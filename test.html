@@ -38,12 +38,24 @@
       top: 100px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 20px;
+      font-size: 32px;
       color: #00ffc3;
-      opacity: 0;
+      opacity: 0.6;
       transition: opacity 0.3s ease;
       pointer-events: none;
       z-index: 5;
+      white-space: nowrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 12px;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
     }
 
     .slider-container {
@@ -110,8 +122,8 @@
     const hint = document.getElementById('hintText');
 
     function showHint(text) {
-      hint.textContent = text;
-      hint.style.opacity = 1;
+      hint.innerHTML = `${text}<span class="cursor">█</span>`;
+      hint.style.opacity = 0.6;
     }
 
     function hideHint() {

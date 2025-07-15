@@ -33,6 +33,19 @@
       background-color: #1558c0;
     }
 
+    .hint {
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      color: #00ffc3;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
     .slider-container {
       position: relative;
       width: 100vw;
@@ -50,7 +63,6 @@
       left: -30%;
       animation: moveRight 45s linear infinite;
       align-items: center;
-      will-change: transform;
     }
 
     .logo-strip:hover {
@@ -62,6 +74,7 @@
       object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
       transition: transform 0.4s ease;
+      cursor: pointer;
     }
 
     .logo-strip img:hover {
@@ -77,12 +90,33 @@
 <body>
   <div class="header" onclick="location.href='index.html'">← Назад на головну</div>
 
+  <div class="hint" id="hintText"></div>
+
   <div class="slider-container">
     <div class="logo-strip">
-      <img src="excel.png" alt="Excel">
-      <img src="powerbi.png" alt="Power BI">
-      <img src="sheets.png" alt="Google Sheets">
+      <img src="excel.png" alt="Excel"
+        onmouseover="showHint('створення кодів для автоматизації рутини')"
+        onmouseout="hideHint()">
+      <img src="powerbi.png" alt="Power BI"
+        onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
+        onmouseout="hideHint()">
+      <img src="sheets.png" alt="Google Sheets"
+        onmouseover="showHint('Автоматизація в гугл листах')"
+        onmouseout="hideHint()">
     </div>
   </div>
+
+  <script>
+    const hint = document.getElementById('hintText');
+
+    function showHint(text) {
+      hint.textContent = text;
+      hint.style.opacity = 1;
+    }
+
+    function hideHint() {
+      hint.style.opacity = 0;
+    }
+  </script>
 </body>
 </html>

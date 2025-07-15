@@ -60,24 +60,26 @@
     .slider-container {
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
       display: flex;
       align-items: center;
-      justify-content: center;
+      cursor: grab;
     }
 
     .scroll-strip {
-      display: flex;
+      display: inline-flex;
       gap: 80px;
       padding: 40px;
       user-select: none;
-      cursor: grab;
     }
 
     .scroll-strip img {
       height: 300px;
       transition: transform 0.3s ease;
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
+      cursor: pointer;
     }
 
     .scroll-strip img:hover {
@@ -116,41 +118,36 @@
       hint.style.opacity = 0;
     }
 
-    const strip = document.getElementById('scrollStrip');
+    const slider = document.getElementById('slider');
     let isDragging = false;
     let startX;
     let scrollLeft;
     let velocity = 0.5;
 
-    // Drag logic
-    strip.addEventListener('mousedown', (e) => {
+    slider.addEventListener('mousedown', (e) => {
       isDragging = true;
-      strip.style.cursor = 'grabbing';
+      slider.style.cursor = 'grabbing';
       startX = e.pageX;
-      scrollLeft = strip.scrollLeft;
+      scrollLeft = slider.scrollLeft;
     });
 
     window.addEventListener('mouseup', () => {
       isDragging = false;
-      strip.style.cursor = 'grab';
+      slider.style.cursor = 'grab';
     });
 
     window.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      e.preventDefault();
       const x = e.pageX;
       const walk = (x - startX);
-      strip.scrollLeft = scrollLeft - walk;
+      slider.scrollLeft = scrollLeft - walk;
     });
 
     // Auto scroll
     function autoScroll() {
       if (!isDragging) {
-        strip.scrollLeft += velocity;
-        // Бесконечная прокрутка (ручной loop)
-        if (strip.scrollLeft >= strip.scrollWidth - strip.clientWidth) {
-          strip.scrollLeft = 0;
-        }
+        slider.scrollLeft += velocity;
+        // Зацикливание вручную не делаем — просто бесконечно едет
       }
       requestAnimationFrame(autoScroll);
     }

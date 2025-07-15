@@ -38,21 +38,27 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
-    .logo {
+    .logo-strip {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 66.66vw;
-      max-width: 1000px;
+      display: flex;
+      gap: 60px;
+      left: -100%;
       animation: moveRight 90s linear infinite;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      align-items: center;
+    }
+
+    .logo-strip img {
+      height: 150px;
+      object-fit: contain;
     }
 
     @keyframes moveRight {
-      0% { left: -70%; }
+      0% { left: -100%; }
       100% { left: 100%; }
     }
   </style>
@@ -61,10 +67,11 @@
   <div class="header" onclick="location.href='index.html'">← Назад на головну</div>
 
   <div class="slider-container">
-    <img 
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fronalpstock_big.jpg/800px-Fronalpstock_big.jpg" 
-      alt="Demo" 
-      class="logo">
+    <div class="logo-strip">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Microsoft_Excel_2013_logo.svg" alt="Excel">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets">
+    </div>
   </div>
 </body>
 </html>

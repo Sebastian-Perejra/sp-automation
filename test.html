@@ -1,158 +1,117 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Тестова сторінка</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Scrolling Logos</title>
   <style>
     body {
       margin: 0;
-      background-color: #0f121a;
-      font-family: 'Roboto Mono', monospace;
-      color: white;
       overflow: hidden;
+      background: #111;
     }
-
-    .header {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: #1a73e8;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-weight: bold;
-      font-size: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .header:hover {
-      background-color: #1558c0;
-    }
-
-    .hint {
-      position: fixed;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 32px;
-      color: #00ffc3;
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      z-index: 5;
-      white-space: nowrap;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 16px;
-      animation: blink 1s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    .slider-container {
+    .container {
+      position: relative;
       width: 100vw;
-      height: 100vh;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
+      height: 120px;
+      overflow: hidden;
       cursor: grab;
     }
-
-    .scroll-strip {
-      display: inline-flex;
-      gap: 80px;
-      padding: 40px;
+    .logo-track {
+      position: absolute;
+      display: flex;
+      gap: 60px;
+      white-space: nowrap;
+      will-change: transform;
+    }
+    .logo {
+      height: 80px;
       user-select: none;
     }
-
-    .scroll-strip img {
-      height: 300px;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
-      cursor: pointer;
-    }
-
-    .scroll-strip img:hover {
-      transform: scale(1.25);
+    .logo:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: -25px;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div class="header" onclick="location.href='index.html'">← Назад на головну</div>
-  <div class="hint" id="hintText"></div>
 
-  <div class="slider-container" id="slider">
-    <div class="scroll-strip" id="scrollStrip">
-      <img src="excel.png" alt="Excel"
-        onmouseover="showHint('створення кодів для автоматизації рутини')"
-        onmouseout="hideHint()">
-      <img src="powerbi.png" alt="Power BI"
-        onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
-        onmouseout="hideHint()">
-      <img src="sheets.png" alt="Google Sheets"
-        onmouseover="showHint('Автоматизація в гугл листах')"
-        onmouseout="hideHint()">
-      <img src="excel.png" alt="Excel">
-      <img src="powerbi.png" alt="Power BI">
-      <img src="sheets.png" alt="Google Sheets">
-    </div>
+<div class="container" id="logoContainer">
+  <div class="logo-track" id="logoTrack">
+    <!-- Повтор логотипов для бесконечной ленты -->
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" title="React">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg" title="NPM">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Redux.png" title="Redux">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" title="Node.js">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" title="SASS">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" title="Figma">
+    <!-- Копия логотипов для бесконечной прокрутки -->
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" title="React">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg" title="NPM">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Redux.png" title="Redux">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" title="Node.js">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" title="SASS">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" title="Figma">
   </div>
+</div>
 
-  <script>
-    const hint = document.getElementById('hintText');
-    function showHint(text) {
-      hint.innerHTML = `${text}<span class="cursor">_</span>`;
-      hint.style.opacity = 0.6;
-    }
-    function hideHint() {
-      hint.style.opacity = 0;
-    }
+<script>
+  const track = document.getElementById('logoTrack');
+  const container = document.getElementById('logoContainer');
 
-    const slider = document.getElementById('slider');
-    let isDragging = false;
-    let startX;
-    let scrollLeft;
-    let velocity = 0.5;
+  let position = 0;
+  let isDragging = false;
+  let startX = 0;
+  let scrollStart = 0;
+  let velocity = 0.8; // скорость движения
+  let lastTime = performance.now();
 
-    slider.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      slider.style.cursor = 'grabbing';
-      startX = e.pageX;
-      scrollLeft = slider.scrollLeft;
-    });
+  function animate(time) {
+    const delta = time - lastTime;
+    lastTime = time;
 
-    window.addEventListener('mouseup', () => {
-      isDragging = false;
-      slider.style.cursor = 'grab';
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const x = e.pageX;
-      const walk = (x - startX);
-      slider.scrollLeft = scrollLeft - walk;
-    });
-
-    // Auto scroll
-    function autoScroll() {
-      if (!isDragging) {
-        slider.scrollLeft += velocity;
-        // Зацикливание вручную не делаем — просто бесконечно едет
-      }
-      requestAnimationFrame(autoScroll);
+    if (!isDragging) {
+      position -= velocity * delta;
     }
 
-    requestAnimationFrame(autoScroll);
-  </script>
+    // Зацикливаем бесконечную ленту
+    const trackWidth = track.offsetWidth / 2;
+    if (position < -trackWidth) {
+      position += trackWidth;
+    } else if (position > 0) {
+      position -= trackWidth;
+    }
+
+    track.style.transform = `translateX(${position}px)`;
+    requestAnimationFrame(animate);
+  }
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    container.style.cursor = 'grabbing';
+    startX = e.clientX;
+    scrollStart = position;
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    container.style.cursor = 'grab';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    position = scrollStart + dx;
+  });
+
+  requestAnimationFrame(animate);
+</script>
+
 </body>
 </html>

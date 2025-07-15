@@ -10,8 +10,8 @@
       margin: 0;
       background-color: #0f121a;
       font-family: 'Roboto Mono', monospace;
-      overflow: hidden;
       color: white;
+      overflow: hidden;
     }
 
     .header {
@@ -25,7 +25,6 @@
       font-size: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       cursor: pointer;
-      transition: background-color 0.3s ease;
       z-index: 10;
     }
 
@@ -47,45 +46,38 @@
       white-space: nowrap;
     }
 
-    .cursor {
-      display: inline-block;
-      width: 16px;
-      animation: blink 1s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      0%, 49%   { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
     .slider-container {
       position: relative;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .scroll-area {
+      width: 100%;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .scroll-area:active {
+      cursor: grabbing;
     }
 
     .logo-strip {
-      position: absolute;
       display: flex;
       gap: 80px;
-      left: -30%;
-      animation: moveRight 45s linear infinite;
-      align-items: center;
-    }
-
-    .logo-strip:hover {
-      animation-play-state: paused;
+      padding: 40px;
+      transition: transform 0.2s ease;
+      user-select: none;
     }
 
     .logo-strip img {
       height: 300px;
-      object-fit: contain;
+      transition: transform 0.3s ease;
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
-      transition: transform 0.4s ease;
       cursor: pointer;
     }
 
@@ -93,28 +85,36 @@
       transform: scale(1.25);
     }
 
-    @keyframes moveRight {
-      0% { left: -30%; }
-      100% { left: 100%; }
+    .cursor {
+      display: inline-block;
+      width: 16px;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
   </style>
 </head>
 <body>
   <div class="header" onclick="location.href='index.html'">← Назад на головну</div>
-
   <div class="hint" id="hintText"></div>
 
   <div class="slider-container">
-    <div class="logo-strip">
-      <img src="excel.png" alt="Excel"
-        onmouseover="showHint('Cтворення кодів для автоматизації рутини')"
-        onmouseout="hideHint()">
-      <img src="powerbi.png" alt="Power BI"
-        onmouseover="showHint('Cтворення звітів, візуалізацій, кастомізація')"
-        onmouseout="hideHint()">
-      <img src="sheets.png" alt="Google Sheets"
-        onmouseover="showHint('Скрипт-автоматизація в гугл листах')"
-        onmouseout="hideHint()">
+    <div class="scroll-area" id="scrollArea">
+      <div class="logo-strip" id="logoStrip">
+        <img src="excel.png" alt="Excel"
+          onmouseover="showHint('створення кодів для автоматизації рутини')"
+          onmouseout="hideHint()">
+        <img src="powerbi.png" alt="Power BI"
+          onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
+          onmouseout="hideHint()">
+        <img src="sheets.png" alt="Google Sheets"
+          onmouseover="showHint('Автоматизація в гугл листах')"
+          onmouseout="hideHint()">
+        <!-- можно добавить ещё логотипы -->
+      </div>
     </div>
   </div>
 
@@ -129,6 +129,36 @@
     function hideHint() {
       hint.style.opacity = 0;
     }
+
+    // Drag-scroll logic
+    const scrollArea = document.getElementById('scrollArea');
+    const logoStrip = document.getElementById('logoStrip');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    scrollArea.addEventListener('mousedown', (e) => {
+      isDown = true;
+      scrollArea.classList.add('active');
+      startX = e.pageX - scrollArea.offsetLeft;
+      scrollLeft = scrollArea.scrollLeft;
+    });
+
+    scrollArea.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    scrollArea.addEventListener('mouseup', () => {
+      isDown = false;
+    });
+
+    scrollArea.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - scrollArea.offsetLeft;
+      const walk = (x - startX) * 1.5; // чувствительность
+      scrollArea.scrollLeft = scrollLeft - walk;
+    });
   </script>
 </body>
 </html>

@@ -75,10 +75,12 @@
       left: -30%;
       animation: moveRight 45s linear infinite;
       align-items: center;
+      will-change: transform;
     }
 
-    .logo-strip:hover {
-      animation-play-state: paused;
+    .logo-strip.dragging {
+      animation: none !important;
+      cursor: grabbing;
     }
 
     .logo-strip img {
@@ -105,7 +107,7 @@
   <div class="hint" id="hintText"></div>
 
   <div class="slider-container">
-    <div class="logo-strip">
+    <div class="logo-strip" id="logoStrip">
       <img src="excel.png" alt="Excel"
         onmouseover="showHint('створення кодів для автоматизації рутини')"
         onmouseout="hideHint()">
@@ -120,6 +122,7 @@
 
   <script>
     const hint = document.getElementById('hintText');
+    const logoStrip = document.getElementById('logoStrip');
 
     function showHint(text) {
       hint.innerHTML = `${text}<span class="cursor">_</span>`;
@@ -129,6 +132,35 @@
     function hideHint() {
       hint.style.opacity = 0;
     }
+
+    // === Drag logic ===
+    let isDragging = false;
+    let startX = 0;
+    let initialLeft = 0;
+
+    logoStrip.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      const computedStyle = window.getComputedStyle(logoStrip);
+      initialLeft = parseFloat(computedStyle.left);
+      logoStrip.classList.add('dragging');
+      e.preventDefault();
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        logoStrip.classList.remove('dragging');
+        logoStrip.style.animation = 'moveRight 45s linear infinite';
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const newLeft = initialLeft + dx;
+      logoStrip.style.left = `${newLeft}px`;
+    });
   </script>
 </body>
 </html>

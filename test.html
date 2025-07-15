@@ -47,15 +47,25 @@
       position: absolute;
       display: flex;
       gap: 80px;
-      left: -30%; /* ближе к экрану */
-      animation: moveRight 45s linear infinite; /* быстрее */
+      left: -30%;
+      animation: moveRight 45s linear infinite;
       align-items: center;
+      will-change: transform;
+    }
+
+    .logo-strip:hover {
+      animation-play-state: paused;
     }
 
     .logo-strip img {
       height: 300px;
       object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
+      transition: transform 0.4s ease;
+    }
+
+    .logo-strip img:hover {
+      transform: scale(1.25);
     }
 
     @keyframes moveRight {

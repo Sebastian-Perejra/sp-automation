@@ -6,21 +6,21 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden;
       background: #111;
     }
     .container {
-      position: relative;
       width: 100vw;
       height: 120px;
       overflow: hidden;
+      position: relative;
       cursor: grab;
     }
     .logo-track {
-      position: absolute;
       display: flex;
       gap: 60px;
-      white-space: nowrap;
+      position: absolute;
+      top: 20px;
+      left: 0;
       will-change: transform;
     }
     .logo {
@@ -42,34 +42,23 @@
 </head>
 <body>
 
-<div class="container" id="logoContainer">
-  <div class="logo-track" id="logoTrack">
-    <!-- Повтор логотипов для бесконечной ленты -->
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" title="React">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg" title="NPM">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Redux.png" title="Redux">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" title="Node.js">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" title="SASS">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" title="Figma">
-    <!-- Копия логотипов для бесконечной прокрутки -->
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" title="React">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg" title="NPM">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Redux.png" title="Redux">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" title="Node.js">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" title="SASS">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" title="Figma">
+<div class="container" id="container">
+  <div class="logo-track" id="track">
+    <img class="logo" src="excel.png" title="Excel">
+    <img class="logo" src="sheets.png" title="Google Sheets">
+    <img class="logo" src="powerbi.png" title="Power BI">
   </div>
 </div>
 
 <script>
-  const track = document.getElementById('logoTrack');
-  const container = document.getElementById('logoContainer');
+  const container = document.getElementById('container');
+  const track = document.getElementById('track');
 
   let position = 0;
   let isDragging = false;
   let startX = 0;
-  let scrollStart = 0;
-  let velocity = 0.8; // скорость движения
+  let dragStart = 0;
+  let velocity = 0.25;
   let lastTime = performance.now();
 
   function animate(time) {
@@ -80,12 +69,13 @@
       position -= velocity * delta;
     }
 
-    // Зацикливаем бесконечную ленту
-    const trackWidth = track.offsetWidth / 2;
-    if (position < -trackWidth) {
-      position += trackWidth;
-    } else if (position > 0) {
-      position -= trackWidth;
+    const trackWidth = track.scrollWidth;
+    const containerWidth = container.offsetWidth;
+    if (position < containerWidth - trackWidth) {
+      position = containerWidth - trackWidth;
+    }
+    if (position > 0) {
+      position = 0;
     }
 
     track.style.transform = `translateX(${position}px)`;
@@ -94,9 +84,9 @@
 
   container.addEventListener('mousedown', (e) => {
     isDragging = true;
-    container.style.cursor = 'grabbing';
     startX = e.clientX;
-    scrollStart = position;
+    dragStart = position;
+    container.style.cursor = 'grabbing';
   });
 
   document.addEventListener('mouseup', () => {
@@ -107,7 +97,7 @@
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     const dx = e.clientX - startX;
-    position = scrollStart + dx;
+    position = dragStart + dx;
   });
 
   requestAnimationFrame(animate);

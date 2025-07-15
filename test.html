@@ -1,107 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Test Page — Сайт2</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тестова сторінка</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      background: #111;
-    }
-    .container {
-      width: 100vw;
-      height: 120px;
+      background-color: #0f121a;
+      font-family: 'Roboto Mono', monospace;
       overflow: hidden;
+      color: white;
+    }
+
+    .header {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #1a73e8;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .header:hover {
+      background-color: #1558c0;
+    }
+
+    .hint {
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+      color: #00ffc3;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 16px;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .slider-container {
       position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
       cursor: grab;
     }
-    .logo-track {
+
+    .logo-strip {
       display: flex;
-      gap: 60px;
-      position: absolute;
-      top: 20px;
-      left: 0;
-      will-change: transform;
-    }
-    .logo {
-      height: 80px;
+      gap: 80px;
+      padding: 40px;
+      animation: moveRight 40s linear infinite;
       user-select: none;
     }
-    .logo:hover::after {
-      content: attr(title);
-      position: absolute;
-      bottom: -25px;
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      pointer-events: none;
+
+    .logo-strip img {
+      height: 300px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
+      cursor: pointer;
+    }
+
+    .logo-strip img:hover {
+      transform: scale(1.25);
+    }
+
+    @keyframes moveRight {
+      from { transform: translateX(-100%); }
+      to   { transform: translateX(100%); }
     }
   </style>
 </head>
 <body>
+  <div class="header" onclick="location.href='index.html'">← Назад на головну</div>
+  <div class="hint" id="hintText"></div>
 
-<div class="container" id="container">
-  <div class="logo-track" id="track">
-    <img class="logo" src="excel.png" title="Excel">
-    <img class="logo" src="sheets.png" title="Google Sheets">
-    <img class="logo" src="powerbi.png" title="Power BI">
+  <div class="slider-container" id="slider">
+    <div class="logo-strip" id="logoStrip">
+      <img src="excel.png" alt="Excel"
+        onmouseover="showHint('створення кодів для автоматизації рутини')"
+        onmouseout="hideHint()">
+      <img src="powerbi.png" alt="Power BI"
+        onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
+        onmouseout="hideHint()">
+      <img src="sheets.png" alt="Google Sheets"
+        onmouseover="showHint('Автоматизація в гугл листах')"
+        onmouseout="hideHint()">
+      <!-- Повторим ленту для бесконечного эффекта -->
+      <img src="excel.png" alt="Excel">
+      <img src="powerbi.png" alt="Power BI">
+      <img src="sheets.png" alt="Google Sheets">
+    </div>
   </div>
-</div>
 
-<script>
-  const container = document.getElementById('container');
-  const track = document.getElementById('track');
-
-  let position = 0;
-  let isDragging = false;
-  let startX = 0;
-  let dragStart = 0;
-  let velocity = 0.25;
-  let lastTime = performance.now();
-
-  function animate(time) {
-    const delta = time - lastTime;
-    lastTime = time;
-
-    if (!isDragging) {
-      position -= velocity * delta;
+  <script>
+    // Подсказка
+    const hint = document.getElementById('hintText');
+    function showHint(text) {
+      hint.innerHTML = `${text}<span class="cursor">_</span>`;
+      hint.style.opacity = 0.6;
+    }
+    function hideHint() {
+      hint.style.opacity = 0;
     }
 
-    const trackWidth = track.scrollWidth;
-    const containerWidth = container.offsetWidth;
-    if (position < containerWidth - trackWidth) {
-      position = containerWidth - trackWidth;
-    }
-    if (position > 0) {
-      position = 0;
-    }
+    // Drag-to-scroll с сохранением анимации
+    const slider = document.getElementById('slider');
+    const strip = document.getElementById('logoStrip');
+    let isDown = false;
+    let startX;
+    let scrollOffset = 0;
 
-    track.style.transform = `translateX(${position}px)`;
-    requestAnimationFrame(animate);
-  }
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      strip.style.animationPlayState = 'paused';
+      startX = e.pageX;
+    });
 
-  container.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startX = e.clientX;
-    dragStart = position;
-    container.style.cursor = 'grabbing';
-  });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      strip.style.animationPlayState = 'running';
+    });
 
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    container.style.cursor = 'grab';
-  });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      strip.style.animationPlayState = 'running';
+    });
 
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    const dx = e.clientX - startX;
-    position = dragStart + dx;
-  });
-
-  requestAnimationFrame(animate);
-</script>
-
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX;
+      const walk = (x - startX) * 1.5;
+      strip.style.transform = `translateX(${walk}px)`;
+    });
+  </script>
 </body>
 </html>

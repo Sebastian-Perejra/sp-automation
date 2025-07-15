@@ -47,19 +47,19 @@
       position: absolute;
       display: flex;
       gap: 80px;
-      left: -100%;
-      animation: moveRight 90s linear infinite;
+      left: -30%; /* ближе к экрану */
+      animation: moveRight 45s linear infinite; /* быстрее */
       align-items: center;
     }
 
     .logo-strip img {
-      height: 300px; /* увеличено в 2 раза */
+      height: 300px;
       object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
     }
 
     @keyframes moveRight {
-      0% { left: -100%; }
+      0% { left: -30%; }
       100% { left: 100%; }
     }
   </style>

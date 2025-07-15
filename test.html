@@ -54,29 +54,36 @@
     }
 
     @keyframes blink {
-      0%, 49% { opacity: 1; }
+      0%, 49%   { opacity: 1; }
       50%, 100% { opacity: 0; }
     }
 
     .slider-container {
+      position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      position: relative;
-      cursor: grab;
     }
 
-    .logo-track {
+    .logo-strip {
+      position: absolute;
       display: flex;
       gap: 80px;
+      left: -30%;
+      animation: moveRight 45s linear infinite;
       align-items: center;
       will-change: transform;
     }
 
-    .logo-track img {
+    .logo-strip.dragging {
+      animation: none !important;
+      cursor: grabbing;
+    }
+
+    .logo-strip img {
       height: 300px;
       object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
@@ -84,7 +91,7 @@
       cursor: pointer;
     }
 
-    .logo-track img:hover {
+    .logo-strip img:hover {
       transform: scale(1.25);
     }
 
@@ -101,6 +108,11 @@
       padding-right: 60px;
       text-shadow: 0 0 10px rgba(0,255,255,0.3);
     }
+
+    @keyframes moveRight {
+      0% { left: -30%; }
+      100% { left: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -108,18 +120,40 @@
 
   <div class="hint" id="hintText"></div>
 
-  <div class="slider-container" id="sliderContainer">
-    <div class="logo-track" id="logoTrack">
-      <!-- Повтор логотипов x3 -->
-      <img src="excel.png" alt="Excel" onmouseover="showHint('створення кодів для автоматизації рутини')" onmouseout="hideHint()">
-      <img src="powerbi.png" alt="Power BI" onmouseover="showHint('створення звітів, візуалізацій, кастомізація')" onmouseout="hideHint()">
-      <img src="sheets.png" alt="Google Sheets" onmouseover="showHint('Автоматизація в гугл листах')" onmouseout="hideHint()">
-      <img src="excel.png" alt="Excel" onmouseover="showHint('створення кодів для автоматизації рутини')" onmouseout="hideHint()">
-      <img src="powerbi.png" alt="Power BI" onmouseover="showHint('створення звітів, візуалізацій, кастомізація')" onmouseout="hideHint()">
-      <img src="sheets.png" alt="Google Sheets" onmouseover="showHint('Автоматизація в гугл листах')" onmouseout="hideHint()">
-      <img src="excel.png" alt="Excel" onmouseover="showHint('створення кодів для автоматизації рутини')" onmouseout="hideHint()">
-      <img src="powerbi.png" alt="Power BI" onmouseover="showHint('створення звітів, візуалізацій, кастомізація')" onmouseout="hideHint()">
-      <img src="sheets.png" alt="Google Sheets" onmouseover="showHint('Автоматизація в гугл листах')" onmouseout="hideHint()">
+  <div class="slider-container">
+    <div class="logo-strip" id="logoStrip">
+      <!-- Повтор 1 -->
+      <img src="excel.png" alt="Excel"
+        onmouseover="showHint('створення кодів для автоматизації рутини')"
+        onmouseout="hideHint()">
+      <img src="powerbi.png" alt="Power BI"
+        onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
+        onmouseout="hideHint()">
+      <img src="sheets.png" alt="Google Sheets"
+        onmouseover="showHint('Автоматизація в гугл листах')"
+        onmouseout="hideHint()">
+
+      <!-- Повтор 2 -->
+      <img src="excel.png" alt="Excel"
+        onmouseover="showHint('створення кодів для автоматизації рутини')"
+        onmouseout="hideHint()">
+      <img src="powerbi.png" alt="Power BI"
+        onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
+        onmouseout="hideHint()">
+      <img src="sheets.png" alt="Google Sheets"
+        onmouseover="showHint('Автоматизація в гугл листах')"
+        onmouseout="hideHint()">
+
+      <!-- Повтор 3 -->
+      <img src="excel.png" alt="Excel"
+        onmouseover="showHint('створення кодів для автоматизації рутини')"
+        onmouseout="hideHint()">
+      <img src="powerbi.png" alt="Power BI"
+        onmouseover="showHint('створення звітів, візуалізацій, кастомізація')"
+        onmouseout="hideHint()">
+      <img src="sheets.png" alt="Google Sheets"
+        onmouseover="showHint('Автоматизація в гугл листах')"
+        onmouseout="hideHint()">
 
       <!-- Email -->
       <span class="email">sebast.perejra@gmail.com</span>
@@ -128,8 +162,7 @@
 
   <script>
     const hint = document.getElementById('hintText');
-    const track = document.getElementById('logoTrack');
-    const container = document.getElementById('sliderContainer');
+    const logoStrip = document.getElementById('logoStrip');
 
     function showHint(text) {
       hint.innerHTML = `${text}<span class="cursor">_</span>`;
@@ -140,49 +173,34 @@
       hint.style.opacity = 0;
     }
 
-    let position = 0;
+    // === Drag logic ===
     let isDragging = false;
     let startX = 0;
-    let dragStart = 0;
-    let velocity = 0.25;
-    let lastTime = performance.now();
+    let initialLeft = 0;
 
-    function animate(time) {
-      const delta = time - lastTime;
-      lastTime = time;
-
-      if (!isDragging) {
-        position -= velocity * delta;
-      }
-
-      const trackWidth = track.scrollWidth;
-      if (position < -trackWidth) {
-        position += trackWidth;
-      }
-
-      track.style.transform = `translateX(${position}px)`;
-      requestAnimationFrame(animate);
-    }
-
-    container.addEventListener('mousedown', (e) => {
+    logoStrip.addEventListener('mousedown', (e) => {
       isDragging = true;
       startX = e.clientX;
-      dragStart = position;
-      container.style.cursor = 'grabbing';
+      const computedStyle = window.getComputedStyle(logoStrip);
+      initialLeft = parseFloat(computedStyle.left);
+      logoStrip.classList.add('dragging');
+      e.preventDefault();
     });
 
     document.addEventListener('mouseup', () => {
-      isDragging = false;
-      container.style.cursor = 'grab';
+      if (isDragging) {
+        isDragging = false;
+        logoStrip.classList.remove('dragging');
+        logoStrip.style.animation = 'moveRight 45s linear infinite';
+      }
     });
 
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       const dx = e.clientX - startX;
-      position = dragStart + dx;
+      const newLeft = initialLeft + dx;
+      logoStrip.style.left = `${newLeft}px`;
     });
-
-    requestAnimationFrame(animate);
   </script>
 </body>
 </html>

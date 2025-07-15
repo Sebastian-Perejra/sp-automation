@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тестова сторінка</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f121a;
+      font-family: 'Roboto Mono', monospace;
+      overflow: hidden;
+      color: white;
+    }
+
+    .header {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #1a73e8;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      z-index: 10;
+    }
+
+    .header:hover {
+      background-color: #1558c0;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .logo {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 66.66vw;
+      max-width: 1000px;
+      animation: moveRight 90s linear infinite;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+    }
+
+    @keyframes moveRight {
+      0% { left: -70%; }
+      100% { left: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header" onclick="location.href='index.html'">← Назад на головну</div>
+
+  <div class="slider-container">
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fronalpstock_big.jpg/800px-Fronalpstock_big.jpg" 
+      alt="Demo" 
+      class="logo">
+  </div>
+</body>
+</html>

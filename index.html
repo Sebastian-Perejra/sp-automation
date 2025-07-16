@@ -172,35 +172,41 @@
       100% { transform: translateX(-100%); }
     }
     @media (max-width: 768px) {
- .lang-switcher {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  gap: 6px;
-  z-index: 200;
-}
+  /* Языковая панель — компактная и не мешает навигации */
+  .lang-switcher {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 6px;
+    z-index: 200;
+  }
 
-.lang-switcher button {
-  padding: 4px 10px;
-  font-size: 12px;
-  opacity: 0.7;
-}
+  .lang-switcher button {
+    padding: 4px 10px;
+    font-size: 12px;
+    opacity: 0.7;
+    border-radius: 3px;
+  }
 
-nav {
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 10px;
-}
+  /* Навигация — в одну строку, центрирована, без наезда */
+  nav {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 8px;
+  }
 
-nav a {
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.9;
-  white-space: nowrap;
-}
+  nav a {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
 
+  /* Заголовок и текст — мягче */
   header {
     padding: 60px 15px 30px;
   }
@@ -219,26 +225,32 @@ nav a {
     font-size: 14px;
   }
 
+  /* Иконки и отступы */
   .icon-row {
     gap: 30px;
     margin: 40px 0;
+    flex-wrap: wrap;
   }
 
   .icon-row img {
     height: 70px;
   }
 
-  .ticker {
-    font-size: 14px;
-    padding: 10px 0;
-  }
-
+  /* Футер — отодвинут от тикера */
   footer {
-    margin-bottom: 40px; /* от тикера */
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 0.85rem;
   }
 
   body {
-    padding-bottom: 60px; /* под бегущую строку */
+    padding-bottom: 60px; /* под фиксированный .ticker */
+  }
+
+  /* Бегущая строка — меньше шрифт */
+  .ticker {
+    font-size: 14px;
+    padding: 10px 0;
   }
 }
 

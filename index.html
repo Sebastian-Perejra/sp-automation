@@ -48,7 +48,6 @@
       font-size: 2.8rem;
       margin-bottom: 20px;
       color: #00ffc3;
-      white-space: nowrap;
     }
 
     header p {
@@ -99,6 +98,7 @@
       padding: 20px;
       font-size: 0.9rem;
       color: #555;
+      margin-bottom: 30px; /* Поднимаем футер чуть выше */
     }
 
     footer span {
@@ -116,6 +116,7 @@
       font-size: 18px;
       padding: 10px 0;
       border-top: 1px solid #222;
+      z-index: 200;
     }
 
     .ticker-text {
@@ -130,20 +131,24 @@
     }
 
     /* typing effect */
+    .typewriter-wrapper {
+      display: inline-block;
+      font-size: 2.8rem;
+      color: #00ffc3;
+      white-space: nowrap;
+    }
+
     .typewriter {
       display: inline-block;
       overflow: hidden;
       border-right: 2px solid #00ffc3;
       white-space: nowrap;
-      animation: typing 3s steps(20, end), blink-caret 0.8s step-end infinite;
-      font-size: 2.8rem;
-      font-weight: normal;
-      color: #00ffc3;
+      animation: typing 6s steps(20, end) forwards, blink-caret 0.8s step-end infinite;
     }
 
     @keyframes typing {
       from { width: 0 }
-      to { width: 100% }
+      to { width: 17ch } /* Длина "Себастьян Перейера" */
     }
 
     @keyframes blink-caret {
@@ -162,7 +167,11 @@
   </nav>
 
   <header>
-    <h1><span class="typewriter">Себастьян Перейера</span></h1>
+    <h1>
+      <span class="typewriter-wrapper">
+        <span class="typewriter">Себастьян Перейера</span>
+      </span>
+    </h1>
     <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
     <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
   </header>

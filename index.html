@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Себастьян Перейера – Автоматизація</title>
+  <title>Себастьян Перейра – Автоматизація</title>
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
@@ -44,16 +44,30 @@
       padding: 80px 20px 40px;
     }
 
-    header h1 {
+    .typewriter {
+      display: inline-block;
       font-size: 2.8rem;
-      margin-bottom: 20px;
       color: #00ffc3;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #00ffc3;
+      animation: typing 4s steps(24) 1 normal both, blink-caret 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 18ch }
+    }
+
+    @keyframes blink-caret {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #00ffc3; }
     }
 
     header p {
       font-size: 1.4rem;
       color: #ccc;
-      margin-top: 0;
+      margin-top: 30px;
     }
 
     .cta-button {
@@ -98,7 +112,9 @@
       padding: 20px;
       font-size: 0.9rem;
       color: #555;
-      margin-bottom: 30px; /* Поднимаем футер чуть выше */
+      position: relative;
+      z-index: 10;
+      background-color: #0d0d0d;
     }
 
     footer span {
@@ -116,7 +132,7 @@
       font-size: 18px;
       padding: 10px 0;
       border-top: 1px solid #222;
-      z-index: 200;
+      z-index: 5;
     }
 
     .ticker-text {
@@ -128,32 +144,6 @@
     @keyframes ticker {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
-    }
-
-    /* typing effect */
-    .typewriter-wrapper {
-      display: inline-block;
-      font-size: 2.8rem;
-      color: #00ffc3;
-      white-space: nowrap;
-    }
-
-    .typewriter {
-      display: inline-block;
-      overflow: hidden;
-      border-right: 2px solid #00ffc3;
-      white-space: nowrap;
-      animation: typing 6s steps(20, end) forwards, blink-caret 0.8s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 17ch } /* Длина "Себастьян Перейра" */
-    }
-
-    @keyframes blink-caret {
-      0%, 100% { border-color: transparent }
-      50% { border-color: #00ffc3 }
     }
   </style>
 </head>
@@ -167,11 +157,7 @@
   </nav>
 
   <header>
-    <h1>
-      <span class="typewriter-wrapper">
-        <span class="typewriter">Себастьян Перейра</span>
-      </span>
-    </h1>
+    <div class="typewriter">Себастьян Перейра</div>
     <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
     <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
   </header>
@@ -181,6 +167,7 @@
     <img src="powerbi.png" alt="Power BI">
     <img src="sheets.png" alt="Google Sheets">
   </div>
+
   <footer>
     <p><span>© 2015–2025 Sebastian Automations.</span> Всі права захищено.</p>
   </footer>

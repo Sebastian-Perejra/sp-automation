@@ -172,32 +172,34 @@
       100% { transform: translateX(-100%); }
     }
     @media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 0;
-    font-size: 14px;
-  }
+ .lang-switcher {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  gap: 6px;
+  z-index: 200;
+}
 
-  nav a {
-    font-size: 14px;
-    font-weight: normal;
-    opacity: 0.8;
-  }
+.lang-switcher button {
+  padding: 4px 10px;
+  font-size: 12px;
+  opacity: 0.7;
+}
 
-  .lang-switcher {
-    position: static;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
+nav {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
 
-  .lang-switcher button {
-    padding: 6px 14px;
-    font-size: 13px;
-  }
+nav a {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+  white-space: nowrap;
+}
 
   header {
     padding: 60px 15px 30px;

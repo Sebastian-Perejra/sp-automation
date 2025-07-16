@@ -173,15 +173,18 @@
     }
     @media (max-width: 768px) {
   nav {
-  gap: 8px;
-  font-size: 14px;
-}
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0;
+    font-size: 14px;
+  }
 
-nav a {
-  font-size: 14px;
-  font-weight: normal;
-  opacity: 0.8;
-}
+  nav a {
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.8;
+  }
 
   .lang-switcher {
     position: static;
@@ -226,6 +229,14 @@ nav a {
   .ticker {
     font-size: 14px;
     padding: 10px 0;
+  }
+
+  footer {
+    margin-bottom: 40px; /* от тикера */
+  }
+
+  body {
+    padding-bottom: 60px; /* под бегущую строку */
   }
 }
 

@@ -48,6 +48,7 @@
       font-size: 2.8rem;
       margin-bottom: 20px;
       color: #00ffc3;
+      white-space: nowrap;
     }
 
     header p {
@@ -127,6 +128,28 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
+
+    /* typing effect */
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      border-right: 2px solid #00ffc3;
+      white-space: nowrap;
+      animation: typing 3s steps(20, end), blink-caret 0.8s step-end infinite;
+      font-size: 2.8rem;
+      font-weight: normal;
+      color: #00ffc3;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      0%, 100% { border-color: transparent }
+      50% { border-color: #00ffc3 }
+    }
   </style>
 </head>
 <body>
@@ -139,7 +162,7 @@
   </nav>
 
   <header>
-    <h1>Себастьян Перейера</h1>
+    <h1><span class="typewriter">Себастьян Перейера</span></h1>
     <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
     <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
   </header>
@@ -148,12 +171,10 @@
     <img src="excel.png" alt="Excel">
     <img src="powerbi.png" alt="Power BI">
     <img src="sheets.png" alt="Google Sheets">
-    <!-- Можеш додати ще: sap.png, python.png, vscode.png і т.п. -->
   </div>
 
   <footer>
     <p><span>© 2015–2025 Sebastian Automations.</span> Всі права захищено.</p>
-    <p>sebast.perejra@gmail.com</p>
   </footer>
 
   <div class="ticker">

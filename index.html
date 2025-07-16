@@ -12,27 +12,65 @@
       font-family: 'Roboto Mono', monospace;
       background-color: #0d0d0d;
       color: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
       overflow-x: hidden;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #111;
+      padding: 20px 0;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #00ffc3;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #1a73e8;
+    }
+
     header {
-      padding: 60px 20px 20px;
       text-align: center;
+      padding: 80px 20px 40px;
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 20px;
       color: #00ffc3;
     }
 
     header p {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #ccc;
-      margin-top: 10px;
+      margin-top: 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #1a73e8;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-top: 40px;
+    }
+
+    .cta-button:hover {
+      background-color: #135fbe;
     }
 
     .icon-row {
@@ -55,21 +93,15 @@
       transform: scale(1.2);
     }
 
-    .cta-button {
-      display: inline-block;
-      background-color: #1a73e8;
-      color: white;
-      padding: 14px 28px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-      margin: 0 auto 60px;
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #555;
     }
 
-    .cta-button:hover {
-      background-color: #135fbe;
+    footer span {
+      color: #888;
     }
 
     .ticker {
@@ -88,41 +120,36 @@
     .ticker-text {
       display: inline-block;
       padding-left: 100%;
-      animation: ticker 20s linear infinite;
+      animation: ticker 40s linear infinite;
     }
 
     @keyframes ticker {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #555;
-      font-size: 0.9rem;
-    }
-
-    footer span {
-      color: #888;
-    }
   </style>
 </head>
 <body>
 
+  <nav>
+    <a href="#about">Про мене</a>
+    <a href="#services">Послуги</a>
+    <a href="#portfolio">Портфоліо</a>
+    <a href="#contact">Контакти</a>
+  </nav>
+
   <header>
     <h1>Себастьян Перейера</h1>
     <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
   </header>
 
   <div class="icon-row">
     <img src="excel.png" alt="Excel">
     <img src="powerbi.png" alt="Power BI">
     <img src="sheets.png" alt="Google Sheets">
-    <!-- Можеш додати ще іконки: SAP, Python, VS Code тощо -->
+    <!-- Можеш додати ще: sap.png, python.png, vscode.png і т.п. -->
   </div>
-
-  <a class="cta-button" href="portfolio.html">Дивитися приклади →</a>
 
   <footer>
     <p><span>© 2015–2025 Sebastian Automations.</span> Всі права захищено.</p>
@@ -131,7 +158,7 @@
 
   <div class="ticker">
     <div class="ticker-text">
-      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Кодування для бізнесу · Формули, що думають · Індивідуальні рішення · Excel, якого ви ще не бачили —
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
     </div>
   </div>
 

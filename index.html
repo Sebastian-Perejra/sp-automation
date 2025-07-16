@@ -4,85 +4,103 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Себастьян Перейера – Автоматизація</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto Mono', monospace;
       background-color: #0d0d0d;
       color: #f4f4f4;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      text-align: center;
+      overflow-x: hidden;
     }
 
     header {
-      padding: 50px 20px 10px;
+      padding: 60px 20px 20px;
+      text-align: center;
     }
 
     header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-    }
-
-    header h2 {
-      font-weight: normal;
-      font-size: 1.25rem;
-      color: #aaa;
-      margin-top: 0;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00ffc3;
     }
 
     header p {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       color: #ccc;
-      margin-top: 30px;
-    }
-
-    .vignette-top,
-    .vignette-bottom {
-      height: 80px;
-      background: linear-gradient(to bottom, #000000 0%, transparent 100%);
-    }
-
-    .vignette-bottom {
-      background: linear-gradient(to top, #000000 0%, transparent 100%);
-      margin-top: auto;
-    }
-
-    .content {
-      padding: 20px;
-    }
-
-    .note {
-      font-size: 1rem;
-      color: #aaa;
       margin-top: 10px;
     }
 
-    .test-button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: bold;
-      color: white;
-      background-color: #1a73e8;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin: 60px 0;
+      flex-wrap: wrap;
     }
 
-    .test-button:hover {
-      background-color: #1558c0;
+    .icon-row img {
+      height: 100px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
+      cursor: pointer;
+    }
+
+    .icon-row img:hover {
+      transform: scale(1.2);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #1a73e8;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin: 0 auto 60px;
+    }
+
+    .cta-button:hover {
+      background-color: #135fbe;
+    }
+
+    .ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #111;
+      color: #00ffc3;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 18px;
+      padding: 10px 0;
+      border-top: 1px solid #222;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 20s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
 
     footer {
+      text-align: center;
       padding: 20px;
-      font-size: 0.9rem;
       color: #555;
-      border-top: 1px solid #222;
+      font-size: 0.9rem;
     }
 
     footer span {
@@ -91,26 +109,31 @@
   </style>
 </head>
 <body>
-  <div class="vignette-top"></div>
 
   <header>
-    <h1>Вас вітає Себастьян Перейера</h1>
-    <h2>Ви обираєте напрям — ми ведемо вас туди.</h2>
-    <p>Розробка та автоматизація процесів, Excel-рішень і бізнес-логіки</p>
+    <h1>Себастьян Перейера</h1>
+    <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
   </header>
 
-  <div class="content">
-    <p class="note">Сайт знаходиться у стадії активної розробки.<br>
-    Скоро тут з'явиться більше функціональності.</p>
-
-    <a href="test.html" class="test-button">→ До тестової сторінки</a>
+  <div class="icon-row">
+    <img src="excel.png" alt="Excel">
+    <img src="powerbi.png" alt="Power BI">
+    <img src="sheets.png" alt="Google Sheets">
+    <!-- Можеш додати ще іконки: SAP, Python, VS Code тощо -->
   </div>
 
-  <div class="vignette-bottom"></div>
+  <a class="cta-button" href="portfolio.html">Дивитися приклади →</a>
 
   <footer>
     <p><span>© 2015–2025 Sebastian Automations.</span> Всі права захищено.</p>
     <p>sebast.perejra@gmail.com</p>
   </footer>
+
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Кодування для бізнесу · Формули, що думають · Індивідуальні рішення · Excel, якого ви ще не бачили —
+    </div>
+  </div>
+
 </body>
 </html>

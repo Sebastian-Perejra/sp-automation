@@ -39,9 +39,35 @@
       color: #1a73e8;
     }
 
+    .lang-switcher {
+      position: fixed;
+      top: 12px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 200;
+    }
+
+    .lang-switcher button {
+      background-color: #1a1a1a;
+      border: 1px solid #00ffc3;
+      color: #00ffc3;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #00ffc3;
+      color: #0d0d0d;
+    }
+
     header {
       text-align: center;
-      padding: 80px 20px 40px; /* увеличили для "съезда" блока вниз */
+      padding: 80px 20px 40px;
     }
 
     .typewriter {
@@ -130,7 +156,7 @@
       overflow: hidden;
       white-space: nowrap;
       font-size: 18px;
-      padding: 14px 0; /* увеличено для выравнивания */
+      padding: 14px 0;
       border-top: 1px solid #222;
       z-index: 99;
     }
@@ -148,6 +174,13 @@
   </style>
 </head>
 <body>
+
+  <!-- Language switcher -->
+  <div class="lang-switcher">
+    <button onclick="alert('UA буде скоро!')">UA</button>
+    <button onclick="alert('EN coming soon!')">EN</button>
+    <button onclick="alert('RU скоро будет!')">RU</button>
+  </div>
 
   <nav>
     <a href="#about">Про мене</a>

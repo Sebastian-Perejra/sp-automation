@@ -6,6 +6,12 @@
   <title>Себастьян Перейра – Автоматизація</title>
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("b9Ok0...ваш Public Key...");
+    })();
+  </script>
   <style>
     body {
       margin: 0;
@@ -13,269 +19,138 @@
       background-color: #0d0d0d;
       color: #f4f4f4;
       overflow-x: hidden;
-      padding-bottom: 60px;
     }
+    ...
+    /* остальной CSS такой же как был — без изменений */
+    ...
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #111;
-      padding: 20px 0;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    nav a {
-      color: #00ffc3;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #1a73e8;
-    }
-
-    .lang-switcher {
-      position: fixed;
-      top: 12px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 200;
-    }
-
-    .lang-switcher button {
+    .contact-section {
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 40px;
       background-color: #1a1a1a;
-      border: 1px solid #00ffc3;
-      color: #00ffc3;
-      font-weight: bold;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background-color 0.3s, color 0.3s;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 195, 0.1);
     }
 
-    .lang-switcher button:hover {
+    .contact-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #00ffc3;
+    }
+
+    .contact-list {
+      margin-bottom: 40px;
+    }
+
+    .contact-list p {
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #111;
+      border: 1px solid #00ffc3;
+      color: #fff;
+      border-radius: 6px;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .contact-form button {
       background-color: #00ffc3;
       color: #0d0d0d;
-    }
-
-    header {
-      text-align: center;
-      padding: 80px 20px 40px;
-    }
-
-    .typewriter {
-      display: inline-block;
-      font-size: 2.8rem;
-      color: #00ffc3;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #00ffc3;
-      animation: typing 8s steps(20) 1 normal both, blink-caret 0.7s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 18ch }
-    }
-
-    @keyframes blink-caret {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: #00ffc3; }
-    }
-
-    header p {
-      font-size: 1.4rem;
-      color: #ccc;
-      margin-top: 30px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: #1a73e8;
-      color: white;
-      padding: 14px 30px;
-      border-radius: 10px;
-      text-decoration: none;
       font-weight: bold;
-      font-size: 16px;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
       transition: background-color 0.3s ease;
-      margin-top: 40px;
     }
 
-    .cta-button:hover {
-      background-color: #135fbe;
-    }
-
-    .icon-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 60px;
-      margin: 60px 0;
-      flex-wrap: wrap;
-    }
-
-    .icon-row img {
-      height: 100px;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
-      cursor: pointer;
-    }
-
-    .icon-row img:hover {
-      transform: scale(1.2);
-    }
-
-    #contact {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    #contact h2 {
-      color: #00ffc3;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    #contact-form {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    #contact-form input,
-    #contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: none;
-    }
-
-    #contact-form button {
+    .contact-form button:hover {
       background-color: #1a73e8;
       color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
     }
 
-    #form-status {
+    .form-status {
       margin-top: 15px;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
       font-size: 0.9rem;
-      color: #555;
-      position: relative;
-      z-index: 10;
-      background-color: #0d0d0d;
-    }
-
-    .ticker {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #111;
       color: #00ffc3;
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: 14px;
-      padding: 10px 0;
-      border-top: 1px solid #222;
-      z-index: 99;
-    }
-
-    .ticker-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 40s linear infinite;
-    }
-
-    @keyframes ticker {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-<div class="lang-switcher">
-  <button onclick="window.location.href='index.html'">UA</button>
-  <button onclick="window.location.href='index-en.html'">EN</button>
-  <button onclick="window.location.href='index-ru.html'">RU</button>
-</div>
+  <!-- Навигация и заголовок иконки и т.д. — всё как раньше -->
+  ...
 
-<nav>
-  <a href="#about">Про мене</a>
-  <a href="#services">Послуги</a>
-  <a href="#portfolio">Портфоліо</a>
-  <a href="#contact">Контакти</a>
-</nav>
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <h2>Контакти</h2>
 
-<header>
-  <div class="typewriter">Себастьян Перейра</div>
-  <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-  <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-</header>
+    <div class="contact-list">
+      <p><strong>Телефон (Viber, WhatsApp, GSM):</strong> +38 (098) 074 66 98</p>
+      <p><strong>Telegram:</strong> @Sebastian_automation</p>
+      <p><strong>Email:</strong> sebast.perejra@gmail.com</p>
+      <p><strong>Локація:</strong> Україна. Особиста зустріч можлива за потребою.</p>
+    </div>
 
-<div class="icon-row">
-  <img src="excel.png" alt="Excel">
-  <img src="powerbi.png" alt="Power BI">
-  <img src="sheets.png" alt="Google Sheets">
-</div>
+    <form class="contact-form" id="contact-form">
+      <label for="name">Ім'я</label>
+      <input type="text" id="name" name="name" required>
 
-<section id="contact">
-  <h2>Зв’язатися зі мною</h2>
-  <form id="contact-form">
-    <input type="text" name="name" placeholder="Ваше ім’я" required>
-    <input type="email" name="email" placeholder="Ваш Email" required>
-    <textarea name="message" placeholder="Ваше повідомлення" rows="6" required></textarea>
-    <button type="submit">Відправити</button>
-    <p id="form-status"></p>
-  </form>
-</section>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email">
 
-<footer>
-  <p><span>© 2015–2025 Sebastian Automations.</span> Всі права захищено.</p>
-</footer>
+      <label for="message">Повідомлення</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
-<div class="ticker">
-  <div class="ticker-text">
-    Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
+      <button type="submit">Відправити</button>
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </section>
+
+  <footer>
+    <p><span>© 2015–2025 Sebastian Automations.</span> Всі права захищено.</p>
+  </footer>
+
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
+    </div>
   </div>
-</div>
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("service_hckw1kr");
-  })();
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    emailjs.sendForm("service_hckw1kr", "template_qz6v45s", this)
+      emailjs.send("service_hckw1kr", "template_qz6v45s", {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      })
       .then(function(response) {
-        document.getElementById("form-status").innerText = "Повідомлення надіслано успішно!";
-        document.getElementById("contact-form").reset();
+        document.getElementById("form-status").innerText = "Повідомлення надіслано успішно.";
       }, function(error) {
-        document.getElementById("form-status").innerText = "Помилка відправки. Спробуйте ще.";
-        console.error("EmailJS error:", error);
+        document.getElementById("form-status").innerText = "Сталася помилка. Спробуйте ще раз.";
       });
-  });
-</script>
+
+      document.getElementById("contact-form").reset();
+    });
+  </script>
 
 </body>
 </html>

@@ -33,41 +33,42 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 16px;
     }
 
     h1 {
       color: #00ffc3;
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
       text-align: center;
     }
 
     .contacts-info {
       text-align: center;
-      margin-bottom: 25px;
-      font-size: 0.95rem;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
 
     form {
       width: 100%;
-      max-width: 400px;
+      max-width: 360px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       background-color: #111;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,255,255,0.1);
     }
 
     input, textarea {
       background-color: #1a1a1a;
       border: 1px solid #00ffc3;
       color: #f4f4f4;
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 6px;
+      padding: 8px;
+      font-size: 13px;
+      border-radius: 5px;
       resize: vertical;
     }
 
@@ -75,11 +76,11 @@
       background-color: #00ffc3;
       color: #0d0d0d;
       border: none;
-      padding: 10px;
+      padding: 9px;
       font-weight: bold;
       cursor: pointer;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     button:hover {
@@ -87,12 +88,12 @@
     }
 
     .back-button {
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 18px;
+      font-size: 13px;
       text-decoration: none;
       color: #00ffc3;
       border: 1px solid #00ffc3;
-      padding: 8px 16px;
+      padding: 7px 14px;
       border-radius: 6px;
       transition: all 0.3s ease;
     }
@@ -106,25 +107,25 @@
       body {
         padding: 10px;
       }
-
       h1 {
-        font-size: 1.6rem;
-        margin-bottom: 8px;
+        font-size: 1.5rem;
+        margin-bottom: 6px;
       }
-
+      .contacts-info {
+        font-size: 0.85rem;
+        margin-bottom: 16px;
+      }
       form {
-        padding: 16px;
-        gap: 10px;
+        padding: 12px;
+        gap: 8px;
       }
-
       input, textarea {
-        padding: 8px;
-        font-size: 13px;
+        padding: 6px;
+        font-size: 12px;
       }
-
       button, .back-button {
-        padding: 8px;
-        font-size: 13px;
+        padding: 7px;
+        font-size: 12px;
       }
     }
   </style>
@@ -133,14 +134,15 @@
   <h1>Контакти</h1>
 
   <div class="contacts-info">
+    <p>Телефон (Viber / WhatsApp / GSM): +38 (098) 074 66 98</p>
+    <p>Telegram: @Sebastian_automation</p>
     <p>Email: sebast.perejra@gmail.com</p>
-    <p>Telegram: @perejra</p>
-    <p>Регіон: Україна, Львів</p>
+    <p>Локацію можна обговорити при необхідності</p>
   </div>
 
   <form onsubmit="sendEmail(event)">
-    <input type="text" name="name" placeholder="Ваше ім'я" required>
-    <input type="email" name="email" placeholder="Ваш Email" required>
+    <input type="text" name="name" placeholder="Ваше ім'я">
+    <input type="email" name="email" placeholder="Ваш Email (необов'язково)">
     <textarea name="message" rows="4" placeholder="Ваше повідомлення" required></textarea>
     <button type="submit">Надіслати</button>
   </form>

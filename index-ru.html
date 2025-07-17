@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Себастьян Перейра – Автоматизация</title>
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #0d0d0d;
+      color: #f4f4f4;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #111;
+      padding: 20px 0;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #00ffc3;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #1a73e8;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 6px;
+      z-index: 200;
+    }
+
+    .lang-switcher button {
+      background-color: #1a1a1a;
+      border: 1px solid #00ffc3;
+      color: #00ffc3;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #00ffc3;
+      color: #0d0d0d;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .typewriter {
+      display: inline-block;
+      font-size: 2.8rem;
+      color: #00ffc3;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #00ffc3;
+      animation: typing 8s steps(20) 1 normal both, blink-caret 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 18ch }
+    }
+
+    @keyframes blink-caret {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #00ffc3; }
+    }
+
+    header p {
+      font-size: 1.4rem;
+      color: #ccc;
+      margin-top: 30px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #1a73e8;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-top: 40px;
+    }
+
+    .cta-button:hover {
+      background-color: #135fbe;
+    }
+
+    .icon-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin: 60px 0;
+      flex-wrap: wrap;
+    }
+
+    .icon-row img {
+      height: 100px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
+      cursor: pointer;
+    }
+
+    .icon-row img:hover {
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #555;
+      position: relative;
+      z-index: 10;
+      background-color: #0d0d0d;
+    }
+
+    footer span {
+      color: #888;
+    }
+
+    .ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #111;
+      color: #00ffc3;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 18px;
+      padding: 14px 0;
+      border-top: 1px solid #222;
+      z-index: 99;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 40s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @media (max-width: 768px) {
+      .lang-switcher {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 6px;
+        z-index: 200;
+      }
+
+      .lang-switcher button {
+        padding: 4px 10px;
+        font-size: 12px;
+        opacity: 0.7;
+        border-radius: 3px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 8px;
+      }
+
+      nav a {
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0.9;
+      }
+
+      header {
+        padding: 60px 15px 30px;
+      }
+
+      .typewriter {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+        margin-top: 20px;
+      }
+
+      .cta-button {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
+      .icon-row {
+        gap: 30px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+      }
+
+      .icon-row img {
+        height: 70px;
+      }
+
+      footer {
+        margin-bottom: 50px;
+        text-align: center;
+        font-size: 0.85rem;
+      }
+
+      body {
+        padding-bottom: 60px;
+      }
+
+      .ticker {
+        font-size: 14px;
+        padding: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language switcher -->
+  <div class="lang-switcher">
+    <button onclick="window.location.href='index.html'">UA</button>
+    <button onclick="window.location.href='index-en.html'">EN</button>
+    <button onclick="window.location.href='index-ru.html'">RU</button>
+  </div>
+
+  <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#services">Услуги</a>
+    <a href="#portfolio">Портфолио</a>
+    <a href="#contact">Контакты</a>
+  </nav>
+
+  <header>
+    <div class="typewriter">Себастьян Перейра</div>
+    <p>Автоматизирую и визуализирую всё, что можно. А остальное — тоже попробую.</p>
+    <a class="cta-button" href="#portfolio">→ Смотреть примеры</a>
+  </header>
+
+  <div class="icon-row">
+    <img src="excel.png" alt="Excel">
+    <img src="powerbi.png" alt="Power BI">
+    <img src="sheets.png" alt="Google Sheets">
+  </div>
+
+  <footer>
+    <p><span>© 2015–2025 Sebastian Automations.</span> Все права защищены.</p>
+  </footer>
+
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматические отчёты · Пользовательская логика · Интеграции · Макросы · Умные формулы · Индивидуальные решения для бизнеса ·
+    </div>
+  </div>
+
+</body>
+</html>

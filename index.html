@@ -171,148 +171,87 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
+
     @media (max-width: 768px) {
-  /* Языковая панель — компактная и не мешает навигации */
-  .lang-switcher {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 6px;
-    z-index: 200;
-  }
+      .lang-switcher {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+      }
 
-  .lang-switcher button {
-    padding: 4px 10px;
-    font-size: 12px;
-    opacity: 0.7;
-    border-radius: 3px;
-  }
+      .lang-switcher button {
+        padding: 4px 10px;
+        font-size: 12px;
+        opacity: 0.7;
+        border-radius: 3px;
+      }
 
-  /* Навигация — в одну строку, центрирована, без наезда */
-  nav {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    padding: 12px 8px;
-  }
+      nav {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 8px;
+      }
 
-  nav a {
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    opacity: 0.9;
-  }
+      nav a {
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0.9;
+      }
 
-  /* Заголовок и текст — мягче */
-  header {
-    padding: 60px 15px 30px;
-  }
+      header {
+        padding: 60px 15px 30px;
+      }
 
-  .typewriter {
-    font-size: 2rem;
-  }
+      .typewriter {
+        font-size: 2rem;
+      }
 
-  header p {
-    font-size: 1.1rem;
-    margin-top: 20px;
-  }
+      header p {
+        font-size: 1.1rem;
+        margin-top: 20px;
+      }
 
-  .cta-button {
-    padding: 12px 24px;
-    font-size: 14px;
-  }
+      .cta-button {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
 
-  /* Иконки и отступы */
-  .icon-row {
-    gap: 30px;
-    margin: 40px 0;
-    flex-wrap: wrap;
-  }
+      .icon-row {
+        gap: 30px;
+        margin: 40px 0;
+      }
 
-  .icon-row img {
-    height: 70px;
-  }
+      .icon-row img {
+        height: 70px;
+      }
 
-  /* Футер — отодвинут от тикера */
-  footer {
-    margin-bottom: 50px;
-    text-align: center;
-    font-size: 0.85rem;
-  }
+      footer {
+        margin-bottom: 50px;
+        font-size: 0.85rem;
+      }
 
-      <!-- Контакти -->
-<section id="contact" style="padding: 60px 20px; background-color: #0f0f0f; color: #f4f4f4; border-top: 1px solid #222;">
-  <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px; color: #00ffc3;">Контакти</h2>
+      body {
+        padding-bottom: 60px;
+      }
 
-  <div style="max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.8;">
-    <p>📞 <strong>Телефон / Viber / WhatsApp:</strong> +38 (098) 074 66 98</p>
-    <p>💬 <strong>Telegram:</strong> @Sebastian_automation</p>
-    <p>📧 <strong>Email:</strong> sebast.perejra@gmail.com</p>
-    <p>📍 <strong>Локація:</strong> Україна. Особисті зустрічі — за домовленістю.</p>
-  </div>
-
-  <form onsubmit="handleContactForm(event)" style="max-width: 600px; margin: 50px auto 0; font-size: 0.95rem; background-color: #151515; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,255,195,0.05);">
-    <label style="display: block; margin-bottom: 15px;">
-      Ім’я:<br>
-      <input type="text" name="name" required style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;">
-    </label>
-
-    <label style="display: block; margin-bottom: 15px;">
-      Email (необов’язково):<br>
-      <input type="email" name="email" style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;">
-    </label>
-
-    <label style="display: block; margin-bottom: 20px;">
-      Повідомлення:<br>
-      <textarea name="message" required rows="5" style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;"></textarea>
-    </label>
-
-    <div style="text-align: center;">
-      <button type="submit" style="background-color: #00ffc3; color: #0d0d0d; padding: 12px 30px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px;">
-        Відправити
-      </button>
-    </div>
-  </form>
-
-  <p id="form-response" style="text-align: center; margin-top: 20px; font-weight: bold; color: #00ffc3; display: none;">
-    Повідомлення надіслано!
-  </p>
-</section>
-
-<script>
-  function handleContactForm(event) {
-    event.preventDefault();
-    document.getElementById('form-response').style.display = 'block';
-    event.target.reset();
-  }
-</script>
-
-      
-  body {
-    padding-bottom: 60px; /* под фиксированный .ticker */
-  }
-
-  /* Бегущая строка — меньше шрифт */
-  .ticker {
-    font-size: 14px;
-    padding: 10px 0;
-  }
-}
-
+      .ticker {
+        font-size: 14px;
+        padding: 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Language switcher -->
-<div class="lang-switcher">
-  <button onclick="window.location.href='index.html'">UA</button>
-  <button onclick="window.location.href='index-en.html'">EN</button>
-  <button onclick="window.location.href='index-ru.html'">RU</button>
-</div>
-
+  <div class="lang-switcher">
+    <button onclick="window.location.href='index.html'">UA</button>
+    <button onclick="window.location.href='index-en.html'">EN</button>
+    <button onclick="window.location.href='index-ru.html'">RU</button>
+  </div>
 
   <nav>
     <a href="#about">Про мене</a>
@@ -342,6 +281,53 @@
       Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
     </div>
   </div>
+
+  <!-- Контакти -->
+  <section id="contact" style="padding: 60px 20px; background-color: #0f0f0f; color: #f4f4f4; border-top: 1px solid #222;">
+    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px; color: #00ffc3;">Контакти</h2>
+
+    <div style="max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.8;">
+      <p>📞 <strong>Телефон / Viber / WhatsApp:</strong> +38 (098) 074 66 98</p>
+      <p>💬 <strong>Telegram:</strong> @Sebastian_automation</p>
+      <p>📧 <strong>Email:</strong> sebast.perejra@gmail.com</p>
+      <p>📍 <strong>Локація:</strong> Україна. Особисті зустрічі — за домовленістю.</p>
+    </div>
+
+    <form onsubmit="handleContactForm(event)" style="max-width: 600px; margin: 50px auto 0; font-size: 0.95rem; background-color: #151515; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,255,195,0.05);">
+      <label style="display: block; margin-bottom: 15px;">
+        Ім’я:<br>
+        <input type="text" name="name" required style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;">
+      </label>
+
+      <label style="display: block; margin-bottom: 15px;">
+        Email (необов’язково):<br>
+        <input type="email" name="email" style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;">
+      </label>
+
+      <label style="display: block; margin-bottom: 20px;">
+        Повідомлення:<br>
+        <textarea name="message" required rows="5" style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;"></textarea>
+      </label>
+
+      <div style="text-align: center;">
+        <button type="submit" style="background-color: #00ffc3; color: #0d0d0d; padding: 12px 30px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px;">
+          Відправити
+        </button>
+      </div>
+    </form>
+
+    <p id="form-response" style="text-align: center; margin-top: 20px; font-weight: bold; color: #00ffc3; display: none;">
+      Повідомлення надіслано!
+    </p>
+  </section>
+
+  <script>
+    function handleContactForm(event) {
+      event.preventDefault();
+      document.getElementById('form-response').style.display = 'block';
+      event.target.reset();
+    }
+  </script>
 
 </body>
 </html>

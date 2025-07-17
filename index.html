@@ -243,6 +243,54 @@
     font-size: 0.85rem;
   }
 
+      <!-- Контакти -->
+<section id="contact" style="padding: 60px 20px; background-color: #0f0f0f; color: #f4f4f4; border-top: 1px solid #222;">
+  <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px; color: #00ffc3;">Контакти</h2>
+
+  <div style="max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.8;">
+    <p>📞 <strong>Телефон / Viber / WhatsApp:</strong> +38 (098) 074 66 98</p>
+    <p>💬 <strong>Telegram:</strong> @Sebastian_automation</p>
+    <p>📧 <strong>Email:</strong> sebast.perejra@gmail.com</p>
+    <p>📍 <strong>Локація:</strong> Україна. Особисті зустрічі — за домовленістю.</p>
+  </div>
+
+  <form onsubmit="handleContactForm(event)" style="max-width: 600px; margin: 50px auto 0; font-size: 0.95rem; background-color: #151515; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,255,195,0.05);">
+    <label style="display: block; margin-bottom: 15px;">
+      Ім’я:<br>
+      <input type="text" name="name" required style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;">
+    </label>
+
+    <label style="display: block; margin-bottom: 15px;">
+      Email (необов’язково):<br>
+      <input type="email" name="email" style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;">
+    </label>
+
+    <label style="display: block; margin-bottom: 20px;">
+      Повідомлення:<br>
+      <textarea name="message" required rows="5" style="width: 100%; padding: 10px; margin-top: 6px; border-radius: 5px; border: none; background-color: #222; color: #f4f4f4;"></textarea>
+    </label>
+
+    <div style="text-align: center;">
+      <button type="submit" style="background-color: #00ffc3; color: #0d0d0d; padding: 12px 30px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px;">
+        Відправити
+      </button>
+    </div>
+  </form>
+
+  <p id="form-response" style="text-align: center; margin-top: 20px; font-weight: bold; color: #00ffc3; display: none;">
+    Повідомлення надіслано!
+  </p>
+</section>
+
+<script>
+  function handleContactForm(event) {
+    event.preventDefault();
+    document.getElementById('form-response').style.display = 'block';
+    event.target.reset();
+  }
+</script>
+
+      
   body {
     padding-bottom: 60px; /* под фиксированный .ticker */
   }

@@ -6,22 +6,6 @@
   <title>Контакти – Себастьян Перейра</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("sUAoOmiqx4fKn8TVo");
-    })();
-
-    function sendEmail(event) {
-      event.preventDefault();
-      emailjs.sendForm('service_hckw1kr', 'template_lu4txv8', event.target)
-        .then(() => {
-          alert('Повідомлення надіслано!');
-          event.target.reset();
-        }, (error) => {
-          alert('Помилка при відправці: ' + JSON.stringify(error));
-        });
-    }
-  </script>
   <style>
     body {
       margin: 0;
@@ -31,71 +15,74 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 16px;
+      padding: 40px 20px;
     }
 
     h1 {
       color: #00ffc3;
-      font-size: 1.8rem;
-      margin-bottom: 8px;
-      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2rem;
     }
 
-    .contacts-info {
+    p {
       text-align: center;
-      margin-bottom: 20px;
-      font-size: 0.9rem;
-      line-height: 1.4;
+      max-width: 600px;
+      margin: 6px 0;
+      font-size: 0.95rem;
     }
 
-    form {
+    .contact-form {
+      margin-top: 40px;
+      max-width: 420px;
       width: 100%;
-      max-width: 360px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      background-color: #111;
-      padding: 16px;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,255,255,0.1);
+      gap: 12px;
     }
 
-    input, textarea {
-      background-color: #1a1a1a;
-      border: 1px solid #00ffc3;
-      color: #f4f4f4;
-      padding: 8px;
-      font-size: 13px;
-      border-radius: 5px;
-      resize: vertical;
-    }
-
-    button {
-      background-color: #00ffc3;
-      color: #0d0d0d;
+    .contact-form input,
+    .contact-form textarea {
+      padding: 10px;
+      font-size: 16px;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #e8f0fe;
       border: none;
-      padding: 9px;
-      font-weight: bold;
-      cursor: pointer;
       border-radius: 6px;
-      font-size: 13px;
+      color: #000;
     }
 
-    button:hover {
-      background-color: #00e6b3;
+    .contact-form textarea {
+      resize: vertical;
+      height: 120px;
+    }
+
+    .contact-form button {
+      background-color: #00ffc3;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #00c3a0;
     }
 
     .back-button {
-      margin-top: 18px;
-      font-size: 13px;
-      text-decoration: none;
+      margin-top: 30px;
+      background-color: #003e35;
       color: #00ffc3;
-      border: 1px solid #00ffc3;
-      padding: 7px 14px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
+      padding: 10px 22px;
+      border: 2px solid #00ffc3;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
     }
 
     .back-button:hover {
@@ -103,50 +90,58 @@
       color: #0d0d0d;
     }
 
-    @media (max-height: 700px) {
-      body {
-        padding: 10px;
-      }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
       h1 {
-        font-size: 1.5rem;
-        margin-bottom: 6px;
+        font-size: 1.6rem;
       }
-      .contacts-info {
-        font-size: 0.85rem;
-        margin-bottom: 16px;
-      }
-      form {
-        padding: 12px;
-        gap: 8px;
-      }
-      input, textarea {
-        padding: 6px;
-        font-size: 12px;
-      }
-      button, .back-button {
-        padding: 7px;
-        font-size: 12px;
+      .contact-form {
+        max-width: 95%;
       }
     }
   </style>
 </head>
 <body>
+
   <h1>Контакти</h1>
 
-  <div class="contacts-info">
-    <p>Телефон (Viber / WhatsApp / GSM): +38 (098) 074 66 98</p>
-    <p>Telegram: @Sebastian_automation</p>
-    <p>Email: sebast.perejra@gmail.com</p>
-    <p>Локацію можна обговорити при необхідності</p>
-  </div>
+  <p>Телефон (Viber / WhatsApp / GSM): <strong>+38 (098) 074 66 98</strong></p>
+  <p>Telegram: <strong>@Sebastian_automation</strong></p>
+  <p>Email: <strong>sebast.perejra@gmail.com</strong></p>
+  <p>Локація: <em>Україна (зустріч за потреби)</em></p>
 
-  <form onsubmit="sendEmail(event)">
-    <input type="text" name="name" placeholder="Ваше ім'я">
-    <input type="email" name="email" placeholder="Ваш Email (необов'язково)">
-    <textarea name="message" rows="4" placeholder="Ваше повідомлення" required></textarea>
+  <form class="contact-form" id="contact-form">
+    <input type="text" id="name" name="user_name" placeholder="Ваше ім’я" required>
+    <input type="email" id="email" name="user_email" placeholder="Email" required>
+    <textarea id="message" name="message" placeholder="Повідомлення" required></textarea>
     <button type="submit">Надіслати</button>
+    <div class="error-message" id="error-message"></div>
   </form>
 
-  <a class="back-button" href="index.html">← Назад на головну</a>
+  <a href="index.html" class="back-button">← Назад на головну</a>
+
+  <script>
+    emailjs.init("sUAoOmiqx4fKn8TVo");
+
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_hckw1kr", "template_qz6v45s", this)
+        .then(() => {
+          alert("Повідомлення надіслано успішно!");
+          this.reset();
+          document.getElementById("error-message").textContent = "";
+        }, (error) => {
+          console.error("EmailJS error:", error);
+          document.getElementById("error-message").textContent = "Помилка надсилання. Спробуйте ще раз.";
+        });
+    });
+  </script>
+
 </body>
 </html>

@@ -4,25 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Контакти – Себастьян Перейра</title>
-  <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    emailjs.init('sUAoOmiqx4fKn8TVo');
+    (function(){
+      emailjs.init("sUAoOmiqx4fKn8TVo");
+    })();
 
-    function sendEmail(e) {
-      e.preventDefault();
-      const status = document.getElementById("status");
-      emailjs.send("service_hckw1kr", "template_qz6v45s", {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
-      }).then(() => {
-        status.innerHTML = "<span style='color: #00ffc3;'>Повідомлення надіслано успішно!</span>";
-        document.getElementById("contact-form").reset();
-      }, () => {
-        status.innerHTML = "<span style='color: red;'>Помилка надсилання. Спробуйте ще раз.</span>";
-      });
+    function sendEmail(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_hckw1kr', 'template_lu4txv8', event.target)
+        .then(() => {
+          alert('Повідомлення надіслано!');
+          event.target.reset();
+        }, (error) => {
+          alert('Помилка при відправці: ' + JSON.stringify(error));
+        });
     }
   </script>
   <style>
@@ -31,89 +28,123 @@
       font-family: 'Roboto Mono', monospace;
       background-color: #0d0d0d;
       color: #f4f4f4;
-      padding: 40px 20px 80px;
-      text-align: center;
-    }
-    a.back-button {
-      display: inline-block;
-      margin-bottom: 30px;
-      padding: 10px 20px;
-      background-color: #00ffc3;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: background-color 0.3s;
-    }
-    a.back-button:hover {
-      background-color: #1a73e8;
-      color: white;
-    }
-    h1 {
-      color: #00ffc3;
-      margin-bottom: 20px;
-    }
-    .contact-block {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
-    .contact-block b {
-      color: #00ffc3;
-    }
-    form {
-      max-width: 500px;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
     }
+
+    h1 {
+      color: #00ffc3;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .contacts-info {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    form {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background-color: #111;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+    }
+
     input, textarea {
-      padding: 12px;
-      font-family: inherit;
-      font-size: 16px;
-      border: none;
+      background-color: #1a1a1a;
+      border: 1px solid #00ffc3;
+      color: #f4f4f4;
+      padding: 10px;
+      font-size: 14px;
       border-radius: 6px;
-      background-color: #e6f0ff;
+      resize: vertical;
     }
+
     button {
-      padding: 12px;
       background-color: #00ffc3;
-      color: #000;
-      font-weight: bold;
-      font-size: 16px;
+      color: #0d0d0d;
       border: none;
-      border-radius: 6px;
+      padding: 10px;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
+      border-radius: 6px;
+      font-size: 14px;
     }
+
     button:hover {
-      background-color: #1a73e8;
-      color: white;
+      background-color: #00e6b3;
     }
-    #status {
+
+    .back-button {
       margin-top: 20px;
-      font-size: 1rem;
+      font-size: 14px;
+      text-decoration: none;
+      color: #00ffc3;
+      border: 1px solid #00ffc3;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #00ffc3;
+      color: #0d0d0d;
+    }
+
+    @media (max-height: 700px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+
+      form {
+        padding: 16px;
+        gap: 10px;
+      }
+
+      input, textarea {
+        padding: 8px;
+        font-size: 13px;
+      }
+
+      button, .back-button {
+        padding: 8px;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back-button">← Повернутися на головну</a>
-
   <h1>Контакти</h1>
-  <div class="contact-block">
-    Телефон (Viber / WhatsApp / GSM):<br>
-    <b>+38 (098) 074 66 98</b><br><br>
-    Telegram: <b>@Sebastian_automation</b><br><br>
-    Email: <b>sebast.perejra@gmail.com</b><br><br>
-    Місцезнаходження: <i>Україна (зустріч за потреби)</i>
+
+  <div class="contacts-info">
+    <p>Email: sebast.perejra@gmail.com</p>
+    <p>Telegram: @perejra</p>
+    <p>Регіон: Україна, Львів</p>
   </div>
 
-  <form id="contact-form" onsubmit="sendEmail(event)">
-    <input type="text" id="name" name="name" placeholder="Ваше ім'я" required />
-    <input type="email" id="email" name="email" placeholder="Ваш Email" required />
-    <textarea id="message" name="message" rows="5" placeholder="Ваше повідомлення" required></textarea>
-    <button type="submit">Відправити</button>
-    <div id="status"></div>
+  <form onsubmit="sendEmail(event)">
+    <input type="text" name="name" placeholder="Ваше ім'я" required>
+    <input type="email" name="email" placeholder="Ваш Email" required>
+    <textarea name="message" rows="4" placeholder="Ваше повідомлення" required></textarea>
+    <button type="submit">Надіслати</button>
   </form>
+
+  <a class="back-button" href="index.html">← Назад на головну</a>
 </body>
 </html>

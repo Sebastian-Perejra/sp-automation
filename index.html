@@ -243,6 +243,18 @@
 
       header {
         padding-top: 120px;
+        .hero-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.hero-inline img {
+  height: 60px;
+}
+
       }
     }
   </style>
@@ -276,11 +288,14 @@
   </div>
 
   <header>
-    <img src="avatar.png" alt="Avatar" style="height: 60px; margin-bottom: 10px; vertical-align: middle; margin-right: 10px;">
+  <div class="hero-inline">
+    <img src="avatar.png" alt="Avatar">
     <div class="typewriter">Себастьян Перейра</div>
-    <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-  </header>
+  </div>
+  <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+  <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
+</header>
+
 
   <div class="icon-row">
     <img src="excel.png" alt="Excel">

@@ -4,202 +4,311 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Себастьян Перейра – Автоматизація</title>
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Roboto Mono', monospace;
-      background-color: #f5f8fa;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+      overflow-x: hidden;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    header {
-      background-color: #e3f0ff;
-      padding: 10px 20px;
+    .lang-switcher {
+      position: fixed;
+      top: 12px;
+      right: 20px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      gap: 10px;
+      z-index: 300;
+    }
+
+    .lang-switcher button {
+      background-color: #ffffff;
+      border: 1px solid #007acc;
+      color: #007acc;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #007acc;
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #e6f0fa;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     nav a {
-      margin: 0 10px;
+      color: #007acc;
+      text-decoration: none;
       font-weight: bold;
-      color: #0077cc;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #005ea8;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      z-index: 301;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #007acc;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background-color: #e6f0fa;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      z-index: 200;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .mobile-nav a {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #007acc;
       text-decoration: none;
     }
 
-    .lang-switch {
-      display: flex;
-      gap: 5px;
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .lang-switch button {
-      padding: 5px 10px;
-      font-weight: bold;
-      border: 1px solid #0077cc;
-      background-color: white;
-      cursor: pointer;
-    }
-
-    main {
+    header {
       text-align: center;
-      flex: 1;
+      padding: 80px 20px 30px;
     }
 
-    .hero {
-      padding: 40px 20px 30px;
-    }
-
-    .hero-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .hero-content img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      margin-bottom: -8px; /* поднимает изображение ближе к тексту */
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      color: #199c59;
+    .typewriter {
       display: inline-block;
-      margin: 0;
+      font-size: 2.8rem;
+      color: #0F9D58;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #0F9D58;
+      animation: typing 8s steps(20) 1 normal both, blink-caret 0.7s step-end infinite;
     }
 
-    p {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      color: #333;
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 18ch }
+    }
+
+    @keyframes blink-caret {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #0F9D58; }
+    }
+
+    header p {
+      font-size: 1.4rem;
+      color: #444;
+      margin-top: 30px;
     }
 
     .cta-button {
-      margin-top: 25px;
-      background-color: #0066ff;
+      display: inline-block;
+      background-color: #1a73e8;
       color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s;
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 40px;
     }
 
     .cta-button:hover {
-      transform: translateY(-4px);
+      background-color: #135fbe;
+      transform: translateY(-5px);
     }
 
-    .tech-logos {
-      margin: 40px 0 20px;
+    .icon-row {
       display: flex;
       justify-content: center;
-      gap: 50px;
+      align-items: center;
+      gap: 60px;
+      margin: 60px 0;
       flex-wrap: wrap;
     }
 
-    .tech-logos img {
+    .icon-row img {
       height: 100px;
       transition: transform 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(0, 122, 204, 0.3));
+      cursor: pointer;
     }
 
-    .tech-logos img:hover {
-      transform: scale(1.08);
+    .icon-row img:hover {
+      transform: scale(1.2);
     }
 
     footer {
-      background-color: #deecfa;
+      text-align: center;
       padding: 10px 20px;
       font-size: 0.9rem;
-      color: #444;
+      color: #555;
+      background-color: #e6f0fa;
+      flex-shrink: 0;
     }
 
-    .marquee {
-      background-color: #0073d9;
+    .ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #007acc;
       color: white;
-      padding: 8px 0;
-      font-size: 1rem;
-      text-align: center;
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
+      font-size: 18px;
+      padding: 14px 0;
+      border-top: 1px solid #005ea8;
+      z-index: 99;
     }
 
-    .marquee span {
+    .ticker-text {
       display: inline-block;
       padding-left: 100%;
-      animation: marquee 18s linear infinite;
+      animation: ticker 40s linear infinite;
     }
 
-    @keyframes marquee {
-      from { transform: translateX(0%); }
-      to { transform: translateX(-100%); }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
 
     @media (max-width: 768px) {
-      .hero-content {
-        flex-direction: column;
-      }
-
-      .tech-logos img {
-        height: 80px;
-      }
-
       nav {
         display: none;
       }
 
       .burger {
-        display: block;
-        cursor: pointer;
+        display: flex;
+      }
+
+      .mobile-nav.show {
+        display: flex;
+      }
+
+      header {
+        padding-top: 120px;
       }
     }
   </style>
 </head>
 <body>
 
-<header>
+  <div class="lang-switcher">
+    <button onclick="location.href='index.html'">UA</button>
+    <button onclick="location.href='index-en.html'">EN</button>
+    <button onclick="location.href='index-ru.html'">RU</button>
+  </div>
+
+  <div class="burger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
   <nav>
     <a href="#about">Про мене</a>
     <a href="#services">Послуги</a>
     <a href="#portfolio">Портфоліо</a>
-    <a href="#contacts">Контакти</a>
+    <a href="contacts.html">Контакти</a>
   </nav>
-  <div class="lang-switch">
-    <button>UA</button>
-    <button>EN</button>
-    <button>RU</button>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="closeMenu()">Про мене</a>
+    <a href="#services" onclick="closeMenu()">Послуги</a>
+    <a href="#portfolio" onclick="closeMenu()">Портфоліо</a>
+    <a href="contacts.html" onclick="closeMenu()">Контакти</a>
   </div>
-</header>
 
-<main>
-  <section class="hero">
-    <div class="hero-content">
-      <img src="avatar.png" alt="Avatar" />
-      <h1>Себастьян Перейра</h1>
-    </div>
+  <header>
+    <img src="avatar.png" alt="Avatar" style="height: 60px; margin-bottom: 10px; vertical-align: middle; margin-right: 10px;">
+    <div class="typewriter">Себастьян Перейра</div>
     <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <button class="cta-button">→ Дивитися приклади</button>
+    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
+  </header>
 
-    <div class="tech-logos">
-      <img src="excel.png" alt="Excel">
-      <img src="powerbi.png" alt="Power BI">
-      <img src="sheets.png" alt="Google Sheets">
+  <div class="icon-row">
+    <img src="excel.png" alt="Excel">
+    <img src="powerbi.png" alt="Power BI">
+    <img src="sheets.png" alt="Google Sheets">
+  </div>
+
+  <footer>
+    <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
+  </footer>
+
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
     </div>
-  </section>
-</main>
+  </div>
 
-<footer>
-  <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
-</footer>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('show');
+    }
 
-<div class="marquee">
-  <span>Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу · </span>
-</div>
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.remove('show');
+    }
+  </script>
 
 </body>
 </html>

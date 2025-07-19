@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Себастьян Перейра – Автоматизація</title>
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -10,15 +10,17 @@
     html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
       color: #1a1a1a;
+      overflow-x: hidden;
     }
 
     body {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
     .lang-switcher {
@@ -113,30 +115,19 @@
     }
 
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    main {
-      flex: 1;
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     header {
       text-align: center;
-      padding: 100px 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background-image: url('avatar-silhouette.png');
-      background-size: cover;
-      background-position: center;
+      padding: 80px 20px 30px;
     }
 
     .typewriter {
@@ -174,13 +165,13 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
       margin-top: 40px;
     }
 
     .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background-color: #135fbe;
+      transform: translateY(-5px);
     }
 
     .icon-row {
@@ -205,10 +196,11 @@
 
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 10px 20px;
       font-size: 0.9rem;
       color: #555;
       background-color: #e6f0fa;
+      flex-shrink: 0;
     }
 
     .ticker {
@@ -231,24 +223,32 @@
       animation: ticker 40s linear infinite;
     }
 
-    .ticker-space {
-      height: 48px;
-    }
-
     @keyframes ticker {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
     @media (max-width: 768px) {
-      nav { display: none; }
-      .burger { display: flex; }
-      .mobile-nav.show { display: flex; }
-      header { flex-direction: column; padding-top: 120px; }
+      nav {
+        display: none;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      .mobile-nav.show {
+        display: flex;
+      }
+
+      header {
+        padding-top: 120px;
+      }
     }
   </style>
 </head>
 <body>
+
   <div class="lang-switcher">
     <button onclick="location.href='index.html'">UA</button>
     <button onclick="location.href='index-en.html'">EN</button>
@@ -256,7 +256,9 @@
   </div>
 
   <div class="burger" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
+    <div></div>
+    <div></div>
+    <div></div>
   </div>
 
   <nav>
@@ -273,27 +275,22 @@
     <a href="contacts.html" onclick="closeMenu()">Контакти</a>
   </div>
 
-  <main>
-    <header>
-      <div class="avatar"></div>
-      <div class="typewriter">Себастьян Перейра</div>
-    </header>
-    <p style="text-align:center; font-size: 1.4rem; color:#444; margin-top:-20px;">Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <div style="text-align:center;">
-      <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-    </div>
-    <div class="icon-row">
-      <img src="excel.png" alt="Excel">
-      <img src="powerbi.png" alt="Power BI">
-      <img src="sheets.png" alt="Google Sheets">
-    </div>
-  </main>
+  <header>
+    <img src="avatar.png" alt="Avatar" style="height: 60px; margin-bottom: 10px; vertical-align: middle; margin-right: 10px;">
+    <div class="typewriter">Себастьян Перейра</div>
+    <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
+  </header>
+
+  <div class="icon-row">
+    <img src="excel.png" alt="Excel">
+    <img src="powerbi.png" alt="Power BI">
+    <img src="sheets.png" alt="Google Sheets">
+  </div>
 
   <footer>
     <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
   </footer>
-
-  <div class="ticker-space"></div>
 
   <div class="ticker">
     <div class="ticker-text">
@@ -303,11 +300,15 @@
 
   <script>
     function toggleMenu() {
-      document.getElementById('mobileNav').classList.toggle('show');
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('show');
     }
+
     function closeMenu() {
-      document.getElementById('mobileNav').classList.remove('show');
+      const nav = document.getElementById('mobileNav');
+      nav.classList.remove('show');
     }
   </script>
+
 </body>
 </html>

@@ -2,35 +2,23 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Себастьян Перейра – Автоматизація</title>
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     html, body {
-      height: 100%;
       margin: 0;
+      padding: 0;
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
       color: #1a1a1a;
-      padding: 0;
-      overflow-x: hidden;
     }
 
     body {
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
-      padding-bottom: 60px; /* чтобы не перекрывал ticker */
-    }
-
-    main {
-      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding-top: 120px;
-      text-align: center;
     }
 
     .lang-switcher {
@@ -125,41 +113,34 @@
     }
 
     @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero {
+    main {
+      flex: 1;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
     }
 
     .avatar {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background-color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .avatar::before {
-      content: "👤";
-      font-size: 30px;
-      color: white;
+      background-image: url('avatar-silhouette.png');
+      background-size: cover;
+      background-position: center;
     }
 
     .typewriter {
+      display: inline-block;
       font-size: 2.8rem;
       color: #0F9D58;
       white-space: nowrap;
@@ -178,7 +159,7 @@
       50% { border-color: #0F9D58; }
     }
 
-    .tagline {
+    header p {
       font-size: 1.4rem;
       color: #444;
       margin-top: 30px;
@@ -193,13 +174,13 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
+      transition: all 0.3s ease;
       margin-top: 40px;
-      transition: transform 0.2s ease, background-color 0.3s ease;
     }
 
     .cta-button:hover {
-      background-color: #135fbe;
-      transform: translateY(-4px);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .icon-row {
@@ -250,32 +231,24 @@
       animation: ticker 40s linear infinite;
     }
 
+    .ticker-space {
+      height: 48px;
+    }
+
     @keyframes ticker {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
     @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
-      .burger {
-        display: flex;
-      }
-
-      .mobile-nav.show {
-        display: flex;
-      }
-
-      main {
-        padding-top: 140px;
-      }
+      nav { display: none; }
+      .burger { display: flex; }
+      .mobile-nav.show { display: flex; }
+      header { flex-direction: column; padding-top: 120px; }
     }
   </style>
 </head>
 <body>
-
   <div class="lang-switcher">
     <button onclick="location.href='index.html'">UA</button>
     <button onclick="location.href='index-en.html'">EN</button>
@@ -301,12 +274,14 @@
   </div>
 
   <main>
-    <div class="hero">
+    <header>
       <div class="avatar"></div>
       <div class="typewriter">Себастьян Перейра</div>
+    </header>
+    <p style="text-align:center; font-size: 1.4rem; color:#444; margin-top:-20px;">Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+    <div style="text-align:center;">
+      <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
     </div>
-    <p class="tagline">Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
     <div class="icon-row">
       <img src="excel.png" alt="Excel">
       <img src="powerbi.png" alt="Power BI">
@@ -318,6 +293,8 @@
     <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
   </footer>
 
+  <div class="ticker-space"></div>
+
   <div class="ticker">
     <div class="ticker-text">
       Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
@@ -328,11 +305,9 @@
     function toggleMenu() {
       document.getElementById('mobileNav').classList.toggle('show');
     }
-
     function closeMenu() {
       document.getElementById('mobileNav').classList.remove('show');
     }
   </script>
-
 </body>
 </html>

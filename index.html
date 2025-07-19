@@ -10,12 +10,18 @@
     html, body {
       height: 100%;
       margin: 0;
-      display: flex;
-      flex-direction: column;
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
       color: #1a1a1a;
+      padding: 0;
       overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding-bottom: 60px; /* чтобы не перекрывал ticker */
     }
 
     main {
@@ -23,7 +29,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-bottom: 60px;
+      padding-top: 120px;
+      text-align: center;
     }
 
     .lang-switcher {
@@ -128,25 +135,31 @@
       }
     }
 
-    header {
-      text-align: center;
-      padding: 100px 20px 40px;
-    }
-
-    .name-block {
+    .hero {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .name-block svg {
-      width: 50px;
-      height: 50px;
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar::before {
+      content: "👤";
+      font-size: 30px;
+      color: white;
     }
 
     .typewriter {
-      display: inline-block;
       font-size: 2.8rem;
       color: #0F9D58;
       white-space: nowrap;
@@ -165,7 +178,7 @@
       50% { border-color: #0F9D58; }
     }
 
-    header p {
+    .tagline {
       font-size: 1.4rem;
       color: #444;
       margin-top: 30px;
@@ -180,13 +193,13 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
-      transition: all 0.3s ease;
       margin-top: 40px;
+      transition: transform 0.2s ease, background-color 0.3s ease;
     }
 
     .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      background-color: #135fbe;
+      transform: translateY(-4px);
     }
 
     .icon-row {
@@ -255,13 +268,14 @@
         display: flex;
       }
 
-      header {
-        padding-top: 120px;
+      main {
+        padding-top: 140px;
       }
     }
   </style>
 </head>
 <body>
+
   <div class="lang-switcher">
     <button onclick="location.href='index.html'">UA</button>
     <button onclick="location.href='index-en.html'">EN</button>
@@ -269,9 +283,7 @@
   </div>
 
   <div class="burger" onclick="toggleMenu()">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div></div><div></div><div></div>
   </div>
 
   <nav>
@@ -289,18 +301,12 @@
   </div>
 
   <main>
-    <header>
-      <div class="name-block">
-        <svg viewBox="0 0 24 24" fill="#1a1a1a" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="12" fill="#333"/>
-          <path fill="#fff" d="M12 12c1.93 0 3.5-1.57 3.5-3.5S13.93 5 12 5s-3.5 1.57-3.5 3.5S10.07 12 12 12zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-        </svg>
-        <div class="typewriter">Себастьян Перейра</div>
-      </div>
-      <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-      <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-    </header>
-
+    <div class="hero">
+      <div class="avatar"></div>
+      <div class="typewriter">Себастьян Перейра</div>
+    </div>
+    <p class="tagline">Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
     <div class="icon-row">
       <img src="excel.png" alt="Excel">
       <img src="powerbi.png" alt="Power BI">
@@ -320,14 +326,13 @@
 
   <script>
     function toggleMenu() {
-      const nav = document.getElementById('mobileNav');
-      nav.classList.toggle('show');
+      document.getElementById('mobileNav').classList.toggle('show');
     }
 
     function closeMenu() {
-      const nav = document.getElementById('mobileNav');
-      nav.classList.remove('show');
+      document.getElementById('mobileNav').classList.remove('show');
     }
   </script>
+
 </body>
 </html>

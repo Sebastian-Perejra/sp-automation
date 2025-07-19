@@ -7,13 +7,23 @@
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
+      display: flex;
+      flex-direction: column;
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
       color: #1a1a1a;
       overflow-x: hidden;
-      padding-bottom: 80px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 60px;
     }
 
     .lang-switcher {
@@ -123,28 +133,16 @@
       padding: 100px 20px 40px;
     }
 
-    .header-row {
+    .name-block {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       gap: 20px;
-      flex-wrap: nowrap;
     }
 
-    .avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background-color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .avatar svg {
-      width: 40px;
-      height: 40px;
-      fill: #fff;
+    .name-block svg {
+      width: 50px;
+      height: 50px;
     }
 
     .typewriter {
@@ -187,9 +185,8 @@
     }
 
     .cta-button:hover {
-      background-color: #135fbe;
       transform: translateY(-2px);
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
     }
 
     .icon-row {
@@ -218,7 +215,6 @@
       font-size: 0.9rem;
       color: #555;
       background-color: #e6f0fa;
-      margin-bottom: 10px;
     }
 
     .ticker {
@@ -259,11 +255,6 @@
         display: flex;
       }
 
-      .header-row {
-        flex-direction: column;
-        gap: 10px;
-      }
-
       header {
         padding-top: 120px;
       }
@@ -271,22 +262,18 @@
   </style>
 </head>
 <body>
-
-  <!-- Языки -->
   <div class="lang-switcher">
     <button onclick="location.href='index.html'">UA</button>
     <button onclick="location.href='index-en.html'">EN</button>
     <button onclick="location.href='index-ru.html'">RU</button>
   </div>
 
-  <!-- Бургер -->
   <div class="burger" onclick="toggleMenu()">
     <div></div>
     <div></div>
     <div></div>
   </div>
 
-  <!-- Навигация desktop -->
   <nav>
     <a href="#about">Про мене</a>
     <a href="#services">Послуги</a>
@@ -294,7 +281,6 @@
     <a href="contacts.html">Контакти</a>
   </nav>
 
-  <!-- Навигация mobile -->
   <div class="mobile-nav" id="mobileNav">
     <a href="#about" onclick="closeMenu()">Про мене</a>
     <a href="#services" onclick="closeMenu()">Послуги</a>
@@ -302,25 +288,25 @@
     <a href="contacts.html" onclick="closeMenu()">Контакти</a>
   </div>
 
-  <header>
-    <div class="header-row">
-      <div class="avatar">
-        <!-- Встроенный силуэт-иконка SVG -->
-        <svg viewBox="0 0 64 64">
-          <path d="M32 32c8.837 0 16-7.163 16-16S40.837 0 32 0 16 7.163 16 16s7.163 16 16 16zm0 8c-10.667 0-32 5.333-32 16v8h64v-8c0-10.667-21.333-16-32-16z"/>
+  <main>
+    <header>
+      <div class="name-block">
+        <svg viewBox="0 0 24 24" fill="#1a1a1a" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="12" fill="#333"/>
+          <path fill="#fff" d="M12 12c1.93 0 3.5-1.57 3.5-3.5S13.93 5 12 5s-3.5 1.57-3.5 3.5S10.07 12 12 12zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
         </svg>
+        <div class="typewriter">Себастьян Перейра</div>
       </div>
-      <div class="typewriter">Себастьян Перейра</div>
-    </div>
-    <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-  </header>
+      <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+      <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
+    </header>
 
-  <div class="icon-row">
-    <img src="excel.png" alt="Excel">
-    <img src="powerbi.png" alt="Power BI">
-    <img src="sheets.png" alt="Google Sheets">
-  </div>
+    <div class="icon-row">
+      <img src="excel.png" alt="Excel">
+      <img src="powerbi.png" alt="Power BI">
+      <img src="sheets.png" alt="Google Sheets">
+    </div>
+  </main>
 
   <footer>
     <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
@@ -343,6 +329,5 @@
       nav.classList.remove('show');
     }
   </script>
-
 </body>
 </html>

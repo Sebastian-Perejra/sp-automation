@@ -123,6 +123,30 @@
       padding: 100px 20px 40px;
     }
 
+    .header-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: nowrap;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar svg {
+      width: 40px;
+      height: 40px;
+      fill: #fff;
+    }
+
     .typewriter {
       display: inline-block;
       font-size: 2.8rem;
@@ -158,12 +182,14 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
       margin-top: 40px;
     }
 
     .cta-button:hover {
       background-color: #135fbe;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
     }
 
     .icon-row {
@@ -233,6 +259,11 @@
         display: flex;
       }
 
+      .header-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
       header {
         padding-top: 120px;
       }
@@ -272,7 +303,15 @@
   </div>
 
   <header>
-    <div class="typewriter">Себастьян Перейра</div>
+    <div class="header-row">
+      <div class="avatar">
+        <!-- Встроенный силуэт-иконка SVG -->
+        <svg viewBox="0 0 64 64">
+          <path d="M32 32c8.837 0 16-7.163 16-16S40.837 0 32 0 16 7.163 16 16s7.163 16 16 16zm0 8c-10.667 0-32 5.333-32 16v8h64v-8c0-10.667-21.333-16-32-16z"/>
+        </svg>
+      </div>
+      <div class="typewriter">Себастьян Перейра</div>
+    </div>
     <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
     <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
   </header>

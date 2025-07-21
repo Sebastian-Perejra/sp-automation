@@ -336,83 +336,64 @@
 </div>
 
 
-<script>
-  function toggleMenu() {
-    const nav = document.getElementById('mobileNav');
-    nav.classList.toggle('show');
-  }
-
-  function closeMenu() {
-    const nav = document.getElementById('mobileNav');
-    nav.classList.remove('show');
-  }
-
-  const carousel = document.getElementById('carousel');
-  let isDragging = false;
-  let startX = 0;
-  let currentRotation = 0;
-  let lastDelta = 0;
-  let inertia = 0;
-  let rafId;
-
-  function applyRotation() {
-    currentRotation += inertia;
-    carousel.style.transform = `rotateY(${currentRotation}deg)`;
-    inertia *= 0.95; // damping factor
-
-    if (Math.abs(inertia) > 0.1) {
-      rafId = requestAnimationFrame(applyRotation);
-    } else {
-      inertia = 0;
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('show');
     }
-  }
 
-  carousel.parentElement.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startX = e.clientX;
-    cancelAnimationFrame(rafId); // остановка инерции, если пользователь перехватил мышку
-  });
-
-  document.addEventListener('mouseup', () => {
-    if (isDragging) {
-      isDragging = false;
-      inertia = lastDelta * 0.5; // сила инерции на основе последнего дельта
-      rafId = requestAnimationFrame(applyRotation);
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.remove('show');
     }
-  });
 
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      const delta = e.clientX - startX;
-      currentRotation += delta * 0.4;
-      carousel.style.transform = `rotateY(${currentRotation}deg)`;
-      lastDelta = delta;
+    const carousel = document.getElementById('carousel');
+    let isDragging = false;
+    let startX;
+    let currentRotation = 0;
+
+    carousel.parentElement.addEventListener('mousedown', (e) => {
+      isDragging = true;
       startX = e.clientX;
-    }
-  });
-
-  // === Подсказки ===
-  const hint = document.getElementById('hint');
-  const descriptions = {
-    'Excel': 'Автоматизація Excel',
-    'Power BI': 'Візуалізація через Power BI',
-    'Google Sheets': 'Скрипти в Google Таблицях',
-    'JavaScript': 'Автоматизація через JavaScript',
-    'VBA': 'Макроси та коди VBA',
-    'Power Query': 'Імпорт та трансформації',
-    'Power Pivot': 'DAX-аналіз у Power Pivot'
-  };
-
-  document.querySelectorAll('.carousel img').forEach(img => {
-    img.addEventListener('mouseenter', () => {
-      hint.textContent = descriptions[img.alt] || '';
-      hint.style.display = 'block';
+      carousel.style.animation = 'none';
     });
-    img.addEventListener('mouseleave', () => {
-      hint.style.display = 'none';
-    });
-  });
-</script>
 
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        carousel.style.animation = 'spin 80s linear infinite';
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const delta = e.clientX - startX;
+        currentRotation += delta * 0.2;
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+        startX = e.clientX;
+      }
+    });
+
+    const hint = document.getElementById('hint');
+    const descriptions = {
+      'Excel': 'Автоматизація Excel',
+      'Power BI': 'Візуалізація через Power BI',
+      'Google Sheets': 'Скрипти в Google Таблицях',
+      'JavaScript': 'Автоматизація через JavaScript',
+      'VBA': 'Макроси та коди VBA',
+      'Power Query': 'Імпорт та трансформації',
+      'Power Pivot': 'DAX-аналіз у Power Pivot'
+    };
+
+    document.querySelectorAll('.carousel img').forEach(img => {
+      img.addEventListener('mouseenter', () => {
+        hint.textContent = descriptions[img.alt] || '';
+        hint.style.display = 'block';
+      });
+      img.addEventListener('mouseleave', () => {
+        hint.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>

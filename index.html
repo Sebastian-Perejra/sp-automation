@@ -23,108 +23,6 @@
       min-height: 100vh;
     }
 
-    .lang-switcher {
-      position: fixed;
-      top: 12px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 300;
-    }
-
-    .lang-switcher button {
-      background-color: #ffffff;
-      border: 1px solid #007acc;
-      color: #007acc;
-      font-weight: bold;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .lang-switcher button:hover {
-      background-color: #007acc;
-      color: white;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    nav a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #005ea8;
-    }
-
-    .burger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      position: fixed;
-      top: 14px;
-      left: 16px;
-      z-index: 301;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background-color: #007acc;
-      margin: 4px 0;
-      transition: all 0.3s ease;
-    }
-
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      background-color: #e6f0fa;
-      position: fixed;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-      z-index: 200;
-      animation: slideDown 0.3s ease forwards;
-    }
-
-    .mobile-nav a {
-      margin: 10px 0;
-      font-size: 18px;
-      color: #007acc;
-      text-decoration: none;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     header {
       text-align: center;
       padding: 80px 20px 30px;
@@ -162,12 +60,6 @@
       50% { border-color: #0F9D58; }
     }
 
-    header p {
-      font-size: 1.4rem;
-      color: #444;
-      margin-top: 30px;
-    }
-
     .cta-button {
       display: inline-block;
       background-color: #1a73e8;
@@ -186,29 +78,58 @@
       transform: translateY(-5px);
     }
 
-    .icon-row {
+    .carousel-container {
+      perspective: 1000px;
+      width: 100%;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 60px;
+      height: 300px;
       margin: 60px 0;
-      flex-wrap: wrap;
+      position: relative;
     }
 
-    .icon-row img {
+    .carousel {
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: spin 80s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    .carousel img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
       height: 100px;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 10px rgba(0, 122, 204, 0.3));
+      transition: transform 0.3s;
       cursor: pointer;
     }
 
-    .icon-row img:hover {
-      transform: scale(1.2);
+    .carousel img:hover {
+      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    }
+
+    .hint {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: transparent;
+      color: #0F9D58;
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 10;
+      display: none;
     }
 
     footer {
       text-align: center;
-      padding: 5px 20px;
+      padding: 10px 20px;
       font-size: 0.9rem;
       color: #555;
       background-color: #e6f0fa;
@@ -239,62 +160,9 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
-      .burger {
-        display: flex;
-      }
-
-      .mobile-nav.show {
-        display: flex;
-      }
-
-      header {
-        padding-top: 120px;
-      }
-
-      .typewriter {
-        font-size: 2rem;
-      }
-
-      .hero-inline img {
-        height: 40px;
-      }
-    }
   </style>
 </head>
 <body>
-
-  <div class="lang-switcher">
-    <button onclick="location.href='index.html'">UA</button>
-    <button onclick="location.href='index-en.html'">EN</button>
-    <button onclick="location.href='index-ru.html'">RU</button>
-  </div>
-
-  <div class="burger" onclick="toggleMenu()">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
-  <nav>
-    <a href="#about">Про мене</a>
-    <a href="#services">Послуги</a>
-    <a href="#portfolio">Портфоліо</a>
-    <a href="contacts.html">Контакти</a>
-  </nav>
-
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#about" onclick="closeMenu()">Про мене</a>
-    <a href="#services" onclick="closeMenu()">Послуги</a>
-    <a href="#portfolio" onclick="closeMenu()">Портфоліо</a>
-    <a href="contacts.html" onclick="closeMenu()">Контакти</a>
-  </div>
-
   <header>
     <div class="hero-inline">
       <img src="avatar.png" alt="Avatar">
@@ -304,10 +172,18 @@
     <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
   </header>
 
-  <div class="icon-row">
-    <img src="excel.png" alt="Excel">
-    <img src="powerbi.png" alt="Power BI">
-    <img src="sheets.png" alt="Google Sheets">
+  <div class="hint" id="hint"></div>
+
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
+      <img src="excel.png" style="--i:0" alt="Excel">
+      <img src="powerbi.png" style="--i:1" alt="Power BI">
+      <img src="sheets.png" style="--i:2" alt="Google Sheets">
+      <img src="JavaScript.png" style="--i:3" alt="JavaScript">
+      <img src="vba.jpg" style="--i:4" alt="VBA">
+      <img src="powerquery.png" style="--i:5" alt="Power Query">
+      <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
+    </div>
   </div>
 
   <footer>
@@ -321,16 +197,55 @@
   </div>
 
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('mobileNav');
-      nav.classList.toggle('show');
-    }
+    const carousel = document.getElementById('carousel');
+    let angle = 0;
+    let isDragging = false;
+    let startX;
+    let currentRotation = 0;
 
-    function closeMenu() {
-      const nav = document.getElementById('mobileNav');
-      nav.classList.remove('show');
-    }
+    carousel.parentElement.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      carousel.style.animation = 'none';
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        carousel.style.animation = 'spin 80s linear infinite';
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const delta = e.clientX - startX;
+        currentRotation += delta * 0.2;
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+        startX = e.clientX;
+      }
+    });
+
+    // Подсказки
+    const hint = document.getElementById('hint');
+    const descriptions = {
+      'Excel': 'Автоматизація Excel',
+      'Power BI': 'Візуалізація через Power BI',
+      'Google Sheets': 'Скрипти в Google Таблицях',
+      'JavaScript': 'Автоматизація через JavaScript',
+      'VBA': 'Макроси та коди VBA',
+      'Power Query': 'Імпорт та трансформації',
+      'Power Pivot': 'DAX-аналіз у Power Pivot'
+    };
+
+    document.querySelectorAll('.carousel img').forEach(img => {
+      img.addEventListener('mouseenter', () => {
+        hint.textContent = descriptions[img.alt] || '';
+        hint.style.display = 'block';
+      });
+      img.addEventListener('mouseleave', () => {
+        hint.style.display = 'none';
+      });
+    });
   </script>
-
 </body>
 </html>

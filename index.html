@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Себастьян Перейра – Автоматизація</title>
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -13,7 +13,6 @@
       height: 100%;
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
-      color: #1a1a1a;
       overflow-x: hidden;
     }
 
@@ -21,6 +20,56 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 12px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 300;
+    }
+
+    .lang-switcher button {
+      background-color: #ffffff;
+      border: 1px solid #007acc;
+      color: #007acc;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #007acc;
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #e6f0fa;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #005ea8;
     }
 
     header {
@@ -60,6 +109,12 @@
       50% { border-color: #0F9D58; }
     }
 
+    header p {
+      font-size: 1.4rem;
+      color: #444;
+      margin-top: 30px;
+    }
+
     .cta-button {
       display: inline-block;
       background-color: #1a73e8;
@@ -80,51 +135,47 @@
 
     .carousel-container {
       perspective: 1000px;
-      width: 100%;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 300px;
-      margin: 60px 0;
       position: relative;
+      height: 180px;
+      margin: 40px auto;
     }
 
-    .carousel {
-      position: absolute;
+    .carousel-strip {
+      display: flex;
+      gap: 80px;
+      animation: rotate3D 80s linear infinite;
       transform-style: preserve-3d;
-      animation: spin 80s linear infinite;
+      transform-origin: center;
     }
 
-    @keyframes spin {
-      from { transform: rotateY(0deg); }
-      to { transform: rotateY(360deg); }
-    }
-
-    .carousel img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    .carousel-strip img {
       height: 100px;
-      transition: transform 0.3s;
       cursor: pointer;
+      transition: transform 0.3s;
     }
 
-    .carousel img:hover {
-      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    .carousel-strip img:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes rotate3D {
+      0% { transform: translateZ(-300px) rotateY(0deg); }
+      100% { transform: translateZ(-300px) rotateY(-360deg); }
     }
 
     .hint {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: transparent;
+      top: 0;
+      left: 0;
+      padding: 6px 12px;
+      background-color: #e6f0ea;
       color: #0F9D58;
-      font-size: 18px;
       font-weight: bold;
-      z-index: 10;
+      font-size: 18px;
+      border-radius: 4px;
       display: none;
+      z-index: 200;
     }
 
     footer {
@@ -163,89 +214,67 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="hero-inline">
-      <img src="avatar.png" alt="Avatar">
-      <div class="typewriter">Себастьян Перейра</div>
-    </div>
-    <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-  </header>
 
-  <div class="hint" id="hint"></div>
+<div class="lang-switcher">
+  <button onclick="location.href='index.html'">UA</button>
+  <button onclick="location.href='index-en.html'">EN</button>
+  <button onclick="location.href='index-ru.html'">RU</button>
+</div>
 
-  <div class="carousel-container">
-    <div class="carousel" id="carousel">
-      <img src="excel.png" style="--i:0" alt="Excel">
-      <img src="powerbi.png" style="--i:1" alt="Power BI">
-      <img src="sheets.png" style="--i:2" alt="Google Sheets">
-      <img src="JavaScript.png" style="--i:3" alt="JavaScript">
-      <img src="vba.jpg" style="--i:4" alt="VBA">
-      <img src="powerquery.png" style="--i:5" alt="Power Query">
-      <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
-    </div>
+<nav>
+  <a href="#about">Про мене</a>
+  <a href="#services">Послуги</a>
+  <a href="#portfolio">Портфоліо</a>
+  <a href="contacts.html">Контакти</a>
+</nav>
+
+<header>
+  <div class="hero-inline">
+    <img src="avatar.png" alt="Avatar">
+    <div class="typewriter">Себастьян Перейра</div>
   </div>
+  <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
+  <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
+</header>
 
-  <footer>
-    <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
-  </footer>
-
-  <div class="ticker">
-    <div class="ticker-text">
-      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
-    </div>
+<div class="carousel-container">
+  <div class="hint" id="hintBox"></div>
+  <div class="carousel-strip" id="carousel">
+    <img src="excel.png" alt="Excel" data-hint="Excel автоматизація">
+    <img src="powerbi.png" alt="Power BI" data-hint="Power BI візуалізація">
+    <img src="sheets.png" alt="Google Sheets" data-hint="Google Sheets інтеграція">
+    <img src="JavaScript.png" alt="JavaScript" data-hint="JS-автоматизація">
+    <img src="vba.jpg" alt="VBA" data-hint="VBA макроси">
+    <img src="powerquery.png" alt="Power Query" data-hint="ETL-процеси PQ">
+    <img src="power-pivot.png" alt="Power Pivot" data-hint="Моделі PowerPivot">
   </div>
+</div>
 
-  <script>
-    const carousel = document.getElementById('carousel');
-    let angle = 0;
-    let isDragging = false;
-    let startX;
-    let currentRotation = 0;
+<footer>
+  <p>© 2015–2025 Sebastian Automations. Всі права захищено.</p>
+</footer>
 
-    carousel.parentElement.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.clientX;
-      carousel.style.animation = 'none';
+<div class="ticker">
+  <div class="ticker-text">
+    Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
+  </div>
+</div>
+
+<script>
+  const carousel = document.getElementById('carousel');
+  const hintBox = document.getElementById('hintBox');
+  const imgs = carousel.querySelectorAll('img');
+
+  imgs.forEach(img => {
+    img.addEventListener('mouseenter', () => {
+      hintBox.style.display = 'block';
+      hintBox.textContent = img.dataset.hint;
     });
-
-    document.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        carousel.style.animation = 'spin 80s linear infinite';
-      }
+    img.addEventListener('mouseleave', () => {
+      hintBox.style.display = 'none';
     });
+  });
+</script>
 
-    document.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        const delta = e.clientX - startX;
-        currentRotation += delta * 0.2;
-        carousel.style.transform = `rotateY(${currentRotation}deg)`;
-        startX = e.clientX;
-      }
-    });
-
-    // Подсказки
-    const hint = document.getElementById('hint');
-    const descriptions = {
-      'Excel': 'Автоматизація Excel',
-      'Power BI': 'Візуалізація через Power BI',
-      'Google Sheets': 'Скрипти в Google Таблицях',
-      'JavaScript': 'Автоматизація через JavaScript',
-      'VBA': 'Макроси та коди VBA',
-      'Power Query': 'Імпорт та трансформації',
-      'Power Pivot': 'DAX-аналіз у Power Pivot'
-    };
-
-    document.querySelectorAll('.carousel img').forEach(img => {
-      img.addEventListener('mouseenter', () => {
-        hint.textContent = descriptions[img.alt] || '';
-        hint.style.display = 'block';
-      });
-      img.addEventListener('mouseleave', () => {
-        hint.style.display = 'none';
-      });
-    });
-  </script>
 </body>
 </html>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Послуги – Себастьян Перейра</title>
-  <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -13,13 +12,6 @@
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
       color: #1a1a1a;
-      overflow-x: hidden;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
     .lang-switcher {
@@ -118,58 +110,50 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .service-section {
-      max-width: 800px;
-      margin: 120px auto 60px;
-      padding: 0 20px;
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
     }
 
-    .category {
-      background-color: #ffffff;
-      border: 1px solid #c4d8e6;
-      border-radius: 8px;
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      color: #0F9D58;
+    }
+
+    details {
       margin-bottom: 20px;
+      background-color: #fff;
+      border-left: 5px solid #007acc;
+      padding: 14px 18px;
+      border-radius: 6px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    .category-header {
-      padding: 18px 20px;
-      font-size: 20px;
+    summary {
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
-    .category-content {
-      display: none;
-      padding: 0 20px 20px;
+    summary img {
+      height: 24px;
     }
 
-    .subcategory {
-      margin-bottom: 12px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .subcategory-details {
-      margin-left: 20px;
-      margin-top: 6px;
-      display: none;
-      font-size: 15px;
-      color: #444;
-    }
-
-    .footer-wrapper {
-      margin-top: auto;
+    ul {
+      margin-top: 12px;
+      padding-left: 20px;
     }
 
     footer {
       text-align: center;
-      padding: 5px 20px;
-      font-size: 0.9rem;
-      color: #555;
+      padding: 8px 20px;
+      font-size: 11px;
+      color: #999;
       background-color: #e6f0fa;
       z-index: 98;
       position: relative;
@@ -180,14 +164,15 @@
       bottom: 0;
       width: 100%;
       background-color: #007acc;
-      color: #00FF00;
+      color: white;
       overflow: hidden;
       white-space: nowrap;
       font-size: 18px;
       padding: 14px 0;
       border-top: 1px solid #005ea8;
-      font-family: 'Courier New', monospace;
       z-index: 999;
+      font-family: 'Courier New', monospace;
+      color: #00FF00;
     }
 
     .ticker-text {
@@ -220,197 +205,70 @@
   </div>
 
   <nav>
-    <a href="index.html#about">Про мене</a>
+    <a href="index.html">Головна</a>
     <a href="services.html">Послуги</a>
-    <a href="index.html#portfolio">Портфоліо</a>
+    <a href="#portfolio">Портфоліо</a>
     <a href="contacts.html">Контакти</a>
   </nav>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="index.html#about" onclick="closeMenu()">Про мене</a>
+    <a href="index.html" onclick="closeMenu()">Головна</a>
     <a href="services.html" onclick="closeMenu()">Послуги</a>
-    <a href="index.html#portfolio" onclick="closeMenu()">Портфоліо</a>
+    <a href="#portfolio" onclick="closeMenu()">Портфоліо</a>
     <a href="contacts.html" onclick="closeMenu()">Контакти</a>
   </div>
 
-<section class="service-section">
-  <details>
-    <summary><img src="excel.png" alt="Excel"> Excel</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>Формули з логікою умов</summary>
-          <ul>
-            <li>IF, SWITCH, IFS для умовної логіки</li>
-            <li>Вкладені формули для комплексного аналізу</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Інтерактивні таблиці для вводу</summary>
-          <ul>
-            <li>Динамічні діапазони для введення даних</li>
-            <li>Валідація введення та перевірка форм</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
+  <main>
+    <h1>Послуги автоматизації</h1>
 
-  <details>
-    <summary><img src="vba.jpg" alt="VBA"> VBA</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>Макроси для автоматизації</summary>
-          <ul>
-            <li>Автоматичне створення звітів</li>
-            <li>Розсилання листів через Outlook</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Події аркуша та книги</summary>
-          <ul>
-            <li>Обробка зміни комірок</li>
-            <li>Автоматична реакція на відкриття/закриття</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
+    <details>
+      <summary><img src="excel.png" alt="Excel"> Excel</summary>
+      <ul>
+        <li>Формули з логікою умов</li>
+        <li>Інтерактивні таблиці для вводу</li>
+        <li>Автоматичні звіти</li>
+        <li>Імпорт/експорт даних</li>
+      </ul>
+    </details>
 
-  <details>
-    <summary><img src="powerbi.png" alt="Power BI"> Power BI</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>DAX-аналітика</summary>
-          <ul>
-            <li>Кастомні міри: CALCULATE, FILTER</li>
-            <li>Складні візуалізації KPI</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Інтерактивні звіти</summary>
-          <ul>
-            <li>Дашборди з фільтрами та сегментами</li>
-            <li>Публікація та оновлення звітів</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
+    <details>
+      <summary><img src="vba.jpg" alt="VBA"> VBA</summary>
+      <ul>
+        <li>Автоматичне сортування і фільтрація</li>
+        <li>Генерація PDF і Email розсилки</li>
+        <li>Цикли, умови, обробка таблиць</li>
+        <li>Взаємодія з іншими офісними програмами</li>
+      </ul>
+    </details>
 
-  <details>
-    <summary><img src="sheets.png" alt="Google Sheets"> Google Sheets</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>Google Apps Script</summary>
-          <ul>
-            <li>Автоматизація Google Forms, Calendar</li>
-            <li>Реакція на події редагування</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Інтеграції з API</summary>
-          <ul>
-            <li>Отримання даних з CRM/ERP</li>
-            <li>Відправка повідомлень через Telegram, Slack</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
+    <details>
+      <summary><img src="powerbi.png" alt="Power BI"> Power BI</summary>
+      <ul>
+        <li>Дашборди для керівництва</li>
+        <li>Підключення до SQL, Excel, Google</li>
+        <li>Моделі даних та зв'язки</li>
+        <li>DAX-формули та обчислення</li>
+      </ul>
+    </details>
 
-  <details>
-    <summary><img src="power-pivot.png" alt="Power Pivot"> Power Pivot</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>DAX для аналітики</summary>
-          <ul>
-            <li>Використання RELATED, SUMX, RANKX</li>
-            <li>Обробка великого обсягу даних</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Моделі даних</summary>
-          <ul>
-            <li>Зв’язки між таблицями</li>
-            <li>Побудова дата-моделей</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
+    <details>
+      <summary><img src="sheets.png" alt="Google Sheets"> Google Sheets</summary>
+      <ul>
+        <li>Google Apps Script автоматизація</li>
+        <li>Форми, тригери, API</li>
+        <li>Інтеграція з іншими Google сервісами</li>
+        <li>Права доступу та безпека</li>
+      </ul>
+    </details>
+  </main>
 
-  <details>
-    <summary><img src="powerquery.png" alt="Power Query"> Power Query</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>Імпорт даних</summary>
-          <ul>
-            <li>З Excel, CSV, Web, SQL</li>
-            <li>Автоматичне оновлення даних</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Трансформації</summary>
-          <ul>
-            <li>Фільтрація, розділення, об’єднання</li>
-            <li>Динамічне перетворення структури</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
+  <footer>
+    © 2015–2025 Sebastian Automations. Всі права захищено.
+  </footer>
 
-  <details>
-    <summary><img src="JavaScript.png" alt="JavaScript"> JavaScript</summary>
-    <ul>
-      <li>
-        <details>
-          <summary>Фронтенд-автоматизація</summary>
-          <ul>
-            <li>Робота з DOM, кліки, форми</li>
-            <li>Інтерактивність на сайтах</li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Скрипти для браузера</summary>
-          <ul>
-            <li>Парсинг сторінок</li>
-            <li>Інтеграція з розширеннями Chrome</li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </details>
-</section>
-
-    <div class="footer-wrapper">
-    <footer>
-      © 2015–2025 Sebastian Automations. Всі права захищено.
-    </footer>
-    <div class="ticker">
-      <div class="ticker-text">
-        Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Запуск макросів · Формули, що думають · Індивідуальні рішення для бізнесу ·
-      </div>
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Скрипти · Веб-автоматизація · Функції, що думають · Дашборди ·
     </div>
   </div>
 

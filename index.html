@@ -23,56 +23,6 @@
       min-height: 100vh;
     }
 
-    .lang-switcher {
-      position: fixed;
-      top: 12px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 300;
-    }
-
-    .lang-switcher button {
-      background-color: #ffffff;
-      border: 1px solid #007acc;
-      color: #007acc;
-      font-weight: bold;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .lang-switcher button:hover {
-      background-color: #007acc;
-      color: white;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    nav a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #005ea8;
-    }
-
     header {
       text-align: center;
       padding: 80px 20px 30px;
@@ -110,58 +60,71 @@
       50% { border-color: #0F9D58; }
     }
 
+    .cta-button {
+      display: inline-block;
+      background-color: #1a73e8;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 40px;
+    }
+
+    .cta-button:hover {
+      background-color: #135fbe;
+      transform: translateY(-5px);
+    }
+
     .carousel-container {
-      perspective: 1200px;
+      perspective: 1000px;
       width: 100%;
-      height: 300px;
-      position: relative;
-      margin: 60px 0;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 300px;
+      margin: 60px 0;
+      position: relative;
     }
 
     .carousel {
-      width: 100%;
-      max-width: 800px;
-      height: 300px;
-      position: relative;
+      position: absolute;
       transform-style: preserve-3d;
-      animation: rotate 80s linear infinite;
+      animation: spin 80s linear infinite;
     }
 
-    .carousel:hover {
-      animation-play-state: paused;
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
     }
 
     .carousel img {
       position: absolute;
-      width: 120px;
-      height: auto;
-      top: 50%;
       left: 50%;
-      transform-origin: center center -400px;
+      top: 50%;
+      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+      height: 100px;
       transition: transform 0.3s;
       cursor: pointer;
     }
 
     .carousel img:hover {
-      transform: scale(1.2) translateZ(30px);
-    }
-
-    @keyframes rotate {
-      0% { transform: rotateY(0deg); }
-      100% { transform: rotateY(360deg); }
+      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
     }
 
     .hint {
       position: absolute;
       top: 20px;
       left: 20px;
+      background-color: transparent;
       color: #0F9D58;
       font-size: 18px;
       font-weight: bold;
       z-index: 10;
+      display: none;
     }
 
     footer {
@@ -200,20 +163,6 @@
   </style>
 </head>
 <body>
-
-  <div class="lang-switcher">
-    <button onclick="location.href='index.html'">UA</button>
-    <button onclick="location.href='index-en.html'">EN</button>
-    <button onclick="location.href='index-ru.html'">RU</button>
-  </div>
-
-  <nav>
-    <a href="#about">Про мене</a>
-    <a href="#services">Послуги</a>
-    <a href="#portfolio">Портфоліо</a>
-    <a href="contacts.html">Контакти</a>
-  </nav>
-
   <header>
     <div class="hero-inline">
       <img src="avatar.png" alt="Avatar">
@@ -224,15 +173,16 @@
   </header>
 
   <div class="hint" id="hint"></div>
+
   <div class="carousel-container">
     <div class="carousel" id="carousel">
-      <img src="excel.png" alt="Excel" data-hint="Excel – таблиці та автоматизація">
-      <img src="powerbi.png" alt="Power BI" data-hint="Power BI – візуалізація даних">
-      <img src="sheets.png" alt="Google Sheets" data-hint="Google Sheets – онлайн автоматизація">
-      <img src="vba.jpg" alt="VBA" data-hint="VBA – макроси для Excel">
-      <img src="JavaScript.png" alt="JavaScript" data-hint="JavaScript – логіка в браузері">
-      <img src="power-pivot.png" alt="Power Pivot" data-hint="Power Pivot – обчислення у звітах">
-      <img src="powerquery.png" alt="Power Query" data-hint="Power Query – трансформація даних">
+      <img src="excel.png" style="--i:0" alt="Excel">
+      <img src="powerbi.png" style="--i:1" alt="Power BI">
+      <img src="sheets.png" style="--i:2" alt="Google Sheets">
+      <img src="JavaScript.png" style="--i:3" alt="JavaScript">
+      <img src="vba.jpg" style="--i:4" alt="VBA">
+      <img src="powerquery.png" style="--i:5" alt="Power Query">
+      <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
     </div>
   </div>
 
@@ -248,19 +198,54 @@
 
   <script>
     const carousel = document.getElementById('carousel');
-    const images = carousel.getElementsByTagName('img');
-    const hint = document.getElementById('hint');
-    const angle = 360 / images.length;
+    let angle = 0;
+    let isDragging = false;
+    let startX;
+    let currentRotation = 0;
 
-    for (let i = 0; i < images.length; i++) {
-      images[i].style.transform = `rotateY(${i * angle}deg) translateZ(400px)`;
-      images[i].addEventListener('mouseenter', function() {
-        hint.textContent = this.dataset.hint;
+    carousel.parentElement.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      carousel.style.animation = 'none';
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        carousel.style.animation = 'spin 80s linear infinite';
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const delta = e.clientX - startX;
+        currentRotation += delta * 0.2;
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+        startX = e.clientX;
+      }
+    });
+
+    // Подсказки
+    const hint = document.getElementById('hint');
+    const descriptions = {
+      'Excel': 'Автоматизація Excel',
+      'Power BI': 'Візуалізація через Power BI',
+      'Google Sheets': 'Скрипти в Google Таблицях',
+      'JavaScript': 'Автоматизація через JavaScript',
+      'VBA': 'Макроси та коди VBA',
+      'Power Query': 'Імпорт та трансформації',
+      'Power Pivot': 'DAX-аналіз у Power Pivot'
+    };
+
+    document.querySelectorAll('.carousel img').forEach(img => {
+      img.addEventListener('mouseenter', () => {
+        hint.textContent = descriptions[img.alt] || '';
+        hint.style.display = 'block';
       });
-      images[i].addEventListener('mouseleave', function() {
-        hint.textContent = '';
+      img.addEventListener('mouseleave', () => {
+        hint.style.display = 'none';
       });
-    }
+    });
   </script>
 </body>
 </html>

@@ -1,6 +1,292 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Послуги – Себастьян Перейра</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 12px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 300;
+    }
+
+    .lang-switcher button {
+      background-color: #ffffff;
+      border: 1px solid #007acc;
+      color: #007acc;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #007acc;
+      color: white;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      z-index: 301;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #007acc;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #e6f0fa;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #005ea8;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background-color: #e6f0fa;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      z-index: 200;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .mobile-nav a {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      color: #0F9D58;
+    }
+
+    details {
+      margin-bottom: 20px;
+      background-color: #fff;
+      border-left: 5px solid #007acc;
+      padding: 14px 18px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    summary {
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    summary img {
+      height: 24px;
+    }
+
+    ul {
+      margin-top: 12px;
+      padding-left: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 11px;
+      color: #999;
+      background-color: #e6f0fa;
+      z-index: 98;
+      position: relative;
+    }
+
+    .ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #007acc;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 18px;
+      padding: 14px 0;
+      border-top: 1px solid #005ea8;
+      z-index: 999;
+      font-family: 'Courier New', monospace;
+      color: #00FF00;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 40s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .burger { display: flex; }
+      .mobile-nav.show { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-switcher">
+    <button onclick="location.href='index.html'">UA</button>
+    <button onclick="location.href='index-en.html'">EN</button>
+    <button onclick="location.href='index-ru.html'">RU</button>
+  </div>
+
+  <div class="burger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <nav>
+    <a href="index.html">Головна</a>
+    <a href="services.html">Послуги</a>
+    <a href="#portfolio">Портфоліо</a>
+    <a href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" onclick="closeMenu()">Головна</a>
+    <a href="services.html" onclick="closeMenu()">Послуги</a>
+    <a href="#portfolio" onclick="closeMenu()">Портфоліо</a>
+    <a href="contacts.html" onclick="closeMenu()">Контакти</a>
+  </div>
+
+  <main>
+    <h1>Послуги автоматизації</h1>
+
+    <details>
+      <summary><img src="excel.png" alt="Excel"> Excel</summary>
+      <ul>
+        <li>Формули з логікою умов</li>
+        <li>Інтерактивні таблиці для вводу</li>
+        <li>Автоматичні звіти</li>
+        <li>Імпорт/експорт даних</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary><img src="vba.jpg" alt="VBA"> VBA</summary>
+      <ul>
+        <li>Автоматичне сортування і фільтрація</li>
+        <li>Генерація PDF і Email розсилки</li>
+        <li>Цикли, умови, обробка таблиць</li>
+        <li>Взаємодія з іншими офісними програмами</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary><img src="powerbi.png" alt="Power BI"> Power BI</summary>
+      <ul>
+        <li>Дашборди для керівництва</li>
+        <li>Підключення до SQL, Excel, Google</li>
+        <li>Моделі даних та зв'язки</li>
+        <li>DAX-формули та обчислення</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary><img src="sheets.png" alt="Google Sheets"> Google Sheets</summary>
+      <ul>
+        <li>Google Apps Script автоматизація</li>
+        <li>Форми, тригери, API</li>
+        <li>Інтеграція з іншими Google сервісами</li>
+        <li>Права доступу та безпека</li>
+      </ul>
+    </details>
+  </main>
+
+  <footer>
+    © 2015–2025 Sebastian Automations. Всі права захищено.
+  </footer>
+
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Скрипти · Веб-автоматизація · Функції, що думають · Дашборди ·
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('show');
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.remove('show');
+    }
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="uk">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Послуги – Себастьян Перейра</title>

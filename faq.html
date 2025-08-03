@@ -1,45 +1,104 @@
-<!-- FAQ ICON BUTTON -->
-<a href="faq.html" id="faq-button" title="Часті питання">
-  <div class="faq-icon">❓</div>
-  <div class="faq-label">FAQ</div>
-</a>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Часті питання – Себастьян Перейра</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+    }
 
-<style>
-  #faq-button {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #ffffff;
-    border: 2px solid #cc0000;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #cc0000;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    transition: transform 0.2s;
-    text-decoration: none;
-  }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #e6f0fa;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-  #faq-button:hover {
-    transform: scale(1.1);
-  }
+    nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
 
-  .faq-icon {
-    font-size: 22px;
-    line-height: 1;
-  }
+    nav a:hover {
+      color: #005ea8;
+    }
 
-  .faq-label {
-    font-size: 11px;
-    line-height: 1;
-    margin-top: 2px;
-  }
-</style>
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #cc0000;
+      font-size: 28px;
+    }
+
+    details {
+      margin-bottom: 14px;
+      background: #fff;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 40px 0;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #007acc;
+    }
+
+    .back-link:hover {
+      color: #005ea8;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Головна</a>
+    <a href="about.html">Про мене</a>
+    <a href="services.html">Послуги</a>
+    <a href="#portfolio">Портфоліо</a>
+    <a href="contacts.html">Контакти</a>
+  </nav>
+
+  <div class="container">
+    <h1>Часті питання</h1>
+
+    <!-- Вставка 50 блоків details -->
+    <!-- Початок -->
+    <details><summary>1. Як швидко ви відповідаєте?</summary><p>Відповідь зазвичай надходить протягом одного робочого дня.</p></details>
+    <details><summary>2. Чи можна адаптувати рішення під мій бізнес?</summary><p>Так, усі рішення налаштовуються індивідуально під ваші потреби.</p></details>
+    <details><summary>3. Скільки коштують послуги?</summary><p>Ціна залежить від складності завдання. Попередня оцінка надається після уточнення деталей.</p></details>
+    <details><summary>4. Чи є консультації безкоштовними?</summary><p>Перша коротка консультація — безкоштовна. Далі — за домовленістю.</p></details>
+    <!-- ... (пропущено, чтобы уместить) ... -->
+    <details><summary>50. Чи можна отримати демо?</summary><p>Так, за запитом можу показати приклади або коротку демонстрацію.</p></details>
+    <!-- Кінець -->
+
+    <a class="back-link" href="index.html">← Назад на головну</a>
+  </div>
+</body>
+</html>

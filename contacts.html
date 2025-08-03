@@ -7,28 +7,38 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Roboto Mono', monospace;
-      background-color: #0d0d0d;
-      color: #f4f4f4;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+      overflow-x: hidden;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
+      padding: 60px 20px 40px;
     }
 
     h1 {
-      color: #00ffc3;
+      color: #007acc;
       margin-bottom: 10px;
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
 
     p {
       text-align: center;
       max-width: 600px;
       margin: 6px 0;
-      font-size: 0.95rem;
+      font-size: 1rem;
+    }
+
+    em {
+      color: #555;
     }
 
     .contact-form {
@@ -37,7 +47,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
 
     .contact-form input,
@@ -45,10 +55,17 @@
       padding: 10px;
       font-size: 16px;
       font-family: 'Roboto Mono', monospace;
-      background-color: #e8f0fe;
-      border: none;
+      background-color: #ffffff;
+      border: 1px solid #c4d8e6;
       border-radius: 6px;
       color: #000;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #007acc;
+      outline: none;
     }
 
     .contact-form textarea {
@@ -57,9 +74,9 @@
     }
 
     .contact-form button {
-      background-color: #00ffc3;
+      background-color: #007acc;
       border: none;
-      color: #000;
+      color: white;
       font-weight: bold;
       font-size: 16px;
       padding: 12px;
@@ -69,25 +86,25 @@
     }
 
     .contact-form button:hover {
-      background-color: #00c3a0;
+      background-color: #005ea8;
     }
 
     .back-button {
       margin-top: 30px;
-      background-color: #003e35;
-      color: #00ffc3;
-      padding: 10px 22px;
-      border: 2px solid #00ffc3;
+      background-color: #ffffff;
+      color: #007acc;
+      padding: 10px 24px;
+      border: 1px solid #007acc;
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .back-button:hover {
-      background-color: #00ffc3;
-      color: #0d0d0d;
+      background-color: #007acc;
+      color: white;
     }
 
     .error-message {
@@ -98,7 +115,7 @@
 
     @media (max-width: 480px) {
       h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
       }
       .contact-form {
         max-width: 95%;

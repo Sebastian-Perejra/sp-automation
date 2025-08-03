@@ -414,5 +414,114 @@
       });
     });
   </script>
+  <!-- FAQ ICON BUTTON -->
+<div id="faq-button" onclick="toggleFaq()">
+  ❓<br><span>FAQ</span>
+</div>
+
+<!-- FAQ POPUP -->
+<div id="faq-popup">
+  <div class="faq-header">Часті питання</div>
+  <div class="faq-body">
+    <details>
+      <summary>Як швидко ви відповідаєте?</summary>
+      <p>Зазвичай протягом 1 робочого дня.</p>
+    </details>
+    <details>
+      <summary>Чи можна адаптувати рішення під мій бізнес?</summary>
+      <p>Так, усе налаштовується індивідуально.</p>
+    </details>
+    <details>
+      <summary>Скільки коштують послуги?</summary>
+      <p>Залежить від обсягу задач. Звʼяжіться для оцінки.</p>
+    </details>
+  </div>
+</div>
+
+<style>
+  #faq-button {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background-color: #ffffff;
+    color: #cc0000;
+    border: 2px solid #cc0000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: transform 0.2s;
+  }
+
+  #faq-button:hover {
+    transform: scale(1.1);
+  }
+
+  #faq-button span {
+    display: block;
+    font-size: 11px;
+    font-weight: normal;
+  }
+
+  #faq-popup {
+    position: fixed;
+    bottom: 160px;
+    right: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    border: 2px solid #cc0000;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1001;
+    display: none;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  .faq-header {
+    background-color: #cc0000;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size: 16px;
+  }
+
+  .faq-body {
+    padding: 12px 16px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .faq-body details {
+    margin-bottom: 10px;
+  }
+
+  .faq-body summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #1a1a1a;
+  }
+
+  .faq-body p {
+    font-size: 14px;
+    margin: 5px 0 10px;
+    color: #444;
+  }
+</style>
+
+<script>
+  function toggleFaq() {
+    const popup = document.getElementById('faq-popup');
+    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
 </body>
 </html>

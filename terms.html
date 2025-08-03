@@ -1,57 +1,25 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Умови використання – Себастьян Перейра</title>
-  <link rel="icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Умови використання сайту</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       font-family: 'Roboto Mono', monospace;
       background-color: #f4f7fa;
       color: #1a1a1a;
-      line-height: 1.6;
-    }
-
-    .lang-switcher {
-      position: fixed;
-      top: 12px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 300;
-    }
-
-    .lang-switcher button {
-      background-color: #ffffff;
-      border: 1px solid #007acc;
-      color: #007acc;
-      font-weight: bold;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .lang-switcher button:hover {
-      background-color: #007acc;
-      color: white;
     }
 
     nav {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 40px;
       background-color: #e6f0fa;
-      padding: 20px 0;
+      padding: 20px;
       border-bottom: 1px solid #c4d8e6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     nav a {
@@ -59,123 +27,81 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
-      transition: color 0.3s;
     }
 
     nav a:hover {
       color: #005ea8;
     }
 
-    .content {
-      max-width: 900px;
-      margin: 80px auto 40px;
+    main {
+      max-width: 800px;
+      margin: 40px auto;
       padding: 0 20px;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      color: #0F9D58;
-      margin-bottom: 40px;
+      line-height: 1.6;
     }
 
     footer {
       text-align: center;
-      padding: 5px 20px;
+      padding: 10px;
       font-size: 0.9rem;
-      color: #555;
       background-color: #e6f0fa;
-      z-index: 98;
-      position: relative;
+      color: #555;
     }
 
-    .ticker {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #007acc;
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: 18px;
-      padding: 14px 0;
-      border-top: 1px solid #005ea8;
-      z-index: 999;
-    }
-
-    .ticker-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 40s linear infinite;
-    }
-
-    @keyframes ticker {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-
-    .cta-button {
-      display: inline-block;
+    .back-button {
+      display: block;
+      width: fit-content;
+      margin: 40px auto 20px;
       background-color: #1a73e8;
       color: white;
-      padding: 14px 30px;
+      padding: 12px 28px;
       border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
       transition: background-color 0.3s ease, transform 0.3s ease;
-      margin-top: 40px;
     }
 
-    .cta-button:hover {
+    .back-button:hover {
       background-color: #135fbe;
-      transform: translateY(-5px);
-    }
-
-    .cta-wrapper {
-      text-align: center;
-      margin: 60px 0 100px;
+      transform: translateY(-3px);
     }
   </style>
 </head>
 <body>
 
-  <div class="lang-switcher">
-    <button onclick="location.href='terms.html'">UA</button>
-    <button onclick="location.href='terms-en.html'">EN</button>
-    <button onclick="location.href='terms-ru.html'">RU</button>
-  </div>
-
   <nav>
-    <a href="index.html">Головна</a>
+    <a href="terms.html">Умови використання</a>
     <a href="about.html">Про мене</a>
     <a href="services.html">Послуги</a>
-    <a href="portfolio.html">Портфоліо</a>
+    <a href="index.html#portfolio">Портфоліо</a>
     <a href="contacts.html">Контакти</a>
   </nav>
 
-  <div class="content">
-    <h1>Умови використання сайту</h1>
-    <p>Цей сайт створений з метою інформування користувачів про послуги, які надає Себастьян Перейра. Всі матеріали, включно з логотипами, зображеннями, текстами, є інтелектуальною власністю або використовуються з дозволу правовласників.</p>
+  <main>
+    <p><strong>1. Загальні положення</strong></p>
+    <p>Цей сайт створено з метою надання інформації про послуги з автоматизації, аналітики та візуалізації даних. Користуючись цим сайтом, ви погоджуєтесь з нижченаведеними умовами.</p>
 
-    <p>Будь-яке копіювання, публікація або інше використання матеріалів з сайту без письмового дозволу заборонено.</p>
+    <p><strong>2. Відсутність публічної оферти</strong></p>
+    <p>Інформація на сайті не є публічною офертою відповідно до статті 641 Цивільного кодексу України. Жодні ціни, приклади рішень чи описані послуги не є обов'язковими до виконання, поки не буде укладено індивідуальну домовленість.</p>
 
-    <p>Цей сайт не збирає персональні дані без вашої згоди. Якщо ви надсилаєте запит через форму зворотного зв'язку, ваші контактні дані використовуються виключно для відповіді на запит.</p>
+    <p><strong>3. Авторське право</strong></p>
+    <p>Весь оригінальний контент сайту, включаючи тексти, структуру, опис послуг, належить автору сайту та захищається згідно із законодавством України про інтелектуальну власність.</p>
 
-    <p>Розміщення зовнішніх логотипів здійснюється лише з метою представлення навичок автора сайту. Усі торгові марки належать відповідним власникам. Якщо ви вважаєте, що порушено ваші права — зв’яжіться зі мною, і контент буде вилучено.</p>
+    <p><strong>4. Сторонні сервіси та логотипи</strong></p>
+    <p>На сайті можуть використовуватись зображення та логотипи компаній (наприклад, Microsoft, Google), виключно з ілюстративною метою. Усі права на ці торговельні марки належать відповідним компаніям. Якщо ви є представником правовласника і маєте зауваження — напишіть через форму на сторінці <a href="contacts.html">Контакти</a>.</p>
 
-    <p>Використання сайту означає вашу згоду з цими умовами.</p>
-  </div>
+    <p><strong>5. Відповідальність</strong></p>
+    <p>Автор сайту не несе відповідальності за можливі неточності або зміну функціоналу сторонніх сервісів, згаданих на сайті.</p>
 
-  <div class="cta-wrapper">
-    <a class="cta-button" href="index.html">← На головну</a>
-  </div>
+    <p><strong>6. Можливі зміни</strong></p>
+    <p>Ці умови можуть оновлюватися без попереднього повідомлення. Актуальна версія завжди розміщена на цій сторінці.</p>
 
-  <div class="ticker" style="font-family: 'Courier New', monospace; font-size: 18px; color: #00FF00;">
-    <div class="ticker-text">
-      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Індивідуальні рішення для бізнесу ·
-    </div>
-  </div>
+    <p><strong>7. Плани розвитку</strong></p>
+    <p>Наразі сайт реалізовано без залучення сторонніх розробників, з використанням допомоги ChatGPT. Розглядається перехід на платформу Tilda для зручності користувачів протягом наступних 6 місяців.</p>
+
+    <a class="back-button" href="index.html">← На головну</a>
+  </main>
 
   <footer>
     © 2015–2025 Sebastian Automations. Всі права захищено.

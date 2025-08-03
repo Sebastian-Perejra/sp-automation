@@ -414,9 +414,10 @@
       });
     });
   </script>
-  <!-- FAQ ICON BUTTON -->
+<!-- FAQ ICON BUTTON -->
 <div id="faq-button" onclick="toggleFaq()">
-  ❓<br><span>FAQ</span>
+  <div class="faq-icon">❓</div>
+  <div class="faq-label">FAQ</div>
 </div>
 
 <!-- FAQ POPUP -->
@@ -443,16 +444,18 @@
     position: fixed;
     bottom: 90px;
     right: 20px;
-    background-color: #ffffff;
-    color: #cc0000;
-    border: 2px solid #cc0000;
-    border-radius: 50%;
     width: 60px;
     height: 60px;
-    font-size: 22px;
+    background-color: #ffffff;
+    border: 2px solid #cc0000;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #cc0000;
+    font-family: 'Roboto Mono', monospace;
     font-weight: bold;
-    text-align: center;
-    line-height: 1.2;
     cursor: pointer;
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(0,0,0,0.25);
@@ -463,10 +466,15 @@
     transform: scale(1.1);
   }
 
-  #faq-button span {
-    display: block;
+  .faq-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .faq-label {
     font-size: 11px;
-    font-weight: normal;
+    line-height: 1;
+    margin-top: 2px;
   }
 
   #faq-popup {

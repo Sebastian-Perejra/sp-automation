@@ -2,9 +2,8 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Себастьян Перейра – Автоматизація</title>
-  <link rel="icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Про мене – Себастьян Перейра</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -119,127 +118,18 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    header {
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    h1 {
+      font-size: 28px;
       text-align: center;
-      padding: 80px 20px 30px;
-    }
-
-    .hero-inline {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .hero-inline img {
-      height: 48px;
-    }
-
-    .typewriter {
-      display: inline-block;
-      font-size: 2.8rem;
       color: #0F9D58;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #0F9D58;
-      animation: typing 8s steps(20) 1 normal both, blink-caret 0.7s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 18ch }
-    }
-
-    @keyframes blink-caret {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: #0F9D58; }
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: #1a73e8;
-      color: white;
-      padding: 14px 30px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      margin-top: 40px;
-    }
-
-    .cta-button:hover {
-      background-color: #135fbe;
-      transform: translateY(-5px);
-    }
-
-    .carousel-container {
-      perspective: 1000px;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 300px;
-      margin: 60px 0;
-      position: relative;
-    }
-
-    .carousel {
-      position: absolute;
-      transform-style: preserve-3d;
-      animation: spin 80s linear infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotateY(0deg); }
-      to { transform: rotateY(360deg); }
-    }
-
-    .carousel img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
-      height: 100px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-
-    .carousel img:hover {
-      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
-    }
-
-    .hint {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #d32f2f;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 10px 16px;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      z-index: 500;
-      display: none;
-      animation: blinkHint 1.2s infinite;
-    }
-
-    @keyframes blinkHint {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    footer {
-      text-align: center;
-      padding: 5px 20px;
-      font-size: 0.9rem;
-      color: #555;
-      background-color: #e6f0fa;
-      z-index: 98;
-      position: relative;
     }
 
     .ticker {
@@ -254,6 +144,8 @@
       padding: 14px 0;
       border-top: 1px solid #005ea8;
       z-index: 999;
+      font-family: 'Courier New', monospace;
+      color: #00FF00;
     }
 
     .ticker-text {
@@ -267,18 +159,28 @@
       100% { transform: translateX(-100%); }
     }
 
+    footer {
+      text-align: center;
+      padding: 5px 20px;
+      font-size: 0.9rem;
+      color: #555;
+      background-color: #e6f0fa;
+      z-index: 98;
+      position: relative;
+    }
+
+    footer span {
+      cursor: help;
+    }
+
     @media (max-width: 768px) {
       nav { display: none; }
       .burger { display: flex; }
       .mobile-nav.show { display: flex; }
-      header { padding-top: 120px; }
-      .typewriter { font-size: 2rem; }
-      .hero-inline img { height: 40px; }
     }
   </style>
 </head>
 <body>
-
   <div class="lang-switcher">
     <button onclick="location.href='index.html'">UA</button>
     <button onclick="location.href='index-en.html'">EN</button>
@@ -290,51 +192,35 @@
   </div>
 
   <nav>
-    <a href="about.html">Про мене</a>
+    <a href="index.html">Головна</a>
     <a href="services.html">Послуги</a>
-    <a href="#portfolio">Портфоліо</a>
+    <a href="about.html">Про мене</a>
     <a href="contacts.html">Контакти</a>
   </nav>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="about.html" onclick="closeMenu()">Про мене</a>
+    <a href="index.html" onclick="closeMenu()">Головна</a>
     <a href="services.html" onclick="closeMenu()">Послуги</a>
-    <a href="#portfolio" onclick="closeMenu()">Портфоліо</a>
+    <a href="about.html" onclick="closeMenu()">Про мене</a>
     <a href="contacts.html" onclick="closeMenu()">Контакти</a>
   </div>
 
-  <header>
-    <div class="hero-inline">
-      <img src="avatar.png" alt="Avatar">
-      <div class="typewriter">Себастьян Перейра</div>
-    </div>
-    <p>Автоматизую і візуалізую все, що можна. А інше — теж спробую.</p>
-    <a class="cta-button" href="#portfolio">→ Дивитися приклади</a>
-  </header>
+  <main>
+    <h1>Про мене</h1>
+    ... (текст без изменений) ...
+  </main>
 
-  <div class="hint" id="hint"></div>
+  <footer>
+    <span title="👨‍💻 Цей сайт зроблено мною особисто – без розробників, без агентств, лише я і ChatGPT. А ще, можливо, я скоро переїду на Tilda, бо там комфортніше для користувачів.">
+      © 2015–2025 Sebastian Automations. Всі права захищено.
+    </span>
+  </footer>
 
-  <div class="carousel-container">
-    <div class="carousel" id="carousel">
-      <img src="excel.png" style="--i:0" alt="Excel">
-      <img src="powerbi.png" style="--i:1" alt="Power BI">
-      <img src="sheets.png" style="--i:2" alt="Google Sheets">
-      <img src="JavaScript.png" style="--i:3" alt="JavaScript">
-      <img src="vba.jpg" style="--i:4" alt="VBA">
-      <img src="powerquery.png" style="--i:5" alt="Power Query">
-      <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Скрипти · Веб-автоматизація · Функції, що думають · Дашборди ·
     </div>
   </div>
-
-<div class="ticker" style="font-family: 'Courier New', monospace; font-size: 18px; color: #00FF00;">
-  <div class="ticker-text">
-    Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Індивідуальні рішення для бізнесу ·
-  </div>
-  <div style="font-size: 11px; color: #999; text-align: center; padding-top: 5px;">
-    © 2015–2025 Sebastian Automations. Всі права захищено.
-  </div>
-</div>
-
 
   <script>
     function toggleMenu() {
@@ -346,54 +232,6 @@
       const nav = document.getElementById('mobileNav');
       nav.classList.remove('show');
     }
-
-    const carousel = document.getElementById('carousel');
-    let isDragging = false;
-    let startX;
-    let currentRotation = 0;
-
-    carousel.parentElement.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.clientX;
-      carousel.style.animation = 'none';
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        carousel.style.animation = 'spin 80s linear infinite';
-      }
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        const delta = e.clientX - startX;
-        currentRotation += delta * 0.2;
-        carousel.style.transform = `rotateY(${currentRotation}deg)`;
-        startX = e.clientX;
-      }
-    });
-
-    const hint = document.getElementById('hint');
-    const descriptions = {
-      'Excel': 'Автоматизація Excel',
-      'Power BI': 'Візуалізація через Power BI',
-      'Google Sheets': 'Скрипти в Google Таблицях',
-      'JavaScript': 'Автоматизація через JavaScript',
-      'VBA': 'Макроси та коди VBA',
-      'Power Query': 'Імпорт та трансформації',
-      'Power Pivot': 'DAX-аналіз у Power Pivot'
-    };
-
-    document.querySelectorAll('.carousel img').forEach(img => {
-      img.addEventListener('mouseenter', () => {
-        hint.textContent = descriptions[img.alt] || '';
-        hint.style.display = 'block';
-      });
-      img.addEventListener('mouseleave', () => {
-        hint.style.display = 'none';
-      });
-    });
   </script>
 </body>
 </html>

@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Умови використання сайту</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-456XH82BM9');
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -14,23 +24,60 @@
     }
 
     nav {
-      display: flex;
-      justify-content: flex-start;
-      gap: 40px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
       background-color: #e6f0fa;
-      padding: 20px;
+      padding: 20px 40px;
       border-bottom: 1px solid #c4d8e6;
     }
 
-    nav a {
+    .nav-left a {
       color: #007acc;
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
     }
 
-    nav a:hover {
+    .nav-center {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .nav-center a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .nav-center a:hover {
       color: #005ea8;
+    }
+
+    .lang-switcher {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .lang-switcher button {
+      background-color: #ffffff;
+      border: 1px solid #007acc;
+      color: #007acc;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #007acc;
+      color: white;
     }
 
     main {
@@ -70,24 +117,23 @@
 </head>
 <body>
 
-  <nav style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background-color: #e6f0fa; padding: 20px 40px; border-bottom: 1px solid #c4d8e6;">
-  <div class="nav-left" style="text-align: left;">
-    <a href="terms.html" style="color:#007acc; font-weight: bold; text-decoration: none; font-size: 16px;">Умови використання</a>
-  </div>
-
-  <div class="nav-center" style="display: flex; justify-content: center; gap: 40px;">
-    <a href="about.html">Про мене</a>
-    <a href="services.html">Послуги</a>
-    <a href="#portfolio">Портфоліо</a>
-    <a href="contacts.html">Контакти</a>
-  </div>
-
-  <div class="nav-right" style="display: flex; justify-content: flex-end; gap: 10px;">
-    <button onclick="location.href='index.html'">UA</button>
-    <button onclick="location.href='index-en.html'">EN</button>
-    <button onclick="location.href='index-ru.html'">RU</button>
-  </div>
-</nav>
+  <nav>
+    <div class="nav-left">
+      <a href="terms.html">Умови використання</a>
+    </div>
+    <div class="nav-center">
+      <a href="about.html">Про мене</a>
+      <a href="services.html">Послуги</a>
+      <a href="pricing.html">Цінова політика</a>
+      <a href="#portfolio">Портфоліо</a>
+      <a href="contacts.html">Контакти</a>
+    </div>
+    <div class="lang-switcher">
+      <button onclick="location.href='index.html'">UA</button>
+      <button onclick="location.href='index-en.html'">EN</button>
+      <button onclick="location.href='index-ru.html'">RU</button>
+    </div>
+  </nav>
 
   <main>
     <p><strong>1. Загальні положення</strong></p>
@@ -120,5 +166,3 @@
 
 </body>
 </html>
-
-

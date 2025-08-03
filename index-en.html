@@ -7,51 +7,35 @@
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Roboto Mono', monospace;
-      background-color: #0d0d0d;
-      color: #f4f4f4;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
       overflow-x: hidden;
     }
 
-    nav {
+    body {
       display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #111;
-      padding: 20px 0;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    nav a {
-      color: #00ffc3;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #1a73e8;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .lang-switcher {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 20px;
       display: flex;
-      gap: 6px;
-      z-index: 200;
+      gap: 10px;
+      z-index: 300;
     }
 
     .lang-switcher button {
-      background-color: #1a1a1a;
-      border: 1px solid #00ffc3;
-      color: #00ffc3;
+      background-color: #ffffff;
+      border: 1px solid #007acc;
+      color: #007acc;
       font-weight: bold;
       padding: 5px 10px;
       cursor: pointer;
@@ -61,22 +45,104 @@
     }
 
     .lang-switcher button:hover {
-      background-color: #00ffc3;
-      color: #0d0d0d;
+      background-color: #007acc;
+      color: white;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      z-index: 301;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #007acc;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #e6f0fa;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #005ea8;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background-color: #e6f0fa;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      z-index: 200;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .mobile-nav a {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     header {
       text-align: center;
-      padding: 80px 20px 40px;
+      padding: 80px 20px 30px;
+    }
+
+    .hero-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-inline img {
+      height: 48px;
     }
 
     .typewriter {
       display: inline-block;
       font-size: 2.8rem;
-      color: #00ffc3;
+      color: #0F9D58;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 2px solid #00ffc3;
+      border-right: 2px solid #0F9D58;
       animation: typing 8s steps(20) 1 normal both, blink-caret 0.7s step-end infinite;
     }
 
@@ -87,13 +153,7 @@
 
     @keyframes blink-caret {
       0%, 100% { border-color: transparent; }
-      50% { border-color: #00ffc3; }
-    }
-
-    header p {
-      font-size: 1.4rem;
-      color: #ccc;
-      margin-top: 30px;
+      50% { border-color: #0F9D58; }
     }
 
     .cta-button {
@@ -105,60 +165,95 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
       margin-top: 40px;
     }
 
     .cta-button:hover {
       background-color: #135fbe;
+      transform: translateY(-5px);
     }
 
-    .icon-row {
+    .carousel-container {
+      perspective: 1000px;
+      width: 100%;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 60px;
+      height: 300px;
       margin: 60px 0;
-      flex-wrap: wrap;
+      position: relative;
     }
 
-    .icon-row img {
+    .carousel {
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: spin 80s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    .carousel img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
       height: 100px;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 10px rgba(0,255,255,0.3));
+      transition: transform 0.3s;
       cursor: pointer;
     }
 
-    .icon-row img:hover {
-      transform: scale(1.2);
+    .carousel img:hover {
+      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    }
+
+    .hint {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #d32f2f;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 500;
+      display: none;
+      animation: blinkHint 1.2s infinite;
+    }
+
+    @keyframes blinkHint {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 5px 20px;
       font-size: 0.9rem;
       color: #555;
+      background-color: #e6f0fa;
+      z-index: 98;
       position: relative;
-      z-index: 10;
-      background-color: #0d0d0d;
-    }
-
-    footer span {
-      color: #888;
     }
 
     .ticker {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #111;
-      color: #00ffc3;
+      background-color: #007acc;
+      color: white;
       overflow: hidden;
       white-space: nowrap;
       font-size: 18px;
       padding: 14px 0;
-      border-top: 1px solid #222;
-      z-index: 99;
+      border-top: 1px solid #005ea8;
+      z-index: 999;
     }
 
     .ticker-text {
@@ -173,120 +268,131 @@
     }
 
     @media (max-width: 768px) {
-      .lang-switcher {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        display: flex;
-        gap: 6px;
-        z-index: 200;
-      }
-
-      .lang-switcher button {
-        padding: 4px 10px;
-        font-size: 12px;
-        opacity: 0.7;
-        border-radius: 3px;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-        padding: 12px 8px;
-      }
-
-      nav a {
-        font-size: 14px;
-        font-weight: 500;
-        white-space: nowrap;
-        opacity: 0.9;
-      }
-
-      header {
-        padding: 60px 15px 30px;
-      }
-
-      .typewriter {
-        font-size: 2rem;
-      }
-
-      header p {
-        font-size: 1.1rem;
-        margin-top: 20px;
-      }
-
-      .cta-button {
-        padding: 12px 24px;
-        font-size: 14px;
-      }
-
-      .icon-row {
-        gap: 30px;
-        margin: 40px 0;
-        flex-wrap: wrap;
-      }
-
-      .icon-row img {
-        height: 70px;
-      }
-
-      footer {
-        margin-bottom: 50px;
-        text-align: center;
-        font-size: 0.85rem;
-      }
-
-      body {
-        padding-bottom: 60px;
-      }
-
-      .ticker {
-        font-size: 14px;
-        padding: 10px 0;
-      }
+      nav { display: none; }
+      .burger { display: flex; }
+      .mobile-nav.show { display: flex; }
+      header { padding-top: 120px; }
+      .typewriter { font-size: 2rem; }
+      .hero-inline img { height: 40px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Language switcher -->
   <div class="lang-switcher">
-    <button onclick="window.location.href='index.html'">UA</button>
-    <button onclick="window.location.href='index-en.html'">EN</button>
-    <button onclick="window.location.href='index-ru.html'">RU</button>
+    <button onclick="location.href='index.html'">UA</button>
+    <button onclick="location.href='index-en.html'">EN</button>
+    <button onclick="location.href='index-ru.html'">RU</button>
+  </div>
+
+  <div class="burger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
   </div>
 
   <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
+    <a href="#about">About Me</a>
+    <a href="services.html">Services</a>
     <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
+    <a href="contacts.html">Contacts</a>
   </nav>
 
-  <header>
-    <div class="typewriter">Sebastian Pereira</div>
-    <p>I automate and visualize everything I can. And the rest — I’ll try too.</p>
-    <a class="cta-button" href="#portfolio">→ See Examples</a>
-  </header>
-
-  <div class="icon-row">
-    <img src="excel.png" alt="Excel">
-    <img src="powerbi.png" alt="Power BI">
-    <img src="sheets.png" alt="Google Sheets">
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="closeMenu()">About Me</a>
+    <a href="services.html" onclick="closeMenu()">Services</a>
+    <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+    <a href="contacts.html" onclick="closeMenu()">Contacts</a>
   </div>
 
-  <footer>
-    <p><span>© 2015–2025 Sebastian Automations.</span> All rights reserved.</p>
-  </footer>
+  <header>
+    <div class="hero-inline">
+      <img src="avatar.png" alt="Avatar">
+      <div class="typewriter">Sebastian Pereira</div>
+    </div>
+    <p>I automate and visualize everything possible. And the rest — I’ll try too.</p>
+    <a class="cta-button" href="#portfolio">→ View Examples</a>
+  </header>
 
-  <div class="ticker">
-    <div class="ticker-text">
-      Excel VBA · Google Apps Script · Power BI DAX · Automated Reports · Custom Logic · Integrations · Macro Execution · Smart Formulas · Tailored Business Solutions ·
+  <div class="hint" id="hint"></div>
+
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
+      <img src="excel.png" style="--i:0" alt="Excel">
+      <img src="powerbi.png" style="--i:1" alt="Power BI">
+      <img src="sheets.png" style="--i:2" alt="Google Sheets">
+      <img src="JavaScript.png" style="--i:3" alt="JavaScript">
+      <img src="vba.jpg" style="--i:4" alt="VBA">
+      <img src="powerquery.png" style="--i:5" alt="Power Query">
+      <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
     </div>
   </div>
 
+  <div class="ticker" style="font-family: 'Courier New', monospace; font-size: 18px; color: #00FF00;">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Automated Reports · Custom Logic · Integrations · Macros · Tailored Business Solutions ·
+    </div>
+    <div style="font-size: 11px; color: #999; text-align: center; padding-top: 5px;">
+      © 2015–2025 Sebastian Automations. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('show');
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.remove('show');
+    }
+
+    const carousel = document.getElementById('carousel');
+    let isDragging = false;
+    let startX;
+    let currentRotation = 0;
+
+    carousel.parentElement.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      carousel.style.animation = 'none';
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        carousel.style.animation = 'spin 80s linear infinite';
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const delta = e.clientX - startX;
+        currentRotation += delta * 0.2;
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+        startX = e.clientX;
+      }
+    });
+
+    const hint = document.getElementById('hint');
+    const descriptions = {
+      'Excel': 'Excel Automation',
+      'Power BI': 'Visualization with Power BI',
+      'Google Sheets': 'Google Sheets Scripting',
+      'JavaScript': 'Automation with JavaScript',
+      'VBA': 'Macros and VBA Code',
+      'Power Query': 'Import and Transformations',
+      'Power Pivot': 'DAX Analysis in Power Pivot'
+    };
+
+    document.querySelectorAll('.carousel img').forEach(img => {
+      img.addEventListener('mouseenter', () => {
+        hint.textContent = descriptions[img.alt] || '';
+        hint.style.display = 'block';
+      });
+      img.addEventListener('mouseleave', () => {
+        hint.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>

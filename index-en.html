@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sebastian Perejra – Automation</title>
+  <title>Sebastian Pereira – Automation</title>
   <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-456XH82BM9');
+  </script>
+
   <style>
     html, body {
       margin: 0;
@@ -89,6 +99,11 @@
 
     nav a:hover {
       color: #005ea8;
+    }
+
+    nav a:first-child {
+      margin-right: auto;
+      padding-left: 20px;
     }
 
     .mobile-nav {
@@ -289,15 +304,21 @@
     <div></div><div></div><div></div>
   </div>
 
-  <nav>
-    <a href="#about">About Me</a>
-    <a href="services.html">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="contacts.html">Contacts</a>
+  <nav style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background-color: #e6f0fa; padding: 20px 40px; border-bottom: 1px solid #c4d8e6;">
+    <div class="nav-left" style="text-align: left;">
+      <a href="terms.html" style="color:#007acc; font-weight: bold; text-decoration: none; font-size: 16px;">Terms of Use</a>
+    </div>
+    <div class="nav-center" style="display: flex; justify-content: center; gap: 40px;">
+      <a href="about.html">About Me</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="contacts.html">Contacts</a>
+    </div>
   </nav>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="#about" onclick="closeMenu()">About Me</a>
+    <a href="about.html" onclick="closeMenu()">About Me</a>
     <a href="services.html" onclick="closeMenu()">Services</a>
     <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
     <a href="contacts.html" onclick="closeMenu()">Contacts</a>
@@ -306,10 +327,10 @@
   <header>
     <div class="hero-inline">
       <img src="avatar.png" alt="Avatar">
-      <div class="typewriter">Sebastian Perejra</div>
+      <div class="typewriter">Sebastian Pereira</div>
     </div>
-    <p>I automate and visualize everything possible. And the rest — I’ll try too.</p>
-    <a class="cta-button" href="#portfolio">→ View Examples</a>
+    <p>I automate and visualize everything that can be. And the rest — I’ll try too.</p>
+    <a class="cta-button" href="#portfolio">→ See Examples</a>
   </header>
 
   <div class="hint" id="hint"></div>
@@ -331,7 +352,7 @@
       Excel VBA · Google Apps Script · Power BI DAX · Automated Reports · Custom Logic · Integrations · Macros · Tailored Business Solutions ·
     </div>
     <div style="font-size: 11px; color: #999; text-align: center; padding-top: 5px;">
-      © 2015–2025 Sebastian Automations. All rights reserved.
+      © 2015–2025 Sebastian Automations. All rights reserved. <a href="terms.html" style="color: #999; text-decoration: underline;">Terms of Use</a>
     </div>
   </div>
 
@@ -375,13 +396,13 @@
 
     const hint = document.getElementById('hint');
     const descriptions = {
-      'Excel': 'Excel Automation',
+      'Excel': 'Excel automation',
       'Power BI': 'Visualization with Power BI',
-      'Google Sheets': 'Google Sheets Scripting',
+      'Google Sheets': 'Scripts in Google Sheets',
       'JavaScript': 'Automation with JavaScript',
-      'VBA': 'Macros and VBA Code',
-      'Power Query': 'Import and Transformations',
-      'Power Pivot': 'DAX Analysis in Power Pivot'
+      'VBA': 'VBA macros and code',
+      'Power Query': 'Import and data transformations',
+      'Power Pivot': 'DAX analysis in Power Pivot'
     };
 
     document.querySelectorAll('.carousel img').forEach(img => {
@@ -394,7 +415,51 @@
       });
     });
   </script>
+
+  <a href="faq.html" id="faq-button" title="Frequently Asked Questions">
+    <div class="faq-icon">❓</div>
+    <div class="faq-label">FAQ</div>
+  </a>
+
+  <style>
+    #faq-button {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #ffffff;
+      border: 2px solid #cc0000;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #cc0000;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      transition: transform 0.2s;
+      text-decoration: none;
+    }
+
+    #faq-button:hover {
+      transform: scale(1.1);
+    }
+
+    .faq-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .faq-label {
+      font-size: 11px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+  </style>
+
 </body>
 </html>
-
-

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me – Sebastian Pereira</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto Mono', monospace;
+      background-color: #f4f7fa;
+      color: #1a1a1a;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 12px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 300;
+    }
+
+    .lang-switcher button {
+      background-color: #ffffff;
+      border: 1px solid #007acc;
+      color: #007acc;
+      font-weight: bold;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .lang-switcher button:hover {
+      background-color: #007acc;
+      color: white;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      z-index: 301;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #007acc;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #e6f0fa;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #005ea8;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background-color: #e6f0fa;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      border-bottom: 1px solid #c4d8e6;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      z-index: 200;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .mobile-nav a {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      flex-grow: 1;
+      line-height: 1.7;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      color: #0F9D58;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 11px;
+      color: #999;
+      background-color: #e6f0fa;
+      z-index: 98;
+    }
+
+    .ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #007acc;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 18px;
+      padding: 14px 0;
+      border-top: 1px solid #005ea8;
+      z-index: 999;
+      font-family: 'Courier New', monospace;
+      color: #00FF00;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 40s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .burger { display: flex; }
+      .mobile-nav.show { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <div class="lang-switcher">
+      <button onclick="location.href='index.html'">UA</button>
+      <button onclick="location.href='index-en.html'">EN</button>
+      <button onclick="location.href='index-ru.html'">RU</button>
+    </div>
+
+    <div class="burger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+
+    <nav>
+      <a href="index-en.html">Home</a>
+      <a href="services-en.html">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="contacts-en.html">Contacts</a>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index-en.html" onclick="closeMenu()">Home</a>
+      <a href="services-en.html" onclick="closeMenu()">Services</a>
+      <a href="about-en.html" onclick="closeMenu()">About Me</a>
+      <a href="contacts-en.html" onclick="closeMenu()">Contacts</a>
+    </div>
+
+      <main>
+        <h1>About Me</h1>
+        <p>Hello, I’m Sebastian. For several years I’ve been helping people automate their work — in Excel, Power BI, and Google Sheets.</p>
+
+        <p>In short: I like when everything works simply and logically. And I don’t like when something is done manually if it can be automated.</p>
+
+        <p>I’ve worked with accountants, logisticians, department heads, production managers, executives — and even students. Each of them came with the same question: <strong>“Can this be done so it calculates by itself?”</strong></p>
+
+        <p>And the answer is — almost always yes.</p>
+
+        <p>For example:</p>
+        <ul>
+          <li>A warehouse manager used to manually check 200+ Excel rows to know what to order. We made a button — and the file now shows next week’s needs automatically;</li>
+          <li>An accountant had a 15-tab report that took 4 hours every Monday. Now the file collects everything and emails it to her boss automatically;</li>
+          <li>One manager copied formulas daily to calculate employee bonuses. We taught Excel to do it by itself — error-free.</li>
+        </ul>
+
+        <p><strong>What I do:</strong></p>
+        <ul>
+          <li>configure Excel so there’s no need for manual copying;</li>
+          <li>write scripts that send emails, calculate and filter data automatically;</li>
+          <li>build dashboards in Power BI and Google Sheets — dynamic reports with visualization that help in decision-making;</li>
+          <li>explain how to use it — in simple and clear language.</li>
+        </ul>
+
+        <p>I don’t deliver templates — I adapt each solution to your process. And I don’t disappear after the job is done — I stay in touch if you need clarifications or improvements.</p>
+
+        <p>If you want to tidy up your spreadsheets, eliminate routine tasks and save time — write to me. We’ll talk, I’ll check, advise and implement.</p>
+
+        <p><strong>Still hesitating? Don’t. Click <a href="contacts-en.html">“Contacts”</a> and send me a message 😉</strong></p>
+      </main>
+
+  </div>
+
+  <footer>
+    <span title="I built this site myself ☕🤖 Just wanted to try — and it turned out better than I thought. Considering moving to Tilda for better user experience 🧭">
+      © 2015–2025 Sebastian Automations. All rights reserved.
+    </span>
+  </footer>
+
+  <div class="ticker">
+    <div class="ticker-text">
+      Excel VBA · Google Apps Script · Power BI DAX · Automated Reports · Custom Logic · Integrations · Macros · Scripts · Web Automation · Dashboards ·
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.toggle('show');
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mobileNav');
+      nav.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

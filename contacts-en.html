@@ -153,22 +153,59 @@
   <a href="index-en.html" class="back-button">← Back to Home</a>
 
   <script>
-    emailjs.init("sUAoOmiqx4fKn8TVo");
+  emailjs.init("sUAoOmiqx4fKn8TVo");
 
-    document.getElementById("contact-form").addEventListener("submit", function(e) {
-      e.preventDefault();
+  const TELEGRAM_WEB_APP_URL =
+    "https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec";
 
-      emailjs.sendForm("service_hckw1kr", "template_qz6v45s", this)
-        .then(() => {
-          alert("Message sent successfully!");
-          this.reset();
-          document.getElementById("error-message").textContent = "";
-        }, (error) => {
-          console.error("EmailJS error:", error);
-          document.getElementById("error-message").textContent = "Failed to send. Please try again.";
-        });
-    });
-  </script>
+  document.getElementById("contact-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const form = this;
+    const errorMessage = document.getElementById("error-message");
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    const telegramData = {
+      user_name: form.elements["user_name"].value.trim(),
+      user_email: form.elements["user_email"].value.trim(),
+      message: form.elements["message"].value.trim()
+    };
+
+    errorMessage.textContent = "";
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+
+    try {
+      await emailjs.sendForm(
+        "service_hckw1kr",
+        "template_qz6v45s",
+        form
+      );
+
+      fetch(TELEGRAM_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(telegramData)
+      }).catch(error => {
+        console.error("Telegram notification error:", error);
+      });
+
+      alert("Message sent successfully!");
+      form.reset();
+
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      errorMessage.textContent =
+        "Failed to send. Please try again.";
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Send";
+    }
+  });
+</script>
 
 </body>
 </html>

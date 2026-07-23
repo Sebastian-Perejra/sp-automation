@@ -2733,6 +2733,11 @@ function discussSelectedTask() {
             <div class="review-stars">
               ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
             </div>
+            ${review.pinned ? `
+  <div class="review-pinned">
+    📌 Закріплено
+  </div>
+` : ''}
 
             <div class="review-text">
               ${escapeReviewHtml(review.review || '')}

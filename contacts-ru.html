@@ -123,6 +123,14 @@
       text-align: center;
     }
 
+    .telegram-note {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #5f6f7a;
+  text-align: center;
+}
+
     @media (max-width: 480px) {
       h1 {
         font-size: 1.8rem;
@@ -147,7 +155,12 @@
     <input type="email" id="email" name="user_email" placeholder="Email" required>
     <textarea id="message" name="message" placeholder="Сообщение" required></textarea>
     <button type="submit">Отправить</button>
-    <div class="error-message" id="error-message"></div>
+
+<p class="telegram-note">
+  ⚡ Ваше сообщение сразу поступит мне в Telegram, поэтому я увижу ваш запрос практически мгновенно и смогу ответить без задержек.
+</p>
+
+<div class="error-message" id="error-message"></div>
   </form>
 
   <a href="index-ru.html" class="back-button">← Назад на главную</a>

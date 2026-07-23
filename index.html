@@ -1013,11 +1013,15 @@
   <span class="solution-desc">Дашборди та показники</span>
 </button>
 
-  <button class="solution-option" type="button">
-    <span class="solution-icon">•••</span>
-    <span class="solution-title">Інше</span>
-    <span class="solution-desc">Опишу свою задачу</span>
-  </button>
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openOtherSolution()"
+>
+  <span class="solution-icon">•••</span>
+  <span class="solution-title">Інше</span>
+  <span class="solution-desc">Опишу свою задачу</span>
+</button>
 
 </div>
   </div>
@@ -1983,6 +1987,16 @@ const solutionResultPhrases = [
   'Схоже, цю рутину можна перекласти на автоматизацію.',
   'Так, тут точно є що автоматизувати.'
 ];
+  const otherSolutionPhrases = [
+  'Окей. Не всі задачі вкладаються в готові категорії 🙂',
+  'Без проблем. Опишіть задачу своїми словами.',
+  'Добре. Тут краще просто розібратися в самій задачі.',
+  'Зрозуміло. Давайте без категорій — просто опишіть, що потрібно.',
+  'Окей, нестандартні задачі якраз найцікавіші.',
+  'Добре. Розкажіть, що зараз доводиться робити вручну.',
+  'Схоже, тут потрібен індивідуальний сценарій.',
+  'Домовились. Опишіть процес так, як він працює зараз.'
+];
 
 function selectExcelTask(task) {
   selectSolutionTask(
@@ -2022,6 +2036,10 @@ function selectExcelTask(task) {
   selectedText.textContent = task;
   resultTitle.textContent = randomPhrase;
   toolsText.textContent = tools;
+    document.getElementById('solution-description').value = '';
+
+document.getElementById('solution-description').placeholder =
+  'Наприклад: щодня отримую файли від 12 менеджерів і вручну збираю їх в один звіт...';
 
   currentStep.classList.remove('active');
   resultStep.classList.add('active');
@@ -2228,6 +2246,61 @@ function backToSolutionStartFromManualData() {
   }
 }
 
+  function openOtherSolution() {
+  selectedSolutionCategory = 'Інше';
+  selectedSolutionTask = 'Індивідуальна задача';
+  selectedSolutionTools = '';
+  selectedSolutionStepId = 'solution-start-step';
+
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const resultStep =
+    document.getElementById('solution-result-step');
+
+  const selectedText =
+    document.getElementById('solution-selected-task-text');
+
+  const resultTitle =
+    document.getElementById('solution-result-title');
+
+  const toolsText =
+    document.getElementById('solution-result-tools-text');
+
+  const description =
+    document.getElementById('solution-description');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  const randomPhrase =
+    otherSolutionPhrases[
+      Math.floor(Math.random() * otherSolutionPhrases.length)
+    ];
+
+  resultTitle.textContent = randomPhrase;
+  selectedText.textContent = 'Індивідуальна задача';
+
+  toolsText.textContent =
+    'Підберемо після короткого опису задачі';
+
+  description.value = '';
+  description.placeholder =
+    'Опишіть, що ви зараз робите вручну і який результат хотіли б отримувати автоматично...';
+
+  startStep.classList.remove('active');
+  resultStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[2]) {
+    progress[2].classList.add('active');
+  }
+
+  setTimeout(() => {
+    description.focus();
+  }, 100);
+}
 
 function selectManualDataTask(task) {
   selectSolutionTask(

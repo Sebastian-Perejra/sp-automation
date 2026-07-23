@@ -469,6 +469,115 @@
     }
   </style>
 
+
+  <!-- REVIEWS FLOAT BUTTON -->
+  <button
+    id="reviews-float-btn"
+    type="button"
+    onclick="openReviewsPanel()"
+  >
+    ⭐ Reviews
+  </button>
+
+  <!-- REVIEWS PANEL -->
+  <div id="reviews-panel" class="reviews-panel">
+
+    <button
+      class="reviews-panel-close"
+      type="button"
+      onclick="closeReviewsPanel()"
+    >
+      ×
+    </button>
+
+    <div class="reviews-panel-header">
+      <div class="reviews-panel-badge">⭐ REVIEWS</div>
+      <h3>What clients say</h3>
+    </div>
+
+    <div id="reviews-panel-list" class="reviews-panel-list">
+      <div class="reviews-panel-loading">
+        Loading reviews...
+      </div>
+    </div>
+
+    <button
+      class="reviews-panel-leave-btn"
+      type="button"
+      onclick="openReviewForm()"
+    >
+      Leave a review
+    </button>
+
+  </div>
+
+  <!-- REVIEW FORM MODAL -->
+  <div id="review-form-overlay" class="review-form-overlay">
+
+    <div class="review-form-modal">
+
+      <button
+        class="review-form-close"
+        type="button"
+        onclick="closeReviewForm()"
+      >
+        ×
+      </button>
+
+      <h3>Leave a review</h3>
+
+      <label for="review-name">
+        Your name
+      </label>
+
+      <input
+        id="review-name"
+        type="text"
+        placeholder="For example, Alexander"
+      >
+
+      <label>
+        Your rating
+      </label>
+
+      <div id="review-rating" class="review-rating">
+        <button type="button" onclick="selectReviewRating(1)">★</button>
+        <button type="button" onclick="selectReviewRating(2)">★</button>
+        <button type="button" onclick="selectReviewRating(3)">★</button>
+        <button type="button" onclick="selectReviewRating(4)">★</button>
+        <button type="button" onclick="selectReviewRating(5)">★</button>
+      </div>
+
+      <input
+        id="review-rating-value"
+        type="hidden"
+        value="0"
+      >
+
+      <label for="review-text-input">
+        Your review
+      </label>
+
+      <textarea
+        id="review-text-input"
+        rows="5"
+        placeholder="Write a few words about the work"
+      ></textarea>
+
+      <button
+        class="review-submit-btn"
+        type="button"
+        onclick="submitWebsiteReview()"
+      >
+        Submit review
+      </button>
+
+      <div id="review-form-status"></div>
+
+    </div>
+
+  </div>
+
   <!-- CONTACT FLOAT BUTTON -->
 <button id="contact-float-btn" type="button" onclick="openContactModal()">
   💬 Message
@@ -2369,8 +2478,610 @@ function discussSelectedTask() {
   });
 </script>
 
+
+  <style>
+  #reviews-float-btn {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    border: 1px solid #0F9D58;
+    background: rgba(255, 255, 255, 0.96);
+    color: #0F9D58;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  #reviews-float-btn:hover {
+    background: #0F9D58;
+    color: #ffffff;
+    transform:
+      translateY(-50%)
+      translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    #reviews-float-btn {
+      left: 10px;
+      top: auto;
+      bottom: 150px;
+      transform: none;
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    #reviews-float-btn:hover {
+      transform: translateX(2px);
+    }
+  }
+  </style>
+
+  <style>
+  .reviews-panel {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    width: 380px;
+    max-height: 70vh;
+    padding: 22px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.98);
+    border: 1px solid #cfe4d6;
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    z-index: 2500;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform:
+      translate(-35px, -50%)
+      scale(0.94);
+    transition:
+      opacity 0.25s ease,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.25s;
+  }
+
+  .reviews-panel.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform:
+      translate(0, -50%)
+      scale(1);
+  }
+
+  .reviews-panel-close {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+    border: none;
+    background: transparent;
+    color: #777;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .reviews-panel-header {
+    margin-bottom: 18px;
+  }
+
+  .reviews-panel-badge {
+    display: inline-block;
+    padding: 5px 9px;
+    margin-bottom: 8px;
+    border-radius: 20px;
+    background: #edf8f1;
+    border: 1px solid #cce8d5;
+    color: #0F9D58;
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .reviews-panel-header h3 {
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
+  }
+
+  .reviews-panel-list {
+    max-height: 430px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+  }
+
+  .reviews-panel-loading {
+    padding: 25px 12px;
+    text-align: center;
+    color: #87929c;
+    font-size: 12px;
+  }
+
+  .reviews-panel-leave-btn {
+    width: 100%;
+    padding: 11px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #1a73e8;
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .reviews-panel-leave-btn:hover {
+    background: #135fbe;
+  }
+
+  @media (max-width: 768px) {
+    .reviews-panel {
+      left: 10px;
+      right: 10px;
+      top: 50%;
+      width: auto;
+      max-height: 72vh;
+      transform:
+        translateY(-50%)
+        scale(0.96);
+    }
+
+    .reviews-panel.show {
+      transform:
+        translateY(-50%)
+        scale(1);
+    }
+  }
+  </style>
+
+  <script>
+  const REVIEWS_API_URL =
+    'https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec';
+
+  let reviewsLoaded = false;
+
+  function openReviewsPanel() {
+    document
+      .getElementById('reviews-panel')
+      .classList.add('show');
+
+    if (!reviewsLoaded) {
+      loadPublishedReviews();
+    }
+  }
+
+  function closeReviewsPanel() {
+    document
+      .getElementById('reviews-panel')
+      .classList.remove('show');
+  }
+
+  async function loadPublishedReviews() {
+    const list =
+      document.getElementById('reviews-panel-list');
+
+    list.innerHTML =
+      '<div class="reviews-panel-loading">Loading reviews...</div>';
+
+    try {
+      const response = await fetch(
+        REVIEWS_API_URL + '?action=getReviews'
+      );
+
+      const data = await response.json();
+
+      console.log('REVIEWS:', data);
+
+      if (!data.ok || !Array.isArray(data.reviews)) {
+        throw new Error('Invalid API response');
+      }
+
+      const reviewsButton =
+        document.getElementById('reviews-float-btn');
+
+      if (reviewsButton) {
+        reviewsButton.textContent =
+          '⭐ Reviews · ' + data.reviews.length;
+      }
+
+      list.innerHTML = data.reviews.map(review => {
+        const rating = Math.max(
+          1,
+          Math.min(5, Number(review.rating) || 5)
+        );
+
+        return `
+          <div class="review-card">
+            <div class="review-stars">
+              ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
+            </div>
+
+            ${review.pinned ? `
+              <div class="review-pinned">
+                📌 Pinned
+              </div>
+            ` : ''}
+
+            <div class="review-text">
+              ${escapeReviewHtml(review.review || '')}
+            </div>
+
+            <div class="review-meta">
+              <div class="review-author">
+                — ${escapeReviewHtml(review.name || 'Client')}
+              </div>
+
+              <div class="review-date">
+                ${escapeReviewHtml(review.published_at || '')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      reviewsLoaded = true;
+
+    } catch (error) {
+      console.error('REVIEWS ERROR:', error);
+
+      list.innerHTML =
+        '<div class="reviews-panel-loading">Could not load reviews.</div>';
+    }
+  }
+
+  function escapeReviewHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+  </script>
+
+  <style>
+  .review-card {
+    padding: 14px 0;
+    border-bottom: 1px solid #e3e8ed;
+  }
+
+  .review-card:last-child {
+    border-bottom: none;
+  }
+
+  .review-stars {
+    margin-bottom: 7px;
+    color: #f4b400;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+
+  .review-text {
+    margin: 0 0 8px 0;
+    padding: 0;
+    color: #333;
+    font-size: 12px;
+    line-height: 1.45;
+    text-align: left;
+    text-indent: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .review-author {
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .review-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .review-date {
+    color: #8a949d;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  </style>
+
+  <style>
+  .review-form-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      background-color 0.3s ease,
+      visibility 0.3s;
+  }
+
+  .review-form-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .review-form-modal {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    padding: 26px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #c4d8e6;
+    border-radius: 14px;
+    box-shadow: 0 16px 45px rgba(0,0,0,0.22);
+    font-family: 'Roboto Mono', monospace;
+    opacity: 0;
+    transform:
+      translate(-180px, 60px)
+      scale(0.35);
+    transform-origin: left center;
+    transition:
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease;
+  }
+
+  .review-form-overlay.show .review-form-modal {
+    opacity: 1;
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  .review-form-modal h3 {
+    margin: 0 0 22px;
+    font-size: 20px;
+    color: #1a1a1a;
+  }
+
+  .review-form-modal label {
+    display: block;
+    margin: 14px 0 6px;
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .review-form-modal input,
+  .review-form-modal textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #c7d3dd;
+    border-radius: 8px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .review-form-modal textarea {
+    resize: vertical;
+  }
+
+  .review-form-modal input:focus,
+  .review-form-modal textarea:focus {
+    border-color: #007acc;
+    box-shadow:
+      0 0 0 3px rgba(0,122,204,0.10);
+  }
+
+  .review-form-close {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+    border: none;
+    background: transparent;
+    color: #777;
+    font-size: 26px;
+    cursor: pointer;
+  }
+
+  .review-rating {
+    display: flex;
+    gap: 6px;
+  }
+
+  .review-rating button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: #c7c7c7;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .review-rating button.active {
+    color: #f4b400;
+  }
+
+  .review-submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #1a73e8;
+    color: #ffffff;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .review-submit-btn:hover {
+    background: #135fbe;
+  }
+
+  #review-form-status {
+    min-height: 18px;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12px;
+  }
+  </style>
+
+  <script>
+  function openReviewForm() {
+    const overlay = document.getElementById('review-form-overlay');
+    if (!overlay) return;
+
+    overlay.classList.add('show');
+  }
+
+  function closeReviewForm() {
+    const overlay = document.getElementById('review-form-overlay');
+    if (!overlay) return;
+
+    overlay.classList.remove('show');
+  }
+
+  function selectReviewRating(rating) {
+    document.getElementById('review-rating-value').value = rating;
+
+    const stars = document.querySelectorAll('#review-rating button');
+
+    stars.forEach((star, index) => {
+      star.classList.toggle('active', index < rating);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('review-form-overlay');
+
+    if (e.target === overlay) {
+      closeReviewForm();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeReviewForm();
+    }
+  });
+  </script>
+
+  <script>
+  async function submitWebsiteReview() {
+    const name =
+      document.getElementById('review-name').value.trim();
+
+    const rating =
+      Number(
+        document.getElementById('review-rating-value').value || 0
+      );
+
+    const review =
+      document.getElementById('review-text-input').value.trim();
+
+    const status =
+      document.getElementById('review-form-status');
+
+    const button =
+      document.querySelector('.review-submit-btn');
+
+    if (!review) {
+      status.textContent = 'Please write your review.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    if (rating < 1 || rating > 5) {
+      status.textContent = 'Please select a rating from 1 to 5.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    status.textContent = 'Sending...';
+    status.style.color = '#555';
+
+    button.disabled = true;
+    button.textContent = 'Sending...';
+
+    try {
+      const response = await fetch(
+        REVIEWS_API_URL,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            source: 'review',
+            name: name,
+            rating: rating,
+            review: review,
+            page_lang: 'EN'
+          })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!result.ok) {
+        throw new Error(
+          result.error || 'Failed to send review'
+        );
+      }
+
+      status.textContent =
+        '✓ Review sent for moderation';
+
+      status.style.color = '#0F9D58';
+
+      document.getElementById('review-name').value = '';
+      document.getElementById('review-text-input').value = '';
+      document.getElementById('review-rating-value').value = '0';
+
+      document
+        .querySelectorAll('#review-rating button')
+        .forEach(star => {
+          star.classList.remove('active');
+        });
+
+      setTimeout(() => {
+        closeReviewForm();
+      }, 1400);
+
+    } catch (error) {
+      console.error(error);
+
+      status.textContent =
+        'Could not send the review. Please try again.';
+
+      status.style.color = '#cc0000';
+
+    } finally {
+      button.disabled = false;
+      button.textContent = 'Submit review';
+    }
+  }
+  </script>
+
 </body>
 </html>
-
-
 

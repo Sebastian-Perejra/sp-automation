@@ -973,31 +973,31 @@
   <span class="solution-desc">Таблиці, формули, макроси</span>
 </button>
 
-      <button class="solution-option" type="button">
+      
         <span class="solution-icon">📈</span>
         <span class="solution-title">Звіти та аналітика</span>
         <span class="solution-desc">Збір та візуалізація даних</span>
       </button>
 
-      <button class="solution-option" type="button">
+      
         <span class="solution-icon">🔄</span>
         <span class="solution-title">Ручна робота з даними</span>
         <span class="solution-desc">Перенесення та обробка</span>
       </button>
 
-      <button class="solution-option" type="button">
+      
         <span class="solution-icon">✈️</span>
         <span class="solution-title">Telegram / сповіщення</span>
         <span class="solution-desc">Боти та автоматичні повідомлення</span>
       </button>
 
-      <button class="solution-option" type="button">
+      
         <span class="solution-icon">📉</span>
         <span class="solution-title">Power BI</span>
         <span class="solution-desc">Дашборди та показники</span>
       </button>
 
-      <button class="solution-option" type="button">
+      
         <span class="solution-icon">•••</span>
         <span class="solution-title">Інше</span>
         <span class="solution-desc">Опишу свою задачу</span>
@@ -1025,43 +1025,115 @@
 
   <div class="solution-picker-options">
 
-    <button class="solution-option" type="button">
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Збирати кілька файлів в один')"
+>
       <span class="solution-icon">📚</span>
       <span class="solution-title">Збирати кілька файлів в один</span>
       <span class="solution-desc">Об'єднання даних з різних файлів</span>
     </button>
 
-    <button class="solution-option" type="button">
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Переносити дані')"
+>
       <span class="solution-icon">↔️</span>
       <span class="solution-title">Переносити дані</span>
       <span class="solution-desc">Між файлами, листами або системами</span>
     </button>
 
-    <button class="solution-option" type="button">
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Формувати звіти')"
+>
       <span class="solution-icon">📄</span>
       <span class="solution-title">Формувати звіти</span>
       <span class="solution-desc">Автоматичні таблиці та підсумки</span>
     </button>
 
-    <button class="solution-option" type="button">
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Перевіряти помилки')"
+>
       <span class="solution-icon">✅</span>
       <span class="solution-title">Перевіряти помилки</span>
       <span class="solution-desc">Контроль даних та умов</span>
     </button>
 
-    <button class="solution-option" type="button">
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Заповнювати документи')"
+>
       <span class="solution-icon">📝</span>
       <span class="solution-title">Заповнювати документи</span>
       <span class="solution-desc">Автоматичне формування документів</span>
     </button>
 
-    <button class="solution-option" type="button">
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Інше')"
+>
       <span class="solution-icon">•••</span>
       <span class="solution-title">Інше</span>
       <span class="solution-desc">Моя задача трохи інша</span>
     </button>
 
   </div>
+
+</div>
+    <!-- STEP 3: RESULT -->
+<div id="solution-result-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToExcelStep()"
+  >
+    ← Назад
+  </button>
+
+  <div class="solution-result-check">✓</div>
+
+  <h2 id="solution-result-title"></h2>
+
+  <p class="solution-result-tools">
+    Можливі інструменти:
+    <strong>Excel / Power Query / VBA / Google Apps Script</strong>
+  </p>
+
+  <div class="solution-selected-task">
+    <span>Ви обрали:</span>
+    <strong id="solution-selected-task-text"></strong>
+  </div>
+
+  <label
+    class="solution-description-label"
+    for="solution-description"
+  >
+    Коротко опишіть, як це відбувається зараз:
+  </label>
+
+  <textarea
+    id="solution-description"
+    class="solution-description"
+    rows="4"
+    placeholder="Наприклад: щодня отримую файли від 12 менеджерів і вручну збираю їх в один звіт..."
+  ></textarea>
+
+  <button
+    class="solution-discuss-btn"
+    type="button"
+    onclick="discussSelectedTask()"
+  >
+    Обговорити задачу →
+  </button>
 
 </div>
 
@@ -1350,6 +1422,126 @@
 .solution-back:hover {
   color: #005ea8;
 }
+  .solution-result-check {
+  width: 54px;
+  height: 54px;
+
+  margin: 2px auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #0F9D58;
+  border-radius: 50%;
+
+  color: #0F9D58;
+
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.solution-result-tools {
+  max-width: 650px;
+
+  margin: 14px auto 22px;
+
+  text-align: center;
+
+  color: #66727c;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.solution-selected-task {
+  max-width: 620px;
+
+  margin: 0 auto 20px;
+  padding: 11px 14px;
+
+  box-sizing: border-box;
+
+  background: #f6f9fc;
+  border: 1px solid #d9e4ec;
+  border-radius: 9px;
+
+  text-align: center;
+
+  font-size: 11px;
+  color: #66727c;
+}
+
+.solution-selected-task strong {
+  margin-left: 6px;
+  color: #1a1a1a;
+}
+
+.solution-description-label {
+  display: block;
+
+  max-width: 620px;
+
+  margin: 0 auto 7px;
+
+  color: #333;
+
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.solution-description {
+  display: block;
+
+  width: 100%;
+  max-width: 620px;
+
+  margin: 0 auto;
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #c7d3dd;
+  border-radius: 9px;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+
+  resize: vertical;
+  outline: none;
+}
+
+.solution-description:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0,122,204,0.10);
+}
+
+.solution-discuss-btn {
+  display: block;
+
+  margin: 20px auto 0;
+  padding: 12px 25px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #1a73e8;
+  color: white;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.solution-discuss-btn:hover {
+  background: #135fbe;
+  transform: translateY(-2px);
+}
 
   @media (max-width: 768px) {
 
@@ -1427,6 +1619,84 @@ function backToSolutionStart() {
   if (progress[0]) {
     progress[0].classList.add('active');
   }
+}
+  let selectedExcelTask = '';
+
+const solutionResultPhrases = [
+  'Так, це можна автоматизувати.',
+  'Так, тут ручну роботу можна суттєво скоротити.',
+  'Для цього можна побудувати автоматичний процес.',
+  'Схоже на задачу, яку є сенс автоматизувати.',
+  'Це хороший кандидат для автоматизації.',
+  'Тут можна обійтися без значної частини ручної роботи.',
+  'Це якраз той тип задач, який зазвичай автоматизують.',
+  'Тут можна зробити значно простіший робочий процес.',
+  'Схоже, цю рутину можна перекласти на автоматизацію.',
+  'Так, тут точно є що автоматизувати.'
+];
+
+function selectExcelTask(task) {
+  selectedExcelTask = task;
+
+  const excelStep = document.getElementById('solution-excel-step');
+  const resultStep = document.getElementById('solution-result-step');
+  const selectedText = document.getElementById('solution-selected-task-text');
+  const resultTitle = document.getElementById('solution-result-title');
+  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  const randomPhrase =
+    solutionResultPhrases[
+      Math.floor(Math.random() * solutionResultPhrases.length)
+    ];
+
+  selectedText.textContent = task;
+  resultTitle.textContent = randomPhrase;
+
+  excelStep.classList.remove('active');
+  resultStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[2]) {
+    progress[2].classList.add('active');
+  }
+
+  setTimeout(() => {
+    document.getElementById('solution-description').focus();
+  }, 100);
+}
+
+function backToExcelStep() {
+  const excelStep = document.getElementById('solution-excel-step');
+  const resultStep = document.getElementById('solution-result-step');
+  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  resultStep.classList.remove('active');
+  excelStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+function discussSelectedTask() {
+  const description =
+    document.getElementById('solution-description').value.trim();
+
+  closeSolutionPicker();
+  openContactModal();
+
+  let text =
+    'Напрям: Excel / Google Sheets\n' +
+    'Задача: ' + selectedExcelTask;
+
+  if (description) {
+    text += '\n\nОпис:\n' + description;
+  }
+
+  document.getElementById('contact-message').value = text;
 }
   function openSolutionPicker() {
     document.getElementById('solution-picker').classList.add('show');

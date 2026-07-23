@@ -2465,5 +2465,153 @@ function discussSelectedTask() {
     }
   }
 </style>
+  <style>
+  .reviews-panel {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+
+    width: 380px;
+    max-height: 70vh;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,0.98);
+
+    border: 1px solid #cfe4d6;
+    border-radius: 14px;
+
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+
+    z-index: 2500;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform:
+      translate(-35px, -50%)
+      scale(0.94);
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.25s;
+  }
+
+  .reviews-panel.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform:
+      translate(0, -50%)
+      scale(1);
+  }
+
+  .reviews-panel-close {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+
+    border: none;
+    background: transparent;
+
+    color: #777;
+
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .reviews-panel-header {
+    margin-bottom: 18px;
+  }
+
+  .reviews-panel-badge {
+    display: inline-block;
+
+    padding: 5px 9px;
+    margin-bottom: 8px;
+
+    border-radius: 20px;
+
+    background: #edf8f1;
+    border: 1px solid #cce8d5;
+
+    color: #0F9D58;
+
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .reviews-panel-header h3 {
+    margin: 0;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
+  }
+
+  .reviews-panel-list {
+    max-height: 430px;
+    overflow-y: auto;
+
+    margin-bottom: 16px;
+  }
+
+  .reviews-panel-loading {
+    padding: 25px 12px;
+
+    text-align: center;
+
+    color: #87929c;
+
+    font-size: 12px;
+  }
+
+  .reviews-panel-leave-btn {
+    width: 100%;
+
+    padding: 11px 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #1a73e8;
+    color: #fff;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+  }
+
+  .reviews-panel-leave-btn:hover {
+    background: #135fbe;
+  }
+
+  @media (max-width: 768px) {
+    .reviews-panel {
+      left: 10px;
+      right: 10px;
+      top: 50%;
+
+      width: auto;
+      max-height: 72vh;
+
+      transform:
+        translateY(-50%)
+        scale(0.96);
+    }
+
+    .reviews-panel.show {
+      transform:
+        translateY(-50%)
+        scale(1);
+    }
+  }
+</style>
 </body>
 </html>

@@ -483,12 +483,46 @@
       placeholder="Наприклад, Олександр"
     >
 
-    <label for="contact-method">Як з вами зв'язатися?</label>
-    <input
-      id="contact-method"
-      type="text"
-      placeholder="Telegram, email або телефон"
-    >
+    <label>Як з вами зв'язатися?</label>
+
+<div class="contact-method-options">
+  <button
+    type="button"
+    class="contact-method-btn"
+    onclick="selectContactMethod('email', this)"
+  >
+    ✉ Пошта
+  </button>
+
+  <button
+    type="button"
+    class="contact-method-btn"
+    onclick="selectContactMethod('phone', this)"
+  >
+    ☎ Телефон
+  </button>
+
+  <button
+    type="button"
+    class="contact-method-btn"
+    onclick="selectContactMethod('telegram', this)"
+  >
+    ✈ Telegram
+  </button>
+</div>
+
+<input
+  id="contact-method"
+  type="text"
+  placeholder="Оберіть спосіб зв'язку"
+  disabled
+>
+
+<input
+  id="contact-method-type"
+  type="hidden"
+  value=""
+>
 
     <label for="contact-message">Повідомлення</label>
     <textarea
@@ -709,6 +743,53 @@
     color: #555;
   }
 
+  .contact-method-options {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.contact-method-btn {
+  flex: 1;
+  padding: 10px 8px;
+
+  border: 1px solid #c7d3dd;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #444;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.contact-method-btn:hover {
+  border-color: #007acc;
+  color: #007acc;
+  transform: translateY(-1px);
+}
+
+.contact-method-btn.active {
+  background: #007acc;
+  border-color: #007acc;
+  color: #ffffff;
+}
+
+#contact-method:disabled {
+  background: #f3f5f7;
+  color: #999;
+  cursor: not-allowed;
+}
+
   @media (max-width: 768px) {
     #contact-float-btn {
       right: 90px;
@@ -744,6 +825,38 @@
       closeContactModal();
     }
   }
+
+  function selectContactMethod(type, button) {
+  const input = document.getElementById('contact-method');
+  const hiddenType = document.getElementById('contact-method-type');
+
+  document.querySelectorAll('.contact-method-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  button.classList.add('active');
+
+  hiddenType.value = type;
+  input.disabled = false;
+  input.value = '';
+
+  if (type === 'email') {
+    input.type = 'email';
+    input.placeholder = 'name@example.com';
+  }
+
+  if (type === 'phone') {
+    input.type = 'tel';
+    input.placeholder = '+380...';
+  }
+
+  if (type === 'telegram') {
+    input.type = 'text';
+    input.placeholder = '@username';
+  }
+
+  input.focus();
+}
 
   async function testContactForm() {
   const name = document.getElementById('contact-name').value.trim();

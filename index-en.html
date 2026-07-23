@@ -189,6 +189,12 @@
       transform: translateY(-5px);
     }
 
+    .solution-picker-btn {
+      border: none;
+      font-family: 'Roboto Mono', monospace;
+      cursor: pointer;
+    }
+
     .carousel-container {
       perspective: 1000px;
       width: 100%;
@@ -330,7 +336,9 @@
       <div class="typewriter">Sebastian Pereira</div>
     </div>
     <p>I automate and visualize everything that can be. And the rest — I’ll try too.</p>
-    <a class="cta-button" href="#portfolio">→ See Examples</a>
+    <button class="cta-button solution-picker-btn" type="button" onclick="openSolutionPicker()">
+      ⚡ Find a solution
+    </button>
   </header>
 
   <div class="hint" id="hint"></div>
@@ -924,10 +932,1445 @@
   });
 </script>
 
+
+  <!-- SOLUTION PICKER -->
+<div id="solution-picker" class="solution-picker-overlay" onclick="handleSolutionOverlayClick(event)">
+
+  <div class="solution-picker">
+
+    <button
+      class="solution-picker-close"
+      type="button"
+      onclick="closeSolutionPicker()"
+    >
+      ×
+    </button>
+
+    <div id="solution-start-step" class="solution-step active">
+
+    <div class="solution-picker-badge">
+      ⚡ SOLUTION FINDER
+    </div>
+
+    <h2>What would you like to automate?</h2>
+
+    <p class="solution-picker-subtitle">
+      Choose the option that best matches your task
+    </p>
+
+    <div class="solution-picker-options">
+
+  <button
+    class="solution-option"
+    type="button"
+    onclick="openExcelStep()"
+  >
+    <span class="solution-icon">📊</span>
+    <span class="solution-title">Excel / Google Sheets</span>
+    <span class="solution-desc">Spreadsheets, formulas, macros</span>
+  </button>
+
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openAnalyticsStep()"
+>
+  <span class="solution-icon">📈</span>
+  <span class="solution-title">Reports & analytics</span>
+  <span class="solution-desc">Data collection and visualization</span>
+</button>
+
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openManualDataStep()"
+>
+  <span class="solution-icon">🔄</span>
+  <span class="solution-title">Manual data work</span>
+  <span class="solution-desc">Moving and processing data</span>
+</button>
+
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openTelegramStep()"
+>
+  <span class="solution-icon">✈️</span>
+  <span class="solution-title">Telegram / notifications</span>
+  <span class="solution-desc">Bots and automated messages</span>
+</button>
+
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openPowerBiStep()"
+>
+  <span class="solution-icon">📉</span>
+  <span class="solution-title">Power BI</span>
+  <span class="solution-desc">Dashboards and metrics</span>
+</button>
+
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openOtherSolution()"
+>
+  <span class="solution-icon">•••</span>
+  <span class="solution-title">Other</span>
+  <span class="solution-desc">I’ll describe my task</span>
+</button>
+
+</div>
+  </div>
+
+    <!-- STEP 2: EXCEL -->
+<div id="solution-excel-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStart()"
+  >
+    ← Back
+  </button>
+
+  <h2>What do you currently have to do manually?</h2>
+
+  <p class="solution-picker-subtitle">
+    Choose the option that best matches your task
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Combine multiple files into one')"
+>
+      <span class="solution-icon">📚</span>
+      <span class="solution-title">Combine multiple files into one</span>
+      <span class="solution-desc">Combine data from different files</span>
+    </button>
+
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Move data')"
+>
+      <span class="solution-icon">↔️</span>
+      <span class="solution-title">Move data</span>
+      <span class="solution-desc">Between files, sheets, or systems</span>
+    </button>
+
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Generate reports')"
+>
+      <span class="solution-icon">📄</span>
+      <span class="solution-title">Generate reports</span>
+      <span class="solution-desc">Automatic tables and summaries</span>
+    </button>
+
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Check for errors')"
+>
+      <span class="solution-icon">✅</span>
+      <span class="solution-title">Check for errors</span>
+      <span class="solution-desc">Validate data and conditions</span>
+    </button>
+
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Fill in documents')"
+>
+      <span class="solution-icon">📝</span>
+      <span class="solution-title">Fill in documents</span>
+      <span class="solution-desc">Automatic document generation</span>
+    </button>
+
+    <button
+  class="solution-option"
+  type="button"
+  onclick="selectExcelTask('Other')"
+>
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Other</span>
+      <span class="solution-desc">My task is a little different</span>
+    </button>
+
+  </div>
+
+</div>
+
+<!-- STEP 2: ANALYTICS -->
+<div id="solution-analytics-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromAnalytics()"
+  >
+    ← Back
+  </button>
+
+  <h2>What exactly would you like to simplify?</h2>
+
+  <p class="solution-picker-subtitle">
+    Choose the option closest to your task
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Combine data from multiple sources')"
+    >
+      <span class="solution-icon">🔗</span>
+      <span class="solution-title">Combine data from multiple sources</span>
+      <span class="solution-desc">Files, spreadsheets, or other sources</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Generate reports automatically')"
+    >
+      <span class="solution-icon">📄</span>
+      <span class="solution-title">Generate reports automatically</span>
+      <span class="solution-desc">Without rebuilding them manually each time</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Calculate KPIs and metrics')"
+    >
+      <span class="solution-icon">🎯</span>
+      <span class="solution-title">Calculate KPIs and metrics</span>
+      <span class="solution-desc">Metrics, targets, and variances</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Visualize data')"
+    >
+      <span class="solution-icon">📊</span>
+      <span class="solution-title">Visualize data</span>
+      <span class="solution-desc">Charts, dashboards, and filters</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Update reports automatically')"
+    >
+      <span class="solution-icon">🔄</span>
+      <span class="solution-title">Update reports automatically</span>
+      <span class="solution-desc">Fresh data without manual rework</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Other')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Other</span>
+      <span class="solution-desc">I have a different scenario</span>
+    </button>
+
+  </div>
+
+</div>
+    <!-- STEP 2: MANUAL DATA -->
+<div id="solution-manual-data-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromManualData()"
+  >
+    ← Back
+  </button>
+
+  <h2>What is taking up your time?</h2>
+
+  <p class="solution-picker-subtitle">
+    Choose the option closest to your situation
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Copy data between spreadsheets')"
+    >
+      <span class="solution-icon">🔁</span>
+      <span class="solution-title">Copy data between spreadsheets</span>
+      <span class="solution-desc">Manual copying from one place to another</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Import or move data from files')"
+    >
+      <span class="solution-icon">📥</span>
+      <span class="solution-title">Import data from files</span>
+      <span class="solution-desc">Excel, CSV, Google Sheets, and other sources</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Clean and standardize data')"
+    >
+      <span class="solution-icon">🧹</span>
+      <span class="solution-title">Clean data</span>
+      <span class="solution-desc">Duplicates, formats, and unnecessary values</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Search and reconcile information')"
+    >
+      <span class="solution-icon">🔍</span>
+      <span class="solution-title">Search and reconcile information</span>
+      <span class="solution-desc">Compare lists and check matches</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Sort and organize data')"
+    >
+      <span class="solution-icon">📂</span>
+      <span class="solution-title">Sort and organize data</span>
+      <span class="solution-desc">By rules, categories, or conditions</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Other')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Other</span>
+      <span class="solution-desc">I have a different manual process</span>
+    </button>
+
+  </div>
+
+</div>
+    <!-- STEP 2: TELEGRAM -->
+<div id="solution-telegram-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromTelegram()"
+  >
+    ← Back
+  </button>
+
+  <h2>What should happen automatically?</h2>
+
+  <p class="solution-picker-subtitle">
+    Choose the scenario closest to your task
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Receive automatic notifications')"
+    >
+      <span class="solution-icon">🔔</span>
+      <span class="solution-title">Receive notifications</span>
+      <span class="solution-desc">Events, requests, changes, or important data</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Create a Telegram bot')"
+    >
+      <span class="solution-icon">🤖</span>
+      <span class="solution-title">Create a Telegram bot</span>
+      <span class="solution-desc">Commands, buttons, and custom logic</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Receive website requests in Telegram')"
+    >
+      <span class="solution-icon">🌐</span>
+      <span class="solution-title">Website requests in Telegram</span>
+      <span class="solution-desc">Receive inquiries without checking email</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Send reminders')"
+    >
+      <span class="solution-icon">⏰</span>
+      <span class="solution-title">Send reminders</span>
+      <span class="solution-desc">By time, date, or a specific event</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Control processes through Telegram')"
+    >
+      <span class="solution-icon">⚙️</span>
+      <span class="solution-title">Control processes</span>
+      <span class="solution-desc">Run actions and receive results in chat</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Other')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Other</span>
+      <span class="solution-desc">I have a different scenario</span>
+    </button>
+
+  </div>
+
+</div>
+    <!-- STEP 2: POWER BI -->
+<div id="solution-powerbi-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromPowerBi()"
+  >
+    ← Back
+  </button>
+
+  <h2>What would you like to achieve in Power BI?</h2>
+
+  <p class="solution-picker-subtitle">
+    Choose the option closest to your task
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Build a dashboard from scratch')"
+    >
+      <span class="solution-icon">📊</span>
+      <span class="solution-title">Build a dashboard from scratch</span>
+      <span class="solution-desc">Metrics, charts, and filters</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Connect data from Excel or Google Sheets')"
+    >
+      <span class="solution-icon">🔗</span>
+      <span class="solution-title">Connect data sources</span>
+      <span class="solution-desc">Excel, Google Sheets, and other sources</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Automate data refresh')"
+    >
+      <span class="solution-icon">🔄</span>
+      <span class="solution-title">Automate refresh</span>
+      <span class="solution-desc">So the report does not need to be rebuilt manually</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Calculate KPIs and metrics')"
+    >
+      <span class="solution-icon">🎯</span>
+      <span class="solution-title">Calculate KPIs</span>
+      <span class="solution-desc">DAX, targets, actuals, and variances</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Improve an existing Power BI report')"
+    >
+      <span class="solution-icon">🛠️</span>
+      <span class="solution-title">Improve an existing report</span>
+      <span class="solution-desc">Logic, data model, design, or performance</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Other')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Other</span>
+      <span class="solution-desc">I have a different Power BI task</span>
+    </button>
+
+  </div>
+
+</div>
+    
+    <!-- STEP 3: RESULT -->
+<div id="solution-result-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSelectedCategoryStep()"
+  >
+    ← Back
+  </button>
+
+  <div class="solution-result-check">✓</div>
+
+  <h2 id="solution-result-title"></h2>
+
+  <p class="solution-result-tools">
+  Possible tools:
+  <strong id="solution-result-tools-text"></strong>
+</p>
+
+  <div class="solution-selected-task">
+    <span>You selected:</span>
+    <strong id="solution-selected-task-text"></strong>
+  </div>
+
+  <label
+    class="solution-description-label"
+    for="solution-description"
+  >
+    Briefly describe how this works today:
+  </label>
+
+  <textarea
+    id="solution-description"
+    class="solution-description"
+    rows="4"
+    placeholder="For example: every day I receive files from 12 managers and manually combine them into one report..."
+  ></textarea>
+
+  <button
+    class="solution-discuss-btn"
+    type="button"
+    onclick="discussSelectedTask()"
+  >
+    Discuss the task →
+  </button>
+
+</div>
+
+    <div class="solution-picker-progress">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .solution-picker-overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 2900;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      opacity 0.3s ease,
+      background-color 0.3s ease,
+      visibility 0.3s;
+  }
+
+  .solution-picker-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .solution-picker {
+    position: relative;
+
+    width: 100%;
+    max-width: 850px;
+
+    padding: 34px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid #c4d8e6;
+    border-radius: 16px;
+
+    box-shadow: 0 18px 55px rgba(0,0,0,0.24);
+
+    font-family: 'Roboto Mono', monospace;
+
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      scale(0.92);
+
+    transition:
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.25s ease;
+  }
+
+  .solution-picker-overlay.show .solution-picker {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .solution-picker-close {
+    position: absolute;
+
+    top: 12px;
+    right: 16px;
+
+    border: none;
+    background: transparent;
+
+    color: #777;
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+  }
+
+  .solution-picker-close:hover {
+    color: #111;
+  }
+
+  .solution-picker-badge {
+    width: fit-content;
+
+    margin: 0 auto 13px;
+    padding: 6px 11px;
+
+    background: #edf6ff;
+    border: 1px solid #c9e2f7;
+    border-radius: 20px;
+
+    color: #007acc;
+
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .solution-picker h2 {
+    margin: 0;
+
+    text-align: center;
+
+    color: #1a1a1a;
+    font-size: 25px;
+  }
+
+  .solution-picker-subtitle {
+    margin: 9px 0 28px;
+
+    text-align: center;
+
+    color: #66727c;
+    font-size: 13px;
+  }
+
+  .solution-picker-options {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 13px;
+  }
+
+  .solution-option {
+    min-height: 145px;
+
+    padding: 20px 14px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d4dee7;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    font-family: 'Roboto Mono', monospace;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.035);
+
+    transition:
+      transform 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      background-color 0.22s ease;
+  }
+
+  .solution-option:hover {
+    transform: translateY(-4px);
+
+    border-color: #1a73e8;
+
+    background: #fbfdff;
+
+    box-shadow: 0 10px 25px rgba(26,115,232,0.12);
+  }
+
+  .solution-icon {
+    min-height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 9px;
+
+    font-size: 28px;
+  }
+
+  .solution-title {
+    color: #1a1a1a;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    text-align: center;
+  }
+
+  .solution-desc {
+    margin-top: 7px;
+
+    color: #87929c;
+
+    font-size: 10px;
+    line-height: 1.45;
+
+    text-align: center;
+  }
+
+  .solution-picker-progress {
+    display: flex;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 25px;
+  }
+
+  .solution-picker-progress span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #cbd5dd;
+
+    transition: all 0.25s ease;
+  }
+
+  .solution-picker-progress span.active {
+    width: 18px;
+
+    border-radius: 10px;
+
+    background: #1a73e8;
+  }
+
+  .solution-step {
+  display: none;
+
+  opacity: 0;
+  transform: translateX(25px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.solution-step.active {
+  display: block;
+
+  animation: solutionStepIn 0.32s ease forwards;
+}
+
+@keyframes solutionStepIn {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.solution-back {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+
+  border: none;
+  background: transparent;
+
+  color: #007acc;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.solution-back:hover {
+  color: #005ea8;
+}
+  .solution-result-check {
+  width: 54px;
+  height: 54px;
+
+  margin: 2px auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #0F9D58;
+  border-radius: 50%;
+
+  color: #0F9D58;
+
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.solution-result-tools {
+  max-width: 650px;
+
+  margin: 14px auto 22px;
+
+  text-align: center;
+
+  color: #66727c;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.solution-selected-task {
+  max-width: 620px;
+
+  margin: 0 auto 20px;
+  padding: 11px 14px;
+
+  box-sizing: border-box;
+
+  background: #f6f9fc;
+  border: 1px solid #d9e4ec;
+  border-radius: 9px;
+
+  text-align: center;
+
+  font-size: 11px;
+  color: #66727c;
+}
+
+.solution-selected-task strong {
+  margin-left: 6px;
+  color: #1a1a1a;
+}
+
+.solution-description-label {
+  display: block;
+
+  max-width: 620px;
+
+  margin: 0 auto 7px;
+
+  color: #333;
+
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.solution-description {
+  display: block;
+
+  width: 100%;
+  max-width: 620px;
+
+  margin: 0 auto;
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #c7d3dd;
+  border-radius: 9px;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+
+  resize: vertical;
+  outline: none;
+}
+
+.solution-description:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0,122,204,0.10);
+}
+
+.solution-discuss-btn {
+  display: block;
+
+  margin: 20px auto 0;
+  padding: 12px 25px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #1a73e8;
+  color: white;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.solution-discuss-btn:hover {
+  background: #135fbe;
+  transform: translateY(-2px);
+}
+
+  @media (max-width: 768px) {
+
+    .solution-picker-overlay {
+      padding: 12px;
+    }
+
+    .solution-picker {
+      max-height: calc(100vh - 24px);
+      overflow-y: auto;
+
+      padding: 27px 15px 22px;
+    }
+
+    .solution-picker h2 {
+      font-size: 20px;
+    }
+
+    .solution-picker-subtitle {
+      font-size: 11px;
+      margin-bottom: 20px;
+    }
+
+    .solution-picker-options {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+
+    .solution-option {
+      min-height: 120px;
+      padding: 14px 8px;
+    }
+
+    .solution-icon {
+      font-size: 24px;
+    }
+
+    .solution-title {
+      font-size: 10px;
+    }
+
+    .solution-desc {
+      font-size: 8px;
+    }
+  }
+</style>
+
+<script>
+
+  function openExcelStep() {
+  const startStep = document.getElementById('solution-start-step');
+  const excelStep = document.getElementById('solution-excel-step');
+  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  excelStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+function backToSolutionStart() {
+  const startStep = document.getElementById('solution-start-step');
+  const excelStep = document.getElementById('solution-excel-step');
+  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  excelStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+  let selectedSolutionCategory = '';
+let selectedSolutionTask = '';
+let selectedSolutionTools = '';
+let selectedSolutionStepId = '';
+
+const solutionResultPhrases = [
+  'Yes, this can be automated.',
+  'Yes, the manual work here can be reduced significantly.',
+  'This can be turned into an automated process.',
+  'This looks like a task worth automating.',
+  'This is a good candidate for automation.',
+  'A large part of the manual work can be removed here.',
+  'This is exactly the kind of task that is usually automated.',
+  'This workflow can be made much simpler.',
+  'It looks like this routine can be handed over to automation.',
+  'Yes, there is definitely something to automate here.'
+];
+  const otherSolutionPhrases = [
+  'Okay. Not every task fits neatly into a predefined category 🙂',
+  'No problem. Describe the task in your own words.',
+  'All right. In this case, it is better to look at the task itself.',
+  'Got it. No categories — just describe what you need.',
+  'Okay, unusual tasks are often the most interesting ones.',
+  'All right. Tell me what you currently have to do manually.',
+  'It looks like this needs a custom approach.',
+  'Sounds good. Describe the process as it works today.'
+];
+
+function selectExcelTask(task) {
+  selectSolutionTask(
+    'Excel / Google Sheets',
+    task,
+    'Excel / Power Query / VBA / Google Apps Script',
+    'solution-excel-step'
+  );
+}
+
+  function selectSolutionTask(category, task, tools, stepId) {
+  selectedSolutionCategory = category;
+  selectedSolutionTask = task;
+  selectedSolutionTools = tools;
+  selectedSolutionStepId = stepId;
+
+  const currentStep = document.getElementById(stepId);
+  const resultStep = document.getElementById('solution-result-step');
+
+  const selectedText =
+    document.getElementById('solution-selected-task-text');
+
+  const resultTitle =
+    document.getElementById('solution-result-title');
+
+  const toolsText =
+    document.getElementById('solution-result-tools-text');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  const randomPhrase =
+    solutionResultPhrases[
+      Math.floor(Math.random() * solutionResultPhrases.length)
+    ];
+
+  selectedText.textContent = task;
+  resultTitle.textContent = randomPhrase;
+  toolsText.textContent = tools;
+    document.getElementById('solution-description').value = '';
+
+document.getElementById('solution-description').placeholder =
+  'For example: every day I receive files from 12 managers and manually combine them into one report...';
+
+  currentStep.classList.remove('active');
+  resultStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[2]) {
+    progress[2].classList.add('active');
+  }
+
+  setTimeout(() => {
+    document.getElementById('solution-description').focus();
+  }, 100);
+}
+
+  function openAnalyticsStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const analyticsStep =
+    document.getElementById('solution-analytics-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  analyticsStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+  function openTelegramStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const telegramStep =
+    document.getElementById('solution-telegram-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  telegramStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromTelegram() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const telegramStep =
+    document.getElementById('solution-telegram-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  telegramStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectTelegramTask(task) {
+  selectSolutionTask(
+    'Telegram / notifications',
+    task,
+    'Telegram Bot API / Google Apps Script / API / Webhooks',
+    'solution-telegram-step'
+  );
+}
+  function openPowerBiStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const powerBiStep =
+    document.getElementById('solution-powerbi-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  powerBiStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromPowerBi() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const powerBiStep =
+    document.getElementById('solution-powerbi-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  powerBiStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectPowerBiTask(task) {
+  selectSolutionTask(
+    'Power BI',
+    task,
+    'Power BI / Power Query / DAX / Excel / Google Sheets',
+    'solution-powerbi-step'
+  );
+}  
+
+function backToSolutionStartFromAnalytics() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const analyticsStep =
+    document.getElementById('solution-analytics-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  analyticsStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectAnalyticsTask(task) {
+  selectSolutionTask(
+    'Reports & analytics',
+    task,
+    'Excel / Power Query / Power BI / Google Sheets',
+    'solution-analytics-step'
+  );
+}
+
+  function openManualDataStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const manualStep =
+    document.getElementById('solution-manual-data-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  manualStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromManualData() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const manualStep =
+    document.getElementById('solution-manual-data-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  manualStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+  function openOtherSolution() {
+  selectedSolutionCategory = 'Other';
+  selectedSolutionTask = 'Custom task';
+  selectedSolutionTools = '';
+  selectedSolutionStepId = 'solution-start-step';
+
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const resultStep =
+    document.getElementById('solution-result-step');
+
+  const selectedText =
+    document.getElementById('solution-selected-task-text');
+
+  const resultTitle =
+    document.getElementById('solution-result-title');
+
+  const toolsText =
+    document.getElementById('solution-result-tools-text');
+
+  const description =
+    document.getElementById('solution-description');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  const randomPhrase =
+    otherSolutionPhrases[
+      Math.floor(Math.random() * otherSolutionPhrases.length)
+    ];
+
+  resultTitle.textContent = randomPhrase;
+  selectedText.textContent = 'Custom task';
+
+  toolsText.textContent =
+    'We’ll choose the right tools after a short description';
+
+  description.value = '';
+  description.placeholder =
+    'Describe what you currently do manually and what result you would like to get automatically...';
+
+  startStep.classList.remove('active');
+  resultStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[2]) {
+    progress[2].classList.add('active');
+  }
+
+  setTimeout(() => {
+    description.focus();
+  }, 100);
+}
+
+function selectManualDataTask(task) {
+  selectSolutionTask(
+    'Manual data work',
+    task,
+    'Excel / Power Query / VBA / Google Apps Script',
+    'solution-manual-data-step'
+  );
+}
+
+function backToSelectedCategoryStep() {
+  const resultStep =
+    document.getElementById('solution-result-step');
+
+  const previousStep =
+    document.getElementById(selectedSolutionStepId);
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  resultStep.classList.remove('active');
+
+  if (previousStep) {
+    previousStep.classList.add('active');
+  }
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+function discussSelectedTask() {
+  const description =
+    document.getElementById('solution-description').value.trim();
+
+  closeSolutionPicker();
+  openContactModal();
+
+  let text =
+    'Category: ' + selectedSolutionCategory + '\n' +
+'Task: ' + selectedSolutionTask;
+
+  if (description) {
+    text += '\n\nDescription:\n' + description;
+  }
+
+  document.getElementById('contact-message').value = text;
+}
+  function openSolutionPicker() {
+    document.getElementById('solution-picker').classList.add('show');
+  }
+
+  function closeSolutionPicker() {
+    document.getElementById('solution-picker').classList.remove('show');
+  }
+
+  function handleSolutionOverlayClick(event) {
+    if (event.target.id === 'solution-picker') {
+      closeSolutionPicker();
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeSolutionPicker();
+    }
+  });
+</script>
+
 </body>
 </html>
-
-
 
 
 

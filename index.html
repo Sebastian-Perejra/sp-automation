@@ -349,7 +349,243 @@
       <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
     </div>
   </div>
+<!-- AUTOMATION ASSISTANT -->
+<section id="automation-assistant" class="automation-assistant">
 
+  <div class="automation-assistant-head">
+    <div class="automation-badge">⚡ Підбір рішення</div>
+
+    <h2>Що хочете автоматизувати?</h2>
+
+    <p>
+      Оберіть, що найбільше схоже на вашу задачу
+    </p>
+  </div>
+
+  <div class="automation-options">
+
+    <button class="automation-option" type="button">
+      <span class="automation-icon">📊</span>
+      <span class="automation-title">Excel / Google Sheets</span>
+      <span class="automation-desc">Таблиці, формули, макроси</span>
+    </button>
+
+    <button class="automation-option" type="button">
+      <span class="automation-icon">📈</span>
+      <span class="automation-title">Звіти та аналітика</span>
+      <span class="automation-desc">Збір та візуалізація даних</span>
+    </button>
+
+    <button class="automation-option" type="button">
+      <span class="automation-icon">🔄</span>
+      <span class="automation-title">Ручна робота з даними</span>
+      <span class="automation-desc">Перенесення та обробка</span>
+    </button>
+
+    <button class="automation-option" type="button">
+      <span class="automation-icon">✈️</span>
+      <span class="automation-title">Telegram / сповіщення</span>
+      <span class="automation-desc">Боти та автоматичні повідомлення</span>
+    </button>
+
+    <button class="automation-option" type="button">
+      <span class="automation-icon">📉</span>
+      <span class="automation-title">Power BI</span>
+      <span class="automation-desc">Дашборди та показники</span>
+    </button>
+
+    <button class="automation-option" type="button">
+      <span class="automation-icon">•••</span>
+      <span class="automation-title">Інше</span>
+      <span class="automation-desc">Опишу свою задачу</span>
+    </button>
+
+  </div>
+
+  <div class="automation-progress">
+    <span class="active"></span>
+    <span></span>
+    <span></span>
+  </div>
+
+</section>
+
+  <style>
+  .automation-assistant {
+    width: calc(100% - 40px);
+    max-width: 1100px;
+    margin: 20px auto 130px;
+    padding: 38px;
+
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,0.72);
+    border: 1px solid #d5e2ec;
+    border-radius: 18px;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,0.07);
+
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  .automation-assistant-head {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .automation-badge {
+    display: inline-block;
+
+    margin-bottom: 12px;
+    padding: 6px 11px;
+
+    background: #edf6ff;
+    border: 1px solid #c9e2f7;
+    border-radius: 20px;
+
+    color: #007acc;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .automation-assistant h2 {
+    margin: 0 0 9px;
+
+    font-size: 25px;
+    color: #1a1a1a;
+  }
+
+  .automation-assistant-head p {
+    margin: 0;
+
+    color: #66727c;
+    font-size: 13px;
+  }
+
+  .automation-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .automation-option {
+    min-height: 145px;
+    padding: 22px 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d4dee7;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    font-family: 'Roboto Mono', monospace;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.035);
+
+    transition:
+      transform 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      background-color 0.22s ease;
+  }
+
+  .automation-option:hover {
+    transform: translateY(-5px);
+
+    border-color: #1a73e8;
+    background: #fbfdff;
+
+    box-shadow: 0 10px 25px rgba(26,115,232,0.12);
+  }
+
+  .automation-icon {
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    font-size: 29px;
+  }
+
+  .automation-title {
+    color: #1a1a1a;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .automation-desc {
+    margin-top: 7px;
+
+    color: #87929c;
+    font-size: 10px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .automation-progress {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+
+    margin-top: 26px;
+  }
+
+  .automation-progress span {
+    width: 6px;
+    height: 6px;
+
+    background: #cbd5dd;
+    border-radius: 50%;
+  }
+
+  .automation-progress span.active {
+    width: 18px;
+
+    background: #1a73e8;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+
+    .automation-assistant {
+      width: calc(100% - 24px);
+      padding: 25px 15px;
+      margin-bottom: 120px;
+    }
+
+    .automation-assistant h2 {
+      font-size: 20px;
+    }
+
+    .automation-options {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .automation-option {
+      min-height: 125px;
+      padding: 16px 10px;
+    }
+
+    .automation-title {
+      font-size: 11px;
+    }
+
+    .automation-desc {
+      font-size: 9px;
+    }
+  }
+</style>
+  
 <div class="ticker" style="font-family: 'Courier New', monospace; font-size: 18px; color: #00FF00;">
   <div class="ticker-text">
     Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Індивідуальні рішення для бізнесу ·

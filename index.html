@@ -2824,5 +2824,195 @@ function discussSelectedTask() {
   white-space: nowrap;
 }
 </style>
+  <style>
+  .review-form-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3200;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      opacity 0.3s ease,
+      background-color 0.3s ease,
+      visibility 0.3s;
+  }
+
+  .review-form-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .review-form-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 430px;
+
+    padding: 26px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #c4d8e6;
+    border-radius: 14px;
+
+    box-shadow: 0 16px 45px rgba(0,0,0,0.22);
+
+    font-family: 'Roboto Mono', monospace;
+
+    opacity: 0;
+
+    transform:
+      translate(-180px, 60px)
+      scale(0.35);
+
+    transform-origin: left center;
+
+    transition:
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease;
+  }
+
+  .review-form-overlay.show .review-form-modal {
+    opacity: 1;
+
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  .review-form-modal h3 {
+    margin: 0 0 22px;
+
+    font-size: 20px;
+    color: #1a1a1a;
+  }
+
+  .review-form-modal label {
+    display: block;
+
+    margin: 14px 0 6px;
+
+    color: #333;
+
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .review-form-modal input,
+  .review-form-modal textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    border: 1px solid #c7d3dd;
+    border-radius: 8px;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+
+    outline: none;
+  }
+
+  .review-form-modal textarea {
+    resize: vertical;
+  }
+
+  .review-form-modal input:focus,
+  .review-form-modal textarea:focus {
+    border-color: #007acc;
+
+    box-shadow:
+      0 0 0 3px rgba(0,122,204,0.10);
+  }
+
+  .review-form-close {
+    position: absolute;
+
+    top: 10px;
+    right: 13px;
+
+    border: none;
+    background: transparent;
+
+    color: #777;
+
+    font-size: 26px;
+
+    cursor: pointer;
+  }
+
+  .review-rating {
+    display: flex;
+    gap: 6px;
+  }
+
+  .review-rating button {
+    border: none;
+    background: transparent;
+
+    padding: 0;
+
+    color: #c7c7c7;
+
+    font-size: 28px;
+
+    cursor: pointer;
+  }
+
+  .review-rating button.active {
+    color: #f4b400;
+  }
+
+  .review-submit-btn {
+    width: 100%;
+
+    margin-top: 20px;
+    padding: 12px 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #1a73e8;
+    color: #ffffff;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+  }
+
+  .review-submit-btn:hover {
+    background: #135fbe;
+  }
+
+  #review-form-status {
+    min-height: 18px;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    font-size: 12px;
+  }
+</style>
 </body>
 </html>

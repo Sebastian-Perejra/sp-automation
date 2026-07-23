@@ -2721,6 +2721,13 @@ function discussSelectedTask() {
       if (!data.ok || !Array.isArray(data.reviews)) {
         throw new Error('Некоректна відповідь API');
       }
+      const reviewsButton =
+  document.getElementById('reviews-float-btn');
+
+if (reviewsButton) {
+  reviewsButton.textContent =
+    '⭐ Відгуки · ' + data.reviews.length;
+}
 
       list.innerHTML = data.reviews.map(review => {
         const rating = Math.max(

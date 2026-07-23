@@ -983,11 +983,15 @@
   <span class="solution-desc">Збір та візуалізація даних</span>
 </button>
 
-  <button class="solution-option" type="button">
-    <span class="solution-icon">🔄</span>
-    <span class="solution-title">Ручна робота з даними</span>
-    <span class="solution-desc">Перенесення та обробка</span>
-  </button>
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openManualDataStep()"
+>
+  <span class="solution-icon">🔄</span>
+  <span class="solution-title">Ручна робота з даними</span>
+  <span class="solution-desc">Перенесення та обробка</span>
+</button>
 
   <button class="solution-option" type="button">
     <span class="solution-icon">✈️</span>
@@ -1170,6 +1174,88 @@
       <span class="solution-icon">•••</span>
       <span class="solution-title">Інше</span>
       <span class="solution-desc">У мене інший сценарій</span>
+    </button>
+
+  </div>
+
+</div>
+    <!-- STEP 2: MANUAL DATA -->
+<div id="solution-manual-data-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromManualData()"
+  >
+    ← Назад
+  </button>
+
+  <h2>Що саме забирає час?</h2>
+
+  <p class="solution-picker-subtitle">
+    Оберіть найближчий до вашої ситуації варіант
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Копіювати дані між таблицями')"
+    >
+      <span class="solution-icon">🔁</span>
+      <span class="solution-title">Копіювати дані між таблицями</span>
+      <span class="solution-desc">Ручне перенесення з одного місця в інше</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Завантажувати або переносити дані з файлів')"
+    >
+      <span class="solution-icon">📥</span>
+      <span class="solution-title">Завантажувати дані з файлів</span>
+      <span class="solution-desc">Excel, CSV, Google Sheets та інші джерела</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Очищати та приводити дані до ладу')"
+    >
+      <span class="solution-icon">🧹</span>
+      <span class="solution-title">Очищати дані</span>
+      <span class="solution-desc">Дублікати, формати, зайві значення</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Шукати та звіряти інформацію')"
+    >
+      <span class="solution-icon">🔍</span>
+      <span class="solution-title">Шукати та звіряти інформацію</span>
+      <span class="solution-desc">Порівняння списків та перевірка збігів</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Сортувати та розкладати дані')"
+    >
+      <span class="solution-icon">📂</span>
+      <span class="solution-title">Сортувати та розкладати дані</span>
+      <span class="solution-desc">За правилами, категоріями або умовами</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectManualDataTask('Інше')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Інше</span>
+      <span class="solution-desc">У мене інший ручний процес</span>
     </button>
 
   </div>
@@ -1827,6 +1913,57 @@ function selectAnalyticsTask(task) {
     task,
     'Excel / Power Query / Power BI / Google Sheets',
     'solution-analytics-step'
+  );
+}
+
+  function openManualDataStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const manualStep =
+    document.getElementById('solution-manual-data-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  manualStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromManualData() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const manualStep =
+    document.getElementById('solution-manual-data-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  manualStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectManualDataTask(task) {
+  selectSolutionTask(
+    'Ручна робота з даними',
+    task,
+    'Excel / Power Query / VBA / Google Apps Script',
+    'solution-manual-data-step'
   );
 }
 

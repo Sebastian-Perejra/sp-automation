@@ -993,11 +993,15 @@
   <span class="solution-desc">Перенесення та обробка</span>
 </button>
 
-  <button class="solution-option" type="button">
-    <span class="solution-icon">✈️</span>
-    <span class="solution-title">Telegram / сповіщення</span>
-    <span class="solution-desc">Боти та автоматичні повідомлення</span>
-  </button>
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openTelegramStep()"
+>
+  <span class="solution-icon">✈️</span>
+  <span class="solution-title">Telegram / сповіщення</span>
+  <span class="solution-desc">Боти та автоматичні повідомлення</span>
+</button>
 
   <button class="solution-option" type="button">
     <span class="solution-icon">📉</span>
@@ -1256,6 +1260,88 @@
       <span class="solution-icon">•••</span>
       <span class="solution-title">Інше</span>
       <span class="solution-desc">У мене інший ручний процес</span>
+    </button>
+
+  </div>
+
+</div>
+    <!-- STEP 2: TELEGRAM -->
+<div id="solution-telegram-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromTelegram()"
+  >
+    ← Назад
+  </button>
+
+  <h2>Що має відбуватися автоматично?</h2>
+
+  <p class="solution-picker-subtitle">
+    Оберіть найближчий до вашої задачі сценарій
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Отримувати автоматичні сповіщення')"
+    >
+      <span class="solution-icon">🔔</span>
+      <span class="solution-title">Отримувати сповіщення</span>
+      <span class="solution-desc">Події, заявки, зміни або важливі дані</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Створити Telegram-бота')"
+    >
+      <span class="solution-icon">🤖</span>
+      <span class="solution-title">Створити Telegram-бота</span>
+      <span class="solution-desc">Команди, кнопки та власна логіка</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Отримувати заявки з сайту в Telegram')"
+    >
+      <span class="solution-icon">🌐</span>
+      <span class="solution-title">Заявки з сайту в Telegram</span>
+      <span class="solution-desc">Передавати звернення без перевірки пошти</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Надсилати нагадування')"
+    >
+      <span class="solution-icon">⏰</span>
+      <span class="solution-title">Надсилати нагадування</span>
+      <span class="solution-desc">За часом, датою або певною подією</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Керувати процесами через Telegram')"
+    >
+      <span class="solution-icon">⚙️</span>
+      <span class="solution-title">Керувати процесами</span>
+      <span class="solution-desc">Запускати дії та отримувати результат у чаті</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectTelegramTask('Інше')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Інше</span>
+      <span class="solution-desc">У мене інший сценарій</span>
     </button>
 
   </div>
@@ -1883,6 +1969,56 @@ function selectExcelTask(task) {
   if (progress[1]) {
     progress[1].classList.add('active');
   }
+}
+  function openTelegramStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const telegramStep =
+    document.getElementById('solution-telegram-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  telegramStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromTelegram() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const telegramStep =
+    document.getElementById('solution-telegram-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  telegramStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectTelegramTask(task) {
+  selectSolutionTask(
+    'Telegram / сповіщення',
+    task,
+    'Telegram Bot API / Google Apps Script / API / Webhooks',
+    'solution-telegram-step'
+  );
 }
 
 

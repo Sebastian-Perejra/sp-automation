@@ -501,11 +501,77 @@
   </div>
 
   <button
-    class="reviews-panel-leave-btn"
-    type="button"
-  >
-    Залишити відгук
-  </button>
+  class="reviews-panel-leave-btn"
+  type="button"
+  onclick="openReviewForm()"
+>
+  Залишити відгук
+</button>
+
+</div>
+  <!-- REVIEW FORM MODAL -->
+<div id="review-form-overlay" class="review-form-overlay">
+
+  <div class="review-form-modal">
+
+    <button
+      class="review-form-close"
+      type="button"
+      onclick="closeReviewForm()"
+    >
+      ×
+    </button>
+
+    <h3>Залишити відгук</h3>
+
+    <label for="review-name">
+      Ваше ім'я
+    </label>
+
+    <input
+      id="review-name"
+      type="text"
+      placeholder="Наприклад, Олександр"
+    >
+
+    <label>
+      Ваша оцінка
+    </label>
+
+    <div id="review-rating" class="review-rating">
+      <button type="button" onclick="selectReviewRating(1)">★</button>
+      <button type="button" onclick="selectReviewRating(2)">★</button>
+      <button type="button" onclick="selectReviewRating(3)">★</button>
+      <button type="button" onclick="selectReviewRating(4)">★</button>
+      <button type="button" onclick="selectReviewRating(5)">★</button>
+    </div>
+
+    <input
+      id="review-rating-value"
+      type="hidden"
+      value="0"
+    >
+
+    <label for="review-text-input">
+      Ваш відгук
+    </label>
+
+    <textarea
+      id="review-text-input"
+      rows="5"
+      placeholder="Напишіть кілька слів про роботу"
+    ></textarea>
+
+    <button
+      class="review-submit-btn"
+      type="button"
+    >
+      Надіслати відгук
+    </button>
+
+    <div id="review-form-status"></div>
+
+  </div>
 
 </div>
 

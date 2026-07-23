@@ -949,6 +949,8 @@
       ×
     </button>
 
+    <div id="solution-start-step" class="solution-step active">
+
     <div class="solution-picker-badge">
       ⚡ ПІДБІР РІШЕННЯ
     </div>
@@ -961,11 +963,15 @@
 
     <div class="solution-picker-options">
 
-      <button class="solution-option" type="button">
-        <span class="solution-icon">📊</span>
-        <span class="solution-title">Excel / Google Sheets</span>
-        <span class="solution-desc">Таблиці, формули, макроси</span>
-      </button>
+      <button
+  class="solution-option"
+  type="button"
+  onclick="openExcelStep()"
+>
+  <span class="solution-icon">📊</span>
+  <span class="solution-title">Excel / Google Sheets</span>
+  <span class="solution-desc">Таблиці, формули, макроси</span>
+</button>
 
       <button class="solution-option" type="button">
         <span class="solution-icon">📈</span>
@@ -998,6 +1004,65 @@
       </button>
 
     </div>
+
+    <!-- STEP 2: EXCEL -->
+<div id="solution-excel-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStart()"
+  >
+    ← Назад
+  </button>
+
+  <h2>Що зараз доводиться робити вручну?</h2>
+
+  <p class="solution-picker-subtitle">
+    Оберіть варіант, який найбільше схожий на вашу задачу
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button class="solution-option" type="button">
+      <span class="solution-icon">📚</span>
+      <span class="solution-title">Збирати кілька файлів в один</span>
+      <span class="solution-desc">Об'єднання даних з різних файлів</span>
+    </button>
+
+    <button class="solution-option" type="button">
+      <span class="solution-icon">↔️</span>
+      <span class="solution-title">Переносити дані</span>
+      <span class="solution-desc">Між файлами, листами або системами</span>
+    </button>
+
+    <button class="solution-option" type="button">
+      <span class="solution-icon">📄</span>
+      <span class="solution-title">Формувати звіти</span>
+      <span class="solution-desc">Автоматичні таблиці та підсумки</span>
+    </button>
+
+    <button class="solution-option" type="button">
+      <span class="solution-icon">✅</span>
+      <span class="solution-title">Перевіряти помилки</span>
+      <span class="solution-desc">Контроль даних та умов</span>
+    </button>
+
+    <button class="solution-option" type="button">
+      <span class="solution-icon">📝</span>
+      <span class="solution-title">Заповнювати документи</span>
+      <span class="solution-desc">Автоматичне формування документів</span>
+    </button>
+
+    <button class="solution-option" type="button">
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Інше</span>
+      <span class="solution-desc">Моя задача трохи інша</span>
+    </button>
+
+  </div>
+
+</div>
 
     <div class="solution-picker-progress">
       <span class="active"></span>
@@ -1235,6 +1300,56 @@
     background: #1a73e8;
   }
 
+  .solution-step {
+  display: none;
+
+  opacity: 0;
+  transform: translateX(25px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.solution-step.active {
+  display: block;
+
+  animation: solutionStepIn 0.32s ease forwards;
+}
+
+@keyframes solutionStepIn {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.solution-back {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+
+  border: none;
+  background: transparent;
+
+  color: #007acc;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.solution-back:hover {
+  color: #005ea8;
+}
+
   @media (max-width: 768px) {
 
     .solution-picker-overlay {
@@ -1282,6 +1397,36 @@
 </style>
 
 <script>
+
+  function openExcelStep() {
+  const startStep = document.getElementById('solution-start-step');
+  const excelStep = document.getElementById('solution-excel-step');
+  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  excelStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+function backToSolutionStart() {
+  const startStep = document.getElementById('solution-start-step');
+  const excelStep = document.getElementById('solution-excel-step');
+  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  excelStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
   function openSolutionPicker() {
     document.getElementById('solution-picker').classList.add('show');
   }

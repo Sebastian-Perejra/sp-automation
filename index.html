@@ -973,11 +973,15 @@
     <span class="solution-desc">Таблиці, формули, макроси</span>
   </button>
 
-  <button class="solution-option" type="button">
-    <span class="solution-icon">📈</span>
-    <span class="solution-title">Звіти та аналітика</span>
-    <span class="solution-desc">Збір та візуалізація даних</span>
-  </button>
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openAnalyticsStep()"
+>
+  <span class="solution-icon">📈</span>
+  <span class="solution-title">Звіти та аналітика</span>
+  <span class="solution-desc">Збір та візуалізація даних</span>
+</button>
 
   <button class="solution-option" type="button">
     <span class="solution-icon">🔄</span>
@@ -1088,13 +1092,97 @@
   </div>
 
 </div>
+
+<!-- STEP 2: ANALYTICS -->
+<div id="solution-analytics-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromAnalytics()"
+  >
+    ← Назад
+  </button>
+
+  <h2>Що саме хочете спростити?</h2>
+
+  <p class="solution-picker-subtitle">
+    Оберіть найближчий до вашої задачі варіант
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Зводити дані з кількох джерел')"
+    >
+      <span class="solution-icon">🔗</span>
+      <span class="solution-title">Зводити дані з кількох джерел</span>
+      <span class="solution-desc">Файли, таблиці або інші джерела</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Автоматично формувати звіти')"
+    >
+      <span class="solution-icon">📄</span>
+      <span class="solution-title">Автоматично формувати звіти</span>
+      <span class="solution-desc">Без ручного збирання кожного разу</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Розраховувати KPI та показники')"
+    >
+      <span class="solution-icon">🎯</span>
+      <span class="solution-title">Розраховувати KPI та показники</span>
+      <span class="solution-desc">Метрики, плани, відхилення</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Візуалізувати дані')"
+    >
+      <span class="solution-icon">📊</span>
+      <span class="solution-title">Візуалізувати дані</span>
+      <span class="solution-desc">Графіки, дашборди та зрізи</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Автоматично оновлювати звіти')"
+    >
+      <span class="solution-icon">🔄</span>
+      <span class="solution-title">Автоматично оновлювати звіти</span>
+      <span class="solution-desc">Нові дані без ручної переробки</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectAnalyticsTask('Інше')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Інше</span>
+      <span class="solution-desc">У мене інший сценарій</span>
+    </button>
+
+  </div>
+
+</div>
+    
     <!-- STEP 3: RESULT -->
 <div id="solution-result-step" class="solution-step">
 
   <button
     class="solution-back"
     type="button"
-    onclick="backToExcelStep()"
+    onclick="backToSelectedCategoryStep()"
   >
     ← Назад
   </button>
@@ -1104,9 +1192,9 @@
   <h2 id="solution-result-title"></h2>
 
   <p class="solution-result-tools">
-    Можливі інструменти:
-    <strong>Excel / Power Query / VBA / Google Apps Script</strong>
-  </p>
+  Можливі інструменти:
+  <strong id="solution-result-tools-text"></strong>
+</p>
 
   <div class="solution-selected-task">
     <span>Ви обрали:</span>
@@ -1620,7 +1708,10 @@ function backToSolutionStart() {
     progress[0].classList.add('active');
   }
 }
-  let selectedExcelTask = '';
+  let selectedSolutionCategory = '';
+let selectedSolutionTask = '';
+let selectedSolutionTools = '';
+let selectedSolutionStepId = '';
 
 const solutionResultPhrases = [
   'Так, це можна автоматизувати.',
@@ -1636,13 +1727,34 @@ const solutionResultPhrases = [
 ];
 
 function selectExcelTask(task) {
-  selectedExcelTask = task;
+  selectSolutionTask(
+    'Excel / Google Sheets',
+    task,
+    'Excel / Power Query / VBA / Google Apps Script',
+    'solution-excel-step'
+  );
+}
 
-  const excelStep = document.getElementById('solution-excel-step');
+  function selectSolutionTask(category, task, tools, stepId) {
+  selectedSolutionCategory = category;
+  selectedSolutionTask = task;
+  selectedSolutionTools = tools;
+  selectedSolutionStepId = stepId;
+
+  const currentStep = document.getElementById(stepId);
   const resultStep = document.getElementById('solution-result-step');
-  const selectedText = document.getElementById('solution-selected-task-text');
-  const resultTitle = document.getElementById('solution-result-title');
-  const progress = document.querySelectorAll('.solution-picker-progress span');
+
+  const selectedText =
+    document.getElementById('solution-selected-task-text');
+
+  const resultTitle =
+    document.getElementById('solution-result-title');
+
+  const toolsText =
+    document.getElementById('solution-result-tools-text');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
 
   const randomPhrase =
     solutionResultPhrases[
@@ -1651,8 +1763,9 @@ function selectExcelTask(task) {
 
   selectedText.textContent = task;
   resultTitle.textContent = randomPhrase;
+  toolsText.textContent = tools;
 
-  excelStep.classList.remove('active');
+  currentStep.classList.remove('active');
   resultStep.classList.add('active');
 
   progress.forEach(item => item.classList.remove('active'));
@@ -1666,13 +1779,72 @@ function selectExcelTask(task) {
   }, 100);
 }
 
-function backToExcelStep() {
-  const excelStep = document.getElementById('solution-excel-step');
-  const resultStep = document.getElementById('solution-result-step');
-  const progress = document.querySelectorAll('.solution-picker-progress span');
+  function openAnalyticsStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const analyticsStep =
+    document.getElementById('solution-analytics-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  analyticsStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromAnalytics() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const analyticsStep =
+    document.getElementById('solution-analytics-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  analyticsStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectAnalyticsTask(task) {
+  selectSolutionTask(
+    'Звіти та аналітика',
+    task,
+    'Excel / Power Query / Power BI / Google Sheets',
+    'solution-analytics-step'
+  );
+}
+
+function backToSelectedCategoryStep() {
+  const resultStep =
+    document.getElementById('solution-result-step');
+
+  const previousStep =
+    document.getElementById(selectedSolutionStepId);
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
 
   resultStep.classList.remove('active');
-  excelStep.classList.add('active');
+
+  if (previousStep) {
+    previousStep.classList.add('active');
+  }
 
   progress.forEach(item => item.classList.remove('active'));
 
@@ -1689,8 +1861,8 @@ function discussSelectedTask() {
   openContactModal();
 
   let text =
-    'Напрям: Excel / Google Sheets\n' +
-    'Задача: ' + selectedExcelTask;
+    'Напрям: ' + selectedSolutionCategory + '\n' +
+'Задача: ' + selectedSolutionTask;
 
   if (description) {
     text += '\n\nОпис:\n' + description;

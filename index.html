@@ -2647,49 +2647,24 @@ function discussSelectedTask() {
         REVIEWS_API_URL + '?action=getReviews'
       );
 
-      if (!response.ok) {
-        throw new Error(
-          'HTTP ' + response.status
-        );
-      }
-
       const data = await response.json();
 
       console.log('REVIEWS:', data);
 
-      if (!data.ok) {
-        throw new Error('API returned ok=false');
-      }
-
-      if (!Array.isArray(data.reviews)) {
-        throw new Error('reviews is not an array');
-      }
-
-      if (data.reviews.length === 0) {
-        list.innerHTML =
-          '<div class="reviews-panel-loading">Поки що немає опублікованих відгуків.</div>';
-
-        reviewsLoaded = true;
-        return;
+      if (!data.ok || !Array.isArray(data.reviews)) {
+        throw new Error('Некоректна відповідь API');
       }
 
       list.innerHTML = data.reviews.map(review => {
-
-        const rating =
-          Math.max(
-            1,
-            Math.min(5, Number(review.rating) || 5)
-          );
-
-        const stars =
-          '★'.repeat(rating) +
-          '☆'.repeat(5 - rating);
+        const rating = Math.max(
+          1,
+          Math.min(5, Number(review.rating) || 5)
+        );
 
         return `
           <div class="review-card">
-
             <div class="review-stars">
-              ${stars}
+              ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
             </div>
 
             <div class="review-text">
@@ -2699,7 +2674,6 @@ function discussSelectedTask() {
             <div class="review-author">
               — ${escapeReviewHtml(review.name || 'Клієнт')}
             </div>
-
           </div>
         `;
       }).join('');

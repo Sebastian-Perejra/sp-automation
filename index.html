@@ -2379,5 +2379,61 @@ function discussSelectedTask() {
     }
   });
 </script>
+  <style>
+  #reviews-float-btn {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    z-index: 1000;
+
+    border: 1px solid #0F9D58;
+    background: rgba(255, 255, 255, 0.96);
+    color: #0F9D58;
+
+    padding: 11px 16px;
+    border-radius: 10px;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  #reviews-float-btn:hover {
+    background: #0F9D58;
+    color: #ffffff;
+
+    transform:
+      translateY(-50%)
+      translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    #reviews-float-btn {
+      left: 10px;
+      top: auto;
+      bottom: 150px;
+
+      transform: none;
+
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    #reviews-float-btn:hover {
+      transform: translateX(2px);
+    }
+  }
+</style>
 </body>
 </html>

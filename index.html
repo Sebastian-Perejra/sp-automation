@@ -3054,5 +3054,101 @@ function discussSelectedTask() {
     }
   });
 </script>
+  <script>
+  async function submitWebsiteReview() {
+    const name =
+      document.getElementById('review-name').value.trim();
+
+    const rating =
+      Number(
+        document.getElementById('review-rating-value').value || 0
+      );
+
+    const review =
+      document.getElementById('review-text-input').value.trim();
+
+    const status =
+      document.getElementById('review-form-status');
+
+    const button =
+      document.querySelector('.review-submit-btn');
+
+    if (!review) {
+      status.textContent = 'Напишіть текст відгуку.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    if (rating < 1 || rating > 5) {
+      status.textContent = 'Оберіть оцінку від 1 до 5.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    status.textContent = 'Надсилаємо...';
+    status.style.color = '#555';
+
+    button.disabled = true;
+    button.textContent = 'Надсилаємо...';
+
+    try {
+      const response = await fetch(
+        REVIEWS_API_URL,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            source: 'review',
+            name: name,
+            rating: rating,
+            review: review,
+            page_lang: 'UA'
+          })
+        }
+      );
+
+      const result = await response.json();
+
+      if (!result.ok) {
+        throw new Error(
+          result.error || 'Помилка відправлення'
+        );
+      }
+
+      status.textContent =
+        '✓ Відгук надіслано на модерацію';
+
+      status.style.color = '#0F9D58';
+
+      document.getElementById('review-name').value = '';
+      document.getElementById('review-text-input').value = '';
+      document.getElementById('review-rating-value').value = '0';
+
+      document
+        .querySelectorAll('#review-rating button')
+        .forEach(star => {
+          star.classList.remove('active');
+        });
+
+      setTimeout(() => {
+        closeReviewForm();
+      }, 1400);
+
+    } catch (error) {
+      console.error(error);
+
+      status.textContent =
+        'Не вдалося надіслати відгук. Спробуйте ще раз.';
+
+      status.style.color = '#cc0000';
+
+    } finally {
+      button.disabled = false;
+      button.textContent = 'Надіслати відгук';
+    }
+  }
+</script>
 </body>
 </html>

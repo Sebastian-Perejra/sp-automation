@@ -117,6 +117,14 @@
       color: white;
     }
 
+    .telegram-note {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #5f6f7a;
+  text-align: center;
+}
+
     .error-message {
       color: red;
       margin-top: 10px;
@@ -147,7 +155,12 @@
     <input type="email" id="email" name="user_email" placeholder="Email" required>
     <textarea id="message" name="message" placeholder="Повідомлення" required></textarea>
     <button type="submit">Надіслати</button>
-    <div class="error-message" id="error-message"></div>
+
+<p class="telegram-note">
+  ⚡ Ваше повідомлення одразу надходить мені в Telegram, тому я побачу ваш запит практично миттєво та зможу відповісти без затримок.
+</p>
+
+<div class="error-message" id="error-message"></div>
   </form>
 
   <a href="index.html" class="back-button">← Назад на головну</a>

@@ -2614,12 +2614,113 @@ function discussSelectedTask() {
   }
 </style>
   <script>
+  const REVIEWS_API_URL =
+    'https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec';
+
+  let reviewsLoaded = false;
+
   function openReviewsPanel() {
-    document.getElementById('reviews-panel').classList.add('show');
+    document
+      .getElementById('reviews-panel')
+      .classList.add('show');
+
+    if (!reviewsLoaded) {
+      loadPublishedReviews();
+    }
   }
 
   function closeReviewsPanel() {
-    document.getElementById('reviews-panel').classList.remove('show');
+    document
+      .getElementById('reviews-panel')
+      .classList.remove('show');
+  }
+
+  async function loadPublishedReviews() {
+    const list =
+      document.getElementById('reviews-panel-list');
+
+    list.innerHTML =
+      '<div class="reviews-panel-loading">Завантажуємо відгуки...</div>';
+
+    try {
+      const response = await fetch(
+        REVIEWS_API_URL + '?action=getReviews'
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          'HTTP ' + response.status
+        );
+      }
+
+      const data = await response.json();
+
+      console.log('REVIEWS:', data);
+
+      if (!data.ok) {
+        throw new Error('API returned ok=false');
+      }
+
+      if (!Array.isArray(data.reviews)) {
+        throw new Error('reviews is not an array');
+      }
+
+      if (data.reviews.length === 0) {
+        list.innerHTML =
+          '<div class="reviews-panel-loading">Поки що немає опублікованих відгуків.</div>';
+
+        reviewsLoaded = true;
+        return;
+      }
+
+      list.innerHTML = data.reviews.map(review => {
+
+        const rating =
+          Math.max(
+            1,
+            Math.min(5, Number(review.rating) || 5)
+          );
+
+        const stars =
+          '★'.repeat(rating) +
+          '☆'.repeat(5 - rating);
+
+        return `
+          <div class="review-card">
+
+            <div class="review-stars">
+              ${stars}
+            </div>
+
+            <div class="review-text">
+              ${escapeReviewHtml(review.review || '')}
+            </div>
+
+            <div class="review-author">
+              — ${escapeReviewHtml(review.name || 'Клієнт')}
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      reviewsLoaded = true;
+
+    } catch (error) {
+      console.error('REVIEWS ERROR:', error);
+
+      list.innerHTML =
+        '<div class="reviews-panel-loading">Не вдалося завантажити відгуки.</div>';
+    }
+  }
+
+  function escapeReviewHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
   }
 </script>
 </body>

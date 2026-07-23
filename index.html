@@ -745,21 +745,69 @@
     }
   }
 
-  function testContactForm() {
-    const name = document.getElementById('contact-name').value.trim();
-    const contact = document.getElementById('contact-method').value.trim();
-    const message = document.getElementById('contact-message').value.trim();
-    const status = document.getElementById('contact-status');
+  async function testContactForm() {
+  const name = document.getElementById('contact-name').value.trim();
+  const contact = document.getElementById('contact-method').value.trim();
+  const message = document.getElementById('contact-message').value.trim();
+  const status = document.getElementById('contact-status');
+  const button = document.querySelector('.contact-send-btn');
 
-    if (!name || !contact || !message) {
-      status.textContent = 'Заповніть усі поля.';
-      status.style.color = '#cc0000';
-      return;
+  if (!name || !contact || !message) {
+    status.textContent = 'Заповніть усі поля.';
+    status.style.color = '#cc0000';
+    return;
+  }
+
+  status.textContent = 'Надсилаємо...';
+  status.style.color = '#555';
+
+  button.disabled = true;
+  button.textContent = 'Надсилаємо...';
+
+  try {
+    const response = await fetch(
+      'https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({
+          user_name: name,
+          user_email: contact,
+          message: message
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!result.ok) {
+      throw new Error(result.error || 'Помилка відправлення');
     }
 
-    status.textContent = 'Форма працює. Відправку підключимо наступним кроком.';
+    status.textContent = '✓ Повідомлення надіслано';
     status.style.color = '#0F9D58';
+
+    document.getElementById('contact-name').value = '';
+    document.getElementById('contact-method').value = '';
+    document.getElementById('contact-message').value = '';
+
+    setTimeout(() => {
+      closeContactModal();
+    }, 1300);
+
+  } catch (error) {
+    console.error(error);
+
+    status.textContent = 'Не вдалося надіслати. Спробуйте ще раз.';
+    status.style.color = '#cc0000';
+
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Надіслати';
   }
+}
 
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {

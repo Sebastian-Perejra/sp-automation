@@ -3014,5 +3014,44 @@ function discussSelectedTask() {
     font-size: 12px;
   }
 </style>
+  <script>
+  function openReviewForm() {
+    const overlay = document.getElementById('review-form-overlay');
+    if (!overlay) return;
+
+    overlay.classList.add('show');
+  }
+
+  function closeReviewForm() {
+    const overlay = document.getElementById('review-form-overlay');
+    if (!overlay) return;
+
+    overlay.classList.remove('show');
+  }
+
+  function selectReviewRating(rating) {
+    document.getElementById('review-rating-value').value = rating;
+
+    const stars = document.querySelectorAll('#review-rating button');
+
+    stars.forEach((star, index) => {
+      star.classList.toggle('active', index < rating);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('review-form-overlay');
+
+    if (e.target === overlay) {
+      closeReviewForm();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeReviewForm();
+    }
+  });
+</script>
 </body>
 </html>

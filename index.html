@@ -1003,11 +1003,15 @@
   <span class="solution-desc">Боти та автоматичні повідомлення</span>
 </button>
 
-  <button class="solution-option" type="button">
-    <span class="solution-icon">📉</span>
-    <span class="solution-title">Power BI</span>
-    <span class="solution-desc">Дашборди та показники</span>
-  </button>
+  <button
+  class="solution-option"
+  type="button"
+  onclick="openPowerBiStep()"
+>
+  <span class="solution-icon">📉</span>
+  <span class="solution-title">Power BI</span>
+  <span class="solution-desc">Дашборди та показники</span>
+</button>
 
   <button class="solution-option" type="button">
     <span class="solution-icon">•••</span>
@@ -1342,6 +1346,88 @@
       <span class="solution-icon">•••</span>
       <span class="solution-title">Інше</span>
       <span class="solution-desc">У мене інший сценарій</span>
+    </button>
+
+  </div>
+
+</div>
+    <!-- STEP 2: POWER BI -->
+<div id="solution-powerbi-step" class="solution-step">
+
+  <button
+    class="solution-back"
+    type="button"
+    onclick="backToSolutionStartFromPowerBi()"
+  >
+    ← Назад
+  </button>
+
+  <h2>Що хочете отримати в Power BI?</h2>
+
+  <p class="solution-picker-subtitle">
+    Оберіть найближчий до вашої задачі варіант
+  </p>
+
+  <div class="solution-picker-options">
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Створити дашборд з нуля')"
+    >
+      <span class="solution-icon">📊</span>
+      <span class="solution-title">Створити дашборд з нуля</span>
+      <span class="solution-desc">Показники, графіки та зрізи</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Підключити дані з Excel або Google Sheets')"
+    >
+      <span class="solution-icon">🔗</span>
+      <span class="solution-title">Підключити джерела даних</span>
+      <span class="solution-desc">Excel, Google Sheets та інші джерела</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Автоматизувати оновлення даних')"
+    >
+      <span class="solution-icon">🔄</span>
+      <span class="solution-title">Автоматизувати оновлення</span>
+      <span class="solution-desc">Щоб звіт не доводилося збирати заново</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Розрахувати KPI та показники')"
+    >
+      <span class="solution-icon">🎯</span>
+      <span class="solution-title">Розрахувати KPI</span>
+      <span class="solution-desc">DAX, плани, факти та відхилення</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Доопрацювати існуючий Power BI звіт')"
+    >
+      <span class="solution-icon">🛠️</span>
+      <span class="solution-title">Доопрацювати існуючий звіт</span>
+      <span class="solution-desc">Логіка, модель, дизайн або швидкість</span>
+    </button>
+
+    <button
+      class="solution-option"
+      type="button"
+      onclick="selectPowerBiTask('Інше')"
+    >
+      <span class="solution-icon">•••</span>
+      <span class="solution-title">Інше</span>
+      <span class="solution-desc">У мене інша задача в Power BI</span>
     </button>
 
   </div>
@@ -2020,7 +2106,56 @@ function selectTelegramTask(task) {
     'solution-telegram-step'
   );
 }
+  function openPowerBiStep() {
+  const startStep =
+    document.getElementById('solution-start-step');
 
+  const powerBiStep =
+    document.getElementById('solution-powerbi-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  startStep.classList.remove('active');
+  powerBiStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[1]) {
+    progress[1].classList.add('active');
+  }
+}
+
+
+function backToSolutionStartFromPowerBi() {
+  const startStep =
+    document.getElementById('solution-start-step');
+
+  const powerBiStep =
+    document.getElementById('solution-powerbi-step');
+
+  const progress =
+    document.querySelectorAll('.solution-picker-progress span');
+
+  powerBiStep.classList.remove('active');
+  startStep.classList.add('active');
+
+  progress.forEach(item => item.classList.remove('active'));
+
+  if (progress[0]) {
+    progress[0].classList.add('active');
+  }
+}
+
+
+function selectPowerBiTask(task) {
+  selectSolutionTask(
+    'Power BI',
+    task,
+    'Power BI / Power Query / DAX / Excel / Google Sheets',
+    'solution-powerbi-step'
+  );
+}  
 
 function backToSolutionStartFromAnalytics() {
   const startStep =

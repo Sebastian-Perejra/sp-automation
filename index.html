@@ -464,5 +464,278 @@
   }
 </style>
 
+<!-- CONTACT FLOAT BUTTON -->
+<button id="contact-float-btn" type="button" onclick="openContactModal()">
+  💬 Написати
+</button>
+
+<!-- CONTACT MODAL -->
+<div id="contact-modal" class="contact-modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="contact-modal">
+    <button class="contact-close" type="button" onclick="closeContactModal()">×</button>
+
+    <h3>Написати Себастьяну</h3>
+
+    <label for="contact-name">Ваше ім'я</label>
+    <input
+      id="contact-name"
+      type="text"
+      placeholder="Наприклад, Олександр"
+    >
+
+    <label for="contact-method">Як з вами зв'язатися?</label>
+    <input
+      id="contact-method"
+      type="text"
+      placeholder="Telegram, email або телефон"
+    >
+
+    <label for="contact-message">Повідомлення</label>
+    <textarea
+      id="contact-message"
+      rows="5"
+      placeholder="Коротко опишіть задачу"
+    ></textarea>
+
+    <button class="contact-send-btn" type="button" onclick="testContactForm()">
+      Надіслати
+    </button>
+
+    <div id="contact-status"></div>
+  </div>
+</div>
+
+<style>
+  #contact-float-btn {
+    position: fixed;
+    right: 95px;
+    bottom: 98px;
+    z-index: 1000;
+
+    border: 1px solid #007acc;
+    background: rgba(255, 255, 255, 0.96);
+    color: #007acc;
+
+    padding: 11px 16px;
+    border-radius: 10px;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.14);
+
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  #contact-float-btn:hover {
+    background-color: #007acc;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .contact-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+
+    background: rgba(0,0,0,0.35);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .contact-modal-overlay.show {
+    display: flex;
+  }
+
+  .contact-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 430px;
+
+    background: #ffffff;
+    border: 1px solid #c4d8e6;
+    border-radius: 14px;
+
+    padding: 26px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 16px 45px rgba(0,0,0,0.22);
+
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  .contact-modal h3 {
+    margin: 0 0 22px;
+    color: #1a1a1a;
+    font-size: 20px;
+  }
+
+  .contact-modal label {
+    display: block;
+    margin: 14px 0 6px;
+
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .contact-modal input,
+  .contact-modal textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    border: 1px solid #c7d3dd;
+    border-radius: 8px;
+
+    padding: 11px 12px;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .contact-modal textarea {
+    resize: vertical;
+  }
+
+  .contact-modal input:focus,
+  .contact-modal textarea:focus {
+    border-color: #007acc;
+    box-shadow: 0 0 0 3px rgba(0,122,204,0.10);
+  }
+
+  .contact-send-btn {
+    width: 100%;
+
+    margin-top: 20px;
+    padding: 12px 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #1a73e8;
+    color: #ffffff;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .contact-send-btn:hover {
+    background: #135fbe;
+    transform: translateY(-1px);
+  }
+
+  .contact-close {
+    position: absolute;
+    top: 10px;
+    right: 13px;
+
+    border: none;
+    background: transparent;
+
+    color: #777;
+
+    font-size: 26px;
+    line-height: 1;
+
+    cursor: pointer;
+  }
+
+  .contact-close:hover {
+    color: #111;
+  }
+
+  #contact-status {
+    min-height: 18px;
+    margin-top: 12px;
+
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    #contact-float-btn {
+      right: 90px;
+      bottom: 93px;
+
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+
+    .contact-modal {
+      padding: 22px 18px;
+    }
+  }
+</style>
+
+<script>
+  function openContactModal() {
+    const modal = document.getElementById('contact-modal');
+    modal.classList.add('show');
+
+    setTimeout(() => {
+      document.getElementById('contact-name').focus();
+    }, 50);
+  }
+
+  function closeContactModal() {
+    document.getElementById('contact-modal').classList.remove('show');
+    document.getElementById('contact-status').textContent = '';
+  }
+
+  function handleOverlayClick(event) {
+    if (event.target.id === 'contact-modal') {
+      closeContactModal();
+    }
+  }
+
+  function testContactForm() {
+    const name = document.getElementById('contact-name').value.trim();
+    const contact = document.getElementById('contact-method').value.trim();
+    const message = document.getElementById('contact-message').value.trim();
+    const status = document.getElementById('contact-status');
+
+    if (!name || !contact || !message) {
+      status.textContent = 'Заповніть усі поля.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    status.textContent = 'Форма працює. Відправку підключимо наступним кроком.';
+    status.style.color = '#0F9D58';
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeContactModal();
+    }
+  });
+</script>
+  
 </body>
 </html>

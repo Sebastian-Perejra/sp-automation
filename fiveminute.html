@@ -317,50 +317,21 @@
   let loginStarted = false;
 
 
-  window.addEventListener(
-  'message',
-  function(event) {
+  function createSessionToken() {
+    const bytes =
+      new Uint8Array(32);
 
-    const frame =
-      document.getElementById('appFrame');
+    crypto.getRandomValues(bytes);
 
-    // Принимаем сообщения только от нашего iframe
-    if (
-      !frame ||
-      event.source !== frame.contentWindow
-    ) {
-      return;
-    }
-
-    const data =
-      event.data || {};
-
-    if (
-      data.type !==
-      'FIVEMINUTE_SESSION'
-    ) {
-      return;
-    }
-
-    const sessionToken =
-      String(
-        data.sessionToken || ''
-      ).trim();
-
-    if (!sessionToken) {
-      return;
-    }
-
-    localStorage.setItem(
-      SESSION_STORAGE_KEY,
-      sessionToken
-    );
-
-    console.log(
-      'FiveMinute session saved'
-    );
+    return Array
+      .from(bytes)
+      .map(byte =>
+        byte
+          .toString(16)
+          .padStart(2, '0')
+      )
+      .join('');
   }
-);
 
 
   window.addEventListener(
@@ -374,6 +345,8 @@
           ) || ''
         ).trim();
 
+      // Сессии ещё нет —
+      // просто показываем Google-вход.
       if (!savedSession) {
         return;
       }
@@ -393,6 +366,10 @@
         'Відновлюємо сесію...';
 
       document.getElementById(
+        'credentialInput'
+      ).value = '';
+
+      document.getElementById(
         'sessionTokenInput'
       ).value = savedSession;
 
@@ -401,9 +378,7 @@
   );
 
 
-  function handleGoogleLogin(
-    response
-  ) {
+  function handleGoogleLogin(response) {
 
     if (loginStarted) {
       return;
@@ -418,12 +393,28 @@
       ).trim();
 
     if (!credential) {
+
       showError(
         'Не вдалося отримати дані Google-акаунта.'
       );
 
       return;
     }
+
+
+    /*
+      Создаём нашу собственную сессию
+      ДО отправки в Apps Script.
+    */
+
+    const sessionToken =
+      createSessionToken();
+
+    localStorage.setItem(
+      SESSION_STORAGE_KEY,
+      sessionToken
+    );
+
 
     loginStarted = true;
 
@@ -439,13 +430,14 @@
     status.textContent =
       'Перевіряємо доступ...';
 
+
     document.getElementById(
       'credentialInput'
     ).value = credential;
 
     document.getElementById(
       'sessionTokenInput'
-    ).value = '';
+    ).value = sessionToken;
 
     openApp();
   }
@@ -469,15 +461,14 @@
           'block';
       };
 
+
     document.getElementById(
       'loginForm'
     ).submit();
   }
 
 
-  function showError(
-    message
-  ) {
+  function showError(message) {
 
     const status =
       document.getElementById(

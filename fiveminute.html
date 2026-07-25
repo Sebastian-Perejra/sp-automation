@@ -31,21 +31,116 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#A96A7C">
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html,
     body {
       margin: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #f5f6f8;
+      background: #eef4f4;
+      font-family: Arial, sans-serif;
     }
 
-    iframe {
-      display: block;
+    #loginScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 22px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #edf5f5 0%,
+          #f8fafa 100%
+        );
+    }
+
+    .loginCard {
+      width: 100%;
+      max-width: 390px;
+
+      padding: 30px 24px;
+
+      background: #fff;
+      border: 1px solid #dce5e5;
+      border-radius: 28px;
+
+      text-align: center;
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.10);
+    }
+
+    .appIcon {
+      width: 96px;
+      height: 96px;
+
+      object-fit: cover;
+
+      border-radius: 24px;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        0 8px 22px rgba(0,0,0,.12);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+
+      font-size: 29px;
+      color: #263638;
+    }
+
+    .subtitle {
+      margin: 0 0 26px;
+
+      color: #879496;
+      font-size: 15px;
+    }
+
+    .loginHint {
+      margin-top: 22px;
+
+      color: #8a9698;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    #status {
+      min-height: 20px;
+
+      margin-top: 18px;
+
+      color: #667476;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    #status.error {
+      color: #b3261e;
+    }
+
+    #appFrame {
+      display: none;
+
       width: 100%;
       height: 100%;
+
       border: 0;
+
       background: #f5f6f8;
     }
   </style>
@@ -53,10 +148,153 @@
 
 <body>
 
+  <div id="loginScreen">
+
+    <div class="loginCard">
+
+      <img
+        class="appIcon"
+        src="/fiveminute-icon-192.png"
+        alt="Пʼятихвилинки"
+      >
+
+      <h1>Пʼятихвилинки</h1>
+
+      <div class="subtitle">
+        Мобільна версія
+      </div>
+
+      <div
+        id="g_id_onload"
+        data-client_id="628554556154-bo05hmpt62cplj6rs894nhso95njq1ab.apps.googleusercontent.com"
+        data-callback="handleGoogleLogin"
+        data-auto_prompt="false"
+        data-cancel_on_tap_outside="false"
+      ></div>
+
+      <div
+        class="g_id_signin"
+        data-type="standard"
+        data-shape="pill"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left"
+        data-width="280"
+      ></div>
+
+      <div id="status"></div>
+
+      <div class="loginHint">
+        Доступ дозволено лише авторизованим
+        Google-акаунтам клініки.
+      </div>
+
+    </div>
+
+  </div>
+
+
   <iframe
-    src="https://script.google.com/macros/s/AKfycbyggxzcfJSav6S73WrFn-aYso53yb_u0OXU2n57CrkIg016yuuVMM4Do25XonvZA2d6/exec"
+    id="appFrame"
+    name="appFrame"
     allow="camera; microphone; fullscreen"
   ></iframe>
+
+
+  <form
+    id="loginForm"
+    method="POST"
+    target="appFrame"
+    action="https://script.google.com/macros/s/AKfycbyggxzcfJSav6S73WrFn-aYso53yb_u0OXU2n57CrkIg016yuuVMM4Do25XonvZA2d6/exec"
+    style="display:none;"
+  >
+    <input
+      type="hidden"
+      id="credentialInput"
+      name="credential"
+      value=""
+    >
+  </form>
+
+
+  <script>
+    let loginStarted = false;
+
+    function handleGoogleLogin(response) {
+
+      if (loginStarted) {
+        return;
+      }
+
+      const credential =
+        String(
+          response &&
+          response.credential
+            ? response.credential
+            : ''
+        ).trim();
+
+      if (!credential) {
+        showError(
+          'Не вдалося отримати дані Google-акаунта.'
+        );
+
+        return;
+      }
+
+      loginStarted = true;
+
+      const status =
+        document.getElementById('status');
+
+      status.classList.remove('error');
+
+      status.textContent =
+        'Перевіряємо доступ...';
+
+      document.getElementById(
+        'credentialInput'
+      ).value = credential;
+
+      const frame =
+        document.getElementById(
+          'appFrame'
+        );
+
+      /*
+        Показываем iframe только после того,
+        как Apps Script реально вернул страницу.
+      */
+
+      frame.onload = function() {
+
+        document.getElementById(
+          'loginScreen'
+        ).style.display = 'none';
+
+        frame.style.display = 'block';
+      };
+
+      document.getElementById(
+        'loginForm'
+      ).submit();
+    }
+
+
+    function showError(message) {
+
+      const status =
+        document.getElementById('status');
+
+      status.classList.add('error');
+
+      status.textContent =
+        message;
+
+      loginStarted = false;
+    }
+  </script>
 
 </body>
 </html>

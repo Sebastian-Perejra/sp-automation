@@ -318,41 +318,49 @@
 
 
   window.addEventListener(
-    'message',
-    function(event) {
+  'message',
+  function(event) {
 
-      if (
-        event.origin !==
-        'https://script.google.com'
-      ) {
-        return;
-      }
+    const frame =
+      document.getElementById('appFrame');
 
-      const data =
-        event.data || {};
-
-      if (
-        data.type !==
-        'FIVEMINUTE_SESSION'
-      ) {
-        return;
-      }
-
-      const sessionToken =
-        String(
-          data.sessionToken || ''
-        ).trim();
-
-      if (!sessionToken) {
-        return;
-      }
-
-      localStorage.setItem(
-        SESSION_STORAGE_KEY,
-        sessionToken
-      );
+    // Принимаем сообщения только от нашего iframe
+    if (
+      !frame ||
+      event.source !== frame.contentWindow
+    ) {
+      return;
     }
-  );
+
+    const data =
+      event.data || {};
+
+    if (
+      data.type !==
+      'FIVEMINUTE_SESSION'
+    ) {
+      return;
+    }
+
+    const sessionToken =
+      String(
+        data.sessionToken || ''
+      ).trim();
+
+    if (!sessionToken) {
+      return;
+    }
+
+    localStorage.setItem(
+      SESSION_STORAGE_KEY,
+      sessionToken
+    );
+
+    console.log(
+      'FiveMinute session saved'
+    );
+  }
+);
 
 
   window.addEventListener(

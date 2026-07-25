@@ -301,86 +301,191 @@
       name="credential"
       value=""
     >
+    <input
+  type="hidden"
+  id="sessionTokenInput"
+  name="sessionToken"
+  value=""
+>
   </form>
 
 
   <script>
-    let loginStarted = false;
+  const SESSION_STORAGE_KEY =
+    'fiveminuteSessionToken';
 
-    function handleGoogleLogin(response) {
+  let loginStarted = false;
 
-      if (loginStarted) {
+
+  window.addEventListener(
+    'message',
+    function(event) {
+
+      if (
+        event.origin !==
+        'https://script.google.com'
+      ) {
         return;
       }
 
-      const credential =
+      const data =
+        event.data || {};
+
+      if (
+        data.type !==
+        'FIVEMINUTE_SESSION'
+      ) {
+        return;
+      }
+
+      const sessionToken =
         String(
-          response &&
-          response.credential
-            ? response.credential
-            : ''
+          data.sessionToken || ''
         ).trim();
 
-      if (!credential) {
-        showError(
-          'Не вдалося отримати дані Google-акаунта.'
-        );
+      if (!sessionToken) {
+        return;
+      }
 
+      localStorage.setItem(
+        SESSION_STORAGE_KEY,
+        sessionToken
+      );
+    }
+  );
+
+
+  window.addEventListener(
+    'load',
+    function() {
+
+      const savedSession =
+        String(
+          localStorage.getItem(
+            SESSION_STORAGE_KEY
+          ) || ''
+        ).trim();
+
+      if (!savedSession) {
         return;
       }
 
       loginStarted = true;
 
       const status =
-        document.getElementById('status');
-
-      status.classList.remove('error');
-
-      status.textContent =
-        'Перевіряємо доступ...';
-
-      document.getElementById(
-        'credentialInput'
-      ).value = credential;
-
-      const frame =
         document.getElementById(
-          'appFrame'
+          'status'
         );
 
-      /*
-        Показываем iframe только после того,
-        как Apps Script реально вернул страницу.
-      */
+      status.classList.remove(
+        'error'
+      );
 
-      frame.onload = function() {
+      status.textContent =
+        'Відновлюємо сесію...';
+
+      document.getElementById(
+        'sessionTokenInput'
+      ).value = savedSession;
+
+      openApp();
+    }
+  );
+
+
+  function handleGoogleLogin(
+    response
+  ) {
+
+    if (loginStarted) {
+      return;
+    }
+
+    const credential =
+      String(
+        response &&
+        response.credential
+          ? response.credential
+          : ''
+      ).trim();
+
+    if (!credential) {
+      showError(
+        'Не вдалося отримати дані Google-акаунта.'
+      );
+
+      return;
+    }
+
+    loginStarted = true;
+
+    const status =
+      document.getElementById(
+        'status'
+      );
+
+    status.classList.remove(
+      'error'
+    );
+
+    status.textContent =
+      'Перевіряємо доступ...';
+
+    document.getElementById(
+      'credentialInput'
+    ).value = credential;
+
+    document.getElementById(
+      'sessionTokenInput'
+    ).value = '';
+
+    openApp();
+  }
+
+
+  function openApp() {
+
+    const frame =
+      document.getElementById(
+        'appFrame'
+      );
+
+    frame.onload =
+      function() {
 
         document.getElementById(
           'loginScreen'
         ).style.display = 'none';
 
-        frame.style.display = 'block';
+        frame.style.display =
+          'block';
       };
 
+    document.getElementById(
+      'loginForm'
+    ).submit();
+  }
+
+
+  function showError(
+    message
+  ) {
+
+    const status =
       document.getElementById(
-        'loginForm'
-      ).submit();
-    }
+        'status'
+      );
 
+    status.classList.add(
+      'error'
+    );
 
-    function showError(message) {
+    status.textContent =
+      message;
 
-      const status =
-        document.getElementById('status');
-
-      status.classList.add('error');
-
-      status.textContent =
-        message;
-
-      loginStarted = false;
-    }
-  </script>
+    loginStarted = false;
+  }
+</script>
 
 </body>
 </html>

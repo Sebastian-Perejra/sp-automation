@@ -2,6 +2,7 @@
   "name": "Пʼятихвилинки",
   "short_name": "Пʼятихвилинки",
   "description": "Мобільний додаток Пʼятихвилинки",
+  "id": "/oliynyk/5minutes_app/",
   "start_url": "/oliynyk/5minutes_app/",
   "scope": "/oliynyk/5minutes_app/",
   "display": "standalone",
@@ -9,16 +10,16 @@
   "theme_color": "#A96A7C",
   "icons": [
     {
-      "src": "/oliynyk/5minutes_app/fiveminute-icon-192.png",
+      "src": "./fiveminute-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/oliynyk/5minutes_app/fiveminute-icon-512.png",
+      "src": "./fiveminute-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

@@ -9,13 +9,13 @@
   "theme_color": "#A96A7C",
   "icons": [
     {
-      "src": "./fiveminute-icon-192.png"
+      "src": "/oliynyk/5minutes_app/fiveminute-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./fiveminute-icon-512.png"
+      "src": "/oliynyk/5minutes_app/fiveminute-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

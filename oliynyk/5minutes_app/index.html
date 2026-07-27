@@ -340,8 +340,6 @@
           ) || ''
         ).trim();
 
-      // Сессии ещё нет —
-      // просто показываем Google-вход.
       if (!savedSession) {
         return;
       }
@@ -396,11 +394,6 @@
       return;
     }
 
-
-    /*
-      Создаём нашу собственную сессию
-      ДО отправки в Apps Script.
-    */
 
     const sessionToken =
       createSessionToken();

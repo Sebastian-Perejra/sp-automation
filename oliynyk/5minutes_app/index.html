@@ -171,15 +171,22 @@
   }
 
   #appFrame {
-    display: none;
+  display: none;
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    border: 0;
+  border: 0;
 
-    background: #f5f6f8;
-  }
+  background: #f5f6f8;
+
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+
+#loginScreen {
+  transition: opacity .22s ease;
+}
 
   /* Телефон */
   @media (max-width: 480px) {
@@ -436,15 +443,42 @@
       );
 
     frame.onload =
+  function() {
+
+    const loginScreen =
+      document.getElementById(
+        'loginScreen'
+      );
+
+    frame.style.display =
+      'block';
+
+    requestAnimationFrame(
       function() {
 
-        document.getElementById(
-          'loginScreen'
-        ).style.display = 'none';
+        requestAnimationFrame(
+          function() {
 
-        frame.style.display =
-          'block';
-      };
+            frame.style.opacity =
+              '1';
+
+            loginScreen.style.opacity =
+              '0';
+
+            setTimeout(
+              function() {
+
+                loginScreen.style.display =
+                  'none';
+
+              },
+              220
+            );
+          }
+        );
+      }
+    );
+  };
 
 
     document.getElementById(

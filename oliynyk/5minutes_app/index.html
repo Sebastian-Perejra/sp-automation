@@ -181,7 +181,19 @@
   background: #f5f6f8;
 
   opacity: 0;
-  transition: opacity .28s ease;
+  transform: scale(.965);
+  filter: blur(7px);
+
+  transition:
+    opacity .6s ease,
+    transform .65s cubic-bezier(.16, 1, .3, 1),
+    filter .55s ease;
+}
+
+#appFrame.appReady {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
 }
 
 #loginScreen {
@@ -459,8 +471,9 @@
         requestAnimationFrame(
           function() {
 
-            frame.style.opacity =
-              '1';
+            frame.classList.add(
+                'appReady'
+            );
 
             loginScreen.style.opacity =
               '0';

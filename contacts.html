@@ -139,6 +139,12 @@
         max-width: 95%;
       }
     }
+
+    .turnstile-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
   </style>
   <script
   src="https://challenges.cloudflare.com/turnstile/v0/api.js"
@@ -166,8 +172,10 @@
 </p>
 
 <div class="error-message" id="error-message"></div>
+    <div class="turnstile-wrapper">
     <div class="cf-turnstile"
-     data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6">
+         data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6">
+    </div>
 </div>
   </form>
 

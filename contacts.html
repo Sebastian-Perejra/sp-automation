@@ -178,6 +178,18 @@
     const errorMessage = document.getElementById("error-message");
     const submitButton = form.querySelector('button[type="submit"]');
 
+    const now = Date.now();
+    const lastSend = Number(localStorage.getItem("contactLastSend") || 0);
+
+    if (now - lastSend < 60000) {
+      const seconds = Math.ceil((60000 - (now - lastSend)) / 1000);
+
+      errorMessage.textContent =
+        `Повторне повідомлення можна надіслати через ${seconds} сек.`;
+
+      return;
+    }
+
     const telegramData = {
       user_name: form.elements["user_name"].value.trim(),
       user_email: form.elements["user_email"].value.trim(),
@@ -205,6 +217,8 @@
       }).catch(error => {
         console.error("Telegram notification error:", error);
       });
+
+      localStorage.setItem("contactLastSend", String(Date.now()));
 
       alert("Повідомлення успішно надіслано!");
       form.reset();

@@ -178,6 +178,18 @@
     const errorMessage = document.getElementById("error-message");
     const submitButton = form.querySelector('button[type="submit"]');
 
+    const now = Date.now();
+    const lastSend = Number(localStorage.getItem("contactLastSendEn") || 0);
+
+    if (now - lastSend < 60000) {
+      const seconds = Math.ceil((60000 - (now - lastSend)) / 1000);
+
+      errorMessage.textContent =
+        `You can send another message in ${seconds} sec.`;
+
+      return;
+    }
+
     const telegramData = {
       user_name: form.elements["user_name"].value.trim(),
       user_email: form.elements["user_email"].value.trim(),
@@ -205,6 +217,8 @@
       }).catch(error => {
         console.error("Telegram notification error:", error);
       });
+
+      localStorage.setItem("contactLastSendEn", String(Date.now()));
 
       alert("Message sent successfully!");
       form.reset();

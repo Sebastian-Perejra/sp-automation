@@ -139,7 +139,17 @@
         max-width: 95%;
       }
     }
+    .turnstile-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
   </style>
+  <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer>
+</script>
 </head>
 <body>
 
@@ -161,6 +171,11 @@
 </p>
 
 <div class="error-message" id="error-message"></div>
+    <div class="turnstile-wrapper">
+  <div class="cf-turnstile"
+       data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6">
+  </div>
+</div>
   </form>
 
   <a href="index-ru.html" class="back-button">← Назад на главную</a>
@@ -190,11 +205,22 @@
       return;
     }
 
-    const telegramData = {
-      user_name: form.elements["user_name"].value.trim(),
-      user_email: form.elements["user_email"].value.trim(),
-      message: form.elements["message"].value.trim()
-    };
+    const turnstileToken =
+  form.querySelector('[name="cf-turnstile-response"]')?.value || "";
+
+if (!turnstileToken) {
+  errorMessage.textContent =
+    "Подтвердите, что вы не робот.";
+
+  return;
+}
+
+const telegramData = {
+  user_name: form.elements["user_name"].value.trim(),
+  user_email: form.elements["user_email"].value.trim(),
+  message: form.elements["message"].value.trim(),
+  turnstileToken: turnstileToken
+};
 
     errorMessage.textContent = "";
     submitButton.disabled = true;

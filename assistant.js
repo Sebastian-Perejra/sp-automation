@@ -265,3 +265,23 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const path = window.location.pathname.toLowerCase();
+  const buttons = document.querySelectorAll(".lang-switcher button");
+
+  let activeLanguage = "UA";
+
+  if (path.includes("-en.html")) {
+    activeLanguage = "EN";
+  } else if (path.includes("-ru.html")) {
+    activeLanguage = "RU";
+  }
+
+  buttons.forEach(button => {
+    const isActive =
+      button.textContent.trim().toUpperCase() === activeLanguage;
+
+    button.classList.toggle("active-language", isActive);
+    button.setAttribute("aria-current", isActive ? "page" : "false");
+  });
+});

@@ -61,6 +61,7 @@ let inactivityTimer;
 let waitingTimer;
 let goodbyeTimer;
 let finalHideTimer;
+let assistantHasGreeted = false;
 
 const assistantGreetings = {
     uk: {
@@ -140,11 +141,16 @@ function showAssistant() {
     const message = document.getElementById("sp-assistant-message");
     const phrases = assistantMessages[lang];
 
-    const greeting = getTimeGreeting(lang);
-const randomPhrase =
+    const randomPhrase =
     phrases[Math.floor(Math.random() * phrases.length)];
 
-message.textContent = greeting + " " + randomPhrase;
+if (!assistantHasGreeted) {
+    const greeting = getTimeGreeting(lang);
+    message.textContent = greeting + " " + randomPhrase;
+    assistantHasGreeted = true;
+} else {
+    message.textContent = randomPhrase;
+}
 
     assistant.classList.add("show");
 

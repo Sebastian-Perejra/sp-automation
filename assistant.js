@@ -477,4 +477,3 @@ document.addEventListener("DOMContentLoaded", () => {
       link.removeAttribute("aria-current");
     }
   });
-});

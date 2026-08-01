@@ -178,3 +178,28 @@ document.addEventListener(
         });
     }
 );
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const assistant = document.createElement("div");
+    assistant.id = "sp-assistant";
+
+    assistant.innerHTML = `
+        <img
+            id="sp-assistant-avatar"
+            src="/assistant-avatar.png"
+            alt="Assistant"
+        >
+
+        <div id="sp-assistant-message">
+            Добрий день! Чим я можу допомогти?
+        </div>
+    `;
+
+    document.body.appendChild(assistant);
+
+    setTimeout(() => {
+        assistant.classList.add("show");
+    }, 1000);
+
+});

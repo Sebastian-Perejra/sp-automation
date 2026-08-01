@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /oliynyk/
+Disallow: /fiveminute.html
+Disallow: /test.html
+
+Sitemap: https://sp-automation.com/sitemap.xml

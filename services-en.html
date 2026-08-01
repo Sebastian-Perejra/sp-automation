@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Services – Sebastian Pereira</title>
+
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Roboto Mono', monospace;
+      background: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(230, 240, 250, 0.96);
+      border-bottom: 1px solid #c4d8e6;
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar-inner {
+      width: min(100%, 1120px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .home-link {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .home-link:hover {
+      color: #005ea8;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 24px;
+    }
+
+    .desktop-nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .desktop-nav a:hover {
+      color: #005ea8;
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 7px;
+    }
+
+    .lang-switcher button {
+      border: 1px solid #007acc;
+      border-radius: 7px;
+      background: #fff;
+      color: #007acc;
+      padding: 6px 9px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lang-switcher button:hover {
+      background: #007acc;
+      color: #fff;
+    }
+
+    .page {
+      width: min(100%, 1040px);
+      margin: 0 auto;
+      padding:
+        42px
+        20px
+        max(64px, env(safe-area-inset-bottom));
+    }
+
+    .hero {
+      margin-bottom: 26px;
+      padding: 34px;
+      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid #d5e4ee;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      color: #0F9D58;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #596771;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      padding: 24px;
+      background: rgba(255,255,255,0.97);
+      border: 1px solid #d9e4ec;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      border-color: #b9d7e9;
+      box-shadow: 0 16px 34px rgba(36, 73, 104, 0.09);
+    }
+
+    .service-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      background: #edf6ff;
+      font-size: 23px;
+    }
+
+    .service-card h2 {
+      margin: 0;
+      color: #007acc;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      margin: 0 0 12px;
+      color: #58666f;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .service-card ul {
+      margin: 0;
+      padding-left: 19px;
+      color: #4f5d66;
+    }
+
+    .service-card li {
+      margin-bottom: 8px;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .service-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    .result {
+      margin-top: 14px;
+      padding: 12px 13px;
+      border-left: 3px solid #0F9D58;
+      border-radius: 8px;
+      background: #f2faf5;
+      color: #44524a;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .process {
+      margin-top: 20px;
+      padding: 28px;
+      background: #fff;
+      border: 1px solid #d9e4ec;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
+    }
+
+    .process h2 {
+      margin: 0 0 16px;
+      color: #1a1a1a;
+      font-size: 21px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .process-step {
+      padding: 16px;
+      border: 1px solid #dce6ed;
+      border-radius: 12px;
+      background: #fbfdff;
+      text-align: center;
+    }
+
+    .process-step strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #007acc;
+      font-size: 12px;
+    }
+
+    .process-step span {
+      color: #5d6a73;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .cta {
+      margin-top: 20px;
+      padding: 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
+      border: 1px solid #c9e2f7;
+      border-radius: 16px;
+    }
+
+    .cta h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .cta p {
+      margin: 0 0 18px;
+      color: #596771;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 9px;
+      background: #1a73e8;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .cta a:hover {
+      background: #135fbe;
+    }
+
+    footer {
+      padding: 16px 20px;
+      border-top: 1px solid #c4d8e6;
+      background: #e6f0fa;
+      color: #7e8991;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        padding:
+          max(12px, env(safe-area-inset-top))
+          12px
+          12px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .lang-switcher {
+        margin-left: auto;
+      }
+
+      .page {
+        padding:
+          24px
+          12px
+          max(36px, env(safe-area-inset-bottom));
+      }
+
+      .hero {
+        padding: 24px 18px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 12px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        padding: 20px 16px;
+      }
+
+      .process {
+        padding: 22px 16px;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 24px 16px;
+      }
+
+      .cta a {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .home-link {
+        font-size: 12px;
+      }
+
+      .lang-switcher button {
+        padding: 5px 7px;
+        font-size: 10px;
+      }
+
+      .service-head {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="home-link" href="index.html">← Home</a>
+
+      <nav class="desktop-nav">
+        <a href="about.html">About</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contacts.html">Contacts</a>
+      </nav>
+
+      <div class="lang-switcher">
+        <button onclick="location.href='services.html'">UA</button>
+        <button onclick="location.href='services-en.html'">EN</button>
+        <button onclick="location.href='services-ru.html'">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <h1>Automation Services</h1>
+      <p>
+        From formulas and reports to web applications, bots, integrations, and analytics. The goal is simple: save time, reduce mistakes, and simplify everyday work.
+      </p>
+    </section>
+
+    <section class="services-grid">
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">⚡</div>
+          <h2>Excel and Google Sheets</h2>
+        </div>
+        <p>Автоматизація таблиць, розрахунків і звітів без ручного копіювання та постійного виправлення помилок.</p>
+        <ul>
+          <li>складні формули та логіка умов;</li>
+          <li>макроси, VBA та Google Apps Script;</li>
+          <li>автоматичні звіти й розсилки;</li>
+          <li>форми вводу, перевірки та довідники;</li>
+          <li>імпорт, експорт і консолідація даних.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> таблиця працює як інструмент, а не як щоденний квест.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">📊</div>
+          <h2>Power BI and analytics</h2>
+        </div>
+        <p>Зрозумілі дашборди для керівників, відділів продажів, фінансів, логістики та виробництва.</p>
+        <ul>
+          <li>моделі даних і зв’язки;</li>
+          <li>DAX, KPI та план-факт аналіз;</li>
+          <li>підключення Excel, Google Sheets, SQL та API;</li>
+          <li>автоматичне оновлення;</li>
+          <li>адаптація під мобільний перегляд.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> ключові цифри видно одразу, без ручного збирання звітів.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">🤖</div>
+          <h2>Telegram bots and notifications</h2>
+        </div>
+        <p>Боти для заявок, нагадувань, повідомлень, команд і запуску автоматичних дій.</p>
+        <ul>
+          <li>приймання команд, текстів і файлів;</li>
+          <li>нагадування за часом або подією;</li>
+          <li>заявки із сайту в Telegram;</li>
+          <li>зв’язок із Google Sheets і Drive;</li>
+          <li>повідомлення менеджерам або клієнтам.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> потрібна інформація приходить автоматично, а не губиться між чатами.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">🌐</div>
+          <h2>Web applications</h2>
+        </div>
+        <p>Окремі інтерфейси для процесів, яким уже тісно в Google Таблицях або Excel.</p>
+        <ul>
+          <li>робота з таблицями, формами й файлами;</li>
+          <li>пошук, картки, фільтри та мобільна навігація;</li>
+          <li>Google Sign-In і перевірка доступів;</li>
+          <li>робота з фотографіями та посиланнями;</li>
+          <li>PWA та встановлення на головний екран.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> користувач отримує простий інтерфейс замість складної технічної таблиці.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">📄</div>
+          <h2>PDFs, invoices, and bank statements</h2>
+        </div>
+        <p>Обробка документів, із яких потрібно витягнути, очистити та структурувати дані.</p>
+        <ul>
+          <li>розпізнавання та парсинг документів;</li>
+          <li>витягування позицій, сум і реквізитів;</li>
+          <li>зіставлення даних між документами;</li>
+          <li>класифікація банківських операцій;</li>
+          <li>запис результату в Google Sheets або Excel.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> брудні документи перетворюються на структуровані дані для подальшої роботи.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">🔗</div>
+          <h2>Integrations and APIs</h2>
+        </div>
+        <p>Обмін даними між різними сервісами без ручного перенесення інформації.</p>
+        <ul>
+          <li>CRM, ERP та зовнішні API;</li>
+          <li>Google Workspace;</li>
+          <li>сайти, форми й Telegram;</li>
+          <li>вебхуки та автоматичні тригери;</li>
+          <li>синхронізація довідників і статусів.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> системи починають обмінюватися даними без участі людини.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">☁️</div>
+          <h2>Google Drive, permissions, and files</h2>
+        </div>
+        <p>Автоматизація роботи з папками, документами, правами доступу та передачею власності.</p>
+        <ul>
+          <li>створення й архівування папок;</li>
+          <li>копіювання та сортування файлів;</li>
+          <li>керування доступами;</li>
+          <li>авторизація користувачів;</li>
+          <li>передача прав замовнику.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> файли зберігаються системно, а доступи не перетворюються на цирк.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">📱</div>
+          <h2>Mobile interfaces and PWAs</h2>
+        </div>
+        <p>Адаптація робочих рішень для смартфонів і планшетів.</p>
+        <ul>
+          <li>зручні картки й великі кнопки;</li>
+          <li>свайпи, пошук і мобільне меню;</li>
+          <li>адаптивні форми;</li>
+          <li>додавання на головний екран;</li>
+          <li>оптимізація під вузькі екрани.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> рішенням реально зручно користуватися з телефону, а не лише відкривати його.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">🔍</div>
+          <h2>Market research</h2>
+        </div>
+        <p>Збір і аналіз відкритих даних для оцінки товарів, конкурентів і ринкової ситуації.</p>
+        <ul>
+          <li>аналіз товарних позицій та асортименту;</li>
+          <li>порівняння цін і характеристик;</li>
+          <li>аналіз конкурентного середовища;</li>
+          <li>оцінка сегментів і потенційних ніш;</li>
+          <li>підготовка звітів і дашбордів.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> не просто таблиця з цифрами, а структурована картина ринку.</div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-head">
+          <div class="service-icon">🧠</div>
+          <h2>Custom solutions</h2>
+        </div>
+        <p>Якщо задача не вкладається в одну категорію, її можна зібрати з декількох технологій.</p>
+        <ul>
+          <li>аудит поточного процесу;</li>
+          <li>проєктування логіки;</li>
+          <li>поетапна розробка;</li>
+          <li>тестування на реальних даних;</li>
+          <li>передача коду, прав та інструкцій.</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> рішення будується під ваш процес, а не процес ламається під готовий шаблон.</div>
+      </article>
+    </section>
+
+    <section class="process">
+      <h2>How the process works</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <strong>1. Analysis</strong>
+          <span>Дивлюся на реальні файли, документи та процес.</span>
+        </div>
+        <div class="process-step">
+          <strong>2. Assessment</strong>
+          <span>Пропоную варіант реалізації та оцінюю обсяг.</span>
+        </div>
+        <div class="process-step">
+          <strong>3. Development</strong>
+          <span>Роблю поетапно й перевіряю на реальних сценаріях.</span>
+        </div>
+        <div class="process-step">
+          <strong>4. Delivery</strong>
+          <span>Передаю рішення, доступи, права та інструкції.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Not sure which category your project belongs to?</h2>
+      <p>
+        That's perfectly fine. Describe the process in your own words, and I will determine the best approach.
+      </p>
+      <a href="contacts.html">Discuss your project</a>
+    </section>
+  </main>
+
+  <footer>
+    © 2015–2026 Sebastian Automations. All rights reserved.
+  </footer>
+</body>
+</html>

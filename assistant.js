@@ -153,6 +153,7 @@ if (!assistantHasGreeted) {
 }
 
     assistant.classList.add("show");
+    playAssistantSound();
 
     waitingTimer = setTimeout(() => {
         message.textContent = assistantFollowUp[lang].waiting;
@@ -194,36 +195,61 @@ function resetInactivityTimer() {
     }, 60000);
 }
 
-function playAssistantSound() {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+let assistantAudioContext = null;
 
-    const osc = ctx.createOscillator();
+function unlockAssistantAudio() {
+    if (!assistantAudioContext) {
+        assistantAudioContext = new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+    }
+
+    if (assistantAudioContext.state === "suspended") {
+        assistantAudioContext.resume();
+    }
+}
+
+function playAssistantSound() {
+    if (!assistantAudioContext) return;
+
+    const ctx = assistantAudioContext;
+    const now = ctx.currentTime;
+
+    const oscillator = ctx.createOscillator();
     const gain = ctx.createGain();
 
-    osc.type = "sine";
+    oscillator.type = "sine";
 
-    osc.frequency.setValueAtTime(900, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(
-        1300,
-        ctx.currentTime + 0.12
+    oscillator.frequency.setValueAtTime(740, now);
+    oscillator.frequency.exponentialRampToValueAtTime(
+        1180,
+        now + 0.11
     );
 
-    gain.gain.setValueAtTime(0.03, ctx.currentTime);
+    gain.gain.setValueAtTime(0.12, now);
     gain.gain.exponentialRampToValueAtTime(
-        0.0001,
-        ctx.currentTime + 0.22
+        0.001,
+        now + 0.3
     );
 
-    osc.connect(gain);
+    oscillator.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start();
-    osc.stop(ctx.currentTime + 0.22);
+    oscillator.start(now);
+    oscillator.stop(now + 0.3);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     createAssistant();
     resetInactivityTimer();
+        ["pointerdown", "keydown", "touchstart"].forEach(eventName => {
+        document.addEventListener(
+            eventName,
+            unlockAssistantAudio,
+            { once: true, passive: true }
+        );
+    });
 
     [
         "mousemove",

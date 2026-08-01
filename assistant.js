@@ -377,7 +377,6 @@ document.addEventListener("DOMContentLoaded", () => {
     button.classList.toggle("active-language", isActive);
     button.setAttribute("aria-current", isActive ? "page" : "false");
   });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector(".desktop-nav");

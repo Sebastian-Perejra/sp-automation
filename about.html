@@ -1,280 +1,611 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Про мене – Себастьян Перейра</title>
+
+  <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto Mono', monospace;
-      background-color: #f4f7fa;
-      color: #1a1a1a;
-      height: 100%;
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      display: flex;
-      flex-direction: column;
+      margin: 0;
       min-height: 100vh;
+      font-family: 'Roboto Mono', monospace;
+      background: #f4f7fa;
+      color: #1a1a1a;
     }
 
-    .page-wrapper {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .lang-switcher {
-      position: fixed;
-      top: 12px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 300;
-    }
-
-    .lang-switcher button {
-      background-color: #ffffff;
-      border: 1px solid #007acc;
-      color: #007acc;
-      font-weight: bold;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .lang-switcher button:hover {
-      background-color: #007acc;
-      color: white;
-    }
-
-    .burger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      position: fixed;
-      top: 14px;
-      left: 16px;
-      z-index: 301;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background-color: #007acc;
-      margin: 4px 0;
-      transition: all 0.3s ease;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
+    .topbar {
       position: sticky;
       top: 0;
       z-index: 100;
+      background: rgba(230, 240, 250, 0.96);
+      border-bottom: 1px solid #c4d8e6;
+      backdrop-filter: blur(10px);
     }
 
-    nav a {
+    .topbar-inner {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .home-link {
       color: #007acc;
       text-decoration: none;
       font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
-    nav a:hover {
+    .home-link:hover {
       color: #005ea8;
     }
 
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
+    .desktop-nav {
+      display: flex;
       align-items: center;
-      background-color: #e6f0fa;
-      position: fixed;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-      z-index: 200;
-      animation: slideDown 0.3s ease forwards;
+      justify-content: flex-end;
+      gap: 26px;
     }
 
-    .mobile-nav a {
-      margin: 10px 0;
-      font-size: 18px;
+    .desktop-nav a {
       color: #007acc;
       text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
     }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .desktop-nav a:hover {
+      color: #005ea8;
     }
 
-    main {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      flex-grow: 1;
+    .lang-switcher {
+      display: flex;
+      gap: 7px;
+    }
+
+    .lang-switcher button {
+      border: 1px solid #007acc;
+      border-radius: 7px;
+      background: #fff;
+      color: #007acc;
+      padding: 6px 9px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lang-switcher button:hover {
+      background: #007acc;
+      color: #fff;
+    }
+
+    .page {
+      width: min(100%, 1000px);
+      margin: 0 auto;
+      padding:
+        42px
+        20px
+        max(64px, env(safe-area-inset-bottom));
+    }
+
+    .hero {
+      margin-bottom: 28px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid #d5e4ee;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      color: #0F9D58;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 700px;
+      color: #596771;
+      font-size: 14px;
       line-height: 1.7;
     }
 
-    h1 {
-      font-size: 28px;
-      text-align: center;
+    .hero-badge {
+      min-width: 145px;
+      padding: 18px;
+      border: 1px solid #cce8d5;
+      border-radius: 16px;
+      background: #edf8f1;
       color: #0F9D58;
-      margin-bottom: 30px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.5;
     }
 
-    p {
-      font-size: 16px;
-      margin-bottom: 18px;
+    .section {
+      margin-top: 18px;
+      padding: 28px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #d9e4ec;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: #1a1a1a;
+      font-size: 21px;
+      line-height: 1.3;
+    }
+
+    .section p {
+      margin: 0 0 14px;
+      color: #4f5d66;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section ul,
+    .section ol {
+      margin: 12px 0 0;
+      padding-left: 21px;
+      color: #4f5d66;
+    }
+
+    .section li {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .section li:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      padding: 18px 20px;
+      border-left: 4px solid #007acc;
+      border-radius: 10px;
+      background: #f3f9fd;
+      color: #33434d;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .capabilities {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .capability {
+      padding: 16px;
+      border: 1px solid #dce6ed;
+      border-radius: 12px;
+      background: #fbfdff;
+    }
+
+    .capability strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #007acc;
+      font-size: 12px;
+    }
+
+    .capability span {
+      display: block;
+      color: #5d6a73;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .process {
+      counter-reset: step;
+      display: grid;
+      gap: 11px;
+      margin-top: 14px;
+    }
+
+    .process-step {
+      position: relative;
+      padding: 15px 15px 15px 52px;
+      border: 1px solid #dce6ed;
+      border-radius: 12px;
+      background: #fbfdff;
+      color: #4f5d66;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .process-step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #007acc;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .quote {
+      margin: 16px 0 0;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background: #1f2b33;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .cta {
+      margin-top: 20px;
+      padding: 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
+      border: 1px solid #c9e2f7;
+      border-radius: 16px;
+    }
+
+    .cta h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .cta p {
+      margin: 0 0 18px;
+      color: #596771;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 9px;
+      background: #1a73e8;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .cta a:hover {
+      background: #135fbe;
     }
 
     footer {
+      padding: 16px 20px;
+      border-top: 1px solid #c4d8e6;
+      background: #e6f0fa;
+      color: #7e8991;
+      font-size: 10px;
       text-align: center;
-      padding: 8px 20px;
-      font-size: 11px;
-      color: #999;
-      background-color: #e6f0fa;
-      z-index: 98;
     }
 
-    .ticker {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #007acc;
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: 18px;
-      padding: 14px 0;
-      border-top: 1px solid #005ea8;
-      z-index: 999;
-      font-family: 'Courier New', monospace;
-      color: #00FF00;
+    @media (max-width: 760px) {
+      .topbar-inner {
+        padding:
+          max(12px, env(safe-area-inset-top))
+          12px
+          12px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .lang-switcher {
+        margin-left: auto;
+      }
+
+      .page {
+        padding:
+          24px
+          12px
+          max(36px, env(safe-area-inset-bottom));
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 24px 18px;
+        text-align: center;
+      }
+
+      .hero-badge {
+        width: fit-content;
+        min-width: 0;
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 22px 16px;
+      }
+
+      .section h2 {
+        font-size: 18px;
+      }
+
+      .section p,
+      .section li {
+        font-size: 12px;
+      }
+
+      .capabilities {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 24px 16px;
+      }
+
+      .cta a {
+        width: 100%;
+      }
     }
 
-    .ticker-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: ticker 40s linear infinite;
-    }
+    @media (max-width: 380px) {
+      .home-link {
+        font-size: 12px;
+      }
 
-    @keyframes ticker {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
+      .lang-switcher button {
+        padding: 5px 7px;
+        font-size: 10px;
+      }
 
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .burger { display: flex; }
-      .mobile-nav.show { display: flex; }
+      .hero h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
+
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="home-link" href="index.html">← На головну</a>
 
-  <div class="page-wrapper">
+      <nav class="desktop-nav">
+        <a href="services.html">Послуги</a>
+        <a href="pricing.html">Цінова політика</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contacts.html">Контакти</a>
+      </nav>
 
-    <div class="lang-switcher">
-      <button onclick="location.href='index.html'">UA</button>
-      <button onclick="location.href='index-en.html'">EN</button>
-      <button onclick="location.href='index-ru.html'">RU</button>
+      <div class="lang-switcher">
+        <button onclick="location.href='about.html'">UA</button>
+        <button onclick="location.href='about-en.html'">EN</button>
+        <button onclick="location.href='about-ru.html'">RU</button>
+      </div>
     </div>
+  </header>
 
-    <div class="burger" onclick="toggleMenu()">
-      <div></div><div></div><div></div>
-    </div>
-
-    <nav>
-      <a href="index.html">Головна</a>
-      <a href="services.html">Послуги</a>
-      <a href="#portfolio">Портфоліо</a>
-      <a href="contacts.html">Контакти</a>
-    </nav>
-
-    <div class="mobile-nav" id="mobileNav">
-      <a href="index.html" onclick="closeMenu()">Головна</a>
-      <a href="services.html" onclick="closeMenu()">Послуги</a>
-      <a href="about.html" onclick="closeMenu()">Про мене</a>
-      <a href="contacts.html" onclick="closeMenu()">Контакти</a>
-    </div>
-
-      <main>
+  <main class="page">
+    <section class="hero">
+      <div>
         <h1>Про мене</h1>
-    <p>Привіт, я Себастьян. Вже кілька років я допомагаю людям автоматизувати їхню роботу — в Excel, Power BI, Google Таблицях.</p>
+        <p>
+          Я займаюся автоматизацією робочих процесів — від складних Excel-файлів
+          і Google Таблиць до Power BI, вебзастосунків, Telegram-ботів,
+          інтеграцій та аналітичних рішень для бізнесу.
+        </p>
+      </div>
 
-    <p>Якщо коротко: я люблю, коли все працює просто і логічно. І не люблю, коли щось треба робити вручну, хоча це можна автоматизувати.</p>
+      <div class="hero-badge">
+        Не просто код.<br>
+        Робоча система.
+      </div>
+    </section>
 
-    <p>Я працював із бухгалтерами, логістами, керівниками відділів, виробничниками, керівниками — і просто студентами. Кожен із них приходив із одним і тим самим питанням: <strong>«А можна якось зробити, щоб воно рахувалось само?»</strong></p>
+    <section class="section">
+      <h2>Що я роблю насправді</h2>
 
-    <p>І так — майже завжди можна.</p>
+      <p>
+        Моє завдання — не просто написати формулу або скрипт. Спочатку я
+        розбираюся, як працює процес, де виникають помилки, що люди роблять
+        вручну та який результат їм насправді потрібен.
+      </p>
 
-    <p>Наприклад:</p>
-    <ul>
-      <li>одного разу керівник складу вручну вичитував 200+ рядків Excel, щоб зрозуміти, скільки чого замовити. Ми зробили кнопку — і файл сам показує потреби на наступний тиждень;</li>
-      <li>у бухгалтера був звіт із 15 вкладок, який вона збирала 4 години перед кожним понеділком. Тепер файл сам збирає дані й шле його керівнику на пошту;</li>
-      <li>один менеджер кожного дня вручну копіював формули в таблицю, щоб вирахувати бонуси працівників. Ми просто навчили Excel рахувати це автоматично, без людських помилок.</li>
-    </ul>
+      <p>
+        Після цього будую рішення, яке прибирає зайві дії, скорочує кількість
+        помилок і робить процес зрозумілішим для тих, хто ним користується.
+      </p>
 
-    <p><strong>Що саме я роблю:</strong></p>
-    <ul>
-      <li>налаштовую Excel так, щоб не доводилось нічого копіювати вручну;</li>
-      <li>пишу скрипти, які самі розсилають листи, рахують і фільтрують;</li>
-      <li>будую дашборди в Power BI та Google Sheets — динамічні звіти з візуалізацією, які допомагають приймати управлінські рішення;</li>
-      <li>пояснюю, як цим користуватись — простою, зрозумілою мовою.</li>
-    </ul>
+      <div class="highlight">
+        Я не намагаюся автоматизувати все заради автоматизації. Якщо задачу
+        простіше вирішити нормальною формулою, я не буду будувати для неї
+        космічний корабель.
+      </div>
+    </section>
 
-    <p>Я не роблю шаблонів — кожне рішення підлаштовую під ваш процес. І не зникаю після здачі — завжди залишаюсь на зв’язку, якщо щось треба уточнити або доробити.</p>
+    <section class="section">
+      <h2>З якими задачами до мене звертаються</h2>
 
-    <p>Якщо ви хочете навести лад у своїх табличках, позбутись рутини й заощадити час — напишіть мені. Домовимось, подивлюсь, підкажу, зроблю.</p>
+      <div class="capabilities">
+        <div class="capability">
+          <strong>Excel і Google Sheets</strong>
+          <span>Формули, макроси, складні розрахунки, перевірки, зведення даних і автоматичні звіти.</span>
+        </div>
 
-    <p><strong>Якщо ще вагаєшся — не вагайся. Натискай на <a href="contacts.html">«Контакти»</a> і пиши запит 😉</strong></p>
+        <div class="capability">
+          <strong>Power BI та аналітика</strong>
+          <span>Дашборди, KPI, план-факт аналіз, візуалізація, моделі даних і автоматичне оновлення.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Вебзастосунки</strong>
+          <span>Інтерфейси для роботи з таблицями, файлами, фото, посиланнями, формами та внутрішніми процесами.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Telegram і повідомлення</strong>
+          <span>Боти, нагадування, заявки з сайту, автоматичні сповіщення та запуск дій через чат.</span>
+        </div>
+
+        <div class="capability">
+          <strong>PDF, інвойси та виписки</strong>
+          <span>Витягування, очищення, зіставлення та перенесення даних у таблиці або інші системи.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Google Drive і доступи</strong>
+          <span>Папки, файли, архівування, права доступу, авторизація користувачів і передача власності.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Інтеграції та API</strong>
+          <span>Обмін даними між сайтами, CRM, Google Workspace, Telegram та іншими сервісами.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Мобільні рішення</strong>
+          <span>Адаптивні вебінтерфейси, PWA та робочі форми для смартфонів і планшетів.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Дослідження ринку та конкурентне середовище</h2>
+
+      <p>
+        Окремо можу проводити прикладні ринкові дослідження для бізнесу.
+        Це корисно, коли потрібно не просто зібрати цифри, а зрозуміти,
+        що відбувається на ринку і як виглядає позиція компанії відносно конкурентів.
+      </p>
+
+      <ul>
+        <li>аналіз товарних позицій і асортименту;</li>
+        <li>порівняння цін, характеристик і позиціонування;</li>
+        <li>аналіз конкурентного середовища;</li>
+        <li>збір і структурування відкритих даних;</li>
+        <li>оцінка ринкових пропозицій і сегментів;</li>
+        <li>пошук закономірностей, відмінностей і потенційних ніш;</li>
+        <li>підготовка таблиць, звітів і дашбордів за результатами дослідження.</li>
+      </ul>
+
+      <p>
+        Результат може бути оформлений у вигляді аналітичної таблиці,
+        презентації, дашборду або структурованого звіту з висновками.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Як я працюю</h2>
+
+      <p>
+        Спочатку я дивлюся на реальні файли, таблиці, документи або поточний
+        процес. Потім уточнюю вимоги, пропоную варіант реалізації та оцінюю
+        обсяг роботи.
+      </p>
+
+      <div class="process">
+        <div class="process-step">Аналіз задачі та вихідних даних.</div>
+        <div class="process-step">Прототип або тестова логіка.</div>
+        <div class="process-step">Розробка основного рішення.</div>
+        <div class="process-step">Перевірка на реальних сценаріях.</div>
+        <div class="process-step">Передача доступів, прав і робочих матеріалів.</div>
+        <div class="process-step">Інструкція та підтримка після запуску.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Що отримує замовник</h2>
+
+      <ul>
+        <li>готове робоче рішення, а не набір розрізнених шматків коду;</li>
+        <li>зрозумілу логіку роботи;</li>
+        <li>доступ до формул, скриптів і налаштувань, якщо інше не погоджено окремо;</li>
+        <li>передачу необхідних прав та власності;</li>
+        <li>тестування на реальних сценаріях;</li>
+        <li>інструкцію або технічну схему;</li>
+        <li>можливість подальшого доопрацювання;</li>
+        <li>підтримку після запуску.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Чому я цим займаюся</h2>
+
+      <p>
+        Мені подобається знаходити місця, де люди щодня витрачають час на
+        повторювані дії, і перетворювати їх на кнопку, автоматичний процес
+        або зрозумілий інтерфейс.
+      </p>
+
+      <div class="quote">
+        «Серйозно? І це весь час можна було не робити вручну?»
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Без зайвих обіцянок</h2>
+
+      <p>
+        Я не обіцяю автоматизувати абсолютно все. Якщо задача технічно
+        недоцільна, занадто дорога або виходить за межі моєї компетенції,
+        я кажу про це прямо.
+      </p>
+
+      <p>
+        Але якщо процес можна зробити швидшим, точнішим і простішим —
+        швидше за все, я знайду спосіб.
+      </p>
+    </section>
+
+    <section class="cta">
+      <h2>Є задача, яка забирає занадто багато часу?</h2>
+      <p>
+        Напишіть мені. Подивлюся, що можна автоматизувати, спростити або
+        перетворити на нормальний робочий процес.
+      </p>
+
+      <a href="contacts.html">Перейти до контактів</a>
+    </section>
   </main>
 
-  </div>
-
   <footer>
-    <span title="Я зробив цей сайт сам ☕🤖 Просто захотілось спробувати — і вийшло краще, ніж думав. Розглядаю переїзд на Tilda заради зручності для користувачів 🧭">
-      © 2015–2025 Sebastian Automations. Всі права захищено.
-    </span>
+    © 2015–2026 Sebastian Automations. Всі права захищено.
   </footer>
-
-  <div class="ticker">
-    <div class="ticker-text">
-      Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Скрипти · Веб-автоматизація · Дашборди ·
-    </div>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('mobileNav');
-      nav.classList.toggle('show');
-    }
-
-    function closeMenu() {
-      const nav = document.getElementById('mobileNav');
-      nav.classList.remove('show');
-    }
-  </script>
 </body>
 </html>
-
-
-
-
-
-

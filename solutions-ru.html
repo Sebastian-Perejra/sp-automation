@@ -1733,6 +1733,41 @@
     </section>
 
 
+    
+<section class="section-card" id="dashboard-case">
+  <div class="case-demo-kicker">Реальный кейс №3</div>
+  <h2>Автоматическое создание дашбордов на основе Excel и Google Sheets</h2>
+  <p class="case-demo-subtitle">
+    Система обрабатывает массив из 200 строк, рассчитывает KPI,
+    группирует данные и автоматически формирует интерактивный дашборд.
+  </p>
+
+  <div style="margin-top:20px;padding:18px;border:1px solid #e8e1d8;border-radius:16px;background:#fcfbf9;">
+    <strong>Демонстрационный массив данных:</strong>
+    <div style="margin-top:12px;max-height:420px;overflow:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead style="position:sticky;top:0;background:#35594b;color:white;">
+          <tr>
+            <th style="padding:8px;">Дата</th>
+            <th style="padding:8px;">Год</th>
+            <th style="padding:8px;">Товар</th>
+            <th style="padding:8px;">Категория</th>
+            <th style="padding:8px;">Клиент</th>
+            <th style="padding:8px;">Количество</th>
+            <th style="padding:8px;">Сумма</th>
+          </tr>
+        </thead>
+        <tbody id="dashboardRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="demo-cta">
+    <a href="contacts-ru.html">Хочу такой дашборд</a>
+  </div>
+</section>
+
+
     <section class="section-card upcoming">
       <h2>Что появится дальше</h2>
 
@@ -2187,6 +2222,36 @@
 
     resetPdfCase();
   </script>
+
+
+<script>
+const dashboardRows = document.getElementById("dashboardRows");
+if (dashboardRows) {
+  const products = ["HP 15","Dell","LG 24","Samsung 27","Logitech","Kingston SSD"];
+  const categories = ["Ноутбуки","Мониторы","Аксессуары","Комплектующие"];
+  const clients = ["Альфа","Бета","Гамма","Дельта","Омега"];
+
+  let html = "";
+
+  for (let i = 1; i <= 200; i++) {
+    const amount = (i * 713) % 45000 + 1000;
+
+    html += `
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${i}.01.2026</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">2026</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${products[i % products.length]}</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${categories[i % categories.length]}</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${clients[i % clients.length]}</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${(i % 12) + 1}</td>
+        <td style="padding:8px;border-bottom:1px solid #eee;">${amount.toLocaleString("ru-RU")}</td>
+      </tr>
+    `;
+  }
+
+  dashboardRows.innerHTML = html;
+}
+</script>
 
 </body>
 </html>

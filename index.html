@@ -3175,14 +3175,30 @@ if (reviewsButton) {
       }, 1400);
 
     } catch (error) {
-      console.error(error);
+  console.error(error);
 
-      status.textContent =
-        'Не вдалося надіслати відгук. Спробуйте ще раз.';
+  let message =
+    error.message ||
+    'Не вдалося надіслати відгук. Спробуйте ще раз.';
 
-      status.style.color = '#cc0000';
+  if (message.includes('Превышен допустимый размер данных')) {
+    message =
+      'Відгук занадто великий. Максимальний розмір — 3000 символів.';
+  }
 
-    } finally {
+  if (message.includes('Проверка защиты от роботов не пройдена')) {
+    message =
+      'Будь ласка, підтвердьте, що ви не робот.';
+  }
+
+  if (message.includes('Пустой отзыв')) {
+    message =
+      'Будь ласка, введіть текст відгуку.';
+  }
+
+  status.textContent = message;
+  status.style.color = '#cc0000';
+} finally {
       button.disabled = false;
       button.textContent = 'Надіслати відгук';
     }

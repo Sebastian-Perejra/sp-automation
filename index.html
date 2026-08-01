@@ -296,6 +296,11 @@
       .hero-inline img { height: 40px; }
     }
   </style>
+  <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer>
+</script>
 </head>
 <body>
 
@@ -562,6 +567,13 @@
       placeholder="Напишіть кілька слів про роботу"
     ></textarea>
 
+    <div class="turnstile-wrapper">
+  <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+  ></div>
+</div>
+    
     <button
   class="review-submit-btn"
   type="button"
@@ -915,6 +927,11 @@
       padding: 22px 18px;
     }
   }
+  .turnstile-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
 </style>
 
 <script>
@@ -3078,6 +3095,10 @@ if (reviewsButton) {
 
     const review =
       document.getElementById('review-text-input').value.trim();
+    const turnstileToken =
+  document.querySelector(
+    '[name="cf-turnstile-response"]'
+  )?.value || '';
 
     const status =
       document.getElementById('review-form-status');
@@ -3096,7 +3117,11 @@ if (reviewsButton) {
       status.style.color = '#cc0000';
       return;
     }
-
+    if (!turnstileToken) {
+  status.textContent = 'Підтвердіть, що ви не робот.';
+  status.style.color = '#cc0000';
+  return;
+}
     status.textContent = 'Надсилаємо...';
     status.style.color = '#555';
 
@@ -3117,6 +3142,7 @@ if (reviewsButton) {
             rating: rating,
             review: review,
             page_lang: 'UA'
+            turnstileToken: turnstileToken
           })
         }
       );

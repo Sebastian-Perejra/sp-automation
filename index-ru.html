@@ -297,6 +297,11 @@
       .hero-inline img { height: 40px; }
     }
   </style>
+  <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer>
+</script>
 </head>
 <body>
 
@@ -315,8 +320,8 @@
       <a href="terms-ru.html" style="color:#007acc; font-weight: bold; text-decoration: none; font-size: 16px;">Условия использования</a>
     </div>
     <div class="nav-center" style="display: flex; justify-content: center; gap: 40px;">
-      <a href="about.html">Обо мне</a>
-      <a href="services.html">Услуги</a>
+      <a href="about-ru.html">Обо мне</a>
+      <a href="services-ru.html">Услуги</a>
       <a href="pricing-ru.html">Ценовая политика</a>
       <a href="#portfolio">Портфолио</a>
       <a href="contacts-ru.html">Контакты</a>
@@ -360,7 +365,7 @@
       Excel VBA · Google Apps Script · Power BI DAX · Автоматические отчёты · Кастомная логика · Интеграции · Макросы · Индивидуальные решения для бизнеса ·
     </div>
     <div style="font-size: 11px; color: #999; text-align: center; padding-top: 5px;">
-      © 2015–2025 Sebastian Automations. Все права защищены. <a href="terms-ru.html" style="color: #999; text-decoration: underline;">Условия использования</a>
+      © 2015–2026 Sebastian Automations. Все права защищены. <a href="terms-ru.html" style="color: #999; text-decoration: underline;">Условия использования</a>
     </div>
   </div>
 
@@ -424,7 +429,7 @@
     });
   </script>
 
-  <a href="faq.html" id="faq-button" title="Часто задаваемые вопросы">
+  <a href="faq-ru.html" id="faq-button" title="Часто задаваемые вопросы">
     <div class="faq-icon">❓</div>
     <div class="faq-label">FAQ</div>
   </a>
@@ -564,6 +569,13 @@
         placeholder="Напишите несколько слов о работе"
       ></textarea>
 
+      <div class="turnstile-wrapper">
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+        ></div>
+      </div>
+
       <button
         class="review-submit-btn"
         type="button"
@@ -644,6 +656,13 @@
       rows="5"
       placeholder="Кратко опишите задачу"
     ></textarea>
+
+    <div class="turnstile-wrapper">
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+      ></div>
+    </div>
 
     <button class="contact-send-btn" type="button" onclick="testContactForm()">
       Отправить
@@ -900,6 +919,12 @@
     cursor: not-allowed;
   }
 
+  .turnstile-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
   @media (max-width: 768px) {
     #contact-float-btn {
       right: 90px;
@@ -973,9 +998,19 @@
     const message = document.getElementById('contact-message').value.trim();
     const status = document.getElementById('contact-status');
     const button = document.querySelector('.contact-send-btn');
+    const turnstileToken =
+      document.querySelector(
+        '#contact-modal [name="cf-turnstile-response"]'
+      )?.value || '';
 
     if (!name || !contact || !message) {
       status.textContent = 'Заполните все поля.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    if (!turnstileToken) {
+      status.textContent = 'Подтвердите, что вы не робот.';
       status.style.color = '#cc0000';
       return;
     }
@@ -997,7 +1032,8 @@
           body: JSON.stringify({
             user_name: name,
             user_email: contact,
-            message: message
+            message: message,
+            turnstileToken: turnstileToken
           })
         }
       );
@@ -1022,7 +1058,31 @@
     } catch (error) {
       console.error(error);
 
-      status.textContent = 'Не удалось отправить. Попробуйте ещё раз.';
+      let message =
+        error.message ||
+        'Не удалось отправить. Попробуйте ещё раз.';
+
+      if (message.includes('Превышен допустимый размер данных')) {
+        message =
+          'Сообщение слишком большое. Максимальный размер — 5000 символов.';
+      }
+
+      if (message.includes('Проверка защиты от роботов не пройдена')) {
+        message =
+          'Проверка защиты завершилась ошибкой. Обновите страницу и попробуйте ещё раз.';
+      }
+
+      if (message.includes('Повторное сообщение можно отправить через 1 минуту')) {
+        message =
+          'Повторное сообщение можно отправить через 1 минуту.';
+      }
+
+      if (message.includes('Не заполнены обязательные поля сайта')) {
+        message =
+          'Заполните все обязательные поля.';
+      }
+
+      status.textContent = message;
       status.style.color = '#cc0000';
 
     } finally {
@@ -2995,6 +3055,11 @@ function discussSelectedTask() {
     const review =
       document.getElementById('review-text-input').value.trim();
 
+    const turnstileToken =
+      document.querySelector(
+        '#review-form-overlay [name="cf-turnstile-response"]'
+      )?.value || '';
+
     const status =
       document.getElementById('review-form-status');
 
@@ -3009,6 +3074,12 @@ function discussSelectedTask() {
 
     if (rating < 1 || rating > 5) {
       status.textContent = 'Выберите оценку от 1 до 5.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    if (!turnstileToken) {
+      status.textContent = 'Подтвердите, что вы не робот.';
       status.style.color = '#cc0000';
       return;
     }
@@ -3032,7 +3103,8 @@ function discussSelectedTask() {
             name: name,
             rating: rating,
             review: review,
-            page_lang: 'RU'
+            page_lang: 'RU',
+            turnstileToken: turnstileToken
           })
         }
       );
@@ -3067,9 +3139,26 @@ function discussSelectedTask() {
     } catch (error) {
       console.error(error);
 
-      status.textContent =
+      let message =
+        error.message ||
         'Не удалось отправить отзыв. Попробуйте ещё раз.';
 
+      if (message.includes('Превышен допустимый размер данных')) {
+        message =
+          'Отзыв слишком большой. Максимальный размер — 3000 символов.';
+      }
+
+      if (message.includes('Проверка защиты от роботов не пройдена')) {
+        message =
+          'Подтвердите, что вы не робот.';
+      }
+
+      if (message.includes('Пустой отзыв')) {
+        message =
+          'Введите текст отзыва.';
+      }
+
+      status.textContent = message;
       status.style.color = '#cc0000';
 
     } finally {
@@ -3081,4 +3170,3 @@ function discussSelectedTask() {
 
 </body>
 </html>
-

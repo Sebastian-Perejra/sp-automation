@@ -62,6 +62,47 @@ let waitingTimer;
 let goodbyeTimer;
 let finalHideTimer;
 
+const assistantGreetings = {
+    uk: {
+        morning: "Доброго ранку!",
+        day: "Добрий день!",
+        evening: "Добрий вечір!",
+        night: "Доброї ночі!"
+    },
+
+    ru: {
+        morning: "Доброе утро!",
+        day: "Добрый день!",
+        evening: "Добрый вечер!",
+        night: "Доброй ночи!"
+    },
+
+    en: {
+        morning: "Good morning!",
+        day: "Good afternoon!",
+        evening: "Good evening!",
+        night: "Good night!"
+    }
+};
+
+function getTimeGreeting(lang) {
+    const hour = new Date().getHours();
+
+    if (hour >= 6 && hour < 11) {
+        return assistantGreetings[lang].morning;
+    }
+
+    if (hour >= 11 && hour < 18) {
+        return assistantGreetings[lang].day;
+    }
+
+    if (hour >= 18 && hour < 23) {
+        return assistantGreetings[lang].evening;
+    }
+
+    return assistantGreetings[lang].night;
+}
+
 function getCurrentLanguage() {
     const lang = document.documentElement.lang.toLowerCase();
 
@@ -99,8 +140,11 @@ function showAssistant() {
     const message = document.getElementById("sp-assistant-message");
     const phrases = assistantMessages[lang];
 
-    message.textContent =
-        phrases[Math.floor(Math.random() * phrases.length)];
+    const greeting = getTimeGreeting(lang);
+const randomPhrase =
+    phrases[Math.floor(Math.random() * phrases.length)];
+
+message.textContent = greeting + " " + randomPhrase;
 
     assistant.classList.add("show");
 

@@ -223,14 +223,14 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 36deg)) translateZ(400px);
       height: 100px;
       transition: transform 0.3s;
       cursor: pointer;
     }
 
     .carousel img:hover {
-      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 36deg)) translateZ(400px);
     }
 
     .hint {
@@ -385,6 +385,9 @@ footer{background:rgba(244,240,234,.96)!important;border-top:1px solid #dfd8cf!i
       <img src="vba.png" style="--i:4" alt="VBA">
       <img src="powerquery.png" style="--i:5" alt="Power Query">
       <img src="power-pivot.png" style="--i:6" alt="Power Pivot">
+      <img src="tgbot.png" style="--i:7" alt="Telegram Bot">
+      <img src="googledrive.png" style="--i:8" alt="Google Drive">
+      <img src="webapp.png" style="--i:9" alt="Web App">
     </div>
   </div>
 
@@ -443,7 +446,10 @@ footer{background:rgba(244,240,234,.96)!important;border-top:1px solid #dfd8cf!i
       'JavaScript': 'Автоматизація через JavaScript',
       'VBA': 'Макроси та коди VBA',
       'Power Query': 'Імпорт та трансформації',
-      'Power Pivot': 'DAX-аналіз у Power Pivot'
+      'Power Pivot': 'DAX-аналіз у Power Pivot',
+      'Telegram Bot': 'Telegram-боти та сповіщення',
+      'Google Drive': 'Автоматизація Google Drive',
+      'Web App': 'Вебзастосунки та PWA'
     };
 
     document.querySelectorAll('.carousel img').forEach(img => {
@@ -3371,14 +3377,14 @@ if (reviewsButton) {
       height: 68px;
       transform:
         translate(-50%, -50%)
-        rotateY(calc(var(--i) * 45deg))
+        rotateY(calc(var(--i) * 36deg))
         translateZ(165px);
     }
 
     .carousel img:hover {
       transform:
         translate(-50%, -50%)
-        rotateY(calc(var(--i) * 45deg))
+        rotateY(calc(var(--i) * 36deg))
         translateZ(165px);
     }
 

@@ -297,6 +297,11 @@
       .hero-inline img { height: 40px; }
     }
   </style>
+  <script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer>
+</script>
 </head>
 <body>
 
@@ -316,7 +321,7 @@
     </div>
     <div class="nav-center" style="display: flex; justify-content: center; gap: 40px;">
       <a href="about-en.html">About Me</a>
-      <a href="services.html">Services</a>
+      <a href="services-en.html">Services</a>
       <a href="pricing-en.html">Pricing</a>
       <a href="#portfolio">Portfolio</a>
       <a href="contacts-en.html">Contacts</a>
@@ -360,7 +365,7 @@
       Excel VBA · Google Apps Script · Power BI DAX · Automated Reports · Custom Logic · Integrations · Macros · Tailored Business Solutions ·
     </div>
     <div style="font-size: 11px; color: #999; text-align: center; padding-top: 5px;">
-      © 2015–2025 Sebastian Automations. All rights reserved. <a href="terms-en.html" style="color: #999; text-decoration: underline;">Terms of Use</a>
+      © 2015–2026 Sebastian Automations. All rights reserved. <a href="terms-en.html" style="color: #999; text-decoration: underline;">Terms of Use</a>
     </div>
   </div>
 
@@ -424,7 +429,7 @@
     });
   </script>
 
-  <a href="faq.html" id="faq-button" title="Frequently Asked Questions">
+  <a href="faq-en.html" id="faq-button" title="Frequently Asked Questions">
     <div class="faq-icon">❓</div>
     <div class="faq-label">FAQ</div>
   </a>
@@ -564,6 +569,13 @@
         placeholder="Write a few words about the work"
       ></textarea>
 
+      <div class="turnstile-wrapper">
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+        ></div>
+      </div>
+
       <button
         class="review-submit-btn"
         type="button"
@@ -644,6 +656,13 @@
       rows="5"
       placeholder="Briefly describe your task"
     ></textarea>
+
+    <div class="turnstile-wrapper">
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+      ></div>
+    </div>
 
     <button class="contact-send-btn" type="button" onclick="testContactForm()">
       Send
@@ -902,6 +921,12 @@
     cursor: not-allowed;
   }
 
+  .turnstile-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
   @media (max-width: 768px) {
     #contact-float-btn {
       right: 90px;
@@ -976,9 +1001,19 @@
     const message = document.getElementById('contact-message').value.trim();
     const status = document.getElementById('contact-status');
     const button = document.querySelector('.contact-send-btn');
+    const turnstileToken =
+      document.querySelector(
+        '#contact-modal [name="cf-turnstile-response"]'
+      )?.value || '';
 
     if (!name || !contact || !message) {
       status.textContent = 'Please complete all fields.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    if (!turnstileToken) {
+      status.textContent = 'Please confirm that you are not a robot.';
       status.style.color = '#cc0000';
       return;
     }
@@ -1000,7 +1035,8 @@
           body: JSON.stringify({
             user_name: name,
             user_email: contact,
-            message: message
+            message: message,
+            turnstileToken: turnstileToken
           })
         }
       );
@@ -1025,7 +1061,31 @@
     } catch (error) {
       console.error(error);
 
-      status.textContent = 'Could not send. Please try again.';
+      let message =
+        error.message ||
+        'Could not send. Please try again.';
+
+      if (message.includes('Превышен допустимый размер данных')) {
+        message =
+          'The message is too long. The maximum length is 5000 characters.';
+      }
+
+      if (message.includes('Проверка защиты от роботов не пройдена')) {
+        message =
+          'The security check failed. Refresh the page and try again.';
+      }
+
+      if (message.includes('Повторное сообщение можно отправить через 1 минуту')) {
+        message =
+          'You can send another message in 1 minute.';
+      }
+
+      if (message.includes('Не заполнены обязательные поля сайта')) {
+        message =
+          'Please complete all required fields.';
+      }
+
+      status.textContent = message;
       status.style.color = '#cc0000';
 
     } finally {
@@ -2998,6 +3058,11 @@ function discussSelectedTask() {
     const review =
       document.getElementById('review-text-input').value.trim();
 
+    const turnstileToken =
+      document.querySelector(
+        '#review-form-overlay [name="cf-turnstile-response"]'
+      )?.value || '';
+
     const status =
       document.getElementById('review-form-status');
 
@@ -3012,6 +3077,12 @@ function discussSelectedTask() {
 
     if (rating < 1 || rating > 5) {
       status.textContent = 'Please select a rating from 1 to 5.';
+      status.style.color = '#cc0000';
+      return;
+    }
+
+    if (!turnstileToken) {
+      status.textContent = 'Please confirm that you are not a robot.';
       status.style.color = '#cc0000';
       return;
     }
@@ -3035,7 +3106,8 @@ function discussSelectedTask() {
             name: name,
             rating: rating,
             review: review,
-            page_lang: 'EN'
+            page_lang: 'EN',
+            turnstileToken: turnstileToken
           })
         }
       );
@@ -3070,9 +3142,26 @@ function discussSelectedTask() {
     } catch (error) {
       console.error(error);
 
-      status.textContent =
+      let message =
+        error.message ||
         'Could not send the review. Please try again.';
 
+      if (message.includes('Превышен допустимый размер данных')) {
+        message =
+          'The review is too long. The maximum length is 3000 characters.';
+      }
+
+      if (message.includes('Проверка защиты от роботов не пройдена')) {
+        message =
+          'Please confirm that you are not a robot.';
+      }
+
+      if (message.includes('Пустой отзыв')) {
+        message =
+          'Please enter your review.';
+      }
+
+      status.textContent = message;
       status.style.color = '#cc0000';
 
     } finally {
@@ -3084,4 +3173,3 @@ function discussSelectedTask() {
 
 </body>
 </html>
-

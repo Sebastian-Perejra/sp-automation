@@ -1,152 +1,541 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Часті питання – Себастьян Перейра</title>
+
+  <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: 'Roboto Mono', monospace;
-      background-color: #f4f7fa;
+      background: #f4f7fa;
       color: #1a1a1a;
     }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
+    .topbar {
       position: sticky;
       top: 0;
       z-index: 100;
+      background: rgba(230, 240, 250, 0.96);
+      border-bottom: 1px solid #c4d8e6;
+      backdrop-filter: blur(10px);
     }
 
-    nav a {
+    .topbar-inner {
+      width: min(100%, 1040px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .home-link {
       color: #007acc;
       text-decoration: none;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
-    nav a:hover {
+    .home-link:hover {
       color: #005ea8;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 26px;
+    }
+
+    .desktop-nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .desktop-nav a:hover {
+      color: #005ea8;
+    }
+
+    .page {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding:
+        38px
+        20px
+        max(50px, env(safe-area-inset-bottom));
+    }
+
+    .hero {
+      margin-bottom: 26px;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
+      margin: 0 0 10px;
       color: #cc0000;
-      font-size: 28px;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      line-height: 1.1;
     }
 
-    details {
-      margin-bottom: 14px;
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: #66727c;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .faq-tools {
+      position: sticky;
+      top: 67px;
+      z-index: 50;
+      margin-bottom: 18px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      background: rgba(244, 247, 250, 0.96);
+      border: 1px solid #d6e3ec;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(36, 73, 104, 0.07);
+      backdrop-filter: blur(10px);
+    }
+
+    .faq-search {
+      min-width: 0;
+      width: 100%;
+      height: 42px;
+      padding: 0 13px;
+      border: 1px solid #c4d8e6;
+      border-radius: 9px;
       background: #fff;
-      padding: 10px 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      color: #1a1a1a;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 16px;
+      outline: none;
     }
 
-    summary {
+    .faq-search:focus {
+      border-color: #007acc;
+      box-shadow: 0 0 0 3px rgba(0,122,204,0.10);
+    }
+
+    .tool-button {
+      min-height: 42px;
+      padding: 0 13px;
+      border: 1px solid #007acc;
+      border-radius: 9px;
+      background: #fff;
+      color: #007acc;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
       font-weight: bold;
       cursor: pointer;
     }
 
+    .tool-button:hover {
+      background: #007acc;
+      color: #fff;
+    }
+
+    .faq-count {
+      margin: 0 0 12px;
+      color: #7b8790;
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    details {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #d7e1e8;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(36, 73, 104, 0.04);
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    details:hover {
+      border-color: #b7d2e4;
+      box-shadow: 0 8px 22px rgba(36, 73, 104, 0.07);
+    }
+
+    details[open] {
+      border-color: #8fc3e4;
+      box-shadow: 0 10px 26px rgba(0,122,204,0.09);
+    }
+
+    summary {
+      position: relative;
+      padding: 17px 50px 17px 18px;
+      color: #26343d;
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 1.5;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      position: absolute;
+      top: 50%;
+      right: 18px;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #c4d8e6;
+      border-radius: 50%;
+      color: #007acc;
+      font-size: 18px;
+      line-height: 1;
+      transform: translateY(-50%);
+      transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    details[open] summary::after {
+      content: '−';
+      background: #007acc;
+      color: #fff;
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    details p {
+      margin: 0;
+      padding: 0 18px 18px;
+      color: #56636c;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    details a {
+      color: #007acc;
+      font-weight: bold;
+    }
+
+    .no-results {
+      display: none;
+      padding: 30px 18px;
+      border: 1px dashed #b8c9d5;
+      border-radius: 12px;
+      color: #6c7881;
+      text-align: center;
+      font-size: 12px;
+    }
+
     .back-link {
       display: block;
-      text-align: center;
-      margin: 40px 0;
-      font-size: 16px;
+      width: fit-content;
+      margin: 34px auto 0;
+      padding: 11px 18px;
+      border: 1px solid #007acc;
+      border-radius: 9px;
+      color: #007acc;
+      background: #fff;
+      font-size: 13px;
       font-weight: bold;
       text-decoration: none;
-      color: #007acc;
     }
 
     .back-link:hover {
-      color: #005ea8;
+      background: #007acc;
+      color: #fff;
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        padding:
+          max(12px, env(safe-area-inset-top))
+          12px
+          12px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .page {
+        padding:
+          26px
+          12px
+          max(34px, env(safe-area-inset-bottom));
+      }
+
+      .hero {
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 11px;
+      }
+
+      .faq-tools {
+        top: 58px;
+        grid-template-columns: 1fr 1fr;
+        padding: 9px;
+        gap: 8px;
+      }
+
+      .faq-search {
+        grid-column: 1 / -1;
+      }
+
+      .tool-button {
+        width: 100%;
+        padding: 0 8px;
+        font-size: 10px;
+      }
+
+      .faq-count {
+        text-align: center;
+      }
+
+      .faq-list {
+        gap: 9px;
+      }
+
+      summary {
+        padding: 15px 45px 15px 14px;
+        font-size: 12px;
+      }
+
+      summary::after {
+        right: 13px;
+      }
+
+      details p {
+        padding: 0 14px 15px;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .tool-button {
+        font-size: 9px;
+      }
+
+      summary {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <nav>
-    <a href="index.html">Головна</a>
-    <a href="about.html">Про мене</a>
-    <a href="services.html">Послуги</a>
-    <a href="#portfolio">Портфоліо</a>
-    <a href="contacts.html">Контакти</a>
-  </nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="home-link" href="index.html">← На головну</a>
 
-  <div class="container">
-    <h1>Часті питання</h1>
+      <nav class="desktop-nav">
+        <a href="about.html">Про мене</a>
+        <a href="services.html">Послуги</a>
+        <a href="pricing.html">Цінова політика</a>
+        <a href="contacts.html">Контакти</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- FAQ BLOCK: Вставляй в контейнер на faq.html -->
-<details><summary>1. Як швидко ви відповідаєте?</summary><p>Відповідь зазвичай я надаю протягом одного календарного дня (в т.ч. суботу та неділю).</p></details>
-<details><summary>2. Чи можна адаптувати рішення під мій бізнес?</summary><p>Так, усі рішення налаштовуються індивідуально під ваші потреби.</p></details>
-<details><summary>3. Скільки коштують послуги?</summary><p>Ціна залежить від складності завдання. Попередня оцінка надається після уточнення деталей.Див.вкладку "Цінова політика".</p></details>
-<details><summary>4. Чи є консультації безкоштовними?</summary><p>Перша коротка консультація — безкоштовна. Далі — за домовленістю.</p></details>
-<details><summary>5. З якими інструментами ви працюєте?</summary><p>Excel, Power BI, Google Sheets, VBA, Apps Script, Power Query, Power Pivot.</p></details>
-<details><summary>6. Чи можна зробити автоматичне формування звітів?</summary><p>Так, створюю повністю автоматизовані звіти під ключ.</p></details>
-<details><summary>7. Ви працюєте з великими обсягами даних?</summary><p>З Big Data-платформами (типу Hadoop, Spark) тимчасово не працюю.Але великі Excel-таблиці з 100 000 – 500 000 рядків, великі масиви в Google Sheets чи Power BI — так, обробляю без проблем.</p></details>
-<details><summary>8. Чи можете інтегрувати різні джерела даних?</summary><p>Так, можлива інтеграція з API, базами даних, CRM, ERP тощо.</p></details>
-<details><summary>9. Ви працюєте віддалено?</summary><p>Так, всі проєкти реалізуються онлайн.</p></details>
-<details><summary>10. Який формат файлів ви видаєте?</summary><p>Excel, Power BI, Google Sheets або будь-який інший погоджений формат.</p></details>
-<details><summary>11. Чи підписуєте ви NDA?</summary><p>Так, конфіденційність гарантована. NDA підписується за запитом.</p></details>
-<details><summary>12. Ви працюєте з державними установами?</summary><p>Наразі я співпрацюю лише з приватними компаніями, підприємцями та фізичними особами. Такий формат дозволяє ефективніше та швидше реалізовувати завдання без зайвих бюрократичних процедур.</p></details>
-<details><summary>13. Чи робите ви дашборди?</summary><p>Так, створюю динамічні дашборди з фільтрами, графіками, KPI.</p></details>
-<details><summary>14. Можна зробити кнопки для керування?</summary><p>Так, реалізую кнопки, макроси, скрипти для взаємодії з користувачем.</p></details>
-<details><summary>15. Ви навчаєте користуванню рішенням?</summary><p>Так, надаю інструкції, відео або міні-курси при потребі.</p></details>
-<details><summary>16. Чи можна оновлювати дані автоматично?</summary><p>Так, налаштовується автоматичне оновлення з джерел.</p></details>
-<details><summary>17. Як довго триває розробка?</summary><p>Від 1 до 10 днів у середньому, залежно від складності.</p></details>
-<details><summary>18. Чи робите ви інструкції для користувача?</summary><p>Так, текстові або відеоінструкції — за погодженням.</p></details>
-<details><summary>19. Ви працюєте з Power BI Service?</summary><p>Так, налаштовую публікацію, оновлення і доступи в Power BI Online.</p></details>
-<details><summary>20. Чи можна замовити лише частину роботи?</summary><p>Так, ви можете замовити окремий етап або компонент.</p></details>
-<details><summary>21. Ви працюєте зі складськими системами?</summary><p>Так, створюю рішення для обліку залишків, руху товару, інвентаризацій.</p></details>
-<details><summary>22. Чи можна працювати поетапно?</summary><p>Так, структура роботи може бути поділена на етапи з оплатою по частинах.</p></details>
-<details><summary>23. Ви працюєте з іноземними клієнтами?</summary><p>Так, працюю з клієнтами з будь-якої країни.</p></details>
-<details><summary>24. Чи створюєте ви калькулятори в Excel?</summary><p>Так, складні калькулятори з формулами, логікою, умовами.</p></details>
-<details><summary>25. Чи інтегруєте з Google Forms?</summary><p>Так, Google Forms може бути джерелом для аналізу чи автоматизації.</p></details>
-<details><summary>26. Ви підтягуєте дані з Zoho, Hubspot або інших CRM?</summary><p>Так, за наявності доступу до API — можливо.</p></details>
-<details><summary>27. Чи створюєте ви фінансові моделі?</summary><p>Так, в тому числі для бюджетування, прогнозування, аналізу сценаріїв.</p></details>
-<details><summary>28. Чи можете виправити мій наявний файл?</summary><p>Так, можу провести аудит і внести поліпшення.</p></details>
-<details><summary>29. Яку платформу краще обрати — Excel чи Power BI?</summary><p>Залежить від задачі. Excel — для локального аналізу, Power BI — для візуалізації та доступу онлайн.</p></details>
-<details><summary>30. Чи можна отримати підтримку після завершення проєкту?</summary><p>Так, надається гарантійна та постгарантійна підтримка.</p></details>
-<details><summary>31. Чи реалізовуєте ви контролі доступу?</summary><p>Так, можу обмежити доступ до окремих частин файлу або звіту.</p></details>
-<details><summary>32. Чи створюєте рішення для мобільного перегляду?</summary><p>Так, Power BI дашборди адаптовані для мобільних пристроїв.</p></details>
-<details><summary>33. Чи реалізовуєте інтеграцію з Telegram, Slack тощо?</summary><p>Так, за запитом можлива інтеграція через API або скрипти.</p></details>
-<details><summary>34. Чи працюєте ви з MacOS?</summary><p>Так, за можливості забезпечую сумісність з Mac.</p></details>
-<details><summary>35. Ви розробляєте на Python, R?</summary><p>Наразі спеціалізуюсь на Excel/Power BI/Apps Script. Python — обмежено.</p></details>
-<details><summary>36. Чи можна організувати регулярні оновлення?</summary><p>Так, налаштовую регулярне оновлення або за розкладом.</p></details>
-<details><summary>37. Ви підтримуєте англійську мову інтерфейсу?</summary><p>Так, можливе двомовне або англомовне рішення.</p></details>
-<details><summary>38. Чи можете допомогти з підготовкою до аудиту?</summary><p>Так, створюю прозорі звіти, логіку обліку та перевірки.</p></details>
-<details><summary>39. Чи використовуєте штучний інтелект?</summary><p>Так, ChatGPT застосовується для генерації коду, але логіка, керування процесом та перевірка результату здійснюється виключно мною.</p></details>
-<details><summary>40. Чи можете автоматизувати email-розсилки?</summary><p>Так, за допомогою Apps Script або Power Automate.</p></details>
-<details><summary>41. Чи потрібна підписка для користування рішенням?</summary><p>Ні, більшість рішень працюють без додаткових підписок.</p></details>
-<details><summary>42. Чи робите ви інтерактивні форми?</summary><p>Так, форми з перевіркою, логікою, підрахунками.</p></details>
-<details><summary>43. Чи використовуєте шаблони чи все з нуля?</summary><p>Усе розробляється з нуля, під конкретне замовлення.</p></details>
-<details><summary>44. Як захищені мої дані?</summary><p>Передача даних здійснюється лише через безпечні канали. Нічого не передається третім особам. За потреби підписується NDA</p></details>
-<details><summary>45. Ви працюєте з Microsoft 365?</summary><p>Так, повна сумісність з M365, Teams, OneDrive, SharePoint.</p></details>
-<details><summary>46. Чи потрібно щось встановлювати на мій компʼютер?</summary><p>Ні, більшість рішень працюють у вашому середовищі без встановлення.</p></details>
-<details><summary>47. Чи буде доступ до коду або формул?</summary><p>Так, всі рішення — з відкритим кодом і доступними формулами.</p></details>
-<details><summary>48. Чи можна потім самостійно редагувати файл?</summary><p>Так, все зроблено прозоро й зрозуміло — можна змінювати без проблем.</p></details>
-<details><summary>49. Ви враховуєте корпоративні стандарти компанії?</summary><p>Так, стилі, логотипи, мова, безпека — все враховується.</p></details>
-<details><summary>50. Чи можна отримати демо?</summary><p>Так, за запитом можу показати приклади або коротку демонстрацію.</p></details>
-    <!-- Кінець -->
+  <main class="page">
+    <section class="hero">
+      <h1>Часті питання</h1>
+      <p>
+        Тут зібрані відповіді про автоматизацію, формати роботи, технології,
+        вебзастосунки, мобільні рішення та підтримку після запуску.
+      </p>
+    </section>
+
+    <section class="faq-tools">
+      <input
+        id="faq-search"
+        class="faq-search"
+        type="search"
+        placeholder="Пошук за питаннями..."
+        aria-label="Пошук за частими питаннями"
+      >
+
+      <button id="open-all" class="tool-button" type="button">
+        Розгорнути всі
+      </button>
+
+      <button id="close-all" class="tool-button" type="button">
+        Згорнути всі
+      </button>
+    </section>
+
+    <div id="faq-count" class="faq-count"></div>
+
+    <section id="faq-list" class="faq-list">
+      <details><summary>1. Як швидко ви відповідаєте?</summary><p>Зазвичай відповідаю протягом одного календарного дня, включно із суботою та неділею.</p></details>
+      <details><summary>2. Чи можна адаптувати рішення під мій бізнес?</summary><p>Так. Усі рішення налаштовуються індивідуально під ваші процеси, структуру даних і вимоги.</p></details>
+      <details><summary>3. Скільки коштують послуги?</summary><p>Ціна залежить від складності та обсягу завдання. Попередню оцінку надаю після уточнення деталей. Актуальні умови дивіться на сторінці <a href="pricing.html">«Цінова політика»</a>.</p></details>
+      <details><summary>4. Чи є консультації безкоштовними?</summary><p>Перша коротка консультація безкоштовна. Подальший формат узгоджується окремо.</p></details>
+      <details><summary>5. З якими інструментами ви працюєте?</summary><p>Excel, Power BI, Google Sheets, VBA, Google Apps Script, Power Query, Power Pivot, JavaScript, HTML/CSS, Telegram Bot API та різні зовнішні API.</p></details>
+      <details><summary>6. Чи можна зробити автоматичне формування звітів?</summary><p>Так. Створюю автоматизовані звіти зі збором, обробкою, перевіркою та візуалізацією даних.</p></details>
+      <details><summary>7. Ви працюєте з великими обсягами даних?</summary><p>З Big Data-платформами на кшталт Hadoop або Spark наразі не працюю. Великі Excel-таблиці, масиви Google Sheets та моделі Power BI обробляю залежно від структури й технічних обмежень конкретного інструмента.</p></details>
+      <details><summary>8. Чи можете інтегрувати різні джерела даних?</summary><p>Так. Можлива інтеграція з API, базами даних, CRM, ERP, Google Drive, файлами Excel, CSV та іншими джерелами.</p></details>
+      <details><summary>9. Ви працюєте віддалено?</summary><p>Так. Більшість проєктів реалізуються повністю онлайн.</p></details>
+      <details><summary>10. Який формат файлів ви передаєте?</summary><p>Excel, Power BI, Google Sheets, PDF, CSV або інший погоджений формат. Формат залежить від завдання.</p></details>
+      <details><summary>11. Чи підписуєте ви NDA?</summary><p>Так. NDA може бути підписано за запитом замовника.</p></details>
+      <details><summary>12. Ви працюєте з державними установами?</summary><p>Наразі основний формат роботи — приватні компанії, підприємці та фізичні особи.</p></details>
+      <details><summary>13. Чи робите ви дашборди?</summary><p>Так. Створюю динамічні дашборди з фільтрами, графіками, KPI, план-факт аналізом та іншими показниками.</p></details>
+      <details><summary>14. Чи можна зробити кнопки для керування?</summary><p>Так. Реалізую кнопки, меню, макроси, скрипти та інші елементи взаємодії з користувачем.</p></details>
+      <details><summary>15. Ви навчаєте користуванню рішенням?</summary><p>Так. За потреби надаю текстові інструкції, відеоінструкції або коротке навчання.</p></details>
+      <details><summary>16. Чи можна оновлювати дані автоматично?</summary><p>Так. Оновлення можна запускати за розкладом, подією, кнопкою або іншою погодженою умовою.</p></details>
+      <details><summary>17. Як довго триває розробка?</summary><p>Залежить від складності. Невеликі задачі можуть бути виконані за один день, більші проєкти — за декілька днів або тижнів.</p></details>
+      <details><summary>18. Чи робите ви інструкції для користувача?</summary><p>Так. Формат інструкції узгоджується окремо: текст, схема, відео або коротка технічна документація.</p></details>
+      <details><summary>19. Ви працюєте з Power BI Service?</summary><p>Так. Налаштовую публікацію, доступи, оновлення та використання звітів у Power BI Service.</p></details>
+      <details><summary>20. Чи можна замовити лише частину роботи?</summary><p>Так. Можна замовити аудит, окремий модуль, конкретну формулу, скрипт, дашборд або етап проєкту.</p></details>
+      <details><summary>21. Ви працюєте зі складськими системами?</summary><p>Так. Можу створювати рішення для обліку залишків, руху товарів, інвентаризації та звітності.</p></details>
+      <details><summary>22. Чи можна працювати поетапно?</summary><p>Так. Проєкт може бути поділений на етапи з окремим тестуванням і оплатою.</p></details>
+      <details><summary>23. Ви працюєте з іноземними клієнтами?</summary><p>Так. Можлива віддалена робота з клієнтами з інших країн.</p></details>
+      <details><summary>24. Чи створюєте ви калькулятори в Excel?</summary><p>Так. Створюю калькулятори з формулами, перевірками, умовами, довідниками та автоматичним формуванням результату.</p></details>
+      <details><summary>25. Чи інтегруєте ви рішення з Google Forms?</summary><p>Так. Google Forms може бути джерелом даних для розрахунків, повідомлень, звітів та автоматизацій.</p></details>
+      <details><summary>26. Ви підтягуєте дані з Zoho, HubSpot або інших CRM?</summary><p>Так, якщо система має доступний API і замовник може надати необхідні права доступу.</p></details>
+      <details><summary>27. Чи створюєте ви фінансові моделі?</summary><p>Так. Зокрема для бюджетування, прогнозування, план-факт аналізу та сценарних розрахунків.</p></details>
+      <details><summary>28. Чи можете виправити мій наявний файл або скрипт?</summary><p>Так. Можу провести аудит, знайти помилки, оптимізувати логіку та доопрацювати існуюче рішення.</p></details>
+      <details><summary>29. Яку платформу краще обрати — Excel чи Power BI?</summary><p>Це залежить від задачі. Excel зручний для розрахунків і локальної роботи, Power BI — для аналітики, інтерактивної візуалізації та спільного перегляду.</p></details>
+      <details><summary>30. Чи можна отримати підтримку після завершення проєкту?</summary><p>Так. Доступна гарантійна та подальша підтримка за окремою домовленістю.</p></details>
+      <details><summary>31. Чи реалізовуєте ви контроль доступу?</summary><p>Так. Можу налаштувати ролі, права доступу, обмеження окремих дій, аркушів, файлів або функцій.</p></details>
+      <details><summary>32. Чи створюєте рішення для мобільного перегляду?</summary><p>Так. Можу адаптувати вебінтерфейси, дашборди та окремі робочі форми під смартфони й планшети.</p></details>
+      <details><summary>33. Чи можлива інтеграція з Telegram, Slack або іншими месенджерами?</summary><p>Так. Інтеграція реалізується через API, вебхуки або серверні скрипти, якщо платформа це дозволяє.</p></details>
+      <details><summary>34. Чи працюють ваші рішення на macOS?</summary><p>Залежить від технології. Google Sheets, вебзастосунки та Power BI у браузері працюють незалежно від ОС. Для VBA можливі окремі обмеження Excel для Mac.</p></details>
+      <details><summary>35. Ви розробляєте на Python або R?</summary><p>Основна спеціалізація — Excel, Power BI, Google Apps Script, JavaScript та вебінтерфейси. Python використовую обмежено, коли це доцільно для конкретної задачі.</p></details>
+      <details><summary>36. Чи можна організувати регулярні оновлення?</summary><p>Так. Можна налаштувати оновлення щогодини, щодня, щотижня або за іншою погодженою логікою.</p></details>
+      <details><summary>37. Ви підтримуєте англійську мову інтерфейсу?</summary><p>Так. Рішення може бути українською, англійською, російською або багатомовним.</p></details>
+      <details><summary>38. Чи можете допомогти з підготовкою до аудиту?</summary><p>Так. Можу створити прозорі звіти, контрольні перевірки, журнали змін та структуру обліку.</p></details>
+      <details><summary>39. Чи використовуєте ви штучний інтелект?</summary><p>Так, як допоміжний інструмент. Архітектуру, логіку, перевірку, тестування та відповідальність за результат беру на себе.</p></details>
+      <details><summary>40. Чи можете автоматизувати email-розсилки?</summary><p>Так. Це можна реалізувати через Apps Script, Power Automate, EmailJS або інші сервіси залежно від задачі.</p></details>
+      <details><summary>41. Чи потрібна підписка для користування рішенням?</summary><p>Не завжди. Частина рішень працює без додаткових підписок, але окремі сервіси можуть мати власні платні тарифи.</p></details>
+      <details><summary>42. Чи робите ви інтерактивні форми?</summary><p>Так. Форми можуть містити перевірки, умовну логіку, розрахунки, завантаження файлів і відправлення повідомлень.</p></details>
+      <details><summary>43. Чи використовуєте шаблони чи все розробляється з нуля?</summary><p>Основна логіка створюється під конкретне завдання. Готові технічні компоненти можуть повторно використовуватися, якщо це не шкодить якості та безпеці.</p></details>
+      <details><summary>44. Як захищені мої дані?</summary><p>Доступи надаються лише в межах, необхідних для роботи. Секретні ключі та токени зберігаються окремо від відкритого коду, а за потреби підписується NDA.</p></details>
+      <details><summary>45. Ви працюєте з Microsoft 365?</summary><p>Так. Можлива робота з Excel, Teams, OneDrive, SharePoint та іншими компонентами Microsoft 365.</p></details>
+      <details><summary>46. Чи потрібно щось встановлювати на комп’ютер?</summary><p>У більшості випадків ні. Багато рішень працюють у браузері, Google Workspace або вже встановленому Excel.</p></details>
+      <details><summary>47. Чи буде доступ до коду або формул?</summary><p>Так, якщо інше не погоджено окремо. Замовник отримує доступ до робочого рішення, формул і скриптів.</p></details>
+      <details><summary>48. Чи можна потім самостійно редагувати файл?</summary><p>Так. Рішення будуються так, щоб їх можна було підтримувати та змінювати надалі.</p></details>
+      <details><summary>49. Ви враховуєте корпоративні стандарти компанії?</summary><p>Так. Можна врахувати кольори, логотипи, термінологію, структуру доступів, правила безпеки та внутрішні процеси.</p></details>
+      <details><summary>50. Чи можна отримати демо?</summary><p>Так. За потреби можу показати приклад, прототип або коротку демонстрацію схожого рішення.</p></details>
+
+      <details><summary>51. Чи розробляєте ви вебзастосунки?</summary><p>Так. Створюю вебінтерфейси для роботи з Google Sheets, файлами, формами, фотографіями, посиланнями, внутрішніми процесами та іншими даними.</p></details>
+      <details><summary>52. Чи можна відкрити вебзастосунок на смартфоні?</summary><p>Так. Інтерфейс можна адаптувати під мобільний екран, додати великі кнопки, свайпи, пошук, картки та іншу мобільну навігацію.</p></details>
+      <details><summary>53. Чи створюєте ви Android-застосунки?</summary><p>Створюю мобільні вебзастосунки та PWA, які відкриваються на Android і можуть додаватися на головний екран як окрема іконка. Нативні застосунки для Google Play оцінюються окремо.</p></details>
+      <details><summary>54. Чи можна встановити ваш вебзастосунок як програму?</summary><p>Так, якщо рішення реалізовано як PWA. Користувач може додати його на головний екран смартфона та відкривати майже як звичайний застосунок.</p></details>
+      <details><summary>55. Чи можете ви створити Telegram-бота?</summary><p>Так. Бот може приймати команди, повідомлення, файли, формувати нагадування, передавати заявки та запускати автоматичні дії.</p></details>
+      <details><summary>56. Чи можна надсилати заявки з сайту прямо в Telegram?</summary><p>Так. Форми сайту можуть надсилати дані в Telegram, email, Google Sheets або одразу в декілька каналів.</p></details>
+      <details><summary>57. Чи можете ви додати авторизацію користувачів?</summary><p>Так. Можлива авторизація через Google, перевірка дозволених акаунтів, ролей і доступу до окремих функцій.</p></details>
+      <details><summary>58. Чи працюєте ви з Google Drive та файлами?</summary><p>Так. Можна автоматично створювати папки, копіювати файли, архівувати документи, формувати посилання та керувати доступом.</p></details>
+      <details><summary>59. Чи можете ви автоматично обробляти PDF, інвойси або банківські виписки?</summary><p>Так, якщо структура документів придатна для розпізнавання. Можна витягувати дані, очищати їх, зіставляти позиції та записувати результат у таблицю.</p></details>
+      <details><summary>60. Чи можете ви зробити систему нагадувань?</summary><p>Так. Нагадування можуть надходити в Telegram або email за часом, датою, статусом чи іншою подією.</p></details>
+      <details><summary>61. Чи можете ви створити сайт або доопрацювати існуючий?</summary><p>Так. Можу створити або доопрацювати HTML/CSS/JavaScript-сайт, форми, адаптивний дизайн, аналітику та інтеграції.</p></details>
+      <details><summary>62. Чи можна захистити форми сайту від ботів і спаму?</summary><p>Так. Використовую серверну перевірку, Cloudflare Turnstile, обмеження частоти запитів, перевірку довжини полів та безпечне збереження даних.</p></details>
+    </section>
+
+    <div id="no-results" class="no-results">
+      Нічого не знайдено. Спробуйте інше слово або коротший запит.
+    </div>
 
     <a class="back-link" href="index.html">← Назад на головну</a>
-  </div>
+  </main>
+
+  <script>
+    const searchInput = document.getElementById('faq-search');
+    const faqItems = Array.from(
+      document.querySelectorAll('#faq-list details')
+    );
+    const faqCount = document.getElementById('faq-count');
+    const noResults = document.getElementById('no-results');
+
+    function updateCount(visibleCount = faqItems.length) {
+      faqCount.textContent =
+        `Показано: ${visibleCount} із ${faqItems.length}`;
+    }
+
+    function filterFaq() {
+      const query = searchInput.value
+        .trim()
+        .toLowerCase();
+
+      let visibleCount = 0;
+
+      faqItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const isVisible = !query || text.includes(query);
+
+        item.style.display = isVisible ? '' : 'none';
+
+        if (isVisible) {
+          visibleCount++;
+        } else {
+          item.open = false;
+        }
+      });
+
+      noResults.style.display =
+        visibleCount === 0 ? 'block' : 'none';
+
+      updateCount(visibleCount);
+    }
+
+    document
+      .getElementById('open-all')
+      .addEventListener('click', () => {
+        faqItems.forEach(item => {
+          if (item.style.display !== 'none') {
+            item.open = true;
+          }
+        });
+      });
+
+    document
+      .getElementById('close-all')
+      .addEventListener('click', () => {
+        faqItems.forEach(item => {
+          item.open = false;
+        });
+      });
+
+    searchInput.addEventListener('input', filterFaq);
+
+    updateCount();
+  </script>
 </body>
 </html>
-
-
-
-
-

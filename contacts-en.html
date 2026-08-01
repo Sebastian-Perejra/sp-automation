@@ -191,6 +191,33 @@
       right: 0;
     }
 
+    .lang-switcher {
+      display: flex;
+      gap: 7px;
+    }
+
+    .lang-switcher button {
+      min-width: 38px;
+      height: 34px;
+      padding: 0 9px;
+      border: 1px solid #d6cec4;
+      border-radius: 10px;
+      background: rgba(255,255,255,.8);
+      color: #5f5a54;
+      font-family: var(--font-tech);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .lang-switcher button:hover {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
     .page-shell {
       width: min(100%, 1080px);
       margin: 0 auto;
@@ -661,6 +688,12 @@
         <a href="solutions-en.html">Solutions</a>
         <a href="faq-en.html">FAQ</a>
       </nav>
+
+      <div class="lang-switcher">
+        <button type="button" onclick="location.href='contacts.html'">UA</button>
+        <button type="button" onclick="location.href='contacts-en.html'">EN</button>
+        <button type="button" onclick="location.href='contacts-ru.html'">RU</button>
+      </div>
     </div>
   </header>
 

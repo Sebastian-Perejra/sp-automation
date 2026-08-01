@@ -1,123 +1,131 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ценовая политика – Себастьян Перейра</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-
-  <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-456XH82BM9');
-  </script>
-
-  <style>
-    body {
-      font-family: 'Roboto Mono', monospace;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f7fa;
-      color: #1a1a1a;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #005ea8;
-    }
-    h1 {
-      text-align: center;
-      color: #cc0000;
-      margin-top: 40px;
-    }
-    .section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .section h2 {
-      color: #007acc;
-    }
-    .back-button {
-      display: block;
-      text-align: center;
-      margin: 60px auto 40px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #cc0000;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #555;
-      background-color: #e6f0fa;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ценовая политика – Sebastian Automations</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Roboto Mono',monospace;background:#f4f7fa;color:#1a1a1a}
+header{position:sticky;top:0;background:#e6f0fa;border-bottom:1px solid #c4d8e6;z-index:100}
+nav{max-width:1100px;margin:auto;padding:18px;display:flex;justify-content:space-between;align-items:center}
+nav a{text-decoration:none;color:#007acc;font-weight:bold}
+.container{max-width:1000px;margin:auto;padding:30px 16px}
+.hero,.card{background:#fff;border-radius:18px;padding:28px;margin-bottom:20px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
+.hero h1{margin:0 0 15px;color:#0F9D58;font-size:42px}
+.hero p,.card p,.card li{line-height:1.8;color:#55626b}
+.card h2{margin-top:0;color:#007acc}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.item{padding:18px;border:1px solid #d9e4ec;border-radius:14px;background:#fbfdff}
+.price{font-size:24px;font-weight:bold;color:#0F9D58;margin-top:8px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px;border-bottom:1px solid #dde7ef;text-align:left}
+th{background:#f5f9fc}
+.note{padding:18px;background:#edf7ff;border-left:4px solid #007acc;border-radius:8px}
+.cta{text-align:center;background:linear-gradient(135deg,#edf6ff,#f7fbff)}
+.button{display:inline-block;padding:14px 22px;border-radius:10px;background:#007acc;color:#fff;text-decoration:none;font-weight:bold}
+footer{text-align:center;padding:20px;background:#e6f0fa}
+@media(max-width:760px){
+.hero h1{font-size:34px}
+.grid{grid-template-columns:1fr}
+table{font-size:13px}
+}
+</style>
 </head>
 <body>
-  <nav>
-    <a href="index-ru.html">Главная</a>
-    <a href="about.html">Обо мне</a>
-    <a href="services.html">Услуги</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contacts-ru.html">Контакты</a>
-  </nav>
+<header>
+<nav>
+<a href="index-ru.html">← Главная</a>
+<div>
+<a href="about-ru.html">Обо мне</a>
+<a href="services-ru.html" style="margin-left:18px;">Услуги</a>
+<a href="contacts-ru.html" style="margin-left:18px;">Контакты</a>
+</div>
+</nav>
+</header>
 
-  <h1>Ценовая политика</h1>
+<div class="container">
 
-  <div class="section">
-    <h2>Базовая ставка</h2>
-    <p>Моя стандартная ставка — <strong>800 гривен в час</strong>.</p>
-    <p>Если проект долгосрочный и оценка превышает <strong>50 часов</strong>, ставка может быть снижена до <strong>650 гривен в час</strong> по договорённости.</p>
-  </div>
+<section class="hero">
+<h1>Ценовая политика</h1>
+<p>Прозрачные условия, почасовая оплата, поэтапная работа и реалистичная оценка стоимости. Вы платите за результат, а не за красивые обещания.</p>
+</section>
 
-  <div class="section">
-    <h2>Пакеты поддержки</h2>
-    <ul>
-      <li>3 часа в месяц — 2000 грн</li>
-      <li>4 часа в месяц — 2600 грн</li>
-    </ul>
-    <p>Фиксированная ежемесячная оплата, независимо от количества задач. Гарантированный приоритет в пределах пакета.</p>
-  </div>
+<section class="card">
+<h2>Почасовая ставка</h2>
+<div class="grid">
+<div class="item">
+<strong>Стандартная ставка</strong>
+<div class="price">800 грн/год</div>
+<p>Для большинства задач, консультаций, доработок и автоматизаций.</p>
+</div>
+<div class="item">
+<strong>Крупные проекты</strong>
+<div class="price">650 грн/год</div>
+<p>Может применяться для проектов объёмом более 50 часов.</p>
+</div>
+</div>
+</section>
 
-  <div class="section">
-    <h2>Консультация и оценка</h2>
-    <p>Первая консультация и предварительная оценка задачи — <strong>бесплатно</strong>.</p>
-  </div>
+<section class="card">
+<h2>Ориентировочная стоимость работ</h2>
+<table>
+<tr><th>Направление</th><th>Стоимость</th></tr>
+<tr><td>Excel и Google Sheets</td><td>от 1500 грн</td></tr>
+<tr><td>Автоматизация отчётов</td><td>от 2000 грн</td></tr>
+<tr><td>Telegram-боты</td><td>от 3000 грн</td></tr>
+<tr><td>Обработка PDF и инвойсов</td><td>от 3000 грн</td></tr>
+<tr><td>Исследование рынка</td><td>от 3000 грн</td></tr>
+<tr><td>Power BI</td><td>от 5000 грн</td></tr>
+<tr><td>Интеграции и API</td><td>от 5000 грн</td></tr>
+<tr><td>Веб-приложения</td><td>от 8000 грн</td></tr>
+</table>
+</section>
 
-  <div class="section">
-    <h2>Формат работы</h2>
-    <p>Работа ведётся по итерационной модели: после получения задачи от клиента выполняется первый этап, согласуется результат, затем — следующая итерация. По завершении каждого этапа производится частичная оплата за фактически потраченное время.</p>
-    <p><em>Общее время включает сопровождение клиента: объяснения, демонстрация решения, ответы на вопросы. Это часть услуги и часть ценности, которую вы получаете вместе с готовым результатом.</em></p>
-  </div>
+<section class="card">
+<h2>Почему цены могут отличаться</h2>
+<p>Две похожие на первый взгляд задачи могут существенно отличаться по сложности.</p>
+<ul>
+<li>Одна формула может занять несколько минут.</li>
+<li>Полноценная автоматизация может потребовать десятки часов работы.</li>
+<li>Некоторые проекты одновременно охватывают Excel, Power BI, Google Sheets, API, Telegram, PDF и веб-интерфейсы.</li>
+</ul>
+<div class="note">
+Окончательная оценка всегда выполняется после ознакомления с реальной задачей, файлами и процессами.
+</div>
+</section>
 
-  <a class="back-button" href="index-ru.html">← Назад на главную</a>
+<section class="card">
+<h2>Пакеты поддержки</h2>
+<table>
+<tr><th>Пакет</th><th>Стоимость</th></tr>
+<tr><td>3 часа</td><td>2000 грн</td></tr>
+<tr><td>4 часа</td><td>2600 грн</td></tr>
+</table>
+<p>В стоимость входят консультации, исправление ошибок, доработки, объяснения и сопровождение.</p>
+</section>
 
-  <footer>
-    © 2015–2025 Sebastian Automations. Все права защищены. <a href="terms-ru.html">Условия использования</a>
-  </footer>
+<section class="card">
+<h2>Как проходит работа</h2>
+<ol>
+<li>Анализ задачи.</li>
+<li>Согласование объёма работ.</li>
+<li>Разработка решения.</li>
+<li>Тестирование.</li>
+<li>Передача результата.</li>
+<li>Поддержка после запуска.</li>
+</ol>
+</section>
+
+<section class="card cta">
+<h2>Первая консультация бесплатная</h2>
+<p>Опишите задачу несколькими предложениями, и я предложу оптимальный способ её решения.</p>
+<a class="button" href="contacts.html">Связаться со мной</a>
+</section>
+
+</div>
+
+<footer>© 2015–2026 Sebastian Automations. Все права защищены.</footer>
 </body>
 </html>

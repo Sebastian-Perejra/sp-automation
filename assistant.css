@@ -149,3 +149,15 @@
 .desktop-nav a.active-page::after {
   display: none;
 }
+body {
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+body.page-leaving {
+    opacity: 0;
+}

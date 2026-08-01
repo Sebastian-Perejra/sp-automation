@@ -1,123 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pricing Policy – Sebastian Pereira</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-
-  <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-456XH82BM9');
-  </script>
-
-  <style>
-    body {
-      font-family: 'Roboto Mono', monospace;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f7fa;
-      color: #1a1a1a;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #005ea8;
-    }
-    h1 {
-      text-align: center;
-      color: #cc0000;
-      margin-top: 40px;
-    }
-    .section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .section h2 {
-      color: #007acc;
-    }
-    .back-button {
-      display: block;
-      text-align: center;
-      margin: 60px auto 40px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #cc0000;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #555;
-      background-color: #e6f0fa;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing – Sebastian Automations</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Roboto Mono',monospace;background:#f4f7fa;color:#1a1a1a}
+header{position:sticky;top:0;background:#e6f0fa;border-bottom:1px solid #c4d8e6;z-index:100}
+nav{max-width:1100px;margin:auto;padding:18px;display:flex;justify-content:space-between;align-items:center}
+nav a{text-decoration:none;color:#007acc;font-weight:bold}
+.container{max-width:1000px;margin:auto;padding:30px 16px}
+.hero,.card{background:#fff;border-radius:18px;padding:28px;margin-bottom:20px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
+.hero h1{margin:0 0 15px;color:#0F9D58;font-size:42px}
+.hero p,.card p,.card li{line-height:1.8;color:#55626b}
+.card h2{margin-top:0;color:#007acc}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.item{padding:18px;border:1px solid #d9e4ec;border-radius:14px;background:#fbfdff}
+.price{font-size:24px;font-weight:bold;color:#0F9D58;margin-top:8px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px;border-bottom:1px solid #dde7ef;text-align:left}
+th{background:#f5f9fc}
+.note{padding:18px;background:#edf7ff;border-left:4px solid #007acc;border-radius:8px}
+.cta{text-align:center;background:linear-gradient(135deg,#edf6ff,#f7fbff)}
+.button{display:inline-block;padding:14px 22px;border-radius:10px;background:#007acc;color:#fff;text-decoration:none;font-weight:bold}
+footer{text-align:center;padding:20px;background:#e6f0fa}
+@media(max-width:760px){
+.hero h1{font-size:34px}
+.grid{grid-template-columns:1fr}
+table{font-size:13px}
+}
+</style>
 </head>
 <body>
-  <nav>
-    <a href="index-en.html">Home</a>
-    <a href="about.html">About Me</a>
-    <a href="services.html">Services</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contacts-en.html">Contacts</a>
-  </nav>
+<header>
+<nav>
+<a href="index-en.html">← Home</a>
+<div>
+<a href="about-en.html">About Me</a>
+<a href="services-en.html" style="margin-left:18px;">Services</a>
+<a href="contacts-en.html" style="margin-left:18px;">Contacts</a>
+</div>
+</nav>
+</header>
 
-  <h1>Pricing Policy</h1>
+<div class="container">
 
-  <div class="section">
-    <h2>Standard Rate</h2>
-    <p>My standard rate is <strong>800 UAH per hour</strong>.</p>
-    <p>For long-term projects exceeding <strong>50 hours</strong>, the rate can be reduced to <strong>650 UAH per hour</strong> upon agreement.</p>
-  </div>
+<section class="hero">
+<h1>Pricing</h1>
+<p>Transparent terms, hourly billing, staged delivery, and realistic cost estimates. You pay for actual work and results, not vague promises.</p>
+</section>
 
-  <div class="section">
-    <h2>Support Packages</h2>
-    <ul>
-      <li>3 hours per month – 2000 UAH</li>
-      <li>4 hours per month – 2600 UAH</li>
-    </ul>
-    <p>Fixed monthly fee, regardless of actual task volume. Guaranteed priority within the allocated package hours.</p>
-  </div>
+<section class="card">
+<h2>Hourly rate</h2>
+<div class="grid">
+<div class="item">
+<strong>Standard rate</strong>
+<div class="price">UAH 800/hour</div>
+<p>For most tasks, consultations, improvements, and automation projects.</p>
+</div>
+<div class="item">
+<strong>Large projects</strong>
+<div class="price">UAH 650/hour</div>
+<p>May apply to projects estimated at more than 50 hours.</p>
+</div>
+</div>
+</section>
 
-  <div class="section">
-    <h2>Consultation & Estimation</h2>
-    <p>Initial consultation and task evaluation — <strong>free of charge</strong>.</p>
-  </div>
+<section class="card">
+<h2>Estimated project costs</h2>
+<table>
+<tr><th>Service</th><th>Estimated cost</th></tr>
+<tr><td>Excel and Google Sheets</td><td>from UAH 1,500</td></tr>
+<tr><td>Report automation</td><td>from UAH 2,000</td></tr>
+<tr><td>Telegram bots</td><td>from UAH 3,000</td></tr>
+<tr><td>PDF and invoice processing</td><td>from UAH 3,000</td></tr>
+<tr><td>Market research</td><td>from UAH 3,000</td></tr>
+<tr><td>Power BI</td><td>from UAH 5,000</td></tr>
+<tr><td>Integrations and APIs</td><td>from UAH 5,000</td></tr>
+<tr><td>Web applications</td><td>from UAH 8,000</td></tr>
+</table>
+</section>
 
-  <div class="section">
-    <h2>Work Format</h2>
-    <p>Work is done in an iterative model: after receiving the task from the client, the first stage is completed, results approved, and then we proceed to the next iteration. After each completed stage, partial payment is made based on actual time spent.</p>
-    <p><em>The total time includes client support: explanation, solution demonstration, answering questions. This is part of the service and part of the value you receive along with the final result.</em></p>
-  </div>
+<section class="card">
+<h2>Why prices may vary</h2>
+<p>Two tasks that look similar at first may differ significantly in complexity.</p>
+<ul>
+<li>A single formula may take only a few minutes.</li>
+<li>A complete automation solution may require dozens of hours of work.</li>
+<li>Some projects combine Excel, Power BI, Google Sheets, APIs, Telegram, PDF processing, and web interfaces.</li>
+</ul>
+<div class="note">
+The final estimate is provided only after reviewing the actual task, files, and business process.
+</div>
+</section>
 
-  <a class="back-button" href="index-en.html">← Back to Home</a>
+<section class="card">
+<h2>Support packages</h2>
+<table>
+<tr><th>Package</th><th>Price</th></tr>
+<tr><td>3 hours</td><td>UAH 2,000</td></tr>
+<tr><td>4 hours</td><td>UAH 2,600</td></tr>
+</table>
+<p>The package includes consultations, bug fixes, improvements, explanations, and ongoing support.</p>
+</section>
 
-  <footer>
-    © 2015–2025 Sebastian Automations. All rights reserved. <a href="terms-en.html">Terms of Use</a>
-  </footer>
+<section class="card">
+<h2>How the work is organized</h2>
+<ol>
+<li>Task analysis.</li>
+<li>Scope agreement.</li>
+<li>Solution development.</li>
+<li>Testing.</li>
+<li>Delivery of the result.</li>
+<li>Post-launch support.</li>
+</ol>
+</section>
+
+<section class="card cta">
+<h2>The first consultation is free</h2>
+<p>Describe your task in a few sentences, and I will suggest the most practical way to solve it.</p>
+<a class="button" href="contacts-en.html">Contact me</a>
+</section>
+
+</div>
+
+<footer>© 2015–2026 Sebastian Automations. All rights reserved.</footer>
 </body>
 </html>

@@ -1462,6 +1462,468 @@
       }
     }
 
+    .dashboard-case {
+      margin-top: 26px;
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow-card);
+    }
+
+    .dashboard-case h2 {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .dashboard-raw {
+      margin-top: 26px;
+      overflow: hidden;
+      border: 1px solid #e7e0d8;
+      border-radius: 18px;
+      background: #fcfbf9;
+      transition: opacity .35s ease, transform .35s ease, max-height .5s ease;
+    }
+
+    .dashboard-raw.hidden {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+    }
+
+    .dashboard-raw-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 18px;
+      border-bottom: 1px solid #e7e0d8;
+      background: #f7f4ef;
+    }
+
+    .dashboard-raw-head strong {
+      color: #3f3b37;
+      font-size: 14px;
+    }
+
+    .dashboard-raw-head span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .dashboard-table-wrap {
+      max-height: 420px;
+      overflow: auto;
+    }
+
+    .dashboard-table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+    }
+
+    .dashboard-table th,
+    .dashboard-table td {
+      padding: 10px 11px;
+      border-right: 1px solid #eee8e0;
+      border-bottom: 1px solid #eee8e0;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .dashboard-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--green);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .dashboard-table td {
+      color: #57524d;
+      font-family: var(--font-tech);
+      font-size: 9px;
+    }
+
+    .dashboard-action {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .dashboard-build-button {
+      min-height: 48px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(53,89,75,.18);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .dashboard-build-button:hover {
+      background: var(--green-hover);
+      transform: translateY(-1px);
+    }
+
+    .dashboard-build-button:disabled {
+      opacity: .65;
+      cursor: wait;
+      transform: none;
+    }
+
+    .dashboard-loader {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 44px;
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .dashboard-loader.active {
+      display: flex;
+    }
+
+    .dashboard-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #cfe0d3;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: dashboardSpin .8s linear infinite;
+    }
+
+    @keyframes dashboardSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .dashboard-output {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease, max-height .8s ease;
+    }
+
+    .dashboard-output.visible {
+      max-height: 1800px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dashboard-filters {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4,1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 12px;
+      border: 1px solid #e7e0d8;
+      border-radius: 14px;
+      background: #f8f7f4;
+    }
+
+    .dashboard-filter {
+      padding: 9px 10px;
+      border: 1px solid #e7e0d8;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .dashboard-filter small {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+      font-size: 8px;
+    }
+
+    .dashboard-filter strong {
+      color: #4b4641;
+      font-size: 9px;
+    }
+
+    .dashboard-kpis {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .dashboard-kpi {
+      padding: 16px;
+      border: 1px solid #e7e0d8;
+      border-radius: 14px;
+      background: #fcfbf9;
+    }
+
+    .dashboard-kpi:nth-child(1) { background:#f2f8f3; border-color:#d4e4d7; }
+    .dashboard-kpi:nth-child(2) { background:#f2f7fb; border-color:#d9e5ee; }
+    .dashboard-kpi:nth-child(3) { background:#fff8e9; border-color:#efdfb8; }
+    .dashboard-kpi:nth-child(4) { background:#f7f3fb; border-color:#dfd8ed; }
+
+    .dashboard-kpi span {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 9px;
+    }
+
+    .dashboard-kpi strong {
+      display: block;
+      margin: 7px 0 5px;
+      color: #2f2c29;
+      font-family: var(--font-tech);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .dashboard-kpi em {
+      color: #0f8a4b;
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .dashboard-charts {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
+    }
+
+    .dashboard-chart {
+      min-height: 260px;
+      padding: 16px;
+      border: 1px solid #e7e0d8;
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .dashboard-chart h3 {
+      margin: 0 0 16px;
+      color: #49443f;
+      font-size: 12px;
+    }
+
+    .monthly-chart {
+      position: relative;
+      height: 185px;
+      padding: 10px 6px 24px 32px;
+      border-left: 1px solid #ddd6ce;
+      border-bottom: 1px solid #ddd6ce;
+      background: repeating-linear-gradient(to bottom,transparent 0,transparent 43px,#f0ece7 44px);
+    }
+
+    .monthly-chart svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .months-row {
+      position: absolute;
+      left: 28px;
+      right: 0;
+      bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      color: #8c857e;
+      font-size: 7px;
+    }
+
+    .years-chart {
+      height: 185px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 44px;
+      padding: 20px 20px 0;
+      border-bottom: 1px solid #ddd6ce;
+      background: repeating-linear-gradient(to bottom,transparent 0,transparent 42px,#f0ece7 43px);
+    }
+
+    .year-column {
+      width: 82px;
+      text-align: center;
+    }
+
+    .year-column b {
+      display: block;
+      margin-bottom: 6px;
+      color: #4b4641;
+      font-size: 9px;
+    }
+
+    .year-column i {
+      display: block;
+      width: 100%;
+      border-radius: 8px 8px 0 0;
+      background: linear-gradient(180deg,#7b73c8,#56519b);
+      transform-origin: bottom;
+      animation: growYear .9s ease both;
+    }
+
+    .year-column span {
+      display: block;
+      margin-top: 7px;
+      color: #847d76;
+      font-size: 8px;
+    }
+
+    @keyframes growYear {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+
+    .category-wrap {
+      display: grid;
+      grid-template-columns: 145px 1fr;
+      align-items: center;
+      gap: 22px;
+      min-height: 180px;
+    }
+
+    .category-donut {
+      width: 145px;
+      height: 145px;
+      border-radius: 50%;
+      position: relative;
+      background: conic-gradient(#3478e5 0 42%,#0f9d58 42% 69%,#f5aa20 69% 89%,#8854d0 89% 100%);
+    }
+
+    .category-donut::after {
+      content: "100%";
+      position: absolute;
+      inset: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: #4f4944;
+      font-family: var(--font-tech);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .category-legend {
+      display: grid;
+      gap: 10px;
+    }
+
+    .category-legend div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #5c5651;
+      font-size: 9px;
+    }
+
+    .category-name {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .category-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .products-bars {
+      display: grid;
+      gap: 12px;
+    }
+
+    .product-bar-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 62px;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .product-bar-row span {
+      color: #5d5752;
+      font-size: 8px;
+    }
+
+    .product-track {
+      height: 11px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #ece8e3;
+    }
+
+    .product-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,#2f80ed,#64afff);
+      transform-origin: left;
+      animation: growProduct .9s ease both;
+    }
+
+    .product-value {
+      text-align: right;
+      font-family: var(--font-tech);
+      font-weight: 700;
+    }
+
+    @keyframes growProduct {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @media (max-width: 760px) {
+      .dashboard-case {
+        margin-top: 18px;
+        padding: 26px 16px;
+        border-radius: 18px;
+      }
+
+      .dashboard-filters {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .dashboard-filter:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .dashboard-kpis,
+      .dashboard-charts {
+        grid-template-columns: 1fr;
+      }
+
+      .category-wrap {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+
+      .category-legend {
+        width: 100%;
+      }
+
+      .product-bar-row {
+        grid-template-columns: 90px 1fr 52px;
+      }
+    }
+
   </style>
   <link rel="stylesheet" href="/assistant.css">
 <script src="/assistant.js" defer></script>
@@ -1732,43 +2194,142 @@
       </div>
     </section>
 
-
-    
-    <section class="section-card" id="dashboard-case">
+    <section class="dashboard-case" id="dashboard-case">
       <div class="case-demo-kicker">Real case study #3</div>
-      <h2>Automatic dashboard creation based on Excel and Google Sheets</h2>
-
+      <h2>Automatic dashboard creation from an Excel dataset</h2>
       <p class="case-demo-subtitle">
-        The system processes large datasets, calculates KPIs, groups information,
-        builds interactive reports and automatically updates dashboards.
+        The source dataset contains 200 sales rows with date, year, month, day,
+        product, category, client, quantity and amount. After the button is pressed,
+        the system aggregates the data, calculates KPIs and builds four charts.
+        All data below is fictional and used for demonstration.
       </p>
 
-      <div style="margin-top:22px;padding:18px;border:1px solid #e8e1d8;border-radius:16px;background:#fcfbf9;">
-        <strong>Demonstration dataset (200 rows)</strong>
+      <div class="dashboard-raw" id="dashboard-raw">
+        <div class="dashboard-raw-head">
+          <strong>Raw sales dataset</strong>
+          <span>200 ROWS</span>
+        </div>
 
-        <div style="margin-top:12px;max-height:420px;overflow:auto;">
-          <table style="width:100%;border-collapse:collapse;font-size:11px;">
-            <thead style="position:sticky;top:0;background:#35594b;color:#fff;">
+        <div class="dashboard-table-wrap">
+          <table class="dashboard-table">
+            <thead>
               <tr>
-                <th style="padding:8px;">Date</th>
-                <th style="padding:8px;">Year</th>
-                <th style="padding:8px;">Product</th>
-                <th style="padding:8px;">Category</th>
-                <th style="padding:8px;">Client</th>
-                <th style="padding:8px;">Qty</th>
-                <th style="padding:8px;">Amount</th>
+                <th>Дата</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Day</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Client</th>
+                <th>Quantity</th>
+                <th>Amount, UAH</th>
               </tr>
             </thead>
-            <tbody id="dashboardRows"></tbody>
+            <tbody>
+              <tbody id="dashboard-raw-body"></tbody>
+            </tbody>
           </table>
         </div>
       </div>
 
-      <div class="demo-cta">
-        <a href="contacts-en.html">I want a similar dashboard</a>
+      <div class="dashboard-action">
+        <button class="dashboard-build-button" id="dashboard-build" type="button">
+          ⚙ Build dashboard
+        </button>
+      </div>
+
+      <div class="dashboard-loader" id="dashboard-loader">
+        <span class="dashboard-spinner"></span>
+        <span>Aggregating data, calculating KPIs and building charts…</span>
+      </div>
+
+      <div class="dashboard-output" id="dashboard-output">
+        <div class="dashboard-filters">
+          <div class="dashboard-filter"><small>Period</small><strong>01.01.2024–31.12.2024</strong></div>
+          <div class="dashboard-filter"><small>Year</small><strong>All</strong></div>
+          <div class="dashboard-filter"><small>Month</small><strong>All</strong></div>
+          <div class="dashboard-filter"><small>Category</small><strong>All</strong></div>
+          <div class="dashboard-filter"><small>Client</small><strong>All</strong></div>
+        </div>
+
+        <div class="dashboard-kpis">
+          <div class="dashboard-kpi"><span>Total revenue</span><strong>1 245 600</strong><em>▲ 18,7%</em></div>
+          <div class="dashboard-kpi"><span>Units sold</span><strong>1 862</strong><em>▲ 12,3%</em></div>
+          <div class="dashboard-kpi"><span>Average order value</span><strong>669 грн</strong><em>▲ 5,1%</em></div>
+          <div class="dashboard-kpi"><span>Unique clients</span><strong>48</strong><em>▲ 9,1%</em></div>
+        </div>
+
+        <div class="dashboard-charts">
+          <article class="dashboard-chart">
+            <h3>Monthly revenue trend</h3>
+            <div class="monthly-chart">
+              <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Динаміка виручки">
+                <defs>
+                  <linearGradient id="dashboard-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#35594b" stop-opacity=".28"/>
+                    <stop offset="100%" stop-color="#35594b" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0 105 L55 92 L110 125 L165 67 L220 83 L275 58 L330 74 L385 126 L440 120 L495 70 L550 47 L600 25 L600 160 L0 160 Z" fill="url(#dashboard-area)"/>
+                <polyline points="0,105 55,92 110,125 165,67 220,83 275,58 330,74 385,126 440,120 495,70 550,47 600,25" fill="none" stroke="#35594b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="months-row">
+                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="dashboard-chart">
+            <h3>Revenue comparison by year</h3>
+            <div class="years-chart">
+              <div class="year-column"><b>1 020 000</b><i style="height:105px;"></i><span>2023</span></div>
+              <div class="year-column"><b>1 245 600</b><i style="height:140px;"></i><span>2024</span></div>
+            </div>
+          </article>
+
+          <article class="dashboard-chart">
+            <h3>Revenue share by category</h3>
+            <div class="category-wrap">
+              <div class="category-donut"></div>
+              <div class="category-legend">
+                <div><span class="category-name"><span class="category-dot" style="background:#3478e5;"></span>Laptops</span><strong>42%</strong></div>
+                <div><span class="category-name"><span class="category-dot" style="background:#0f9d58;"></span>Monitors</span><strong>27%</strong></div>
+                <div><span class="category-name"><span class="category-dot" style="background:#f5aa20;"></span>Accessories</span><strong>20%</strong></div>
+                <div><span class="category-name"><span class="category-dot" style="background:#8854d0;"></span>Other</span><strong>11%</strong></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="dashboard-chart">
+            <h3>Top products by revenue</h3>
+            <div class="products-bars">
+              <div class="product-bar-row"><span>HP 15 Laptop</span><div class="product-track"><div class="product-fill" style="width:100%;"></div></div><span class="product-value">285 000</span></div>
+              <div class="product-bar-row"><span>Dell Inspiron</span><div class="product-track"><div class="product-fill" style="width:78%;"></div></div><span class="product-value">210 500</span></div>
+              <div class="product-bar-row"><span>LG 24 Monitor</span><div class="product-track"><div class="product-fill" style="width:67%;"></div></div><span class="product-value">180 000</span></div>
+              <div class="product-bar-row"><span>Миша Logitech</span><div class="product-track"><div class="product-fill" style="width:36%;"></div></div><span class="product-value">95 400</span></div>
+              <div class="product-bar-row"><span>A4Tech</span><div class="product-track"><div class="product-fill" style="width:25%;"></div></div><span class="product-value">67 200</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="case-demo-controls">
+          <div class="demo-progress-wrap">
+            <div class="demo-progress-label">
+              <span>Completed analytical dashboard</span>
+              <span>200 / 200</span>
+            </div>
+            <div class="demo-progress-track">
+              <div class="demo-progress-bar" style="width:100%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-cta">
+          <a href="contacts.html">I want a similar dashboard</a>
+        </div>
       </div>
     </section>
-
 
     <section class="section-card upcoming">
       <h2>What Will Be Added Next</h2>
@@ -2226,28 +2787,98 @@
   </script>
 
 
-<script>
-const dashboardRows=document.getElementById("dashboardRows");
-if(dashboardRows){
-const p=["HP 15","Dell","LG 24","Samsung 27","Logitech","Kingston SSD"];
-const c=["Laptops","Monitors","Accessories","Components"];
-const cl=["Alpha","Beta","Gamma","Delta","Omega"];
-let h="";
-for(let i=1;i<=200;i++){
- const a=(i*713)%45000+1000;
- h+=`<tr>
-<td style="padding:8px;border-bottom:1px solid #eee;">${i}.01.2026</td>
-<td style="padding:8px;border-bottom:1px solid #eee;">2026</td>
-<td style="padding:8px;border-bottom:1px solid #eee;">${p[i%p.length]}</td>
-<td style="padding:8px;border-bottom:1px solid #eee;">${c[i%c.length]}</td>
-<td style="padding:8px;border-bottom:1px solid #eee;">${cl[i%cl.length]}</td>
-<td style="padding:8px;border-bottom:1px solid #eee;">${(i%12)+1}</td>
-<td style="padding:8px;border-bottom:1px solid #eee;">${a.toLocaleString("en-US")}</td>
-</tr>`;
-}
-dashboardRows.innerHTML=h;
-}
-</script>
 
+  <script>
+    const dashboardRawBody = document.getElementById("dashboard-raw-body");
+
+    const dashboardProducts = [
+      ["HP 15 Laptop", "Laptops", 23000],
+      ["Dell Inspiron 3520", "Laptops", 28500],
+      ["Lenovo IdeaPad 3", "Laptops", 26400],
+      ["LG 24 Monitor", "Monitors", 9000],
+      ["Монітор Samsung 27", "Monitors", 11800],
+      ["Logitech M185 Mouse", "Accessories", 450],
+      ["A4Tech Keyboard", "Accessories", 750],
+      ["SSD Kingston 1TB", "Components", 3200],
+      ["Роутер TP-Link", "Networking equipment", 2100],
+      ["Принтер Canon", "Office equipment", 7600]
+    ];
+
+    const dashboardClients = [
+      "Alpha LLC",
+      "Beta LLC",
+      "Gamma LLC",
+      "Delta LLC",
+      "Ivanenko",
+      "Petrenko",
+      "Omega LLC",
+      "Vector LLC",
+      "Prime LLC",
+      "Kovalenko"
+    ];
+
+    function renderDashboardRawRows() {
+      const startDate = new Date(2023, 0, 3);
+      const rows = [];
+
+      for (let i = 0; i < 200; i++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + i * 3);
+
+        const product = dashboardProducts[i % dashboardProducts.length];
+        const client = dashboardClients[(i * 3) % dashboardClients.length];
+        const quantity = 1 + ((i * 7) % 12);
+        const amount = product[2] * quantity;
+
+        rows.push(`
+          <tr>
+            <td>${currentDate.toLocaleDateString("en-GB")}</td>
+            <td>${currentDate.getFullYear()}</td>
+            <td>${currentDate.toLocaleDateString("uk-UA", { month: "long" })}</td>
+            <td>${currentDate.getDate()}</td>
+            <td>${product[0]}</td>
+            <td>${product[1]}</td>
+            <td>${client}</td>
+            <td>${quantity}</td>
+            <td>${amount.toLocaleString("en-GB")}</td>
+          </tr>
+        `);
+      }
+
+      dashboardRawBody.innerHTML = rows.join("");
+    }
+
+    renderDashboardRawRows();
+
+    const dashboardBuildButton = document.getElementById("dashboard-build");
+    const dashboardRaw = document.getElementById("dashboard-raw");
+    const dashboardLoader = document.getElementById("dashboard-loader");
+    const dashboardOutput = document.getElementById("dashboard-output");
+
+    let dashboardIsBuilt = false;
+
+    dashboardBuildButton.addEventListener("click", () => {
+      if (dashboardIsBuilt) {
+        dashboardOutput.classList.remove("visible");
+        dashboardRaw.classList.remove("hidden");
+        dashboardBuildButton.textContent = "⚙ Build dashboard";
+        dashboardIsBuilt = false;
+        return;
+      }
+
+      dashboardBuildButton.disabled = true;
+      dashboardBuildButton.textContent = "Processing data…";
+      dashboardLoader.classList.add("active");
+
+      setTimeout(() => {
+        dashboardRaw.classList.add("hidden");
+        dashboardLoader.classList.remove("active");
+        dashboardOutput.classList.add("visible");
+        dashboardBuildButton.disabled = false;
+        dashboardBuildButton.textContent = "↩ Show raw data";
+        dashboardIsBuilt = true;
+      }, 1300);
+    });
+  </script>
 </body>
 </html>

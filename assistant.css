@@ -138,3 +138,14 @@
   box-shadow: 0 4px 12px rgba(53, 89, 75, 0.18);
   cursor: default;
 }
+.desktop-nav a.active-page {
+  color: #ffffff;
+  background: #35594b;
+  padding: 7px 11px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(53, 89, 75, 0.18);
+}
+
+.desktop-nav a.active-page::after {
+  display: none;
+}

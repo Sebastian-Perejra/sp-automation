@@ -287,8 +287,83 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector(".desktop-nav");
+
+  if (!nav) return;
+
   const path = window.location.pathname.toLowerCase();
-  const navLinks = document.querySelectorAll(".desktop-nav a");
+  const fileName = path.split("/").pop() || "index.html";
+
+  let language = "ua";
+  let suffix = "";
+
+  if (fileName.includes("-en.html")) {
+    language = "en";
+    suffix = "-en";
+  } else if (fileName.includes("-ru.html")) {
+    language = "ru";
+    suffix = "-ru";
+  }
+
+  const labels = {
+    ua: {
+      about: "Про мене",
+      services: "Послуги",
+      pricing: "Цінова політика",
+      solutions: "Рішення",
+      faq: "FAQ",
+      contacts: "Контакти"
+    },
+    en: {
+      about: "About Me",
+      services: "Services",
+      pricing: "Pricing",
+      solutions: "Solutions",
+      faq: "FAQ",
+      contacts: "Contacts"
+    },
+    ru: {
+      about: "Обо мне",
+      services: "Услуги",
+      pricing: "Ценовая политика",
+      solutions: "Решения",
+      faq: "FAQ",
+      contacts: "Контакты"
+    }
+  };
+
+  const pages = [
+    "about",
+    "services",
+    "pricing",
+    "solutions",
+    "faq",
+    "contacts"
+  ];
+
+  const currentPage = fileName
+    .replace("-en.html", "")
+    .replace("-ru.html", "")
+    .replace(".html", "");
+
+  nav.innerHTML = pages
+    .map(page => {
+      const activeClass = page === currentPage ? "active-page" : "";
+      const ariaCurrent =
+        page === currentPage ? 'aria-current="page"' : "";
+
+      return `
+        <a
+          class="${activeClass}"
+          href="${page}${suffix}.html"
+          ${ariaCurrent}
+        >
+          ${labels[language][page]}
+        </a>
+      `;
+    })
+    .join("");
+});
 
   navLinks.forEach(link => {
     const href = link.getAttribute("href")?.toLowerCase();

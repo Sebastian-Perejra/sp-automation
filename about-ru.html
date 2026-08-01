@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Обо мне – Себастьян Перейра</title>
+
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Roboto Mono', monospace;
+      background: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(230, 240, 250, 0.96);
+      border-bottom: 1px solid #c4d8e6;
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar-inner {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .home-link {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .home-link:hover {
+      color: #005ea8;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 26px;
+    }
+
+    .desktop-nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .desktop-nav a:hover {
+      color: #005ea8;
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 7px;
+    }
+
+    .lang-switcher button {
+      border: 1px solid #007acc;
+      border-radius: 7px;
+      background: #fff;
+      color: #007acc;
+      padding: 6px 9px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lang-switcher button:hover {
+      background: #007acc;
+      color: #fff;
+    }
+
+    .page {
+      width: min(100%, 1000px);
+      margin: 0 auto;
+      padding:
+        42px
+        20px
+        max(64px, env(safe-area-inset-bottom));
+    }
+
+    .hero {
+      margin-bottom: 28px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid #d5e4ee;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      color: #0F9D58;
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 700px;
+      color: #596771;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .hero-badge {
+      min-width: 145px;
+      padding: 18px;
+      border: 1px solid #cce8d5;
+      border-radius: 16px;
+      background: #edf8f1;
+      color: #0F9D58;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 28px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #d9e4ec;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: #1a1a1a;
+      font-size: 21px;
+      line-height: 1.3;
+    }
+
+    .section p {
+      margin: 0 0 14px;
+      color: #4f5d66;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section ul,
+    .section ol {
+      margin: 12px 0 0;
+      padding-left: 21px;
+      color: #4f5d66;
+    }
+
+    .section li {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .section li:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      padding: 18px 20px;
+      border-left: 4px solid #007acc;
+      border-radius: 10px;
+      background: #f3f9fd;
+      color: #33434d;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .capabilities {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .capability {
+      padding: 16px;
+      border: 1px solid #dce6ed;
+      border-radius: 12px;
+      background: #fbfdff;
+    }
+
+    .capability strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #007acc;
+      font-size: 12px;
+    }
+
+    .capability span {
+      display: block;
+      color: #5d6a73;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .process {
+      counter-reset: step;
+      display: grid;
+      gap: 11px;
+      margin-top: 14px;
+    }
+
+    .process-step {
+      position: relative;
+      padding: 15px 15px 15px 52px;
+      border: 1px solid #dce6ed;
+      border-radius: 12px;
+      background: #fbfdff;
+      color: #4f5d66;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .process-step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #007acc;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .quote {
+      margin: 16px 0 0;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background: #1f2b33;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .cta {
+      margin-top: 20px;
+      padding: 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
+      border: 1px solid #c9e2f7;
+      border-radius: 16px;
+    }
+
+    .cta h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .cta p {
+      margin: 0 0 18px;
+      color: #596771;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 9px;
+      background: #1a73e8;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .cta a:hover {
+      background: #135fbe;
+    }
+
+    footer {
+      padding: 16px 20px;
+      border-top: 1px solid #c4d8e6;
+      background: #e6f0fa;
+      color: #7e8991;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        padding:
+          max(12px, env(safe-area-inset-top))
+          12px
+          12px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .lang-switcher {
+        margin-left: auto;
+      }
+
+      .page {
+        padding:
+          24px
+          12px
+          max(36px, env(safe-area-inset-bottom));
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 24px 18px;
+        text-align: center;
+      }
+
+      .hero-badge {
+        width: fit-content;
+        min-width: 0;
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 22px 16px;
+      }
+
+      .section h2 {
+        font-size: 18px;
+      }
+
+      .section p,
+      .section li {
+        font-size: 12px;
+      }
+
+      .capabilities {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 24px 16px;
+      }
+
+      .cta a {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .home-link {
+        font-size: 12px;
+      }
+
+      .lang-switcher button {
+        padding: 5px 7px;
+        font-size: 10px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="home-link" href="index-ru.html">← На главную</a>
+
+      <nav class="desktop-nav">
+        <a href="services-ru.html">Услуги</a>
+        <a href="pricing-ru.html">Ценовая политика</a>
+        <a href="faq-ru.html">FAQ</a>
+        <a href="contacts-ru.html">Контакты</a>
+      </nav>
+
+      <div class="lang-switcher">
+        <button onclick="location.href='about-ru.html'">UA</button>
+        <button onclick="location.href='about-en.html'">EN</button>
+        <button onclick="location.href='about-ru.html'">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <h1>Обо мне</h1>
+        <p>
+          Я занимаюсь автоматизацией рабочих процессов — от сложных Excel-файлов
+          и Google Таблиц до Power BI, веб-приложений, Telegram-ботов,
+          интеграций и аналитических решений для бизнеса.
+        </p>
+      </div>
+
+      <div class="hero-badge">
+        Не просто код.<br>
+        Рабочая система.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Что я делаю на самом деле</h2>
+
+      <p>
+        Моя задача — не просто написать формулу или скрипт. Сначала я
+        разбираюсь, как работает процесс, где возникают ошибки, что люди делают
+        вручную и какой результат им на самом деле нужен.
+      </p>
+
+      <p>
+        После этого строю решение, которое убирает лишние действия, сокращает количество
+        ошибок и делает процесс понятнее для тех, кто им пользуется.
+      </p>
+
+      <div class="highlight">
+        Я не пытаюсь автоматизировать всё ради автоматизации. Если задачу
+        проще решить нормальной формулой, я не буду строить для неё
+        космический корабль.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>С какими задачами ко мне обращаются</h2>
+
+      <div class="capabilities">
+        <div class="capability">
+          <strong>Excel и Google Sheets</strong>
+          <span>Формулы, макросы, сложные расчёты, проверки, сведение данных и автоматические отчёты.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Power BI и аналитика</strong>
+          <span>Дашборды, KPI, план-факт анализ, визуализация, модели данных и автоматическое обновление.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Веб-приложения</strong>
+          <span>Интерфейсы для работы с таблицами, файлами, фото, ссылками, формами и внутренними процессами.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Telegram и уведомления</strong>
+          <span>Боты, напоминания, заявки с сайта, автоматические уведомления и запуск действий через чат.</span>
+        </div>
+
+        <div class="capability">
+          <strong>PDF, инвойсы и выписки</strong>
+          <span>Извлечение, очистка, сопоставление и перенос данных в таблицы или другие системы.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Google Drive и доступы</strong>
+          <span>Папки, файлы, архивирование, права доступа, авторизация пользователей и передача собственности.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Интеграции и API</strong>
+          <span>Обмен данными между сайтами, CRM, Google Workspace, Telegram и другими сервисами.</span>
+        </div>
+
+        <div class="capability">
+          <strong>Мобильные решения</strong>
+          <span>Адаптивные веб-интерфейсы, PWA и рабочие формы для смартфонов и планшетов.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Исследование рынка и конкурентной среды</h2>
+
+      <p>
+        Отдельно могу проводить прикладные исследования рынка для бизнеса.
+        Это полезно, когда нужно не просто собрать цифры, а понять,
+        что происходит на рынке и как выглядит позиция компании относительно конкурентов.
+      </p>
+
+      <ul>
+        <li>анализ товарных позиций и ассортимента;</li>
+        <li>сравнение цен, характеристик и позиционирования;</li>
+        <li>анализ конкурентной среды;</li>
+        <li>сбор и структурирование открытых данных;</li>
+        <li>оценка рыночных предложений и сегментов;</li>
+        <li>поиск закономерностей, отличий и потенциальных ниш;</li>
+        <li>подготовка таблиц, отчётов и дашбордов по результатам исследования.</li>
+      </ul>
+
+      <p>
+        Результат может быть оформлен в виде аналитической таблицы,
+        презентации, дашборда или структурированного отчёта с выводами.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Как я работаю</h2>
+
+      <p>
+        Сначала я смотрю на реальные файлы, таблицы, документы или текущий
+        процесс. Затем уточняю требования, предлагаю вариант реализации и оцениваю
+        объём работы.
+      </p>
+
+      <div class="process">
+        <div class="process-step">Анализ задачи и исходных данных.</div>
+        <div class="process-step">Прототип или тестовая логика.</div>
+        <div class="process-step">Разработка основного решения.</div>
+        <div class="process-step">Проверка на реальных сценариях.</div>
+        <div class="process-step">Передача доступов, прав и рабочих материалов.</div>
+        <div class="process-step">Инструкция и поддержка после запуска.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Что получает заказчик</h2>
+
+      <ul>
+        <li>готовое рабочее решение, а не набор разрозненных кусков кода;</li>
+        <li>понятную логику работы;</li>
+        <li>доступ к формулам, скриптам и настройкам, если иное не согласовано отдельно;</li>
+        <li>передачу необходимых прав и собственности;</li>
+        <li>тестирование на реальных сценариях;</li>
+        <li>инструкцию или техническую схему;</li>
+        <li>возможность дальнейшей доработки;</li>
+        <li>поддержку после запуска.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Почему я этим занимаюсь</h2>
+
+      <p>
+        Мне нравится находить места, где люди каждый день тратят время на
+        повторяющиеся действия, и превращать их в кнопку, автоматический процесс
+        или понятный интерфейс.
+      </p>
+
+      <div class="quote">
+        «Серьёзно? И это всё время можно было не делать вручную?»
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Без лишних обещаний</h2>
+
+      <p>
+        Я не обещаю автоматизировать абсолютно всё. Если задача технически
+        нецелесообразна, слишком дорогая или выходит за пределы моей компетенции,
+        я говорю об этом прямо.
+      </p>
+
+      <p>
+        Но если процесс можно сделать быстрее, точнее и проще —
+        скорее всего, я найду способ.
+      </p>
+    </section>
+
+    <section class="cta">
+      <h2>Есть задача, которая отнимает слишком много времени?</h2>
+      <p>
+        Напишите мне. Посмотрю, что можно автоматизировать, упростить или
+        превратить в нормальный рабочий процесс.
+      </p>
+
+      <a href="contacts.html">Перейти к контактам</a>
+    </section>
+  </main>
+
+  <footer>
+    © 2015–2026 Sebastian Automations. Все права защищены.
+  </footer>
+</body>
+</html>

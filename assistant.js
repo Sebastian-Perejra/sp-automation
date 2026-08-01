@@ -58,19 +58,15 @@ const assistantFollowUp = {
 
 let assistantVisible = false;
 let inactivityTimer;
-let secondTimer;
-let hideTimer;
+let waitingTimer;
+let goodbyeTimer;
+let finalHideTimer;
 
 function getCurrentLanguage() {
     const lang = document.documentElement.lang.toLowerCase();
 
-    if (lang.startsWith("uk")) {
-        return "uk";
-    }
-
-    if (lang.startsWith("ru")) {
-        return "ru";
-    }
+    if (lang.startsWith("uk")) return "uk";
+    if (lang.startsWith("ru")) return "ru";
 
     return "en";
 }
@@ -94,112 +90,74 @@ function createAssistant() {
 }
 
 function showAssistant() {
-    if (assistantVisible) {
-        return;
-    }
+    if (assistantVisible) return;
 
     assistantVisible = true;
 
     const lang = getCurrentLanguage();
-
-    const assistant =
-        document.getElementById("sp-assistant");
-
-    const message =
-        document.getElementById("sp-assistant-message");
-
+    const assistant = document.getElementById("sp-assistant");
+    const message = document.getElementById("sp-assistant-message");
     const phrases = assistantMessages[lang];
 
     message.textContent =
-        phrases[
-            Math.floor(Math.random() * phrases.length)
-        ];
+        phrases[Math.floor(Math.random() * phrases.length)];
 
     assistant.classList.add("show");
 
-    secondTimer = setTimeout(() => {
-        message.textContent =
-            assistantFollowUp[lang].waiting;
+    waitingTimer = setTimeout(() => {
+        message.textContent = assistantFollowUp[lang].waiting;
     }, 60000);
 
-    hideTimer = setTimeout(() => {
-        message.textContent =
-            assistantFollowUp[lang].goodbye;
+    goodbyeTimer = setTimeout(() => {
+        message.textContent = assistantFollowUp[lang].goodbye;
 
-        setTimeout(() => {
+        finalHideTimer = setTimeout(() => {
             hideAssistant();
         }, 3000);
-
     }, 120000);
 }
 
 function hideAssistant() {
     assistantVisible = false;
 
-    clearTimeout(secondTimer);
-    clearTimeout(hideTimer);
+    clearTimeout(waitingTimer);
+    clearTimeout(goodbyeTimer);
+    clearTimeout(finalHideTimer);
 
-    document
-        .getElementById("sp-assistant")
-        .classList.remove("show");
+    const assistant = document.getElementById("sp-assistant");
+
+    if (assistant) {
+        assistant.classList.remove("show");
+    }
 }
 
-function resetTimer() {
+function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
 
     if (assistantVisible) {
         hideAssistant();
     }
 
-    inactivityTimer = setTimeout(
-        showAssistant,
-        60000
-    );
+    inactivityTimer = setTimeout(() => {
+        showAssistant();
+    }, 60000);
 }
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-        createAssistant();
-        resetTimer();
-
-        [
-            "mousemove",
-            "mousedown",
-            "keydown",
-            "touchstart",
-            "scroll"
-        ].forEach(eventName => {
-            document.addEventListener(
-                eventName,
-                resetTimer,
-                { passive: true }
-            );
-        });
-    }
-);
-
 document.addEventListener("DOMContentLoaded", () => {
+    createAssistant();
+    resetInactivityTimer();
 
-    const assistant = document.createElement("div");
-    assistant.id = "sp-assistant";
-
-    assistant.innerHTML = `
-        <img
-            id="sp-assistant-avatar"
-            src="/assistant-avatar.png"
-            alt="Assistant"
-        >
-
-        <div id="sp-assistant-message">
-            Добрий день! Чим я можу допомогти?
-        </div>
-    `;
-
-    document.body.appendChild(assistant);
-
-    setTimeout(() => {
-        assistant.classList.add("show");
-    }, 1000);
-
+    [
+        "mousemove",
+        "mousedown",
+        "keydown",
+        "touchstart",
+        "scroll"
+    ].forEach(eventName => {
+        document.addEventListener(
+            eventName,
+            resetInactivityTimer,
+            { passive: true }
+        );
+    });
 });

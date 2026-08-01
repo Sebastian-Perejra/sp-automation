@@ -32,6 +32,7 @@
 
       --green: #35594b;
       --green-hover: #29483c;
+      --green-soft: #dce9df;
 
       --blue: #2f6f9f;
       --blue-hover: #255a82;
@@ -47,6 +48,7 @@
 
       --radius-large: 28px;
       --radius-card: 22px;
+      --radius-small: 12px;
 
       --font-main: "Manrope", sans-serif;
       --font-tech: "Roboto Mono", monospace;
@@ -636,6 +638,830 @@
         padding-right: 17px;
       }
     }
+
+    .case-demo {
+      margin-top: 26px;
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: var(--shadow-card);
+    }
+
+    .case-demo-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .case-demo-kicker {
+      margin-bottom: 8px;
+      color: var(--green);
+      font-family: var(--font-tech);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .case-demo h2 {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .case-demo-subtitle {
+      max-width: 760px;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .case-demo-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 18px;
+    }
+
+    .statement-panel,
+    .result-panel {
+      min-width: 0;
+      border: 1px solid #e7e0d8;
+      border-radius: 18px;
+      background: #fcfbf9;
+      overflow: hidden;
+    }
+
+    .demo-panel-head {
+      padding: 16px 18px;
+      border-bottom: 1px solid #e7e0d8;
+      background: rgba(247, 244, 239, .9);
+    }
+
+    .demo-panel-title {
+      color: #3f3b37;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .demo-panel-note {
+      margin-top: 3px;
+      color: var(--text-muted);
+      font-family: var(--font-tech);
+      font-size: 9px;
+    }
+
+    .statement-window {
+      height: 390px;
+      overflow: auto;
+      padding: 12px;
+      background: #f8f7f4;
+    }
+
+    .statement-line {
+      display: grid;
+      grid-template-columns: 72px 1fr 86px;
+      gap: 10px;
+      padding: 10px 11px;
+      border-bottom: 1px dashed #ddd5cc;
+      color: #4e4a45;
+      font-family: var(--font-tech);
+      font-size: 10px;
+      line-height: 1.45;
+      opacity: .42;
+      transition: opacity .22s ease, background .22s ease, transform .22s ease;
+    }
+
+    .statement-line.active {
+      opacity: 1;
+      background: #fff9e8;
+      transform: translateX(2px);
+    }
+
+    .statement-line.done {
+      opacity: .82;
+      background: #f7faf7;
+    }
+
+    .statement-date {
+      color: #7d766e;
+      white-space: nowrap;
+    }
+
+    .statement-text {
+      overflow-wrap: anywhere;
+    }
+
+    .statement-amount {
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .result-window {
+      height: 390px;
+      overflow: auto;
+      background: #ffffff;
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .result-table th,
+    .result-table td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #eee8e0;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .result-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f7f4ef;
+      color: #5c5751;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .result-table td {
+      color: #504b46;
+      font-size: 10px;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity .22s ease, transform .22s ease;
+    }
+
+    .result-table tr.show td {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .category-chip {
+      display: inline-flex;
+      padding: 5px 8px;
+      border: 1px solid #d9e6dc;
+      border-radius: 999px;
+      background: #f3f8f4;
+      color: var(--green);
+      font-family: var(--font-tech);
+      font-size: 9px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .case-demo-controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-green);
+      border-radius: 16px;
+      background: var(--surface-green);
+    }
+
+    .demo-progress-wrap {
+      min-width: 0;
+    }
+
+    .demo-progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 8px;
+      color: #50675a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .demo-progress-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #dce8df;
+    }
+
+    .demo-progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5f8a72);
+      transition: width .22s ease;
+    }
+
+    .demo-run-button {
+      min-height: 46px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(53, 89, 75, .18);
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+
+    .demo-run-button:hover {
+      background: var(--green-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(53, 89, 75, .24);
+    }
+
+    .demo-run-button:disabled {
+      opacity: .62;
+      cursor: wait;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .case-demo-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .demo-stat {
+      padding: 15px 14px;
+      border: 1px solid #e8e2da;
+      border-radius: 14px;
+      background: #fcfbf9;
+      text-align: center;
+    }
+
+    .demo-stat strong {
+      display: block;
+      color: var(--green);
+      font-family: var(--font-tech);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .demo-stat span {
+      display: block;
+      margin-top: 7px;
+      color: var(--text-muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .demo-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .demo-cta a {
+      display: inline-flex;
+      min-height: 48px;
+      padding: 0 22px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(47, 111, 159, .18);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .demo-cta a:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 900px) {
+      .case-demo {
+        padding: 32px;
+      }
+
+      .case-demo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .statement-window,
+      .result-window {
+        height: 340px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .case-demo {
+        margin-top: 18px;
+        padding: 26px 16px;
+        border-radius: 18px;
+      }
+
+      .case-demo-header {
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      .case-demo h2 {
+        font-size: 1.8rem;
+      }
+
+      .statement-window,
+      .result-window {
+        height: 310px;
+      }
+
+      .statement-line {
+        grid-template-columns: 62px 1fr;
+        font-size: 9px;
+      }
+
+      .statement-amount {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .case-demo-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-run-button {
+        width: 100%;
+      }
+
+      .case-demo-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .result-table th:nth-child(1),
+      .result-table td:nth-child(1) {
+        display: none;
+      }
+    }
+
+
+    .statement-line.warning {
+      opacity: 1;
+      background: #fff5dc;
+    }
+
+    .statement-line.error {
+      opacity: 1;
+      background: #ffe8e8;
+    }
+
+    .category-chip.warning {
+      border-color: #efd28a;
+      background: #fff5dc;
+      color: #8b6500;
+    }
+
+    .category-chip.error {
+      border-color: #efb0b0;
+      background: #ffe8e8;
+      color: #9a2f2f;
+    }
+
+    .result-table tr.warning td {
+      background: #fffaf0;
+    }
+
+    .result-table tr.error td {
+      background: #fff2f2;
+    }
+
+
+    .pdf-case {
+      margin-top: 26px;
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: var(--shadow-card);
+    }
+
+    .pdf-case h2 {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .pdf-case-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 0.78fr 1.32fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .drive-panel,
+    .pipeline-panel,
+    .sheet-panel {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #e7e0d8;
+      border-radius: 18px;
+      background: #fcfbf9;
+    }
+
+    .drive-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #e7e0d8;
+      background: #f7f4ef;
+      color: #5e5953;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .drive-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d8d0c7;
+    }
+
+    .drive-body {
+      min-height: 370px;
+      padding: 14px;
+    }
+
+    .drive-folder {
+      margin-bottom: 12px;
+      overflow: hidden;
+      border: 1px solid #e5ddd4;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .drive-folder-title {
+      padding: 11px 12px;
+      border-bottom: 1px solid #eee7df;
+      background: #fbfaf7;
+      color: #46413d;
+      font-family: var(--font-tech);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .drive-files {
+      min-height: 54px;
+      padding: 8px;
+    }
+
+    .drive-empty {
+      padding: 10px;
+      color: #a09a93;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      text-align: center;
+    }
+
+    .drive-file {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 6px;
+      padding: 8px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      color: #56514c;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      line-height: 1.35;
+      transition: opacity .2s ease, transform .25s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .drive-file:last-child {
+      margin-bottom: 0;
+    }
+
+    .drive-file.processing {
+      border-color: #efd28a;
+      background: #fff7e5;
+      transform: translateX(3px);
+    }
+
+    .drive-file.archived {
+      border-color: #d2e3d6;
+      background: #f3f8f4;
+    }
+
+    .pdf-icon {
+      display: grid;
+      width: 27px;
+      height: 32px;
+      place-items: center;
+      border-radius: 5px;
+      background: #c6534f;
+      color: #fff;
+      font-size: 7px;
+      font-weight: 700;
+    }
+
+    .pipeline-body {
+      min-height: 370px;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pipeline-step {
+      position: relative;
+      padding: 12px 12px 12px 42px;
+      border: 1px solid #e5ddd4;
+      border-radius: 12px;
+      background: #fff;
+      color: #68615a;
+      font-size: 11px;
+      font-weight: 700;
+      transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .pipeline-step + .pipeline-step {
+      margin-top: 17px;
+    }
+
+    .pipeline-step + .pipeline-step::before {
+      content: "↓";
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      color: #aaa198;
+      font-family: var(--font-tech);
+      transform: translateX(-50%);
+    }
+
+    .pipeline-step span {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 21px;
+      height: 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ece7e0;
+      color: #827a72;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      transform: translateY(-50%);
+    }
+
+    .pipeline-step.active {
+      border-color: #efd28a;
+      background: #fff7e5;
+      color: #725400;
+      transform: translateX(2px);
+    }
+
+    .pipeline-step.done {
+      border-color: #cfe0d3;
+      background: #f3f8f4;
+      color: var(--green);
+    }
+
+    .pipeline-step.done span {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .sheet-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 12px 0;
+      border-bottom: 1px solid #e7e0d8;
+      background: #f7f4ef;
+    }
+
+    .sheet-tab {
+      padding: 8px 11px;
+      border: 1px solid #ddd5cc;
+      border-bottom: 0;
+      border-radius: 9px 9px 0 0;
+      background: #eee9e3;
+      color: #7b746c;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .sheet-tab.active {
+      background: #fff;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .pdf-sheet-window {
+      height: 370px;
+      overflow: auto;
+      background: #fff;
+    }
+
+    .pdf-result-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .pdf-result-table th,
+    .pdf-result-table td {
+      padding: 9px 8px;
+      border-right: 1px solid #eee8e0;
+      border-bottom: 1px solid #eee8e0;
+      text-align: left;
+      vertical-align: top;
+      font-size: 9px;
+      line-height: 1.35;
+    }
+
+    .pdf-result-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f7f4ef;
+      color: #5f5953;
+      font-weight: 700;
+    }
+
+    .pdf-result-table td {
+      color: #514c47;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .22s ease, transform .22s ease;
+    }
+
+    .pdf-result-table tr.show td {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pdf-case-controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-blue);
+      border-radius: 16px;
+      background: #f1f6f9;
+    }
+
+    .pdf-log {
+      min-height: 42px;
+      color: #50616a;
+      font-family: var(--font-tech);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .pdf-run-button {
+      min-height: 46px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(47,111,159,.18);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .pdf-run-button:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .pdf-run-button:disabled {
+      opacity: .62;
+      cursor: wait;
+      transform: none;
+    }
+
+    .pdf-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pdf-summary-item {
+      padding: 14px 12px;
+      border: 1px solid #e8e2da;
+      border-radius: 14px;
+      background: #fcfbf9;
+      text-align: center;
+    }
+
+    .pdf-summary-item strong {
+      display: block;
+      color: var(--blue);
+      font-family: var(--font-tech);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .pdf-summary-item span {
+      display: block;
+      margin-top: 7px;
+      color: var(--text-muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 980px) {
+      .pdf-case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .drive-body,
+      .pipeline-body {
+        min-height: auto;
+      }
+
+      .pipeline-body {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      .pipeline-step + .pipeline-step {
+        margin-top: 0;
+      }
+
+      .pipeline-step + .pipeline-step::before {
+        content: "→";
+        top: 50%;
+        left: -8px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pdf-case {
+        margin-top: 18px;
+        padding: 26px 16px;
+        border-radius: 18px;
+      }
+
+      .pipeline-body {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-step + .pipeline-step {
+        margin-top: 17px;
+      }
+
+      .pipeline-step + .pipeline-step::before {
+        content: "↓";
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .pdf-case-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .pdf-run-button {
+        width: 100%;
+      }
+
+      .pdf-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pdf-result-table th:nth-child(1),
+      .pdf-result-table td:nth-child(1),
+      .pdf-result-table th:nth-child(6),
+      .pdf-result-table td:nth-child(6) {
+        display: none;
+      }
+    }
+
   </style>
 </head>
 
@@ -725,6 +1551,186 @@
       </ul>
     </section>
 
+
+    <section class="case-demo" id="bank-statement-case">
+      <div class="case-demo-header">
+        <div>
+          <div class="case-demo-kicker">Реальный кейс №1</div>
+          <h2>Автоматическая обработка банковских выписок</h2>
+          <p class="case-demo-subtitle">
+            Система читает «грязные» строки банковской выписки, определяет контрагента, сумму и назначение платежа, а затем автоматически распределяет операции по категориям. Ниже используются полностью вымышленные демонстрационные данные.
+          </p>
+        </div>
+      </div>
+
+      <div class="case-demo-grid">
+        <div class="statement-panel">
+          <div class="demo-panel-head">
+            <div class="demo-panel-title">Исходная банковская выписка</div>
+            <div class="demo-panel-note">100 сырых строк • банковские выписки • OCR • разные форматы</div>
+          </div>
+          <div class="statement-window" id="statement-window"></div>
+        </div>
+
+        <div class="result-panel">
+          <div class="demo-panel-head">
+            <div class="demo-panel-title">Результат после обработки</div>
+            <div class="demo-panel-note">контрагент • категория • сумма</div>
+          </div>
+          <div class="result-window">
+            <table class="result-table">
+              <thead>
+                <tr>
+                  <th style="width:22%;">Дата</th>
+                  <th style="width:34%;">Контрагент</th>
+                  <th style="width:28%;">Категория</th>
+                  <th style="width:16%;">Сумма</th>
+                </tr>
+              </thead>
+              <tbody id="result-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-demo-controls">
+        <div class="demo-progress-wrap">
+          <div class="demo-progress-label">
+            <span id="demo-status">Готово к запуску</span>
+            <span id="demo-counter">0 / 100</span>
+          </div>
+          <div class="demo-progress-track">
+            <div class="demo-progress-bar" id="demo-progress"></div>
+          </div>
+        </div>
+
+        <button class="demo-run-button" id="demo-run" type="button">
+          ▶ Запустить обработку
+        </button>
+      </div>
+
+      <div class="case-demo-stats">
+        <div class="demo-stat">
+          <strong id="stat-rows">0</strong>
+          <span>строк обработано</span>
+        </div>
+        <div class="demo-stat">
+          <strong id="stat-clients">0</strong>
+          <span>контрагентов найдено</span>
+        </div>
+        <div class="demo-stat">
+          <strong id="stat-categories">0</strong>
+          <span>категорий определено</span>
+        </div>
+        <div class="demo-stat">
+          <strong id="stat-errors">0</strong>
+          <span>требуют проверки</span>
+        </div>
+      </div>
+
+      <div class="demo-cta">
+        <a href="contacts-ru.html">Хочу такое же решение</a>
+      </div>
+    </section>
+
+
+
+    <section class="pdf-case" id="pdf-parser-case">
+      <div class="case-demo-kicker">Реальный кейс №2</div>
+      <h2>Автоматический парсинг PDF-инвойсов и упаковочных листов</h2>
+      <p class="case-demo-subtitle">
+        PDF-файлы загружаются во входящую папку Google Drive. После запуска скрипт распознаёт текст, определяет тип документа, разбирает позиции, записывает данные на листы RAW и УПАКОВ, сопоставляет вес по составному ключу и переносит обработанный файл в архив. Все названия, артикулы, количества и цены ниже вымышлены.
+      </p>
+
+      <div class="pdf-case-grid">
+        <div class="drive-panel">
+          <div class="drive-toolbar">
+            <span class="drive-dot"></span>
+            <span class="drive-dot"></span>
+            <span class="drive-dot"></span>
+            <span style="margin-left:4px;">Google Drive — Demo Workspace</span>
+          </div>
+
+          <div class="drive-body">
+            <div class="drive-folder">
+              <div class="drive-folder-title">📁 PDF_IN</div>
+              <div class="drive-files" id="pdf-in-files"></div>
+            </div>
+
+            <div class="drive-folder">
+              <div class="drive-folder-title">📁 PDF_ARCHIVE</div>
+              <div class="drive-files" id="pdf-archive-files">
+                <div class="drive-empty">Архив пуст</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-panel">
+          <div class="demo-panel-head">
+            <div class="demo-panel-title">Сценарий обработки</div>
+            <div class="demo-panel-note">Drive → OCR → Parser → Sheets → Archive</div>
+          </div>
+
+          <div class="pipeline-body">
+            <div class="pipeline-step" data-pdf-step="0"><span>1</span>PDF_IN</div>
+            <div class="pipeline-step" data-pdf-step="1"><span>2</span>OCR через Google Docs</div>
+            <div class="pipeline-step" data-pdf-step="2"><span>3</span>Парсинг позиций</div>
+            <div class="pipeline-step" data-pdf-step="3"><span>4</span>RAW / УПАКОВ</div>
+            <div class="pipeline-step" data-pdf-step="4"><span>5</span>PDF_ARCHIVE</div>
+          </div>
+        </div>
+
+        <div class="sheet-panel">
+          <div class="sheet-tabs">
+            <button class="sheet-tab active" type="button" data-sheet-tab="RAW">RAW</button>
+            <button class="sheet-tab" type="button" data-sheet-tab="УПАКОВ">УПАКОВ</button>
+          </div>
+
+          <div class="pdf-sheet-window">
+            <table class="pdf-result-table">
+              <thead id="pdf-table-head"></thead>
+              <tbody id="pdf-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-case-controls">
+        <div class="pdf-log" id="pdf-log">
+          Готово к запуску. У папці PDF_IN знаходяться 3 демонстраційні PDF-файли.
+        </div>
+
+        <button class="pdf-run-button" id="pdf-run" type="button">
+          ▶ Запустить парсинг
+        </button>
+      </div>
+
+      <div class="pdf-summary">
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-files">0</strong>
+          <span>PDF обработано</span>
+        </div>
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-rows">0</strong>
+          <span>позиций распознано</span>
+        </div>
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-weights">0</strong>
+          <span>весов сопоставлено</span>
+        </div>
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-errors">0</strong>
+          <span>требуют проверки</span>
+        </div>
+      </div>
+
+      <div class="demo-cta">
+        <a href="contacts-ru.html">Хочу автоматизировать PDF</a>
+      </div>
+    </section>
+
+
     <section class="section-card upcoming">
       <h2>Что появится дальше</h2>
 
@@ -752,5 +1758,433 @@
   <footer>
     © 2015–2026 Sebastian Automations. Все права защищены.
   </footer>
+
+  <script>
+    const bankRows = [["03.07.2026", "CARD*4821 POS 19:44 NOVUS KYIV UA MCC5411 REF 884521", "-1 286,40", "NOVUS", "Продукты", "ok"], ["03.07.2026", "UAH KOM 0.00 / PEREKAZ Z KARTY 5168****1047 VID IVANENKO O.O.", "+12 500,00", "Іваненко О.О.", "Поступление", "ok"], ["04.07.2026", "MONO PAY*GOOGLE ADS 874201 IE DUBLIN IRL 04/07", "-2 940,18", "Google Ads", "Реклама", "ok"], ["04.07.2026", "PLATIZH ZA RAH 1048-26 TOV VEKTOR SERVIS BEZ PDV", "-7 200,00", "ТОВ «Вектор Сервіс»", "Услуги", "ok"], ["05.07.2026", "ATM CASH WD 005771 KYIV PR-T PEREMOHY 12 KOM 80.00", "-4 000,00", "Банкомат", "Снятие наличных", "ok"], ["05.07.2026", "NOVA POSHTA 02041 KYIV TERMINAL 330192 MCC4215", "-486,00", "Нова пошта", "Логистика", "ok"], ["06.07.2026", "EPICENTR K POS 8871 BUD MATERIALY CHECK 001947", "-3 742,90", "Епіцентр", "Хозяйственные расходы", "ok"], ["06.07.2026", "P2P CREDIT 4149****7720 KOVALENKO SERHII D.", "+8 000,00", "Коваленко С.Д.", "Поступление", "ok"], ["07.07.2026", "FOP MELNYK O.V. RAH 708 OPлата za druk etyketok", "-5 600,00", "ФОП Мельник О.В.", "Полиграфия", "ok"], ["07.07.2026", "UBER *TRIP HELP.UBER.COM NL 07-07 AUTH 102944", "-318,72", "Uber", "Транспорт", "ok"], ["08.07.2026", "VAT PAYMENT 2 KV 2026 EDPR 3011400000 PRYZN 101", "-18 760,00", "Налоговая служба", "Налоги", "ok"], ["08.07.2026", "ROZETKA UA KYIV ORDER RZK-4938172 OFFICE MOUSE", "-1 149,00", "Rozetka", "Офисные расходы", "ok"], ["09.07.2026", "APPLE.COM/BILL 800-275-2273 IRL ICLOUD+ 200GB", "-149,00", "Apple", "Подписки", "ok"], ["09.07.2026", "TOV MHP POSTACHANNYA ZA DOG 14/26 RAH 553", " +34 980,00", "ТОВ «МХП»", "Оплата клиента", "ok"], ["10.07.2026", "WOG A-95 31.42L ST 083 KYIV OBL TERM 774912", "-1 842,65", "WOG", "Топливо", "ok"], ["10.07.2026", "FOP PETRENKO A.A. AVANS ZA DIZAYN MAKETIV", "-3 000,00", "ФОП Петренко А.А.", "Дизайн", "ok"], ["11.07.2026", "SILPO 118 POS 2881 MCC 5411 KYIV 11.07.26", "-947,31", "Сільпо", "Продукты", "ok"], ["11.07.2026", "PRIVAT24 KOMISIYA ZA RKO TARIF BUSINESS", "-199,00", "ПриватБанк", "Банковские комиссии", "ok"], ["12.07.2026", "TOV NOVA LINIYA CHECK 62287 INSTRUMENTY SKLAD", "-2 386,50", "Нова Лінія", "Хозяйственные расходы", "ok"], ["12.07.2026", "PEREKAZ VID TOV ALFA TRADE RAH 204 POSLUGY", " +21 400,00", "ТОВ «Альфа Трейд»", "Оплата клиента", "ok"], ["13.07.2026", "MICROSOFT*SUBSCRIPTION MSFT IE M365 BUSINESS", "-512,40", "Microsoft", "Подписки", "ok"], ["13.07.2026", "BOLT.EU/R/240713 KYIV UA RIDE 229184", "-204,00", "Bolt", "Транспорт", "ok"], ["14.07.2026", "PAYMENT TO FOP BONDARENKO V.V. HOSTING 1 YEAR", "-2 100,00", "ФОП Бондаренко В.В.", "Хостинг", "ok"], ["14.07.2026", "CREDIT P2P 5355****8802 SHEVCHENKO N.M.", "+5 000,00", "Шевченко Н.М.", "Поступление", "ok"], ["15.07.2026", "KYIVSTAR B2B INV 726193 TEL +380980746698", "-450,00", "Kyivstar", "Связь", "ok"], ["15.07.2026", "PROM.UA ORDER 883420 PACKING TAPE 48MM 36PCS", "-1 764,00", "Prom.ua", "Упаковочные материалы", "ok"], ["16.07.2026", "UKRPOSHTA VIDPR 18 POSHLYNA TRACK RR004891UA", "-392,80", "Укрпошта", "Логистика", "ok"], ["16.07.2026", "TOV BETA LOGISTICS RAH 912 DOSTAVKA 14.07", "-6 480,00", "ТОВ «Бета Логістик»", "Логистика", "ok"], ["17.07.2026", "AMAZON WEB SERVICES AWS EMEA INV 994-20817", "-873,44", "Amazon Web Services", "Облачные сервисы", "ok"], ["17.07.2026", "PEREKAZ VID FOP KLYMENKO O.P. CONSULTING JULY", " +9 600,00", "ФОП Клименко О.П.", "Оплата клиента", "ok"], ["18.07.2026", "METRO CASH&CARRY 0184 KYIV OFFICE WATER COFFEE", "-1 328,16", "METRO", "Офисные расходы", "ok"], ["18.07.2026", "GOOGLE*WORKSPACE G.CO/HELPPAY# IE 18JUL", "-772,22", "Google Workspace", "Подписки", "ok"], ["19.07.2026", "FOP ROMANENKO S.S. REMONT PRINTERA RAH 91", "-1 250,00", "ФОП Романенко С.С.", "Ремонт", "ok"], ["19.07.2026", "MONOBANK REWARD CASHBACK JUL 2026", " +184,37", "Monobank", "Кешбэк", "ok"], ["20.07.2026", "OKKO POS 7081 DIESEL 38.20L TERM 811294", "-2 121,48", "OKKO", "Топливо", "ok"], ["20.07.2026", "CANVA*PRO SYDNEY AU CARD 4821 MONTHLY", "-499,00", "Canva", "Подписки", "ok"], ["21.07.2026", "TOV GAMMA PACK RAH 772 KARTONNI KOROBKY 500PCS", "-14 850,00", "ТОВ «Гамма Пак»", "Упаковочные материалы", "ok"], ["21.07.2026", "PEREKAZ ZA DOG 18-07 TOV DELTA PLUS", " +18 900,00", "ТОВ «Дельта Плюс»", "Оплата клиента", "ok"], ["22.07.2026", "LIFECELL BUSINESS ACC 380630001122 JULY", "-310,00", "Lifecell", "Связь", "ok"], ["22.07.2026", "FOP HRITSENKO M.I. BUHG POSLUGY 07/2026", "-4 500,00", "ФОП Гриценко М.І.", "Бухгалтерия", "ok"], ["23.07.2026", "ZOOM.US 888-799-9666 SAN JOSE US PRO PLAN", "-611,74", "Zoom", "Подписки", "ok"], ["23.07.2026", "P2P CREDIT 5457****1409 TKACHENKO VIKTOR", " +2 500,00", "Ткаченко В.", "Поступление", "ok"], ["24.07.2026", "AUTOLUX CARGO KYIV ODESA TTN 7749201", "-786,00", "Autolux", "Логистика", "ok"], ["24.07.2026", "EPICENTR K POS 1091 LED LAMPS CABLE CHECK 729", "-1 093,55", "Епіцентр", "Хозяйственные расходы", "ok"], ["25.07.2026", "FOP LISOVYI D.P. TARGET ADS JULY PART 2", "-6 000,00", "ФОП Лісовий Д.П.", "Реклама", "ok"], ["25.07.2026", "TOV OMEGA RETAIL RAH 443 OPLATA ZA POSLUGY", " +27 300,00", "ТОВ «Омега Рітейл»", "Оплата клиента", "ok"], ["26.07.2026", "PRIVATBANK ACQUIRING FEE TERMINAL 03 JULY", "-628,40", "ПриватБанк", "Банковские комиссии", "ok"], ["26.07.2026", "DIIA.SIGN BUSINESS CERTIFICATE 1 YEAR", "-300,00", "Дія", "Электронная подпись", "ok"], ["27.07.2026", "NOVA POSHTA 00017 POSYLKA 20499000219482", "-224,00", "Нова пошта", "Логистика", "ok"], ["27.07.2026", "PEREKAZ VID TOV SIGMA GROUP FINAL PAYMENT", " +42 000,00", "ТОВ «Сігма Груп»", "Оплата клиента", "ok"], ["01.09.2025", "ЕСВ с зарплаты за 1 половину сентября 2025 г.;101/570.50/UAH/UA273052990000026004010112233/3011400000/код 30114000", "-570,50", "Налоговая служба", "ЕСВ", "ok"], ["01.09.2025", "НДФЛ с зарплаты за 1 половину сентября 2025 г.;101/466.77/UAH/UA118999980000000000000123456/Казначейство", "-466,77", "Налоговая служба", "НДФЛ", "ok"], ["01.09.2025", "Военный сбор с зарплаты за 1 половину сентября 2025 г.;101/166.70/UAH/код бюджета 11011000", "-166,70", "Налоговая служба", "Военный сбор", "ok"], ["02.09.2025", "Зарплата за 1 половину сентября 2025 г. Ведомость №09-1; карточный счёт сотрудника", "-2 567,25", "Сотрудники", "Заработная плата", "ok"], ["02.09.2025", "Перечисление собственных средств на текущий счёт. Без НДС. Взнос владельца", " +8 000,00", "Владелец", "Собственные средства", "ok"], ["03.09.2025", "ЕСВ с больничных за август 2025 г.;101/312.84/UAH/счёт UA273052990000026004010112233", "-312,84", "Налоговая служба", "ЕСВ", "ok"], ["03.09.2025", "НДФЛ с больничных за август 2025 г.;101/198.44/UAH/11010100", "-198,44", "Налоговая служба", "НДФЛ", "ok"], ["03.09.2025", "Военный сбор с больничных за август 2025 г.;101/71.18/UAH/11011000", "-71,18", "Налоговая служба", "Военный сбор", "ok"], ["04.09.2025", "Комиссия за расчётно-кассовое обслуживание согласно тарифам банка за 09/2025", "-180,00", "Банк", "Банковские комиссии", "ok"], ["04.09.2025", "Оплата больничных за август 2025 г. Ведомость 08-L; реестр 147", "-1 102,40", "Сотрудники", "Больничные", "ok"], ["05.09.2025", "101;ЕСВ за наёмных сотрудников за август 2025;3011400000;период 08/2025", "-1 284,60", "Налоговая служба", "ЕСВ", "ok"], ["05.09.2025", "101;НДФЛ за наёмных сотрудников август 2025;11010100;без НДС", "-1 014,22", "Налоговая служба", "НДФЛ", "ok"], ["05.09.2025", "101;военный сбор за наёмных сотрудников август 2025;11011000;без НДС", "-362,22", "Налоговая служба", "Военный сбор", "ok"], ["06.09.2025", "Выплата заработной платы за август 2025 согласно ведомости №08-2", "-6 480,00", "Сотрудники", "Заработная плата", "ok"], ["06.09.2025", "Возврат неиспользованных подотчётных средств сотрудником, авансовый отчёт №44", " +540,00", "Сотрудник", "Возврат подотчётных средств", "ok"], ["07.09.2025", "Оплата аренды офиса за сентябрь 2025 согласно договору №15/О; без НДС", "-12 000,00", "Арендодатель", "Аренда", "ok"], ["07.09.2025", "Оплата электроэнергии за август 2025 л/с 102771; показатель 18432; в т.ч. НДС", "-2 744,19", "Поставщик электроэнергии", "Коммунальные услуги", "ok"], ["08.09.2025", "Оплата услуг банка за перевод зарплаты на карточные счета сотрудников", "-92,40", "Банк", "Банковские комиссии", "ok"], ["08.09.2025", "Платёж за интернет сентябрь 2025; лицевой счёт 771928; договор ИН-221", "-480,00", "Интернет-провайдер", "Интернет", "ok"], ["09.09.2025", "Единый налог за III кв. 2025;101;18050400;ФЛП;без НДС", "-4 200,00", "Налоговая служба", "Единый налог", "ok"], ["09.09.2025", "Оплата услуг бухгалтера за август 2025 согласно акту №32 от 31.08.2025", "-3 500,00", "Бухгалтер", "Бухгалтерские услуги", "ok"], ["10.09.2025", "Перевод на корпоративную карту для хозяйственных расходов; под отчёт сотруднику", "-3 000,00", "Сотрудник", "Подотчётные средства", "ok"], ["10.09.2025", "Возврат ошибочно перечисленных средств по платёжному поручению №884", " +1 250,00", "Контрагент", "Возврат средств", "ok"], ["11.09.2025", "101/ЕСВ/заработная плата/2 половина сентября 2025/UA273052990000026004010112233", "-612,04", "Налоговая служба", "ЕСВ", "ok"], ["11.09.2025", "101/НДФЛ/заработная плата/2 половина сентября 2025/UA118999980000000000000123456", "-500,76", "Налоговая служба", "НДФЛ", "ok"], ["11.09.2025", "101/военный сбор/заработная плата/2 половина сентября 2025/11011000", "-178,84", "Налоговая служба", "Военный сбор", "ok"], ["12.09.2025", "Зарплата за 2 половину сентября 2025 года согласно ведомости №09-2", "-2 765,00", "Сотрудники", "Заработная плата", "ok"], ["12.09.2025", "Оплата мобильной связи, корпоративный пакет BUSINESS 09/2025, тел. 0980746698", "-420,00", "Мобильный оператор", "Связь", "ok"], ["13.09.2025", "Оплата домена и SSL-сертификата sp-automation.com на 12 мес.; INV#SSL-9921", "-1 890,00", "Хостинг-провайдер", "Хостинг", "ok"], ["13.09.2025", "Оплата услуг курьерской доставки по реестру №118 от 12.09.2025", "-740,00", "Курьерская служба", "Логистика", "ok"], ["14.09.2025", "Перечисление благотворительной помощи согласно письму №77; без НДС", "-1 000,00", "Благотворительный фонд", "Благотворительность", "ok"], ["14.09.2025", "Оплата канцтоваров по счёту №221-09; бумага А4, ручки, файлы", "-1 384,60", "Поставщик канцтоваров", "Офисные расходы", "ok"], ["15.09.2025", "Начисленная пеня за просрочку налогового обязательства;101;1400", "-84,18", "Налоговая служба", "Пеня", "ok"], ["15.09.2025", "Оплата аудита и проверки отчётности за 8 мес. 2025; акт №09/15", "-5 600,00", "Аудитор", "Аудиторские услуги", "ok"], ["16.09.2025", "Компенсация командировочных расходов по авансовому отчёту №52: проезд+отель", "-3 944,70", "Сотрудник", "Командировка", "ok"], ["16.09.2025", "Оплата программного обеспечения, лицензия 09/2025, invoice 84711", "-2 246,80", "Поставщик ПО", "Программное обеспечение", "ok"], ["17.09.2025", "Возврат налога согласно уточняющему расчёту;код бюджета 11010100", " +622,15", "Налоговая служба", "Возврат налогов", "ok"], ["17.09.2025", "Перевод между собственными счетами UA26040250010059660 -> UA90322001000012345", " +15 000,00", "Собственные счета", "Внутренний перевод", "ok"], ["18.09.2025", "Перевод между собственными счетами UA90322001000012345 -> UA26040250010059660", "-15 000,00", "Собственные счета", "Внутренний перевод", "ok"], ["18.09.2025", "Оплата поставщику за материалы по счёту №991/09; частичная предоплата 50%", "-8 750,00", "Поставщик материалов", "Материалы", "ok"], ["19.09.2025", "Поступление оплаты от клиента за консультационные услуги, счёт №45", " +12 400,00", "Клиент", "Оплата клиента", "ok"], ["19.09.2025", "Возврат клиенту излишне уплаченных средств по счёту №45", "-400,00", "Клиент", "Возврат клиенту", "ok"], ["20.09.2025", "Оплата получения выписки/справки/сервисный сбор, документ №A-774", "-180,00", "Государственный сервис", "Административные расходы", "ok"], ["20.09.2025", "Оплата ремонта офисного принтера и замены картриджа, акт 55", "-1 420,00", "Сервисный центр", "Ремонт", "ok"], ["21.09.2025", "Перевод средств за услуги по договору без номера; назначение сокращено", "-2 900,00", "Не определено", "Требует проверки", "warning"], ["21.09.2025", "Платёж 0921/77; счёт 44001; услуги по акту; без НДС; контрагент не указан", "-1 775,00", "Не определено", "Требует проверки", "warning"], ["22.09.2025", "Перевод средств по договорённости; детализация отсутствует; реф 008814", "-980,00", "Не определено", "Неоднозначная категория", "warning"], ["22.09.2025", "UA26040250010059660/платёж/101/код 8847/строка повреждена OCR ### ??? 77A", "-643,17", "Не определено", "Не классифицировано", "error"], ["23.09.2025", "Оплата услуг банка: открытие дополнительного счёта и SMS-информирование", "-250,00", "Банк", "Банковские комиссии", "ok"], ["23.09.2025", "Поступление собственных средств на счёт для покрытия кассового разрыва; без НДС", " +6 000,00", "Владелец", "Собственные средства", "ok"]];
+
+    const statementWindow = document.getElementById("statement-window");
+    const resultBody = document.getElementById("result-body");
+    const runButton = document.getElementById("demo-run");
+    const progress = document.getElementById("demo-progress");
+    const statusText = document.getElementById("demo-status");
+    const counterText = document.getElementById("demo-counter");
+    const statRows = document.getElementById("stat-rows");
+    const statClients = document.getElementById("stat-clients");
+    const statCategories = document.getElementById("stat-categories");
+    const statErrors = document.getElementById("stat-errors");
+
+    function renderSourceRows() {
+      statementWindow.innerHTML = "";
+
+      bankRows.forEach((row, index) => {
+        const item = document.createElement("div");
+        item.className = "statement-line";
+        item.dataset.index = index;
+
+        item.innerHTML = `
+          <span class="statement-date">${row[0]}</span>
+          <span class="statement-text">${row[1]}</span>
+          <span class="statement-amount">${row[2]}</span>
+        `;
+
+        statementWindow.appendChild(item);
+      });
+    }
+
+    function resetDemo() {
+      renderSourceRows();
+      resultBody.innerHTML = "";
+      progress.style.width = "0%";
+      statusText.textContent = "Готово к запуску";
+      counterText.textContent = `0 / ${bankRows.length}`;
+      statRows.textContent = "0";
+      statClients.textContent = "0";
+      statCategories.textContent = "0";
+      statErrors.textContent = "0";
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function runDemo() {
+      runButton.disabled = true;
+      runButton.textContent = "Обработка...";
+
+      resetDemo();
+
+      const clients = new Set();
+      const categories = new Set();
+      const lines = Array.from(document.querySelectorAll(".statement-line"));
+
+      for (let i = 0; i < bankRows.length; i++) {
+        const row = bankRows[i];
+        const line = lines[i];
+
+        if (i > 0) {
+          lines[i - 1].classList.remove("active");
+          lines[i - 1].classList.add("done");
+        }
+
+        line.classList.add("active");
+        line.scrollIntoView({ block: "nearest", behavior: "smooth" });
+
+        statusText.textContent = `Распознавание и категоризация строки ${i + 1}`;
+        counterText.textContent = `${i + 1} / ${bankRows.length}`;
+        progress.style.width = `${((i + 1) / bankRows.length) * 100}%`;
+
+        const status = row[5] || "ok";
+
+        if (status !== "error") {
+          clients.add(row[3]);
+          categories.add(row[4]);
+        }
+
+        if (status === "warning") {
+          line.classList.add("warning");
+        }
+
+        if (status === "error") {
+          line.classList.add("error");
+        }
+
+        const tr = document.createElement("tr");
+        tr.className = status === "ok" ? "" : status;
+
+        const chipClass =
+          status === "warning"
+            ? "category-chip warning"
+            : status === "error"
+              ? "category-chip error"
+              : "category-chip";
+
+        const categoryLabel =
+          status === "warning"
+            ? "⚠ " + row[4]
+            : status === "error"
+              ? "✖ " + row[4]
+              : row[4];
+
+        tr.innerHTML = `
+          <td>${row[0]}</td>
+          <td>${row[3]}</td>
+          <td><span class="${chipClass}">${categoryLabel}</span></td>
+          <td>${row[2]}</td>
+        `;
+
+        resultBody.appendChild(tr);
+
+        requestAnimationFrame(() => {
+          tr.classList.add("show");
+        });
+
+        tr.scrollIntoView({ block: "nearest", behavior: "smooth" });
+
+        const issueCount = bankRows
+          .slice(0, i + 1)
+          .filter(item => (item[5] || "ok") !== "ok")
+          .length;
+
+        statRows.textContent = String(i + 1);
+        statClients.textContent = String(clients.size);
+        statCategories.textContent = String(categories.size);
+        statErrors.textContent = String(issueCount);
+
+        await sleep(55);
+      }
+
+      lines[bankRows.length - 1].classList.remove("active");
+      lines[bankRows.length - 1].classList.add("done");
+
+      statusText.textContent =
+        "Готово: 96 операцій оброблено • 3 требуют проверки • 1 не розпізнано";
+      runButton.disabled = false;
+      runButton.textContent = "↻ Запустить ещё раз";
+    }
+
+    runButton.addEventListener("click", runDemo);
+
+    resetDemo();
+  </script>
+
+
+  <script>
+    const pdfDemoDocuments = [{"name": "Invoice_Aurora_4821.pdf", "type": "invoice", "rows": [["10", "410201/AX", "Profile Aurora 45 silver", "6.0", "120", "Piece", "18.40", "2208.00", "76042100", "DE", "46.8000"], ["20", "410315/BK", "Corner Nova 45 reinforced", "", "240", "Pcs", "3.25", "780.00", "76169990", "DE", "21.6000"], ["30", "420118/CL", "Clip Vector S black", "", "600", "Pcs", "0.84", "504.00", "39269097", "PL", "12.3000"], ["40", "430722/DP", "Base plate Delta 90", "", "80", "Piece", "11.50", "920.00", "73269098", "CZ", "38.4000"]]}, {"name": "PackingList_Aurora_4821.pdf", "type": "packing", "rows": [["10", "410201/AX", "Profile Aurora 45 silver", "6.0", "120", "Piece", "46.8000", "76042100", "118.50", "132.40", "2 Palette"], ["20", "410315/BK", "Corner Nova 45 reinforced", "", "240", "Pcs", "21.6000", "76169990", "118.50", "132.40", "2 Palette"], ["30", "420118/CL", "Clip Vector S black", "", "600", "Pcs", "12.3000", "39269097", "118.50", "132.40", "2 Palette"], ["40", "430722/DP", "Base plate Delta 90", "", "80", "Piece", "38.4000", "73269098", "118.50", "132.40", "2 Palette"]]}, {"name": "Invoice_Nova_4822.pdf", "type": "invoice", "rows": [["10", "510144/ER", "Swivel Link Orbit M12", "", "40", "Piece", "7.80", "312.00", "73181900", "DE", "8.2000"], ["20", "510288/FS", "Guard unit Sigma 60", "", "25", "Piece", "24.60", "615.00", "73269098", "DE", "19.7500"], ["30", "520901/GT", "Ring bolt Terra M16", "", "90", "Pcs", "2.15", "193.50", "73181595", "PL", ""]]}];
+
+    const pdfInFiles = document.getElementById("pdf-in-files");
+    const pdfArchiveFiles = document.getElementById("pdf-archive-files");
+    const pdfRun = document.getElementById("pdf-run");
+    const pdfLog = document.getElementById("pdf-log");
+    const pdfTableHead = document.getElementById("pdf-table-head");
+    const pdfTableBody = document.getElementById("pdf-table-body");
+    const pdfSteps = Array.from(document.querySelectorAll("[data-pdf-step]"));
+    const pdfTabs = Array.from(document.querySelectorAll("[data-sheet-tab]"));
+    const pdfStatFiles = document.getElementById("pdf-stat-files");
+    const pdfStatRows = document.getElementById("pdf-stat-rows");
+    const pdfStatWeights = document.getElementById("pdf-stat-weights");
+    const pdfStatErrors = document.getElementById("pdf-stat-errors");
+
+    let activePdfSheet = "RAW";
+    const parsedPdfRows = {
+      RAW: [],
+      "УПАКОВ": []
+    };
+
+    function pdfSleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function createDriveFile(documentData, state = "") {
+      const file = document.createElement("div");
+      file.className = "drive-file" + (state ? " " + state : "");
+      file.dataset.pdfName = documentData.name;
+      file.innerHTML = `
+        <span class="pdf-icon">PDF</span>
+        <span>${documentData.name}</span>
+      `;
+      return file;
+    }
+
+    function resetPdfCase() {
+      pdfInFiles.innerHTML = "";
+      pdfArchiveFiles.innerHTML = '<div class="drive-empty">Архив пуст</div>';
+
+      pdfDemoDocuments.forEach(item => {
+        pdfInFiles.appendChild(createDriveFile(item));
+      });
+
+      parsedPdfRows.RAW = [];
+      parsedPdfRows["УПАКОВ"] = [];
+
+      pdfSteps.forEach(step => {
+        step.classList.remove("active", "done");
+      });
+
+      pdfStatFiles.textContent = "0";
+      pdfStatRows.textContent = "0";
+      pdfStatWeights.textContent = "0";
+      pdfStatErrors.textContent = "0";
+      pdfLog.textContent =
+        "Готово к запуску. У папці PDF_IN знаходяться 3 демонстраційні PDF-файли.";
+
+      renderPdfTable();
+    }
+
+    function setPdfStep(index) {
+      pdfSteps.forEach((step, stepIndex) => {
+        step.classList.toggle("active", stepIndex === index);
+        if (stepIndex < index) {
+          step.classList.add("done");
+          step.classList.remove("active");
+        }
+      });
+    }
+
+    function finishPdfSteps() {
+      pdfSteps.forEach(step => {
+        step.classList.remove("active");
+        step.classList.add("done");
+      });
+    }
+
+    function renderPdfTable() {
+      const isRaw = activePdfSheet === "RAW";
+
+      pdfTableHead.innerHTML = isRaw
+        ? `
+          <tr>
+            <th>Pos</th>
+            <th>Article</th>
+            <th>Description</th>
+            <th>Length</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Weight</th>
+          </tr>
+        `
+        : `
+          <tr>
+            <th>Pos</th>
+            <th>Article</th>
+            <th>Description</th>
+            <th>Length</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Weight</th>
+            <th>Net</th>
+            <th>Gross</th>
+          </tr>
+        `;
+
+      pdfTableBody.innerHTML = "";
+
+      parsedPdfRows[activePdfSheet].forEach(row => {
+        const tr = document.createElement("tr");
+
+        if (isRaw) {
+          tr.innerHTML = `
+            <td>${row[0]}</td>
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[4]}</td>
+            <td>${row[5]}</td>
+            <td>${row[6]}</td>
+            <td>${row[7]}</td>
+            <td>${row[10] || "⚠"}</td>
+          `;
+        } else {
+          tr.innerHTML = `
+            <td>${row[0]}</td>
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[4]}</td>
+            <td>${row[5]}</td>
+            <td>${row[6]}</td>
+            <td>${row[8]}</td>
+            <td>${row[9]}</td>
+          `;
+        }
+
+        pdfTableBody.appendChild(tr);
+        requestAnimationFrame(() => tr.classList.add("show"));
+      });
+    }
+
+    pdfTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        activePdfSheet = tab.dataset.sheetTab;
+
+        pdfTabs.forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.sheetTab === activePdfSheet
+          );
+        });
+
+        renderPdfTable();
+      });
+    });
+
+    async function runPdfCase() {
+      pdfRun.disabled = true;
+      pdfRun.textContent = "Обработка...";
+      resetPdfCase();
+
+      let processedFiles = 0;
+      let parsedRows = 0;
+      let matchedWeights = 0;
+      let warnings = 0;
+
+      for (let docIndex = 0; docIndex < pdfDemoDocuments.length; docIndex++) {
+        const current = pdfDemoDocuments[docIndex];
+        const fileNode = pdfInFiles.querySelector(
+          `[data-pdf-name="${current.name}"]`
+        );
+
+        fileNode.classList.add("processing");
+        setPdfStep(0);
+        pdfLog.textContent =
+          `Найден ${current.name} в папке PDF_IN. Читаю файл...`;
+        await pdfSleep(650);
+
+        setPdfStep(1);
+        pdfLog.textContent =
+          `Создан временный Google Docs. Выполняется OCR: ${current.name}`;
+        await pdfSleep(750);
+
+        setPdfStep(2);
+        pdfLog.textContent =
+          current.type === "invoice"
+            ? "Найден Invoice. Розбираю номер, дату, артикул, Pos, кількість, ціну та тариф."
+            : "Найден Packing List. Розбираю вагу, Net Weight, Gross Weight та упаковки.";
+        await pdfSleep(700);
+
+        setPdfStep(3);
+
+        if (current.type === "invoice") {
+          current.rows.forEach(row => {
+            parsedPdfRows.RAW.push(row);
+            parsedRows++;
+
+            if (row[10]) {
+              matchedWeights++;
+            } else {
+              warnings++;
+            }
+          });
+
+          activePdfSheet = "RAW";
+        } else {
+          current.rows.forEach(row => {
+            parsedPdfRows["УПАКОВ"].push(row);
+            parsedRows++;
+          });
+
+          activePdfSheet = "УПАКОВ";
+        }
+
+        pdfTabs.forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.sheetTab === activePdfSheet
+          );
+        });
+
+        renderPdfTable();
+
+        pdfLog.textContent =
+          current.type === "invoice"
+            ? `Данные записаны на лист RAW. Распознано ${current.rows.length} позиции.`
+            : `Данные записаны на лист УПАКОВ. Вес готов к сопоставлению с RAW.`;
+
+        pdfStatRows.textContent = String(parsedRows);
+        pdfStatWeights.textContent = String(matchedWeights);
+        pdfStatErrors.textContent = String(warnings);
+        await pdfSleep(700);
+
+        setPdfStep(4);
+
+        if (pdfArchiveFiles.querySelector(".drive-empty")) {
+          pdfArchiveFiles.innerHTML = "";
+        }
+
+        fileNode.remove();
+        pdfArchiveFiles.appendChild(createDriveFile(current, "archived"));
+
+        processedFiles++;
+        pdfStatFiles.textContent = String(processedFiles);
+        pdfLog.textContent =
+          `${current.name} успешно перемещён из PDF_IN в PDF_ARCHIVE.`;
+
+        await pdfSleep(650);
+      }
+
+      finishPdfSteps();
+      activePdfSheet = "RAW";
+
+      pdfTabs.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.sheetTab === "RAW"
+        );
+      });
+
+      renderPdfTable();
+
+      pdfLog.textContent =
+        "Готово: 3 PDF обработано, дані записано до RAW та УПАКОВ, 1 вага потребує ручної перевірки.";
+      pdfRun.disabled = false;
+      pdfRun.textContent = "↻ Запустить ещё раз";
+    }
+
+    pdfRun.addEventListener("click", runPdfCase);
+
+    resetPdfCase();
+  </script>
+
 </body>
 </html>

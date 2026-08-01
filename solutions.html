@@ -1043,6 +1043,425 @@
       background: #fff2f2;
     }
 
+
+    .pdf-case {
+      margin-top: 26px;
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: var(--shadow-card);
+    }
+
+    .pdf-case h2 {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .pdf-case-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 0.78fr 1.32fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .drive-panel,
+    .pipeline-panel,
+    .sheet-panel {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #e7e0d8;
+      border-radius: 18px;
+      background: #fcfbf9;
+    }
+
+    .drive-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #e7e0d8;
+      background: #f7f4ef;
+      color: #5e5953;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .drive-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d8d0c7;
+    }
+
+    .drive-body {
+      min-height: 370px;
+      padding: 14px;
+    }
+
+    .drive-folder {
+      margin-bottom: 12px;
+      overflow: hidden;
+      border: 1px solid #e5ddd4;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .drive-folder-title {
+      padding: 11px 12px;
+      border-bottom: 1px solid #eee7df;
+      background: #fbfaf7;
+      color: #46413d;
+      font-family: var(--font-tech);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .drive-files {
+      min-height: 54px;
+      padding: 8px;
+    }
+
+    .drive-empty {
+      padding: 10px;
+      color: #a09a93;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      text-align: center;
+    }
+
+    .drive-file {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 6px;
+      padding: 8px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      color: #56514c;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      line-height: 1.35;
+      transition: opacity .2s ease, transform .25s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .drive-file:last-child {
+      margin-bottom: 0;
+    }
+
+    .drive-file.processing {
+      border-color: #efd28a;
+      background: #fff7e5;
+      transform: translateX(3px);
+    }
+
+    .drive-file.archived {
+      border-color: #d2e3d6;
+      background: #f3f8f4;
+    }
+
+    .pdf-icon {
+      display: grid;
+      width: 27px;
+      height: 32px;
+      place-items: center;
+      border-radius: 5px;
+      background: #c6534f;
+      color: #fff;
+      font-size: 7px;
+      font-weight: 700;
+    }
+
+    .pipeline-body {
+      min-height: 370px;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pipeline-step {
+      position: relative;
+      padding: 12px 12px 12px 42px;
+      border: 1px solid #e5ddd4;
+      border-radius: 12px;
+      background: #fff;
+      color: #68615a;
+      font-size: 11px;
+      font-weight: 700;
+      transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .pipeline-step + .pipeline-step {
+      margin-top: 17px;
+    }
+
+    .pipeline-step + .pipeline-step::before {
+      content: "↓";
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      color: #aaa198;
+      font-family: var(--font-tech);
+      transform: translateX(-50%);
+    }
+
+    .pipeline-step span {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      width: 21px;
+      height: 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ece7e0;
+      color: #827a72;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      transform: translateY(-50%);
+    }
+
+    .pipeline-step.active {
+      border-color: #efd28a;
+      background: #fff7e5;
+      color: #725400;
+      transform: translateX(2px);
+    }
+
+    .pipeline-step.done {
+      border-color: #cfe0d3;
+      background: #f3f8f4;
+      color: var(--green);
+    }
+
+    .pipeline-step.done span {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .sheet-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 10px 12px 0;
+      border-bottom: 1px solid #e7e0d8;
+      background: #f7f4ef;
+    }
+
+    .sheet-tab {
+      padding: 8px 11px;
+      border: 1px solid #ddd5cc;
+      border-bottom: 0;
+      border-radius: 9px 9px 0 0;
+      background: #eee9e3;
+      color: #7b746c;
+      font-family: var(--font-tech);
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .sheet-tab.active {
+      background: #fff;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .pdf-sheet-window {
+      height: 370px;
+      overflow: auto;
+      background: #fff;
+    }
+
+    .pdf-result-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .pdf-result-table th,
+    .pdf-result-table td {
+      padding: 9px 8px;
+      border-right: 1px solid #eee8e0;
+      border-bottom: 1px solid #eee8e0;
+      text-align: left;
+      vertical-align: top;
+      font-size: 9px;
+      line-height: 1.35;
+    }
+
+    .pdf-result-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f7f4ef;
+      color: #5f5953;
+      font-weight: 700;
+    }
+
+    .pdf-result-table td {
+      color: #514c47;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .22s ease, transform .22s ease;
+    }
+
+    .pdf-result-table tr.show td {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pdf-case-controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-blue);
+      border-radius: 16px;
+      background: #f1f6f9;
+    }
+
+    .pdf-log {
+      min-height: 42px;
+      color: #50616a;
+      font-family: var(--font-tech);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .pdf-run-button {
+      min-height: 46px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(47,111,159,.18);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .pdf-run-button:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .pdf-run-button:disabled {
+      opacity: .62;
+      cursor: wait;
+      transform: none;
+    }
+
+    .pdf-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pdf-summary-item {
+      padding: 14px 12px;
+      border: 1px solid #e8e2da;
+      border-radius: 14px;
+      background: #fcfbf9;
+      text-align: center;
+    }
+
+    .pdf-summary-item strong {
+      display: block;
+      color: var(--blue);
+      font-family: var(--font-tech);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .pdf-summary-item span {
+      display: block;
+      margin-top: 7px;
+      color: var(--text-muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 980px) {
+      .pdf-case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .drive-body,
+      .pipeline-body {
+        min-height: auto;
+      }
+
+      .pipeline-body {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      .pipeline-step + .pipeline-step {
+        margin-top: 0;
+      }
+
+      .pipeline-step + .pipeline-step::before {
+        content: "→";
+        top: 50%;
+        left: -8px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pdf-case {
+        margin-top: 18px;
+        padding: 26px 16px;
+        border-radius: 18px;
+      }
+
+      .pipeline-body {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-step + .pipeline-step {
+        margin-top: 17px;
+      }
+
+      .pipeline-step + .pipeline-step::before {
+        content: "↓";
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .pdf-case-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .pdf-run-button {
+        width: 100%;
+      }
+
+      .pdf-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pdf-result-table th:nth-child(1),
+      .pdf-result-table td:nth-child(1),
+      .pdf-result-table th:nth-child(6),
+      .pdf-result-table td:nth-child(6) {
+        display: none;
+      }
+    }
+
   </style>
 </head>
 
@@ -1213,6 +1632,106 @@
 
       <div class="demo-cta">
         <a href="contacts.html">Хочу таке ж рішення</a>
+      </div>
+    </section>
+
+
+
+    <section class="pdf-case" id="pdf-parser-case">
+      <div class="case-demo-kicker">Реальний кейс №2</div>
+      <h2>Автоматичний парсинг PDF-інвойсів і пакувальних листів</h2>
+      <p class="case-demo-subtitle">
+        PDF-файли завантажуються до вхідної папки Google Drive. Після запуску скрипт
+        розпізнає текст, визначає тип документа, розбирає позиції, записує дані на листи
+        RAW та УПАКОВ, зіставляє вагу за ключем і переносить оброблений файл до архіву.
+        Усі назви, артикули, кількості та ціни нижче вигадані.
+      </p>
+
+      <div class="pdf-case-grid">
+        <div class="drive-panel">
+          <div class="drive-toolbar">
+            <span class="drive-dot"></span>
+            <span class="drive-dot"></span>
+            <span class="drive-dot"></span>
+            <span style="margin-left:4px;">Google Drive — Demo Workspace</span>
+          </div>
+
+          <div class="drive-body">
+            <div class="drive-folder">
+              <div class="drive-folder-title">📁 PDF_IN</div>
+              <div class="drive-files" id="pdf-in-files"></div>
+            </div>
+
+            <div class="drive-folder">
+              <div class="drive-folder-title">📁 PDF_ARCHIVE</div>
+              <div class="drive-files" id="pdf-archive-files">
+                <div class="drive-empty">Архів порожній</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-panel">
+          <div class="demo-panel-head">
+            <div class="demo-panel-title">Сценарій обробки</div>
+            <div class="demo-panel-note">Drive → OCR → Parser → Sheets → Archive</div>
+          </div>
+
+          <div class="pipeline-body">
+            <div class="pipeline-step" data-pdf-step="0"><span>1</span>PDF_IN</div>
+            <div class="pipeline-step" data-pdf-step="1"><span>2</span>OCR у Google Docs</div>
+            <div class="pipeline-step" data-pdf-step="2"><span>3</span>Парсинг позицій</div>
+            <div class="pipeline-step" data-pdf-step="3"><span>4</span>RAW / УПАКОВ</div>
+            <div class="pipeline-step" data-pdf-step="4"><span>5</span>PDF_ARCHIVE</div>
+          </div>
+        </div>
+
+        <div class="sheet-panel">
+          <div class="sheet-tabs">
+            <button class="sheet-tab active" type="button" data-sheet-tab="RAW">RAW</button>
+            <button class="sheet-tab" type="button" data-sheet-tab="УПАКОВ">УПАКОВ</button>
+          </div>
+
+          <div class="pdf-sheet-window">
+            <table class="pdf-result-table">
+              <thead id="pdf-table-head"></thead>
+              <tbody id="pdf-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdf-case-controls">
+        <div class="pdf-log" id="pdf-log">
+          Готово до запуску. У папці PDF_IN знаходяться 3 демонстраційні PDF-файли.
+        </div>
+
+        <button class="pdf-run-button" id="pdf-run" type="button">
+          ▶ Запустити парсинг
+        </button>
+      </div>
+
+      <div class="pdf-summary">
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-files">0</strong>
+          <span>PDF оброблено</span>
+        </div>
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-rows">0</strong>
+          <span>позицій розпізнано</span>
+        </div>
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-weights">0</strong>
+          <span>ваг зіставлено</span>
+        </div>
+        <div class="pdf-summary-item">
+          <strong id="pdf-stat-errors">0</strong>
+          <span>потребують перевірки</span>
+        </div>
+      </div>
+
+      <div class="demo-cta">
+        <a href="contacts.html">Хочу автоматизувати PDF</a>
       </div>
     </section>
 
@@ -1391,6 +1910,285 @@
     runButton.addEventListener("click", runDemo);
 
     resetDemo();
+  </script>
+
+
+  <script>
+    const pdfDemoDocuments = [{"name": "Invoice_Aurora_4821.pdf", "type": "invoice", "rows": [["10", "410201/AX", "Profile Aurora 45 silver", "6.0", "120", "Piece", "18.40", "2208.00", "76042100", "DE", "46.8000"], ["20", "410315/BK", "Corner Nova 45 reinforced", "", "240", "Pcs", "3.25", "780.00", "76169990", "DE", "21.6000"], ["30", "420118/CL", "Clip Vector S black", "", "600", "Pcs", "0.84", "504.00", "39269097", "PL", "12.3000"], ["40", "430722/DP", "Base plate Delta 90", "", "80", "Piece", "11.50", "920.00", "73269098", "CZ", "38.4000"]]}, {"name": "PackingList_Aurora_4821.pdf", "type": "packing", "rows": [["10", "410201/AX", "Profile Aurora 45 silver", "6.0", "120", "Piece", "46.8000", "76042100", "118.50", "132.40", "2 Palette"], ["20", "410315/BK", "Corner Nova 45 reinforced", "", "240", "Pcs", "21.6000", "76169990", "118.50", "132.40", "2 Palette"], ["30", "420118/CL", "Clip Vector S black", "", "600", "Pcs", "12.3000", "39269097", "118.50", "132.40", "2 Palette"], ["40", "430722/DP", "Base plate Delta 90", "", "80", "Piece", "38.4000", "73269098", "118.50", "132.40", "2 Palette"]]}, {"name": "Invoice_Nova_4822.pdf", "type": "invoice", "rows": [["10", "510144/ER", "Swivel Link Orbit M12", "", "40", "Piece", "7.80", "312.00", "73181900", "DE", "8.2000"], ["20", "510288/FS", "Guard unit Sigma 60", "", "25", "Piece", "24.60", "615.00", "73269098", "DE", "19.7500"], ["30", "520901/GT", "Ring bolt Terra M16", "", "90", "Pcs", "2.15", "193.50", "73181595", "PL", ""]]}];
+
+    const pdfInFiles = document.getElementById("pdf-in-files");
+    const pdfArchiveFiles = document.getElementById("pdf-archive-files");
+    const pdfRun = document.getElementById("pdf-run");
+    const pdfLog = document.getElementById("pdf-log");
+    const pdfTableHead = document.getElementById("pdf-table-head");
+    const pdfTableBody = document.getElementById("pdf-table-body");
+    const pdfSteps = Array.from(document.querySelectorAll("[data-pdf-step]"));
+    const pdfTabs = Array.from(document.querySelectorAll("[data-sheet-tab]"));
+    const pdfStatFiles = document.getElementById("pdf-stat-files");
+    const pdfStatRows = document.getElementById("pdf-stat-rows");
+    const pdfStatWeights = document.getElementById("pdf-stat-weights");
+    const pdfStatErrors = document.getElementById("pdf-stat-errors");
+
+    let activePdfSheet = "RAW";
+    const parsedPdfRows = {
+      RAW: [],
+      "УПАКОВ": []
+    };
+
+    function pdfSleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function createDriveFile(documentData, state = "") {
+      const file = document.createElement("div");
+      file.className = "drive-file" + (state ? " " + state : "");
+      file.dataset.pdfName = documentData.name;
+      file.innerHTML = `
+        <span class="pdf-icon">PDF</span>
+        <span>${documentData.name}</span>
+      `;
+      return file;
+    }
+
+    function resetPdfCase() {
+      pdfInFiles.innerHTML = "";
+      pdfArchiveFiles.innerHTML = '<div class="drive-empty">Архів порожній</div>';
+
+      pdfDemoDocuments.forEach(item => {
+        pdfInFiles.appendChild(createDriveFile(item));
+      });
+
+      parsedPdfRows.RAW = [];
+      parsedPdfRows["УПАКОВ"] = [];
+
+      pdfSteps.forEach(step => {
+        step.classList.remove("active", "done");
+      });
+
+      pdfStatFiles.textContent = "0";
+      pdfStatRows.textContent = "0";
+      pdfStatWeights.textContent = "0";
+      pdfStatErrors.textContent = "0";
+      pdfLog.textContent =
+        "Готово до запуску. У папці PDF_IN знаходяться 3 демонстраційні PDF-файли.";
+
+      renderPdfTable();
+    }
+
+    function setPdfStep(index) {
+      pdfSteps.forEach((step, stepIndex) => {
+        step.classList.toggle("active", stepIndex === index);
+        if (stepIndex < index) {
+          step.classList.add("done");
+          step.classList.remove("active");
+        }
+      });
+    }
+
+    function finishPdfSteps() {
+      pdfSteps.forEach(step => {
+        step.classList.remove("active");
+        step.classList.add("done");
+      });
+    }
+
+    function renderPdfTable() {
+      const isRaw = activePdfSheet === "RAW";
+
+      pdfTableHead.innerHTML = isRaw
+        ? `
+          <tr>
+            <th>Pos</th>
+            <th>Article</th>
+            <th>Description</th>
+            <th>Length</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Weight</th>
+          </tr>
+        `
+        : `
+          <tr>
+            <th>Pos</th>
+            <th>Article</th>
+            <th>Description</th>
+            <th>Length</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Weight</th>
+            <th>Net</th>
+            <th>Gross</th>
+          </tr>
+        `;
+
+      pdfTableBody.innerHTML = "";
+
+      parsedPdfRows[activePdfSheet].forEach(row => {
+        const tr = document.createElement("tr");
+
+        if (isRaw) {
+          tr.innerHTML = `
+            <td>${row[0]}</td>
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[4]}</td>
+            <td>${row[5]}</td>
+            <td>${row[6]}</td>
+            <td>${row[7]}</td>
+            <td>${row[10] || "⚠"}</td>
+          `;
+        } else {
+          tr.innerHTML = `
+            <td>${row[0]}</td>
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[4]}</td>
+            <td>${row[5]}</td>
+            <td>${row[6]}</td>
+            <td>${row[8]}</td>
+            <td>${row[9]}</td>
+          `;
+        }
+
+        pdfTableBody.appendChild(tr);
+        requestAnimationFrame(() => tr.classList.add("show"));
+      });
+    }
+
+    pdfTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        activePdfSheet = tab.dataset.sheetTab;
+
+        pdfTabs.forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.sheetTab === activePdfSheet
+          );
+        });
+
+        renderPdfTable();
+      });
+    });
+
+    async function runPdfCase() {
+      pdfRun.disabled = true;
+      pdfRun.textContent = "Обробка...";
+      resetPdfCase();
+
+      let processedFiles = 0;
+      let parsedRows = 0;
+      let matchedWeights = 0;
+      let warnings = 0;
+
+      for (let docIndex = 0; docIndex < pdfDemoDocuments.length; docIndex++) {
+        const current = pdfDemoDocuments[docIndex];
+        const fileNode = pdfInFiles.querySelector(
+          `[data-pdf-name="${current.name}"]`
+        );
+
+        fileNode.classList.add("processing");
+        setPdfStep(0);
+        pdfLog.textContent =
+          `Знайдено ${current.name} у папці PDF_IN. Читаю файл...`;
+        await pdfSleep(650);
+
+        setPdfStep(1);
+        pdfLog.textContent =
+          `Створено тимчасовий Google Docs. Виконується OCR: ${current.name}`;
+        await pdfSleep(750);
+
+        setPdfStep(2);
+        pdfLog.textContent =
+          current.type === "invoice"
+            ? "Знайдено Invoice. Розбираю номер, дату, артикул, Pos, кількість, ціну та тариф."
+            : "Знайдено Packing List. Розбираю вагу, Net Weight, Gross Weight та упаковки.";
+        await pdfSleep(700);
+
+        setPdfStep(3);
+
+        if (current.type === "invoice") {
+          current.rows.forEach(row => {
+            parsedPdfRows.RAW.push(row);
+            parsedRows++;
+
+            if (row[10]) {
+              matchedWeights++;
+            } else {
+              warnings++;
+            }
+          });
+
+          activePdfSheet = "RAW";
+        } else {
+          current.rows.forEach(row => {
+            parsedPdfRows["УПАКОВ"].push(row);
+            parsedRows++;
+          });
+
+          activePdfSheet = "УПАКОВ";
+        }
+
+        pdfTabs.forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.sheetTab === activePdfSheet
+          );
+        });
+
+        renderPdfTable();
+
+        pdfLog.textContent =
+          current.type === "invoice"
+            ? `Дані записано на лист RAW. Розпізнано ${current.rows.length} позиції.`
+            : `Дані записано на лист УПАКОВ. Вага готова до зіставлення з RAW.`;
+
+        pdfStatRows.textContent = String(parsedRows);
+        pdfStatWeights.textContent = String(matchedWeights);
+        pdfStatErrors.textContent = String(warnings);
+        await pdfSleep(700);
+
+        setPdfStep(4);
+
+        if (pdfArchiveFiles.querySelector(".drive-empty")) {
+          pdfArchiveFiles.innerHTML = "";
+        }
+
+        fileNode.remove();
+        pdfArchiveFiles.appendChild(createDriveFile(current, "archived"));
+
+        processedFiles++;
+        pdfStatFiles.textContent = String(processedFiles);
+        pdfLog.textContent =
+          `${current.name} успішно переміщено з PDF_IN до PDF_ARCHIVE.`;
+
+        await pdfSleep(650);
+      }
+
+      finishPdfSteps();
+      activePdfSheet = "RAW";
+
+      pdfTabs.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.sheetTab === "RAW"
+        );
+      });
+
+      renderPdfTable();
+
+      pdfLog.textContent =
+        "Готово: 3 PDF оброблено, дані записано до RAW та УПАКОВ, 1 вага потребує ручної перевірки.";
+      pdfRun.disabled = false;
+      pdfRun.textContent = "↻ Запустити ще раз";
+    }
+
+    pdfRun.addEventListener("click", runPdfCase);
+
+    resetPdfCase();
   </script>
 
 </body>

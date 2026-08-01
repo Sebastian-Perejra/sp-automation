@@ -267,7 +267,100 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname.toLowerCase();
-  const buttons = document.querySelectorAll(".lang-switcher a");
+  const fileName = path.split("/").pop() || "index.html";
+
+  let language = "ua";
+  let suffix = "";
+  let activeLanguage = "UA";
+
+  if (fileName.includes("-en.html")) {
+    language = "en";
+    suffix = "-en";
+    activeLanguage = "EN";
+  } else if (fileName.includes("-ru.html")) {
+    language = "ru";
+    suffix = "-ru";
+    activeLanguage = "RU";
+  }
+
+  const languageButtons = document.querySelectorAll(
+    ".lang-switcher a, .lang-switcher button"
+  );
+
+  languageButtons.forEach(button => {
+    const isActive =
+      button.textContent.trim().toUpperCase() === activeLanguage;
+
+    button.classList.toggle("active-language", isActive);
+
+    if (isActive) {
+      button.setAttribute("aria-current", "page");
+    } else {
+      button.removeAttribute("aria-current");
+    }
+  });
+
+  const nav = document.querySelector(".desktop-nav");
+
+  if (!nav) return;
+
+  const labels = {
+    ua: {
+      about: "Про мене",
+      services: "Послуги",
+      pricing: "Цінова політика",
+      solutions: "Рішення",
+      faq: "FAQ",
+      contacts: "Контакти"
+    },
+    en: {
+      about: "About Me",
+      services: "Services",
+      pricing: "Pricing",
+      solutions: "Solutions",
+      faq: "FAQ",
+      contacts: "Contacts"
+    },
+    ru: {
+      about: "Обо мне",
+      services: "Услуги",
+      pricing: "Ценовая политика",
+      solutions: "Решения",
+      faq: "FAQ",
+      contacts: "Контакты"
+    }
+  };
+
+  const pages = [
+    "about",
+    "services",
+    "pricing",
+    "solutions",
+    "faq",
+    "contacts"
+  ];
+
+  const currentPage = fileName
+    .replace("-en.html", "")
+    .replace("-ru.html", "")
+    .replace(".html", "");
+
+  nav.innerHTML = pages
+    .map(page => {
+      const isActive = page === currentPage;
+
+      return `
+        <a
+          href="${page}${suffix}.html"
+          class="${isActive ? "active-page" : ""}"
+          ${isActive ? 'aria-current="page"' : ""}
+        >
+          ${labels[language][page]}
+        </a>
+      `;
+    })
+    .join("");
+});
 
   let activeLanguage = "UA";
 

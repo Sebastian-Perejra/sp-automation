@@ -1,113 +1,131 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Цінова політика – Себастьян Перейра</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto Mono', monospace;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f7fa;
-      color: #1a1a1a;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      background-color: #e6f0fa;
-      padding: 20px 0;
-      border-bottom: 1px solid #c4d8e6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #005ea8;
-    }
-    h1 {
-      text-align: center;
-      color: #cc0000;
-      margin-top: 40px;
-    }
-    .section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .section h2 {
-      color: #007acc;
-    }
-    .back-button {
-      display: block;
-      text-align: center;
-      margin: 60px auto 40px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #cc0000;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #555;
-      background-color: #e6f0fa;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Цінова політика – Sebastian Automations</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Roboto Mono',monospace;background:#f4f7fa;color:#1a1a1a}
+header{position:sticky;top:0;background:#e6f0fa;border-bottom:1px solid #c4d8e6;z-index:100}
+nav{max-width:1100px;margin:auto;padding:18px;display:flex;justify-content:space-between;align-items:center}
+nav a{text-decoration:none;color:#007acc;font-weight:bold}
+.container{max-width:1000px;margin:auto;padding:30px 16px}
+.hero,.card{background:#fff;border-radius:18px;padding:28px;margin-bottom:20px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
+.hero h1{margin:0 0 15px;color:#0F9D58;font-size:42px}
+.hero p,.card p,.card li{line-height:1.8;color:#55626b}
+.card h2{margin-top:0;color:#007acc}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.item{padding:18px;border:1px solid #d9e4ec;border-radius:14px;background:#fbfdff}
+.price{font-size:24px;font-weight:bold;color:#0F9D58;margin-top:8px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px;border-bottom:1px solid #dde7ef;text-align:left}
+th{background:#f5f9fc}
+.note{padding:18px;background:#edf7ff;border-left:4px solid #007acc;border-radius:8px}
+.cta{text-align:center;background:linear-gradient(135deg,#edf6ff,#f7fbff)}
+.button{display:inline-block;padding:14px 22px;border-radius:10px;background:#007acc;color:#fff;text-decoration:none;font-weight:bold}
+footer{text-align:center;padding:20px;background:#e6f0fa}
+@media(max-width:760px){
+.hero h1{font-size:34px}
+.grid{grid-template-columns:1fr}
+table{font-size:13px}
+}
+</style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Головна</a>
-    <a href="about.html">Про мене</a>
-    <a href="services.html">Послуги</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contacts.html">Контакти</a>
-  </nav>
+<header>
+<nav>
+<a href="index.html">← Головна</a>
+<div>
+<a href="about.html">Про мене</a>
+<a href="services.html" style="margin-left:18px;">Послуги</a>
+<a href="contacts.html" style="margin-left:18px;">Контакти</a>
+</div>
+</nav>
+</header>
 
-  <h1>Цінова політика</h1>
+<div class="container">
 
-  <div class="section">
-    <h2>Базова ставка</h2>
-    <p>Моя стандартна ставка — <strong>800 гривень за годину</strong>.</p>
-    <p>У випадку довгострокових проєктів, якщо оцінка перевищує <strong>50 годин</strong>, погоджена ставка може бути знижена до <strong>650 гривень за годину</strong>.</p>
-  </div>
+<section class="hero">
+<h1>Цінова політика</h1>
+<p>Прозорі умови, погодинна оплата, поетапна робота та реалістична оцінка вартості. Ви платите за результат, а не за красиві обіцянки.</p>
+</section>
 
-  <div class="section">
-    <h2>Пакети підтримки</h2>
-    <ul>
-      <li>3 години на місяць — 2000 грн</li>
-      <li>4 години на місяць — 2600 грн</li>
-    </ul>
-    <p>Фіксована щомісячна оплата, незалежно від обсягу задач. Гарантований пріоритет виконання ваших звернень у межах пакету.</p>
-  </div>
+<section class="card">
+<h2>Погодинна ставка</h2>
+<div class="grid">
+<div class="item">
+<strong>Стандартна ставка</strong>
+<div class="price">800 грн/год</div>
+<p>Для більшості задач, консультацій, доробок та автоматизацій.</p>
+</div>
+<div class="item">
+<strong>Великі проєкти</strong>
+<div class="price">650 грн/год</div>
+<p>Може застосовуватися для проєктів обсягом понад 50 годин.</p>
+</div>
+</div>
+</section>
 
-  <div class="section">
-    <h2>Консультація та оцінка</h2>
-    <p>Перша консультація та попередня оцінка завдання — <strong>безкоштовно</strong>.</p>
-  </div>
+<section class="card">
+<h2>Орієнтовна вартість робіт</h2>
+<table>
+<tr><th>Напрямок</th><th>Вартість</th></tr>
+<tr><td>Excel та Google Sheets</td><td>від 1500 грн</td></tr>
+<tr><td>Автоматизація звітів</td><td>від 2000 грн</td></tr>
+<tr><td>Telegram-боти</td><td>від 3000 грн</td></tr>
+<tr><td>Обробка PDF та інвойсів</td><td>від 3000 грн</td></tr>
+<tr><td>Дослідження ринку</td><td>від 3000 грн</td></tr>
+<tr><td>Power BI</td><td>від 5000 грн</td></tr>
+<tr><td>Інтеграції та API</td><td>від 5000 грн</td></tr>
+<tr><td>Вебзастосунки</td><td>від 8000 грн</td></tr>
+</table>
+</section>
 
-  <div class="section">
-    <h2>Формат роботи</h2>
-    <p>Робота ведеться за ітераційною моделлю: після отримання завдання від клієнта виконується перший етап, погоджується результат, далі — наступна ітерація. Після кожного завершеного етапу проводиться проміжна оплата за фактично витрачений час.</p>
-    <p><em>До загального часу також входить супровід клієнта: пояснення, демонстрація рішення, відповіді на запитання. Це частина послуги та частина цінності, яку ви отримуєте разом із готовим результатом.</em></p>
-  </div>
+<section class="card">
+<h2>Чому ціни можуть відрізнятися</h2>
+<p>Дві схожі на перший погляд задачі можуть суттєво відрізнятися за складністю.</p>
+<ul>
+<li>Одна формула може зайняти декілька хвилин.</li>
+<li>Повноцінна автоматизація може вимагати десятки годин роботи.</li>
+<li>Деякі проєкти охоплюють одночасно Excel, Power BI, Google Sheets, API, Telegram, PDF та вебінтерфейси.</li>
+</ul>
+<div class="note">
+Остаточна оцінка завжди виконується після ознайомлення з реальною задачею, файлами та процесами.
+</div>
+</section>
 
-  <a class="back-button" href="index.html">← Назад на головну</a>
+<section class="card">
+<h2>Пакети підтримки</h2>
+<table>
+<tr><th>Пакет</th><th>Вартість</th></tr>
+<tr><td>3 години</td><td>2000 грн</td></tr>
+<tr><td>4 години</td><td>2600 грн</td></tr>
+</table>
+<p>До вартості входять консультації, виправлення помилок, доопрацювання, пояснення та супровід.</p>
+</section>
 
-  <footer>
-    © 2015–2025 Sebastian Automations. Всі права захищено. <a href="terms.html">Умови використання</a>
-  </footer>
+<section class="card">
+<h2>Як відбувається робота</h2>
+<ol>
+<li>Аналіз задачі.</li>
+<li>Узгодження обсягу робіт.</li>
+<li>Розробка рішення.</li>
+<li>Тестування.</li>
+<li>Передача результату.</li>
+<li>Підтримка після запуску.</li>
+</ol>
+</section>
+
+<section class="card cta">
+<h2>Перша консультація безкоштовна</h2>
+<p>Опишіть задачу кількома реченнями, і я запропоную оптимальний спосіб її вирішення.</p>
+<a class="button" href="contacts.html">Зв'язатися зі мною</a>
+</section>
+
+</div>
+
+<footer>© 2015–2026 Sebastian Automations. Всі права захищено.</footer>
 </body>
 </html>

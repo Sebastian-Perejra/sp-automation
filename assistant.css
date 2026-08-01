@@ -131,3 +131,10 @@
         scale: 1;
     }
 }
+.lang-switcher button.active-language {
+  background: #35594b;
+  color: #ffffff;
+  border-color: #35594b;
+  box-shadow: 0 4px 12px rgba(53, 89, 75, 0.18);
+  cursor: default;
+}

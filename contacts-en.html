@@ -2,20 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Contacts – Sebastian Perejra</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>Contacts – Sebastian Pereira</title>
 
   <link rel="icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9">
+  </script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-456XH82BM9');
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-456XH82BM9");
   </script>
 
   <script
@@ -25,228 +45,429 @@
   </script>
 
   <style>
+    :root {
+      --page-bg: #f7f4ef;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf7;
+      --surface-green: #f2f7f3;
+
+      --text-main: #242321;
+      --text-secondary: #64605b;
+      --text-muted: #817c75;
+
+      --green: #35594b;
+      --green-hover: #29483c;
+
+      --blue: #2f6f9f;
+      --blue-hover: #255a82;
+
+      --red: #b64a4a;
+
+      --border: #e8e1d8;
+      --border-green: #d5e3d8;
+
+      --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
+
+      --radius-large: 28px;
+
+      --font-main: "Manrope", sans-serif;
+      --font-tech: "Roboto Mono", monospace;
+    }
+
     * {
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
+    html {
       min-height: 100%;
-      font-family: 'Roboto Mono', monospace;
-      background: #f4f7fa;
-      color: #1a1a1a;
+      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
+      font-family: var(--font-main);
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(221, 233, 224, 0.52),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at top right,
+          rgba(222, 232, 239, 0.48),
+          transparent 30%
+        ),
+        var(--page-bg);
+      color: var(--text-main);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a,
+    button,
+    input,
+    textarea {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 244, 239, 0.88);
+      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      width: min(100%, 1180px);
+      min-height: 72px;
+      margin: 0 auto;
       padding:
-        max(28px, env(safe-area-inset-top))
-        20px
-        max(34px, env(safe-area-inset-bottom));
+        max(14px, env(safe-area-inset-top))
+        28px
+        14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .home-link {
+      color: var(--green);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .home-link:hover {
+      color: var(--green-hover);
+      transform: translateX(-2px);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      color: #52504c;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -7px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green);
+      transition: right 0.22s ease;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--green);
+    }
+
+    .desktop-nav a:hover::after {
+      right: 0;
     }
 
     .page-shell {
-      width: min(100%, 920px);
+      width: min(100%, 1080px);
       margin: 0 auto;
-    }
-
-    .back-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 26px;
-      color: #007acc;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .back-top:hover {
-      color: #005ea8;
+      padding:
+        72px
+        24px
+        max(104px, env(safe-area-inset-bottom));
     }
 
     .contact-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
-      gap: 34px;
-      align-items: start;
+      grid-template-columns:
+        minmax(0, 0.9fr)
+        minmax(380px, 1.1fr);
+      gap: 28px;
+      align-items: stretch;
     }
 
     .contact-info,
     .contact-form-card {
-      background: rgba(255,255,255,0.96);
-      border: 1px solid #d6e3ec;
-      border-radius: 18px;
-      box-shadow: 0 12px 34px rgba(36, 73, 104, 0.08);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow-soft);
     }
 
     .contact-info {
-      padding: 30px;
+      padding: 48px 42px;
+    }
+
+    .contact-info::before {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      top: -120px;
+      left: -100px;
+      border-radius: 50%;
+      background: rgba(196, 217, 202, 0.42);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .contact-info::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -100px;
+      bottom: -110px;
+      border-radius: 50%;
+      background: rgba(205, 218, 228, 0.42);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .contact-info > * {
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      margin: 0 0 12px;
-      color: #007acc;
-      font-size: clamp(2rem, 5vw, 2.7rem);
-      line-height: 1.1;
+      margin: 0 0 20px;
+      color: var(--green);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.055em;
     }
 
     .lead {
-      margin: 0 0 28px;
-      color: #65727c;
-      font-size: 14px;
-      line-height: 1.6;
+      margin: 0 0 34px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.85;
     }
 
     .contact-list {
       display: grid;
-      gap: 12px;
+      gap: 13px;
     }
 
     .contact-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 14px;
-      border: 1px solid #e0e9ef;
-      border-radius: 12px;
-      background: #f9fbfd;
+      gap: 14px;
+      padding: 17px;
+      border: 1px solid #e8e2da;
+      border-radius: 16px;
+      background: var(--surface-soft);
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .contact-item:hover {
+      border-color: #cbd9ce;
+      box-shadow: 0 10px 26px rgba(47, 70, 57, 0.07);
+      transform: translateY(-2px);
     }
 
     .contact-icon {
-      width: 28px;
-      flex: 0 0 28px;
-      text-align: center;
-      font-size: 18px;
-      line-height: 1.4;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--surface-green);
+      color: var(--green);
+      font-family: var(--font-tech);
+      font-size: 17px;
+      font-weight: 600;
     }
 
     .contact-item-content {
       min-width: 0;
+      padding-top: 1px;
     }
 
     .contact-label {
       display: block;
       margin-bottom: 4px;
-      color: #73818b;
-      font-size: 11px;
-      font-weight: bold;
+      color: var(--text-muted);
+      font-family: var(--font-tech);
+      font-size: 10px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
 
     .contact-value {
-      color: #1a1a1a;
+      color: #4e4b47;
       font-size: 14px;
-      line-height: 1.45;
+      line-height: 1.55;
       overflow-wrap: anywhere;
     }
 
     .contact-value a {
-      color: #007acc;
+      color: var(--green);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .contact-value a:hover {
+      color: var(--green-hover);
       text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .contact-form-card {
-      padding: 30px;
+      padding: 48px 42px;
     }
 
     .contact-form-card h2 {
-      margin: 0 0 8px;
-      font-size: 20px;
+      margin: 0 0 12px;
+      color: #2e4d5f;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
     }
 
     .form-subtitle {
-      margin: 0 0 24px;
-      color: #6c7983;
-      font-size: 12px;
-      line-height: 1.55;
+      margin: 0 0 30px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.75;
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 15px;
     }
 
     .contact-form label {
-      margin-bottom: -7px;
-      color: #34434d;
-      font-size: 12px;
-      font-weight: bold;
+      margin-bottom: -8px;
+      color: #514e49;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      padding: 12px 13px;
-      border: 1px solid #c4d8e6;
-      border-radius: 9px;
-      background: #fff;
-      color: #000;
-      font-family: 'Roboto Mono', monospace;
+      padding: 14px 15px;
+      border: 1px solid #dcd5cc;
+      border-radius: 13px;
+      background: #fdfcfb;
+      color: var(--text-main);
+      font-family: var(--font-main);
       font-size: 16px;
       outline: none;
       transition:
         border-color 0.2s ease,
+        background 0.2s ease,
         box-shadow 0.2s ease;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #aaa39b;
+    }
+
+    .contact-form input:hover,
+    .contact-form textarea:hover {
+      border-color: #c8bfb5;
+      background: #ffffff;
     }
 
     .contact-form input:focus,
     .contact-form textarea:focus {
-      border-color: #007acc;
-      box-shadow: 0 0 0 3px rgba(0,122,204,0.10);
+      border-color: var(--green);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(53, 89, 75, 0.09);
     }
 
     .contact-form textarea {
-      min-height: 132px;
+      min-height: 148px;
       resize: vertical;
+      line-height: 1.65;
     }
 
     .contact-form button[type="submit"] {
       width: 100%;
-      min-height: 48px;
+      min-height: 52px;
+      margin-top: 2px;
       border: none;
-      border-radius: 9px;
-      background: #007acc;
-      color: #fff;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 15px;
-      font-weight: bold;
+      border-radius: 13px;
+      background: var(--blue);
+      color: #ffffff;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 10px 25px rgba(47, 111, 159, 0.2);
       transition:
-        background-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
         transform 0.2s ease;
     }
 
     .contact-form button[type="submit"]:hover {
-      background: #005ea8;
-      transform: translateY(-1px);
+      background: var(--blue-hover);
+      box-shadow: 0 14px 30px rgba(47, 111, 159, 0.26);
+      transform: translateY(-2px);
     }
 
     .contact-form button[type="submit"]:disabled {
-      opacity: 0.7;
+      opacity: 0.68;
       cursor: wait;
+      box-shadow: none;
       transform: none;
     }
 
     .telegram-note {
-      margin: 0;
-      color: #5f6f7a;
+      margin: 1px 0 0;
+      padding: 13px 15px;
+      border: 1px solid var(--border-green);
+      border-radius: 13px;
+      background: var(--surface-green);
+      color: #50675a;
       font-size: 11px;
-      line-height: 1.55;
+      line-height: 1.6;
       text-align: center;
     }
 
     .error-message {
       min-height: 18px;
-      color: #cc0000;
+      color: var(--red);
       font-size: 12px;
+      font-weight: 600;
       line-height: 1.45;
       text-align: center;
     }
@@ -263,85 +484,127 @@
       transform-origin: center top;
     }
 
-    @media (max-width: 760px) {
-      body {
-        padding:
-          max(18px, env(safe-area-inset-top))
-          12px
-          max(26px, env(safe-area-inset-bottom));
+    footer {
+      padding:
+        34px
+        20px
+        max(34px, env(safe-area-inset-bottom));
+      border-top: 1px solid #dfd8cf;
+      background: rgba(244, 240, 234, 0.96);
+      color: var(--text-muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner {
+        gap: 16px;
+        padding-left: 18px;
+        padding-right: 18px;
       }
 
-      .page-shell {
-        width: 100%;
+      .desktop-nav {
+        gap: 18px;
       }
 
-      .back-top {
-        margin: 2px 4px 18px;
+      .desktop-nav a {
         font-size: 13px;
       }
 
       .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        grid-template-columns:
+          minmax(0, 1fr)
+          minmax(350px, 1fr);
       }
 
       .contact-info,
       .contact-form-card {
-        border-radius: 14px;
+        padding: 38px 30px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        min-height: 64px;
+        padding:
+          max(12px, env(safe-area-inset-top))
+          14px
+          12px;
       }
 
-      .contact-info {
-        padding: 22px 16px;
+      .desktop-nav {
+        display: none;
+      }
+
+      .page-shell {
+        width: 100%;
+        padding:
+          36px
+          14px
+          max(56px, env(safe-area-inset-bottom));
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .contact-info,
+      .contact-form-card {
+        padding: 32px 20px;
+        border-radius: 22px;
       }
 
       h1 {
+        margin-bottom: 18px;
+        font-size: clamp(2.8rem, 15vw, 3.8rem);
         text-align: center;
-        font-size: 2rem;
       }
 
       .lead {
-        max-width: 420px;
-        margin: 0 auto 20px;
+        max-width: 460px;
+        margin: 0 auto 28px;
+        font-size: 14px;
+        line-height: 1.75;
         text-align: center;
-        font-size: 12px;
       }
 
       .contact-list {
-        gap: 9px;
+        gap: 10px;
       }
 
       .contact-item {
-        padding: 12px;
+        padding: 14px;
+      }
+
+      .contact-icon {
+        width: 33px;
+        height: 33px;
+        flex-basis: 33px;
+        font-size: 15px;
       }
 
       .contact-label {
-        font-size: 10px;
+        font-size: 9px;
       }
 
       .contact-value {
-        font-size: 12px;
-      }
-
-      .contact-form-card {
-        padding: 22px 16px 20px;
+        font-size: 13px;
       }
 
       .contact-form-card h2 {
+        font-size: 1.8rem;
         text-align: center;
-        font-size: 18px;
       }
 
       .form-subtitle {
+        margin-bottom: 25px;
+        font-size: 13px;
         text-align: center;
-        font-size: 11px;
-      }
-
-      .contact-form {
-        gap: 12px;
       }
 
       .contact-form textarea {
-        min-height: 120px;
+        min-height: 132px;
       }
 
       .telegram-note {
@@ -349,21 +612,32 @@
       }
     }
 
-    @media (max-width: 360px) {
+    @media (max-width: 380px) {
+      .home-link {
+        font-size: 12px;
+      }
+
       .contact-info,
       .contact-form-card {
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .contact-item {
-        gap: 8px;
+        gap: 10px;
       }
 
       .contact-icon {
-        width: 24px;
-        flex-basis: 24px;
-        font-size: 16px;
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+        font-size: 14px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        padding-left: 13px;
+        padding-right: 13px;
       }
 
       .cf-turnstile {
@@ -374,23 +648,46 @@
 </head>
 
 <body>
-  <main class="page-shell">
-    <a href="index-en.html" class="back-top">← Back to Home</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="home-link" href="index-en.html">
+        ← Home
+      </a>
 
+      <nav class="desktop-nav">
+        <a href="about-en.html">About Me</a>
+        <a href="services-en.html">Services</a>
+        <a href="pricing-en.html">Pricing</a>
+        <a href="solutions-en.html">Solutions</a>
+        <a href="faq-en.html">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
     <section class="contact-layout">
       <div class="contact-info">
         <h1>Contacts</h1>
+
         <p class="lead">
-          Message or call me using whichever channel is most convenient. A short task description is enough to get started.
+          Message or call me using whichever channel is most convenient.
+          A short task description is enough to get started.
         </p>
 
         <div class="contact-list">
           <div class="contact-item">
             <div class="contact-icon">☎</div>
+
             <div class="contact-item-content">
-              <span class="contact-label">Phone</span>
+              <span class="contact-label">
+                Phone
+              </span>
+
               <div class="contact-value">
-                <a href="tel:+380980746698">+38 (098) 074 66 98</a><br>
+                <a href="tel:+380980746698">
+                  +38 (098) 074 66 98
+                </a>
+                <br>
                 Viber / WhatsApp / GSM
               </div>
             </div>
@@ -398,29 +695,51 @@
 
           <div class="contact-item">
             <div class="contact-icon">✈</div>
+
             <div class="contact-item-content">
-              <span class="contact-label">Telegram</span>
+              <span class="contact-label">
+                Telegram
+              </span>
+
               <div class="contact-value">
-                <a href="https://t.me/Sebastian_automation">@Sebastian_automation</a>
+                <a
+                  href="https://t.me/Sebastian_automation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @Sebastian_automation
+                </a>
               </div>
             </div>
           </div>
 
           <div class="contact-item">
             <div class="contact-icon">✉</div>
+
             <div class="contact-item-content">
-              <span class="contact-label">Email</span>
+              <span class="contact-label">
+                Email
+              </span>
+
               <div class="contact-value">
-                <a href="mailto:sebastian@sp-automation.com">sebastian@sp-automation.com</a>
+                <a href="mailto:sebastian@sp-automation.com">
+                  sebastian@sp-automation.com
+                </a>
               </div>
             </div>
           </div>
 
           <div class="contact-item">
             <div class="contact-icon">⌖</div>
+
             <div class="contact-item-content">
-              <span class="contact-label">Location</span>
-              <div class="contact-value">Ukraine, meetings upon request</div>
+              <span class="contact-label">
+                Location
+              </span>
+
+              <div class="contact-value">
+                Ukraine, meetings upon request
+              </div>
             </div>
           </div>
         </div>
@@ -428,12 +747,16 @@
 
       <div class="contact-form-card">
         <h2>Send a message</h2>
+
         <p class="form-subtitle">
           Your message will be delivered to me in Telegram and by email.
         </p>
 
         <form class="contact-form" id="contact-form">
-          <label for="name">Your name</label>
+          <label for="name">
+            Your name
+          </label>
+
           <input
             type="text"
             id="name"
@@ -444,7 +767,10 @@
             required
           >
 
-          <label for="email">Email</label>
+          <label for="email">
+            Email
+          </label>
+
           <input
             type="email"
             id="email"
@@ -455,7 +781,10 @@
             required
           >
 
-          <label for="message">Message</label>
+          <label for="message">
+            Message
+          </label>
+
           <textarea
             id="message"
             name="message"
@@ -464,13 +793,19 @@
             required
           ></textarea>
 
-          <button type="submit">Send</button>
+          <button type="submit">
+            Send
+          </button>
 
           <p class="telegram-note">
-            ⚡ I will see your request almost instantly and can respond without unnecessary delays.
+            ⚡ I will see your request almost instantly
+            and can respond without unnecessary delays.
           </p>
 
-          <div class="error-message" id="error-message"></div>
+          <div
+            class="error-message"
+            id="error-message"
+          ></div>
 
           <div class="turnstile-wrapper">
             <div
@@ -482,6 +817,10 @@
       </div>
     </section>
   </main>
+
+  <footer>
+    © 2015–2026 Sebastian Automations. All rights reserved.
+  </footer>
 
   <script>
     emailjs.init("sUAoOmiqx4fKn8TVo");
@@ -495,16 +834,25 @@
         e.preventDefault();
 
         const form = this;
-        const errorMessage = document.getElementById("error-message");
-        const submitButton = form.querySelector('button[type="submit"]');
+
+        const errorMessage =
+          document.getElementById("error-message");
+
+        const submitButton =
+          form.querySelector('button[type="submit"]');
 
         const now = Date.now();
+
         const lastSend =
-          Number(localStorage.getItem("contactLastSendEn") || 0);
+          Number(
+            localStorage.getItem("contactLastSendEn") || 0
+          );
 
         if (now - lastSend < 60000) {
           const seconds =
-            Math.ceil((60000 - (now - lastSend)) / 1000);
+            Math.ceil(
+              (60000 - (now - lastSend)) / 1000
+            );
 
           errorMessage.textContent =
             `You can send another message in ${seconds} sec.`;
@@ -520,20 +868,25 @@
         if (!turnstileToken) {
           errorMessage.textContent =
             "Please confirm that you are not a robot.";
+
           return;
         }
 
         const telegramData = {
           user_name:
             form.elements["user_name"].value.trim(),
+
           user_email:
             form.elements["user_email"].value.trim(),
+
           message:
             form.elements["message"].value.trim(),
+
           turnstileToken: turnstileToken
         };
 
         errorMessage.textContent = "";
+
         submitButton.disabled = true;
         submitButton.textContent = "Sending...";
 
@@ -547,10 +900,14 @@
           fetch(TELEGRAM_WEB_APP_URL, {
             method: "POST",
             mode: "no-cors",
+
             headers: {
-              "Content-Type": "text/plain;charset=utf-8"
+              "Content-Type":
+                "text/plain;charset=utf-8"
             },
+
             body: JSON.stringify(telegramData)
+
           }).catch(error => {
             console.error(
               "Telegram notification error:",
@@ -564,6 +921,7 @@
           );
 
           alert("Message sent successfully!");
+
           form.reset();
 
           if (window.turnstile) {

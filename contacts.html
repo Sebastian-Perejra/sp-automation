@@ -7,7 +7,596 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-  <!-- Google Analytics (GA4) -->
+  <!-- Google Analytics (GA4) --><!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Контакти – Себастьян Перейра</title>
+
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-456XH82BM9');
+  </script>
+
+  <script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer>
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: 'Roboto Mono', monospace;
+      background: #f4f7fa;
+      color: #1a1a1a;
+    }
+
+    body {
+      min-height: 100vh;
+      padding:
+        max(28px, env(safe-area-inset-top))
+        20px
+        max(34px, env(safe-area-inset-bottom));
+    }
+
+    .page-shell {
+      width: min(100%, 920px);
+      margin: 0 auto;
+    }
+
+    .back-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 26px;
+      color: #007acc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .back-top:hover {
+      color: #005ea8;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .contact-info,
+    .contact-form-card {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #d6e3ec;
+      border-radius: 18px;
+      box-shadow: 0 12px 34px rgba(36, 73, 104, 0.08);
+    }
+
+    .contact-info {
+      padding: 30px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #007acc;
+      font-size: clamp(2rem, 5vw, 2.7rem);
+      line-height: 1.1;
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      color: #65727c;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid #e0e9ef;
+      border-radius: 12px;
+      background: #f9fbfd;
+    }
+
+    .contact-icon {
+      width: 28px;
+      flex: 0 0 28px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .contact-item-content {
+      min-width: 0;
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #73818b;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .contact-value {
+      color: #1a1a1a;
+      font-size: 14px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-value a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form-card {
+      padding: 30px;
+    }
+
+    .contact-form-card h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .form-subtitle {
+      margin: 0 0 24px;
+      color: #6c7983;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-form label {
+      margin-bottom: -7px;
+      color: #34434d;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid #c4d8e6;
+      border-radius: 9px;
+      background: #fff;
+      color: #000;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 16px;
+      outline: none;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #007acc;
+      box-shadow: 0 0 0 3px rgba(0,122,204,0.10);
+    }
+
+    .contact-form textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .contact-form button[type="submit"] {
+      width: 100%;
+      min-height: 48px;
+      border: none;
+      border-radius: 9px;
+      background: #007acc;
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .contact-form button[type="submit"]:hover {
+      background: #005ea8;
+      transform: translateY(-1px);
+    }
+
+    .contact-form button[type="submit"]:disabled {
+      opacity: 0.7;
+      cursor: wait;
+      transform: none;
+    }
+
+    .telegram-note {
+      margin: 0;
+      color: #5f6f7a;
+      font-size: 11px;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .error-message {
+      min-height: 18px;
+      color: #cc0000;
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .turnstile-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .cf-turnstile {
+      transform-origin: center top;
+    }
+
+    .back-button {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding:
+          max(18px, env(safe-area-inset-top))
+          12px
+          max(26px, env(safe-area-inset-bottom));
+      }
+
+      .page-shell {
+        width: 100%;
+      }
+
+      .back-top {
+        margin: 2px 4px 18px;
+        font-size: 13px;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .contact-info,
+      .contact-form-card {
+        border-radius: 14px;
+      }
+
+      .contact-info {
+        padding: 22px 16px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2rem;
+      }
+
+      .lead {
+        max-width: 420px;
+        margin: 0 auto 20px;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .contact-list {
+        gap: 9px;
+      }
+
+      .contact-item {
+        padding: 12px;
+      }
+
+      .contact-label {
+        font-size: 10px;
+      }
+
+      .contact-value {
+        font-size: 12px;
+      }
+
+      .contact-form-card {
+        padding: 22px 16px 20px;
+      }
+
+      .contact-form-card h2 {
+        text-align: center;
+        font-size: 18px;
+      }
+
+      .form-subtitle {
+        text-align: center;
+        font-size: 11px;
+      }
+
+      .contact-form {
+        gap: 12px;
+      }
+
+      .contact-form textarea {
+        min-height: 120px;
+      }
+
+      .telegram-note {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .contact-info,
+      .contact-form-card {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .contact-item {
+        gap: 8px;
+      }
+
+      .contact-icon {
+        width: 24px;
+        flex-basis: 24px;
+        font-size: 16px;
+      }
+
+      .cf-turnstile {
+        transform: scale(0.86);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-shell">
+    <a href="index.html" class="back-top">← На головну</a>
+
+    <section class="contact-layout">
+      <div class="contact-info">
+        <h1>Контакти</h1>
+        <p class="lead">
+          Напишіть або зателефонуйте зручним способом. Короткого опису задачі достатньо, щоб почати.
+        </p>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-icon">☎</div>
+            <div class="contact-item-content">
+              <span class="contact-label">Телефон</span>
+              <div class="contact-value">
+                <a href="tel:+380980746698">+38 (098) 074 66 98</a><br>
+                Viber / WhatsApp / GSM
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✈</div>
+            <div class="contact-item-content">
+              <span class="contact-label">Telegram</span>
+              <div class="contact-value">
+                <a href="https://t.me/Sebastian_automation">@Sebastian_automation</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div class="contact-item-content">
+              <span class="contact-label">Email</span>
+              <div class="contact-value">
+                <a href="mailto:sebastian@sp-automation.com">sebastian@sp-automation.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">⌖</div>
+            <div class="contact-item-content">
+              <span class="contact-label">Локація</span>
+              <div class="contact-value">Україна, зустріч за потреби</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h2>Надіслати повідомлення</h2>
+        <p class="form-subtitle">
+          Повідомлення одразу надійде мені в Telegram та на email.
+        </p>
+
+        <form class="contact-form" id="contact-form">
+          <label for="name">Ваше ім’я</label>
+          <input
+            type="text"
+            id="name"
+            name="user_name"
+            placeholder="Наприклад, Олександр"
+            maxlength="100"
+            autocomplete="name"
+            required
+          >
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="user_email"
+            placeholder="name@example.com"
+            maxlength="160"
+            autocomplete="email"
+            required
+          >
+
+          <label for="message">Повідомлення</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Коротко опишіть задачу"
+            maxlength="5000"
+            required
+          ></textarea>
+
+          <button type="submit">Надіслати</button>
+
+          <p class="telegram-note">
+            ⚡ Я побачу ваш запит практично миттєво та зможу відповісти без зайвих затримок.
+          </p>
+
+          <div class="error-message" id="error-message"></div>
+
+          <div class="turnstile-wrapper">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+            ></div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    emailjs.init("sUAoOmiqx4fKn8TVo");
+
+    const TELEGRAM_WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec";
+
+    document
+      .getElementById("contact-form")
+      .addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const form = this;
+        const errorMessage = document.getElementById("error-message");
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        const now = Date.now();
+        const lastSend =
+          Number(localStorage.getItem("contactLastSend") || 0);
+
+        if (now - lastSend < 60000) {
+          const seconds =
+            Math.ceil((60000 - (now - lastSend)) / 1000);
+
+          errorMessage.textContent =
+            `Повторне повідомлення можна надіслати через ${seconds} сек.`;
+
+          return;
+        }
+
+        const turnstileToken =
+          form.querySelector(
+            '[name="cf-turnstile-response"]'
+          )?.value || "";
+
+        if (!turnstileToken) {
+          errorMessage.textContent =
+            "Підтвердіть, що ви не робот.";
+          return;
+        }
+
+        const telegramData = {
+          user_name:
+            form.elements["user_name"].value.trim(),
+          user_email:
+            form.elements["user_email"].value.trim(),
+          message:
+            form.elements["message"].value.trim(),
+          turnstileToken: turnstileToken
+        };
+
+        errorMessage.textContent = "";
+        submitButton.disabled = true;
+        submitButton.textContent = "Надсилання...";
+
+        try {
+          await emailjs.sendForm(
+            "service_hckw1kr",
+            "template_qz6v45s",
+            form
+          );
+
+          fetch(TELEGRAM_WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(telegramData)
+          }).catch(error => {
+            console.error(
+              "Telegram notification error:",
+              error
+            );
+          });
+
+          localStorage.setItem(
+            "contactLastSend",
+            String(Date.now())
+          );
+
+          alert("Повідомлення успішно надіслано!");
+          form.reset();
+
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
+
+        } catch (error) {
+          console.error("EmailJS error:", error);
+
+          errorMessage.textContent =
+            "Помилка надсилання. Спробуйте ще раз.";
+
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Надіслати";
+        }
+      });
+  </script>
+</body>
+</html>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];

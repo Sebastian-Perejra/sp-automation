@@ -271,13 +271,26 @@
     }
 
     footer {
-      padding: 16px 20px;
-      border-top: 1px solid #c4d8e6;
-      background: #e6f0fa;
-      color: #7e8991;
-      font-size: 10px;
-      text-align: center;
-    }
+  padding:
+    34px
+    20px
+    max(34px, env(safe-area-inset-bottom));
+  border-top: 1px solid #dfd8cf;
+  background: rgba(244, 240, 234, 0.96);
+  color: #817c75;
+  font-size: 12px;
+  text-align: center;
+}
+
+footer a {
+  color: #35594b;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
 
     @media (max-width: 760px) {
       .topbar-inner {
@@ -685,7 +698,8 @@
   </main>
 
   <footer>
-    © 2015–2026 Sebastian Automations. All rights reserved.
-  </footer>
+  © 2015–2026 Sebastian Automations. All rights reserved.
+  <a href="terms-en.html">Terms of Use</a>
+</footer>
 </body>
 </html>

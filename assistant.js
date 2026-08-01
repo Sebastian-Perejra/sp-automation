@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname.toLowerCase();
-  const buttons = document.querySelectorAll(".lang-switcher button");
+  const buttons = document.querySelectorAll(".lang-switcher a");
 
   let activeLanguage = "UA";
 

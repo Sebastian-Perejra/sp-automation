@@ -2,11 +2,12 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Умови використання сайту</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Умови використання та політика конфіденційності</title>
+
+  <link rel="icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
-  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,153 +17,598 @@
   </script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: 'Roboto Mono', monospace;
-      background-color: #f4f7fa;
+      background: #f4f7fa;
       color: #1a1a1a;
     }
 
-    nav {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      background-color: #e6f0fa;
-      padding: 20px 40px;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(230, 240, 250, 0.96);
       border-bottom: 1px solid #c4d8e6;
+      backdrop-filter: blur(10px);
     }
 
-    .nav-left a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .nav-center {
+    .topbar-inner {
+      width: min(100%, 1120px);
+      margin: 0 auto;
+      padding: 14px 20px;
       display: flex;
-      justify-content: center;
-      gap: 40px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
     }
 
-    .nav-center a {
+    .home-link {
       color: #007acc;
       text-decoration: none;
+      font-size: 14px;
       font-weight: bold;
-      font-size: 16px;
-      transition: color 0.3s;
+      white-space: nowrap;
     }
 
-    .nav-center a:hover {
+    .home-link:hover {
+      color: #005ea8;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .desktop-nav a {
+      color: #007acc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .desktop-nav a:hover {
       color: #005ea8;
     }
 
     .lang-switcher {
       display: flex;
-      justify-content: flex-end;
-      gap: 10px;
+      gap: 7px;
     }
 
     .lang-switcher button {
-      background-color: #ffffff;
       border: 1px solid #007acc;
+      border-radius: 7px;
+      background: #fff;
       color: #007acc;
+      padding: 6px 9px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
       font-weight: bold;
-      padding: 5px 10px;
       cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: background-color 0.3s, color 0.3s;
     }
 
     .lang-switcher button:hover {
-      background-color: #007acc;
-      color: white;
+      background: #007acc;
+      color: #fff;
     }
 
-    main {
-      max-width: 800px;
-      margin: 40px auto;
+    .page {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding:
+        42px
+        20px
+        max(64px, env(safe-area-inset-bottom));
+    }
+
+    .hero {
+      margin-bottom: 22px;
+      padding: 34px;
+      border: 1px solid #d5e4ee;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fff 0%, #f7fbff 100%);
+      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      color: #0F9D58;
+      font-size: clamp(2rem, 6vw, 3.1rem);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: #596771;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .updated {
+      display: inline-flex;
+      margin-top: 16px;
+      padding: 8px 11px;
+      border: 1px solid #cfe0eb;
+      border-radius: 9px;
+      background: #f8fbfd;
+      color: #6d7880;
+      font-size: 10px;
+    }
+
+    .legal-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .legal-section {
+      padding: 24px;
+      border: 1px solid #d9e4ec;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
+    }
+
+    .legal-section h2 {
+      margin: 0 0 12px;
+      color: #007acc;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .legal-section p,
+    .legal-section li {
+      color: #53616a;
+      font-size: 12px;
+      line-height: 1.72;
+    }
+
+    .legal-section p {
+      margin: 0 0 12px;
+    }
+
+    .legal-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .legal-section ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .legal-section li {
+      margin-bottom: 8px;
+    }
+
+    .confidentiality {
+      border-color: #bfe0ca;
+      background: linear-gradient(135deg, #f8fffa 0%, #f0faf3 100%);
+    }
+
+    .confidentiality h2 {
+      color: #0F9D58;
+    }
+
+    .confidentiality-note {
+      margin-top: 14px;
+      padding: 15px 16px;
+      border-left: 4px solid #0F9D58;
+      border-radius: 9px;
+      background: #fff;
+      color: #344b3c;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.65;
+    }
+
+    .contact-box {
+      margin-top: 20px;
+      padding: 26px;
+      text-align: center;
+      border: 1px solid #c9e2f7;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
+    }
+
+    .contact-box h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .contact-box p {
+      margin: 0 0 18px;
+      color: #596771;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .contact-box a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
       padding: 0 20px;
-      line-height: 1.6;
+      border-radius: 9px;
+      background: #1a73e8;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .contact-box a:hover {
+      background: #135fbe;
     }
 
     footer {
+      padding: 16px 20px;
+      border-top: 1px solid #c4d8e6;
+      background: #e6f0fa;
+      color: #7e8991;
+      font-size: 10px;
       text-align: center;
-      padding: 10px;
-      font-size: 0.9rem;
-      background-color: #e6f0fa;
-      color: #555;
     }
 
-    .back-button {
-      display: block;
-      width: fit-content;
-      margin: 40px auto 20px;
-      background-color: #1a73e8;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+    @media (max-width: 760px) {
+      .topbar-inner {
+        padding:
+          max(12px, env(safe-area-inset-top))
+          12px
+          12px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .lang-switcher {
+        margin-left: auto;
+      }
+
+      .page {
+        padding:
+          24px
+          12px
+          max(36px, env(safe-area-inset-bottom));
+      }
+
+      .hero {
+        padding: 24px 18px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 12px;
+      }
+
+      .legal-section {
+        padding: 20px 16px;
+      }
+
+      .legal-section h2 {
+        font-size: 16px;
+      }
+
+      .legal-section p,
+      .legal-section li {
+        font-size: 11px;
+      }
+
+      .contact-box {
+        padding: 22px 16px;
+      }
+
+      .contact-box a {
+        width: 100%;
+      }
     }
 
-    .back-button:hover {
-      background-color: #135fbe;
-      transform: translateY(-3px);
+    @media (max-width: 380px) {
+      .home-link {
+        font-size: 12px;
+      }
+
+      .lang-switcher button {
+        padding: 5px 7px;
+        font-size: 10px;
+      }
     }
   </style>
 </head>
+
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="home-link" href="index.html">← На головну</a>
 
-  <nav>
-    <div class="nav-left">
-      <a href="terms.html">Умови використання</a>
+      <nav class="desktop-nav">
+        <a href="about.html">Про мене</a>
+        <a href="services.html">Послуги</a>
+        <a href="pricing.html">Цінова політика</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contacts.html">Контакти</a>
+      </nav>
+
+      <div class="lang-switcher">
+        <button onclick="location.href='terms.html'">UA</button>
+        <button onclick="location.href='terms-en.html'">EN</button>
+        <button onclick="location.href='terms-ru.html'">RU</button>
+      </div>
     </div>
-    <div class="nav-center">
-      <a href="about.html">Про мене</a>
-      <a href="services.html">Послуги</a>
-      <a href="pricing.html">Цінова політика</a>
-      <a href="#portfolio">Портфоліо</a>
-      <a href="contacts.html">Контакти</a>
-    </div>
-    <div class="lang-switcher">
-      <button onclick="location.href='index.html'">UA</button>
-      <button onclick="location.href='index-en.html'">EN</button>
-      <button onclick="location.href='index-ru.html'">RU</button>
-    </div>
-  </nav>
+  </header>
 
-  <main>
-    <p><strong>1. Загальні положення</strong></p>
-    <p>Цей сайт створено з метою надання інформації про послуги з автоматизації, аналітики та візуалізації даних. Користуючись цим сайтом, ви погоджуєтесь з нижченаведеними умовами.</p>
+  <main class="page">
+    <section class="hero">
+      <h1>Умови використання та політика конфіденційності</h1>
+      <p>
+        Ця сторінка визначає правила користування сайтом, принципи обробки
+        даних, конфіденційності, безпеки та взаємодії з відвідувачами й замовниками.
+      </p>
+      <div class="updated">Останнє оновлення: 2026 рік</div>
+    </section>
 
-    <p><strong>2. Відсутність публічної оферти</strong></p>
-    <p>Інформація на сайті не є публічною офертою відповідно до статті 641 Цивільного кодексу України. Жодні ціни, приклади рішень чи описані послуги не є обов'язковими до виконання, поки не буде укладено індивідуальну домовленість.</p>
+    <section class="legal-grid">
+      <article class="legal-section">
+        <h2>1. Загальні положення</h2>
+        <p>
+          Сайт створено для надання інформації про послуги з автоматизації,
+          аналітики, розробки вебзастосунків, інтеграцій, обробки даних,
+          дослідження ринку та інших цифрових рішень.
+        </p>
+        <p>
+          Використовуючи цей сайт, ви підтверджуєте, що ознайомилися з цими
+          умовами та погоджуєтеся дотримуватися їх.
+        </p>
+      </article>
 
-    <p><strong>3. Авторське право</strong></p>
-    <p>Весь оригінальний контент сайту, включаючи тексти, структуру, опис послуг, належить автору сайту та захищається згідно із законодавством України про інтелектуальну власність.</p>
+      <article class="legal-section">
+        <h2>2. Відсутність публічної оферти</h2>
+        <p>
+          Інформація, описи послуг, приклади, орієнтовні ціни та строки,
+          розміщені на сайті, не є публічною офертою.
+        </p>
+        <p>
+          Остаточний обсяг робіт, строки, вартість, права та відповідальність
+          сторін визначаються індивідуально після ознайомлення з конкретною задачею.
+        </p>
+      </article>
 
-    <p><strong>4. Сторонні сервіси та логотипи</strong></p>
-    <p>На сайті можуть використовуватись зображення та логотипи компаній (наприклад, Microsoft, Google, Oracle), виключно з ілюстративною метою. Усі права на ці торговельні марки належать відповідним компаніям. Якщо ви є представником правовласника і маєте зауваження — напишіть через форму на сторінці <a href="contacts.html">Контакти</a>.</p>
+      <article class="legal-section">
+        <h2>3. Дані, які можуть оброблятися</h2>
+        <p>
+          Під час користування сайтом можуть оброблятися дані, які ви
+          добровільно передаєте через форми або інші канали зв’язку:
+        </p>
+        <ul>
+          <li>ім’я;</li>
+          <li>email;</li>
+          <li>номер телефону або контакт у месенджері;</li>
+          <li>текст повідомлення;</li>
+          <li>опис задачі, файли, документи або посилання;</li>
+          <li>інші відомості, які ви передаєте самостійно.</li>
+        </ul>
+      </article>
 
-    <p><strong>5. Відповідальність</strong></p>
-    <p>Автор сайту не несе відповідальності за можливі неточності або зміну функціоналу сторонніх сервісів, згаданих на сайті.</p>
+      <article class="legal-section">
+        <h2>4. Технічна інформація та аналітика</h2>
+        <p>
+          Сайт може автоматично отримувати технічні дані про відвідування,
+          зокрема тип браузера, тип пристрою, приблизне місцезнаходження,
+          дату й час відвідування, джерело переходу та дії на сторінках.
+        </p>
+        <p>
+          Такі дані можуть оброблятися за допомогою Google Analytics,
+          Cloudflare та інших технічних сервісів для забезпечення безпеки,
+          аналізу роботи сайту та покращення користувацького досвіду.
+        </p>
+      </article>
 
-    <p><strong>6. Можливі зміни</strong></p>
-    <p>Ці умови можуть оновлюватися без попереднього повідомлення. Актуальна версія завжди розміщена на цій сторінці.</p>
+      <article class="legal-section">
+        <h2>5. Форми, повідомлення та сторонні сервіси</h2>
+        <p>
+          Для роботи форм можуть використовуватися сторонні сервіси,
+          зокрема EmailJS, Google Apps Script, Telegram, Cloudflare Turnstile
+          та інші інструменти.
+        </p>
+        <p>
+          Передані через форми дані можуть бути направлені на email,
+          у Telegram або інший погоджений канал зв’язку виключно для
+          обробки звернення та подальшої комунікації.
+        </p>
+      </article>
 
-    <p><strong>7. Плани розвитку</strong></p>
-    <p>Наразі сайт реалізовано без залучення сторонніх розробників, з використанням допомоги ChatGPT. Розглядається перехід на платформу Tilda для зручності користувачів протягом наступних 6 місяців.</p>
+      <article class="legal-section confidentiality">
+        <h2>6. Конфіденційність із першого контакту</h2>
+        <p>
+          Уся інформація, отримана під час первинного звернення,
+          ознайомлення з проєктом, обговорення вимог або аналізу матеріалів,
+          за замовчуванням вважається конфіденційною.
+        </p>
+        <p>
+          Це стосується, зокрема:
+        </p>
+        <ul>
+          <li>документів, таблиць, баз даних і звітів;</li>
+          <li>фінансової та комерційної інформації;</li>
+          <li>бізнес-процесів і внутрішньої логіки роботи;</li>
+          <li>вихідного коду, алгоритмів і технічної архітектури;</li>
+          <li>контактів клієнтів, працівників, партнерів і постачальників;</li>
+          <li>умов співпраці та інших непублічних відомостей.</li>
+        </ul>
+        <p>
+          Отримані матеріали не передаються, не публікуються та не
+          розголошуються третім особам без попередньої згоди замовника,
+          крім випадків, прямо передбачених законодавством.
+        </p>
+        <p>
+          Принцип конфіденційності діє незалежно від того, чи було
+          укладено договір і чи розпочалося виконання робіт.
+        </p>
+        <div class="confidentiality-note">
+          Конфіденційність є базовим принципом роботи, а не окремою платною послугою.
+          За потреби сторони можуть додатково підписати NDA.
+        </div>
+      </article>
 
-    <a class="back-button" href="index.html">← На головну</a>
+      <article class="legal-section">
+        <h2>7. Мета використання даних</h2>
+        <p>
+          Отримані дані можуть використовуватися лише для:
+        </p>
+        <ul>
+          <li>відповіді на звернення;</li>
+          <li>аналізу та оцінки задачі;</li>
+          <li>підготовки пропозиції;</li>
+          <li>виконання погоджених робіт;</li>
+          <li>технічної підтримки;</li>
+          <li>забезпечення безпеки сайту;</li>
+          <li>покращення якості сервісу.</li>
+        </ul>
+      </article>
+
+      <article class="legal-section">
+        <h2>8. Зберігання та видалення даних</h2>
+        <p>
+          Дані зберігаються лише протягом строку, необхідного для
+          комунікації, оцінки задачі, виконання робіт або виконання
+          інших законних цілей.
+        </p>
+        <p>
+          За запитом можна уточнити, які дані були передані, а також
+          звернутися з проханням про їх видалення, якщо це не суперечить
+          законодавству або чинним зобов’язанням сторін.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>9. Безпека</h2>
+        <p>
+          Для захисту форм і комунікацій можуть застосовуватися
+          Cloudflare Turnstile, обмеження частоти запитів, серверна
+          перевірка, обмеження довжини полів та інші технічні заходи.
+        </p>
+        <p>
+          Водночас жоден спосіб передачі даних через інтернет не може
+          гарантувати абсолютну безпеку.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>10. Використання штучного інтелекту</h2>
+        <p>
+          Під час аналізу, розробки, підготовки коду, документації або
+          інших матеріалів можуть використовуватися інструменти штучного
+          інтелекту як допоміжний засіб.
+        </p>
+        <p>
+          Архітектура, логіка, перевірка, тестування та остаточний результат
+          контролюються виконавцем.
+        </p>
+        <p>
+          Конфіденційні матеріали не повинні передаватися стороннім AI-сервісам
+          без попереднього погодження із замовником.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>11. Авторське право та контент сайту</h2>
+        <p>
+          Оригінальні тексти, структура, дизайн, описи послуг та інші
+          матеріали сайту захищаються законодавством про інтелектуальну власність.
+        </p>
+        <p>
+          Копіювання або публічне використання матеріалів без дозволу
+          не допускається, крім випадків, передбачених законом.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>12. Права на розроблені рішення</h2>
+        <p>
+          Права на код, таблиці, скрипти, вебзастосунки, звіти,
+          документацію та інші результати визначаються індивідуально.
+        </p>
+        <p>
+          Після завершення проєкту замовник отримує погоджений обсяг
+          доступів, матеріалів, вихідного коду, інструкцій і прав.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>13. Сторонні бренди, логотипи та сервіси</h2>
+        <p>
+          Назви, логотипи та торговельні марки Google, Microsoft,
+          Telegram, OpenAI, Cloudflare та інших компаній належать
+          відповідним правовласникам.
+        </p>
+        <p>
+          Їх використання на сайті має виключно інформаційний або
+          ілюстративний характер і не означає офіційного партнерства,
+          якщо прямо не зазначено інше.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>14. Обмеження відповідальності</h2>
+        <p>
+          Автор сайту не несе відповідальності за:
+        </p>
+        <ul>
+          <li>зміни функціоналу або політик сторонніх сервісів;</li>
+          <li>тимчасову недоступність хостингу, API або зовнішніх платформ;</li>
+          <li>дії користувачів після передачі рішення;</li>
+          <li>збитки, спричинені неправильним використанням матеріалів;</li>
+          <li>неточності, викликані неповними або некоректними вихідними даними.</li>
+        </ul>
+      </article>
+
+      <article class="legal-section">
+        <h2>15. Зміни умов</h2>
+        <p>
+          Ці умови можуть оновлюватися у зв’язку зі змінами функціоналу
+          сайту, законодавства, сервісів або підходів до обробки даних.
+        </p>
+        <p>
+          Актуальна версія завжди розміщується на цій сторінці.
+        </p>
+      </article>
+
+      <article class="legal-section">
+        <h2>16. Контакт щодо конфіденційності</h2>
+        <p>
+          Якщо у вас є питання щодо даних, конфіденційності,
+          видалення інформації або підписання NDA, зверніться через
+          сторінку контактів.
+        </p>
+      </article>
+    </section>
+
+    <section class="contact-box">
+      <h2>Потрібно підписати NDA або уточнити умови?</h2>
+      <p>
+        Напишіть мені до передачі матеріалів, і ми погодимо формат
+        конфіденційності до початку роботи.
+      </p>
+      <a href="contacts.html">Перейти до контактів</a>
+    </section>
   </main>
 
   <footer>
-    © 2015–2025 Sebastian Automations. Всі права захищено.
+    © 2015–2026 Sebastian Automations. Всі права захищено.
   </footer>
-
 </body>
 </html>

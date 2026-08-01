@@ -1,7 +1,7 @@
 #sp-assistant {
     position: fixed;
     right: 20px;
-    bottom: 160px;
+    bottom: 120px;
     z-index: 99999;
 
     display: flex;
@@ -26,12 +26,15 @@
 }
 
 #sp-assistant-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+
     cursor: pointer;
 
-    animation: assistantFloat 2s ease-in-out infinite;
+    animation:
+        assistantFloat 4s ease-in-out infinite,
+        assistantGlow 3s ease-in-out infinite,
+        assistantBreathing 4s ease-in-out infinite;
 }
 
 #sp-assistant-message {
@@ -41,25 +44,56 @@
 
     border-radius: 14px;
 
-    background: rgba(255,255,255,0.97);
+    background: rgba(255, 255, 255, 0.97);
 
-    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
 
-    font-family: Manrope, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
 }
 
 @keyframes assistantFloat {
+
     0% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-4px);
     }
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@keyframes assistantGlow {
+
+    0% {
+        filter: drop-shadow(0 0 5px rgba(0, 170, 255, 0.2));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 14px rgba(0, 170, 255, 0.5));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 5px rgba(0, 170, 255, 0.2));
+    }
+}
+
+@keyframes assistantBreathing {
+
+    0% {
+        scale: 1;
+    }
+
+    50% {
+        scale: 1.03;
+    }
+
+    100% {
+        scale: 1;
     }
 }

@@ -1522,7 +1522,8 @@
     }
 
     .dashboard-table-wrap {
-      overflow-x: auto;
+      max-height: 420px;
+      overflow: auto;
     }
 
     .dashboard-table {
@@ -1541,6 +1542,9 @@
     }
 
     .dashboard-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
       background: var(--green);
       color: #fff;
       font-size: 9px;
@@ -2229,12 +2233,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>15.01.2024</td><td>2024</td><td>Січень</td><td>15</td><td>Ноутбук HP 15</td><td>Ноутбуки</td><td>ТОВ «Альфа»</td><td>2</td><td>46 000</td></tr>
-              <tr><td>16.01.2024</td><td>2024</td><td>Січень</td><td>16</td><td>Миша Logitech</td><td>Аксесуари</td><td>ТОВ «Бета»</td><td>10</td><td>4 500</td></tr>
-              <tr><td>16.01.2024</td><td>2024</td><td>Січень</td><td>16</td><td>Монітор LG 24</td><td>Монітори</td><td>ФОП Іваненко</td><td>3</td><td>27 000</td></tr>
-              <tr><td>17.01.2024</td><td>2024</td><td>Січень</td><td>17</td><td>Клавіатура A4Tech</td><td>Аксесуари</td><td>ТОВ «Гамма»</td><td>5</td><td>2 250</td></tr>
-              <tr><td>18.01.2024</td><td>2024</td><td>Січень</td><td>18</td><td>Dell Inspiron</td><td>Ноутбуки</td><td>ТОВ «Альфа»</td><td>1</td><td>28 500</td></tr>
-              <tr><td>…</td><td>…</td><td>…</td><td>…</td><td>Ще 195 рядків</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+              <tbody id="dashboard-raw-body"></tbody>
             </tbody>
           </table>
         </div>
@@ -2796,6 +2795,67 @@
 
 
   <script>
+    const dashboardRawBody = document.getElementById("dashboard-raw-body");
+
+    const dashboardProducts = [
+      ["Ноутбук HP 15", "Ноутбуки", 23000],
+      ["Dell Inspiron 3520", "Ноутбуки", 28500],
+      ["Lenovo IdeaPad 3", "Ноутбуки", 26400],
+      ["Монітор LG 24", "Монітори", 9000],
+      ["Монітор Samsung 27", "Монітори", 11800],
+      ["Миша Logitech M185", "Аксесуари", 450],
+      ["Клавіатура A4Tech", "Аксесуари", 750],
+      ["SSD Kingston 1TB", "Комплектуючі", 3200],
+      ["Роутер TP-Link", "Мережеве обладнання", 2100],
+      ["Принтер Canon", "Оргтехніка", 7600]
+    ];
+
+    const dashboardClients = [
+      "ТОВ «Альфа»",
+      "ТОВ «Бета»",
+      "ТОВ «Гамма»",
+      "ТОВ «Дельта»",
+      "ФОП Іваненко",
+      "ФОП Петренко",
+      "ТОВ «Омега»",
+      "ТОВ «Вектор»",
+      "ТОВ «Прайм»",
+      "ФОП Коваленко"
+    ];
+
+    function renderDashboardRawRows() {
+      const startDate = new Date(2023, 0, 3);
+      const rows = [];
+
+      for (let i = 0; i < 200; i++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + i * 3);
+
+        const product = dashboardProducts[i % dashboardProducts.length];
+        const client = dashboardClients[(i * 3) % dashboardClients.length];
+        const quantity = 1 + ((i * 7) % 12);
+        const amount = product[2] * quantity;
+
+        rows.push(`
+          <tr>
+            <td>${currentDate.toLocaleDateString("uk-UA")}</td>
+            <td>${currentDate.getFullYear()}</td>
+            <td>${currentDate.toLocaleDateString("uk-UA", { month: "long" })}</td>
+            <td>${currentDate.getDate()}</td>
+            <td>${product[0]}</td>
+            <td>${product[1]}</td>
+            <td>${client}</td>
+            <td>${quantity}</td>
+            <td>${amount.toLocaleString("uk-UA")}</td>
+          </tr>
+        `);
+      }
+
+      dashboardRawBody.innerHTML = rows.join("");
+    }
+
+    renderDashboardRawRows();
+
     const dashboardBuildButton = document.getElementById("dashboard-build");
     const dashboardRaw = document.getElementById("dashboard-raw");
     const dashboardLoader = document.getElementById("dashboard-loader");

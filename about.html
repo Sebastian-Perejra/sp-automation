@@ -2,13 +2,60 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <title>Про мене – Себастьян Перейра</title>
 
   <link rel="icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+    :root {
+      --page-bg: #f7f4ef;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf7;
+      --surface-green: #f2f7f3;
+      --surface-blue: #f2f6f8;
+      --surface-dark: #2b3431;
+
+      --text-main: #242321;
+      --text-secondary: #64605b;
+      --text-muted: #817c75;
+
+      --green: #35594b;
+      --green-hover: #29483c;
+
+      --blue: #2f6f9f;
+      --blue-hover: #255a82;
+
+      --purple: #6665a8;
+
+      --border: #e8e1d8;
+      --border-green: #d5e3d8;
+      --border-blue: #d9e5ee;
+
+      --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
+      --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
+
+      --radius-large: 28px;
+      --radius-card: 22px;
+      --radius-small: 16px;
+
+      --font-main: "Manrope", sans-serif;
+      --font-tech: "Roboto Mono", monospace;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -20,58 +67,107 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: 'Roboto Mono', monospace;
-      background: #f4f7fa;
-      color: #1a1a1a;
+      font-family: var(--font-main);
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(221, 233, 224, 0.5),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at top right,
+          rgba(222, 232, 239, 0.45),
+          transparent 30%
+        ),
+        var(--page-bg);
+      color: var(--text-main);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
     }
 
     .topbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(230, 240, 250, 0.96);
-      border-bottom: 1px solid #c4d8e6;
-      backdrop-filter: blur(10px);
+      background: rgba(247, 244, 239, 0.88);
+      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .topbar-inner {
-      width: min(100%, 1100px);
+      width: min(100%, 1180px);
+      min-height: 72px;
       margin: 0 auto;
-      padding: 14px 20px;
+      padding:
+        max(14px, env(safe-area-inset-top))
+        28px
+        14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 28px;
     }
 
     .home-link {
-      color: #007acc;
+      color: var(--green);
       text-decoration: none;
-      font-weight: bold;
       font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
       white-space: nowrap;
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
     }
 
     .home-link:hover {
-      color: #005ea8;
+      color: var(--green-hover);
+      transform: translateX(-2px);
     }
 
     .desktop-nav {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 26px;
+      justify-content: center;
+      gap: 28px;
+      margin-left: auto;
     }
 
     .desktop-nav a {
-      color: #007acc;
+      position: relative;
+      color: #52504c;
       text-decoration: none;
-      font-weight: bold;
       font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -7px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green);
+      transition: right 0.22s ease;
     }
 
     .desktop-nav a:hover {
-      color: #005ea8;
+      color: var(--green);
+    }
+
+    .desktop-nav a:hover::after {
+      right: 0;
     }
 
     .lang-switcher {
@@ -80,93 +176,146 @@
     }
 
     .lang-switcher button {
-      border: 1px solid #007acc;
-      border-radius: 7px;
-      background: #fff;
-      color: #007acc;
-      padding: 6px 9px;
-      font-family: 'Roboto Mono', monospace;
+      min-width: 38px;
+      height: 34px;
+      padding: 0 9px;
+      border: 1px solid #d6cec4;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #5f5a54;
+      font-family: var(--font-tech);
       font-size: 11px;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
     }
 
     .lang-switcher button:hover {
-      background: #007acc;
-      color: #fff;
+      border-color: var(--green);
+      background: var(--green);
+      color: #ffffff;
+      transform: translateY(-1px);
     }
 
     .page {
-      width: min(100%, 1000px);
+      width: min(100%, 1080px);
       margin: 0 auto;
       padding:
-        42px
-        20px
-        max(64px, env(safe-area-inset-bottom));
+        72px
+        24px
+        max(104px, env(safe-area-inset-bottom));
     }
 
     .hero {
-      margin-bottom: 28px;
-      padding: 34px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 34px;
+      padding: 64px 56px;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 28px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 42px;
       align-items: center;
-      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
-      border: 1px solid #d5e4ee;
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(249, 247, 243, 0.98)
+        );
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      top: -130px;
+      left: -100px;
+      border-radius: 50%;
+      background: rgba(196, 217, 202, 0.4);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      bottom: -130px;
+      border-radius: 50%;
+      background: rgba(205, 218, 228, 0.45);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
-      margin: 0 0 14px;
-      color: #0F9D58;
-      font-size: clamp(2.2rem, 6vw, 3.4rem);
-      line-height: 1.05;
+      margin: 0 0 24px;
+      color: var(--green);
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.055em;
     }
 
     .hero p {
       margin: 0;
-      max-width: 700px;
-      color: #596771;
-      font-size: 14px;
-      line-height: 1.7;
+      max-width: 730px;
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.9;
     }
 
     .hero-badge {
-      min-width: 145px;
-      padding: 18px;
-      border: 1px solid #cce8d5;
-      border-radius: 16px;
-      background: #edf8f1;
-      color: #0F9D58;
+      min-width: 185px;
+      padding: 26px 24px;
+      border: 1px solid var(--border-green);
+      border-radius: 20px;
+      background: var(--surface-green);
+      color: var(--green);
       text-align: center;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 1.5;
+      font-family: var(--font-tech);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.7;
+      box-shadow: 0 10px 28px rgba(47, 70, 57, 0.05);
     }
 
     .section {
-      margin-top: 18px;
-      padding: 28px;
-      background: rgba(255,255,255,0.96);
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
+      margin-top: 26px;
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow-card);
     }
 
     .section h2 {
-      margin: 0 0 14px;
-      color: #1a1a1a;
-      font-size: 21px;
-      line-height: 1.3;
+      margin: 0 0 24px;
+      color: var(--green);
+      font-size: clamp(1.65rem, 3vw, 2.1rem);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
     }
 
     .section p {
-      margin: 0 0 14px;
-      color: #4f5d66;
-      font-size: 13px;
-      line-height: 1.75;
+      margin: 0 0 18px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.85;
     }
 
     .section p:last-child {
@@ -175,159 +324,242 @@
 
     .section ul,
     .section ol {
-      margin: 12px 0 0;
-      padding-left: 21px;
-      color: #4f5d66;
+      margin: 14px 0 0;
+      padding-left: 22px;
+      color: var(--text-secondary);
     }
 
     .section li {
-      margin-bottom: 10px;
-      font-size: 13px;
-      line-height: 1.65;
+      margin-bottom: 12px;
+      padding-left: 4px;
+      font-size: 15px;
+      line-height: 1.75;
     }
 
     .section li:last-child {
       margin-bottom: 0;
     }
 
+    .section li::marker {
+      color: var(--green);
+    }
+
     .highlight {
-      padding: 18px 20px;
-      border-left: 4px solid #007acc;
-      border-radius: 10px;
-      background: #f3f9fd;
-      color: #33434d;
-      font-size: 13px;
-      line-height: 1.7;
+      margin-top: 24px;
+      padding: 22px 24px;
+      border: 1px solid var(--border-green);
+      border-left: 4px solid var(--green);
+      border-radius: 16px;
+      background: var(--surface-green);
+      color: #46564d;
+      font-size: 14px;
+      line-height: 1.8;
     }
 
     .capabilities {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
+      gap: 14px;
+      margin-top: 18px;
     }
 
     .capability {
-      padding: 16px;
-      border: 1px solid #dce6ed;
-      border-radius: 12px;
-      background: #fbfdff;
+      padding: 22px;
+      border: 1px solid #e8e2da;
+      border-radius: 17px;
+      background: var(--surface-soft);
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .capability:hover {
+      border-color: #cbd9ce;
+      box-shadow: 0 10px 28px rgba(47, 70, 57, 0.07);
+      transform: translateY(-2px);
     }
 
     .capability strong {
       display: block;
-      margin-bottom: 7px;
-      color: #007acc;
-      font-size: 12px;
+      margin-bottom: 9px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .capability span {
       display: block;
-      color: #5d6a73;
-      font-size: 11px;
-      line-height: 1.55;
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     .process {
       counter-reset: step;
       display: grid;
-      gap: 11px;
-      margin-top: 14px;
+      gap: 13px;
+      margin-top: 18px;
     }
 
     .process-step {
       position: relative;
-      padding: 15px 15px 15px 52px;
-      border: 1px solid #dce6ed;
-      border-radius: 12px;
-      background: #fbfdff;
-      color: #4f5d66;
-      font-size: 12px;
-      line-height: 1.6;
+      padding: 19px 20px 19px 64px;
+      border: 1px solid #e8e2da;
+      border-radius: 16px;
+      background: var(--surface-soft);
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .process-step:hover {
+      border-color: #cbd9ce;
+      box-shadow: 0 10px 26px rgba(47, 70, 57, 0.06);
+      transform: translateY(-1px);
     }
 
     .process-step::before {
       counter-increment: step;
       content: counter(step);
       position: absolute;
-      left: 14px;
-      top: 14px;
-      width: 25px;
-      height: 25px;
+      left: 20px;
+      top: 50%;
+      width: 29px;
+      height: 29px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: #007acc;
-      color: #fff;
-      font-size: 11px;
-      font-weight: bold;
+      background: var(--green);
+      color: #ffffff;
+      font-family: var(--font-tech);
+      font-size: 12px;
+      font-weight: 600;
+      transform: translateY(-50%);
     }
 
     .quote {
-      margin: 16px 0 0;
-      padding: 18px 20px;
-      border-radius: 12px;
-      background: #1f2b33;
-      color: #fff;
-      font-size: 14px;
-      line-height: 1.65;
+      margin: 24px 0 0;
+      padding: 28px 30px;
+      border-radius: 18px;
+      background:
+        linear-gradient(
+          135deg,
+          #2a3430 0%,
+          #34413c 100%
+        );
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.75;
       text-align: center;
+      box-shadow: 0 14px 34px rgba(34, 44, 40, 0.16);
     }
 
     .cta {
-      margin-top: 20px;
-      padding: 30px;
+      margin-top: 32px;
+      padding: 54px 38px;
+      border: 1px solid var(--border-blue);
+      border-radius: var(--radius-card);
+      background:
+        linear-gradient(
+          135deg,
+          #edf4f8 0%,
+          #f8f8f5 100%
+        );
+      box-shadow: var(--shadow-card);
       text-align: center;
-      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
-      border: 1px solid #c9e2f7;
-      border-radius: 16px;
     }
 
     .cta h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
+      margin: 0 0 14px;
+      color: #2e4d5f;
+      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
     }
 
     .cta p {
-      margin: 0 0 18px;
-      color: #596771;
-      font-size: 13px;
-      line-height: 1.65;
+      max-width: 700px;
+      margin: 0 auto 28px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
     }
 
     .cta a {
       display: inline-flex;
+      min-height: 50px;
+      padding: 0 24px;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 0 20px;
-      border-radius: 9px;
-      background: #1a73e8;
-      color: #fff;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #ffffff;
       text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(47, 111, 159, 0.2);
+      transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
     }
 
     .cta a:hover {
-      background: #135fbe;
+      background: var(--blue-hover);
+      box-shadow: 0 14px 30px rgba(47, 111, 159, 0.26);
+      transform: translateY(-2px);
     }
 
     footer {
-      padding: 16px 20px;
-      border-top: 1px solid #c4d8e6;
-      background: #e6f0fa;
-      color: #7e8991;
-      font-size: 10px;
+      padding:
+        34px
+        20px
+        max(34px, env(safe-area-inset-bottom));
+      border-top: 1px solid #dfd8cf;
+      background: rgba(244, 240, 234, 0.96);
+      color: var(--text-muted);
+      font-size: 12px;
       text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner {
+        gap: 16px;
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .desktop-nav {
+        gap: 18px;
+      }
+
+      .desktop-nav a {
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 54px 36px;
+      }
+
+      .section {
+        padding: 34px;
+      }
     }
 
     @media (max-width: 760px) {
       .topbar-inner {
+        min-height: 64px;
         padding:
           max(12px, env(safe-area-inset-top))
-          12px
+          14px
           12px;
       }
 
@@ -341,42 +573,88 @@
 
       .page {
         padding:
-          24px
-          12px
-          max(36px, env(safe-area-inset-bottom));
+          36px
+          14px
+          max(56px, env(safe-area-inset-bottom));
       }
 
       .hero {
         grid-template-columns: 1fr;
-        padding: 24px 18px;
+        gap: 28px;
+        padding: 42px 22px;
+        border-radius: 22px;
         text-align: center;
+      }
+
+      .hero h1 {
+        margin-bottom: 20px;
+        font-size: clamp(2.7rem, 14vw, 3.8rem);
+      }
+
+      .hero p {
+        font-size: 15px;
+        line-height: 1.8;
       }
 
       .hero-badge {
         width: fit-content;
         min-width: 0;
         margin: 0 auto;
+        padding: 18px 22px;
+        font-size: 12px;
       }
 
       .section {
-        padding: 22px 16px;
+        margin-top: 18px;
+        padding: 28px 20px;
+        border-radius: 18px;
       }
 
       .section h2 {
-        font-size: 18px;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
       }
 
       .section p,
       .section li {
-        font-size: 12px;
+        font-size: 14px;
       }
 
       .capabilities {
         grid-template-columns: 1fr;
+        gap: 11px;
+      }
+
+      .capability {
+        padding: 18px;
+      }
+
+      .process-step {
+        padding: 17px 16px 17px 56px;
+        font-size: 13px;
+      }
+
+      .process-step::before {
+        left: 16px;
+      }
+
+      .quote {
+        padding: 24px 20px;
+        font-size: 15px;
       }
 
       .cta {
-        padding: 24px 16px;
+        margin-top: 22px;
+        padding: 38px 20px;
+        border-radius: 18px;
+      }
+
+      .cta h2 {
+        font-size: 1.8rem;
+      }
+
+      .cta p {
+        font-size: 14px;
       }
 
       .cta a {
@@ -384,18 +662,34 @@
       }
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 390px) {
       .home-link {
         font-size: 12px;
       }
 
+      .lang-switcher {
+        gap: 5px;
+      }
+
       .lang-switcher button {
-        padding: 5px 7px;
+        min-width: 34px;
+        height: 31px;
+        padding: 0 7px;
         font-size: 10px;
       }
 
-      .hero h1 {
-        font-size: 2rem;
+      .hero {
+        padding-left: 17px;
+        padding-right: 17px;
+      }
+
+      .section {
+        padding-left: 17px;
+        padding-right: 17px;
+      }
+
+      .highlight {
+        padding: 18px;
       }
     }
   </style>
@@ -404,19 +698,30 @@
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="home-link" href="index.html">← На головну</a>
+      <a class="home-link" href="index.html">
+        ← На головну
+      </a>
 
       <nav class="desktop-nav">
         <a href="services.html">Послуги</a>
         <a href="pricing.html">Цінова політика</a>
+        <a href="solutions.html">Рішення</a>
         <a href="faq.html">FAQ</a>
         <a href="contacts.html">Контакти</a>
       </nav>
 
       <div class="lang-switcher">
-        <button onclick="location.href='about.html'">UA</button>
-        <button onclick="location.href='about-en.html'">EN</button>
-        <button onclick="location.href='about-ru.html'">RU</button>
+        <button type="button" onclick="location.href='about.html'">
+          UA
+        </button>
+
+        <button type="button" onclick="location.href='about-en.html'">
+          EN
+        </button>
+
+        <button type="button" onclick="location.href='about-ru.html'">
+          RU
+        </button>
       </div>
     </div>
   </header>
@@ -425,10 +730,11 @@
     <section class="hero">
       <div>
         <h1>Про мене</h1>
+
         <p>
-          Я займаюся автоматизацією робочих процесів — від складних Excel-файлів
-          і Google Таблиць до Power BI, вебзастосунків, Telegram-ботів,
-          інтеграцій та аналітичних рішень для бізнесу.
+          Я займаюся автоматизацією робочих процесів — від складних
+          Excel-файлів і Google Таблиць до Power BI, вебзастосунків,
+          Telegram-ботів, інтеграцій та аналітичних рішень для бізнесу.
         </p>
       </div>
 
@@ -465,42 +771,74 @@
       <div class="capabilities">
         <div class="capability">
           <strong>Excel і Google Sheets</strong>
-          <span>Формули, макроси, складні розрахунки, перевірки, зведення даних і автоматичні звіти.</span>
+
+          <span>
+            Формули, макроси, складні розрахунки, перевірки,
+            зведення даних і автоматичні звіти.
+          </span>
         </div>
 
         <div class="capability">
           <strong>Power BI та аналітика</strong>
-          <span>Дашборди, KPI, план-факт аналіз, візуалізація, моделі даних і автоматичне оновлення.</span>
+
+          <span>
+            Дашборди, KPI, план-факт аналіз, візуалізація,
+            моделі даних і автоматичне оновлення.
+          </span>
         </div>
 
         <div class="capability">
           <strong>Вебзастосунки</strong>
-          <span>Інтерфейси для роботи з таблицями, файлами, фото, посиланнями, формами та внутрішніми процесами.</span>
+
+          <span>
+            Інтерфейси для роботи з таблицями, файлами, фото,
+            посиланнями, формами та внутрішніми процесами.
+          </span>
         </div>
 
         <div class="capability">
           <strong>Telegram і повідомлення</strong>
-          <span>Боти, нагадування, заявки з сайту, автоматичні сповіщення та запуск дій через чат.</span>
+
+          <span>
+            Боти, нагадування, заявки з сайту, автоматичні
+            сповіщення та запуск дій через чат.
+          </span>
         </div>
 
         <div class="capability">
           <strong>PDF, інвойси та виписки</strong>
-          <span>Витягування, очищення, зіставлення та перенесення даних у таблиці або інші системи.</span>
+
+          <span>
+            Витягування, очищення, зіставлення та перенесення
+            даних у таблиці або інші системи.
+          </span>
         </div>
 
         <div class="capability">
           <strong>Google Drive і доступи</strong>
-          <span>Папки, файли, архівування, права доступу, авторизація користувачів і передача власності.</span>
+
+          <span>
+            Папки, файли, архівування, права доступу,
+            авторизація користувачів і передача власності.
+          </span>
         </div>
 
         <div class="capability">
           <strong>Інтеграції та API</strong>
-          <span>Обмін даними між сайтами, CRM, Google Workspace, Telegram та іншими сервісами.</span>
+
+          <span>
+            Обмін даними між сайтами, CRM, Google Workspace,
+            Telegram та іншими сервісами.
+          </span>
         </div>
 
         <div class="capability">
           <strong>Мобільні рішення</strong>
-          <span>Адаптивні вебінтерфейси, PWA та робочі форми для смартфонів і планшетів.</span>
+
+          <span>
+            Адаптивні вебінтерфейси, PWA та робочі форми
+            для смартфонів і планшетів.
+          </span>
         </div>
       </div>
     </section>
@@ -511,7 +849,8 @@
       <p>
         Окремо можу проводити прикладні ринкові дослідження для бізнесу.
         Це корисно, коли потрібно не просто зібрати цифри, а зрозуміти,
-        що відбувається на ринку і як виглядає позиція компанії відносно конкурентів.
+        що відбувається на ринку і як виглядає позиція компанії
+        відносно конкурентів.
       </p>
 
       <ul>
@@ -521,7 +860,10 @@
         <li>збір і структурування відкритих даних;</li>
         <li>оцінка ринкових пропозицій і сегментів;</li>
         <li>пошук закономірностей, відмінностей і потенційних ніш;</li>
-        <li>підготовка таблиць, звітів і дашбордів за результатами дослідження.</li>
+        <li>
+          підготовка таблиць, звітів і дашбордів
+          за результатами дослідження.
+        </li>
       </ul>
 
       <p>
@@ -540,12 +882,29 @@
       </p>
 
       <div class="process">
-        <div class="process-step">Аналіз задачі та вихідних даних.</div>
-        <div class="process-step">Прототип або тестова логіка.</div>
-        <div class="process-step">Розробка основного рішення.</div>
-        <div class="process-step">Перевірка на реальних сценаріях.</div>
-        <div class="process-step">Передача доступів, прав і робочих матеріалів.</div>
-        <div class="process-step">Інструкція та підтримка після запуску.</div>
+        <div class="process-step">
+          Аналіз задачі та вихідних даних.
+        </div>
+
+        <div class="process-step">
+          Прототип або тестова логіка.
+        </div>
+
+        <div class="process-step">
+          Розробка основного рішення.
+        </div>
+
+        <div class="process-step">
+          Перевірка на реальних сценаріях.
+        </div>
+
+        <div class="process-step">
+          Передача доступів, прав і робочих матеріалів.
+        </div>
+
+        <div class="process-step">
+          Інструкція та підтримка після запуску.
+        </div>
       </div>
     </section>
 
@@ -553,9 +912,14 @@
       <h2>Що отримує замовник</h2>
 
       <ul>
-        <li>готове робоче рішення, а не набір розрізнених шматків коду;</li>
+        <li>
+          готове робоче рішення, а не набір розрізнених шматків коду;
+        </li>
         <li>зрозумілу логіку роботи;</li>
-        <li>доступ до формул, скриптів і налаштувань, якщо інше не погоджено окремо;</li>
+        <li>
+          доступ до формул, скриптів і налаштувань,
+          якщо інше не погоджено окремо;
+        </li>
         <li>передачу необхідних прав та власності;</li>
         <li>тестування на реальних сценаріях;</li>
         <li>інструкцію або технічну схему;</li>
@@ -595,12 +959,15 @@
 
     <section class="cta">
       <h2>Є задача, яка забирає занадто багато часу?</h2>
+
       <p>
-        Напишіть мені. Подивлюся, що можна автоматизувати, спростити або
-        перетворити на нормальний робочий процес.
+        Напишіть мені. Подивлюся, що можна автоматизувати,
+        спростити або перетворити на нормальний робочий процес.
       </p>
 
-      <a href="contacts.html">Перейти до контактів</a>
+      <a href="contacts.html">
+        Перейти до контактів
+      </a>
     </section>
   </main>
 

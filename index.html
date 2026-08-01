@@ -1056,10 +1056,34 @@
     }, 1300);
 
   } catch (error) {
-    console.error(error);
+  console.error(error);
 
-    status.textContent = 'Не вдалося надіслати. Спробуйте ще раз.';
-    status.style.color = '#cc0000';
+  let message =
+    error.message ||
+    'Не вдалося надіслати. Спробуйте ще раз.';
+
+  if (message.includes('Превышен допустимый размер данных')) {
+    message =
+      'Повідомлення занадто велике. Максимальний розмір — 5000 символів.';
+  }
+
+  if (message.includes('Проверка защиты от роботов не пройдена')) {
+    message =
+      'Перевірка захисту завершилася помилкою. Оновіть сторінку та спробуйте ще раз.';
+  }
+
+  if (message.includes('Повторное сообщение можно отправить через 1 минуту')) {
+    message =
+      'Повторне повідомлення можна надіслати через 1 хвилину.';
+  }
+
+  if (message.includes('Не заполнены обязательные поля сайта')) {
+    message =
+      'Заповніть усі обов’язкові поля.';
+  }
+
+  status.textContent = message;
+  status.style.color = '#cc0000';
 
   } finally {
     button.disabled = false;

@@ -527,3 +527,114 @@
     width: 100%;
   }
 }
+.case5-calculate-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0;
+  padding: 22px;
+  border: 1px solid #d7e4da;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      #eef8f0 0%,
+      #f4f7fb 100%
+    );
+}
+
+.case5-calculate-button {
+  min-height: 52px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 13px;
+  background: var(--green);
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(53, 89, 75, 0.22);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.case5-calculate-button:hover {
+  background: var(--green-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(53, 89, 75, 0.28);
+}
+
+.case5-calculate-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+.case5-loader {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  color: #50675a;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.case5-loader.active {
+  display: flex;
+}
+
+.case5-spinner {
+  width: 19px;
+  height: 19px;
+  border: 2px solid #cfe0d3;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: case5Spin 0.75s linear infinite;
+}
+
+@keyframes case5Spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.case5-results {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition:
+    max-height 0.9s ease,
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.case5-results.visible {
+  max-height: 3000px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (max-width: 760px) {
+  .case5-calculate-area {
+    padding: 18px 14px;
+  }
+
+  .case5-calculate-button {
+    width: 100%;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .case5-loader {
+    align-items: flex-start;
+    font-size: 10px;
+  }
+}

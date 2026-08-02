@@ -3005,7 +3005,7 @@ footer a:hover {
     <div class="capacity-panel-head">
       <div>
         <strong>Incoming Production Orders</strong>
-        <span>100 демонстраційних замовлень</span>
+        <span>100 демонстраційних orders</span>
       </div>
 
       <div class="capacity-orders-status" id="capacity-orders-status">
@@ -3073,14 +3073,14 @@ footer a:hover {
   <div class="capacity-loader" id="capacity-loader">
     <span class="capacity-spinner"></span>
     <span>
-      Розподіл замовлень за календарними днями та перевірка доступної потужності…
+      Розподіл orders за календарними днями та перевірка доступної потужності…
     </span>
   </div>
 
   <div class="capacity-output" id="capacity-output">
     <div class="capacity-summary">
       <article class="capacity-summary-item">
-        <span>Замовлень розраховано</span>
+        <span>orders розраховано</span>
         <strong id="capacity-summary-orders">0</strong>
       </article>
 
@@ -3090,7 +3090,7 @@ footer a:hover {
       </article>
 
       <article class="capacity-summary-item">
-        <span>Замовлень delayed</span>
+        <span>orders delayed</span>
         <strong id="capacity-summary-delayed">0</strong>
       </article>
 
@@ -4046,7 +4046,7 @@ footer a:hover {
         .join("");
 
     capacityOrdersStatus.textContent =
-      `${capacityOrders.length} замовлень очікують розрахунку`;
+      `${capacityOrders.length} orders очікують розрахунку`;
   }
 
   function capacityResetInitialValues() {
@@ -4662,7 +4662,7 @@ footer a:hover {
     capacityResetInitialValues();
 
     capacityOrdersStatus.textContent =
-      `${capacityOrders.length} замовлень очікують розрахунку`;
+      `${capacityOrders.length} orders очікують розрахунку`;
 
     capacityLastPlan = null;
   }
@@ -4737,8 +4737,8 @@ footer a:hover {
       capacityLoader.classList.add("active");
       capacityOrdersStatus.textContent =
         capacityPlanningMode === "priority"
-          ? "Перерахунок із пріоритетним витісненням замовлень..."
-          : "Послідовний розподіл замовлень за виробничими днями...";
+          ? "Перерахунок із пріоритетним витісненням orders..."
+          : "Послідовний розподіл orders за виробничими днями...";
 
       setTimeout(() => {
         capacityLastPlan =

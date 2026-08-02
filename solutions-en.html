@@ -2916,7 +2916,7 @@ footer a:hover {
 
           <div class="capacity-value">
             <strong id="capacity-line1">250</strong>
-            <span>од./день</span>
+            <span>pcs/day</span>
           </div>
 
           <button
@@ -2950,7 +2950,7 @@ footer a:hover {
 
           <div class="capacity-value">
             <strong id="capacity-line2">400</strong>
-            <span>од./день</span>
+            <span>pcs/day</span>
           </div>
 
           <button
@@ -2984,7 +2984,7 @@ footer a:hover {
 
           <div class="capacity-value">
             <strong id="capacity-line3">600</strong>
-            <span>од./день</span>
+            <span>pcs/day</span>
           </div>
 
           <button
@@ -3021,7 +3021,7 @@ footer a:hover {
             <th>Дата надходження</th>
             <th>Код виробу</th>
             <th>Виріб</th>
-            <th>Кількість</th>
+            <th>Quantity</th>
             <th>Лінія</th>
             <th>Бажана дата</th>
             <th>Розрахункова дата</th>
@@ -3562,7 +3562,7 @@ footer a:hover {
         setPdfStep(2);
         pdfLog.textContent =
           current.type === "invoice"
-            ? "Found Invoice. Розбираю номер, дату, артикул, Pos, кількість, ціну та тариф."
+            ? "Found Invoice. Розбираю номер, дату, артикул, Pos, Quantity, ціну та тариф."
             : "Found Packing List. Розбираю вагу, Net Weight, Gross Weight та упаковки.";
         await pdfSleep(700);
 

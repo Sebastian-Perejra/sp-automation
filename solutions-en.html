@@ -3036,7 +3036,7 @@ footer a:hover {
 
       <div class="capacity-mode-panel">
   <div>
-    <strong>Режим планування</strong>
+    <strong>Planning Mode</strong>
     <span>
       Select how the available production capacity is allocated
     </span>
@@ -3080,17 +3080,17 @@ footer a:hover {
   <div class="capacity-output" id="capacity-output">
     <div class="capacity-summary">
       <article class="capacity-summary-item">
-        <span>orders розраховано</span>
+        <span>Orders calculated</span>
         <strong id="capacity-summary-orders">0</strong>
       </article>
 
       <article class="capacity-summary-item">
-        <span>Загальний обсяг</span>
+        <span>Total amount</span>
         <strong id="capacity-summary-units">0</strong>
       </article>
 
       <article class="capacity-summary-item">
-        <span>orders delayed</span>
+        <span>Orders delayed</span>
         <strong id="capacity-summary-delayed">0</strong>
       </article>
 
@@ -4737,7 +4737,7 @@ footer a:hover {
       capacityLoader.classList.add("active");
       capacityOrdersStatus.textContent =
         capacityPlanningMode === "priority"
-          ? "Перерахунок із пріоритетним витісненням orders..."
+          ? "Recalculating with priority-based order rescheduling..."
           : "Послідовний розподіл orders за виробничими днями...";
 
       setTimeout(() => {

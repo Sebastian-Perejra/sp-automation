@@ -1935,6 +1935,403 @@ footer a:hover {
       }
     }
 
+    .capacity-case {
+  margin-top: 26px;
+  padding: 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: rgba(255,255,255,.97);
+  box-shadow: var(--shadow-card);
+}
+
+.capacity-settings {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid #e7e0d8;
+  border-radius: 18px;
+  background: #f8f7f4;
+}
+
+.capacity-settings-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.capacity-settings-head strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.capacity-settings-head span,
+.capacity-period {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.capacity-lines {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.capacity-line-card {
+  padding: 18px;
+  border: 1px solid #e7e0d8;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.capacity-line-name span {
+  display: block;
+  font-weight: 700;
+}
+
+.capacity-line-name small {
+  color: var(--text-muted);
+}
+
+.capacity-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.capacity-minus,
+.capacity-plus {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.capacity-value {
+  text-align: center;
+}
+
+.capacity-value strong {
+  display: block;
+  color: var(--green);
+  font-family: var(--font-tech);
+  font-size: 24px;
+}
+
+.capacity-value span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-orders-panel {
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid #e7e0d8;
+  border-radius: 18px;
+}
+
+.capacity-panel-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  background: #f7f4ef;
+}
+
+.capacity-panel-head strong {
+  display: block;
+}
+
+.capacity-panel-head span,
+.capacity-orders-status {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-table-wrap {
+  max-height: 420px;
+  overflow: auto;
+}
+
+.capacity-orders-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.capacity-orders-table th,
+.capacity-orders-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee8e0;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.capacity-orders-table th {
+  position: sticky;
+  top: 0;
+  background: var(--green);
+  color: #fff;
+}
+
+.capacity-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.capacity-calculate-button {
+  min-height: 50px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.capacity-loader {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.capacity-loader.active {
+  display: flex;
+}
+
+.capacity-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d9e5ee;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: capacitySpin .8s linear infinite;
+}
+
+@keyframes capacitySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.capacity-output {
+  margin-top: 24px;
+}
+
+.capacity-summary {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+}
+
+.capacity-summary-item {
+  padding: 18px;
+  border: 1px solid #e7e0d8;
+  border-radius: 16px;
+  background: #fcfbf9;
+}
+
+.capacity-summary-item span {
+  display: block;
+  font-size: 10px;
+}
+
+.capacity-summary-item strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 24px;
+}
+
+.capacity-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.capacity-dashboard-card {
+  padding: 18px;
+  border: 1px solid #e7e0d8;
+  border-radius: 18px;
+}
+
+.capacity-dashboard-head span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-utilization-row {
+  margin-top: 18px;
+}
+
+.capacity-utilization-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.capacity-utilization-track {
+  height: 12px;
+  border-radius: 999px;
+  background: #ece8e3;
+}
+
+.capacity-utilization-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg,#35594b,#70a588);
+}
+
+.capacity-calendar {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.capacity-day {
+  height: 38px;
+  border-radius: 8px;
+}
+
+.capacity-free {
+  background: #e6f3e9;
+}
+
+.capacity-medium {
+  background: #ffe9ae;
+}
+
+.capacity-full {
+  background: #ffc7c7;
+}
+
+.capacity-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.capacity-legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+}
+
+.capacity-legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.capacity-legend-free {
+  background: #e6f3e9;
+}
+
+.capacity-legend-medium {
+  background: #ffe9ae;
+}
+
+.capacity-legend-full {
+  background: #ffc7c7;
+}
+
+@media (max-width: 760px) {
+
+  .capacity-case {
+    padding: 26px 16px;
+  }
+
+  .capacity-lines,
+  .capacity-summary,
+  .capacity-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .capacity-settings-head {
+    display: block;
+  }
+
+  .capacity-legend {
+    flex-direction: column;
+  }
+}
+    .capacity-orders-table td {
+  color: #57524d;
+  font-family: var(--font-tech);
+}
+
+.capacity-orders-table tbody tr:hover td {
+  background: #f7faf7;
+}
+
+.capacity-orders-table tbody tr[data-capacity-priority="urgent"] td {
+  background: #fff8f0;
+}
+
+.capacity-status,
+.capacity-priority {
+  display: inline-flex;
+  align-items: center;
+  margin: 2px 4px 2px 0;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.capacity-status-waiting {
+  border: 1px solid #ded8cf;
+  background: #f5f2ed;
+  color: #777069;
+}
+
+.capacity-status-ok {
+  border: 1px solid #cfe2d4;
+  background: #edf7ef;
+  color: #287047;
+}
+
+.capacity-status-warning {
+  border: 1px solid #efd798;
+  background: #fff5d9;
+  color: #876400;
+}
+
+.capacity-status-error {
+  border: 1px solid #efbaba;
+  background: #ffeaea;
+  color: #9b3434;
+}
+
+.capacity-priority-normal {
+  border: 1px solid #dfe2e0;
+  background: #f5f6f5;
+  color: #6e716f;
+}
+
+.capacity-priority-high {
+  border: 1px solid #d5d8ec;
+  background: #f2f3fb;
+  color: #585a91;
+}
+
+.capacity-priority-urgent {
+  border: 1px solid #efbaba;
+  background: #fff0f0;
+  color: #a03434;
+}
   </style>
   <link rel="stylesheet" href="/assistant.css">
 <script src="/assistant.js" defer></script>
@@ -2342,6 +2739,329 @@ footer a:hover {
       </div>
     </section>
 
+    <section class="capacity-case" id="production-capacity-case">
+  <div class="case-demo-kicker">Реальный кейс №4</div>
+
+  <h2>Планирование производственных мощностей и сроков исполнения заказов</h2>
+
+  <p class="case-demo-subtitle">
+    Система получает список входящих заказов, учитывает выбранную
+    производственную линию и её суточную мощность, после чего автоматически
+    распределяет объем по календарным дням и расчитывает фактическую дату
+    готовности каждого заказа. Все данные ниже демонстрационные.
+  </p>
+
+  <div class="capacity-settings">
+    <div class="capacity-settings-head">
+      <div>
+        <strong>Настройка производственных мощностей</strong>
+        <span>
+          Измените продуктивность линий и повторно расчитайте производственный план
+        </span>
+      </div>
+
+      <div class="capacity-period">
+        Период заказов: 01.01.2026–02.08.2026
+      </div>
+    </div>
+
+    <div class="capacity-lines">
+      <article class="capacity-line-card" data-line="line1">
+        <div class="capacity-line-name">
+          <span>Линия 1</span>
+          <small>Стальная труба</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line1"
+            aria-label="Уменьшить мощность Линии 1"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line1">250</strong>
+            <span>ед./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line1"
+            aria-label="Увеличить мощность Линии 1"
+          >
+            +
+          </button>
+        </div>
+      </article>
+
+      <article class="capacity-line-card" data-line="line2">
+        <div class="capacity-line-name">
+          <span>Линия 2</span>
+          <small>Стальной уголок</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line2"
+            aria-label="Уменьшить мощность Линии 2"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line2">400</strong>
+            <span>ед./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line2"
+            aria-label="Увеличить мощность Линии 2"
+          >
+            +
+          </button>
+        </div>
+      </article>
+
+      <article class="capacity-line-card" data-line="line3">
+        <div class="capacity-line-name">
+          <span>Линия 3</span>
+          <small>Стальной профиль</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line3"
+            aria-label="Уменьшить мощность Линии 3"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line3">600</strong>
+            <span>ед./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line3"
+            aria-label="Увеличить мощность Линии 3"
+          >
+            +
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="capacity-orders-panel">
+    <div class="capacity-panel-head">
+      <div>
+        <strong>Входящие производственные заказы</strong>
+        <span>100 демонстрационных заказов</span>
+      </div>
+
+      <div class="capacity-orders-status" id="capacity-orders-status">
+        Ожидают расчета
+      </div>
+    </div>
+
+    <div class="capacity-table-wrap">
+      <table class="capacity-orders-table">
+        <thead>
+          <tr>
+            <th>Заказ</th>
+            <th>Дата поступления</th>
+            <th>Код изделия</th>
+            <th>Изделие</th>
+            <th>Кол-во</th>
+            <th>Линия</th>
+            <th>Желаемая дата</th>
+            <th>Расчетная дата</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+
+        <tbody id="capacity-orders-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+      <div class="capacity-mode-panel">
+  <div>
+    <strong>Режим планирования</strong>
+    <span>
+      Выберите логику распределения доступной производственной мощности
+    </span>
+  </div>
+
+  <div class="capacity-mode-switch">
+    <button
+      class="capacity-mode-button active"
+      type="button"
+      data-capacity-mode="queue"
+    >
+      По очереди
+    </button>
+
+    <button
+      class="capacity-mode-button"
+      type="button"
+      data-capacity-mode="priority"
+    >
+      По приоритету
+    </button>
+  </div>
+</div>
+  <div class="capacity-action">
+    <button
+      class="capacity-calculate-button"
+      id="capacity-calculate"
+      type="button"
+    >
+      ⚙ Расчитать производственный план
+    </button>
+  </div>
+
+  <div class="capacity-loader" id="capacity-loader">
+    <span class="capacity-spinner"></span>
+    <span>
+      Распределение заказов по календарным дням и проверка доступной мощности…
+    </span>
+  </div>
+
+  <div class="capacity-output" id="capacity-output">
+    <div class="capacity-summary">
+      <article class="capacity-summary-item">
+        <span>Заказов расчитано</span>
+        <strong id="capacity-summary-orders">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Общий объем</span>
+        <strong id="capacity-summary-units">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Зааказов с переносом</span>
+        <strong id="capacity-summary-delayed">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Последняя дата плана</span>
+        <strong id="capacity-summary-last-date">—</strong>
+      </article>
+    </div>
+
+    <div class="capacity-dashboard-grid">
+      <article class="capacity-dashboard-card">
+        <div class="capacity-dashboard-head">
+          <div>
+            <strong>Средняя загрузка линий</strong>
+            <span>по расчитаному производственному плану</span>
+          </div>
+        </div>
+
+        <div class="capacity-utilization">
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Линия 1</span>
+              <strong id="capacity-util-line1-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line1"
+              ></div>
+            </div>
+          </div>
+
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Линия 2</span>
+              <strong id="capacity-util-line2-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line2"
+              ></div>
+            </div>
+          </div>
+
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Линия 3</span>
+              <strong id="capacity-util-line3-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line3"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="capacity-dashboard-card">
+        <div class="capacity-dashboard-head">
+          <div>
+            <strong>Загрузка по дням</strong>
+            <span>календарь производственных мощностей</span>
+          </div>
+        </div>
+
+        <div
+          class="capacity-calendar"
+          id="capacity-calendar"
+        ></div>
+      </article>
+    </div>
+
+    <div class="capacity-legend">
+      <span>
+        <i class="capacity-legend-free"></i>
+        Свободная мощность
+      </span>
+
+      <span>
+        <i class="capacity-legend-medium"></i>
+        Частичная загрузка
+      </span>
+
+      <span>
+        <i class="capacity-legend-full"></i>
+        Полная загрузка
+      </span>
+    </div>
+
+    <div class="demo-cta">
+      <a href="contacts.html">
+        Хочу автоматизировать планирование производства
+      </a>
+    </div>
+  </div>
+</section>
     <section class="section-card upcoming">
       <h2>Что появится дальше</h2>
 
@@ -2892,5 +3612,369 @@ footer a:hover {
       }, 1300);
     });
   </script>
+  <script>
+  const capacityProducts = [
+    {
+      code: "ST-025",
+      name: "Сталева труба Ø25",
+      line: "line1",
+      lineLabel: "Лінія 1"
+    },
+    {
+      code: "ST-040",
+      name: "Сталева труба Ø40",
+      line: "line1",
+      lineLabel: "Лінія 1"
+    },
+    {
+      code: "AN-050",
+      name: "Сталевий кутник 50×50",
+      line: "line2",
+      lineLabel: "Лінія 2"
+    },
+    {
+      code: "AN-075",
+      name: "Сталевий кутник 75×75",
+      line: "line2",
+      lineLabel: "Лінія 2"
+    },
+    {
+      code: "PR-040",
+      name: "Сталевий профіль 40×40",
+      line: "line3",
+      lineLabel: "Лінія 3"
+    },
+    {
+      code: "PR-060",
+      name: "Сталевий профіль 60×60",
+      line: "line3",
+      lineLabel: "Лінія 3"
+    }
+  ];
+
+  const capacityPriorities = [
+    {
+      key: "normal",
+      label: "Звичайний"
+    },
+    {
+      key: "high",
+      label: "Високий"
+    },
+    {
+      key: "urgent",
+      label: "Терміновий"
+    }
+  ];
+
+  const capacityOrdersBody =
+    document.getElementById("capacity-orders-body");
+
+  const capacityOrdersStatus =
+    document.getElementById("capacity-orders-status");
+
+  const capacityStartDate =
+    new Date(2026, 0, 1);
+
+  const capacityEndDate =
+    new Date(2026, 7, 2);
+
+  let capacityOrders = [];
+
+  function capacityCloneDate(date) {
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+  }
+
+  function capacityAddDays(date, days) {
+    const result = capacityCloneDate(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  function capacityFormatDate(date) {
+    return date.toLocaleDateString("uk-UA", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+  }
+
+  function capacityDaysBetween(start, end) {
+    const milliseconds =
+      capacityCloneDate(end) - capacityCloneDate(start);
+
+    return Math.floor(
+      milliseconds / (1000 * 60 * 60 * 24)
+    );
+  }
+
+  function capacityCreateOrders() {
+    const totalPeriodDays =
+      capacityDaysBetween(
+        capacityStartDate,
+        capacityEndDate
+      );
+
+    const orders = [];
+
+    for (let index = 0; index < 100; index++) {
+      const product =
+        capacityProducts[
+          (index * 5 + Math.floor(index / 4)) %
+          capacityProducts.length
+        ];
+
+      const receivedOffset =
+        Math.floor(
+          (index / 99) * totalPeriodDays
+        );
+
+      const receivedDate =
+        capacityAddDays(
+          capacityStartDate,
+          receivedOffset
+        );
+
+      const quantityBase =
+        product.line === "line1"
+          ? 180
+          : product.line === "line2"
+            ? 260
+            : 380;
+
+      const quantityStep =
+        product.line === "line1"
+          ? 37
+          : product.line === "line2"
+            ? 53
+            : 71;
+
+      const quantity =
+        quantityBase +
+        ((index * quantityStep) % 1450);
+
+      const priority =
+        index % 13 === 0
+          ? capacityPriorities[2]
+          : index % 5 === 0
+            ? capacityPriorities[1]
+            : capacityPriorities[0];
+
+      const requestedLeadTime =
+        priority.key === "urgent"
+          ? 2 + (index % 3)
+          : priority.key === "high"
+            ? 4 + (index % 5)
+            : 7 + (index % 10);
+
+      let requestedDate =
+        capacityAddDays(
+          receivedDate,
+          requestedLeadTime
+        );
+
+      if (requestedDate > capacityEndDate) {
+        requestedDate =
+          capacityCloneDate(capacityEndDate);
+      }
+
+      orders.push({
+        id: `ORD-${String(index + 1).padStart(4, "0")}`,
+        receivedDate,
+        productCode: product.code,
+        productName: product.name,
+        quantity,
+        line: product.line,
+        lineLabel: product.lineLabel,
+        requestedDate,
+        calculatedDate: null,
+        priority: priority.key,
+        priorityLabel: priority.label,
+        status: "waiting"
+      });
+    }
+
+    return orders;
+  }
+
+  function capacityPriorityClass(priority) {
+    if (priority === "urgent") {
+      return "capacity-priority-urgent";
+    }
+
+    if (priority === "high") {
+      return "capacity-priority-high";
+    }
+
+    return "capacity-priority-normal";
+  }
+
+  function capacityStatusMarkup(order) {
+    if (order.status === "on-time") {
+      return `
+        <span class="capacity-status capacity-status-ok">
+          Вчасно
+        </span>
+      `;
+    }
+
+    if (order.status === "delayed") {
+      return `
+        <span class="capacity-status capacity-status-warning">
+          Перенесено
+        </span>
+      `;
+    }
+
+    if (order.status === "critical") {
+      return `
+        <span class="capacity-status capacity-status-error">
+          Перевантаження
+        </span>
+      `;
+    }
+
+    return `
+      <span class="capacity-status capacity-status-waiting">
+        Очікує
+      </span>
+    `;
+  }
+
+  function capacityRenderOrders() {
+    capacityOrdersBody.innerHTML =
+      capacityOrders
+        .map(order => {
+          const calculatedDate =
+            order.calculatedDate
+              ? capacityFormatDate(
+                  order.calculatedDate
+                )
+              : "—";
+
+          return `
+            <tr
+              data-capacity-order="${order.id}"
+              data-capacity-line="${order.line}"
+              data-capacity-priority="${order.priority}"
+            >
+              <td>
+                <strong>${order.id}</strong>
+              </td>
+
+              <td>
+                ${capacityFormatDate(
+                  order.receivedDate
+                )}
+              </td>
+
+              <td>
+                ${order.productCode}
+              </td>
+
+              <td>
+                ${order.productName}
+              </td>
+
+              <td>
+                ${order.quantity.toLocaleString("uk-UA")}
+              </td>
+
+              <td>
+                ${order.lineLabel}
+              </td>
+
+              <td>
+                ${capacityFormatDate(
+                  order.requestedDate
+                )}
+              </td>
+
+              <td class="capacity-calculated-date">
+                ${calculatedDate}
+              </td>
+
+              <td>
+                ${capacityStatusMarkup(order)}
+
+                <span
+                  class="capacity-priority ${capacityPriorityClass(
+                    order.priority
+                  )}"
+                >
+                  ${order.priorityLabel}
+                </span>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+
+    capacityOrdersStatus.textContent =
+      `${capacityOrders.length} замовлень очікують розрахунку`;
+  }
+
+  function capacityResetInitialValues() {
+    const output =
+      document.getElementById("capacity-output");
+
+    const calendar =
+      document.getElementById("capacity-calendar");
+
+    const summaryOrders =
+      document.getElementById(
+        "capacity-summary-orders"
+      );
+
+    const summaryUnits =
+      document.getElementById(
+        "capacity-summary-units"
+      );
+
+    const summaryDelayed =
+      document.getElementById(
+        "capacity-summary-delayed"
+      );
+
+    const summaryLastDate =
+      document.getElementById(
+        "capacity-summary-last-date"
+      );
+
+    summaryOrders.textContent = "0";
+    summaryUnits.textContent = "0";
+    summaryDelayed.textContent = "0";
+    summaryLastDate.textContent = "—";
+
+    calendar.innerHTML = "";
+
+    ["line1", "line2", "line3"].forEach(line => {
+      const fill =
+        document.getElementById(
+          `capacity-util-${line}`
+        );
+
+      const text =
+        document.getElementById(
+          `capacity-util-${line}-text`
+        );
+
+      fill.style.width = "0%";
+      text.textContent = "0%";
+    });
+
+    output.dataset.calculated = "false";
+  }
+
+  capacityOrders =
+    capacityCreateOrders();
+
+  capacityRenderOrders();
+  capacityResetInitialValues();
+</script>
 </body>
 </html>

@@ -3009,7 +3009,7 @@ footer a:hover {
       </div>
 
       <div class="capacity-orders-status" id="capacity-orders-status">
-        Очікують розрахунку
+        waiting for calculation
       </div>
     </div>
 
@@ -4046,7 +4046,7 @@ footer a:hover {
         .join("");
 
     capacityOrdersStatus.textContent =
-      `${capacityOrders.length} orders очікують розрахунку`;
+      `${capacityOrders.length} orders waiting for calculation`;
   }
 
   function capacityResetInitialValues() {
@@ -4662,7 +4662,7 @@ footer a:hover {
     capacityResetInitialValues();
 
     capacityOrdersStatus.textContent =
-      `${capacityOrders.length} orders очікують розрахунку`;
+      `${capacityOrders.length} orders waiting for calculation`;
 
     capacityLastPlan = null;
   }

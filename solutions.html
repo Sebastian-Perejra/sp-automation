@@ -2332,6 +2332,136 @@ footer a:hover {
   background: #fff0f0;
   color: #a03434;
 }
+    .capacity-mode-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 17px 18px;
+  border: 1px solid var(--border-green);
+  border-radius: 16px;
+  background: var(--surface-green);
+}
+
+.capacity-mode-panel strong {
+  display: block;
+  color: var(--green);
+  font-size: 13px;
+}
+
+.capacity-mode-panel span {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-mode-switch {
+  display: flex;
+  gap: 7px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #e1ebe3;
+}
+
+.capacity-mode-button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #647168;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.capacity-mode-button.active {
+  background: #ffffff;
+  color: var(--green);
+  box-shadow: 0 5px 14px rgba(53, 89, 75, .13);
+}
+
+.capacity-calculate-button:disabled {
+  opacity: .62;
+  cursor: wait;
+}
+
+.capacity-orders-table tbody tr.capacity-row-updated td {
+  animation: capacityRowUpdate .55s ease;
+}
+
+@keyframes capacityRowUpdate {
+  0% {
+    background: #e9f4eb;
+  }
+
+  100% {
+    background: transparent;
+  }
+}
+
+.capacity-day {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  color: #5c5751;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.capacity-day::after {
+  content: attr(data-load);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 7px);
+  z-index: 5;
+  width: max-content;
+  max-width: 180px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: #34322f;
+  color: #ffffff;
+  font-size: 8px;
+  line-height: 1.4;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity .18s ease,
+    visibility .18s ease,
+    transform .18s ease;
+  pointer-events: none;
+}
+
+.capacity-day:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 760px) {
+  .capacity-mode-panel {
+    display: block;
+  }
+
+  .capacity-mode-switch {
+    margin-top: 14px;
+  }
+
+  .capacity-mode-button {
+    flex: 1;
+  }
+}
   </style>
   <link rel="stylesheet" href="/assistant.css">
 <script src="/assistant.js" defer></script>
@@ -2910,6 +3040,32 @@ footer a:hover {
     </div>
   </div>
 
+      <div class="capacity-mode-panel">
+  <div>
+    <strong>Режим планування</strong>
+    <span>
+      Оберіть логіку розподілу доступної виробничої потужності
+    </span>
+  </div>
+
+  <div class="capacity-mode-switch">
+    <button
+      class="capacity-mode-button active"
+      type="button"
+      data-capacity-mode="queue"
+    >
+      За чергою
+    </button>
+
+    <button
+      class="capacity-mode-button"
+      type="button"
+      data-capacity-mode="priority"
+    >
+      За пріоритетом
+    </button>
+  </div>
+</div>
   <div class="capacity-action">
     <button
       class="capacity-calculate-button"
@@ -3955,6 +4111,679 @@ footer a:hover {
 
   capacityRenderOrders();
   capacityResetInitialValues();
+</script>
+  <script>
+  const capacityPlannerValues = {
+    line1: 250,
+    line2: 400,
+    line3: 600
+  };
+
+  const capacityPlannerStep = 50;
+  const capacityPlannerMinimum = 50;
+  const capacityPlannerMaximum = 2000;
+
+  const capacityCalculateButton =
+    document.getElementById("capacity-calculate");
+
+  const capacityLoader =
+    document.getElementById("capacity-loader");
+
+  const capacityOutput =
+    document.getElementById("capacity-output");
+
+  const capacityCalendar =
+    document.getElementById("capacity-calendar");
+
+  const capacitySummaryOrders =
+    document.getElementById("capacity-summary-orders");
+
+  const capacitySummaryUnits =
+    document.getElementById("capacity-summary-units");
+
+  const capacitySummaryDelayed =
+    document.getElementById("capacity-summary-delayed");
+
+  const capacitySummaryLastDate =
+    document.getElementById("capacity-summary-last-date");
+
+  const capacityModeButtons =
+    Array.from(
+      document.querySelectorAll("[data-capacity-mode]")
+    );
+
+  const capacityControlButtons =
+    Array.from(
+      document.querySelectorAll("[data-capacity-action]")
+    );
+
+  let capacityPlanningMode = "queue";
+  let capacityLastPlan = null;
+
+  function capacityPlannerDateKey(date) {
+    const year = date.getFullYear();
+    const month =
+      String(date.getMonth() + 1).padStart(2, "0");
+    const day =
+      String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  function capacityPlannerParseDateKey(key) {
+    const [year, month, day] =
+      key.split("-").map(Number);
+
+    return new Date(year, month - 1, day);
+  }
+
+  function capacityPlannerCompareDates(a, b) {
+    return (
+      capacityCloneDate(a).getTime() -
+      capacityCloneDate(b).getTime()
+    );
+  }
+
+  function capacityPlannerPriorityRank(priority) {
+    if (priority === "urgent") return 3;
+    if (priority === "high") return 2;
+    return 1;
+  }
+
+  function capacityPlannerDelayDays(order) {
+    if (!order.calculatedDate) return 0;
+
+    return Math.max(
+      0,
+      capacityDaysBetween(
+        order.requestedDate,
+        order.calculatedDate
+      )
+    );
+  }
+
+  function capacityPlannerSetStatus(order) {
+    const delayDays =
+      capacityPlannerDelayDays(order);
+
+    if (delayDays === 0) {
+      order.status = "on-time";
+      return;
+    }
+
+    if (delayDays <= 5) {
+      order.status = "delayed";
+      return;
+    }
+
+    order.status = "critical";
+  }
+
+  function capacityPlannerSortOrders(orders) {
+    return [...orders].sort((a, b) => {
+      if (a.line !== b.line) {
+        return a.line.localeCompare(b.line);
+      }
+
+      if (capacityPlanningMode === "priority") {
+        const priorityDifference =
+          capacityPlannerPriorityRank(b.priority) -
+          capacityPlannerPriorityRank(a.priority);
+
+        if (priorityDifference !== 0) {
+          return priorityDifference;
+        }
+
+        const requestedDifference =
+          capacityPlannerCompareDates(
+            a.requestedDate,
+            b.requestedDate
+          );
+
+        if (requestedDifference !== 0) {
+          return requestedDifference;
+        }
+      }
+
+      const receivedDifference =
+        capacityPlannerCompareDates(
+          a.receivedDate,
+          b.receivedDate
+        );
+
+      if (receivedDifference !== 0) {
+        return receivedDifference;
+      }
+
+      const requestedDifference =
+        capacityPlannerCompareDates(
+          a.requestedDate,
+          b.requestedDate
+        );
+
+      if (requestedDifference !== 0) {
+        return requestedDifference;
+      }
+
+      return a.id.localeCompare(b.id);
+    });
+  }
+
+  function capacityPlannerCreateUsage() {
+    return {
+      line1: {},
+      line2: {},
+      line3: {}
+    };
+  }
+
+  function capacityPlannerGetUsed(
+    usage,
+    line,
+    date
+  ) {
+    const key =
+      capacityPlannerDateKey(date);
+
+    return usage[line][key] || 0;
+  }
+
+  function capacityPlannerAddUsed(
+    usage,
+    line,
+    date,
+    amount
+  ) {
+    const key =
+      capacityPlannerDateKey(date);
+
+    usage[line][key] =
+      (usage[line][key] || 0) + amount;
+  }
+
+  function capacityPlannerScheduleOrder(
+    order,
+    usage
+  ) {
+    let remaining =
+      order.quantity;
+
+    let currentDate =
+      capacityCloneDate(order.receivedDate);
+
+    let lastProductionDate =
+      capacityCloneDate(order.receivedDate);
+
+    let safetyCounter = 0;
+
+    while (remaining > 0 && safetyCounter < 3000) {
+      safetyCounter++;
+
+      const dailyCapacity =
+        capacityPlannerValues[order.line];
+
+      const used =
+        capacityPlannerGetUsed(
+          usage,
+          order.line,
+          currentDate
+        );
+
+      const available =
+        Math.max(0, dailyCapacity - used);
+
+      if (available > 0) {
+        const produced =
+          Math.min(available, remaining);
+
+        capacityPlannerAddUsed(
+          usage,
+          order.line,
+          currentDate,
+          produced
+        );
+
+        remaining -= produced;
+        lastProductionDate =
+          capacityCloneDate(currentDate);
+      }
+
+      if (remaining > 0) {
+        currentDate =
+          capacityAddDays(currentDate, 1);
+      }
+    }
+
+    order.calculatedDate =
+      lastProductionDate;
+
+    capacityPlannerSetStatus(order);
+  }
+
+  function capacityPlannerCalculatePlan() {
+    const usage =
+      capacityPlannerCreateUsage();
+
+    capacityOrders.forEach(order => {
+      order.calculatedDate = null;
+      order.status = "waiting";
+    });
+
+    const sortedOrders =
+      capacityPlannerSortOrders(capacityOrders);
+
+    sortedOrders.forEach(order => {
+      capacityPlannerScheduleOrder(
+        order,
+        usage
+      );
+    });
+
+    return {
+      usage,
+      orders: sortedOrders
+    };
+  }
+
+  function capacityPlannerUpdateTable() {
+    capacityRenderOrders();
+
+    capacityOrders.forEach((order, index) => {
+      const row =
+        document.querySelector(
+          `[data-capacity-order="${order.id}"]`
+        );
+
+      if (!row) return;
+
+      setTimeout(() => {
+        row.classList.add(
+          "capacity-row-updated"
+        );
+
+        setTimeout(() => {
+          row.classList.remove(
+            "capacity-row-updated"
+          );
+        }, 600);
+      }, Math.min(index * 8, 700));
+    });
+  }
+
+  function capacityPlannerGetUsageDates(usage) {
+    const keys = new Set();
+
+    Object.values(usage).forEach(lineUsage => {
+      Object.keys(lineUsage).forEach(key => {
+        keys.add(key);
+      });
+    });
+
+    return Array.from(keys)
+      .sort((a, b) => {
+        return (
+          capacityPlannerParseDateKey(a) -
+          capacityPlannerParseDateKey(b)
+        );
+      });
+  }
+
+  function capacityPlannerCalculateUtilization(
+    usage,
+    line,
+    allDates
+  ) {
+    if (!allDates.length) return 0;
+
+    const totalUsed =
+      Object.values(usage[line])
+        .reduce(
+          (sum, value) => sum + value,
+          0
+        );
+
+    const firstDate =
+      capacityPlannerParseDateKey(
+        allDates[0]
+      );
+
+    const lastDate =
+      capacityPlannerParseDateKey(
+        allDates[allDates.length - 1]
+      );
+
+    const periodDays =
+      capacityDaysBetween(
+        firstDate,
+        lastDate
+      ) + 1;
+
+    const availableCapacity =
+      periodDays *
+      capacityPlannerValues[line];
+
+    if (availableCapacity === 0) {
+      return 0;
+    }
+
+    return Math.min(
+      100,
+      Math.round(
+        (totalUsed / availableCapacity) *
+        100
+      )
+    );
+  }
+
+  function capacityPlannerUpdateUtilization(
+    usage,
+    allDates
+  ) {
+    ["line1", "line2", "line3"]
+      .forEach(line => {
+        const percent =
+          capacityPlannerCalculateUtilization(
+            usage,
+            line,
+            allDates
+          );
+
+        const fill =
+          document.getElementById(
+            `capacity-util-${line}`
+          );
+
+        const text =
+          document.getElementById(
+            `capacity-util-${line}-text`
+          );
+
+        fill.style.width =
+          `${percent}%`;
+
+        text.textContent =
+          `${percent}%`;
+      });
+  }
+
+  function capacityPlannerDayLoad(
+    usage,
+    dateKey
+  ) {
+    const lineLoads =
+      ["line1", "line2", "line3"]
+        .map(line => {
+          const used =
+            usage[line][dateKey] || 0;
+
+          const capacity =
+            capacityPlannerValues[line];
+
+          return capacity > 0
+            ? used / capacity
+            : 0;
+        });
+
+    return (
+      lineLoads.reduce(
+        (sum, value) => sum + value,
+        0
+      ) / lineLoads.length
+    );
+  }
+
+  function capacityPlannerDayClass(load) {
+    if (load >= 0.9) {
+      return "capacity-full";
+    }
+
+    if (load >= 0.35) {
+      return "capacity-medium";
+    }
+
+    return "capacity-free";
+  }
+
+  function capacityPlannerRenderCalendar(
+    usage,
+    allDates
+  ) {
+    capacityCalendar.innerHTML = "";
+
+    if (!allDates.length) return;
+
+    const visibleDates =
+      allDates.slice(-35);
+
+    visibleDates.forEach(dateKey => {
+      const date =
+        capacityPlannerParseDateKey(
+          dateKey
+        );
+
+      const load =
+        capacityPlannerDayLoad(
+          usage,
+          dateKey
+        );
+
+      const percent =
+        Math.round(load * 100);
+
+      const line1Used =
+        usage.line1[dateKey] || 0;
+
+      const line2Used =
+        usage.line2[dateKey] || 0;
+
+      const line3Used =
+        usage.line3[dateKey] || 0;
+
+      const day =
+        document.createElement("div");
+
+      day.className =
+        `capacity-day ${capacityPlannerDayClass(load)}`;
+
+      day.textContent =
+        String(date.getDate());
+
+      day.dataset.load =
+        `${capacityFormatDate(date)} • ` +
+        `середнє завантаження ${percent}% • ` +
+        `Л1: ${line1Used}/${capacityPlannerValues.line1} • ` +
+        `Л2: ${line2Used}/${capacityPlannerValues.line2} • ` +
+        `Л3: ${line3Used}/${capacityPlannerValues.line3}`;
+
+      capacityCalendar.appendChild(day);
+    });
+  }
+
+  function capacityPlannerUpdateSummary(
+    allDates
+  ) {
+    const totalUnits =
+      capacityOrders.reduce(
+        (sum, order) =>
+          sum + order.quantity,
+        0
+      );
+
+    const delayedOrders =
+      capacityOrders.filter(order => {
+        return (
+          order.status === "delayed" ||
+          order.status === "critical"
+        );
+      }).length;
+
+    const lastDate =
+      capacityOrders.reduce(
+        (latest, order) => {
+          if (!order.calculatedDate) {
+            return latest;
+          }
+
+          if (
+            !latest ||
+            order.calculatedDate > latest
+          ) {
+            return order.calculatedDate;
+          }
+
+          return latest;
+        },
+        null
+      );
+
+    capacitySummaryOrders.textContent =
+      capacityOrders.length
+        .toLocaleString("uk-UA");
+
+    capacitySummaryUnits.textContent =
+      totalUnits.toLocaleString("uk-UA");
+
+    capacitySummaryDelayed.textContent =
+      delayedOrders.toLocaleString("uk-UA");
+
+    capacitySummaryLastDate.textContent =
+      lastDate
+        ? capacityFormatDate(lastDate)
+        : "—";
+
+    capacityOrdersStatus.textContent =
+      capacityPlanningMode === "priority"
+        ? `Розраховано за пріоритетом • ${delayedOrders} із перенесенням`
+        : `Розраховано за чергою • ${delayedOrders} із перенесенням`;
+  }
+
+  function capacityPlannerResetResult() {
+    capacityOrders.forEach(order => {
+      order.calculatedDate = null;
+      order.status = "waiting";
+    });
+
+    capacityRenderOrders();
+    capacityResetInitialValues();
+
+    capacityOrdersStatus.textContent =
+      `${capacityOrders.length} замовлень очікують розрахунку`;
+
+    capacityLastPlan = null;
+  }
+
+  function capacityPlannerUpdateValue(line) {
+    const valueElement =
+      document.getElementById(
+        `capacity-${line}`
+      );
+
+    valueElement.textContent =
+      capacityPlannerValues[line]
+        .toLocaleString("uk-UA");
+  }
+
+  capacityControlButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const line =
+        button.dataset.capacityLine;
+
+      const action =
+        button.dataset.capacityAction;
+
+      if (!line || !action) return;
+
+      if (action === "plus") {
+        capacityPlannerValues[line] =
+          Math.min(
+            capacityPlannerMaximum,
+            capacityPlannerValues[line] +
+            capacityPlannerStep
+          );
+      }
+
+      if (action === "minus") {
+        capacityPlannerValues[line] =
+          Math.max(
+            capacityPlannerMinimum,
+            capacityPlannerValues[line] -
+            capacityPlannerStep
+          );
+      }
+
+      capacityPlannerUpdateValue(line);
+      capacityPlannerResetResult();
+    });
+  });
+
+  capacityModeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      capacityPlanningMode =
+        button.dataset.capacityMode;
+
+      capacityModeButtons.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item === button
+        );
+      });
+
+      capacityPlannerResetResult();
+    });
+  });
+
+  capacityCalculateButton.addEventListener(
+    "click",
+    () => {
+      capacityCalculateButton.disabled = true;
+      capacityCalculateButton.textContent =
+        "Розрахунок...";
+
+      capacityLoader.classList.add("active");
+      capacityOrdersStatus.textContent =
+        capacityPlanningMode === "priority"
+          ? "Перерахунок із пріоритетним витісненням замовлень..."
+          : "Послідовний розподіл замовлень за виробничими днями...";
+
+      setTimeout(() => {
+        capacityLastPlan =
+          capacityPlannerCalculatePlan();
+
+        const allDates =
+          capacityPlannerGetUsageDates(
+            capacityLastPlan.usage
+          );
+
+        capacityPlannerUpdateTable();
+
+        capacityPlannerUpdateSummary(
+          allDates
+        );
+
+        capacityPlannerUpdateUtilization(
+          capacityLastPlan.usage,
+          allDates
+        );
+
+        capacityPlannerRenderCalendar(
+          capacityLastPlan.usage,
+          allDates
+        );
+
+        capacityLoader.classList.remove("active");
+
+        capacityCalculateButton.disabled = false;
+        capacityCalculateButton.textContent =
+          "↻ Перерахувати виробничий план";
+
+        capacityOutput.dataset.calculated =
+          "true";
+      }, 1100);
+    }
+  );
+
+  ["line1", "line2", "line3"]
+    .forEach(capacityPlannerUpdateValue);
 </script>
 </body>
 </html>

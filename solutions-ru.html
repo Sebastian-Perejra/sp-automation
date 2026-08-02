@@ -4730,8 +4730,8 @@ footer a:hover {
       capacityLoader.classList.add("active");
       capacityOrdersStatus.textContent =
         capacityPlanningMode === "priority"
-          ? "Перерахунок із пріоритетним витісненням замовлень..."
-          : "Послідовний розподіл замовлень за виробничими днями...";
+          ? "Перерасчет с приоритетным вытеснением заказов..."
+          : "Последовательное распределение заказов по производственным дням...";
 
       setTimeout(() => {
         capacityLastPlan =
@@ -4762,7 +4762,7 @@ footer a:hover {
 
         capacityCalculateButton.disabled = false;
         capacityCalculateButton.textContent =
-          "↻ Перерахувати виробничий план";
+          "↻ Пересчитать производственный план";
 
         capacityOutput.dataset.calculated =
           "true";

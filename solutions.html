@@ -1935,6 +1935,337 @@ footer a:hover {
       }
     }
 
+    .capacity-case {
+  margin-top: 26px;
+  padding: 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: rgba(255,255,255,.97);
+  box-shadow: var(--shadow-card);
+}
+
+.capacity-settings {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid #e7e0d8;
+  border-radius: 18px;
+  background: #f8f7f4;
+}
+
+.capacity-settings-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.capacity-settings-head strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.capacity-settings-head span,
+.capacity-period {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.capacity-lines {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.capacity-line-card {
+  padding: 18px;
+  border: 1px solid #e7e0d8;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.capacity-line-name span {
+  display: block;
+  font-weight: 700;
+}
+
+.capacity-line-name small {
+  color: var(--text-muted);
+}
+
+.capacity-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.capacity-minus,
+.capacity-plus {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.capacity-value {
+  text-align: center;
+}
+
+.capacity-value strong {
+  display: block;
+  color: var(--green);
+  font-family: var(--font-tech);
+  font-size: 24px;
+}
+
+.capacity-value span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-orders-panel {
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid #e7e0d8;
+  border-radius: 18px;
+}
+
+.capacity-panel-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  background: #f7f4ef;
+}
+
+.capacity-panel-head strong {
+  display: block;
+}
+
+.capacity-panel-head span,
+.capacity-orders-status {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-table-wrap {
+  max-height: 420px;
+  overflow: auto;
+}
+
+.capacity-orders-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.capacity-orders-table th,
+.capacity-orders-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee8e0;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.capacity-orders-table th {
+  position: sticky;
+  top: 0;
+  background: var(--green);
+  color: #fff;
+}
+
+.capacity-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.capacity-calculate-button {
+  min-height: 50px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.capacity-loader {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.capacity-loader.active {
+  display: flex;
+}
+
+.capacity-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d9e5ee;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: capacitySpin .8s linear infinite;
+}
+
+@keyframes capacitySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.capacity-output {
+  margin-top: 24px;
+}
+
+.capacity-summary {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+}
+
+.capacity-summary-item {
+  padding: 18px;
+  border: 1px solid #e7e0d8;
+  border-radius: 16px;
+  background: #fcfbf9;
+}
+
+.capacity-summary-item span {
+  display: block;
+  font-size: 10px;
+}
+
+.capacity-summary-item strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 24px;
+}
+
+.capacity-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.capacity-dashboard-card {
+  padding: 18px;
+  border: 1px solid #e7e0d8;
+  border-radius: 18px;
+}
+
+.capacity-dashboard-head span {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.capacity-utilization-row {
+  margin-top: 18px;
+}
+
+.capacity-utilization-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.capacity-utilization-track {
+  height: 12px;
+  border-radius: 999px;
+  background: #ece8e3;
+}
+
+.capacity-utilization-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg,#35594b,#70a588);
+}
+
+.capacity-calendar {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.capacity-day {
+  height: 38px;
+  border-radius: 8px;
+}
+
+.capacity-free {
+  background: #e6f3e9;
+}
+
+.capacity-medium {
+  background: #ffe9ae;
+}
+
+.capacity-full {
+  background: #ffc7c7;
+}
+
+.capacity-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.capacity-legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+}
+
+.capacity-legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.capacity-legend-free {
+  background: #e6f3e9;
+}
+
+.capacity-legend-medium {
+  background: #ffe9ae;
+}
+
+.capacity-legend-full {
+  background: #ffc7c7;
+}
+
+@media (max-width: 760px) {
+
+  .capacity-case {
+    padding: 26px 16px;
+  }
+
+  .capacity-lines,
+  .capacity-summary,
+  .capacity-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .capacity-settings-head {
+    display: block;
+  }
+
+  .capacity-legend {
+    flex-direction: column;
+  }
+}
   </style>
   <link rel="stylesheet" href="/assistant.css">
 <script src="/assistant.js" defer></script>
@@ -2349,6 +2680,303 @@ footer a:hover {
       </div>
     </section>
 
+    <section class="capacity-case" id="production-capacity-case">
+  <div class="case-demo-kicker">Реальний кейс №4</div>
+
+  <h2>Планування виробничих потужностей і строків виконання замовлень</h2>
+
+  <p class="case-demo-subtitle">
+    Система отримує список вхідних замовлень, враховує призначену
+    виробничу лінію та її добову потужність, після чого автоматично
+    розподіляє обсяг за календарними днями й розраховує фактичну дату
+    готовності кожного замовлення. Усі дані нижче демонстраційні.
+  </p>
+
+  <div class="capacity-settings">
+    <div class="capacity-settings-head">
+      <div>
+        <strong>Налаштування виробничих потужностей</strong>
+        <span>
+          Змініть продуктивність ліній і повторно розрахуйте виробничий план
+        </span>
+      </div>
+
+      <div class="capacity-period">
+        Період замовлень: 01.01.2026–02.08.2026
+      </div>
+    </div>
+
+    <div class="capacity-lines">
+      <article class="capacity-line-card" data-line="line1">
+        <div class="capacity-line-name">
+          <span>Лінія 1</span>
+          <small>Сталева труба</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line1"
+            aria-label="Зменшити потужність Лінії 1"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line1">250</strong>
+            <span>од./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line1"
+            aria-label="Збільшити потужність Лінії 1"
+          >
+            +
+          </button>
+        </div>
+      </article>
+
+      <article class="capacity-line-card" data-line="line2">
+        <div class="capacity-line-name">
+          <span>Лінія 2</span>
+          <small>Сталевий кутник</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line2"
+            aria-label="Зменшити потужність Лінії 2"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line2">400</strong>
+            <span>од./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line2"
+            aria-label="Збільшити потужність Лінії 2"
+          >
+            +
+          </button>
+        </div>
+      </article>
+
+      <article class="capacity-line-card" data-line="line3">
+        <div class="capacity-line-name">
+          <span>Лінія 3</span>
+          <small>Сталевий профіль</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line3"
+            aria-label="Зменшити потужність Лінії 3"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line3">600</strong>
+            <span>од./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line3"
+            aria-label="Збільшити потужність Лінії 3"
+          >
+            +
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="capacity-orders-panel">
+    <div class="capacity-panel-head">
+      <div>
+        <strong>Вхідні виробничі замовлення</strong>
+        <span>100 демонстраційних замовлень</span>
+      </div>
+
+      <div class="capacity-orders-status" id="capacity-orders-status">
+        Очікують розрахунку
+      </div>
+    </div>
+
+    <div class="capacity-table-wrap">
+      <table class="capacity-orders-table">
+        <thead>
+          <tr>
+            <th>Замовлення</th>
+            <th>Дата надходження</th>
+            <th>Код виробу</th>
+            <th>Виріб</th>
+            <th>Кількість</th>
+            <th>Лінія</th>
+            <th>Бажана дата</th>
+            <th>Розрахункова дата</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+
+        <tbody id="capacity-orders-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="capacity-action">
+    <button
+      class="capacity-calculate-button"
+      id="capacity-calculate"
+      type="button"
+    >
+      ⚙ Розрахувати виробничий план
+    </button>
+  </div>
+
+  <div class="capacity-loader" id="capacity-loader">
+    <span class="capacity-spinner"></span>
+    <span>
+      Розподіл замовлень за календарними днями та перевірка доступної потужності…
+    </span>
+  </div>
+
+  <div class="capacity-output" id="capacity-output">
+    <div class="capacity-summary">
+      <article class="capacity-summary-item">
+        <span>Замовлень розраховано</span>
+        <strong id="capacity-summary-orders">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Загальний обсяг</span>
+        <strong id="capacity-summary-units">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Замовлень із перенесенням</span>
+        <strong id="capacity-summary-delayed">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Остання дата плану</span>
+        <strong id="capacity-summary-last-date">—</strong>
+      </article>
+    </div>
+
+    <div class="capacity-dashboard-grid">
+      <article class="capacity-dashboard-card">
+        <div class="capacity-dashboard-head">
+          <div>
+            <strong>Середнє завантаження ліній</strong>
+            <span>за розрахованим виробничим планом</span>
+          </div>
+        </div>
+
+        <div class="capacity-utilization">
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Лінія 1</span>
+              <strong id="capacity-util-line1-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line1"
+              ></div>
+            </div>
+          </div>
+
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Лінія 2</span>
+              <strong id="capacity-util-line2-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line2"
+              ></div>
+            </div>
+          </div>
+
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Лінія 3</span>
+              <strong id="capacity-util-line3-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line3"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="capacity-dashboard-card">
+        <div class="capacity-dashboard-head">
+          <div>
+            <strong>Завантаження за днями</strong>
+            <span>календар виробничих потужностей</span>
+          </div>
+        </div>
+
+        <div
+          class="capacity-calendar"
+          id="capacity-calendar"
+        ></div>
+      </article>
+    </div>
+
+    <div class="capacity-legend">
+      <span>
+        <i class="capacity-legend-free"></i>
+        Вільна потужність
+      </span>
+
+      <span>
+        <i class="capacity-legend-medium"></i>
+        Часткове завантаження
+      </span>
+
+      <span>
+        <i class="capacity-legend-full"></i>
+        Повне завантаження
+      </span>
+    </div>
+
+    <div class="demo-cta">
+      <a href="contacts.html">
+        Хочу автоматизувати планування виробництва
+      </a>
+    </div>
+  </div>
+</section>
     <section class="section-card upcoming">
       <h2>Що з’явиться далі</h2>
 

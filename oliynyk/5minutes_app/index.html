@@ -499,6 +499,77 @@
     ).submit();
   }
 
+    window.addEventListener(
+  'message',
+  function(event) {
+
+    const frame =
+      document.getElementById(
+        'appFrame'
+      );
+
+    if (
+      !frame ||
+      event.source !== frame.contentWindow
+    ) {
+      return;
+    }
+
+    const data =
+      event.data || {};
+
+    if (
+      data.type !==
+      'FIVEMINUTE_SESSION_EXPIRED'
+    ) {
+      return;
+    }
+
+    localStorage.removeItem(
+      SESSION_STORAGE_KEY
+    );
+
+    loginStarted = false;
+
+    frame.classList.remove(
+      'appReady'
+    );
+
+    frame.style.display =
+      'none';
+
+    document.getElementById(
+      'credentialInput'
+    ).value = '';
+
+    document.getElementById(
+      'sessionTokenInput'
+    ).value = '';
+
+    const loginScreen =
+      document.getElementById(
+        'loginScreen'
+      );
+
+    loginScreen.style.display =
+      'flex';
+
+    loginScreen.style.opacity =
+      '1';
+
+    const status =
+      document.getElementById(
+        'status'
+      );
+
+    status.classList.remove(
+      'error'
+    );
+
+    status.textContent =
+      'Сесія завершилася. Увійдіть знову.';
+  }
+);
 
   function showError(message) {
 

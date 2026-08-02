@@ -604,37 +604,37 @@
 }
 
 .case5-results {
+  opacity: 1;
+}
+
+.case5-summary,
+.case5-flow {
   max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   overflow: hidden;
   opacity: 0;
   transform: translateY(16px);
   pointer-events: none;
   transition:
-    max-height 0.9s ease,
-    opacity 0.45s ease,
-    transform 0.45s ease;
+    max-height 0.8s ease,
+    margin 0.4s ease,
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
-.case5-results.visible {
-  max-height: 3000px;
+.case5-results.visible .case5-summary {
+  max-height: 300px;
+  margin-bottom: 18px;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-@media (max-width: 760px) {
-  .case5-calculate-area {
-    padding: 18px 14px;
-  }
-
-  .case5-calculate-button {
-    width: 100%;
-    padding: 0 14px;
-    font-size: 13px;
-  }
-
-  .case5-loader {
-    align-items: flex-start;
-    font-size: 10px;
-  }
+.case5-results.visible .case5-flow {
+  max-height: 300px;
+  margin-top: 18px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }

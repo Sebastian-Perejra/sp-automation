@@ -3189,6 +3189,7 @@ footer a:hover {
     </div>
   </div>
 </section>
+    <div id="case5-container"></div>
     <section class="section-card upcoming">
       <h2>Что появится дальше</h2>
 
@@ -4774,6 +4775,27 @@ footer a:hover {
 
   ["line1", "line2", "line3"]
     .forEach(capacityPlannerUpdateValue);
+</script>
+  <script>
+  fetch("cases/case-5/case5-ru.html")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Не удалось загрузить кейс №5");
+      }
+
+      return response.text();
+    })
+    .then(html => {
+      const container = document.getElementById("case5-container");
+      container.innerHTML = html;
+
+      const script = document.createElement("script");
+      script.src = "cases/case-5/case5.js";
+      document.body.appendChild(script);
+    })
+    .catch(error => {
+      console.error(error);
+    });
 </script>
 </body>
 </html>

@@ -3066,7 +3066,7 @@ footer a:hover {
       id="capacity-calculate"
       type="button"
     >
-      ⚙ Розрахувати виробничий план
+      ⚙ Calculate Production Plan
     </button>
   </div>
 
@@ -4732,13 +4732,13 @@ footer a:hover {
     () => {
       capacityCalculateButton.disabled = true;
       capacityCalculateButton.textContent =
-        "Розрахунок...";
+        "Distribution in process...";
 
       capacityLoader.classList.add("active");
       capacityOrdersStatus.textContent =
         capacityPlanningMode === "priority"
           ? "Recalculating with priority-based order rescheduling..."
-          : "Послідовний розподіл orders за виробничими днями...";
+          : "Sequential allocation of orders across production days...";
 
       setTimeout(() => {
         capacityLastPlan =

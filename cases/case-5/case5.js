@@ -87,6 +87,20 @@ const case5TotalStock =
 const case5TotalBuy =
   document.getElementById("case5-total-buy");
 
+const case5CalculateButton =
+  document.getElementById("case5-calculate-button");
+
+const case5Loader =
+  document.getElementById("case5-loader");
+
+const case5LoaderText =
+  document.getElementById("case5-loader-text");
+
+const case5Results =
+  document.getElementById("case5-results");
+
+let case5Calculated = false;
+
 function case5Number(value) {
   const number = Number(value);
 
@@ -95,6 +109,12 @@ function case5Number(value) {
   }
 
   return Math.floor(number);
+}
+
+function case5Sleep(milliseconds) {
+  return new Promise(resolve => {
+    setTimeout(resolve, milliseconds);
+  });
 }
 
 function case5GetMachineQuantity(machineKey) {
@@ -128,12 +148,25 @@ function case5CalculateNeeds() {
 function case5CreatePartRow(
   partCode,
   part,
-  need,
-  buy
+  need = null,
+  buy = null
 ) {
   const row = document.createElement("article");
 
   row.className = "case5-part-row";
+
+  const needValue =
+    need === null ? "—" : need;
+
+  const buyValue =
+    buy === null ? "—" : buy;
+
+  let buyClass = "";
+
+  if (buy !== null) {
+    buyClass =
+      buy > 0 ? "deficit" : "covered";
+  }
 
   row.innerHTML = `
     <div class="case5-part-name">
@@ -143,7 +176,7 @@ function case5CreatePartRow(
 
     <div class="case5-part-cell">
       <span>Потреба</span>
-      <strong>${need}</strong>
+      <strong>${needValue}</strong>
     </div>
 
     <label class="case5-part-cell">
@@ -161,12 +194,8 @@ function case5CreatePartRow(
     <div class="case5-part-cell">
       <span>До закупівлі</span>
 
-      <strong
-        class="case5-buy-value ${
-          buy > 0 ? "deficit" : "covered"
-        }"
-      >
-        ${buy}
+      <strong class="case5-buy-value ${buyClass}">
+        ${buyValue}
       </strong>
     </div>
   `;
@@ -174,7 +203,24 @@ function case5CreatePartRow(
   return row;
 }
 
-function case5Render() {
+function case5RenderInitialState() {
+  case5PartsList.innerHTML = "";
+
+  Object.entries(case5Parts).forEach(
+    ([partCode, part]) => {
+      case5PartsList.appendChild(
+        case5CreatePartRow(
+          partCode,
+          part
+        )
+      );
+    }
+  );
+
+  case5AttachStockListeners();
+}
+
+function case5RenderCalculation() {
   const needs = case5CalculateNeeds();
 
   let totalMachines = 0;
@@ -207,15 +253,14 @@ function case5Render() {
       totalStock += stockUsed;
       totalBuy += buy;
 
-      const row =
+      case5PartsList.appendChild(
         case5CreatePartRow(
           partCode,
           part,
           need,
           buy
-        );
-
-      case5PartsList.appendChild(row);
+        )
+      );
     }
   );
 
@@ -231,6 +276,10 @@ function case5Render() {
   case5TotalBuy.textContent =
     totalBuy.toLocaleString("uk-UA");
 
+  case5AttachStockListeners();
+}
+
+function case5AttachStockListeners() {
   document
     .querySelectorAll("[data-case5-stock]")
     .forEach(input => {
@@ -241,16 +290,83 @@ function case5Render() {
         case5Parts[partCode].stock =
           case5Number(event.target.value);
 
-        case5Render();
+        case5ResetAfterChange();
       });
     });
+}
+
+function case5ResetAfterChange() {
+  if (!case5Calculated) {
+    return;
+  }
+
+  case5Calculated = false;
+
+  case5Results.classList.remove("visible");
+
+  case5CalculateButton.textContent =
+    "⚙ Розрахувати потребу в комплектуючих";
+
+  case5RenderInitialState();
+}
+
+async function case5RunCalculation() {
+  case5CalculateButton.disabled = true;
+  case5CalculateButton.textContent =
+    "Виконується розрахунок…";
+
+  case5Loader.classList.add("active");
+
+  case5LoaderText.textContent =
+    "Аналіз замовлень від відділу продажів…";
+
+  await case5Sleep(450);
+
+  case5LoaderText.textContent =
+    "Розкриття специфікацій BOM…";
+
+  await case5Sleep(500);
+
+  case5LoaderText.textContent =
+    "Перевірка складських залишків…";
+
+  await case5Sleep(500);
+
+  case5LoaderText.textContent =
+    "Розрахунок дефіциту комплектуючих…";
+
+  await case5Sleep(500);
+
+  case5RenderCalculation();
+
+  case5LoaderText.textContent =
+    "Список закупівлі сформовано";
+
+  await case5Sleep(350);
+
+  case5Loader.classList.remove("active");
+  case5Results.classList.add("visible");
+
+  case5Calculated = true;
+
+  case5CalculateButton.disabled = false;
+  case5CalculateButton.textContent =
+    "↻ Перерахувати потребу";
 }
 
 Object.values(case5Machines).forEach(machine => {
   const input =
     document.getElementById(machine.inputId);
 
-  input.addEventListener("input", case5Render);
+  input.addEventListener(
+    "input",
+    case5ResetAfterChange
+  );
 });
 
-case5Render();
+case5CalculateButton.addEventListener(
+  "click",
+  case5RunCalculation
+);
+
+case5RenderInitialState();

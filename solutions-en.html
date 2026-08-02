@@ -2870,7 +2870,7 @@ footer a:hover {
     </section>
 
     <section class="capacity-case" id="production-capacity-case">
-  <div class="case-demo-kicker">Реальний кейс №4</div>
+  <div class="case-demo-kicker">REAL CASE STUDY #4</div>
 
   <h2>Планування виробничих потужностей і строків виконання замовлень</h2>
 
@@ -2898,8 +2898,8 @@ footer a:hover {
     <div class="capacity-lines">
       <article class="capacity-line-card" data-line="line1">
         <div class="capacity-line-name">
-          <span>Лінія 1</span>
-          <small>Сталева труба</small>
+          <span>Line 1</span>
+          <small>Steel Pipe</small>
         </div>
 
         <div class="capacity-control">
@@ -2932,8 +2932,8 @@ footer a:hover {
 
       <article class="capacity-line-card" data-line="line2">
         <div class="capacity-line-name">
-          <span>Лінія 2</span>
-          <small>Сталевий кутник</small>
+          <span>Line 2</span>
+          <small>Steel Corner</small>
         </div>
 
         <div class="capacity-control">
@@ -2966,8 +2966,8 @@ footer a:hover {
 
       <article class="capacity-line-card" data-line="line3">
         <div class="capacity-line-name">
-          <span>Лінія 3</span>
-          <small>Сталевий профіль</small>
+          <span>Line 3</span>
+          <small>Steel Profile</small>
         </div>
 
         <div class="capacity-control">
@@ -3037,7 +3037,7 @@ footer a:hover {
   <div>
     <strong>Режим планування</strong>
     <span>
-      Оберіть логіку розподілу доступної виробничої потужності
+      Select how the available production capacity is allocated
     </span>
   </div>
 
@@ -3047,7 +3047,7 @@ footer a:hover {
       type="button"
       data-capacity-mode="queue"
     >
-      За чергою
+      Queue order
     </button>
 
     <button
@@ -3055,7 +3055,7 @@ footer a:hover {
       type="button"
       data-capacity-mode="priority"
     >
-      За пріоритетом
+      By priority
     </button>
   </div>
 </div>
@@ -3089,7 +3089,7 @@ footer a:hover {
       </article>
 
       <article class="capacity-summary-item">
-        <span>Замовлень із перенесенням</span>
+        <span>Замовлень delayed</span>
         <strong id="capacity-summary-delayed">0</strong>
       </article>
 
@@ -3111,7 +3111,7 @@ footer a:hover {
         <div class="capacity-utilization">
           <div class="capacity-utilization-row">
             <div class="capacity-utilization-label">
-              <span>Лінія 1</span>
+              <span>Line 1</span>
               <strong id="capacity-util-line1-text">0%</strong>
             </div>
 
@@ -3125,7 +3125,7 @@ footer a:hover {
 
           <div class="capacity-utilization-row">
             <div class="capacity-utilization-label">
-              <span>Лінія 2</span>
+              <span>Line 2</span>
               <strong id="capacity-util-line2-text">0%</strong>
             </div>
 
@@ -3139,7 +3139,7 @@ footer a:hover {
 
           <div class="capacity-utilization-row">
             <div class="capacity-utilization-label">
-              <span>Лінія 3</span>
+              <span>Line 3</span>
               <strong id="capacity-util-line3-text">0%</strong>
             </div>
 
@@ -3696,7 +3696,7 @@ footer a:hover {
           <tr>
             <td>${currentDate.toLocaleDateString("en-GB")}</td>
             <td>${currentDate.getFullYear()}</td>
-            <td>${currentDate.toLocaleDateString("uk-UA", { month: "long" })}</td>
+            <td>${currentdate.toLocaleDateString("en-GB", { month: "long" })}</td>
             <td>${currentDate.getDate()}</td>
             <td>${product[0]}</td>
             <td>${product[1]}</td>
@@ -3746,54 +3746,54 @@ footer a:hover {
   const capacityProducts = [
     {
       code: "ST-025",
-      name: "Сталева труба Ø25",
+      name: "Steel Pipe Ø25",
       line: "line1",
-      lineLabel: "Лінія 1"
+      lineLabel: "Line 1"
     },
     {
       code: "ST-040",
-      name: "Сталева труба Ø40",
+      name: "Steel Pipe Ø40",
       line: "line1",
-      lineLabel: "Лінія 1"
+      lineLabel: "Line 1"
     },
     {
       code: "AN-050",
-      name: "Сталевий кутник 50×50",
+      name: "Steel Corner 50×50",
       line: "line2",
-      lineLabel: "Лінія 2"
+      lineLabel: "Line 2"
     },
     {
       code: "AN-075",
-      name: "Сталевий кутник 75×75",
+      name: "Steel Corner 75×75",
       line: "line2",
-      lineLabel: "Лінія 2"
+      lineLabel: "Line 2"
     },
     {
       code: "PR-040",
-      name: "Сталевий профіль 40×40",
+      name: "Steel Profile 40×40",
       line: "line3",
-      lineLabel: "Лінія 3"
+      lineLabel: "Line 3"
     },
     {
       code: "PR-060",
-      name: "Сталевий профіль 60×60",
+      name: "Steel Profile 60×60",
       line: "line3",
-      lineLabel: "Лінія 3"
+      lineLabel: "Line 3"
     }
   ];
 
   const capacityPriorities = [
     {
       key: "normal",
-      label: "Звичайний"
+      label: "Normal"
     },
     {
       key: "high",
-      label: "Високий"
+      label: "High"
     },
     {
       key: "urgent",
-      label: "Терміновий"
+      label: "Urgent"
     }
   ];
 
@@ -3826,7 +3826,7 @@ footer a:hover {
   }
 
   function capacityFormatDate(date) {
-    return date.toLocaleDateString("uk-UA", {
+    return date.toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric"
@@ -3947,7 +3947,7 @@ footer a:hover {
     if (order.status === "on-time") {
       return `
         <span class="capacity-status capacity-status-ok">
-          Вчасно
+          On time
         </span>
       `;
     }
@@ -3955,7 +3955,7 @@ footer a:hover {
     if (order.status === "delayed") {
       return `
         <span class="capacity-status capacity-status-warning">
-          Перенесено
+          Delayed
         </span>
       `;
     }
@@ -3963,14 +3963,14 @@ footer a:hover {
     if (order.status === "critical") {
       return `
         <span class="capacity-status capacity-status-error">
-          Перевантаження
+          Overloaded
         </span>
       `;
     }
 
     return `
       <span class="capacity-status capacity-status-waiting">
-        Очікує
+        Waiting
       </span>
     `;
   }
@@ -4011,7 +4011,7 @@ footer a:hover {
               </td>
 
               <td>
-                ${order.quantity.toLocaleString("uk-UA")}
+                ${order.quantity.toLocaleString("en-US")}
               </td>
 
               <td>
@@ -4632,13 +4632,13 @@ footer a:hover {
 
     capacitySummaryOrders.textContent =
       capacityOrders.length
-        .toLocaleString("uk-UA");
+        .toLocaleString("en-US");
 
     capacitySummaryUnits.textContent =
-      totalUnits.toLocaleString("uk-UA");
+      totalUnits.toLocaleString("en-US");
 
     capacitySummaryDelayed.textContent =
-      delayedOrders.toLocaleString("uk-UA");
+      delayedOrders.toLocaleString("en-US");
 
     capacitySummaryLastDate.textContent =
       lastDate
@@ -4647,8 +4647,8 @@ footer a:hover {
 
     capacityOrdersStatus.textContent =
       capacityPlanningMode === "priority"
-        ? `Розраховано за пріоритетом • ${delayedOrders} із перенесенням`
-        : `Розраховано за чергою • ${delayedOrders} із перенесенням`;
+        ? `Calculated by priority • ${delayedOrders} delayed`
+        : `Calculated in queue order • ${delayedOrders} delayed`;
   }
 
   function capacityPlannerResetResult() {
@@ -4674,7 +4674,7 @@ footer a:hover {
 
     valueElement.textContent =
       capacityPlannerValues[line]
-        .toLocaleString("uk-UA");
+        .toLocaleString("en-US");
   }
 
   capacityControlButtons.forEach(button => {
@@ -4768,7 +4768,7 @@ footer a:hover {
 
         capacityCalculateButton.disabled = false;
         capacityCalculateButton.textContent =
-          "↻ Перерахувати виробничий план";
+          "↻ Recalculate production plan";
 
         capacityOutput.dataset.calculated =
           "true";

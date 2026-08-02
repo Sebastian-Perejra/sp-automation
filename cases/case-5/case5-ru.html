@@ -1,1 +1,193 @@
+<section class="case5" id="components-planning-case">
+  <div class="case5-header">
+    <div class="case5-kicker">Реальный кейс №5</div>
 
+    <h2>Автоматический расчёт потребности в комплектующих</h2>
+
+    <p class="case5-subtitle">
+      Производственное предприятие ежемесячно планирует выпуск нескольких
+      видов оборудования. Раньше сотрудники вручную рассчитывали количество
+      двигателей, датчиков, контроллеров, редукторов и других комплектующих.
+      После автоматизации расчёт стал занимать несколько секунд вместо
+      нескольких часов.
+    </p>
+  </div>
+
+  <div class="case5-problem-solution">
+    <article class="case5-info-card case5-problem">
+      <span class="case5-info-label">ПРОБЛЕМА</span>
+
+      <h3>Сложные расчёты и ошибки</h3>
+
+      <p>
+        Специалисты вручную работали с десятками спецификаций, сравнивали
+        складские остатки, рассчитывали дефицит и формировали заявки
+        поставщикам.
+      </p>
+    </article>
+
+    <article class="case5-info-card case5-solution">
+      <span class="case5-info-label">РЕШЕНИЕ</span>
+
+      <h3>Автоматическое планирование</h3>
+
+      <p>
+        Система автоматически анализирует план производства, определяет
+        необходимое количество компонентов, сравнивает результаты с остатками
+        на складе и формирует перечень позиций для закупки.
+      </p>
+    </article>
+  </div>
+
+  <div class="case5-calculate-area">
+    <button
+      class="case5-calculate-button"
+      id="case5-calculate-button"
+      type="button"
+    >
+      ⚙ Рассчитать потребность в комплектующих
+    </button>
+
+    <div class="case5-loader" id="case5-loader">
+      <span class="case5-spinner"></span>
+
+      <span id="case5-loader-text">
+        Анализ заказов и спецификаций BOM...
+      </span>
+    </div>
+  </div>
+
+  <div class="case5-results" id="case5-results">
+
+    <div class="case5-summary">
+      <article class="case5-summary-card">
+        <span>ПРОИЗВОДСТВО</span>
+        <strong id="case5-total-machines">0</strong>
+        <small>Всего единиц оборудования</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>ПОТРЕБНОСТЬ</span>
+        <strong id="case5-total-need">0</strong>
+        <small>Необходимые комплектующие</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>СКЛАД</span>
+        <strong id="case5-total-stock">0</strong>
+        <small>Используемые остатки</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>ЗАКУПКА</span>
+        <strong id="case5-total-buy">0</strong>
+        <small>Необходимо заказать</small>
+      </article>
+    </div>
+
+    <div class="case5-grid">
+
+      <section class="case5-orders-panel">
+
+        <div class="case5-panel-head">
+          <strong>План производства</strong>
+          <span>Введите необходимое количество оборудования</span>
+        </div>
+
+        <div class="case5-machines">
+
+          <article class="case5-machine-card">
+            <div class="case5-machine-code">SP100</div>
+
+            <strong>Упаковочная линия</strong>
+
+            <small>
+              Электродвигатели, датчики, пневматика
+            </small>
+
+            <input id="case5-machine-sp100" type="number" min="0" value="10">
+          </article>
+
+          <article class="case5-machine-card">
+            <div class="case5-machine-code">FM20</div>
+
+            <strong>Фрезерный станок</strong>
+
+            <small>
+              Редукторы, шпиндели, система ЧПУ
+            </small>
+
+            <input id="case5-machine-fm20" type="number" min="0" value="5">
+          </article>
+
+          <article class="case5-machine-card">
+            <div class="case5-machine-code">ML5</div>
+
+            <strong>Маркировочная система</strong>
+
+            <small>
+              Контроллеры, печатающие модули
+            </small>
+
+            <input id="case5-machine-ml5" type="number" min="0" value="3">
+          </article>
+
+        </div>
+
+      </section>
+
+      <section class="case5-parts-panel">
+
+        <div class="case5-panel-head">
+          <strong>Комплектующие и складские остатки</strong>
+
+          <span>
+            Система автоматически определяет дефицит
+          </span>
+        </div>
+
+        <div
+          class="case5-parts-list"
+          id="case5-parts-list"
+        ></div>
+
+      </section>
+
+    </div>
+
+    <div class="case5-flow">
+
+      <article>
+        <span>1</span>
+        <strong>Заказ</strong>
+        <small>Получение плана производства</small>
+      </article>
+
+      <article>
+        <span>2</span>
+        <strong>BOM</strong>
+        <small>Анализ спецификаций</small>
+      </article>
+
+      <article>
+        <span>3</span>
+        <strong>Склад</strong>
+        <small>Проверка остатков</small>
+      </article>
+
+      <article>
+        <span>4</span>
+        <strong>Закупка</strong>
+        <small>Формирование заявки</small>
+      </article>
+
+    </div>
+
+  </div>
+
+  <div class="case5-cta">
+    <a href="contacts-ru.html">
+      Хочу автоматизировать планирование закупок
+    </a>
+  </div>
+</section>

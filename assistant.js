@@ -477,37 +477,3 @@ document.addEventListener("DOMContentLoaded", () => {
       link.removeAttribute("aria-current");
     }
   });
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("page-loaded");
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    link.addEventListener("click", event => {
-      const href = link.getAttribute("href");
-
-      if (
-        !href ||
-        href.startsWith("#") ||
-        href.startsWith("mailto:") ||
-        href.startsWith("tel:") ||
-        link.target === "_blank"
-      ) {
-        return;
-      }
-
-      const destination = new URL(href, window.location.href);
-
-      if (destination.origin !== window.location.origin) {
-        return;
-      }
-
-      event.preventDefault();
-
-      document.body.classList.remove("page-loaded");
-      document.body.classList.add("page-leaving");
-
-      setTimeout(() => {
-        window.location.href = destination.href;
-      }, 180);
-    });
-  });
-});

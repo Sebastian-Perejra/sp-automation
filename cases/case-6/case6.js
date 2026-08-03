@@ -1,176 +1,4 @@
 (() => {
-    const case6Root =
-    document.getElementById("powerbi-management-case");
-
-  const case6Lang =
-    case6Root?.dataset.case6Lang || "uk";
-
-  const case6Text = {
-    uk: {
-      allRegions: "Усі регіони",
-      allChannels: "Усі канали",
-      allManagers: "Усі менеджери",
-      allCategories: "Усі категорії",
-
-      noComparison:
-        "немає бази для порівняння",
-
-      previousYear:
-        "до попереднього року",
-
-      planCompleted:
-        "план виконано",
-
-      needsAttention:
-        "потребує уваги",
-
-      criticalDeviation:
-        "критичне відхилення",
-
-      revenue:
-        "Виручка",
-
-      profit:
-        "Прибуток",
-
-      margin:
-        "Маржа",
-
-      quantity:
-        "Кількість",
-
-      year:
-        "Рік",
-
-      quarter:
-        "Квартал",
-
-      region:
-        "Регіон",
-
-      channel:
-        "Канал",
-
-      manager:
-        "Менеджер",
-
-      category:
-        "Категорія",
-
-      operations:
-        "операцій",
-
-      updatedModel:
-        t.updatedModel,
-
-      updatingModel:
-        t.updatingModel,
-
-      reportsPerYear:
-        "год/рік",
-        operations:
-  "операцій",
-
-hoursPerYear:
-  "год/рік",
-
-buildMessages: [
-  "Підключення до ERP та перевірка шлюзу даних…",
-  "Завантаження таблиць продажів, клієнтів і товарів…",
-  "Очищення та перетворення даних у Power Query…",
-  "Оновлення зв’язків моделі даних…",
-  "Перерахунок DAX-показників і KPI…",
-  "Оновлення візуалізацій і перехресної фільтрації…"
-]
-    },
-
-    ru: {
-      allRegions: "Все регионы",
-      allChannels: "Все каналы",
-      allManagers: "Все менеджеры",
-      allCategories: "Все категории",
-
-      noComparison:
-        "нет базы для сравнения",
-
-      previousYear:
-        "к предыдущему году",
-
-      planCompleted:
-        "план выполнен",
-
-      needsAttention:
-        "требует внимания",
-
-      criticalDeviation:
-        "критическое отклонение",
-
-      revenue:
-        "Выручка",
-
-      profit:
-        "Прибыль",
-
-      margin:
-        "Маржа",
-
-      quantity:
-        "Количество",
-
-      year:
-        "Год",
-
-      quarter:
-        "Квартал",
-
-      region:
-        "Регион",
-
-      channel:
-        "Канал",
-
-      manager:
-        "Менеджер",
-
-      category:
-        "Категория",
-
-      operations:
-        "операций",
-
-      updatedModel:
-        "↻ Обновить модель ещё раз",
-
-      updatingModel:
-        "Обновление модели…",
-
-      reportsPerYear:
-        "ч/год",
-        operations:
-  "операцій",
-
-hoursPerYear:
-  "${t.hoursPerYear}",
-
-operations:
-  "операций",
-
-hoursPerYear:
-  "ч/год",
-
-buildMessages: [
-  "Подключение к ERP и проверка шлюза данных…",
-  "Загрузка таблиц продаж, клиентов и товаров…",
-  "Очистка и преобразование данных в Power Query…",
-  "Обновление связей модели данных…",
-  "Перерасчёт DAX-показателей и KPI…",
-  "Обновление визуализаций и перекрёстной фильтрации…"
-]
-    }
-  };
-
-  const t =
-    case6Text[case6Lang] || case6Text.uk;
   const $ = (id) => document.getElementById(id);
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
@@ -1095,7 +923,7 @@ buildMessages: [
           data.map((row) => row.region)
         )
       ],
-      t.allRegions
+      "Усі регіони"
     );
 
     fillSelect(
@@ -1105,7 +933,7 @@ buildMessages: [
           data.map((row) => row.channel)
         )
       ],
-      t.allChannels
+      "Усі канали"
     );
 
     fillSelect(
@@ -1115,7 +943,7 @@ buildMessages: [
           data.map((row) => row.manager)
         )
       ],
-      t.allManagers
+      "Усі менеджери"
     );
 
     fillSelect(
@@ -1125,7 +953,7 @@ buildMessages: [
           data.map((row) => row.category)
         )
       ],
-      t.allCategories
+      "Усі категорії"
     );
   }
 
@@ -1401,35 +1229,35 @@ buildMessages: [
     $("case6-kpi-revenue-change")
       .textContent =
         revenueChange === null
-          ? t.noComparison
+          ? "немає бази для порівняння"
           : `${revenueChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(revenueChange)
-            )} ${t.previousYear}`;
+            )} до попереднього року`;
 
     $("case6-kpi-profit-change")
       .textContent =
         profitChange === null
-          ? t.noComparison
+          ? "немає бази для порівняння"
           : `${profitChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(profitChange)
-            )} ${t.previousYear}`;
+            )} до попереднього року`;
 
     $("case6-kpi-margin-change")
       .textContent =
         marginChange === null
-          ? ? t.noComparison
+          ? "немає бази для порівняння"
           : `${marginChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(marginChange),
               2
-            )} ${t.previousYear}`;
+            )} до попереднього року`;
 
     $("case6-kpi-plan-status")
       .textContent =
         summary.planCompletion >= 1
           ? "план виконано"
-: summary.planCompletion >= 0.9
-  ? "потребує уваги"
-  : "критичне відхилення";
+          : summary.planCompletion >= 0.9
+            ? "потребує уваги"
+            : "критичне відхилення";
   }
 
   function renderExecutiveSummary(rows) {
@@ -2156,8 +1984,8 @@ buildMessages: [
   function renderDetails(rows) {
     detailCount.textContent =
       `${formatNumber(
-  rows.length
-)} ${t.operations}`;
+        rows.length
+      )} операцій`;
 
     detailBody.innerHTML =
       rows
@@ -2377,19 +2205,19 @@ buildMessages: [
       .textContent =
         `${formatNumber(
           before
-        )} ${t.hoursPerYear}`;
+        )} год/рік`;
 
     $("case6-time-after")
       .textContent =
         `${formatNumber(
           after
-        )} ${t.hoursPerYear}`;
+        )} год/рік`;
 
     $("case6-time-saving")
       .textContent =
         `${formatNumber(
           saving
-        )} ${t.hoursPerYear}`;
+        )} год/рік`;
   }
 
   function syncFilterControls() {
@@ -2439,7 +2267,14 @@ buildMessages: [
 
     loader.classList.add("active");
 
-    const messages = t.buildMessages;
+    const messages = [
+      "Підключення до ERP та перевірка шлюзу даних…",
+      "Завантаження таблиць продажів, клієнтів і товарів…",
+      "Очищення та перетворення даних у Power Query…",
+      "Оновлення зв’язків моделі даних…",
+      "Перерахунок DAX-показників і KPI…",
+      "Оновлення візуалізацій і перехресної фільтрації…"
+    ];
 
     for (
       let index = 0;
@@ -2482,7 +2317,7 @@ buildMessages: [
     buildButton.disabled = false;
 
     buildButton.textContent =
-      t.updatedModel;
+      "↻ Оновити модель ще раз";
   }
 
   [

@@ -1,4 +1,142 @@
 (() => {
+    const case6Root =
+    document.getElementById("powerbi-management-case");
+
+  const case6Lang =
+    case6Root?.dataset.case6Lang || "uk";
+
+  const case6Text = {
+    uk: {
+      allRegions: "Усі регіони",
+      allChannels: "Усі канали",
+      allManagers: "Усі менеджери",
+      allCategories: "Усі категорії",
+
+      noComparison:
+        "немає бази для порівняння",
+
+      previousYear:
+        "до попереднього року",
+
+      planCompleted:
+        "план виконано",
+
+      needsAttention:
+        "потребує уваги",
+
+      criticalDeviation:
+        "критичне відхилення",
+
+      revenue:
+        "Виручка",
+
+      profit:
+        "Прибуток",
+
+      margin:
+        "Маржа",
+
+      quantity:
+        "Кількість",
+
+      year:
+        "Рік",
+
+      quarter:
+        "Квартал",
+
+      region:
+        "Регіон",
+
+      channel:
+        "Канал",
+
+      manager:
+        "Менеджер",
+
+      category:
+        "Категорія",
+
+      operations:
+        "операцій",
+
+      updatedModel:
+        "↻ Оновити модель ще раз",
+
+      updatingModel:
+        "Оновлення моделі…",
+
+      reportsPerYear:
+        "год/рік"
+    },
+
+    ru: {
+      allRegions: "Все регионы",
+      allChannels: "Все каналы",
+      allManagers: "Все менеджеры",
+      allCategories: "Все категории",
+
+      noComparison:
+        "нет базы для сравнения",
+
+      previousYear:
+        "к предыдущему году",
+
+      planCompleted:
+        "план выполнен",
+
+      needsAttention:
+        "требует внимания",
+
+      criticalDeviation:
+        "критическое отклонение",
+
+      revenue:
+        "Выручка",
+
+      profit:
+        "Прибыль",
+
+      margin:
+        "Маржа",
+
+      quantity:
+        "Количество",
+
+      year:
+        "Год",
+
+      quarter:
+        "Квартал",
+
+      region:
+        "Регион",
+
+      channel:
+        "Канал",
+
+      manager:
+        "Менеджер",
+
+      category:
+        "Категория",
+
+      operations:
+        "операций",
+
+      updatedModel:
+        "↻ Обновить модель ещё раз",
+
+      updatingModel:
+        "Обновление модели…",
+
+      reportsPerYear:
+        "ч/год"
+    }
+  };
+
+  const t =
+    case6Text[case6Lang] || case6Text.uk;
   const $ = (id) => document.getElementById(id);
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 

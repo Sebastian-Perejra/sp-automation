@@ -1061,7 +1061,7 @@
           data.map((row) => row.region)
         )
       ],
-      "Усі регіони"
+      t.allRegions
     );
 
     fillSelect(
@@ -1071,7 +1071,7 @@
           data.map((row) => row.channel)
         )
       ],
-      "Усі канали"
+      t.allChannels
     );
 
     fillSelect(
@@ -1081,7 +1081,7 @@
           data.map((row) => row.manager)
         )
       ],
-      "Усі менеджери"
+      t.allManagers
     );
 
     fillSelect(
@@ -1091,7 +1091,7 @@
           data.map((row) => row.category)
         )
       ],
-      "Усі категорії"
+      t.allCategories
     );
   }
 
@@ -1367,35 +1367,35 @@
     $("case6-kpi-revenue-change")
       .textContent =
         revenueChange === null
-          ? "немає бази для порівняння"
+          ? t.noComparison
           : `${revenueChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(revenueChange)
-            )} до попереднього року`;
+            )} ${t.previousYear}`;
 
     $("case6-kpi-profit-change")
       .textContent =
         profitChange === null
-          ? "немає бази для порівняння"
+          ? t.noComparison
           : `${profitChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(profitChange)
-            )} до попереднього року`;
+            )} ${t.previousYear}`;
 
     $("case6-kpi-margin-change")
       .textContent =
         marginChange === null
-          ? "немає бази для порівняння"
+          ? ? t.noComparison
           : `${marginChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(marginChange),
               2
-            )} до попереднього року`;
+            )} ${t.previousYear}`;
 
     $("case6-kpi-plan-status")
       .textContent =
         summary.planCompletion >= 1
           ? "план виконано"
-          : summary.planCompletion >= 0.9
-            ? "потребує уваги"
-            : "критичне відхилення";
+: summary.planCompletion >= 0.9
+  ? "потребує уваги"
+  : "критичне відхилення";
   }
 
   function renderExecutiveSummary(rows) {

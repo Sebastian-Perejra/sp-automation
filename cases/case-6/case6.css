@@ -1574,6 +1574,244 @@
   transform: translateY(-1px);
 }
 
+.case6-powerbi-shell {
+  position: relative;
+  border: 1px solid rgba(34, 35, 38, 0.2);
+  background: #ececec;
+  box-shadow:
+    0 35px 90px rgba(25, 24, 22, 0.2),
+    0 8px 24px rgba(25, 24, 22, 0.1);
+}
+
+.case6-powerbi-shell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 190px;
+  right: 0;
+  z-index: 5;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    #f2c811,
+    #ffd84b,
+    #d7a900
+  );
+}
+
+.case6-sidebar {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(242, 200, 17, 0.13),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #26272b 0%,
+      #17181b 100%
+    );
+}
+
+.case6-brand {
+  padding-top: 14px;
+}
+
+.case6-brand-icon {
+  box-shadow:
+    0 8px 18px rgba(242, 200, 17, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.case6-menu-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.case6-menu-button::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: #f2c811;
+  opacity: 0;
+  transform: scaleY(0);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.case6-menu-button:hover::before,
+.case6-menu-button.active::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.case6-menu-button.active {
+  background:
+    linear-gradient(
+      135deg,
+      #f2c811,
+      #e4b600
+    );
+  box-shadow:
+    0 8px 18px rgba(242, 200, 17, 0.19);
+}
+
+.case6-report {
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(47, 128, 237, 0.08),
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      #f6f6f6,
+      #ececec
+    );
+}
+
+.case6-report-header {
+  position: relative;
+  padding: 4px 0 15px;
+  border-bottom: 1px solid #ddd7cf;
+}
+
+.case6-report-header h3 {
+  font-size: 24px;
+  letter-spacing: -0.035em;
+}
+
+.case6-refresh-info {
+  box-shadow:
+    0 5px 14px rgba(30, 28, 25, 0.06);
+}
+
+.case6-filter {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.case6-filter:hover,
+.case6-filter:focus-within {
+  border-color: #d2ac00;
+  box-shadow:
+    0 6px 16px rgba(53, 48, 35, 0.08);
+  transform: translateY(-1px);
+}
+
+.case6-kpi {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.case6-kpi::after {
+  content: "";
+  position: absolute;
+  top: -42px;
+  right: -42px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(242, 200, 17, 0.12),
+      transparent 70%
+    );
+}
+
+.case6-kpi:hover {
+  z-index: 2;
+  border-color: #d8c988;
+  box-shadow:
+    0 14px 30px rgba(40, 38, 35, 0.12);
+  transform: translateY(-4px);
+}
+
+.case6-kpi strong {
+  position: relative;
+  z-index: 1;
+  font-size: 19px;
+}
+
+.case6-executive-summary {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 8px 22px rgba(177, 137, 0, 0.08);
+}
+
+.case6-executive-summary::after {
+  content: "AI INSIGHT";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  color: rgba(125, 94, 0, 0.17);
+  font-family: var(--font-tech);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.case6-visual,
+.case6-alerts-card,
+.case6-decomposition-card,
+.case6-detail-table-section {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.case6-visual:hover,
+.case6-alerts-card:hover,
+.case6-decomposition-card:hover,
+.case6-detail-table-section:hover {
+  border-color: #d2cbc2;
+  box-shadow:
+    0 15px 32px rgba(38, 35, 31, 0.09);
+  transform: translateY(-2px);
+}
+
+.case6-visual-head strong {
+  font-size: 11px;
+}
+
+.case6-year-column i,
+.case6-bar-fill {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 5px 12px rgba(47, 128, 237, 0.12);
+}
+
+.case6-what-if {
+  box-shadow:
+    0 12px 28px rgba(47, 128, 237, 0.08);
+}
+
+.case6-slider-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.case6-slider-card:hover {
+  box-shadow:
+    0 9px 20px rgba(47, 128, 237, 0.1);
+  transform: translateY(-2px);
+}
 @media (max-width: 1100px) {
   .case6 {
     padding: 32px;

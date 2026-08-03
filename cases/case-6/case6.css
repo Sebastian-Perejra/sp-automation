@@ -230,13 +230,21 @@
 }
 
 .case6-raw-badges span {
+  display: inline-flex;
+  width: 58px;
+  height: 58px;
   margin: 0;
-  padding: 6px 9px;
-  border-radius: 999px;
+  padding: 6px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   background: #2d2b29;
   color: #fff;
   font-family: var(--font-tech);
   font-size: 8px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
 }
 
 .case6-table-wrap {

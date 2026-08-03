@@ -61,13 +61,27 @@
         "операцій",
 
       updatedModel:
-        "↻ Оновити модель ще раз",
+        t.updatedModel,
 
       updatingModel:
-        "Оновлення моделі…",
+        t.updatingModel,
 
       reportsPerYear:
-        "год/рік"
+        "год/рік",
+        operations:
+  "операцій",
+
+hoursPerYear:
+  "год/рік",
+
+buildMessages: [
+  "Підключення до ERP та перевірка шлюзу даних…",
+  "Завантаження таблиць продажів, клієнтів і товарів…",
+  "Очищення та перетворення даних у Power Query…",
+  "Оновлення зв’язків моделі даних…",
+  "Перерахунок DAX-показників і KPI…",
+  "Оновлення візуалізацій і перехресної фільтрації…"
+]
     },
 
     ru: {
@@ -131,7 +145,27 @@
         "Обновление модели…",
 
       reportsPerYear:
-        "ч/год"
+        "ч/год",
+        operations:
+  "операцій",
+
+hoursPerYear:
+  "${t.hoursPerYear}",
+
+operations:
+  "операций",
+
+hoursPerYear:
+  "ч/год",
+
+buildMessages: [
+  "Подключение к ERP и проверка шлюза данных…",
+  "Загрузка таблиц продаж, клиентов и товаров…",
+  "Очистка и преобразование данных в Power Query…",
+  "Обновление связей модели данных…",
+  "Перерасчёт DAX-показателей и KPI…",
+  "Обновление визуализаций и перекрёстной фильтрации…"
+]
     }
   };
 
@@ -2122,8 +2156,8 @@
   function renderDetails(rows) {
     detailCount.textContent =
       `${formatNumber(
-        rows.length
-      )} операцій`;
+  rows.length
+)} ${t.operations}`;
 
     detailBody.innerHTML =
       rows
@@ -2343,19 +2377,19 @@
       .textContent =
         `${formatNumber(
           before
-        )} год/рік`;
+        )} ${t.hoursPerYear}`;
 
     $("case6-time-after")
       .textContent =
         `${formatNumber(
           after
-        )} год/рік`;
+        )} ${t.hoursPerYear}`;
 
     $("case6-time-saving")
       .textContent =
         `${formatNumber(
           saving
-        )} год/рік`;
+        )} ${t.hoursPerYear}`;
   }
 
   function syncFilterControls() {
@@ -2405,14 +2439,7 @@
 
     loader.classList.add("active");
 
-    const messages = [
-      "Підключення до ERP та перевірка шлюзу даних…",
-      "Завантаження таблиць продажів, клієнтів і товарів…",
-      "Очищення та перетворення даних у Power Query…",
-      "Оновлення зв’язків моделі даних…",
-      "Перерахунок DAX-показників і KPI…",
-      "Оновлення візуалізацій і перехресної фільтрації…"
-    ];
+    const messages = t.buildMessages;
 
     for (
       let index = 0;
@@ -2455,7 +2482,7 @@
     buildButton.disabled = false;
 
     buildButton.textContent =
-      "↻ Оновити модель ще раз";
+      t.updatedModel;
   }
 
   [

@@ -1,1 +1,896 @@
+<section class="case6" id="powerbi-management-case">
+  <div class="case6-header">
+    <div class="case6-kicker">Реальный кейс №6</div>
 
+    <h2>
+  Автоматизация управленческой отчётности в Power&nbsp;BI
+   </h2>>
+
+    <p class="case6-subtitle">
+      Компанія виробляє та продає соки, мінеральну воду, лимонади,
+      холодний чай та енергетичні напої. Дані про продажі зберігаються
+      в обліковій системі — наприклад, 1С, SAP або іншій ERP.
+      Раніше працівник щомісяця вручну вивантажував дані в Excel,
+      доповнював старий файл, перевіряв формули, оновлював зведені
+      таблиці та формував нову версію звіту для керівництва.
+    </p>
+  </div>
+
+  <div class="case6-problem-solution">
+    <article class="case6-info-card case6-problem">
+      <span class="case6-info-label">Проблема</span>
+
+      <h3>Управлінський звіт застарівав ще до моменту відправлення</h3>
+
+      <p>
+        Дані вручну переносилися з облікової системи до Excel.
+        Кожне оновлення займало багато часу, залежало від конкретного
+        працівника та створювало ризик помилок у формулах, діапазонах,
+        зведених таблицях і графіках.
+      </p>
+
+      <ul>
+        <li>кілька версій одного звіту;</li>
+        <li>ручне копіювання нових даних;</li>
+        <li>затримка управлінської інформації;</li>
+        <li>неможливість швидко змінити аналітичний зріз;</li>
+        <li>залежність від працівника, який готує Excel-файл.</li>
+      </ul>
+    </article>
+
+    <article class="case6-info-card case6-solution">
+      <span class="case6-info-label">РЕШЕНИЕ</span>
+
+      <h3>Автоматичне оновлення моделі та інтерактивний Power BI-звіт</h3>
+
+      <p>
+        Power BI підключається до джерела через конектор, API,
+        ODBC-підключення або безпосередньо до бази даних.
+        Якщо система розташована у внутрішній мережі компанії,
+        використовується локальний шлюз даних — On-premises Data Gateway.
+      </p>
+
+      <ul>
+        <li>автоматичне оновлення даних за розкладом;</li>
+        <li>єдина модель для всіх користувачів;</li>
+        <li>фільтри, слайсери та перехресна фільтрація;</li>
+        <li>план-факт аналіз і порогові показники;</li>
+        <li>доступ керівництва до актуальних цифр щодня.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="case6-before-after">
+    <article class="case6-before-card">
+      <span class="case6-stage-label">Было</span>
+
+      <strong>Excel-файл, який оновлюється вручну</strong>
+
+      <div class="case6-before-details">
+        <span>500 рядків продажів</span>
+        <span>2024–2026 роки</span>
+        <span>25 колонок</span>
+        <span>кілька версій файлу</span>
+        <span>до 15 годин ручної роботи щомісяця</span>
+      </div>
+    </article>
+
+    <div class="case6-transform-arrow">
+      <span>→</span>
+    </div>
+
+    <article class="case6-after-card">
+      <span class="case6-stage-label">Стало</span>
+
+      <strong>Єдиний інтерактивний Power BI-звіт</strong>
+
+      <div class="case6-before-details">
+        <span>автоматичне оновлення</span>
+        <span>одна актуальна версія</span>
+        <span>фільтри та деталізація</span>
+        <span>щоденний доступ керівництва</span>
+        <span>до 156 годин економії на рік</span>
+      </div>
+    </article>
+  </div>
+
+  <section class="case6-raw-panel" id="case6-raw-panel">
+    <div class="case6-panel-head">
+      <div>
+        <strong>Початковий масив продажів</strong>
+
+        <span>
+          500 демонстраційних операцій за 2024–2026 роки
+        </span>
+      </div>
+
+      <div class="case6-raw-badges">
+        <span>500 рядків</span>
+        <span>25 колонок</span>
+        <span>3 роки</span>
+      </div>
+    </div>
+
+    <div class="case6-table-wrap">
+      <table class="case6-raw-table">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Рік</th>
+            <th>Квартал</th>
+            <th>Місяць</th>
+            <th>Замовлення</th>
+            <th>Регіон</th>
+            <th>Місто</th>
+            <th>Канал</th>
+            <th>Менеджер</th>
+            <th>Клієнт</th>
+            <th>Сегмент</th>
+            <th>Категорія</th>
+            <th>Бренд</th>
+            <th>Товар</th>
+            <th>Упаковка</th>
+            <th>Кількість</th>
+            <th>Ціна</th>
+            <th>Виручка</th>
+            <th>Собівартість</th>
+            <th>Валовий прибуток</th>
+            <th>Маржинальність</th>
+            <th>Знижка</th>
+            <th>План</th>
+            <th>Виконання плану</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+
+        <tbody id="case6-raw-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="case6-build-area">
+    <button
+      class="case6-build-button"
+      id="case6-build-button"
+      type="button"
+    >
+      ⚡ Оновити модель Power BI
+    </button>
+
+    <div class="case6-loader" id="case6-loader">
+      <span class="case6-spinner"></span>
+
+      <span id="case6-loader-text">
+        Підключення до джерела даних…
+      </span>
+    </div>
+
+    <div class="case6-pipeline" id="case6-pipeline">
+      <div class="case6-pipeline-step" data-case6-step="0">
+        <span>1</span>
+        <strong>Підключення до ERP</strong>
+      </div>
+
+      <div class="case6-pipeline-step" data-case6-step="1">
+        <span>2</span>
+        <strong>Завантаження таблиць</strong>
+      </div>
+
+      <div class="case6-pipeline-step" data-case6-step="2">
+        <span>3</span>
+        <strong>Power Query</strong>
+      </div>
+
+      <div class="case6-pipeline-step" data-case6-step="3">
+        <span>4</span>
+        <strong>Модель даних</strong>
+      </div>
+
+      <div class="case6-pipeline-step" data-case6-step="4">
+        <span>5</span>
+        <strong>DAX-показники</strong>
+      </div>
+
+      <div class="case6-pipeline-step" data-case6-step="5">
+        <span>6</span>
+        <strong>Візуалізації</strong>
+      </div>
+    </div>
+  </div>
+
+  <section class="case6-dashboard" id="case6-dashboard">
+    <div class="case6-powerbi-shell">
+      <aside class="case6-sidebar">
+        <div class="case6-brand">
+          <span class="case6-brand-icon">P</span>
+
+          <div>
+            <strong>Power BI</strong>
+            <small>Executive Analytics</small>
+          </div>
+        </div>
+
+        <nav class="case6-menu">
+          <button
+            class="case6-menu-button active"
+            type="button"
+            data-case6-page="overview"
+          >
+            <span>▣</span>
+            Огляд
+          </button>
+
+          <button
+            class="case6-menu-button"
+            type="button"
+            data-case6-page="sales"
+          >
+            <span>▥</span>
+            Продажі
+          </button>
+
+          <button
+            class="case6-menu-button"
+            type="button"
+            data-case6-page="products"
+          >
+            <span>◉</span>
+            Товари
+          </button>
+
+          <button
+            class="case6-menu-button"
+            type="button"
+            data-case6-page="managers"
+          >
+            <span>♙</span>
+            Менеджери
+          </button>
+
+          <button
+            class="case6-menu-button"
+            type="button"
+            data-case6-page="customers"
+          >
+            <span>◇</span>
+            Клієнти
+          </button>
+
+          <button
+            class="case6-menu-button"
+            type="button"
+            data-case6-page="risks"
+          >
+            <span>⚠</span>
+            Ризики
+          </button>
+        </nav>
+
+        <button
+          class="case6-reset-button"
+          id="case6-reset-filters"
+          type="button"
+        >
+          Скинути всі фільтри
+        </button>
+      </aside>
+
+      <div class="case6-report">
+        <header class="case6-report-header">
+          <div>
+            <span class="case6-report-kicker">
+              Executive management report
+            </span>
+
+            <h3 id="case6-report-title">
+              Огляд для керівництва
+            </h3>
+          </div>
+
+          <div class="case6-refresh-info">
+            <span class="case6-refresh-dot"></span>
+
+            <div>
+              <strong>Дані оновлено</strong>
+              <small>сьогодні о 07:00</small>
+            </div>
+          </div>
+        </header>
+
+        <div class="case6-filter-bar">
+          <label class="case6-filter">
+            <span>Рік</span>
+
+            <select id="case6-filter-year">
+              <option value="all">Усі роки</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+            </select>
+          </label>
+
+          <label class="case6-filter">
+            <span>Квартал</span>
+
+            <select id="case6-filter-quarter">
+              <option value="all">Усі квартали</option>
+              <option value="Q1">Q1</option>
+              <option value="Q2">Q2</option>
+              <option value="Q3">Q3</option>
+              <option value="Q4">Q4</option>
+            </select>
+          </label>
+
+          <label class="case6-filter">
+            <span>Регіон</span>
+
+            <select id="case6-filter-region">
+              <option value="all">Усі регіони</option>
+            </select>
+          </label>
+
+          <label class="case6-filter">
+            <span>Канал продажів</span>
+
+            <select id="case6-filter-channel">
+              <option value="all">Усі канали</option>
+            </select>
+          </label>
+
+          <label class="case6-filter">
+            <span>Менеджер</span>
+
+            <select id="case6-filter-manager">
+              <option value="all">Усі менеджери</option>
+            </select>
+          </label>
+
+          <label class="case6-filter">
+            <span>Категорія</span>
+
+            <select id="case6-filter-category">
+              <option value="all">Усі категорії</option>
+            </select>
+          </label>
+        </div>
+
+        <div
+          class="case6-active-filters"
+          id="case6-active-filters"
+        ></div>
+
+        <div class="case6-metric-switch">
+          <button
+            class="case6-metric-button active"
+            type="button"
+            data-case6-metric="revenue"
+          >
+            Виручка
+          </button>
+
+          <button
+            class="case6-metric-button"
+            type="button"
+            data-case6-metric="profit"
+          >
+            Прибуток
+          </button>
+
+          <button
+            class="case6-metric-button"
+            type="button"
+            data-case6-metric="quantity"
+          >
+            Кількість
+          </button>
+
+          <button
+            class="case6-metric-button"
+            type="button"
+            data-case6-metric="margin"
+          >
+            Маржа
+          </button>
+        </div>
+
+        <div class="case6-kpis">
+          <article class="case6-kpi">
+            <span>Виручка</span>
+
+            <strong id="case6-kpi-revenue">0</strong>
+
+            <small id="case6-kpi-revenue-change">
+              —
+            </small>
+          </article>
+
+          <article class="case6-kpi">
+            <span>Валовий прибуток</span>
+
+            <strong id="case6-kpi-profit">0</strong>
+
+            <small id="case6-kpi-profit-change">
+              —
+            </small>
+          </article>
+
+          <article class="case6-kpi">
+            <span>Маржинальність</span>
+
+            <strong id="case6-kpi-margin">0%</strong>
+
+            <small id="case6-kpi-margin-change">
+              —
+            </small>
+          </article>
+
+          <article class="case6-kpi">
+            <span>Виконання плану</span>
+
+            <strong id="case6-kpi-plan">0%</strong>
+
+            <small id="case6-kpi-plan-status">
+              —
+            </small>
+          </article>
+
+          <article class="case6-kpi">
+            <span>Продано одиниць</span>
+
+            <strong id="case6-kpi-quantity">0</strong>
+
+            <small>за вибраним зрізом</small>
+          </article>
+
+          <article class="case6-kpi">
+            <span>Активні клієнти</span>
+
+            <strong id="case6-kpi-customers">0</strong>
+
+            <small>унікальних покупців</small>
+          </article>
+        </div>
+
+        <article class="case6-executive-summary">
+          <div class="case6-summary-icon">✦</div>
+
+          <div>
+            <span>Автоматичний управлінський висновок</span>
+
+            <p id="case6-executive-text">
+              Після застосування фільтрів система автоматично пояснить,
+              що відбулося з виручкою, прибутком, маржинальністю,
+              регіонами та категоріями.
+            </p>
+          </div>
+        </article>
+
+        <div class="case6-dashboard-grid">
+          <article class="case6-visual case6-year-chart-card">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Динаміка за роками</strong>
+                <span>2024 проти 2025 проти 2026</span>
+              </div>
+
+              <button
+                class="case6-visual-reset"
+                type="button"
+                data-case6-clear="year"
+              >
+                Очистити
+              </button>
+            </div>
+
+            <div
+              class="case6-year-chart"
+              id="case6-year-chart"
+            ></div>
+          </article>
+
+          <article class="case6-visual case6-plan-card">
+            <div class="case6-visual-head">
+              <div>
+                <strong>План, факт і прогноз</strong>
+                <span>очікуване виконання річного плану</span>
+              </div>
+            </div>
+
+            <div class="case6-plan-summary">
+              <div>
+                <span>План</span>
+                <strong id="case6-plan-value">0</strong>
+              </div>
+
+              <div>
+                <span>Факт</span>
+                <strong id="case6-fact-value">0</strong>
+              </div>
+
+              <div>
+                <span>Прогноз</span>
+                <strong id="case6-forecast-value">0</strong>
+              </div>
+            </div>
+
+            <div class="case6-plan-track">
+              <div
+                class="case6-plan-fill"
+                id="case6-plan-fill"
+              ></div>
+
+              <div
+                class="case6-forecast-marker"
+                id="case6-forecast-marker"
+              ></div>
+            </div>
+
+            <div
+              class="case6-plan-warning"
+              id="case6-plan-warning"
+            ></div>
+          </article>
+
+          <article class="case6-visual">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Продажі за категоріями</strong>
+                <span>натисніть на сектор для фільтрації</span>
+              </div>
+
+              <button
+                class="case6-visual-reset"
+                type="button"
+                data-case6-clear="category"
+              >
+                Очистити
+              </button>
+            </div>
+
+            <div class="case6-category-layout">
+              <div
+                class="case6-category-donut"
+                id="case6-category-donut"
+              ></div>
+
+              <div
+                class="case6-category-legend"
+                id="case6-category-legend"
+              ></div>
+            </div>
+          </article>
+
+          <article class="case6-visual">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Рейтинг регіонів</strong>
+                <span>перехресна фільтрація звіту</span>
+              </div>
+
+              <button
+                class="case6-visual-reset"
+                type="button"
+                data-case6-clear="region"
+              >
+                Очистити
+              </button>
+            </div>
+
+            <div
+              class="case6-region-bars"
+              id="case6-region-bars"
+            ></div>
+          </article>
+
+          <article class="case6-visual">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Рейтинг менеджерів</strong>
+                <span>виручка, прибуток і маржинальність</span>
+              </div>
+
+              <button
+                class="case6-visual-reset"
+                type="button"
+                data-case6-clear="manager"
+              >
+                Очистити
+              </button>
+            </div>
+
+            <div
+              class="case6-manager-table"
+              id="case6-manager-table"
+            ></div>
+          </article>
+
+          <article class="case6-visual">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Топ товарів</strong>
+                <span>ABC-аналіз номенклатури</span>
+              </div>
+            </div>
+
+            <div
+              class="case6-product-bars"
+              id="case6-product-bars"
+            ></div>
+          </article>
+        </div>
+
+        <div class="case6-analysis-grid">
+          <article class="case6-alerts-card">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Потребує уваги</strong>
+                <span>автоматичні управлінські сигнали</span>
+              </div>
+            </div>
+
+            <div
+              class="case6-alerts-list"
+              id="case6-alerts-list"
+            ></div>
+          </article>
+
+          <article class="case6-decomposition-card">
+            <div class="case6-visual-head">
+              <div>
+                <strong>Дерево причин</strong>
+                <span>чому змінилася маржинальність</span>
+              </div>
+            </div>
+
+            <div
+              class="case6-decomposition-tree"
+              id="case6-decomposition-tree"
+            ></div>
+          </article>
+        </div>
+
+        <section class="case6-what-if">
+          <div class="case6-what-if-head">
+            <div>
+              <strong>What-if аналіз</strong>
+
+              <span>
+                Змініть ціну, обсяг або собівартість і перегляньте прогноз
+              </span>
+            </div>
+
+            <button
+              class="case6-what-if-reset"
+              id="case6-what-if-reset"
+              type="button"
+            >
+              Скинути сценарій
+            </button>
+          </div>
+
+          <div class="case6-what-if-grid">
+            <label class="case6-slider-card">
+              <span>Зміна ціни</span>
+
+              <input
+                id="case6-price-slider"
+                type="range"
+                min="-10"
+                max="10"
+                value="0"
+              >
+
+              <strong id="case6-price-slider-value">0%</strong>
+            </label>
+
+            <label class="case6-slider-card">
+              <span>Зміна обсягу</span>
+
+              <input
+                id="case6-volume-slider"
+                type="range"
+                min="-20"
+                max="20"
+                value="0"
+              >
+
+              <strong id="case6-volume-slider-value">0%</strong>
+            </label>
+
+            <label class="case6-slider-card">
+              <span>Зміна собівартості</span>
+
+              <input
+                id="case6-cost-slider"
+                type="range"
+                min="0"
+                max="15"
+                value="0"
+              >
+
+              <strong id="case6-cost-slider-value">0%</strong>
+            </label>
+          </div>
+
+          <div class="case6-scenario-results">
+            <article>
+              <span>Прогнозна виручка</span>
+              <strong id="case6-scenario-revenue">0</strong>
+            </article>
+
+            <article>
+              <span>Прогнозний прибуток</span>
+              <strong id="case6-scenario-profit">0</strong>
+            </article>
+
+            <article>
+              <span>Прогнозна маржа</span>
+              <strong id="case6-scenario-margin">0%</strong>
+            </article>
+
+            <article>
+              <span>Виконання плану</span>
+              <strong id="case6-scenario-plan">0%</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="case6-detail-table-section">
+          <div class="case6-visual-head">
+            <div>
+              <strong>Деталізація вибраного зрізу</strong>
+
+              <span id="case6-detail-count">
+                0 операцій
+              </span>
+            </div>
+          </div>
+
+          <div class="case6-detail-table-wrap">
+            <table class="case6-detail-table">
+              <thead>
+                <tr>
+                  <th>Дата</th>
+                  <th>Менеджер</th>
+                  <th>Клієнт</th>
+                  <th>Товар</th>
+                  <th>Категорія</th>
+                  <th>Регіон</th>
+                  <th>Кількість</th>
+                  <th>Виручка</th>
+                  <th>Прибуток</th>
+                  <th>Маржа</th>
+                </tr>
+              </thead>
+
+              <tbody id="case6-detail-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="case6-time-savings">
+    <div class="case6-time-header">
+      <div>
+        <span class="case6-kicker">Економічний ефект</span>
+
+        <h3>Скільки ручної роботи можна прибрати</h3>
+
+        <p>
+          Користувач може змінити частоту підготовки звіту,
+          тривалість одного циклу та кількість залучених працівників.
+        </p>
+      </div>
+    </div>
+
+    <div class="case6-time-grid">
+      <label class="case6-time-control">
+        <span>Звітів на рік</span>
+
+        <input
+          id="case6-reports-per-year"
+          type="number"
+          min="1"
+          max="52"
+          value="12"
+        >
+      </label>
+
+      <label class="case6-time-control">
+        <span>Годин на один звіт</span>
+
+        <input
+          id="case6-hours-per-report"
+          type="number"
+          min="1"
+          max="80"
+          value="15"
+        >
+      </label>
+
+      <label class="case6-time-control">
+        <span>Працівників залучено</span>
+
+        <input
+          id="case6-employees"
+          type="number"
+          min="1"
+          max="20"
+          value="1"
+        >
+      </label>
+
+      <label class="case6-time-control">
+        <span>Контроль після автоматизації</span>
+
+        <input
+          id="case6-hours-after"
+          type="number"
+          min="0"
+          max="10"
+          value="2"
+        >
+      </label>
+    </div>
+
+    <div class="case6-time-result">
+      <article>
+        <span>До автоматизації</span>
+
+        <strong id="case6-time-before">180 год/рік</strong>
+      </article>
+
+      <article>
+        <span>Після автоматизації</span>
+
+        <strong id="case6-time-after">24 год/рік</strong>
+      </article>
+
+      <article class="case6-time-saving-highlight">
+        <span>Потенційна економія</span>
+
+        <strong id="case6-time-saving">156 год/рік</strong>
+      </article>
+    </div>
+  </section>
+
+  <div class="case6-flow">
+    <article>
+      <span>1</span>
+      <strong>ERP / 1С / SAP</strong>
+      <small>джерело облікових даних</small>
+    </article>
+
+    <article>
+      <span>2</span>
+      <strong>Підключення</strong>
+      <small>конектор, API, ODBC або Gateway</small>
+    </article>
+
+    <article>
+      <span>3</span>
+      <strong>Power Query</strong>
+      <small>очищення та перетворення</small>
+    </article>
+
+    <article>
+      <span>4</span>
+      <strong>Модель і DAX</strong>
+      <small>зв’язки та показники</small>
+    </article>
+
+    <article>
+      <span>5</span>
+      <strong>Power BI</strong>
+      <small>актуальний управлінський звіт</small>
+    </article>
+  </div>
+
+  <div class="case6-cta">
+    <a href="contacts.html">
+      Хочу автоматизувати управлінську звітність
+    </a>
+  </div>
+</section>

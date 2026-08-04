@@ -2461,6 +2461,7 @@ footer a:hover {
   <link rel="stylesheet" href="/assistant.css">
   <link rel="stylesheet" href="cases/case-5/case5.css">
   <link rel="stylesheet" href="cases/case-6/case6.css">
+  <link rel="stylesheet" href="cases/case-7/case7.css">
 
 <script src="/assistant.js" defer></script>
 </head>
@@ -3192,6 +3193,7 @@ footer a:hover {
 </section>
     <div id="case5-container"></div>
     <div id="case6-container"></div>
+    <div id="case7-container"></div>
     <section class="section-card upcoming">
       <h2>Что появится дальше</h2>
 
@@ -4820,6 +4822,27 @@ footer a:hover {
       script.src =
         "cases/case-6/case6-ru.js";
 
+      document.body.appendChild(script);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+</script>
+  <script>
+  fetch("cases/case-7/case7-ru.html")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Не удалось загрузить кейс №7");
+      }
+
+      return response.text();
+    })
+    .then(html => {
+      const container = document.getElementById("case7-container");
+      container.innerHTML = html;
+
+      const script = document.createElement("script");
+      script.src = "cases/case-7/case7-ru.js";
       document.body.appendChild(script);
     })
     .catch(error => {

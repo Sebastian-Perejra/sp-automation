@@ -516,11 +516,13 @@ footer a:hover {
 
     @media (max-width: 760px) {
       .topbar-inner {
-        min-height: 64px;
-        padding:
-          max(12px, env(safe-area-inset-top))
-          14px
-          12px;
+      min-height: 64px;
+      padding:
+      max(12px, env(safe-area-inset-top))
+      14px
+      12px;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
       }
 
       .desktop-nav {
@@ -528,7 +530,8 @@ footer a:hover {
       }
 
       .lang-switcher {
-        margin-left: auto;
+      margin-left: 0;
+      justify-self: end;
       }
 
       .page {

@@ -1,1 +1,51 @@
+.desktop-nav a {
+  min-width: max-content;
+  text-align: center;
+  transition:
+    color 0.2s ease,
+    font-weight 0.15s ease,
+    letter-spacing 0.15s ease;
+}
 
+.desktop-nav a.font-style-1 {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.desktop-nav a.font-style-2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.desktop-nav a.font-style-3 {
+  font-family: "Courier New", monospace;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.desktop-nav a.font-style-4 {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.desktop-nav a.font-style-5 {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 760px) {
+  .desktop-nav a {
+    font-family: var(--font-main);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: normal;
+  }
+}

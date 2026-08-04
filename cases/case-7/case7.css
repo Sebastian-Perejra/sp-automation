@@ -1000,3 +1000,10 @@
     grid-template-columns: 70px 1fr 48px;
   }
 }
+.case7-folder-title small {
+  display: block;
+  margin-top: 4px;
+  color: #817c75;
+  font-size: 8px;
+  font-weight: 400;
+}

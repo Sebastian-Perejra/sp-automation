@@ -14,11 +14,15 @@
   animation: nav-font-kaleidoscope 2.1s steps(1, end) infinite !important;
 }
 
-.desktop-nav a[href="solutions.html"] {
+.desktop-nav a[href="solutions.html"],
+.desktop-nav a[href="solutions-ru.html"],
+.desktop-nav a[href="solutions-en.html"] {
   color: #ffffff;
 }
 
-.desktop-nav a[href="solutions.html"]:hover {
+.desktop-nav a[href="solutions.html"]:hover,
+.desktop-nav a[href="solutions-ru.html"]:hover,
+.desktop-nav a[href="solutions-en.html"]:hover {
   color: #ffffff !important;
 }
 
@@ -104,7 +108,9 @@
   }
 }
 
-.desktop-nav a[href="solutions.html"]:hover {
+.desktop-nav a[href="solutions.html"]:hover,
+.desktop-nav a[href="solutions-ru.html"]:hover,
+.desktop-nav a[href="solutions-en.html"]:hover {
   animation-name: nav-font-kaleidoscope-active !important;
 }
 

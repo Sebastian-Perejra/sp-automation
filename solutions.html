@@ -2467,6 +2467,7 @@ footer a:hover {
 <script src="/assistant.js" defer></script>
   <link rel="stylesheet" href="cases/case-5/case5.css">
   <link rel="stylesheet" href="cases/case-6/case6.css">
+  <link rel="stylesheet" href="cases/case-7/case7.css">
 </head>
 
 <body>
@@ -3203,6 +3204,7 @@ footer a:hover {
 </section>
     <div id="case5-container"></div>
     <div id="case6-container"></div>
+    <div id="case7-container"></div>
     <section class="section-card upcoming">
       <h2>Що з’явиться далі</h2>
 
@@ -4832,6 +4834,20 @@ footer a:hover {
     })
     .catch(error => {
       console.error(error);
+    });
+</script>
+  <script>
+  fetch("cases/case-7/case7.html")
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById("case7-container").innerHTML = html;
+
+      const script = document.createElement("script");
+      script.src = "cases/case-7/case7.js";
+      document.body.appendChild(script);
+    })
+    .catch(error => {
+      console.error("Помилка завантаження кейсу №7:", error);
     });
 </script>
 </body>

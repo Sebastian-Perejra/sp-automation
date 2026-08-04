@@ -1,58 +1,197 @@
 .desktop-nav a {
   display: inline-block !important;
   transform-origin: center;
+  will-change:
+    font-family,
+    font-weight,
+    letter-spacing,
+    transform,
+    color,
+    text-shadow;
 }
 
 .desktop-nav a:hover {
-  animation: nav-font-kaleidoscope 1.2s steps(1, end) infinite !important;
+  animation: nav-font-kaleidoscope 2.1s steps(1, end) infinite !important;
+}
+
+.desktop-nav a[href="solutions.html"] {
+  color: #ffffff;
+}
+
+.desktop-nav a[href="solutions.html"]:hover {
+  color: #ffffff !important;
 }
 
 @keyframes nav-font-kaleidoscope {
   0% {
-    font-family: "Manrope", sans-serif !important;
+    font-family: "Manrope", Arial, sans-serif !important;
     font-style: normal;
     font-weight: 600;
     letter-spacing: 0;
+    color: #35594b;
+    text-shadow: none;
     transform: scale(1);
   }
 
-  20% {
-    font-family: "Roboto Mono", monospace !important;
+  14% {
+    font-family: "Roboto Mono", "Courier New", monospace !important;
     font-style: normal;
     font-weight: 500;
-    letter-spacing: -0.04em;
-    transform: scale(1.08);
+    letter-spacing: -0.03em;
+    color: #35594b;
+    text-shadow: 0 0 10px rgba(53, 89, 75, 0.14);
+    transform: scale(1.025);
   }
 
-  40% {
+  28% {
     font-family: Georgia, "Times New Roman", serif !important;
     font-style: italic;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    transform: skewX(-8deg) scale(1.06);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #2f6657;
+    text-shadow: none;
+    transform: skewX(-3deg) scale(1.02);
   }
 
-  60% {
-    font-family: Impact, "Arial Black", sans-serif !important;
+  42% {
+    font-family: "Trebuchet MS", Arial, sans-serif !important;
     font-style: normal;
-    font-weight: 900;
-    letter-spacing: 0;
-    transform: scaleX(0.9) scaleY(1.12);
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    color: #2f6f78;
+    text-shadow: 0 0 12px rgba(47, 111, 120, 0.12);
+    transform: scaleX(1.025);
   }
 
-  80% {
+  56% {
     font-family: "Courier New", monospace !important;
     font-style: normal;
     font-weight: 700;
-    letter-spacing: -0.08em;
-    transform: scaleX(0.95);
+    letter-spacing: -0.04em;
+    color: #35594b;
+    text-shadow: none;
+    transform: scaleX(0.985);
+  }
+
+  70% {
+    font-family: "Times New Roman", Georgia, serif !important;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.035em;
+    color: #3f5f7a;
+    text-shadow: 0 0 10px rgba(63, 95, 122, 0.1);
+    transform: skewX(2deg) scale(1.015);
+  }
+
+  84% {
+    font-family: "Roboto Mono", monospace !important;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: #2f6657;
+    text-shadow: none;
+    transform: scale(1.025);
   }
 
   100% {
-    font-family: "Times New Roman", serif !important;
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: #35594b;
+    text-shadow: none;
+    transform: scale(1);
+  }
+}
+
+.desktop-nav a[href="solutions.html"]:hover {
+  animation-name: nav-font-kaleidoscope-active !important;
+}
+
+@keyframes nav-font-kaleidoscope-active {
+  0% {
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-shadow: none;
+    transform: scale(1);
+  }
+
+  14% {
+    font-family: "Roboto Mono", monospace !important;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.22);
+    transform: scale(1.025);
+  }
+
+  28% {
+    font-family: Georgia, "Times New Roman", serif !important;
     font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    transform: skewX(6deg) scale(1.04);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    text-shadow: none;
+    transform: skewX(-3deg) scale(1.02);
+  }
+
+  42% {
+    font-family: "Trebuchet MS", Arial, sans-serif !important;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    transform: scaleX(1.025);
+  }
+
+  56% {
+    font-family: "Courier New", monospace !important;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    text-shadow: none;
+    transform: scaleX(0.985);
+  }
+
+  70% {
+    font-family: "Times New Roman", Georgia, serif !important;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.035em;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.18);
+    transform: skewX(2deg) scale(1.015);
+  }
+
+  84% {
+    font-family: "Roboto Mono", monospace !important;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: #ffffff;
+    text-shadow: none;
+    transform: scale(1.025);
+  }
+
+  100% {
+    font-family: "Manrope", Arial, sans-serif !important;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-shadow: none;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .desktop-nav a:hover {
+    animation: none !important;
   }
 }

@@ -1,5 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
   const links = document.querySelectorAll(".desktop-nav a");
+
+  if (!links.length) return;
 
   const styles = [
     {
@@ -12,91 +14,84 @@ document.addEventListener("DOMContentLoaded", () => {
       fontFamily: 'Georgia, "Times New Roman", serif',
       fontStyle: "italic",
       fontWeight: "700",
-      letterSpacing: "0.01em"
+      letterSpacing: "0.02em"
     },
     {
       fontFamily: '"Courier New", monospace',
       fontStyle: "normal",
       fontWeight: "700",
-      letterSpacing: "-0.06em"
+      letterSpacing: "-0.07em"
     },
     {
       fontFamily: '"Trebuchet MS", Arial, sans-serif',
       fontStyle: "normal",
       fontWeight: "700",
-      letterSpacing: "0.04em"
+      letterSpacing: "0.05em"
     },
     {
       fontFamily: '"Times New Roman", serif',
       fontStyle: "italic",
       fontWeight: "400",
-      letterSpacing: "0.06em"
+      letterSpacing: "0.08em"
     }
   ];
 
   links.forEach(link => {
-    const original = {
-      fontFamily: link.style.fontFamily,
-      fontStyle: link.style.fontStyle,
-      fontWeight: link.style.fontWeight,
-      letterSpacing: link.style.letterSpacing
-    };
-
-    let startTimer;
-    let cycleTimer;
+    let delayTimer = null;
+    let cycleTimer = null;
     let index = 0;
 
-    const restore = () => {
-      clearTimeout(startTimer);
+    const reset = () => {
+      clearTimeout(delayTimer);
       clearInterval(cycleTimer);
 
-      link.style.fontFamily = original.fontFamily;
-      link.style.fontStyle = original.fontStyle;
-      link.style.fontWeight = original.fontWeight;
-      link.style.letterSpacing = original.letterSpacing;
+      link.style.removeProperty("font-family");
+      link.style.removeProperty("font-style");
+      link.style.removeProperty("font-weight");
+      link.style.removeProperty("letter-spacing");
 
       index = 0;
     };
 
-    link.addEventListener("mouseenter", () => {
-      restore();
+    const changeFont = () => {
+      const style = styles[index];
 
-      startTimer = setTimeout(() => {
-        const applyNextStyle = () => {
-          const style = styles[index];
+      link.style.setProperty(
+        "font-family",
+        style.fontFamily,
+        "important"
+      );
 
-          link.style.setProperty(
-            "font-family",
-            style.fontFamily,
-            "important"
-          );
+      link.style.setProperty(
+        "font-style",
+        style.fontStyle,
+        "important"
+      );
 
-          link.style.setProperty(
-            "font-style",
-            style.fontStyle,
-            "important"
-          );
+      link.style.setProperty(
+        "font-weight",
+        style.fontWeight,
+        "important"
+      );
 
-          link.style.setProperty(
-            "font-weight",
-            style.fontWeight,
-            "important"
-          );
+      link.style.setProperty(
+        "letter-spacing",
+        style.letterSpacing,
+        "important"
+      );
 
-          link.style.setProperty(
-            "letter-spacing",
-            style.letterSpacing,
-            "important"
-          );
+      index = (index + 1) % styles.length;
+    };
 
-          index = (index + 1) % styles.length;
-        };
+    link.addEventListener("pointerenter", () => {
+      reset();
 
-        applyNextStyle();
-        cycleTimer = setInterval(applyNextStyle, 220);
+      delayTimer = setTimeout(() => {
+        changeFont();
+        cycleTimer = setInterval(changeFont, 180);
       }, 350);
     });
 
-    link.addEventListener("mouseleave", restore);
+    link.addEventListener("pointerleave", reset);
   });
-});
+})();

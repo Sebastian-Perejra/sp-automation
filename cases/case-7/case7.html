@@ -1,1 +1,420 @@
+<section class="case7" id="folder-consolidation-case">
+  <div class="case7-header">
+    <div class="case7-kicker">РЕАЛЬНИЙ КЕЙС №7</div>
 
+    <h2>
+      Автоматичне об’єднання даних із сотень Excel-файлів
+    </h2>
+
+    <p class="case7-subtitle">
+      Співробітники різних магазинів регулярно завантажують
+      Excel-звіти до спільної папки. Кожен файл має однакову
+      структуру, але не підходить для прямого аналізу:
+      у ньому є службові рядки, повторні заголовки,
+      проміжні підсумки та дані, розташовані блоками.
+    </p>
+  </div>
+
+  <div class="case7-problem-solution">
+    <article class="case7-info-card case7-problem">
+      <span class="case7-info-label">ПРОБЛЕМА</span>
+
+      <h3>
+        Аналітик вручну збирав дані з великої кількості файлів
+      </h3>
+
+      <p>
+        Щотижня нові звіти надходили від магазинів і регіональних
+        підрозділів. Для підготовки загальної аналітики потрібно було
+        відкривати кожен файл, копіювати дані та додавати їх до
+        зведеної таблиці.
+      </p>
+
+      <ul>
+        <li>сотні окремих Excel-файлів;</li>
+        <li>ручне копіювання даних;</li>
+        <li>ризик пропустити новий файл;</li>
+        <li>дублікати та помилки у структурі;</li>
+        <li>багато часу на повторювану роботу.</li>
+      </ul>
+    </article>
+
+    <article class="case7-info-card case7-solution">
+      <span class="case7-info-label">РІШЕННЯ</span>
+
+      <h3>
+        Одне підключення до папки та автоматичне оновлення
+      </h3>
+
+      <p>
+        Аналітик один раз підключає Power Query або Power BI
+        до спільної папки. Після оновлення система знаходить
+        нові файли, очищує таблиці, приводить дані до єдиного
+        формату та об’єднує їх в один масив.
+      </p>
+
+      <ul>
+        <li>автоматичний пошук нових файлів;</li>
+        <li>перевірка однакової структури;</li>
+        <li>видалення службових рядків;</li>
+        <li>контроль дублікатів;</li>
+        <li>оновлення аналітики однією кнопкою.</li>
+      </ul>
+    </article>
+  </div>
+    <div class="case7-folder-panel">
+    <div class="case7-panel-head">
+      <div>
+        <strong>Спільна папка зі звітами магазинів</strong>
+
+        <span>
+          Нові Excel-файли регулярно додаються різними співробітниками
+        </span>
+      </div>
+
+      <div class="case7-folder-stats">
+        <span>1 000 файлів</span>
+        <span>80 магазинів</span>
+        <span>2024–2026</span>
+      </div>
+    </div>
+
+    <div class="case7-folder-layout">
+      <div class="case7-folder-tree">
+        <div class="case7-folder-title">
+          📁 Звіти магазинів
+        </div>
+
+        <div class="case7-folder-list" id="case7-folder-list"></div>
+      </div>
+
+      <div class="case7-file-preview">
+        <div class="case7-preview-head">
+          <div>
+            <strong id="case7-preview-name">
+              Магазин_Київ_01_07_2026.xlsx
+            </strong>
+
+            <span>
+              Структурований, але незручний для аналізу звіт
+            </span>
+          </div>
+
+          <span class="case7-preview-badge">
+            Excel
+          </span>
+        </div>
+
+        <div class="case7-preview-table-wrap">
+          <table class="case7-preview-table">
+            <tbody>
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Звіт про рух товарів за 01.07.2026
+                </td>
+              </tr>
+
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Магазин: Київ-01
+                </td>
+              </tr>
+
+              <tr>
+                <th>Код</th>
+                <th>Товар</th>
+                <th>Категорія</th>
+                <th>Залишок</th>
+                <th>Надходження</th>
+                <th>Продажі</th>
+                <th>Списання</th>
+                <th>Сума</th>
+              </tr>
+
+              <tr>
+                <td>J-001</td>
+                <td>Сік яблучний 1 л</td>
+                <td>Соки</td>
+                <td>118</td>
+                <td>40</td>
+                <td>42</td>
+                <td>1</td>
+                <td>3 780</td>
+              </tr>
+
+              <tr>
+                <td>W-015</td>
+                <td>Вода 1,5 л</td>
+                <td>Вода</td>
+                <td>204</td>
+                <td>120</td>
+                <td>87</td>
+                <td>0</td>
+                <td>2 610</td>
+              </tr>
+
+              <tr class="case7-total-row">
+                <td colspan="7">Разом по магазину</td>
+                <td>6 390</td>
+              </tr>
+
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Сформовано автоматично: 02.07.2026 08:15
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case7-action-area">
+    <button
+      class="case7-refresh-button"
+      id="case7-refresh-button"
+      type="button"
+    >
+      ⚡ Оновити дані з папки
+    </button>
+
+    <div class="case7-loader" id="case7-loader">
+      <span class="case7-spinner"></span>
+
+      <span id="case7-loader-text">
+        Підключення до спільної папки…
+      </span>
+    </div>
+  </div>
+
+  <div class="case7-pipeline">
+    <div class="case7-pipeline-step" data-case7-step="0">
+      <span>1</span>
+      <strong>Сканування папки</strong>
+      <small>пошук нових Excel-файлів</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="1">
+      <span>2</span>
+      <strong>Перевірка структури</strong>
+      <small>контроль колонок і типів даних</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="2">
+      <span>3</span>
+      <strong>Очищення таблиць</strong>
+      <small>службові рядки та підсумки</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="3">
+      <span>4</span>
+      <strong>Об’єднання</strong>
+      <small>один масив із усіх файлів</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="4">
+      <span>5</span>
+      <strong>Контроль якості</strong>
+      <small>дублікати та помилки</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="5">
+      <span>6</span>
+      <strong>Оновлення аналітики</strong>
+      <small>готові KPI та розрахунки</small>
+    </div>
+  </div>
+    <section class="case7-result" id="case7-result">
+    <div class="case7-result-head">
+      <div>
+        <span class="case7-kicker">РЕЗУЛЬТАТ ОБРОБКИ</span>
+
+        <h3>
+          Один масив даних замість тисячі окремих файлів
+        </h3>
+
+        <p>
+          Після оновлення система додає нові звіти до загальної
+          таблиці, перевіряє якість даних і передає результат
+          до подальших розрахунків, зведених таблиць та Power BI.
+        </p>
+      </div>
+    </div>
+
+    <div class="case7-result-stats">
+      <article>
+        <span>Файлів у папці</span>
+        <strong id="case7-stat-files">1 000</strong>
+        <small>загальна кількість</small>
+      </article>
+
+      <article>
+        <span>Нових файлів</span>
+        <strong id="case7-stat-new">0</strong>
+        <small>з моменту останнього оновлення</small>
+      </article>
+
+      <article>
+        <span>Об’єднано рядків</span>
+        <strong id="case7-stat-rows">0</strong>
+        <small>у єдиний масив</small>
+      </article>
+
+      <article>
+        <span>Дублікатів</span>
+        <strong id="case7-stat-duplicates">0</strong>
+        <small>виявлено автоматично</small>
+      </article>
+
+      <article>
+        <span>Файлів з помилками</span>
+        <strong id="case7-stat-errors">0</strong>
+        <small>потребують перевірки</small>
+      </article>
+
+      <article>
+        <span>Час оновлення</span>
+        <strong id="case7-stat-time">0 с</strong>
+        <small>повний цикл обробки</small>
+      </article>
+    </div>
+
+    <div class="case7-array-panel">
+      <div class="case7-array-head">
+        <div>
+          <strong>Єдиний масив даних</strong>
+
+          <span>
+            Очищені та приведені до однакової структури записи
+          </span>
+        </div>
+
+        <span class="case7-array-status" id="case7-array-status">
+          очікує оновлення
+        </span>
+      </div>
+
+      <div class="case7-array-table-wrap">
+        <table class="case7-array-table">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Магазин</th>
+              <th>Код товару</th>
+              <th>Товар</th>
+              <th>Категорія</th>
+              <th>Залишок на початок</th>
+              <th>Надходження</th>
+              <th>Продажі</th>
+              <th>Повернення</th>
+              <th>Списання</th>
+              <th>Залишок на кінець</th>
+              <th>Сума продажів</th>
+              <th>Джерело</th>
+            </tr>
+          </thead>
+
+          <tbody id="case7-array-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="case7-analytics-grid">
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Продажі за магазинами</strong>
+            <span>рейтинг підрозділів</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-store-bars"
+          id="case7-store-bars"
+        ></div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Продажі за категоріями</strong>
+            <span>структура загального обороту</span>
+          </div>
+        </div>
+
+        <div class="case7-category-layout">
+          <div
+            class="case7-category-donut"
+            id="case7-category-donut"
+          ></div>
+
+          <div
+            class="case7-category-legend"
+            id="case7-category-legend"
+          ></div>
+        </div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Ризик дефіциту</strong>
+            <span>товари з низьким залишком</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-risk-list"
+          id="case7-risk-list"
+        ></div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Контроль якості даних</strong>
+            <span>результати перевірки файлів</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-quality-list"
+          id="case7-quality-list"
+        ></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="case7-business-impact">
+    <article>
+      <span>До автоматизації</span>
+      <strong>до 40 годин на місяць</strong>
+      <small>
+        ручне відкриття, копіювання та перевірка файлів
+      </small>
+    </article>
+
+    <article>
+      <span>Після автоматизації</span>
+      <strong>одне оновлення</strong>
+      <small>
+        нові файли автоматично потрапляють до загальної моделі
+      </small>
+    </article>
+
+    <article>
+      <span>Результат</span>
+      <strong>єдине джерело даних</strong>
+      <small>
+        для аналітики, звітності та управлінських рішень
+      </small>
+    </article>
+  </div>
+
+  <div class="case7-cta">
+    <a href="contacts.html">
+      Хочу автоматично об’єднувати файли
+    </a>
+  </div>
+</section>

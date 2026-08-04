@@ -1,1 +1,422 @@
+<section class="case7" id="folder-consolidation-case">
+  <div class="case7-header">
+    <div class="case7-kicker">РЕАЛЬНЫЙ КЕЙС №7</div>
 
+    <h2>
+      Автоматическое объединение данных из сотен
+      <span class="case7-nowrap">Excel-файлов</span>
+    </h2>
+
+    <p class="case7-subtitle">
+      Сотрудники разных магазинов регулярно загружают
+      Excel-отчёты в общую папку. Каждый файл имеет одинаковую
+      структуру, но не подходит для прямого анализа:
+      в нём есть служебные строки, повторяющиеся заголовки,
+      промежуточные итоги и данные, расположенные блоками.
+    </p>
+  </div>
+
+  <div class="case7-problem-solution">
+    <article class="case7-info-card case7-problem">
+      <span class="case7-info-label">ПРОБЛЕМА</span>
+
+      <h3>
+        Аналитик вручную собирал данные из большого количества файлов
+      </h3>
+
+      <p>
+        Каждую неделю новые отчёты поступали от магазинов и региональных
+        подразделений. Для подготовки общей аналитики нужно было
+        открывать каждый файл, копировать данные и добавлять их
+        в сводную таблицу.
+      </p>
+
+      <ul>
+        <li>сотни отдельных Excel-файлов;</li>
+        <li>ручное копирование данных;</li>
+        <li>риск пропустить новый файл;</li>
+        <li>дубликаты и ошибки в структуре;</li>
+        <li>много времени на повторяющуюся работу.</li>
+      </ul>
+    </article>
+
+    <article class="case7-info-card case7-solution">
+      <span class="case7-info-label">РЕШЕНИЕ</span>
+
+      <h3>
+        Одно подключение к папке и автоматическое обновление
+      </h3>
+
+      <p>
+        Аналитик один раз подключает Power Query или Power BI
+        к общей папке. После обновления система находит
+        новые файлы, очищает таблицы, приводит данные к единому
+        формату и объединяет их в один массив.
+      </p>
+
+      <ul>
+        <li>автоматический поиск новых файлов;</li>
+        <li>проверка одинаковой структуры;</li>
+        <li>удаление служебных строк;</li>
+        <li>контроль дубликатов;</li>
+        <li>обновление аналитики одной кнопкой.</li>
+      </ul>
+    </article>
+  </div>
+    <div class="case7-folder-panel">
+    <div class="case7-panel-head">
+      <div>
+        <strong>Общая папка с отчётами магазинов</strong>
+
+        <span>
+          Новые Excel-файлы регулярно добавляют разные сотрудники
+        </span>
+      </div>
+
+      <div class="case7-folder-stats">
+        <span>1 000 файлов</span>
+        <span>80 магазинов</span>
+        <span>2024–2026</span>
+      </div>
+    </div>
+
+    <div class="case7-folder-layout">
+      <div class="case7-folder-tree">
+        <div class="case7-folder-title">
+          📁 Отчёты магазинов
+          <small>Показаны 10 последних файлов из 1 000</small>
+        </div>
+
+        <div class="case7-folder-list" id="case7-folder-list"></div>
+      </div>
+
+      <div class="case7-file-preview">
+        <div class="case7-preview-head">
+          <div>
+            <strong id="case7-preview-name">
+              Магазин_Киев_01_07_2026.xlsx
+            </strong>
+
+            <span>
+              Структурированный, но неудобный для анализа отчёт
+            </span>
+          </div>
+
+          <span class="case7-preview-badge">
+            Excel
+          </span>
+        </div>
+
+        <div class="case7-preview-table-wrap">
+          <table class="case7-preview-table">
+            <tbody>
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Отчёт о движении товаров за 01.07.2026
+                </td>
+              </tr>
+
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Магазин: Киев-01
+                </td>
+              </tr>
+
+              <tr>
+                <th>Код</th>
+                <th>Товар</th>
+                <th>Категория</th>
+                <th>Остаток</th>
+                <th>Поступление</th>
+                <th>Продажи</th>
+                <th>Списание</th>
+                <th>Сумма</th>
+              </tr>
+
+              <tr>
+                <td>J-001</td>
+                <td>Сок яблочный 1 л</td>
+                <td>Соки</td>
+                <td>118</td>
+                <td>40</td>
+                <td>42</td>
+                <td>1</td>
+                <td>3 780</td>
+              </tr>
+
+              <tr>
+                <td>W-015</td>
+                <td>Вода 1,5 л</td>
+                <td>Вода</td>
+                <td>204</td>
+                <td>120</td>
+                <td>87</td>
+                <td>0</td>
+                <td>2 610</td>
+              </tr>
+
+              <tr class="case7-total-row">
+                <td colspan="7">Итого по магазину</td>
+                <td>6 390</td>
+              </tr>
+
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Сформировано автоматически: 02.07.2026 08:15
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case7-action-area">
+    <button
+      class="case7-refresh-button"
+      id="case7-refresh-button"
+      type="button"
+    >
+      ⚡ Обновить данные из папки
+    </button>
+
+    <div class="case7-loader" id="case7-loader">
+      <span class="case7-spinner"></span>
+
+      <span id="case7-loader-text">
+        Подключение к общей папке…
+      </span>
+    </div>
+  </div>
+
+  <div class="case7-pipeline">
+    <div class="case7-pipeline-step" data-case7-step="0">
+      <span>1</span>
+      <strong>Сканирование папки</strong>
+      <small>поиск новых Excel-файлов</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="1">
+      <span>2</span>
+      <strong>Проверка структуры</strong>
+      <small>контроль колонок и типов данных</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="2">
+      <span>3</span>
+      <strong>Очистка таблиц</strong>
+      <small>служебные строки и итоги</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="3">
+      <span>4</span>
+      <strong>Объединение</strong>
+      <small>один массив из всех файлов</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="4">
+      <span>5</span>
+      <strong>Контроль качества</strong>
+      <small>дубликаты и ошибки</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="5">
+      <span>6</span>
+      <strong>Обновление аналитики</strong>
+      <small>готовые KPI и расчёты</small>
+    </div>
+  </div>
+    <section class="case7-result" id="case7-result">
+    <div class="case7-result-head">
+      <div>
+        <span class="case7-kicker">РЕЗУЛЬТАТ ОБРАБОТКИ</span>
+
+        <h3>
+          Один массив данных вместо тысячи отдельных файлов
+        </h3>
+
+        <p>
+          После обновления система добавляет новые отчёты в общую
+          таблицу, проверяет качество данных и передаёт результат
+          в дальнейшие расчёты, сводные таблицы и Power BI.
+        </p>
+      </div>
+    </div>
+
+    <div class="case7-result-stats">
+      <article>
+        <span>Файлов в папке</span>
+        <strong id="case7-stat-files">1 000</strong>
+        <small>общее количество</small>
+      </article>
+
+      <article>
+        <span>Новых файлов</span>
+        <strong id="case7-stat-new">0</strong>
+        <small>с момента последнего обновления</small>
+      </article>
+
+      <article>
+        <span>Объединено строк</span>
+        <strong id="case7-stat-rows">0</strong>
+        <small>в единый массив</small>
+      </article>
+
+      <article>
+        <span>Дубликатов</span>
+        <strong id="case7-stat-duplicates">0</strong>
+        <small>выявлено автоматически</small>
+      </article>
+
+      <article>
+        <span>Файлов с ошибками</span>
+        <strong id="case7-stat-errors">0</strong>
+        <small>требуют проверки</small>
+      </article>
+
+      <article>
+        <span>Время обновления</span>
+        <strong id="case7-stat-time">0 с</strong>
+        <small>полный цикл обработки</small>
+      </article>
+    </div>
+
+    <div class="case7-array-panel">
+      <div class="case7-array-head">
+        <div>
+          <strong>Единый массив данных</strong>
+
+          <span>
+            Очищенные и приведённые к одинаковой структуре записи
+          </span>
+        </div>
+
+        <span class="case7-array-status" id="case7-array-status">
+          ожидает обновления
+        </span>
+      </div>
+
+      <div class="case7-array-table-wrap">
+        <table class="case7-array-table">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Магазин</th>
+              <th>Код товара</th>
+              <th>Товар</th>
+              <th>Категория</th>
+              <th>Остаток на начало</th>
+              <th>Поступление</th>
+              <th>Продажи</th>
+              <th>Возвраты</th>
+              <th>Списание</th>
+              <th>Остаток на конец</th>
+              <th>Сумма продаж</th>
+              <th>Источник</th>
+            </tr>
+          </thead>
+
+          <tbody id="case7-array-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="case7-analytics-grid">
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Продажи по магазинам</strong>
+            <span>рейтинг подразделений</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-store-bars"
+          id="case7-store-bars"
+        ></div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Продажи по категориям</strong>
+            <span>структура общего оборота</span>
+          </div>
+        </div>
+
+        <div class="case7-category-layout">
+          <div
+            class="case7-category-donut"
+            id="case7-category-donut"
+          ></div>
+
+          <div
+            class="case7-category-legend"
+            id="case7-category-legend"
+          ></div>
+        </div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Риск дефицита</strong>
+            <span>товары с низким остатком</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-risk-list"
+          id="case7-risk-list"
+        ></div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Контроль качества данных</strong>
+            <span>результаты проверки файлов</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-quality-list"
+          id="case7-quality-list"
+        ></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="case7-business-impact">
+    <article>
+      <span>До автоматизации</span>
+      <strong>до 40 часов в месяц</strong>
+      <small>
+        ручное открытие, копирование и проверка файлов
+      </small>
+    </article>
+
+    <article>
+      <span>После автоматизации</span>
+      <strong>одно обновление</strong>
+      <small>
+        новые файлы автоматически попадают в общую модель
+      </small>
+    </article>
+
+    <article>
+      <span>Результат</span>
+      <strong>единый источник данных</strong>
+      <small>
+        для аналитики, отчётности и управленческих решений
+      </small>
+    </article>
+  </div>
+
+  <div class="case7-cta">
+    <a href="contacts-ru.html">
+      Хочу автоматически объединять файлы
+    </a>
+  </div>
+</section>

@@ -1007,3 +1007,6 @@
   font-size: 8px;
   font-weight: 400;
 }
+.case7-nowrap {
+  white-space: nowrap;
+}

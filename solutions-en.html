@@ -4791,28 +4791,7 @@ footer a:hover {
   ["line1", "line2", "line3"]
     .forEach(capacityPlannerUpdateValue);
 </script>
-  <script>
-  fetch("cases/case-5/case5-en.html")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Failed to load case study No. 5");
-      }
-
-      return response.text();
-    })
-    .then(html => {
-      const container = document.getElementById("case5-container");
-      container.innerHTML = html;
-
-      const script = document.createElement("script");
-      script.src = "cases/case-5/case5-en.js";
-      document.body.appendChild(script);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-    <script>
-  fetch("cases/case-5/case5-en.html")
+    fetch("cases/case-5/case5-en.html")
     .then(response => {
       if (!response.ok) {
         throw new Error("Failed to load case study No. 5");

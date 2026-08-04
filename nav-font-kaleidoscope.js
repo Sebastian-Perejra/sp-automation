@@ -1,44 +1,74 @@
-const navLinks = document.querySelectorAll(".desktop-nav a");
+.desktop-nav a {
+  display: inline-block;
+  min-width: max-content;
+  text-align: center;
+  transform-origin: center;
+}
 
-const fonts = [
-  '"Roboto Mono", monospace',
-  'Georgia, serif',
-  '"Courier New", monospace',
-  'Impact, sans-serif',
-  '"Times New Roman", serif',
-  '"Trebuchet MS", sans-serif'
-];
+.desktop-nav a:hover {
+  animation: nav-font-kaleidoscope 1.5s steps(1, end) infinite;
+}
 
-navLinks.forEach(link => {
-  let timer = null;
-  let index = 0;
+@keyframes nav-font-kaleidoscope {
+  0% {
+    font-family: "Manrope", Arial, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0;
+    transform: scale(1);
+  }
 
-  link.addEventListener("mouseenter", () => {
-    clearInterval(timer);
+  16% {
+    font-family: "Roboto Mono", "Courier New", monospace;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    transform: scale(1.04);
+  }
 
-    timer = setInterval(() => {
-      link.style.setProperty(
-        "font-family",
-        fonts[index],
-        "important"
-      );
+  32% {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transform: skewX(-6deg) scale(1.05);
+  }
 
-      link.style.setProperty(
-        "font-size",
-        index % 2 === 0 ? "16px" : "14px",
-        "important"
-      );
+  48% {
+    font-family: Impact, "Arial Black", sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0;
+    transform: scaleX(0.92) scaleY(1.08);
+  }
 
-      index = (index + 1) % fonts.length;
-    }, 250);
-  });
+  64% {
+    font-family: "Courier New", monospace;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.07em;
+    transform: scaleX(0.95);
+  }
 
-  link.addEventListener("mouseleave", () => {
-    clearInterval(timer);
-    timer = null;
-    index = 0;
+  80% {
+    font-family: "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    transform: skewX(5deg) scale(1.03);
+  }
 
-    link.style.removeProperty("font-family");
-    link.style.removeProperty("font-size");
-  });
-});
+  100% {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transform: scaleX(1.05);
+  }
+}
+
+@media (max-width: 760px) {
+  .desktop-nav a:hover {
+    animation: none;
+  }
+}

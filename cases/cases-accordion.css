@@ -1,1 +1,217 @@
+.cases-accordion-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 26px 0 14px;
+  padding: 16px 18px;
+  border: 1px solid #e8e1d8;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 24px rgba(48, 43, 37, 0.04);
+}
 
+.cases-accordion-toolbar-text strong {
+  display: block;
+  color: #35594b;
+  font-size: 14px;
+}
+
+.cases-accordion-toolbar-text span {
+  display: block;
+  margin-top: 3px;
+  color: #817c75;
+  font-size: 10px;
+}
+
+.cases-accordion-toolbar-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cases-accordion-toolbar button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid #d9d1c8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #35594b;
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cases-accordion-toolbar button:hover {
+  border-color: #35594b;
+  background: #35594b;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.case-accordion-item {
+  margin-top: 14px;
+  overflow: hidden;
+  border: 1px solid #e8e1d8;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 26px rgba(48, 43, 37, 0.04);
+}
+
+.case-accordion-trigger {
+  width: 100%;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  border: 0;
+  background: #fbfaf7;
+  color: #242321;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.case-accordion-trigger:hover {
+  background: #f2f7f3;
+}
+
+.case-accordion-number {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 12px;
+  background: #35594b;
+  color: #ffffff;
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.case-accordion-heading {
+  min-width: 0;
+}
+
+.case-accordion-heading strong {
+  display: block;
+  color: #35594b;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.case-accordion-heading span {
+  display: block;
+  margin-top: 4px;
+  color: #817c75;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.case-accordion-icon {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #d9d1c8;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.case-accordion-icon::before,
+.case-accordion-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: #35594b;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease;
+}
+
+.case-accordion-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.case-accordion-item.open .case-accordion-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.case-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.55s ease,
+    opacity 0.3s ease;
+}
+
+.case-accordion-item.open .case-accordion-content {
+  opacity: 1;
+}
+
+.case-accordion-content-inner {
+  padding-top: 2px;
+}
+
+.case-accordion-content-inner > * {
+  margin-top: 0 !important;
+}
+
+.case-accordion-item.open .case-accordion-trigger {
+  border-bottom: 1px solid #e8e1d8;
+  background: #f2f7f3;
+}
+
+@media (max-width: 760px) {
+  .cases-accordion-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cases-accordion-toolbar-buttons {
+    width: 100%;
+  }
+
+  .cases-accordion-toolbar button {
+    flex: 1;
+  }
+
+  .case-accordion-trigger {
+    grid-template-columns: auto 1fr auto;
+    min-height: 68px;
+    padding: 13px 14px;
+  }
+
+  .case-accordion-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 10px;
+  }
+
+  .case-accordion-heading strong {
+    font-size: 13px;
+  }
+
+  .case-accordion-heading span {
+    font-size: 9px;
+  }
+
+  .case-accordion-icon {
+    width: 30px;
+    height: 30px;
+  }
+}

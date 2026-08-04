@@ -101,17 +101,17 @@
     }
 
     .topbar-inner {
-      width: min(100%, 1180px);
-      min-height: 72px;
-      margin: 0 auto;
-      padding:
-        max(14px, env(safe-area-inset-top))
-        28px
-        14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
+    width: min(100%, 1080px);
+    min-height: 72px;
+    margin: 0 auto;
+    padding:
+    max(14px, env(safe-area-inset-top))
+    28px
+    14px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 28px;
     }
 
     .home-link {
@@ -169,8 +169,9 @@
     }
 
     .lang-switcher {
-      display: flex;
-      gap: 7px;
+    display: flex;
+    gap: 7px;
+    justify-self: end;
     }
 
     .lang-switcher button {
@@ -514,21 +515,23 @@ footer a:hover {
       }
     }
 
-    @media (max-width: 760px) {
-      .topbar-inner {
-        min-height: 64px;
-        padding:
-          max(12px, env(safe-area-inset-top))
-          14px
-          12px;
-      }
+    .topbar-inner {
+    min-height: 64px;
+    padding:
+    max(12px, env(safe-area-inset-top))
+    14px
+    12px;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    }
 
       .desktop-nav {
         display: none;
       }
 
       .lang-switcher {
-        margin-left: auto;
+      margin-left: 0;
+      justify-self: end;
       }
 
       .page {
@@ -2464,6 +2467,7 @@ footer a:hover {
   <link rel="stylesheet" href="cases/case-7/case7.css">
   <link rel="stylesheet" href="cases/cases-accordion.css">
   <link rel="stylesheet" href="cases/page-scroll-nav.css">
+  <link rel="stylesheet" href="nav-font-kaleidoscope.css">
 
 <script src="/assistant.js" defer></script>
 </head>

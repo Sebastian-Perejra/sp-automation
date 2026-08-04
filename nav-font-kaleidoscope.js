@@ -1,60 +1,84 @@
 (() => {
-  const links = document.querySelectorAll(".desktop-nav a");
-
-  if (!links.length) return;
-
-  const styles = [
+  const fontStyles = [
     {
       fontFamily: '"Roboto Mono", monospace',
       fontStyle: "normal",
       fontWeight: "500",
-      letterSpacing: "-0.03em"
+      letterSpacing: "-0.04em",
+      transform: "scale(1.04)"
     },
     {
       fontFamily: 'Georgia, "Times New Roman", serif',
       fontStyle: "italic",
       fontWeight: "700",
-      letterSpacing: "0.02em"
+      letterSpacing: "0.02em",
+      transform: "skewX(-7deg) scale(1.06)"
     },
     {
       fontFamily: '"Courier New", monospace',
       fontStyle: "normal",
       fontWeight: "700",
-      letterSpacing: "-0.07em"
+      letterSpacing: "-0.08em",
+      transform: "scaleX(0.94)"
     },
     {
-      fontFamily: '"Trebuchet MS", Arial, sans-serif',
+      fontFamily: 'Impact, "Arial Black", sans-serif',
       fontStyle: "normal",
-      fontWeight: "700",
-      letterSpacing: "0.05em"
+      fontWeight: "900",
+      letterSpacing: "0.01em",
+      transform: "scaleX(0.9) scaleY(1.08)"
     },
     {
       fontFamily: '"Times New Roman", serif',
       fontStyle: "italic",
       fontWeight: "400",
-      letterSpacing: "0.08em"
+      letterSpacing: "0.09em",
+      transform: "skewX(5deg) scale(1.03)"
+    },
+    {
+      fontFamily: '"Trebuchet MS", Arial, sans-serif',
+      fontStyle: "normal",
+      fontWeight: "700",
+      letterSpacing: "0.05em",
+      transform: "scaleX(1.05)"
     }
   ];
 
-  links.forEach(link => {
-    let delayTimer = null;
-    let cycleTimer = null;
+  const timers = new WeakMap();
+
+  function resetLink(link) {
+    const timer = timers.get(link);
+
+    if (timer) {
+      clearInterval(timer);
+      timers.delete(link);
+    }
+
+    link.style.removeProperty("font-family");
+    link.style.removeProperty("font-style");
+    link.style.removeProperty("font-weight");
+    link.style.removeProperty("letter-spacing");
+    link.style.removeProperty("transform");
+    link.style.removeProperty("transition");
+    link.style.removeProperty("display");
+    link.style.removeProperty("transform-origin");
+  }
+
+  function startKaleidoscope(link) {
+    resetLink(link);
+
     let index = 0;
 
-    const reset = () => {
-      clearTimeout(delayTimer);
-      clearInterval(cycleTimer);
+    link.style.setProperty("display", "inline-block", "important");
+    link.style.setProperty("transform-origin", "center", "important");
+    link.style.setProperty(
+      "transition",
+      "font-family 0s, transform 0.12s ease, letter-spacing 0.12s ease",
+      "important"
+    );
 
-      link.style.removeProperty("font-family");
-      link.style.removeProperty("font-style");
-      link.style.removeProperty("font-weight");
-      link.style.removeProperty("letter-spacing");
-
-      index = 0;
-    };
-
-    const changeFont = () => {
-      const style = styles[index];
+    const applyStyle = () => {
+      const style = fontStyles[index];
 
       link.style.setProperty(
         "font-family",
@@ -80,18 +104,40 @@
         "important"
       );
 
-      index = (index + 1) % styles.length;
+      link.style.setProperty(
+        "transform",
+        style.transform,
+        "important"
+      );
+
+      index = (index + 1) % fontStyles.length;
     };
 
-    link.addEventListener("pointerenter", () => {
-      reset();
+    applyStyle();
 
-      delayTimer = setTimeout(() => {
-        changeFont();
-        cycleTimer = setInterval(changeFont, 180);
-      }, 350);
-    });
+    const timer = setInterval(applyStyle, 240);
+    timers.set(link, timer);
+  }
 
-    link.addEventListener("pointerleave", reset);
+  document.addEventListener("mouseover", event => {
+    const link = event.target.closest(".desktop-nav a");
+
+    if (!link) return;
+    if (link.contains(event.relatedTarget)) return;
+
+    startKaleidoscope(link);
+  });
+
+  document.addEventListener("mouseout", event => {
+    const link = event.target.closest(".desktop-nav a");
+
+    if (!link) return;
+    if (link.contains(event.relatedTarget)) return;
+
+    resetLink(link);
+  });
+
+  window.addEventListener("blur", () => {
+    document.querySelectorAll(".desktop-nav a").forEach(resetLink);
   });
 })();

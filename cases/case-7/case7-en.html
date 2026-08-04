@@ -1,1 +1,422 @@
+<section class="case7" id="folder-consolidation-case">
+  <div class="case7-header">
+    <div class="case7-kicker">REAL CASE №7</div>
 
+    <h2>
+      Automatic consolidation of data from hundreds of
+      <span class="case7-nowrap">Excel files</span>
+    </h2>
+
+    <p class="case7-subtitle">
+      Employees from different stores regularly upload
+      Excel reports to a shared folder. Each file has the same
+      structure but is not convenient for direct analysis:
+      it contains service rows, repeated headers,
+      intermediate totals and data arranged in separate blocks.
+    </p>
+  </div>
+
+  <div class="case7-problem-solution">
+    <article class="case7-info-card case7-problem">
+      <span class="case7-info-label">PROBLEM</span>
+
+      <h3>
+        The analyst collected data manually from a large number of files
+      </h3>
+
+      <p>
+        New reports arrived every week from stores and regional
+        divisions. To prepare consolidated analytics, the analyst had
+        to open every file, copy the data and add it
+        to a master table.
+      </p>
+
+      <ul>
+        <li>hundreds of separate Excel files;</li>
+        <li>manual copying of data;</li>
+        <li>risk of missing a new file;</li>
+        <li>duplicates and structural errors;</li>
+        <li>many hours spent on repetitive work.</li>
+      </ul>
+    </article>
+
+    <article class="case7-info-card case7-solution">
+      <span class="case7-info-label">SOLUTION</span>
+
+      <h3>
+        One connection to the folder and automatic refresh
+      </h3>
+
+      <p>
+        The analyst connects Power Query or Power BI
+        to the shared folder only once. During each refresh, the system
+        finds new files, cleans the tables, converts the data
+        to a consistent format and combines everything into one dataset.
+      </p>
+
+      <ul>
+        <li>automatic detection of new files;</li>
+        <li>validation of the expected structure;</li>
+        <li>removal of service rows;</li>
+        <li>duplicate control;</li>
+        <li>analytics refreshed with one button.</li>
+      </ul>
+    </article>
+  </div>
+    <div class="case7-folder-panel">
+    <div class="case7-panel-head">
+      <div>
+        <strong>Shared folder with store reports</strong>
+
+        <span>
+          New Excel files are regularly added by different employees
+        </span>
+      </div>
+
+      <div class="case7-folder-stats">
+        <span>1,000 files</span>
+        <span>80 stores</span>
+        <span>2024–2026</span>
+      </div>
+    </div>
+
+    <div class="case7-folder-layout">
+      <div class="case7-folder-tree">
+        <div class="case7-folder-title">
+          📁 Store reports
+          <small>Showing the 10 latest files out of 1,000</small>
+        </div>
+
+        <div class="case7-folder-list" id="case7-folder-list"></div>
+      </div>
+
+      <div class="case7-file-preview">
+        <div class="case7-preview-head">
+          <div>
+            <strong id="case7-preview-name">
+              Store_Kyiv_01_07_2026.xlsx
+            </strong>
+
+            <span>
+              Structured, but inconvenient for direct analysis
+            </span>
+          </div>
+
+          <span class="case7-preview-badge">
+            Excel
+          </span>
+        </div>
+
+        <div class="case7-preview-table-wrap">
+          <table class="case7-preview-table">
+            <tbody>
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Inventory movement report for 01.07.2026
+                </td>
+              </tr>
+
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Store: Kyiv-01
+                </td>
+              </tr>
+
+              <tr>
+                <th>Code</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Incoming</th>
+                <th>Sales</th>
+                <th>Write-offs</th>
+                <th>Amount</th>
+              </tr>
+
+              <tr>
+                <td>J-001</td>
+                <td>Apple juice 1 L</td>
+                <td>Juices</td>
+                <td>118</td>
+                <td>40</td>
+                <td>42</td>
+                <td>1</td>
+                <td>3,780</td>
+              </tr>
+
+              <tr>
+                <td>W-015</td>
+                <td>Water 1.5 L</td>
+                <td>Water</td>
+                <td>204</td>
+                <td>120</td>
+                <td>87</td>
+                <td>0</td>
+                <td>2,610</td>
+              </tr>
+
+              <tr class="case7-total-row">
+                <td colspan="7">Store total</td>
+                <td>6,390</td>
+              </tr>
+
+              <tr class="case7-service-row">
+                <td colspan="8">
+                  Generated automatically: 02.07.2026 08:15
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case7-action-area">
+    <button
+      class="case7-refresh-button"
+      id="case7-refresh-button"
+      type="button"
+    >
+      ⚡ Refresh data from folder
+    </button>
+
+    <div class="case7-loader" id="case7-loader">
+      <span class="case7-spinner"></span>
+
+      <span id="case7-loader-text">
+        Connecting to the shared folder…
+      </span>
+    </div>
+  </div>
+
+  <div class="case7-pipeline">
+    <div class="case7-pipeline-step" data-case7-step="0">
+      <span>1</span>
+      <strong>Folder scan</strong>
+      <small>searching for new Excel files</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="1">
+      <span>2</span>
+      <strong>Structure validation</strong>
+      <small>checking columns and data types</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="2">
+      <span>3</span>
+      <strong>Table cleanup</strong>
+      <small>removing service rows and totals</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="3">
+      <span>4</span>
+      <strong>Consolidation</strong>
+      <small>one dataset from all files</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="4">
+      <span>5</span>
+      <strong>Quality control</strong>
+      <small>duplicates and errors</small>
+    </div>
+
+    <div class="case7-pipeline-step" data-case7-step="5">
+      <span>6</span>
+      <strong>Analytics refresh</strong>
+      <small>updated KPIs and calculations</small>
+    </div>
+  </div>
+    <section class="case7-result" id="case7-result">
+    <div class="case7-result-head">
+      <div>
+        <span class="case7-kicker">PROCESSING RESULT</span>
+
+        <h3>
+          One dataset instead of one thousand separate files
+        </h3>
+
+        <p>
+          During each refresh, the system adds new reports to the master
+          table, validates data quality and passes the result
+          to further calculations, pivot tables and Power BI.
+        </p>
+      </div>
+    </div>
+
+    <div class="case7-result-stats">
+      <article>
+        <span>Files in folder</span>
+        <strong id="case7-stat-files">1,000</strong>
+        <small>total number of files</small>
+      </article>
+
+      <article>
+        <span>New files</span>
+        <strong id="case7-stat-new">0</strong>
+        <small>since the previous refresh</small>
+      </article>
+
+      <article>
+        <span>Rows consolidated</span>
+        <strong id="case7-stat-rows">0</strong>
+        <small>in one dataset</small>
+      </article>
+
+      <article>
+        <span>Duplicates</span>
+        <strong id="case7-stat-duplicates">0</strong>
+        <small>detected automatically</small>
+      </article>
+
+      <article>
+        <span>Files with errors</span>
+        <strong id="case7-stat-errors">0</strong>
+        <small>require review</small>
+      </article>
+
+      <article>
+        <span>Refresh time</span>
+        <strong id="case7-stat-time">0 sec</strong>
+        <small>full processing cycle</small>
+      </article>
+    </div>
+
+    <div class="case7-array-panel">
+      <div class="case7-array-head">
+        <div>
+          <strong>Consolidated dataset</strong>
+
+          <span>
+            Cleaned records converted to a consistent structure
+          </span>
+        </div>
+
+        <span class="case7-array-status" id="case7-array-status">
+          waiting for refresh
+        </span>
+      </div>
+
+      <div class="case7-array-table-wrap">
+        <table class="case7-array-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Store</th>
+              <th>Product code</th>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Opening stock</th>
+              <th>Incoming</th>
+              <th>Sales</th>
+              <th>Returns</th>
+              <th>Write-offs</th>
+              <th>Closing stock</th>
+              <th>Sales amount</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+
+          <tbody id="case7-array-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="case7-analytics-grid">
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Sales by store</strong>
+            <span>store performance ranking</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-store-bars"
+          id="case7-store-bars"
+        ></div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Sales by category</strong>
+            <span>share of total revenue</span>
+          </div>
+        </div>
+
+        <div class="case7-category-layout">
+          <div
+            class="case7-category-donut"
+            id="case7-category-donut"
+          ></div>
+
+          <div
+            class="case7-category-legend"
+            id="case7-category-legend"
+          ></div>
+        </div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Stockout risk</strong>
+            <span>products with low stock levels</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-risk-list"
+          id="case7-risk-list"
+        ></div>
+      </article>
+
+      <article class="case7-analytics-card">
+        <div class="case7-card-head">
+          <div>
+            <strong>Data quality control</strong>
+            <span>file validation results</span>
+          </div>
+        </div>
+
+        <div
+          class="case7-quality-list"
+          id="case7-quality-list"
+        ></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="case7-business-impact">
+    <article>
+      <span>Before automation</span>
+      <strong>up to 40 hours per month</strong>
+      <small>
+        manually opening, copying and checking files
+      </small>
+    </article>
+
+    <article>
+      <span>After automation</span>
+      <strong>one refresh</strong>
+      <small>
+        new files are added to the master model automatically
+      </small>
+    </article>
+
+    <article>
+      <span>Result</span>
+      <strong>one source of truth</strong>
+      <small>
+        for analytics, reporting and management decisions
+      </small>
+    </article>
+  </div>
+
+  <div class="case7-cta">
+    <a href="contacts-en.html">
+      I want to consolidate files automatically
+    </a>
+  </div>
+</section>

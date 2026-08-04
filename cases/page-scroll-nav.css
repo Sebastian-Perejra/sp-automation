@@ -1,1 +1,86 @@
+.page-scroll-nav {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 120;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #d7cec4;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #35594b;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(48, 43, 37, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
 
+.page-scroll-nav.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.page-scroll-nav:hover {
+  border-color: #35594b;
+  background: #35594b;
+  color: #ffffff;
+}
+
+.page-scroll-nav-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+.page-scroll-nav-icon::before,
+.page-scroll-nav-icon::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  width: 11px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.page-scroll-nav-icon::before {
+  left: 0;
+  transform: rotate(45deg);
+}
+
+.page-scroll-nav-icon::after {
+  right: 0;
+  transform: rotate(-45deg);
+}
+
+.page-scroll-nav.to-top .page-scroll-nav-icon::before {
+  transform: rotate(-45deg);
+}
+
+.page-scroll-nav.to-top .page-scroll-nav-icon::after {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 760px) {
+  .page-scroll-nav {
+    right: 14px;
+    bottom: 18px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+}

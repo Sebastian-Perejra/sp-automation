@@ -10,7 +10,7 @@
     text-shadow;
 }
 
-.desktop-nav a:hover {
+.desktop-nav a:not(.active):hover {
   animation: nav-font-kaleidoscope 2.1s steps(1, end) infinite !important;
 }
 

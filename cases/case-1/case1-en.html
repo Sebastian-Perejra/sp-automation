@@ -1,0 +1,150 @@
+<section class="case-demo" id="bank-statement-case">
+  <div class="case-demo-header">
+    <div>
+      <div class="case-demo-kicker">Real case study #1</div>
+
+      <h2>Automated bank statement processing</h2>
+
+      <p class="case-demo-subtitle">
+        The system reads messy bank statement lines, identifies the counterparty,
+        amount and payment purpose, and then automatically assigns each transaction
+        to a category. The data below is entirely fictional and used only for
+        demonstration.
+      </p>
+    </div>
+  </div>
+
+  <div class="case-demo-grid">
+    <div class="statement-panel">
+      <div class="demo-panel-head">
+        <div class="demo-panel-title">
+          Raw bank statement
+        </div>
+
+        <div class="demo-panel-note">
+          100 raw lines • bank statements • OCR • mixed formats
+        </div>
+      </div>
+
+      <div
+        class="statement-window"
+        id="statement-window"
+      ></div>
+    </div>
+
+    <div class="result-panel">
+      <div class="demo-panel-head">
+        <div class="demo-panel-title">
+          Processed result
+        </div>
+
+        <div class="demo-panel-note">
+          counterparty • category • amount
+        </div>
+      </div>
+
+      <div class="result-window">
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;">
+                Date
+              </th>
+
+              <th style="width: 34%;">
+                Counterparty
+              </th>
+
+              <th style="width: 28%;">
+                Category
+              </th>
+
+              <th style="width: 16%;">
+                Amount
+              </th>
+            </tr>
+          </thead>
+
+          <tbody id="result-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-demo-controls">
+    <div class="demo-progress-wrap">
+      <div class="demo-progress-label">
+        <span id="demo-status">
+          Ready to start
+        </span>
+
+        <span id="demo-counter">
+          0 / 100
+        </span>
+      </div>
+
+      <div class="demo-progress-track">
+        <div
+          class="demo-progress-bar"
+          id="demo-progress"
+        ></div>
+      </div>
+    </div>
+
+    <button
+      class="demo-run-button"
+      id="demo-run"
+      type="button"
+    >
+      ▶ Start processing
+    </button>
+  </div>
+
+  <div class="case-demo-stats">
+    <div class="demo-stat">
+      <strong id="stat-rows">
+        0
+      </strong>
+
+      <span>
+        rows processed
+      </span>
+    </div>
+
+    <div class="demo-stat">
+      <strong id="stat-clients">
+        0
+      </strong>
+
+      <span>
+        counterparties found
+      </span>
+    </div>
+
+    <div class="demo-stat">
+      <strong id="stat-categories">
+        0
+      </strong>
+
+      <span>
+        categories identified
+      </span>
+    </div>
+
+    <div class="demo-stat">
+      <strong id="stat-errors">
+        0
+      </strong>
+
+      <span>
+        items requiring review
+      </span>
+    </div>
+  </div>
+
+  <div class="demo-cta">
+    <a href="contacts-en.html">
+      I want a similar solution
+    </a>
+  </div>
+</section>

@@ -317,20 +317,23 @@ footer a:hover {
 
 @media (max-width: 760px) {
   .topbar-inner {
-    min-height: 72px;
+    min-height: 64px;
     padding:
       max(12px, env(safe-area-inset-top))
-      12px
+      14px
       12px;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
   }
 
-      .desktop-nav {
-        display: none;
-      }
+  .desktop-nav {
+    display: none;
+  }
 
-      .lang-switcher {
-        margin-left: auto;
-      }
+  .lang-switcher {
+    margin-left: 0;
+    justify-self: end;
+  }
 
       .page {
         padding:

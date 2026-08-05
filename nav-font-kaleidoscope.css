@@ -96,12 +96,6 @@
   }
 }
 
-.desktop-nav a[href="solutions.html"]:hover,
-.desktop-nav a[href="solutions-ru.html"]:hover,
-.desktop-nav a[href="solutions-en.html"]:hover {
-  animation-name: nav-font-kaleidoscope-active !important;
-}
-
 @keyframes nav-font-kaleidoscope-active {
   0% {
     font-family: "Manrope", Arial, sans-serif !important;

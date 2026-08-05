@@ -370,11 +370,24 @@ footer{background:rgba(244,240,234,.96)!important;border-top:1px solid #dfd8cf!i
 }
 
 .topbar .desktop-nav {
+  position: static;
   display: flex;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin-left: auto;
+  padding: 0 !important;
   align-items: center;
   justify-content: center;
   gap: 28px;
-  margin-left: auto;
+  border: 0 !important;
+  background: transparent !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+  .topbar .desktop-nav a:first-child {
+  margin-right: 0;
+  padding-left: 0;
 }
 
 .topbar .desktop-nav a {

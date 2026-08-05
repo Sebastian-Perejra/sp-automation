@@ -2468,6 +2468,7 @@ footer a:hover {
   </style>
   <link rel="stylesheet" href="/assistant.css">
   <link rel="stylesheet" href="cases/case-1/case1.css">
+  <link rel="stylesheet" href="cases/case-1/case1.css">
   <link rel="stylesheet" href="cases/case-5/case5.css">
   <link rel="stylesheet" href="cases/case-6/case6.css">
   <link rel="stylesheet" href="cases/case-7/case7.css">
@@ -2565,6 +2566,7 @@ footer a:hover {
     </section>
  
     <div id="case1-container"></div>
+    <div id="case2-container"></div>
     <section class="pdf-case" id="pdf-parser-case">
       <div class="case-demo-kicker">Real case study #2</div>
       <h2>Automated parsing of PDF invoices and packing lists</h2>
@@ -4589,6 +4591,33 @@ footer a:hover {
     });
 </script>
   <script>
+  fetch("cases/case-2/case2-en.html")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to load case study No. 2");
+      }
+
+      return response.text();
+    })
+    .then(html => {
+      const container =
+        document.getElementById("case2-container");
+
+      container.innerHTML = html;
+
+      const script =
+        document.createElement("script");
+
+      script.src =
+        "cases/case-2/case2-en.js";
+
+      document.body.appendChild(script);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+</script>
+    <script>
     fetch("cases/case-5/case5-en.html")
     .then(response => {
       if (!response.ok) {

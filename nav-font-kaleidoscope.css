@@ -168,6 +168,12 @@
   }
 }
 
+.desktop-nav a.active:hover {
+  animation: none !important;
+  color: #ffffff !important;
+  transform: none !important;
+  text-shadow: none !important;
+}
 @media (max-width: 760px) {
   .desktop-nav a:hover {
     animation: none !important;

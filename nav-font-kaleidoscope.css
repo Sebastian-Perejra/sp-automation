@@ -10,16 +10,14 @@
     text-shadow;
 }
 
-.desktop-nav a:not(.active):not([aria-current="page"]):hover {
+.desktop-nav a:hover {
   animation: nav-font-kaleidoscope 2.1s steps(1, end) infinite !important;
 }
 
 
 .desktop-nav a.active:hover,
 .desktop-nav a[aria-current="page"]:hover {
-  animation: none !important;
-  transform: none !important;
-  text-shadow: none !important;
+  color: #ffffff !important;
 }
 
 @keyframes nav-font-kaleidoscope {

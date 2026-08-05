@@ -512,7 +512,6 @@ async function runPdfCase() {
 
     await pdfSleep(650);
   }
-}
   finishPdfSteps();
 
   activePdfSheet = "RAW";

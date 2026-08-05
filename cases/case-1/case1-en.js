@@ -802,3 +802,237 @@ const bankRows = [
     "ok"
   ]
 ];
+const statementWindow =
+  document.getElementById("statement-window");
+
+const resultBody =
+  document.getElementById("result-body");
+
+const runButton =
+  document.getElementById("demo-run");
+
+const progress =
+  document.getElementById("demo-progress");
+
+const statusText =
+  document.getElementById("demo-status");
+
+const counterText =
+  document.getElementById("demo-counter");
+
+const statRows =
+  document.getElementById("stat-rows");
+
+const statClients =
+  document.getElementById("stat-clients");
+
+const statCategories =
+  document.getElementById("stat-categories");
+
+const statErrors =
+  document.getElementById("stat-errors");
+
+function renderSourceRows() {
+  statementWindow.innerHTML = "";
+
+  bankRows.forEach((row, index) => {
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "statement-line";
+
+    item.dataset.index =
+      index;
+
+    item.innerHTML = `
+      <span class="statement-date">
+        ${row[0]}
+      </span>
+
+      <span class="statement-text">
+        ${row[1]}
+      </span>
+
+      <span class="statement-amount">
+        ${row[2]}
+      </span>
+    `;
+
+    statementWindow.appendChild(item);
+  });
+}
+
+function resetDemo() {
+  renderSourceRows();
+
+  resultBody.innerHTML = "";
+
+  progress.style.width =
+    "0%";
+
+  statusText.textContent =
+    "Ready to start";
+
+  counterText.textContent =
+    `0 / ${bankRows.length}`;
+
+  statRows.textContent =
+    "0";
+
+  statClients.textContent =
+    "0";
+
+  statCategories.textContent =
+    "0";
+
+  statErrors.textContent =
+    "0";
+}
+
+function sleep(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+async function runDemo() {
+  runButton.disabled = true;
+  runButton.textContent = "Processing...";
+
+  resetDemo();
+
+  const clients = new Set();
+  const categories = new Set();
+
+  const lines =
+    Array.from(
+      document.querySelectorAll(".statement-line")
+    );
+
+  for (let i = 0; i < bankRows.length; i++) {
+    const row = bankRows[i];
+    const line = lines[i];
+
+    if (i > 0) {
+      lines[i - 1].classList.remove("active");
+      lines[i - 1].classList.add("done");
+    }
+
+    line.classList.add("active");
+
+    line.scrollIntoView({
+      block: "nearest",
+      behavior: "smooth"
+    });
+
+    statusText.textContent =
+      `Recognising and categorising row ${i + 1}`;
+
+    counterText.textContent =
+      `${i + 1} / ${bankRows.length}`;
+
+    progress.style.width =
+      `${((i + 1) / bankRows.length) * 100}%`;
+
+    const status =
+      row[5] || "ok";
+
+    if (status !== "error") {
+      clients.add(row[3]);
+      categories.add(row[4]);
+    }
+
+    if (status === "warning") {
+      line.classList.add("warning");
+    }
+
+    if (status === "error") {
+      line.classList.add("error");
+    }
+
+    const tr =
+      document.createElement("tr");
+
+    tr.className =
+      status === "ok"
+        ? ""
+        : status;
+
+    const chipClass =
+      status === "warning"
+        ? "category-chip warning"
+        : status === "error"
+          ? "category-chip error"
+          : "category-chip";
+
+    const categoryLabel =
+      status === "warning"
+        ? "⚠ " + row[4]
+        : status === "error"
+          ? "✖ " + row[4]
+          : row[4];
+
+    tr.innerHTML = `
+      <td>${row[0]}</td>
+      <td>${row[3]}</td>
+      <td>
+        <span class="${chipClass}">
+          ${categoryLabel}
+        </span>
+      </td>
+      <td>${row[2]}</td>
+    `;
+
+    resultBody.appendChild(tr);
+
+    requestAnimationFrame(() => {
+      tr.classList.add("show");
+    });
+
+    tr.scrollIntoView({
+      block: "nearest",
+      behavior: "smooth"
+    });
+
+    const issueCount =
+      bankRows
+        .slice(0, i + 1)
+        .filter(item => {
+          return (item[5] || "ok") !== "ok";
+        })
+        .length;
+
+    statRows.textContent =
+      String(i + 1);
+
+    statClients.textContent =
+      String(clients.size);
+
+    statCategories.textContent =
+      String(categories.size);
+
+    statErrors.textContent =
+      String(issueCount);
+
+    await sleep(55);
+  }
+
+  lines[bankRows.length - 1]
+    .classList.remove("active");
+
+  lines[bankRows.length - 1]
+    .classList.add("done");
+
+  statusText.textContent =
+    "Completed: 96 transactions processed • 3 items requiring review • 1 unrecognised";
+
+  runButton.disabled = false;
+  runButton.textContent = "↻ Run again";
+}
+
+runButton.addEventListener(
+  "click",
+  runDemo
+);
+
+resetDemo();

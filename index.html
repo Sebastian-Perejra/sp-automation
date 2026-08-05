@@ -267,8 +267,11 @@
 
     .ticker {
       position: fixed;
+      left: 0;
+      right: 0;
       bottom: 0;
-      width: 100%;
+      width: auto;
+      box-sizing: border-box;
       background-color: #007acc;
       color: white;
       overflow: hidden;
@@ -463,51 +466,7 @@ footer{background:rgba(244,240,234,.96)!important;border-top:1px solid #dfd8cf!i
       });
     });
   </script>
-  <!-- FAQ ICON BUTTON -->
-<a href="faq.html" id="faq-button" title="Часті питання">
-  <div class="faq-icon">❓</div>
-  <div class="faq-label">FAQ</div>
-</a>
-
-<style>
-  #faq-button {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #ffffff;
-    border: 2px solid #cc0000;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #cc0000;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    transition: transform 0.2s;
-    text-decoration: none;
-  }
-
-  #faq-button:hover {
-    transform: scale(1.1);
-  }
-
-  .faq-icon {
-    font-size: 22px;
-    line-height: 1;
-  }
-
-  .faq-label {
-    font-size: 11px;
-    line-height: 1;
-    margin-top: 2px;
-  }
-</style>
+  
   <!-- REVIEWS FLOAT BUTTON -->
 <button
   id="reviews-float-btn"
@@ -705,7 +664,7 @@ footer{background:rgba(244,240,234,.96)!important;border-top:1px solid #dfd8cf!i
 <style>
   #contact-float-btn {
     position: fixed;
-    right: 95px;
+    right: 20px;
     bottom: 98px;
     z-index: 1000;
 

@@ -96,16 +96,6 @@
   }
 }
 
-@keyframes nav-font-kaleidoscope-active {
-  0% {
-    font-family: "Manrope", Arial, sans-serif !important;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: 0;
-    color: #ffffff;
-    text-shadow: none;
-    transform: scale(1);
-  }
 
   14% {
     font-family: "Roboto Mono", monospace !important;

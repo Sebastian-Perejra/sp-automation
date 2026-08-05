@@ -34,25 +34,25 @@
   const casesByLanguage = {
     uk: [
       {
-        selector: "#bank-statement-case",
+        selector: "#case1-container",
         number: 1,
         title: "Автоматична обробка банківських виписок",
         description: "Розпізнавання, категоризація та очищення операцій"
       },
       {
-        selector: "#pdf-parser-case",
+        selector: "#case2-container",
         number: 2,
         title: "Парсинг PDF-інвойсів і пакувальних листів",
         description: "OCR, перенесення даних і зіставлення ваги"
       },
       {
-        selector: "#dashboard-case",
+        selector: "#case3-container",
         number: 3,
         title: "Автоматичне створення аналітичного дашборда",
         description: "Розрахунок KPI, агрегація даних і графіки"
       },
       {
-        selector: "#production-capacity-case",
+        selector: "#case4-container",
         number: 4,
         title: "Планування виробничих потужностей",
         description: "Розподіл замовлень і розрахунок строків"
@@ -79,25 +79,25 @@
 
     ru: [
       {
-        selector: "#bank-statement-case",
+        selector: "#case1-container",
         number: 1,
         title: "Автоматическая обработка банковских выписок",
         description: "Распознавание, категоризация и очистка операций"
       },
       {
-        selector: "#pdf-parser-case",
+        selector: "#case2-container",
         number: 2,
         title: "Парсинг PDF-инвойсов и упаковочных листов",
         description: "OCR, перенос данных и сопоставление веса"
       },
       {
-        selector: "#dashboard-case",
+        selector: "#case3-container",
         number: 3,
         title: "Автоматическое создание аналитического дашборда",
         description: "Расчёт KPI, агрегация данных и графики"
       },
       {
-        selector: "#production-capacity-case",
+        selector: "#case4-container",
         number: 4,
         title: "Планирование производственных мощностей",
         description: "Распределение заказов и расчёт сроков"
@@ -124,25 +124,25 @@
 
     en: [
       {
-        selector: "#bank-statement-case",
+        selector: "#case1-container",
         number: 1,
         title: "Automatic bank statement processing",
         description: "Recognition, categorisation and transaction cleanup"
       },
       {
-        selector: "#pdf-parser-case",
+        selector: "#case2-container",
         number: 2,
         title: "PDF invoice and packing list parsing",
         description: "OCR, data extraction and weight matching"
       },
       {
-        selector: "#dashboard-case",
+        selector: "#case3-container",
         number: 3,
         title: "Automatic analytical dashboard creation",
         description: "KPI calculation, data aggregation and charts"
       },
       {
-        selector: "#production-capacity-case",
+        selector: "#case4-container",
         number: 4,
         title: "Production capacity planning",
         description: "Order allocation and completion date calculation"

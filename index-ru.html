@@ -267,8 +267,11 @@
 
     .ticker {
       position: fixed;
+      left: 0;
+      right: 0;
       bottom: 0;
-      width: 100%;
+      width: auto;
+      box-sizing: border-box;
       background-color: #007acc;
       color: white;
       overflow: hidden;
@@ -871,6 +874,7 @@ body::-webkit-scrollbar {
     <a href="services-ru.html" onclick="closeMenu()">Услуги</a>
     <a href="pricing-ru.html" onclick="closeMenu()">Ценовая политика</a>
     <a href="solutions-ru.html" onclick="closeMenu()">Решения</a>
+    <a href="faq-ru.html" onclick="closeMenu()">FAQ</a>
     <a href="contacts-ru.html" onclick="closeMenu()">Контакты</a>
     <a href="terms-ru.html" onclick="closeMenu()">Условия использования</a>
   </div>
@@ -3720,11 +3724,7 @@ function discussSelectedTask() {
       font-size: 15px;
       text-align: center;
     }
-
-    header {
-      padding: 88px 16px 18px;
-    }
-
+    
     .hero-inline {
       display: flex;
       flex-direction: column;
@@ -3757,14 +3757,7 @@ function discussSelectedTask() {
       padding: 14px 18px;
       font-size: 15px;
     }
-
-    .carousel-container {
-  width: calc(100% - 24px);
-  height: 220px;
-  margin: 22px auto 42px;
-  overflow: hidden;
-   }
-
+    
     .carousel img {
       height: 68px;
       transform:

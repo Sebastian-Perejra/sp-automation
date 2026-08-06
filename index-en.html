@@ -864,7 +864,7 @@ body::-webkit-scrollbar {
 
 <div class="mobile-lang-switcher">
   <button onclick="location.href='index.html'">UA</button>
-  <button onclick="location.href='index-en.html'">EN</button>
+  <<button class="active" onclick="location.href='index-en.html'">EN</button>
   <button onclick="location.href='index-ru.html'">RU</button>
 </div>
 
@@ -4071,6 +4071,13 @@ function discussSelectedTask() {
     gap: 6px;
     z-index: 1002;
   }
+
+  .mobile-lang-switcher button.active {
+  border-color: var(--green);
+  background: var(--green);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(53, 89, 75, 0.22);
+}
 
   .mobile-lang-switcher button {
     min-width: 38px;

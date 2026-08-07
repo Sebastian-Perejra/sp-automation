@@ -442,8 +442,21 @@
     document.getElementById(
       'sessionTokenInput'
     ).value = sessionToken;
-
+    
+requestDriveAccess()
+  .then(function () {
     openApp();
+  })
+  .catch(function (error) {
+
+    loginStarted = false;
+
+    showError(
+      error && error.message
+        ? error.message
+        : String(error)
+    );
+  });
   }
 
     let driveAccessToken = '';
@@ -474,46 +487,77 @@
   );
 }
 
-const driveTokenClient =
-  google.accounts.oauth2.initTokenClient({
-    client_id:
-      '1655310339-bmbl5rav6cn57ibr4jmfmpl3d34u09ps.apps.googleusercontent.com',
+function requestDriveAccess() {
 
-    scope:
-      'https://www.googleapis.com/auth/drive.file',
+  return new Promise(
+    function(resolve, reject) {
 
-    callback:
-      function(tokenResponse) {
-
-        if (
-          !tokenResponse ||
-          !tokenResponse.access_token
-        ) {
-          showError(
-            'Не вдалося отримати доступ до Google Drive.'
-          );
-
-          return;
-        }
-
-        driveAccessToken =
-          tokenResponse.access_token;
-        sendDriveTokenToApp();
-
-        sessionStorage.setItem(
-          'fiveMinuteDriveAccessToken',
-          driveAccessToken
+      if (
+        !window.google ||
+        !google.accounts ||
+        !google.accounts.oauth2
+      ) {
+        reject(
+          new Error(
+            'Google Identity Services ще не завантажено.'
+          )
         );
 
-        console.log(
-          'Drive access token отримано'
-        );
+        return;
       }
-  });
 
-    driveTokenClient.requestAccessToken({
-  prompt: ''
-});
+      const clientId =
+        document
+          .getElementById('g_id_onload')
+          .dataset.client_id;
+
+      const tokenClient =
+        google.accounts.oauth2.initTokenClient({
+
+          client_id:
+            clientId,
+
+          scope:
+            'https://www.googleapis.com/auth/drive.file',
+
+          callback:
+            function(tokenResponse) {
+
+              if (
+                !tokenResponse ||
+                !tokenResponse.access_token
+              ) {
+                reject(
+                  new Error(
+                    'Google Drive не повернув access token.'
+                  )
+                );
+
+                return;
+              }
+
+              driveAccessToken =
+                tokenResponse.access_token;
+
+              sessionStorage.setItem(
+                'fiveMinuteDriveAccessToken',
+                driveAccessToken
+              );
+
+              sendDriveTokenToApp();
+
+              resolve(
+                driveAccessToken
+              );
+            }
+        });
+
+      tokenClient.requestAccessToken({
+        prompt: 'consent'
+      });
+    }
+  );
+}
 
 
   function openApp() {

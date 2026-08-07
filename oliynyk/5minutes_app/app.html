@@ -446,6 +446,48 @@
     openApp();
   }
 
+    let driveAccessToken = '';
+
+const driveTokenClient =
+  google.accounts.oauth2.initTokenClient({
+    client_id:
+      '1655310339-ggiu271hplep7ila7ldlvtb6en8a171k.apps.googleusercontent.com',
+
+    scope:
+      'https://www.googleapis.com/auth/drive.file',
+
+    callback:
+      function(tokenResponse) {
+
+        if (
+          !tokenResponse ||
+          !tokenResponse.access_token
+        ) {
+          showError(
+            'Не вдалося отримати доступ до Google Drive.'
+          );
+
+          return;
+        }
+
+        driveAccessToken =
+          tokenResponse.access_token;
+
+        sessionStorage.setItem(
+          'fiveMinuteDriveAccessToken',
+          driveAccessToken
+        );
+
+        console.log(
+          'Drive access token отримано'
+        );
+      }
+  });
+
+    driveTokenClient.requestAccessToken({
+  prompt: ''
+});
+
 
   function openApp() {
 

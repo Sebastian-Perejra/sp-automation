@@ -624,6 +624,15 @@ function requestDriveAccess() {
    
     const data =
       event.data || {};
+    if (
+  data.type ===
+  'FIVE_MINUTE_APP_READY'
+) {
+
+  sendDriveTokenToApp();
+
+  return;
+}
 
     if (
       data.type !==

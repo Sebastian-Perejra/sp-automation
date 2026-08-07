@@ -448,6 +448,32 @@
 
     let driveAccessToken = '';
 
+    function sendDriveTokenToApp() {
+  const frame =
+    document.getElementById(
+      'appFrame'
+    );
+
+  if (
+    !frame ||
+    !frame.contentWindow ||
+    !driveAccessToken
+  ) {
+    return;
+  }
+
+  frame.contentWindow.postMessage(
+    {
+      type:
+        'FIVE_MINUTE_DRIVE_TOKEN',
+
+      accessToken:
+        driveAccessToken
+    },
+    '*'
+  );
+}
+
 const driveTokenClient =
   google.accounts.oauth2.initTokenClient({
     client_id:
@@ -472,6 +498,7 @@ const driveTokenClient =
 
         driveAccessToken =
           tokenResponse.access_token;
+        sendDriveTokenToApp();
 
         sessionStorage.setItem(
           'fiveMinuteDriveAccessToken',
@@ -623,6 +650,17 @@ const driveTokenClient =
 
     loginStarted = false;
   }
+    document
+  .getElementById('appFrame')
+  .addEventListener(
+    'load',
+    function() {
+      setTimeout(
+        sendDriveTokenToApp,
+        300
+      );
+    }
+  );
 </script>
 
 </body>

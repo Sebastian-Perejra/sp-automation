@@ -459,7 +459,12 @@ requestDriveAccess()
   });
   }
 
-    let driveAccessToken = '';
+    let driveAccessToken =
+  String(
+    sessionStorage.getItem(
+      'fiveMinuteDriveAccessToken'
+    ) || ''
+  ).trim();
 
     function sendDriveTokenToApp() {
   const frame =

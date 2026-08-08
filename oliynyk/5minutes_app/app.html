@@ -758,42 +758,68 @@ function requestDriveAccess() {
         ]
       };
 
-      const form =
-        new FormData();
+      const boundary =
+  '-------fiveMinuteBoundary' +
+  Date.now();
 
-      form.append(
-        'metadata',
-        new Blob(
-          [
-            JSON.stringify(metadata)
-          ],
-          {
-            type:
-              'application/json'
-          }
-        )
-      );
+const delimiter =
+  '\r\n--' +
+  boundary +
+  '\r\n';
 
-      form.append(
-        'file',
-        file
-      );
+const closeDelimiter =
+  '\r\n--' +
+  boundary +
+  '--';
 
-      const response =
-        await fetch(
-          'https://www.googleapis.com/upload/drive/v3/files' +
-          '?uploadType=multipart' +
-          '&fields=id,name,mimeType,size',
-          {
-            method: 'POST',
+const metadataPart =
+  delimiter +
+  'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+  JSON.stringify(metadata) +
+  delimiter +
+  'Content-Type: ' +
+  (
+    file.type ||
+    'application/octet-stream'
+  ) +
+  '\r\n\r\n';
 
-            headers: {
-              Authorization:
-                'Bearer ' +
-                driveAccessToken
-            },
+const body =
+  new Blob(
+    [
+      metadataPart,
+      file,
+      closeDelimiter
+    ],
+    {
+      type:
+        'multipart/related; boundary=' +
+        boundary
+    }
+  );
 
-            body: form
+const response =
+  await fetch(
+    'https://www.googleapis.com/upload/drive/v3/files' +
+    '?uploadType=multipart' +
+    '&fields=id,name,mimeType,size',
+    {
+      method: 'POST',
+
+      headers: {
+        Authorization:
+          'Bearer ' +
+          driveAccessToken,
+
+        'Content-Type':
+          'multipart/related; boundary=' +
+          boundary
+      },
+
+      body:
+        body
+    }
+  );
           }
         );
 

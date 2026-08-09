@@ -764,11 +764,20 @@ sessionStorage.setItem(
 
     try {
 
-      if (!driveAccessToken) {
-        throw new Error(
-          'Немає доступу до Google Drive.'
-        );
-      }
+      if (
+  !driveAccessToken ||
+  !driveAccessTokenExpiresAt ||
+  Date.now() >= driveAccessTokenExpiresAt
+) {
+
+  await requestDriveAccess();
+
+  if (!driveAccessToken) {
+    throw new Error(
+      'Немає доступу до Google Drive.'
+    );
+  }
+}
 
       const file =
         data.file;

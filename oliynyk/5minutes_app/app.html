@@ -466,6 +466,13 @@ requestDriveAccess()
     ) || ''
   ).trim();
 
+    let driveAccessTokenExpiresAt =
+  Number(
+    sessionStorage.getItem(
+      'fiveMinuteDriveAccessTokenExpiresAt'
+    ) || 0
+  );
+
     function sendDriveTokenToApp() {
   const frame =
     document.getElementById(
@@ -548,6 +555,22 @@ function requestDriveAccess() {
                 'fiveMinuteDriveAccessToken',
                 driveAccessToken
               );
+
+              driveAccessTokenExpiresAt =
+  Date.now() +
+  (
+    Number(
+      tokenResponse.expires_in || 3600
+    ) * 1000
+  ) -
+  60000;
+
+sessionStorage.setItem(
+  'fiveMinuteDriveAccessTokenExpiresAt',
+  String(
+    driveAccessTokenExpiresAt
+  )
+);
 
               sendDriveTokenToApp();
 

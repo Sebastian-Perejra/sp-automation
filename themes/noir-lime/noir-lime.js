@@ -258,11 +258,31 @@ artifact.style.top = `${y}%`;
 
     layer.appendChild(artifact);
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        artifact.classList.add('is-visible');
-      });
-    });
+if (window.innerWidth <= 760) {
+  requestAnimationFrame(() => {
+    const layerRect = layer.getBoundingClientRect();
+    const artifactRect = artifact.getBoundingClientRect();
+    const edgeGap = 10;
+
+    let left = artifact.offsetLeft;
+
+    if (artifactRect.right > layerRect.right - edgeGap) {
+      left -= artifactRect.right - (layerRect.right - edgeGap);
+    }
+
+    if (artifactRect.left < layerRect.left + edgeGap) {
+      left += (layerRect.left + edgeGap) - artifactRect.left;
+    }
+
+    artifact.style.left = `${Math.max(edgeGap, left)}px`;
+  });
+}
+
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    artifact.classList.add('is-visible');
+  });
+});
 
     const visibleTime = random(6500, 10000);
 

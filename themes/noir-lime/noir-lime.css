@@ -461,3 +461,7 @@ body {
 .contact-form-card {
   align-self: start;
 }
+
+body::after {
+  display: none;
+}

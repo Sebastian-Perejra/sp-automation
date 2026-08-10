@@ -466,42 +466,43 @@ body::after {
   content: "";
   position: fixed;
   z-index: -1;
-  left: 50%;
-  top: 88px;
-  width: 1600px;
-  height: 1100px;
-  transform:
-    translateX(-50%)
-    perspective(1200px)
-    rotateX(78deg);
-  transform-origin: top center;
+
+  left: 0;
+  right: 0;
+  top: 118px;
+  bottom: 0;
+
   pointer-events: none;
-  opacity: 0.22;
+
   background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(184, 255, 53, 0.06) 0 1px,
-      transparent 1px 90px
-    ),
-    repeating-linear-gradient(
-      180deg,
-      rgba(184, 255, 53, 0.035) 0 1px,
-      transparent 1px 72px
+    repeating-conic-gradient(
+      from 262deg at 50% 18%,
+      transparent 0deg 5.5deg,
+      rgba(184, 255, 53, 0.085) 5.55deg 5.65deg,
+      transparent 5.7deg 11deg
     );
-  mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.82) 18%,
-    rgba(0, 0, 0, 0.42) 54%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.82) 18%,
-    rgba(0, 0, 0, 0.42) 54%,
-    transparent 100%
-  );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 10%,
+      rgba(0, 0, 0, 0.8) 35%,
+      rgba(0, 0, 0, 0.55) 72%,
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.15) 10%,
+      rgba(0, 0, 0, 0.8) 35%,
+      rgba(0, 0, 0, 0.55) 72%,
+      transparent 100%
+    );
+
+  opacity: 0.75;
 }
 
 .turnstile-wrapper {

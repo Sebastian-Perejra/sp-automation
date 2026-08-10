@@ -974,3 +974,11 @@ footer {
 body {
   padding-top: 72px !important;
 }
+.turnstile-wrapper {
+  margin-top: 14px !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  min-height: 0 !important;
+}

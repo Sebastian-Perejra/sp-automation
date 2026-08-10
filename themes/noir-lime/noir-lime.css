@@ -822,6 +822,6 @@ body {
 @media (max-width: 760px) {
   .code-artifact {
     max-width: 180px;
-    font-size: 10px;
+    font-size: 8px;
   }
 }

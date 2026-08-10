@@ -982,3 +982,19 @@ body {
   background: transparent !important;
   min-height: 0 !important;
 }
+
+.home-link {
+  color: rgba(255, 255, 255, 0.72) !important;
+  text-shadow: none !important;
+  letter-spacing: 0.02em !important;
+}
+
+.home-link::before,
+.home-link::after {
+  content: none !important;
+  display: none !important;
+}
+
+.home-link:hover {
+  color: #b8ff2c !important;
+}

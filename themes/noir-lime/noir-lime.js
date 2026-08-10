@@ -217,9 +217,9 @@ do {
   const side = Math.random() < 0.5 ? 'left' : 'right';
 
   x =
-    side === 'left'
-      ? random(2, 24)
-      : random(76, 94);
+  side === 'left'
+    ? random(3, 20)
+    : random(80, 90);
 
   y = random(16, 82);
 

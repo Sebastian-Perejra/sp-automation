@@ -1,4 +1,60 @@
 (() => {
+  const earthImages = [
+  'assets/contacts/Earth_horizon1.jpg',
+  'assets/contacts/Earth_horizon2.avif',
+  'assets/contacts/Earth_horizon_3_AI.png',
+  'assets/contacts/Earth_horizon_4_AI.png',
+  'assets/contacts/Earth_horizon_5_AI.png',
+  'assets/contacts/Earth_horizon_6_AI.png',
+  'assets/contacts/Earth_horizon_7_AI.png',
+  'assets/contacts/Earth_horizon_8_AI.png',
+  'assets/contacts/Earth_horizon_9_AI.png',
+  'assets/contacts/Earth_horizon_10_AI.png'
+];
+  const earthBackground = document.getElementById('earthBackground');
+
+if (earthBackground) {
+  const earthLayers = Array.from(
+    earthBackground.querySelectorAll('.earth-background__image')
+  );
+
+  if (earthLayers.length >= 2) {
+    let currentImageIndex = 0;
+    let activeLayerIndex = 0;
+
+    earthLayers[0].style.backgroundImage =
+      `url("${earthImages[0]}")`;
+
+    earthLayers[0].classList.add('is-active');
+
+    earthImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    function showNextEarthImage() {
+      const nextImageIndex =
+        (currentImageIndex + 1) % earthImages.length;
+
+      const nextLayerIndex =
+        activeLayerIndex === 0 ? 1 : 0;
+
+      const currentLayer = earthLayers[activeLayerIndex];
+      const nextLayer = earthLayers[nextLayerIndex];
+
+      nextLayer.style.backgroundImage =
+        `url("${earthImages[nextImageIndex]}")`;
+
+      nextLayer.classList.add('is-active');
+      currentLayer.classList.remove('is-active');
+
+      currentImageIndex = nextImageIndex;
+      activeLayerIndex = nextLayerIndex;
+    }
+
+    setInterval(showNextEarthImage, 16000);
+  }
+}
   const layer = document.getElementById('codeArtifacts');
   if (!layer) return;
 

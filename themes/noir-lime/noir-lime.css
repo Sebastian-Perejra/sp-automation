@@ -541,3 +541,22 @@ body::after {
   background: rgba(184, 255, 53, 0.12);
   color: var(--nl-lime);
 }
+
+.topbar-inner {
+  width: min(100%, 1180px);
+}
+
+.home-link {
+  font-size: 13px;
+}
+
+.desktop-nav a {
+  font-size: 12px;
+  letter-spacing: 0.025em;
+}
+
+.lang-switcher button {
+  min-width: 36px;
+  height: 34px;
+  font-size: 10px;
+}

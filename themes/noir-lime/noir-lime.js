@@ -128,8 +128,24 @@
 
   function createArtifact() {
     const artifact = document.createElement('span');
-    artifact.className = 'code-artifact';
-    artifact.textContent = getFragment();
+    const fragment = getFragment();
+
+artifact.className = 'code-artifact';
+artifact.textContent = fragment;
+
+const isThought =
+  fragment.includes('?') ||
+  fragment.startsWith('як ') ||
+  fragment.startsWith('чому ') ||
+  fragment.startsWith('може ') ||
+  fragment.startsWith('чи ') ||
+  fragment.startsWith('що ') ||
+  fragment.startsWith('де ') ||
+  fragment.startsWith('звідки ');
+
+artifact.classList.add(
+  isThought ? 'code-artifact--thought' : 'code-artifact--code'
+);
 
     const side = Math.random() < 0.5 ? 'left' : 'right';
 

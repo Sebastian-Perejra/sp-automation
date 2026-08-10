@@ -853,3 +853,57 @@ body {
 .code-artifact--code::before {
   background: var(--nl-lime);
 }
+
+.earth-background {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  pointer-events: none;
+  background: #070a08;
+}
+
+.earth-background__image {
+  position: absolute;
+  inset: -2%;
+  opacity: 0;
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  transform: scale(1.035);
+
+  transition:
+    opacity 4.5s ease-in-out,
+    transform 18s ease-out;
+
+  will-change: opacity, transform;
+}
+
+.earth-background__image.is-active {
+  opacity: 0.62;
+  transform: scale(1);
+}
+
+.earth-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 7, 6, 0.46) 0%,
+      rgba(5, 10, 8, 0.36) 34%,
+      rgba(5, 12, 9, 0.48) 72%,
+      rgba(3, 6, 5, 0.70) 100%
+    ),
+    radial-gradient(
+      ellipse 68% 58% at 50% 45%,
+      rgba(5, 12, 9, 0.08) 0%,
+      rgba(4, 8, 6, 0.30) 62%,
+      rgba(2, 4, 3, 0.58) 100%
+    );
+}

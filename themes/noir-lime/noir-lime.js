@@ -22,7 +22,6 @@
   'themes/noir-lime/assets/contacts/Earth_horizon_9_AI.png',
   'themes/noir-lime/assets/contacts/Earth_horizon_10_AI.png'
 ];
-
   const earthBackground =
     document.getElementById('earthBackground');
 

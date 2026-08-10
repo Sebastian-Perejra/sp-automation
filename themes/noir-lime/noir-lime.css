@@ -654,3 +654,53 @@ body::after {
 .contact-form textarea {
   min-height: 120px;
 }
+
+.contact-form button[type="submit"] {
+  position: relative;
+  min-height: 56px;
+  padding: 0 54px 0 22px;
+  border: 1px solid rgba(184, 255, 53, 0.72);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      135deg,
+      #b8ff35 0%,
+      #9eea25 100%
+    );
+  color: #090c0a;
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow:
+    0 10px 28px rgba(184, 255, 53, 0.10);
+}
+
+.contact-form button[type="submit"]::after {
+  content: "→";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-52%);
+  font-size: 18px;
+  font-weight: 400;
+  transition:
+    transform 0.25s ease;
+}
+
+.contact-form button[type="submit"]:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #c7ff58 0%,
+      #adf12e 100%
+    );
+  box-shadow:
+    0 14px 38px rgba(184, 255, 53, 0.18);
+  transform: translateY(-1px);
+}
+
+.contact-form button[type="submit"]:hover::after {
+  transform: translate(4px, -52%);
+}

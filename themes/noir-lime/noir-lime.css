@@ -999,7 +999,25 @@ body {
   color: #b8ff2c !important;
 }
 @media (max-width: 760px) {
-  .contact-card {
+  .contact-layout {
     grid-template-columns: 1fr !important;
+  }
+
+  .contact-layout::before {
+    display: none !important;
+  }
+
+  .contact-info,
+  .contact-form-card {
+    width: 100%;
+    padding: 28px 18px !important;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 14vw, 4rem) !important;
+  }
+
+  .contact-form-card h2 {
+    font-size: clamp(2rem, 9vw, 2.8rem) !important;
   }
 }

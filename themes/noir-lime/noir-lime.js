@@ -56,6 +56,7 @@ if (earthBackground) {
   }
 }
   const layer = document.getElementById('codeArtifacts');
+  const contactsShell = document.querySelector('.contacts-shell');
   if (!layer) return;
 
   const fragments = [
@@ -203,17 +204,49 @@ artifact.classList.add(
   isThought ? 'code-artifact--thought' : 'code-artifact--code'
 );
 
-    const side = Math.random() < 0.5 ? 'left' : 'right';
+    let x;
+let y;
+let attempts = 0;
 
-    const x =
-      side === 'left'
-        ? random(2, 24)
-        : random(76, 94);
+const layerRect = layer.getBoundingClientRect();
+const contactRect = contactsShell
+  ? contactsShell.getBoundingClientRect()
+  : null;
 
-    const y = random(16, 82);
+do {
+  const side = Math.random() < 0.5 ? 'left' : 'right';
 
-    artifact.style.left = `${x}%`;
-    artifact.style.top = `${y}%`;
+  x =
+    side === 'left'
+      ? random(2, 24)
+      : random(76, 94);
+
+  y = random(16, 82);
+
+  attempts++;
+
+  if (!contactRect) break;
+
+  const pointX =
+    layerRect.left + (x / 100) * layerRect.width;
+
+  const pointY =
+    layerRect.top + (y / 100) * layerRect.height;
+
+  const safeGap = 70;
+
+  const insideProtectedZone =
+    pointX > contactRect.left - safeGap &&
+    pointX < contactRect.right + safeGap &&
+    pointY > contactRect.top - safeGap &&
+    pointY < contactRect.bottom + safeGap;
+
+  if (!insideProtectedZone) break;
+
+} while (attempts < 50);
+
+artifact.style.left = `${x}%`;
+artifact.style.top = `${y}%`;
 
     artifact.style.setProperty(
       '--artifact-opacity',

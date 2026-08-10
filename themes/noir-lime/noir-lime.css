@@ -314,16 +314,10 @@ footer {
 }
 
 body {
-  background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.022) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.022) 1px,
-      transparent 1px
-    ),
+  position: relative;
+  isolation: isolate;
+  color: var(--nl-text);
+  background:
     radial-gradient(
       ellipse 80% 38% at 50% 45%,
       rgba(55, 150, 120, 0.10) 0%,
@@ -337,12 +331,6 @@ body {
       #08100c 72%,
       #070908 100%
     );
-
-  background-size:
-    72px 72px,
-    72px 72px,
-    auto,
-    auto;
 }
 
 .contact-layout {
@@ -462,47 +450,76 @@ body {
   align-self: start;
 }
 
-body::after {
+.page-shell {
+  position: relative;
+  z-index: 0;
+  overflow: visible;
+}
+
+.page-shell::before {
   content: "";
   position: fixed;
   z-index: -1;
-
-  left: 0;
-  right: 0;
-  top: 118px;
-  bottom: 0;
-
+  left: 50%;
+  top: 88px;
+  width: 2200px;
+  height: 1400px;
+  transform:
+    translateX(-50%)
+    perspective(900px)
+    rotateX(78deg);
+  transform-origin: top center;
   pointer-events: none;
-
+  opacity: 0.52;
   background:
-    repeating-conic-gradient(
-      from 262deg at 50% 18%,
-      transparent 0deg 5.5deg,
-      rgba(184, 255, 53, 0.085) 5.55deg 5.65deg,
-      transparent 5.7deg 11deg
+    repeating-linear-gradient(
+      90deg,
+      rgba(184, 255, 53, 0.14) 0 1px,
+      transparent 1px 120px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(184, 255, 53, 0.10) 0 1px,
+      transparent 1px 96px
     );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.98) 0%,
+    rgba(0, 0, 0, 0.92) 16%,
+    rgba(0, 0, 0, 0.78) 34%,
+    rgba(0, 0, 0, 0.42) 62%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.98) 0%,
+    rgba(0, 0, 0, 0.92) 16%,
+    rgba(0, 0, 0, 0.78) 34%,
+    rgba(0, 0, 0, 0.42) 62%,
+    transparent 100%
+  );
+  filter:
+    drop-shadow(0 0 12px rgba(184, 255, 53, 0.08));
+}
 
-  mask-image:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 0, 0, 0.15) 10%,
-      rgba(0, 0, 0, 0.8) 35%,
-      rgba(0, 0, 0, 0.55) 72%,
-      transparent 100%
+.page-shell::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  left: 50%;
+  top: 330px;
+  width: 1200px;
+  height: 320px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(184, 255, 53, 0.09) 0%,
+      rgba(77, 210, 168, 0.06) 28%,
+      rgba(34, 105, 88, 0.03) 46%,
+      transparent 75%
     );
-
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 0, 0, 0.15) 10%,
-      rgba(0, 0, 0, 0.8) 35%,
-      rgba(0, 0, 0, 0.55) 72%,
-      transparent 100%
-    );
-
-  opacity: 0.75;
 }
 
 .turnstile-wrapper {

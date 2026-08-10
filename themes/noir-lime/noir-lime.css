@@ -465,3 +465,20 @@ body {
 body::after {
   display: none;
 }
+
+.turnstile-wrapper {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.cf-turnstile {
+  filter: saturate(0.85) contrast(0.96);
+}

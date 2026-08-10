@@ -998,3 +998,8 @@ body {
 .home-link:hover {
   color: #b8ff2c !important;
 }
+@media (max-width: 760px) {
+  .contact-card {
+    grid-template-columns: 1fr !important;
+  }
+}

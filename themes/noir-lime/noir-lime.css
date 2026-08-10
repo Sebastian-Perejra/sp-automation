@@ -766,7 +766,7 @@ body {
 .code-artifacts {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 90;
   overflow: hidden;
   pointer-events: none;
 }
@@ -775,7 +775,7 @@ body {
   position: absolute;
   max-width: 320px;
   opacity: 0;
-  color: rgba(184, 255, 53, 0.42);
+  color: rgba(184, 255, 53, 0.95)
   font-family: var(--font-tech);
   font-size: 10px;
   font-weight: 400;
@@ -796,7 +796,7 @@ body {
 }
 
 .code-artifact.is-visible {
-  opacity: var(--artifact-opacity, 0.28);
+  opacity: 0.9;
   transform: translateY(-3px);
 }
 

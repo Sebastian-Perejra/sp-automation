@@ -825,3 +825,31 @@ body {
     font-size: 8px;
   }
 }
+
+.code-artifact--code {
+  color: rgba(184, 255, 53, 0.78);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.code-artifact--thought {
+  color: rgba(226, 238, 224, 0.78);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  text-shadow:
+    0 0 12px rgba(184, 255, 53, 0.08),
+    0 0 26px rgba(184, 255, 53, 0.035);
+}
+
+.code-artifact--thought::before {
+  width: 5px;
+  height: 5px;
+  background: rgba(226, 238, 224, 0.82);
+  box-shadow:
+    0 0 9px rgba(184, 255, 53, 0.18);
+}
+
+.code-artifact--code::before {
+  background: var(--nl-lime);
+}

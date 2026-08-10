@@ -312,3 +312,35 @@ footer {
     font-size: clamp(3.5rem, 18vw, 5rem);
   }
 }
+
+body {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      ellipse 80% 38% at 50% 45%,
+      rgba(55, 150, 120, 0.10) 0%,
+      rgba(20, 80, 65, 0.055) 35%,
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      #070908 0%,
+      #090c0a 38%,
+      #08100c 72%,
+      #070908 100%
+    );
+
+  background-size:
+    72px 72px,
+    72px 72px,
+    auto,
+    auto;
+}

@@ -318,19 +318,19 @@ body {
   isolation: isolate;
   color: var(--nl-text);
   background:
-    radial-gradient(
-      ellipse 80% 38% at 50% 45%,
-      rgba(55, 150, 120, 0.10) 0%,
-      rgba(20, 80, 65, 0.055) 35%,
-      transparent 72%
-    ),
-    linear-gradient(
-      180deg,
-      #070908 0%,
-      #090c0a 38%,
-      #08100c 72%,
-      #070908 100%
-    );
+  radial-gradient(
+    ellipse 90% 48% at 50% 46%,
+    rgba(66, 158, 128, 0.15) 0%,
+    rgba(34, 94, 76, 0.09) 36%,
+    transparent 72%
+  ),
+  linear-gradient(
+    180deg,
+    #0d110f 0%,
+    #101511 38%,
+    #0d1511 72%,
+    #0b0f0d 100%
+  );
 }
 
 .contact-layout {

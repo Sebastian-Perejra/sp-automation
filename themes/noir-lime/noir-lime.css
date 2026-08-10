@@ -775,7 +775,7 @@ body {
   position: absolute;
   max-width: 320px;
   opacity: 0;
-  color: rgba(184, 255, 53, 0.95)
+  color: rgba(184, 255, 53, 0.95);
   font-family: var(--font-tech);
   font-size: 10px;
   font-weight: 400;
@@ -857,7 +857,7 @@ body {
 .earth-background {
   position: fixed;
   inset: 0;
-  z-index: -3;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
   background: #070a08;
@@ -906,4 +906,24 @@ body {
       rgba(4, 8, 6, 0.30) 62%,
       rgba(2, 4, 3, 0.58) 100%
     );
+}
+
+.page-shell,
+.topbar,
+footer {
+  position: relative;
+  z-index: 10;
+}
+
+.code-artifacts {
+  z-index: 20;
+}
+
+.earth-background {
+  z-index: 1 !important;
+}
+
+.earth-background__image:first-child {
+  background-image: url("assets/contacts/Earth_horizon1.jpg") !important;
+  opacity: 0.85 !important;
 }

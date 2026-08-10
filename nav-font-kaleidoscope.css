@@ -1,4 +1,5 @@
-.desktop-nav a {
+.desktop-nav a,
+.home-link {
   display: inline-block !important;
   transform-origin: center;
   will-change:
@@ -10,7 +11,8 @@
     text-shadow;
 }
 
-.desktop-nav a:hover {
+.desktop-nav a:hover,
+.home-link:hover {
   animation: nav-font-kaleidoscope 2.1s steps(1, end) infinite !important;
 }
 
@@ -103,7 +105,8 @@
 }
 
 @media (max-width: 760px) {
-  .desktop-nav a:hover {
+  .desktop-nav a:hover,
+  .home-link:hover {
     animation: none !important;
   }
 }

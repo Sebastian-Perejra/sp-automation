@@ -610,12 +610,6 @@ body {
   font-size: 10px;
 }
 
-.lang-switcher button:first-child {
-  border-color: rgba(184, 255, 53, 0.28);
-  background: rgba(184, 255, 53, 0.12);
-  color: var(--nl-lime);
-}
-
 .topbar-inner {
   width: min(100%, 1180px);
 }

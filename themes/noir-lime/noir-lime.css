@@ -542,13 +542,17 @@ body {
 }
 
 .topbar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(184,255,53,.08);
   background:
     linear-gradient(
       180deg,
-      rgba(7, 9, 8, 0.96),
-      rgba(7, 9, 8, 0.82)
+      rgba(6, 9, 8, .97) 0%,
+      rgba(9, 13, 11, .93) 100%
     );
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, .35),
+    inset 0 -1px 0 rgba(255,255,255,.03);
 }
 
 .topbar-inner {
@@ -581,10 +585,10 @@ body {
 
 .desktop-nav a {
   font-family: "Roboto Mono", monospace;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #ffffff;
 }
@@ -936,4 +940,23 @@ footer {
 .earth-background__image:first-child {
   background-image: url("assets/contacts/Earth_horizon1.jpg") !important;
   opacity: 0.85 !important;
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: min(980px, 72vw);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(184, 255, 53, .18) 25%,
+    rgba(255, 255, 255, .08) 50%,
+    rgba(184, 255, 53, .18) 75%,
+    transparent
+  );
+  pointer-events: none;
 }

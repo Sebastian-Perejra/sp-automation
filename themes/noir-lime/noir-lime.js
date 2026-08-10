@@ -1,16 +1,27 @@
 (() => {
   const earthImages = [
-    'themes/noir-lime/assets/contacts/Earth_horizon1.jpg',
-    'themes/noir-lime/assets/contacts/Earth_horizon2.avif',
-    'themes/noir-lime/assets/contacts/Earth_horizon_3_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_4_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_5_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_6_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_7_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_8_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_9_AI.png',
-    'themes/noir-lime/assets/contacts/Earth_horizon_10_AI.png'
-  ];
+  'themes/noir-lime/assets/contacts/1.jpeg',
+  'themes/noir-lime/assets/contacts/2.jpeg',
+  'themes/noir-lime/assets/contacts/3.jpeg',
+  'themes/noir-lime/assets/contacts/4.jpeg',
+  'themes/noir-lime/assets/contacts/5.jpeg',
+  'themes/noir-lime/assets/contacts/6.jpeg',
+  'themes/noir-lime/assets/contacts/7.jpeg',
+  'themes/noir-lime/assets/contacts/8.jpeg',
+  'themes/noir-lime/assets/contacts/9.jpeg',
+  'themes/noir-lime/assets/contacts/10.jpeg',
+
+  'themes/noir-lime/assets/contacts/Earth_horizon1.jpg',
+  'themes/noir-lime/assets/contacts/Earth_horizon2.avif',
+  'themes/noir-lime/assets/contacts/Earth_horizon_3_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_4_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_5_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_6_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_7_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_8_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_9_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_10_AI.png'
+];
 
   const earthBackground =
     document.getElementById('earthBackground');

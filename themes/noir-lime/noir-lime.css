@@ -580,12 +580,13 @@ body {
 }
 
 .desktop-nav a {
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.015em;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
+  color: #ffffff;
 }
 .desktop-nav a:hover {
   color: #ffffff;

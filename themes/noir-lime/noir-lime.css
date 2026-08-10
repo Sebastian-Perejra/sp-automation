@@ -882,7 +882,7 @@ body {
 }
 
 .earth-background__image.is-active {
-  opacity: 0.62;
+  opacity: 0.82;
   transform: scale(1);
 }
 
@@ -893,19 +893,19 @@ body {
   pointer-events: none;
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(4, 7, 6, 0.46) 0%,
-      rgba(5, 10, 8, 0.36) 34%,
-      rgba(5, 12, 9, 0.48) 72%,
-      rgba(3, 6, 5, 0.70) 100%
-    ),
-    radial-gradient(
-      ellipse 68% 58% at 50% 45%,
-      rgba(5, 12, 9, 0.08) 0%,
-      rgba(4, 8, 6, 0.30) 62%,
-      rgba(2, 4, 3, 0.58) 100%
-    );
+  linear-gradient(
+    180deg,
+    rgba(4, 7, 6, 0.24) 0%,
+    rgba(5, 10, 8, 0.18) 34%,
+    rgba(5, 12, 9, 0.26) 72%,
+    rgba(3, 6, 5, 0.42) 100%
+  ),
+  radial-gradient(
+    ellipse 68% 58% at 50% 45%,
+    rgba(5, 12, 9, 0.02) 0%,
+    rgba(4, 8, 6, 0.12) 62%,
+    rgba(2, 4, 3, 0.30) 100%
+  );
 }
 
 .page-shell,

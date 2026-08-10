@@ -762,3 +762,66 @@ body {
 .contact-form button[type="submit"]:hover::after {
   transform: translate(4px, -52%);
 }
+
+.code-artifacts {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.code-artifact {
+  position: absolute;
+  max-width: 320px;
+  opacity: 0;
+  color: rgba(184, 255, 53, 0.42);
+  font-family: var(--font-tech);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.035em;
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 8px rgba(184, 255, 53, 0.12),
+    0 0 20px rgba(184, 255, 53, 0.05);
+
+  filter: blur(0.15px);
+
+  transition:
+    opacity 1.8s ease,
+    transform 4.5s ease,
+    filter 2s ease;
+}
+
+.code-artifact.is-visible {
+  opacity: var(--artifact-opacity, 0.28);
+  transform: translateY(-3px);
+}
+
+.code-artifact.is-fading {
+  opacity: 0;
+  transform: translateY(-7px);
+  filter: blur(1px);
+}
+
+.code-artifact::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--nl-lime);
+  vertical-align: middle;
+  opacity: 0.55;
+  box-shadow: 0 0 8px rgba(184, 255, 53, 0.28);
+}
+
+@media (max-width: 760px) {
+  .code-artifact {
+    max-width: 180px;
+    font-size: 8px;
+  }
+}

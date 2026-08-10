@@ -1,15 +1,15 @@
 (() => {
   const earthImages = [
-  'assets/contacts/Earth_horizon1.jpg',
-  'assets/contacts/Earth_horizon2.avif',
-  'assets/contacts/Earth_horizon_3_AI.png',
-  'assets/contacts/Earth_horizon_4_AI.png',
-  'assets/contacts/Earth_horizon_5_AI.png',
-  'assets/contacts/Earth_horizon_6_AI.png',
-  'assets/contacts/Earth_horizon_7_AI.png',
-  'assets/contacts/Earth_horizon_8_AI.png',
-  'assets/contacts/Earth_horizon_9_AI.png',
-  'assets/contacts/Earth_horizon_10_AI.png'
+  'themes/noir-lime/assets/contacts/Earth_horizon1.jpg',
+  'themes/noir-lime/assets/contacts/Earth_horizon2.avif',
+  'themes/noir-lime/assets/contacts/Earth_horizon_3_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_4_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_5_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_6_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_7_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_8_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_9_AI.png',
+  'themes/noir-lime/assets/contacts/Earth_horizon_10_AI.png'
 ];
   const earthBackground = document.getElementById('earthBackground');
 

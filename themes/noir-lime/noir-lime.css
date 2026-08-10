@@ -542,6 +542,10 @@ body {
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   border-bottom: 1px solid rgba(184,255,53,.08);
   background:
     linear-gradient(
@@ -549,7 +553,9 @@ body {
       rgba(6, 9, 8, .97) 0%,
       rgba(9, 13, 11, .93) 100%
     );
+
   backdrop-filter: blur(18px);
+
   box-shadow:
     0 20px 60px rgba(0, 0, 0, .35),
     inset 0 -1px 0 rgba(255,255,255,.03);

@@ -929,7 +929,6 @@ body {
 }
 
 .page-shell,
-.topbar,
 footer {
   position: relative;
   z-index: 10;

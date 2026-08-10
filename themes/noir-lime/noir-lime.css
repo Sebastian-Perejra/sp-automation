@@ -580,11 +580,20 @@ body {
 }
 
 .desktop-nav a {
-  font-family: var(--font-tech);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.035em;
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.015em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+.desktop-nav a:hover {
+  color: #ffffff;
+}
+
+.desktop-nav a.active {
+  color: #ffffff;
+  font-weight: 800;
 }
 
 .lang-switcher button {

@@ -470,17 +470,17 @@ body {
     rotateX(78deg);
   transform-origin: top center;
   pointer-events: none;
-  opacity: 0.22;
+  opacity: 0.52;
   background:
     repeating-linear-gradient(
   90deg,
-  rgba(184, 255, 53, 0.09) 0 1px,
-  transparent 1px 150px
+  rgba(184, 255, 53, 0.14) 0 1px,
+  transparent 1px 120px
 ),
 repeating-linear-gradient(
   180deg,
-  rgba(184, 255, 53, 0.055) 0 1px,
-  transparent 1px 120px
+  rgba(184, 255, 53, 0.10) 0 1px,
+  transparent 1px 96px
 );
   mask-image: linear-gradient(
     to bottom,

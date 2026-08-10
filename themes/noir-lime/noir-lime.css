@@ -560,3 +560,53 @@ body::after {
   height: 34px;
   font-size: 10px;
 }
+
+.contact-list {
+  gap: 0;
+}
+
+.contact-item {
+  position: relative;
+  padding: 18px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 0;
+  background: transparent;
+}
+
+.contact-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.contact-item:hover {
+  padding-left: 10px;
+  border-color: rgba(184, 255, 53, 0.28);
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border-radius: 10px;
+  background: rgba(184, 255, 53, 0.11);
+  color: var(--nl-lime);
+  border: 1px solid rgba(184, 255, 53, 0.22);
+}
+
+.contact-label {
+  margin-bottom: 2px;
+  color: rgba(243, 245, 239, 0.34);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.contact-value {
+  color: rgba(243, 245, 239, 0.84);
+}
+
+.contact-value a {
+  color: var(--nl-text);
+}

@@ -390,11 +390,11 @@ body {
 }
 
 .contact-info {
-  padding: 64px 52px 64px 54px;
+  padding: 54px 48px 50px;
 }
 
 .contact-form-card {
-  padding: 64px 54px 64px 52px;
+  padding: 54px 48px 50px;
 }
 
 .contact-info::before {
@@ -435,4 +435,29 @@ body {
   .contact-form-card {
     padding: 36px 22px;
   }
+}
+
+.page-shell {
+  width: min(100%, 1180px);
+  padding-top: 56px;
+}
+
+.contact-layout {
+  align-items: start;
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(0, 1.05fr);
+}
+
+.contact-info,
+.contact-form-card {
+  min-height: auto;
+}
+
+.contact-info {
+  align-self: start;
+}
+
+.contact-form-card {
+  align-self: start;
 }

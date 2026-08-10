@@ -9,7 +9,7 @@
   >
 
   <title>Контакты – Себастьян Перейра</title>
-
+  <link rel="canonical" href="https://sp-automation.com/contacts-ru.html">
   <link rel="icon" href="favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +50,7 @@
       --surface: #ffffff;
       --surface-soft: #fbfaf7;
       --surface-green: #f2f7f3;
+      --surface-blue: #f2f6f8;
 
       --text-main: #242321;
       --text-secondary: #64605b;
@@ -65,10 +66,14 @@
 
       --border: #e8e1d8;
       --border-green: #d5e3d8;
+      --border-blue: #d9e5ee;
 
       --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
+      --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
 
       --radius-large: 28px;
+      --radius-card: 22px;
+      --radius-small: 14px;
 
       --font-main: "Manrope", sans-serif;
       --font-tech: "Roboto Mono", monospace;
@@ -136,7 +141,6 @@
   align-items: center;
   gap: 28px;
 }
-
     .home-link {
       color: var(--green);
       text-decoration: none;
@@ -550,9 +554,7 @@ footer a:hover {
       }
 
       .contact-layout {
-        grid-template-columns:
-          minmax(0, 1fr)
-          minmax(350px, 1fr);
+        grid-template-columns: minmax(0, 1fr) minmax(350px, 1fr);
       }
 
       .contact-info,
@@ -574,6 +576,10 @@ footer a:hover {
 
       .desktop-nav {
         display: none;
+      }
+
+      .lang-switcher {
+        margin-left: auto;
       }
 
       .page-shell {
@@ -687,16 +693,20 @@ footer a:hover {
   </style>
   <link rel="stylesheet" href="/assistant.css">
   <script src="/assistant.js" defer></script>
-  <link rel="stylesheet" href="nav-font-kaleidoscope.css?v=4">
-  <script src="nav-font-kaleidoscope.js?v=4" defer></script>
+  <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
+  
+  <link rel="stylesheet" href="themes/noir-lime/noir-lime.css">
 </head>
 
 <body>
+  <div class="earth-background" id="earthBackground">
+  <div class="earth-background__image is-active"></div>
+  <div class="earth-background__image"></div>
+</div>
+ <div class="code-artifacts" id="codeArtifacts"></div>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="home-link" href="index-ru.html">
-        ← На главную
-      </a>
+      <a class="home-link" href="index-ru.html">← На главную</a>
 
       <nav class="desktop-nav">
         <a href="about-ru.html">Обо мне</a>
@@ -705,7 +715,7 @@ footer a:hover {
         <a href="solutions-ru.html">Решения</a>
         <a href="faq-ru.html">FAQ</a>
       </nav>
-
+           
       <div class="lang-switcher">
         <button type="button" onclick="location.href='contacts.html'">UA</button>
         <button type="button" onclick="location.href='contacts-en.html'">EN</button>
@@ -729,9 +739,7 @@ footer a:hover {
             <div class="contact-icon">☎</div>
 
             <div class="contact-item-content">
-              <span class="contact-label">
-                Телефон
-              </span>
+              <span class="contact-label">Телефон</span>
 
               <div class="contact-value">
                 <a href="tel:+380980746698">
@@ -747,9 +755,7 @@ footer a:hover {
             <div class="contact-icon">✈</div>
 
             <div class="contact-item-content">
-              <span class="contact-label">
-                Telegram
-              </span>
+              <span class="contact-label">Telegram</span>
 
               <div class="contact-value">
                 <a
@@ -767,9 +773,7 @@ footer a:hover {
             <div class="contact-icon">✉</div>
 
             <div class="contact-item-content">
-              <span class="contact-label">
-                Email
-              </span>
+              <span class="contact-label">Email</span>
 
               <div class="contact-value">
                 <a href="mailto:sebastian@sp-automation.com">
@@ -783,15 +787,19 @@ footer a:hover {
             <div class="contact-icon">⌖</div>
 
             <div class="contact-item-content">
-              <span class="contact-label">
-                Локация
-              </span>
+              <span class="contact-label">Локация</span>
 
               <div class="contact-value">
                 Украина, встреча по необходимости
               </div>
             </div>
           </div>
+        </div>
+          <div class="turnstile-wrapper">
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+          ></div>
         </div>
       </div>
 
@@ -803,9 +811,7 @@ footer a:hover {
         </p>
 
         <form class="contact-form" id="contact-form">
-          <label for="name">
-            Ваше имя
-          </label>
+          <label for="name">Ваше имя</label>
 
           <input
             type="text"
@@ -817,9 +823,7 @@ footer a:hover {
             required
           >
 
-          <label for="email">
-            Email
-          </label>
+          <label for="email">Email</label>
 
           <input
             type="email"
@@ -831,9 +835,7 @@ footer a:hover {
             required
           >
 
-          <label for="message">
-            Сообщение
-          </label>
+          <label for="message">Сообщение</label>
 
           <textarea
             id="message"
@@ -856,13 +858,7 @@ footer a:hover {
             class="error-message"
             id="error-message"
           ></div>
-
-          <div class="turnstile-wrapper">
-            <div
-              class="cf-turnstile"
-              data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
-            ></div>
-          </div>
+       
         </form>
       </div>
     </section>
@@ -937,7 +933,6 @@ footer a:hover {
         };
 
         errorMessage.textContent = "";
-
         submitButton.disabled = true;
         submitButton.textContent = "Отправка...";
 
@@ -991,6 +986,7 @@ footer a:hover {
         }
       });
   </script>
-  <script src="nav-font-kaleidoscope.js"></script>
+  
+  <script src="themes/noir-lime/noir-lime.js"></script>
 </body>
 </html>

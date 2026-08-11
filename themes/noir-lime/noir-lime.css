@@ -873,7 +873,7 @@ body {
   background: #070a08;
 }
 
-.earth-background__image {
+.e {
   position: absolute;
   inset: -2%;
   opacity: 0;
@@ -891,7 +891,7 @@ body {
   will-change: opacity, transform;
 }
 
-.earth-background__image.is-active {
+.e.is-active {
   opacity: 0.90;
   transform: scale(1);
 }
@@ -930,11 +930,6 @@ footer {
 
 .earth-background {
   z-index: 1 !important;
-}
-
-.earth-background__image:first-child {
-  background-image: url("assets/contacts/Earth_horizon1.jpg") !important;
-  opacity: 0.85 !important;
 }
 
 .topbar::after {

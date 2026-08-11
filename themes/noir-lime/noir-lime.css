@@ -1010,3 +1010,34 @@ body {
     font-size: clamp(2rem, 9vw, 2.8rem) !important;
   }
 }
+html {
+  background: #070a08;
+}
+
+body {
+  opacity: 1;
+  transition:
+    opacity 0.32s ease,
+    filter 0.32s ease;
+}
+
+body.page-leaving {
+  opacity: 0;
+  filter: blur(2px);
+}
+
+body.page-entering {
+  animation: noir-page-enter 0.42s ease both;
+}
+
+@keyframes noir-page-enter {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}

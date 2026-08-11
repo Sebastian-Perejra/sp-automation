@@ -10,6 +10,7 @@
   'themes/noir-lime/assets/contacts/Earth_horizon_08.webp',
   'themes/noir-lime/assets/contacts/Earth_horizon_09.webp',
   'themes/noir-lime/assets/contacts/Earth_horizon_10.webp',
+    
   'themes/noir-lime/assets/contacts/earth_01.webp',
   'themes/noir-lime/assets/contacts/earth_02.webp',
   'themes/noir-lime/assets/contacts/earth_03.webp',

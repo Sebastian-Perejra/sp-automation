@@ -873,7 +873,7 @@ body {
   background: #070a08;
 }
 
-.e {
+.earth-background__image {
   position: absolute;
   inset: -2%;
   opacity: 0;
@@ -891,7 +891,7 @@ body {
   will-change: opacity, transform;
 }
 
-.e.is-active {
+.earth-background__image.is-active {
   opacity: 0.90;
   transform: scale(1);
 }

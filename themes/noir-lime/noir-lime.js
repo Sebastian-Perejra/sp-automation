@@ -40,34 +40,44 @@
         `url("${earthImages[0]}")`;
 
       earthLayers[0].classList.add('is-active');
-
-      earthImages.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-      });
-
+      
       function showNextEarthImage() {
-        const nextImageIndex =
-          (currentImageIndex + 1) % earthImages.length;
+  const nextImageIndex =
+    (currentImageIndex + 1) % earthImages.length;
 
-        const nextLayerIndex =
-          activeLayerIndex === 0 ? 1 : 0;
+  const nextLayerIndex =
+    activeLayerIndex === 0 ? 1 : 0;
 
-        const currentLayer =
-          earthLayers[activeLayerIndex];
+  const currentLayer =
+    earthLayers[activeLayerIndex];
 
-        const nextLayer =
-          earthLayers[nextLayerIndex];
+  const nextLayer =
+    earthLayers[nextLayerIndex];
 
-        nextLayer.style.backgroundImage =
-          `url("${earthImages[nextImageIndex]}")`;
+  const nextSrc =
+    earthImages[nextImageIndex];
 
-        nextLayer.classList.add('is-active');
-        currentLayer.classList.remove('is-active');
+  const img = new Image();
 
-        currentImageIndex = nextImageIndex;
-        activeLayerIndex = nextLayerIndex;
-      }
+  img.onload = () => {
+    nextLayer.style.backgroundImage =
+      `url("${nextSrc}")`;
+
+    requestAnimationFrame(() => {
+      nextLayer.classList.add('is-active');
+      currentLayer.classList.remove('is-active');
+
+      currentImageIndex = nextImageIndex;
+      activeLayerIndex = nextLayerIndex;
+    });
+  };
+
+  img.onerror = () => {
+    currentImageIndex = nextImageIndex;
+  };
+
+  img.src = nextSrc;
+}
 
       setInterval(showNextEarthImage, 16000);
     }

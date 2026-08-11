@@ -606,40 +606,4 @@
     createArtifact();
     scheduleNext();
   }, 1800);
-  document.body.classList.add('page-entering');
-
-document.querySelectorAll('.lang-switcher button').forEach((button) => {
-  button.addEventListener(
-    'click',
-    (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-
-      const lang = button.textContent.trim().toUpperCase();
-
-      const targets = {
-        UA: 'contacts.html',
-        EN: 'contacts-en.html',
-        RU: 'contacts-ru.html'
-      };
-
-      const target = targets[lang];
-
-      if (!target) return;
-
-      const current =
-        window.location.pathname.split('/').pop();
-
-      if (current === target) return;
-
-      document.body.classList.remove('page-entering');
-      document.body.classList.add('page-leaving');
-
-      setTimeout(() => {
-        window.location.href = target;
-      }, 300);
-    },
-    true
-  );
-});
-})();
+  })();

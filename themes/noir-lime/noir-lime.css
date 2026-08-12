@@ -1079,3 +1079,76 @@ footer {
     transform: translateX(-100%);
   }
 }
+.cosmic-frame {
+  position: fixed;
+  inset: 16px 20px;
+  z-index: 90;
+  pointer-events: none;
+
+  border-left: 1px solid rgba(200, 230, 220, 0.16);
+  border-right: 1px solid rgba(200, 230, 220, 0.16);
+
+  border-radius: 22px;
+}
+
+.cosmic-frame::before,
+.cosmic-frame::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 54px;
+
+  border-left: 1px solid rgba(210, 240, 230, 0.28);
+  border-right: 1px solid rgba(210, 240, 230, 0.28);
+}
+
+.cosmic-frame::before {
+  top: 0;
+
+  border-top: 1px solid rgba(210, 240, 230, 0.28);
+  border-radius: 20px 20px 0 0;
+
+  clip-path: polygon(
+    0 0,
+    28% 0,
+    29% 8px,
+    71% 8px,
+    72% 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+.cosmic-frame::after {
+  bottom: 0;
+
+  border-bottom: 1px solid rgba(210, 240, 230, 0.28);
+  border-radius: 0 0 20px 20px;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    72% 100%,
+    71% calc(100% - 8px),
+    29% calc(100% - 8px),
+    28% 100%,
+    0 100%
+  );
+}
+
+@media (max-width: 760px) {
+  .cosmic-frame {
+    inset: 10px 8px;
+    border-radius: 16px;
+  }
+
+  .cosmic-frame::before,
+  .cosmic-frame::after {
+    left: 4px;
+    right: 4px;
+    height: 36px;
+  }
+}

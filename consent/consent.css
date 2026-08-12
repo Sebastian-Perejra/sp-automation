@@ -60,6 +60,8 @@
   width: 44px;
   height: 44px;
   flex: 0 0 44px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .sp-consent-title {
@@ -149,8 +151,8 @@
   display: block;
   width: 60px;
   height: 60px;
-  transform: scale(1.55);
-  transform-origin: center;
+  object-fit: contain;
+  object-position: center;
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
 }
 .sp-consent-reopen:hover {
@@ -182,7 +184,8 @@
 .sp-consent-reopen img {
   width: 56px;
   height: 56px;
-  transform: scale(1.55);
+  object-fit: contain;
+  object-position: center;
 }
 }
 .sp-consent-settings {

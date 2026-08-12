@@ -46,6 +46,7 @@
   const translations = {
     uk: {
       title: 'Налаштування cookies',
+      tooltip: 'Налаштування cookies',
 
       intro:
         'Ми використовуємо необхідні cookies для роботи та безпеки сайту, а аналітичні cookies — лише за вашою згодою.',
@@ -74,6 +75,7 @@
 
     ru: {
       title: 'Настройки cookies',
+      tooltip: 'Настройки cookies',
 
       intro:
         'Мы используем необходимые cookies для работы и безопасности сайта, а аналитические cookies — только с вашего согласия.',
@@ -102,6 +104,7 @@
 
     en: {
       title: 'Cookie settings',
+      tooltip: 'Cookie settings',
 
       intro:
         'We use necessary cookies for website functionality and security. Analytics cookies are used only with your consent.',
@@ -310,6 +313,10 @@
     reopen.setAttribute(
       'aria-label',
       t.title
+    );
+    reopen.setAttribute(
+  'data-tooltip',
+      t.tooltip
     );
 
     reopen.innerHTML = `

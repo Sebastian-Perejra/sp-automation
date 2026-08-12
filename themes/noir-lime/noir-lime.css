@@ -296,8 +296,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   background: #080a09;
   color: #ffffff;
-  padding-top: 60px;
-}
+  }
 
 @media (max-width: 760px) {
   .page-shell {
@@ -1010,4 +1009,8 @@ body {
   .contact-form-card h2 {
     font-size: clamp(2rem, 9vw, 2.8rem) !important;
   }
+}
+
+footer p {
+  transform: translateY(12px);
 }

@@ -123,8 +123,8 @@
   left: 18px;
   bottom: 18px;
   z-index: 99997;
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -147,8 +147,8 @@
 
 .sp-consent-reopen img {
   display: block;
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
 }
@@ -175,8 +175,8 @@
   .sp-consent-reopen {
     left: 14px;
     bottom: 14px;
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
   }
 
   .sp-consent-reopen img {

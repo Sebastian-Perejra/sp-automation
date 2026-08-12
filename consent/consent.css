@@ -159,7 +159,7 @@
   transform: translateY(-2px) scale(1.03);
 }
 .sp-consent-reopen::after {
-  content: "Налаштування cookies";
+  content: attr(data-tooltip);
   position: absolute;
   left: calc(100% + 10px);
   top: 50%;

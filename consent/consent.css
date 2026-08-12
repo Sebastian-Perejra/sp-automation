@@ -123,7 +123,7 @@
 .sp-consent-reopen {
   position: fixed;
   left: 18px;
-  bottom: 18px;
+  bottom: 14px;
   z-index: 99997;
   width: 72px;
   height: 72px;
@@ -212,7 +212,7 @@
 
   .sp-consent-reopen {
   left: 14px;
-  bottom: 14px;
+  bottom: 15px;
   width: 68px;
   height: 68px;
 }

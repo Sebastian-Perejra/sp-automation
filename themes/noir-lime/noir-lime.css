@@ -1023,10 +1023,11 @@ body {
   margin-bottom: 14px;
 
   font-family: "Roboto Mono", monospace;
-  font-size: 15px;
-  color: #e9f4ec;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  color: #ffffff;
 }
-
 .footer-ticker-text {
   display: inline-block;
   padding-left: 100%;

@@ -1011,6 +1011,6 @@ body {
   }
 }
 
-footer p {
-  transform: translateY(48px);
+.footer-content {
+  transform: translateY(18px);
 }

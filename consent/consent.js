@@ -3,95 +3,135 @@
   const ICON_PATH = '/consent/consent-icon.webp';
   const GA_ID = 'G-456XH82BM9';
 
-let analyticsLoaded = false;
+  let analyticsLoaded = false;
 
-function loadAnalytics() {
-  if (analyticsLoaded) return;
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
 
-  window['ga-disable-' + GA_ID] = false;
+    window['ga-disable-' + GA_ID] = false;
 
-  window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-  window.gtag = window.gtag || function () {
-    window.dataLayer.push(arguments);
-  };
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
 
-  const script = document.createElement('script');
+    const script = document.createElement('script');
 
-  script.async = true;
-  script.src =
-    'https://www.googletagmanager.com/gtag/js?id=' +
-    encodeURIComponent(GA_ID);
+    script.async = true;
+    script.src =
+      'https://www.googletagmanager.com/gtag/js?id=' +
+      encodeURIComponent(GA_ID);
 
-  document.head.appendChild(script);
+    document.head.appendChild(script);
 
-  window.gtag('js', new Date());
-  window.gtag('config', GA_ID);
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID);
 
-  analyticsLoaded = true;
-}
-
-function disableAnalytics() {
-  window['ga-disable-' + GA_ID] = true;
-}
-
-function applyConsent(consent) {
-  if (consent?.analytics === true) {
-    loadAnalytics();
-  } else {
-    disableAnalytics();
+    analyticsLoaded = true;
   }
-}
+
+  function disableAnalytics() {
+    window['ga-disable-' + GA_ID] = true;
+  }
+
+  function applyConsent(consent) {
+    if (consent?.analytics === true) {
+      loadAnalytics();
+    } else {
+      disableAnalytics();
+    }
+  }
 
   const translations = {
     uk: {
       title: 'Налаштування cookies',
-      intro: 'Ми використовуємо необхідні cookies для роботи сайту, аналітику для покращення сервісу та сторонні сервіси для окремих функцій.',
+
+      intro:
+        'Ми використовуємо необхідні cookies для роботи та безпеки сайту, а аналітичні cookies — лише за вашою згодою.',
+
       necessary: 'Необхідні',
-      necessaryText: 'Потрібні для базової роботи сайту, безпеки та збереження ваших налаштувань.',
+
+      necessaryText:
+        'Потрібні для базової роботи сайту, безпеки, роботи форм та збереження ваших налаштувань.',
+
       alwaysActive: 'Завжди активні',
+
       analytics: 'Аналітика',
-      analyticsText: 'Допомагає нам розуміти відвідуваність і використання сайту за допомогою Google Analytics.',
-      thirdParty: 'Сторонні сервіси',
-      thirdPartyText: 'Дозволяє завантаження окремих зовнішніх сервісів і функцій від третіх сторін.',
-      rejectAll: 'Відхилити все',
+
+      analyticsText:
+        'Допомагає нам розуміти відвідуваність і використання сайту за допомогою Google Analytics.',
+
+      thirdPartyInfo: 'Сторонні сервіси',
+
+      thirdPartyInfoText:
+        'На сайті наразі немає необов’язкових сторонніх сервісів, які потребують окремого вибору користувача. Технічні сторонні сервіси, необхідні для роботи та захисту сайту, належать до категорії «Необхідні».',
+
+      rejectAll: 'Відхилити аналітику',
       save: 'Зберегти налаштування',
-      acceptAll: 'Дозволити все'
+      acceptAll: 'Дозволити аналітику'
     },
 
     ru: {
       title: 'Настройки cookies',
-      intro: 'Мы используем необходимые cookies для работы сайта, аналитику для улучшения сервиса и сторонние сервисы для отдельных функций.',
+
+      intro:
+        'Мы используем необходимые cookies для работы и безопасности сайта, а аналитические cookies — только с вашего согласия.',
+
       necessary: 'Необходимые',
-      necessaryText: 'Нужны для базовой работы сайта, безопасности и сохранения ваших настроек.',
+
+      necessaryText:
+        'Нужны для базовой работы сайта, безопасности, работы форм и сохранения ваших настроек.',
+
       alwaysActive: 'Всегда активны',
+
       analytics: 'Аналитика',
-      analyticsText: 'Помогает нам понимать посещаемость и использование сайта с помощью Google Analytics.',
-      thirdParty: 'Сторонние сервисы',
-      thirdPartyText: 'Разрешает загрузку отдельных внешних сервисов и функций от третьих сторон.',
-      rejectAll: 'Отклонить все',
+
+      analyticsText:
+        'Помогает нам понимать посещаемость и использование сайта с помощью Google Analytics.',
+
+      thirdPartyInfo: 'Сторонние сервисы',
+
+      thirdPartyInfoText:
+        'На сайте сейчас нет необязательных сторонних сервисов, требующих отдельного выбора пользователя. Технические сторонние сервисы, необходимые для работы и защиты сайта, относятся к категории «Необходимые».',
+
+      rejectAll: 'Отклонить аналитику',
       save: 'Сохранить настройки',
-      acceptAll: 'Разрешить все'
+      acceptAll: 'Разрешить аналитику'
     },
 
     en: {
       title: 'Cookie settings',
-      intro: 'We use necessary cookies for basic website functionality, analytics to improve the service, and third-party services for specific features.',
+
+      intro:
+        'We use necessary cookies for website functionality and security. Analytics cookies are used only with your consent.',
+
       necessary: 'Necessary',
-      necessaryText: 'Required for basic website functionality, security and remembering your preferences.',
+
+      necessaryText:
+        'Required for basic website functionality, security, forms and remembering your preferences.',
+
       alwaysActive: 'Always active',
+
       analytics: 'Analytics',
-      analyticsText: 'Helps us understand website traffic and usage through Google Analytics.',
-      thirdParty: 'Third-party services',
-      thirdPartyText: 'Allows selected external services and third-party features to load.',
-      rejectAll: 'Reject all',
+
+      analyticsText:
+        'Helps us understand website traffic and usage through Google Analytics.',
+
+      thirdPartyInfo: 'Third-party services',
+
+      thirdPartyInfoText:
+        'The website currently does not use optional third-party services that require a separate user choice. Technical third-party services required for website functionality and security are treated as Necessary.',
+
+      rejectAll: 'Reject analytics',
       save: 'Save preferences',
-      acceptAll: 'Accept all'
+      acceptAll: 'Allow analytics'
     }
   };
 
   function getLanguage() {
-    const lang = (document.documentElement.lang || 'uk').toLowerCase();
+    const lang =
+      (document.documentElement.lang || 'uk').toLowerCase();
 
     if (lang.startsWith('ru')) return 'ru';
     if (lang.startsWith('en')) return 'en';
@@ -113,14 +153,17 @@ function applyConsent(consent) {
     }
   }
 
-  function saveConsent(analytics, thirdParty) {
+  function saveConsent(analytics) {
     const value = {
       necessary: true,
-      analytics: Boolean(analytics),
-      thirdParty: Boolean(thirdParty)
+      analytics: Boolean(analytics)
     };
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(value)
+    );
+
     applyConsent(value);
 
     window.dispatchEvent(
@@ -134,28 +177,40 @@ function applyConsent(consent) {
     const lang = getLanguage();
     const t = translations[lang];
     const savedConsent = getConsent();
+
     applyConsent(savedConsent);
 
-    const backdrop = document.createElement('div');
-    backdrop.className = 'sp-consent-backdrop';
+    const backdrop =
+      document.createElement('div');
 
-    const modal = document.createElement('div');
-    modal.className = 'sp-consent-modal';
+    backdrop.className =
+      'sp-consent-backdrop';
+
+    const modal =
+      document.createElement('div');
+
+    modal.className =
+      'sp-consent-modal';
 
     modal.innerHTML = `
       <div class="sp-consent-content">
 
         <div class="sp-consent-header">
           <img src="${ICON_PATH}" alt="">
-          <h2 class="sp-consent-title">${t.title}</h2>
+          <h2 class="sp-consent-title">
+            ${t.title}
+          </h2>
         </div>
 
-        <p class="sp-consent-text">${t.intro}</p>
+        <p class="sp-consent-text">
+          ${t.intro}
+        </p>
 
         <div class="sp-consent-settings">
 
           <div class="sp-consent-row">
             <div class="sp-consent-row-copy">
+
               <div class="sp-consent-row-title">
                 ${t.necessary}
               </div>
@@ -163,6 +218,7 @@ function applyConsent(consent) {
               <div class="sp-consent-row-text">
                 ${t.necessaryText}
               </div>
+
             </div>
 
             <div class="sp-consent-always">
@@ -172,6 +228,7 @@ function applyConsent(consent) {
 
           <div class="sp-consent-row">
             <div class="sp-consent-row-copy">
+
               <div class="sp-consent-row-title">
                 ${t.analytics}
               </div>
@@ -179,37 +236,34 @@ function applyConsent(consent) {
               <div class="sp-consent-row-text">
                 ${t.analyticsText}
               </div>
+
             </div>
 
             <label class="sp-consent-switch">
+
               <input
                 type="checkbox"
                 id="spConsentAnalytics"
                 ${savedConsent?.analytics ? 'checked' : ''}
               >
+
               <span class="sp-consent-slider"></span>
+
             </label>
           </div>
 
           <div class="sp-consent-row">
             <div class="sp-consent-row-copy">
+
               <div class="sp-consent-row-title">
-                ${t.thirdParty}
+                ${t.thirdPartyInfo}
               </div>
 
               <div class="sp-consent-row-text">
-                ${t.thirdPartyText}
+                ${t.thirdPartyInfoText}
               </div>
-            </div>
 
-            <label class="sp-consent-switch">
-              <input
-                type="checkbox"
-                id="spConsentThirdParty"
-                ${savedConsent?.thirdParty ? 'checked' : ''}
-              >
-              <span class="sp-consent-slider"></span>
-            </label>
+            </div>
           </div>
 
         </div>
@@ -241,13 +295,22 @@ function applyConsent(consent) {
           </button>
 
         </div>
+
       </div>
     `;
 
-    const reopen = document.createElement('button');
+    const reopen =
+      document.createElement('button');
+
     reopen.type = 'button';
-    reopen.className = 'sp-consent-reopen';
-    reopen.setAttribute('aria-label', t.title);
+
+    reopen.className =
+      'sp-consent-reopen';
+
+    reopen.setAttribute(
+      'aria-label',
+      t.title
+    );
 
     reopen.innerHTML = `
       <img src="${ICON_PATH}" alt="">
@@ -258,72 +321,110 @@ function applyConsent(consent) {
     document.body.appendChild(reopen);
 
     const analyticsToggle =
-      modal.querySelector('#spConsentAnalytics');
-
-    const thirdPartyToggle =
-      modal.querySelector('#spConsentThirdParty');
+      modal.querySelector(
+        '#spConsentAnalytics'
+      );
 
     function openModal() {
-      const currentConsent = getConsent();
+      const currentConsent =
+        getConsent();
 
       analyticsToggle.checked =
-        Boolean(currentConsent?.analytics);
+        Boolean(
+          currentConsent?.analytics
+        );
 
-      thirdPartyToggle.checked =
-        Boolean(currentConsent?.thirdParty);
+      backdrop.classList.add(
+        'is-visible'
+      );
 
-      backdrop.classList.add('is-visible');
-      modal.classList.add('is-visible');
-      reopen.classList.remove('is-visible');
+      modal.classList.add(
+        'is-visible'
+      );
+
+      reopen.classList.remove(
+        'is-visible'
+      );
     }
 
     function closeModal() {
-      backdrop.classList.remove('is-visible');
-      modal.classList.remove('is-visible');
-      reopen.classList.add('is-visible');
+      backdrop.classList.remove(
+        'is-visible'
+      );
+
+      modal.classList.remove(
+        'is-visible'
+      );
+
+      reopen.classList.add(
+        'is-visible'
+      );
     }
 
     modal
-      .querySelector('[data-consent-action="reject"]')
-      .addEventListener('click', function () {
-        analyticsToggle.checked = false;
-        thirdPartyToggle.checked = false;
+      .querySelector(
+        '[data-consent-action="reject"]'
+      )
+      .addEventListener(
+        'click',
+        function () {
+          analyticsToggle.checked = false;
 
-        saveConsent(false, false);
-        closeModal();
-      });
+          saveConsent(false);
 
-    modal
-      .querySelector('[data-consent-action="save"]')
-      .addEventListener('click', function () {
-        saveConsent(
-          analyticsToggle.checked,
-          thirdPartyToggle.checked
-        );
-
-        closeModal();
-      });
+          closeModal();
+        }
+      );
 
     modal
-      .querySelector('[data-consent-action="accept"]')
-      .addEventListener('click', function () {
-        analyticsToggle.checked = true;
-        thirdPartyToggle.checked = true;
+      .querySelector(
+        '[data-consent-action="save"]'
+      )
+      .addEventListener(
+        'click',
+        function () {
+          saveConsent(
+            analyticsToggle.checked
+          );
 
-        saveConsent(true, true);
-        closeModal();
-      });
+          closeModal();
+        }
+      );
 
-    reopen.addEventListener('click', openModal);
+    modal
+      .querySelector(
+        '[data-consent-action="accept"]'
+      )
+      .addEventListener(
+        'click',
+        function () {
+          analyticsToggle.checked = true;
+
+          saveConsent(true);
+
+          closeModal();
+        }
+      );
+
+    reopen.addEventListener(
+      'click',
+      openModal
+    );
 
     if (savedConsent) {
-      reopen.classList.add('is-visible');
+      reopen.classList.add(
+        'is-visible'
+      );
     } else {
-      requestAnimationFrame(openModal);
+      requestAnimationFrame(
+        openModal
+      );
     }
   }
 
-  if (document.readyState === 'loading') {
+  if (
+    document.readyState === 'loading'
+  ) {
     document.addEventListener(
       'DOMContentLoaded',
       createConsentUI

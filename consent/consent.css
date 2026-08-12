@@ -125,8 +125,8 @@
   left: 18px;
   bottom: 18px;
   z-index: 99997;
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 72px;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -158,6 +158,42 @@
 .sp-consent-reopen:hover {
   transform: translateY(-2px) scale(1.03);
 }
+.sp-consent-reopen::after {
+  content: "Налаштування cookies";
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(15, 20, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0.18s ease;
+}
+
+.sp-consent-reopen:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 600px) {
+  .sp-consent-reopen::after {
+    display: none;
+  }
+}
 
 @media (max-width: 600px) {
   .sp-consent-modal {
@@ -177,13 +213,13 @@
   .sp-consent-reopen {
   left: 14px;
   bottom: 14px;
-  width: 56px;
-  height: 56px;
+  width: 68px;
+  height: 68px;
 }
 
 .sp-consent-reopen img {
-  width: 58px;
-  height: 58px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
   object-position: center;
 }

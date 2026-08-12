@@ -184,3 +184,125 @@
     height: 48px;
   }
 }
+.sp-consent-settings {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sp-consent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0;
+}
+
+.sp-consent-row + .sp-consent-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sp-consent-row-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-consent-row-title {
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sp-consent-row-text {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.sp-consent-always {
+  flex: 0 0 auto;
+  color: #82ef9b;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sp-consent-switch {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.sp-consent-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sp-consent-slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: 0.22s ease;
+}
+
+.sp-consent-slider::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  transition: transform 0.22s ease;
+}
+
+.sp-consent-switch input:checked + .sp-consent-slider {
+  background: linear-gradient(135deg, #ec2f9b, #7955ff 52%, #10b8ef);
+  border-color: transparent;
+}
+
+.sp-consent-switch input:checked + .sp-consent-slider::before {
+  transform: translateX(20px);
+}
+
+.sp-consent-actions--three {
+  grid-template-columns: 1fr 1.2fr 1fr;
+}
+
+.sp-consent-btn--save {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 600px) {
+  .sp-consent-row {
+    gap: 14px;
+    padding: 16px 0;
+  }
+
+  .sp-consent-row-text {
+    font-size: 11px;
+  }
+
+  .sp-consent-always {
+    max-width: 90px;
+    white-space: normal;
+    text-align: right;
+  }
+
+  .sp-consent-actions--three {
+    grid-template-columns: 1fr;
+  }
+}

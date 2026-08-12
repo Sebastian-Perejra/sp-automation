@@ -1013,7 +1013,8 @@ body {
 
 footer {
   position: relative;
-  height: 78px;
+  height: 74px !important;
+  min-height: 74px !important;
   padding: 0 20px !important;
   overflow: hidden;
   box-sizing: border-box;
@@ -1035,8 +1036,8 @@ footer {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
   font-weight: 400;
-  letter-spacing: 0.025em;
   line-height: 1;
+  letter-spacing: 0.025em;
   color: #ffffff;
 }
 
@@ -1050,7 +1051,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 7px;
+  bottom: 5px;
 
   font-size: 12px;
   line-height: 1;

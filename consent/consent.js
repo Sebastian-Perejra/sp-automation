@@ -1,6 +1,47 @@
 (function () {
   const STORAGE_KEY = 'sp_cookie_consent';
   const ICON_PATH = '/consent/consent-icon.webp';
+  const GA_ID = 'G-456XH82BM9';
+
+let analyticsLoaded = false;
+
+function loadAnalytics() {
+  if (analyticsLoaded) return;
+
+  window['ga-disable-' + GA_ID] = false;
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.gtag = window.gtag || function () {
+    window.dataLayer.push(arguments);
+  };
+
+  const script = document.createElement('script');
+
+  script.async = true;
+  script.src =
+    'https://www.googletagmanager.com/gtag/js?id=' +
+    encodeURIComponent(GA_ID);
+
+  document.head.appendChild(script);
+
+  window.gtag('js', new Date());
+  window.gtag('config', GA_ID);
+
+  analyticsLoaded = true;
+}
+
+function disableAnalytics() {
+  window['ga-disable-' + GA_ID] = true;
+}
+
+function applyConsent(consent) {
+  if (consent?.analytics === true) {
+    loadAnalytics();
+  } else {
+    disableAnalytics();
+  }
+}
 
   const translations = {
     uk: {
@@ -80,6 +121,7 @@
     };
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    applyConsent(value);
 
     window.dispatchEvent(
       new CustomEvent('spConsentChanged', {
@@ -92,6 +134,7 @@
     const lang = getLanguage();
     const t = translations[lang];
     const savedConsent = getConsent();
+    applyConsent(savedConsent);
 
     const backdrop = document.createElement('div');
     backdrop.className = 'sp-consent-backdrop';

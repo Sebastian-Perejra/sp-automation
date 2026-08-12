@@ -1081,26 +1081,24 @@ footer {
 }
 .cosmic-frame {
   position: fixed;
-  inset: 158px 20px 18px;
+  inset: 154px 18px 18px;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.42;
 }
 
-/* Боковые линии */
 .cosmic-frame::before,
 .cosmic-frame::after {
   content: "";
   position: absolute;
-  top: 34px;
-  bottom: 34px;
+  top: 48px;
+  bottom: 48px;
   width: 1px;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(255, 255, 255, 0.18) 10%,
-    rgba(255, 255, 255, 0.10) 45%,
-    rgba(255, 255, 255, 0.18) 90%,
+    rgba(210, 240, 230, 0.22) 12%,
+    rgba(210, 240, 230, 0.12) 50%,
+    rgba(210, 240, 230, 0.22) 88%,
     transparent 100%
   );
 }
@@ -1113,85 +1111,99 @@ footer {
   right: 0;
 }
 
-/* Верхние и нижние декоративные сегменты */
-.cosmic-frame-top,
-.cosmic-frame-bottom {
+.cosmic-frame__top-left,
+.cosmic-frame__top-right,
+.cosmic-frame__bottom-left,
+.cosmic-frame__bottom-right {
   position: absolute;
-  left: 10px;
-  right: 10px;
-  height: 28px;
-}
-
-.cosmic-frame-top {
-  top: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.13);
-  border-left: 1px solid rgba(255, 255, 255, 0.16);
-  border-right: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 14px 14px 0 0;
-}
-
-.cosmic-frame-bottom {
-  bottom: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
-  border-left: 1px solid rgba(255, 255, 255, 0.16);
-  border-right: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 0 0 14px 14px;
-}
-
-/* Разрыв по центру сверху */
-.cosmic-frame-top::after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: 50%;
   width: 34%;
-  height: 4px;
-  transform: translateX(-50%);
-  background: #05080f;
-  opacity: 0.92;
+  height: 54px;
 }
 
-/* Разрыв по центру снизу */
-.cosmic-frame-bottom::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 24%;
-  height: 4px;
-  transform: translateX(-50%);
-  background: #05080f;
-  opacity: 0.92;
+.cosmic-frame__top-left {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgba(220, 245, 238, 0.24);
+  border-left: 1px solid rgba(220, 245, 238, 0.28);
+  border-radius: 18px 0 0 0;
 }
 
-/* Маленькие акценты в углах */
-.cosmic-frame-top::before,
-.cosmic-frame-bottom::before {
+.cosmic-frame__top-right {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgba(220, 245, 238, 0.24);
+  border-right: 1px solid rgba(220, 245, 238, 0.28);
+  border-radius: 0 18px 0 0;
+}
+
+.cosmic-frame__bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgba(220, 245, 238, 0.24);
+  border-left: 1px solid rgba(220, 245, 238, 0.28);
+  border-radius: 0 0 0 18px;
+}
+
+.cosmic-frame__bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgba(220, 245, 238, 0.24);
+  border-right: 1px solid rgba(220, 245, 238, 0.28);
+  border-radius: 0 0 18px 0;
+}
+
+.cosmic-frame__top-left::after,
+.cosmic-frame__bottom-left::after {
   content: "";
   position: absolute;
-  left: 24px;
-  width: 46px;
+  left: 58px;
+  width: 54px;
   height: 1px;
-  background: rgba(174, 255, 46, 0.32);
+  background: rgba(166, 255, 72, 0.34);
 }
 
-.cosmic-frame-top::before {
+.cosmic-frame__top-left::after {
   top: -1px;
 }
 
-.cosmic-frame-bottom::before {
+.cosmic-frame__bottom-left::after {
+  bottom: -1px;
+}
+
+.cosmic-frame__top-right::after,
+.cosmic-frame__bottom-right::after {
+  content: "";
+  position: absolute;
+  right: 58px;
+  width: 54px;
+  height: 1px;
+  background: rgba(166, 255, 72, 0.34);
+}
+
+.cosmic-frame__top-right::after {
+  top: -1px;
+}
+
+.cosmic-frame__bottom-right::after {
   bottom: -1px;
 }
 
 @media (max-width: 760px) {
   .cosmic-frame {
-    inset: 92px 10px 12px;
-    opacity: 0.3;
+    inset: 90px 8px 10px;
   }
 
-  .cosmic-frame-top,
-  .cosmic-frame-bottom {
-    left: 5px;
-    right: 5px;
+  .cosmic-frame__top-left,
+  .cosmic-frame__top-right,
+  .cosmic-frame__bottom-left,
+  .cosmic-frame__bottom-right {
+    width: 42%;
+    height: 36px;
+  }
+
+  .cosmic-frame::before,
+  .cosmic-frame::after {
+    top: 32px;
+    bottom: 32px;
   }
 }

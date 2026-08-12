@@ -295,7 +295,7 @@ h1::after {
 footer {
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   background: #080a09;
-  color: rgba(243, 245, 239, 0.4);
+  color: #ffffff;
 }
 
 @media (max-width: 760px) {

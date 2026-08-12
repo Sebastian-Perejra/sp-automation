@@ -1080,8 +1080,11 @@ footer {
   }
 }
 .cosmic-frame {
-  position: fixed;
-  inset: 154px 18px 18px;
+  position: absolute;
+  top: 154px;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
   z-index: 2;
   pointer-events: none;
 }
@@ -1116,7 +1119,7 @@ footer {
 .cosmic-frame__bottom-left,
 .cosmic-frame__bottom-right {
   position: absolute;
-  width: 34%;
+  width: 27%;
   height: 54px;
 }
 

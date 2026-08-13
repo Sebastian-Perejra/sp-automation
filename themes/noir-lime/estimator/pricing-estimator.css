@@ -1,6 +1,6 @@
 .pricing-estimator-trigger {
   position: fixed;
-  left: clamp(32px, 4.2vw, 68px);
+  left: clamp(45px, 5.2vw, 84px);
   top: 50%;
   z-index: 9997;
   width: 118px;
@@ -52,43 +52,19 @@
 }
 
 .pricing-estimator-trigger-icon {
-  position: relative;
-  width: 34px;
-  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   margin: 0 auto 10px;
-  border: 1px solid rgba(184, 255, 53, 0.48);
-  border-radius: 9px;
-  background: rgba(184, 255, 53, 0.05);
+  border: 1px solid rgba(184, 255, 53, 0.45);
+  border-radius: 10px;
+  background: rgba(184, 255, 53, 0.06);
+  color: #b8ff35;
+  font-size: 23px;
+  line-height: 1;
 }
-
-.pricing-estimator-trigger-icon::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  top: 7px;
-  height: 6px;
-  border: 1px solid rgba(211, 255, 155, 0.78);
-  border-radius: 2px;
-}
-
-.pricing-estimator-trigger-icon::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 17px;
-  width: 4px;
-  height: 4px;
-  border-radius: 1px;
-  background: #b8ff35;
-  box-shadow:
-    7px 0 0 rgba(184, 255, 53, 0.72),
-    14px 0 0 rgba(184, 255, 53, 0.72),
-    0 7px 0 rgba(184, 255, 53, 0.72),
-    7px 7px 0 rgba(184, 255, 53, 0.72),
-    14px 7px 0 rgba(184, 255, 53, 0.72);
-}
-
 .pricing-estimator-trigger-title {
   display: block;
   color: #eff7f0;

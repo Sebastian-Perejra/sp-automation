@@ -10,27 +10,49 @@ body {
   isolation: isolate;
 }
 
-body::before {
-  content: "";
+.pricing-background {
   position: fixed;
-  inset: -24px;
+  inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
-  background:
-    linear-gradient(
-      rgba(2, 7, 4, 0.7),
-      rgba(2, 7, 4, 0.82)
-    ),
-    url("/themes/noir-lime/pricing-grid/assets/background-pricing.png")
-    center center / cover no-repeat;
+}
+
+.pricing-background-layer {
+  position: absolute;
+  inset: -30px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
   transform:
     translate3d(
       var(--pricing-shift-x, 0px),
       var(--pricing-shift-y, 0px),
       0
     )
-    scale(1.035);
-  will-change: transform;
+    scale(1.04);
+  transition: opacity 5s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.pricing-background-layer-a {
+  background-image:
+    linear-gradient(
+      rgba(3, 10, 6, 0.43),
+      rgba(2, 8, 5, 0.58)
+    ),
+    url("/themes/noir-lime/pricing-grid/assets/Price-grid1.webp");
+  opacity: 1;
+}
+
+.pricing-background-layer-b {
+  background-image:
+    linear-gradient(
+      rgba(3, 10, 6, 0.43),
+      rgba(2, 8, 5, 0.58)
+    ),
+    url("/themes/noir-lime/pricing-grid/assets/Price-grid2.webp");
 }
 
 body::after {

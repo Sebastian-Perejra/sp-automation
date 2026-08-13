@@ -1315,6 +1315,179 @@ footer a:visited {
   }
 }
 
+.process-step-testing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 74px;
+}
+
+.process-step-testing:hover .process-visual {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.process-visual-testing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.testing-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 8px 1fr 14px;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 9px;
+}
+
+.testing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(142, 178, 152, 0.42);
+}
+
+.testing-line {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(130, 163, 140, 0.3);
+}
+
+.testing-status {
+  color: #d2f6dc;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.process-step-testing:hover .testing-row-1 .testing-dot,
+.process-step-testing:hover .testing-row-1 .testing-line,
+.process-step-testing:hover .testing-row-1 .testing-status {
+  animation: testingPassOne 2.8s ease-in-out infinite;
+}
+
+.process-step-testing:hover .testing-row-2 .testing-dot,
+.process-step-testing:hover .testing-row-2 .testing-line,
+.process-step-testing:hover .testing-row-2 .testing-status {
+  animation: testingPassTwo 2.8s ease-in-out infinite;
+}
+
+.process-step-testing:hover .testing-row-3 .testing-dot,
+.process-step-testing:hover .testing-row-3 .testing-line {
+  animation: testingPassThree 2.8s ease-in-out infinite;
+}
+
+.process-step-testing:hover .testing-status-fix {
+  animation: testingFixStatus 2.8s ease-in-out infinite;
+}
+
+@keyframes testingPassOne {
+  0%,
+  10% {
+    opacity: 0.35;
+    transform: scale(1);
+    background: rgba(130, 163, 140, 0.3);
+  }
+
+  20%,
+  72% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(160, 230, 181, 0.82);
+  }
+
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+    background: rgba(130, 163, 140, 0.3);
+  }
+}
+
+@keyframes testingPassTwo {
+  0%,
+  24% {
+    opacity: 0.35;
+    transform: scale(1);
+    background: rgba(130, 163, 140, 0.3);
+  }
+
+  36%,
+  72% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(160, 230, 181, 0.82);
+  }
+
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+    background: rgba(130, 163, 140, 0.3);
+  }
+}
+
+@keyframes testingPassThree {
+  0%,
+  38% {
+    background: rgba(130, 163, 140, 0.3);
+  }
+
+  50%,
+  62% {
+    background: rgba(184, 91, 91, 0.7);
+    box-shadow: 0 0 8px rgba(190, 80, 80, 0.22);
+  }
+
+  72%,
+  90% {
+    background: rgba(160, 230, 181, 0.82);
+    box-shadow: 0 0 8px rgba(110, 220, 140, 0.28);
+  }
+
+  100% {
+    background: rgba(130, 163, 140, 0.3);
+    box-shadow: none;
+  }
+}
+
+@keyframes testingFixStatus {
+  0%,
+  40% {
+    opacity: 0;
+    transform: scale(0.6);
+    color: #d6e7da;
+  }
+
+  50%,
+  62% {
+    opacity: 1;
+    transform: scale(1);
+    color: #e6a2a2;
+  }
+
+  63% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  72%,
+  90% {
+    opacity: 1;
+    transform: scale(1);
+    color: #d2f6dc;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

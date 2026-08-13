@@ -1,6 +1,6 @@
 .pricing-estimator-trigger {
   position: fixed;
-  left: 18px;
+  left: clamp(32px, 4.2vw, 68px);
   top: 50%;
   z-index: 9997;
   width: 118px;

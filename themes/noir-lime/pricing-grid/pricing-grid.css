@@ -7,13 +7,14 @@ body {
   overflow-x: hidden;
   background-color: #020704;
   color: #eef3ef;
+  isolation: isolate;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: -24px;
-  z-index: -4;
+  z-index: -1;
   pointer-events: none;
   background:
     linear-gradient(

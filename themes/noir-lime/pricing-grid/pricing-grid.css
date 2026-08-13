@@ -598,8 +598,8 @@ footer a:visited {
   position: relative;
   flex: 0 0 170px;
   width: 170px;
-  height: 44px;
-  opacity: 0.5;
+  height: 48px;
+  opacity: 0.52;
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
@@ -611,124 +611,186 @@ footer a:visited {
 }
 
 .process-visual-analysis {
-  overflow: hidden;
-  border: 1px solid rgba(140, 205, 160, 0.2);
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.analysis-document {
+  position: absolute;
+  left: 26px;
+  top: 5px;
+  width: 82px;
+  height: 38px;
+  border: 1px solid rgba(143, 205, 160, 0.28);
+  border-radius: 7px;
   background:
     linear-gradient(
       180deg,
-      rgba(8, 20, 12, 0.88),
-      rgba(3, 11, 7, 0.9)
+      rgba(9, 23, 14, 0.95),
+      rgba(4, 13, 8, 0.95)
     );
-}
-
-.analysis-data {
-  position: absolute;
-  left: 14px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(120, 154, 130, 0.35);
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.analysis-data-1 {
-  top: 9px;
-  width: 42px;
-}
-
-.analysis-data-2 {
-  top: 17px;
-  width: 68px;
-}
-
-.analysis-data-3 {
-  top: 25px;
-  width: 50px;
-}
-
-.analysis-data-4 {
-  top: 33px;
-  width: 76px;
-}
-
-.analysis-scan {
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: -20px;
-  width: 2px;
-  background: #d9ffe4;
   box-shadow:
-    0 0 10px rgba(180, 255, 201, 0.95),
-    0 0 22px rgba(100, 220, 135, 0.6);
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.analysis-line {
+  position: absolute;
+  left: 11px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(149, 190, 160, 0.42);
+}
+
+.analysis-line-1 {
+  top: 9px;
+  width: 45px;
+}
+
+.analysis-line-2 {
+  top: 17px;
+  width: 59px;
+}
+
+.analysis-line-3 {
+  top: 25px;
+  width: 37px;
+}
+
+.analysis-magnifier {
+  position: absolute;
+  left: 17px;
+  top: 8px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(207, 255, 220, 0.92);
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px rgba(160, 240, 182, 0.48),
+    inset 0 0 8px rgba(136, 220, 160, 0.15);
   opacity: 0;
+}
+
+.analysis-magnifier::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  right: -7px;
+  bottom: -4px;
+  border-radius: 999px;
+  background: rgba(207, 255, 220, 0.92);
+  transform: rotate(45deg);
+  transform-origin: left center;
 }
 
 .analysis-check {
   position: absolute;
-  right: 16px;
+  right: 20px;
   top: 50%;
-  color: #c9f6d5;
-  font-size: 19px;
+  color: #d7f8df;
+  font-size: 20px;
   font-weight: 700;
   opacity: 0;
   transform:
     translateY(-50%)
-    scale(0.7);
+    scale(0.55);
 }
 
-.process-step-analysis:hover .analysis-scan {
-  opacity: 1;
-  animation: analysisScanMove 2s ease-in-out infinite;
+.process-step-analysis:hover .analysis-magnifier {
+  animation: analysisMagnifierMove 2.2s ease-in-out infinite;
 }
 
-.process-step-analysis:hover .analysis-data {
-  animation: analysisDataRead 2s ease-in-out infinite;
+.process-step-analysis:hover .analysis-line {
+  animation: analysisLineRead 2.2s ease-in-out infinite;
 }
 
-.process-step-analysis:hover .analysis-data-2 {
-  animation-delay: 0.08s;
+.process-step-analysis:hover .analysis-line-2 {
+  animation-delay: 0.1s;
 }
 
-.process-step-analysis:hover .analysis-data-3 {
-  animation-delay: 0.16s;
-}
-
-.process-step-analysis:hover .analysis-data-4 {
-  animation-delay: 0.24s;
+.process-step-analysis:hover .analysis-line-3 {
+  animation-delay: 0.2s;
 }
 
 .process-step-analysis:hover .analysis-check {
-  animation: analysisCheckShow 2s ease-in-out infinite;
+  animation: analysisCheckShow 2.2s ease-in-out infinite;
 }
 
-@keyframes analysisScanMove {
+@keyframes analysisMagnifierMove {
   0% {
-    left: -20px;
+    left: 17px;
+    top: 8px;
+    opacity: 0;
   }
 
-  72% {
-    left: 126px;
+  12% {
+    opacity: 1;
+  }
+
+  38% {
+    left: 54px;
+    top: 10px;
+    opacity: 1;
+  }
+
+  65% {
+    left: 76px;
+    top: 18px;
+    opacity: 1;
+  }
+
+  78% {
+    opacity: 0;
   }
 
   100% {
-    left: 126px;
+    left: 76px;
+    top: 18px;
+    opacity: 0;
   }
 }
 
-@keyframes analysisDataRead {
+@keyframes analysisLineRead {
   0%,
-  18% {
-    background: rgba(120, 154, 130, 0.35);
+  26% {
+    background: rgba(149, 190, 160, 0.42);
     box-shadow: none;
   }
 
   48%,
+  80% {
+    background: rgba(177, 235, 193, 0.92);
+    box-shadow: 0 0 8px rgba(110, 220, 140, 0.32);
+  }
+
   100% {
-    background: rgba(160, 230, 181, 0.82);
-    box-shadow: 0 0 10px rgba(105, 210, 135, 0.28);
+    background: rgba(149, 190, 160, 0.42);
+    box-shadow: none;
+  }
+}
+
+@keyframes analysisCheckShow {
+  0%,
+  66% {
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scale(0.55);
+  }
+
+  78%,
+  92% {
+    opacity: 1;
+    transform:
+      translateY(-50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scale(0.7);
   }
 }
 

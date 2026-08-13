@@ -1488,6 +1488,68 @@ footer a:visited {
   }
 }
 
+.testing-status-fix {
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.testing-fail,
+.testing-pass {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testing-pass {
+  opacity: 0;
+}
+
+.process-step-testing:hover .testing-fail {
+  animation: testingFailSwap 2.8s ease-in-out infinite;
+}
+
+.process-step-testing:hover .testing-pass {
+  animation: testingPassSwap 2.8s ease-in-out infinite;
+}
+
+@keyframes testingFailSwap {
+  0%,
+  40% {
+    opacity: 0;
+  }
+
+  50%,
+  62% {
+    opacity: 1;
+    color: #e6a2a2;
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes testingPassSwap {
+  0%,
+  66% {
+    opacity: 0;
+  }
+
+  72%,
+  90% {
+    opacity: 1;
+    color: #d2f6dc;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

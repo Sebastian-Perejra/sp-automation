@@ -1550,6 +1550,196 @@ footer a:visited {
   }
 }
 
+.process-step-delivery {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 74px;
+}
+
+.process-step-delivery:hover .process-visual {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.process-visual-delivery {
+  position: relative;
+}
+
+.delivery-source,
+.delivery-target {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(145, 205, 161, 0.3);
+  border-radius: 7px;
+  background: rgba(5, 16, 9, 0.94);
+  color: rgba(194, 222, 201, 0.76);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transform: translateY(-50%);
+}
+
+.delivery-source {
+  left: 6px;
+}
+
+.delivery-target {
+  right: 6px;
+}
+
+.delivery-path {
+  position: absolute;
+  left: 54px;
+  right: 54px;
+  top: 50%;
+  height: 1px;
+  background: rgba(145, 205, 161, 0.22);
+  transform: translateY(-50%);
+}
+
+.delivery-packet {
+  position: absolute;
+  left: 52px;
+  top: 50%;
+  color: #d8f9e1;
+  font-size: 15px;
+  opacity: 0;
+  transform:
+    translateY(-50%)
+    scale(0.8);
+  text-shadow:
+    0 0 8px rgba(170, 255, 195, 0.7),
+    0 0 16px rgba(100, 220, 135, 0.35);
+}
+
+.delivery-check {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  color: #d9f9e1;
+  font-size: 15px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.process-step-delivery:hover .delivery-source {
+  animation: deliverySourcePulse 2.4s ease-in-out infinite;
+}
+
+.process-step-delivery:hover .delivery-packet {
+  animation: deliveryPacketMove 2.4s ease-in-out infinite;
+}
+
+.process-step-delivery:hover .delivery-target {
+  animation: deliveryTargetReceive 2.4s ease-in-out infinite;
+}
+
+.process-step-delivery:hover .delivery-check {
+  animation: deliveryCheckShow 2.4s ease-in-out infinite;
+}
+
+@keyframes deliverySourcePulse {
+  0%,
+  10% {
+    border-color: rgba(145, 205, 161, 0.3);
+    box-shadow: none;
+  }
+
+  24%,
+  42% {
+    border-color: rgba(185, 240, 199, 0.74);
+    box-shadow: 0 0 14px rgba(105, 220, 135, 0.22);
+  }
+
+  100% {
+    border-color: rgba(145, 205, 161, 0.3);
+    box-shadow: none;
+  }
+}
+
+@keyframes deliveryPacketMove {
+  0%,
+  18% {
+    left: 52px;
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scale(0.75);
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  64% {
+    left: 105px;
+    opacity: 1;
+    transform:
+      translateY(-50%)
+      scale(1);
+  }
+
+  72% {
+    left: 112px;
+    opacity: 0;
+    transform:
+      translateY(-50%)
+      scale(0.8);
+  }
+
+  100% {
+    left: 112px;
+    opacity: 0;
+  }
+}
+
+@keyframes deliveryTargetReceive {
+  0%,
+  58% {
+    border-color: rgba(145, 205, 161, 0.3);
+    box-shadow: none;
+  }
+
+  70%,
+  90% {
+    border-color: rgba(185, 240, 199, 0.74);
+    box-shadow: 0 0 15px rgba(105, 220, 135, 0.25);
+    color: #d7f3df;
+  }
+
+  100% {
+    border-color: rgba(145, 205, 161, 0.3);
+    box-shadow: none;
+  }
+}
+
+@keyframes deliveryCheckShow {
+  0%,
+  70% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  80%,
+  92% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

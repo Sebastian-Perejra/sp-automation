@@ -706,379 +706,651 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function calculateEstimate() {
-    const category = answers.start;
+  const category = answers.start;
 
-    const estimates = {
-      powerbi: { min: 5, max: 9 },
-      excel: { min: 3, max: 6 },
-      reports: { min: 4, max: 8 },
-      telegram: { min: 5, max: 10 },
-      documents: { min: 5, max: 10 },
-      integration: { min: 8, max: 16 },
-      other: { min: 4, max: 10 }
-    };
-
-    const base = estimates[category] || {
+  const estimates = {
+    powerbi: {
+      min: 5,
+      max: 9,
+      label: "Base Power BI estimate"
+    },
+    excel: {
+      min: 3,
+      max: 6,
+      label: "Base Excel / Google Sheets estimate"
+    },
+    reports: {
       min: 4,
-      max: 10
-    };
+      max: 8,
+      label: "Base report automation estimate"
+    },
+    telegram: {
+      min: 5,
+      max: 10,
+      label: "Base Telegram bot estimate"
+    },
+    documents: {
+      min: 5,
+      max: 10,
+      label: "Base document processing estimate"
+    },
+    integration: {
+      min: 8,
+      max: 16,
+      label: "Base integration estimate"
+    },
+    other: {
+      min: 4,
+      max: 10,
+      label: "Base project estimate"
+    }
+  };
 
-    let minHours = base.min;
-    let maxHours = base.max;
+  const base =
+    estimates[category] ||
+    estimates.other;
 
-    if (category === "powerbi") {
-      if (answers.powerbi_type === "new") {
-        minHours += 2;
-        maxHours += 4;
-      }
+  let minHours = base.min;
+  let maxHours = base.max;
 
-      if (answers.powerbi_type === "full") {
-        minHours += 8;
-        maxHours += 16;
-      }
+  const breakdown = [
+    {
+      label: base.label,
+      minHours: base.min,
+      maxHours: base.max
+    }
+  ];
 
-      if (answers.powerbi_license === "no") {
-        minHours += 1;
-        maxHours += 3;
-      }
+  function addWork(label, min, max) {
+    minHours += min;
+    maxHours += max;
 
-      const sources = answers.powerbi_sources || [];
+    breakdown.push({
+      label,
+      minHours: min,
+      maxHours: max
+    });
+  }
 
-      if (sources.length === 2) {
-        minHours += 1;
-        maxHours += 3;
-      }
-
-      if (sources.length >= 3) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (
-        sources.includes("api") ||
-        sources.includes("database") ||
-        sources.includes("crm")
-      ) {
-        minHours += 2;
-        maxHours += 5;
-      }
-
-      if (answers.powerbi_visuals === "2-3") {
-        minHours += 2;
-        maxHours += 4;
-      }
-
-      if (answers.powerbi_visuals === "4-5") {
-        minHours += 4;
-        maxHours += 8;
-      }
-
-      if (answers.powerbi_visuals === "6+") {
-        minHours += 7;
-        maxHours += 14;
-      }
-
-      if (answers.powerbi_complexity === "medium") {
-        minHours += 3;
-        maxHours += 6;
-      }
-
-      if (answers.powerbi_complexity === "complex") {
-        minHours += 7;
-        maxHours += 15;
-      }
+  if (category === "powerbi") {
+    if (answers.powerbi_type === "new") {
+      addWork(
+        "Create a new report",
+        2,
+        4
+      );
     }
 
-    if (category === "excel") {
-      const types = answers.excel_type || [];
-      const sources = answers.excel_sources || [];
-      const launches = answers.excel_launch || [];
-
-      if (types.length >= 3) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (
-        types.includes("integration") ||
-        types.includes("data")
-      ) {
-        minHours += 2;
-        maxHours += 5;
-      }
-
-      if (answers.excel_platform === "both") {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (answers.excel_volume === "medium") {
-        minHours += 1;
-        maxHours += 3;
-      }
-
-      if (answers.excel_volume === "large") {
-        minHours += 4;
-        maxHours += 10;
-      }
-
-      if (sources.length >= 3) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (
-        sources.includes("crm") ||
-        sources.includes("api") ||
-        sources.includes("email")
-      ) {
-        minHours += 2;
-        maxHours += 6;
-      }
-
-      if (answers.excel_process === "several") {
-        minHours += 3;
-        maxHours += 6;
-      }
-
-      if (answers.excel_process === "full") {
-        minHours += 7;
-        maxHours += 15;
-      }
-
-      if (
-        launches.includes("schedule") ||
-        launches.includes("event")
-      ) {
-        minHours += 2;
-        maxHours += 5;
-      }
+    if (answers.powerbi_type === "full") {
+      addWork(
+        "Complete Power BI solution",
+        8,
+        16
+      );
     }
 
-    if (category === "reports") {
-      const sources = answers.reports_sources || [];
-      const delivery = answers.reports_delivery || [];
-
-      if (sources.length >= 3) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (
-        sources.includes("crm") ||
-        sources.includes("api") ||
-        sources.includes("multiple")
-      ) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (answers.reports_count === "2-3") {
-        minHours += 3;
-        maxHours += 6;
-      }
-
-      if (answers.reports_count === "4-5") {
-        minHours += 6;
-        maxHours += 12;
-      }
-
-      if (answers.reports_count === "6+") {
-        minHours += 10;
-        maxHours += 20;
-      }
-
-      if (delivery.length >= 2) {
-        minHours += 2;
-        maxHours += 5;
-      }
-
-      if (answers.reports_frequency !== "manual") {
-        minHours += 1;
-        maxHours += 4;
-      }
+    if (answers.powerbi_license === "no") {
+      addWork(
+        "Power BI setup",
+        1,
+        3
+      );
     }
 
-    if (category === "telegram") {
-      const functions = answers.telegram_functions || [];
+    const sources =
+      answers.powerbi_sources || [];
 
-      if (functions.length >= 3) {
-        minHours += 4;
-        maxHours += 8;
-      }
-
-      if (functions.length >= 5) {
-        minHours += 4;
-        maxHours += 10;
-      }
-
-      if (
-        functions.includes("api") ||
-        functions.includes("roles")
-      ) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (answers.telegram_complexity === "medium") {
-        minHours += 4;
-        maxHours += 8;
-      }
-
-      if (answers.telegram_complexity === "complex") {
-        minHours += 10;
-        maxHours += 20;
-      }
-
-      if (answers.telegram_users === "200+") {
-        minHours += 3;
-        maxHours += 8;
-      }
+    if (sources.length === 2) {
+      addWork(
+        "Two data sources",
+        1,
+        3
+      );
     }
 
-    if (category === "documents") {
-      const types = answers.documents_type || [];
-      const results = answers.documents_result || [];
-
-      if (types.includes("scans")) {
-        minHours += 4;
-        maxHours += 10;
-      }
-
-      if (types.length >= 3) {
-        minHours += 3;
-        maxHours += 7;
-      }
-
-      if (answers.documents_templates === "2-5") {
-        minHours += 4;
-        maxHours += 10;
-      }
-
-      if (answers.documents_templates === "6+") {
-        minHours += 10;
-        maxHours += 24;
-      }
-
-      if (answers.documents_volume === "medium") {
-        minHours += 2;
-        maxHours += 5;
-      }
-
-      if (answers.documents_volume === "large") {
-        minHours += 5;
-        maxHours += 12;
-      }
-
-      if (
-        results.includes("crm") ||
-        results.includes("database") ||
-        results.includes("api")
-      ) {
-        minHours += 3;
-        maxHours += 8;
-      }
+    if (sources.length >= 3) {
+      addWork(
+        "Multiple data sources",
+        3,
+        7
+      );
     }
 
-    if (category === "integration") {
-      const systems = answers.integration_systems || [];
-
-      if (systems.length >= 3) {
-        minHours += 5;
-        maxHours += 12;
-      }
-
-      if (answers.integration_direction === "twoway") {
-        minHours += 6;
-        maxHours += 14;
-      }
-
-      if (answers.integration_direction === "multiple") {
-        minHours += 10;
-        maxHours += 22;
-      }
-
-      if (answers.integration_api === "no") {
-        minHours += 5;
-        maxHours += 15;
-      }
-
-      if (answers.integration_api === "unknown") {
-        minHours += 2;
-        maxHours += 8;
-      }
-
-      if (answers.integration_frequency === "realtime") {
-        minHours += 5;
-        maxHours += 12;
-      }
+    if (
+      sources.includes("api") ||
+      sources.includes("database") ||
+      sources.includes("crm")
+    ) {
+      addWork(
+        "CRM / API / database",
+        2,
+        5
+      );
     }
 
-    if (answers.common_existing === "existing") {
-      minHours += 1;
-      maxHours += 4;
+    if (answers.powerbi_visuals === "2-3") {
+      addWork(
+        "2–3 visualizations",
+        2,
+        4
+      );
     }
 
-    if (answers.common_existing === "broken") {
-      minHours += 2;
-      maxHours += 6;
+    if (answers.powerbi_visuals === "4-5") {
+      addWork(
+        "4–5 visualizations",
+        4,
+        8
+      );
     }
 
-    if (answers.common_urgency === "urgent") {
-      minHours *= 1.1;
-      maxHours *= 1.2;
+    if (answers.powerbi_visuals === "6+") {
+      addWork(
+        "More than 5 visualizations",
+        7,
+        14
+      );
     }
 
-    if (answers.common_support === "short") {
-      minHours += 1;
-      maxHours += 3;
+    if (answers.powerbi_complexity === "medium") {
+      addWork(
+        "KPIs, filters and calculations",
+        3,
+        6
+      );
     }
 
-    if (answers.common_support === "ongoing") {
-      minHours += 3;
-      maxHours += 8;
+    if (answers.powerbi_complexity === "complex") {
+      addWork(
+        "Complex business logic",
+        7,
+        15
+      );
+    }
+  }
+
+  if (category === "excel") {
+    const types =
+      answers.excel_type || [];
+
+    const sources =
+      answers.excel_sources || [];
+
+    const launches =
+      answers.excel_launch || [];
+
+    if (types.length >= 3) {
+      addWork(
+        "Multiple automation types",
+        3,
+        7
+      );
     }
 
-    minHours = Math.max(2, Math.round(minHours));
-    maxHours = Math.max(
+    if (
+      types.includes("integration") ||
+      types.includes("data")
+    ) {
+      addWork(
+        "Data processing / integration",
+        2,
+        5
+      );
+    }
+
+    if (answers.excel_platform === "both") {
+      addWork(
+        "Excel + Google Sheets",
+        3,
+        7
+      );
+    }
+
+    if (answers.excel_volume === "medium") {
+      addWork(
+        "Medium data volume",
+        1,
+        3
+      );
+    }
+
+    if (answers.excel_volume === "large") {
+      addWork(
+        "Large data volume",
+        4,
+        10
+      );
+    }
+
+    if (sources.length >= 3) {
+      addWork(
+        "Multiple data sources",
+        3,
+        7
+      );
+    }
+
+    if (
+      sources.includes("crm") ||
+      sources.includes("api") ||
+      sources.includes("email")
+    ) {
+      addWork(
+        "CRM / API / Email",
+        2,
+        6
+      );
+    }
+
+    if (answers.excel_process === "several") {
+      addWork(
+        "Several connected operations",
+        3,
+        6
+      );
+    }
+
+    if (answers.excel_process === "full") {
+      addWork(
+        "Full automated process",
+        7,
+        15
+      );
+    }
+
+    if (
+      launches.includes("schedule") ||
+      launches.includes("event")
+    ) {
+      addWork(
+        "Automatic execution",
+        2,
+        5
+      );
+    }
+  }
+
+  if (category === "reports") {
+    const sources =
+      answers.reports_sources || [];
+
+    const delivery =
+      answers.reports_delivery || [];
+
+    if (sources.length >= 3) {
+      addWork(
+        "Multiple data sources",
+        3,
+        7
+      );
+    }
+
+    if (
+      sources.includes("crm") ||
+      sources.includes("api") ||
+      sources.includes("multiple")
+    ) {
+      addWork(
+        "CRM / API / complex sources",
+        3,
+        7
+      );
+    }
+
+    if (answers.reports_count === "2-3") {
+      addWork(
+        "2–3 reports",
+        3,
+        6
+      );
+    }
+
+    if (answers.reports_count === "4-5") {
+      addWork(
+        "4–5 reports",
+        6,
+        12
+      );
+    }
+
+    if (answers.reports_count === "6+") {
+      addWork(
+        "More than 5 reports",
+        10,
+        20
+      );
+    }
+
+    if (delivery.length >= 2) {
+      addWork(
+        "Multiple delivery channels",
+        2,
+        5
+      );
+    }
+
+    if (answers.reports_frequency !== "manual") {
+      addWork(
+        "Automatic report generation",
+        1,
+        4
+      );
+    }
+  }
+
+  if (category === "telegram") {
+    const functions =
+      answers.telegram_functions || [];
+
+    if (functions.length >= 3) {
+      addWork(
+        "Multiple bot functions",
+        4,
+        8
+      );
+    }
+
+    if (functions.length >= 5) {
+      addWork(
+        "Extended functionality",
+        4,
+        10
+      );
+    }
+
+    if (
+      functions.includes("api") ||
+      functions.includes("roles")
+    ) {
+      addWork(
+        "API / user roles",
+        3,
+        7
+      );
+    }
+
+    if (answers.telegram_complexity === "medium") {
+      addWork(
+        "Several connected workflows",
+        4,
+        8
+      );
+    }
+
+    if (answers.telegram_complexity === "complex") {
+      addWork(
+        "Complex bot logic",
+        10,
+        20
+      );
+    }
+
+    if (answers.telegram_users === "200+") {
+      addWork(
+        "Large number of users",
+        3,
+        8
+      );
+    }
+  }
+
+  if (category === "documents") {
+    const types =
+      answers.documents_type || [];
+
+    const results =
+      answers.documents_result || [];
+
+    if (types.includes("scans")) {
+      addWork(
+        "Scans / photos",
+        4,
+        10
+      );
+    }
+
+    if (types.length >= 3) {
+      addWork(
+        "Multiple document types",
+        3,
+        7
+      );
+    }
+
+    if (answers.documents_templates === "2-5") {
+      addWork(
+        "2–5 document formats",
+        4,
+        10
+      );
+    }
+
+    if (answers.documents_templates === "6+") {
+      addWork(
+        "Many document formats",
+        10,
+        24
+      );
+    }
+
+    if (answers.documents_volume === "medium") {
+      addWork(
+        "50–500 documents per month",
+        2,
+        5
+      );
+    }
+
+    if (answers.documents_volume === "large") {
+      addWork(
+        "More than 500 documents per month",
+        5,
+        12
+      );
+    }
+
+    if (
+      results.includes("crm") ||
+      results.includes("database") ||
+      results.includes("api")
+    ) {
+      addWork(
+        "Send data to an external system",
+        3,
+        8
+      );
+    }
+  }
+
+  if (category === "integration") {
+    const systems =
+      answers.integration_systems || [];
+
+    if (systems.length >= 3) {
+      addWork(
+        "Multiple systems",
+        5,
+        12
+      );
+    }
+
+    if (answers.integration_direction === "twoway") {
+      addWork(
+        "Two-way data exchange",
+        6,
+        14
+      );
+    }
+
+    if (answers.integration_direction === "multiple") {
+      addWork(
+        "Data exchange between multiple systems",
+        10,
+        22
+      );
+    }
+
+    if (answers.integration_api === "no") {
+      addWork(
+        "No ready-to-use API",
+        5,
+        15
+      );
+    }
+
+    if (answers.integration_api === "unknown") {
+      addWork(
+        "API requires review",
+        2,
+        8
+      );
+    }
+
+    if (answers.integration_frequency === "realtime") {
+      addWork(
+        "Near real-time synchronization",
+        5,
+        12
+      );
+    }
+  }
+
+  if (answers.common_existing === "existing") {
+    addWork(
+      "Improvement of an existing solution",
+      1,
+      4
+    );
+  }
+
+  if (answers.common_existing === "broken") {
+    addWork(
+      "Diagnostics and fixes",
+      2,
+      6
+    );
+  }
+
+  if (answers.common_support === "short") {
+    addWork(
+      "Launch support",
+      1,
+      3
+    );
+  }
+
+  if (answers.common_support === "ongoing") {
+    addWork(
+      "Extended support",
+      3,
+      8
+    );
+  }
+
+  minHours =
+    Math.max(
+      2,
+      Math.round(minHours)
+    );
+
+  maxHours =
+    Math.max(
       minHours + 1,
       Math.round(maxHours)
     );
 
-    const rate =
-      minHours > 50 && maxHours > 50
-        ? 800
-        : 1000;
+  const rate =
+    minHours > 50 && maxHours > 50
+      ? 800
+      : 1000;
 
-    let minPrice = minHours * rate;
-    let maxPrice = maxHours * rate;
+  let baseMinPrice =
+    minHours * rate;
 
-    if (minHours <= 50 && maxHours > 50) {
-      minPrice = minHours * 1000;
-      maxPrice = maxHours * 800;
-    }
+  let baseMaxPrice =
+    maxHours * rate;
 
-    minPrice =
-      Math.ceil(minPrice / 500) * 500;
+  if (
+    minHours <= 50 &&
+    maxHours > 50
+  ) {
+    baseMinPrice =
+      minHours * 1000;
 
-    maxPrice =
-      Math.ceil(maxPrice / 500) * 500;
-
-    const needsManualEstimate =
-      category === "integration" &&
-      (
-        answers.integration_api === "no" ||
-        answers.integration_direction === "multiple"
-      );
-
-    return {
-      minHours,
-      maxHours,
-      minPrice,
-      maxPrice,
-      needsManualEstimate
-    };
+    baseMaxPrice =
+      maxHours * 800;
   }
+
+  baseMinPrice =
+    Math.ceil(
+      baseMinPrice / 500
+    ) * 500;
+
+  baseMaxPrice =
+    Math.ceil(
+      baseMaxPrice / 500
+    ) * 500;
+
+  let urgencyPercent = 0;
+  let urgencyLabel = "";
+
+  if (answers.common_urgency === "week") {
+    urgencyPercent = 50;
+    urgencyLabel =
+      "Priority delivery";
+  }
+
+  if (answers.common_urgency === "urgent") {
+    urgencyPercent = 100;
+    urgencyLabel =
+      "Maximum urgency";
+  }
+
+  if (answers.common_urgency === "date") {
+    urgencyPercent = 50;
+    urgencyLabel =
+      "Fixed deadline";
+  }
+
+  const urgencyMultiplier =
+    1 + urgencyPercent / 100;
+
+  let minPrice =
+    baseMinPrice * urgencyMultiplier;
+
+  let maxPrice =
+    baseMaxPrice * urgencyMultiplier;
+
+  minPrice =
+    Math.ceil(
+      minPrice / 500
+    ) * 500;
+
+  maxPrice =
+    Math.ceil(
+      maxPrice / 500
+    ) * 500;
+
+  const needsManualEstimate =
+    category === "integration" &&
+    (
+      answers.integration_api === "no" ||
+      answers.integration_direction === "multiple"
+    );
+
+  return {
+    minHours,
+    maxHours,
+    baseMinPrice,
+    baseMaxPrice,
+    minPrice,
+    maxPrice,
+    urgencyPercent,
+    urgencyLabel,
+    breakdown,
+    needsManualEstimate
+  };
+}
 
   function getAnswerLabels(questionId) {
     const question = questions[questionId];
@@ -1106,60 +1378,116 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function buildEstimatorMessage(estimate = null) {
-    const lines = [];
+  const lines = [];
 
-    lines.push("Preliminary request from the project cost calculator");
-    lines.push("");
+  lines.push(
+    "Preliminary request from the project cost calculator"
+  );
 
-    flow.forEach((questionId) => {
-      if (answers[questionId] === undefined) {
-        return;
-      }
+  lines.push("");
 
-      const question = questions[questionId];
-
-      if (!question) {
-        return;
-      }
-
-      lines.push(question.title);
-      lines.push(getAnswerLabels(questionId));
-      lines.push("");
-    });
-
-    if (estimate) {
-      if (estimate.needsManualEstimate) {
-        lines.push("Preliminary estimate:");
-        lines.push("Individual assessment required");
-        lines.push("");
-
-        lines.push("Estimated workload:");
-        lines.push(
-          `${estimate.minHours}–${estimate.maxHours} hours`
-        );
-        lines.push("");
-      } else {
-        lines.push("Preliminary estimate:");
-        lines.push(
-          `${estimate.minPrice.toLocaleString("en-US")}–` +
-          `${estimate.maxPrice.toLocaleString("en-US")} UAH`
-        );
-        lines.push("");
-
-        lines.push("Estimated workload:");
-        lines.push(
-          `${estimate.minHours}–${estimate.maxHours} hours`
-        );
-        lines.push("");
-      }
+  flow.forEach((questionId) => {
+    if (
+      answers[questionId] === undefined
+    ) {
+      return;
     }
 
+    const question =
+      questions[questionId];
+
+    if (!question) {
+      return;
+    }
+
+    lines.push(question.title);
     lines.push(
-      "I would like to discuss this project and confirm the final scope and cost."
+      getAnswerLabels(questionId)
+    );
+    lines.push("");
+  });
+
+  if (estimate) {
+    lines.push(
+      "Estimated scope of work:"
     );
 
-    return lines.join("\n");
+    estimate.breakdown.forEach(
+      (item) => {
+        lines.push(
+          `${item.label}: ` +
+          `${item.minHours}–${item.maxHours} hours`
+        );
+      }
+    );
+
+    lines.push("");
+
+    lines.push(
+      "Estimated workload:"
+    );
+
+    lines.push(
+      `${estimate.minHours}–` +
+      `${estimate.maxHours} hours`
+    );
+
+    lines.push("");
+
+    if (estimate.needsManualEstimate) {
+      lines.push(
+        "Preliminary estimate:"
+      );
+
+      lines.push(
+        "Individual assessment required"
+      );
+
+      lines.push("");
+    } else {
+      lines.push(
+        "Base cost:"
+      );
+
+      lines.push(
+        `${estimate.baseMinPrice.toLocaleString("en-US")}–` +
+        `${estimate.baseMaxPrice.toLocaleString("en-US")} UAH`
+      );
+
+      lines.push("");
+
+      if (estimate.urgencyPercent > 0) {
+        lines.push(
+          "Urgency surcharge:"
+        );
+
+        lines.push(
+          `${estimate.urgencyLabel}: ` +
+          `+${estimate.urgencyPercent}%`
+        );
+
+        lines.push("");
+      }
+
+      lines.push(
+        "Preliminary project cost:"
+      );
+
+      lines.push(
+        `${estimate.minPrice.toLocaleString("en-US")}–` +
+        `${estimate.maxPrice.toLocaleString("en-US")} UAH`
+      );
+
+      lines.push("");
+    }
   }
+
+  lines.push(
+    "I would like to discuss this project and confirm the final scope and cost."
+  );
+
+  return lines.join("\n");
+}
 
   function saveEstimatorDraft(estimate = null) {
     const message =
@@ -1179,123 +1507,214 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showResult() {
-    const estimate = calculateEstimate();
+  const estimate =
+    calculateEstimate();
 
-    if (progressBar) {
-      progressBar.style.width = "100%";
-    }
-
-    if (progressValue) {
-      progressValue.textContent = "100%";
-    }
-
-    if (progressLabel) {
-      progressLabel.textContent = "Done";
-    }
-
-    if (backButton) {
-      backButton.disabled = false;
-    }
-
-    if (tiredButton) {
-      tiredButton.style.display = "none";
-    }
-
-    const priceText =
-      `${estimate.minPrice.toLocaleString("en-US")}–` +
-      `${estimate.maxPrice.toLocaleString("en-US")} UAH`;
-
-    const hoursText =
-      `${estimate.minHours}–${estimate.maxHours} hours`;
-
-    let resultHtml = "";
-
-    if (estimate.needsManualEstimate) {
-      resultHtml = `
-        <div class="pricing-estimator-step">
-          <div class="pricing-estimator-summary">
-
-            <div class="pricing-estimator-question-number">
-              Preliminary result
-            </div>
-
-            <h3 class="pricing-estimator-summary-title">
-              Individual assessment required
-            </h3>
-
-            <p class="pricing-estimator-summary-text">
-              In this scenario, the cost depends heavily on system access,
-              API availability and technical limitations. An automatically
-              generated exact figure would not be reliable.
-            </p>
-
-            <p class="pricing-estimator-summary-text">
-              Estimated workload:
-              <strong>${hoursText}</strong>.
-            </p>
-
-            <button
-              class="pricing-estimator-contact-button pricing-estimator-result-contact"
-              type="button"
-            >
-              Get an accurate estimate
-            </button>
-
-          </div>
-        </div>
-      `;
-    } else {
-      resultHtml = `
-        <div class="pricing-estimator-step">
-          <div class="pricing-estimator-summary">
-
-            <div class="pricing-estimator-question-number">
-              Preliminary result
-            </div>
-
-            <h3 class="pricing-estimator-summary-title">
-              ${priceText}
-            </h3>
-
-            <p class="pricing-estimator-summary-text">
-              Estimated workload:
-              <strong>${hoursText}</strong>.
-            </p>
-
-            <p class="pricing-estimator-summary-text">
-              This is a preliminary estimate based on your answers,
-              not a fixed commercial offer.
-              The estimate may change after a short review of the actual task.
-            </p>
-
-            <button
-              class="pricing-estimator-contact-button pricing-estimator-result-contact"
-              type="button"
-            >
-              Discuss the project
-            </button>
-
-          </div>
-        </div>
-      `;
-    }
-
-    content.innerHTML = resultHtml;
-
-    const contactButton =
-      content.querySelector(
-        ".pricing-estimator-result-contact"
-      );
-
-    if (contactButton) {
-      contactButton.addEventListener(
-        "click",
-        () => {
-          goToContacts(estimate);
-        }
-      );
-    }
+  if (progressBar) {
+    progressBar.style.width =
+      "100%";
   }
+
+  if (progressValue) {
+    progressValue.textContent =
+      "100%";
+  }
+
+  if (progressLabel) {
+    progressLabel.textContent =
+      "Done";
+  }
+
+  if (backButton) {
+    backButton.disabled = false;
+  }
+
+  if (tiredButton) {
+    tiredButton.style.display =
+      "none";
+  }
+
+  const priceText =
+    `${estimate.minPrice.toLocaleString("en-US")}–` +
+    `${estimate.maxPrice.toLocaleString("en-US")} UAH`;
+
+  const basePriceText =
+    `${estimate.baseMinPrice.toLocaleString("en-US")}–` +
+    `${estimate.baseMaxPrice.toLocaleString("en-US")} UAH`;
+
+  const hoursText =
+    `${estimate.minHours}–` +
+    `${estimate.maxHours} hours`;
+
+  const breakdownHtml =
+    estimate.breakdown
+      .map(
+        (item) => `
+          <div class="pricing-estimator-cost-row">
+            <span class="pricing-estimator-cost-label">
+              ${item.label}
+            </span>
+
+            <span class="pricing-estimator-cost-value">
+              ${item.minHours}–${item.maxHours} hours
+            </span>
+          </div>
+        `
+      )
+      .join("");
+
+  const urgencyHtml =
+    estimate.urgencyPercent > 0
+      ? `
+        <div class="pricing-estimator-cost-row pricing-estimator-cost-row-urgency">
+          <span class="pricing-estimator-cost-label">
+            ${estimate.urgencyLabel}
+          </span>
+
+          <span class="pricing-estimator-cost-value">
+            +${estimate.urgencyPercent}%
+          </span>
+        </div>
+      `
+      : "";
+
+  let resultHtml = "";
+
+  if (estimate.needsManualEstimate) {
+    resultHtml = `
+      <div class="pricing-estimator-step">
+        <div class="pricing-estimator-summary">
+
+          <div class="pricing-estimator-question-number">
+            Preliminary result
+          </div>
+
+          <h3 class="pricing-estimator-summary-title">
+            Individual assessment required
+          </h3>
+
+          <p class="pricing-estimator-summary-text">
+            In this scenario, the final cost depends heavily
+            on system access, API availability and technical limitations.
+          </p>
+
+          <div class="pricing-estimator-cost-breakdown">
+
+            <div class="pricing-estimator-cost-heading">
+              What affects the estimate
+            </div>
+
+            ${breakdownHtml}
+
+            <div class="pricing-estimator-cost-total">
+              <span>
+                Estimated workload
+              </span>
+
+              <strong>
+                ${hoursText}
+              </strong>
+            </div>
+
+          </div>
+
+          <button
+            class="pricing-estimator-contact-button pricing-estimator-result-contact"
+            type="button"
+          >
+            Get an accurate estimate
+          </button>
+
+        </div>
+      </div>
+    `;
+  } else {
+    resultHtml = `
+      <div class="pricing-estimator-step">
+        <div class="pricing-estimator-summary">
+
+          <div class="pricing-estimator-question-number">
+            Preliminary result
+          </div>
+
+          <h3 class="pricing-estimator-summary-title">
+            ${priceText}
+          </h3>
+
+          <p class="pricing-estimator-summary-text">
+            Estimated workload:
+            <strong>${hoursText}</strong>.
+          </p>
+
+          <div class="pricing-estimator-cost-breakdown">
+
+            <div class="pricing-estimator-cost-heading">
+              How the estimate was calculated
+            </div>
+
+            ${breakdownHtml}
+
+            <div class="pricing-estimator-cost-separator"></div>
+
+            <div class="pricing-estimator-cost-row">
+              <span class="pricing-estimator-cost-label">
+                Base cost
+              </span>
+
+              <span class="pricing-estimator-cost-value">
+                ${basePriceText}
+              </span>
+            </div>
+
+            ${urgencyHtml}
+
+            <div class="pricing-estimator-cost-total">
+              <span>
+                Preliminary project cost
+              </span>
+
+              <strong>
+                ${priceText}
+              </strong>
+            </div>
+
+          </div>
+
+          <p class="pricing-estimator-summary-text pricing-estimator-summary-disclaimer">
+            This is a preliminary estimate based on your answers,
+            not a fixed commercial offer.
+            The estimate may change after reviewing the actual project scope.
+          </p>
+
+          <button
+            class="pricing-estimator-contact-button pricing-estimator-result-contact"
+            type="button"
+          >
+            Discuss the project
+          </button>
+
+        </div>
+      </div>
+    `;
+  }
+
+  content.innerHTML =
+    resultHtml;
+
+  const contactButton =
+    content.querySelector(
+      ".pricing-estimator-result-contact"
+    );
+
+  if (contactButton) {
+    contactButton.addEventListener(
+      "click",
+      () => {
+        goToContacts(estimate);
+      }
+    );
+  }
+}
 
   function leaveRequest() {
     saveEstimatorDraft();

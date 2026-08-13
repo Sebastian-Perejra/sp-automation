@@ -2374,3 +2374,7 @@ footer {
     bottom: 32px;
   }
 }
+
+.page {
+  width: min(100%, 1180px);
+}

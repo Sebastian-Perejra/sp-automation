@@ -697,9 +697,99 @@
 
   <link rel="stylesheet" href="/consent/consent.css">
   <link rel="stylesheet" href="/themes/noir-lime/pricing-grid/pricing-grid.css">
+  <link rel="stylesheet" href="/themes/noir-lime/estimator/pricing-estimator.css?v=1">
 </head>
 
 <body>
+  <button
+  class="pricing-estimator-trigger"
+  type="button"
+  aria-label="Calculate the estimated project cost"
+>
+  <span class="pricing-estimator-trigger-icon" aria-hidden="true">▦</span>
+
+  <span class="pricing-estimator-trigger-title">
+    Calculate project cost
+  </span>
+
+  <span class="pricing-estimator-trigger-subtitle">
+    Preliminary estimate
+  </span>
+</button>
+
+<div class="pricing-estimator-overlay" aria-hidden="true"></div>
+
+<aside
+  class="pricing-estimator-panel"
+  aria-hidden="true"
+  aria-label="Project cost calculator"
+>
+  <button
+    class="pricing-estimator-close"
+    type="button"
+    aria-label="Close calculator"
+  >
+    ×
+  </button>
+
+  <div class="pricing-estimator-panel-inner">
+
+    <div class="pricing-estimator-panel-kicker">
+      Preliminary estimate
+    </div>
+
+    <h2 class="pricing-estimator-panel-title">
+      Calculate project cost
+    </h2>
+
+    <p class="pricing-estimator-panel-text">
+      Answer a few short questions to receive an estimated project cost.
+    </p>
+
+    <div class="pricing-estimator-progress">
+      <div class="pricing-estimator-progress-head">
+        <span class="pricing-estimator-progress-label">
+          Start
+        </span>
+
+        <span class="pricing-estimator-progress-value">
+          0%
+        </span>
+      </div>
+
+      <div class="pricing-estimator-progress-track">
+        <span class="pricing-estimator-progress-bar"></span>
+      </div>
+    </div>
+
+    <div class="pricing-estimator-content"></div>
+
+    <div class="pricing-estimator-navigation">
+      <button
+        class="pricing-estimator-back"
+        type="button"
+        disabled
+      >
+        ← Back
+      </button>
+
+      <button
+        class="pricing-estimator-reset"
+        type="button"
+      >
+        Reset
+      </button>
+    </div>
+
+    <button
+      class="pricing-estimator-tired"
+      type="button"
+    >
+      I don't want to answer more — send a request
+    </button>
+
+  </div>
+</aside>
   <div class="cosmic-frame" aria-hidden="true">
     <span class="cosmic-frame__top-left"></span>
     <span class="cosmic-frame__top-right"></span>
@@ -1037,5 +1127,6 @@
 
   <script src="/themes/noir-lime/pricing-grid/pricing-grid.js" defer></script>
   <script src="/consent/consent.js"></script>
+  <script src="/themes/noir-lime/estimator/pricing-estimator-en.js?v=1" defer></script>
 </body>
 </html>

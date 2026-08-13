@@ -216,13 +216,28 @@ function initPriceCounters() {
 
   const targets = [1000, 800];
 
+  const lang =
+    document.documentElement.lang
+      .toLowerCase()
+      .split("-")[0];
+
+  let priceSuffix = "грн/год";
+
+  if (lang === "ru") {
+    priceSuffix = "грн/час";
+  }
+
+  if (lang === "en") {
+    priceSuffix = "UAH/hour";
+  }
+
   priceElements.forEach((element, index) => {
     if (index > 1) return;
 
     const target = targets[index];
 
     element.dataset.targetPrice = String(target);
-    element.textContent = `0 грн/год`;
+    element.textContent = `0 ${priceSuffix}`;
   });
 
   const observer = new IntersectionObserver(
@@ -256,13 +271,13 @@ function initPriceCounters() {
             Math.round(target * eased);
 
           element.textContent =
-            `${value} грн/год`;
+            `${value} ${priceSuffix}`;
 
           if (progress < 1) {
             requestAnimationFrame(updateCounter);
           } else {
             element.textContent =
-              `${target} грн/год`;
+              `${target} ${priceSuffix}`;
 
             element.dataset.animated = "true";
           }
@@ -284,7 +299,6 @@ function initPriceCounters() {
     observer.observe(element);
   });
 }
-
 initPriceCounters();  
   
 initMagneticCTA();

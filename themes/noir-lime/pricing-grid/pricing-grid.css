@@ -100,6 +100,63 @@ body::after {
     );
 }
 
+.pricing-background::after {
+  content: "";
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -18%;
+  height: 58%;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(170, 255, 198, 0.02) 36%,
+      rgba(170, 255, 198, 0.16) 50%,
+      rgba(170, 255, 198, 0.035) 62%,
+      transparent 100%
+    );
+  filter: blur(16px);
+  opacity: 0.7;
+  transform:
+    perspective(700px)
+    rotateX(66deg)
+    translateY(38%);
+  transform-origin: center bottom;
+  animation: pricingGridPulse 11s ease-in-out infinite;
+}
+
+@keyframes pricingGridPulse {
+  0% {
+    transform:
+      perspective(700px)
+      rotateX(66deg)
+      translateY(54%);
+    opacity: 0;
+  }
+
+  28% {
+    opacity: 0.22;
+  }
+
+  52% {
+    opacity: 0.7;
+  }
+
+  76% {
+    opacity: 0.18;
+  }
+
+  100% {
+    transform:
+      perspective(700px)
+      rotateX(66deg)
+      translateY(-26%);
+    opacity: 0;
+  }
+}
+
 .topbar {
   background: rgba(5, 10, 8, 0.76);
   border-bottom: 1px solid rgba(120, 168, 137, 0.18);
@@ -412,6 +469,48 @@ footer a:visited {
   }
 }
 
+.pricing-background-glow {
+  position: absolute;
+  width: 48vw;
+  height: 48vw;
+  min-width: 420px;
+  min-height: 420px;
+  left: 10%;
+  top: 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(135, 220, 164, 0.18) 0%,
+      rgba(88, 166, 113, 0.09) 34%,
+      rgba(50, 110, 73, 0.04) 52%,
+      transparent 72%
+    );
+  filter: blur(34px);
+  opacity: 0.8;
+  animation: pricingGlowFloat 22s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes pricingGlowFloat {
+  0% {
+    transform:
+      translate3d(-6vw, -3vh, 0)
+      scale(0.94);
+  }
+
+  50% {
+    transform:
+      translate3d(18vw, 12vh, 0)
+      scale(1.08);
+  }
+
+  100% {
+    transform:
+      translate3d(42vw, -2vh, 0)
+      scale(0.98);
+  }
+}
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

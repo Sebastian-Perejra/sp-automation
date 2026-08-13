@@ -1207,30 +1207,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   content.innerHTML = resultHtml;
 }
-
-    content.innerHTML = `
-      <div class="pricing-estimator-step">
-        <div class="pricing-estimator-summary">
-          <h3 class="pricing-estimator-summary-title">
-            Даних достатньо для попередньої оцінки
-          </h3>
-
-          <p class="pricing-estimator-summary-text">
-            Відповіді збережені в калькуляторі. Наступним кроком тут буде
-            розраховано орієнтовний діапазон вартості та склад робіт.
-          </p>
-
-          <a
-            class="pricing-estimator-contact-button"
-            href="contacts.html"
-          >
-            Обговорити проєкт
-          </a>
-        </div>
-      </div>
-    `;
-  }
-
+  
   function leaveRequest() {
     const payload = encodeURIComponent(
       JSON.stringify(answers)

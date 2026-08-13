@@ -1046,6 +1046,275 @@ footer a:visited {
   }
 }
 
+.process-step-development {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 74px;
+}
+
+.process-step-development:hover .process-visual {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.process-visual-development {
+  position: relative;
+}
+
+.development-module {
+  position: absolute;
+  width: 25px;
+  height: 18px;
+  border: 1px solid rgba(150, 210, 166, 0.34);
+  border-radius: 5px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17, 39, 23, 0.96),
+      rgba(5, 17, 9, 0.96)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.development-module::before,
+.development-module::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(169, 215, 181, 0.46);
+}
+
+.development-module::before {
+  top: 5px;
+  width: 13px;
+}
+
+.development-module::after {
+  top: 10px;
+  width: 9px;
+}
+
+.development-module-1 {
+  left: 8px;
+  top: 4px;
+}
+
+.development-module-2 {
+  left: 8px;
+  bottom: 4px;
+}
+
+.development-module-3 {
+  right: 8px;
+  top: 15px;
+}
+
+.development-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 32px;
+  height: 28px;
+  border: 1px solid rgba(177, 235, 192, 0.18);
+  border-radius: 7px;
+  background: rgba(8, 24, 13, 0.92);
+  opacity: 0;
+  transform:
+    translate(-50%, -50%)
+    scale(0.55);
+}
+
+.development-core::before {
+  content: "</>";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d1f3da;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.development-line {
+  position: absolute;
+  height: 1px;
+  background: rgba(170, 235, 187, 0.72);
+  box-shadow: 0 0 8px rgba(100, 220, 135, 0.35);
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.development-line-1 {
+  left: 41px;
+  top: 14px;
+  width: 37px;
+  transform-origin: left center;
+}
+
+.development-line-2 {
+  left: 41px;
+  bottom: 13px;
+  width: 37px;
+  transform-origin: left center;
+}
+
+.development-check {
+  position: absolute;
+  right: 4px;
+  top: 2px;
+  color: #d9f9e1;
+  font-size: 15px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.process-step-development:hover .development-module-1 {
+  animation: developmentModule1 2.4s ease-in-out infinite;
+}
+
+.process-step-development:hover .development-module-2 {
+  animation: developmentModule2 2.4s ease-in-out infinite;
+}
+
+.process-step-development:hover .development-module-3 {
+  animation: developmentModule3 2.4s ease-in-out infinite;
+}
+
+.process-step-development:hover .development-line {
+  animation: developmentLineBuild 2.4s ease-in-out infinite;
+}
+
+.process-step-development:hover .development-core {
+  animation: developmentCoreBuild 2.4s ease-in-out infinite;
+}
+
+.process-step-development:hover .development-check {
+  animation: developmentCheckShow 2.4s ease-in-out infinite;
+}
+
+@keyframes developmentModule1 {
+  0%,
+  12% {
+    transform: translate(0, 0);
+  }
+
+  45%,
+  88% {
+    transform: translate(35px, 7px);
+    border-color: rgba(184, 241, 199, 0.7);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes developmentModule2 {
+  0%,
+  12% {
+    transform: translate(0, 0);
+  }
+
+  45%,
+  88% {
+    transform: translate(35px, -7px);
+    border-color: rgba(184, 241, 199, 0.7);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes developmentModule3 {
+  0%,
+  12% {
+    transform: translate(0, 0);
+  }
+
+  45%,
+  88% {
+    transform: translate(-34px, 0);
+    border-color: rgba(184, 241, 199, 0.7);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes developmentLineBuild {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  58%,
+  86% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
+
+@keyframes developmentCoreBuild {
+  0%,
+  38% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.55);
+  }
+
+  56%,
+  88% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+    border-color: rgba(183, 240, 198, 0.62);
+    box-shadow: 0 0 15px rgba(100, 210, 132, 0.22);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.7);
+  }
+}
+
+@keyframes developmentCheckShow {
+  0%,
+  68% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  78%,
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

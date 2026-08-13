@@ -183,6 +183,36 @@ function initScrollReveal() {
   });
 }
 
+function initMagneticCTA() {
+  const button = document.querySelector(".cta .button");
+
+  if (!button) return;
+
+  button.addEventListener("pointermove", (event) => {
+    const rect = button.getBoundingClientRect();
+
+    const x =
+      event.clientX - rect.left - rect.width / 2;
+
+    const y =
+      event.clientY - rect.top - rect.height / 2;
+
+    button.style.transform =
+      `translate3d(${x * 0.16}px, ${y * 0.22}px, 0)`;
+
+    button.classList.add("magnetic-active");
+  });
+
+  button.addEventListener("pointerleave", () => {
+    button.style.transform =
+      "translate3d(0, 0, 0)";
+
+    button.classList.remove("magnetic-active");
+  });
+}
+
+initMagneticCTA();
+  
 initScrollReveal();
   
 initInteractiveCards();

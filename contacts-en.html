@@ -875,6 +875,24 @@ footer a:hover {
 
   <script>
     emailjs.init("sUAoOmiqx4fKn8TVo");
+    const estimatorDraft =
+  sessionStorage.getItem(
+    "pricingEstimatorContactDraft"
+  );
+
+if (estimatorDraft) {
+  const messageField =
+    document.getElementById("message");
+
+  if (messageField) {
+    messageField.value =
+      estimatorDraft;
+  }
+
+  sessionStorage.removeItem(
+    "pricingEstimatorContactDraft"
+  );
+}
 
     const TELEGRAM_WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec";
@@ -912,9 +930,9 @@ footer a:hover {
         }
 
         const turnstileToken =
-          form.querySelector(
-            '[name="cf-turnstile-response"]'
-          )?.value || "";
+        document.querySelector(
+          '[name="cf-turnstile-response"]'
+        )?.value || "";
 
         if (!turnstileToken) {
           errorMessage.textContent =

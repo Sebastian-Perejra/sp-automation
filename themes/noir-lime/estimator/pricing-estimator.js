@@ -1102,6 +1102,104 @@ document.addEventListener("DOMContentLoaded", () => {
     needsManualEstimate
   };
 }
+
+  function getAnswerLabels(questionId) {
+  const question = questions[questionId];
+  const answer = answers[questionId];
+
+  if (!question || answer === undefined) {
+    return "";
+  }
+
+  const getLabel = (value) => {
+    const option = question.options.find(
+      ([optionValue]) => optionValue === value
+    );
+
+    return option ? option[1] : String(value);
+  };
+
+  if (Array.isArray(answer)) {
+    return answer
+      .map(getLabel)
+      .join(", ");
+  }
+
+  return getLabel(answer);
+}
+
+function buildEstimatorMessage(estimate = null) {
+  const lines = [];
+
+  lines.push("Попередня заявка з калькулятора вартості");
+  lines.push("");
+
+  flow.forEach((questionId) => {
+    if (answers[questionId] === undefined) {
+      return;
+    }
+
+    const question = questions[questionId];
+
+    if (!question) {
+      return;
+    }
+
+    lines.push(question.title);
+    lines.push(getAnswerLabels(questionId));
+    lines.push("");
+  });
+
+  if (estimate) {
+    if (estimate.needsManualEstimate) {
+      lines.push("Попередня оцінка:");
+      lines.push("Потрібна індивідуальна оцінка");
+      lines.push("");
+
+      lines.push("Орієнтовна трудомісткість:");
+      lines.push(
+        `${estimate.minHours}–${estimate.maxHours} год`
+      );
+      lines.push("");
+    } else {
+      lines.push("Попередня оцінка:");
+      lines.push(
+        `${estimate.minPrice.toLocaleString("uk-UA")}–` +
+        `${estimate.maxPrice.toLocaleString("uk-UA")} грн`
+      );
+      lines.push("");
+
+      lines.push("Орієнтовна трудомісткість:");
+      lines.push(
+        `${estimate.minHours}–${estimate.maxHours} год`
+      );
+      lines.push("");
+    }
+  }
+
+  lines.push(
+    "Хочу обговорити це завдання та уточнити остаточну вартість."
+  );
+
+  return lines.join("\n");
+}
+
+function saveEstimatorDraft(estimate = null) {
+  const message =
+    buildEstimatorMessage(estimate);
+
+  sessionStorage.setItem(
+    "pricingEstimatorContactDraft",
+    message
+  );
+}
+
+function goToContacts(estimate = null) {
+  saveEstimatorDraft(estimate);
+
+  window.location.href =
+    "contacts.html?from=estimator";
+}
   
   function showResult() {
   const estimate = calculateEstimate();
@@ -1159,12 +1257,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <strong>${hoursText}</strong>.
           </p>
 
-          <a
-            class="pricing-estimator-contact-button"
-            href="contacts.html"
+          <button
+            class="pricing-estimator-contact-button pricing-estimator-result-contact"
+            type="button"
           >
             Отримати точну оцінку
-          </a>
+          </button>
 
         </div>
       </div>
@@ -1193,12 +1291,12 @@ document.addEventListener("DOMContentLoaded", () => {
             Після короткого уточнення завдання оцінка може змінитися.
           </p>
 
-          <a
-            class="pricing-estimator-contact-button"
-            href="contacts.html"
+          <button
+            class="pricing-estimator-contact-button pricing-estimator-result-contact"
+            type="button"
           >
             Обговорити проєкт
-          </a>
+          </button>
 
         </div>
       </div>
@@ -1206,16 +1304,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   content.innerHTML = resultHtml;
+    const contactButton =
+  content.querySelector(
+    ".pricing-estimator-result-contact"
+  );
+
+if (contactButton) {
+  contactButton.addEventListener(
+    "click",
+    () => {
+      goToContacts(estimate);
+    }
+  );
+}
 }
   
   function leaveRequest() {
-    const payload = encodeURIComponent(
-      JSON.stringify(answers)
-    );
+  saveEstimatorDraft();
 
-    window.location.href =
-      `contacts.html?estimator=${payload}`;
-  }
+  window.location.href =
+    "contacts.html?from=estimator";
+}
 
   trigger.addEventListener("click", openEstimator);
   closeButton.addEventListener("click", closeEstimator);

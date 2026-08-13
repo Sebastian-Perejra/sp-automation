@@ -70,21 +70,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function createParticles() {
   if (!particlesContainer) return;
 
-  const particleCount = 14;
+  const particleCount = 24;
 
   for (let i = 0; i < particleCount; i += 1) {
     const particle = document.createElement("span");
 
     particle.className = "pricing-particle";
 
-    const size = 1 + Math.random() * 2.2;
+    const size = 1 + Math.random() * 3;
     const left = Math.random() * 100;
     const top = Math.random() * 100;
     const duration = 18 + Math.random() * 28;
     const fade = 6 + Math.random() * 9;
     const delay = Math.random() * -30;
     const drift = -22 + Math.random() * 44;
-    const opacity = 0.18 + Math.random() * 0.38;
+    const opacity = 0.18 + Math.random() * 0.4;
 
     particle.style.left = `${left}%`;
     particle.style.top = `${top}%`;

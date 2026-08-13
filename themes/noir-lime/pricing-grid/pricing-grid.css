@@ -6,25 +6,14 @@ body {
   position: relative;
   overflow-x: hidden;
   background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(75, 125, 94, 0.18),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(42, 84, 68, 0.11),
-      transparent 30%
-    ),
     linear-gradient(
-      180deg,
-      #08100d 0%,
-      #050807 42%,
-      #030504 100%
-    );
+      rgba(2, 7, 4, 0.72),
+      rgba(2, 7, 4, 0.82)
+    ),
+    url("/themes/noir-lime/pricing-grid/assets/background-pricing.png")
+    center top / cover fixed no-repeat;
   color: #eef3ef;
 }
-
 body::before {
   content: "";
   position: fixed;

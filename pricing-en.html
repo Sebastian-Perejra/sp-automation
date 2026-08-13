@@ -10,8 +10,10 @@
   <title>Pricing – Sebastian Automations</title>
   <link rel="canonical" href="https://sp-automation.com/pricing-en.html">
   <link rel="icon" href="favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
     rel="stylesheet"
@@ -96,18 +98,18 @@
     }
 
     .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
+      width: min(100%, 1080px);
+      min-height: 72px;
+      margin: 0 auto;
+      padding:
+        max(14px, env(safe-area-inset-top))
+        28px
+        14px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 28px;
+    }
 
     .home-link {
       color: var(--green);
@@ -163,10 +165,10 @@
     }
 
     .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
+      display: flex;
+      gap: 7px;
+      justify-self: end;
+    }
 
     .lang-switcher button {
       min-width: 38px;
@@ -180,7 +182,11 @@
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
-      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+      transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
     }
 
     .lang-switcher button:hover {
@@ -371,8 +377,8 @@
 
     table {
       width: 100%;
-      min-width: 560px;
       border-collapse: collapse;
+      min-width: 560px;
     }
 
     th,
@@ -526,16 +532,17 @@
       font-size: 12px;
       text-align: center;
     }
-    footer a,
-footer a:visited {
-  color: inherit;
-  text-decoration: none;
-  font: inherit;
-}
 
-footer a:hover {
-  text-decoration: underline;
-}
+    footer a,
+    footer a:visited {
+      color: inherit;
+      text-decoration: none;
+      font: inherit;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
 
     @media (max-width: 820px) {
       .topbar-inner {
@@ -562,15 +569,15 @@ footer a:hover {
     }
 
     @media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
+      .topbar-inner {
+        min-height: 64px;
+        padding:
+          max(12px, env(safe-area-inset-top))
+          14px
+          12px;
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+      }
 
       .desktop-nav {
         display: none;
@@ -681,11 +688,32 @@ footer a:hover {
       }
     }
   </style>
+
   <link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
+  <script src="/assistant.js" defer></script>
+
+  <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
+  <script src="/nav-font-kaleidoscope.js?v=4" defer></script>
+
+  <link rel="stylesheet" href="/consent/consent.css">
+  <link rel="stylesheet" href="/themes/noir-lime/pricing-grid/pricing-grid.css">
 </head>
 
 <body>
+  <div class="cosmic-frame" aria-hidden="true">
+    <span class="cosmic-frame__top-left"></span>
+    <span class="cosmic-frame__top-right"></span>
+    <span class="cosmic-frame__bottom-left"></span>
+    <span class="cosmic-frame__bottom-right"></span>
+  </div>
+
+  <div class="pricing-background" aria-hidden="true">
+    <div class="pricing-background-layer pricing-background-layer-a"></div>
+    <div class="pricing-background-layer pricing-background-layer-b"></div>
+    <div class="pricing-background-glow"></div>
+    <div class="pricing-background-particles"></div>
+  </div>
+
   <header class="topbar">
     <div class="topbar-inner">
       <a class="home-link" href="index-en.html">
@@ -693,7 +721,7 @@ footer a:hover {
       </a>
 
       <nav class="desktop-nav">
-        <a href="about-en.html">About Me</a>
+        <a href="about-en.html">About</a>
         <a href="services-en.html">Services</a>
         <a href="solutions-en.html">Solutions</a>
         <a href="faq-en.html">FAQ</a>
@@ -713,8 +741,8 @@ footer a:hover {
       <h1>Pricing</h1>
 
       <p>
-        Transparent terms, hourly billing, staged delivery, and realistic
-        cost estimates. You pay for actual work and results, not vague promises.
+        Transparent terms, hourly billing, step-by-step work and realistic
+        cost estimates. You pay for the result.
       </p>
     </section>
 
@@ -725,20 +753,20 @@ footer a:hover {
         <div class="item">
           <strong>Standard rate</strong>
 
-          <div class="price">UAH 800/hour</div>
+          <div class="price">1,000 UAH/hour</div>
 
           <p>
-            For most tasks, consultations, improvements, and automation projects.
+            For most tasks, consultations, improvements and automation projects.
           </p>
         </div>
 
         <div class="item">
-          <strong>Large projects</strong>
+          <strong>Larger projects</strong>
 
-          <div class="price">UAH 650/hour</div>
+          <div class="price">800 UAH/hour</div>
 
           <p>
-            May apply to projects estimated at more than 50 hours.
+            May apply to projects requiring more than 50 hours of work.
           </p>
         </div>
       </div>
@@ -759,42 +787,42 @@ footer a:hover {
           <tbody>
             <tr>
               <td>Excel and Google Sheets</td>
-              <td>from UAH 1,500</td>
+              <td>from 2,000 UAH</td>
             </tr>
 
             <tr>
               <td>Report automation</td>
-              <td>from UAH 2,000</td>
+              <td>from 3,000 UAH</td>
             </tr>
 
             <tr>
               <td>Telegram bots</td>
-              <td>from UAH 3,000</td>
+              <td>from 3,000 UAH</td>
             </tr>
 
             <tr>
               <td>PDF and invoice processing</td>
-              <td>from UAH 3,000</td>
+              <td>from 3,000 UAH</td>
             </tr>
 
             <tr>
               <td>Market research</td>
-              <td>from UAH 3,000</td>
+              <td>from 5,000 UAH</td>
             </tr>
 
             <tr>
               <td>Power BI</td>
-              <td>from UAH 5,000</td>
+              <td>from 5,000 UAH</td>
             </tr>
 
             <tr>
-              <td>Integrations and APIs</td>
-              <td>from UAH 5,000</td>
+              <td>Integrations and API</td>
+              <td>from 5,000 UAH</td>
             </tr>
 
             <tr>
               <td>Web applications</td>
-              <td>from UAH 8,000</td>
+              <td>from 10,000 UAH</td>
             </tr>
           </tbody>
         </table>
@@ -805,7 +833,7 @@ footer a:hover {
       <h2>Why prices may vary</h2>
 
       <p>
-        Two tasks that look similar at first may differ significantly
+        Two tasks that look similar at first glance may differ significantly
         in complexity.
       </p>
 
@@ -817,14 +845,14 @@ footer a:hover {
         </li>
 
         <li>
-          Some projects combine Excel, Power BI, Google Sheets, APIs,
-          Telegram, PDF processing, and web interfaces.
+          Some projects combine Excel, Power BI, Google Sheets, API,
+          Telegram, PDF processing and web interfaces.
         </li>
       </ul>
 
       <div class="note">
-        The final estimate is provided only after reviewing the actual task,
-        files, and business process.
+        The final estimate is always provided after reviewing
+        the actual task, files and business processes.
       </div>
     </section>
 
@@ -843,42 +871,144 @@ footer a:hover {
           <tbody>
             <tr>
               <td>3 hours</td>
-              <td>UAH 2,000</td>
+              <td>2,500 UAH</td>
             </tr>
 
             <tr>
               <td>4 hours</td>
-              <td>UAH 2,600</td>
+              <td>3,200 UAH</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <p style="margin-top: 20px;">
-        The package includes consultations, bug fixes, improvements,
-        explanations, and ongoing support.
+        The price includes consultations, bug fixes,
+        improvements, explanations and ongoing support.
       </p>
     </section>
 
     <section class="card">
-      <h2>How the work is organized</h2>
+      <h2>How the process works</h2>
 
       <div class="process">
-        <div class="process-step">Task analysis.</div>
-        <div class="process-step">Scope agreement.</div>
-        <div class="process-step">Solution development.</div>
-        <div class="process-step">Testing.</div>
-        <div class="process-step">Delivery of the result.</div>
-        <div class="process-step">Post-launch support.</div>
+        <div class="process-step process-step-analysis">
+          <span class="process-step-text">Task analysis.</span>
+
+          <span class="process-visual process-visual-analysis" aria-hidden="true">
+            <span class="analysis-document">
+              <span class="analysis-line analysis-line-1"></span>
+              <span class="analysis-line analysis-line-2"></span>
+              <span class="analysis-line analysis-line-3"></span>
+            </span>
+
+            <span class="analysis-magnifier"></span>
+            <span class="analysis-check">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-scope">
+          <span class="process-step-text">Scope agreement.</span>
+
+          <span class="process-visual process-visual-scope" aria-hidden="true">
+            <span class="scope-box scope-task">TASK</span>
+
+            <span class="scope-connection">
+              <span class="scope-arrow scope-arrow-right">→</span>
+              <span class="scope-arrow scope-arrow-left">←</span>
+            </span>
+
+            <span class="scope-box scope-volume">SCOPE</span>
+            <span class="scope-approved">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-development">
+          <span class="process-step-text">Solution development.</span>
+
+          <span class="process-visual process-visual-development" aria-hidden="true">
+            <span class="development-module development-module-1"></span>
+            <span class="development-module development-module-2"></span>
+            <span class="development-module development-module-3"></span>
+
+            <span class="development-line development-line-1"></span>
+            <span class="development-line development-line-2"></span>
+
+            <span class="development-core"></span>
+            <span class="development-check">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-testing">
+          <span class="process-step-text">Testing.</span>
+
+          <span class="process-visual process-visual-testing" aria-hidden="true">
+            <span class="testing-row testing-row-1">
+              <span class="testing-dot"></span>
+              <span class="testing-line"></span>
+              <span class="testing-status">✓</span>
+            </span>
+
+            <span class="testing-row testing-row-2">
+              <span class="testing-dot"></span>
+              <span class="testing-line"></span>
+              <span class="testing-status">✓</span>
+            </span>
+
+            <span class="testing-row testing-row-3">
+              <span class="testing-dot"></span>
+              <span class="testing-line"></span>
+
+              <span class="testing-status testing-status-fix">
+                <span class="testing-fail">×</span>
+                <span class="testing-pass">✓</span>
+              </span>
+            </span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-delivery">
+          <span class="process-step-text">Result delivery.</span>
+
+          <span class="process-visual process-visual-delivery" aria-hidden="true">
+            <span class="delivery-source">FILE</span>
+            <span class="delivery-path"></span>
+            <span class="delivery-packet">➜</span>
+            <span class="delivery-target">YOU</span>
+            <span class="delivery-check">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-support">
+          <span class="process-step-text">Post-launch support.</span>
+
+          <span class="process-visual process-visual-support" aria-hidden="true">
+            <span class="support-line support-line-1"></span>
+            <span class="support-line support-line-2"></span>
+            <span class="support-line support-line-3"></span>
+
+            <span class="support-node support-node-1"></span>
+            <span class="support-node support-node-2"></span>
+            <span class="support-node support-node-3"></span>
+
+            <span class="support-core">SUPPORT</span>
+
+            <span class="support-signal support-signal-1"></span>
+            <span class="support-signal support-signal-2"></span>
+            <span class="support-signal support-signal-3"></span>
+
+            <span class="support-check">✓</span>
+          </span>
+        </div>
       </div>
     </section>
 
     <section class="cta">
-      <h2>The first consultation is free</h2>
+      <h2>First consultation is free</h2>
 
       <p>
-        Describe your task in a few sentences, and I will suggest
-        the most practical way to solve it.
+        Describe your task in a few sentences and I will suggest
+        the most suitable way to solve it.
       </p>
 
       <a class="button" href="contacts-en.html">
@@ -888,8 +1018,24 @@ footer a:hover {
   </main>
 
   <footer>
-  © 2015–2026 Sebastian Automations. All rights reserved.
-  <a href="terms-en.html">Terms of Use</a>
-</footer>
+    <div class="footer-ticker">
+      <div class="footer-ticker-text">
+        Excel VBA · Google Apps Script · Power BI · DAX · Power Query ·
+        Automated Reports · Excel Automation · Data Processing ·
+        Data Cleaning · Data Parsing · Integrations · Macros ·
+        Custom Logic · Business Process Automation ·
+        Analytical Dashboards · Google Sheets Automation · Web Applications ·
+        JavaScript · Custom Business Solutions ·
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      © 2015–2026 Sebastian Automations. All rights reserved.
+      <a href="terms-en.html">Terms of Use</a>
+    </div>
+  </footer>
+
+  <script src="/themes/noir-lime/pricing-grid/pricing-grid.js" defer></script>
+  <script src="/consent/consent.js"></script>
 </body>
 </html>

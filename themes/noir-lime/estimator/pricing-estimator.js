@@ -711,68 +711,107 @@ document.addEventListener("DOMContentLoaded", () => {
   const estimates = {
     powerbi: {
       min: 5,
-      max: 9
+      max: 9,
+      label: "Базова оцінка Power BI"
     },
     excel: {
       min: 3,
-      max: 6
+      max: 6,
+      label: "Базова оцінка Excel / Google Sheets"
     },
     reports: {
       min: 4,
-      max: 8
+      max: 8,
+      label: "Базова оцінка автоматизації звітів"
     },
     telegram: {
       min: 5,
-      max: 10
+      max: 10,
+      label: "Базова оцінка Telegram-бота"
     },
     documents: {
       min: 5,
-      max: 10
+      max: 10,
+      label: "Базова оцінка обробки документів"
     },
     integration: {
       min: 8,
-      max: 16
+      max: 16,
+      label: "Базова оцінка інтеграції"
     },
     other: {
       min: 4,
-      max: 10
+      max: 10,
+      label: "Базова оцінка задачі"
     }
   };
 
-  const base = estimates[category] || {
-    min: 4,
-    max: 10
-  };
+  const base = estimates[category] || estimates.other;
 
   let minHours = base.min;
   let maxHours = base.max;
 
+  const breakdown = [
+    {
+      label: base.label,
+      minHours: base.min,
+      maxHours: base.max
+    }
+  ];
+
+  function addWork(label, min, max) {
+    minHours += min;
+    maxHours += max;
+
+    breakdown.push({
+      label,
+      minHours: min,
+      maxHours: max
+    });
+  }
+
   if (category === "powerbi") {
     if (answers.powerbi_type === "new") {
-      minHours += 2;
-      maxHours += 4;
+      addWork(
+        "Створення нового звіту",
+        2,
+        4
+      );
     }
 
     if (answers.powerbi_type === "full") {
-      minHours += 8;
-      maxHours += 16;
+      addWork(
+        "Комплексне Power BI рішення",
+        8,
+        16
+      );
     }
 
     if (answers.powerbi_license === "no") {
-      minHours += 1;
-      maxHours += 3;
+      addWork(
+        "Налаштування Power BI",
+        1,
+        3
+      );
     }
 
-    const sources = answers.powerbi_sources || [];
+    const sources =
+      answers.powerbi_sources || [];
 
     if (sources.length === 2) {
-      minHours += 1;
-      maxHours += 3;
+      addWork(
+        "Два джерела даних",
+        1,
+        3
+      );
     }
 
     if (sources.length >= 3) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "Кілька джерел даних",
+        3,
+        7
+      );
     }
 
     if (
@@ -780,72 +819,113 @@ document.addEventListener("DOMContentLoaded", () => {
       sources.includes("database") ||
       sources.includes("crm")
     ) {
-      minHours += 2;
-      maxHours += 5;
+      addWork(
+        "CRM / API / база даних",
+        2,
+        5
+      );
     }
 
     if (answers.powerbi_visuals === "2-3") {
-      minHours += 2;
-      maxHours += 4;
+      addWork(
+        "2–3 візуалізації",
+        2,
+        4
+      );
     }
 
     if (answers.powerbi_visuals === "4-5") {
-      minHours += 4;
-      maxHours += 8;
+      addWork(
+        "4–5 візуалізацій",
+        4,
+        8
+      );
     }
 
     if (answers.powerbi_visuals === "6+") {
-      minHours += 7;
-      maxHours += 14;
+      addWork(
+        "Більше 5 візуалізацій",
+        7,
+        14
+      );
     }
 
     if (answers.powerbi_complexity === "medium") {
-      minHours += 3;
-      maxHours += 6;
+      addWork(
+        "KPI, фільтри та розрахунки",
+        3,
+        6
+      );
     }
 
     if (answers.powerbi_complexity === "complex") {
-      minHours += 7;
-      maxHours += 15;
+      addWork(
+        "Складна бізнес-логіка",
+        7,
+        15
+      );
     }
   }
 
   if (category === "excel") {
-    const types = answers.excel_type || [];
-    const sources = answers.excel_sources || [];
-    const launches = answers.excel_launch || [];
+    const types =
+      answers.excel_type || [];
+
+    const sources =
+      answers.excel_sources || [];
+
+    const launches =
+      answers.excel_launch || [];
 
     if (types.length >= 3) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "Кілька типів автоматизації",
+        3,
+        7
+      );
     }
 
     if (
       types.includes("integration") ||
       types.includes("data")
     ) {
-      minHours += 2;
-      maxHours += 5;
+      addWork(
+        "Обробка даних / інтеграція",
+        2,
+        5
+      );
     }
 
     if (answers.excel_platform === "both") {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "Excel + Google Sheets",
+        3,
+        7
+      );
     }
 
     if (answers.excel_volume === "medium") {
-      minHours += 1;
-      maxHours += 3;
+      addWork(
+        "Середній обсяг даних",
+        1,
+        3
+      );
     }
 
     if (answers.excel_volume === "large") {
-      minHours += 4;
-      maxHours += 10;
+      addWork(
+        "Великий обсяг даних",
+        4,
+        10
+      );
     }
 
     if (sources.length >= 3) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "Кілька джерел даних",
+        3,
+        7
+      );
     }
 
     if (
@@ -853,36 +933,54 @@ document.addEventListener("DOMContentLoaded", () => {
       sources.includes("api") ||
       sources.includes("email")
     ) {
-      minHours += 2;
-      maxHours += 6;
+      addWork(
+        "CRM / API / Email",
+        2,
+        6
+      );
     }
 
     if (answers.excel_process === "several") {
-      minHours += 3;
-      maxHours += 6;
+      addWork(
+        "Кілька пов'язаних операцій",
+        3,
+        6
+      );
     }
 
     if (answers.excel_process === "full") {
-      minHours += 7;
-      maxHours += 15;
+      addWork(
+        "Повний автоматизований процес",
+        7,
+        15
+      );
     }
 
     if (
       launches.includes("schedule") ||
       launches.includes("event")
     ) {
-      minHours += 2;
-      maxHours += 5;
+      addWork(
+        "Автоматичний запуск",
+        2,
+        5
+      );
     }
   }
 
   if (category === "reports") {
-    const sources = answers.reports_sources || [];
-    const delivery = answers.reports_delivery || [];
+    const sources =
+      answers.reports_sources || [];
+
+    const delivery =
+      answers.reports_delivery || [];
 
     if (sources.length >= 3) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "Кілька джерел даних",
+        3,
+        7
+      );
     }
 
     if (
@@ -890,107 +988,163 @@ document.addEventListener("DOMContentLoaded", () => {
       sources.includes("api") ||
       sources.includes("multiple")
     ) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "CRM / API / комплексні джерела",
+        3,
+        7
+      );
     }
 
     if (answers.reports_count === "2-3") {
-      minHours += 3;
-      maxHours += 6;
+      addWork(
+        "2–3 звіти",
+        3,
+        6
+      );
     }
 
     if (answers.reports_count === "4-5") {
-      minHours += 6;
-      maxHours += 12;
+      addWork(
+        "4–5 звітів",
+        6,
+        12
+      );
     }
 
     if (answers.reports_count === "6+") {
-      minHours += 10;
-      maxHours += 20;
+      addWork(
+        "Більше 5 звітів",
+        10,
+        20
+      );
     }
 
     if (delivery.length >= 2) {
-      minHours += 2;
-      maxHours += 5;
+      addWork(
+        "Кілька каналів доставки",
+        2,
+        5
+      );
     }
 
     if (answers.reports_frequency !== "manual") {
-      minHours += 1;
-      maxHours += 4;
+      addWork(
+        "Автоматичне формування",
+        1,
+        4
+      );
     }
   }
 
   if (category === "telegram") {
-    const functions = answers.telegram_functions || [];
+    const functions =
+      answers.telegram_functions || [];
 
     if (functions.length >= 3) {
-      minHours += 4;
-      maxHours += 8;
+      addWork(
+        "Кілька функцій бота",
+        4,
+        8
+      );
     }
 
     if (functions.length >= 5) {
-      minHours += 4;
-      maxHours += 10;
+      addWork(
+        "Розширений функціонал",
+        4,
+        10
+      );
     }
 
     if (
       functions.includes("api") ||
       functions.includes("roles")
     ) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "API / ролі користувачів",
+        3,
+        7
+      );
     }
 
     if (answers.telegram_complexity === "medium") {
-      minHours += 4;
-      maxHours += 8;
+      addWork(
+        "Кілька пов'язаних сценаріїв",
+        4,
+        8
+      );
     }
 
     if (answers.telegram_complexity === "complex") {
-      minHours += 10;
-      maxHours += 20;
+      addWork(
+        "Складна логіка бота",
+        10,
+        20
+      );
     }
 
     if (answers.telegram_users === "200+") {
-      minHours += 3;
-      maxHours += 8;
+      addWork(
+        "Велика кількість користувачів",
+        3,
+        8
+      );
     }
   }
 
   if (category === "documents") {
-    const types = answers.documents_type || [];
-    const results = answers.documents_result || [];
+    const types =
+      answers.documents_type || [];
 
-    if (
-      types.includes("scans")
-    ) {
-      minHours += 4;
-      maxHours += 10;
+    const results =
+      answers.documents_result || [];
+
+    if (types.includes("scans")) {
+      addWork(
+        "Скани / фотографії",
+        4,
+        10
+      );
     }
 
     if (types.length >= 3) {
-      minHours += 3;
-      maxHours += 7;
+      addWork(
+        "Кілька типів документів",
+        3,
+        7
+      );
     }
 
     if (answers.documents_templates === "2-5") {
-      minHours += 4;
-      maxHours += 10;
+      addWork(
+        "2–5 форматів документів",
+        4,
+        10
+      );
     }
 
     if (answers.documents_templates === "6+") {
-      minHours += 10;
-      maxHours += 24;
+      addWork(
+        "Багато форматів документів",
+        10,
+        24
+      );
     }
 
     if (answers.documents_volume === "medium") {
-      minHours += 2;
-      maxHours += 5;
+      addWork(
+        "50–500 документів на місяць",
+        2,
+        5
+      );
     }
 
     if (answers.documents_volume === "large") {
-      minHours += 5;
-      maxHours += 12;
+      addWork(
+        "Понад 500 документів на місяць",
+        5,
+        12
+      );
     }
 
     if (
@@ -998,94 +1152,182 @@ document.addEventListener("DOMContentLoaded", () => {
       results.includes("database") ||
       results.includes("api")
     ) {
-      minHours += 3;
-      maxHours += 8;
+      addWork(
+        "Передача даних у зовнішню систему",
+        3,
+        8
+      );
     }
   }
 
   if (category === "integration") {
-    const systems = answers.integration_systems || [];
+    const systems =
+      answers.integration_systems || [];
 
     if (systems.length >= 3) {
-      minHours += 5;
-      maxHours += 12;
+      addWork(
+        "Кілька систем",
+        5,
+        12
+      );
     }
 
     if (answers.integration_direction === "twoway") {
-      minHours += 6;
-      maxHours += 14;
+      addWork(
+        "Двосторонній обмін",
+        6,
+        14
+      );
     }
 
     if (answers.integration_direction === "multiple") {
-      minHours += 10;
-      maxHours += 22;
+      addWork(
+        "Обмін між кількома системами",
+        10,
+        22
+      );
     }
 
     if (answers.integration_api === "no") {
-      minHours += 5;
-      maxHours += 15;
+      addWork(
+        "Відсутній готовий API",
+        5,
+        15
+      );
     }
 
     if (answers.integration_api === "unknown") {
-      minHours += 2;
-      maxHours += 8;
+      addWork(
+        "API потребує перевірки",
+        2,
+        8
+      );
     }
 
     if (answers.integration_frequency === "realtime") {
-      minHours += 5;
-      maxHours += 12;
+      addWork(
+        "Синхронізація майже в реальному часі",
+        5,
+        12
+      );
     }
   }
 
   if (answers.common_existing === "existing") {
-    minHours += 1;
-    maxHours += 4;
+    addWork(
+      "Доопрацювання існуючого рішення",
+      1,
+      4
+    );
   }
 
   if (answers.common_existing === "broken") {
-    minHours += 2;
-    maxHours += 6;
-  }
-
-  if (answers.common_urgency === "urgent") {
-    minHours *= 1.1;
-    maxHours *= 1.2;
+    addWork(
+      "Діагностика та виправлення",
+      2,
+      6
+    );
   }
 
   if (answers.common_support === "short") {
-    minHours += 1;
-    maxHours += 3;
+    addWork(
+      "Підтримка під час запуску",
+      1,
+      3
+    );
   }
 
   if (answers.common_support === "ongoing") {
-    minHours += 3;
-    maxHours += 8;
+    addWork(
+      "Розширена підтримка",
+      3,
+      8
+    );
   }
 
-  minHours = Math.max(2, Math.round(minHours));
-  maxHours = Math.max(
-    minHours + 1,
-    Math.round(maxHours)
-  );
+  minHours =
+    Math.max(
+      2,
+      Math.round(minHours)
+    );
+
+  maxHours =
+    Math.max(
+      minHours + 1,
+      Math.round(maxHours)
+    );
 
   const rate =
     minHours > 50 && maxHours > 50
       ? 800
       : 1000;
 
-  let minPrice = minHours * rate;
-  let maxPrice = maxHours * rate;
+  let baseMinPrice =
+    minHours * rate;
 
-  if (minHours <= 50 && maxHours > 50) {
-    minPrice = minHours * 1000;
-    maxPrice = maxHours * 800;
+  let baseMaxPrice =
+    maxHours * rate;
+
+  if (
+    minHours <= 50 &&
+    maxHours > 50
+  ) {
+    baseMinPrice =
+      minHours * 1000;
+
+    baseMaxPrice =
+      maxHours * 800;
   }
 
+  baseMinPrice =
+    Math.ceil(
+      baseMinPrice / 500
+    ) * 500;
+
+  baseMaxPrice =
+    Math.ceil(
+      baseMaxPrice / 500
+    ) * 500;
+
+  let urgencyPercent = 0;
+  let urgencyLabel = "";
+
+  if (answers.common_urgency === "week") {
+    urgencyPercent = 50;
+    urgencyLabel =
+      "Пріоритетне виконання";
+  }
+
+  if (answers.common_urgency === "urgent") {
+    urgencyPercent = 100;
+    urgencyLabel =
+      "Максимальна терміновість";
+  }
+
+  if (answers.common_urgency === "date") {
+    urgencyPercent = 50;
+    urgencyLabel =
+      "Робота під конкретний дедлайн";
+  }
+
+  const urgencyMultiplier =
+    1 + urgencyPercent / 100;
+
+  let minPrice =
+    baseMinPrice * urgencyMultiplier;
+
+  let maxPrice =
+    baseMaxPrice * urgencyMultiplier;
+
   minPrice =
-    Math.ceil(minPrice / 500) * 500;
+    Math.ceil(
+      minPrice / 500
+    ) * 500;
 
   maxPrice =
-    Math.ceil(maxPrice / 500) * 500;
+    Math.ceil(
+      maxPrice / 500
+    ) * 500;
 
   const needsManualEstimate =
     category === "integration" &&
@@ -1097,8 +1339,13 @@ document.addEventListener("DOMContentLoaded", () => {
   return {
     minHours,
     maxHours,
+    baseMinPrice,
+    baseMaxPrice,
     minPrice,
     maxPrice,
+    urgencyPercent,
+    urgencyLabel,
+    breakdown,
     needsManualEstimate
   };
 }
@@ -1131,48 +1378,104 @@ document.addEventListener("DOMContentLoaded", () => {
 function buildEstimatorMessage(estimate = null) {
   const lines = [];
 
-  lines.push("Попередня заявка з калькулятора вартості");
+  lines.push(
+    "Попередня заявка з калькулятора вартості"
+  );
+
   lines.push("");
 
   flow.forEach((questionId) => {
-    if (answers[questionId] === undefined) {
+    if (
+      answers[questionId] === undefined
+    ) {
       return;
     }
 
-    const question = questions[questionId];
+    const question =
+      questions[questionId];
 
     if (!question) {
       return;
     }
 
     lines.push(question.title);
-    lines.push(getAnswerLabels(questionId));
+    lines.push(
+      getAnswerLabels(questionId)
+    );
     lines.push("");
   });
 
   if (estimate) {
-    if (estimate.needsManualEstimate) {
-      lines.push("Попередня оцінка:");
-      lines.push("Потрібна індивідуальна оцінка");
-      lines.push("");
+    lines.push(
+      "Орієнтовний склад робіт:"
+    );
 
-      lines.push("Орієнтовна трудомісткість:");
+    estimate.breakdown.forEach(
+      (item) => {
+        lines.push(
+          `${item.label}: ` +
+          `${item.minHours}–${item.maxHours} год`
+        );
+      }
+    );
+
+    lines.push("");
+
+    lines.push(
+      "Орієнтовна трудомісткість:"
+    );
+
+    lines.push(
+      `${estimate.minHours}–` +
+      `${estimate.maxHours} год`
+    );
+
+    lines.push("");
+
+    if (estimate.needsManualEstimate) {
       lines.push(
-        `${estimate.minHours}–${estimate.maxHours} год`
+        "Попередня оцінка:"
       );
+
+      lines.push(
+        "Потрібна індивідуальна оцінка"
+      );
+
       lines.push("");
     } else {
-      lines.push("Попередня оцінка:");
+      lines.push(
+        "Базова вартість:"
+      );
+
+      lines.push(
+        `${estimate.baseMinPrice.toLocaleString("uk-UA")}–` +
+        `${estimate.baseMaxPrice.toLocaleString("uk-UA")} грн`
+      );
+
+      lines.push("");
+
+      if (estimate.urgencyPercent > 0) {
+        lines.push(
+          "Доплата за терміновість:"
+        );
+
+        lines.push(
+          `${estimate.urgencyLabel}: ` +
+          `+${estimate.urgencyPercent}%`
+        );
+
+        lines.push("");
+      }
+
+      lines.push(
+        "Попередня вартість:"
+      );
+
       lines.push(
         `${estimate.minPrice.toLocaleString("uk-UA")}–` +
         `${estimate.maxPrice.toLocaleString("uk-UA")} грн`
       );
-      lines.push("");
 
-      lines.push("Орієнтовна трудомісткість:");
-      lines.push(
-        `${estimate.minHours}–${estimate.maxHours} год`
-      );
       lines.push("");
     }
   }
@@ -1183,7 +1486,6 @@ function buildEstimatorMessage(estimate = null) {
 
   return lines.join("\n");
 }
-
 function saveEstimatorDraft(estimate = null) {
   const message =
     buildEstimatorMessage(estimate);
@@ -1202,7 +1504,8 @@ function goToContacts(estimate = null) {
 }
   
   function showResult() {
-  const estimate = calculateEstimate();
+  const estimate =
+    calculateEstimate();
 
   if (progressBar) {
     progressBar.style.width = "100%";
@@ -1213,7 +1516,8 @@ function goToContacts(estimate = null) {
   }
 
   if (progressLabel) {
-    progressLabel.textContent = "Готово";
+    progressLabel.textContent =
+      "Готово";
   }
 
   if (backButton) {
@@ -1221,15 +1525,53 @@ function goToContacts(estimate = null) {
   }
 
   if (tiredButton) {
-    tiredButton.style.display = "none";
+    tiredButton.style.display =
+      "none";
   }
 
   const priceText =
     `${estimate.minPrice.toLocaleString("uk-UA")}–` +
     `${estimate.maxPrice.toLocaleString("uk-UA")} грн`;
 
+  const basePriceText =
+    `${estimate.baseMinPrice.toLocaleString("uk-UA")}–` +
+    `${estimate.baseMaxPrice.toLocaleString("uk-UA")} грн`;
+
   const hoursText =
-    `${estimate.minHours}–${estimate.maxHours} год`;
+    `${estimate.minHours}–` +
+    `${estimate.maxHours} год`;
+
+  const breakdownHtml =
+    estimate.breakdown
+      .map(
+        (item) => `
+          <div class="pricing-estimator-cost-row">
+            <span class="pricing-estimator-cost-label">
+              ${item.label}
+            </span>
+
+            <span class="pricing-estimator-cost-value">
+              ${item.minHours}–${item.maxHours} год
+            </span>
+          </div>
+        `
+      )
+      .join("");
+
+  const urgencyHtml =
+    estimate.urgencyPercent > 0
+      ? `
+        <div class="pricing-estimator-cost-row pricing-estimator-cost-row-urgency">
+          <span class="pricing-estimator-cost-label">
+            ${estimate.urgencyLabel}
+          </span>
+
+          <span class="pricing-estimator-cost-value">
+            +${estimate.urgencyPercent}%
+          </span>
+        </div>
+      `
+      : "";
 
   let resultHtml = "";
 
@@ -1247,15 +1589,29 @@ function goToContacts(estimate = null) {
           </h3>
 
           <p class="pricing-estimator-summary-text">
-            У цьому сценарії вартість занадто залежить від доступу
-            до систем, API та технічних обмежень. Давати точну цифру
-            автоматично було б некоректно.
+            У цьому сценарії вартість занадто залежить
+            від доступу до систем, API та технічних обмежень.
           </p>
 
-          <p class="pricing-estimator-summary-text">
-            Орієнтир за трудомісткістю:
-            <strong>${hoursText}</strong>.
-          </p>
+          <div class="pricing-estimator-cost-breakdown">
+
+            <div class="pricing-estimator-cost-heading">
+              Що формує оцінку
+            </div>
+
+            ${breakdownHtml}
+
+            <div class="pricing-estimator-cost-total">
+              <span>
+                Орієнтовна трудомісткість
+              </span>
+
+              <strong>
+                ${hoursText}
+              </strong>
+            </div>
+
+          </div>
 
           <button
             class="pricing-estimator-contact-button pricing-estimator-result-contact"
@@ -1285,10 +1641,44 @@ function goToContacts(estimate = null) {
             <strong>${hoursText}</strong>.
           </p>
 
-          <p class="pricing-estimator-summary-text">
+          <div class="pricing-estimator-cost-breakdown">
+
+            <div class="pricing-estimator-cost-heading">
+              Як сформована оцінка
+            </div>
+
+            ${breakdownHtml}
+
+            <div class="pricing-estimator-cost-separator"></div>
+
+            <div class="pricing-estimator-cost-row">
+              <span class="pricing-estimator-cost-label">
+                Базова вартість
+              </span>
+
+              <span class="pricing-estimator-cost-value">
+                ${basePriceText}
+              </span>
+            </div>
+
+            ${urgencyHtml}
+
+            <div class="pricing-estimator-cost-total">
+              <span>
+                Попередня вартість
+              </span>
+
+              <strong>
+                ${priceText}
+              </strong>
+            </div>
+
+          </div>
+
+          <p class="pricing-estimator-summary-text pricing-estimator-summary-disclaimer">
             Це попередня оцінка за вашими відповідями,
             а не фіксована комерційна пропозиція.
-            Після короткого уточнення завдання оцінка може змінитися.
+            Після уточнення реальної задачі оцінка може змінитися.
           </p>
 
           <button
@@ -1303,20 +1693,22 @@ function goToContacts(estimate = null) {
     `;
   }
 
-  content.innerHTML = resultHtml;
-    const contactButton =
-  content.querySelector(
-    ".pricing-estimator-result-contact"
-  );
+  content.innerHTML =
+    resultHtml;
 
-if (contactButton) {
-  contactButton.addEventListener(
-    "click",
-    () => {
-      goToContacts(estimate);
-    }
-  );
-}
+  const contactButton =
+    content.querySelector(
+      ".pricing-estimator-result-contact"
+    );
+
+  if (contactButton) {
+    contactButton.addEventListener(
+      "click",
+      () => {
+        goToContacts(estimate);
+      }
+    );
+  }
 }
   
   function leaveRequest() {

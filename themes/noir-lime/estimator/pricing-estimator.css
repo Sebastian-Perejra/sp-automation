@@ -1,1 +1,135 @@
+.pricing-estimator-trigger {
+  position: fixed;
+  left: 18px;
+  top: 50%;
+  z-index: 9997;
+  width: 118px;
+  min-height: 126px;
+  padding: 16px 12px;
+  border: 1px solid rgba(184, 255, 53, 0.38);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9, 20, 13, 0.94),
+      rgba(4, 11, 7, 0.92)
+    );
+  color: #eef8f0;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.015),
+    0 0 26px rgba(140, 220, 80, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
 
+.pricing-estimator-trigger:hover {
+  border-color: rgba(184, 255, 53, 0.72);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 33, 21, 0.97),
+      rgba(6, 16, 10, 0.95)
+    );
+  box-shadow:
+    0 22px 58px rgba(0, 0, 0, 0.48),
+    0 0 28px rgba(184, 255, 53, 0.14);
+  transform:
+    translateY(-50%)
+    translateX(3px);
+}
+
+.pricing-estimator-trigger-icon {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 10px;
+  border: 1px solid rgba(184, 255, 53, 0.48);
+  border-radius: 9px;
+  background: rgba(184, 255, 53, 0.05);
+}
+
+.pricing-estimator-trigger-icon::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 7px;
+  height: 6px;
+  border: 1px solid rgba(211, 255, 155, 0.78);
+  border-radius: 2px;
+}
+
+.pricing-estimator-trigger-icon::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 17px;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  background: #b8ff35;
+  box-shadow:
+    7px 0 0 rgba(184, 255, 53, 0.72),
+    14px 0 0 rgba(184, 255, 53, 0.72),
+    0 7px 0 rgba(184, 255, 53, 0.72),
+    7px 7px 0 rgba(184, 255, 53, 0.72),
+    14px 7px 0 rgba(184, 255, 53, 0.72);
+}
+
+.pricing-estimator-trigger-title {
+  display: block;
+  color: #eff7f0;
+}
+
+.pricing-estimator-trigger-subtitle {
+  display: block;
+  margin-top: 5px;
+  color: rgba(202, 219, 207, 0.58);
+  font-family: "Roboto Mono", monospace;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .pricing-estimator-trigger {
+    left: auto;
+    right: 16px;
+    top: auto;
+    bottom: 18px;
+    width: 58px;
+    min-height: 58px;
+    padding: 0;
+    border-radius: 50%;
+    transform: none;
+  }
+
+  .pricing-estimator-trigger:hover {
+    transform: translateY(-2px);
+  }
+
+  .pricing-estimator-trigger-icon {
+    width: 30px;
+    height: 30px;
+    margin: 13px auto 0;
+  }
+
+  .pricing-estimator-trigger-title,
+  .pricing-estimator-trigger-subtitle {
+    display: none;
+  }
+}

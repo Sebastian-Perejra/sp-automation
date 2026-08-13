@@ -211,6 +211,82 @@ function initMagneticCTA() {
   });
 }
 
+function initPriceCounters() {
+  const priceElements = document.querySelectorAll(".price");
+
+  const targets = [1000, 800];
+
+  priceElements.forEach((element, index) => {
+    if (index > 1) return;
+
+    const target = targets[index];
+
+    element.dataset.targetPrice = String(target);
+    element.textContent = `0 грн/год`;
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const element = entry.target;
+
+        if (element.dataset.animated === "true") {
+          observer.unobserve(element);
+          return;
+        }
+
+        const target =
+          Number(element.dataset.targetPrice);
+
+        const duration = 900;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const progress = Math.min(
+            (currentTime - startTime) / duration,
+            1
+          );
+
+          const eased =
+            1 - Math.pow(1 - progress, 3);
+
+          const value =
+            Math.round(target * eased);
+
+          element.textContent =
+            `${value} грн/год`;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent =
+              `${target} грн/год`;
+
+            element.dataset.animated = "true";
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+
+        observer.unobserve(element);
+      });
+    },
+    {
+      threshold: 0.55
+    }
+  );
+
+  priceElements.forEach((element, index) => {
+    if (index > 1) return;
+
+    observer.observe(element);
+  });
+}
+
+initPriceCounters();  
+  
 initMagneticCTA();
   
 initScrollReveal();

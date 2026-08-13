@@ -1,10 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
+  const layerA = document.querySelector(".pricing-background-layer-a");
+  const layerB = document.querySelector(".pricing-background-layer-b");
+
+  const images = [
+    "/themes/noir-lime/pricing-grid/assets/Price-grid1.webp",
+    "/themes/noir-lime/pricing-grid/assets/Price-grid2.webp",
+    "/themes/noir-lime/pricing-grid/assets/Price-grid3.webp",
+    "/themes/noir-lime/pricing-grid/assets/Price-grid4.webp",
+    "/themes/noir-lime/pricing-grid/assets/Price-grid5.webp"
+  ];
 
   let targetX = 0;
   let targetY = 0;
   let currentX = 0;
   let currentY = 0;
+
+  let currentIndex = 0;
+  let showingA = true;
 
   window.addEventListener("pointermove", (event) => {
     targetX = (event.clientX / window.innerWidth - 0.5) * 16;
@@ -27,6 +40,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(animate);
   }
+
+  function setBackground(layer, image) {
+    layer.style.backgroundImage = `
+      linear-gradient(
+        rgba(3, 10, 6, 0.43),
+        rgba(2, 8, 5, 0.58)
+      ),
+      url("${image}")
+    `;
+  }
+
+  function changeBackground() {
+    const nextIndex = (currentIndex + 1) % images.length;
+    const currentLayer = showingA ? layerA : layerB;
+    const nextLayer = showingA ? layerB : layerA;
+
+    setBackground(nextLayer, images[nextIndex]);
+
+    nextLayer.style.opacity = "1";
+    currentLayer.style.opacity = "0";
+
+    currentIndex = nextIndex;
+    showingA = !showingA;
+  }
+
+  setInterval(changeBackground, 20000);
 
   animate();
 });

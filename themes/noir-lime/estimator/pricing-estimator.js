@@ -1,19 +1,477 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const trigger =
-    document.querySelector(".pricing-estimator-trigger");
+  const trigger = document.querySelector(".pricing-estimator-trigger");
+  const panel = document.querySelector(".pricing-estimator-panel");
+  const overlay = document.querySelector(".pricing-estimator-overlay");
+  const closeButton = document.querySelector(".pricing-estimator-close");
+  const content = document.querySelector(".pricing-estimator-content");
+  const backButton = document.querySelector(".pricing-estimator-back");
+  const resetButton = document.querySelector(".pricing-estimator-reset");
+  const tiredButton = document.querySelector(".pricing-estimator-tired");
+  const progressBar = document.querySelector(".pricing-estimator-progress-bar");
+  const progressValue = document.querySelector(".pricing-estimator-progress-value");
+  const progressLabel = document.querySelector(".pricing-estimator-progress-label");
 
-  const panel =
-    document.querySelector(".pricing-estimator-panel");
-
-  const overlay =
-    document.querySelector(".pricing-estimator-overlay");
-
-  const closeButton =
-    document.querySelector(".pricing-estimator-close");
-
-  if (!trigger || !panel || !overlay || !closeButton) {
+  if (
+    !trigger ||
+    !panel ||
+    !overlay ||
+    !closeButton ||
+    !content
+  ) {
     return;
   }
+
+  const questions = {
+    start: {
+      title: "Що потрібно зробити?",
+      hint: "Оберіть напрямок, який найбільше схожий на ваше завдання.",
+      options: [
+        ["powerbi", "Power BI"],
+        ["excel", "Excel / Google Sheets"],
+        ["reports", "Автоматизація звітів"],
+        ["telegram", "Telegram-бот"],
+        ["documents", "PDF / рахунки / документи"],
+        ["integration", "Інтеграція систем / API"],
+        ["other", "Інше або поки не знаю"]
+      ]
+    },
+
+    powerbi_type: {
+      title: "Що потрібно зробити з Power BI?",
+      options: [
+        ["new", "Створити новий звіт"],
+        ["improve", "Доопрацювати існуючий"],
+        ["refresh", "Налаштувати автоматичне оновлення"],
+        ["fix", "Виправити проблему"],
+        ["full", "Комплексне рішення"]
+      ]
+    },
+
+    powerbi_license: {
+      title: "Чи налаштований у вас Power BI для публікації та спільної роботи?",
+      hint: "Якщо ні — можемо врахувати налаштування та ліцензування окремо.",
+      options: [
+        ["yes", "Так"],
+        ["no", "Ні"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    powerbi_sources: {
+      title: "Звідки надходять дані?",
+      hint: "Можна вибрати кілька варіантів.",
+      multiple: true,
+      options: [
+        ["excel", "Excel / CSV"],
+        ["sheets", "Google Sheets"],
+        ["crm", "CRM / ERP"],
+        ["api", "API / веб-сервіс"],
+        ["database", "База даних"],
+        ["other", "Інше"]
+      ]
+    },
+
+    powerbi_visuals: {
+      title: "Скільки візуалізацій приблизно потрібно?",
+      options: [
+        ["1", "1"],
+        ["2-3", "2–3"],
+        ["4-5", "4–5"],
+        ["6+", "Більше 5"]
+      ]
+    },
+
+    powerbi_complexity: {
+      title: "Яка логіка потрібна у звіті?",
+      hint: "Не потрібно знати технічні терміни — оберіть найближчий варіант.",
+      options: [
+        ["simple", "Базові показники, таблиці та графіки"],
+        ["medium", "Фільтри, порівняння, KPI та розрахунки"],
+        ["complex", "Складна бізнес-логіка та багато взаємозалежних показників"],
+        ["unknown", "Не знаю — потрібно визначити"]
+      ]
+    },
+
+    powerbi_users: {
+      title: "Скільки людей повинні користуватися результатом?",
+      hint: "Для Power BI кожному користувачу може знадобитися окрема ліцензія залежно від способу публікації.",
+      options: [
+        ["1", "1 користувач"],
+        ["2-5", "2–5"],
+        ["6-20", "6–20"],
+        ["20+", "Більше 20"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    excel_type: {
+      title: "Що потрібно зробити в Excel або Google Sheets?",
+      multiple: true,
+      options: [
+        ["automation", "Автоматизувати ручну роботу"],
+        ["formulas", "Формули та розрахунки"],
+        ["reports", "Звіти / дашборди"],
+        ["data", "Обробка та очищення даних"],
+        ["files", "Об'єднання або створення файлів"],
+        ["integration", "Обмін даними з іншою системою"],
+        ["existing", "Доопрацювати існуючий файл"],
+        ["other", "Інше"]
+      ]
+    },
+
+    excel_platform: {
+      title: "Де повинно працювати рішення?",
+      options: [
+        ["excel", "Microsoft Excel"],
+        ["sheets", "Google Sheets"],
+        ["both", "Excel і Google Sheets"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    excel_volume: {
+      title: "Який приблизно обсяг даних?",
+      options: [
+        ["small", "До кількох тисяч рядків"],
+        ["medium", "Десятки тисяч рядків"],
+        ["large", "Сотні тисяч рядків або більше"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    excel_sources: {
+      title: "Звідки потрібно отримувати дані?",
+      multiple: true,
+      options: [
+        ["manual", "Користувач вводить вручну"],
+        ["excel", "Інші Excel / CSV файли"],
+        ["sheets", "Google Sheets"],
+        ["crm", "CRM / ERP"],
+        ["api", "API / веб-сервіс"],
+        ["email", "Email / вкладення"],
+        ["other", "Інше"]
+      ]
+    },
+
+    excel_process: {
+      title: "Наскільки великий процес потрібно автоматизувати?",
+      options: [
+        ["one", "Одну конкретну операцію"],
+        ["several", "Кілька пов'язаних операцій"],
+        ["full", "Повний процес від вхідних даних до результату"],
+        ["unknown", "Не знаю — хочу прибрати ручну роботу"]
+      ]
+    },
+
+    excel_launch: {
+      title: "Як повинна запускатися автоматизація?",
+      multiple: true,
+      options: [
+        ["button", "Кнопкою користувача"],
+        ["schedule", "Автоматично за розкладом"],
+        ["event", "При появі або зміні даних"],
+        ["both", "Ручний та автоматичний режим"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    reports_sources: {
+      title: "Звідки беруться дані для звіту?",
+      multiple: true,
+      options: [
+        ["excel", "Excel / CSV"],
+        ["sheets", "Google Sheets"],
+        ["crm", "CRM / ERP"],
+        ["email", "Email / вкладення"],
+        ["api", "API"],
+        ["multiple", "З кількох різних джерел"]
+      ]
+    },
+
+    reports_count: {
+      title: "Скільки різних звітів потрібно автоматизувати?",
+      options: [
+        ["1", "1"],
+        ["2-3", "2–3"],
+        ["4-5", "4–5"],
+        ["6+", "Більше 5"]
+      ]
+    },
+
+    reports_frequency: {
+      title: "Як часто потрібно формувати звіт?",
+      options: [
+        ["manual", "За запитом"],
+        ["daily", "Щодня"],
+        ["weekly", "Щотижня"],
+        ["monthly", "Щомісяця"],
+        ["event", "При появі нових даних"]
+      ]
+    },
+
+    reports_delivery: {
+      title: "Що має відбуватися з готовим звітом?",
+      multiple: true,
+      options: [
+        ["save", "Зберегти у файл / папку"],
+        ["email", "Надіслати email"],
+        ["telegram", "Надіслати в Telegram"],
+        ["dashboard", "Оновити дашборд"],
+        ["other", "Інший сценарій"]
+      ]
+    },
+
+    telegram_type: {
+      title: "Що потрібно зробити з Telegram-ботом?",
+      options: [
+        ["new", "Створити нового бота"],
+        ["improve", "Доопрацювати існуючого"],
+        ["fix", "Виправити проблему"],
+        ["unknown", "Потрібна консультація"]
+      ]
+    },
+
+    telegram_functions: {
+      title: "Що повинен уміти бот?",
+      multiple: true,
+      options: [
+        ["notifications", "Надсилати повідомлення / нагадування"],
+        ["forms", "Приймати дані від користувача"],
+        ["files", "Приймати або відправляти файли"],
+        ["sheets", "Працювати з Google Sheets"],
+        ["api", "Працювати з іншою системою / API"],
+        ["roles", "Різні ролі користувачів"],
+        ["commands", "Кнопки, меню та сценарії діалогу"],
+        ["other", "Інше"]
+      ]
+    },
+
+    telegram_users: {
+      title: "Скільки користувачів приблизно працюватиме з ботом?",
+      options: [
+        ["1-10", "До 10"],
+        ["11-50", "11–50"],
+        ["51-200", "51–200"],
+        ["200+", "Більше 200"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    telegram_complexity: {
+      title: "Наскільки складним буде сценарій роботи?",
+      options: [
+        ["simple", "Кілька простих команд"],
+        ["medium", "Кілька пов'язаних сценаріїв"],
+        ["complex", "Багато станів, ролей та логіки"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    documents_type: {
+      title: "Які документи потрібно обробляти?",
+      multiple: true,
+      options: [
+        ["invoice", "Рахунки / invoices"],
+        ["pdf", "PDF-документи"],
+        ["scans", "Скани / фотографії"],
+        ["orders", "Замовлення / заявки"],
+        ["other", "Інші документи"]
+      ]
+    },
+
+    documents_templates: {
+      title: "Скільки різних форматів документів приблизно є?",
+      options: [
+        ["1", "Один стабільний формат"],
+        ["2-5", "2–5 форматів"],
+        ["6+", "Багато різних форматів"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    documents_volume: {
+      title: "Скільки документів потрібно обробляти?",
+      options: [
+        ["small", "До 50 на місяць"],
+        ["medium", "50–500 на місяць"],
+        ["large", "Більше 500 на місяць"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    documents_result: {
+      title: "Куди повинні потрапляти отримані дані?",
+      multiple: true,
+      options: [
+        ["excel", "Excel"],
+        ["sheets", "Google Sheets"],
+        ["crm", "CRM / ERP"],
+        ["database", "База даних"],
+        ["api", "Інша система / API"]
+      ]
+    },
+
+    integration_systems: {
+      title: "Що потрібно зв'язати між собою?",
+      multiple: true,
+      options: [
+        ["excel", "Excel / Google Sheets"],
+        ["crm", "CRM / ERP"],
+        ["telegram", "Telegram"],
+        ["email", "Email"],
+        ["api", "Веб-сервіс / API"],
+        ["other", "Інші системи"]
+      ]
+    },
+
+    integration_direction: {
+      title: "Як повинні передаватися дані?",
+      options: [
+        ["oneway", "З однієї системи в іншу"],
+        ["twoway", "В обидві сторони"],
+        ["multiple", "Між кількома системами"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    integration_api: {
+      title: "Чи є доступ до API або технічної документації системи?",
+      options: [
+        ["yes", "Так"],
+        ["no", "Ні"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    integration_frequency: {
+      title: "Як часто потрібно синхронізувати дані?",
+      options: [
+        ["manual", "За запитом"],
+        ["schedule", "За розкладом"],
+        ["realtime", "Практично одразу"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    other_type: {
+      title: "Що найближче описує ваше завдання?",
+      options: [
+        ["data", "Робота з даними"],
+        ["automation", "Автоматизація процесу"],
+        ["report", "Звітність"],
+        ["integration", "Обмін між системами"],
+        ["problem", "Є проблема, але я не знаю яке потрібне рішення"]
+      ]
+    },
+
+    common_existing: {
+      title: "Рішення потрібно створити з нуля чи щось уже є?",
+      options: [
+        ["new", "З нуля"],
+        ["existing", "Є існуюче рішення, потрібно доопрацювати"],
+        ["broken", "Є рішення, але воно працює неправильно"],
+        ["unknown", "Не знаю"]
+      ]
+    },
+
+    common_urgency: {
+      title: "Наскільки терміново потрібен результат?",
+      options: [
+        ["normal", "Без жорсткого дедлайну"],
+        ["week", "Бажано протягом тижня"],
+        ["urgent", "Потрібно максимально швидко"],
+        ["date", "Є конкретний дедлайн"]
+      ]
+    },
+
+    common_support: {
+      title: "Чи потрібна підтримка після запуску?",
+      options: [
+        ["no", "Ні, достатньо передати готове рішення"],
+        ["short", "Так, на період запуску"],
+        ["ongoing", "Так, потрібна подальша підтримка"],
+        ["unknown", "Поки не знаю"]
+      ]
+    }
+  };
+
+  const flows = {
+    powerbi: [
+      "powerbi_type",
+      "powerbi_license",
+      "powerbi_sources",
+      "powerbi_visuals",
+      "powerbi_complexity",
+      "powerbi_users",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ],
+
+    excel: [
+      "excel_type",
+      "excel_platform",
+      "excel_volume",
+      "excel_sources",
+      "excel_process",
+      "excel_launch",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ],
+
+    reports: [
+      "reports_sources",
+      "reports_count",
+      "reports_frequency",
+      "reports_delivery",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ],
+
+    telegram: [
+      "telegram_type",
+      "telegram_functions",
+      "telegram_users",
+      "telegram_complexity",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ],
+
+    documents: [
+      "documents_type",
+      "documents_templates",
+      "documents_volume",
+      "documents_result",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ],
+
+    integration: [
+      "integration_systems",
+      "integration_direction",
+      "integration_api",
+      "integration_frequency",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ],
+
+    other: [
+      "other_type",
+      "common_existing",
+      "common_urgency",
+      "common_support"
+    ]
+  };
+
+  let selectedFlow = null;
+  let flow = ["start"];
+  let stepIndex = 0;
+  let answers = {};
 
   function openEstimator() {
     panel.classList.add("is-open");
@@ -22,6 +480,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     panel.setAttribute("aria-hidden", "false");
     overlay.setAttribute("aria-hidden", "false");
+
+    render();
   }
 
   function closeEstimator() {
@@ -33,13 +493,295 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.setAttribute("aria-hidden", "true");
   }
 
+  function resetEstimator() {
+    selectedFlow = null;
+    flow = ["start"];
+    stepIndex = 0;
+    answers = {};
+
+    render();
+  }
+
+  function getCurrentQuestionId() {
+    return flow[stepIndex];
+  }
+
+  function getCurrentQuestion() {
+    return questions[getCurrentQuestionId()];
+  }
+
+  function updateProgress() {
+    let percentage = 0;
+
+    if (selectedFlow) {
+      percentage = Math.round(
+        (stepIndex / Math.max(flow.length, 1)) * 100
+      );
+    }
+
+    if (progressBar) {
+      progressBar.style.width = `${percentage}%`;
+    }
+
+    if (progressValue) {
+      progressValue.textContent = `${percentage}%`;
+    }
+
+    if (progressLabel) {
+      if (!selectedFlow) {
+        progressLabel.textContent = "Початок";
+      } else {
+        progressLabel.textContent =
+          `Крок ${Math.min(stepIndex + 1, flow.length)} з ${flow.length}`;
+      }
+    }
+  }
+
+  function selectSingle(questionId, value) {
+    answers[questionId] = value;
+
+    if (questionId === "start") {
+      selectedFlow = value;
+      flow = ["start", ...flows[value]];
+      stepIndex = 1;
+      render();
+      return;
+    }
+
+    nextStep();
+  }
+
+  function toggleMultiple(questionId, value, button) {
+    if (!Array.isArray(answers[questionId])) {
+      answers[questionId] = [];
+    }
+
+    const selected = answers[questionId];
+    const index = selected.indexOf(value);
+
+    if (index === -1) {
+      selected.push(value);
+      button.classList.add("is-selected");
+    } else {
+      selected.splice(index, 1);
+      button.classList.remove("is-selected");
+    }
+
+    const continueButton =
+      content.querySelector(".pricing-estimator-continue");
+
+    if (continueButton) {
+      continueButton.disabled = selected.length === 0;
+    }
+  }
+
+  function nextStep() {
+    if (stepIndex < flow.length - 1) {
+      stepIndex += 1;
+      render();
+      return;
+    }
+
+    showResult();
+  }
+
+  function previousStep() {
+    if (stepIndex <= 0) {
+      return;
+    }
+
+    stepIndex -= 1;
+
+    if (stepIndex === 0) {
+      selectedFlow = null;
+      flow = ["start"];
+    }
+
+    render();
+  }
+
+  function render() {
+    const questionId = getCurrentQuestionId();
+    const question = getCurrentQuestion();
+
+    if (!question) {
+      resetEstimator();
+      return;
+    }
+
+    updateProgress();
+
+    if (backButton) {
+      backButton.disabled = stepIndex === 0;
+    }
+
+    if (tiredButton) {
+      tiredButton.style.display =
+        stepIndex === 0 ? "none" : "block";
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "pricing-estimator-step";
+
+    const number = document.createElement("div");
+    number.className = "pricing-estimator-question-number";
+
+    number.textContent =
+      stepIndex === 0
+        ? "Оберіть напрямок"
+        : `Питання ${stepIndex}`;
+
+    wrapper.appendChild(number);
+
+    const title = document.createElement("h3");
+    title.className = "pricing-estimator-question";
+    title.textContent = question.title;
+
+    wrapper.appendChild(title);
+
+    if (question.hint) {
+      const hint = document.createElement("p");
+      hint.className = "pricing-estimator-hint";
+      hint.textContent = question.hint;
+
+      wrapper.appendChild(hint);
+    }
+
+    const options = document.createElement("div");
+    options.className = "pricing-estimator-options";
+
+    question.options.forEach(([value, label]) => {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "pricing-estimator-option";
+      button.textContent = label;
+
+      const existing = answers[questionId];
+
+      if (
+        question.multiple &&
+        Array.isArray(existing) &&
+        existing.includes(value)
+      ) {
+        button.classList.add("is-selected");
+      }
+
+      if (!question.multiple && existing === value) {
+        button.classList.add("is-selected");
+      }
+
+      button.addEventListener("click", () => {
+        if (question.multiple) {
+          toggleMultiple(questionId, value, button);
+        } else {
+          selectSingle(questionId, value);
+        }
+      });
+
+      options.appendChild(button);
+    });
+
+    wrapper.appendChild(options);
+
+    if (question.multiple) {
+      const continueButton = document.createElement("button");
+
+      continueButton.type = "button";
+      continueButton.className = "pricing-estimator-continue";
+      continueButton.textContent = "Продовжити";
+
+      const existing = answers[questionId];
+
+      continueButton.disabled =
+        !Array.isArray(existing) || existing.length === 0;
+
+      continueButton.addEventListener("click", nextStep);
+
+      wrapper.appendChild(continueButton);
+    }
+
+    content.innerHTML = "";
+    content.appendChild(wrapper);
+  }
+
+  function showResult() {
+    if (progressBar) {
+      progressBar.style.width = "100%";
+    }
+
+    if (progressValue) {
+      progressValue.textContent = "100%";
+    }
+
+    if (progressLabel) {
+      progressLabel.textContent = "Готово";
+    }
+
+    if (backButton) {
+      backButton.disabled = false;
+    }
+
+    if (tiredButton) {
+      tiredButton.style.display = "none";
+    }
+
+    content.innerHTML = `
+      <div class="pricing-estimator-step">
+        <div class="pricing-estimator-summary">
+          <h3 class="pricing-estimator-summary-title">
+            Даних достатньо для попередньої оцінки
+          </h3>
+
+          <p class="pricing-estimator-summary-text">
+            Відповіді збережені в калькуляторі. Наступним кроком тут буде
+            розраховано орієнтовний діапазон вартості та склад робіт.
+          </p>
+
+          <a
+            class="pricing-estimator-contact-button"
+            href="contacts.html"
+          >
+            Обговорити проєкт
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  function leaveRequest() {
+    const payload = encodeURIComponent(
+      JSON.stringify(answers)
+    );
+
+    window.location.href =
+      `contacts.html?estimator=${payload}`;
+  }
+
   trigger.addEventListener("click", openEstimator);
   closeButton.addEventListener("click", closeEstimator);
   overlay.addEventListener("click", closeEstimator);
 
+  if (backButton) {
+    backButton.addEventListener("click", previousStep);
+  }
+
+  if (resetButton) {
+    resetButton.addEventListener("click", resetEstimator);
+  }
+
+  if (tiredButton) {
+    tiredButton.addEventListener("click", leaveRequest);
+  }
+
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    if (
+      event.key === "Escape" &&
+      panel.classList.contains("is-open")
+    ) {
       closeEstimator();
     }
   });
+
+  render();
 });

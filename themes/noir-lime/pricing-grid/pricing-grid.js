@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
   const layerA = document.querySelector(".pricing-background-layer-a");
   const layerB = document.querySelector(".pricing-background-layer-b");
+  const particlesContainer =
+  document.querySelector(".pricing-background-particles");
 
   const images = [
     "/themes/noir-lime/pricing-grid/assets/Price-grid1.webp",
@@ -65,6 +67,58 @@ document.addEventListener("DOMContentLoaded", () => {
     showingA = !showingA;
   }
 
+  function createParticles() {
+  if (!particlesContainer) return;
+
+  const particleCount = 14;
+
+  for (let i = 0; i < particleCount; i += 1) {
+    const particle = document.createElement("span");
+
+    particle.className = "pricing-particle";
+
+    const size = 1 + Math.random() * 2.2;
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const duration = 18 + Math.random() * 28;
+    const fade = 6 + Math.random() * 9;
+    const delay = Math.random() * -30;
+    const drift = -22 + Math.random() * 44;
+    const opacity = 0.18 + Math.random() * 0.38;
+
+    particle.style.left = `${left}%`;
+    particle.style.top = `${top}%`;
+    particle.style.setProperty(
+      "--particle-size",
+      `${size.toFixed(2)}px`
+    );
+    particle.style.setProperty(
+      "--particle-duration",
+      `${duration.toFixed(2)}s`
+    );
+    particle.style.setProperty(
+      "--particle-fade",
+      `${fade.toFixed(2)}s`
+    );
+    particle.style.setProperty(
+      "--particle-delay",
+      `${delay.toFixed(2)}s`
+    );
+    particle.style.setProperty(
+      "--particle-drift",
+      `${drift.toFixed(2)}px`
+    );
+    particle.style.setProperty(
+      "--particle-opacity",
+      opacity.toFixed(2)
+    );
+
+    particlesContainer.appendChild(particle);
+  }
+}
+
+createParticles();
+  
   setInterval(changeBackground, 20000);
 
   animate();

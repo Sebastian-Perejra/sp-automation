@@ -1,1 +1,359 @@
+html {
+  background: #050807;
+}
 
+body {
+  position: relative;
+  overflow-x: hidden;
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(75, 125, 94, 0.18),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(42, 84, 68, 0.11),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #08100d 0%,
+      #050807 42%,
+      #030504 100%
+    );
+  color: #eef3ef;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(132, 198, 153, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 85%,
+      rgba(51, 101, 76, 0.07),
+      transparent 34%
+    );
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  left: -15vw;
+  right: -15vw;
+  bottom: -42vh;
+  height: 95vh;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(93, 156, 113, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(93, 156, 113, 0.18) 1px,
+      transparent 1px
+    );
+  background-size:
+    70px 70px,
+    70px 70px;
+  transform:
+    perspective(700px)
+    rotateX(66deg)
+    scale(1.45);
+  transform-origin: center bottom;
+  mask-image:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.72) 44%,
+      rgba(0, 0, 0, 0.1) 78%,
+      transparent 100%
+    );
+  -webkit-mask-image:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.72) 44%,
+      rgba(0, 0, 0, 0.1) 78%,
+      transparent 100%
+    );
+}
+
+.topbar {
+  background: rgba(5, 10, 8, 0.76);
+  border-bottom: 1px solid rgba(120, 168, 137, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.home-link {
+  color: #9bc1a6;
+}
+
+.home-link:hover {
+  color: #d7f2dd;
+}
+
+.desktop-nav a {
+  color: #b8c5bc;
+}
+
+.desktop-nav a::after {
+  background: #86b594;
+}
+
+.desktop-nav a:hover {
+  color: #e5f4e9;
+}
+
+.lang-switcher button {
+  border-color: rgba(146, 185, 157, 0.28);
+  background: rgba(15, 24, 19, 0.74);
+  color: #aebbb1;
+}
+
+.lang-switcher button:hover {
+  border-color: #7dac8b;
+  background: rgba(87, 133, 101, 0.78);
+  color: #ffffff;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  border: 1px solid rgba(127, 170, 140, 0.2);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(13, 23, 18, 0.86),
+      rgba(7, 13, 10, 0.78)
+    );
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.hero::before {
+  background: rgba(78, 134, 96, 0.23);
+  filter: blur(28px);
+}
+
+.hero::after {
+  background: rgba(110, 153, 123, 0.15);
+  filter: blur(30px);
+}
+
+.hero h1 {
+  color: #e6f3e9;
+  text-shadow: 0 0 30px rgba(115, 174, 132, 0.12);
+}
+
+.hero p {
+  color: #aebbb2;
+}
+
+.card {
+  border: 1px solid rgba(124, 166, 137, 0.16);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(11, 20, 15, 0.82),
+      rgba(6, 12, 9, 0.78)
+    );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.card h2 {
+  color: #d7eadc;
+}
+
+.card p,
+.card li {
+  color: #aab6ad;
+}
+
+.card li::marker {
+  color: #7fa98a;
+}
+
+.item {
+  border: 1px solid rgba(119, 160, 132, 0.16);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 27, 21, 0.88),
+      rgba(8, 15, 11, 0.76)
+    );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.item:hover {
+  border-color: rgba(131, 181, 146, 0.36);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.26),
+    0 0 30px rgba(94, 145, 109, 0.06);
+  transform: translateY(-3px);
+}
+
+.item strong {
+  color: #bac8be;
+}
+
+.price {
+  color: #b7d8c0;
+  text-shadow: 0 0 22px rgba(103, 170, 122, 0.12);
+}
+
+.item p {
+  color: #8f9d93;
+}
+
+.table-wrap {
+  border: 1px solid rgba(123, 162, 135, 0.15);
+  background: rgba(6, 12, 9, 0.7);
+}
+
+th,
+td {
+  border-bottom: 1px solid rgba(119, 155, 130, 0.12);
+}
+
+th {
+  background: rgba(66, 101, 77, 0.16);
+  color: #a8c8b1;
+}
+
+td {
+  color: #a6b2a9;
+}
+
+td:last-child {
+  color: #bdd9c4;
+}
+
+.note {
+  border: 1px solid rgba(106, 153, 119, 0.2);
+  border-left: 4px solid #6f9f7d;
+  background: rgba(26, 45, 34, 0.52);
+  color: #a8b9ad;
+}
+
+.process-step {
+  border: 1px solid rgba(115, 154, 127, 0.14);
+  background: rgba(11, 19, 14, 0.74);
+  color: #a5b1a8;
+}
+
+.process-step::before {
+  background:
+    linear-gradient(
+      145deg,
+      #587b62,
+      #365240
+    );
+  color: #f0f7f2;
+  box-shadow: 0 0 22px rgba(98, 150, 113, 0.12);
+}
+
+.cta {
+  border: 1px solid rgba(128, 171, 140, 0.22);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(20, 34, 26, 0.94),
+      rgba(7, 14, 10, 0.88)
+    );
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cta h2 {
+  color: #dcece0;
+}
+
+.cta p {
+  color: #a7b3aa;
+}
+
+.button {
+  background:
+    linear-gradient(
+      135deg,
+      #4f7c5d,
+      #35513e
+    );
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 0 28px rgba(77, 127, 91, 0.12);
+  color: #ffffff;
+}
+
+.button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #628f6d,
+      #42614b
+    );
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.4),
+    0 0 34px rgba(90, 145, 105, 0.14);
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(124, 165, 136, 0.16);
+  background: rgba(4, 8, 6, 0.9);
+  color: #849087;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+footer a,
+footer a:visited {
+  color: inherit;
+}
+
+@media (max-width: 760px) {
+  body::after {
+    left: -40vw;
+    right: -40vw;
+    bottom: -28vh;
+    height: 78vh;
+    background-size:
+      46px 46px,
+      46px 46px;
+    transform:
+      perspective(520px)
+      rotateX(68deg)
+      scale(1.55);
+  }
+
+  .hero,
+  .card,
+  .cta {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}

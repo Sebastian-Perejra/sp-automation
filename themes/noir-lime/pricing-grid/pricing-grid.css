@@ -358,10 +358,11 @@ footer a:visited {
   width: var(--particle-size);
   height: var(--particle-size);
   border-radius: 50%;
-  background: rgba(196, 255, 217, 0.82);
+  background: rgba(220, 255, 230, 1);
   box-shadow:
-    0 0 8px rgba(144, 230, 172, 0.55),
-    0 0 18px rgba(92, 173, 118, 0.22);
+    0 0 10px rgba(175, 255, 200, 0.95),
+    0 0 24px rgba(100, 230, 145, 0.7),
+    0 0 42px rgba(70, 190, 110, 0.4);
   opacity: 0;
   transform: translate3d(0, 0, 0);
   animation:

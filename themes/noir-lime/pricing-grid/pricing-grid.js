@@ -117,6 +117,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 }
 
+function initInteractiveCards() {
+  const cards = document.querySelectorAll(".card, .item");
+
+  cards.forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const percentX = x / rect.width;
+      const percentY = y / rect.height;
+
+      const rotateY = (percentX - 0.5) * 2.4;
+      const rotateX = (0.5 - percentY) * 2;
+
+      card.style.setProperty(
+        "--spotlight-x",
+        `${x}px`
+      );
+
+      card.style.setProperty(
+        "--spotlight-y",
+        `${y}px`
+      );
+
+      card.style.transform =
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.transform =
+        "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
+    });
+  });
+}
+
+initInteractiveCards();
+  
 createParticles();
   
   setInterval(changeBackground, 20000);

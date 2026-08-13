@@ -705,26 +705,508 @@ document.addEventListener("DOMContentLoaded", () => {
     content.appendChild(wrapper);
   }
 
+  function calculateEstimate() {
+  const category = answers.start;
+
+  const estimates = {
+    powerbi: {
+      min: 5,
+      max: 9
+    },
+    excel: {
+      min: 3,
+      max: 6
+    },
+    reports: {
+      min: 4,
+      max: 8
+    },
+    telegram: {
+      min: 5,
+      max: 10
+    },
+    documents: {
+      min: 5,
+      max: 10
+    },
+    integration: {
+      min: 8,
+      max: 16
+    },
+    other: {
+      min: 4,
+      max: 10
+    }
+  };
+
+  const base = estimates[category] || {
+    min: 4,
+    max: 10
+  };
+
+  let minHours = base.min;
+  let maxHours = base.max;
+
+  if (category === "powerbi") {
+    if (answers.powerbi_type === "new") {
+      minHours += 2;
+      maxHours += 4;
+    }
+
+    if (answers.powerbi_type === "full") {
+      minHours += 8;
+      maxHours += 16;
+    }
+
+    if (answers.powerbi_license === "no") {
+      minHours += 1;
+      maxHours += 3;
+    }
+
+    const sources = answers.powerbi_sources || [];
+
+    if (sources.length === 2) {
+      minHours += 1;
+      maxHours += 3;
+    }
+
+    if (sources.length >= 3) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (
+      sources.includes("api") ||
+      sources.includes("database") ||
+      sources.includes("crm")
+    ) {
+      minHours += 2;
+      maxHours += 5;
+    }
+
+    if (answers.powerbi_visuals === "2-3") {
+      minHours += 2;
+      maxHours += 4;
+    }
+
+    if (answers.powerbi_visuals === "4-5") {
+      minHours += 4;
+      maxHours += 8;
+    }
+
+    if (answers.powerbi_visuals === "6+") {
+      minHours += 7;
+      maxHours += 14;
+    }
+
+    if (answers.powerbi_complexity === "medium") {
+      minHours += 3;
+      maxHours += 6;
+    }
+
+    if (answers.powerbi_complexity === "complex") {
+      minHours += 7;
+      maxHours += 15;
+    }
+  }
+
+  if (category === "excel") {
+    const types = answers.excel_type || [];
+    const sources = answers.excel_sources || [];
+    const launches = answers.excel_launch || [];
+
+    if (types.length >= 3) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (
+      types.includes("integration") ||
+      types.includes("data")
+    ) {
+      minHours += 2;
+      maxHours += 5;
+    }
+
+    if (answers.excel_platform === "both") {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (answers.excel_volume === "medium") {
+      minHours += 1;
+      maxHours += 3;
+    }
+
+    if (answers.excel_volume === "large") {
+      minHours += 4;
+      maxHours += 10;
+    }
+
+    if (sources.length >= 3) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (
+      sources.includes("crm") ||
+      sources.includes("api") ||
+      sources.includes("email")
+    ) {
+      minHours += 2;
+      maxHours += 6;
+    }
+
+    if (answers.excel_process === "several") {
+      minHours += 3;
+      maxHours += 6;
+    }
+
+    if (answers.excel_process === "full") {
+      minHours += 7;
+      maxHours += 15;
+    }
+
+    if (
+      launches.includes("schedule") ||
+      launches.includes("event")
+    ) {
+      minHours += 2;
+      maxHours += 5;
+    }
+  }
+
+  if (category === "reports") {
+    const sources = answers.reports_sources || [];
+    const delivery = answers.reports_delivery || [];
+
+    if (sources.length >= 3) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (
+      sources.includes("crm") ||
+      sources.includes("api") ||
+      sources.includes("multiple")
+    ) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (answers.reports_count === "2-3") {
+      minHours += 3;
+      maxHours += 6;
+    }
+
+    if (answers.reports_count === "4-5") {
+      minHours += 6;
+      maxHours += 12;
+    }
+
+    if (answers.reports_count === "6+") {
+      minHours += 10;
+      maxHours += 20;
+    }
+
+    if (delivery.length >= 2) {
+      minHours += 2;
+      maxHours += 5;
+    }
+
+    if (answers.reports_frequency !== "manual") {
+      minHours += 1;
+      maxHours += 4;
+    }
+  }
+
+  if (category === "telegram") {
+    const functions = answers.telegram_functions || [];
+
+    if (functions.length >= 3) {
+      minHours += 4;
+      maxHours += 8;
+    }
+
+    if (functions.length >= 5) {
+      minHours += 4;
+      maxHours += 10;
+    }
+
+    if (
+      functions.includes("api") ||
+      functions.includes("roles")
+    ) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (answers.telegram_complexity === "medium") {
+      minHours += 4;
+      maxHours += 8;
+    }
+
+    if (answers.telegram_complexity === "complex") {
+      minHours += 10;
+      maxHours += 20;
+    }
+
+    if (answers.telegram_users === "200+") {
+      minHours += 3;
+      maxHours += 8;
+    }
+  }
+
+  if (category === "documents") {
+    const types = answers.documents_type || [];
+    const results = answers.documents_result || [];
+
+    if (
+      types.includes("scans")
+    ) {
+      minHours += 4;
+      maxHours += 10;
+    }
+
+    if (types.length >= 3) {
+      minHours += 3;
+      maxHours += 7;
+    }
+
+    if (answers.documents_templates === "2-5") {
+      minHours += 4;
+      maxHours += 10;
+    }
+
+    if (answers.documents_templates === "6+") {
+      minHours += 10;
+      maxHours += 24;
+    }
+
+    if (answers.documents_volume === "medium") {
+      minHours += 2;
+      maxHours += 5;
+    }
+
+    if (answers.documents_volume === "large") {
+      minHours += 5;
+      maxHours += 12;
+    }
+
+    if (
+      results.includes("crm") ||
+      results.includes("database") ||
+      results.includes("api")
+    ) {
+      minHours += 3;
+      maxHours += 8;
+    }
+  }
+
+  if (category === "integration") {
+    const systems = answers.integration_systems || [];
+
+    if (systems.length >= 3) {
+      minHours += 5;
+      maxHours += 12;
+    }
+
+    if (answers.integration_direction === "twoway") {
+      minHours += 6;
+      maxHours += 14;
+    }
+
+    if (answers.integration_direction === "multiple") {
+      minHours += 10;
+      maxHours += 22;
+    }
+
+    if (answers.integration_api === "no") {
+      minHours += 5;
+      maxHours += 15;
+    }
+
+    if (answers.integration_api === "unknown") {
+      minHours += 2;
+      maxHours += 8;
+    }
+
+    if (answers.integration_frequency === "realtime") {
+      minHours += 5;
+      maxHours += 12;
+    }
+  }
+
+  if (answers.common_existing === "existing") {
+    minHours += 1;
+    maxHours += 4;
+  }
+
+  if (answers.common_existing === "broken") {
+    minHours += 2;
+    maxHours += 6;
+  }
+
+  if (answers.common_urgency === "urgent") {
+    minHours *= 1.1;
+    maxHours *= 1.2;
+  }
+
+  if (answers.common_support === "short") {
+    minHours += 1;
+    maxHours += 3;
+  }
+
+  if (answers.common_support === "ongoing") {
+    minHours += 3;
+    maxHours += 8;
+  }
+
+  minHours = Math.max(2, Math.round(minHours));
+  maxHours = Math.max(
+    minHours + 1,
+    Math.round(maxHours)
+  );
+
+  const rate =
+    minHours > 50 && maxHours > 50
+      ? 800
+      : 1000;
+
+  let minPrice = minHours * rate;
+  let maxPrice = maxHours * rate;
+
+  if (minHours <= 50 && maxHours > 50) {
+    minPrice = minHours * 1000;
+    maxPrice = maxHours * 800;
+  }
+
+  minPrice =
+    Math.ceil(minPrice / 500) * 500;
+
+  maxPrice =
+    Math.ceil(maxPrice / 500) * 500;
+
+  const needsManualEstimate =
+    category === "integration" &&
+    (
+      answers.integration_api === "no" ||
+      answers.integration_direction === "multiple"
+    );
+
+  return {
+    minHours,
+    maxHours,
+    minPrice,
+    maxPrice,
+    needsManualEstimate
+  };
+}
+  
   function showResult() {
-    if (progressBar) {
-      progressBar.style.width = "100%";
-    }
+  const estimate = calculateEstimate();
 
-    if (progressValue) {
-      progressValue.textContent = "100%";
-    }
+  if (progressBar) {
+    progressBar.style.width = "100%";
+  }
 
-    if (progressLabel) {
-      progressLabel.textContent = "Готово";
-    }
+  if (progressValue) {
+    progressValue.textContent = "100%";
+  }
 
-    if (backButton) {
-      backButton.disabled = false;
-    }
+  if (progressLabel) {
+    progressLabel.textContent = "Готово";
+  }
 
-    if (tiredButton) {
-      tiredButton.style.display = "none";
-    }
+  if (backButton) {
+    backButton.disabled = false;
+  }
+
+  if (tiredButton) {
+    tiredButton.style.display = "none";
+  }
+
+  const priceText =
+    `${estimate.minPrice.toLocaleString("uk-UA")}–` +
+    `${estimate.maxPrice.toLocaleString("uk-UA")} грн`;
+
+  const hoursText =
+    `${estimate.minHours}–${estimate.maxHours} год`;
+
+  let resultHtml = "";
+
+  if (estimate.needsManualEstimate) {
+    resultHtml = `
+      <div class="pricing-estimator-step">
+        <div class="pricing-estimator-summary">
+
+          <div class="pricing-estimator-question-number">
+            Попередній результат
+          </div>
+
+          <h3 class="pricing-estimator-summary-title">
+            Потрібна індивідуальна оцінка
+          </h3>
+
+          <p class="pricing-estimator-summary-text">
+            У цьому сценарії вартість занадто залежить від доступу
+            до систем, API та технічних обмежень. Давати точну цифру
+            автоматично було б некоректно.
+          </p>
+
+          <p class="pricing-estimator-summary-text">
+            Орієнтир за трудомісткістю:
+            <strong>${hoursText}</strong>.
+          </p>
+
+          <a
+            class="pricing-estimator-contact-button"
+            href="contacts.html"
+          >
+            Отримати точну оцінку
+          </a>
+
+        </div>
+      </div>
+    `;
+  } else {
+    resultHtml = `
+      <div class="pricing-estimator-step">
+        <div class="pricing-estimator-summary">
+
+          <div class="pricing-estimator-question-number">
+            Попередній результат
+          </div>
+
+          <h3 class="pricing-estimator-summary-title">
+            ${priceText}
+          </h3>
+
+          <p class="pricing-estimator-summary-text">
+            Орієнтовна трудомісткість:
+            <strong>${hoursText}</strong>.
+          </p>
+
+          <p class="pricing-estimator-summary-text">
+            Це попередня оцінка за вашими відповідями,
+            а не фіксована комерційна пропозиція.
+            Після короткого уточнення завдання оцінка може змінитися.
+          </p>
+
+          <a
+            class="pricing-estimator-contact-button"
+            href="contacts.html"
+          >
+            Обговорити проєкт
+          </a>
+
+        </div>
+      </div>
+    `;
+  }
+
+  content.innerHTML = resultHtml;
+}
 
     content.innerHTML = `
       <div class="pricing-estimator-step">

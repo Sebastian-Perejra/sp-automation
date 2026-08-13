@@ -214,7 +214,7 @@ function initMagneticCTA() {
 function initPriceCounters() {
   const priceElements = document.querySelectorAll(".price");
 
-  const targets = [1000, 800];
+  const targets = [1 000, 800];
 
   priceElements.forEach((element, index) => {
     if (index > 1) return;

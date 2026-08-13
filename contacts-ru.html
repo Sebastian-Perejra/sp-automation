@@ -930,9 +930,9 @@ if (estimatorDraft) {
         }
 
         const turnstileToken =
-          form.querySelector(
-            '[name="cf-turnstile-response"]'
-          )?.value || "";
+        document.querySelector(
+          '[name="cf-turnstile-response"]'
+        )?.value || "";
 
         if (!turnstileToken) {
           errorMessage.textContent =

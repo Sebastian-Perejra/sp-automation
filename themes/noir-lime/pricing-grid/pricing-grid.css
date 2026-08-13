@@ -2163,64 +2163,59 @@ body {
 footer {
   position: relative;
   z-index: 2;
-  padding: 0;
+  height: 74px !important;
+  min-height: 74px !important;
+  padding: 0 !important;
   overflow: hidden;
-  border-top: 1px solid rgba(184, 255, 53, 0.08);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(6, 9, 8, 0.97) 0%,
-      rgba(9, 13, 11, 0.96) 100%
-    );
-  color: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: #080a09;
+  color: #ffffff;
 }
 
 .footer-ticker {
-  position: relative;
+  position: absolute;
+  top: 15px;
+  left: 0;
   width: 100%;
   overflow: hidden;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  color: #ffffff;
 }
 
 .footer-ticker-text {
   display: inline-block;
-  width: max-content;
-  white-space: nowrap;
   padding-left: 100%;
-  font-family: "Roboto Mono", monospace;
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(190, 224, 198, 0.58);
-  animation: footerTickerMove 42s linear infinite;
+  white-space: nowrap;
+  animation: footerTicker 40s linear infinite;
 }
 
 .footer-copy {
-  padding: 17px 20px 19px;
-  text-align: center;
-  font-family: "Roboto Mono", monospace;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Manrope", sans-serif;
   font-size: 10px;
-  line-height: 1.7;
-  letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  color: #ffffff;
 }
 
 .footer-copy a,
 .footer-copy a:visited {
-  margin-left: 8px;
-  color: rgba(190, 224, 198, 0.62);
-  text-decoration: none;
+  color: #ffffff;
 }
 
-.footer-copy a:hover {
-  color: #b8ff35;
-}
-
-@keyframes footerTickerMove {
+@keyframes footerTicker {
   from {
     transform: translateX(0);
   }
@@ -2229,7 +2224,6 @@ footer {
     transform: translateX(-100%);
   }
 }
-
 @media (max-width: 760px) {
   .footer-ticker {
     padding: 13px 0;

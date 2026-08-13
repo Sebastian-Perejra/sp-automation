@@ -818,6 +818,234 @@ footer a:visited {
       scale(0.8);
   }
 }
+
+.process-step-scope {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 74px;
+}
+
+.process-step-scope:hover .process-visual {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.process-visual-scope {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scope-box {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 26px;
+  border: 1px solid rgba(145, 205, 161, 0.3);
+  border-radius: 7px;
+  background: rgba(5, 16, 9, 0.94);
+  color: rgba(194, 222, 201, 0.76);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transform: translateY(-50%);
+}
+
+.scope-task {
+  left: 5px;
+}
+
+.scope-volume {
+  right: 5px;
+}
+
+.scope-connection {
+  position: absolute;
+  left: 65px;
+  top: 50%;
+  width: 40px;
+  height: 28px;
+  transform: translateY(-50%);
+}
+
+.scope-arrow {
+  position: absolute;
+  left: 50%;
+  color: rgba(156, 205, 169, 0.4);
+  font-size: 15px;
+  line-height: 1;
+  opacity: 0;
+}
+
+.scope-arrow-right {
+  top: 0;
+  transform: translateX(-100%);
+}
+
+.scope-arrow-left {
+  bottom: 0;
+  transform: translateX(0);
+}
+
+.scope-approved {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(74, 128, 89, 0.9);
+  color: #e4f9e9;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(112, 220, 141, 0.3);
+  opacity: 0;
+  transform:
+    translate(-50%, -50%)
+    scale(0.5);
+}
+
+.process-step-scope:hover .scope-task {
+  animation: scopeTaskMove 2.4s ease-in-out infinite;
+}
+
+.process-step-scope:hover .scope-volume {
+  animation: scopeVolumeMove 2.4s ease-in-out infinite;
+}
+
+.process-step-scope:hover .scope-arrow-right {
+  animation: scopeArrowRight 2.4s ease-in-out infinite;
+}
+
+.process-step-scope:hover .scope-arrow-left {
+  animation: scopeArrowLeft 2.4s ease-in-out infinite;
+}
+
+.process-step-scope:hover .scope-approved {
+  animation: scopeApproved 2.4s ease-in-out infinite;
+}
+
+@keyframes scopeTaskMove {
+  0%,
+  12% {
+    transform:
+      translateY(-50%)
+      translateX(0);
+  }
+
+  58%,
+  86% {
+    transform:
+      translateY(-50%)
+      translateX(7px);
+    border-color: rgba(181, 239, 197, 0.7);
+  }
+
+  100% {
+    transform:
+      translateY(-50%)
+      translateX(0);
+  }
+}
+
+@keyframes scopeVolumeMove {
+  0%,
+  12% {
+    transform:
+      translateY(-50%)
+      translateX(0);
+  }
+
+  58%,
+  86% {
+    transform:
+      translateY(-50%)
+      translateX(-7px);
+    border-color: rgba(181, 239, 197, 0.7);
+  }
+
+  100% {
+    transform:
+      translateY(-50%)
+      translateX(0);
+  }
+}
+
+@keyframes scopeArrowRight {
+  0%,
+  15% {
+    opacity: 0;
+    transform: translateX(-130%);
+  }
+
+  28%,
+  50% {
+    opacity: 1;
+    transform: translateX(-55%);
+    color: #c5f1d0;
+  }
+
+  62%,
+  100% {
+    opacity: 0;
+    transform: translateX(5%);
+  }
+}
+
+@keyframes scopeArrowLeft {
+  0%,
+  28% {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+
+  40%,
+  60% {
+    opacity: 1;
+    transform: translateX(-35%);
+    color: #c5f1d0;
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateX(-90%);
+  }
+}
+
+@keyframes scopeApproved {
+  0%,
+  58% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+  70%,
+  88% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.65);
+  }
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

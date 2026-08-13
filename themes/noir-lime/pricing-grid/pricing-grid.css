@@ -565,6 +565,22 @@ footer a:visited {
   transform: translate3d(0, 0, 0);
 }
 
+.cta .button {
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 0.22s ease-out,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+  will-change: transform;
+}
+
+.cta .button.magnetic-active {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 0 38px rgba(112, 190, 136, 0.2);
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

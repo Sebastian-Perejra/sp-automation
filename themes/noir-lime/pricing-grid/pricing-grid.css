@@ -2159,3 +2159,92 @@ body {
     font-size: 12px;
   }
 }
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(184, 255, 53, 0.08);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 9, 8, 0.97) 0%,
+      rgba(9, 13, 11, 0.96) 100%
+    );
+  color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.footer-ticker {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-ticker-text {
+  display: inline-block;
+  width: max-content;
+  white-space: nowrap;
+  padding-left: 100%;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(190, 224, 198, 0.58);
+  animation: footerTickerMove 42s linear infinite;
+}
+
+.footer-copy {
+  padding: 17px 20px 19px;
+  text-align: center;
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-copy a,
+.footer-copy a:visited {
+  margin-left: 8px;
+  color: rgba(190, 224, 198, 0.62);
+  text-decoration: none;
+}
+
+.footer-copy a:hover {
+  color: #b8ff35;
+}
+
+@keyframes footerTickerMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 760px) {
+  .footer-ticker {
+    padding: 13px 0;
+  }
+
+  .footer-ticker-text {
+    font-size: 10px;
+    animation-duration: 34s;
+  }
+
+  .footer-copy {
+    padding:
+      15px
+      14px
+      calc(17px + env(safe-area-inset-bottom));
+    font-size: 9px;
+  }
+}

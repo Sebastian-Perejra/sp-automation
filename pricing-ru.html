@@ -10,8 +10,10 @@
   <title>Ценовая политика – Sebastian Automations</title>
   <link rel="canonical" href="https://sp-automation.com/pricing-ru.html">
   <link rel="icon" href="favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
     rel="stylesheet"
@@ -96,18 +98,18 @@
     }
 
     .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
+      width: min(100%, 1080px);
+      min-height: 72px;
+      margin: 0 auto;
+      padding:
+        max(14px, env(safe-area-inset-top))
+        28px
+        14px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 28px;
+    }
 
     .home-link {
       color: var(--green);
@@ -163,10 +165,10 @@
     }
 
     .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
+      display: flex;
+      gap: 7px;
+      justify-self: end;
+    }
 
     .lang-switcher button {
       min-width: 38px;
@@ -180,7 +182,11 @@
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
-      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+      transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
     }
 
     .lang-switcher button:hover {
@@ -371,8 +377,8 @@
 
     table {
       width: 100%;
-      min-width: 560px;
       border-collapse: collapse;
+      min-width: 560px;
     }
 
     th,
@@ -526,16 +532,17 @@
       font-size: 12px;
       text-align: center;
     }
-    footer a,
-footer a:visited {
-  color: inherit;
-  text-decoration: none;
-  font: inherit;
-}
 
-footer a:hover {
-  text-decoration: underline;
-}
+    footer a,
+    footer a:visited {
+      color: inherit;
+      text-decoration: none;
+      font: inherit;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
 
     @media (max-width: 820px) {
       .topbar-inner {
@@ -562,15 +569,15 @@ footer a:hover {
     }
 
     @media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
+      .topbar-inner {
+        min-height: 64px;
+        padding:
+          max(12px, env(safe-area-inset-top))
+          14px
+          12px;
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+      }
 
       .desktop-nav {
         display: none;
@@ -681,11 +688,32 @@ footer a:hover {
       }
     }
   </style>
+
   <link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
+  <script src="/assistant.js" defer></script>
+
+  <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
+  <script src="/nav-font-kaleidoscope.js?v=4" defer></script>
+
+  <link rel="stylesheet" href="/consent/consent.css">
+  <link rel="stylesheet" href="/themes/noir-lime/pricing-grid/pricing-grid.css">
 </head>
 
 <body>
+  <div class="cosmic-frame" aria-hidden="true">
+    <span class="cosmic-frame__top-left"></span>
+    <span class="cosmic-frame__top-right"></span>
+    <span class="cosmic-frame__bottom-left"></span>
+    <span class="cosmic-frame__bottom-right"></span>
+  </div>
+
+  <div class="pricing-background" aria-hidden="true">
+    <div class="pricing-background-layer pricing-background-layer-a"></div>
+    <div class="pricing-background-layer pricing-background-layer-b"></div>
+    <div class="pricing-background-glow"></div>
+    <div class="pricing-background-particles"></div>
+  </div>
+
   <header class="topbar">
     <div class="topbar-inner">
       <a class="home-link" href="index-ru.html">
@@ -714,7 +742,7 @@ footer a:hover {
 
       <p>
         Прозрачные условия, почасовая оплата, поэтапная работа и реалистичная
-        оценка стоимости. Вы платите за результат, а не за красивые обещания.
+        оценка стоимости. Вы платите за результат.
       </p>
     </section>
 
@@ -725,7 +753,7 @@ footer a:hover {
         <div class="item">
           <strong>Стандартная ставка</strong>
 
-          <div class="price">800 грн/час</div>
+          <div class="price">1 000 грн/час</div>
 
           <p>
             Для большинства задач, консультаций, доработок и автоматизаций.
@@ -735,7 +763,7 @@ footer a:hover {
         <div class="item">
           <strong>Крупные проекты</strong>
 
-          <div class="price">650 грн/час</div>
+          <div class="price">800 грн/час</div>
 
           <p>
             Может применяться для проектов объёмом более 50 часов.
@@ -752,49 +780,49 @@ footer a:hover {
           <thead>
             <tr>
               <th>Направление</th>
-              <th>Стоимость</th>
+              <th>Ориентировочная стоимость</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
               <td>Excel и Google Sheets</td>
-              <td>от 1500 грн</td>
+              <td>от 2 000 грн</td>
             </tr>
 
             <tr>
               <td>Автоматизация отчётов</td>
-              <td>от 2000 грн</td>
+              <td>от 3 000 грн</td>
             </tr>
 
             <tr>
               <td>Telegram-боты</td>
-              <td>от 3000 грн</td>
+              <td>от 3 000 грн</td>
             </tr>
 
             <tr>
               <td>Обработка PDF и инвойсов</td>
-              <td>от 3000 грн</td>
+              <td>от 3 000 грн</td>
             </tr>
 
             <tr>
               <td>Исследование рынка</td>
-              <td>от 3000 грн</td>
+              <td>от 5 000 грн</td>
             </tr>
 
             <tr>
               <td>Power BI</td>
-              <td>от 5000 грн</td>
+              <td>от 5 000 грн</td>
             </tr>
 
             <tr>
               <td>Интеграции и API</td>
-              <td>от 5000 грн</td>
+              <td>от 5 000 грн</td>
             </tr>
 
             <tr>
               <td>Веб-приложения</td>
-              <td>от 8000 грн</td>
+              <td>от 10 000 грн</td>
             </tr>
           </tbody>
         </table>
@@ -843,12 +871,12 @@ footer a:hover {
           <tbody>
             <tr>
               <td>3 часа</td>
-              <td>2000 грн</td>
+              <td>2 500 грн</td>
             </tr>
 
             <tr>
               <td>4 часа</td>
-              <td>2600 грн</td>
+              <td>3 200 грн</td>
             </tr>
           </tbody>
         </table>
@@ -864,12 +892,114 @@ footer a:hover {
       <h2>Как проходит работа</h2>
 
       <div class="process">
-        <div class="process-step">Анализ задачи.</div>
-        <div class="process-step">Согласование объёма работ.</div>
-        <div class="process-step">Разработка решения.</div>
-        <div class="process-step">Тестирование.</div>
-        <div class="process-step">Передача результата.</div>
-        <div class="process-step">Поддержка после запуска.</div>
+        <div class="process-step process-step-analysis">
+          <span class="process-step-text">Анализ задачи.</span>
+
+          <span class="process-visual process-visual-analysis" aria-hidden="true">
+            <span class="analysis-document">
+              <span class="analysis-line analysis-line-1"></span>
+              <span class="analysis-line analysis-line-2"></span>
+              <span class="analysis-line analysis-line-3"></span>
+            </span>
+
+            <span class="analysis-magnifier"></span>
+            <span class="analysis-check">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-scope">
+          <span class="process-step-text">Согласование объёма работ.</span>
+
+          <span class="process-visual process-visual-scope" aria-hidden="true">
+            <span class="scope-box scope-task">ЗАДАЧА</span>
+
+            <span class="scope-connection">
+              <span class="scope-arrow scope-arrow-right">→</span>
+              <span class="scope-arrow scope-arrow-left">←</span>
+            </span>
+
+            <span class="scope-box scope-volume">ОБЪЁМ</span>
+            <span class="scope-approved">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-development">
+          <span class="process-step-text">Разработка решения.</span>
+
+          <span class="process-visual process-visual-development" aria-hidden="true">
+            <span class="development-module development-module-1"></span>
+            <span class="development-module development-module-2"></span>
+            <span class="development-module development-module-3"></span>
+
+            <span class="development-line development-line-1"></span>
+            <span class="development-line development-line-2"></span>
+
+            <span class="development-core"></span>
+            <span class="development-check">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-testing">
+          <span class="process-step-text">Тестирование.</span>
+
+          <span class="process-visual process-visual-testing" aria-hidden="true">
+            <span class="testing-row testing-row-1">
+              <span class="testing-dot"></span>
+              <span class="testing-line"></span>
+              <span class="testing-status">✓</span>
+            </span>
+
+            <span class="testing-row testing-row-2">
+              <span class="testing-dot"></span>
+              <span class="testing-line"></span>
+              <span class="testing-status">✓</span>
+            </span>
+
+            <span class="testing-row testing-row-3">
+              <span class="testing-dot"></span>
+              <span class="testing-line"></span>
+
+              <span class="testing-status testing-status-fix">
+                <span class="testing-fail">×</span>
+                <span class="testing-pass">✓</span>
+              </span>
+            </span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-delivery">
+          <span class="process-step-text">Передача результата.</span>
+
+          <span class="process-visual process-visual-delivery" aria-hidden="true">
+            <span class="delivery-source">FILE</span>
+            <span class="delivery-path"></span>
+            <span class="delivery-packet">➜</span>
+            <span class="delivery-target">YOU</span>
+            <span class="delivery-check">✓</span>
+          </span>
+        </div>
+
+        <div class="process-step process-step-support">
+          <span class="process-step-text">Поддержка после запуска.</span>
+
+          <span class="process-visual process-visual-support" aria-hidden="true">
+            <span class="support-line support-line-1"></span>
+            <span class="support-line support-line-2"></span>
+            <span class="support-line support-line-3"></span>
+
+            <span class="support-node support-node-1"></span>
+            <span class="support-node support-node-2"></span>
+            <span class="support-node support-node-3"></span>
+
+            <span class="support-core">SUPPORT</span>
+
+            <span class="support-signal support-signal-1"></span>
+            <span class="support-signal support-signal-2"></span>
+            <span class="support-signal support-signal-3"></span>
+
+            <span class="support-check">✓</span>
+          </span>
+        </div>
       </div>
     </section>
 
@@ -888,8 +1018,24 @@ footer a:hover {
   </main>
 
   <footer>
-  © 2015–2026 Sebastian Automations. Все права защищены.
-  <a href="terms-ru.html">Условия использования</a>
-</footer>
+    <div class="footer-ticker">
+      <div class="footer-ticker-text">
+        Excel VBA · Google Apps Script · Power BI · DAX · Power Query ·
+        Автоматические отчёты · Автоматизация Excel · Обработка данных ·
+        Очистка данных · Парсинг данных · Интеграции · Макросы ·
+        Кастомная логика · Автоматизация бизнес-процессов ·
+        Аналитические дашборды · Автоматизация Google Sheets · Веб-приложения ·
+        JavaScript · Индивидуальные решения для бизнеса ·
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      © 2015–2026 Sebastian Automations. Все права защищены.
+      <a href="terms-ru.html">Условия использования</a>
+    </div>
+  </footer>
+
+  <script src="/themes/noir-lime/pricing-grid/pricing-grid.js" defer></script>
+  <script src="/consent/consent.js"></script>
 </body>
 </html>

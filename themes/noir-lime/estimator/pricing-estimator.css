@@ -526,3 +526,132 @@ body.pricing-estimator-open {
     margin-top: 22px;
   }
 }
+
+.pricing-estimator-cost-breakdown {
+  margin: 18px 0 20px;
+  padding: 15px;
+  border: 1px solid rgba(184, 255, 53, 0.13);
+  border-radius: 13px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(184, 255, 53, 0.028),
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.pricing-estimator-cost-heading {
+  margin-bottom: 12px;
+  color: rgba(184, 255, 53, 0.72);
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.pricing-estimator-cost-row {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 14px;
+  align-items: start;
+  padding: 7px 0;
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.04);
+}
+
+.pricing-estimator-cost-row:last-child {
+  border-bottom: 0;
+}
+
+.pricing-estimator-cost-label {
+  color: rgba(207, 222, 211, 0.62);
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.pricing-estimator-cost-value {
+  color: rgba(236, 246, 238, 0.82);
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  line-height: 1.5;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pricing-estimator-cost-row-urgency {
+  margin-top: 4px;
+  padding: 9px 0;
+}
+
+.pricing-estimator-cost-row-urgency
+.pricing-estimator-cost-label,
+.pricing-estimator-cost-row-urgency
+.pricing-estimator-cost-value {
+  color: #b8ff35;
+}
+
+.pricing-estimator-cost-separator {
+  height: 1px;
+  margin: 10px 0 5px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(184, 255, 53, 0.22),
+      transparent
+    );
+}
+
+.pricing-estimator-cost-total {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+  gap: 14px;
+  align-items: center;
+  margin-top: 11px;
+  padding-top: 12px;
+  border-top:
+    1px solid rgba(184, 255, 53, 0.2);
+}
+
+.pricing-estimator-cost-total span {
+  color: rgba(217, 232, 220, 0.7);
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pricing-estimator-cost-total strong {
+  color: #b8ff35;
+  font-family: "Roboto Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pricing-estimator-summary-disclaimer {
+  margin-top: 18px;
+}
+
+@media (max-width: 760px) {
+  .pricing-estimator-cost-breakdown {
+    padding: 13px;
+  }
+
+  .pricing-estimator-cost-row {
+    gap: 10px;
+  }
+
+  .pricing-estimator-cost-label {
+    font-size: 9px;
+  }
+
+  .pricing-estimator-cost-value {
+    font-size: 8px;
+  }
+}

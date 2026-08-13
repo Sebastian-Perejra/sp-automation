@@ -511,6 +511,46 @@ footer a:visited {
       scale(0.98);
   }
 }
+
+.card,
+.item {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.card::after,
+.item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      320px circle at
+      var(--spotlight-x, 50%)
+      var(--spotlight-y, 50%),
+      rgba(155, 235, 181, 0.13),
+      rgba(105, 190, 133, 0.055) 32%,
+      transparent 68%
+    );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card:hover::after,
+.item:hover::after {
+  opacity: 1;
+}
+
+.card > *,
+.item > * {
+  position: relative;
+  z-index: 1;
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

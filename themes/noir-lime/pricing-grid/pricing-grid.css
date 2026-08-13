@@ -1740,6 +1740,280 @@ footer a:visited {
   }
 }
 
+.process-step-support {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 74px;
+}
+
+.process-step-support:hover .process-visual {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.process-visual-support {
+  position: relative;
+}
+
+.support-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(158, 216, 174, 0.4);
+  border-radius: 8px;
+  background: rgba(6, 19, 10, 0.96);
+  color: rgba(211, 239, 218, 0.86);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  transform: translate(-50%, -50%);
+}
+
+.support-node {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(154, 207, 168, 0.45);
+  border-radius: 50%;
+  background: rgba(8, 23, 12, 0.96);
+}
+
+.support-node-1 {
+  left: 7px;
+  top: 7px;
+}
+
+.support-node-2 {
+  left: 7px;
+  bottom: 7px;
+}
+
+.support-node-3 {
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.support-line {
+  position: absolute;
+  height: 1px;
+  background: rgba(137, 184, 149, 0.28);
+  transform-origin: left center;
+}
+
+.support-line-1 {
+  left: 17px;
+  top: 12px;
+  width: 49px;
+  transform: rotate(12deg);
+}
+
+.support-line-2 {
+  left: 17px;
+  bottom: 12px;
+  width: 49px;
+  transform: rotate(-12deg);
+}
+
+.support-line-3 {
+  left: 105px;
+  top: 50%;
+  width: 48px;
+}
+
+.support-signal {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d7f9e0;
+  box-shadow:
+    0 0 7px rgba(170, 255, 194, 0.9),
+    0 0 15px rgba(100, 220, 135, 0.5);
+  opacity: 0;
+}
+
+.support-signal-1 {
+  left: 18px;
+  top: 10px;
+}
+
+.support-signal-2 {
+  left: 18px;
+  bottom: 10px;
+}
+
+.support-signal-3 {
+  left: 105px;
+  top: calc(50% - 2px);
+}
+
+.support-check {
+  position: absolute;
+  right: 1px;
+  top: 0;
+  color: #d9f9e1;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.process-step-support:hover .support-core {
+  animation: supportCorePulse 2.8s ease-in-out infinite;
+}
+
+.process-step-support:hover .support-signal-1 {
+  animation: supportSignalOne 2.8s ease-in-out infinite;
+}
+
+.process-step-support:hover .support-signal-2 {
+  animation: supportSignalTwo 2.8s ease-in-out infinite;
+}
+
+.process-step-support:hover .support-signal-3 {
+  animation: supportSignalThree 2.8s ease-in-out infinite;
+}
+
+.process-step-support:hover .support-node {
+  animation: supportNodePulse 2.8s ease-in-out infinite;
+}
+
+.process-step-support:hover .support-check {
+  animation: supportCheckShow 2.8s ease-in-out infinite;
+}
+
+@keyframes supportCorePulse {
+  0%,
+  100% {
+    border-color: rgba(158, 216, 174, 0.4);
+    box-shadow: none;
+  }
+
+  45%,
+  78% {
+    border-color: rgba(191, 243, 205, 0.8);
+    box-shadow:
+      0 0 10px rgba(125, 220, 151, 0.25),
+      0 0 24px rgba(92, 190, 120, 0.12);
+  }
+}
+
+@keyframes supportSignalOne {
+  0%,
+  10% {
+    left: 18px;
+    top: 10px;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  36% {
+    left: 66px;
+    top: 19px;
+    opacity: 1;
+  }
+
+  42%,
+  100% {
+    left: 66px;
+    top: 19px;
+    opacity: 0;
+  }
+}
+
+@keyframes supportSignalTwo {
+  0%,
+  30% {
+    left: 18px;
+    bottom: 10px;
+    opacity: 0;
+  }
+
+  38% {
+    opacity: 1;
+  }
+
+  56% {
+    left: 66px;
+    bottom: 19px;
+    opacity: 1;
+  }
+
+  62%,
+  100% {
+    left: 66px;
+    bottom: 19px;
+    opacity: 0;
+  }
+}
+
+@keyframes supportSignalThree {
+  0%,
+  52% {
+    left: 105px;
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  76% {
+    left: 149px;
+    opacity: 1;
+  }
+
+  82%,
+  100% {
+    left: 149px;
+    opacity: 0;
+  }
+}
+
+@keyframes supportNodePulse {
+  0%,
+  100% {
+    border-color: rgba(154, 207, 168, 0.45);
+    box-shadow: none;
+  }
+
+  62%,
+  82% {
+    border-color: rgba(190, 244, 205, 0.85);
+    box-shadow: 0 0 10px rgba(110, 220, 140, 0.35);
+  }
+}
+
+@keyframes supportCheckShow {
+  0%,
+  78% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  86%,
+  94% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
 @media (max-width: 760px) {
   body::after {
     left: -40vw;

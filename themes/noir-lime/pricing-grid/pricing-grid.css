@@ -2378,3 +2378,47 @@ footer {
 .page {
   width: min(100%, 1180px);
 }
+
+@media (max-width: 760px) {
+  .table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .table-wrap table {
+    width: 100%;
+    min-width: 0 !important;
+    table-layout: fixed;
+  }
+
+  .table-wrap th,
+  .table-wrap td {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .table-wrap th:first-child,
+  .table-wrap td:first-child {
+    width: 62%;
+  }
+
+  .table-wrap th:last-child,
+  .table-wrap td:last-child {
+    width: 38%;
+    white-space: normal !important;
+    text-align: right;
+  }
+
+  .table-wrap th {
+    padding: 12px 10px;
+    font-size: 9px;
+  }
+
+  .table-wrap td {
+    padding: 13px 10px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+}

@@ -911,3 +911,57 @@ details[open]:hover summary::after {
     display: none;
   }
 }
+
+.faq-list details {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.faq-list details.is-filtering-out {
+  opacity: 0;
+  transform: translateY(7px) scale(0.992);
+  pointer-events: none;
+}
+
+.faq-list details.is-filtering-in {
+  animation: faqFilterIn 0.34s ease both;
+}
+
+@keyframes faqFilterIn {
+  from {
+    opacity: 0;
+    transform: translateY(9px) scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.faq-category {
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.faq-category:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-list details,
+  .faq-list details.is-filtering-in,
+  .faq-category {
+    animation: none;
+    transition: none;
+  }
+}

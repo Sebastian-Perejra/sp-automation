@@ -670,7 +670,7 @@ footer a:hover {
 <button class="tool-button" id="open-all" type="button">Expand all</button>
 <button class="tool-button" id="close-all" type="button">Collapse all</button>
 </section>
-<div class="faq-count" id="faq-count"></div>
+
 <section aria-label="FAQ categories" class="faq-categories">
 <button class="faq-category active" data-filter="all" type="button">ALL</button>
 <button class="faq-category" data-filter="start" type="button">GETTING STARTED</button>
@@ -682,7 +682,7 @@ footer a:hover {
 <button class="faq-category" data-filter="handoff" type="button">HANDOFF</button>
 <button class="faq-category" data-filter="support" type="button">SUPPORT</button>
 <button class="faq-category" data-filter="other" type="button">OTHER</button>
-</section>
+</section><div class="faq-viewbar"><div class="faq-count" id="faq-count"></div><div aria-label="FAQ display mode" class="faq-view-switch"><button aria-label="List view" class="faq-view-button active" id="faq-view-list" title="List view" type="button">☰</button><button aria-label="Block view" class="faq-view-button" id="faq-view-grid" title="Block view" type="button">▦</button></div></div>
 <section class="faq-list" id="faq-list">
 <details data-category="start"><summary>How quickly do you respond?</summary><p>I usually respond within one calendar day, including Saturdays and Sundays.</p></details>
 <details data-category="start"><summary>How does work on a task begin?</summary><p>First, you briefly describe the task, the current process, and the desired result. I then clarify the details, assess possible implementation options, and suggest the next steps.</p></details>
@@ -802,22 +802,61 @@ footer a:hover {
 </div>
 <div class="footer-copy">© 2015–2026 Sebastian Automations. All rights reserved. <a href="terms-en.html">Terms of Use</a></div>
 </footer>
-<script>
-(() => {
+<script>(() => {
+  const groupMap = {
+    "Початок роботи": "Getting started",
+    "Вартість": "Pricing",
+    "Технології": "Technologies",
+    "Інтеграції": "Integrations",
+    "Web / Mobile": "Web / Mobile",
+    "Безпека": "Security",
+    "Передача рішення": "Handoff",
+    "Підтримка": "Support",
+    "Інше": "Other"
+  };
+
   const translateDynamicText = () => {
-    const count = document.getElementById("faq-count");
+    const count =
+      document.getElementById(
+        "faq-count"
+      );
+
     if (count) {
-      const match = count.textContent.match(/Показано:\s*(\d+)\s*із\s*(\d+)/);
+      const match =
+        count.textContent.match(
+          /Показано:\s*(\d+)\s*із\s*(\d+)/
+        );
+
       if (match) {
-        count.textContent = `Shown: ${match[1]} of ${match[2]}`;
+        count.textContent =
+          `Shown: ${match[1]} of ${match[2]}`;
       }
     }
 
-    const error = document.getElementById("faq-contact-error");
-    if (error) {
-      const repeatMatch = error.textContent.match(
-        /Повторне повідомлення можна надіслати через\s*(\d+)\s*сек\./
+    document
+      .querySelectorAll(
+        ".faq-grid-section-heading h2"
+      )
+      .forEach(title => {
+        const text =
+          title.textContent.trim();
+
+        if (groupMap[text]) {
+          title.textContent =
+            groupMap[text];
+        }
+      });
+
+    const error =
+      document.getElementById(
+        "faq-contact-error"
       );
+
+    if (error) {
+      const repeatMatch =
+        error.textContent.match(
+          /Повторне повідомлення можна надіслати через\s*(\d+)\s*сек\./
+        );
 
       if (repeatMatch) {
         error.textContent =
@@ -837,22 +876,32 @@ footer a:hover {
       }
     }
 
-    const submit = document.querySelector(
-      ".faq-contact-submit"
-    );
+    const submit =
+      document.querySelector(
+        ".faq-contact-submit"
+      );
 
     if (submit) {
-      if (submit.textContent.trim() === "Надсилання...") {
-        submit.textContent = "Sending...";
+      if (
+        submit.textContent.trim() ===
+        "Надсилання..."
+      ) {
+        submit.textContent =
+          "Sending...";
       }
 
-      if (submit.textContent.trim() === "Надіслати") {
-        submit.textContent = "Send";
+      if (
+        submit.textContent.trim() ===
+        "Надіслати"
+      ) {
+        submit.textContent =
+          "Send";
       }
     }
   };
 
-  const originalAlert = window.alert;
+  const originalAlert =
+    window.alert;
 
   window.alert = message => {
     if (
@@ -860,7 +909,7 @@ footer a:hover {
       "Повідомлення успішно надіслано!"
     ) {
       originalAlert(
-        "Your message has been sent successfully!"
+        "Message sent successfully!"
       );
       return;
     }
@@ -868,9 +917,10 @@ footer a:hover {
     originalAlert(message);
   };
 
-  const observer = new MutationObserver(
-    translateDynamicText
-  );
+  const observer =
+    new MutationObserver(
+      translateDynamicText
+    );
 
   observer.observe(
     document.documentElement,
@@ -882,6 +932,5 @@ footer a:hover {
   );
 
   translateDynamicText();
-})();
-</script></body>
+})();</script></body>
 </html>

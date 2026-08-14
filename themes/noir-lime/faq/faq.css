@@ -1602,3 +1602,39 @@ body.faq-modal-open {
     bottom: 32px;
   }
 }
+.cosmic-frame {
+  z-index: 10;
+}
+
+.cosmic-frame::before,
+.cosmic-frame::after {
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(74, 108, 79, 0.32) 12%,
+      rgba(74, 108, 79, 0.18) 50%,
+      rgba(74, 108, 79, 0.32) 88%,
+      transparent 100%
+    );
+}
+
+.cosmic-frame__top-left {
+  border-top-color: rgba(74, 108, 79, 0.34);
+  border-left-color: rgba(74, 108, 79, 0.38);
+}
+
+.cosmic-frame__top-right {
+  border-top-color: rgba(74, 108, 79, 0.34);
+  border-right-color: rgba(74, 108, 79, 0.38);
+}
+
+.cosmic-frame__bottom-left {
+  border-bottom-color: rgba(74, 108, 79, 0.34);
+  border-left-color: rgba(74, 108, 79, 0.38);
+}
+
+.cosmic-frame__bottom-right {
+  border-bottom-color: rgba(74, 108, 79, 0.34);
+  border-right-color: rgba(74, 108, 79, 0.38);
+}

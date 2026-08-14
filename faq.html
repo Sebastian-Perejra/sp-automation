@@ -717,9 +717,7 @@ footer a:hover {
         Згорнути всі
       </button>
     </section>
-
-    <div id="faq-count" class="faq-count"></div>
-
+   
     <section class="faq-categories" aria-label="Категорії FAQ">
       <button class="faq-category active" type="button" data-filter="all">УСІ</button>
       <button class="faq-category" type="button" data-filter="start">ПОЧАТОК РОБОТИ</button>
@@ -732,6 +730,31 @@ footer a:hover {
       <button class="faq-category" type="button" data-filter="support">ПІДТРИМКА</button>
       <button class="faq-category" type="button" data-filter="other">ІНШЕ</button>
     </section>
+    <div class="faq-viewbar">
+  <div id="faq-count" class="faq-count"></div>
+
+  <div class="faq-view-switch" aria-label="Режим відображення FAQ">
+    <button
+      id="faq-view-list"
+      class="faq-view-button active"
+      type="button"
+      aria-label="Список"
+      title="Список"
+    >
+      ☰
+    </button>
+
+    <button
+      id="faq-view-grid"
+      class="faq-view-button"
+      type="button"
+      aria-label="Блоки"
+      title="Блоки"
+    >
+      ▦
+    </button>
+  </div>
+</div>
 
     <section id="faq-list" class="faq-list">
       <details data-category="start"><summary>1. Як швидко ви відповідаєте?</summary><p>Зазвичай відповідаю протягом одного календарного дня, включно із суботою та неділею.</p></details>

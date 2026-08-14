@@ -642,5 +642,254 @@ if (faqParallaxEnabled) {
   animateFaqBackground();
 }
 
+  const faqViewList =
+  document.getElementById("faq-view-list");
+
+const faqViewGrid =
+  document.getElementById("faq-view-grid");
+
+const FAQ_VIEW_KEY =
+  "faq-view-mode";
+
+const faqListElement =
+  document.getElementById("faq-list");
+
+const originalFaqItems =
+  Array.from(
+    faqListElement.querySelectorAll(
+      ":scope > details"
+    )
+  );
+
+const faqGroupNames = {
+  start: "Початок роботи",
+  price: "Вартість",
+  tech: "Технології",
+  integration: "Інтеграції",
+  web: "Web / Mobile",
+  security: "Безпека",
+  handoff: "Передача рішення",
+  support: "Підтримка",
+  other: "Інше"
+};
+
+function buildFaqGrid() {
+  faqListElement.innerHTML = "";
+
+  Object.entries(
+    faqGroupNames
+  ).forEach(
+    ([category, title]) => {
+      const items =
+        originalFaqItems.filter(
+          item =>
+            item.dataset.category ===
+            category
+        );
+
+      if (!items.length) return;
+
+      const section =
+        document.createElement(
+          "section"
+        );
+
+      section.className =
+        "faq-grid-section";
+
+      section.dataset.category =
+        category;
+
+      const heading =
+        document.createElement("div");
+
+      heading.className =
+        "faq-grid-section-heading";
+
+      const headingTitle =
+        document.createElement("h2");
+
+      headingTitle.textContent =
+        title;
+
+      const headingCount =
+        document.createElement("span");
+
+      headingCount.textContent =
+        items.length;
+
+      heading.append(
+        headingTitle,
+        headingCount
+      );
+
+      const content =
+        document.createElement("div");
+
+      content.className =
+        "faq-grid-section-content";
+
+      items.forEach(item => {
+        content.appendChild(item);
+      });
+
+      section.append(
+        heading,
+        content
+      );
+
+      faqListElement.appendChild(
+        section
+      );
+    }
+  );
+
+  updateFaqGridSections();
+}
+
+function restoreFaqList() {
+  faqListElement.innerHTML = "";
+
+  originalFaqItems.forEach(
+    item => {
+      faqListElement.appendChild(
+        item
+      );
+    }
+  );
+}
+
+function updateFaqGridSections() {
+  if (
+    !document.body.classList.contains(
+      "faq-grid-mode"
+    )
+  ) {
+    return;
+  }
+
+  document
+    .querySelectorAll(
+      ".faq-grid-section"
+    )
+    .forEach(section => {
+      const items =
+        section.querySelectorAll(
+          "details"
+        );
+
+      const visibleItems =
+        Array.from(items).filter(
+          item =>
+            item.style.display !==
+            "none"
+        );
+
+      section.style.display =
+        visibleItems.length
+          ? ""
+          : "none";
+
+      const count =
+        section.querySelector(
+          ".faq-grid-section-heading span"
+        );
+
+      if (count) {
+        count.textContent =
+          visibleItems.length;
+      }
+    });
+}
+
+function setFaqView(mode) {
+  const isGrid =
+    mode === "grid";
+
+  if (isGrid) {
+    document.body.classList.add(
+      "faq-grid-mode"
+    );
+
+    buildFaqGrid();
+  } else {
+    document.body.classList.remove(
+      "faq-grid-mode"
+    );
+
+    restoreFaqList();
+  }
+
+  faqViewList?.classList.toggle(
+    "active",
+    !isGrid
+  );
+
+  faqViewGrid?.classList.toggle(
+    "active",
+    isGrid
+  );
+
+  localStorage.setItem(
+    FAQ_VIEW_KEY,
+    isGrid ? "grid" : "list"
+  );
+}
+
+faqViewList?.addEventListener(
+  "click",
+  () => {
+    setFaqView("list");
+    filterFaq();
+  }
+);
+
+faqViewGrid?.addEventListener(
+  "click",
+  () => {
+    setFaqView("grid");
+    filterFaq();
+
+    window.setTimeout(
+      updateFaqGridSections,
+      50
+    );
+  }
+);
+
+faqSearch?.addEventListener(
+  "input",
+  () => {
+    window.setTimeout(
+      updateFaqGridSections,
+      50
+    );
+  }
+);
+
+categoryButtons.forEach(
+  button => {
+    button.addEventListener(
+      "click",
+      () => {
+        window.setTimeout(
+          updateFaqGridSections,
+          50
+        );
+      }
+    );
+  }
+);
+
+const savedFaqView =
+  localStorage.getItem(
+    FAQ_VIEW_KEY
+  );
+
+if (savedFaqView === "grid") {
+  setFaqView("grid");
+} else {
+  setFaqView("list");
+}
   filterFaq();
 })();

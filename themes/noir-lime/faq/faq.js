@@ -18,7 +18,8 @@
   let nextLayer = layerB;
   let currentIndex = 0;
 
-  currentLayer.style.backgroundImage = `url("${backgrounds[0]}")`;
+  currentLayer.style.backgroundImage =
+    `url("${backgrounds[0]}")`;
 
   backgrounds.slice(1).forEach(src => {
     const image = new Image();
@@ -26,7 +27,8 @@
   });
 
   function changeBackground() {
-    currentIndex = (currentIndex + 1) % backgrounds.length;
+    currentIndex =
+      (currentIndex + 1) % backgrounds.length;
 
     nextLayer.style.backgroundImage =
       `url("${backgrounds[currentIndex]}")`;
@@ -41,39 +43,50 @@
 
   setInterval(changeBackground, 14000);
 
-  const searchInput = document.getElementById("faq-search");
+  const searchInput =
+    document.getElementById("faq-search");
 
   const faqItems = Array.from(
     document.querySelectorAll("#faq-list details")
   );
 
-  const faqCount = document.getElementById("faq-count");
-  const noResults = document.getElementById("no-results");
+  const faqCount =
+    document.getElementById("faq-count");
+
+  const noResults =
+    document.getElementById("no-results");
 
   const categoryButtons = Array.from(
     document.querySelectorAll(".faq-category")
   );
 
-  const openAllButton = document.getElementById("open-all");
-  const closeAllButton = document.getElementById("close-all");
+  const openAllButton =
+    document.getElementById("open-all");
+
+  const closeAllButton =
+    document.getElementById("close-all");
 
   let activeCategory = "all";
 
-  function updateCount(visibleCount = faqItems.length) {
+  function updateCount(
+    visibleCount = faqItems.length
+  ) {
     faqCount.textContent =
       `Показано: ${visibleCount} із ${faqItems.length}`;
   }
 
   function filterFaq() {
-    const query = searchInput.value
-      .trim()
-      .toLowerCase();
+    const query =
+      searchInput.value.trim().toLowerCase();
 
     let visibleCount = 0;
 
     faqItems.forEach((item, index) => {
-      const text = item.textContent.toLowerCase();
-      const category = item.dataset.category;
+      const text =
+        item.textContent.toLowerCase();
+
+      const category =
+        item.dataset.category;
 
       const matchesSearch =
         !query || text.includes(query);
@@ -83,7 +96,8 @@
         category === activeCategory;
 
       const shouldShow =
-        matchesSearch && matchesCategory;
+        matchesSearch &&
+        matchesCategory;
 
       if (shouldShow) {
         visibleCount++;
@@ -91,22 +105,36 @@
         if (item.style.display === "none") {
           item.style.display = "";
 
-          item.classList.remove("is-filtering-out");
-          item.classList.remove("is-filtering-in");
+          item.classList.remove(
+            "is-filtering-out"
+          );
+
+          item.classList.remove(
+            "is-filtering-in"
+          );
 
           requestAnimationFrame(() => {
             item.style.animationDelay =
               `${Math.min(index * 18, 150)}ms`;
 
-            item.classList.add("is-filtering-in");
+            item.classList.add(
+              "is-filtering-in"
+            );
           });
         }
       } else {
-        if (item.style.display !== "none") {
+        if (
+          item.style.display !== "none"
+        ) {
           item.open = false;
 
-          item.classList.remove("is-filtering-in");
-          item.classList.add("is-filtering-out");
+          item.classList.remove(
+            "is-filtering-in"
+          );
+
+          item.classList.add(
+            "is-filtering-out"
+          );
 
           window.setTimeout(() => {
             if (
@@ -114,8 +142,12 @@
                 "is-filtering-out"
               )
             ) {
-              item.style.display = "none";
-              item.classList.remove("is-filtering-out");
+              item.style.display =
+                "none";
+
+              item.classList.remove(
+                "is-filtering-out"
+              );
             }
           }, 240);
         }
@@ -131,88 +163,153 @@
   }
 
   categoryButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      activeCategory = button.dataset.filter;
+    button.addEventListener(
+      "click",
+      () => {
+        activeCategory =
+          button.dataset.filter;
 
-      categoryButtons.forEach(item => {
-        item.classList.toggle(
-          "active",
-          item === button
+        categoryButtons.forEach(
+          item => {
+            item.classList.toggle(
+              "active",
+              item === button
+            );
+          }
         );
-      });
 
-      filterFaq();
-    });
-  });
-
-  openAllButton.addEventListener("click", () => {
-    faqItems.forEach(item => {
-      if (item.style.display !== "none") {
-        item.open = true;
+        filterFaq();
       }
-    });
+    );
   });
 
-  closeAllButton.addEventListener("click", () => {
-    faqItems.forEach(item => {
-      item.open = false;
-    });
-  });
+  openAllButton.addEventListener(
+    "click",
+    () => {
+      faqItems.forEach(item => {
+        if (
+          item.style.display !==
+          "none"
+        ) {
+          item.open = true;
+        }
+      });
+    }
+  );
 
-  searchInput.addEventListener("input", filterFaq);
+  closeAllButton.addEventListener(
+    "click",
+    () => {
+      faqItems.forEach(item => {
+        item.open = false;
+      });
+    }
+  );
+
+  searchInput.addEventListener(
+    "input",
+    filterFaq
+  );
 
   faqItems.forEach(item => {
-    item.addEventListener("pointermove", event => {
-      const rect = item.getBoundingClientRect();
+    item.addEventListener(
+      "pointermove",
+      event => {
+        const rect =
+          item.getBoundingClientRect();
 
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+        const x =
+          event.clientX - rect.left;
 
-      item.style.setProperty("--spot-x", `${x}px`);
-      item.style.setProperty("--spot-y", `${y}px`);
-    });
+        const y =
+          event.clientY - rect.top;
 
-    item.addEventListener("pointerenter", () => {
-      item.classList.add("is-hovered");
-    });
+        item.style.setProperty(
+          "--spot-x",
+          `${x}px`
+        );
 
-    item.addEventListener("pointerleave", () => {
-      item.classList.remove("is-hovered");
-    });
+        item.style.setProperty(
+          "--spot-y",
+          `${y}px`
+        );
+      }
+    );
 
-    item.addEventListener("toggle", () => {
-      item.classList.toggle("is-open", item.open);
-    });
+    item.addEventListener(
+      "pointerenter",
+      () => {
+        item.classList.add(
+          "is-hovered"
+        );
+      }
+    );
+
+    item.addEventListener(
+      "pointerleave",
+      () => {
+        item.classList.remove(
+          "is-hovered"
+        );
+      }
+    );
+
+    item.addEventListener(
+      "toggle",
+      () => {
+        item.classList.toggle(
+          "is-open",
+          item.open
+        );
+      }
+    );
   });
 
-  const hero = document.querySelector(".hero");
+  const hero =
+    document.querySelector(".hero");
 
   if (hero) {
-    hero.addEventListener("pointermove", event => {
-      const rect = hero.getBoundingClientRect();
+    hero.addEventListener(
+      "pointermove",
+      event => {
+        const rect =
+          hero.getBoundingClientRect();
 
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+        const x =
+          event.clientX - rect.left;
 
-      hero.style.setProperty("--hero-x", `${x}px`);
-      hero.style.setProperty("--hero-y", `${y}px`);
+        const y =
+          event.clientY - rect.top;
 
-      const orbitX =
-        (x / rect.width - 0.5) * 28;
+        hero.style.setProperty(
+          "--hero-x",
+          `${x}px`
+        );
 
-      const orbitY =
-        (y / rect.height - 0.5) * 28;
+        hero.style.setProperty(
+          "--hero-y",
+          `${y}px`
+        );
 
-      hero.style.setProperty(
-        "--orbit-x",
-        `${orbitX}px`
-      );
+        const orbitX =
+          (x / rect.width - 0.5) *
+          28;
 
-      hero.style.setProperty(
-        "--orbit-y",
-        `${orbitY}px`
-      );
-    });
+        const orbitY =
+          (y / rect.height - 0.5) *
+          28;
+
+        hero.style.setProperty(
+          "--orbit-x",
+          `${orbitX}px`
+        );
+
+        hero.style.setProperty(
+          "--orbit-y",
+          `${orbitY}px`
+        );
+      }
+    );
   }
 
   filterFaq();

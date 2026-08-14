@@ -803,7 +803,16 @@ body {
   position: relative;
   margin: 0;
   min-height: 100vh;
-  padding-top: 72px !important;
+  overflow-x: hidden;
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background:
+    linear-gradient(
+      180deg,
+      #ecefe8 0%,
+      var(--page-bg) 220px,
+      var(--page-bg-soft) 100%
+    );
 }
 
 .mobile-menu-button,
@@ -911,6 +920,7 @@ body {
   top: 94px;
   left: 18px;
   right: 18px;
+  bottom: auto;
   height: calc(100% - 112px);
   z-index: 2;
   pointer-events: none;
@@ -1030,7 +1040,8 @@ footer {
     top: 82px;
     left: 8px;
     right: 8px;
-    bottom: 10px;
+    bottom: auto;
+    height: calc(100% - 92px);
   }
 
   .terms-frame__top-left,

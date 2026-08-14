@@ -261,6 +261,18 @@
           "is-open",
           item.open
         );
+    
+        const answer =
+          item.querySelector(":scope > p");
+    
+        if (!answer) return;
+    
+        if (item.open) {
+          answer.style.maxHeight =
+            `${answer.scrollHeight}px`;
+        } else {
+          answer.style.maxHeight = "0px";
+        }
       }
     );
   });

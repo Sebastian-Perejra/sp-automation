@@ -268,6 +268,15 @@
         if (!answer) return;
     
         if (item.open) {
+          faqItems.forEach(otherItem => {
+            if (
+              otherItem !== item &&
+              otherItem.open
+            ) {
+              otherItem.open = false;
+            }
+          });
+    
           answer.style.maxHeight =
             `${answer.scrollHeight}px`;
         } else {

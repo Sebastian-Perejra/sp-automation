@@ -1083,3 +1083,92 @@ body {
     font-size: 12px;
   }
 }
+
+footer {
+  position: relative;
+  z-index: 2;
+  height: 74px !important;
+  min-height: 74px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: #080a09;
+  color: #ffffff;
+}
+
+.footer-ticker {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  color: #ffffff;
+}
+
+.footer-ticker-text {
+  display: inline-block;
+  padding-left: 100%;
+  white-space: nowrap;
+  animation: footerTicker 40s linear infinite;
+}
+
+.footer-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  color: #ffffff;
+}
+
+.footer-copy a,
+.footer-copy a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-copy a:hover {
+  text-decoration: underline;
+}
+
+@keyframes footerTicker {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 760px) {
+  .footer-ticker {
+    padding: 13px 0;
+  }
+
+  .footer-ticker-text {
+    font-size: 10px;
+    animation-duration: 34s;
+  }
+
+  .footer-copy {
+    padding:
+      15px
+      14px
+      calc(17px + env(safe-area-inset-bottom));
+    font-size: 9px;
+  }
+}

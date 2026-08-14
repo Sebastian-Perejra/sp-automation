@@ -64,14 +64,23 @@ body::after {
 
 .faq-bg {
   position: fixed;
-  inset: -24px;
+  inset: -36px;
   z-index: -1;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
-  transform: scale(1.035);
+
+  transform:
+    translate3d(
+      var(--faq-bg-x, 0px),
+      var(--faq-bg-y, 0px),
+      0
+    )
+    scale(1.055);
+
   transition: opacity 2.2s ease;
+  will-change: transform, opacity;
   pointer-events: none;
 }
 

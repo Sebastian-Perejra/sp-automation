@@ -666,3 +666,117 @@ footer {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
+
+details {
+  --spot-x: 50%;
+  --spot-y: 50%;
+}
+
+details::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      260px circle at var(--spot-x) var(--spot-y),
+      rgba(137, 219, 95, 0.13),
+      rgba(137, 219, 95, 0.045) 36%,
+      transparent 68%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+details.is-hovered::after {
+  opacity: 1;
+}
+
+details summary,
+details p {
+  position: relative;
+  z-index: 1;
+}
+
+details.is-hovered {
+  transform: translateY(-2px);
+}
+
+details.is-open {
+  transform: translateY(-1px);
+}
+
+details.is-open::after {
+  opacity: 0.55;
+}
+
+.hero {
+  --hero-x: 50%;
+  --hero-y: 50%;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      380px circle at var(--hero-x) var(--hero-y),
+      rgba(145, 225, 103, 0.16),
+      rgba(145, 225, 103, 0.055) 38%,
+      transparent 70%
+    );
+  filter: none;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+summary::after {
+  transition:
+    transform 0.24s ease,
+    background 0.24s ease,
+    color 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+details:hover summary::after {
+  transform: translateY(-50%) scale(1.08);
+}
+
+details[open] summary::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+details[open]:hover summary::after {
+  transform: translateY(-50%) rotate(180deg) scale(1.08);
+}
+
+@media (hover: none) {
+  details::after {
+    display: none;
+  }
+
+  details.is-hovered {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details,
+  details::after,
+  summary::after {
+    transition: none;
+  }
+}

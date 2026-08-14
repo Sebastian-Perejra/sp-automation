@@ -268,15 +268,6 @@
         if (!answer) return;
     
         if (item.open) {
-          faqItems.forEach(otherItem => {
-            if (
-              otherItem !== item &&
-              otherItem.open
-            ) {
-              otherItem.open = false;
-            }
-          });
-    
           answer.style.maxHeight =
             `${answer.scrollHeight}px`;
         } else {
@@ -285,6 +276,41 @@
       }
     );
   });
+
+  openAllButton.addEventListener(
+  "click",
+  () => {
+    faqItems.forEach(item => {
+      if (item.style.display !== "none") {
+        item.open = true;
+
+        const answer =
+          item.querySelector(":scope > p");
+
+        if (answer) {
+          answer.style.maxHeight =
+            `${answer.scrollHeight}px`;
+        }
+      }
+    });
+  }
+);
+
+  closeAllButton.addEventListener(
+  "click",
+  () => {
+    faqItems.forEach(item => {
+      item.open = false;
+
+      const answer =
+        item.querySelector(":scope > p");
+
+      if (answer) {
+        answer.style.maxHeight = "0px";
+      }
+    });
+  }
+);
 
   const hero =
     document.querySelector(".hero");

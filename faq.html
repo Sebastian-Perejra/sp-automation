@@ -810,35 +810,85 @@ footer a:hover {
     }
 
     function filterFaq() {
-      const query = searchInput.value
-        .trim()
-        .toLowerCase();
+  const query = searchInput.value
+    .trim()
+    .toLowerCase();
 
-      let visibleCount = 0;
+  let visibleCount = 0;
 
-      faqItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const category = item.dataset.category;
-        const matchesSearch = !query || text.includes(query);
-        const matchesCategory =
-          activeCategory === 'all' || category === activeCategory;
-        const isVisible = matchesSearch && matchesCategory;
+  faqItems.forEach((item, index) => {
+    const text = item.textContent.toLowerCase();
+    const category = item.dataset.category;
 
-        item.style.display = isVisible ? '' : 'none';
+    const matchesSearch =
+      !query || text.includes(query);
 
-        if (isVisible) {
-          visibleCount++;
-        } else {
-          item.open = false;
-        }
-      });
+    const matchesCategory =
+      activeCategory === 'all' ||
+      category === activeCategory;
 
-      noResults.style.display =
-        visibleCount === 0 ? 'block' : 'none';
+    const shouldShow =
+      matchesSearch && matchesCategory;
 
-      updateCount(visibleCount);
+    if (shouldShow) {
+      visibleCount++;
+
+      if (item.style.display === 'none') {
+        item.style.display = '';
+
+        item.classList.remove(
+          'is-filtering-out'
+        );
+
+        item.classList.remove(
+          'is-filtering-in'
+        );
+
+        requestAnimationFrame(() => {
+          item.style.animationDelay =
+            `${Math.min(index * 18, 150)}ms`;
+
+          item.classList.add(
+            'is-filtering-in'
+          );
+        });
+      }
+    } else {
+      if (item.style.display !== 'none') {
+        item.open = false;
+
+        item.classList.remove(
+          'is-filtering-in'
+        );
+
+        item.classList.add(
+          'is-filtering-out'
+        );
+
+        window.setTimeout(() => {
+          if (
+            item.classList.contains(
+              'is-filtering-out'
+            )
+          ) {
+            item.style.display = 'none';
+
+            item.classList.remove(
+              'is-filtering-out'
+            );
+          }
+        }, 240);
+      }
     }
+  });
 
+  noResults.style.display =
+    visibleCount === 0
+      ? 'block'
+      : 'none';
+
+  updateCount(visibleCount);
+}
     categoryButtons.forEach(button => {
       button.addEventListener('click', () => {
         activeCategory = button.dataset.filter;

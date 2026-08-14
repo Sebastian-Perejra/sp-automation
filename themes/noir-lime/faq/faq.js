@@ -183,29 +183,6 @@
     );
   });
 
-  openAllButton.addEventListener(
-    "click",
-    () => {
-      faqItems.forEach(item => {
-        if (
-          item.style.display !==
-          "none"
-        ) {
-          item.open = true;
-        }
-      });
-    }
-  );
-
-  closeAllButton.addEventListener(
-    "click",
-    () => {
-      faqItems.forEach(item => {
-        item.open = false;
-      });
-    }
-  );
-
   searchInput.addEventListener(
     "input",
     filterFaq

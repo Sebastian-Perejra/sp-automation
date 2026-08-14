@@ -25,24 +25,68 @@
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index.html">← На головну</a>
-      <nav class="desktop-nav">
-        <a href="about.html">Про мене</a>
-        <a href="services.html">Послуги</a>
-        <a href="pricing.html">Цінова політика</a>
-        <a href="solutions.html">Рішення</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contacts.html">Контакти</a>
-      </nav>
-      <div class="lang-switcher">
-        <button onclick="location.href='terms.html'">UA</button>
-        <button onclick="location.href='terms-en.html'">EN</button>
-        <button onclick="location.href='terms-ru.html'">RU</button>
-      </div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home-link" href="index.html">← На головну</a>
+
+    <button
+      class="mobile-menu-button"
+      type="button"
+      aria-label="Відкрити меню"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="desktop-nav">
+      <a href="about.html">Про мене</a>
+      <a href="services.html">Послуги</a>
+      <a href="pricing.html">Цінова політика</a>
+      <a href="solutions.html">Рішення</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакти</a>
+    </nav>
+
+    <div class="lang-switcher">
+      <button
+        type="button"
+        class="active"
+        onclick="location.href='terms.html'"
+      >
+        UA
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='terms-en.html'"
+      >
+        EN
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='terms-ru.html'"
+      >
+        RU
+      </button>
     </div>
-  </header>
+  </div>
+</header>
+
+<div class="mobile-menu">
+  <nav class="mobile-menu-nav">
+    <a href="index.html">Головна</a>
+    <a href="about.html">Про мене</a>
+    <a href="services.html">Послуги</a>
+    <a href="pricing.html">Цінова політика</a>
+    <a href="solutions.html">Рішення</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contacts.html">Контакти</a>
+    <a href="terms.html" class="active">Умови використання</a>
+  </nav>
+</div>
 
   <main class="page">
     <section class="hero">

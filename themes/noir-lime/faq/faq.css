@@ -420,3 +420,249 @@ footer {
     transition: none;
   }
 }
+
+.topbar {
+  background: rgba(250, 252, 249, 0.78);
+  border-bottom: 1px solid rgba(71, 104, 77, 0.14);
+  box-shadow: 0 8px 30px rgba(30, 52, 35, 0.05);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.home-link {
+  color: #4b7d43;
+}
+
+.home-link:hover {
+  color: #345f30;
+}
+
+.desktop-nav a {
+  color: rgba(38, 53, 42, 0.72);
+}
+
+.desktop-nav a:hover {
+  color: #4b7d43;
+}
+
+.desktop-nav a::after {
+  background: #7fd957;
+  box-shadow: 0 0 12px rgba(127, 217, 87, 0.2);
+}
+
+.lang-switcher button {
+  border: 1px solid rgba(80, 110, 85, 0.18);
+  background: rgba(255, 255, 255, 0.68);
+  color: #536057;
+}
+
+.lang-switcher button:hover {
+  border-color: #7fd957;
+  background: #7fd957;
+  color: #173016;
+}
+
+.hero {
+  border: 1px solid rgba(89, 124, 94, 0.16);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(246, 250, 245, 0.58)
+    );
+  box-shadow:
+    0 24px 70px rgba(52, 74, 57, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.hero::before {
+  background: rgba(142, 221, 98, 0.16);
+}
+
+.hero::after {
+  background: rgba(122, 203, 167, 0.12);
+}
+
+h1 {
+  color: #253629;
+  text-shadow: none;
+}
+
+.hero p {
+  color: rgba(45, 61, 49, 0.66);
+}
+
+.faq-tools {
+  border: 1px solid rgba(89, 124, 94, 0.15);
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow:
+    0 16px 50px rgba(45, 66, 50, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.faq-search {
+  border: 1px solid rgba(81, 112, 86, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  color: #243429;
+}
+
+.faq-search::placeholder {
+  color: rgba(52, 68, 57, 0.42);
+}
+
+.faq-search:hover {
+  border-color: rgba(110, 176, 84, 0.42);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.faq-search:focus {
+  border-color: #7fd957;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(127, 217, 87, 0.11),
+    0 8px 24px rgba(60, 95, 65, 0.08);
+}
+
+.tool-button {
+  border-color: rgba(100, 157, 78, 0.36);
+  background: rgba(255, 255, 255, 0.7);
+  color: #4f843d;
+}
+
+.tool-button:hover {
+  border-color: #7fd957;
+  background: #7fd957;
+  color: #183216;
+  box-shadow: 0 8px 22px rgba(127, 217, 87, 0.2);
+}
+
+.faq-count {
+  color: rgba(63, 78, 67, 0.48);
+}
+
+.faq-category {
+  border: 1px solid rgba(77, 107, 82, 0.16);
+  background: rgba(255, 255, 255, 0.66);
+  color: rgba(43, 58, 47, 0.66);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.faq-category:hover {
+  border-color: rgba(110, 176, 84, 0.55);
+  color: #4d7c3d;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 8px 20px rgba(54, 85, 58, 0.07);
+}
+
+.faq-category.active {
+  border-color: #8be35d;
+  background: #a8ef76;
+  color: #20381d;
+  box-shadow:
+    0 8px 22px rgba(127, 217, 87, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+details {
+  border: 1px solid rgba(84, 115, 89, 0.15);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.76),
+      rgba(247, 250, 246, 0.63)
+    );
+  box-shadow:
+    0 10px 30px rgba(49, 70, 54, 0.075),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+details::before {
+  background: #8be35d;
+  box-shadow: 0 0 16px rgba(127, 217, 87, 0.32);
+}
+
+details:hover {
+  border-color: rgba(113, 174, 91, 0.38);
+  box-shadow:
+    0 14px 38px rgba(49, 70, 54, 0.11),
+    0 0 20px rgba(127, 217, 87, 0.04);
+}
+
+details[open] {
+  border-color: rgba(113, 174, 91, 0.42);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(241, 248, 238, 0.82)
+    );
+  box-shadow:
+    0 16px 42px rgba(49, 70, 54, 0.12),
+    0 0 24px rgba(127, 217, 87, 0.05);
+}
+
+summary {
+  color: #2d3c31;
+}
+
+summary:hover {
+  color: #1f3023;
+}
+
+summary::after {
+  border: 1px solid rgba(104, 162, 81, 0.28);
+  background: rgba(139, 227, 93, 0.1);
+  color: #5d9c44;
+}
+
+details[open] summary::after {
+  border-color: #8be35d;
+  background: #9bea69;
+  color: #21371d;
+  box-shadow: 0 6px 18px rgba(127, 217, 87, 0.18);
+}
+
+details p {
+  color: rgba(47, 63, 51, 0.7);
+}
+
+details a {
+  color: #4d873d;
+}
+
+details a:hover {
+  color: #315f2c;
+}
+
+.no-results {
+  border: 1px dashed rgba(97, 145, 80, 0.32);
+  background: rgba(255, 255, 255, 0.66);
+  color: rgba(49, 66, 54, 0.65);
+}
+
+.back-link {
+  border-color: rgba(102, 158, 82, 0.38);
+  background: rgba(255, 255, 255, 0.68);
+  color: #4f843d;
+}
+
+.back-link:hover {
+  border-color: #8be35d;
+  background: #9bea69;
+  color: #20371d;
+}
+
+footer {
+  border-top: 1px solid rgba(82, 111, 87, 0.13);
+  background: rgba(248, 251, 247, 0.76);
+  color: rgba(53, 69, 57, 0.52);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}

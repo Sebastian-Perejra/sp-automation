@@ -79,49 +79,6 @@ body::after {
   opacity: 1;
 }
 
-.topbar {
-  background: rgba(2, 7, 4, 0.68);
-  border-bottom: 1px solid rgba(177, 255, 142, 0.11);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-}
-
-.home-link {
-  color: var(--green);
-}
-
-.home-link:hover {
-  color: var(--green-hover);
-}
-
-.desktop-nav a {
-  color: rgba(238, 243, 239, 0.72);
-}
-
-.desktop-nav a:hover {
-  color: var(--green);
-}
-
-.desktop-nav a::after {
-  background: var(--green);
-  box-shadow: 0 0 14px rgba(167, 255, 106, 0.42);
-}
-
-.lang-switcher button {
-  border: 1px solid rgba(190, 255, 160, 0.17);
-  background: rgba(7, 15, 10, 0.7);
-  color: rgba(238, 243, 239, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.lang-switcher button:hover {
-  border-color: var(--green);
-  background: var(--green);
-  color: #061006;
-  box-shadow: 0 0 22px rgba(167, 255, 106, 0.18);
-}
-
 .page {
   width: min(100%, 1120px);
   padding-top: 66px;
@@ -419,47 +376,6 @@ footer {
   .home-link {
     transition: none;
   }
-}
-
-.topbar {
-  background: rgba(250, 252, 249, 0.78);
-  border-bottom: 1px solid rgba(71, 104, 77, 0.14);
-  box-shadow: 0 8px 30px rgba(30, 52, 35, 0.05);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-}
-
-.home-link {
-  color: #4b7d43;
-}
-
-.home-link:hover {
-  color: #345f30;
-}
-
-.desktop-nav a {
-  color: rgba(38, 53, 42, 0.72);
-}
-
-.desktop-nav a:hover {
-  color: #4b7d43;
-}
-
-.desktop-nav a::after {
-  background: #7fd957;
-  box-shadow: 0 0 12px rgba(127, 217, 87, 0.2);
-}
-
-.lang-switcher button {
-  border: 1px solid rgba(80, 110, 85, 0.18);
-  background: rgba(255, 255, 255, 0.68);
-  color: #536057;
-}
-
-.lang-switcher button:hover {
-  border-color: #7fd957;
-  background: #7fd957;
-  color: #173016;
 }
 
 .hero {
@@ -1171,23 +1087,4 @@ body {
   .home-link {
     font-size: 12px;
   }
-}
-
-.desktop-nav a.active {
-  padding: 9px 14px;
-  border-radius: 999px;
-  background: rgba(79, 124, 93, 0.78);
-  color: #ffffff;
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.desktop-nav a.active::after {
-  display: none;
-}
-
-.desktop-nav a.active:hover {
-  color: #ffffff;
-  background: rgba(92, 143, 108, 0.88);
 }

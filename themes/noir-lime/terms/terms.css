@@ -472,26 +472,72 @@ body {
   box-shadow: 0 6px 16px rgba(43, 87, 56, 0.14);
 }
 footer {
-  padding:
-    38px
-    20px
-    max(38px, env(safe-area-inset-bottom));
+  position: relative;
+  height: 74px !important;
+  min-height: 74px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
-  background: #101914;
-  color: #86948b;
+  background: #080a09;
+  color: #ffffff;
+}
+
+.footer-ticker {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Roboto Mono", monospace;
   font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  color: #ffffff;
+}
+
+.footer-ticker-text {
+  display: inline-block;
+  padding-left: 100%;
+  white-space: nowrap;
+  animation: footerTicker 40s linear infinite;
+}
+
+.footer-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
   text-align: center;
+  color: #ffffff;
 }
 
-footer a {
-  margin-left: 8px;
-  color: #bfcdc3;
+.footer-copy a,
+.footer-copy a:visited {
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.2s ease;
 }
 
-footer a:hover {
-  color: #a7df93;
+.footer-copy a:hover {
+  text-decoration: underline;
+}
+
+@keyframes footerTicker {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 @media (max-width: 760px) {

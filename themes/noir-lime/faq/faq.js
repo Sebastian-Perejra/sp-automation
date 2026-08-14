@@ -41,9 +41,125 @@
 
   setInterval(changeBackground, 14000);
 
+  const searchInput = document.getElementById("faq-search");
+
   const faqItems = Array.from(
     document.querySelectorAll("#faq-list details")
   );
+
+  const faqCount = document.getElementById("faq-count");
+  const noResults = document.getElementById("no-results");
+
+  const categoryButtons = Array.from(
+    document.querySelectorAll(".faq-category")
+  );
+
+  const openAllButton = document.getElementById("open-all");
+  const closeAllButton = document.getElementById("close-all");
+
+  let activeCategory = "all";
+
+  function updateCount(visibleCount = faqItems.length) {
+    faqCount.textContent =
+      `Показано: ${visibleCount} із ${faqItems.length}`;
+  }
+
+  function filterFaq() {
+    const query = searchInput.value
+      .trim()
+      .toLowerCase();
+
+    let visibleCount = 0;
+
+    faqItems.forEach((item, index) => {
+      const text = item.textContent.toLowerCase();
+      const category = item.dataset.category;
+
+      const matchesSearch =
+        !query || text.includes(query);
+
+      const matchesCategory =
+        activeCategory === "all" ||
+        category === activeCategory;
+
+      const shouldShow =
+        matchesSearch && matchesCategory;
+
+      if (shouldShow) {
+        visibleCount++;
+
+        if (item.style.display === "none") {
+          item.style.display = "";
+
+          item.classList.remove("is-filtering-out");
+          item.classList.remove("is-filtering-in");
+
+          requestAnimationFrame(() => {
+            item.style.animationDelay =
+              `${Math.min(index * 18, 150)}ms`;
+
+            item.classList.add("is-filtering-in");
+          });
+        }
+      } else {
+        if (item.style.display !== "none") {
+          item.open = false;
+
+          item.classList.remove("is-filtering-in");
+          item.classList.add("is-filtering-out");
+
+          window.setTimeout(() => {
+            if (
+              item.classList.contains(
+                "is-filtering-out"
+              )
+            ) {
+              item.style.display = "none";
+              item.classList.remove("is-filtering-out");
+            }
+          }, 240);
+        }
+      }
+    });
+
+    noResults.style.display =
+      visibleCount === 0
+        ? "block"
+        : "none";
+
+    updateCount(visibleCount);
+  }
+
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.filter;
+
+      categoryButtons.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item === button
+        );
+      });
+
+      filterFaq();
+    });
+  });
+
+  openAllButton.addEventListener("click", () => {
+    faqItems.forEach(item => {
+      if (item.style.display !== "none") {
+        item.open = true;
+      }
+    });
+  });
+
+  closeAllButton.addEventListener("click", () => {
+    faqItems.forEach(item => {
+      item.open = false;
+    });
+  });
+
+  searchInput.addEventListener("input", filterFaq);
 
   faqItems.forEach(item => {
     item.addEventListener("pointermove", event => {
@@ -80,11 +196,24 @@
 
       hero.style.setProperty("--hero-x", `${x}px`);
       hero.style.setProperty("--hero-y", `${y}px`);
-      const orbitX = (x / rect.width - 0.5) * 28;
-const orbitY = (y / rect.height - 0.5) * 28;
 
-hero.style.setProperty("--orbit-x", `${orbitX}px`);
-hero.style.setProperty("--orbit-y", `${orbitY}px`);
+      const orbitX =
+        (x / rect.width - 0.5) * 28;
+
+      const orbitY =
+        (y / rect.height - 0.5) * 28;
+
+      hero.style.setProperty(
+        "--orbit-x",
+        `${orbitX}px`
+      );
+
+      hero.style.setProperty(
+        "--orbit-y",
+        `${orbitY}px`
+      );
     });
   }
+
+  filterFaq();
 })();

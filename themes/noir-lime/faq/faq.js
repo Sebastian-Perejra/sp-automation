@@ -69,11 +69,14 @@
   let activeCategory = "all";
 
   function updateCount(
-    visibleCount = faqItems.length
-  ) {
-    faqCount.textContent =
-      `Показано: ${visibleCount} із ${faqItems.length}`;
-  }
+  visibleCount = faqItems.length
+) {
+  faqCount.textContent =
+    faqText.count(
+      visibleCount,
+      faqItems.length
+    );
+}
 
   function filterFaq() {
     const query =
@@ -465,7 +468,7 @@ if (
           );
 
         faqContactError.textContent =
-          `Повторне повідомлення можна надіслати через ${seconds} сек.`;
+          faqText.repeat(seconds);
 
         return;
       }
@@ -477,7 +480,7 @@ if (
 
       if (!turnstileToken) {
         faqContactError.textContent =
-          "Підтвердіть, що ви не робот.";
+          faqText.robot;
 
         return;
       }
@@ -509,7 +512,7 @@ if (
 
       faqContactSubmit.disabled = true;
       faqContactSubmit.textContent =
-        "Надсилання...";
+        faqText.sending;
 
       try {
         await emailjs.sendForm(
@@ -547,7 +550,7 @@ if (
         );
 
         alert(
-          "Повідомлення успішно надіслано!"
+          faqText.success
         );
 
         faqContactForm.reset();
@@ -565,14 +568,14 @@ if (
         );
 
         faqContactError.textContent =
-          "Помилка надсилання. Спробуйте ще раз.";
+          faqText.error;
 
       } finally {
         faqContactSubmit.disabled =
           false;
 
         faqContactSubmit.textContent =
-          "Надіслати";
+          faqText.send;
       }
     }
   );
@@ -661,17 +664,122 @@ const originalFaqItems =
     )
   );
 
-const faqGroupNames = {
-  start: "Початок роботи",
-  price: "Вартість",
-  tech: "Технології",
-  integration: "Інтеграції",
-  web: "Web / Mobile",
-  security: "Безпека",
-  handoff: "Передача рішення",
-  support: "Підтримка",
-  other: "Інше"
+const faqLanguage =
+  document.documentElement.lang || "uk";
+
+const faqTexts = {
+  uk: {
+    count: (visible, total) =>
+      `Показано: ${visible} із ${total}`,
+
+    groups: {
+      start: "Початок роботи",
+      price: "Вартість",
+      tech: "Технології",
+      integration: "Інтеграції",
+      web: "Web / Mobile",
+      security: "Безпека",
+      handoff: "Передача рішення",
+      support: "Підтримка",
+      other: "Інше"
+    },
+
+    repeat: seconds =>
+      `Повторне повідомлення можна надіслати через ${seconds} сек.`,
+
+    robot:
+      "Підтвердіть, що ви не робот.",
+
+    sending:
+      "Надсилання...",
+
+    success:
+      "Повідомлення успішно надіслано!",
+
+    error:
+      "Помилка надсилання. Спробуйте ще раз.",
+
+    send:
+      "Надіслати"
+  },
+
+  ru: {
+    count: (visible, total) =>
+      `Показано: ${visible} из ${total}`,
+
+    groups: {
+      start: "Начало работы",
+      price: "Стоимость",
+      tech: "Технологии",
+      integration: "Интеграции",
+      web: "Web / Mobile",
+      security: "Безопасность",
+      handoff: "Передача решения",
+      support: "Поддержка",
+      other: "Другое"
+    },
+
+    repeat: seconds =>
+      `Повторное сообщение можно отправить через ${seconds} сек.`,
+
+    robot:
+      "Подтвердите, что вы не робот.",
+
+    sending:
+      "Отправка...",
+
+    success:
+      "Сообщение успешно отправлено!",
+
+    error:
+      "Ошибка отправки. Попробуйте ещё раз.",
+
+    send:
+      "Отправить"
+  },
+
+  en: {
+    count: (visible, total) =>
+      `Shown: ${visible} of ${total}`,
+
+    groups: {
+      start: "Getting started",
+      price: "Pricing",
+      tech: "Technologies",
+      integration: "Integrations",
+      web: "Web / Mobile",
+      security: "Security",
+      handoff: "Handoff",
+      support: "Support",
+      other: "Other"
+    },
+
+    repeat: seconds =>
+      `You can send another message in ${seconds} sec.`,
+
+    robot:
+      "Please confirm that you are not a robot.",
+
+    sending:
+      "Sending...",
+
+    success:
+      "Message sent successfully!",
+
+    error:
+      "Sending failed. Please try again.",
+
+    send:
+      "Send"
+  }
 };
+
+const faqText =
+  faqTexts[faqLanguage] ||
+  faqTexts.uk;
+
+const faqGroupNames =
+  faqText.groups;
 
 function buildFaqGrid() {
   faqListElement.innerHTML = "";

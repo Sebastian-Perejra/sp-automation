@@ -26,14 +26,14 @@
 }
 
 html {
-  background: #020704;
+  background: #f7faf6;
 }
 
 body {
   position: relative;
   min-height: 100vh;
-  background: #020704;
-  color: var(--text-main);
+  background: transparent;
+  color: #263129;
   overflow-x: hidden;
 }
 
@@ -41,51 +41,31 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.14) 46%,
-      rgba(245, 249, 246, 0.3) 100%
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(248, 251, 247, 0.18) 100%
     );
   pointer-events: none;
 }
+.topbar,
+.page,
+footer {
+  position: relative;
+  z-index: 1;
+}
 
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(
-      circle at 50% 14%,
-      rgba(165, 255, 110, 0.13),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 18% 48%,
-      rgba(75, 190, 125, 0.08),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 86% 38%,
-      rgba(95, 170, 255, 0.055),
-      transparent 30%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(1, 6, 3, 0.08) 0%,
-      rgba(1, 6, 3, 0.18) 52%,
-      rgba(1, 6, 3, 0.64) 100%
-    );
-  pointer-events: none;
+  display: none;
 }
 
 .faq-bg {
   position: fixed;
   inset: -24px;
-  z-index: -4;
+  z-index: -1;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

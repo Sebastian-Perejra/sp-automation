@@ -965,3 +965,26 @@ details[open]:hover summary::after {
     transition: none;
   }
 }
+
+details > p {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition:
+    max-height 0.34s ease,
+    opacity 0.24s ease,
+    padding 0.28s ease;
+}
+
+details[open] > p {
+  opacity: 1;
+  padding-bottom: 22px;
+}
+
+@media (max-width: 760px) {
+  details[open] > p {
+    padding-bottom: 18px;
+  }
+}

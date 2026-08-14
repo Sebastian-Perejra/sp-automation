@@ -1056,11 +1056,6 @@ details[open] > p {
   transform: translateY(-1px);
 }
 
-.lang-switcher button.active {
-  border-color: rgba(184, 255, 53, 0.42);
-  color: #d9ff91;
-}
-
 body {
   padding-top: 72px;
 }

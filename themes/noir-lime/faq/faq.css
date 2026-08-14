@@ -45,13 +45,14 @@ body::before {
   background:
     linear-gradient(
       180deg,
-      rgba(2, 7, 4, 0.72) 0%,
-      rgba(2, 7, 4, 0.79) 38%,
-      rgba(2, 7, 4, 0.9) 100%
+      rgba(2, 7, 4, 0.28) 0%,
+      rgba(2, 7, 4, 0.46) 42%,
+      rgba(2, 7, 4, 0.72) 100%
     ),
     url("/themes/noir-lime/faq/assets/photo.png")
       center center / cover no-repeat;
   transform: scale(1.035);
+  filter: brightness(1.16) saturate(1.08);
   pointer-events: none;
 }
 
@@ -62,20 +63,25 @@ body::after {
   z-index: -2;
   background:
     radial-gradient(
-      circle at 12% 16%,
-      rgba(167, 255, 106, 0.09),
-      transparent 26%
+      circle at 50% 14%,
+      rgba(165, 255, 110, 0.13),
+      transparent 32%
     ),
     radial-gradient(
-      circle at 84% 32%,
-      rgba(115, 255, 169, 0.055),
-      transparent 28%
+      circle at 18% 48%,
+      rgba(75, 190, 125, 0.08),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 86% 38%,
+      rgba(95, 170, 255, 0.055),
+      transparent 30%
     ),
     linear-gradient(
       180deg,
-      transparent 0%,
-      rgba(2, 7, 4, 0.18) 48%,
-      rgba(2, 7, 4, 0.76) 100%
+      rgba(1, 6, 3, 0.08) 0%,
+      rgba(1, 6, 3, 0.18) 52%,
+      rgba(1, 6, 3, 0.64) 100%
     );
   pointer-events: none;
 }
@@ -136,11 +142,11 @@ body::after {
   border: 1px solid rgba(190, 255, 160, 0.14);
   border-radius: 30px;
   background:
-    linear-gradient(
-      135deg,
-      rgba(8, 18, 11, 0.88),
-      rgba(3, 10, 6, 0.72)
-    );
+  linear-gradient(
+    135deg,
+    rgba(17, 38, 22, 0.76),
+    rgba(5, 15, 9, 0.54)
+  );
   box-shadow:
     0 30px 90px rgba(0, 0, 0, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.025);
@@ -268,8 +274,8 @@ details {
   background:
     linear-gradient(
       135deg,
-      rgba(7, 16, 10, 0.82),
-      rgba(3, 10, 6, 0.76)
+      rgba(11, 25, 15, 0.74),
+      rgba(4, 13, 8, 0.62)
     );
   box-shadow:
     0 12px 38px rgba(0, 0, 0, 0.23),
@@ -304,8 +310,8 @@ details[open] {
   background:
     linear-gradient(
       135deg,
-      rgba(10, 23, 13, 0.92),
-      rgba(4, 12, 7, 0.86)
+      rgba(18, 39, 23, 0.88),
+      rgba(6, 17, 10, 0.78)
     );
   box-shadow:
     0 20px 58px rgba(0, 0, 0, 0.32),
@@ -386,13 +392,14 @@ footer {
     background:
       linear-gradient(
         180deg,
-        rgba(2, 7, 4, 0.76) 0%,
-        rgba(2, 7, 4, 0.83) 44%,
-        rgba(2, 7, 4, 0.93) 100%
+        rgba(2, 7, 4, 0.34) 0%,
+        rgba(2, 7, 4, 0.52) 48%,
+        rgba(2, 7, 4, 0.76) 100%
       ),
       url("/themes/noir-lime/faq/assets/photo.png")
         center center / cover no-repeat;
     transform: scale(1.025);
+    filter: brightness(1.12) saturate(1.06);
   }
 
   .page {

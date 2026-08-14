@@ -857,7 +857,7 @@ faqViewGrid?.addEventListener(
   }
 );
 
-faqSearch?.addEventListener(
+searchInput?.addEventListener(
   "input",
   () => {
     window.setTimeout(

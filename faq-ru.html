@@ -670,8 +670,8 @@ footer a:hover {
 <button class="tool-button" id="open-all" type="button">Развернуть все</button>
 <button class="tool-button" id="close-all" type="button">Свернуть все</button>
 </section>
-<div class="faq-count" id="faq-count"></div>
-<section aria-label="FAQ categories" class="faq-categories">
+
+<section aria-label="Категории FAQ" class="faq-categories">
 <button class="faq-category active" data-filter="all" type="button">ВСЕ</button>
 <button class="faq-category" data-filter="start" type="button">НАЧАЛО РАБОТЫ</button>
 <button class="faq-category" data-filter="price" type="button">СТОИМОСТЬ</button>
@@ -682,7 +682,7 @@ footer a:hover {
 <button class="faq-category" data-filter="handoff" type="button">ПЕРЕДАЧА</button>
 <button class="faq-category" data-filter="support" type="button">ПОДДЕРЖКА</button>
 <button class="faq-category" data-filter="other" type="button">ДРУГОЕ</button>
-</section>
+</section><div class="faq-viewbar"><div class="faq-count" id="faq-count"></div><div aria-label="Режим отображения FAQ" class="faq-view-switch"><button aria-label="Список" class="faq-view-button active" id="faq-view-list" title="Список" type="button">☰</button><button aria-label="Блоки" class="faq-view-button" id="faq-view-grid" title="Блоки" type="button">▦</button></div></div>
 <section class="faq-list" id="faq-list">
 <details data-category="start"><summary>1. Как быстро вы отвечаете?</summary><p>Обычно отвечаю в течение одного календарного дня, включая субботу и воскресенье.</p></details>
 <details data-category="start"><summary>2. С чего начинается работа над задачей?</summary><p>Сначала нужно кратко описать задачу, текущий процесс и желаемый результат. После этого я уточняю детали, оцениваю возможные варианты реализации и предлагаю следующие шаги.</p></details>
@@ -803,6 +803,18 @@ footer a:hover {
 <div class="footer-copy">© 2015–2026 Sebastian Automations. Все права защищены. <a href="terms-ru.html">Условия использования</a></div>
 </footer>
 <script>(() => {
+  const groupMap = {
+    "Початок роботи": "Начало работы",
+    "Вартість": "Стоимость",
+    "Технології": "Технологии",
+    "Інтеграції": "Интеграции",
+    "Web / Mobile": "Web / Mobile",
+    "Безпека": "Безопасность",
+    "Передача рішення": "Передача решения",
+    "Підтримка": "Поддержка",
+    "Інше": "Другое"
+  };
+
   const translateDynamicText = () => {
     const count = document.getElementById("faq-count");
 
@@ -816,6 +828,20 @@ footer a:hover {
           `Показано: ${match[1]} из ${match[2]}`;
       }
     }
+
+    document
+      .querySelectorAll(
+        ".faq-grid-section-heading h2"
+      )
+      .forEach(title => {
+        const text =
+          title.textContent.trim();
+
+        if (groupMap[text]) {
+          title.textContent =
+            groupMap[text];
+        }
+      });
 
     const error =
       document.getElementById(

@@ -805,6 +805,110 @@ footer a:hover {
       Нічого не знайдено. Спробуйте інше слово або коротший запит.
     </div>
 
+    <section class="faq-contact-cta">
+  <div class="faq-contact-cta-text">
+    <h2>Не знайшли відповіді?</h2>
+    <p>
+      Напишіть мені прямо звідси — коротко опишіть задачу, і я відповім особисто.
+    </p>
+  </div>
+
+  <button
+    id="faq-contact-open"
+    class="faq-contact-cta-button"
+    type="button"
+  >
+    Написати мені
+  </button>
+</section>
+
+<div
+  id="faq-contact-overlay"
+  class="faq-contact-overlay"
+  aria-hidden="true"
+></div>
+
+<div
+  id="faq-contact-modal"
+  class="faq-contact-modal"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="faq-contact-title"
+>
+  <button
+    id="faq-contact-close"
+    class="faq-contact-close"
+    type="button"
+    aria-label="Закрити"
+  >
+    ×
+  </button>
+
+  <div class="faq-contact-modal-inner">
+    <h2 id="faq-contact-title">
+      Написати мені
+    </h2>
+
+    <p class="faq-contact-subtitle">
+      Опишіть задачу кількома реченнями.
+    </p>
+
+    <form
+      id="faq-contact-form"
+      class="faq-contact-form"
+    >
+      <label for="faq-contact-name">
+        Ваше ім’я
+      </label>
+
+      <input
+        id="faq-contact-name"
+        name="user_name"
+        type="text"
+        maxlength="100"
+        autocomplete="name"
+        required
+      >
+
+      <label for="faq-contact-email">
+        Email
+      </label>
+
+      <input
+        id="faq-contact-email"
+        name="user_email"
+        type="email"
+        maxlength="160"
+        autocomplete="email"
+        required
+      >
+
+      <label for="faq-contact-message">
+        Повідомлення
+      </label>
+
+      <textarea
+        id="faq-contact-message"
+        name="message"
+        maxlength="5000"
+        required
+      ></textarea>
+
+      <div
+        id="faq-contact-error"
+        class="faq-contact-error"
+      ></div>
+
+      <button
+        class="faq-contact-submit"
+        type="submit"
+      >
+        Надіслати
+      </button>
+    </form>
+  </div>
+</div>
     <a class="back-link" href="index.html">← Назад на головну</a>
   </main>
 

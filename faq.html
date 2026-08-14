@@ -625,30 +625,51 @@ footer a:hover {
 <link rel="stylesheet" href="/themes/noir-lime/faq/faq.css">
 <script src="/themes/noir-lime/faq/faq.js" defer></script>
 
-<link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
+  <link rel="stylesheet" href="/assistant.css">
+  <script src="/assistant.js" defer></script>
+  <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
 </head>
 
 <body>
   <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index.html">← На головну</a>
+  <div class="topbar-inner">
+    <a class="home-link" href="index.html">
+      ← На головну
+    </a>
 
-      <nav class="desktop-nav">
-        <a href="about.html">Про мене</a>
-        <a href="services.html">Послуги</a>
-        <a href="pricing.html">Цінова політика</a>
-        <a href="solutions.html">Рішення</a>
-        <a href="contacts.html">Контакти</a>
-      </nav>
+    <nav class="desktop-nav">
+      <a href="about.html">Про мене</a>
+      <a href="services.html">Послуги</a>
+      <a href="pricing.html">Цінова політика</a>
+      <a href="solutions.html">Рішення</a>
+      <a href="contacts.html">Контакти</a>
+    </nav>
 
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='faq.html'">UA</button>
-        <button type="button" onclick="location.href='faq-en.html'">EN</button>
-        <button type="button" onclick="location.href='faq-ru.html'">RU</button>
-      </div>
+    <div class="lang-switcher">
+      <button
+        type="button"
+        class="active"
+        onclick="location.href='faq.html'"
+      >
+        UA
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='faq-en.html'"
+      >
+        EN
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='faq-ru.html'"
+      >
+        RU
+      </button>
     </div>
-  </header>
+  </div>
+</header>
 
   <main class="page">
     <section class="hero">

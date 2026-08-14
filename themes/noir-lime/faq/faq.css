@@ -80,7 +80,7 @@ body::after {
 }
 
 .page {
-  width: min(100%, 1120px);
+  width: min(100%, 1180px);
   padding-top: 66px;
 }
 
@@ -1170,5 +1170,22 @@ footer {
       14px
       calc(17px + env(safe-area-inset-bottom));
     font-size: 9px;
+  }
+}
+.page {
+  width: min(100%, 1180px);
+  padding:
+    66px
+    24px
+    max(104px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 760px) {
+  .page {
+    width: 100%;
+    padding:
+      28px
+      14px
+      max(56px, env(safe-area-inset-bottom));
   }
 }

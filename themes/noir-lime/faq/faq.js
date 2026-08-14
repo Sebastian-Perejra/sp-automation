@@ -335,6 +335,90 @@
       }
     );
   }
+  const faqContactOpen =
+  document.getElementById("faq-contact-open");
+
+const faqContactClose =
+  document.getElementById("faq-contact-close");
+
+const faqContactOverlay =
+  document.getElementById("faq-contact-overlay");
+
+const faqContactModal =
+  document.getElementById("faq-contact-modal");
+
+function openFaqContactModal() {
+  faqContactOverlay.classList.add("is-open");
+  faqContactModal.classList.add("is-open");
+
+  faqContactOverlay.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  faqContactModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "faq-modal-open"
+  );
+
+  window.setTimeout(() => {
+    document
+      .getElementById("faq-contact-name")
+      ?.focus();
+  }, 180);
+}
+
+function closeFaqContactModal() {
+  faqContactOverlay.classList.remove("is-open");
+  faqContactModal.classList.remove("is-open");
+
+  faqContactOverlay.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  faqContactModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "faq-modal-open"
+  );
+}
+
+faqContactOpen?.addEventListener(
+  "click",
+  openFaqContactModal
+);
+
+faqContactClose?.addEventListener(
+  "click",
+  closeFaqContactModal
+);
+
+faqContactOverlay?.addEventListener(
+  "click",
+  closeFaqContactModal
+);
+
+document.addEventListener(
+  "keydown",
+  event => {
+    if (
+      event.key === "Escape" &&
+      faqContactModal?.classList.contains(
+        "is-open"
+      )
+    ) {
+      closeFaqContactModal();
+    }
+  }
+);
 
   filterFaq();
 })();

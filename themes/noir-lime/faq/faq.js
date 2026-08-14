@@ -420,5 +420,163 @@ document.addEventListener(
   }
 );
 
+  const faqContactForm =
+  document.getElementById("faq-contact-form");
+
+const faqContactError =
+  document.getElementById("faq-contact-error");
+
+const faqContactSubmit =
+  faqContactForm?.querySelector(
+    ".faq-contact-submit"
+  );
+
+const TELEGRAM_WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec";
+
+if (
+  faqContactForm &&
+  faqContactError &&
+  faqContactSubmit
+) {
+  emailjs.init("sUAoOmiqx4fKn8TVo");
+
+  faqContactForm.addEventListener(
+    "submit",
+    async event => {
+      event.preventDefault();
+
+      const now = Date.now();
+
+      const lastSend =
+        Number(
+          localStorage.getItem(
+            "contactLastSend"
+          ) || 0
+        );
+
+      if (now - lastSend < 60000) {
+        const seconds =
+          Math.ceil(
+            (
+              60000 -
+              (now - lastSend)
+            ) / 1000
+          );
+
+        faqContactError.textContent =
+          `Повторне повідомлення можна надіслати через ${seconds} сек.`;
+
+        return;
+      }
+
+      const turnstileToken =
+        document.querySelector(
+          '#faq-contact-form [name="cf-turnstile-response"]'
+        )?.value || "";
+
+      if (!turnstileToken) {
+        faqContactError.textContent =
+          "Підтвердіть, що ви не робот.";
+
+        return;
+      }
+
+      const telegramData = {
+        user_name:
+          faqContactForm
+            .elements["user_name"]
+            .value
+            .trim(),
+
+        user_email:
+          faqContactForm
+            .elements["user_email"]
+            .value
+            .trim(),
+
+        message:
+          faqContactForm
+            .elements["message"]
+            .value
+            .trim(),
+
+        turnstileToken:
+          turnstileToken
+      };
+
+      faqContactError.textContent = "";
+
+      faqContactSubmit.disabled = true;
+      faqContactSubmit.textContent =
+        "Надсилання...";
+
+      try {
+        await emailjs.sendForm(
+          "service_hckw1kr",
+          "template_qz6v45s",
+          faqContactForm
+        );
+
+        fetch(
+          TELEGRAM_WEB_APP_URL,
+          {
+            method: "POST",
+            mode: "no-cors",
+
+            headers: {
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:
+              JSON.stringify(
+                telegramData
+              )
+          }
+        ).catch(error => {
+          console.error(
+            "Telegram notification error:",
+            error
+          );
+        });
+
+        localStorage.setItem(
+          "contactLastSend",
+          String(Date.now())
+        );
+
+        alert(
+          "Повідомлення успішно надіслано!"
+        );
+
+        faqContactForm.reset();
+
+        if (window.turnstile) {
+          window.turnstile.reset();
+        }
+
+        closeFaqContactModal();
+
+      } catch (error) {
+        console.error(
+          "EmailJS error:",
+          error
+        );
+
+        faqContactError.textContent =
+          "Помилка надсилання. Спробуйте ще раз.";
+
+      } finally {
+        faqContactSubmit.disabled =
+          false;
+
+        faqContactSubmit.textContent =
+          "Надіслати";
+      }
+    }
+  );
+}
+
   filterFaq();
 })();

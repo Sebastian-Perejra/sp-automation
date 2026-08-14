@@ -1,22 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Часто задаваемые вопросы – Себастьян Перейра</title>
-  <link rel="canonical" href="https://sp-automation.com/faq-ru.html">
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Частые вопросы – Себастьян Перейра</title>
+<meta content="Частые вопросы об автоматизации бизнес-процессов, Excel, Power BI, Google Sheets, веб-приложениях, интеграциях, безопасности данных, стоимости работ, передаче решений и поддержке." name="description"/>
+<meta content="Частые вопросы – Себастьян Перейра" property="og:title"/>
+<meta content="Ответы об автоматизации, стоимости работ, Excel, Power BI, Google Sheets, веб-приложениях, интеграциях, безопасности, передаче решений и поддержке." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://sp-automation.com/faq-ru.html" property="og:url"/>
+<meta content="ru_RU" property="og:locale"/><link href="https://sp-automation.com/faq-ru.html" rel="canonical"/><link href="https://sp-automation.com/faq.html" hreflang="uk" rel="alternate"/><link href="https://sp-automation.com/faq-en.html" hreflang="en" rel="alternate"/><link href="https://sp-automation.com/faq-ru.html" hreflang="ru" rel="alternate"/><link href="https://sp-automation.com/faq.html" hreflang="x-default" rel="alternate"/>
+<link href="favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Roboto+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --page-bg: #f7f4ef;
       --surface: #ffffff;
       --surface-soft: #fbfaf7;
       --surface-green: #f2f7f3;
+      --surface-blue: #f2f6f8;
 
       --text-main: #242321;
       --text-secondary: #64605b;
@@ -25,9 +30,11 @@
       --green: #35594b;
       --green-hover: #29483c;
       --blue: #2f6f9f;
+      --blue-hover: #255a82;
 
       --border: #e8e1d8;
       --border-green: #d5e3d8;
+      --border-blue: #d9e5ee;
 
       --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
       --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
@@ -175,7 +182,7 @@
     72px
     20px
     max(64px, env(safe-area-inset-bottom));
-    }
+   }
 
     .hero {
       position: relative;
@@ -186,6 +193,7 @@
       border-radius: 28px;
       background: linear-gradient(135deg, rgba(255,255,255,.98), rgba(249,247,243,.98));
       box-shadow: var(--shadow-soft);
+      text-align: left;
     }
 
     .hero::before {
@@ -310,6 +318,40 @@
     .faq-list {
       display: grid;
       gap: 12px;
+    }
+
+    .faq-categories {
+      margin: 0 0 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .faq-category {
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: var(--text-secondary);
+      font-family: var(--font-main);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .faq-category:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-1px);
+    }
+
+    .faq-category.active {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
     }
 
     details {
@@ -520,6 +562,24 @@ footer a:hover {
         text-align: center;
       }
 
+      .faq-categories {
+        margin-bottom: 16px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+
+      .faq-categories::-webkit-scrollbar {
+        display: none;
+      }
+
+      .faq-category {
+        flex: 0 0 auto;
+        min-height: 34px;
+        font-size: 9px;
+      }
+
       summary {
         padding: 17px 50px 17px 16px;
         font-size: 13px;
@@ -558,198 +618,289 @@ footer a:hover {
       }
     }
   </style>
-<link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
+<link href="/consent/consent.css" rel="stylesheet"/>
+<script defer="" src="/consent/consent.js"></script>
+<link href="/themes/noir-lime/faq/faq.css" rel="stylesheet"/>
+<script defer="" src="/themes/noir-lime/faq/faq.js"></script>
+<link href="/assistant.css" rel="stylesheet"/>
+<script defer="" src="/assistant.js"></script>
+<link href="/nav-font-kaleidoscope.css?v=5" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script async="" defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js">
+</script>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index-ru.html">← На главную</a>
-
-      <nav class="desktop-nav">
-        <a href="about-ru.html">Обо мне</a>
-        <a href="services-ru.html">Услуги</a>
-        <a href="pricing-ru.html">Ценовая политика</a>
-        <a href="solutions-ru.html">Решения</a>
-        <a href="contacts-ru.html">Контакты</a>
-      </nav>
-
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='faq.html'">UA</button>
-        <button type="button" onclick="location.href='faq-en.html'">EN</button>
-        <button type="button" onclick="location.href='faq-ru.html'">RU</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="page">
-    <section class="hero">
-      <h1>Часто задаваемые вопросы</h1>
-      <p>
-        Здесь собраны ответы об автоматизации, форматах работы, технологиях,
-        веб-приложениях, мобильных решениях и поддержке после запуска.
-      </p>
-    </section>
-
-    <section class="faq-tools">
-      <input
-        id="faq-search"
-        class="faq-search"
-        type="search"
-        placeholder="Поиск по вопросам..."
-        aria-label="Поиск по часто задаваемым вопросам"
-      >
-
-      <button id="open-all" class="tool-button" type="button">
-        Развернуть все
-      </button>
-
-      <button id="close-all" class="tool-button" type="button">
-        Свернуть все
-      </button>
-    </section>
-
-    <div id="faq-count" class="faq-count"></div>
-
-    <section id="faq-list" class="faq-list">
-      <details><summary>1. Как быстро вы отвечаете?</summary><p>Обычно отвечаю в течение одного календарного дня, включая субботу и воскресенье.</p></details>
-      <details><summary>2. Можно ли адаптировать решение под мой бизнес?</summary><p>Да. Все решения настраиваются индивидуально под ваши процессы, структуру данных и требования.</p></details>
-      <details><summary>3. Сколько стоят услуги?</summary><p>Цена зависит от сложности и объёма задачи. Предварительную оценку даю после уточнения деталей. Актуальные условия смотрите на странице <a href="pricing-ru.html">«Ценовая политика»</a>.</p></details>
-      <details><summary>4. Консультации бесплатные?</summary><p>Первая короткая консультация бесплатная. Дальнейший формат согласовывается отдельно.</p></details>
-      <details><summary>5. С какими инструментами вы работаете?</summary><p>Excel, Power BI, Google Sheets, VBA, Google Apps Script, Power Query, Power Pivot, JavaScript, HTML/CSS, Telegram Bot API и различные внешние API.</p></details>
-      <details><summary>6. Можно ли сделать автоматическое формирование отчётов?</summary><p>Да. Создаю автоматизированные отчёты со сбором, обработкой, проверкой и визуализацией данных.</p></details>
-      <details><summary>7. Вы работаете с большими объёмами данных?</summary><p>С Big Data-платформами вроде Hadoop или Spark сейчас не работаю. Большие Excel-таблицы, массивы Google Sheets и модели Power BI обрабатываю с учётом структуры и технических ограничений конкретного инструмента.</p></details>
-      <details><summary>8. Можете ли вы интегрировать разные источники данных?</summary><p>Да. Возможна интеграция с API, базами данных, CRM, ERP, Google Drive, файлами Excel, CSV и другими источниками.</p></details>
-      <details><summary>9. Вы работаете удалённо?</summary><p>Да. Большинство проектов реализуются полностью онлайн.</p></details>
-      <details><summary>10. В каком формате вы передаёте файлы?</summary><p>Excel, Power BI, Google Sheets, PDF, CSV или другой согласованный формат. Формат зависит от задачи.</p></details>
-      <details><summary>11. Вы подписываете NDA?</summary><p>Да. NDA может быть подписан по запросу заказчика.</p></details>
-      <details><summary>12. Вы работаете с государственными учреждениями?</summary><p>Сейчас основной формат работы — частные компании, предприниматели и физические лица.</p></details>
-      <details><summary>13. Вы делаете дашборды?</summary><p>Да. Создаю динамические дашборды с фильтрами, графиками, KPI, план-факт анализом и другими показателями.</p></details>
-      <details><summary>14. Можно ли сделать кнопки управления?</summary><p>Да. Реализую кнопки, меню, макросы, скрипты и другие элементы взаимодействия с пользователем.</p></details>
-      <details><summary>15. Вы обучаете работе с решением?</summary><p>Да. При необходимости предоставляю текстовые инструкции, видеоинструкции или короткое обучение.</p></details>
-      <details><summary>16. Можно ли обновлять данные автоматически?</summary><p>Да. Обновление можно запускать по расписанию, событию, кнопке или другому согласованному условию.</p></details>
-      <details><summary>17. Сколько длится разработка?</summary><p>Зависит от сложности. Небольшие задачи могут быть выполнены за один день, более крупные проекты — за несколько дней или недель.</p></details>
-      <details><summary>18. Вы делаете инструкции для пользователя?</summary><p>Да. Формат инструкции согласовывается отдельно: текст, схема, видео или короткая техническая документация.</p></details>
-      <details><summary>19. Вы работаете с Power BI Service?</summary><p>Да. Настраиваю публикацию, доступы, обновление и использование отчётов в Power BI Service.</p></details>
-      <details><summary>20. Можно ли заказать только часть работы?</summary><p>Да. Можно заказать аудит, отдельный модуль, конкретную формулу, скрипт, дашборд или этап проекта.</p></details>
-      <details><summary>21. Вы работаете со складскими системами?</summary><p>Да. Могу создавать решения для учёта остатков, движения товаров, инвентаризации и отчётности.</p></details>
-      <details><summary>22. Можно ли работать поэтапно?</summary><p>Да. Проект может быть разделён на этапы с отдельным тестированием и оплатой.</p></details>
-      <details><summary>23. Вы работаете с иностранными клиентами?</summary><p>Да. Возможна удалённая работа с клиентами из других стран.</p></details>
-      <details><summary>24. Вы создаёте калькуляторы в Excel?</summary><p>Да. Создаю калькуляторы с формулами, проверками, условиями, справочниками и автоматическим формированием результата.</p></details>
-      <details><summary>25. Интегрируете ли вы решения с Google Forms?</summary><p>Да. Google Forms может быть источником данных для расчётов, уведомлений, отчётов и автоматизаций.</p></details>
-      <details><summary>26. Вы подтягиваете данные из Zoho, HubSpot или других CRM?</summary><p>Да, если у системы есть доступный API и заказчик может предоставить необходимые права доступа.</p></details>
-      <details><summary>27. Вы создаёте финансовые модели?</summary><p>Да. В том числе для бюджетирования, прогнозирования, план-факт анализа и сценарных расчётов.</p></details>
-      <details><summary>28. Можете ли вы исправить мой существующий файл или скрипт?</summary><p>Да. Могу провести аудит, найти ошибки, оптимизировать логику и доработать существующее решение.</p></details>
-      <details><summary>29. Что лучше выбрать — Excel или Power BI?</summary><p>Это зависит от задачи. Excel удобен для расчётов и локальной работы, Power BI — для аналитики, интерактивной визуализации и совместного просмотра.</p></details>
-      <details><summary>30. Можно ли получить поддержку после завершения проекта?</summary><p>Да. Доступна гарантийная и последующая поддержка по отдельной договорённости.</p></details>
-      <details><summary>31. Реализуете ли вы контроль доступа?</summary><p>Да. Могу настроить роли, права доступа и ограничения отдельных действий, листов, файлов или функций.</p></details>
-      <details><summary>32. Создаёте ли вы решения для мобильного просмотра?</summary><p>Да. Могу адаптировать веб-интерфейсы, дашборды и отдельные рабочие формы под смартфоны и планшеты.</p></details>
-      <details><summary>33. Возможна ли интеграция с Telegram, Slack или другими мессенджерами?</summary><p>Да. Интеграция реализуется через API, вебхуки или серверные скрипты, если платформа это позволяет.</p></details>
-      <details><summary>34. Работают ли ваши решения на macOS?</summary><p>Зависит от технологии. Google Sheets, веб-приложения и Power BI в браузере работают независимо от ОС. Для VBA возможны отдельные ограничения Excel для Mac.</p></details>
-      <details><summary>35. Вы разрабатываете на Python или R?</summary><p>Основная специализация — Excel, Power BI, Google Apps Script, JavaScript и веб-интерфейсы. Python использую ограниченно, когда это целесообразно для конкретной задачи.</p></details>
-      <details><summary>36. Можно ли организовать регулярные обновления?</summary><p>Да. Можно настроить обновление каждый час, ежедневно, еженедельно или по другой согласованной логике.</p></details>
-      <details><summary>37. Поддерживаете ли вы английский язык интерфейса?</summary><p>Да. Решение может быть на украинском, английском, русском языке или многоязычным.</p></details>
-      <details><summary>38. Можете ли вы помочь с подготовкой к аудиту?</summary><p>Да. Могу создать прозрачные отчёты, контрольные проверки, журналы изменений и структуру учёта.</p></details>
-      <details><summary>39. Используете ли вы искусственный интеллект?</summary><p>Да, как вспомогательный инструмент. Архитектуру, логику, проверку, тестирование и ответственность за результат беру на себя.</p></details>
-      <details><summary>40. Можете ли вы автоматизировать email-рассылки?</summary><p>Да. Это можно реализовать через Apps Script, Power Automate, EmailJS или другие сервисы в зависимости от задачи.</p></details>
-      <details><summary>41. Нужна ли подписка для использования решения?</summary><p>Не всегда. Часть решений работает без дополнительных подписок, но отдельные сервисы могут иметь собственные платные тарифы.</p></details>
-      <details><summary>42. Вы делаете интерактивные формы?</summary><p>Да. Формы могут содержать проверки, условную логику, расчёты, загрузку файлов и отправку сообщений.</p></details>
-      <details><summary>43. Вы используете шаблоны или всё разрабатывается с нуля?</summary><p>Основная логика создаётся под конкретную задачу. Готовые технические компоненты могут использоваться повторно, если это не вредит качеству и безопасности.</p></details>
-      <details><summary>44. Как защищены мои данные?</summary><p>Доступы предоставляются только в пределах, необходимых для работы. Секретные ключи и токены хранятся отдельно от открытого кода, а при необходимости подписывается NDA.</p></details>
-      <details><summary>45. Вы работаете с Microsoft 365?</summary><p>Да. Возможна работа с Excel, Teams, OneDrive, SharePoint и другими компонентами Microsoft 365.</p></details>
-      <details><summary>46. Нужно ли что-то устанавливать на компьютер?</summary><p>В большинстве случаев нет. Многие решения работают в браузере, Google Workspace или уже установленном Excel.</p></details>
-      <details><summary>47. Будет ли доступ к коду или формулам?</summary><p>Да, если другое не согласовано отдельно. Заказчик получает доступ к рабочему решению, формулам и скриптам.</p></details>
-      <details><summary>48. Можно ли потом самостоятельно редактировать файл?</summary><p>Да. Решения строятся так, чтобы их можно было поддерживать и изменять в дальнейшем.</p></details>
-      <details><summary>49. Учитываете ли вы корпоративные стандарты компании?</summary><p>Да. Можно учесть цвета, логотипы, терминологию, структуру доступов, правила безопасности и внутренние процессы.</p></details>
-      <details><summary>50. Можно ли получить демо?</summary><p>Да. При необходимости могу показать пример, прототип или короткую демонстрацию похожего решения.</p></details>
-
-      <details><summary>51. Вы разрабатываете веб-приложения?</summary><p>Да. Создаю веб-интерфейсы для работы с Google Sheets, файлами, формами, фотографиями, ссылками, внутренними процессами и другими данными.</p></details>
-      <details><summary>52. Можно ли открыть веб-приложение на смартфоне?</summary><p>Да. Интерфейс можно адаптировать под мобильный экран, добавить большие кнопки, свайпы, поиск, карточки и другую мобильную навигацию.</p></details>
-      <details><summary>53. Вы создаёте Android-приложения?</summary><p>Создаю мобильные веб-приложения и PWA, которые работают на Android и могут добавляться на главный экран как отдельная иконка. Нативные приложения для Google Play оцениваются отдельно.</p></details>
-      <details><summary>54. Можно ли установить ваше веб-приложение как обычную программу?</summary><p>Да, если решение реализовано как PWA. Пользователь может добавить его на главный экран смартфона и открывать почти как обычное приложение.</p></details>
-      <details><summary>55. Можете ли вы создать Telegram-бота?</summary><p>Да. Бот может принимать команды, сообщения и файлы, создавать напоминания, передавать заявки и запускать автоматические действия.</p></details>
-      <details><summary>56. Можно ли отправлять заявки с сайта прямо в Telegram?</summary><p>Да. Формы сайта могут отправлять данные в Telegram, email, Google Sheets или сразу в несколько каналов.</p></details>
-      <details><summary>57. Можете ли вы добавить авторизацию пользователей?</summary><p>Да. Возможна авторизация через Google, проверка разрешённых аккаунтов, ролей и доступа к отдельным функциям.</p></details>
-      <details><summary>58. Вы работаете с Google Drive и файлами?</summary><p>Да. Можно автоматически создавать папки, копировать файлы, архивировать документы, формировать ссылки и управлять доступом.</p></details>
-      <details><summary>59. Можете ли вы автоматически обрабатывать PDF, инвойсы или банковские выписки?</summary><p>Да, если структура документов подходит для распознавания. Можно извлекать данные, очищать их, сопоставлять позиции и записывать результат в таблицу.</p></details>
-      <details><summary>60. Можете ли вы сделать систему напоминаний?</summary><p>Да. Напоминания могут приходить в Telegram или email по времени, дате, статусу или другому событию.</p></details>
-      <details><summary>61. Можете ли вы создать сайт или доработать существующий?</summary><p>Да. Могу создать или доработать HTML/CSS/JavaScript-сайт, формы, адаптивный дизайн, аналитику и интеграции.</p></details>
-      <details><summary>62. Можно ли защитить формы сайта от ботов и спама?</summary><p>Да. Использую серверную проверку, Cloudflare Turnstile, ограничение частоты запросов, проверку длины полей и безопасную обработку данных.</p></details>
-    </section>
-
-    <div id="no-results" class="no-results">
-      Ничего не найдено. Попробуйте другое слово или более короткий запрос.
-    </div>
-
-    <a class="back-link" href="index-ru.html">← Назад на главную</a>
-  </main>
-
-  <footer>
-  © 2015–2026 Sebastian Automations. Все права защищены.
-  <a href="terms-ru.html">Условия использования</a>
+<div aria-hidden="true" class="cosmic-frame">
+<span class="cosmic-frame__top-left"></span>
+<span class="cosmic-frame__top-right"></span>
+<span class="cosmic-frame__bottom-left"></span>
+<span class="cosmic-frame__bottom-right"></span>
+</div>
+<header class="topbar">
+<div class="topbar-inner">
+<a class="home-link" href="index-ru.html">← На главную</a>
+<nav class="desktop-nav">
+<a href="about-ru.html">Обо мне</a>
+<a href="services-ru.html">Услуги</a>
+<a href="pricing-ru.html">Ценовая политика</a>
+<a href="solutions-ru.html">Решения</a>
+<a class="active" href="faq-ru.html">FAQ</a>
+<a href="contacts-ru.html">Контакты</a>
+</nav>
+<div class="lang-switcher">
+<button onclick="location.href='faq.html'" type="button">UA</button>
+<button onclick="location.href='faq-en.html'" type="button">EN</button>
+<button class="active" onclick="location.href='faq-ru.html'" type="button">RU</button>
+</div>
+</div>
+</header>
+<main class="page">
+<section class="hero">
+<h1>Частые вопросы</h1>
+<p>Здесь собраны ответы об автоматизации, форматах работы, технологиях, веб-приложениях, мобильных решениях и поддержке после запуска.</p>
+<div aria-hidden="true" class="faq-orbit">
+<div class="faq-orbit-core">?</div>
+<span class="faq-orbit-node faq-orbit-node-a">✓</span>
+<span class="faq-orbit-node faq-orbit-node-b">i</span>
+<span class="faq-orbit-node faq-orbit-node-c">↗</span>
+</div>
+</section>
+<section class="faq-tools">
+<input aria-label="Поиск по частым вопросам" class="faq-search" id="faq-search" placeholder="Поиск по вопросам..." type="search"/>
+<button class="tool-button" id="open-all" type="button">Развернуть все</button>
+<button class="tool-button" id="close-all" type="button">Свернуть все</button>
+</section>
+<div class="faq-count" id="faq-count"></div>
+<section aria-label="FAQ categories" class="faq-categories">
+<button class="faq-category active" data-filter="all" type="button">ВСЕ</button>
+<button class="faq-category" data-filter="start" type="button">НАЧАЛО РАБОТЫ</button>
+<button class="faq-category" data-filter="price" type="button">СТОИМОСТЬ</button>
+<button class="faq-category" data-filter="tech" type="button">ТЕХНОЛОГИИ</button>
+<button class="faq-category" data-filter="integration" type="button">ИНТЕГРАЦИИ</button>
+<button class="faq-category" data-filter="web" type="button">WEB / MOBILE</button>
+<button class="faq-category" data-filter="security" type="button">БЕЗОПАСНОСТЬ</button>
+<button class="faq-category" data-filter="handoff" type="button">ПЕРЕДАЧА</button>
+<button class="faq-category" data-filter="support" type="button">ПОДДЕРЖКА</button>
+<button class="faq-category" data-filter="other" type="button">ДРУГОЕ</button>
+</section>
+<section class="faq-list" id="faq-list">
+<details data-category="start"><summary>1. Как быстро вы отвечаете?</summary><p>Обычно отвечаю в течение одного календарного дня, включая субботу и воскресенье.</p></details>
+<details data-category="start"><summary>2. С чего начинается работа над задачей?</summary><p>Сначала нужно кратко описать задачу, текущий процесс и желаемый результат. После этого я уточняю детали, оцениваю возможные варианты реализации и предлагаю следующие шаги.</p></details>
+<details data-category="start"><summary>3. Что нужно предоставить для предварительной оценки?</summary><p>Обычно достаточно описания задачи, примера файла или структуры данных, скриншотов либо краткого объяснения текущего процесса. Для более сложных задач могут понадобиться дополнительные материалы или тестовые данные.</p></details>
+<details data-category="start"><summary>4. Что делать, если я не знаю, какой инструмент нужен для моей задачи?</summary><p>Это нормально. Не обязательно заранее решать, нужен ли Excel, Power BI, Google Sheets, веб-приложение или другой инструмент. Сначала определяется сама задача, а уже потом подбирается технология.</p></details>
+<details data-category="start"><summary>5. Можете ли вы сначала проанализировать процесс и предложить варианты автоматизации?</summary><p>Да. Могу проанализировать текущий процесс, найти ручные или повторяющиеся операции и предложить один или несколько вариантов автоматизации.</p></details>
+<details data-category="start"><summary>6. Каждый ли процесс стоит автоматизировать?</summary><p>Нет. Если автоматизация окажется сложнее, дороже или неудобнее самого ручного процесса, я скажу об этом. Иногда достаточно изменить структуру данных, формулу или отдельный этап работы.</p></details>
+<details data-category="start"><summary>7. Можно ли адаптировать решение под мой бизнес?</summary><p>Да. Решение настраивается под конкретный процесс, структуру данных, правила работы, пользователей и технические ограничения.</p></details>
+<details data-category="start"><summary>8. Можно ли заказать только часть работы?</summary><p>Да. Это может быть аудит, отдельная формула, макрос, скрипт, дашборд, интеграция, модуль или конкретный этап более крупного проекта.</p></details>
+<details data-category="start"><summary>9. Можно ли работать поэтапно?</summary><p>Да. Большой проект можно разделить на отдельные этапы со своим результатом, тестированием и оплатой.</p></details>
+<details data-category="start"><summary>10. Можно ли начать с прототипа или MVP?</summary><p>Да. Для сложной или новой задачи часто целесообразно сначала реализовать ограниченную версию, проверить логику на практике, а затем расширять решение.</p></details>
+<details data-category="start"><summary>11. Берёте ли вы срочные задачи?</summary><p>Такие задачи возможны в зависимости от текущей загрузки, сложности и необходимого срока выполнения. Срочность лучше указать сразу при первом обращении.</p></details>
+<details data-category="price"><summary>12. Сколько стоят услуги?</summary><p>Стоимость зависит от сложности, объёма и формата работы. Предварительная оценка формируется после уточнения задачи. Актуальные тарифы и условия указаны на странице <a href="pricing-ru.html">«Ценовая политика»</a>.</p></details>
+<details data-category="price"><summary>13. Как формируется предварительная оценка?</summary><p>Оцениваются объём работ, сложность логики, количество интеграций, состояние исходных данных, необходимость тестирования, документации и другие технические факторы.</p></details>
+<details data-category="price"><summary>14. Первая консультация бесплатная?</summary><p>Да. Первое короткое обсуждение задачи и её общего контекста бесплатно. Детальный анализ, проектирование или выполнение работы уже могут быть отдельной услугой.</p></details>
+<details data-category="price"><summary>15. Как происходит оплата?</summary><p>Формат оплаты зависит от размера и длительности задачи. Небольшие работы могут оплачиваться как отдельное задание, а более крупные проекты — поэтапно или за согласованный объём работ.</p></details>
+<details data-category="price"><summary>16. Нужна ли предоплата?</summary><p>Это зависит от конкретного проекта, его объёма и формата сотрудничества. Условия оплаты согласовываются до начала работы.</p></details>
+<details data-category="price"><summary>17. Что будет, если во время работы изменятся требования?</summary><p>Сначала оценивается, как изменение влияет на уже выполненную работу, сроки и объём проекта. Если изменение существенное, новый объём согласовывается отдельно до его реализации.</p></details>
+<details data-category="price"><summary>18. Могу ли я остановить проект после завершения отдельного этапа?</summary><p>Да, если работа организована поэтапно. Завершённый и оплаченный этап может оставаться самостоятельным результатом, если это технически возможно.</p></details>
+<details data-category="price"><summary>19. Нужна ли отдельная подписка для использования решения?</summary><p>Не всегда. Часть решений работает без дополнительных подписок, но Microsoft, Google, хостинг, API или сторонние сервисы могут иметь собственные платные тарифы.</p></details>
+<details data-category="price"><summary>20. Какие дополнительные расходы могут возникнуть кроме стоимости разработки?</summary><p>Это могут быть лицензии Microsoft 365 или Power BI, хостинг, домен, платные API, сторонние сервисы, увеличенные лимиты или другая внешняя инфраструктура. Если такие расходы нужны, они согласовываются отдельно.</p></details>
+<details data-category="tech"><summary>21. С какими инструментами вы работаете?</summary><p>Основные направления — Excel, VBA, Power Query, Power Pivot, Power BI, Google Sheets, Google Apps Script, JavaScript, HTML/CSS, Telegram Bot API и интеграции с внешними API.</p></details>
+<details data-category="tech"><summary>22. Как понять, какой инструмент лучше подходит для моей задачи?</summary><p>Выбор зависит от того, где находятся данные, кто будет работать с решением, какие нужны расчёты, автоматизации, доступы и способ использования. Инструмент подбирается под задачу, а не наоборот.</p></details>
+<details data-category="tech"><summary>23. Можно ли автоматически формировать отчёты?</summary><p>Да. Можно автоматизировать сбор, обработку, проверку, объединение данных, расчёты и формирование итоговых отчётов.</p></details>
+<details data-category="tech"><summary>24. Можно ли автоматически обновлять данные?</summary><p>Да. В зависимости от технологии обновление может запускаться по расписанию, кнопкой, событием или другим согласованным условием.</p></details>
+<details data-category="tech"><summary>25. Можно ли настроить регулярные обновления?</summary><p>Да. Обновления могут выполняться каждый час, ежедневно, еженедельно или по другой логике, если это поддерживает выбранная платформа.</p></details>
+<details data-category="tech"><summary>26. Вы работаете с большими объёмами данных?</summary><p>Да, в пределах технических возможностей Excel, Google Sheets, Power BI и других используемых инструментов. С Big Data-платформами вроде Hadoop или Spark сейчас не работаю.</p></details>
+<details data-category="tech"><summary>27. Вы создаёте дашборды?</summary><p>Да. Можно реализовать KPI, графики, фильтры, план-факт анализ, детализацию показателей и другие интерактивные элементы.</p></details>
+<details data-category="tech"><summary>28. Вы создаёте калькуляторы в Excel?</summary><p>Да. Это могут быть калькуляторы с формулами, условиями, проверками, справочниками, сценариями и автоматическим формированием результата.</p></details>
+<details data-category="tech"><summary>29. Вы создаёте финансовые модели?</summary><p>Да. Например, для бюджетирования, прогнозирования, план-факт анализа, сценарных расчётов и других задач, если их логика может быть чётко формализована.</p></details>
+<details data-category="tech"><summary>30. Вы работаете с Power BI Service?</summary><p>Да. Возможна работа с публикацией отчётов, доступами, обновлением и использованием отчётов в Power BI Service.</p></details>
+<details data-category="tech"><summary>31. Вы работаете с Microsoft 365?</summary><p>Да. В зависимости от задачи могут использоваться Excel, OneDrive, SharePoint, Teams и другие компоненты Microsoft 365.</p></details>
+<details data-category="tech"><summary>32. Вы разрабатываете на Python или R?</summary><p>Основная специализация — Excel, Power BI, Google Apps Script, JavaScript и веб-интерфейсы. Python могу использовать как вспомогательный инструмент, когда это оправдано конкретной задачей. R не является основным направлением работы.</p></details>
+<details data-category="integration"><summary>33. Можно ли интегрировать разные источники данных?</summary><p>Да. В зависимости от системы это могут быть API, CRM, ERP, Google Drive, Excel, CSV, Google Sheets, базы данных и другие доступные источники.</p></details>
+<details data-category="integration"><summary>34. Вы подтягиваете данные из Zoho, HubSpot или других CRM?</summary><p>Да, если система имеет доступный API или другой технический способ интеграции и заказчик может предоставить необходимые права доступа.</p></details>
+<details data-category="integration"><summary>35. Можно ли интегрировать решение с Google Forms?</summary><p>Да. Google Forms может быть источником данных для расчётов, заявок, уведомлений, отчётов и других автоматизаций.</p></details>
+<details data-category="integration"><summary>36. Вы работаете с Google Drive и файлами?</summary><p>Да. Можно автоматизировать создание папок, копирование, переименование, архивацию файлов, формирование ссылок и отдельные операции с доступами.</p></details>
+<details data-category="integration"><summary>37. Возможна ли интеграция с Telegram, Slack или другими мессенджерами?</summary><p>Да, если платформа имеет соответствующий API, вебхуки или другой доступный механизм интеграции.</p></details>
+<details data-category="integration"><summary>38. Можно ли отправлять заявки с сайта прямо в Telegram или email?</summary><p>Да. Данные из формы можно передавать в Telegram, email, Google Sheets или несколько каналов одновременно.</p></details>
+<details data-category="integration"><summary>39. Можете ли вы автоматизировать email-рассылки?</summary><p>Да. Можно реализовать автоматическое создание и отправку сообщений через соответствующие сервисы или API в зависимости от задачи и платформы.</p></details>
+<details data-category="integration"><summary>40. Можете ли вы автоматически обрабатывать PDF, инвойсы или банковские выписки?</summary><p>Да, если из документа можно стабильно получать нужные данные. Можно извлекать значения, очищать их, проверять, сопоставлять позиции и записывать результат в таблицы или другие системы. Точность и способ обработки зависят от структуры документов.</p></details>
+<details data-category="integration"><summary>41. Что будет, если сторонний API или сервис изменит правила работы?</summary><p>Внешние сервисы могут менять API, авторизацию, тарифы, лимиты или другие правила. В таком случае интеграция может потребовать адаптации или доработки.</p></details>
+<details data-category="web"><summary>42. Вы разрабатываете веб-приложения?</summary><p>Да. Создаю веб-интерфейсы для работы с таблицами, формами, файлами, фотографиями, ссылками, внутренними процессами и другими бизнес-данными.</p></details>
+<details data-category="web"><summary>43. Можете ли вы создать сайт или доработать существующий?</summary><p>Да. Могу дорабатывать HTML/CSS/JavaScript-сайты, формы, адаптивный интерфейс, аналитику и интеграции. Основной фокус — функциональные бизнес-сайты и веб-интерфейсы, а не сложная дизайнерская веб-разработка.</p></details>
+<details data-category="web"><summary>44. Можно ли открыть веб-приложение на смартфоне?</summary><p>Да. Интерфейс можно адаптировать под смартфоны и планшеты, включая навигацию, кнопки, формы, поиск и другие элементы.</p></details>
+<details data-category="web"><summary>45. Вы создаёте Android-приложения?</summary><p>Основное направление — мобильные веб-приложения и PWA, которые работают на Android через браузер и могут добавляться на главный экран. Полноценная нативная Android-разработка для Google Play не является основной специализацией.</p></details>
+<details data-category="web"><summary>46. Можно ли установить веб-приложение как отдельную программу?</summary><p>Да, если решение поддерживает формат PWA. В таком случае его можно добавить на главный экран и открывать отдельно от обычной вкладки браузера.</p></details>
+<details data-category="web"><summary>47. Можете ли вы создать Telegram-бота?</summary><p>Да. Бот может принимать команды, сообщения и файлы, создавать напоминания, передавать заявки, работать с кнопками и запускать автоматизированные действия.</p></details>
+<details data-category="web"><summary>48. Можете ли вы сделать систему напоминаний?</summary><p>Да. Напоминания могут приходить в Telegram или email по дате, времени, статусу или другому согласованному условию.</p></details>
+<details data-category="web"><summary>49. Вы делаете интерактивные формы?</summary><p>Да. Формы могут содержать проверки, условную логику, расчёты, списки выбора, загрузку файлов и автоматическую отправку данных.</p></details>
+<details data-category="web"><summary>50. Можно ли защитить формы сайта от ботов и спама?</summary><p>Да. В зависимости от решения могут использоваться CAPTCHA или Turnstile, серверная проверка, ограничение частоты запросов, валидация данных и другие методы.</p></details>
+<details data-category="security"><summary>51. Как защищаются мои данные?</summary><p>Доступ запрашивается только к тем данным и системам, которые нужны для конкретной работы. Ключи, токены и другие секретные параметры не должны храниться в открытом коде. При необходимости могут использоваться тестовые данные, ограниченные права доступа и NDA.</p></details>
+<details data-category="security"><summary>52. Вы подписываете NDA?</summary><p>Да. NDA может быть подписано по запросу заказчика.</p></details>
+<details data-category="security"><summary>53. Можно ли работать без передачи реальных конфиденциальных данных?</summary><p>Да, если задача это позволяет. Для разработки и тестирования можно использовать тестовые, изменённые или анонимизированные данные с той же структурой.</p></details>
+<details data-category="security"><summary>54. Можете ли вы реализовать контроль доступа?</summary><p>Да. В зависимости от платформы можно ограничивать доступ к файлам, страницам, функциям, действиям или отдельным частям системы.</p></details>
+<details data-category="security"><summary>55. Можете ли вы добавить авторизацию пользователей?</summary><p>Да. Возможна авторизация через Google или другой доступный механизм, а также проверка разрешённых аккаунтов и ролей.</p></details>
+<details data-category="security"><summary>56. Останется ли у вас доступ к моим данным или системам после завершения проекта?</summary><p>Необходимость дальнейшего доступа согласовывается отдельно. Если доступ больше не нужен, его можно отозвать, а ключи, пароли или токены — заменить после завершения работ.</p></details>
+<details data-category="security"><summary>57. Учитываете ли вы корпоративные стандарты компании?</summary><p>Да. Можно учесть корпоративные цвета, логотипы, терминологию, правила доступа, структуру данных и внутренние требования.</p></details>
+<details data-category="security"><summary>58. Можете помочь с контрольными отчётами и проверкой данных?</summary><p>Да. Можно создавать контрольные проверки, отчёты о расхождениях, журналы изменений, статусы и другие инструменты для проверки качества данных и процессов.</p></details>
+<details data-category="handoff"><summary>59. Что я получаю после завершения работы?</summary><p>Это зависит от формата проекта. Это может быть готовый Excel-файл, Google Sheet, Power BI-отчёт, веб-приложение, скрипт, код, инструкция или другой согласованный результат.</p></details>
+<details data-category="handoff"><summary>60. Будет ли у меня доступ к коду, формулам и логике решения?</summary><p>Да, если иное не согласовано отдельно. Для решений, которые передаются заказчику, доступ к формулам, скриптам и рабочей логике обычно остаётся у заказчика.</p></details>
+<details data-category="handoff"><summary>61. Смогу ли я самостоятельно редактировать или поддерживать решение?</summary><p>Да, если технология и права доступа это позволяют. При необходимости можно дополнительно подготовить инструкцию или объяснить структуру решения.</p></details>
+<details data-category="handoff"><summary>62. Кому принадлежит созданное решение после завершения работы?</summary><p>Это определяется условиями конкретного проекта и согласованным объёмом передачи. Файлы, код, скрипты, документация или другие материалы, входящие в согласованный результат, передаются заказчику на согласованных условиях. Права на сторонние библиотеки, сервисы, платформы и другие внешние компоненты определяются их собственными лицензиями и правилами.</p></details>
+<details data-category="handoff"><summary>63. Будет ли готовое решение зависеть от вас в будущем?</summary><p>Цель — не создавать искусственной зависимости. Если решение технически может работать автономно, оно должно продолжать работать без моего постоянного участия. Исключение — внешние сервисы, API или инфраструктура, которые могут требовать отдельного обслуживания.</p></details>
+<details data-category="handoff"><summary>64. Нужно ли что-то устанавливать на компьютер?</summary><p>Во многих случаях нет. Google Workspace, веб-приложения и часть других решений работают в браузере. Для отдельных Excel-решений может потребоваться соответствующая версия Microsoft Excel.</p></details>
+<details data-category="handoff"><summary>65. Работают ли ваши решения на macOS?</summary><p>Зависит от технологии. Веб-приложения и Google Workspace обычно не зависят от операционной системы. Для Excel VBA на Mac могут существовать технические ограничения.</p></details>
+<details data-category="handoff"><summary>66. Может ли решение иметь несколько языков интерфейса?</summary><p>Да. При необходимости можно реализовать украинский, английский, русский или другие языки, если это предусмотрено задачей.</p></details>
+<details data-category="support"><summary>67. Сколько длится разработка?</summary><p>Срок зависит от объёма, сложности, готовности исходных данных и скорости согласования деталей. Небольшие задачи могут выполняться быстро, а сложные проекты — поэтапно в течение более длительного периода.</p></details>
+<details data-category="support"><summary>68. Как проходит тестирование решения?</summary><p>Перед передачей проверяется основная логика, типовые сценарии работы и критические ошибки. Для сложных решений тестирование может проводиться поэтапно вместе с заказчиком на тестовых или реальных сценариях.</p></details>
+<details data-category="support"><summary>69. Что будет, если после запуска обнаружится ошибка?</summary><p>Если ошибка относится к согласованной и реализованной логике, анализируется её причина и определяется способ исправления. Новые требования или изменения бизнес-логики рассматриваются отдельно от исправления ошибок.</p></details>
+<details data-category="support"><summary>70. Можно ли получить поддержку после завершения проекта?</summary><p>Да. Возможна поддержка после запуска, исправление выявленных проблем, консультации и дальнейшие доработки на согласованных условиях.</p></details>
+<details data-category="support"><summary>71. Можно ли в дальнейшем расширять готовое решение?</summary><p>Да, если архитектура и технология это позволяют. Новые функции, модули, отчёты или интеграции можно добавлять отдельными этапами.</p></details>
+<details data-category="support"><summary>72. Вы делаете инструкции для пользователей?</summary><p>Да. При необходимости это может быть текстовая инструкция, схема, короткое видео или техническое описание.</p></details>
+<details data-category="support"><summary>73. Вы обучаете работе с готовым решением?</summary><p>Да. Для более сложных решений можно провести короткое объяснение или обучение пользователей.</p></details>
+<details data-category="other"><summary>74. Вы работаете удалённо?</summary><p>Да. Большинство задач и проектов можно полностью реализовать онлайн.</p></details>
+<details data-category="other"><summary>75. Вы работаете с иностранными клиентами?</summary><p>Да. Возможна удалённая работа с заказчиками из других стран.</p></details>
+<details data-category="other"><summary>76. Вы используете готовые шаблоны?</summary><p>Основная логика создаётся под конкретную задачу. Отдельные проверенные технические компоненты могут использоваться повторно, если это целесообразно и не создаёт проблем с безопасностью или качеством.</p></details>
+<details data-category="other"><summary>77. Вы используете искусственный интеллект?</summary><p>Да, как вспомогательный инструмент в работе. Архитектура решения, бизнес-логика, проверка, тестирование и финальное решение не должны опираться только на автоматически сгенерированный результат.</p></details>
+<details data-category="other"><summary>78. Можно ли посмотреть примеры реализованных решений?</summary><p>Да. На странице <a href="solutions-ru.html">«Решения»</a> доступны демонстрационные кейсы с примерами реализованных задач. Для отдельной задачи также можно обсудить релевантный пример или прототип, если такой формат целесообразен и не нарушает конфиденциальность других клиентов.</p></details>
+</section>
+<div class="no-results" id="no-results">Ничего не найдено. Попробуйте другое слово или более короткий запрос.</div>
+<section class="faq-contact-cta">
+<div class="faq-contact-cta-text">
+<h2>Не нашли ответа?</h2>
+<p>Напишите мне прямо отсюда — коротко опишите задачу, и я отвечу лично.</p>
+</div>
+<button class="faq-contact-cta-button" id="faq-contact-open" type="button">Написать мне</button>
+</section>
+<div aria-hidden="true" class="faq-contact-overlay" id="faq-contact-overlay"></div>
+<div aria-hidden="true" aria-labelledby="faq-contact-title" aria-modal="true" class="faq-contact-modal" id="faq-contact-modal" role="dialog">
+<button aria-label="Закрыть" class="faq-contact-close" id="faq-contact-close" type="button">
+    ×
+  </button>
+<div class="faq-contact-modal-inner">
+<h2 id="faq-contact-title">Написать мне</h2>
+<p class="faq-contact-subtitle">Опишите задачу несколькими предложениями.</p>
+<form class="faq-contact-form" id="faq-contact-form">
+<label for="faq-contact-name">Ваше имя</label>
+<input autocomplete="name" id="faq-contact-name" maxlength="100" name="user_name" required="" type="text"/>
+<label for="faq-contact-email">Email</label>
+<input autocomplete="email" id="faq-contact-email" maxlength="160" name="user_email" required="" type="email"/>
+<label for="faq-contact-message">Сообщение</label>
+<textarea id="faq-contact-message" maxlength="5000" name="message" required=""></textarea>
+<div class="faq-contact-turnstile">
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"></div>
+</div>
+<div class="faq-contact-error" id="faq-contact-error"></div>
+<button class="faq-contact-submit" type="submit">Отправить</button>
+</form>
+</div>
+</div>
+<a class="back-link" href="index-ru.html">← Назад на главную</a>
+</main>
+<footer>
+<div class="footer-ticker">
+<div class="footer-ticker-text">Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Автоматические отчёты · Автоматизация Excel · Обработка данных · Очистка данных · Парсинг данных · Интеграции · Макросы · Кастомная логика · Автоматизация бизнес-процессов · Аналитические дашборды · Автоматизация Google Sheets · Веб-приложения · JavaScript · Индивидуальные решения для бизнеса ·</div>
+</div>
+<div class="footer-copy">© 2015–2026 Sebastian Automations. Все права защищены. <a href="terms-ru.html">Условия использования</a></div>
 </footer>
+<script>(() => {
+  const translateDynamicText = () => {
+    const count = document.getElementById("faq-count");
 
-  <script>
-    const searchInput = document.getElementById('faq-search');
-    const faqItems = Array.from(
-      document.querySelectorAll('#faq-list details')
+    if (count) {
+      const match = count.textContent.match(
+        /Показано:\s*(\d+)\s*із\s*(\d+)/
+      );
+
+      if (match) {
+        count.textContent =
+          `Показано: ${match[1]} из ${match[2]}`;
+      }
+    }
+
+    const error =
+      document.getElementById(
+        "faq-contact-error"
+      );
+
+    if (error) {
+      const repeatMatch =
+        error.textContent.match(
+          /Повторне повідомлення можна надіслати через\s*(\d+)\s*сек\./
+        );
+
+      if (repeatMatch) {
+        error.textContent =
+          `Повторное сообщение можно отправить через ${repeatMatch[1]} сек.`;
+      } else if (
+        error.textContent ===
+        "Підтвердіть, що ви не робот."
+      ) {
+        error.textContent =
+          "Подтвердите, что вы не робот.";
+      } else if (
+        error.textContent ===
+        "Помилка надсилання. Спробуйте ще раз."
+      ) {
+        error.textContent =
+          "Ошибка отправки. Попробуйте ещё раз.";
+      }
+    }
+
+    const submit =
+      document.querySelector(
+        ".faq-contact-submit"
+      );
+
+    if (submit) {
+      if (
+        submit.textContent.trim() ===
+        "Надсилання..."
+      ) {
+        submit.textContent =
+          "Отправка...";
+      }
+
+      if (
+        submit.textContent.trim() ===
+        "Надіслати"
+      ) {
+        submit.textContent =
+          "Отправить";
+      }
+    }
+  };
+
+  const originalAlert =
+    window.alert;
+
+  window.alert = message => {
+    if (
+      message ===
+      "Повідомлення успішно надіслано!"
+    ) {
+      originalAlert(
+        "Сообщение успешно отправлено!"
+      );
+      return;
+    }
+
+    originalAlert(message);
+  };
+
+  const observer =
+    new MutationObserver(
+      translateDynamicText
     );
-    const faqCount = document.getElementById('faq-count');
-    const noResults = document.getElementById('no-results');
 
-    function updateCount(visibleCount = faqItems.length) {
-      faqCount.textContent =
-        `Показано: ${visibleCount} из ${faqItems.length}`;
+  observer.observe(
+    document.documentElement,
+    {
+      childList: true,
+      subtree: true,
+      characterData: true
     }
+  );
 
-    function filterFaq() {
-      const query = searchInput.value
-        .trim()
-        .toLowerCase();
-
-      let visibleCount = 0;
-
-      faqItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const isVisible = !query || text.includes(query);
-
-        item.style.display = isVisible ? '' : 'none';
-
-        if (isVisible) {
-          visibleCount++;
-        } else {
-          item.open = false;
-        }
-      });
-
-      noResults.style.display =
-        visibleCount === 0 ? 'block' : 'none';
-
-      updateCount(visibleCount);
-    }
-
-    document
-      .getElementById('open-all')
-      .addEventListener('click', () => {
-        faqItems.forEach(item => {
-          if (item.style.display !== 'none') {
-            item.open = true;
-          }
-        });
-      });
-
-    document
-      .getElementById('close-all')
-      .addEventListener('click', () => {
-        faqItems.forEach(item => {
-          item.open = false;
-        });
-      });
-
-    searchInput.addEventListener('input', filterFaq);
-
-    updateCount();
-  </script>
-</body>
+  translateDynamicText();
+})();</script></body>
 </html>

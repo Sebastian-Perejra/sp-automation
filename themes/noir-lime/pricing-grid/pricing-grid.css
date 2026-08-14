@@ -2422,3 +2422,100 @@ footer {
     line-height: 1.45;
   }
 }
+
+.mobile-menu-button,
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  header.topbar .topbar-inner {
+    min-height: 64px !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-rows: 1fr !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+
+  header.topbar .home-link {
+    display: none !important;
+  }
+
+  header.topbar .mobile-menu-button {
+    display: flex !important;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 !important;
+    border: 1px solid rgba(146, 185, 157, 0.28);
+    border-radius: 10px;
+    background: rgba(15, 24, 19, 0.74);
+    cursor: pointer;
+  }
+
+  header.topbar .mobile-menu-button span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: #ffffff;
+  }
+
+  header.topbar .desktop-nav {
+    display: none !important;
+  }
+
+  header.topbar .lang-switcher {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 99998;
+    display: none;
+    padding: 12px 14px 18px;
+    background: rgba(7, 11, 9, 0.97);
+    border-bottom: 1px solid rgba(184, 255, 53, 0.08);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .mobile-menu.is-open {
+    display: block;
+  }
+
+  .mobile-menu-nav {
+    display: grid;
+    gap: 4px;
+  }
+
+  .mobile-menu-nav a {
+    padding: 13px 14px;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.82);
+    font-family: var(--font-tech);
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-menu-nav a:hover,
+  .mobile-menu-nav a.active {
+    background: rgba(167, 255, 106, 0.1);
+    color: #b8ff2c;
+  }
+}

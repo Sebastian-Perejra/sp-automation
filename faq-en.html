@@ -1,21 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Frequently Asked Questions – Sebastian Perejra</title>
-  <link rel="canonical" href="https://sp-automation.com/faq-en.html">
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Frequently Asked Questions – Sebastian Perejra</title>
+<meta content="Frequently asked questions about business process automation, Excel, Power BI, Google Sheets, web applications, integrations, data security, pricing, project handoff and support." name="description"/>
+<meta content="Frequently Asked Questions – Sebastian Perejra" property="og:title"/>
+<meta content="Answers about automation, pricing, Excel, Power BI, Google Sheets, web applications, integrations, security, project handoff and support." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://sp-automation.com/faq-en.html" property="og:url"/>
+<meta content="en_US" property="og:locale"/><link href="https://sp-automation.com/faq-en.html" rel="canonical"/><link href="https://sp-automation.com/faq.html" hreflang="uk" rel="alternate"/><link href="https://sp-automation.com/faq-en.html" hreflang="en" rel="alternate"/><link href="https://sp-automation.com/faq-ru.html" hreflang="ru" rel="alternate"/><link href="https://sp-automation.com/faq.html" hreflang="x-default" rel="alternate"/>
+<link href="favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Roboto+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --page-bg: #f7f4ef;
       --surface: #ffffff;
       --surface-soft: #fbfaf7;
       --surface-green: #f2f7f3;
+      --surface-blue: #f2f6f8;
 
       --text-main: #242321;
       --text-secondary: #64605b;
@@ -24,9 +30,11 @@
       --green: #35594b;
       --green-hover: #29483c;
       --blue: #2f6f9f;
+      --blue-hover: #255a82;
 
       --border: #e8e1d8;
       --border-green: #d5e3d8;
+      --border-blue: #d9e5ee;
 
       --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
       --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
@@ -174,7 +182,7 @@
     72px
     20px
     max(64px, env(safe-area-inset-bottom));
-    }
+   }
 
     .hero {
       position: relative;
@@ -185,6 +193,7 @@
       border-radius: 28px;
       background: linear-gradient(135deg, rgba(255,255,255,.98), rgba(249,247,243,.98));
       box-shadow: var(--shadow-soft);
+      text-align: left;
     }
 
     .hero::before {
@@ -309,6 +318,40 @@
     .faq-list {
       display: grid;
       gap: 12px;
+    }
+
+    .faq-categories {
+      margin: 0 0 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .faq-category {
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: var(--text-secondary);
+      font-family: var(--font-main);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .faq-category:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-1px);
+    }
+
+    .faq-category.active {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
     }
 
     details {
@@ -519,6 +562,24 @@ footer a:hover {
         text-align: center;
       }
 
+      .faq-categories {
+        margin-bottom: 16px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+
+      .faq-categories::-webkit-scrollbar {
+        display: none;
+      }
+
+      .faq-category {
+        flex: 0 0 auto;
+        min-height: 34px;
+        font-size: 9px;
+      }
+
       summary {
         padding: 17px 50px 17px 16px;
         font-size: 13px;
@@ -557,198 +618,270 @@ footer a:hover {
       }
     }
   </style>
-  <link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
+<link href="/consent/consent.css" rel="stylesheet"/>
+<script defer="" src="/consent/consent.js"></script>
+<link href="/themes/noir-lime/faq/faq.css" rel="stylesheet"/>
+<script defer="" src="/themes/noir-lime/faq/faq.js"></script>
+<link href="/assistant.css" rel="stylesheet"/>
+<script defer="" src="/assistant.js"></script>
+<link href="/nav-font-kaleidoscope.css?v=5" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script async="" defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js">
+</script>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index-en.html">← Home</a>
-
-      <nav class="desktop-nav">
-        <a href="about-en.html">About</a>
-        <a href="services-en.html">Services</a>
-        <a href="pricing-en.html">Pricing</a>
-        <a href="solutions-en.html">Solutions</a>
-        <a href="contacts-en.html">Contacts</a>
-      </nav>
-
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='faq.html'">UA</button>
-        <button type="button" onclick="location.href='faq-en.html'">EN</button>
-        <button type="button" onclick="location.href='faq-ru.html'">RU</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="page">
-    <section class="hero">
-      <h1>Frequently Asked Questions</h1>
-      <p>
-        Answers about automation, working formats, technologies,
-        web applications, mobile solutions, and post-launch support.
-      </p>
-    </section>
-
-    <section class="faq-tools">
-      <input
-        id="faq-search"
-        class="faq-search"
-        type="search"
-        placeholder="Search questions..."
-        aria-label="Search frequently asked questions"
-      >
-
-      <button id="open-all" class="tool-button" type="button">
-        Expand all
-      </button>
-
-      <button id="close-all" class="tool-button" type="button">
-        Collapse all
-      </button>
-    </section>
-
-    <div id="faq-count" class="faq-count"></div>
-
-    <section id="faq-list" class="faq-list">
-      <details><summary>1. How quickly do you respond?</summary><p>I usually respond within one calendar day, including Saturdays and Sundays.</p></details>
-      <details><summary>2. Can the solution be adapted to my business?</summary><p>Yes. Every solution is tailored to your processes, data structure, and requirements.</p></details>
-      <details><summary>3. How much do your services cost?</summary><p>The price depends on the complexity and scope of the task. I provide an initial estimate after clarifying the details. See the current terms on the <a href="pricing-en.html">Pricing</a> page.</p></details>
-      <details><summary>4. Are consultations free?</summary><p>The first short consultation is free. Any further work is agreed separately.</p></details>
-      <details><summary>5. Which tools do you work with?</summary><p>Excel, Power BI, Google Sheets, VBA, Google Apps Script, Power Query, Power Pivot, JavaScript, HTML/CSS, Telegram Bot API, and various external APIs.</p></details>
-      <details><summary>6. Can reports be generated automatically?</summary><p>Yes. I build automated reports that collect, process, validate, and visualize data.</p></details>
-      <details><summary>7. Do you work with large data volumes?</summary><p>I do not currently work with Big Data platforms such as Hadoop or Spark. I do handle large Excel files, Google Sheets datasets, and Power BI models within the technical limits of each tool.</p></details>
-      <details><summary>8. Can you integrate different data sources?</summary><p>Yes. Integration is possible with APIs, databases, CRM and ERP systems, Google Drive, Excel and CSV files, and other sources.</p></details>
-      <details><summary>9. Do you work remotely?</summary><p>Yes. Most projects are completed entirely online.</p></details>
-      <details><summary>10. Which file formats do you deliver?</summary><p>Excel, Power BI, Google Sheets, PDF, CSV, or another agreed format. The final format depends on the task.</p></details>
-      <details><summary>11. Do you sign NDAs?</summary><p>Yes. An NDA can be signed at the client's request.</p></details>
-      <details><summary>12. Do you work with government organizations?</summary><p>At present, I primarily work with private companies, entrepreneurs, and individuals.</p></details>
-      <details><summary>13. Do you build dashboards?</summary><p>Yes. I build dynamic dashboards with filters, charts, KPIs, plan-versus-actual analysis, and other metrics.</p></details>
-      <details><summary>14. Can you add control buttons?</summary><p>Yes. I can add buttons, menus, macros, scripts, and other user interaction elements.</p></details>
-      <details><summary>15. Do you train users to work with the solution?</summary><p>Yes. When needed, I provide written instructions, video guides, or short training sessions.</p></details>
-      <details><summary>16. Can data be updated automatically?</summary><p>Yes. Updates can run on a schedule, on an event, from a button, or under another agreed condition.</p></details>
-      <details><summary>17. How long does development take?</summary><p>It depends on complexity. Small tasks may take one day, while larger projects can take several days or weeks.</p></details>
-      <details><summary>18. Do you provide user documentation?</summary><p>Yes. The format can be agreed separately: text, diagrams, video, or concise technical documentation.</p></details>
-      <details><summary>19. Do you work with Power BI Service?</summary><p>Yes. I configure publishing, access, refreshes, and report usage in Power BI Service.</p></details>
-      <details><summary>20. Can I order only part of the work?</summary><p>Yes. You can order an audit, a separate module, a specific formula, script, dashboard, or project stage.</p></details>
-      <details><summary>21. Do you work with warehouse systems?</summary><p>Yes. I can create solutions for stock balances, goods movement, inventory counts, and reporting.</p></details>
-      <details><summary>22. Can the project be delivered in stages?</summary><p>Yes. A project can be divided into stages with separate testing and payments.</p></details>
-      <details><summary>23. Do you work with international clients?</summary><p>Yes. I can work remotely with clients from other countries.</p></details>
-      <details><summary>24. Do you build calculators in Excel?</summary><p>Yes. I build calculators with formulas, validation, conditions, reference tables, and automatic output generation.</p></details>
-      <details><summary>25. Do you integrate solutions with Google Forms?</summary><p>Yes. Google Forms can serve as a data source for calculations, notifications, reports, and automation.</p></details>
-      <details><summary>26. Can you retrieve data from Zoho, HubSpot, or other CRMs?</summary><p>Yes, if the system provides an API and the client can grant the required access.</p></details>
-      <details><summary>27. Do you build financial models?</summary><p>Yes. This includes budgeting, forecasting, plan-versus-actual analysis, and scenario modeling.</p></details>
-      <details><summary>28. Can you fix my existing file or script?</summary><p>Yes. I can audit it, identify errors, optimize the logic, and improve the existing solution.</p></details>
-      <details><summary>29. Which platform is better: Excel or Power BI?</summary><p>It depends on the task. Excel is convenient for calculations and local work, while Power BI is better for analytics, interactive visualization, and shared viewing.</p></details>
-      <details><summary>30. Is support available after the project is completed?</summary><p>Yes. Warranty and ongoing support are available by separate agreement.</p></details>
-      <details><summary>31. Can you implement access control?</summary><p>Yes. I can configure roles, permissions, and restrictions for specific actions, sheets, files, or functions.</p></details>
-      <details><summary>32. Do you create solutions for mobile viewing?</summary><p>Yes. I can adapt web interfaces, dashboards, and work forms for smartphones and tablets.</p></details>
-      <details><summary>33. Can you integrate with Telegram, Slack, or other messengers?</summary><p>Yes. Integration can be implemented through APIs, webhooks, or server-side scripts when the platform supports it.</p></details>
-      <details><summary>34. Do your solutions work on macOS?</summary><p>It depends on the technology. Google Sheets, web apps, and browser-based Power BI work across operating systems. VBA may have specific limitations in Excel for Mac.</p></details>
-      <details><summary>35. Do you develop in Python or R?</summary><p>My main specialization is Excel, Power BI, Google Apps Script, JavaScript, and web interfaces. I use Python selectively when it is appropriate for a specific task.</p></details>
-      <details><summary>36. Can regular updates be scheduled?</summary><p>Yes. Updates can be scheduled hourly, daily, weekly, or according to another agreed rule.</p></details>
-      <details><summary>37. Do you support English-language interfaces?</summary><p>Yes. A solution can be in Ukrainian, English, Russian, or multilingual.</p></details>
-      <details><summary>38. Can you help prepare for an audit?</summary><p>Yes. I can create transparent reports, control checks, change logs, and accounting structures.</p></details>
-      <details><summary>39. Do you use artificial intelligence?</summary><p>Yes, as an assisting tool. I personally handle the architecture, logic, verification, testing, and responsibility for the final result.</p></details>
-      <details><summary>40. Can you automate email campaigns?</summary><p>Yes. This can be implemented through Apps Script, Power Automate, EmailJS, or other services depending on the task.</p></details>
-      <details><summary>41. Is a subscription required to use the solution?</summary><p>Not always. Some solutions work without additional subscriptions, while certain third-party services may have their own paid plans.</p></details>
-      <details><summary>42. Do you build interactive forms?</summary><p>Yes. Forms can include validation, conditional logic, calculations, file uploads, and notifications.</p></details>
-      <details><summary>43. Do you use templates, or is everything built from scratch?</summary><p>The core logic is built for the specific task. Reusable technical components may be used when they do not compromise quality or security.</p></details>
-      <details><summary>44. How is my data protected?</summary><p>Access is limited to what is required for the work. Secret keys and tokens are stored separately from public code, and an NDA can be signed when needed.</p></details>
-      <details><summary>45. Do you work with Microsoft 365?</summary><p>Yes. I can work with Excel, Teams, OneDrive, SharePoint, and other Microsoft 365 components.</p></details>
-      <details><summary>46. Does anything need to be installed on my computer?</summary><p>In most cases, no. Many solutions work in a browser, Google Workspace, or the Excel installation you already use.</p></details>
-      <details><summary>47. Will I have access to the code or formulas?</summary><p>Yes, unless agreed otherwise. The client receives access to the working solution, formulas, and scripts.</p></details>
-      <details><summary>48. Can I edit the file myself later?</summary><p>Yes. Solutions are built so they can be maintained and modified later.</p></details>
-      <details><summary>49. Do you follow a company's corporate standards?</summary><p>Yes. Colors, logos, terminology, access structure, security rules, and internal processes can all be taken into account.</p></details>
-      <details><summary>50. Can I get a demo?</summary><p>Yes. I can show an example, prototype, or short demonstration of a similar solution.</p></details>
-
-      <details><summary>51. Do you develop web applications?</summary><p>Yes. I build web interfaces for Google Sheets, files, forms, photos, links, internal processes, and other data.</p></details>
-      <details><summary>52. Can a web application be used on a smartphone?</summary><p>Yes. The interface can be adapted for mobile screens with larger buttons, swipe actions, search, cards, and other mobile navigation patterns.</p></details>
-      <details><summary>53. Do you create Android applications?</summary><p>I build mobile web applications and PWAs that run on Android and can be added to the home screen as a standalone icon. Native Google Play applications are evaluated separately.</p></details>
-      <details><summary>54. Can your web application be installed like an app?</summary><p>Yes, if it is implemented as a PWA. Users can add it to the smartphone home screen and open it much like a regular app.</p></details>
-      <details><summary>55. Can you create a Telegram bot?</summary><p>Yes. A bot can receive commands, messages, and files, create reminders, forward requests, and trigger automated actions.</p></details>
-      <details><summary>56. Can website requests be sent directly to Telegram?</summary><p>Yes. Website forms can send data to Telegram, email, Google Sheets, or several channels at once.</p></details>
-      <details><summary>57. Can you add user authentication?</summary><p>Yes. Authentication can be implemented through Google, including allowed-account checks, roles, and access to specific functions.</p></details>
-      <details><summary>58. Do you work with Google Drive and files?</summary><p>Yes. I can automate folder creation, file copying, document archiving, link generation, and access management.</p></details>
-      <details><summary>59. Can you automatically process PDFs, invoices, or bank statements?</summary><p>Yes, when the document structure is suitable for recognition. Data can be extracted, cleaned, matched, and written into a spreadsheet.</p></details>
-      <details><summary>60. Can you build a reminder system?</summary><p>Yes. Reminders can be sent through Telegram or email based on time, date, status, or another event.</p></details>
-      <details><summary>61. Can you create a website or improve an existing one?</summary><p>Yes. I can create or improve an HTML/CSS/JavaScript website, forms, responsive design, analytics, and integrations.</p></details>
-      <details><summary>62. Can website forms be protected from bots and spam?</summary><p>Yes. I use server-side validation, Cloudflare Turnstile, request rate limits, field length checks, and safe data handling.</p></details>
-    </section>
-
-    <div id="no-results" class="no-results">
-      Nothing found. Try another word or a shorter search query.
-    </div>
-
-    <a class="back-link" href="index-en.html">← Back to Home</a>
-  </main>
-
-  <footer>
-  © 2015–2026 Sebastian Automations. All rights reserved.
-  <a href="terms-en.html">Terms of Use</a>
+<div aria-hidden="true" class="cosmic-frame">
+<span class="cosmic-frame__top-left"></span>
+<span class="cosmic-frame__top-right"></span>
+<span class="cosmic-frame__bottom-left"></span>
+<span class="cosmic-frame__bottom-right"></span>
+</div>
+<header class="topbar">
+<div class="topbar-inner">
+<a class="home-link" href="index-en.html">← Home</a>
+<nav class="desktop-nav">
+<a href="about-en.html">About me</a>
+<a href="services-en.html">Services</a>
+<a href="pricing-en.html">Pricing</a>
+<a href="solutions-en.html">Solutions</a>
+<a class="active" href="faq-en.html">FAQ</a>
+<a href="contacts-en.html">Contacts</a>
+</nav>
+<div class="lang-switcher">
+<button onclick="location.href='faq.html'" type="button">UA</button>
+<button class="active" onclick="location.href='faq-en.html'" type="button">EN</button>
+<button onclick="location.href='faq-ru.html'" type="button">RU</button>
+</div>
+</div>
+</header>
+<main class="page">
+<section class="hero">
+<h1>Frequently Asked Questions</h1>
+<p>Here you can find answers about automation, ways of working, technologies, web applications, mobile solutions, and post-launch support.</p>
+<div aria-hidden="true" class="faq-orbit">
+<div class="faq-orbit-core">?</div>
+<span class="faq-orbit-node faq-orbit-node-a">✓</span>
+<span class="faq-orbit-node faq-orbit-node-b">i</span>
+<span class="faq-orbit-node faq-orbit-node-c">↗</span>
+</div>
+</section>
+<section class="faq-tools">
+<input aria-label="Search frequently asked questions" class="faq-search" id="faq-search" placeholder="Search questions..." type="search"/>
+<button class="tool-button" id="open-all" type="button">Expand all</button>
+<button class="tool-button" id="close-all" type="button">Collapse all</button>
+</section>
+<div class="faq-count" id="faq-count"></div>
+<section aria-label="FAQ categories" class="faq-categories">
+<button class="faq-category active" data-filter="all" type="button">ALL</button>
+<button class="faq-category" data-filter="start" type="button">GETTING STARTED</button>
+<button class="faq-category" data-filter="price" type="button">PRICING</button>
+<button class="faq-category" data-filter="tech" type="button">TECHNOLOGIES</button>
+<button class="faq-category" data-filter="integration" type="button">INTEGRATIONS</button>
+<button class="faq-category" data-filter="web" type="button">WEB / MOBILE</button>
+<button class="faq-category" data-filter="security" type="button">SECURITY</button>
+<button class="faq-category" data-filter="handoff" type="button">HANDOFF</button>
+<button class="faq-category" data-filter="support" type="button">SUPPORT</button>
+<button class="faq-category" data-filter="other" type="button">OTHER</button>
+</section>
+<section class="faq-list" id="faq-list">
+<details data-category="start"><summary>How quickly do you respond?</summary><p>I usually respond within one calendar day, including Saturdays and Sundays.</p></details>
+<details data-category="start"><summary>How does work on a task begin?</summary><p>First, you briefly describe the task, the current process, and the desired result. I then clarify the details, assess possible implementation options, and suggest the next steps.</p></details>
+<details data-category="start"><summary>What do I need to provide for a preliminary estimate?</summary><p>Usually, a task description, a sample file or data structure, screenshots, or a brief explanation of the current process is enough. More complex tasks may require additional materials or test data.</p></details>
+<details data-category="start"><summary>What if I do not know which tool is best for my task?</summary><p>That is completely fine. You do not need to decide in advance whether the solution should use Excel, Power BI, Google Sheets, a web application, or another tool. The task is defined first, and the technology is selected afterward.</p></details>
+<details data-category="start"><summary>Can you first analyze the process and suggest automation options?</summary><p>Yes. I can review the current process, identify manual or repetitive operations, and propose one or more automation options.</p></details>
+<details data-category="start"><summary>Is every process worth automating?</summary><p>No. If automation would be more complex, more expensive, or less convenient than the manual process itself, I will say so. Sometimes it is enough to improve the data structure, a formula, or one specific step in the workflow.</p></details>
+<details data-category="start"><summary>Can the solution be adapted to my business?</summary><p>Yes. The solution is configured around the specific process, data structure, business rules, users, and technical constraints.</p></details>
+<details data-category="start"><summary>Can I order only part of the work?</summary><p>Yes. It can be an audit, a single formula, macro, script, dashboard, integration, module, or a specific stage of a larger project.</p></details>
+<details data-category="start"><summary>Can we work in stages?</summary><p>Yes. A larger project can be divided into separate stages, each with its own result, testing, and payment.</p></details>
+<details data-category="start"><summary>Can we start with a prototype or MVP?</summary><p>Yes. For a complex or new task, it is often useful to build a limited version first, validate the logic in practice, and then expand the solution.</p></details>
+<details data-category="start"><summary>Do you take urgent tasks?</summary><p>Urgent tasks are possible depending on current workload, complexity, and the required deadline. It is best to mention the urgency at the first contact.</p></details>
+<details data-category="price"><summary>How much do your services cost?</summary><p>The cost depends on the complexity, scope, and format of the work. A preliminary estimate is prepared after the task is clarified. Current rates and terms are listed on the <a href="pricing-en.html">Pricing</a> page.</p></details>
+<details data-category="price"><summary>How is the preliminary estimate calculated?</summary><p>The estimate takes into account the scope of work, logic complexity, number of integrations, condition of the source data, testing needs, documentation, and other technical factors.</p></details>
+<details data-category="price"><summary>Is the first consultation free?</summary><p>Yes. The first short discussion of the task and its general context is free of charge. Detailed analysis, solution design, or implementation may be a separate paid service.</p></details>
+<details data-category="price"><summary>How does payment work?</summary><p>The payment format depends on the size and duration of the task. Small jobs can be paid as individual assignments, while larger projects can be paid in stages or according to an agreed scope of work.</p></details>
+<details data-category="price"><summary>Is a prepayment required?</summary><p>It depends on the specific project, its scope, and the cooperation format. Payment terms are agreed before work begins.</p></details>
+<details data-category="price"><summary>What happens if the requirements change during the project?</summary><p>First, I assess how the change affects the work already completed, the timeline, and the project scope. If the change is significant, the additional scope is agreed separately before implementation.</p></details>
+<details data-category="price"><summary>Can I stop the project after a separate stage is completed?</summary><p>Yes, if the work is organized in stages. A completed and paid stage can remain a standalone result where technically possible.</p></details>
+<details data-category="price"><summary>Do I need a separate subscription to use the solution?</summary><p>Not always. Some solutions work without additional subscriptions, but Microsoft, Google, hosting providers, APIs, or third-party services may have their own paid plans.</p></details>
+<details data-category="price"><summary>What additional costs may arise besides development?</summary><p>These may include Microsoft 365 or Power BI licenses, hosting, a domain, paid APIs, third-party services, increased limits, or other external infrastructure. If such costs are required, they are agreed separately.</p></details>
+<details data-category="tech"><summary>Which tools do you work with?</summary><p>My main tools include Excel, VBA, Power Query, Power Pivot, Power BI, Google Sheets, Google Apps Script, JavaScript, HTML/CSS, Telegram Bot API, and integrations with external APIs.</p></details>
+<details data-category="tech"><summary>How do I know which tool is best for my task?</summary><p>The choice depends on where the data is stored, who will use the solution, which calculations and automations are required, what access rules apply, and how the solution will be used. The tool is selected for the task, not the other way around.</p></details>
+<details data-category="tech"><summary>Can reports be generated automatically?</summary><p>Yes. Data collection, processing, validation, consolidation, calculations, and final report generation can all be automated.</p></details>
+<details data-category="tech"><summary>Can data be refreshed automatically?</summary><p>Yes. Depending on the technology, updates can run on a schedule, by button, by event, or under another agreed condition.</p></details>
+<details data-category="tech"><summary>Can regular updates be scheduled?</summary><p>Yes. Updates can run hourly, daily, weekly, or according to another schedule if the selected platform supports it.</p></details>
+<details data-category="tech"><summary>Do you work with large data volumes?</summary><p>Yes, within the technical capabilities of Excel, Google Sheets, Power BI, and the other tools being used. I currently do not work with Big Data platforms such as Hadoop or Spark.</p></details>
+<details data-category="tech"><summary>Do you create dashboards?</summary><p>Yes. Dashboards can include KPIs, charts, filters, plan-vs-actual analysis, drill-downs, and other interactive elements.</p></details>
+<details data-category="tech"><summary>Do you create calculators in Excel?</summary><p>Yes. They can include formulas, conditions, validations, reference tables, scenarios, and automatic result generation.</p></details>
+<details data-category="tech"><summary>Do you create financial models?</summary><p>Yes. For example, models for budgeting, forecasting, plan-vs-actual analysis, scenario calculations, and other tasks where the logic can be clearly formalized.</p></details>
+<details data-category="tech"><summary>Do you work with Power BI Service?</summary><p>Yes. I can work with report publishing, access management, refresh, and report usage in Power BI Service.</p></details>
+<details data-category="tech"><summary>Do you work with Microsoft 365?</summary><p>Yes. Depending on the task, the solution can use Excel, OneDrive, SharePoint, Teams, and other Microsoft 365 components.</p></details>
+<details data-category="tech"><summary>Do you develop in Python or R?</summary><p>My main focus is Excel, Power BI, Google Apps Script, JavaScript, and web interfaces. I can use Python as a supporting tool when it is justified by a specific task. R is not a primary area of my work.</p></details>
+<details data-category="integration"><summary>Can different data sources be integrated?</summary><p>Yes. Depending on the system, these may include APIs, CRM, ERP, Google Drive, Excel, CSV, Google Sheets, databases, and other accessible sources.</p></details>
+<details data-category="integration"><summary>Can you pull data from Zoho, HubSpot, or other CRM systems?</summary><p>Yes, if the system provides an accessible API or another technical integration method and the client can provide the required access rights.</p></details>
+<details data-category="integration"><summary>Can the solution be integrated with Google Forms?</summary><p>Yes. Google Forms can serve as a data source for calculations, requests, notifications, reports, and other automations.</p></details>
+<details data-category="integration"><summary>Do you work with Google Drive and files?</summary><p>Yes. Folder creation, copying, renaming, archiving files, generating links, and certain access-related operations can be automated.</p></details>
+<details data-category="integration"><summary>Can the solution integrate with Telegram, Slack, or other messengers?</summary><p>Yes, if the platform provides a suitable API, webhooks, or another available integration mechanism.</p></details>
+<details data-category="integration"><summary>Can website requests be sent directly to Telegram or email?</summary><p>Yes. Form data can be sent to Telegram, email, Google Sheets, or several channels at the same time.</p></details>
+<details data-category="integration"><summary>Can you automate email sending?</summary><p>Yes. Automatic message creation and sending can be implemented through suitable services or APIs, depending on the task and platform.</p></details>
+<details data-category="integration"><summary>Can you automatically process PDFs, invoices, or bank statements?</summary><p>Yes, if the required data can be extracted from the document reliably. Values can be extracted, cleaned, validated, matched, and written to spreadsheets or other systems. Accuracy and the processing method depend on the document structure.</p></details>
+<details data-category="integration"><summary>What happens if a third-party API or service changes its rules?</summary><p>External services may change their APIs, authorization methods, pricing, limits, or other rules. In that case, the integration may require adaptation or further development.</p></details>
+<details data-category="web"><summary>Do you develop web applications?</summary><p>Yes. I build web interfaces for working with spreadsheets, forms, files, photos, links, internal processes, and other business data.</p></details>
+<details data-category="web"><summary>Can you create a website or improve an existing one?</summary><p>Yes. I can improve HTML/CSS/JavaScript websites, forms, responsive interfaces, analytics, and integrations. The main focus is functional business websites and web interfaces rather than complex design-driven web development.</p></details>
+<details data-category="web"><summary>Can a web application be used on a smartphone?</summary><p>Yes. The interface can be adapted for smartphones and tablets, including navigation, buttons, forms, search, and other elements.</p></details>
+<details data-category="web"><summary>Do you create Android applications?</summary><p>My main focus is mobile web applications and PWAs that work on Android through a browser and can be added to the home screen. Full native Android development for Google Play is not my primary specialization.</p></details>
+<details data-category="web"><summary>Can a web application be installed like a separate app?</summary><p>Yes, if the solution supports PWA functionality. In that case, it can be added to the home screen and opened separately from a regular browser tab.</p></details>
+<details data-category="web"><summary>Can you create a Telegram bot?</summary><p>Yes. A bot can receive commands, messages, and files, create reminders, forward requests, work with buttons, and launch automated actions.</p></details>
+<details data-category="web"><summary>Can you build a reminder system?</summary><p>Yes. Reminders can be sent via Telegram or email based on date, time, status, or another agreed condition.</p></details>
+<details data-category="web"><summary>Do you create interactive forms?</summary><p>Yes. Forms can include validation, conditional logic, calculations, selection lists, file uploads, and automatic data submission.</p></details>
+<details data-category="web"><summary>Can website forms be protected from bots and spam?</summary><p>Yes. Depending on the solution, protection can include CAPTCHA or Turnstile, server-side verification, rate limiting, data validation, and other methods.</p></details>
+<details data-category="security"><summary>How is my data protected?</summary><p>Access is requested only to the data and systems required for the specific work. Keys, tokens, and other secret parameters should not be stored in publicly accessible code. Test data, limited access rights, and an NDA can be used where appropriate.</p></details>
+<details data-category="security"><summary>Do you sign NDAs?</summary><p>Yes. An NDA can be signed at the client's request.</p></details>
+<details data-category="security"><summary>Can we work without sharing real confidential data?</summary><p>Yes, if the task allows it. Development and testing can use test, modified, or anonymized data with the same structure.</p></details>
+<details data-category="security"><summary>Can you implement access control?</summary><p>Yes. Depending on the platform, access can be restricted to files, pages, functions, actions, or specific parts of the system.</p></details>
+<details data-category="security"><summary>Can you add user authentication?</summary><p>Yes. Authentication can be implemented through Google or another available mechanism, including checks for approved accounts and user roles.</p></details>
+<details data-category="security"><summary>Will you retain access to my data or systems after the project is completed?</summary><p>Any need for continued access is agreed separately. If access is no longer required, it can be revoked, and keys, passwords, or tokens can be changed after the work is completed.</p></details>
+<details data-category="security"><summary>Do you take corporate standards into account?</summary><p>Yes. Corporate colors, logos, terminology, access rules, data structure, and internal requirements can be incorporated.</p></details>
+<details data-category="security"><summary>Can you help with control reports and data validation?</summary><p>Yes. I can create validation checks, discrepancy reports, change logs, statuses, and other tools for monitoring data and process quality.</p></details>
+<details data-category="handoff"><summary>What do I receive after the work is completed?</summary><p>It depends on the project format. The deliverable may be a finished Excel file, Google Sheet, Power BI report, web application, script, source code, instructions, or another agreed result.</p></details>
+<details data-category="handoff"><summary>Will I have access to the code, formulas, and solution logic?</summary><p>Yes, unless agreed otherwise. For solutions transferred to the client, access to formulas, scripts, and working logic generally remains with the client.</p></details>
+<details data-category="handoff"><summary>Will I be able to edit or maintain the solution myself?</summary><p>Yes, if the technology and access rights allow it. If needed, I can also prepare instructions or explain the solution structure.</p></details>
+<details data-category="handoff"><summary>Who owns the solution after the work is completed?</summary><p>This is defined by the terms of the specific project and the agreed handoff scope. Files, code, scripts, documentation, or other materials included in the agreed deliverable are transferred to the client under the agreed terms. Rights to third-party libraries, services, platforms, and other external components remain subject to their own licenses and rules.</p></details>
+<details data-category="handoff"><summary>Will the finished solution depend on you in the future?</summary><p>The goal is to avoid creating artificial dependency. If the solution can technically operate independently, it should continue working without my permanent involvement. External services, APIs, or infrastructure may be exceptions because they can require separate maintenance.</p></details>
+<details data-category="handoff"><summary>Do I need to install anything on my computer?</summary><p>In many cases, no. Google Workspace, web applications, and some other solutions work in a browser. Certain Excel solutions may require a suitable version of Microsoft Excel.</p></details>
+<details data-category="handoff"><summary>Do your solutions work on macOS?</summary><p>It depends on the technology. Web applications and Google Workspace generally do not depend on the operating system. Excel VBA on Mac may have technical limitations.</p></details>
+<details data-category="handoff"><summary>Can the solution support several interface languages?</summary><p>Yes. Ukrainian, English, Russian, or other languages can be implemented if required by the project.</p></details>
+<details data-category="support"><summary>How long does development take?</summary><p>The timeline depends on the scope, complexity, readiness of the source data, and the speed of approving details. Small tasks can be completed quickly, while complex projects may be delivered in stages over a longer period.</p></details>
+<details data-category="support"><summary>How is the solution tested?</summary><p>Before handoff, the core logic, typical use scenarios, and critical errors are checked. For complex solutions, testing can be performed in stages together with the client using test or real-world scenarios.</p></details>
+<details data-category="support"><summary>What happens if an error is found after launch?</summary><p>If the issue relates to agreed and implemented logic, its cause is analyzed and the correction approach is determined. New requirements or changes to business logic are handled separately from bug fixes.</p></details>
+<details data-category="support"><summary>Can I get support after the project is completed?</summary><p>Yes. Post-launch support, correction of identified issues, consultations, and further improvements are available under agreed terms.</p></details>
+<details data-category="support"><summary>Can the finished solution be expanded later?</summary><p>Yes, if the architecture and technology allow it. New functions, modules, reports, or integrations can be added as separate stages.</p></details>
+<details data-category="support"><summary>Do you prepare user instructions?</summary><p>Yes. If needed, this can be a written guide, diagram, short video, or technical description.</p></details>
+<details data-category="support"><summary>Do you provide training on the finished solution?</summary><p>Yes. For more complex solutions, I can provide a short explanation or user training session.</p></details>
+<details data-category="other"><summary>Do you work remotely?</summary><p>Yes. Most tasks and projects can be completed entirely online.</p></details>
+<details data-category="other"><summary>Do you work with international clients?</summary><p>Yes. Remote cooperation with clients from other countries is possible.</p></details>
+<details data-category="other"><summary>Do you use ready-made templates?</summary><p>The core logic is built for the specific task. Certain proven technical components may be reused when appropriate and when doing so does not create security or quality issues.</p></details>
+<details data-category="other"><summary>Do you use artificial intelligence?</summary><p>Yes, as a supporting tool in my work. Solution architecture, business logic, validation, testing, and final decisions should not rely solely on automatically generated output.</p></details>
+<details data-category="other"><summary>Can I see examples of implemented solutions?</summary><p>Yes. The <a href="solutions-en.html">Solutions</a> page includes demonstration cases with examples of implemented tasks. For a specific task, we can also discuss a relevant example or prototype where appropriate and where doing so does not compromise another client’s confidentiality.</p></details>
+</section>
+<div class="no-results" id="no-results">Nothing found. Try another word or a shorter search query.</div>
+<section class="faq-contact-cta">
+<div class="faq-contact-cta-text">
+<h2>Didn't find the answer?</h2>
+<p>Write to me directly from here — briefly describe your task, and I’ll reply personally.</p>
+</div>
+<button class="faq-contact-cta-button" id="faq-contact-open" type="button">Contact me</button>
+</section>
+<div aria-hidden="true" class="faq-contact-overlay" id="faq-contact-overlay"></div>
+<div aria-hidden="true" aria-labelledby="faq-contact-title" aria-modal="true" class="faq-contact-modal" id="faq-contact-modal" role="dialog">
+<button aria-label="Close" class="faq-contact-close" id="faq-contact-close" type="button">
+    ×
+  </button>
+<div class="faq-contact-modal-inner">
+<h2 id="faq-contact-title">Contact me</h2>
+<p class="faq-contact-subtitle">Describe your task in a few sentences.</p>
+<form class="faq-contact-form" id="faq-contact-form">
+<label for="faq-contact-name">Your name</label>
+<input autocomplete="name" id="faq-contact-name" maxlength="100" name="user_name" required="" type="text"/>
+<label for="faq-contact-email">Email</label>
+<input autocomplete="email" id="faq-contact-email" maxlength="160" name="user_email" required="" type="email"/>
+<label for="faq-contact-message">Message</label>
+<textarea id="faq-contact-message" maxlength="5000" name="message" required=""></textarea>
+<div class="faq-contact-turnstile">
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"></div>
+</div>
+<div class="faq-contact-error" id="faq-contact-error"></div>
+<button class="faq-contact-submit" type="submit">Send</button>
+</form>
+</div>
+</div>
+<a class="back-link" href="index-en.html">← Back to home</a>
+</main>
+<footer>
+<div class="footer-ticker">
+<div class="footer-ticker-text">Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Automated reports · Excel automation · Data processing · Data cleaning · Data parsing · Integrations · Macros · Custom logic · Business process automation · Analytics dashboards · Google Sheets automation · Web applications · JavaScript · Custom business solutions ·</div>
+</div>
+<div class="footer-copy">© 2015–2026 Sebastian Automations. All rights reserved. <a href="terms-en.html">Terms of Use</a></div>
 </footer>
+<script>
+(() => {
+  const translateDynamicText = () => {
+    const count = document.getElementById("faq-count");
+    if (count) {
+      const match = count.textContent.match(/Показано:\s*(\d+)\s*із\s*(\d+)/);
+      if (match) {
+        count.textContent = `Shown: ${match[1]} of ${match[2]}`;
+      }
+    }
 
-  <script>
-    const searchInput = document.getElementById('faq-search');
-    const faqItems = Array.from(
-      document.querySelectorAll('#faq-list details')
+    const error = document.getElementById("faq-contact-error");
+    if (error) {
+      const repeatMatch = error.textContent.match(
+        /Повторне повідомлення можна надіслати через\s*(\d+)\s*сек\./
+      );
+
+      if (repeatMatch) {
+        error.textContent =
+          `You can send another message in ${repeatMatch[1]} sec.`;
+      } else if (
+        error.textContent ===
+        "Підтвердіть, що ви не робот."
+      ) {
+        error.textContent =
+          "Please confirm that you are not a robot.";
+      } else if (
+        error.textContent ===
+        "Помилка надсилання. Спробуйте ще раз."
+      ) {
+        error.textContent =
+          "Sending failed. Please try again.";
+      }
+    }
+
+    const submit = document.querySelector(
+      ".faq-contact-submit"
     );
-    const faqCount = document.getElementById('faq-count');
-    const noResults = document.getElementById('no-results');
 
-    function updateCount(visibleCount = faqItems.length) {
-      faqCount.textContent =
-        `Showing: ${visibleCount} of ${faqItems.length}`;
+    if (submit) {
+      if (submit.textContent.trim() === "Надсилання...") {
+        submit.textContent = "Sending...";
+      }
+
+      if (submit.textContent.trim() === "Надіслати") {
+        submit.textContent = "Send";
+      }
+    }
+  };
+
+  const originalAlert = window.alert;
+
+  window.alert = message => {
+    if (
+      message ===
+      "Повідомлення успішно надіслано!"
+    ) {
+      originalAlert(
+        "Your message has been sent successfully!"
+      );
+      return;
     }
 
-    function filterFaq() {
-      const query = searchInput.value
-        .trim()
-        .toLowerCase();
+    originalAlert(message);
+  };
 
-      let visibleCount = 0;
+  const observer = new MutationObserver(
+    translateDynamicText
+  );
 
-      faqItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const isVisible = !query || text.includes(query);
-
-        item.style.display = isVisible ? '' : 'none';
-
-        if (isVisible) {
-          visibleCount++;
-        } else {
-          item.open = false;
-        }
-      });
-
-      noResults.style.display =
-        visibleCount === 0 ? 'block' : 'none';
-
-      updateCount(visibleCount);
+  observer.observe(
+    document.documentElement,
+    {
+      childList: true,
+      subtree: true,
+      characterData: true
     }
+  );
 
-    document
-      .getElementById('open-all')
-      .addEventListener('click', () => {
-        faqItems.forEach(item => {
-          if (item.style.display !== 'none') {
-            item.open = true;
-          }
-        });
-      });
-
-    document
-      .getElementById('close-all')
-      .addEventListener('click', () => {
-        faqItems.forEach(item => {
-          item.open = false;
-        });
-      });
-
-    searchInput.addEventListener('input', filterFaq);
-
-    updateCount();
-  </script>
-</body>
+  translateDynamicText();
+})();
+</script></body>
 </html>

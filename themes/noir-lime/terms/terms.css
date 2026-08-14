@@ -401,38 +401,46 @@ body {
 .contact-box {
   position: relative;
   overflow: hidden;
-  margin-top: 26px;
-  padding: 34px 36px;
+  margin-top: 14px;
+  padding: 30px 34px;
   text-align: left;
-  border: 1px solid #c9d8cb;
-  border-radius: 19px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
   background:
-    radial-gradient(
-      circle at 92% 50%,
-      rgba(90, 145, 102, 0.13),
-      transparent 28%
-    ),
     linear-gradient(
       135deg,
-      #eef5ee,
-      #fafbf8
+      var(--paper) 0%,
+      var(--paper-soft) 100%
     );
-  box-shadow: 0 16px 40px rgba(52, 70, 57, 0.07);
+  box-shadow:
+    0 10px 28px rgba(50, 64, 54, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.contact-box::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 999px 999px 0;
+  background: #4f8b5c;
 }
 
 .contact-box h2 {
   max-width: 720px;
-  margin: 0 0 10px;
+  margin: 0 0 9px;
   color: var(--green-deep);
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 650;
   line-height: 1.35;
 }
 
 .contact-box p {
   max-width: 690px;
-  margin: 0 0 19px;
-  color: #637067;
+  margin: 0 0 18px;
+  color: var(--text-soft);
   font-size: 13px;
   line-height: 1.72;
 }
@@ -441,8 +449,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 43px;
-  padding: 0 20px;
+  min-height: 41px;
+  padding: 0 18px;
   border: 1px solid #376845;
   border-radius: 9px;
   background: #315c42;
@@ -461,9 +469,8 @@ body {
   border-color: #244f35;
   background: #244f35;
   transform: translateY(-1px);
-  box-shadow: 0 7px 18px rgba(43, 87, 56, 0.16);
+  box-shadow: 0 6px 16px rgba(43, 87, 56, 0.14);
 }
-
 footer {
   padding:
     38px

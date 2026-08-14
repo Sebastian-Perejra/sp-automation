@@ -640,3 +640,218 @@ footer a:hover {
     transition-duration: 0.01ms !important;
   }
 }
+.topbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
+  border-bottom: 1px solid rgba(184, 255, 53, 0.08);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 9, 8, 0.97) 0%,
+      rgba(9, 13, 11, 0.93) 100%
+    );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: min(980px, 72vw);
+  height: 1px;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(184, 255, 53, 0.18) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(184, 255, 53, 0.18) 75%,
+      transparent
+    );
+  pointer-events: none;
+}
+
+.topbar-inner {
+  width: min(100%, 1180px);
+  min-height: 76px;
+}
+
+.home-link {
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em !important;
+  text-shadow: none !important;
+}
+
+.home-link::before,
+.home-link::after {
+  content: none !important;
+  display: none !important;
+}
+
+.home-link:hover {
+  color: #b8ff2c !important;
+}
+
+.desktop-nav {
+  gap: 34px;
+}
+
+.desktop-nav a {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.desktop-nav a:hover {
+  color: #ffffff;
+}
+
+.desktop-nav a::after {
+  background: #b8ff35;
+}
+
+.lang-switcher button {
+  min-width: 36px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(243, 245, 239, 0.66);
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+}
+
+.lang-switcher button:first-child,
+.lang-switcher button.active {
+  border-color: #b8ff35;
+  background: #b8ff35;
+  color: #0a0d0b;
+}
+
+.lang-switcher button:hover {
+  border-color: #b8ff35;
+  background: #b8ff35;
+  color: #0a0d0b;
+}
+
+body {
+  padding-top: 72px !important;
+}
+
+.mobile-menu-button,
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  header.topbar .topbar-inner {
+    min-height: 64px !important;
+    padding:
+      max(12px, env(safe-area-inset-top))
+      14px
+      12px !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-rows: 1fr !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+
+  header.topbar .home-link {
+    display: none !important;
+  }
+
+  header.topbar .mobile-menu-button {
+    display: flex !important;
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 !important;
+    border: 1px solid rgba(146, 185, 157, 0.28);
+    border-radius: 10px;
+    background: rgba(15, 24, 19, 0.74);
+    cursor: pointer;
+  }
+
+  header.topbar .mobile-menu-button span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: #ffffff;
+  }
+
+  header.topbar .desktop-nav {
+    display: none !important;
+  }
+
+  header.topbar .lang-switcher {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 99998;
+    display: none;
+    padding: 12px 14px 18px;
+    background: rgba(7, 11, 9, 0.97);
+    border-bottom: 1px solid rgba(184, 255, 53, 0.08);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .mobile-menu.is-open {
+    display: block;
+  }
+
+  .mobile-menu-nav {
+    display: grid;
+    gap: 4px;
+  }
+
+  .mobile-menu-nav a {
+    padding: 13px 14px;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.82);
+    font-family: "Roboto Mono", monospace;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .mobile-menu-nav a:hover,
+  .mobile-menu-nav a.active {
+    background: rgba(167, 255, 106, 0.1);
+    color: #b8ff2c;
+  }
+}

@@ -752,7 +752,10 @@ summary::after {
 }
 
 details:hover summary::after {
-  transform: translateY(-50%) scale(1.08);
+  transform: translateY(-50%) scale(1.18);
+  box-shadow:
+    0 6px 18px rgba(127, 217, 87, 0.24),
+    0 0 0 5px rgba(139, 227, 93, 0.07);
 }
 
 details[open] summary::after {
@@ -760,7 +763,10 @@ details[open] summary::after {
 }
 
 details[open]:hover summary::after {
-  transform: translateY(-50%) rotate(180deg) scale(1.08);
+  transform: translateY(-50%) rotate(180deg) scale(1.18);
+  box-shadow:
+    0 7px 20px rgba(127, 217, 87, 0.26),
+    0 0 0 5px rgba(139, 227, 93, 0.08);
 }
 
 @media (hover: none) {

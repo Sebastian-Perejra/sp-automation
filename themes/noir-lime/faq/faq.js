@@ -80,6 +80,11 @@
 
       hero.style.setProperty("--hero-x", `${x}px`);
       hero.style.setProperty("--hero-y", `${y}px`);
+      const orbitX = (x / rect.width - 0.5) * 28;
+const orbitY = (y / rect.height - 0.5) * 28;
+
+hero.style.setProperty("--orbit-x", `${orbitX}px`);
+hero.style.setProperty("--orbit-y", `${orbitY}px`);
     });
   }
 })();

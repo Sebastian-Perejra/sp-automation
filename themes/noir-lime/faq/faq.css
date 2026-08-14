@@ -1945,3 +1945,35 @@ body.faq-grid-mode .no-results {
     color: #b8ff2c;
   }
 }
+@media (max-width: 760px) {
+  .topbar-inner {
+    min-height: 64px;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+  }
+
+  .home-link {
+    display: none !important;
+  }
+
+  .mobile-menu-button {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: center;
+    margin: 0;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .lang-switcher {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    margin: 0;
+  }
+}

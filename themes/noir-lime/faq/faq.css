@@ -1455,3 +1455,18 @@ body.faq-modal-open {
     text-align: center;
   }
 }
+
+.faq-contact-turnstile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+@media (max-width: 380px) {
+  .faq-contact-turnstile .cf-turnstile {
+    transform: scale(0.86);
+    transform-origin: center top;
+  }
+}

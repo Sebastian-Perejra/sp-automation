@@ -578,5 +578,69 @@ if (
   );
 }
 
+  const faqBackgrounds =
+  document.querySelectorAll(".faq-bg");
+
+const faqParallaxEnabled =
+  window.matchMedia(
+    "(pointer: fine)"
+  ).matches &&
+  !window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+if (faqParallaxEnabled) {
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  window.addEventListener(
+    "pointermove",
+    event => {
+      const x =
+        event.clientX /
+        window.innerWidth -
+        0.5;
+
+      const y =
+        event.clientY /
+        window.innerHeight -
+        0.5;
+
+      targetX = x * -22;
+      targetY = y * -16;
+    }
+  );
+
+  function animateFaqBackground() {
+    currentX +=
+      (targetX - currentX) * 0.055;
+
+    currentY +=
+      (targetY - currentY) * 0.055;
+
+    faqBackgrounds.forEach(
+      background => {
+        background.style.setProperty(
+          "--faq-bg-x",
+          `${currentX}px`
+        );
+
+        background.style.setProperty(
+          "--faq-bg-y",
+          `${currentY}px`
+        );
+      }
+    );
+
+    requestAnimationFrame(
+      animateFaqBackground
+    );
+  }
+
+  animateFaqBackground();
+}
+
   filterFaq();
 })();

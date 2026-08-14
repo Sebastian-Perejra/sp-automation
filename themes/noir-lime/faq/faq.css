@@ -1977,3 +1977,37 @@ body.faq-grid-mode .no-results {
     margin: 0;
   }
 }
+@media (max-width: 760px) {
+  header.topbar .topbar-inner {
+    min-height: 64px !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-rows: 1fr !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+
+  header.topbar .home-link {
+    display: none !important;
+  }
+
+  header.topbar .mobile-menu-button {
+    display: flex !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    margin: 0 !important;
+  }
+
+  header.topbar .desktop-nav {
+    display: none !important;
+  }
+
+  header.topbar .lang-switcher {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    margin: 0 !important;
+  }
+}

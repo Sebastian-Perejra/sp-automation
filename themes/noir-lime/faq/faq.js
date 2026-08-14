@@ -40,4 +40,46 @@
   }
 
   setInterval(changeBackground, 14000);
+
+  const faqItems = Array.from(
+    document.querySelectorAll("#faq-list details")
+  );
+
+  faqItems.forEach(item => {
+    item.addEventListener("pointermove", event => {
+      const rect = item.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      item.style.setProperty("--spot-x", `${x}px`);
+      item.style.setProperty("--spot-y", `${y}px`);
+    });
+
+    item.addEventListener("pointerenter", () => {
+      item.classList.add("is-hovered");
+    });
+
+    item.addEventListener("pointerleave", () => {
+      item.classList.remove("is-hovered");
+    });
+
+    item.addEventListener("toggle", () => {
+      item.classList.toggle("is-open", item.open);
+    });
+  });
+
+  const hero = document.querySelector(".hero");
+
+  if (hero) {
+    hero.addEventListener("pointermove", event => {
+      const rect = hero.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      hero.style.setProperty("--hero-x", `${x}px`);
+      hero.style.setProperty("--hero-y", `${y}px`);
+    });
+  }
 })();

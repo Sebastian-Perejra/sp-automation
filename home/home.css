@@ -2142,3 +2142,20 @@ body.workspace-peek-open {
     font-size: 23px;
   }
 }
+.workspace-peek-btn {
+  animation: workspacePeekAppear 0.35s ease 8s backwards;
+}
+
+@keyframes workspacePeekAppear {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(3px) scale(0.9);
+  }
+
+  to {
+    opacity: 0.58;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+}

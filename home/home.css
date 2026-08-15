@@ -1866,282 +1866,260 @@ body.home-bg-show-b::after {
 .workspace-peek-overlay {
   position: fixed;
   inset: 0;
-
-  z-index: 5000;
-
+  z-index: 1200;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  padding: 34px;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(21, 25, 23, 0.12),
-      rgba(8, 11, 10, 0.72)
-    );
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
+  padding:
+    max(24px, env(safe-area-inset-top))
+    24px
+    24px;
+  background: rgba(7, 13, 10, 0.34);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-
   transition:
-    opacity 0.42s ease,
-    visibility 0.42s ease;
+    opacity 0.38s ease,
+    visibility 0s linear 0.38s,
+    backdrop-filter 0.38s ease,
+    -webkit-backdrop-filter 0.38s ease;
 }
 
-.workspace-peek-overlay.show {
+.workspace-peek-overlay[aria-hidden="false"] {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transition:
+    opacity 0.38s ease,
+    visibility 0s linear 0s,
+    backdrop-filter 0.38s ease,
+    -webkit-backdrop-filter 0.38s ease;
 }
 
 .workspace-peek-window {
   position: relative;
-
-  width: min(1180px, 92vw);
-  height: min(720px, 82vh);
-
-  border-radius: 26px;
-
-  overflow: hidden;
-
-  background: #0d1110;
-
-  box-shadow:
-    0 35px 100px rgba(0, 0, 0, 0.42),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-
+  width: min(1020px, 100%);
+  transform: translateY(18px) scale(0.985);
   opacity: 0;
-
-  transform:
-    scale(0.72)
-    translateY(28px);
-
+  filter: blur(7px);
   transition:
-    opacity 0.32s ease,
-    transform 0.68s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.34s ease,
+    filter 0.42s ease;
 }
 
-.workspace-peek-overlay.show .workspace-peek-window {
+.workspace-peek-overlay[aria-hidden="false"] .workspace-peek-window {
+  transform: translateY(0) scale(1);
   opacity: 1;
+  filter: blur(0);
+}
 
-  transform:
-    scale(1)
-    translateY(0);
+.workspace-peek-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(224, 235, 230, 0.22);
+  border-radius: 50%;
+  background: rgba(7, 13, 10, 0.44);
+  color: #eef4f0;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.workspace-peek-close:hover {
+  transform: scale(1.06);
+  background: rgba(10, 18, 14, 0.62);
+  border-color: rgba(224, 235, 230, 0.32);
 }
 
 .workspace-peek-frame {
   position: relative;
-
-  width: 100%;
-  height: 100%;
-
   overflow: hidden;
+  border: 1px solid rgba(210, 225, 216, 0.16);
+  border-radius: 30px;
+  background: rgba(10, 16, 13, 0.72);
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  isolation: isolate;
+}
 
-  background: #0b0f0e;
+.workspace-peek-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(
+      112deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.05) 18%,
+      rgba(255, 255, 255, 0.01) 34%,
+      rgba(255, 255, 255, 0.1) 52%,
+      rgba(255, 255, 255, 0.02) 66%,
+      rgba(255, 255, 255, 0.15) 82%,
+      rgba(255, 255, 255, 0.04) 100%
+    ),
+    radial-gradient(
+      circle at 22% 18%,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.06) 18%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 78% 32%,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.03) 16%,
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 50% 86%,
+      rgba(255, 255, 255, 0.12),
+      transparent 34%
+    );
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.workspace-peek-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 16, 13, 0.22) 0%,
+      rgba(10, 16, 13, 0.08) 9%,
+      rgba(255, 255, 255, 0.03) 19%,
+      rgba(255, 255, 255, 0) 36%,
+      rgba(255, 255, 255, 0) 64%,
+      rgba(8, 14, 11, 0.08) 76%,
+      rgba(8, 14, 11, 0.22) 100%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0) 34%,
+      rgba(255, 255, 255, 0.06) 66%,
+      rgba(6, 11, 8, 0.18) 100%
+    );
+  pointer-events: none;
 }
 
 .workspace-peek-image {
-  position: absolute;
-  inset: 0;
-
+  display: block;
   width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  transform: scale(1.08);
-
+  height: auto;
+  transform: scale(1.02);
   filter:
-    saturate(0.94)
-    contrast(1.04)
-    brightness(0.92);
-
-  transition:
-    transform 8s cubic-bezier(0.2, 0.6, 0.2, 1),
-    filter 1.2s ease;
-}
-
-.workspace-peek-overlay.show .workspace-peek-image {
-  transform: scale(1.015);
-
-  filter:
-    saturate(1)
-    contrast(1.04)
-    brightness(0.98);
+    saturate(0.92)
+    contrast(0.92)
+    brightness(0.88)
+    blur(0.6px);
 }
 
 .workspace-peek-shade {
   position: absolute;
   inset: 0;
-
-  pointer-events: none;
-
+  z-index: 1;
   background:
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.13) 0%,
-      rgba(0, 0, 0, 0.02) 42%,
-      rgba(0, 0, 0, 0.34) 100%
+      rgba(10, 16, 13, 0.1) 0%,
+      rgba(10, 16, 13, 0.02) 24%,
+      rgba(10, 16, 13, 0.08) 60%,
+      rgba(10, 16, 13, 0.32) 100%
     ),
-    radial-gradient(
-      circle at center,
-      transparent 46%,
-      rgba(0, 0, 0, 0.24) 100%
+    linear-gradient(
+      101deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.02) 16%,
+      rgba(255, 255, 255, 0) 28%,
+      rgba(255, 255, 255, 0.1) 44%,
+      rgba(255, 255, 255, 0) 58%,
+      rgba(255, 255, 255, 0.08) 76%,
+      rgba(255, 255, 255, 0) 100%
     );
+  pointer-events: none;
 }
 
 .workspace-peek-caption {
   position: absolute;
-
-  left: 22px;
-  bottom: 20px;
-
-  display: flex;
+  left: 20px;
+  bottom: 18px;
+  z-index: 4;
+  display: inline-flex;
   align-items: center;
-
-  gap: 9px;
-
-  padding: 9px 13px;
-
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
-
-  background: rgba(12, 16, 15, 0.5);
-
-  color: rgba(255, 255, 255, 0.84);
-
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(219, 231, 224, 0.14);
+  border-radius: 999px;
+  background: rgba(7, 13, 10, 0.5);
+  color: rgba(239, 244, 241, 0.94);
   font-family: var(--font-tech);
   font-size: 11px;
-
-  letter-spacing: 0.02em;
-
+  font-weight: 600;
+  letter-spacing: 0.04em;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.24);
 }
 
 .workspace-peek-dot {
-  width: 7px;
-  height: 7px;
-
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-
-  background: #5fc184;
-
+  background: #5bd67b;
   box-shadow:
-    0 0 0 4px rgba(95, 193, 132, 0.12),
-    0 0 14px rgba(95, 193, 132, 0.45);
+    0 0 0 4px rgba(91, 214, 123, 0.14),
+    0 0 14px rgba(91, 214, 123, 0.6);
 }
 
-.workspace-peek-close {
-  position: absolute;
-
-  top: 16px;
-  right: 16px;
-
-  z-index: 3;
-
-  width: 40px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
-
-  background: rgba(10, 14, 13, 0.42);
-
-  color: rgba(255, 255, 255, 0.86);
-
-  font-family: Arial, sans-serif;
-  font-size: 26px;
-  line-height: 1;
-
-  cursor: pointer;
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.workspace-peek-close:hover {
-  background: rgba(10, 14, 13, 0.72);
-
-  border-color: rgba(255, 255, 255, 0.26);
-
-  transform: scale(1.05);
-}
-
-body.workspace-peek-open {
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .hero-name-wrap {
-    gap: 7px;
-  }
-
-  .workspace-peek-btn {
-    width: 30px;
-    height: 30px;
-
-    border-radius: 9px;
-  }
-
-  .workspace-peek-btn svg {
-    width: 13px;
-    height: 13px;
-  }
-
+@media (max-width: 760px) {
   .workspace-peek-overlay {
     padding:
-      max(12px, env(safe-area-inset-top))
-      10px
-      max(12px, env(safe-area-inset-bottom));
+      max(16px, env(safe-area-inset-top))
+      16px
+      16px;
   }
 
   .workspace-peek-window {
     width: 100%;
-    height: min(72vh, 620px);
-
-    border-radius: 20px;
   }
 
-  .workspace-peek-caption {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-
-    width: fit-content;
-    max-width: calc(100% - 24px);
-
-    font-size: 9px;
+  .workspace-peek-frame {
+    border-radius: 22px;
   }
 
   .workspace-peek-close {
-    top: 10px;
-    right: 10px;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+  }
 
-    width: 36px;
-    height: 36px;
-
-    border-radius: 10px;
-
-    font-size: 23px;
+  .workspace-peek-caption {
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    justify-content: flex-start;
+    font-size: 10px;
+    padding: 9px 12px;
   }
 }
 .workspace-peek-btn {

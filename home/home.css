@@ -2464,3 +2464,55 @@ body.home-ready .hero-sheen {
     animation: none;
   }
 }
+
+.solution-picker {
+  width: min(1120px, calc(100vw - 48px));
+  max-width: 1120px;
+
+  padding: 40px 42px 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(247, 250, 248, 0.78)
+    );
+
+  box-shadow:
+    0 32px 90px rgba(24, 36, 31, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(22px) saturate(1.12);
+  -webkit-backdrop-filter: blur(22px) saturate(1.12);
+}
+
+.solution-picker-overlay.show {
+  background:
+    rgba(12, 18, 16, 0.28);
+}
+
+@media (max-width: 768px) {
+  .solution-picker {
+    width: 100%;
+    max-width: 100%;
+
+    padding:
+      50px
+      14px
+      24px;
+
+    border-radius: 20px;
+
+    background:
+      rgba(255, 255, 255, 0.91);
+
+    backdrop-filter:
+      blur(18px);
+
+    -webkit-backdrop-filter:
+      blur(18px);
+  }
+}

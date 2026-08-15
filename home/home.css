@@ -2240,3 +2240,67 @@ body.home-ready .carousel-container {
       0 24px 70px rgba(48, 43, 37, 0.09);
   }
 }
+
+.hero-sheen {
+  position: absolute;
+  top: -35%;
+  left: -35%;
+  width: 28%;
+  height: 170%;
+
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 30%,
+      rgba(255, 255, 255, 0.42) 50%,
+      rgba(255, 255, 255, 0.05) 70%,
+      transparent 100%
+    );
+
+  filter: blur(7px);
+
+  transform:
+    translateX(-180%)
+    rotate(8deg);
+
+  opacity: 0;
+}
+
+body.home-ready .hero-sheen {
+  animation:
+    heroSheenPass 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.75s 1 both;
+}
+
+@keyframes heroSheenPass {
+  0% {
+    opacity: 0;
+    transform:
+      translateX(-180%)
+      rotate(8deg);
+  }
+
+  18% {
+    opacity: 0.7;
+  }
+
+  78% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateX(650%)
+      rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sheen {
+    display: none;
+  }
+}

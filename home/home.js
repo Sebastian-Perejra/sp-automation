@@ -1960,6 +1960,56 @@ document.addEventListener(
   }
 );
 
+function initHeroSpotlight() {
+  const hero =
+    document.querySelector('.home-hero');
+
+  if (!hero) {
+    return;
+  }
+
+  hero.addEventListener(
+    'mousemove',
+    event => {
+      const rect =
+        hero.getBoundingClientRect();
+
+      const x =
+        ((event.clientX - rect.left) /
+          rect.width) *
+        100;
+
+      const y =
+        ((event.clientY - rect.top) /
+          rect.height) *
+        100;
+
+      hero.style.setProperty(
+        '--hero-spot-x',
+        `${x}%`
+      );
+
+      hero.style.setProperty(
+        '--hero-spot-y',
+        `${y}%`
+      );
+
+      hero.classList.add(
+        'hero-spotlight-active'
+      );
+    }
+  );
+
+  hero.addEventListener(
+    'mouseleave',
+    () => {
+      hero.classList.remove(
+        'hero-spotlight-active'
+      );
+    }
+  );
+}
 initHomeBackground();
+initHeroSpotlight();
 initCarousel();
 loadHomeParts();

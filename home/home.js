@@ -99,6 +99,8 @@ if ('requestIdleCallback' in window) {
 
   let currentX = 0;
   let currentY = 0;
+  let backgroundScale = 1.035;
+  let scaleDirection = 1;
 
   document.body.style.setProperty(
     '--home-bg-a',
@@ -165,6 +167,21 @@ if ('requestIdleCallback' in window) {
       `${currentY.toFixed(2)}px`
     );
 
+    backgroundScale +=
+  0.000006 * scaleDirection;
+
+if (backgroundScale >= 1.055) {
+  scaleDirection = -1;
+}
+
+if (backgroundScale <= 1.035) {
+  scaleDirection = 1;
+}
+
+document.body.style.setProperty(
+  '--home-bg-scale',
+  backgroundScale.toFixed(4)
+);
     window.requestAnimationFrame(
       animateParallax
     );

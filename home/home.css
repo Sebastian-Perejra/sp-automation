@@ -2304,3 +2304,11 @@ body.home-ready .hero-sheen {
     display: none;
   }
 }
+
+.solution-picker-btn {
+  will-change: transform;
+  transition:
+    transform 0.16s ease-out,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}

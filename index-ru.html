@@ -118,6 +118,11 @@
   >
 
   <link
+  rel="stylesheet"
+  href="/themes/noir-lime/estimator/pricing-estimator.css?v=1"
+>
+
+  <link
     rel="stylesheet"
     href="/components/components.css"
   >
@@ -321,6 +326,92 @@
   <div id="home-contact-slot"></div>
   <div id="home-solution-picker-slot"></div>
 
+  <button
+  class="pricing-estimator-trigger home-estimator-hidden-trigger"
+  type="button"
+  aria-hidden="true"
+  tabindex="-1"
+></button>
+
+<div
+  class="pricing-estimator-overlay"
+  aria-hidden="true"
+></div>
+
+<aside
+  class="pricing-estimator-panel"
+  aria-hidden="true"
+  aria-label="Калькулятор стоимости проекта"
+>
+  <button
+    class="pricing-estimator-close"
+    type="button"
+    aria-label="Закрыть калькулятор"
+  >
+    ×
+  </button>
+
+  <div class="pricing-estimator-panel-inner">
+    <div class="pricing-estimator-panel-kicker">
+      Предварительная оценка
+    </div>
+
+    <h2 class="pricing-estimator-panel-title">
+      Рассчитать стоимость проекта
+    </h2>
+
+    <p class="pricing-estimator-panel-text">
+      Ответьте на несколько коротких вопросов, чтобы получить примерную оценку проекта.
+    </p>
+
+    <div class="pricing-estimator-progress">
+      <div class="pricing-estimator-progress-head">
+        <span class="pricing-estimator-progress-label">
+          Начало
+        </span>
+
+        <span class="pricing-estimator-progress-value">
+          0%
+        </span>
+      </div>
+
+      <div class="pricing-estimator-progress-track">
+        <span class="pricing-estimator-progress-bar"></span>
+      </div>
+    </div>
+
+    <div class="pricing-estimator-content"></div>
+
+    <div class="pricing-estimator-navigation">
+      <button
+        class="pricing-estimator-back"
+        type="button"
+        disabled
+      >
+        ← Назад
+      </button>
+
+      <button
+        class="pricing-estimator-reset"
+        type="button"
+      >
+        Сбросить
+      </button>
+    </div>
+
+    <button
+      class="pricing-estimator-tired"
+      type="button"
+    >
+      Я устал отвечать — оставить запрос
+    </button>
+  </div>
+</aside>
+  
   <div id="site-footer-slot"></div>
+  <script
+  src="/themes/noir-lime/estimator/pricing-estimator-ru.js?v=1"
+  defer
+></script>
 </body>
 </html>

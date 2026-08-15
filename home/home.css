@@ -107,18 +107,38 @@ html, body {
     }
 
     .carousel img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotateY(calc(var(--i) * 36deg)) translateZ(400px);
-      height: 100px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotateY(calc(var(--i) * 36deg))
+    translateZ(400px);
+  height: 100px;
+  cursor: pointer;
+  backface-visibility: visible;
+  filter:
+    drop-shadow(0 14px 24px rgba(0,0,0,0.18))
+    saturate(1.05);
+  opacity: 0.92;
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease,
+    opacity 0.35s ease;
+}
 
     .carousel img:hover {
-      transform: translate(-50%, -50%) scale(1.2) rotateY(calc(var(--i) * 36deg)) translateZ(400px);
-    }
+  transform:
+    translate(-50%, -50%)
+    scale(1.16)
+    rotateY(calc(var(--i) * 36deg))
+    translateZ(420px);
+  filter:
+    drop-shadow(0 20px 34px rgba(0,0,0,0.24))
+    saturate(1.12)
+    brightness(1.06);
+  opacity: 1;
+}
 
     .hint {
       position: absolute;

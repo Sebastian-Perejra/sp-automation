@@ -2,438 +2,261 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Условия использования и политика конфиденциальности – Sebastian Automations</title>
-  <link rel="canonical" href="https://sp-automation.com/terms-ru.html">
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-456XH82BM9');
-  </script>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <title>
+    Условия использования и политика конфиденциальности – Sebastian Automations
+  </title>
 
-    html {
-      scroll-behavior: smooth;
-    }
+  <meta
+    name="description"
+    content="Условия использования и политика конфиденциальности sp-automation.com: обработка персональных данных, конфиденциальность, GDPR, безопасность, права пользователей и правила использования сайта."
+  >
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Manrope', sans-serif;
-      background:#f7f4ef;
-      color: #1a1a1a;
-    }
+  <link
+    rel="canonical"
+    href="https://sp-automation.com/terms-ru.html"
+  >
 
+  <link
+    rel="icon"
+    href="/favicon.png"
+  >
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 244, 239, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
-    .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
-    .home-link {
-      color: #35594b;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
-    .home-link:hover {
-      color: #29483c;
-      transform: translateX(-2px);
-    }
+  <link
+    rel="stylesheet"
+    href="/themes/noir-lime/terms/terms.css"
+  >
 
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      margin-left: auto;
-    }
+  <link
+    rel="stylesheet"
+    href="/consent/consent.css"
+  >
 
-    .desktop-nav a {
-      position: relative;
-      color: #52504c;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
+  <link
+    rel="stylesheet"
+    href="/assistant.css"
+  >
 
-    .desktop-nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 100%;
-      bottom: -7px;
-      height: 2px;
-      border-radius: 999px;
-      background: #35594b;
-      transition: right 0.22s ease;
-    }
+  <link
+    rel="stylesheet"
+    href="/nav-font-kaleidoscope.css?v=5"
+  >
 
-    .desktop-nav a:hover {
-      color: #35594b;
-    }
+  <script
+    src="/assistant.js"
+    defer
+  ></script>
 
-    .desktop-nav a:hover::after {
-      right: 0;
-    }
-
-    .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
-    .lang-switcher button {
-      min-width: 38px;
-      height: 34px;
-      padding: 0 9px;
-      border: 1px solid #d6cec4;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      color: #5f5a54;
-      font-family: "Roboto Mono", monospace;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition:
-        color 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .lang-switcher button:hover {
-      border-color: #35594b;
-      background: #35594b;
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .page {
-      width: min(100%, 1080px);
-      margin: 0 auto;
-      padding:
-        72px
-        24px
-        max(104px, env(safe-area-inset-bottom));
-    }
-
-    .hero {
-      margin-bottom: 22px;
-      padding: 34px;
-      border: 1px solid #d5e4ee;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #fff 0%, #f7fbff 100%);
-      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      color: #0F9D58;
-      font-size: clamp(2rem, 6vw, 3.1rem);
-      line-height: 1.08;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 760px;
-      color: #596771;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .updated {
-      display: inline-flex;
-      margin-top: 16px;
-      padding: 8px 11px;
-      border: 1px solid #cfe0eb;
-      border-radius: 9px;
-      background: #f8fbfd;
-      color: #6d7880;
-      font-size: 10px;
-    }
-
-    .legal-grid {
-      display: grid;
-      gap: 14px;
-    }
-
-    .legal-section {
-      padding: 24px;
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.97);
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
-    }
-
-    .legal-section h2 {
-      margin: 0 0 12px;
-      color: #007acc;
-      font-size: 17px;
-      line-height: 1.35;
-    }
-
-    .legal-section p,
-    .legal-section li {
-      color: #53616a;
-      font-size: 12px;
-      line-height: 1.72;
-    }
-
-    .legal-section p {
-      margin: 0 0 12px;
-    }
-
-    .legal-section p:last-child {
-      margin-bottom: 0;
-    }
-
-    .legal-section ul {
-      margin: 10px 0 0;
-      padding-left: 20px;
-    }
-
-    .legal-section li {
-      margin-bottom: 8px;
-    }
-
-    .confidentiality {
-      border-color: #bfe0ca;
-      background: linear-gradient(135deg, #f8fffa 0%, #f0faf3 100%);
-    }
-
-    .confidentiality h2 {
-      color: #0F9D58;
-    }
-
-    .confidentiality-note {
-      margin-top: 14px;
-      padding: 15px 16px;
-      border-left: 4px solid #0F9D58;
-      border-radius: 9px;
-      background: #fff;
-      color: #344b3c;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 1.65;
-    }
-
-    .contact-box {
-      margin-top: 20px;
-      padding: 26px;
-      text-align: center;
-      border: 1px solid #c9e2f7;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
-    }
-
-    .contact-box h2 {
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
-    .contact-box p {
-      margin: 0 0 18px;
-      color: #596771;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    .contact-box a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 20px;
-      border-radius: 9px;
-      background: #1a73e8;
-      color: #fff;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .contact-box a:hover {
-      background: #135fbe;
-    }
-
-    footer {
-  padding:
-    34px
-    20px
-    max(34px, env(safe-area-inset-bottom));
-  border-top: 1px solid #dfd8cf;
-  background: rgba(244, 240, 234, 0.96);
-  color: #817c75;
-  font-size: 12px;
-  text-align: center;
-}
-
-footer a {
-  color: #35594b;
-  text-decoration: none;
-  margin-left: 8px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-
-  .lang-switcher {
-    margin-left: 0;
-    justify-self: end;
-  }
-
-      .page {
-        padding:
-          24px
-          12px
-          max(36px, env(safe-area-inset-bottom));
-      }
-
-      .hero {
-        padding: 24px 18px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 12px;
-      }
-
-      .legal-section {
-        padding: 20px 16px;
-      }
-
-      .legal-section h2 {
-        font-size: 16px;
-      }
-
-      .legal-section p,
-      .legal-section li {
-        font-size: 11px;
-      }
-
-      .contact-box {
-        padding: 22px 16px;
-      }
-
-      .contact-box a {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .home-link {
-        font-size: 12px;
-      }
-
-      .lang-switcher button {
-        padding: 5px 7px;
-        font-size: 10px;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="/assistant.css">
-  <script src="/assistant.js" defer></script>
-  <link rel="stylesheet" href="nav-font-kaleidoscope.css?v=5">
-  <script src="nav-font-kaleidoscope.js?v=5" defer></script>
+  <script
+    src="/nav-font-kaleidoscope.js?v=5"
+    defer
+  ></script>
 </head>
 
 <body>
+
+  <div
+    class="terms-background"
+    aria-hidden="true"
+  >
+    <div
+      class="terms-background__layer terms-background__layer--1 is-active"
+    ></div>
+
+    <div
+      class="terms-background__layer terms-background__layer--2"
+    ></div>
+  </div>
+
+  <div
+    class="terms-frame"
+    aria-hidden="true"
+  >
+    <span class="terms-frame__top-left"></span>
+    <span class="terms-frame__top-right"></span>
+    <span class="terms-frame__bottom-left"></span>
+    <span class="terms-frame__bottom-right"></span>
+  </div>
+
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="home-link" href="index-ru.html">← На главную</a>
 
-      <nav class="desktop-nav">
-        <a href="about-ru.html">Обо мне</a>
-        <a href="services-ru.html">Услуги</a>
-        <a href="pricing-ru.html">Ценовая политика</a>
-        <a href="solutions-ru.html">Решения</a>
-        <a href="faq-ru.html">FAQ</a>
-        <a href="contacts-ru.html">Контакты</a>
+      <a
+        class="home-link"
+        href="/index-ru.html"
+      >
+        ← На главную
+      </a>
+
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav
+        class="desktop-nav"
+        aria-label="Основная навигация"
+      >
+        <a href="/about-ru.html">
+          Обо мне
+        </a>
+
+        <a href="/services-ru.html">
+          Услуги
+        </a>
+
+        <a href="/pricing-ru.html">
+          Ценовая политика
+        </a>
+
+        <a href="/solutions-ru.html">
+          Решения
+        </a>
+
+        <a href="/faq-ru.html">
+          FAQ
+        </a>
+
+        <a href="/contacts-ru.html">
+          Контакты
+        </a>
       </nav>
 
-      <div class="lang-switcher">
-        <button onclick="location.href='terms.html'">UA</button>
-        <button onclick="location.href='terms-en.html'">EN</button>
-        <button onclick="location.href='terms-ru.html'">RU</button>
+      <div
+        class="lang-switcher"
+        aria-label="Выбор языка"
+      >
+        <button
+          type="button"
+          onclick="location.href='/terms.html'"
+          aria-label="Украинская версия"
+        >
+          UA
+        </button>
+
+        <button
+          type="button"
+          onclick="location.href='/terms-en.html'"
+          aria-label="English version"
+        >
+          EN
+        </button>
+
+        <button
+          type="button"
+          class="active"
+          onclick="location.href='/terms-ru.html'"
+          aria-label="Русская версия"
+          aria-current="page"
+        >
+          RU
+        </button>
       </div>
+
     </div>
   </header>
 
+  <div class="mobile-menu">
+    <nav
+      class="mobile-menu-nav"
+      aria-label="Мобильная навигация"
+    >
+      <a href="/index-ru.html">
+        Главная
+      </a>
+
+      <a href="/about-ru.html">
+        Обо мне
+      </a>
+
+      <a href="/services-ru.html">
+        Услуги
+      </a>
+
+      <a href="/pricing-ru.html">
+        Ценовая политика
+      </a>
+
+      <a href="/solutions-ru.html">
+        Решения
+      </a>
+
+      <a href="/faq-ru.html">
+        FAQ
+      </a>
+
+      <a href="/contacts-ru.html">
+        Контакты
+      </a>
+
+      <a
+        href="/terms-ru.html"
+        class="active"
+        aria-current="page"
+      >
+        Условия использования
+      </a>
+    </nav>
+  </div>
+
   <main class="page">
+
     <section class="hero">
-      <h1>Условия использования и политика конфиденциальности</h1>
+      <h1>
+        Условия использования и политика конфиденциальности
+      </h1>
+
       <p>
         На этой странице описаны правила использования сайта, принципы обработки
         персональных данных, стандарты конфиденциальности, меры безопасности
         и условия взаимодействия с посетителями и заказчиками.
       </p>
-      <div class="updated">Последнее обновление: 2026 год</div>
+
+      <div class="updated">
+        Последнее обновление: 2026 год
+      </div>
     </section>
 
     <section class="legal-grid">
+
       <article class="legal-section">
-        <h2>1. Общие положения</h2>
+        <h2>
+          1. Общие положения
+        </h2>
+
         <p>
           Сайт предназначен для предоставления информации об услугах по автоматизации,
           аналитике, разработке веб-приложений, интеграциям, обработке документов,
           исследованию рынка и другим цифровым решениям.
         </p>
+
         <p>
           Используя этот сайт, вы подтверждаете, что ознакомились с настоящими
           условиями и политикой конфиденциальности.
@@ -441,12 +264,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>2. Отсутствие публичной оферты</h2>
+        <h2>
+          2. Отсутствие публичной оферты
+        </h2>
+
         <p>
           Информация, описания услуг, примеры, ориентировочные цены и сроки,
           размещённые на сайте, носят информационный характер и не являются
           публичной офертой.
         </p>
+
         <p>
           Окончательный объём работ, стоимость, сроки, права и ответственность
           сторон согласовываются индивидуально после изучения конкретной задачи.
@@ -454,11 +281,15 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>3. Персональные данные, которые могут обрабатываться</h2>
+        <h2>
+          3. Персональные данные, которые могут обрабатываться
+        </h2>
+
         <p>
           Могут обрабатываться данные, которые вы добровольно передаёте
           через формы, email, Telegram или другие каналы связи:
         </p>
+
         <ul>
           <li>имя;</li>
           <li>адрес электронной почты;</li>
@@ -470,12 +301,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>4. Техническая информация и аналитика</h2>
+        <h2>
+          4. Техническая информация и аналитика
+        </h2>
+
         <p>
           Сайт может автоматически получать техническую информацию:
           тип браузера, тип устройства, приблизительное местоположение,
           дату и время посещения, источник перехода и действия на страницах.
         </p>
+
         <p>
           Эти данные могут обрабатываться с помощью Google Analytics,
           Cloudflare и других технических сервисов для обеспечения безопасности,
@@ -484,12 +319,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>5. Формы, сообщения и сторонние сервисы</h2>
+        <h2>
+          5. Формы, сообщения и сторонние сервисы
+        </h2>
+
         <p>
           Для работы форм могут использоваться EmailJS, Google Apps Script,
           Telegram, Cloudflare Turnstile, хостинг-провайдеры и другие
           технические сервисы.
         </p>
+
         <p>
           Данные, отправленные через формы, могут поступать на email,
           в Telegram, Google Sheets или другой согласованный канал
@@ -498,13 +337,20 @@ footer a:hover {
       </article>
 
       <article class="legal-section confidentiality">
-        <h2>6. Конфиденциальность с первого контакта</h2>
+        <h2>
+          6. Конфиденциальность с первого контакта
+        </h2>
+
         <p>
           Вся непубличная информация, полученная при первом обращении,
           первичном ознакомлении с проектом, обсуждении требований
           или анализе материалов, по умолчанию считается конфиденциальной.
         </p>
-        <p>К такой информации относятся, в частности:</p>
+
+        <p>
+          К такой информации относятся, в частности:
+        </p>
+
         <ul>
           <li>документы, таблицы, базы данных и отчёты;</li>
           <li>финансовая, коммерческая и операционная информация;</li>
@@ -513,15 +359,18 @@ footer a:hover {
           <li>данные клиентов, сотрудников, партнёров и поставщиков;</li>
           <li>коммерческие условия и другие непубличные сведения о проекте.</li>
         </ul>
+
         <p>
           Такая информация не раскрывается, не публикуется, не продаётся
           и не передаётся третьим лицам без предварительного согласия заказчика,
           кроме случаев, прямо предусмотренных законодательством.
         </p>
+
         <p>
           Этот стандарт конфиденциальности действует независимо от того,
           подписан ли договор и начались ли оплачиваемые работы.
         </p>
+
         <div class="confidentiality-note">
           Конфиденциальность является стандартом сотрудничества, а не отдельной
           платной услугой. При необходимости стороны могут подписать отдельное NDA.
@@ -529,14 +378,21 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>7. Цели и правовые основания обработки данных</h2>
+        <h2>
+          7. Цели и правовые основания обработки данных
+        </h2>
+
         <p>
           Персональные данные обрабатываются только при наличии соответствующего
           правового основания: согласия, действий по запросу пользователя до
           заключения договора, исполнения договора, выполнения юридических
           обязанностей или законного интереса, который не нарушает права пользователя.
         </p>
-        <p>Данные могут использоваться для:</p>
+
+        <p>
+          Данные могут использоваться для:
+        </p>
+
         <ul>
           <li>ответа на обращение;</li>
           <li>анализа и оценки задачи;</li>
@@ -549,7 +405,10 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>8. GDPR и принципы защиты данных</h2>
+        <h2>
+          8. GDPR и принципы защиты данных
+        </h2>
+
         <p>
           Если к конкретной обработке применяется Общий регламент ЕС по защите данных
           (GDPR), персональные данные обрабатываются в соответствии с принципами
@@ -557,16 +416,26 @@ footer a:hover {
           минимизации данных, точности, ограничения сроков хранения,
           целостности, конфиденциальности и подотчётности.
         </p>
+
         <p>
           Официальный текст Регламента (ЕС) 2016/679 доступен на
-          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
-             target="_blank"
-             rel="noopener noreferrer">EUR-Lex</a>.
+          <a
+            href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            EUR-Lex
+          </a>.
           Разъяснение основных принципов GDPR опубликовано на сайте
-          <a href="https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en"
-             target="_blank"
-             rel="noopener noreferrer">Европейской комиссии</a>.
+          <a
+            href="https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Европейской комиссии
+          </a>.
         </p>
+
         <p>
           Настоящая страница описывает общие принципы работы с данными
           и не означает, что GDPR автоматически применяется к каждому
@@ -575,12 +444,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>9. Хранение и удаление данных</h2>
+        <h2>
+          9. Хранение и удаление данных
+        </h2>
+
         <p>
           Персональные данные хранятся только в течение срока, необходимого
           для коммуникации, оценки задачи, выполнения работ, соблюдения закона,
           разрешения споров, обеспечения безопасности или другой законной цели.
         </p>
+
         <p>
           Вы можете запросить информацию о переданных данных, попросить исправить
           неточности или удалить данные, если отсутствуют юридические,
@@ -589,13 +462,17 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>10. Ваши права в отношении данных</h2>
+        <h2>
+          10. Ваши права в отношении данных
+        </h2>
+
         <p>
           В зависимости от применимого законодательства вы можете иметь право
           на доступ, исправление, удаление, ограничение обработки,
           переносимость данных, возражение против обработки
           или отзыв ранее предоставленного согласия.
         </p>
+
         <p>
           Если применяется GDPR, вы также можете иметь право подать жалобу
           в компетентный надзорный орган по защите данных.
@@ -603,13 +480,17 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>11. Международная передача данных</h2>
+        <h2>
+          11. Международная передача данных
+        </h2>
+
         <p>
           Некоторые сторонние сервисы могут обрабатывать или хранить данные
           за пределами вашей страны или Европейской экономической зоны.
           Такие передачи регулируются условиями, гарантиями и механизмами
           защиты данных соответствующего поставщика.
         </p>
+
         <p>
           Для работы сайта, коммуникации, безопасности и выполнения проекта
           используются только сервисы, которые действительно необходимы.
@@ -617,13 +498,17 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>12. Безопасность</h2>
+        <h2>
+          12. Безопасность
+        </h2>
+
         <p>
           Для защиты сайта и форм могут применяться Cloudflare Turnstile,
           серверная проверка, ограничение частоты запросов, ограничения длины полей,
           контроль доступа, безопасное хранение учётных данных и отделение
           секретных ключей от открытого кода.
         </p>
+
         <p>
           Несмотря на разумные технические и организационные меры,
           ни один способ передачи или хранения данных не гарантирует
@@ -632,16 +517,21 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>13. Использование искусственного интеллекта</h2>
+        <h2>
+          13. Использование искусственного интеллекта
+        </h2>
+
         <p>
           Инструменты искусственного интеллекта могут использоваться как
           вспомогательные средства при исследовании, анализе, программировании,
           подготовке документации, тестировании или создании материалов.
         </p>
+
         <p>
           Архитектура, логика, проверка, тестирование и итоговый результат
           остаются под человеческим контролем и ответственностью исполнителя.
         </p>
+
         <p>
           Конфиденциальные материалы заказчика не должны передаваться
           внешним AI-сервисам без предварительного согласия заказчика
@@ -650,12 +540,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>14. Интеллектуальная собственность и контент сайта</h2>
+        <h2>
+          14. Интеллектуальная собственность и контент сайта
+        </h2>
+
         <p>
           Оригинальные тексты, структура, дизайн, описания услуг
           и другие материалы сайта защищаются применимым законодательством
           об интеллектуальной собственности.
         </p>
+
         <p>
           Копирование, публикация или коммерческое использование материалов
           без разрешения запрещены, кроме случаев, допускаемых законом.
@@ -663,12 +557,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>15. Права на разработанные решения</h2>
+        <h2>
+          15. Права на разработанные решения
+        </h2>
+
         <p>
           Права на исходный код, таблицы, скрипты, веб-приложения,
           дашборды, отчёты, документацию и другие результаты
           определяются индивидуальными условиями проекта.
         </p>
+
         <p>
           После завершения проекта заказчик получает согласованный объём
           материалов, доступов, исходных файлов, учётных данных, инструкций
@@ -677,12 +575,16 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>16. Сторонние бренды и сервисы</h2>
+        <h2>
+          16. Сторонние бренды и сервисы
+        </h2>
+
         <p>
           Названия, логотипы и торговые марки Google, Microsoft,
           Telegram, OpenAI, Cloudflare и других организаций
           принадлежат соответствующим правообладателям.
         </p>
+
         <p>
           Упоминание таких сервисов носит информационный характер
           и не означает официального партнёрства, сертификации
@@ -691,8 +593,14 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>17. Ограничение ответственности</h2>
-        <p>Владелец сайта не несёт ответственности за:</p>
+        <h2>
+          17. Ограничение ответственности
+        </h2>
+
+        <p>
+          Владелец сайта не несёт ответственности за:
+        </p>
+
         <ul>
           <li>изменения сторонних сервисов, API, политик или тарифов;</li>
           <li>временную недоступность хостинга, API или внешних платформ;</li>
@@ -704,19 +612,26 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-        <h2>18. Изменение условий</h2>
+        <h2>
+          18. Изменение условий
+        </h2>
+
         <p>
           Настоящие условия и политика конфиденциальности могут обновляться
           при изменении функциональности сайта, законодательства,
           сторонних сервисов, мер безопасности или процессов обработки данных.
         </p>
+
         <p>
           Актуальная версия всегда публикуется на этой странице.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>19. Контакт по вопросам конфиденциальности</h2>
+        <h2>
+          19. Контакт по вопросам конфиденциальности
+        </h2>
+
         <p>
           По вопросам конфиденциальности, персональных данных,
           удаления информации или подписания NDA воспользуйтесь
@@ -725,36 +640,65 @@ footer a:hover {
       </article>
 
       <article class="legal-section">
-    <h2>20. Языковые версии сайта</h2>
+        <h2>
+          20. Языковые версии сайта
+        </h2>
 
-    <p>
-        Сайт доступен на украинском, английском и русском языках.
-        Другие языковые версии предоставляются исключительно для удобства пользователей.
-    </p>
+        <p>
+          Сайт доступен на украинском, английском и русском языках.
+          Другие языковые версии предоставляются исключительно для удобства пользователей.
+        </p>
 
-    <p>
-        В случае возникновения расхождений, неоднозначностей, неточностей перевода
-        или различий в толковании положений настоящего документа приоритетной
-        для толкования считается версия на украинском языке.
-    </p>
-    </article>
+        <p>
+          В случае возникновения расхождений, неоднозначностей, неточностей перевода
+          или различий в толковании положений настоящего документа приоритетной
+          для толкования считается версия на украинском языке.
+        </p>
+      </article>
+
     </section>
 
     <section class="contact-box">
-      <h2>Нужно подписать NDA или согласовать отдельный режим конфиденциальности?</h2>
+      <h2>
+        Нужно подписать NDA или согласовать отдельный режим конфиденциальности?
+      </h2>
+
       <p>
         Свяжитесь со мной до передачи чувствительных материалов,
         и мы согласуем условия конфиденциальности до начала ознакомления с проектом.
       </p>
-      <a href="contacts-ru.html">Перейти к контактам</a>
+
+      <a href="/contacts-ru.html">
+        Перейти к контактам
+      </a>
     </section>
 
-    </main>
+  </main>
 
   <footer>
-  © 2015–2026 Sebastian Automations. Все права защищены.
-  <a href="terms-ru.html">Условия использования</a>
-</footer>
-  <script src="nav-font-kaleidoscope.js"></script>
+
+    <div class="footer-ticker">
+      <div class="footer-ticker-text">
+        Excel VBA · Google Apps Script · Power BI · DAX · Power Query ·
+        Автоматические отчёты · Автоматизация Excel · Обработка данных ·
+        Очистка данных · Парсинг данных · Интеграции · Макросы ·
+        Кастомная логика · Автоматизация бизнес-процессов ·
+        Аналитические дашборды · Автоматизация Google Sheets ·
+        Веб-приложения · JavaScript · Индивидуальные решения для бизнеса ·
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      © 2015–2026 Sebastian Automations. Все права защищены.
+      <a href="/terms-ru.html">
+        Условия использования
+      </a>
+    </div>
+
+  </footer>
+
+  <script src="/themes/noir-lime/terms/terms.js"></script>
+  <script src="/consent/consent.js"></script>
+
 </body>
 </html>

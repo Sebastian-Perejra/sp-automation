@@ -237,15 +237,28 @@
       );
 
     if (homeLink) {
-      homeLink.textContent =
-        text.home;
+  const homeLabels = {
+    uk: "Головна",
+    en: "Home",
+    ru: "Главная"
+  };
 
-      homeLink.href =
-        pageUrl(
-          "index",
-          lang
-        );
-    }
+  homeLink.textContent =
+    currentPage === "index"
+      ? homeLabels[lang]
+      : text.home;
+
+  homeLink.href =
+    pageUrl(
+      "index",
+      lang
+    );
+
+  homeLink.classList.toggle(
+    "is-home-page",
+    currentPage === "index"
+  );
+}
 
     const mobileMenuButton =
       document.querySelector(

@@ -1594,7 +1594,7 @@ body.faq-modal-open {
 
 @media (max-width: 760px) {
   .cosmic-frame {
-    inset: 90px 8px 10px;
+    inset: 104px 8px 30px;
   }
 
   .cosmic-frame__top-left,

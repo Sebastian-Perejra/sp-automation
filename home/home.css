@@ -2312,3 +2312,98 @@ body.home-ready .hero-sheen {
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
+
+.solution-picker-btn {
+  position: relative;
+  isolation: isolate;
+
+  padding: 15px 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #315f52 0%,
+      #2f6f86 52%,
+      #2f6f9f 100%
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 28px rgba(35, 74, 88, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+
+  letter-spacing: 0.01em;
+
+  overflow: visible;
+
+  transition:
+    transform 0.16s ease-out,
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
+}
+
+.solution-picker-btn::before {
+  content: "";
+  position: absolute;
+
+  inset: -7px;
+
+  z-index: -1;
+
+  border: 1px solid rgba(69, 119, 99, 0);
+  border-radius: 19px;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  animation:
+    solutionCtaSignal 9s ease-in-out infinite;
+}
+
+.solution-picker-btn:hover {
+  filter:
+    brightness(1.06)
+    saturate(1.06);
+
+  box-shadow:
+    0 17px 38px rgba(35, 74, 88, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+@keyframes solutionCtaSignal {
+  0%,
+  68%,
+  100% {
+    opacity: 0;
+    border-color: rgba(69, 119, 99, 0);
+    box-shadow: 0 0 0 0 rgba(69, 119, 99, 0);
+  }
+
+  72% {
+    opacity: 1;
+    border-color: rgba(76, 137, 111, 0.38);
+    box-shadow:
+      0 0 0 0 rgba(76, 137, 111, 0.22),
+      0 0 24px rgba(76, 137, 111, 0.18);
+  }
+
+  78% {
+    opacity: 0;
+    border-color: rgba(76, 137, 111, 0);
+    box-shadow:
+      0 0 0 12px rgba(76, 137, 111, 0),
+      0 0 34px rgba(76, 137, 111, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-picker-btn::before {
+    animation: none;
+  }
+}

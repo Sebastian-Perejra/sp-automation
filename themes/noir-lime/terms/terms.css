@@ -1135,15 +1135,10 @@ footer {
   background:
     linear-gradient(
       180deg,
-      rgba(247, 246, 241, 0.78) 0%,
-      rgba(247, 246, 241, 0.72) 28%,
-      rgba(247, 246, 241, 0.77) 72%,
-      rgba(247, 246, 241, 0.86) 100%
-    ),
-    radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.08),
-      rgba(235, 238, 232, 0.28)
+      rgba(247, 246, 241, 0.42) 0%,
+      rgba(247, 246, 241, 0.34) 30%,
+      rgba(247, 246, 241, 0.40) 72%,
+      rgba(247, 246, 241, 0.52) 100%
     );
 }
 
@@ -1166,12 +1161,12 @@ footer {
   }
 
   .terms-background__layer.is-active {
-    opacity: 0.2;
+    opacity: 0.42;
   }
 
   .terms-background::after {
     background:
-      rgba(247, 246, 241, 0.82);
+      rgba(247, 246, 241, 0.55);
   }
 }
 

@@ -1,1 +1,149 @@
+<button
+  id="reviews-float-btn"
+  type="button"
+  onclick="openReviewsPanel()"
+>
+  ⭐ Отзывы
+</button>
 
+<div
+  id="reviews-panel"
+  class="reviews-panel"
+>
+  <button
+    class="reviews-panel-close"
+    type="button"
+    onclick="closeReviewsPanel()"
+  >
+    ×
+  </button>
+
+  <div class="reviews-panel-header">
+    <div class="reviews-panel-badge">
+      ⭐ ОТЗЫВЫ
+    </div>
+
+    <h3>Что говорят клиенты</h3>
+  </div>
+
+  <div
+    id="reviews-panel-list"
+    class="reviews-panel-list"
+  >
+    <div class="reviews-panel-loading">
+      Загружаем отзывы...
+    </div>
+  </div>
+
+  <button
+    class="reviews-panel-leave-btn"
+    type="button"
+    onclick="openReviewForm()"
+  >
+    Оставить отзыв
+  </button>
+</div>
+
+<div
+  id="review-form-overlay"
+  class="review-form-overlay"
+>
+  <div class="review-form-modal">
+    <button
+      class="review-form-close"
+      type="button"
+      onclick="closeReviewForm()"
+    >
+      ×
+    </button>
+
+    <h3>Оставить отзыв</h3>
+
+    <label for="review-name">
+      Ваше имя
+    </label>
+
+    <input
+      id="review-name"
+      type="text"
+      placeholder="Например, Александр"
+    >
+
+    <label>
+      Ваша оценка
+    </label>
+
+    <div
+      id="review-rating"
+      class="review-rating"
+    >
+      <button
+        type="button"
+        onclick="selectReviewRating(1)"
+      >
+        ★
+      </button>
+
+      <button
+        type="button"
+        onclick="selectReviewRating(2)"
+      >
+        ★
+      </button>
+
+      <button
+        type="button"
+        onclick="selectReviewRating(3)"
+      >
+        ★
+      </button>
+
+      <button
+        type="button"
+        onclick="selectReviewRating(4)"
+      >
+        ★
+      </button>
+
+      <button
+        type="button"
+        onclick="selectReviewRating(5)"
+      >
+        ★
+      </button>
+    </div>
+
+    <input
+      id="review-rating-value"
+      type="hidden"
+      value="0"
+    >
+
+    <label for="review-text-input">
+      Ваш отзыв
+    </label>
+
+    <textarea
+      id="review-text-input"
+      rows="5"
+      placeholder="Напишите несколько слов о работе"
+    ></textarea>
+
+    <div class="turnstile-wrapper">
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+      ></div>
+    </div>
+
+    <button
+      class="review-submit-btn"
+      type="button"
+      onclick="submitWebsiteReview()"
+    >
+      Отправить отзыв
+    </button>
+
+    <div id="review-form-status"></div>
+  </div>
+</div>

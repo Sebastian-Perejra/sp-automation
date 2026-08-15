@@ -9,12 +9,9 @@ html, body {
     }
     
     body {
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
     }
-    
-    
+     
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -1349,20 +1346,7 @@ body::-webkit-scrollbar {
   }
 
   @media (max-width: 768px) {
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+     
     .home-hero {
       padding: 88px 16px 18px;
     }
@@ -1425,13 +1409,7 @@ body::-webkit-scrollbar {
     .hint {
       display: none !important;
     }
-
-    
-
-    
-
-    
-
+   
     #faq-button,
     #contact-float-btn,
     #reviews-float-btn {
@@ -1686,7 +1664,4 @@ body::-webkit-scrollbar {
 
   @media (max-width: 768px) {
     
-
-    
-
   }

@@ -2202,6 +2202,120 @@ function handleSolutionOverlayClick(
   }
 }
 
+const WORKSPACE_PEEK_FRAMES = [
+  {
+    src: '/home/assets/workspace.webp',
+    duration: 12000
+  },
+  {
+    src: '/home/assets/2stood.webp',
+    duration: 4500
+  },
+  {
+    src: '/home/assets/3smoking.webp',
+    duration: 9000
+  },
+  {
+    src: '/home/assets/4pullups.webp',
+    duration: 7000
+  },
+  {
+    src: '/home/assets/5again_working.webp',
+    duration: 14000
+  }
+];
+
+let workspacePeekFrameIndex = 0;
+let workspacePeekTimer = null;
+
+function preloadWorkspacePeekFrames() {
+  WORKSPACE_PEEK_FRAMES.forEach(frame => {
+    const image = new Image();
+    image.src = frame.src;
+  });
+}
+
+function showWorkspacePeekFrame(index) {
+  const overlay =
+    document.getElementById(
+      'workspace-peek'
+    );
+
+  if (!overlay) {
+    return;
+  }
+
+  const image =
+    overlay.querySelector(
+      '.workspace-peek-image'
+    );
+
+  if (!image) {
+    return;
+  }
+
+  image.classList.add(
+    'is-switching'
+  );
+
+  window.setTimeout(
+    () => {
+      image.src =
+        WORKSPACE_PEEK_FRAMES[index].src;
+
+      workspacePeekFrameIndex =
+        index;
+    },
+    260
+  );
+
+  window.setTimeout(
+    () => {
+      image.classList.remove(
+        'is-switching'
+      );
+    },
+    700
+  );
+}
+
+function scheduleWorkspacePeekFrame() {
+  window.clearTimeout(
+    workspacePeekTimer
+  );
+
+  const currentFrame =
+    WORKSPACE_PEEK_FRAMES[
+      workspacePeekFrameIndex
+    ];
+
+  workspacePeekTimer =
+    window.setTimeout(
+      () => {
+        let nextIndex =
+          workspacePeekFrameIndex + 1;
+
+        if (
+          nextIndex >=
+          WORKSPACE_PEEK_FRAMES.length
+        ) {
+          nextIndex = 0;
+        }
+
+        showWorkspacePeekFrame(
+          nextIndex
+        );
+
+        workspacePeekTimer =
+          window.setTimeout(
+            scheduleWorkspacePeekFrame,
+            750
+          );
+      },
+      currentFrame.duration
+    );
+}
+
 function openWorkspacePeek() {
   const overlay =
     document.getElementById(
@@ -2224,6 +2338,12 @@ function openWorkspacePeek() {
   document.body.classList.add(
     'workspace-peek-open'
   );
+
+  workspacePeekFrameIndex = 0;
+
+  showWorkspacePeekFrame(0);
+
+  scheduleWorkspacePeekFrame();
 }
 
 function closeWorkspacePeek() {
@@ -2235,6 +2355,12 @@ function closeWorkspacePeek() {
   if (!overlay) {
     return;
   }
+
+  window.clearTimeout(
+    workspacePeekTimer
+  );
+
+  workspacePeekTimer = null;
 
   overlay.classList.remove(
     'show'
@@ -2258,6 +2384,8 @@ function handleWorkspacePeekClick(event) {
     closeWorkspacePeek();
   }
 }
+
+preloadWorkspacePeekFrames();
 document.addEventListener(
   'click',
   event => {

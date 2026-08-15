@@ -2146,7 +2146,42 @@ body.home-bg-show-b::after {
   }
 }
 .workspace-peek-btn {
-  animation: workspacePeekAppear 0.35s ease 8s backwards;
+  animation:
+    workspacePeekAppear 0.35s ease 8s backwards,
+    workspacePeekHint 7s ease-in-out 10s infinite;
+}
+
+@keyframes workspacePeekHint {
+  0%,
+  72%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(53, 89, 75, 0);
+    border-color:
+      rgba(53, 89, 75, 0.16);
+    color:
+      rgba(53, 89, 75, 0.52);
+  }
+
+  78% {
+    box-shadow:
+      0 0 0 5px rgba(53, 89, 75, 0.08),
+      0 0 18px rgba(53, 89, 75, 0.14);
+    border-color:
+      rgba(53, 89, 75, 0.34);
+    color:
+      rgba(53, 89, 75, 0.82);
+  }
+
+  84% {
+    box-shadow:
+      0 0 0 10px rgba(53, 89, 75, 0),
+      0 0 24px rgba(53, 89, 75, 0);
+    border-color:
+      rgba(53, 89, 75, 0.2);
+    color:
+      rgba(53, 89, 75, 0.58);
+  }
 }
 
 @keyframes workspacePeekAppear {
@@ -3816,4 +3851,39 @@ body.home-ready .hero-sheen {
   .workspace-peek-curtain {
     width: 34%;
   }
+}
+
+.workspace-peek-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 4px;
+}
+
+.workspace-peek-progress span {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(239, 244, 241, 0.28);
+
+  transition:
+    width 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.workspace-peek-progress span.active {
+  width: 14px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(108, 219, 137, 0.92);
+
+  box-shadow:
+    0 0 10px
+    rgba(91, 214, 123, 0.42);
 }

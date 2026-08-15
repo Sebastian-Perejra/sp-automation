@@ -805,6 +805,51 @@ function selectContactMethod(
   input.focus();
 }
 
+const HOME_CONTACT_TEXTS = {
+  uk: {
+    fillAll: 'Заповніть усі поля.',
+    robot: 'Підтвердьте, що ви не робот.',
+    sending: 'Надсилаємо...',
+    sent: '✓ Повідомлення надіслано',
+    send: 'Надіслати',
+    failed: 'Не вдалося надіслати. Спробуйте ще раз.',
+    tooLong: 'Повідомлення занадто велике. Максимальний розмір — 5000 символів.',
+    securityFailed: 'Перевірка захисту завершилася помилкою. Оновіть сторінку та спробуйте ще раз.',
+    waitMinute: 'Повторне повідомлення можна надіслати через 1 хвилину.',
+    required: 'Заповніть усі обов’язкові поля.'
+  },
+
+  en: {
+    fillAll: 'Please complete all fields.',
+    robot: 'Please confirm that you are not a robot.',
+    sending: 'Sending...',
+    sent: '✓ Message sent',
+    send: 'Send',
+    failed: 'Could not send. Please try again.',
+    tooLong: 'The message is too long. The maximum length is 5000 characters.',
+    securityFailed: 'The security check failed. Refresh the page and try again.',
+    waitMinute: 'You can send another message in 1 minute.',
+    required: 'Please complete all required fields.'
+  },
+
+  ru: {
+    fillAll: 'Заполните все поля.',
+    robot: 'Подтвердите, что вы не робот.',
+    sending: 'Отправляем...',
+    sent: '✓ Сообщение отправлено',
+    send: 'Отправить',
+    failed: 'Не удалось отправить. Попробуйте ещё раз.',
+    tooLong: 'Сообщение слишком большое. Максимальный размер — 5000 символов.',
+    securityFailed: 'Проверка защиты завершилась ошибкой. Обновите страницу и попробуйте ещё раз.',
+    waitMinute: 'Повторное сообщение можно отправить через 1 минуту.',
+    required: 'Заполните все обязательные поля.'
+  }
+};
+
+const HOME_CONTACT_TEXT =
+  HOME_CONTACT_TEXTS[HOME_LANG] ||
+  HOME_CONTACT_TEXTS.uk;
+
 async function testContactForm() {
   const name =
     document
@@ -855,7 +900,7 @@ async function testContactForm() {
     !message
   ) {
     status.textContent =
-      'Заповніть усі поля.';
+      HOME_CONTACT_TEXT.fillAll;
 
     status.style.color =
       '#cc0000';
@@ -865,7 +910,7 @@ async function testContactForm() {
 
   if (!turnstileToken) {
     status.textContent =
-      'Підтвердіть, що ви не робот.';
+      HOME_CONTACT_TEXT.robot;
 
     status.style.color =
       '#cc0000';
@@ -874,7 +919,7 @@ async function testContactForm() {
   }
 
   status.textContent =
-    'Надсилаємо...';
+    HOME_CONTACT_TEXT.sending;
 
   status.style.color =
     '#555';
@@ -882,7 +927,7 @@ async function testContactForm() {
   button.disabled = true;
 
   button.textContent =
-    'Надсилаємо...';
+    HOME_CONTACT_TEXT.sending;
 
   try {
     const response =
@@ -919,12 +964,12 @@ async function testContactForm() {
     if (!result.ok) {
       throw new Error(
         result.error ||
-        'Помилка відправлення'
+        HOME_CONTACT_TEXT.failed
       );
     }
 
     status.textContent =
-      '✓ Повідомлення надіслано';
+      HOME_CONTACT_TEXT.sent;
 
     status.style.color =
       '#0F9D58';
@@ -967,7 +1012,7 @@ async function testContactForm() {
 
     let errorMessage =
       error.message ||
-      'Не вдалося надіслати. Спробуйте ще раз.';
+      HOME_CONTACT_TEXT.failed;
 
     if (
       errorMessage.includes(
@@ -975,7 +1020,7 @@ async function testContactForm() {
       )
     ) {
       errorMessage =
-        'Повідомлення занадто велике. Максимальний розмір — 5000 символів.';
+        HOME_CONTACT_TEXT.tooLong;
     }
 
     if (
@@ -984,7 +1029,7 @@ async function testContactForm() {
       )
     ) {
       errorMessage =
-        'Перевірка захисту завершилася помилкою. Оновіть сторінку та спробуйте ще раз.';
+        HOME_CONTACT_TEXT.securityFailed;
     }
 
     if (
@@ -993,7 +1038,7 @@ async function testContactForm() {
       )
     ) {
       errorMessage =
-        'Повторне повідомлення можна надіслати через 1 хвилину.';
+        HOME_CONTACT_TEXT.waitMinute;
     }
 
     if (
@@ -1002,7 +1047,7 @@ async function testContactForm() {
       )
     ) {
       errorMessage =
-        'Заповніть усі обов’язкові поля.';
+        HOME_CONTACT_TEXT.required;
     }
 
     status.textContent =
@@ -1014,7 +1059,7 @@ async function testContactForm() {
     button.disabled = false;
 
     button.textContent =
-      'Надіслати';
+      HOME_CONTACT_TEXT.send;
   }
 }
 
@@ -1050,6 +1095,36 @@ function closeReviewsPanel() {
   }
 }
 
+const HOME_REVIEWS_TEXTS = {
+  uk: {
+    loading: 'Завантажуємо відгуки...',
+    button: '⭐ Відгуки',
+    pinned: '📌 Закріплено',
+    client: 'Клієнт',
+    loadError: 'Не вдалося завантажити відгуки.'
+  },
+
+  en: {
+    loading: 'Loading reviews...',
+    button: '⭐ Reviews',
+    pinned: '📌 Pinned',
+    client: 'Client',
+    loadError: 'Could not load reviews.'
+  },
+
+  ru: {
+    loading: 'Загружаем отзывы...',
+    button: '⭐ Отзывы',
+    pinned: '📌 Закреплено',
+    client: 'Клиент',
+    loadError: 'Не удалось загрузить отзывы.'
+  }
+};
+
+const HOME_REVIEWS_TEXT =
+  HOME_REVIEWS_TEXTS[HOME_LANG] ||
+  HOME_REVIEWS_TEXTS.uk;
+
 async function loadPublishedReviews() {
   const list =
     document.getElementById(
@@ -1061,7 +1136,7 @@ async function loadPublishedReviews() {
   }
 
   list.innerHTML =
-    '<div class="reviews-panel-loading">Завантажуємо відгуки...</div>';
+    `<div class="reviews-panel-loading">${HOME_REVIEWS_TEXT.loading}</div>`;
 
   try {
     const response =
@@ -1080,7 +1155,7 @@ async function loadPublishedReviews() {
       )
     ) {
       throw new Error(
-        'Некоректна відповідь API'
+        'Invalid reviews API response'
       );
     }
 
@@ -1091,7 +1166,8 @@ async function loadPublishedReviews() {
 
     if (reviewsButton) {
       reviewsButton.textContent =
-        '⭐ Відгуки · ' +
+        HOME_REVIEWS_TEXT.button +
+        ' · ' +
         data.reviews.length;
     }
 
@@ -1113,7 +1189,7 @@ async function loadPublishedReviews() {
             review.pinned
               ? `
                 <div class="review-pinned">
-                  📌 Закріплено
+                  ${HOME_REVIEWS_TEXT.pinned}
                 </div>
               `
               : '';
@@ -1132,7 +1208,7 @@ async function loadPublishedReviews() {
 
               <div class="review-meta">
                 <div class="review-author">
-                  — ${escapeReviewHtml(review.name || 'Клієнт')}
+                  — ${escapeReviewHtml(review.name || HOME_REVIEWS_TEXT.client)}
                 </div>
 
                 <div class="review-date">
@@ -1152,7 +1228,7 @@ async function loadPublishedReviews() {
     );
 
     list.innerHTML =
-      '<div class="reviews-panel-loading">Не вдалося завантажити відгуки.</div>';
+      `<div class="reviews-panel-loading">${HOME_REVIEWS_TEXT.loadError}</div>`;
   }
 }
 
@@ -1241,6 +1317,54 @@ function selectReviewRating(
     );
 }
 
+const HOME_REVIEW_FORM_TEXTS = {
+  uk: {
+    empty: 'Напишіть текст відгуку.',
+    rating: 'Оберіть оцінку від 1 до 5.',
+    robot: 'Підтвердіть, що ви не робот.',
+    sending: 'Надсилаємо...',
+    sent: '✓ Відгук надіслано на модерацію',
+    failed: 'Не вдалося надіслати відгук. Спробуйте ще раз.',
+    tooLong: 'Відгук занадто великий. Максимальний розмір — 3000 символів.',
+    security: 'Будь ласка, підтвердьте, що ви не робот.',
+    emptyServer: 'Будь ласка, введіть текст відгуку.',
+    send: 'Надіслати відгук',
+    pageLang: 'UA'
+  },
+
+  en: {
+    empty: 'Please write your review.',
+    rating: 'Please select a rating from 1 to 5.',
+    robot: 'Please confirm that you are not a robot.',
+    sending: 'Sending...',
+    sent: '✓ Review sent for moderation',
+    failed: 'Could not send the review. Please try again.',
+    tooLong: 'The review is too long. The maximum length is 3000 characters.',
+    security: 'Please confirm that you are not a robot.',
+    emptyServer: 'Please enter your review.',
+    send: 'Submit review',
+    pageLang: 'EN'
+  },
+
+  ru: {
+    empty: 'Напишите текст отзыва.',
+    rating: 'Выберите оценку от 1 до 5.',
+    robot: 'Подтвердите, что вы не робот.',
+    sending: 'Отправляем...',
+    sent: '✓ Отзыв отправлен на модерацию',
+    failed: 'Не удалось отправить отзыв. Попробуйте ещё раз.',
+    tooLong: 'Отзыв слишком большой. Максимальный размер — 3000 символов.',
+    security: 'Подтвердите, что вы не робот.',
+    emptyServer: 'Введите текст отзыва.',
+    send: 'Отправить отзыв',
+    pageLang: 'RU'
+  }
+};
+
+const HOME_REVIEW_FORM_TEXT =
+  HOME_REVIEW_FORM_TEXTS[HOME_LANG] ||
+  HOME_REVIEW_FORM_TEXTS.uk;
+
 async function submitWebsiteReview() {
   const name =
     document
@@ -1289,7 +1413,7 @@ async function submitWebsiteReview() {
 
   if (!review) {
     status.textContent =
-      'Напишіть текст відгуку.';
+      HOME_REVIEW_FORM_TEXT.empty;
 
     status.style.color =
       '#cc0000';
@@ -1302,7 +1426,7 @@ async function submitWebsiteReview() {
     rating > 5
   ) {
     status.textContent =
-      'Оберіть оцінку від 1 до 5.';
+      HOME_REVIEW_FORM_TEXT.rating;
 
     status.style.color =
       '#cc0000';
@@ -1312,7 +1436,7 @@ async function submitWebsiteReview() {
 
   if (!turnstileToken) {
     status.textContent =
-      'Підтвердіть, що ви не робот.';
+      HOME_REVIEW_FORM_TEXT.robot;
 
     status.style.color =
       '#cc0000';
@@ -1321,7 +1445,7 @@ async function submitWebsiteReview() {
   }
 
   status.textContent =
-    'Надсилаємо...';
+    HOME_REVIEW_FORM_TEXT.sending;
 
   status.style.color =
     '#555';
@@ -1329,7 +1453,7 @@ async function submitWebsiteReview() {
   button.disabled = true;
 
   button.textContent =
-    'Надсилаємо...';
+    HOME_REVIEW_FORM_TEXT.sending;
 
   try {
     const response =
@@ -1345,21 +1469,12 @@ async function submitWebsiteReview() {
 
           body:
             JSON.stringify({
-              source:
-                'review',
-
-              name:
-                name,
-
-              rating:
-                rating,
-
-              review:
-                review,
-
+              source: 'review',
+              name: name,
+              rating: rating,
+              review: review,
               page_lang:
-                'UA',
-
+                HOME_REVIEW_FORM_TEXT.pageLang,
               turnstileToken:
                 turnstileToken
             })
@@ -1372,12 +1487,12 @@ async function submitWebsiteReview() {
     if (!result.ok) {
       throw new Error(
         result.error ||
-        'Помилка відправлення'
+        HOME_REVIEW_FORM_TEXT.failed
       );
     }
 
     status.textContent =
-      '✓ Відгук надіслано на модерацію';
+      HOME_REVIEW_FORM_TEXT.sent;
 
     status.style.color =
       '#0F9D58';
@@ -1432,7 +1547,7 @@ async function submitWebsiteReview() {
 
     let errorMessage =
       error.message ||
-      'Не вдалося надіслати відгук. Спробуйте ще раз.';
+      HOME_REVIEW_FORM_TEXT.failed;
 
     if (
       errorMessage.includes(
@@ -1440,7 +1555,7 @@ async function submitWebsiteReview() {
       )
     ) {
       errorMessage =
-        'Відгук занадто великий. Максимальний розмір — 3000 символів.';
+        HOME_REVIEW_FORM_TEXT.tooLong;
     }
 
     if (
@@ -1449,7 +1564,7 @@ async function submitWebsiteReview() {
       )
     ) {
       errorMessage =
-        'Будь ласка, підтвердьте, що ви не робот.';
+        HOME_REVIEW_FORM_TEXT.security;
     }
 
     if (
@@ -1458,7 +1573,7 @@ async function submitWebsiteReview() {
       )
     ) {
       errorMessage =
-        'Будь ласка, введіть текст відгуку.';
+        HOME_REVIEW_FORM_TEXT.emptyServer;
     }
 
     status.textContent =
@@ -1470,10 +1585,9 @@ async function submitWebsiteReview() {
     button.disabled = false;
 
     button.textContent =
-      'Надіслати відгук';
+      HOME_REVIEW_FORM_TEXT.send;
   }
 }
-
 function openExcelStep() {
   openSolutionCategoryStep(
     'solution-excel-step'
@@ -1623,60 +1737,95 @@ function setSolutionProgress(
   }
 }
 
-function selectExcelTask(
-  task
-) {
+const HOME_SOLUTION_CATEGORIES = {
+  uk: {
+    excel: 'Excel / Google Sheets',
+    analytics: 'Звіти та аналітика',
+    manual: 'Ручна робота з даними',
+    telegram: 'Telegram / сповіщення',
+    powerbi: 'Power BI'
+  },
+
+  en: {
+    excel: 'Excel / Google Sheets',
+    analytics: 'Reports & analytics',
+    manual: 'Manual data work',
+    telegram: 'Telegram / notifications',
+    powerbi: 'Power BI'
+  },
+
+  ru: {
+    excel: 'Excel / Google Sheets',
+    analytics: 'Отчёты и аналитика',
+    manual: 'Ручная работа с данными',
+    telegram: 'Telegram / уведомления',
+    powerbi: 'Power BI'
+  }
+};
+
+const HOME_SOLUTION_CATEGORY =
+  HOME_SOLUTION_CATEGORIES[HOME_LANG] ||
+  HOME_SOLUTION_CATEGORIES.uk;
+
+function selectExcelTask(task) {
   selectSolutionTask(
-    'Excel / Google Sheets',
+    HOME_SOLUTION_CATEGORY.excel,
     task,
     'Excel / Power Query / VBA / Google Apps Script',
     'solution-excel-step'
   );
 }
 
-function selectAnalyticsTask(
-  task
-) {
+function selectAnalyticsTask(task) {
   selectSolutionTask(
-    'Звіти та аналітика',
+    HOME_SOLUTION_CATEGORY.analytics,
     task,
     'Excel / Power Query / Power BI / Google Sheets',
     'solution-analytics-step'
   );
 }
 
-function selectManualDataTask(
-  task
-) {
+function selectManualDataTask(task) {
   selectSolutionTask(
-    'Ручна робота з даними',
+    HOME_SOLUTION_CATEGORY.manual,
     task,
     'Excel / Power Query / VBA / Google Apps Script',
     'solution-manual-data-step'
   );
 }
 
-function selectTelegramTask(
-  task
-) {
+function selectTelegramTask(task) {
   selectSolutionTask(
-    'Telegram / сповіщення',
+    HOME_SOLUTION_CATEGORY.telegram,
     task,
     'Telegram Bot API / Google Apps Script / API / Webhooks',
     'solution-telegram-step'
   );
 }
 
-function selectPowerBiTask(
-  task
-) {
+function selectPowerBiTask(task) {
   selectSolutionTask(
-    'Power BI',
+    HOME_SOLUTION_CATEGORY.powerbi,
     task,
     'Power BI / Power Query / DAX / Excel / Google Sheets',
     'solution-powerbi-step'
   );
 }
+
+const HOME_SOLUTION_PLACEHOLDERS = {
+  uk:
+    'Наприклад: щодня отримую файли від 12 менеджерів і вручну збираю їх в один звіт...',
+
+  en:
+    'For example: every day I receive files from 12 managers and manually combine them into one report...',
+
+  ru:
+    'Например: каждый день я получаю файлы от 12 менеджеров и вручную собираю их в один отчёт...'
+};
+
+const HOME_SOLUTION_PLACEHOLDER =
+  HOME_SOLUTION_PLACEHOLDERS[HOME_LANG] ||
+  HOME_SOLUTION_PLACEHOLDERS.uk;
 
 function selectSolutionTask(
   category,
@@ -1757,7 +1906,7 @@ function selectSolutionTask(
   description.value = '';
 
   description.placeholder =
-    'Наприклад: щодня отримую файли від 12 менеджерів і вручну збираю їх в один звіт...';
+  HOME_SOLUTION_PLACEHOLDER;
 
   currentStep.classList.remove(
     'active'
@@ -1778,14 +1927,43 @@ function selectSolutionTask(
 }
 
 function openOtherSolution() {
+  const texts = {
+    uk: {
+      category: 'Інше',
+      task: 'Індивідуальна задача',
+      tools: 'Підберемо після короткого опису задачі',
+      placeholder:
+        'Опишіть, що ви зараз робите вручну і який результат хотіли б отримувати автоматично...'
+    },
+
+    en: {
+      category: 'Other',
+      task: 'Custom task',
+      tools: 'We’ll choose the right tools after a short description',
+      placeholder:
+        'Describe what you currently do manually and what result you would like to get automatically...'
+    },
+
+    ru: {
+      category: 'Другое',
+      task: 'Индивидуальная задача',
+      tools: 'Подберём после короткого описания задачи',
+      placeholder:
+        'Опишите, что вы сейчас делаете вручную и какой результат хотели бы получать автоматически...'
+    }
+  };
+
+  const text =
+    texts[HOME_LANG] ||
+    texts.uk;
+
   selectedSolutionCategory =
-    'Інше';
+    text.category;
 
   selectedSolutionTask =
-    'Індивідуальна задача';
+    text.task;
 
-  selectedSolutionTools =
-    '';
+  selectedSolutionTools = '';
 
   selectedSolutionStepId =
     'solution-start-step';
@@ -1820,16 +1998,10 @@ function openOtherSolution() {
       'solution-description'
     );
 
-  if (
-    !startStep ||
-    !resultStep ||
-    !selectedText ||
-    !resultTitle ||
-    !toolsText ||
-    !description
-  ) {
-    return;
-  }
+  const progress =
+    document.querySelectorAll(
+      '.solution-picker-progress span'
+    );
 
   const randomPhrase =
     otherSolutionPhrases[
@@ -1843,15 +2015,15 @@ function openOtherSolution() {
     randomPhrase;
 
   selectedText.textContent =
-    'Індивідуальна задача';
+    text.task;
 
   toolsText.textContent =
-    'Підберемо після короткого опису задачі';
+    text.tools;
 
   description.value = '';
 
   description.placeholder =
-    'Опишіть, що ви зараз робите вручну і який результат хотіли б отримувати автоматично...';
+    text.placeholder;
 
   startStep.classList.remove(
     'active'
@@ -1861,14 +2033,19 @@ function openOtherSolution() {
     'active'
   );
 
-  setSolutionProgress(2);
-
-  setTimeout(
-    () => {
-      description.focus();
-    },
-    100
+  progress.forEach(item =>
+    item.classList.remove('active')
   );
+
+  if (progress[2]) {
+    progress[2].classList.add(
+      'active'
+    );
+  }
+
+  setTimeout(() => {
+    description.focus();
+  }, 100);
 }
 
 function backToSelectedCategoryStep() {
@@ -1908,38 +2085,64 @@ function backToSelectedCategoryStep() {
 }
 
 function discussSelectedTask() {
+  const texts = {
+    uk: {
+      category: 'Напрямок',
+      task: 'Задача',
+      description: 'Опис'
+    },
+
+    en: {
+      category: 'Category',
+      task: 'Task',
+      description: 'Description'
+    },
+
+    ru: {
+      category: 'Направление',
+      task: 'Задача',
+      description: 'Описание'
+    }
+  };
+
+  const text =
+    texts[HOME_LANG] ||
+    texts.uk;
+
   const description =
     document
       .getElementById(
         'solution-description'
       )
-      ?.value.trim() || '';
+      .value
+      .trim();
 
   closeSolutionPicker();
   openContactModal();
 
-  let text =
-    'Напрям: ' +
+  let message =
+    text.category +
+    ': ' +
     selectedSolutionCategory +
     '\n' +
-    'Задача: ' +
+    text.task +
+    ': ' +
     selectedSolutionTask;
 
   if (description) {
-    text +=
-      '\n\nОпис:\n' +
+    message +=
+      '\n\n' +
+      text.description +
+      ':\n' +
       description;
   }
 
-  const contactMessage =
-    document.getElementById(
+  document
+    .getElementById(
       'contact-message'
-    );
-
-  if (contactMessage) {
-    contactMessage.value =
-      text;
-  }
+    )
+    .value =
+    message;
 }
 
 function openSolutionPicker() {

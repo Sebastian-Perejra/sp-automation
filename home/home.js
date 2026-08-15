@@ -2145,10 +2145,34 @@ function initMagneticCta() {
   );
 }
 
+function initSolutionsNavHint() {
+  const links =
+    Array.from(
+      document.querySelectorAll(
+        '.topbar a'
+      )
+    );
+
+  const solutionsLink =
+    links.find(link =>
+      link.textContent.trim() ===
+      'РІШЕННЯ'
+    );
+
+  if (!solutionsLink) {
+    return;
+  }
+
+  solutionsLink.classList.add(
+    'home-solutions-hint'
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
 initMagneticCta();
+initSolutionsNavHint();
 initCarousel();
 initHomeEntrance();
 loadHomeParts();

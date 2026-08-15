@@ -150,11 +150,6 @@ body {
     transform 0.2s ease;
 }
 
-.lang-switcher button:first-child {
-  border-color: #9ebda6;
-  background: #315c42;
-  color: #ffffff;
-}
 
 .lang-switcher button:hover {
   border-color: #789d82;
@@ -786,7 +781,6 @@ footer {
   font-size: 10px;
 }
 
-.lang-switcher button:first-child,
 .lang-switcher button.active {
   border-color: #b8ff35;
   background: #b8ff35;

@@ -118,8 +118,8 @@
   >
 
   <link
-  rel="stylesheet"
-  href="/themes/noir-lime/estimator/pricing-estimator.css?v=1"
+    rel="stylesheet"
+    href="/themes/noir-lime/estimator/pricing-estimator.css?v=1"
   >
 
   <link
@@ -163,16 +163,28 @@
   <div id="site-header-slot"></div>
 
   <section class="home-hero">
-    <div
-      class="hero-sheen"
-      aria-hidden="true"
-    ></div>
+    <div class="hero-sheen" aria-hidden="true"></div>
+
+    <div class="hero-eyebrow">
+      BUSINESS AUTOMATION · ANALYTICS · SYSTEMS
+    </div>
 
     <div class="hero-inline">
-      <img
-        src="/home/assets/avatar.png"
-        alt="Avatar"
-      >
+
+      <div class="hero-avatar-orbit" aria-hidden="true">
+        <span class="hero-orbit hero-orbit-1"></span>
+        <span class="hero-orbit hero-orbit-2"></span>
+        <span class="hero-orbit hero-orbit-3"></span>
+
+        <span class="hero-orbit-dot hero-orbit-dot-1"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-2"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-3"></span>
+
+        <img
+          src="/home/assets/avatar.png"
+          alt="Avatar"
+        >
+      </div>
 
       <div class="hero-name-wrap">
         <div class="typewriter">
@@ -204,9 +216,25 @@
     </div>
 
     <p>
-      I automate and visualize everything that can be automated.
-      And the rest — I’ll probably try too.
+      I automate and visualize everything that can be automated. And the rest — I’ll probably try too.
     </p>
+
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <strong>11+ years</strong>
+        <span>of automation experience</span>
+      </div>
+
+      <div class="hero-metric">
+        <strong>Excel · BI · Apps Script</strong>
+        <span>working systems and analytics</span>
+      </div>
+
+      <div class="hero-metric">
+        <strong>Automation · Analytics</strong>
+        <span>integrations and custom logic</span>
+      </div>
+    </div>
 
     <button
       class="cta-button solution-picker-btn"
@@ -215,6 +243,28 @@
     >
       ⚡ Find the right solution
     </button>
+
+    <div class="hero-data-curve" aria-hidden="true">
+      <svg viewBox="0 0 220 110" preserveAspectRatio="none">
+        <path
+          class="hero-data-grid-line"
+          d="M10 92 H210"
+        />
+
+        <path
+          class="hero-data-curve-line"
+          d="M12 88 C48 86, 56 52, 92 58 S134 84, 160 46 S190 30, 208 18"
+        />
+
+        <circle class="hero-data-dot" cx="92" cy="58" r="3.2" />
+        <circle class="hero-data-dot" cx="160" cy="46" r="3.2" />
+        <circle class="hero-data-dot" cx="208" cy="18" r="3.2" />
+      </svg>
+    </div>
+
+    <div class="hero-watermark" aria-hidden="true">
+      AUTOMATION
+    </div>
   </section>
 
   <div
@@ -260,158 +310,382 @@
       class="carousel"
       id="carousel"
     >
-      <img
-        src="/home/assets/excel.png"
-        style="--i:0"
-        alt="Excel"
-      >
-
-      <img
-        src="/home/assets/powerbi.png"
-        style="--i:1"
-        alt="Power BI"
-      >
-
-      <img
-        src="/home/assets/sheets.png"
-        style="--i:2"
-        alt="Google Sheets"
-      >
-
-      <img
-        src="/home/assets/JavaScript.png"
-        style="--i:3"
-        alt="JavaScript"
-      >
-
-      <img
-        src="/home/assets/vba.png"
-        style="--i:4"
-        alt="VBA"
-      >
-
-      <img
-        src="/home/assets/powerquery.png"
-        style="--i:5"
-        alt="Power Query"
-      >
-
-      <img
-        src="/home/assets/power-pivot.png"
-        style="--i:6"
-        alt="Power Pivot"
-      >
-
-      <img
-        src="/home/assets/tgbot.png"
-        style="--i:7"
-        alt="Telegram Bot"
-      >
-
-      <img
-        src="/home/assets/googledrive.png"
-        style="--i:8"
-        alt="Google Drive"
-      >
-
-      <img
-        src="/home/assets/webapp.png"
-        style="--i:9"
-        alt="Web App"
-      >
+      <img src="/home/assets/excel.png" style="--i:0" alt="Excel">
+      <img src="/home/assets/powerbi.png" style="--i:1" alt="Power BI">
+      <img src="/home/assets/sheets.png" style="--i:2" alt="Google Sheets">
+      <img src="/home/assets/JavaScript.png" style="--i:3" alt="JavaScript">
+      <img src="/home/assets/vba.png" style="--i:4" alt="VBA">
+      <img src="/home/assets/powerquery.png" style="--i:5" alt="Power Query">
+      <img src="/home/assets/power-pivot.png" style="--i:6" alt="Power Pivot">
+      <img src="/home/assets/tgbot.png" style="--i:7" alt="Telegram Bot">
+      <img src="/home/assets/googledrive.png" style="--i:8" alt="Google Drive">
+      <img src="/home/assets/webapp.png" style="--i:9" alt="Web App">
     </div>
   </div>
+
+  <section class="home-automation-section">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">
+          CAPABILITIES
+        </div>
+
+        <h2>
+          What I automate
+        </h2>
+
+        <p>
+          Solutions that save time and help your business scale.
+        </p>
+      </div>
+    </div>
+
+    <div class="home-automation-grid">
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          XL
+        </div>
+
+        <h3>
+          Excel systems
+        </h3>
+
+        <p>
+          Complex models, calculations, operational systems and custom tools built around your processes.
+        </p>
+
+        <a href="/solutions-en.html">
+          Learn more →
+        </a>
+      </article>
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          BI
+        </div>
+
+        <h3>
+          BI dashboards
+        </h3>
+
+        <p>
+          Power BI, analytics, KPIs and clear data visualization for better decisions.
+        </p>
+
+        <a href="/solutions-en.html">
+          Learn more →
+        </a>
+      </article>
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          API
+        </div>
+
+        <h3>
+          Apps Script / Integrations
+        </h3>
+
+        <p>
+          Google Workspace automation, APIs, data synchronization and connections between services.
+        </p>
+
+        <a href="/solutions-en.html">
+          Learn more →
+        </a>
+      </article>
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          TG
+        </div>
+
+        <h3>
+          Web / Telegram bots
+        </h3>
+
+        <p>
+          Bots, forms, notifications and web tools that automate communication and business processes.
+        </p>
+
+        <a href="/solutions-en.html">
+          Learn more →
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="home-cases-section">
+    <div class="home-cases-head">
+      <div>
+        <div class="home-section-kicker">
+          CASES
+        </div>
+
+        <h2>
+          Selected cases
+        </h2>
+
+        <p>
+          Real projects. Practical solutions. Measurable results.
+        </p>
+      </div>
+
+      <a
+        class="home-cases-all"
+        href="/solutions-en.html"
+      >
+        View all cases →
+      </a>
+    </div>
+
+    <div class="home-cases-grid">
+
+      <a
+        class="home-case-card home-case-card-link"
+        href="/solutions-en.html"
+      >
+        <div class="home-case-media home-case-media-dashboard">
+          <img
+            src="/home/assets/case-dashboard.webp"
+            alt="Sales analytics dashboard"
+          >
+        </div>
+
+        <div class="home-case-content">
+          <span class="home-case-tag">
+            BI / DASHBOARDS
+          </span>
+
+          <h3>
+            Data analytics and visualization
+          </h3>
+
+          <p>
+            Interactive reports, KPIs and a clear view of the numbers that matter.
+          </p>
+        </div>
+      </a>
+
+      <a
+        class="home-case-card home-case-card-link"
+        href="/solutions-en.html"
+      >
+        <div class="home-case-media home-case-media-dashboard">
+          <img
+            src="/home/assets/case-production.webp"
+            alt="Production planning and capacity utilization"
+          >
+        </div>
+
+        <div class="home-case-content">
+          <span class="home-case-tag">
+            PRODUCTION / PLANNING
+          </span>
+
+          <h3>
+            Production planning
+          </h3>
+
+          <p>
+            Order allocation, capacity utilization, deadline control and production scheduling.
+          </p>
+        </div>
+      </a>
+
+      <a
+        class="home-case-card home-case-card-link"
+        href="/solutions-en.html"
+      >
+        <div class="home-case-media home-case-media-dashboard">
+          <img
+            src="/home/assets/case-documents.webp"
+            alt="PDF and document automation"
+          >
+        </div>
+
+        <div class="home-case-content">
+          <span class="home-case-tag">
+            DOCS / AUTOMATION
+          </span>
+
+          <h3>
+            Document automation
+          </h3>
+
+          <p>
+            PDF processing, data extraction, validation, workflows and automated result export.
+          </p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="home-motto">
+    <div class="home-motto-line">
+      <span>NO PAIN.</span>
+      <strong>STILL GAIN.</strong>
+    </div>
+
+    <p>
+      Automation should remove the routine, not the result.
+    </p>
+  </section>
+
+  <section class="home-final-cta">
+    <div class="home-final-cta-copy">
+      <div class="home-final-cta-kicker">
+        READY TO MOVE FORWARD?
+      </div>
+
+      <h2>
+        Choose a solution that moves your business faster
+      </h2>
+
+      <p>
+        Explore ready-made solutions or estimate the approximate cost of your project.
+      </p>
+
+      <div class="home-final-cta-actions">
+        <button
+          type="button"
+          class="home-final-cta-primary"
+          onclick="openSolutionPicker()"
+        >
+          ⚡ Find the right solution
+        </button>
+
+        <button
+          type="button"
+          class="home-final-cta-secondary"
+          onclick="openHomeEstimator()"
+        >
+          ▦ Estimate project cost
+        </button>
+      </div>
+    </div>
+
+    <div class="home-final-cta-visual" aria-hidden="true">
+      <div class="home-final-calc">
+        <span class="home-final-calc-screen"></span>
+
+        <span>÷</span>
+        <span>×</span>
+        <span>−</span>
+
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+
+        <span>4</span>
+        <span>5</span>
+        <span>+</span>
+      </div>
+
+      <div class="home-final-bars">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="home-final-chart-line"></div>
+    </div>
+  </section>
 
   <div id="home-reviews-slot"></div>
   <div id="home-contact-slot"></div>
   <div id="home-solution-picker-slot"></div>
 
   <button
-  class="pricing-estimator-trigger home-estimator-hidden-trigger"
-  type="button"
-  aria-hidden="true"
-  tabindex="-1"
-></button>
-
-<div
-  class="pricing-estimator-overlay"
-  aria-hidden="true"
-></div>
-
-<aside
-  class="pricing-estimator-panel"
-  aria-hidden="true"
-  aria-label="Project cost calculator"
->
-  <button
-    class="pricing-estimator-close"
+    class="pricing-estimator-trigger home-estimator-hidden-trigger"
     type="button"
-    aria-label="Close calculator"
+    aria-hidden="true"
+    tabindex="-1"
+  ></button>
+
+  <div
+    class="pricing-estimator-overlay"
+    aria-hidden="true"
+  ></div>
+
+  <aside
+    class="pricing-estimator-panel"
+    aria-hidden="true"
+    aria-label="Project cost calculator"
   >
-    ×
-  </button>
-
-  <div class="pricing-estimator-panel-inner">
-    <div class="pricing-estimator-panel-kicker">
-      Preliminary estimate
-    </div>
-
-    <h2 class="pricing-estimator-panel-title">
-      Estimate project cost
-    </h2>
-
-    <p class="pricing-estimator-panel-text">
-      Answer a few short questions to get an approximate project estimate.
-    </p>
-
-    <div class="pricing-estimator-progress">
-      <div class="pricing-estimator-progress-head">
-        <span class="pricing-estimator-progress-label">
-          Start
-        </span>
-
-        <span class="pricing-estimator-progress-value">
-          0%
-        </span>
-      </div>
-
-      <div class="pricing-estimator-progress-track">
-        <span class="pricing-estimator-progress-bar"></span>
-      </div>
-    </div>
-
-    <div class="pricing-estimator-content"></div>
-
-    <div class="pricing-estimator-navigation">
-      <button
-        class="pricing-estimator-back"
-        type="button"
-        disabled
-      >
-        ← Back
-      </button>
-
-      <button
-        class="pricing-estimator-reset"
-        type="button"
-      >
-        Reset
-      </button>
-    </div>
-
     <button
-      class="pricing-estimator-tired"
+      class="pricing-estimator-close"
       type="button"
+      aria-label="Close calculator"
     >
-          I’m done answering — send a request
+      ×
+    </button>
+
+    <div class="pricing-estimator-panel-inner">
+      <div class="pricing-estimator-panel-kicker">
+        Preliminary estimate
+      </div>
+
+      <h2 class="pricing-estimator-panel-title">
+        Estimate project cost
+      </h2>
+
+      <p class="pricing-estimator-panel-text">
+        Answer a few short questions to get an approximate project estimate.
+      </p>
+
+      <div class="pricing-estimator-progress">
+        <div class="pricing-estimator-progress-head">
+          <span class="pricing-estimator-progress-label">
+            Start
+          </span>
+
+          <span class="pricing-estimator-progress-value">
+            0%
+          </span>
+        </div>
+
+        <div class="pricing-estimator-progress-track">
+          <span class="pricing-estimator-progress-bar"></span>
+        </div>
+      </div>
+
+      <div class="pricing-estimator-content"></div>
+
+      <div class="pricing-estimator-navigation">
+        <button
+          class="pricing-estimator-back"
+          type="button"
+          disabled
+        >
+          ← Back
+        </button>
+
+        <button
+          class="pricing-estimator-reset"
+          type="button"
+        >
+          Reset
         </button>
       </div>
-    </aside>
-  
+
+      <button
+        class="pricing-estimator-tired"
+        type="button"
+      >
+        I’m done answering — send a request
+      </button>
+    </div>
+  </aside>
+
   <div id="site-footer-slot"></div>
+
   <script
-  src="/themes/noir-lime/estimator/pricing-estimator-en.js?v=1"
-  defer
-></script>
+    src="/themes/noir-lime/estimator/pricing-estimator-en.js?v=1"
+    defer
+  ></script>
 </body>
 </html>

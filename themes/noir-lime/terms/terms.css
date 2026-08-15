@@ -1125,7 +1125,7 @@ footer {
 }
 
 .terms-background__layer.is-active {
-  opacity: 0.62;
+  opacity: 0.72;
 }
 
 .terms-background::after {
@@ -1135,10 +1135,10 @@ footer {
   background:
     linear-gradient(
       180deg,
-      rgba(247, 246, 241, 0.42) 0%,
-      rgba(247, 246, 241, 0.34) 30%,
-      rgba(247, 246, 241, 0.40) 72%,
-      rgba(247, 246, 241, 0.52) 100%
+      rgba(247, 246, 241, 0.28) 0%,
+      rgba(247, 246, 241, 0.22) 30%,
+      rgba(247, 246, 241, 0.30) 72%,
+      rgba(247, 246, 241, 0.38) 100%
     );
 }
 

@@ -357,37 +357,50 @@ function initCarousel() {
 
   carousel.style.animation = 'none';
 
-  const descriptions = {
-    Excel:
-      'Автоматизація Excel',
+  const descriptionsByLang = {
+  uk: {
+    Excel: 'Автоматизація Excel',
+    'Power BI': 'Візуалізація через Power BI',
+    'Google Sheets': 'Скрипти в Google Таблицях',
+    JavaScript: 'Автоматизація через JavaScript',
+    VBA: 'Макроси та коди VBA',
+    'Power Query': 'Імпорт та трансформації',
+    'Power Pivot': 'DAX-аналіз у Power Pivot',
+    'Telegram Bot': 'Telegram-боти та сповіщення',
+    'Google Drive': 'Автоматизація Google Drive',
+    'Web App': 'Вебзастосунки та PWA'
+  },
 
-    'Power BI':
-      'Візуалізація через Power BI',
+  en: {
+    Excel: 'Excel automation',
+    'Power BI': 'Visualization with Power BI',
+    'Google Sheets': 'Scripts in Google Sheets',
+    JavaScript: 'Automation with JavaScript',
+    VBA: 'VBA macros and code',
+    'Power Query': 'Import and data transformations',
+    'Power Pivot': 'DAX analysis in Power Pivot',
+    'Telegram Bot': 'Telegram bots and notifications',
+    'Google Drive': 'Google Drive automation',
+    'Web App': 'Web apps and PWA'
+  },
 
-    'Google Sheets':
-      'Скрипти в Google Таблицях',
+  ru: {
+    Excel: 'Автоматизация Excel',
+    'Power BI': 'Визуализация через Power BI',
+    'Google Sheets': 'Скрипты в Google Таблицах',
+    JavaScript: 'Автоматизация через JavaScript',
+    VBA: 'Макросы и код VBA',
+    'Power Query': 'Импорт и преобразование данных',
+    'Power Pivot': 'DAX-анализ в Power Pivot',
+    'Telegram Bot': 'Telegram-боты и уведомления',
+    'Google Drive': 'Автоматизация Google Drive',
+    'Web App': 'Веб-приложения и PWA'
+  }
+};
 
-    JavaScript:
-      'Автоматизація через JavaScript',
-
-    VBA:
-      'Макроси та коди VBA',
-
-    'Power Query':
-      'Імпорт та трансформації',
-
-    'Power Pivot':
-      'DAX-аналіз у Power Pivot',
-
-    'Telegram Bot':
-      'Telegram-боти та сповіщення',
-
-    'Google Drive':
-      'Автоматизація Google Drive',
-
-    'Web App':
-      'Вебзастосунки та PWA'
-  };
+const descriptions =
+  descriptionsByLang[HOME_LANG] ||
+  descriptionsByLang.uk;
 
   function updateDepth() {
     images.forEach(
@@ -2167,6 +2180,16 @@ function initMagneticCta() {
 }
 
 function initSolutionsNavHint() {
+  const labels = {
+    uk: 'РІШЕННЯ',
+    en: 'SOLUTIONS',
+    ru: 'РЕШЕНИЯ'
+  };
+
+  const targetLabel =
+    labels[HOME_LANG] ||
+    labels.uk;
+
   function applyHint() {
     const links =
       Array.from(
@@ -2180,7 +2203,7 @@ function initSolutionsNavHint() {
         link.textContent
           .trim()
           .toUpperCase() ===
-        'РІШЕННЯ'
+        targetLabel
       );
 
     if (!solutionsLink) {

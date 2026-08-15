@@ -2194,3 +2194,33 @@ body.workspace-peek-open {
     display: none;
   }
 }
+
+.home-hero,
+.carousel-container {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+body.home-ready .home-hero {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.home-ready .carousel-container {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.75s ease 0.18s,
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero,
+  .carousel-container {
+    opacity: 1;
+    transform: none;
+  }
+}

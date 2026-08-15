@@ -169,9 +169,9 @@
 }
 
 .lang-switcher button.active {
-  border-color: #b8ff2c;
-  background: rgba(184, 255, 44, 0.12);
-  color: #b8ff2c;
+  border-color: rgba(146, 185, 157, 0.42);
+  background: rgba(87, 133, 101, 0.78);
+  color: #ffffff;
 }
 
 .mobile-menu-button,

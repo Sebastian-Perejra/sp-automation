@@ -3653,3 +3653,66 @@ body.home-ready .hero-sheen {
   color: inherit;
   text-decoration: none;
 }
+
+.home-motto {
+  width: min(calc(100% - 48px), 1180px);
+  margin: 0 auto 44px;
+  padding: 18px 8px 22px;
+
+  text-align: center;
+}
+
+.home-motto-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  font-family: var(--font-main);
+  text-transform: uppercase;
+
+  letter-spacing: 0.03em;
+}
+
+.home-motto-line span {
+  font-size: clamp(26px, 3.8vw, 54px);
+  font-weight: 300;
+
+  color: rgba(36, 79, 64, 0.42);
+}
+
+.home-motto-line strong {
+  font-size: clamp(30px, 4.2vw, 62px);
+  font-weight: 700;
+
+  color: #244f40;
+}
+
+.home-motto p {
+  margin: 10px 0 0;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  letter-spacing: 0.04em;
+
+  color: rgba(42, 55, 49, 0.58);
+}
+
+@media (max-width: 640px) {
+  .home-motto {
+    width: calc(100% - 24px);
+    margin-bottom: 34px;
+    padding: 10px 6px 16px;
+  }
+
+  .home-motto-line {
+    gap: 7px;
+  }
+
+  .home-motto p {
+    font-size: 11px;
+  }
+}

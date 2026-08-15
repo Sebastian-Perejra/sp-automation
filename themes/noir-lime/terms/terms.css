@@ -1112,9 +1112,9 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
 filter:
-  saturate(0.9)
-  contrast(1.12)
-  brightness(0.96);
+  saturate(0.92)
+  contrast(1.08)
+  brightness(1.04);
   transform: scale(1.08);
   transition:
     opacity 4.5s ease-in-out,
@@ -1135,10 +1135,10 @@ filter:
   background:
     linear-gradient(
       180deg,
-      rgba(247, 246, 241, 0.04) 0%,
-      rgba(247, 246, 241, 0.02) 35%,
-      rgba(247, 246, 241, 0.05) 70%,
-      rgba(247, 246, 241, 0.10) 100%
+      rgba(247, 246, 241, 0.07) 0%,
+      rgba(247, 246, 241, 0.05) 35%,
+      rgba(247, 246, 241, 0.08) 70%,
+      rgba(247, 246, 241, 0.14) 100%
     );
 }
 

@@ -3204,15 +3204,21 @@ body.home-ready .hero-sheen {
 }
 
 .home-case-media img {
+  width: 92px;
+  height: 92px;
+
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}
+
+.home-case-media-dashboard img {
   width: 100%;
   height: 100%;
 
   object-fit: cover;
   object-position: center;
-
-  transition: transform 0.3s ease;
 }
-
 .home-case-card:hover .home-case-media img {
   transform: scale(1.06);
 }

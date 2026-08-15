@@ -1,1 +1,713 @@
+<div
+  id="solution-picker"
+  class="solution-picker-overlay"
+  onclick="handleSolutionOverlayClick(event)"
+>
+  <div class="solution-picker">
+    <button
+      class="solution-picker-close"
+      type="button"
+      onclick="closeSolutionPicker()"
+    >
+      ×
+    </button>
 
+    <div
+      id="solution-start-step"
+      class="solution-step active"
+    >
+      <div class="solution-picker-badge">
+        ⚡ ПОДБОР РЕШЕНИЯ
+      </div>
+
+      <h2>
+        Что хотите автоматизировать?
+      </h2>
+
+      <p class="solution-picker-subtitle">
+        Выберите вариант, который больше всего похож на вашу задачу
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openExcelStep()"
+        >
+          <span class="solution-icon">📊</span>
+          <span class="solution-title">
+            Excel / Google Sheets
+          </span>
+          <span class="solution-desc">
+            Таблицы, формулы и макросы
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openAnalyticsStep()"
+        >
+          <span class="solution-icon">📈</span>
+          <span class="solution-title">
+            Отчёты и аналитика
+          </span>
+          <span class="solution-desc">
+            Сбор и визуализация данных
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openManualDataStep()"
+        >
+          <span class="solution-icon">🔄</span>
+          <span class="solution-title">
+            Ручная работа с данными
+          </span>
+          <span class="solution-desc">
+            Перенос и обработка данных
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openTelegramStep()"
+        >
+          <span class="solution-icon">✈️</span>
+          <span class="solution-title">
+            Telegram / уведомления
+          </span>
+          <span class="solution-desc">
+            Боты и автоматические сообщения
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openPowerBiStep()"
+        >
+          <span class="solution-icon">📉</span>
+          <span class="solution-title">
+            Power BI
+          </span>
+          <span class="solution-desc">
+            Дашборды и бизнес-показатели
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openOtherSolution()"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">
+            Другое
+          </span>
+          <span class="solution-desc">
+            Опишу свою задачу
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-excel-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStart()"
+      >
+        ← Назад
+      </button>
+
+      <h2>
+        Что сейчас приходится делать вручную?
+      </h2>
+
+      <p class="solution-picker-subtitle">
+        Выберите вариант, который больше всего похож на вашу задачу
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Собирать несколько файлов в один')"
+        >
+          <span class="solution-icon">📚</span>
+          <span class="solution-title">
+            Собирать несколько файлов в один
+          </span>
+          <span class="solution-desc">
+            Объединение данных из разных файлов
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Переносить данные')"
+        >
+          <span class="solution-icon">↔️</span>
+          <span class="solution-title">
+            Переносить данные
+          </span>
+          <span class="solution-desc">
+            Между файлами, листами или системами
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Формировать отчёты')"
+        >
+          <span class="solution-icon">📄</span>
+          <span class="solution-title">
+            Формировать отчёты
+          </span>
+          <span class="solution-desc">
+            Автоматические таблицы и итоги
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Проверять ошибки')"
+        >
+          <span class="solution-icon">✅</span>
+          <span class="solution-title">
+            Проверять ошибки
+          </span>
+          <span class="solution-desc">
+            Контроль данных и условий
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Заполнять документы')"
+        >
+          <span class="solution-icon">📝</span>
+          <span class="solution-title">
+            Заполнять документы
+          </span>
+          <span class="solution-desc">
+            Автоматическое формирование документов
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Другое')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">
+            Другое
+          </span>
+          <span class="solution-desc">
+            Моя задача немного другая
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-analytics-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromAnalytics()"
+      >
+        ← Назад
+      </button>
+
+      <h2>
+        Что именно хотите упростить?
+      </h2>
+
+      <p class="solution-picker-subtitle">
+        Выберите вариант, наиболее близкий к вашей задаче
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Сводить данные из нескольких источников')"
+        >
+          <span class="solution-icon">🔗</span>
+          <span class="solution-title">
+            Сводить данные из нескольких источников
+          </span>
+          <span class="solution-desc">
+            Файлы, таблицы или другие источники
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Автоматически формировать отчёты')"
+        >
+          <span class="solution-icon">📄</span>
+          <span class="solution-title">
+            Автоматически формировать отчёты
+          </span>
+          <span class="solution-desc">
+            Без ручной сборки каждый раз
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Рассчитывать KPI и показатели')"
+        >
+          <span class="solution-icon">🎯</span>
+          <span class="solution-title">
+            Рассчитывать KPI и показатели
+          </span>
+          <span class="solution-desc">
+            Планы, факты и отклонения
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Визуализировать данные')"
+        >
+          <span class="solution-icon">📊</span>
+          <span class="solution-title">
+            Визуализировать данные
+          </span>
+          <span class="solution-desc">
+            Графики, дашборды и срезы
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Автоматически обновлять отчёты')"
+        >
+          <span class="solution-icon">🔄</span>
+          <span class="solution-title">
+            Автоматически обновлять отчёты
+          </span>
+          <span class="solution-desc">
+            Новые данные без ручной переработки
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Другое')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">
+            Другое
+          </span>
+          <span class="solution-desc">
+            У меня другой сценарий
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-manual-data-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromManualData()"
+      >
+        ← Назад
+      </button>
+
+      <h2>
+        Что именно отнимает время?
+      </h2>
+
+      <p class="solution-picker-subtitle">
+        Выберите вариант, наиболее близкий к вашей ситуации
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Копировать данные между таблицами')"
+        >
+          <span class="solution-icon">🔁</span>
+          <span class="solution-title">
+            Копировать данные между таблицами
+          </span>
+          <span class="solution-desc">
+            Ручной перенос из одного места в другое
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Загружать или переносить данные из файлов')"
+        >
+          <span class="solution-icon">📥</span>
+          <span class="solution-title">
+            Загружать данные из файлов
+          </span>
+          <span class="solution-desc">
+            Excel, CSV, Google Sheets и другие источники
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Очищать и приводить данные в порядок')"
+        >
+          <span class="solution-icon">🧹</span>
+          <span class="solution-title">
+            Очищать данные
+          </span>
+          <span class="solution-desc">
+            Дубликаты, форматы и лишние значения
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Искать и сверять информацию')"
+        >
+          <span class="solution-icon">🔍</span>
+          <span class="solution-title">
+            Искать и сверять информацию
+          </span>
+          <span class="solution-desc">
+            Сравнение списков и проверка совпадений
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Сортировать и раскладывать данные')"
+        >
+          <span class="solution-icon">📂</span>
+          <span class="solution-title">
+            Сортировать и раскладывать данные
+          </span>
+          <span class="solution-desc">
+            По правилам, категориям или условиям
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Другое')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">
+            Другое
+          </span>
+          <span class="solution-desc">
+            У меня другой ручной процесс
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-telegram-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromTelegram()"
+      >
+        ← Назад
+      </button>
+
+      <h2>
+        Что должно происходить автоматически?
+      </h2>
+
+      <p class="solution-picker-subtitle">
+        Выберите сценарий, наиболее близкий к вашей задаче
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Получать автоматические уведомления')"
+        >
+          <span class="solution-icon">🔔</span>
+          <span class="solution-title">
+            Получать уведомления
+          </span>
+          <span class="solution-desc">
+            События, заявки, изменения или важные данные
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Создать Telegram-бота')"
+        >
+          <span class="solution-icon">🤖</span>
+          <span class="solution-title">
+            Создать Telegram-бота
+          </span>
+          <span class="solution-desc">
+            Команды, кнопки и собственная логика
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Получать заявки с сайта в Telegram')"
+        >
+          <span class="solution-icon">🌐</span>
+          <span class="solution-title">
+            Заявки с сайта в Telegram
+          </span>
+          <span class="solution-desc">
+            Получать обращения без проверки почты
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Отправлять напоминания')"
+        >
+          <span class="solution-icon">⏰</span>
+          <span class="solution-title">
+            Отправлять напоминания
+          </span>
+          <span class="solution-desc">
+            По времени, дате или определённому событию
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Управлять процессами через Telegram')"
+        >
+          <span class="solution-icon">⚙️</span>
+          <span class="solution-title">
+            Управлять процессами
+          </span>
+          <span class="solution-desc">
+            Запускать действия и получать результат в чате
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Другое')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">
+            Другое
+          </span>
+          <span class="solution-desc">
+            У меня другой сценарий
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-powerbi-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromPowerBi()"
+      >
+        ← Назад
+      </button>
+
+      <h2>
+        Что хотите получить в Power BI?
+      </h2>
+
+      <p class="solution-picker-subtitle">
+        Выберите вариант, наиболее близкий к вашей задаче
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Создать дашборд с нуля')"
+        >
+          <span class="solution-icon">📊</span>
+          <span class="solution-title">
+            Создать дашборд с нуля
+          </span>
+          <span class="solution-desc">
+            Показатели, графики и срезы
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Подключить данные из Excel или Google Sheets')"
+        >
+          <span class="solution-icon">🔗</span>
+          <span class="solution-title">
+            Подключить источники данных
+          </span>
+          <span class="solution-desc">
+            Excel, Google Sheets и другие источники
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Автоматизировать обновление данных')"
+        >
+          <span class="solution-icon">🔄</span>
+          <span class="solution-title">
+            Автоматизировать обновление
+          </span>
+          <span class="solution-desc">
+            Чтобы отчёт не приходилось собирать заново
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Рассчитать KPI и показатели')"
+        >
+          <span class="solution-icon">🎯</span>
+          <span class="solution-title">
+            Рассчитать KPI
+          </span>
+          <span class="solution-desc">
+            DAX, планы, факты и отклонения
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Доработать существующий отчёт Power BI')"
+        >
+          <span class="solution-icon">🛠️</span>
+          <span class="solution-title">
+            Доработать существующий отчёт
+          </span>
+          <span class="solution-desc">
+            Логика, модель, дизайн или скорость
+          </span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Другое')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">
+            Другое
+          </span>
+          <span class="solution-desc">
+            У меня другая задача в Power BI
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-result-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSelectedCategoryStep()"
+      >
+        ← Назад
+      </button>
+
+      <div class="solution-result-check">
+        ✓
+      </div>
+
+      <h2 id="solution-result-title"></h2>
+
+      <p class="solution-result-tools">
+        Возможные инструменты:
+        <strong id="solution-result-tools-text"></strong>
+      </p>
+
+      <div class="solution-selected-task">
+        <span>
+          Вы выбрали:
+        </span>
+
+        <strong id="solution-selected-task-text"></strong>
+      </div>
+
+      <label
+        class="solution-description-label"
+        for="solution-description"
+      >
+        Кратко опишите, как это происходит сейчас:
+      </label>
+
+      <textarea
+        id="solution-description"
+        class="solution-description"
+        rows="4"
+        placeholder="Например: каждый день я получаю файлы от 12 менеджеров и вручную собираю их в один отчёт..."
+      ></textarea>
+
+      <button
+        class="solution-discuss-btn"
+        type="button"
+        onclick="discussSelectedTask()"
+      >
+        Обсудить задачу →
+      </button>
+    </div>
+
+    <div class="solution-picker-progress">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>

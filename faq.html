@@ -633,6 +633,8 @@ footer a:hover {
   <link rel="stylesheet" href="/assistant.css">
   <script src="/assistant.js" defer></script>
   <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
+  <link rel="stylesheet" href="/components/components.css">
+  <script src="/components/components.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script
@@ -649,69 +651,7 @@ footer a:hover {
     <span class="cosmic-frame__bottom-left"></span>
     <span class="cosmic-frame__bottom-right"></span>
   </div>
-  <header class="topbar">
-  <div class="topbar-inner">
-    <a class="home-link" href="index.html">
-      ← На головну
-    </a>
-
-    <button
-  class="mobile-menu-button"
-  type="button"
-  aria-label="Відкрити меню"
-  aria-expanded="false"
->
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-
-    <nav class="desktop-nav">
-  <a href="about.html">Про мене</a>
-  <a href="services.html">Послуги</a>
-  <a href="pricing.html">Цінова політика</a>
-  <a href="solutions.html">Рішення</a>
-  <a href="faq.html" class="active">FAQ</a>
-  <a href="contacts.html">Контакти</a>
-    </nav>
-
-    <div class="lang-switcher">
-      <button
-        type="button"
-        class="active"
-        onclick="location.href='faq.html'"
-      >
-        UA
-      </button>
-
-      <button
-        type="button"
-        onclick="location.href='faq-en.html'"
-      >
-        EN
-      </button>
-
-      <button
-        type="button"
-        onclick="location.href='faq-ru.html'"
-      >
-        RU
-      </button>
-    </div>
-  </div>
-</header>
-  <div class="mobile-menu">
-  <nav class="mobile-menu-nav">
-    <a href="index.html">Головна</a>
-    <a href="about.html">Про мене</a>
-    <a href="services.html">Послуги</a>
-    <a href="pricing.html">Цінова політика</a>
-    <a href="solutions.html">Рішення</a>
-    <a href="faq.html" class="active">FAQ</a>
-    <a href="contacts.html">Контакти</a>
-    <a href="terms.html">Умови використання</a>
-  </nav>
-</div>
+  <div id="site-header-slot"></div>
 
   <main class="page">
     <section class="hero">
@@ -982,23 +922,7 @@ footer a:hover {
     <a class="back-link" href="index.html">← Назад на головну</a>
   </main>
 
-  <footer>
-  <div class="footer-ticker">
-    <div class="footer-ticker-text">
-      Excel VBA · Google Apps Script · Power BI · DAX · Power Query ·
-      Автоматичні звіти · Автоматизація Excel · Обробка даних ·
-      Очищення даних · Парсинг даних · Інтеграції · Макроси ·
-      Кастомна логіка · Автоматизація бізнес-процесів ·
-      Аналітичні дашборди · Автоматизація Google Sheets · Веб-застосунки ·
-      JavaScript · Індивідуальні рішення для бізнесу ·
-    </div>
-  </div>
-
-  <div class="footer-copy">
-    © 2015–2026 Sebastian Automations. Всі права захищено.
-    <a href="terms.html">Умови використання</a>
-  </div>
-</footer>
+  <div id="site-footer-slot"></div>
 
 </body>
 </html>

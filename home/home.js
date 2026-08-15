@@ -60,10 +60,26 @@ function initHomeBackground() {
     return;
   }
 
-  HOME_BACKGROUND_IMAGES.forEach(src => {
-    const image = new Image();
-    image.src = src;
-  });
+  const firstBackground = new Image();
+firstBackground.src = HOME_BACKGROUND_IMAGES[0];
+
+const secondBackground = new Image();
+secondBackground.src = HOME_BACKGROUND_IMAGES[1];
+
+const preloadRest = () => {
+  HOME_BACKGROUND_IMAGES
+    .slice(2)
+    .forEach(src => {
+      const image = new Image();
+      image.src = src;
+    });
+};
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(preloadRest);
+} else {
+  setTimeout(preloadRest, 1800);
+}
 
   const reducedMotion =
     window.matchMedia(

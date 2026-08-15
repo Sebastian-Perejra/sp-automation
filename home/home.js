@@ -273,68 +273,35 @@ function renderHomeTurnstile() {
 
 function initCarousel() {
   const carousel =
-    document.getElementById(
-      'carousel'
-    );
+    document.getElementById('carousel');
 
   const hint =
-    document.getElementById(
-      'hint'
-    );
+    document.getElementById('hint');
 
   if (!carousel || !hint) {
     return;
   }
 
+  const images =
+    Array.from(
+      carousel.querySelectorAll('img')
+    );
+
+  const reducedMotion =
+    window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
   let isDragging = false;
   let startX = 0;
-  let currentRotation = 0;
 
-  carousel.parentElement.addEventListener(
-    'mousedown',
-    event => {
-      isDragging = true;
-      startX = event.clientX;
+  let rotation = 0;
+  let lastTime = performance.now();
 
-      carousel.style.animation =
-        'none';
-    }
-  );
+  const rotationSpeed =
+    360 / 80000;
 
-  document.addEventListener(
-    'mouseup',
-    () => {
-      if (!isDragging) {
-        return;
-      }
-
-      isDragging = false;
-
-      carousel.style.animation =
-        'spin 80s linear infinite';
-    }
-  );
-
-  document.addEventListener(
-    'mousemove',
-    event => {
-      if (!isDragging) {
-        return;
-      }
-
-      const delta =
-        event.clientX - startX;
-
-      currentRotation +=
-        delta * 0.2;
-
-      carousel.style.transform =
-        `rotateY(${currentRotation}deg)`;
-
-      startX =
-        event.clientX;
-    }
-  );
+  carousel.style.animation = 'none';
 
   const descriptions = {
     Excel:
@@ -368,11 +335,196 @@ function initCarousel() {
       'Вебзастосунки та PWA'
   };
 
-  document
-    .querySelectorAll(
-      '.carousel img'
-    )
-    .forEach(img => {
+  function updateDepth() {
+    images.forEach(
+      (img, index) => {
+        const angle =
+          rotation +
+          index * 36;
+
+        const radians =
+          angle *
+          Math.PI /
+          180;
+
+        const depth =
+          (
+            Math.cos(radians) +
+            1
+          ) / 2;
+
+        const scale =
+          0.76 +
+          depth * 0.34;
+
+        const opacity =
+          0.38 +
+          depth * 0.62;
+
+        const brightness =
+          0.72 +
+          depth * 0.36;
+
+        const saturation =
+          0.72 +
+          depth * 0.38;
+
+        const blur =
+          (1 - depth) * 0.7;
+
+        const shadow =
+          6 +
+          depth * 18;
+
+        img.style.scale =
+          scale.toFixed(3);
+
+        img.style.opacity =
+          opacity.toFixed(3);
+
+        img.style.zIndex =
+          String(
+            Math.round(
+              depth * 100
+            )
+          );
+
+        img.style.filter =
+          `
+            brightness(${brightness.toFixed(3)})
+            saturate(${saturation.toFixed(3)})
+            blur(${blur.toFixed(2)}px)
+            drop-shadow(
+              0
+              ${shadow.toFixed(1)}px
+              ${(shadow * 1.5).toFixed(1)}px
+              rgba(0, 0, 0, ${(
+                0.08 +
+                depth * 0.14
+              ).toFixed(3)})
+            )
+          `;
+      }
+    );
+  }
+
+  function animate(time) {
+    const delta =
+      time - lastTime;
+
+    lastTime = time;
+
+    if (
+      !isDragging &&
+      !reducedMotion
+    ) {
+      rotation +=
+        delta *
+        rotationSpeed;
+    }
+
+    rotation %= 360;
+
+    carousel.style.transform =
+      `rotateY(${rotation}deg)`;
+
+    updateDepth();
+
+    window.requestAnimationFrame(
+      animate
+    );
+  }
+
+  carousel.parentElement.addEventListener(
+    'mousedown',
+    event => {
+      isDragging = true;
+      startX = event.clientX;
+    }
+  );
+
+  document.addEventListener(
+    'mousemove',
+    event => {
+      if (!isDragging) {
+        return;
+      }
+
+      const delta =
+        event.clientX -
+        startX;
+
+      rotation +=
+        delta * 0.22;
+
+      startX =
+        event.clientX;
+    }
+  );
+
+  document.addEventListener(
+    'mouseup',
+    () => {
+      isDragging = false;
+    }
+  );
+
+  carousel.parentElement.addEventListener(
+    'touchstart',
+    event => {
+      if (
+        !event.touches.length
+      ) {
+        return;
+      }
+
+      isDragging = true;
+
+      startX =
+        event.touches[0].clientX;
+    },
+    {
+      passive: true
+    }
+  );
+
+  carousel.parentElement.addEventListener(
+    'touchmove',
+    event => {
+      if (
+        !isDragging ||
+        !event.touches.length
+      ) {
+        return;
+      }
+
+      const currentX =
+        event.touches[0].clientX;
+
+      const delta =
+        currentX -
+        startX;
+
+      rotation +=
+        delta * 0.18;
+
+      startX =
+        currentX;
+    },
+    {
+      passive: true
+    }
+  );
+
+  carousel.parentElement.addEventListener(
+    'touchend',
+    () => {
+      isDragging = false;
+    }
+  );
+
+  images.forEach(
+    img => {
       img.addEventListener(
         'mouseenter',
         () => {
@@ -393,7 +545,14 @@ function initCarousel() {
             'none';
         }
       );
-    });
+    }
+  );
+
+  updateDepth();
+
+  window.requestAnimationFrame(
+    animate
+  );
 }
 
 function openContactModal() {

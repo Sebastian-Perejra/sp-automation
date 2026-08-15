@@ -2748,3 +2748,103 @@ body.home-ready .hero-sheen {
     text-align: center;
   }
 }
+.hero-avatar-orbit {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 92px;
+  height: 92px;
+
+  flex: 0 0 92px;
+}
+
+.hero-avatar-orbit img {
+  position: relative;
+  z-index: 3;
+
+  width: 54px;
+  height: 54px;
+
+  object-fit: contain;
+}
+
+.hero-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  border: 1px solid rgba(43, 92, 74, 0.11);
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.hero-orbit-1 {
+  width: 64px;
+  height: 64px;
+}
+
+.hero-orbit-2 {
+  width: 82px;
+  height: 82px;
+}
+
+.hero-orbit-3 {
+  width: 104px;
+  height: 104px;
+}
+
+.hero-orbit-dot {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: rgba(43, 92, 74, 0.62);
+
+  box-shadow:
+    0 0 0 3px rgba(43, 92, 74, 0.05);
+
+  z-index: 2;
+}
+
+.hero-orbit-dot-1 {
+  left: 4px;
+  top: 44px;
+}
+
+.hero-orbit-dot-2 {
+  right: 8px;
+  top: 20px;
+}
+
+.hero-orbit-dot-3 {
+  right: 14px;
+  bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .hero-avatar-orbit {
+    width: 70px;
+    height: 70px;
+
+    flex-basis: 70px;
+  }
+
+  .hero-avatar-orbit img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .hero-orbit-3 {
+    width: 82px;
+    height: 82px;
+  }
+}

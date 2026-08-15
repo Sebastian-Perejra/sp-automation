@@ -2021,14 +2021,37 @@ body.home-bg-show-b::after {
 
 .workspace-peek-image {
   display: block;
+
   width: 100%;
   height: auto;
+
   transform: scale(1.02);
+
+  opacity: 1;
+
   filter:
     saturate(0.92)
     contrast(0.92)
     brightness(0.88)
     blur(0.6px);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.7s ease,
+    filter 0.45s ease;
+}
+
+.workspace-peek-image.is-switching {
+  opacity: 0.78;
+
+  transform:
+    scale(1.035);
+
+  filter:
+    saturate(0.88)
+    contrast(0.9)
+    brightness(0.82)
+    blur(2px);
 }
 
 .workspace-peek-shade {

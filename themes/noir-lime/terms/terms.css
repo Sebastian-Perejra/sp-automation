@@ -1104,24 +1104,24 @@ footer {
 
 .terms-background__layer {
   position: absolute;
-  inset: -12%;
+  inset: -8%;
   opacity: 0;
-  background-position: center center;
+  background-position:
+    center
+    calc(50% + var(--terms-bg-y, 0px));
   background-repeat: no-repeat;
   background-size: cover;
   filter:
     saturate(0.72)
     contrast(0.86)
     brightness(1.05);
-  transform:
-    translate3d(0, var(--terms-bg-y, 0px), 0)
-    scale(1.08);
+  transform: scale(1.08);
   transition:
     opacity 4.5s ease-in-out,
-    transform 0.16s linear;
+    background-position 0.16s linear;
   will-change:
     opacity,
-    transform;
+    background-position;
 }
 
 .terms-background__layer.is-active {
@@ -1152,13 +1152,13 @@ footer {
   z-index: 2;
 }
 
-@media (max-width: 760px) {
-  .terms-background__layer {
-    inset: -8%;
-    transform:
-      translate3d(0, calc(var(--terms-bg-y, 0px) * 0.45), 0)
-      scale(1.1);
-  }
+.terms-background__layer {
+  inset: -6%;
+  background-position:
+    center
+    calc(50% + var(--terms-bg-y, 0px));
+  transform: scale(1.1);
+}
 
   .terms-background__layer.is-active {
     opacity: 0.42;

@@ -146,11 +146,11 @@ let latestScrollY = 0;
 let parallaxFrame = null;
 
 function updateBackgroundParallax() {
-  const maxShift = 260;
+  const maxShift = 110;
 
   const shift =
     Math.min(
-      latestScrollY * 0.13,
+      latestScrollY * 0.055,
       maxShift
     );
 

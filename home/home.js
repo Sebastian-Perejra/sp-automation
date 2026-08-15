@@ -2037,8 +2037,69 @@ function initHomeEntrance() {
   );
 }
 
+function initHeroTilt() {
+  const hero =
+    document.querySelector('.home-hero');
+
+  if (!hero) {
+    return;
+  }
+
+  if (
+    window.matchMedia(
+      '(max-width: 768px)'
+    ).matches
+  ) {
+    return;
+  }
+
+  hero.addEventListener(
+    'mousemove',
+    event => {
+      const rect =
+        hero.getBoundingClientRect();
+
+      const x =
+        (event.clientX - rect.left) /
+        rect.width -
+        0.5;
+
+      const y =
+        (event.clientY - rect.top) /
+        rect.height -
+        0.5;
+
+      const rotateY =
+        x * 2.4;
+
+      const rotateX =
+        y * -1.8;
+
+      hero.style.transform =
+        `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+
+      hero.classList.add(
+        'hero-tilt-active'
+      );
+    }
+  );
+
+  hero.addEventListener(
+    'mouseleave',
+    () => {
+      hero.style.transform =
+        'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+
+      hero.classList.remove(
+        'hero-tilt-active'
+      );
+    }
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
+initHeroTilt();
 initCarousel();
 initHomeEntrance();
 loadHomeParts();

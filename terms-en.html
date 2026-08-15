@@ -2,488 +2,359 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Terms of Use & Privacy Policy – Sebastian Automations</title>
-  <link rel="canonical" href="https://sp-automation.com/terms-en.html">
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-456XH82BM9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-456XH82BM9');
-  </script>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <title>
+    Terms of Use & Privacy Policy – Sebastian Automations
+  </title>
 
-    html {
-      scroll-behavior: smooth;
-    }
+  <meta
+    name="description"
+    content="Terms of Use and Privacy Policy for sp-automation.com, including privacy practices, personal data processing, confidentiality, GDPR, security, user rights, and website terms."
+  >
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Manrope', sans-serif;
-      background:#f7f4ef;
-      color: #1a1a1a;
-    }
+  <link
+    rel="canonical"
+    href="https://sp-automation.com/terms-en.html"
+  >
 
-    
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 244, 239, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
+  <link
+    rel="icon"
+    href="/favicon.png"
+  >
 
-    .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
-    .home-link {
-      color: #35594b;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      margin-left: auto;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
-    .desktop-nav a {
-      position: relative;
-      color: #52504c;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-    }
+  <link
+    rel="stylesheet"
+    href="/themes/noir-lime/terms/terms.css"
+  >
 
-    .desktop-nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 100%;
-      bottom: -7px;
-      height: 2px;
-      border-radius: 999px;
-      background: #35594b;
-      transition: right .22s ease;
-    }
+  <link
+    rel="stylesheet"
+    href="/consent/consent.css"
+  >
 
-    .desktop-nav a:hover::after {
-      right: 0;
-    }
+  <link
+    rel="stylesheet"
+    href="/assistant.css"
+  >
 
-    .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
-    .lang-switcher button {
-      min-width: 38px;
-      height: 34px;
-      border: 1px solid #d6cec4;
-      border-radius: 10px;
-      background: rgba(255,255,255,.8);
-      color: #5f5a54;
-      font-family: "Roboto Mono", monospace;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  <link
+    rel="stylesheet"
+    href="/nav-font-kaleidoscope.css?v=5"
+  >
 
-    .lang-switcher button:hover {
-      border-color: #35594b;
-      background: #35594b;
-      color: #fff;
-    }
+  <script
+    src="/assistant.js"
+    defer
+  ></script>
 
-
-    .page {
-      width: min(100%, 1080px);
-      margin: 0 auto;
-      padding:
-        72px
-        24px
-        max(104px, env(safe-area-inset-bottom));
-    }
-
-    .hero {
-      margin-bottom: 22px;
-      padding: 34px;
-      border: 1px solid #d5e4ee;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #fff 0%, #f7fbff 100%);
-      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      color: #0F9D58;
-      font-size: clamp(2rem, 6vw, 3.1rem);
-      line-height: 1.08;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 760px;
-      color: #596771;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .updated {
-      display: inline-flex;
-      margin-top: 16px;
-      padding: 8px 11px;
-      border: 1px solid #cfe0eb;
-      border-radius: 9px;
-      background: #f8fbfd;
-      color: #6d7880;
-      font-size: 10px;
-    }
-
-    .legal-grid {
-      display: grid;
-      gap: 14px;
-    }
-
-    .legal-section {
-      padding: 24px;
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.97);
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
-    }
-
-    .legal-section h2 {
-      margin: 0 0 12px;
-      color: #007acc;
-      font-size: 17px;
-      line-height: 1.35;
-    }
-
-    .legal-section p,
-    .legal-section li {
-      color: #53616a;
-      font-size: 12px;
-      line-height: 1.72;
-    }
-
-    .legal-section p {
-      margin: 0 0 12px;
-    }
-
-    .legal-section p:last-child {
-      margin-bottom: 0;
-    }
-
-    .legal-section ul {
-      margin: 10px 0 0;
-      padding-left: 20px;
-    }
-
-    .legal-section li {
-      margin-bottom: 8px;
-    }
-
-    .confidentiality {
-      border-color: #bfe0ca;
-      background: linear-gradient(135deg, #f8fffa 0%, #f0faf3 100%);
-    }
-
-    .confidentiality h2 {
-      color: #0F9D58;
-    }
-
-    .confidentiality-note {
-      margin-top: 14px;
-      padding: 15px 16px;
-      border-left: 4px solid #0F9D58;
-      border-radius: 9px;
-      background: #fff;
-      color: #344b3c;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 1.65;
-    }
-
-    .contact-box {
-      margin-top: 20px;
-      padding: 26px;
-      text-align: center;
-      border: 1px solid #c9e2f7;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
-    }
-
-    .contact-box h2 {
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
-    .contact-box p {
-      margin: 0 0 18px;
-      color: #596771;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    .contact-box a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 20px;
-      border-radius: 9px;
-      background: #1a73e8;
-      color: #fff;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .contact-box a:hover {
-      background: #135fbe;
-    }
-
-    footer {
-  padding:
-    34px
-    20px
-    max(34px, env(safe-area-inset-bottom));
-  border-top: 1px solid #dfd8cf;
-  background: rgba(244, 240, 234, 0.96);
-  color: #817c75;
-  font-size: 12px;
-  text-align: center;
-}
-
-footer a {
-  color: #35594b;
-  text-decoration: none;
-  margin-left: 8px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-    @media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .lang-switcher {
-        margin-left: auto;
-      }
-
-      .page {
-        padding:
-          24px
-          12px
-          max(36px, env(safe-area-inset-bottom));
-      }
-
-      .hero {
-        padding: 24px 18px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 12px;
-      }
-
-      .legal-section {
-        padding: 20px 16px;
-      }
-
-      .legal-section h2 {
-        font-size: 16px;
-      }
-
-      .legal-section p,
-      .legal-section li {
-        font-size: 11px;
-      }
-
-      .contact-box {
-        padding: 22px 16px;
-      }
-
-      .contact-box a {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .home-link {
-        font-size: 12px;
-      }
-
-      .lang-switcher button {
-        padding: 5px 7px;
-        font-size: 10px;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="/assistant.css">
-  <script src="/assistant.js" defer></script>
-  <link rel="stylesheet" href="nav-font-kaleidoscope.css?v=5">
-  <script src="nav-font-kaleidoscope.js?v=5" defer></script>
+  <script
+    src="/nav-font-kaleidoscope.js?v=5"
+    defer
+  ></script>
 </head>
 
 <body>
+
+  <div
+    class="terms-background"
+    aria-hidden="true"
+  >
+    <div
+      class="terms-background__layer terms-background__layer--1 is-active"
+    ></div>
+
+    <div
+      class="terms-background__layer terms-background__layer--2"
+    ></div>
+  </div>
+
+  <div
+    class="terms-frame"
+    aria-hidden="true"
+  >
+    <span class="terms-frame__top-left"></span>
+    <span class="terms-frame__top-right"></span>
+    <span class="terms-frame__bottom-left"></span>
+    <span class="terms-frame__bottom-right"></span>
+  </div>
+
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="home-link" href="index-en.html">← Home</a>
 
-      <nav class="desktop-nav">
-        <a href="about-en.html">About</a>
-        <a href="services-en.html">Services</a>
-        <a href="pricing-en.html">Pricing</a>
-        <a href="solutions-en.html">Solutions</a>
-        <a href="faq-en.html">FAQ</a>
-        <a href="contacts-en.html">Contacts</a>
+      <a
+        class="home-link"
+        href="/index-en.html"
+      >
+        ← Home
+      </a>
+
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav
+        class="desktop-nav"
+        aria-label="Main navigation"
+      >
+        <a href="/about-en.html">
+          About
+        </a>
+
+        <a href="/services-en.html">
+          Services
+        </a>
+
+        <a href="/pricing-en.html">
+          Pricing
+        </a>
+
+        <a href="/solutions-en.html">
+          Solutions
+        </a>
+
+        <a href="/faq-en.html">
+          FAQ
+        </a>
+
+        <a href="/contacts-en.html">
+          Contact
+        </a>
       </nav>
 
-      <div class="lang-switcher">
-        <button onclick="location.href='terms.html'">UA</button>
-        <button onclick="location.href='terms-en.html'">EN</button>
-        <button onclick="location.href='terms-ru.html'">RU</button>
+      <div
+        class="lang-switcher"
+        aria-label="Language selector"
+      >
+        <button
+          type="button"
+          onclick="location.href='/terms.html'"
+          aria-label="Ukrainian version"
+        >
+          UA
+        </button>
+
+        <button
+          type="button"
+          class="active"
+          onclick="location.href='/terms-en.html'"
+          aria-label="English version"
+          aria-current="page"
+        >
+          EN
+        </button>
+
+        <button
+          type="button"
+          onclick="location.href='/terms-ru.html'"
+          aria-label="Russian version"
+        >
+          RU
+        </button>
       </div>
+
     </div>
   </header>
 
+  <div class="mobile-menu">
+    <nav
+      class="mobile-menu-nav"
+      aria-label="Mobile navigation"
+    >
+      <a href="/index-en.html">
+        Home
+      </a>
+
+      <a href="/about-en.html">
+        About
+      </a>
+
+      <a href="/services-en.html">
+        Services
+      </a>
+
+      <a href="/pricing-en.html">
+        Pricing
+      </a>
+
+      <a href="/solutions-en.html">
+        Solutions
+      </a>
+
+      <a href="/faq-en.html">
+        FAQ
+      </a>
+
+      <a href="/contacts-en.html">
+        Contact
+      </a>
+
+      <a
+        href="/terms-en.html"
+        class="active"
+        aria-current="page"
+      >
+        Terms & Privacy
+      </a>
+    </nav>
+  </div>
+
   <main class="page">
+
     <section class="hero">
-      <h1>Terms of Use & Privacy Policy</h1>
+      <h1>
+        Terms of Use & Privacy Policy
+      </h1>
+
       <p>
-        This page explains the rules for using this website, how personal data
-        may be processed, the confidentiality standards applied to client
-        information, and the limitations that apply when using third-party services.
+        This page explains the terms for using this website, how personal
+        information may be handled, how confidential client information is
+        protected, and the standards that apply when you contact or work with me.
       </p>
-      <div class="updated">Last updated: 2026</div>
+
+      <div class="updated">
+        Last updated: 2026
+      </div>
     </section>
 
     <section class="legal-grid">
+
       <article class="legal-section">
-        <h2>1. General Provisions</h2>
+        <h2>
+          1. About These Terms
+        </h2>
+
         <p>
           This website provides information about automation, analytics,
-          web application development, integrations, document processing,
-          market research, and other digital services.
+          web application development, system integrations, document processing,
+          market research, and other digital solutions.
         </p>
+
         <p>
-          By using this website, you acknowledge that you have read and
-          accepted these Terms of Use and this Privacy Policy.
+          By using this website, you acknowledge that you have read these
+          Terms of Use and this Privacy Policy.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>2. No Public Offer</h2>
+        <h2>
+          2. Informational Purposes; No Binding Offer
+        </h2>
+
         <p>
-          Information published on this website, including service descriptions,
-          examples, estimated prices, and indicative delivery times, is provided
-          for general information only and does not constitute a binding public offer.
+          Service descriptions, examples, estimated pricing, timelines,
+          and other information published on this website are provided
+          for general informational purposes only and do not constitute
+          a binding offer or agreement.
         </p>
+
         <p>
-          The final scope, price, schedule, ownership rights, and responsibilities
-          of the parties are agreed individually after the actual task has been reviewed.
+          The final scope of work, pricing, schedule, ownership rights,
+          responsibilities, and other project terms are agreed upon
+          individually after the specific project has been reviewed.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>3. Personal Data We May Process</h2>
+        <h2>
+          3. Personal Information We May Collect
+        </h2>
+
         <p>
-          We may process information that you voluntarily provide through forms,
-          email, Telegram, or another communication channel, including:
+          We may process information that you voluntarily provide through
+          website forms, email, Telegram, or other communication channels,
+          including:
         </p>
+
         <ul>
           <li>your name;</li>
-          <li>email address;</li>
-          <li>telephone number or messenger contact;</li>
-          <li>the content of your message;</li>
-          <li>task descriptions, files, documents, or links;</li>
-          <li>other information that you choose to provide.</li>
+          <li>your email address;</li>
+          <li>your phone number or messaging contact;</li>
+          <li>the contents of your message;</li>
+          <li>project details, files, documents, or links;</li>
+          <li>any other information you choose to provide.</li>
         </ul>
       </article>
 
       <article class="legal-section">
-        <h2>4. Technical Data and Analytics</h2>
+        <h2>
+          4. Technical Information and Analytics
+        </h2>
+
         <p>
-          The website may automatically receive technical information such as
-          browser type, device type, approximate location, visit date and time,
-          referral source, and interactions with website pages.
+          This website may automatically collect certain technical information,
+          such as browser type, device type, approximate location, date and time
+          of access, referral source, and interactions with website pages.
         </p>
+
         <p>
-          This information may be processed through Google Analytics, Cloudflare,
-          and similar technical services for security, performance analysis,
-          fraud prevention, and improvement of the user experience.
+          This information may be processed through services such as
+          Google Analytics and Cloudflare to help secure the website,
+          understand site performance, prevent abuse, and improve the user experience.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>5. Forms, Messages, and Third-Party Processors</h2>
+        <h2>
+          5. Forms, Messages, and Third-Party Services
+        </h2>
+
         <p>
-          Website forms may rely on third-party services such as EmailJS,
+          Website forms and communications may rely on services such as EmailJS,
           Google Apps Script, Telegram, Cloudflare Turnstile, hosting providers,
-          and other infrastructure tools.
+          and other technical infrastructure.
         </p>
+
         <p>
-          Information submitted through a form may be delivered to email,
-          Telegram, Google Sheets, or another agreed communication channel
-          solely for handling the enquiry and continuing the conversation.
+          Information submitted through a form may be sent to email,
+          Telegram, Google Sheets, or another appropriate communication
+          channel solely for responding to your request and continuing
+          project-related communication.
         </p>
       </article>
 
       <article class="legal-section confidentiality">
-        <h2>6. Confidentiality from the First Contact</h2>
+        <h2>
+          6. Confidentiality Starts with Your First Contact
+        </h2>
+
         <p>
-          All non-public information received during the first enquiry,
-          initial project review, requirements discussion, or analysis of
-          client materials is treated as confidential by default.
+          Non-public information shared during an initial inquiry,
+          project review, requirements discussion, or evaluation of
+          project materials is treated as confidential from the start.
         </p>
-        <p>This includes, without limitation:</p>
+
+        <p>
+          This may include:
+        </p>
+
         <ul>
           <li>documents, spreadsheets, databases, and reports;</li>
           <li>financial, commercial, and operational information;</li>
@@ -492,238 +363,351 @@ footer a:hover {
           <li>customer, employee, partner, and supplier information;</li>
           <li>commercial terms and other non-public project information.</li>
         </ul>
+
         <p>
-          Such information is not disclosed, published, sold, or transferred
-          to third parties without the client's prior consent, except where
-          disclosure is required by applicable law.
+          Confidential information will not be published, sold, disclosed,
+          or shared with third parties without the client's prior consent,
+          except where disclosure is required by applicable law.
         </p>
+
         <p>
-          This confidentiality standard applies regardless of whether a contract
-          has been signed or paid work has started.
+          This confidentiality standard applies whether or not a formal
+          agreement has been signed and whether or not paid work has begun.
         </p>
+
         <div class="confidentiality-note">
-          Confidentiality is the default standard of cooperation, not an additional
-          paid service. A separate non-disclosure agreement (NDA) may be signed
-          whenever the client requires one.
+          Confidentiality is part of the standard working relationship,
+          not an extra paid service. If needed, a separate non-disclosure
+          agreement (NDA) can be signed before project materials are shared.
         </div>
       </article>
 
       <article class="legal-section">
-        <h2>7. Purposes and Legal Bases for Processing</h2>
+        <h2>
+          7. Why We Process Personal Information
+        </h2>
+
         <p>
-          Personal data may be processed only where there is an appropriate legal
-          basis, including consent, steps taken at your request before entering
-          into a contract, performance of a contract, compliance with legal
-          obligations, or a legitimate interest that does not override your rights.
+          Personal information is processed only when there is an appropriate
+          legal basis for doing so. Depending on the circumstances, this may
+          include your consent, steps taken at your request before entering
+          into an agreement, performance of an agreement, compliance with
+          legal obligations, or a legitimate business interest that does not
+          override your rights.
         </p>
-        <p>Data may be used for the following purposes:</p>
+
+        <p>
+          Personal information may be used to:
+        </p>
+
         <ul>
-          <li>responding to enquiries;</li>
-          <li>reviewing and estimating a task;</li>
-          <li>preparing a proposal;</li>
-          <li>performing agreed services;</li>
-          <li>providing technical support;</li>
-          <li>protecting the website and preventing abuse;</li>
-          <li>improving services and website performance.</li>
+          <li>respond to inquiries;</li>
+          <li>review and estimate a project;</li>
+          <li>prepare a proposal;</li>
+          <li>perform agreed services;</li>
+          <li>provide technical support;</li>
+          <li>protect the website and prevent abuse;</li>
+          <li>improve services and website performance.</li>
         </ul>
       </article>
 
       <article class="legal-section">
-        <h2>8. GDPR and Data Protection Principles</h2>
+        <h2>
+          8. GDPR and Data Protection Principles
+        </h2>
+
         <p>
-          Where the General Data Protection Regulation applies, personal data is
-          handled in line with the principles of lawfulness, fairness, transparency,
-          purpose limitation, data minimisation, accuracy, storage limitation,
-          integrity, confidentiality, and accountability.
+          Where the General Data Protection Regulation (GDPR) applies,
+          personal data is handled in accordance with principles including
+          lawfulness, fairness, transparency, purpose limitation,
+          data minimization, accuracy, storage limitation, integrity,
+          confidentiality, and accountability.
         </p>
+
         <p>
           The official text of Regulation (EU) 2016/679 is available through
-          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
-             target="_blank"
-             rel="noopener noreferrer">EUR-Lex</a>.
-          A practical overview of GDPR principles is available from the
-          <a href="https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en"
-             target="_blank"
-             rel="noopener noreferrer">European Commission</a>.
+          <a
+            href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            EUR-Lex
+          </a>.
+          Additional information about GDPR principles is available from the
+          <a
+            href="https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            European Commission
+          </a>.
         </p>
+
         <p>
-          This page is intended to provide transparent information about data
-          handling. It does not claim that every visitor, project, or processing
-          activity is automatically subject to the GDPR.
+          This section explains general data-protection practices and does not
+          mean that the GDPR automatically applies to every visitor,
+          project, or processing activity.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>9. Data Retention and Deletion</h2>
+        <h2>
+          9. Data Retention and Deletion
+        </h2>
+
         <p>
-          Personal data is retained only for as long as reasonably necessary
-          for communication, project assessment, performance of services,
+          Personal information is retained only for as long as reasonably
+          necessary for communication, project evaluation, delivery of services,
           legal compliance, dispute resolution, security, or another legitimate purpose.
         </p>
+
         <p>
-          You may request information about the personal data you have submitted,
-          ask for inaccurate data to be corrected, or request deletion where there
-          is no overriding legal or contractual reason to retain it.
+          You may ask what personal information you have provided,
+          request corrections to inaccurate information, or request deletion
+          when there is no legal, contractual, or other legitimate reason
+          to continue retaining it.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>10. Your Data Protection Rights</h2>
+        <h2>
+          10. Your Privacy Rights
+        </h2>
+
         <p>
-          Depending on the applicable law, you may have the right to request access,
-          correction, deletion, restriction of processing, data portability,
-          objection to processing, or withdrawal of consent.
+          Depending on the law that applies to you, you may have rights
+          relating to access, correction, deletion, restriction of processing,
+          data portability, objection to processing, or withdrawal of consent.
         </p>
+
         <p>
-          Where the GDPR applies, you may also have the right to lodge a complaint
-          with the competent data protection authority.
+          Where the GDPR applies, you may also have the right to file
+          a complaint with the appropriate data protection authority.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>11. International Data Transfers</h2>
+        <h2>
+          11. International Data Transfers
+        </h2>
+
         <p>
-          Some third-party services may process or store information outside your
-          country or outside the European Economic Area. Such transfers are governed
-          by the terms, safeguards, and data protection mechanisms of the relevant provider.
+          Some third-party service providers may process or store information
+          outside your country or outside the European Economic Area.
+          Any such transfers are subject to the terms, safeguards,
+          and data-protection mechanisms used by the relevant provider.
         </p>
+
         <p>
-          Only services reasonably required for website operation, communication,
-          security, or project delivery should be used.
+          Third-party services are used only when reasonably necessary
+          for website operation, communication, security, or project delivery.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>12. Security</h2>
+        <h2>
+          12. Security
+        </h2>
+
         <p>
-          Security measures may include Cloudflare Turnstile, server-side validation,
-          rate limiting, field length restrictions, access controls, secure storage
-          of credentials, and separation of secret keys from public code.
+          Security measures may include Cloudflare Turnstile,
+          server-side validation, rate limiting, field-length restrictions,
+          access controls, secure credential storage, and keeping secret
+          keys separate from publicly accessible code.
         </p>
+
         <p>
-          Despite reasonable technical and organisational measures, no method of
-          transmission or storage can guarantee absolute security.
+          While reasonable technical and organizational safeguards are used,
+          no method of transmitting or storing information can guarantee
+          absolute security.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>13. Use of Artificial Intelligence</h2>
+        <h2>
+          13. Use of AI Tools
+        </h2>
+
         <p>
-          Artificial intelligence tools may be used as supporting instruments during
-          research, analysis, coding, documentation, testing, or preparation of materials.
+          Artificial intelligence tools may be used to assist with research,
+          analysis, coding, documentation, testing, or preparation of project materials.
         </p>
+
         <p>
-          Architecture, logic, verification, testing, and final delivery remain under
-          human control and responsibility.
+          Project architecture, business logic, review, testing,
+          and final delivery remain under human oversight and responsibility.
         </p>
+
         <p>
-          Confidential client materials must not be submitted to external AI services
-          without the client's prior approval or another valid legal basis.
+          Confidential client materials will not be submitted to external
+          AI services without the client's prior approval or another valid legal basis.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>14. Intellectual Property and Website Content</h2>
+        <h2>
+          14. Intellectual Property and Website Content
+        </h2>
+
         <p>
-          Original text, structure, design, service descriptions, and other website
-          materials are protected by applicable intellectual property laws.
+          Original website text, structure, design, service descriptions,
+          and other original materials are protected by applicable
+          intellectual property laws.
         </p>
+
         <p>
-          Copying, republishing, or commercially reusing website content without
-          permission is prohibited except where permitted by law.
+          Copying, republishing, or commercially using website content
+          without permission is prohibited except where otherwise permitted by law.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>15. Intellectual Property and Ownership Rights in Deliverables</h2>
+        <h2>
+          15. Ownership of Project Deliverables
+        </h2>
+
         <p>
-          Rights to source code, spreadsheets, scripts, web applications,
-          dashboards, reports, documentation, and other deliverables are determined
-          by the individual project agreement.
+          Ownership and usage rights relating to source code, spreadsheets,
+          scripts, web applications, dashboards, reports, documentation,
+          and other project deliverables are determined by the terms
+          agreed upon for the individual project.
         </p>
+
         <p>
-          After project completion, the client receives the agreed materials,
-          access rights, source files, credentials, instructions, and ownership
-          rights included in the agreed scope.
+          Upon completion, the client receives the materials, access,
+          source files, credentials, documentation, and rights included
+          in the agreed project scope.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>16. Third-Party Brands and Services</h2>
+        <h2>
+          16. Third-Party Brands and Services
+        </h2>
+
         <p>
-          Product names, logos, and trademarks belonging to Google, Microsoft,
-          Telegram, OpenAI, Cloudflare, and other organisations remain the property
-          of their respective owners.
+          Names, logos, products, and trademarks belonging to Google,
+          Microsoft, Telegram, OpenAI, Cloudflare, and other organizations
+          remain the property of their respective owners.
         </p>
+
         <p>
-          References to such services are informational and do not imply endorsement,
-          certification, or an official partnership unless explicitly stated.
+          References to third-party products or services are provided
+          for informational purposes and do not imply endorsement,
+          certification, sponsorship, or an official partnership unless
+          expressly stated otherwise.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>17. Limitation of Liability</h2>
-        <p>The website owner is not liable for:</p>
+        <h2>
+          17. Limitation of Liability
+        </h2>
+
+        <p>
+          To the extent permitted by applicable law, the website owner
+          is not responsible for:
+        </p>
+
         <ul>
           <li>changes to third-party services, APIs, policies, or pricing;</li>
-          <li>temporary unavailability of hosting, APIs, or external platforms;</li>
+          <li>temporary outages affecting hosting, APIs, or external platforms;</li>
           <li>actions taken by users after a solution has been delivered;</li>
-          <li>loss caused by misuse of provided materials or systems;</li>
+          <li>losses resulting from improper use of delivered materials or systems;</li>
           <li>errors caused by incomplete, outdated, or inaccurate source data;</li>
-          <li>indirect, incidental, or consequential loss to the extent permitted by law.</li>
+          <li>indirect, incidental, special, or consequential damages.</li>
         </ul>
       </article>
 
       <article class="legal-section">
-        <h2>18. Changes to These Terms</h2>
+        <h2>
+          18. Changes to These Terms
+        </h2>
+
         <p>
-          These Terms and this Privacy Policy may be updated to reflect changes in
-          website functionality, applicable law, third-party services, security
-          practices, or data-processing activities.
+          These Terms of Use and this Privacy Policy may be updated
+          from time to time to reflect changes in website functionality,
+          applicable law, third-party services, security practices,
+          or data-processing activities.
         </p>
+
         <p>
-          The latest version will always be published on this page.
+          The current version will always be posted on this page.
         </p>
       </article>
 
       <article class="legal-section">
-        <h2>19. Privacy Contact</h2>
+        <h2>
+          19. Privacy Questions
+        </h2>
+
         <p>
-          For questions about privacy, personal data, deletion requests,
-          confidentiality, or signing an NDA, please use the contact page.
+          If you have questions about privacy, personal information,
+          deletion requests, confidentiality, or an NDA, please use
+          the contact page.
         </p>
       </article>
 
-     <article class="legal-section">
-       <h2>20. Language Versions of the Website</h2>
+      <article class="legal-section">
+        <h2>
+          20. Language Versions
+        </h2>
 
-      <p>
-        The website is available in Ukrainian, English, and Russian.
-        The other language versions are provided solely for the convenience of users.
-      </p>
+        <p>
+          This website is available in Ukrainian, English, and Russian.
+          The English and Russian versions are provided for convenience.
+        </p>
 
-      <p>
-       In the event of any discrepancies, ambiguity, translation inaccuracies,
-       or differences in the interpretation of this document, the Ukrainian-language
-      version shall prevail for interpretation purposes.
-      </p>
-   </article>
+        <p>
+          If there is any inconsistency, ambiguity, translation error,
+          or difference in interpretation between language versions,
+          the Ukrainian version will control.
+        </p>
+      </article>
+
     </section>
 
     <section class="contact-box">
-      <h2>Need an NDA or a specific confidentiality arrangement?</h2>
+      <h2>
+        Need an NDA or custom confidentiality terms?
+      </h2>
+
       <p>
-        Contact me before sending sensitive materials, and we can agree on
-        the confidentiality framework before the project review begins.
+        Contact me before sending sensitive materials, and we can agree
+        on the appropriate confidentiality terms before I review your project.
       </p>
-      <a href="contacts-en.html">Go to Contacts</a>
+
+      <a href="/contacts-en.html">
+        Contact Me
+      </a>
     </section>
+
   </main>
 
   <footer>
-  © 2015–2026 Sebastian Automations. All rights reserved.
-  <a href="terms-en.html">Terms of Use</a>
-</footer>
-  <script src="nav-font-kaleidoscope.js"></script>
+
+    <div class="footer-ticker">
+      <div class="footer-ticker-text">
+        Excel VBA · Google Apps Script · Power BI · DAX · Power Query ·
+        Automated Reporting · Excel Automation · Data Processing ·
+        Data Cleaning · Data Parsing · Integrations · Macros ·
+        Custom Logic · Business Process Automation · Analytics Dashboards ·
+        Google Sheets Automation · Web Applications · JavaScript ·
+        Custom Business Solutions ·
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      © 2015–2026 Sebastian Automations. All rights reserved.
+      <a href="/terms-en.html">
+        Terms of Use
+      </a>
+    </div>
+
+  </footer>
+
+  <script src="/themes/noir-lime/terms/terms.js"></script>
+  <script src="/consent/consent.js"></script>
+
 </body>
 </html>

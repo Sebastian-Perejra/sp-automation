@@ -630,6 +630,8 @@ footer a:hover {
 <link href="/assistant.css" rel="stylesheet"/>
 <script defer="" src="/assistant.js"></script>
 <link href="/nav-font-kaleidoscope.css?v=5" rel="stylesheet"/>
+<link rel="stylesheet" href="/components/components.css">
+<script src="/components/components.js" defer></script>    
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script async="" defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js">
 </script>
@@ -641,47 +643,7 @@ footer a:hover {
 <span class="cosmic-frame__bottom-left"></span>
 <span class="cosmic-frame__bottom-right"></span>
 </div>
-<header class="topbar">
-<div class="topbar-inner">
-<a class="home-link" href="index-en.html">← Home</a>
-    <button
-  class="mobile-menu-button"
-  type="button"
-  aria-label="Open menu"
-  aria-expanded="false"
->
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-<nav class="desktop-nav">
-<a href="about-en.html">About me</a>
-<a href="services-en.html">Services</a>
-<a href="pricing-en.html">Pricing</a>
-<a href="solutions-en.html">Solutions</a>
-<a class="active" href="faq-en.html">FAQ</a>
-<a href="contacts-en.html">Contacts</a>
-</nav>
-<div class="lang-switcher">
-<button onclick="location.href='faq.html'" type="button">UA</button>
-<button class="active" onclick="location.href='faq-en.html'" type="button">EN</button>
-<button onclick="location.href='faq-ru.html'" type="button">RU</button>
-</div>
-</div>
-</header>
-    <div class="mobile-menu">
-  <nav class="mobile-menu-nav">
-    <a href="index-en.html">Home</a>
-    <a href="about-en.html">About Me</a>
-    <a href="services-en.html">Services</a>
-    <a href="pricing-en.html">Pricing</a>
-    <a href="solutions-en.html">Solutions</a>
-    <a href="faq-en.html" class="active">FAQ</a>
-    <a href="contacts-en.html">Contacts</a>
-    <a href="terms-en.html">Terms of Use</a>
-  </nav>
-</div>
-<main class="page">
+<div id="site-header-slot"></div><main class="page">
 <section class="hero">
 <h1>Frequently Asked Questions</h1>
 <p>Here you can find answers about automation, ways of working, technologies, web applications, mobile solutions, and post-launch support.</p>
@@ -823,12 +785,7 @@ footer a:hover {
 </div>
 <a class="back-link" href="index-en.html">← Back to home</a>
 </main>
-<footer>
-<div class="footer-ticker">
-<div class="footer-ticker-text">Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Automated reports · Excel automation · Data processing · Data cleaning · Data parsing · Integrations · Macros · Custom logic · Business process automation · Analytics dashboards · Google Sheets automation · Web applications · JavaScript · Custom business solutions ·</div>
-</div>
-<div class="footer-copy">© 2015–2026 Sebastian Automations. All rights reserved. <a href="terms-en.html">Terms of Use</a></div>
-</footer>
+<div id="site-footer-slot"></div>
 
 </body>
 </html>

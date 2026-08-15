@@ -1671,3 +1671,89 @@ body::-webkit-scrollbar {
   @media (max-width: 768px) {
     
   }
+
+html {
+  background: #f7f4ef;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+  --home-bg-a: url("/home/assets/air1.webp");
+  --home-bg-b: url("/home/assets/air2.webp");
+  --home-bg-x: 0px;
+  --home-bg-y: 0px;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -24px;
+  z-index: -2;
+  pointer-events: none;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform:
+    translate3d(
+      var(--home-bg-x),
+      var(--home-bg-y),
+      0
+    )
+    scale(1.035);
+  transition:
+    opacity 2.4s ease,
+    transform 0.18s ease-out;
+  will-change: opacity, transform;
+}
+
+body::before {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(247, 244, 239, 0.76) 0%,
+      rgba(247, 244, 239, 0.68) 42%,
+      rgba(247, 244, 239, 0.78) 100%
+    ),
+    var(--home-bg-a);
+  opacity: 1;
+}
+
+body::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(247, 244, 239, 0.76) 0%,
+      rgba(247, 244, 239, 0.68) 42%,
+      rgba(247, 244, 239, 0.78) 100%
+    ),
+    var(--home-bg-b);
+  opacity: 0;
+}
+
+body.home-bg-show-b::before {
+  opacity: 0;
+}
+
+body.home-bg-show-b::after {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    inset: 0;
+    transform: scale(1.02);
+    transition: opacity 2.4s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    transform: scale(1.02);
+    transition: opacity 0.8s linear;
+  }
+}

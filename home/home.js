@@ -1,15 +1,36 @@
+const HOME_LANG =
+  document.documentElement.lang === 'en'
+    ? 'en'
+    : document.documentElement.lang === 'ru'
+      ? 'ru'
+      : 'uk';
+
+const HOME_PART_SUFFIX =
+  HOME_LANG === 'uk'
+    ? ''
+    : `-${HOME_LANG}`;
+
 const HOME_PARTS = [
   {
     slot: 'home-reviews-slot',
-    url: '/home/parts/reviews.html'
+    url:
+      '/home/parts/reviews' +
+      HOME_PART_SUFFIX +
+      '.html'
   },
   {
     slot: 'home-contact-slot',
-    url: '/home/parts/contact.html'
+    url:
+      '/home/parts/contact' +
+      HOME_PART_SUFFIX +
+      '.html'
   },
   {
     slot: 'home-solution-picker-slot',
-    url: '/home/parts/solution-picker.html'
+    url:
+      '/home/parts/solution-picker' +
+      HOME_PART_SUFFIX +
+      '.html'
   }
 ];
 

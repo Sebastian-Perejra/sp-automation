@@ -1125,7 +1125,7 @@ footer {
 }
 
 .terms-background__layer.is-active {
-  opacity: 0.28;
+  opacity: 0.62;
 }
 
 .terms-background::after {

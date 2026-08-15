@@ -2026,7 +2026,19 @@ function initHeroSpotlight() {
     }
   );
 }
+
+function initHomeEntrance() {
+  window.requestAnimationFrame(
+    () => {
+      document.body.classList.add(
+        'home-ready'
+      );
+    }
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initCarousel();
+initHomeEntrance();
 loadHomeParts();

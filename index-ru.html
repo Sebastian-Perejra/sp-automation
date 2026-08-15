@@ -118,9 +118,9 @@
   >
 
   <link
-  rel="stylesheet"
-  href="/themes/noir-lime/estimator/pricing-estimator.css?v=1"
->
+    rel="stylesheet"
+    href="/themes/noir-lime/estimator/pricing-estimator.css?v=1"
+  >
 
   <link
     rel="stylesheet"
@@ -163,16 +163,28 @@
   <div id="site-header-slot"></div>
 
   <section class="home-hero">
-    <div
-      class="hero-sheen"
-      aria-hidden="true"
-    ></div>
+    <div class="hero-sheen" aria-hidden="true"></div>
+
+    <div class="hero-eyebrow">
+      BUSINESS AUTOMATION · ANALYTICS · SYSTEMS
+    </div>
 
     <div class="hero-inline">
-      <img
-        src="/home/assets/avatar.png"
-        alt="Avatar"
-      >
+
+      <div class="hero-avatar-orbit" aria-hidden="true">
+        <span class="hero-orbit hero-orbit-1"></span>
+        <span class="hero-orbit hero-orbit-2"></span>
+        <span class="hero-orbit hero-orbit-3"></span>
+
+        <span class="hero-orbit-dot hero-orbit-dot-1"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-2"></span>
+        <span class="hero-orbit-dot hero-orbit-dot-3"></span>
+
+        <img
+          src="/home/assets/avatar.png"
+          alt="Avatar"
+        >
+      </div>
 
       <div class="hero-name-wrap">
         <div class="typewriter">
@@ -204,9 +216,25 @@
     </div>
 
     <p>
-      Автоматизирую и визуализирую всё, что можно.
-      А остальное — тоже попробую.
+      Автоматизирую и визуализирую всё, что можно. А остальное — тоже попробую.
     </p>
+
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <strong>11+ лет</strong>
+        <span>опыта в автоматизации</span>
+      </div>
+
+      <div class="hero-metric">
+        <strong>Excel · BI · Apps Script</strong>
+        <span>рабочие системы и аналитика</span>
+      </div>
+
+      <div class="hero-metric">
+        <strong>Automation · Analytics</strong>
+        <span>интеграции и кастомная логика</span>
+      </div>
+    </div>
 
     <button
       class="cta-button solution-picker-btn"
@@ -215,6 +243,28 @@
     >
       ⚡ Подобрать решение
     </button>
+
+    <div class="hero-data-curve" aria-hidden="true">
+      <svg viewBox="0 0 220 110" preserveAspectRatio="none">
+        <path
+          class="hero-data-grid-line"
+          d="M10 92 H210"
+        />
+
+        <path
+          class="hero-data-curve-line"
+          d="M12 88 C48 86, 56 52, 92 58 S134 84, 160 46 S190 30, 208 18"
+        />
+
+        <circle class="hero-data-dot" cx="92" cy="58" r="3.2" />
+        <circle class="hero-data-dot" cx="160" cy="46" r="3.2" />
+        <circle class="hero-data-dot" cx="208" cy="18" r="3.2" />
+      </svg>
+    </div>
+
+    <div class="hero-watermark" aria-hidden="true">
+      AUTOMATION
+    </div>
   </section>
 
   <div
@@ -260,158 +310,382 @@
       class="carousel"
       id="carousel"
     >
-      <img
-        src="/home/assets/excel.png"
-        style="--i:0"
-        alt="Excel"
-      >
-
-      <img
-        src="/home/assets/powerbi.png"
-        style="--i:1"
-        alt="Power BI"
-      >
-
-      <img
-        src="/home/assets/sheets.png"
-        style="--i:2"
-        alt="Google Sheets"
-      >
-
-      <img
-        src="/home/assets/JavaScript.png"
-        style="--i:3"
-        alt="JavaScript"
-      >
-
-      <img
-        src="/home/assets/vba.png"
-        style="--i:4"
-        alt="VBA"
-      >
-
-      <img
-        src="/home/assets/powerquery.png"
-        style="--i:5"
-        alt="Power Query"
-      >
-
-      <img
-        src="/home/assets/power-pivot.png"
-        style="--i:6"
-        alt="Power Pivot"
-      >
-
-      <img
-        src="/home/assets/tgbot.png"
-        style="--i:7"
-        alt="Telegram Bot"
-      >
-
-      <img
-        src="/home/assets/googledrive.png"
-        style="--i:8"
-        alt="Google Drive"
-      >
-
-      <img
-        src="/home/assets/webapp.png"
-        style="--i:9"
-        alt="Web App"
-      >
+      <img src="/home/assets/excel.png" style="--i:0" alt="Excel">
+      <img src="/home/assets/powerbi.png" style="--i:1" alt="Power BI">
+      <img src="/home/assets/sheets.png" style="--i:2" alt="Google Sheets">
+      <img src="/home/assets/JavaScript.png" style="--i:3" alt="JavaScript">
+      <img src="/home/assets/vba.png" style="--i:4" alt="VBA">
+      <img src="/home/assets/powerquery.png" style="--i:5" alt="Power Query">
+      <img src="/home/assets/power-pivot.png" style="--i:6" alt="Power Pivot">
+      <img src="/home/assets/tgbot.png" style="--i:7" alt="Telegram Bot">
+      <img src="/home/assets/googledrive.png" style="--i:8" alt="Google Drive">
+      <img src="/home/assets/webapp.png" style="--i:9" alt="Web App">
     </div>
   </div>
+
+  <section class="home-automation-section">
+    <div class="home-section-head">
+      <div>
+        <div class="home-section-kicker">
+          ВОЗМОЖНОСТИ
+        </div>
+
+        <h2>
+          Что я автоматизирую
+        </h2>
+
+        <p>
+          Решения, которые экономят ваше время и помогают масштабировать бизнес.
+        </p>
+      </div>
+    </div>
+
+    <div class="home-automation-grid">
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          XL
+        </div>
+
+        <h3>
+          Excel-системы
+        </h3>
+
+        <p>
+          Сложные модели, расчёты, системы учёта и рабочие инструменты под ваши процессы.
+        </p>
+
+        <a href="/solutions-ru.html">
+          Подробнее →
+        </a>
+      </article>
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          BI
+        </div>
+
+        <h3>
+          BI-дашборды
+        </h3>
+
+        <p>
+          Power BI, аналитика, KPI и понятная визуализация данных для принятия решений.
+        </p>
+
+        <a href="/solutions-ru.html">
+          Подробнее →
+        </a>
+      </article>
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          API
+        </div>
+
+        <h3>
+          Apps Script / Интеграции
+        </h3>
+
+        <p>
+          Автоматизация Google Workspace, API, синхронизация данных и связь между сервисами.
+        </p>
+
+        <a href="/solutions-ru.html">
+          Подробнее →
+        </a>
+      </article>
+
+      <article class="home-automation-card">
+        <div class="home-automation-card-icon">
+          TG
+        </div>
+
+        <h3>
+          Web / Telegram-боты
+        </h3>
+
+        <p>
+          Боты, формы, уведомления и веб-инструменты для автоматизации коммуникаций и процессов.
+        </p>
+
+        <a href="/solutions-ru.html">
+          Подробнее →
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="home-cases-section">
+    <div class="home-cases-head">
+      <div>
+        <div class="home-section-kicker">
+          КЕЙСЫ
+        </div>
+
+        <h2>
+          Избранные кейсы
+        </h2>
+
+        <p>
+          Реальные проекты. Практические решения. Измеримый результат.
+        </p>
+      </div>
+
+      <a
+        class="home-cases-all"
+        href="/solutions-ru.html"
+      >
+        Смотреть все кейсы →
+      </a>
+    </div>
+
+    <div class="home-cases-grid">
+
+      <a
+        class="home-case-card home-case-card-link"
+        href="/solutions-ru.html"
+      >
+        <div class="home-case-media home-case-media-dashboard">
+          <img
+            src="/home/assets/case-dashboard.webp"
+            alt="Дашборд аналитики продаж"
+          >
+        </div>
+
+        <div class="home-case-content">
+          <span class="home-case-tag">
+            BI / DASHBOARDS
+          </span>
+
+          <h3>
+            Аналитика и визуализация данных
+          </h3>
+
+          <p>
+            Интерактивные отчёты, KPI и понятная картина для принятия решений.
+          </p>
+        </div>
+      </a>
+
+      <a
+        class="home-case-card home-case-card-link"
+        href="/solutions-ru.html"
+      >
+        <div class="home-case-media home-case-media-dashboard">
+          <img
+            src="/home/assets/case-production.webp"
+            alt="Планирование производства и загрузки мощностей"
+          >
+        </div>
+
+        <div class="home-case-content">
+          <span class="home-case-tag">
+            PRODUCTION / PLANNING
+          </span>
+
+          <h3>
+            Планирование производства
+          </h3>
+
+          <p>
+            Распределение заказов, загрузка мощностей, контроль сроков и планирование производственных процессов.
+          </p>
+        </div>
+      </a>
+
+      <a
+        class="home-case-card home-case-card-link"
+        href="/solutions-ru.html"
+      >
+        <div class="home-case-media home-case-media-dashboard">
+          <img
+            src="/home/assets/case-documents.webp"
+            alt="Автоматизация документов и PDF"
+          >
+        </div>
+
+        <div class="home-case-content">
+          <span class="home-case-tag">
+            DOCS / AUTOMATION
+          </span>
+
+          <h3>
+            Автоматизация документов
+          </h3>
+
+          <p>
+            Обработка PDF, распознавание данных, проверка, маршруты обработки и автоматический экспорт результатов.
+          </p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="home-motto">
+    <div class="home-motto-line">
+      <span>NO PAIN.</span>
+      <strong>STILL GAIN.</strong>
+    </div>
+
+    <p>
+      Автоматизация должна убирать рутину, а не результат.
+    </p>
+  </section>
+
+  <section class="home-final-cta">
+    <div class="home-final-cta-copy">
+      <div class="home-final-cta-kicker">
+        ГОТОВЫ ДВИГАТЬСЯ ДАЛЬШЕ?
+      </div>
+
+      <h2>
+        Выберите решение, которое ускорит ваш бизнес
+      </h2>
+
+      <p>
+        Перейдите к готовым решениям или рассчитайте примерную стоимость вашего проекта.
+      </p>
+
+      <div class="home-final-cta-actions">
+        <button
+          type="button"
+          class="home-final-cta-primary"
+          onclick="openSolutionPicker()"
+        >
+          ⚡ Подобрать решение
+        </button>
+
+        <button
+          type="button"
+          class="home-final-cta-secondary"
+          onclick="openHomeEstimator()"
+        >
+          ▦ Рассчитать стоимость
+        </button>
+      </div>
+    </div>
+
+    <div class="home-final-cta-visual" aria-hidden="true">
+      <div class="home-final-calc">
+        <span class="home-final-calc-screen"></span>
+
+        <span>÷</span>
+        <span>×</span>
+        <span>−</span>
+
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+
+        <span>4</span>
+        <span>5</span>
+        <span>+</span>
+      </div>
+
+      <div class="home-final-bars">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="home-final-chart-line"></div>
+    </div>
+  </section>
 
   <div id="home-reviews-slot"></div>
   <div id="home-contact-slot"></div>
   <div id="home-solution-picker-slot"></div>
 
   <button
-  class="pricing-estimator-trigger home-estimator-hidden-trigger"
-  type="button"
-  aria-hidden="true"
-  tabindex="-1"
-></button>
-
-<div
-  class="pricing-estimator-overlay"
-  aria-hidden="true"
-></div>
-
-<aside
-  class="pricing-estimator-panel"
-  aria-hidden="true"
-  aria-label="Калькулятор стоимости проекта"
->
-  <button
-    class="pricing-estimator-close"
+    class="pricing-estimator-trigger home-estimator-hidden-trigger"
     type="button"
-    aria-label="Закрыть калькулятор"
+    aria-hidden="true"
+    tabindex="-1"
+  ></button>
+
+  <div
+    class="pricing-estimator-overlay"
+    aria-hidden="true"
+  ></div>
+
+  <aside
+    class="pricing-estimator-panel"
+    aria-hidden="true"
+    aria-label="Калькулятор стоимости проекта"
   >
-    ×
-  </button>
-
-  <div class="pricing-estimator-panel-inner">
-    <div class="pricing-estimator-panel-kicker">
-      Предварительная оценка
-    </div>
-
-    <h2 class="pricing-estimator-panel-title">
-      Рассчитать стоимость проекта
-    </h2>
-
-    <p class="pricing-estimator-panel-text">
-      Ответьте на несколько коротких вопросов, чтобы получить примерную оценку проекта.
-    </p>
-
-    <div class="pricing-estimator-progress">
-      <div class="pricing-estimator-progress-head">
-        <span class="pricing-estimator-progress-label">
-          Начало
-        </span>
-
-        <span class="pricing-estimator-progress-value">
-          0%
-        </span>
-      </div>
-
-      <div class="pricing-estimator-progress-track">
-        <span class="pricing-estimator-progress-bar"></span>
-      </div>
-    </div>
-
-    <div class="pricing-estimator-content"></div>
-
-    <div class="pricing-estimator-navigation">
-      <button
-        class="pricing-estimator-back"
-        type="button"
-        disabled
-      >
-        ← Назад
-      </button>
-
-      <button
-        class="pricing-estimator-reset"
-        type="button"
-      >
-        Сбросить
-      </button>
-    </div>
-
     <button
-      class="pricing-estimator-tired"
+      class="pricing-estimator-close"
       type="button"
+      aria-label="Закрыть калькулятор"
     >
-      Я устал отвечать — оставить запрос
+      ×
     </button>
-  </div>
-</aside>
-  
+
+    <div class="pricing-estimator-panel-inner">
+      <div class="pricing-estimator-panel-kicker">
+        Предварительная оценка
+      </div>
+
+      <h2 class="pricing-estimator-panel-title">
+        Рассчитать стоимость проекта
+      </h2>
+
+      <p class="pricing-estimator-panel-text">
+        Ответьте на несколько коротких вопросов, чтобы получить примерную оценку проекта.
+      </p>
+
+      <div class="pricing-estimator-progress">
+        <div class="pricing-estimator-progress-head">
+          <span class="pricing-estimator-progress-label">
+            Начало
+          </span>
+
+          <span class="pricing-estimator-progress-value">
+            0%
+          </span>
+        </div>
+
+        <div class="pricing-estimator-progress-track">
+          <span class="pricing-estimator-progress-bar"></span>
+        </div>
+      </div>
+
+      <div class="pricing-estimator-content"></div>
+
+      <div class="pricing-estimator-navigation">
+        <button
+          class="pricing-estimator-back"
+          type="button"
+          disabled
+        >
+          ← Назад
+        </button>
+
+        <button
+          class="pricing-estimator-reset"
+          type="button"
+        >
+          Сбросить
+        </button>
+      </div>
+
+      <button
+        class="pricing-estimator-tired"
+        type="button"
+      >
+        Я устал отвечать — оставить запрос
+      </button>
+    </div>
+  </aside>
+
   <div id="site-footer-slot"></div>
+
   <script
-  src="/themes/noir-lime/estimator/pricing-estimator-ru.js?v=1"
-  defer
-></script>
+    src="/themes/noir-lime/estimator/pricing-estimator-ru.js?v=1"
+    defer
+  ></script>
 </body>
 </html>

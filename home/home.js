@@ -13,6 +13,14 @@ const HOME_PARTS = [
   }
 ];
 
+const HOME_BACKGROUND_IMAGES = [
+  '/home/assets/air1.webp',
+  '/home/assets/air2.webp',
+  '/home/assets/air3.webp',
+  '/home/assets/air4.webp',
+  '/home/assets/air5.webp'
+];
+
 const REVIEWS_API_URL =
   'https://script.google.com/macros/s/AKfycbwQ4rbjx6uIXv9PJ-EpbriFkhMTWVT2urzz0Tgv6sPRuwKRboFjlT3-D2bGAcjL2vs/exec';
 
@@ -47,58 +55,232 @@ const otherSolutionPhrases = [
   'Домовились. Опишіть процес так, як він працює зараз.'
 ];
 
-async function loadHomePart(slotId, url) {
-  const slot = document.getElementById(slotId);
+function initHomeBackground() {
+  if (!document.body) {
+    return;
+  }
+
+  HOME_BACKGROUND_IMAGES.forEach(src => {
+    const image = new Image();
+    image.src = src;
+  });
+
+  const reducedMotion =
+    window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+  const mobile =
+    window.matchMedia(
+      '(max-width: 768px)'
+    ).matches;
+
+  let currentIndex = 0;
+  let showingLayerB = false;
+
+  let targetX = 0;
+  let targetY = 0;
+
+  let currentX = 0;
+  let currentY = 0;
+
+  document.body.style.setProperty(
+    '--home-bg-a',
+    `url("${HOME_BACKGROUND_IMAGES[0]}")`
+  );
+
+  document.body.style.setProperty(
+    '--home-bg-b',
+    `url("${HOME_BACKGROUND_IMAGES[1]}")`
+  );
+
+  function showNextBackground() {
+    const nextIndex =
+      (currentIndex + 1) %
+      HOME_BACKGROUND_IMAGES.length;
+
+    if (showingLayerB) {
+      document.body.style.setProperty(
+        '--home-bg-a',
+        `url("${HOME_BACKGROUND_IMAGES[nextIndex]}")`
+      );
+
+      document.body.classList.remove(
+        'home-bg-show-b'
+      );
+    } else {
+      document.body.style.setProperty(
+        '--home-bg-b',
+        `url("${HOME_BACKGROUND_IMAGES[nextIndex]}")`
+      );
+
+      document.body.classList.add(
+        'home-bg-show-b'
+      );
+    }
+
+    showingLayerB = !showingLayerB;
+    currentIndex = nextIndex;
+  }
+
+  window.setInterval(
+    showNextBackground,
+    reducedMotion ? 18000 : 14000
+  );
+
+  if (mobile || reducedMotion) {
+    return;
+  }
+
+  function animateParallax() {
+    currentX +=
+      (targetX - currentX) * 0.065;
+
+    currentY +=
+      (targetY - currentY) * 0.065;
+
+    document.body.style.setProperty(
+      '--home-bg-x',
+      `${currentX.toFixed(2)}px`
+    );
+
+    document.body.style.setProperty(
+      '--home-bg-y',
+      `${currentY.toFixed(2)}px`
+    );
+
+    window.requestAnimationFrame(
+      animateParallax
+    );
+  }
+
+  window.addEventListener(
+    'mousemove',
+    event => {
+      const normalizedX =
+        event.clientX /
+        window.innerWidth -
+        0.5;
+
+      const normalizedY =
+        event.clientY /
+        window.innerHeight -
+        0.5;
+
+      targetX =
+        normalizedX * -18;
+
+      targetY =
+        normalizedY * -14;
+    },
+    {
+      passive: true
+    }
+  );
+
+  document.documentElement.addEventListener(
+    'mouseleave',
+    () => {
+      targetX = 0;
+      targetY = 0;
+    }
+  );
+
+  window.requestAnimationFrame(
+    animateParallax
+  );
+}
+
+async function loadHomePart(
+  slotId,
+  url
+) {
+  const slot =
+    document.getElementById(slotId);
 
   if (!slot) {
     return;
   }
 
-  const response = await fetch(url);
+  const response =
+    await fetch(url);
 
   if (!response.ok) {
-    throw new Error(`Не вдалося завантажити ${url}`);
+    throw new Error(
+      `Не вдалося завантажити ${url}`
+    );
   }
 
-  slot.innerHTML = await response.text();
+  slot.innerHTML =
+    await response.text();
 }
 
 async function loadHomeParts() {
   try {
     await Promise.all(
-      HOME_PARTS.map(part =>
-        loadHomePart(part.slot, part.url)
+      HOME_PARTS.map(
+        part =>
+          loadHomePart(
+            part.slot,
+            part.url
+          )
       )
     );
 
     renderHomeTurnstile();
   } catch (error) {
-    console.error('HOME PARTS ERROR:', error);
+    console.error(
+      'HOME PARTS ERROR:',
+      error
+    );
   }
 }
 
 function renderHomeTurnstile() {
   if (!window.turnstile) {
-    setTimeout(renderHomeTurnstile, 250);
+    setTimeout(
+      renderHomeTurnstile,
+      250
+    );
+
     return;
   }
 
-  document.querySelectorAll('.cf-turnstile').forEach(element => {
-    if (element.dataset.rendered === 'true') {
-      return;
-    }
+  document
+    .querySelectorAll(
+      '.cf-turnstile'
+    )
+    .forEach(element => {
+      if (
+        element.dataset.rendered ===
+        'true'
+      ) {
+        return;
+      }
 
-    window.turnstile.render(element, {
-      sitekey: element.dataset.sitekey
+      window.turnstile.render(
+        element,
+        {
+          sitekey:
+            element.dataset.sitekey
+        }
+      );
+
+      element.dataset.rendered =
+        'true';
     });
-
-    element.dataset.rendered = 'true';
-  });
 }
 
 function initCarousel() {
-  const carousel = document.getElementById('carousel');
-  const hint = document.getElementById('hint');
+  const carousel =
+    document.getElementById(
+      'carousel'
+    );
+
+  const hint =
+    document.getElementById(
+      'hint'
+    );
 
   if (!carousel || !hint) {
     return;
@@ -108,85 +290,156 @@ function initCarousel() {
   let startX = 0;
   let currentRotation = 0;
 
-  carousel.parentElement.addEventListener('mousedown', event => {
-    isDragging = true;
-    startX = event.clientX;
-    carousel.style.animation = 'none';
-  });
+  carousel.parentElement.addEventListener(
+    'mousedown',
+    event => {
+      isDragging = true;
+      startX = event.clientX;
 
-  document.addEventListener('mouseup', () => {
-    if (!isDragging) {
-      return;
+      carousel.style.animation =
+        'none';
     }
+  );
 
-    isDragging = false;
-    carousel.style.animation = 'spin 80s linear infinite';
-  });
+  document.addEventListener(
+    'mouseup',
+    () => {
+      if (!isDragging) {
+        return;
+      }
 
-  document.addEventListener('mousemove', event => {
-    if (!isDragging) {
-      return;
+      isDragging = false;
+
+      carousel.style.animation =
+        'spin 80s linear infinite';
     }
+  );
 
-    const delta = event.clientX - startX;
+  document.addEventListener(
+    'mousemove',
+    event => {
+      if (!isDragging) {
+        return;
+      }
 
-    currentRotation += delta * 0.2;
+      const delta =
+        event.clientX - startX;
 
-    carousel.style.transform =
-      `rotateY(${currentRotation}deg)`;
+      currentRotation +=
+        delta * 0.2;
 
-    startX = event.clientX;
-  });
+      carousel.style.transform =
+        `rotateY(${currentRotation}deg)`;
+
+      startX =
+        event.clientX;
+    }
+  );
 
   const descriptions = {
-    Excel: 'Автоматизація Excel',
-    'Power BI': 'Візуалізація через Power BI',
-    'Google Sheets': 'Скрипти в Google Таблицях',
-    JavaScript: 'Автоматизація через JavaScript',
-    VBA: 'Макроси та коди VBA',
-    'Power Query': 'Імпорт та трансформації',
-    'Power Pivot': 'DAX-аналіз у Power Pivot',
-    'Telegram Bot': 'Telegram-боти та сповіщення',
-    'Google Drive': 'Автоматизація Google Drive',
-    'Web App': 'Вебзастосунки та PWA'
+    Excel:
+      'Автоматизація Excel',
+
+    'Power BI':
+      'Візуалізація через Power BI',
+
+    'Google Sheets':
+      'Скрипти в Google Таблицях',
+
+    JavaScript:
+      'Автоматизація через JavaScript',
+
+    VBA:
+      'Макроси та коди VBA',
+
+    'Power Query':
+      'Імпорт та трансформації',
+
+    'Power Pivot':
+      'DAX-аналіз у Power Pivot',
+
+    'Telegram Bot':
+      'Telegram-боти та сповіщення',
+
+    'Google Drive':
+      'Автоматизація Google Drive',
+
+    'Web App':
+      'Вебзастосунки та PWA'
   };
 
-  document.querySelectorAll('.carousel img').forEach(img => {
-    img.addEventListener('mouseenter', () => {
-      hint.textContent = descriptions[img.alt] || '';
-      hint.style.display = 'block';
-    });
+  document
+    .querySelectorAll(
+      '.carousel img'
+    )
+    .forEach(img => {
+      img.addEventListener(
+        'mouseenter',
+        () => {
+          hint.textContent =
+            descriptions[
+              img.alt
+            ] || '';
 
-    img.addEventListener('mouseleave', () => {
-      hint.style.display = 'none';
+          hint.style.display =
+            'block';
+        }
+      );
+
+      img.addEventListener(
+        'mouseleave',
+        () => {
+          hint.style.display =
+            'none';
+        }
+      );
     });
-  });
 }
 
 function openContactModal() {
-  const modal = document.getElementById('contact-modal');
+  const modal =
+    document.getElementById(
+      'contact-modal'
+    );
 
   if (!modal) {
     return;
   }
 
-  modal.classList.add('show');
+  modal.classList.add(
+    'show'
+  );
 
-  setTimeout(() => {
-    const input = document.getElementById('contact-name');
+  setTimeout(
+    () => {
+      const input =
+        document.getElementById(
+          'contact-name'
+        );
 
-    if (input) {
-      input.focus();
-    }
-  }, 50);
+      if (input) {
+        input.focus();
+      }
+    },
+    50
+  );
 }
 
 function closeContactModal() {
-  const modal = document.getElementById('contact-modal');
-  const status = document.getElementById('contact-status');
+  const modal =
+    document.getElementById(
+      'contact-modal'
+    );
+
+  const status =
+    document.getElementById(
+      'contact-status'
+    );
 
   if (modal) {
-    modal.classList.remove('show');
+    modal.classList.remove(
+      'show'
+    );
   }
 
   if (status) {
@@ -194,46 +447,73 @@ function closeContactModal() {
   }
 }
 
-function handleOverlayClick(event) {
-  if (event.target.id === 'contact-modal') {
+function handleOverlayClick(
+  event
+) {
+  if (
+    event.target.id ===
+    'contact-modal'
+  ) {
     closeContactModal();
   }
 }
 
-function selectContactMethod(type, button) {
-  const input = document.getElementById('contact-method');
-  const hiddenType =
-    document.getElementById('contact-method-type');
+function selectContactMethod(
+  type,
+  button
+) {
+  const input =
+    document.getElementById(
+      'contact-method'
+    );
 
-  if (!input || !hiddenType) {
+  const hiddenType =
+    document.getElementById(
+      'contact-method-type'
+    );
+
+  if (
+    !input ||
+    !hiddenType
+  ) {
     return;
   }
 
   document
-    .querySelectorAll('.contact-method-btn')
+    .querySelectorAll(
+      '.contact-method-btn'
+    )
     .forEach(btn => {
-      btn.classList.remove('active');
+      btn.classList.remove(
+        'active'
+      );
     });
 
-  button.classList.add('active');
+  button.classList.add(
+    'active'
+  );
 
   hiddenType.value = type;
+
   input.disabled = false;
   input.value = '';
 
   if (type === 'email') {
     input.type = 'email';
-    input.placeholder = 'name@example.com';
+    input.placeholder =
+      'name@example.com';
   }
 
   if (type === 'phone') {
     input.type = 'tel';
-    input.placeholder = '+380...';
+    input.placeholder =
+      '+380...';
   }
 
   if (type === 'telegram') {
     input.type = 'text';
-    input.placeholder = '@username';
+    input.placeholder =
+      '@username';
   }
 
   input.focus();
@@ -241,78 +521,139 @@ function selectContactMethod(type, button) {
 
 async function testContactForm() {
   const name =
-    document.getElementById('contact-name')?.value.trim() || '';
+    document
+      .getElementById(
+        'contact-name'
+      )
+      ?.value.trim() || '';
 
   const contact =
-    document.getElementById('contact-method')?.value.trim() || '';
+    document
+      .getElementById(
+        'contact-method'
+      )
+      ?.value.trim() || '';
 
   const message =
-    document.getElementById('contact-message')?.value.trim() || '';
+    document
+      .getElementById(
+        'contact-message'
+      )
+      ?.value.trim() || '';
 
   const status =
-    document.getElementById('contact-status');
+    document.getElementById(
+      'contact-status'
+    );
 
   const button =
-    document.querySelector('.contact-send-btn');
+    document.querySelector(
+      '.contact-send-btn'
+    );
 
   const turnstileToken =
     document.querySelector(
       '#contact-modal [name="cf-turnstile-response"]'
     )?.value || '';
 
-  if (!status || !button) {
+  if (
+    !status ||
+    !button
+  ) {
     return;
   }
 
-  if (!name || !contact || !message) {
-    status.textContent = 'Заповніть усі поля.';
-    status.style.color = '#cc0000';
+  if (
+    !name ||
+    !contact ||
+    !message
+  ) {
+    status.textContent =
+      'Заповніть усі поля.';
+
+    status.style.color =
+      '#cc0000';
+
     return;
   }
 
   if (!turnstileToken) {
-    status.textContent = 'Підтвердіть, що ви не робот.';
-    status.style.color = '#cc0000';
+    status.textContent =
+      'Підтвердіть, що ви не робот.';
+
+    status.style.color =
+      '#cc0000';
+
     return;
   }
 
-  status.textContent = 'Надсилаємо...';
-  status.style.color = '#555';
+  status.textContent =
+    'Надсилаємо...';
+
+  status.style.color =
+    '#555';
 
   button.disabled = true;
-  button.textContent = 'Надсилаємо...';
+
+  button.textContent =
+    'Надсилаємо...';
 
   try {
-    const response = await fetch(
-      REVIEWS_API_URL,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify({
-          user_name: name,
-          user_email: contact,
-          message: message,
-          turnstileToken: turnstileToken
-        })
-      }
-    );
+    const response =
+      await fetch(
+        REVIEWS_API_URL,
+        {
+          method: 'POST',
 
-    const result = await response.json();
+          headers: {
+            'Content-Type':
+              'text/plain;charset=utf-8'
+          },
+
+          body:
+            JSON.stringify({
+              user_name:
+                name,
+
+              user_email:
+                contact,
+
+              message:
+                message,
+
+              turnstileToken:
+                turnstileToken
+            })
+        }
+      );
+
+    const result =
+      await response.json();
 
     if (!result.ok) {
       throw new Error(
-        result.error || 'Помилка відправлення'
+        result.error ||
+        'Помилка відправлення'
       );
     }
 
-    status.textContent = '✓ Повідомлення надіслано';
-    status.style.color = '#0F9D58';
+    status.textContent =
+      '✓ Повідомлення надіслано';
 
-    document.getElementById('contact-name').value = '';
-    document.getElementById('contact-method').value = '';
-    document.getElementById('contact-message').value = '';
+    status.style.color =
+      '#0F9D58';
+
+    document.getElementById(
+      'contact-name'
+    ).value = '';
+
+    document.getElementById(
+      'contact-method'
+    ).value = '';
+
+    document.getElementById(
+      'contact-message'
+    ).value = '';
 
     if (window.turnstile) {
       const widget =
@@ -321,15 +662,22 @@ async function testContactForm() {
         );
 
       if (widget) {
-        window.turnstile.reset(widget);
+        window.turnstile.reset(
+          widget
+        );
       }
     }
 
-    setTimeout(() => {
-      closeContactModal();
-    }, 1300);
+    setTimeout(
+      () => {
+        closeContactModal();
+      },
+      1300
+    );
   } catch (error) {
-    console.error(error);
+    console.error(
+      error
+    );
 
     let errorMessage =
       error.message ||
@@ -371,22 +719,32 @@ async function testContactForm() {
         'Заповніть усі обов’язкові поля.';
     }
 
-    status.textContent = errorMessage;
-    status.style.color = '#cc0000';
+    status.textContent =
+      errorMessage;
+
+    status.style.color =
+      '#cc0000';
   } finally {
     button.disabled = false;
-    button.textContent = 'Надіслати';
+
+    button.textContent =
+      'Надіслати';
   }
 }
 
 function openReviewsPanel() {
-  const panel = document.getElementById('reviews-panel');
+  const panel =
+    document.getElementById(
+      'reviews-panel'
+    );
 
   if (!panel) {
     return;
   }
 
-  panel.classList.add('show');
+  panel.classList.add(
+    'show'
+  );
 
   if (!reviewsLoaded) {
     loadPublishedReviews();
@@ -394,16 +752,23 @@ function openReviewsPanel() {
 }
 
 function closeReviewsPanel() {
-  const panel = document.getElementById('reviews-panel');
+  const panel =
+    document.getElementById(
+      'reviews-panel'
+    );
 
   if (panel) {
-    panel.classList.remove('show');
+    panel.classList.remove(
+      'show'
+    );
   }
 }
 
 async function loadPublishedReviews() {
   const list =
-    document.getElementById('reviews-panel-list');
+    document.getElementById(
+      'reviews-panel-list'
+    );
 
   if (!list) {
     return;
@@ -413,109 +778,159 @@ async function loadPublishedReviews() {
     '<div class="reviews-panel-loading">Завантажуємо відгуки...</div>';
 
   try {
-    const response = await fetch(
-      REVIEWS_API_URL + '?action=getReviews'
-    );
+    const response =
+      await fetch(
+        REVIEWS_API_URL +
+        '?action=getReviews'
+      );
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
-    if (!data.ok || !Array.isArray(data.reviews)) {
-      throw new Error('Некоректна відповідь API');
+    if (
+      !data.ok ||
+      !Array.isArray(
+        data.reviews
+      )
+    ) {
+      throw new Error(
+        'Некоректна відповідь API'
+      );
     }
 
     const reviewsButton =
-      document.getElementById('reviews-float-btn');
+      document.getElementById(
+        'reviews-float-btn'
+      );
 
     if (reviewsButton) {
       reviewsButton.textContent =
-        '⭐ Відгуки · ' + data.reviews.length;
+        '⭐ Відгуки · ' +
+        data.reviews.length;
     }
 
-    list.innerHTML = data.reviews
-      .map(review => {
-        const rating = Math.max(
-          1,
-          Math.min(
-            5,
-            Number(review.rating) || 5
-          )
-        );
+    list.innerHTML =
+      data.reviews
+        .map(review => {
+          const rating =
+            Math.max(
+              1,
+              Math.min(
+                5,
+                Number(
+                  review.rating
+                ) || 5
+              )
+            );
 
-        const pinned = review.pinned
-          ? `
-            <div class="review-pinned">
-              📌 Закріплено
-            </div>
-          `
-          : '';
+          const pinned =
+            review.pinned
+              ? `
+                <div class="review-pinned">
+                  📌 Закріплено
+                </div>
+              `
+              : '';
 
-        return `
-          <div class="review-card">
-            <div class="review-stars">
-              ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
-            </div>
-
-            ${pinned}
-
-            <div class="review-text">
-              ${escapeReviewHtml(review.review || '')}
-            </div>
-
-            <div class="review-meta">
-              <div class="review-author">
-                — ${escapeReviewHtml(review.name || 'Клієнт')}
+          return `
+            <div class="review-card">
+              <div class="review-stars">
+                ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
               </div>
 
-              <div class="review-date">
-                ${escapeReviewHtml(review.published_at || '')}
+              ${pinned}
+
+              <div class="review-text">
+                ${escapeReviewHtml(review.review || '')}
+              </div>
+
+              <div class="review-meta">
+                <div class="review-author">
+                  — ${escapeReviewHtml(review.name || 'Клієнт')}
+                </div>
+
+                <div class="review-date">
+                  ${escapeReviewHtml(review.published_at || '')}
+                </div>
               </div>
             </div>
-          </div>
-        `;
-      })
-      .join('');
+          `;
+        })
+        .join('');
 
     reviewsLoaded = true;
   } catch (error) {
-    console.error('REVIEWS ERROR:', error);
+    console.error(
+      'REVIEWS ERROR:',
+      error
+    );
 
     list.innerHTML =
       '<div class="reviews-panel-loading">Не вдалося завантажити відгуки.</div>';
   }
 }
 
-function escapeReviewHtml(value) {
+function escapeReviewHtml(
+  value
+) {
   return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
 }
 
 function openReviewForm() {
   const overlay =
-    document.getElementById('review-form-overlay');
+    document.getElementById(
+      'review-form-overlay'
+    );
 
   if (!overlay) {
     return;
   }
 
-  overlay.classList.add('show');
+  overlay.classList.add(
+    'show'
+  );
 }
 
 function closeReviewForm() {
   const overlay =
-    document.getElementById('review-form-overlay');
+    document.getElementById(
+      'review-form-overlay'
+    );
 
   if (overlay) {
-    overlay.classList.remove('show');
+    overlay.classList.remove(
+      'show'
+    );
   }
 }
 
-function selectReviewRating(rating) {
+function selectReviewRating(
+  rating
+) {
   const value =
-    document.getElementById('review-rating-value');
+    document.getElementById(
+      'review-rating-value'
+    );
 
   if (!value) {
     return;
@@ -524,25 +939,45 @@ function selectReviewRating(rating) {
   value.value = rating;
 
   document
-    .querySelectorAll('#review-rating button')
-    .forEach((star, index) => {
-      star.classList.toggle(
-        'active',
-        index < rating
-      );
-    });
+    .querySelectorAll(
+      '#review-rating button'
+    )
+    .forEach(
+      (
+        star,
+        index
+      ) => {
+        star.classList.toggle(
+          'active',
+          index < rating
+        );
+      }
+    );
 }
 
 async function submitWebsiteReview() {
   const name =
-    document.getElementById('review-name')?.value.trim() || '';
+    document
+      .getElementById(
+        'review-name'
+      )
+      ?.value.trim() || '';
 
-  const rating = Number(
-    document.getElementById('review-rating-value')?.value || 0
-  );
+  const rating =
+    Number(
+      document
+        .getElementById(
+          'review-rating-value'
+        )
+        ?.value || 0
+    );
 
   const review =
-    document.getElementById('review-text-input')?.value.trim() || '';
+    document
+      .getElementById(
+        'review-text-input'
+      )
+      ?.value.trim() || '';
 
   const turnstileToken =
     document.querySelector(
@@ -550,80 +985,140 @@ async function submitWebsiteReview() {
     )?.value || '';
 
   const status =
-    document.getElementById('review-form-status');
+    document.getElementById(
+      'review-form-status'
+    );
 
   const button =
-    document.querySelector('.review-submit-btn');
+    document.querySelector(
+      '.review-submit-btn'
+    );
 
-  if (!status || !button) {
+  if (
+    !status ||
+    !button
+  ) {
     return;
   }
 
   if (!review) {
-    status.textContent = 'Напишіть текст відгуку.';
-    status.style.color = '#cc0000';
+    status.textContent =
+      'Напишіть текст відгуку.';
+
+    status.style.color =
+      '#cc0000';
+
     return;
   }
 
-  if (rating < 1 || rating > 5) {
-    status.textContent = 'Оберіть оцінку від 1 до 5.';
-    status.style.color = '#cc0000';
+  if (
+    rating < 1 ||
+    rating > 5
+  ) {
+    status.textContent =
+      'Оберіть оцінку від 1 до 5.';
+
+    status.style.color =
+      '#cc0000';
+
     return;
   }
 
   if (!turnstileToken) {
-    status.textContent = 'Підтвердіть, що ви не робот.';
-    status.style.color = '#cc0000';
+    status.textContent =
+      'Підтвердіть, що ви не робот.';
+
+    status.style.color =
+      '#cc0000';
+
     return;
   }
 
-  status.textContent = 'Надсилаємо...';
-  status.style.color = '#555';
+  status.textContent =
+    'Надсилаємо...';
+
+  status.style.color =
+    '#555';
 
   button.disabled = true;
-  button.textContent = 'Надсилаємо...';
+
+  button.textContent =
+    'Надсилаємо...';
 
   try {
-    const response = await fetch(
-      REVIEWS_API_URL,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify({
-          source: 'review',
-          name: name,
-          rating: rating,
-          review: review,
-          page_lang: 'UA',
-          turnstileToken: turnstileToken
-        })
-      }
-    );
+    const response =
+      await fetch(
+        REVIEWS_API_URL,
+        {
+          method: 'POST',
 
-    const result = await response.json();
+          headers: {
+            'Content-Type':
+              'text/plain;charset=utf-8'
+          },
+
+          body:
+            JSON.stringify({
+              source:
+                'review',
+
+              name:
+                name,
+
+              rating:
+                rating,
+
+              review:
+                review,
+
+              page_lang:
+                'UA',
+
+              turnstileToken:
+                turnstileToken
+            })
+        }
+      );
+
+    const result =
+      await response.json();
 
     if (!result.ok) {
       throw new Error(
-        result.error || 'Помилка відправлення'
+        result.error ||
+        'Помилка відправлення'
       );
     }
 
     status.textContent =
       '✓ Відгук надіслано на модерацію';
 
-    status.style.color = '#0F9D58';
+    status.style.color =
+      '#0F9D58';
 
-    document.getElementById('review-name').value = '';
-    document.getElementById('review-text-input').value = '';
-    document.getElementById('review-rating-value').value = '0';
+    document.getElementById(
+      'review-name'
+    ).value = '';
+
+    document.getElementById(
+      'review-text-input'
+    ).value = '';
+
+    document.getElementById(
+      'review-rating-value'
+    ).value = '0';
 
     document
-      .querySelectorAll('#review-rating button')
-      .forEach(star => {
-        star.classList.remove('active');
-      });
+      .querySelectorAll(
+        '#review-rating button'
+      )
+      .forEach(
+        star => {
+          star.classList.remove(
+            'active'
+          );
+        }
+      );
 
     if (window.turnstile) {
       const widget =
@@ -632,15 +1127,22 @@ async function submitWebsiteReview() {
         );
 
       if (widget) {
-        window.turnstile.reset(widget);
+        window.turnstile.reset(
+          widget
+        );
       }
     }
 
-    setTimeout(() => {
-      closeReviewForm();
-    }, 1400);
+    setTimeout(
+      () => {
+        closeReviewForm();
+      },
+      1400
+    );
   } catch (error) {
-    console.error(error);
+    console.error(
+      error
+    );
 
     let errorMessage =
       error.message ||
@@ -665,26 +1167,37 @@ async function submitWebsiteReview() {
     }
 
     if (
-      errorMessage.includes('Пустой отзыв')
+      errorMessage.includes(
+        'Пустой отзыв'
+      )
     ) {
       errorMessage =
         'Будь ласка, введіть текст відгуку.';
     }
 
-    status.textContent = errorMessage;
-    status.style.color = '#cc0000';
+    status.textContent =
+      errorMessage;
+
+    status.style.color =
+      '#cc0000';
   } finally {
     button.disabled = false;
-    button.textContent = 'Надіслати відгук';
+
+    button.textContent =
+      'Надіслати відгук';
   }
 }
 
 function openExcelStep() {
-  openSolutionCategoryStep('solution-excel-step');
+  openSolutionCategoryStep(
+    'solution-excel-step'
+  );
 }
 
 function openAnalyticsStep() {
-  openSolutionCategoryStep('solution-analytics-step');
+  openSolutionCategoryStep(
+    'solution-analytics-step'
+  );
 }
 
 function openManualDataStep() {
@@ -705,19 +1218,33 @@ function openPowerBiStep() {
   );
 }
 
-function openSolutionCategoryStep(stepId) {
+function openSolutionCategoryStep(
+  stepId
+) {
   const startStep =
-    document.getElementById('solution-start-step');
+    document.getElementById(
+      'solution-start-step'
+    );
 
   const nextStep =
-    document.getElementById(stepId);
+    document.getElementById(
+      stepId
+    );
 
-  if (!startStep || !nextStep) {
+  if (
+    !startStep ||
+    !nextStep
+  ) {
     return;
   }
 
-  startStep.classList.remove('active');
-  nextStep.classList.add('active');
+  startStep.classList.remove(
+    'active'
+  );
+
+  nextStep.classList.add(
+    'active'
+  );
 
   setSolutionProgress(1);
 }
@@ -752,39 +1279,67 @@ function backToSolutionStartFromPowerBi() {
   );
 }
 
-function backToSolutionStartFrom(stepId) {
+function backToSolutionStartFrom(
+  stepId
+) {
   const startStep =
-    document.getElementById('solution-start-step');
+    document.getElementById(
+      'solution-start-step'
+    );
 
   const currentStep =
-    document.getElementById(stepId);
+    document.getElementById(
+      stepId
+    );
 
-  if (!startStep || !currentStep) {
+  if (
+    !startStep ||
+    !currentStep
+  ) {
     return;
   }
 
-  currentStep.classList.remove('active');
-  startStep.classList.add('active');
+  currentStep.classList.remove(
+    'active'
+  );
+
+  startStep.classList.add(
+    'active'
+  );
 
   setSolutionProgress(0);
 }
 
-function setSolutionProgress(index) {
+function setSolutionProgress(
+  index
+) {
   const progress =
     document.querySelectorAll(
       '.solution-picker-progress span'
     );
 
-  progress.forEach(item => {
-    item.classList.remove('active');
-  });
+  progress.forEach(
+    item => {
+      item.classList.remove(
+        'active'
+      );
+    }
+  );
 
-  if (progress[index]) {
-    progress[index].classList.add('active');
+  if (
+    progress[index]
+  ) {
+    progress[
+      index
+    ].classList.add(
+      'active'
+    );
   }
 }
 
-function selectExcelTask(task) {
+function selectExcelTask(
+  task
+) {
   selectSolutionTask(
     'Excel / Google Sheets',
     task,
@@ -793,7 +1348,9 @@ function selectExcelTask(task) {
   );
 }
 
-function selectAnalyticsTask(task) {
+function selectAnalyticsTask(
+  task
+) {
   selectSolutionTask(
     'Звіти та аналітика',
     task,
@@ -802,7 +1359,9 @@ function selectAnalyticsTask(task) {
   );
 }
 
-function selectManualDataTask(task) {
+function selectManualDataTask(
+  task
+) {
   selectSolutionTask(
     'Ручна робота з даними',
     task,
@@ -811,7 +1370,9 @@ function selectManualDataTask(task) {
   );
 }
 
-function selectTelegramTask(task) {
+function selectTelegramTask(
+  task
+) {
   selectSolutionTask(
     'Telegram / сповіщення',
     task,
@@ -820,7 +1381,9 @@ function selectTelegramTask(task) {
   );
 }
 
-function selectPowerBiTask(task) {
+function selectPowerBiTask(
+  task
+) {
   selectSolutionTask(
     'Power BI',
     task,
@@ -835,16 +1398,27 @@ function selectSolutionTask(
   tools,
   stepId
 ) {
-  selectedSolutionCategory = category;
-  selectedSolutionTask = task;
-  selectedSolutionTools = tools;
-  selectedSolutionStepId = stepId;
+  selectedSolutionCategory =
+    category;
+
+  selectedSolutionTask =
+    task;
+
+  selectedSolutionTools =
+    tools;
+
+  selectedSolutionStepId =
+    stepId;
 
   const currentStep =
-    document.getElementById(stepId);
+    document.getElementById(
+      stepId
+    );
 
   const resultStep =
-    document.getElementById('solution-result-step');
+    document.getElementById(
+      'solution-result-step'
+    );
 
   const selectedText =
     document.getElementById(
@@ -885,35 +1459,60 @@ function selectSolutionTask(
       )
     ];
 
-  selectedText.textContent = task;
-  resultTitle.textContent = randomPhrase;
-  toolsText.textContent = tools;
+  selectedText.textContent =
+    task;
+
+  resultTitle.textContent =
+    randomPhrase;
+
+  toolsText.textContent =
+    tools;
 
   description.value = '';
+
   description.placeholder =
     'Наприклад: щодня отримую файли від 12 менеджерів і вручну збираю їх в один звіт...';
 
-  currentStep.classList.remove('active');
-  resultStep.classList.add('active');
+  currentStep.classList.remove(
+    'active'
+  );
+
+  resultStep.classList.add(
+    'active'
+  );
 
   setSolutionProgress(2);
 
-  setTimeout(() => {
-    description.focus();
-  }, 100);
+  setTimeout(
+    () => {
+      description.focus();
+    },
+    100
+  );
 }
 
 function openOtherSolution() {
-  selectedSolutionCategory = 'Інше';
-  selectedSolutionTask = 'Індивідуальна задача';
-  selectedSolutionTools = '';
-  selectedSolutionStepId = 'solution-start-step';
+  selectedSolutionCategory =
+    'Інше';
+
+  selectedSolutionTask =
+    'Індивідуальна задача';
+
+  selectedSolutionTools =
+    '';
+
+  selectedSolutionStepId =
+    'solution-start-step';
 
   const startStep =
-    document.getElementById('solution-start-step');
+    document.getElementById(
+      'solution-start-step'
+    );
 
   const resultStep =
-    document.getElementById('solution-result-step');
+    document.getElementById(
+      'solution-result-step'
+    );
 
   const selectedText =
     document.getElementById(
@@ -954,7 +1553,8 @@ function openOtherSolution() {
       )
     ];
 
-  resultTitle.textContent = randomPhrase;
+  resultTitle.textContent =
+    randomPhrase;
 
   selectedText.textContent =
     'Індивідуальна задача';
@@ -967,14 +1567,22 @@ function openOtherSolution() {
   description.placeholder =
     'Опишіть, що ви зараз робите вручну і який результат хотіли б отримувати автоматично...';
 
-  startStep.classList.remove('active');
-  resultStep.classList.add('active');
+  startStep.classList.remove(
+    'active'
+  );
+
+  resultStep.classList.add(
+    'active'
+  );
 
   setSolutionProgress(2);
 
-  setTimeout(() => {
-    description.focus();
-  }, 100);
+  setTimeout(
+    () => {
+      description.focus();
+    },
+    100
+  );
 }
 
 function backToSelectedCategoryStep() {
@@ -988,12 +1596,20 @@ function backToSelectedCategoryStep() {
       selectedSolutionStepId
     );
 
-  if (!resultStep || !previousStep) {
+  if (
+    !resultStep ||
+    !previousStep
+  ) {
     return;
   }
 
-  resultStep.classList.remove('active');
-  previousStep.classList.add('active');
+  resultStep.classList.remove(
+    'active'
+  );
+
+  previousStep.classList.add(
+    'active'
+  );
 
   if (
     selectedSolutionStepId ===
@@ -1007,9 +1623,11 @@ function backToSelectedCategoryStep() {
 
 function discussSelectedTask() {
   const description =
-    document.getElementById(
-      'solution-description'
-    )?.value.trim() || '';
+    document
+      .getElementById(
+        'solution-description'
+      )
+      ?.value.trim() || '';
 
   closeSolutionPicker();
   openContactModal();
@@ -1033,58 +1651,83 @@ function discussSelectedTask() {
     );
 
   if (contactMessage) {
-    contactMessage.value = text;
+    contactMessage.value =
+      text;
   }
 }
 
 function openSolutionPicker() {
   const picker =
-    document.getElementById('solution-picker');
+    document.getElementById(
+      'solution-picker'
+    );
 
   if (picker) {
-    picker.classList.add('show');
+    picker.classList.add(
+      'show'
+    );
   }
 }
 
 function closeSolutionPicker() {
   const picker =
-    document.getElementById('solution-picker');
+    document.getElementById(
+      'solution-picker'
+    );
 
   if (picker) {
-    picker.classList.remove('show');
+    picker.classList.remove(
+      'show'
+    );
   }
 }
 
-function handleSolutionOverlayClick(event) {
-  if (event.target.id === 'solution-picker') {
+function handleSolutionOverlayClick(
+  event
+) {
+  if (
+    event.target.id ===
+    'solution-picker'
+  ) {
     closeSolutionPicker();
   }
 }
 
-document.addEventListener('click', event => {
-  const reviewOverlay =
-    document.getElementById(
-      'review-form-overlay'
-    );
+document.addEventListener(
+  'click',
+  event => {
+    const reviewOverlay =
+      document.getElementById(
+        'review-form-overlay'
+      );
 
-  if (
-    reviewOverlay &&
-    event.target === reviewOverlay
-  ) {
+    if (
+      reviewOverlay &&
+      event.target ===
+        reviewOverlay
+    ) {
+      closeReviewForm();
+    }
+  }
+);
+
+document.addEventListener(
+  'keydown',
+  event => {
+    if (
+      event.key !==
+      'Escape'
+    ) {
+      return;
+    }
+
+    closeContactModal();
     closeReviewForm();
+    closeSolutionPicker();
+    closeReviewsPanel();
   }
-});
+);
 
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape') {
-    return;
-  }
-
-  closeContactModal();
-  closeReviewForm();
-  closeSolutionPicker();
-  closeReviewsPanel();
-});
-
+initHomeBackground();
 initCarousel();
 loadHomeParts();

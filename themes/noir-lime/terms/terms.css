@@ -1152,21 +1152,22 @@ footer {
   z-index: 2;
 }
 
-.terms-background__layer {
-  inset: -6%;
-  background-position:
-    center
-    calc(50% + var(--terms-bg-y, 0px));
-  transform: scale(1.1);
-}
+@media (max-width: 760px) {
+  .terms-background__layer {
+    inset: -6%;
+    background-position:
+      center
+      calc(50% + var(--terms-bg-y, 0px));
+    transform: scale(1.1);
+  }
 
   .terms-background__layer.is-active {
-    opacity: 0.42;
+    opacity: 0.72;
   }
 
   .terms-background::after {
     background:
-      rgba(247, 246, 241, 0.55);
+      rgba(247, 246, 241, 0.18);
   }
 }
 

@@ -137,7 +137,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    header {
+    .home-hero {
       text-align: center;
       padding: 80px 20px 30px;
     }
@@ -297,7 +297,7 @@
       nav { display: none; }
       .burger { display: flex; }
       .mobile-nav.show { display: flex; }
-      header { padding-top: 120px; }
+      .home-hero { padding-top: 120px; }
       .typewriter { font-size: 2rem; }
       .hero-inline img { height: 40px; }
     }
@@ -315,8 +315,8 @@ nav{height:72px;min-height:72px;box-sizing:border-box;padding:14px max(28px,calc
 .desktop-nav a{color:#52504c;text-decoration:none;font-size:14px;font-weight:600}.desktop-nav a:hover{color:var(--green)}
 .lang-switcher{position:static;justify-self:end;display:flex;gap:7px;z-index:auto}.lang-switcher button{min-width:38px;height:34px;padding:0 9px;border:1px solid #d6cec4;border-radius:10px;background:rgba(255,255,255,.84);color:#5f5a54;font-family:var(--font-tech);font-size:11px;font-weight:600}.lang-switcher button:hover{border-color:var(--green);background:var(--green);color:#fff}
 .burger div{background-color:var(--green)}.mobile-nav{background:rgba(247,244,239,.98);border-bottom:1px solid var(--border)}.mobile-nav a{color:var(--green);font-family:var(--font-main);font-weight:600}
-header{width:min(100% - 48px,1032px);box-sizing:border-box;margin:72px auto 0;padding:72px 38px 58px;position:relative;overflow:hidden;border:1px solid var(--border);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(249,247,243,.98));box-shadow:var(--shadow-soft)}
-header:before{content:"";position:absolute;width:280px;height:280px;top:-150px;left:-110px;border-radius:50%;background:rgba(196,217,202,.42);filter:blur(8px)}header:after{content:"";position:absolute;width:240px;height:240px;right:-110px;bottom:-140px;border-radius:50%;background:rgba(205,218,228,.44);filter:blur(8px)}header>*{position:relative;z-index:1}
+.home-hero{width:min(100% - 48px,1032px);box-sizing:border-box;margin:72px auto 0;padding:72px 38px 58px;position:relative;overflow:hidden;border:1px solid var(--border);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(249,247,243,.98));box-shadow:var(--shadow-soft)}
+.home-hero:before{content:"";position:absolute;width:280px;height:280px;top:-150px;left:-110px;border-radius:50%;background:rgba(196,217,202,.42);filter:blur(8px)}header>*{position:relative;z-index:1}
 .hero-inline{gap:18px;margin-bottom:24px}.hero-inline img{height:58px;filter:drop-shadow(0 8px 18px rgba(53,89,75,.12))}.typewriter{color:var(--green);border-right-color:var(--green);font-family:var(--font-main);font-size:clamp(2.8rem,7vw,4.8rem);font-weight:600;line-height:1;letter-spacing:-.055em}header p{max-width:720px;margin:0 auto;color:var(--text-secondary);font-size:16px;line-height:1.85}
 .cta-button{margin-top:34px;padding:15px 28px;border-radius:13px;background:var(--blue);font-family:var(--font-main);font-size:14px;font-weight:700;box-shadow:0 10px 25px rgba(47,111,159,.2)}.cta-button:hover{background:var(--blue-hover);transform:translateY(-2px)}.solution-picker-btn{font-family:var(--font-main)!important}
 .carousel-container{width:min(100% - 48px,1032px);box-sizing:border-box;height:320px;margin:34px auto 110px;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.72);box-shadow:var(--shadow-card)}.carousel img{filter:drop-shadow(0 10px 18px rgba(48,43,37,.12))}.hint{border-radius:12px;background:#b64a4a;font-family:var(--font-main);font-size:14px}
@@ -424,54 +424,18 @@ body::-webkit-scrollbar {
   height: 0;
 }
 </style>
-  <link rel="stylesheet" href="/assistant.css">
-  <link rel="stylesheet" href="nav-font-kaleidoscope.css">
+  
+<link rel="stylesheet" href="/assistant.css">
+<link rel="stylesheet" href="nav-font-kaleidoscope.css">
+<link rel="stylesheet" href="/components/components.css">
 <script src="/assistant.js" defer></script>
+<script src="/components/components.js" defer></script>
+  
 </head>
 <body>
   
-  <div class="burger" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
-
-  <div class="topbar">
-  <div class="topbar-inner">
-    <a class="home-link" href="index.html">Головна</a>
-
-    <nav class="desktop-nav">
-      <a href="about.html">Про мене</a>
-      <a href="services.html">Послуги</a>
-      <a href="pricing.html">Цінова політика</a>
-      <a href="solutions.html">Рішення</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contacts.html">Контакти</a>
-    </nav>
-
-    <div class="lang-switcher">
-      <button type="button" onclick="location.href='index.html'">UA</button>
-      <button type="button" onclick="location.href='index-en.html'">EN</button>
-      <button type="button" onclick="location.href='index-ru.html'">RU</button>
-    </div>
-  </div>
-</div>
-
-<div class="mobile-lang-switcher">
-  <button class="active" onclick="location.href='index.html'">UA</button>
-  <button onclick="location.href='index-en.html'">EN</button>
-  <button onclick="location.href='index-ru.html'">RU</button>
-</div>
-
-<div class="mobile-nav" id="mobileNav">
-
-    <a href="about.html" onclick="closeMenu()">Про мене</a>
-    <a href="services.html" onclick="closeMenu()">Послуги</a>
-    <a href="pricing.html" onclick="closeMenu()">Цінова політика</a>
-    <a href="solutions.html" onclick="closeMenu()">Рішення</a>
-    <a href="contacts.html" onclick="closeMenu()">Контакти</a>
-    <a href="terms.html" onclick="closeMenu()">Умови використання</a>
-  </div>
-
-  <header>
+  <div id="site-header-slot"></div>
+  <section class="home-hero">
     <div class="hero-inline">
       <img src="avatar.png" alt="Avatar">
       <div class="typewriter">Себастьян Перейра</div>
@@ -480,7 +444,7 @@ body::-webkit-scrollbar {
     <button class="cta-button solution-picker-btn" type="button" onclick="openSolutionPicker()">
   ⚡ Підібрати рішення
 </button>
-  </header>
+  </section>
 
   <div class="hint" id="hint"></div>
 
@@ -499,14 +463,7 @@ body::-webkit-scrollbar {
     </div>
   </div>
 
-<div class="ticker" style="font-family: 'Courier New', monospace; font-size: 18px; color: #00FF00;">
-  <div class="ticker-text">
-    Excel VBA · Google Apps Script · Power BI DAX · Автоматичні звіти · Кастомна логіка · Інтеграції · Макроси · Індивідуальні рішення для бізнесу ·
-  </div>
-  <div style="font-size: 11px; color: #999; text-align: center; padding-top: 5px;">
-    © 2015–2026 Sebastian Automations. Всі права захищено. <a href="terms.html" style="color: #999; text-decoration: underline;">Умови використання</a>
-  </div>
-</div>
+<div id="site-footer-slot"></div>
 
   <script>
     function toggleMenu() {
@@ -3393,7 +3350,7 @@ if (reviewsButton) {
       text-align: center;
     }
 
-    header {
+    .home-hero {
       padding: 88px 16px 18px;
     }
 
@@ -3414,7 +3371,7 @@ if (reviewsButton) {
       white-space: nowrap;
     }
 
-    header p {
+    .home-hero p {
       max-width: 340px;
       margin: 0 auto;
       padding: 0 8px;

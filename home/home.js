@@ -2145,6 +2145,26 @@ function discussSelectedTask() {
     message;
 }
 
+function openHomeEstimator() {
+  const trigger =
+    document.querySelector(
+      '.pricing-estimator-trigger'
+    );
+
+  if (!trigger) {
+    return;
+  }
+
+  closeSolutionPicker();
+
+  setTimeout(
+    () => {
+      trigger.click();
+    },
+    180
+  );
+}
+
 function openSolutionPicker() {
   const picker =
     document.getElementById(

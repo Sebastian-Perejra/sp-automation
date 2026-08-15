@@ -2520,6 +2520,26 @@ function initSolutionsNavHint() {
   );
 }
 
+function initAutomationCardSpotlight() {
+  const cards = document.querySelectorAll('.home-automation-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', event => {
+      const rect = card.getBoundingClientRect();
+
+      card.style.setProperty(
+        '--card-x',
+        `${event.clientX - rect.left}px`
+      );
+
+      card.style.setProperty(
+        '--card-y',
+        `${event.clientY - rect.top}px`
+      );
+    });
+  });
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2528,3 +2548,4 @@ initSolutionsNavHint();
 initCarousel();
 initHomeEntrance();
 loadHomeParts();
+initAutomationCardSpotlight();

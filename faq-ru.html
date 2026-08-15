@@ -630,6 +630,8 @@ footer a:hover {
 <link href="/assistant.css" rel="stylesheet"/>
 <script defer="" src="/assistant.js"></script>
 <link href="/nav-font-kaleidoscope.css?v=5" rel="stylesheet"/>
+<link rel="stylesheet" href="/components/components.css">
+<script src="/components/components.js" defer></script>    
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script async="" defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js">
 </script>
@@ -641,47 +643,7 @@ footer a:hover {
 <span class="cosmic-frame__bottom-left"></span>
 <span class="cosmic-frame__bottom-right"></span>
 </div>
-<header class="topbar">
-<div class="topbar-inner">
-<a class="home-link" href="index-ru.html">← На главную</a>
-    <button
-  class="mobile-menu-button"
-  type="button"
-  aria-label="Открыть меню"
-  aria-expanded="false"
->
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-<nav class="desktop-nav">
-<a href="about-ru.html">Обо мне</a>
-<a href="services-ru.html">Услуги</a>
-<a href="pricing-ru.html">Ценовая политика</a>
-<a href="solutions-ru.html">Решения</a>
-<a class="active" href="faq-ru.html">FAQ</a>
-<a href="contacts-ru.html">Контакты</a>
-</nav>
-<div class="lang-switcher">
-<button onclick="location.href='faq.html'" type="button">UA</button>
-<button onclick="location.href='faq-en.html'" type="button">EN</button>
-<button class="active" onclick="location.href='faq-ru.html'" type="button">RU</button>
-</div>
-</div>
-</header>
-
-    <div class="mobile-menu">
-  <nav class="mobile-menu-nav">
-    <a href="index-ru.html">Главная</a>
-    <a href="about-ru.html">Обо мне</a>
-    <a href="services-ru.html">Услуги</a>
-    <a href="pricing-ru.html">Ценовая политика</a>
-    <a href="solutions-ru.html">Решения</a>
-    <a href="faq-ru.html" class="active">FAQ</a>
-    <a href="contacts-ru.html">Контакты</a>
-    <a href="terms-ru.html">Условия использования</a>
-  </nav>
-</div>
+<div id="site-header-slot"></div>
 <main class="page">
 <section class="hero">
 <h1>Частые вопросы</h1>
@@ -824,11 +786,6 @@ footer a:hover {
 </div>
 <a class="back-link" href="index-ru.html">← Назад на главную</a>
 </main>
-<footer>
-<div class="footer-ticker">
-<div class="footer-ticker-text">Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Автоматические отчёты · Автоматизация Excel · Обработка данных · Очистка данных · Парсинг данных · Интеграции · Макросы · Кастомная логика · Автоматизация бизнес-процессов · Аналитические дашборды · Автоматизация Google Sheets · Веб-приложения · JavaScript · Индивидуальные решения для бизнеса ·</div>
-</div>
-<div class="footer-copy">© 2015–2026 Sebastian Automations. Все права защищены. <a href="terms-ru.html">Условия использования</a></div>
-</footer>
+<div id="site-footer-slot"></div>
 </body>
 </html>

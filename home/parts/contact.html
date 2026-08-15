@@ -1,1 +1,99 @@
+<button
+  id="contact-float-btn"
+  type="button"
+  onclick="openContactModal()"
+>
+  💬 Написати
+</button>
 
+<div
+  id="contact-modal"
+  class="contact-modal-overlay"
+  onclick="handleOverlayClick(event)"
+>
+  <div class="contact-modal">
+    <button
+      class="contact-close"
+      type="button"
+      onclick="closeContactModal()"
+    >
+      ×
+    </button>
+
+    <h3>Написати Себастьяну</h3>
+
+    <label for="contact-name">Ваше ім'я</label>
+
+    <input
+      id="contact-name"
+      type="text"
+      placeholder="Наприклад, Олександр"
+    >
+
+    <label>Як з вами зв'язатися?</label>
+
+    <div class="contact-method-options">
+      <button
+        type="button"
+        class="contact-method-btn"
+        onclick="selectContactMethod('email', this)"
+      >
+        ✉ Пошта
+      </button>
+
+      <button
+        type="button"
+        class="contact-method-btn"
+        onclick="selectContactMethod('phone', this)"
+      >
+        ☎ Телефон
+      </button>
+
+      <button
+        type="button"
+        class="contact-method-btn"
+        onclick="selectContactMethod('telegram', this)"
+      >
+        ✈ Telegram
+      </button>
+    </div>
+
+    <input
+      id="contact-method"
+      type="text"
+      placeholder="Оберіть спосіб зв'язку"
+      disabled
+    >
+
+    <input
+      id="contact-method-type"
+      type="hidden"
+      value=""
+    >
+
+    <label for="contact-message">Повідомлення</label>
+
+    <textarea
+      id="contact-message"
+      rows="5"
+      placeholder="Коротко опишіть задачу"
+    ></textarea>
+
+    <div class="turnstile-wrapper">
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+      ></div>
+    </div>
+
+    <button
+      class="contact-send-btn"
+      type="button"
+      onclick="testContactForm()"
+    >
+      Надіслати
+    </button>
+
+    <div id="contact-status"></div>
+  </div>
+</div>

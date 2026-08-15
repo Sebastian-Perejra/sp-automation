@@ -159,15 +159,39 @@
 
   <section class="home-hero">
     <div class="hero-inline">
-      <img
-        src="/home/assets/avatar.png"
-        alt="Avatar"
-      >
+  <img
+    src="/home/assets/avatar.png"
+    alt="Avatar"
+  >
 
-      <div class="typewriter">
-        Себастьян Перейра
-      </div>
+  <div class="hero-name-wrap">
+    <div class="typewriter">
+      Себастьян Перейра
     </div>
+
+    <button
+      class="workspace-peek-btn"
+      type="button"
+      aria-label="Зазирнути за лаштунки"
+      title="Зазирнути за лаштунки"
+      onclick="openWorkspacePeek()"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path d="M8 3H3v5"></path>
+        <path d="M3 3l6 6"></path>
+        <path d="M16 3h5v5"></path>
+        <path d="M21 3l-6 6"></path>
+        <path d="M8 21H3v-5"></path>
+        <path d="M3 21l6-6"></path>
+        <path d="M16 21h5v-5"></path>
+        <path d="M21 21l-6-6"></path>
+      </svg>
+    </button>
+  </div>
+</div>
 
     <p>
       Автоматизую і візуалізую все, що можна. А інше — теж спробую.
@@ -182,6 +206,38 @@
     </button>
   </section>
 
+  <div
+  class="workspace-peek-overlay"
+  id="workspace-peek"
+  aria-hidden="true"
+  onclick="handleWorkspacePeekClick(event)"
+>
+  <div class="workspace-peek-window">
+    <button
+      class="workspace-peek-close"
+      type="button"
+      aria-label="Закрити"
+      onclick="closeWorkspacePeek()"
+    >
+      ×
+    </button>
+
+    <div class="workspace-peek-frame">
+      <img
+        src="/home/assets/workspace.webp"
+        alt="Робоче місце Себастьяна"
+        class="workspace-peek-image"
+      >
+
+      <div class="workspace-peek-shade"></div>
+
+      <div class="workspace-peek-caption">
+        <span class="workspace-peek-dot"></span>
+        Десь зараз щось автоматизується
+      </div>
+    </div>
+  </div>
+</div>
   <div
     class="hint"
     id="hint"

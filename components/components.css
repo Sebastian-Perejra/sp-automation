@@ -121,13 +121,19 @@
   transition: right 0.22s ease;
 }
 
-.desktop-nav a:hover::after,
-.desktop-nav a.active::after {
+.desktop-nav a:hover::after {
   right: 0;
 }
 
 .desktop-nav a.active {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(87, 133, 101, 0.78);
   color: #ffffff;
+}
+
+.desktop-nav a.active::after {
+  display: none;
 }
 
 .lang-switcher {

@@ -2097,9 +2097,58 @@ function initHeroTilt() {
   );
 }
 
+function initMagneticCta() {
+  const button =
+    document.querySelector(
+      '.solution-picker-btn'
+    );
+
+  if (!button) {
+    return;
+  }
+
+  if (
+    window.matchMedia(
+      '(max-width: 768px)'
+    ).matches
+  ) {
+    return;
+  }
+
+  button.addEventListener(
+    'mousemove',
+    event => {
+      const rect =
+        button.getBoundingClientRect();
+
+      const x =
+        event.clientX -
+        rect.left -
+        rect.width / 2;
+
+      const y =
+        event.clientY -
+        rect.top -
+        rect.height / 2;
+
+      button.style.transform =
+        `translate(${(x * 0.08).toFixed(2)}px, ${(y * 0.08).toFixed(2)}px)`;
+    }
+  );
+
+  button.addEventListener(
+    'mouseleave',
+    () => {
+      button.style.transform =
+        'translate(0, 0)';
+    }
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
+initMagneticCta();
 initCarousel();
 initHomeEntrance();
 loadHomeParts();

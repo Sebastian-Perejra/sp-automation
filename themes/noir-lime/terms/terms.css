@@ -938,9 +938,9 @@ body {
     linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(49, 92, 66, 0.22) 12%,
-      rgba(49, 92, 66, 0.09) 50%,
-      rgba(49, 92, 66, 0.22) 88%,
+      rgba(74, 124, 86, 0.5) 12%,
+      rgba(74, 124, 86, 0.22) 50%,
+      rgba(74, 124, 86, 0.5) 88%,
       transparent 100%
     );
 }
@@ -1001,7 +1001,7 @@ body {
   left: 58px;
   width: 54px;
   height: 1px;
-  background: rgba(76, 143, 91, 0.42);
+  background: rgba(105, 170, 118, 0.7);
 }
 
 .terms-frame__top-left::after {
@@ -1019,7 +1019,7 @@ body {
   right: 58px;
   width: 54px;
   height: 1px;
-  background: rgba(76, 143, 91, 0.42);
+  background: rgba(105, 170, 118, 0.7);
 }
 
 .terms-frame__top-right::after {

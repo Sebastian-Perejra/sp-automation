@@ -142,17 +142,24 @@ if (backgroundLayers.length >= 2) {
   );
 }
 
-let latestScrollY = 0;
 let parallaxFrame = null;
 
 function updateBackgroundParallax() {
-  const maxShift = 110;
+  const scrollableHeight =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
+
+  const progress =
+    scrollableHeight > 0
+      ? window.scrollY / scrollableHeight
+      : 0;
+
+  const startShift = -60;
+  const endShift = 60;
 
   const shift =
-    Math.min(
-      latestScrollY * 0.055,
-      maxShift
-    );
+    startShift +
+    (endShift - startShift) * progress;
 
   document.documentElement.style.setProperty(
     "--terms-bg-y",
@@ -162,27 +169,29 @@ function updateBackgroundParallax() {
   parallaxFrame = null;
 }
 
+function requestParallaxUpdate() {
+  if (parallaxFrame) return;
+
+  parallaxFrame =
+    requestAnimationFrame(
+      updateBackgroundParallax
+    );
+}
+
 window.addEventListener(
   "scroll",
-  () => {
-    latestScrollY =
-      window.scrollY;
-
-    if (parallaxFrame) {
-      return;
-    }
-
-    parallaxFrame =
-      requestAnimationFrame(
-        updateBackgroundParallax
-      );
-  },
+  requestParallaxUpdate,
   {
     passive: true
   }
 );
 
-latestScrollY =
-  window.scrollY;
+window.addEventListener(
+  "resize",
+  requestParallaxUpdate,
+  {
+    passive: true
+  }
+);
 
 updateBackgroundParallax();

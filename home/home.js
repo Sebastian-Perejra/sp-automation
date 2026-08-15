@@ -2146,25 +2146,50 @@ function initMagneticCta() {
 }
 
 function initSolutionsNavHint() {
-  const links =
-    Array.from(
-      document.querySelectorAll(
-        '.topbar a'
-      )
+  function applyHint() {
+    const links =
+      Array.from(
+        document.querySelectorAll(
+          '.topbar a'
+        )
+      );
+
+    const solutionsLink =
+      links.find(link =>
+        link.textContent
+          .trim()
+          .toUpperCase() ===
+        'РІШЕННЯ'
+      );
+
+    if (!solutionsLink) {
+      return false;
+    }
+
+    solutionsLink.classList.add(
+      'home-solutions-hint'
     );
 
-  const solutionsLink =
-    links.find(link =>
-      link.textContent.trim() ===
-      'РІШЕННЯ'
-    );
+    return true;
+  }
 
-  if (!solutionsLink) {
+  if (applyHint()) {
     return;
   }
 
-  solutionsLink.classList.add(
-    'home-solutions-hint'
+  const observer =
+    new MutationObserver(() => {
+      if (applyHint()) {
+        observer.disconnect();
+      }
+    });
+
+  observer.observe(
+    document.body,
+    {
+      childList: true,
+      subtree: true
+    }
   );
 }
 

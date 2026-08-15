@@ -3641,3 +3641,9 @@ body.home-ready .hero-sheen {
     min-height: 190px;
   }
 }
+
+.home-case-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}

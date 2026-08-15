@@ -3044,3 +3044,35 @@ body.home-ready .hero-sheen {
     min-height: 0;
   }
 }
+
+.home-automation-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-automation-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      220px circle at var(--card-x, 50%) var(--card-y, 50%),
+      rgba(70, 132, 105, 0.12),
+      transparent 68%
+    );
+
+  opacity: 0;
+  transition: opacity 0.28s ease;
+
+  pointer-events: none;
+}
+
+.home-automation-card:hover::before {
+  opacity: 1;
+}
+
+.home-automation-card > * {
+  position: relative;
+  z-index: 1;
+}

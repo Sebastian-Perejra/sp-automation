@@ -1,1 +1,554 @@
+<div
+  id="solution-picker"
+  class="solution-picker-overlay"
+  onclick="handleSolutionOverlayClick(event)"
+>
+  <div class="solution-picker">
+    <button
+      class="solution-picker-close"
+      type="button"
+      onclick="closeSolutionPicker()"
+    >
+      ×
+    </button>
 
+    <div
+      id="solution-start-step"
+      class="solution-step active"
+    >
+      <div class="solution-picker-badge">
+        ⚡ ПІДБІР РІШЕННЯ
+      </div>
+
+      <h2>Що хочете автоматизувати?</h2>
+
+      <p class="solution-picker-subtitle">
+        Оберіть, що найбільше схоже на вашу задачу
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openExcelStep()"
+        >
+          <span class="solution-icon">📊</span>
+          <span class="solution-title">Excel / Google Sheets</span>
+          <span class="solution-desc">Таблиці, формули, макроси</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openAnalyticsStep()"
+        >
+          <span class="solution-icon">📈</span>
+          <span class="solution-title">Звіти та аналітика</span>
+          <span class="solution-desc">Збір та візуалізація даних</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openManualDataStep()"
+        >
+          <span class="solution-icon">🔄</span>
+          <span class="solution-title">Ручна робота з даними</span>
+          <span class="solution-desc">Перенесення та обробка</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openTelegramStep()"
+        >
+          <span class="solution-icon">✈️</span>
+          <span class="solution-title">Telegram / сповіщення</span>
+          <span class="solution-desc">Боти та автоматичні повідомлення</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openPowerBiStep()"
+        >
+          <span class="solution-icon">📉</span>
+          <span class="solution-title">Power BI</span>
+          <span class="solution-desc">Дашборди та показники</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="openOtherSolution()"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">Інше</span>
+          <span class="solution-desc">Опишу свою задачу</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-excel-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStart()"
+      >
+        ← Назад
+      </button>
+
+      <h2>Що зараз доводиться робити вручну?</h2>
+
+      <p class="solution-picker-subtitle">
+        Оберіть варіант, який найбільше схожий на вашу задачу
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Збирати кілька файлів в один')"
+        >
+          <span class="solution-icon">📚</span>
+          <span class="solution-title">Збирати кілька файлів в один</span>
+          <span class="solution-desc">Об'єднання даних з різних файлів</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Переносити дані')"
+        >
+          <span class="solution-icon">↔️</span>
+          <span class="solution-title">Переносити дані</span>
+          <span class="solution-desc">Між файлами, листами або системами</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Формувати звіти')"
+        >
+          <span class="solution-icon">📄</span>
+          <span class="solution-title">Формувати звіти</span>
+          <span class="solution-desc">Автоматичні таблиці та підсумки</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Перевіряти помилки')"
+        >
+          <span class="solution-icon">✅</span>
+          <span class="solution-title">Перевіряти помилки</span>
+          <span class="solution-desc">Контроль даних та умов</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Заповнювати документи')"
+        >
+          <span class="solution-icon">📝</span>
+          <span class="solution-title">Заповнювати документи</span>
+          <span class="solution-desc">Автоматичне формування документів</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectExcelTask('Інше')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">Інше</span>
+          <span class="solution-desc">Моя задача трохи інша</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-analytics-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromAnalytics()"
+      >
+        ← Назад
+      </button>
+
+      <h2>Що саме хочете спростити?</h2>
+
+      <p class="solution-picker-subtitle">
+        Оберіть найближчий до вашої задачі варіант
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Зводити дані з кількох джерел')"
+        >
+          <span class="solution-icon">🔗</span>
+          <span class="solution-title">Зводити дані з кількох джерел</span>
+          <span class="solution-desc">Файли, таблиці або інші джерела</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Автоматично формувати звіти')"
+        >
+          <span class="solution-icon">📄</span>
+          <span class="solution-title">Автоматично формувати звіти</span>
+          <span class="solution-desc">Без ручного збирання кожного разу</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Розраховувати KPI та показники')"
+        >
+          <span class="solution-icon">🎯</span>
+          <span class="solution-title">Розраховувати KPI та показники</span>
+          <span class="solution-desc">Метрики, плани, відхилення</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Візуалізувати дані')"
+        >
+          <span class="solution-icon">📊</span>
+          <span class="solution-title">Візуалізувати дані</span>
+          <span class="solution-desc">Графіки, дашборди та зрізи</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Автоматично оновлювати звіти')"
+        >
+          <span class="solution-icon">🔄</span>
+          <span class="solution-title">Автоматично оновлювати звіти</span>
+          <span class="solution-desc">Нові дані без ручної переробки</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectAnalyticsTask('Інше')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">Інше</span>
+          <span class="solution-desc">У мене інший сценарій</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-manual-data-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromManualData()"
+      >
+        ← Назад
+      </button>
+
+      <h2>Що саме забирає час?</h2>
+
+      <p class="solution-picker-subtitle">
+        Оберіть найближчий до вашої ситуації варіант
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Копіювати дані між таблицями')"
+        >
+          <span class="solution-icon">🔁</span>
+          <span class="solution-title">Копіювати дані між таблицями</span>
+          <span class="solution-desc">Ручне перенесення з одного місця в інше</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Завантажувати або переносити дані з файлів')"
+        >
+          <span class="solution-icon">📥</span>
+          <span class="solution-title">Завантажувати дані з файлів</span>
+          <span class="solution-desc">Excel, CSV, Google Sheets та інші джерела</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Очищати та приводити дані до ладу')"
+        >
+          <span class="solution-icon">🧹</span>
+          <span class="solution-title">Очищати дані</span>
+          <span class="solution-desc">Дублікати, формати, зайві значення</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Шукати та звіряти інформацію')"
+        >
+          <span class="solution-icon">🔍</span>
+          <span class="solution-title">Шукати та звіряти інформацію</span>
+          <span class="solution-desc">Порівняння списків та перевірка збігів</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Сортувати та розкладати дані')"
+        >
+          <span class="solution-icon">📂</span>
+          <span class="solution-title">Сортувати та розкладати дані</span>
+          <span class="solution-desc">За правилами, категоріями або умовами</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectManualDataTask('Інше')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">Інше</span>
+          <span class="solution-desc">У мене інший ручний процес</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-telegram-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromTelegram()"
+      >
+        ← Назад
+      </button>
+
+      <h2>Що має відбуватися автоматично?</h2>
+
+      <p class="solution-picker-subtitle">
+        Оберіть найближчий до вашої задачі сценарій
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Отримувати автоматичні сповіщення')"
+        >
+          <span class="solution-icon">🔔</span>
+          <span class="solution-title">Отримувати сповіщення</span>
+          <span class="solution-desc">Події, заявки, зміни або важливі дані</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Створити Telegram-бота')"
+        >
+          <span class="solution-icon">🤖</span>
+          <span class="solution-title">Створити Telegram-бота</span>
+          <span class="solution-desc">Команди, кнопки та власна логіка</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Отримувати заявки з сайту в Telegram')"
+        >
+          <span class="solution-icon">🌐</span>
+          <span class="solution-title">Заявки з сайту в Telegram</span>
+          <span class="solution-desc">Передавати звернення без перевірки пошти</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Надсилати нагадування')"
+        >
+          <span class="solution-icon">⏰</span>
+          <span class="solution-title">Надсилати нагадування</span>
+          <span class="solution-desc">За часом, датою або певною подією</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Керувати процесами через Telegram')"
+        >
+          <span class="solution-icon">⚙️</span>
+          <span class="solution-title">Керувати процесами</span>
+          <span class="solution-desc">Запускати дії та отримувати результат у чаті</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectTelegramTask('Інше')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">Інше</span>
+          <span class="solution-desc">У мене інший сценарій</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-powerbi-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSolutionStartFromPowerBi()"
+      >
+        ← Назад
+      </button>
+
+      <h2>Що хочете отримати в Power BI?</h2>
+
+      <p class="solution-picker-subtitle">
+        Оберіть найближчий до вашої задачі варіант
+      </p>
+
+      <div class="solution-picker-options">
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Створити дашборд з нуля')"
+        >
+          <span class="solution-icon">📊</span>
+          <span class="solution-title">Створити дашборд з нуля</span>
+          <span class="solution-desc">Показники, графіки та зрізи</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Підключити дані з Excel або Google Sheets')"
+        >
+          <span class="solution-icon">🔗</span>
+          <span class="solution-title">Підключити джерела даних</span>
+          <span class="solution-desc">Excel, Google Sheets та інші джерела</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Автоматизувати оновлення даних')"
+        >
+          <span class="solution-icon">🔄</span>
+          <span class="solution-title">Автоматизувати оновлення</span>
+          <span class="solution-desc">Щоб звіт не доводилося збирати заново</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Розрахувати KPI та показники')"
+        >
+          <span class="solution-icon">🎯</span>
+          <span class="solution-title">Розрахувати KPI</span>
+          <span class="solution-desc">DAX, плани, факти та відхилення</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Доопрацювати існуючий Power BI звіт')"
+        >
+          <span class="solution-icon">🛠️</span>
+          <span class="solution-title">Доопрацювати існуючий звіт</span>
+          <span class="solution-desc">Логіка, модель, дизайн або швидкість</span>
+        </button>
+
+        <button
+          class="solution-option"
+          type="button"
+          onclick="selectPowerBiTask('Інше')"
+        >
+          <span class="solution-icon">•••</span>
+          <span class="solution-title">Інше</span>
+          <span class="solution-desc">У мене інша задача в Power BI</span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="solution-result-step"
+      class="solution-step"
+    >
+      <button
+        class="solution-back"
+        type="button"
+        onclick="backToSelectedCategoryStep()"
+      >
+        ← Назад
+      </button>
+
+      <div class="solution-result-check">
+        ✓
+      </div>
+
+      <h2 id="solution-result-title"></h2>
+
+      <p class="solution-result-tools">
+        Можливі інструменти:
+        <strong id="solution-result-tools-text"></strong>
+      </p>
+
+      <div class="solution-selected-task">
+        <span>Ви обрали:</span>
+        <strong id="solution-selected-task-text"></strong>
+      </div>
+
+      <label
+        class="solution-description-label"
+        for="solution-description"
+      >
+        Коротко опишіть, як це відбувається зараз:
+      </label>
+
+      <textarea
+        id="solution-description"
+        class="solution-description"
+        rows="4"
+        placeholder="Наприклад: щодня отримую файли від 12 менеджерів і вручну збираю їх в один звіт..."
+      ></textarea>
+
+      <button
+        class="solution-discuss-btn"
+        type="button"
+        onclick="discussSelectedTask()"
+      >
+        Обговорити задачу →
+      </button>
+    </div>
+
+    <div class="solution-picker-progress">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>

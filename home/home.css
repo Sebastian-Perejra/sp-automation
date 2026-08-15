@@ -2573,3 +2573,28 @@ body.home-ready .hero-sheen {
   font-size: 17px;
   line-height: 1;
 }
+
+.hero-eyebrow {
+  margin: 0 0 22px;
+
+  text-align: center;
+
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  color: rgba(43, 92, 74, 0.64);
+}
+
+@media (max-width: 768px) {
+  .hero-eyebrow {
+    margin-bottom: 16px;
+    padding: 0 14px;
+
+    font-size: 9px;
+    letter-spacing: 0.19em;
+  }
+}

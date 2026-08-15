@@ -1852,6 +1852,62 @@ function handleSolutionOverlayClick(
   }
 }
 
+function openWorkspacePeek() {
+  const overlay =
+    document.getElementById(
+      'workspace-peek'
+    );
+
+  if (!overlay) {
+    return;
+  }
+
+  overlay.classList.add(
+    'show'
+  );
+
+  overlay.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  document.body.classList.add(
+    'workspace-peek-open'
+  );
+}
+
+function closeWorkspacePeek() {
+  const overlay =
+    document.getElementById(
+      'workspace-peek'
+    );
+
+  if (!overlay) {
+    return;
+  }
+
+  overlay.classList.remove(
+    'show'
+  );
+
+  overlay.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  document.body.classList.remove(
+    'workspace-peek-open'
+  );
+}
+
+function handleWorkspacePeekClick(event) {
+  if (
+    event.target.id ===
+    'workspace-peek'
+  ) {
+    closeWorkspacePeek();
+  }
+}
 document.addEventListener(
   'click',
   event => {
@@ -1884,6 +1940,7 @@ document.addEventListener(
     closeReviewForm();
     closeSolutionPicker();
     closeReviewsPanel();
+    closeWorkspacePeek();
   }
 );
 

@@ -2602,7 +2602,7 @@ body.home-ready .hero-sheen {
 .hero-watermark {
   position: absolute;
   left: 50%;
-  bottom: -22px;
+  bottom: -62px;
   transform: translateX(-50%);
 
   width: 100%;

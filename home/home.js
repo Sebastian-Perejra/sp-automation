@@ -2265,6 +2265,19 @@ function showWorkspacePeekFrame(index) {
 
       workspacePeekFrameIndex =
         index;
+          const progressDots =
+          overlay.querySelectorAll(
+            '.workspace-peek-progress span'
+          );
+        
+        progressDots.forEach(
+          (dot, dotIndex) => {
+            dot.classList.toggle(
+              'active',
+              dotIndex === index
+            );
+          }
+      );
     },
     260
   );

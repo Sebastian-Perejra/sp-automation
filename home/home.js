@@ -2808,14 +2808,7 @@ function initHeroEasterEgg() {
   );
 }
 
-function initHomeHandoffScene() {
-  if (
-    typeof gsap === 'undefined' ||
-    typeof ScrollTrigger === 'undefined'
-  ) {
-    return;
-  }
-
+function initHomePushHandoff() {
   if (
     window.matchMedia(
       '(max-width: 768px)'
@@ -2824,294 +2817,132 @@ function initHomeHandoffScene() {
     return;
   }
 
-  gsap.registerPlugin(ScrollTrigger);
+  const HEADER_TOP = 82;
+  const CONTACT_GAP = 10;
 
-  const hero =
-    document.querySelector('.home-hero');
+  const selectors = [
+    '.home-hero',
+    '.carousel-container',
+    '.home-automation-section',
+    '.home-cases-section'
+  ];
 
-  const carousel =
-    document.querySelector('.carousel-container');
+  const elements = selectors
+    .map(selector =>
+      document.querySelector(selector)
+    )
+    .filter(Boolean);
 
-  const automation =
-    document.querySelector('.home-automation-section');
-
-  const cases =
-    document.querySelector('.home-cases-section');
-
-  if (
-    !hero ||
-    !carousel ||
-    !automation ||
-    !cases
-  ) {
+  if (elements.length < 2) {
     return;
   }
 
-  const scene =
-    document.createElement('div');
-
-  const stage =
-    document.createElement('div');
-
-  scene.className =
-    'home-handoff-scene';
-
-  stage.className =
-    'home-handoff-stage';
-
-  hero.parentNode.insertBefore(
-    scene,
-    hero
-  );
-
-  scene.appendChild(stage);
-
-  const elements = [
-    hero,
-    carousel,
-    automation,
-    cases
-  ];
-
-  const layers =
-    elements.map((element, index) => {
-      const layer =
+  const shells = elements.map(
+    (element, index) => {
+      const shell =
         document.createElement('div');
 
-      layer.className =
-        'home-handoff-layer';
+      shell.className =
+        'home-push-shell';
 
-      layer.dataset.handoffIndex =
-        String(index);
-
-      stage.appendChild(layer);
-      layer.appendChild(element);
-
-      return layer;
-    });
-
-  const [
-    heroLayer,
-    carouselLayer,
-    automationLayer,
-    casesLayer
-  ] = layers;
-
-  function buildTimeline() {
-    ScrollTrigger
-      .getById('home-handoff')
-      ?.kill();
-
-    gsap.killTweensOf(layers);
-
-    const stageHeight =
-      stage.clientHeight;
-
-    const heroHeight =
-      hero.offsetHeight;
-
-    const carouselHeight =
-      carousel.offsetHeight;
-
-    const automationHeight =
-      automation.offsetHeight;
-
-    const gap = 12;
-
-    gsap.set(
-      heroLayer,
-      {
-        y: 0
-      }
-    );
-
-    gsap.set(
-      carouselLayer,
-      {
-        y:
-          stageHeight +
-          80
-      }
-    );
-
-    gsap.set(
-      automationLayer,
-      {
-        y:
-          stageHeight +
-          80
-      }
-    );
-
-    gsap.set(
-      casesLayer,
-      {
-        y:
-          stageHeight +
-          80
-      }
-    );
-
-    const timeline =
-      gsap.timeline({
-        defaults: {
-          ease: 'none'
-        }
-      });
-
-    timeline
-      .to(
-        {},
-        {
-          duration: 0.45
-        }
-      )
-
-      .to(
-        carouselLayer,
-        {
-          y:
-            heroHeight +
-            gap,
-          duration: 1.15
-        }
-      )
-
-      .to(
-        heroLayer,
-        {
-          y:
-            -(heroHeight + gap),
-          duration: 0.72
-        },
-        'heroPush'
-      )
-
-      .to(
-        carouselLayer,
-        {
-          y: 0,
-          duration: 0.72
-        },
-        'heroPush'
-      )
-
-      .to(
-        {},
-        {
-          duration: 0.42
-        }
-      )
-
-      .to(
-        automationLayer,
-        {
-          y:
-            carouselHeight +
-            gap,
-          duration: 1.15
-        }
-      )
-
-      .to(
-        carouselLayer,
-        {
-          y:
-            -(carouselHeight + gap),
-          duration: 0.72
-        },
-        'carouselPush'
-      )
-
-      .to(
-        automationLayer,
-        {
-          y: 0,
-          duration: 0.72
-        },
-        'carouselPush'
-      )
-
-      .to(
-        {},
-        {
-          duration: 0.42
-        }
-      )
-
-      .to(
-        casesLayer,
-        {
-          y:
-            automationHeight +
-            gap,
-          duration: 1.15
-        }
-      )
-
-      .to(
-        automationLayer,
-        {
-          y:
-            -(automationHeight + gap),
-          duration: 0.72
-        },
-        'automationPush'
-      )
-
-      .to(
-        casesLayer,
-        {
-          y: 0,
-          duration: 0.72
-        },
-        'automationPush'
-      )
-
-      .to(
-        {},
-        {
-          duration: 0.55
-        }
+      shell.style.setProperty(
+        '--home-push-z',
+        String(20 + index)
       );
 
-    ScrollTrigger.create({
-      id: 'home-handoff',
+      element.parentNode.insertBefore(
+        shell,
+        element
+      );
 
-      trigger: scene,
+      shell.appendChild(element);
 
-      start: 'top 82px',
-
-      end: () =>
-        `+=${window.innerHeight * 5.4}`,
-
-      animation: timeline,
-
-      pin: stage,
-
-      pinSpacing: true,
-
-      scrub: true,
-
-      anticipatePin: 1,
-
-      invalidateOnRefresh: true
-    });
-  }
-
-  buildTimeline();
-
-  window.addEventListener(
-    'load',
-    () => {
-      ScrollTrigger.refresh();
-    },
-    {
-      once: true
+      return shell;
     }
   );
-}
 
+  function updatePush() {
+    shells.forEach(
+      (shell, index) => {
+        const next =
+          shells[index + 1];
+
+        if (!next) {
+          shell.style.setProperty(
+            '--home-push-y',
+            '0px'
+          );
+
+          return;
+        }
+
+        const shellRect =
+          shell.getBoundingClientRect();
+
+        const nextRect =
+          next.getBoundingClientRect();
+
+        const shellHeight =
+          shell.offsetHeight;
+
+        let pushY = 0;
+
+        if (
+          shellRect.top <=
+          HEADER_TOP + 1
+        ) {
+          const contactPoint =
+            HEADER_TOP +
+            shellHeight +
+            CONTACT_GAP;
+
+          if (
+            nextRect.top <
+            contactPoint
+          ) {
+            pushY =
+              nextRect.top -
+              contactPoint;
+          }
+
+          const maxPush =
+            -(
+              shellHeight +
+              CONTACT_GAP
+            );
+
+          if (
+            pushY <
+            maxPush
+          ) {
+            pushY =
+              maxPush;
+          }
+        }
+
+        shell.style.setProperty(
+          '--home-push-y',
+          `${pushY}px`
+        );
+      }
+    );
+  }
+
+  updatePush();
+
+  window.addEventListener(
+    'scroll',
+    updatePush,
+    {
+      passive: true
+    }
+  );
+
+  window.addEventListener(
+    'resize',
+    updatePush
+  );
+}
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -3122,4 +2953,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
-initHomeHandoffScene();
+initHomePushHandoff();

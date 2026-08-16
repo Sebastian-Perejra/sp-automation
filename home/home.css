@@ -48,9 +48,9 @@ html, body {
       overflow: hidden;
       border-right: 2px solid #0F9D58;
       animation:
-      typing 8s steps(20) 1 normal both,
-      blink-caret 0.7s step-end 11;
-        }
+        typing 1.35s steps(20) 1 normal both,
+        blink-caret 0.7s step-end 3;
+    }
 
     @keyframes typing {
       from { width: 0 }

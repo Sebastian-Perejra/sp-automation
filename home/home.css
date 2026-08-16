@@ -4067,9 +4067,9 @@ body.home-ready .hero-sheen {
 }
 
 @media (min-width: 769px) {
-  .home-contact-placeholder {
+  .home-contact-marker {
     display: block;
-    position: relative;
+    width: 100%;
     pointer-events: none;
   }
 

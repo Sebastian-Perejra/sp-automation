@@ -2808,6 +2808,62 @@ function initHeroEasterEgg() {
   );
 }
 
+function initHomeScrollHandoff() {
+  if (
+    typeof gsap === 'undefined' ||
+    typeof ScrollTrigger === 'undefined'
+  ) {
+    return;
+  }
+
+  if (
+    window.matchMedia(
+      '(max-width: 768px)'
+    ).matches
+  ) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const hero =
+    document.querySelector(
+      '.home-hero'
+    );
+
+  const carousel =
+    document.querySelector(
+      '.carousel-container'
+    );
+
+  if (!hero || !carousel) {
+    return;
+  }
+
+  const HEADER_TOP = 82;
+  const CONTACT_GAP = 12;
+
+  ScrollTrigger.create({
+    trigger: hero,
+    start: `top ${HEADER_TOP}px`,
+    endTrigger: carousel,
+
+    end: () =>
+      `top ${
+        HEADER_TOP +
+        hero.offsetHeight +
+        CONTACT_GAP
+      }px`,
+
+    pin: hero,
+    pinSpacing: false,
+    anticipatePin: 1,
+    invalidateOnRefresh: true
+  });
+
+  ScrollTrigger.refresh();
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2818,3 +2874,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
+initHomeScrollHandoff();

@@ -74,11 +74,13 @@ body::after {
 .page {
   position: relative;
   z-index: 1;
-  width: min(100%, 1280px);
+
+  width: min(calc(100% - 48px), 1180px);
   margin: 0 auto;
+
   padding:
     72px
-    20px
+    0
     max(64px, env(safe-area-inset-bottom));
 }
 
@@ -359,12 +361,14 @@ body::after {
     translate: 0 0;
   }
 
-  .page {
-    padding:
-      24px
-      12px
-      max(36px, env(safe-area-inset-bottom));
-  }
+.page {
+  width: calc(100% - 24px);
+
+  padding:
+    24px
+    0
+    max(36px, env(safe-area-inset-bottom));
+}
 
    .hero {
     padding: 30px 20px 28px;

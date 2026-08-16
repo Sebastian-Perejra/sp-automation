@@ -4065,3 +4065,24 @@ body.home-ready .hero-sheen {
     font-size: 17px;
   }
 }
+
+.home-hero-scroll-scene {
+  position: relative;
+  min-height: 140vh;
+}
+
+.home-hero-scroll-scene .home-hero {
+  position: sticky;
+  top: 78px;
+  z-index: 4;
+}
+
+@media (max-width: 768px) {
+  .home-hero-scroll-scene {
+    min-height: 125vh;
+  }
+
+  .home-hero-scroll-scene .home-hero {
+    top: 68px;
+  }
+}

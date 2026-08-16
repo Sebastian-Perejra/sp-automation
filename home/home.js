@@ -2808,6 +2808,310 @@ function initHeroEasterEgg() {
   );
 }
 
+function initHomeHandoffScene() {
+  if (
+    typeof gsap === 'undefined' ||
+    typeof ScrollTrigger === 'undefined'
+  ) {
+    return;
+  }
+
+  if (
+    window.matchMedia(
+      '(max-width: 768px)'
+    ).matches
+  ) {
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const hero =
+    document.querySelector('.home-hero');
+
+  const carousel =
+    document.querySelector('.carousel-container');
+
+  const automation =
+    document.querySelector('.home-automation-section');
+
+  const cases =
+    document.querySelector('.home-cases-section');
+
+  if (
+    !hero ||
+    !carousel ||
+    !automation ||
+    !cases
+  ) {
+    return;
+  }
+
+  const scene =
+    document.createElement('div');
+
+  const stage =
+    document.createElement('div');
+
+  scene.className =
+    'home-handoff-scene';
+
+  stage.className =
+    'home-handoff-stage';
+
+  hero.parentNode.insertBefore(
+    scene,
+    hero
+  );
+
+  scene.appendChild(stage);
+
+  const elements = [
+    hero,
+    carousel,
+    automation,
+    cases
+  ];
+
+  const layers =
+    elements.map((element, index) => {
+      const layer =
+        document.createElement('div');
+
+      layer.className =
+        'home-handoff-layer';
+
+      layer.dataset.handoffIndex =
+        String(index);
+
+      stage.appendChild(layer);
+      layer.appendChild(element);
+
+      return layer;
+    });
+
+  const [
+    heroLayer,
+    carouselLayer,
+    automationLayer,
+    casesLayer
+  ] = layers;
+
+  function buildTimeline() {
+    ScrollTrigger
+      .getById('home-handoff')
+      ?.kill();
+
+    gsap.killTweensOf(layers);
+
+    const stageHeight =
+      stage.clientHeight;
+
+    const heroHeight =
+      hero.offsetHeight;
+
+    const carouselHeight =
+      carousel.offsetHeight;
+
+    const automationHeight =
+      automation.offsetHeight;
+
+    const gap = 12;
+
+    gsap.set(
+      heroLayer,
+      {
+        y: 0
+      }
+    );
+
+    gsap.set(
+      carouselLayer,
+      {
+        y:
+          stageHeight +
+          80
+      }
+    );
+
+    gsap.set(
+      automationLayer,
+      {
+        y:
+          stageHeight +
+          80
+      }
+    );
+
+    gsap.set(
+      casesLayer,
+      {
+        y:
+          stageHeight +
+          80
+      }
+    );
+
+    const timeline =
+      gsap.timeline({
+        defaults: {
+          ease: 'none'
+        }
+      });
+
+    timeline
+      .to(
+        {},
+        {
+          duration: 0.45
+        }
+      )
+
+      .to(
+        carouselLayer,
+        {
+          y:
+            heroHeight +
+            gap,
+          duration: 1.15
+        }
+      )
+
+      .to(
+        heroLayer,
+        {
+          y:
+            -(heroHeight + gap),
+          duration: 0.72
+        },
+        'heroPush'
+      )
+
+      .to(
+        carouselLayer,
+        {
+          y: 0,
+          duration: 0.72
+        },
+        'heroPush'
+      )
+
+      .to(
+        {},
+        {
+          duration: 0.42
+        }
+      )
+
+      .to(
+        automationLayer,
+        {
+          y:
+            carouselHeight +
+            gap,
+          duration: 1.15
+        }
+      )
+
+      .to(
+        carouselLayer,
+        {
+          y:
+            -(carouselHeight + gap),
+          duration: 0.72
+        },
+        'carouselPush'
+      )
+
+      .to(
+        automationLayer,
+        {
+          y: 0,
+          duration: 0.72
+        },
+        'carouselPush'
+      )
+
+      .to(
+        {},
+        {
+          duration: 0.42
+        }
+      )
+
+      .to(
+        casesLayer,
+        {
+          y:
+            automationHeight +
+            gap,
+          duration: 1.15
+        }
+      )
+
+      .to(
+        automationLayer,
+        {
+          y:
+            -(automationHeight + gap),
+          duration: 0.72
+        },
+        'automationPush'
+      )
+
+      .to(
+        casesLayer,
+        {
+          y: 0,
+          duration: 0.72
+        },
+        'automationPush'
+      )
+
+      .to(
+        {},
+        {
+          duration: 0.55
+        }
+      );
+
+    ScrollTrigger.create({
+      id: 'home-handoff',
+
+      trigger: scene,
+
+      start: 'top 82px',
+
+      end: () =>
+        `+=${window.innerHeight * 5.4}`,
+
+      animation: timeline,
+
+      pin: stage,
+
+      pinSpacing: true,
+
+      scrub: true,
+
+      anticipatePin: 1,
+
+      invalidateOnRefresh: true
+    });
+  }
+
+  buildTimeline();
+
+  window.addEventListener(
+    'load',
+    () => {
+      ScrollTrigger.refresh();
+    },
+    {
+      once: true
+    }
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2818,3 +3122,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
+initHomeHandoffScene();

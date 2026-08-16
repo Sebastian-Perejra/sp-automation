@@ -3570,6 +3570,216 @@ function initHomeProcessMetaphors() {
   showSlide(0);
 }
 
+function initCallBooking() {
+  const overlay = document.getElementById('call-booking-overlay');
+  const title = document.getElementById('call-calendar-title');
+  const daysContainer = document.getElementById('call-calendar-days');
+  const prevBtn = document.getElementById('call-calendar-prev');
+  const nextBtn = document.getElementById('call-calendar-next');
+  const dateInput = document.getElementById('call-booking-date');
+  const timeInput = document.getElementById('call-booking-time');
+  const timeButtons = Array.from(
+    document.querySelectorAll('#call-booking-times button')
+  );
+
+  if (
+    !overlay ||
+    !title ||
+    !daysContainer ||
+    !prevBtn ||
+    !nextBtn ||
+    !dateInput ||
+    !timeInput
+  ) {
+    return;
+  }
+
+  const localeMap = {
+    uk: 'uk-UA',
+    ru: 'ru-RU',
+    en: 'en-US'
+  };
+
+  const lang =
+    document.documentElement.lang === 'ru'
+      ? 'ru'
+      : document.documentElement.lang === 'en'
+        ? 'en'
+        : 'uk';
+
+  const locale = localeMap[lang];
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let viewDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    1
+  );
+
+  let selectedDate = null;
+
+  function formatDateValue(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
+  function renderCalendar() {
+    daysContainer.innerHTML = '';
+
+    title.textContent = new Intl.DateTimeFormat(
+      locale,
+      {
+        month: 'long',
+        year: 'numeric'
+      }
+    ).format(viewDate);
+
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+
+    const firstDay = new Date(year, month, 1);
+
+    let startOffset = firstDay.getDay() - 1;
+
+    if (startOffset < 0) {
+      startOffset = 6;
+    }
+
+    for (let i = 0; i < startOffset; i++) {
+      const empty = document.createElement('span');
+      daysContainer.appendChild(empty);
+    }
+
+    const lastDay = new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
+
+    for (let day = 1; day <= lastDay; day++) {
+      const date = new Date(
+        year,
+        month,
+        day
+      );
+
+      date.setHours(0, 0, 0, 0);
+
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.textContent = String(day);
+
+      if (date < today) {
+        button.disabled = true;
+      }
+
+      if (
+        selectedDate &&
+        formatDateValue(date) === formatDateValue(selectedDate)
+      ) {
+        button.classList.add('is-selected');
+      }
+
+      button.addEventListener('click', () => {
+        if (button.disabled) {
+          return;
+        }
+
+        selectedDate = date;
+        dateInput.value = formatDateValue(date);
+
+        renderCalendar();
+      });
+
+      daysContainer.appendChild(button);
+    }
+
+    const currentMonthStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      1
+    );
+
+    prevBtn.disabled =
+      viewDate.getFullYear() === currentMonthStart.getFullYear() &&
+      viewDate.getMonth() === currentMonthStart.getMonth();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (prevBtn.disabled) {
+      return;
+    }
+
+    viewDate = new Date(
+      viewDate.getFullYear(),
+      viewDate.getMonth() - 1,
+      1
+    );
+
+    renderCalendar();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    viewDate = new Date(
+      viewDate.getFullYear(),
+      viewDate.getMonth() + 1,
+      1
+    );
+
+    renderCalendar();
+  });
+
+  timeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      timeButtons.forEach((item) => {
+        item.classList.remove('is-selected');
+      });
+
+      button.classList.add('is-selected');
+
+      timeInput.value =
+        button.dataset.callTime || '';
+    });
+  });
+
+  window.openCallBookingModal = function () {
+    overlay.classList.add('show');
+
+    document.body.style.overflow = 'hidden';
+
+    renderCalendar();
+  };
+
+  window.closeCallBookingModal = function () {
+    overlay.classList.remove('show');
+
+    document.body.style.overflow = '';
+  };
+
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) {
+      window.closeCallBookingModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'Escape' &&
+      overlay.classList.contains('show')
+    ) {
+      window.closeCallBookingModal();
+    }
+  });
+
+  renderCalendar();
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -3583,3 +3793,4 @@ initHeroEasterEgg();
 initHomePushHandoff();
 initHomePhysicalCalculator();
 initHomeProcessMetaphors();
+initCallBooking();

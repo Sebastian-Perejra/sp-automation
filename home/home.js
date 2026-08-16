@@ -2820,7 +2820,7 @@ function initHomePushHandoff() {
   const configs = [
     {
       selector: '.home-hero',
-      hold: 260,
+      hold: 390,
       type: 'hero'
     },
     {

@@ -11,8 +11,59 @@ body {
   min-height: 100vh;
   font-family: "Manrope", sans-serif;
   background: #f7f4ef;
+  position: relative;
+  isolation: isolate;
   color: #1a1a1a;
   overflow-x: hidden;
+}
+
+.services-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.03);
+  transition:
+    opacity 2.4s ease,
+    transform 10s ease;
+  pointer-events: none;
+}
+
+.services-bg.is-active {
+  opacity: 1;
+  transform: scale(1.07);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(247, 244, 239, 0.78) 0%,
+      rgba(247, 244, 239, 0.84) 45%,
+      rgba(247, 244, 239, 0.9) 100%
+    );
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255, 255, 255, 0.28),
+      transparent 42%
+    );
+  pointer-events: none;
 }
 
 .page {

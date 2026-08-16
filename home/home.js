@@ -2808,6 +2808,111 @@ function initHeroEasterEgg() {
   );
 }
 
+function initHomePinnedSections() {
+  if (
+    window.matchMedia(
+      '(max-width: 768px)'
+    ).matches
+  ) {
+    return;
+  }
+
+  const sections = [
+    {
+      selector: '.home-hero',
+      hold: 220
+    },
+    {
+      selector: '.home-automation-section',
+      hold: 190
+    },
+    {
+      selector: '.home-cases-section',
+      hold: 190
+    }
+  ];
+
+  sections.forEach(
+    (config, index) => {
+      const section =
+        document.querySelector(
+          config.selector
+        );
+
+      if (!section) {
+        return;
+      }
+
+      if (
+        section.parentElement
+          ?.classList.contains(
+            'home-pinned-scene'
+          )
+      ) {
+        return;
+      }
+
+      const scene =
+        document.createElement(
+          'div'
+        );
+
+      scene.className =
+        'home-pinned-scene';
+
+      scene.dataset.hold =
+        String(config.hold);
+
+      scene.style.setProperty(
+        '--home-pin-index',
+        String(index)
+      );
+
+      section.parentNode.insertBefore(
+        scene,
+        section
+      );
+
+      scene.appendChild(
+        section
+      );
+    }
+  );
+
+  function updatePinnedSceneSizes() {
+    document
+      .querySelectorAll(
+        '.home-pinned-scene'
+      )
+      .forEach(scene => {
+        const section =
+          scene.firstElementChild;
+
+        if (!section) {
+          return;
+        }
+
+        const hold =
+          Number(
+            scene.dataset.hold
+          ) || 0;
+
+        const sectionHeight =
+          section.offsetHeight;
+
+        scene.style.height =
+          `${sectionHeight + hold}px`;
+      });
+  }
+
+  updatePinnedSceneSizes();
+
+  window.addEventListener(
+    'resize',
+    updatePinnedSceneSizes
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2818,3 +2923,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
+initHomePinnedSections();

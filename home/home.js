@@ -2719,10 +2719,16 @@ function initHeroEasterEgg() {
       terminal.className =
         'hero-easter-terminal';
 
+      const easterWorkingText = {
+        uk: 'Все ще працюю.',
+        ru: 'Всё ещё работаю.',
+        en: 'Still working.'
+      };
+      
       terminal.innerHTML = `
         <strong>No pain. Still gain.</strong>
         <span>
-          Still working.<i class="hero-easter-cursor"></i>
+          ${easterWorkingText[HOME_LANG] || easterWorkingText.en}<i class="hero-easter-cursor"></i>
         </span>
       `;
 

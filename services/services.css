@@ -504,3 +504,22 @@ body::after {
     display: none;
   }
 }
+
+.services-signal-set.is-active {
+  opacity: 1;
+}
+
+.signal-pulse {
+  stroke-width: 3;
+  stroke-dasharray: none !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+.signal-green {
+  stroke: rgba(0, 255, 140, 0.95);
+}
+
+.signal-gold {
+  stroke: rgba(255, 190, 70, 0.95);
+}

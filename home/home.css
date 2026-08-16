@@ -4065,3 +4065,15 @@ body.home-ready .hero-sheen {
     font-size: 17px;
   }
 }
+
+@media (min-width: 769px) {
+  .home-hero-pin-shell {
+    position: relative;
+    width: 100%;
+    margin-top: 72px;
+  }
+
+  .home-hero-pin-shell > .home-hero {
+    margin-top: 0;
+  }
+}

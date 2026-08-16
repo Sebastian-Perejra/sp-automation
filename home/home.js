@@ -2681,6 +2681,127 @@ function initAutomationCardSpotlight() {
   });
 }
 
+function initHeroEasterEgg() {
+  const avatar =
+    document.querySelector(
+      '.hero-avatar-orbit'
+    );
+
+  if (!avatar) {
+    return;
+  }
+
+  let clickCount = 0;
+  let resetTimer = null;
+  let terminalTimer = null;
+
+  function resetClicks() {
+    clickCount = 0;
+
+    avatar.classList.remove(
+      'easter-click-1',
+      'easter-click-2'
+    );
+  }
+
+  function showTerminal() {
+    let terminal =
+      document.querySelector(
+        '.hero-easter-terminal'
+      );
+
+    if (!terminal) {
+      terminal =
+        document.createElement(
+          'div'
+        );
+
+      terminal.className =
+        'hero-easter-terminal';
+
+      terminal.innerHTML = `
+        <strong>No pain. Still gain.</strong>
+        <span>
+          Still working.<i class="hero-easter-cursor"></i>
+        </span>
+      `;
+
+      document.body.appendChild(
+        terminal
+      );
+    }
+
+    window.clearTimeout(
+      terminalTimer
+    );
+
+    window.requestAnimationFrame(
+      () => {
+        terminal.classList.add(
+          'show'
+        );
+      }
+    );
+
+    terminalTimer =
+      window.setTimeout(
+        () => {
+          terminal.classList.remove(
+            'show'
+          );
+        },
+        3200
+      );
+  }
+
+  avatar.addEventListener(
+    'click',
+    () => {
+      clickCount += 1;
+
+      window.clearTimeout(
+        resetTimer
+      );
+
+      avatar.classList.remove(
+        'easter-click-1',
+        'easter-click-2',
+        'easter-unlocked'
+      );
+
+      void avatar.offsetWidth;
+
+      if (clickCount === 1) {
+        avatar.classList.add(
+          'easter-click-1'
+        );
+      }
+
+      if (clickCount === 2) {
+        avatar.classList.add(
+          'easter-click-2'
+        );
+      }
+
+      if (clickCount >= 3) {
+        avatar.classList.add(
+          'easter-unlocked'
+        );
+
+        showTerminal();
+
+        clickCount = 0;
+      }
+
+      resetTimer =
+        window.setTimeout(
+          resetClicks,
+          1800
+        );
+    }
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2690,3 +2811,4 @@ initCarousel();
 initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
+initHeroEasterEgg();

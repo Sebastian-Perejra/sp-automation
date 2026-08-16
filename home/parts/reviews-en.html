@@ -3,7 +3,14 @@
   type="button"
   onclick="openReviewsPanel()"
 >
-  ⭐ Reviews
+  <span class="float-action-icon">★</span>
+
+  <span class="float-action-copy">
+    <strong>Client reviews</strong>
+    <small>Real project experience</small>
+  </span>
+
+  <span class="float-action-arrow">→</span>
 </button>
 
 <div
@@ -13,6 +20,7 @@
   <button
     class="reviews-panel-close"
     type="button"
+    aria-label="Close"
     onclick="closeReviewsPanel()"
   >
     ×
@@ -20,10 +28,28 @@
 
   <div class="reviews-panel-header">
     <div class="reviews-panel-badge">
-      ⭐ REVIEWS
+      CLIENT FEEDBACK
     </div>
 
-    <h3>What clients say</h3>
+    <h3>
+      What clients say
+    </h3>
+
+    <p class="reviews-panel-intro">
+      Feedback from completed projects.
+      New reviews are published after moderation.
+    </p>
+  </div>
+
+  <div class="reviews-panel-trust">
+    <div class="reviews-panel-trust-mark">
+      <span>★</span>
+    </div>
+
+    <div>
+      <strong>Real project experience</strong>
+      <span>Automation · Analytics · Business processes</span>
+    </div>
   </div>
 
   <div
@@ -35,13 +61,21 @@
     </div>
   </div>
 
-  <button
-    class="reviews-panel-leave-btn"
-    type="button"
-    onclick="openReviewForm()"
-  >
-    Leave a review
-  </button>
+  <div class="reviews-panel-footer">
+    <div class="reviews-panel-footer-copy">
+      <strong>Worked with me?</strong>
+      <span>Share your experience.</span>
+    </div>
+
+    <button
+      class="reviews-panel-leave-btn"
+      type="button"
+      onclick="openReviewForm()"
+    >
+      Leave a review
+      <span>→</span>
+    </button>
+  </div>
 </div>
 
 <div
@@ -52,88 +86,116 @@
     <button
       class="review-form-close"
       type="button"
+      aria-label="Close"
       onclick="closeReviewForm()"
     >
       ×
     </button>
 
-    <h3>Leave a review</h3>
-
-    <label for="review-name">
-      Your name
-    </label>
-
-    <input
-      id="review-name"
-      type="text"
-      placeholder="For example, Alexander"
-    >
-
-    <label>
-      Your rating
-    </label>
-
-    <div
-      id="review-rating"
-      class="review-rating"
-    >
-      <button
-        type="button"
-        onclick="selectReviewRating(1)"
-      >
-        ★
-      </button>
-
-      <button
-        type="button"
-        onclick="selectReviewRating(2)"
-      >
-        ★
-      </button>
-
-      <button
-        type="button"
-        onclick="selectReviewRating(3)"
-      >
-        ★
-      </button>
-
-      <button
-        type="button"
-        onclick="selectReviewRating(4)"
-      >
-        ★
-      </button>
-
-      <button
-        type="button"
-        onclick="selectReviewRating(5)"
-      >
-        ★
-      </button>
+    <div class="form-modal-kicker">
+      CLIENT FEEDBACK
     </div>
 
-    <input
-      id="review-rating-value"
-      type="hidden"
-      value="0"
-    >
+    <h3>
+      Worked with me?
+    </h3>
 
-    <label for="review-text-input">
-      Your review
-    </label>
+    <p class="form-modal-intro">
+      Share a few words about your experience.
+      Your review will be published after moderation.
+    </p>
 
-    <textarea
-      id="review-text-input"
-      rows="5"
-      placeholder="Write a few words about the work"
-    ></textarea>
+    <div class="form-field">
+      <label for="review-name">
+        Your name
+      </label>
 
-    <div class="turnstile-wrapper">
+      <input
+        id="review-name"
+        type="text"
+        placeholder="For example, Alexander"
+      >
+    </div>
+
+    <div class="form-field">
+      <label>
+        Your rating
+      </label>
+
       <div
-        class="cf-turnstile"
-        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
-      ></div>
+        id="review-rating"
+        class="review-rating"
+        aria-label="Rating from 1 to 5"
+      >
+        <button
+          type="button"
+          aria-label="1 star"
+          onclick="selectReviewRating(1)"
+        >
+          ★
+        </button>
+
+        <button
+          type="button"
+          aria-label="2 stars"
+          onclick="selectReviewRating(2)"
+        >
+          ★
+        </button>
+
+        <button
+          type="button"
+          aria-label="3 stars"
+          onclick="selectReviewRating(3)"
+        >
+          ★
+        </button>
+
+        <button
+          type="button"
+          aria-label="4 stars"
+          onclick="selectReviewRating(4)"
+        >
+          ★
+        </button>
+
+        <button
+          type="button"
+          aria-label="5 stars"
+          onclick="selectReviewRating(5)"
+        >
+          ★
+        </button>
+      </div>
+
+      <input
+        id="review-rating-value"
+        type="hidden"
+        value="0"
+      >
+    </div>
+
+    <div class="form-field">
+      <label for="review-text-input">
+        Your review
+      </label>
+
+      <textarea
+        id="review-text-input"
+        rows="5"
+        placeholder="What was done, and what changed after that?"
+      ></textarea>
+    </div>
+
+    <div class="form-security">
+      <span>Secure submission</span>
+
+      <div class="turnstile-wrapper">
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+        ></div>
+      </div>
     </div>
 
     <button
@@ -142,6 +204,7 @@
       onclick="submitWebsiteReview()"
     >
       Submit review
+      <span>→</span>
     </button>
 
     <div id="review-form-status"></div>

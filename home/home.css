@@ -6770,3 +6770,13 @@ button[data-calc="clear"] {
     grid-column: auto;
   }
 }
+
+.call-booking-modal .turnstile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.call-booking-modal .form-security > span {
+  text-align: center;
+}

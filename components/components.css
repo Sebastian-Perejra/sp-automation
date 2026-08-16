@@ -374,3 +374,136 @@ footer {
     transition: none;
   }
 }
+
+.cosmic-frame {
+  position: fixed;
+  top: 102px;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.cosmic-frame::before,
+.cosmic-frame::after {
+  content: "";
+  position: absolute;
+  top: 48px;
+  bottom: 48px;
+  width: 1px;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(74, 108, 79, 0.32) 12%,
+      rgba(74, 108, 79, 0.18) 50%,
+      rgba(74, 108, 79, 0.32) 88%,
+      transparent 100%
+    );
+}
+
+.cosmic-frame::before {
+  left: 0;
+}
+
+.cosmic-frame::after {
+  right: 0;
+}
+
+.cosmic-frame__top-left,
+.cosmic-frame__top-right,
+.cosmic-frame__bottom-left,
+.cosmic-frame__bottom-right {
+  position: absolute;
+  width: 27%;
+  height: 54px;
+}
+
+.cosmic-frame__top-left {
+  top: 0;
+  left: 0;
+  border-top: 1px solid rgba(74, 108, 79, 0.34);
+  border-left: 1px solid rgba(74, 108, 79, 0.38);
+  border-radius: 18px 0 0 0;
+}
+
+.cosmic-frame__top-right {
+  top: 0;
+  right: 0;
+  border-top: 1px solid rgba(74, 108, 79, 0.34);
+  border-right: 1px solid rgba(74, 108, 79, 0.38);
+  border-radius: 0 18px 0 0;
+}
+
+.cosmic-frame__bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid rgba(74, 108, 79, 0.34);
+  border-left: 1px solid rgba(74, 108, 79, 0.38);
+  border-radius: 0 0 0 18px;
+}
+
+.cosmic-frame__bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid rgba(74, 108, 79, 0.34);
+  border-right: 1px solid rgba(74, 108, 79, 0.38);
+  border-radius: 0 0 18px 0;
+}
+
+.cosmic-frame__top-left::after,
+.cosmic-frame__bottom-left::after {
+  content: "";
+  position: absolute;
+  left: 58px;
+  width: 54px;
+  height: 1px;
+  background: rgba(166, 255, 72, 0.34);
+}
+
+.cosmic-frame__top-left::after {
+  top: -1px;
+}
+
+.cosmic-frame__bottom-left::after {
+  bottom: -1px;
+}
+
+.cosmic-frame__top-right::after,
+.cosmic-frame__bottom-right::after {
+  content: "";
+  position: absolute;
+  right: 58px;
+  width: 54px;
+  height: 1px;
+  background: rgba(166, 255, 72, 0.34);
+}
+
+.cosmic-frame__top-right::after {
+  top: -1px;
+}
+
+.cosmic-frame__bottom-right::after {
+  bottom: -1px;
+}
+
+@media (max-width: 760px) {
+  .cosmic-frame {
+    inset: 78px 8px 8px;
+  }
+
+  .cosmic-frame__top-left,
+  .cosmic-frame__top-right,
+  .cosmic-frame__bottom-left,
+  .cosmic-frame__bottom-right {
+    width: 42%;
+    height: 36px;
+  }
+
+  .cosmic-frame::before,
+  .cosmic-frame::after {
+    top: 32px;
+    bottom: 32px;
+  }
+}

@@ -168,3 +168,17 @@ const animateBackground = () => {
 
   document.body.appendChild(signals);
 })();
+
+const lightSignals = document.createElement("div");
+lightSignals.className = "light-signals";
+
+lightSignals.innerHTML = `
+  <span class="light-signal signal-1"></span>
+  <span class="light-signal signal-2"></span>
+  <span class="light-signal signal-3"></span>
+  <span class="light-signal signal-4"></span>
+  <span class="light-signal signal-5"></span>
+  <span class="light-signal signal-6"></span>
+`;
+
+document.body.appendChild(lightSignals);

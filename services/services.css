@@ -84,29 +84,67 @@ body::after {
 
 .hero {
   position: relative;
-  margin-bottom: 26px;
-  padding: 34px;
+  margin-bottom: 28px;
+  padding: 46px 38px 42px;
   overflow: hidden;
+  border: 1px solid rgba(208, 224, 216, 0.72);
+  border-radius: 20px;
   background:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.96) 0%,
-      rgba(247, 251, 255, 0.94) 100%
+      rgba(255, 255, 255, 0.84) 0%,
+      rgba(247, 252, 249, 0.76) 56%,
+      rgba(241, 248, 245, 0.72) 100%
     );
-  border: 1px solid #d5e4ee;
-  border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
+  box-shadow:
+    0 18px 46px rgba(32, 72, 55, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   text-align: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(85, 195, 132, 0.15),
+      transparent 42%
+    );
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 56%;
+  height: 1px;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(71, 156, 112, 0.42),
+      rgba(210, 176, 97, 0.35),
+      transparent
+    );
+  pointer-events: none;
 }
 
 .hero h1 {
   position: relative;
   z-index: 1;
-  margin: 0 0 14px;
-  color: #0f9d58;
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  margin: 0 0 16px;
+  color: #1c7d50;
+  font-size: clamp(2.35rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-weight: 700;
 }
 
 .hero p {
@@ -114,9 +152,9 @@ body::after {
   z-index: 1;
   max-width: 760px;
   margin: 0 auto;
-  color: #596771;
+  color: #56645d;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .services-grid {
@@ -328,8 +366,8 @@ body::after {
       max(36px, env(safe-area-inset-bottom));
   }
 
-  .hero {
-    padding: 24px 18px;
+   .hero {
+    padding: 30px 20px 28px;
   }
 
   .hero h1 {

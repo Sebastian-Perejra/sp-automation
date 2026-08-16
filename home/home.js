@@ -2876,26 +2876,19 @@ function initHomeHeroPin() {
 
     start: 'top 82px',
 
-    endTrigger: carousel,
-
-    end: () =>
-      `top ${
-        82 +
-        hero.offsetHeight +
-        12
-      }px`,
-
-    pin: shell,
-
-    pinSpacing: false,
-
-    anticipatePin: 1,
-
-    invalidateOnRefresh: true
-  });
-
-  ScrollTrigger.refresh();
-}
+  end: '+=400',
+  
+  pin: shell,
+  
+  pinSpacing: true,
+  
+      anticipatePin: 1,
+  
+      invalidateOnRefresh: true
+    });
+  
+    ScrollTrigger.refresh();
+  }
 
 initHomeBackground();
 initHeroSpotlight();

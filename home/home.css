@@ -4067,41 +4067,37 @@ body.home-ready .hero-sheen {
 }
 
 @media (min-width: 769px) {
-  .home-handoff-scene {
-    position: relative;
+  .home-push-shell {
+    position: sticky;
+    top: 82px;
+
     width: 100%;
+
+    z-index:
+      var(--home-push-z, 20);
+
+    translate:
+      0
+      var(--home-push-y, 0px);
+
+    will-change: translate;
   }
 
-  .home-handoff-stage {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 82px);
-    overflow: hidden;
+  .home-push-shell > .home-hero {
+    margin-top: 72px;
   }
 
-  .home-handoff-layer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    will-change: transform;
+  .home-push-shell > .carousel-container {
+    margin-top: 34px;
   }
 
-  .home-handoff-layer > .home-hero {
-    margin-top: 56px;
+  .home-push-shell >
+  .home-automation-section {
+    margin-top: 40px;
   }
 
-  .home-handoff-layer > .carousel-container {
+  .home-push-shell >
+  .home-cases-section {
     margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .home-handoff-layer > .home-automation-section {
-    margin-top: 22px;
-    margin-bottom: 0;
-  }
-
-  .home-handoff-layer > .home-cases-section {
-    margin-top: 22px;
-    margin-bottom: 0;
   }
 }

@@ -4065,3 +4065,43 @@ body.home-ready .hero-sheen {
     font-size: 17px;
   }
 }
+
+@media (min-width: 769px) {
+  .home-handoff-scene {
+    position: relative;
+    width: 100%;
+  }
+
+  .home-handoff-stage {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 82px);
+    overflow: hidden;
+  }
+
+  .home-handoff-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    will-change: transform;
+  }
+
+  .home-handoff-layer > .home-hero {
+    margin-top: 56px;
+  }
+
+  .home-handoff-layer > .carousel-container {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .home-handoff-layer > .home-automation-section {
+    margin-top: 22px;
+    margin-bottom: 0;
+  }
+
+  .home-handoff-layer > .home-cases-section {
+    margin-top: 22px;
+    margin-bottom: 0;
+  }
+}

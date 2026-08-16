@@ -371,12 +371,47 @@
     }
   }
 
+  function ensureCosmicFrame() {
+  if (
+    document.querySelector(
+      '.cosmic-frame'
+    )
+  ) {
+    return;
+  }
+
+  const frame =
+    document.createElement(
+      'div'
+    );
+
+  frame.className =
+    'cosmic-frame';
+
+  frame.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  frame.innerHTML = `
+    <span class="cosmic-frame__top-left"></span>
+    <span class="cosmic-frame__top-right"></span>
+    <span class="cosmic-frame__bottom-left"></span>
+    <span class="cosmic-frame__bottom-right"></span>
+  `;
+
+  document.body.prepend(
+    frame
+  );
+}
+  
   async function init() {
     const lang =
       getLanguage();
 
     const currentPage =
       getCurrentPage();
+    ensureCosmicFrame();
 
     await Promise.all([
       loadComponent(

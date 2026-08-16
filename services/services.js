@@ -28,18 +28,24 @@
   let activeLayer = layerA;
   let hiddenLayer = layerB;
 
-  setInterval(() => {
-    index = (index + 1) % images.length;
+ const changeBackground = () => {
+  index = (index + 1) % images.length;
 
-    hiddenLayer.style.backgroundImage = `url("${images[index]}")`;
+  hiddenLayer.style.backgroundImage = `url("${images[index]}")`;
 
+  requestAnimationFrame(() => {
     hiddenLayer.classList.add("is-active");
     activeLayer.classList.remove("is-active");
 
     const temp = activeLayer;
     activeLayer = hiddenLayer;
     hiddenLayer = temp;
-  }, 9000);
+  });
+
+  setTimeout(changeBackground, 14000);
+};
+
+setTimeout(changeBackground, 14000);
 
   let targetX = 0;
   let targetY = 0;

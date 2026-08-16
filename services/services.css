@@ -25,16 +25,17 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
-  transform: scale(1.03);
+  transform: scale(1.02);
   transition:
-    opacity 2.4s ease,
-    transform 10s ease;
+  opacity 5.8s ease-in-out,
+  transform 16s ease-in-out,
+  translate 0.9s ease;
   pointer-events: none;
 }
 
 .services-bg.is-active {
   opacity: 1;
-  transform: scale(1.07);
+  transform: scale(1.06);
 }
 
 .services-bg {

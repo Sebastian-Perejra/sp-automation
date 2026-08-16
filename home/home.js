@@ -2944,19 +2944,7 @@ function initHomePhysicalCalculator() {
   const screen =
     cta.querySelector(
       '.home-final-calc-screen'
-    
-
-  const screenValue =
-  document.createElement(
-    'span'
-  );
-
-screenValue.className =
-  'home-final-calc-value';
-
-screen.appendChild(
-  screenValue
-);
+    );
 
   const buttons =
     Array.from(
@@ -2987,6 +2975,18 @@ screen.appendChild(
   ) {
     return;
   }
+
+  const screenValue =
+    document.createElement(
+      'span'
+    );
+
+  screenValue.className =
+    'home-final-calc-value';
+
+  screen.appendChild(
+    screenValue
+  );
 
   const reducedMotion =
     window.matchMedia(
@@ -3068,76 +3068,78 @@ screen.appendChild(
     return;
   }
 
-let calcPreviewTimer = null;
+  let calcPreviewTimer = null;
 
-const previewValues = [
-  '128',
-  '642',
-  '91%',
-  'START?'
-];
-
-estimateButton.addEventListener(
-  'pointerenter',
-  () => {
-    calc.classList.add(
-      'is-calculator-ready'
-    );
-
-    let index = 0;
-
-    clearInterval(
-      calcPreviewTimer
-    );
-
-    screenValue.textContent =
-      previewValues[0];
-
-    calcPreviewTimer =
-      window.setInterval(
-        () => {
-          index += 1;
-
-          if (
-            index >=
-            previewValues.length
-          ) {
-            clearInterval(
-              calcPreviewTimer
-            );
-
-            return;
-          }
-
-          screenValue.textContent =
-            previewValues[index];
-        },
-        240
-      );
-  }
-);
+  const previewValues = [
+    '0',
+    '38',
+    '72',
+    '100%',
+    'READY'
+  ];
 
   estimateButton.addEventListener(
-  'pointerleave',
-  () => {
-    calc.classList.remove(
-      'is-calculator-ready'
-    );
+    'pointerenter',
+    () => {
+      calc.classList.add(
+        'is-calculator-ready'
+      );
 
-    clearInterval(
-      calcPreviewTimer
-    );
+      let index = 0;
 
-    screenValue.textContent = '';
-  }
-);
+      clearInterval(
+        calcPreviewTimer
+      );
+
+      screenValue.textContent =
+        previewValues[0];
+
+      calcPreviewTimer =
+        window.setInterval(
+          () => {
+            index += 1;
+
+            if (
+              index >=
+              previewValues.length
+            ) {
+              clearInterval(
+                calcPreviewTimer
+              );
+
+              return;
+            }
+
+            screenValue.textContent =
+              previewValues[index];
+          },
+          180
+        );
+    }
+  );
+
+  estimateButton.addEventListener(
+    'pointerleave',
+    () => {
+      calc.classList.remove(
+        'is-calculator-ready'
+      );
+
+      clearInterval(
+        calcPreviewTimer
+      );
+
+      screenValue.textContent = '';
+    }
+  );
 
   estimateButton.addEventListener(
     'click',
     event => {
       if (
         estimateButton.dataset
-          .calculatorBoot === 'true'
+          .calculatorBoot ===
+        'true'
       ) {
         return;
       }
@@ -3149,11 +3151,16 @@ estimateButton.addEventListener(
         .calculatorBoot =
         'true';
 
+      clearInterval(
+        calcPreviewTimer
+      );
+
       calc.classList.add(
         'is-calculator-booting'
       );
+
       screenValue.textContent =
-     'CALC...';
+        'CALC...';
 
       window.setTimeout(
         () => {

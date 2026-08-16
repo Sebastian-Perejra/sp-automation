@@ -2820,7 +2820,7 @@ function initHomePinnedSections() {
   const sections = [
     {
       selector: '.home-hero',
-      hold: 220
+      hold: 420
     },
     {
       selector: '.home-automation-section',

@@ -2825,118 +2825,132 @@ function initHomeContactPush() {
   if (items.length < 2) return;
 
   const HEADER_TOP = 82;
-  const CONTACT_GAP = 16;
+  const CONTACT_GAP = 12;
 
-  const data = items.map((item, index) => {
-    const placeholder = document.createElement('div');
+  const data = items.map(item => {
+    const marker = document.createElement('div');
 
-    placeholder.className = 'home-contact-placeholder';
+    marker.className = 'home-contact-marker';
+    marker.style.height = '0px';
 
-    item.parentNode.insertBefore(placeholder, item);
+    item.parentNode.insertBefore(marker, item);
 
     return {
       item,
-      placeholder,
-      index,
-      originalParent: item.parentNode
+      marker,
+      fixed: false,
+      rect: null
     };
   });
 
-  function syncPlaceholders() {
-    data.forEach(entry => {
-      const rect = entry.item.getBoundingClientRect();
+  function release(entry) {
+    if (!entry.fixed) return;
 
-      if (!entry.item.classList.contains('home-contact-fixed')) {
-        entry.placeholder.style.height = `${entry.item.offsetHeight}px`;
-      }
+    const { item, marker } = entry;
 
-      entry.placeholder.style.width = `${entry.item.offsetWidth}px`;
-    });
-  }
-
-  function resetItem(entry) {
-    const { item, placeholder } = entry;
-
-    if (!item.classList.contains('home-contact-fixed')) return;
-
-    placeholder.parentNode.insertBefore(item, placeholder.nextSibling);
+    marker.parentNode.insertBefore(
+      item,
+      marker.nextSibling
+    );
 
     item.classList.remove(
       'home-contact-fixed',
       'home-contact-pushing'
     );
 
-    item.style.removeProperty('--home-contact-width');
     item.style.removeProperty('--home-contact-left');
+    item.style.removeProperty('--home-contact-width');
     item.style.removeProperty('--home-contact-y');
+
+    marker.style.height = '0px';
+
+    entry.fixed = false;
   }
 
-  function fixItem(entry) {
-    const { item, placeholder } = entry;
+  function pin(entry) {
+    if (entry.fixed) return;
 
-    if (item.classList.contains('home-contact-fixed')) return;
+    const { item, marker } = entry;
 
-    const rect = placeholder.getBoundingClientRect();
+    const rect = item.getBoundingClientRect();
 
-    placeholder.style.height = `${item.offsetHeight}px`;
+    entry.rect = rect;
 
-    item.style.setProperty(
-      '--home-contact-width',
-      `${rect.width}px`
-    );
+    marker.style.height =
+      `${item.offsetHeight}px`;
 
     item.style.setProperty(
       '--home-contact-left',
       `${rect.left}px`
     );
 
+    item.style.setProperty(
+      '--home-contact-width',
+      `${rect.width}px`
+    );
+
     document.body.appendChild(item);
 
-    item.classList.add('home-contact-fixed');
+    item.classList.add(
+      'home-contact-fixed'
+    );
+
+    entry.fixed = true;
+  }
+
+  function getNaturalTop(entry) {
+    if (entry.fixed) {
+      return entry.marker.getBoundingClientRect().top;
+    }
+
+    return entry.item.getBoundingClientRect().top;
   }
 
   function update() {
-    syncPlaceholders();
-
     let activeIndex = -1;
 
     data.forEach((entry, index) => {
-      const rect = entry.placeholder.getBoundingClientRect();
+      const naturalTop =
+        getNaturalTop(entry);
 
-      if (rect.top <= HEADER_TOP) {
+      if (naturalTop <= HEADER_TOP) {
         activeIndex = index;
       }
     });
 
     data.forEach((entry, index) => {
       if (index !== activeIndex) {
-        resetItem(entry);
+        release(entry);
       }
     });
 
     if (activeIndex < 0) return;
 
-    const current = data[activeIndex];
-    const next = data[activeIndex + 1];
+    const current =
+      data[activeIndex];
 
-    fixItem(current);
+    pin(current);
 
-    const currentHeight = current.item.offsetHeight;
+    const next =
+      data[activeIndex + 1];
 
     let pushY = 0;
 
     if (next) {
-      const nextRect =
-        next.placeholder.getBoundingClientRect();
+      const nextTop =
+        getNaturalTop(next);
+
+      const currentHeight =
+        current.item.offsetHeight;
 
       const contactPoint =
         HEADER_TOP +
         currentHeight +
         CONTACT_GAP;
 
-      if (nextRect.top < contactPoint) {
+      if (nextTop <= contactPoint) {
         pushY =
-          nextRect.top -
+          nextTop -
           contactPoint;
 
         current.item.classList.add(
@@ -2955,7 +2969,6 @@ function initHomeContactPush() {
     );
   }
 
-  syncPlaceholders();
   update();
 
   window.addEventListener(
@@ -2967,8 +2980,7 @@ function initHomeContactPush() {
   window.addEventListener(
     'resize',
     () => {
-      data.forEach(resetItem);
-      syncPlaceholders();
+      data.forEach(release);
       update();
     }
   );

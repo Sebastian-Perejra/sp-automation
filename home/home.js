@@ -2826,6 +2826,7 @@ function initHomeContactPush() {
 
   const HEADER_TOP = 82;
   const CONTACT_GAP = 12;
+  const PIN_DISTANCE = 220;
 
   const data = items.map(item => {
     const marker = document.createElement('div');
@@ -2877,7 +2878,7 @@ function initHomeContactPush() {
     entry.rect = rect;
 
     marker.style.height =
-      `${item.offsetHeight}px`;
+  `${item.offsetHeight + PIN_DISTANCE}px`;
 
     item.style.setProperty(
       '--home-contact-left',

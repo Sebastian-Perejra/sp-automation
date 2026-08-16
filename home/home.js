@@ -4009,6 +4009,66 @@ async function submitCallBooking() {
   }
 }
 
+function initCallBookingPreviewDate() {
+  const preview =
+    document.querySelector('.home-call-booking-preview');
+
+  if (!preview) {
+    return;
+  }
+
+  const dayEl =
+    preview.querySelector('.home-call-preview-day');
+
+  const dateEl =
+    preview.querySelector('.home-call-preview-date strong');
+
+  const monthEl =
+    preview.querySelector(
+      '.home-call-preview-date span:last-child'
+    );
+
+  if (
+    !dayEl ||
+    !dateEl ||
+    !monthEl
+  ) {
+    return;
+  }
+
+  const date = new Date();
+
+  date.setDate(date.getDate() + 1);
+
+  const dayName =
+    new Intl.DateTimeFormat(
+      'en-US',
+      {
+        weekday: 'short'
+      }
+    )
+      .format(date)
+      .toUpperCase();
+
+  const monthName =
+    new Intl.DateTimeFormat(
+      'en-US',
+      {
+        month: 'short'
+      }
+    )
+      .format(date)
+      .toUpperCase();
+
+  dayEl.textContent = dayName;
+
+  dateEl.textContent =
+    String(date.getDate());
+
+  monthEl.textContent =
+    monthName;
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -4023,3 +4083,4 @@ initHomePushHandoff();
 initHomePhysicalCalculator();
 initHomeProcessMetaphors();
 initCallBooking();
+initCallBookingPreviewDate();

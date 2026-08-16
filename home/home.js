@@ -2820,7 +2820,7 @@ function initHomePinnedSections() {
   const sections = [
   {
     selector: '.home-hero',
-    hold: 260
+    hold: 520
   },
   {
     selector: '.carousel-container',

@@ -4065,26 +4065,3 @@ body.home-ready .hero-sheen {
     font-size: 17px;
   }
 }
-
-@media (min-width: 769px) {
-  .home-contact-marker {
-    display: block;
-    width: 100%;
-    pointer-events: none;
-  }
-
-  .home-contact-fixed {
-    position: fixed !important;
-    top: 82px !important;
-    left: var(--home-contact-left) !important;
-    width: var(--home-contact-width) !important;
-    margin: 0 !important;
-    z-index: 40 !important;
-    translate: 0 var(--home-contact-y, 0px);
-    will-change: translate;
-  }
-
-  .home-contact-pushing {
-    z-index: 39 !important;
-  }
-}

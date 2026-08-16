@@ -5668,3 +5668,258 @@ button[data-calc="clear"] {
     justify-content: center;
   }
 }
+
+#reviews-float-btn,
+#contact-float-btn {
+  min-width: 206px;
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 8px 11px;
+
+  border: 1px solid rgba(43, 92, 74, 0.16) !important;
+  border-radius: 17px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(245, 249, 247, 0.9)
+    ) !important;
+
+  color: #244f40 !important;
+
+  font-family: var(--font-main) !important;
+
+  box-shadow:
+    0 14px 34px rgba(20, 34, 28, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease !important;
+}
+
+#reviews-float-btn::before,
+#contact-float-btn::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      120px circle at 18% 50%,
+      rgba(92, 151, 123, 0.12),
+      transparent 72%
+    );
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.24s ease;
+}
+
+#reviews-float-btn:hover::before,
+#contact-float-btn:hover::before {
+  opacity: 1;
+}
+
+#reviews-float-btn:hover,
+#contact-float-btn:hover {
+  border-color:
+    rgba(43, 92, 74, 0.28) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.99),
+      rgba(237, 245, 240, 0.97)
+    ) !important;
+
+  color: #244f40 !important;
+
+  box-shadow:
+    0 18px 40px rgba(20, 34, 28, 0.19),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+#reviews-float-btn {
+  left: 18px;
+}
+
+#reviews-float-btn:hover {
+  transform:
+    translateY(-50%)
+    translateX(4px);
+}
+
+#contact-float-btn {
+  right: 18px;
+}
+
+#contact-float-btn:hover {
+  transform: translateY(-3px);
+}
+
+#reviews-float-btn .float-action-icon,
+#contact-float-btn .float-action-icon {
+  position: relative;
+  z-index: 1;
+
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(43, 92, 74, 0.13);
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(231, 242, 235, 0.98),
+      rgba(242, 247, 244, 0.92)
+    );
+
+  color: #2b5c4a;
+
+  font-family: var(--font-tech);
+  font-size: 14px;
+  font-weight: 700;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+#reviews-float-btn .float-action-copy,
+#contact-float-btn .float-action-copy {
+  position: relative;
+  z-index: 1;
+
+  min-width: 0;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+
+  text-align: left;
+}
+
+#reviews-float-btn .float-action-copy strong,
+#contact-float-btn .float-action-copy strong {
+  color: #244f40;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.18;
+
+  letter-spacing: -0.01em;
+}
+
+#reviews-float-btn .float-action-copy small,
+#contact-float-btn .float-action-copy small {
+  margin-top: 3px;
+
+  color: rgba(42, 55, 49, 0.5);
+
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+#reviews-float-btn .float-action-arrow,
+#contact-float-btn .float-action-arrow {
+  position: relative;
+  z-index: 1;
+
+  margin-left: auto;
+
+  color: rgba(43, 92, 74, 0.42);
+
+  font-family: var(--font-tech);
+  font-size: 12px;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+#reviews-float-btn:hover .float-action-arrow,
+#contact-float-btn:hover .float-action-arrow {
+  transform: translateX(3px);
+
+  color: #2b5c4a;
+}
+
+@media (max-width: 768px) {
+  #reviews-float-btn,
+  #contact-float-btn {
+    min-width: 0;
+    width: auto;
+    min-height: 48px;
+    height: 48px;
+
+    gap: 7px;
+
+    padding: 6px 9px;
+
+    border-radius: 15px !important;
+  }
+
+  #reviews-float-btn {
+    left: 10px;
+  }
+
+  #contact-float-btn {
+    right: 10px;
+  }
+
+  #reviews-float-btn .float-action-icon,
+  #contact-float-btn .float-action-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-basis: 30px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+  }
+
+  #reviews-float-btn .float-action-copy small,
+  #contact-float-btn .float-action-copy small,
+  #reviews-float-btn .float-action-arrow,
+  #contact-float-btn .float-action-arrow {
+    display: none;
+  }
+
+  #reviews-float-btn .float-action-copy strong,
+  #contact-float-btn .float-action-copy strong {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  #reviews-float-btn:hover,
+  #contact-float-btn:hover {
+    transform: none;
+  }
+}

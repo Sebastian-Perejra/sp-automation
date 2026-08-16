@@ -2808,88 +2808,6 @@ function initHeroEasterEgg() {
   );
 }
 
-function initHomeHeroPin() {
-  console.log(
-  'GSAP:',
-  typeof gsap,
-  'ScrollTrigger:',
-  typeof ScrollTrigger
-);
-  if (
-    typeof gsap === 'undefined' ||
-    typeof ScrollTrigger === 'undefined'
-  ) {
-    return;
-  }
-
-  if (
-    window.matchMedia(
-      '(max-width: 768px)'
-    ).matches
-  ) {
-    return;
-  }
-
-  gsap.registerPlugin(
-    ScrollTrigger
-  );
-
-  const hero =
-    document.querySelector(
-      '.home-hero'
-    );
-
-  const carousel =
-    document.querySelector(
-      '.carousel-container'
-    );
-
-  if (
-    !hero ||
-    !carousel ||
-    hero.parentElement.classList.contains(
-      'home-hero-pin-shell'
-    )
-  ) {
-    return;
-  }
-
-  const shell =
-    document.createElement(
-      'div'
-    );
-
-  shell.className =
-    'home-hero-pin-shell';
-
-  hero.parentNode.insertBefore(
-    shell,
-    hero
-  );
-
-  shell.appendChild(
-    hero
-  );
-
-  ScrollTrigger.create({
-    trigger: shell,
-
-    start: 'top 82px',
-
-  end: '+=400',
-  
-  pin: shell,
-  
-  pinSpacing: true,
-  
-      anticipatePin: 1,
-  
-      invalidateOnRefresh: true
-    });
-  
-    ScrollTrigger.refresh();
-  }
-
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2900,4 +2818,3 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
-initHomeHeroPin();

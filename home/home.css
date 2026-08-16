@@ -4065,23 +4065,15 @@ body.home-ready .hero-sheen {
     font-size: 17px;
   }
 }
-
 @media (min-width: 769px) {
-  .home-hero {
+  .home-sticky-scene-hero {
+    position: relative;
+    min-height: calc(100vh + 220px);
+  }
+
+  .home-sticky-scene-hero .home-hero {
     position: sticky;
     top: 82px;
-    z-index: 10;
-  }
-
-  .home-automation-section {
-    position: sticky;
-    top: 96px;
-    z-index: 20;
-  }
-
-  .home-cases-section {
-    position: sticky;
-    top: 110px;
-    z-index: 30;
+    z-index: 8;
   }
 }

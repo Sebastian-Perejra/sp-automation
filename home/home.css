@@ -4067,24 +4067,11 @@ body.home-ready .hero-sheen {
 }
 
 @media (min-width: 769px) {
-  .home-pinned-scene {
-    position: relative;
-  }
-
-  .home-pinned-scene > .home-hero,
-  .home-pinned-scene > .carousel-container,
-  .home-pinned-scene > .home-automation-section,
-  .home-pinned-scene > .home-cases-section {
+  .home-push-item {
     position: sticky;
-    top: 78px;
-    z-index: 5;
-  }
-
-  .home-pinned-scene > .home-hero {
-    margin-top: 0;
-  }
-
-  .home-pinned-scene:first-of-type {
-    padding-top: 72px;
+    top: 82px;
+    z-index: var(--home-push-z, 20);
+    translate: 0 var(--home-push-y, 0px);
+    will-change: translate;
   }
 }

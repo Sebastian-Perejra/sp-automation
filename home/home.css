@@ -4096,9 +4096,16 @@ body.home-ready .hero-sheen {
   }
 
   .home-push-scene-carousel {
-    padding-top: 34px;
-    margin-top: -280px;
+    padding-top: 0;
+    margin-top: -440px;
     margin-bottom: 110px;
+  }
+
+  .home-push-scene-carousel >
+  .carousel-container {
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: translateY(0);
   }
 
   .home-push-scene-carousel >

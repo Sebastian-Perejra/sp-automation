@@ -3336,6 +3336,235 @@ function initHomePhysicalCalculator() {
 
   updateDisplay();
 }
+
+function initHomeProcessMetaphors() {
+  const section =
+    document.querySelector(
+      '.home-process-metaphors'
+    );
+
+  if (!section) {
+    return;
+  }
+
+  const slides =
+    Array.from(
+      section.querySelectorAll(
+        '.home-process-slide'
+      )
+    );
+
+  const dots =
+    Array.from(
+      section.querySelectorAll(
+        '.home-process-dots button'
+      )
+    );
+
+  const prevButton =
+    section.querySelector(
+      '.home-process-arrow-prev'
+    );
+
+  const nextButton =
+    section.querySelector(
+      '.home-process-arrow-next'
+    );
+
+  const stage =
+    section.querySelector(
+      '.home-process-stage'
+    );
+
+  if (
+    !slides.length ||
+    !prevButton ||
+    !nextButton ||
+    !stage
+  ) {
+    return;
+  }
+
+  let currentIndex = 0;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function showSlide(index) {
+    if (index < 0) {
+      index =
+        slides.length - 1;
+    }
+
+    if (index >= slides.length) {
+      index = 0;
+    }
+
+    currentIndex =
+      index;
+
+    slides.forEach(
+      (
+        slide,
+        slideIndex
+      ) => {
+        slide.classList.toggle(
+          'is-active',
+          slideIndex ===
+            currentIndex
+        );
+      }
+    );
+
+    dots.forEach(
+      (
+        dot,
+        dotIndex
+      ) => {
+        dot.classList.toggle(
+          'is-active',
+          dotIndex ===
+            currentIndex
+        );
+      }
+    );
+  }
+
+  prevButton.addEventListener(
+    'click',
+    () => {
+      showSlide(
+        currentIndex - 1
+      );
+    }
+  );
+
+  nextButton.addEventListener(
+    'click',
+    () => {
+      showSlide(
+        currentIndex + 1
+      );
+    }
+  );
+
+  dots.forEach(
+    (
+      dot,
+      index
+    ) => {
+      dot.addEventListener(
+        'click',
+        () => {
+          showSlide(index);
+        }
+      );
+    }
+  );
+
+  stage.addEventListener(
+    'touchstart',
+    event => {
+      if (
+        !event.touches.length
+      ) {
+        return;
+      }
+
+      touchStartX =
+        event.touches[0]
+          .clientX;
+
+      touchStartY =
+        event.touches[0]
+          .clientY;
+    },
+    {
+      passive: true
+    }
+  );
+
+  stage.addEventListener(
+    'touchend',
+    event => {
+      if (
+        !event.changedTouches
+          .length
+      ) {
+        return;
+      }
+
+      const touchEndX =
+        event.changedTouches[0]
+          .clientX;
+
+      const touchEndY =
+        event.changedTouches[0]
+          .clientY;
+
+      const diffX =
+        touchEndX -
+        touchStartX;
+
+      const diffY =
+        touchEndY -
+        touchStartY;
+
+      if (
+        Math.abs(diffX) <
+        45
+      ) {
+        return;
+      }
+
+      if (
+        Math.abs(diffY) >
+        Math.abs(diffX)
+      ) {
+        return;
+      }
+
+      if (diffX < 0) {
+        showSlide(
+          currentIndex + 1
+        );
+      } else {
+        showSlide(
+          currentIndex - 1
+        );
+      }
+    },
+    {
+      passive: true
+    }
+  );
+
+  section.addEventListener(
+    'keydown',
+    event => {
+      if (
+        event.key ===
+        'ArrowLeft'
+      ) {
+        showSlide(
+          currentIndex - 1
+        );
+      }
+
+      if (
+        event.key ===
+        'ArrowRight'
+      ) {
+        showSlide(
+          currentIndex + 1
+        );
+      }
+    }
+  );
+
+  showSlide(0);
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -3348,3 +3577,4 @@ initAutomationCardSpotlight();
 initHeroEasterEgg();
 initHomePushHandoff();
 initHomePhysicalCalculator();
+initHomeProcessMetaphors();

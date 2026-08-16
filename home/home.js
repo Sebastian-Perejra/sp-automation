@@ -2818,32 +2818,37 @@ function initHomePushHandoff() {
   }
 
   const configs = [
-    {
-      selector: '.home-hero',
-      hold: 540,
-      type: 'hero'
-    },
-    {
-      selector: '.carousel-container',
-      hold: 220,
-      type: 'carousel'
-    },
-    {
-      selector: '.home-automation-section',
-      hold: 220,
-      type: 'automation'
-    },
-    {
-      selector: '.home-cases-section',
-      hold: 220,
-      type: 'cases'
-    },
-    {
-      selector: '.home-final-cta',
-      hold: 0,
-      type: 'final'
-    }
-  ];
+  {
+    selector: '.home-hero',
+    hold: 540,
+    type: 'hero'
+  },
+  {
+    selector: '.carousel-container',
+    hold: 220,
+    type: 'carousel'
+  },
+  {
+    selector: '.home-automation-section',
+    hold: 220,
+    type: 'automation'
+  },
+  {
+    selector: '.home-cases-section',
+    hold: 220,
+    type: 'cases'
+  },
+  {
+    selector: '.home-final-cta',
+    hold: 220,
+    type: 'final'
+  },
+  {
+    selector: '.home-process-metaphors',
+    hold: 260,
+    type: 'process'
+  }
+];
 
   const scenes = [];
 

@@ -4144,3 +4144,165 @@ body.home-ready .hero-sheen {
     margin-top: 0;
   }
 }
+
+@media (min-width: 769px) {
+  .home-final-calc {
+    --calc-x: 0px;
+    --calc-y: 0px;
+
+    transform:
+      translate3d(
+        var(--calc-x),
+        var(--calc-y),
+        0
+      )
+      rotate(7deg);
+
+    transition:
+      filter 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .home-final-calc-screen {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+      background 0.28s ease,
+      box-shadow 0.28s ease,
+      filter 0.28s ease;
+  }
+
+  .home-final-calc-screen::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+      linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(
+          255,
+          255,
+          255,
+          0.68
+        ) 48%,
+        transparent 76%
+      );
+
+    transform:
+      translateX(-150%);
+
+    opacity: 0;
+  }
+
+  .home-final-calc.is-calculator-ready {
+    filter:
+      drop-shadow(
+        0 14px 20px
+        rgba(0, 0, 0, 0.22)
+      );
+  }
+
+  .home-final-calc.is-calculator-ready
+  .home-final-calc-screen {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(
+          205,
+          238,
+          181,
+          0.98
+        ),
+        rgba(
+          242,
+          250,
+          232,
+          1
+        )
+      );
+
+    box-shadow:
+      0 0 18px
+      rgba(
+        193,
+        231,
+        164,
+        0.34
+      ),
+      inset 0 0 0 1px
+      rgba(
+        255,
+        255,
+        255,
+        0.5
+      );
+  }
+
+  .home-final-calc.is-calculator-ready
+  .home-final-calc-screen::after {
+    opacity: 1;
+
+    animation:
+      homeCalcScan
+      1.25s
+      ease
+      infinite;
+  }
+
+  .home-final-calc.is-calculator-booting {
+    animation:
+      homeCalcBoot
+      0.32s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+  }
+
+  .home-final-calc.is-calculator-booting
+  .home-final-calc-screen {
+    filter:
+      brightness(1.28);
+
+    box-shadow:
+      0 0 28px
+      rgba(
+        206,
+        242,
+        177,
+        0.56
+      );
+  }
+}
+
+@keyframes homeCalcScan {
+  from {
+    transform:
+      translateX(-150%);
+  }
+
+  to {
+    transform:
+      translateX(150%);
+  }
+}
+
+@keyframes homeCalcBoot {
+  0% {
+    scale: 1;
+  }
+
+  48% {
+    scale: 1.045;
+  }
+
+  100% {
+    scale: 1;
+  }
+}

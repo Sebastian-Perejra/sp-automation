@@ -141,25 +141,45 @@ function initHomeBackground() {
     return;
   }
 
-  const firstBackground = new Image();
-firstBackground.src = HOME_BACKGROUND_IMAGES[0];
+  const mobile =
+  window.matchMedia(
+    '(max-width: 768px)'
+  ).matches;
 
-const secondBackground = new Image();
-secondBackground.src = HOME_BACKGROUND_IMAGES[1];
+const firstBackground = new Image();
+firstBackground.src =
+  HOME_BACKGROUND_IMAGES[0];
 
-const preloadRest = () => {
-  HOME_BACKGROUND_IMAGES
-    .slice(2)
-    .forEach(src => {
-      const image = new Image();
-      image.src = src;
-    });
-};
+if (!mobile) {
+  const secondBackground =
+    new Image();
 
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(preloadRest);
-} else {
-  setTimeout(preloadRest, 1800);
+  secondBackground.src =
+    HOME_BACKGROUND_IMAGES[1];
+
+  const preloadRest = () => {
+    HOME_BACKGROUND_IMAGES
+      .slice(2)
+      .forEach(src => {
+        const image =
+          new Image();
+
+        image.src = src;
+      });
+  };
+
+  if (
+    'requestIdleCallback' in window
+  ) {
+    requestIdleCallback(
+      preloadRest
+    );
+  } else {
+    setTimeout(
+      preloadRest,
+      1800
+    );
+  }
 }
 
   const reducedMotion =
@@ -167,10 +187,6 @@ if ('requestIdleCallback' in window) {
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
-  const mobile =
-    window.matchMedia(
-      '(max-width: 768px)'
-    ).matches;
 
   let currentIndex = 0;
   let showingLayerB = false;

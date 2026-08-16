@@ -2808,112 +2808,72 @@ function initHeroEasterEgg() {
   );
 }
 
-function initHomePinnedSections() {
-  if (
-    window.matchMedia(
-      '(max-width: 768px)'
-    ).matches
-  ) {
-    return;
-  }
+function initHomePushScroll() {
+  if (window.matchMedia('(max-width: 768px)').matches) return;
 
-  const sections = [
-  {
-    selector: '.home-hero',
-    hold: 520
-  },
-  {
-    selector: '.carousel-container',
-    hold: 240
-  },
-  {
-    selector: '.home-automation-section',
-    hold: 240
-  },
-  {
-    selector: '.home-cases-section',
-    hold: 220
-  }
-];
+  const items = [
+    document.querySelector('.home-hero'),
+    document.querySelector('.carousel-container'),
+    document.querySelector('.home-automation-section'),
+    document.querySelector('.home-cases-section')
+  ].filter(Boolean);
 
-  sections.forEach(
-    (config, index) => {
-      const section =
-        document.querySelector(
-          config.selector
-        );
+  if (items.length < 2) return;
 
-      if (!section) {
+  const HEADER_TOP = 82;
+  const CONTACT_GAP = 14;
+
+  items.forEach((item, index) => {
+    item.classList.add('home-push-item');
+    item.style.setProperty('--home-push-z', String(20 + index));
+  });
+
+  function updateHomePushScroll() {
+    items.forEach((item, index) => {
+      const next = items[index + 1];
+
+      if (!next) {
+        item.style.setProperty('--home-push-y', '0px');
         return;
       }
 
-      if (
-        section.parentElement
-          ?.classList.contains(
-            'home-pinned-scene'
-          )
-      ) {
-        return;
+      const nextRect = next.getBoundingClientRect();
+      const itemHeight = item.offsetHeight;
+
+      const contactPoint =
+        HEADER_TOP +
+        itemHeight +
+        CONTACT_GAP;
+
+      let push = nextRect.top - contactPoint;
+
+      if (push > 0) push = 0;
+
+      const maxPush =
+        -(itemHeight + CONTACT_GAP);
+
+      if (push < maxPush) {
+        push = maxPush;
       }
 
-      const scene =
-        document.createElement(
-          'div'
-        );
-
-      scene.className =
-        'home-pinned-scene';
-
-      scene.dataset.hold =
-        String(config.hold);
-
-      scene.style.setProperty(
-        '--home-pin-index',
-        String(index)
+      item.style.setProperty(
+        '--home-push-y',
+        `${push}px`
       );
+    });
+  }
 
-      section.parentNode.insertBefore(
-        scene,
-        section
-      );
+  updateHomePushScroll();
 
-      scene.appendChild(
-        section
-      );
-    }
+  window.addEventListener(
+    'scroll',
+    updateHomePushScroll,
+    { passive: true }
   );
-
-  function updatePinnedSceneSizes() {
-    document
-      .querySelectorAll(
-        '.home-pinned-scene'
-      )
-      .forEach(scene => {
-        const section =
-          scene.firstElementChild;
-
-        if (!section) {
-          return;
-        }
-
-        const hold =
-          Number(
-            scene.dataset.hold
-          ) || 0;
-
-        const sectionHeight =
-          section.offsetHeight;
-
-        scene.style.height =
-          `${sectionHeight + hold}px`;
-      });
-  }
-
-  updatePinnedSceneSizes();
 
   window.addEventListener(
     'resize',
-    updatePinnedSceneSizes
+    updateHomePushScroll
   );
 }
 
@@ -2927,4 +2887,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
-initHomePinnedSections();
+initHomePushScroll();

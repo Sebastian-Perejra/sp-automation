@@ -2818,19 +2818,23 @@ function initHomePinnedSections() {
   }
 
   const sections = [
-    {
-      selector: '.home-hero',
-      hold: 420
-    },
-    {
-      selector: '.home-automation-section',
-      hold: 190
-    },
-    {
-      selector: '.home-cases-section',
-      hold: 190
-    }
-  ];
+  {
+    selector: '.home-hero',
+    hold: 260
+  },
+  {
+    selector: '.carousel-container',
+    hold: 240
+  },
+  {
+    selector: '.home-automation-section',
+    hold: 240
+  },
+  {
+    selector: '.home-cases-section',
+    hold: 220
+  }
+];
 
   sections.forEach(
     (config, index) => {

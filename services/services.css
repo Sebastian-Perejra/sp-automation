@@ -175,9 +175,9 @@ body::before {
   background:
     linear-gradient(
       180deg,
-      rgba(247, 244, 239, 0.18) 0%,
-      rgba(247, 244, 239, 0.26) 45%,
-      rgba(247, 244, 239, 0.38) 100%
+      rgba(247, 244, 239, 0.30) 0%,
+      rgba(247, 244, 239, 0.38) 45%,
+      rgba(247, 244, 239, 0.48) 100%
     );
   pointer-events: none;
 }

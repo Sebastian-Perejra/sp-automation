@@ -4066,23 +4066,22 @@ body.home-ready .hero-sheen {
   }
 }
 
-.home-hero-scroll-scene {
-  position: relative;
-  min-height: 140vh;
-}
-
-.home-hero-scroll-scene .home-hero {
-  position: sticky;
-  top: 78px;
-  z-index: 4;
-}
-
-@media (max-width: 768px) {
-  .home-hero-scroll-scene {
-    min-height: 125vh;
+@media (min-width: 769px) {
+  .home-hero {
+    position: sticky;
+    top: 82px;
+    z-index: 10;
   }
 
-  .home-hero-scroll-scene .home-hero {
-    top: 68px;
+  .home-automation-section {
+    position: sticky;
+    top: 96px;
+    z-index: 20;
+  }
+
+  .home-cases-section {
+    position: sticky;
+    top: 110px;
+    z-index: 30;
   }
 }

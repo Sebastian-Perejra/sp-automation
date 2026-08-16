@@ -4076,7 +4076,15 @@ body.home-ready .hero-sheen {
   .home-pinned-scene > .home-automation-section,
   .home-pinned-scene > .home-cases-section {
     position: sticky;
-    top: 82px;
+    top: 78px;
     z-index: 5;
+  }
+
+  .home-pinned-scene > .home-hero {
+    margin-top: 0;
+  }
+
+  .home-pinned-scene:first-of-type {
+    padding-top: 72px;
   }
 }

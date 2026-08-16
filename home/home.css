@@ -6005,3 +6005,768 @@ button[data-calc="clear"] {
     margin-top: 8px;
   }
 }
+
+.home-call-booking {
+  width: min(calc(100% - 48px), 1180px);
+  margin: 0 auto 84px;
+}
+
+.home-call-booking-inner {
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
+  gap: 34px;
+
+  padding: 38px 40px;
+
+  border: 1px solid rgba(43, 92, 74, 0.14);
+  border-radius: 28px;
+
+  background:
+    radial-gradient(
+      420px circle at 10% 10%,
+      rgba(181, 217, 197, 0.24),
+      transparent 70%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(247, 250, 248, 0.92)
+    );
+
+  box-shadow:
+    0 26px 60px rgba(16, 28, 23, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.home-call-booking-copy {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-call-booking-copy h2 {
+  margin: 10px 0 14px;
+
+  max-width: 720px;
+
+  color: #244f40;
+
+  font-family: var(--font-main);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 600;
+  line-height: 1.02;
+
+  letter-spacing: -0.04em;
+}
+
+.home-call-booking-copy > p {
+  max-width: 640px;
+
+  margin: 0;
+
+  color: rgba(42, 55, 49, 0.66);
+
+  font-family: var(--font-main);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.home-call-booking-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 24px;
+}
+
+.home-call-booking-btn,
+.home-call-message-btn {
+  min-height: 48px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 0 18px;
+
+  border-radius: 14px;
+
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.home-call-booking-btn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  background:
+    linear-gradient(
+      135deg,
+      #315f52 0%,
+      #2f6f86 100%
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 28px rgba(35, 74, 88, 0.2);
+}
+
+.home-call-booking-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 34px rgba(35, 74, 88, 0.26);
+}
+
+.home-call-message-btn {
+  border: 1px solid rgba(43, 92, 74, 0.14);
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  color: #2b5c4a;
+}
+
+.home-call-message-btn:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(43, 92, 74, 0.28);
+
+  background:
+    rgba(247, 250, 248, 0.98);
+}
+
+.home-call-booking-note {
+  margin-top: 14px;
+
+  color: rgba(42, 55, 49, 0.46);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.home-call-booking-preview {
+  position: relative;
+  z-index: 2;
+
+  min-height: 320px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 22px;
+
+  border: 1px solid rgba(43, 92, 74, 0.12);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(247, 250, 248, 0.96),
+      rgba(237, 245, 240, 0.9)
+    );
+
+  box-shadow:
+    0 18px 36px rgba(26, 42, 35, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.home-call-preview-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: rgba(43, 92, 74, 0.46);
+
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.home-call-preview-date {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: end;
+  justify-content: center;
+  gap: 10px;
+
+  margin: 34px 0 24px;
+}
+
+.home-call-preview-date strong {
+  color: #244f40;
+
+  font-family: var(--font-main);
+  font-size: 74px;
+  font-weight: 500;
+  line-height: 0.9;
+
+  letter-spacing: -0.06em;
+}
+
+.home-call-preview-date span {
+  padding-bottom: 7px;
+
+  color: rgba(42, 55, 49, 0.48);
+
+  font-family: var(--font-tech);
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+.home-call-preview-times {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.home-call-preview-times span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 38px;
+
+  border: 1px solid rgba(43, 92, 74, 0.12);
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.74);
+
+  color: #2b5c4a;
+
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.home-call-preview-times span:nth-child(2) {
+  border-color: rgba(43, 92, 74, 0.28);
+
+  background:
+    rgba(231, 242, 235, 0.98);
+
+  box-shadow:
+    0 8px 18px rgba(43, 92, 74, 0.08);
+}
+
+.home-call-preview-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: auto;
+  padding-top: 18px;
+
+  color: rgba(42, 55, 49, 0.54);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.home-call-preview-status > span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #4b8b6d;
+
+  box-shadow:
+    0 0 0 5px rgba(75, 139, 109, 0.09);
+}
+
+.call-booking-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3600;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    rgba(10, 17, 14, 0.52);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.call-booking-overlay.show {
+  display: flex;
+}
+
+.call-booking-modal {
+  position: relative;
+
+  width: min(900px, 100%);
+  max-height: calc(100vh - 48px);
+
+  overflow-y: auto;
+
+  padding: 30px 30px 26px;
+
+  border: 1px solid rgba(43, 92, 74, 0.14);
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.99),
+      rgba(248, 250, 248, 0.97)
+    );
+
+  box-shadow:
+    0 34px 90px rgba(16, 28, 23, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+}
+
+.call-booking-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(43, 92, 74, 0.08);
+  border-radius: 50%;
+
+  background:
+    rgba(247, 250, 248, 0.82);
+
+  color: rgba(42, 55, 49, 0.56);
+
+  font-size: 19px;
+
+  cursor: pointer;
+}
+
+.call-booking-modal h3 {
+  margin: 0;
+
+  max-width: 640px;
+
+  color: #244f40;
+
+  font-family: var(--font-main);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.06;
+
+  letter-spacing: -0.03em;
+}
+
+.call-booking-intro {
+  max-width: 660px;
+
+  margin: 9px 0 0;
+
+  color: rgba(42, 55, 49, 0.6);
+
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.call-booking-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.42fr);
+  gap: 18px;
+
+  margin-top: 24px;
+}
+
+.call-booking-calendar-area,
+.call-booking-time-area {
+  padding: 18px;
+
+  border: 1px solid rgba(43, 92, 74, 0.1);
+  border-radius: 18px;
+
+  background:
+    rgba(248, 251, 249, 0.76);
+}
+
+.call-calendar-header {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 14px;
+}
+
+.call-calendar-header strong {
+  text-align: center;
+
+  color: #244f40;
+
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.call-calendar-header button {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(43, 92, 74, 0.1);
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.8);
+
+  color: #2b5c4a;
+
+  cursor: pointer;
+}
+
+.call-calendar-weekdays,
+.call-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.call-calendar-weekdays {
+  margin-bottom: 6px;
+}
+
+.call-calendar-weekdays span {
+  text-align: center;
+
+  color: rgba(42, 55, 49, 0.4);
+
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.call-calendar-days button,
+.call-calendar-days span {
+  aspect-ratio: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.call-calendar-days button {
+  border: 1px solid transparent;
+
+  background:
+    rgba(255, 255, 255, 0.7);
+
+  color: #2d4d41;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.16s ease,
+    background 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.call-calendar-days button:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(43, 92, 74, 0.2);
+
+  background:
+    rgba(237, 245, 240, 0.96);
+}
+
+.call-calendar-days button.is-selected {
+  border-color: #35594b;
+
+  background: #35594b;
+
+  color: #ffffff;
+}
+
+.call-calendar-days button:disabled {
+  opacity: 0.28;
+
+  cursor: not-allowed;
+}
+
+.call-booking-time-title {
+  margin-bottom: 12px;
+
+  color: #244f40;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.call-booking-times {
+  display: grid;
+  gap: 8px;
+}
+
+.call-booking-times button {
+  min-height: 38px;
+
+  border: 1px solid rgba(43, 92, 74, 0.11);
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.76);
+
+  color: #2b5c4a;
+
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.call-booking-times button:hover {
+  transform: translateY(-1px);
+
+  border-color:
+    rgba(43, 92, 74, 0.24);
+
+  background:
+    rgba(237, 245, 240, 0.96);
+}
+
+.call-booking-times button.is-selected {
+  border-color: #35594b;
+
+  background: #35594b;
+
+  color: #ffffff;
+}
+
+.call-booking-time-note {
+  margin-top: 12px;
+
+  color: rgba(42, 55, 49, 0.46);
+
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.call-booking-person {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+
+  margin-top: 6px;
+}
+
+.call-booking-person .form-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.call-booking-person input,
+.call-booking-person textarea {
+  width: 100%;
+
+  padding: 12px 13px;
+
+  border: 1px solid rgba(43, 92, 74, 0.14);
+  border-radius: 13px;
+
+  background:
+    rgba(255, 255, 255, 0.82);
+
+  color: #27342f;
+
+  font-family: var(--font-main);
+  font-size: 13px;
+}
+
+.call-booking-person textarea {
+  min-height: 90px;
+
+  resize: vertical;
+}
+
+.call-booking-submit {
+  width: 100%;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #315f52 0%,
+      #2f6f86 100%
+    );
+
+  color: #ffffff;
+
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+
+  box-shadow:
+    0 12px 28px rgba(35, 74, 88, 0.19);
+
+  cursor: pointer;
+}
+
+#call-booking-status {
+  min-height: 16px;
+
+  margin-top: 10px;
+
+  text-align: center;
+
+  font-size: 9px;
+}
+
+@media (max-width: 760px) {
+  .home-call-booking {
+    width: calc(100% - 24px);
+    margin-bottom: 56px;
+  }
+
+  .home-call-booking-inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    padding: 24px 14px 18px;
+
+    border-radius: 22px;
+  }
+
+  .home-call-booking-copy h2 {
+    font-size: 32px;
+  }
+
+  .home-call-booking-copy > p {
+    font-size: 12px;
+  }
+
+  .home-call-booking-actions {
+    flex-direction: column;
+  }
+
+  .home-call-booking-btn,
+  .home-call-message-btn {
+    width: 100%;
+  }
+
+  .home-call-booking-preview {
+    min-height: 250px;
+
+    padding: 18px;
+
+    border-radius: 18px;
+  }
+
+  .home-call-preview-date {
+    margin: 26px 0 20px;
+  }
+
+  .home-call-preview-date strong {
+    font-size: 60px;
+  }
+
+  .call-booking-overlay {
+    align-items: flex-start;
+
+    padding: 10px;
+  }
+
+  .call-booking-modal {
+    width: 100%;
+    max-height: calc(100vh - 20px);
+
+    padding: 24px 14px 18px;
+
+    border-radius: 20px;
+  }
+
+  .call-booking-modal h3 {
+    padding-right: 34px;
+
+    font-size: 25px;
+  }
+
+  .call-booking-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    margin-top: 18px;
+  }
+
+  .call-booking-calendar-area,
+  .call-booking-time-area {
+    padding: 14px;
+
+    border-radius: 16px;
+  }
+
+  .call-booking-times {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .call-booking-person {
+    grid-template-columns: 1fr;
+  }
+
+  .call-booking-person .form-field:last-child {
+    grid-column: auto;
+  }
+}

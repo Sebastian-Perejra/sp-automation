@@ -2941,52 +2941,23 @@ function initHomePhysicalCalculator() {
       '.home-final-calc'
     );
 
-  const screen =
+  const screenValue =
     cta.querySelector(
-      '.home-final-calc-screen'
-    );
-
-  const buttons =
-    Array.from(
-      cta.querySelectorAll(
-        'button'
-      )
+      '.home-final-calc-value'
     );
 
   const estimateButton =
-    buttons.find(button => {
-      const text =
-        button.textContent
-          .trim()
-          .toLowerCase();
-
-      return (
-        text.includes('розрахувати') ||
-        text.includes('рассчитать') ||
-        text.includes('estimate') ||
-        text.includes('calculate')
-      );
-    });
+    cta.querySelector(
+      '.home-final-cta-secondary'
+    );
 
   if (
     !visual ||
     !calc ||
-    !screen
+    !screenValue
   ) {
     return;
   }
-
-  const screenValue =
-    document.createElement(
-      'span'
-    );
-
-  screenValue.className =
-    'home-final-calc-value';
-
-  screen.appendChild(
-    screenValue
-  );
 
   const reducedMotion =
     window.matchMedia(
@@ -2998,6 +2969,235 @@ function initHomePhysicalCalculator() {
 
   let currentX = 0;
   let currentY = 0;
+
+  let currentValue = '0';
+  let storedValue = null;
+  let pendingOperator = null;
+  let waitingForOperand = false;
+  let justCalculated = false;
+
+  function formatResult(value) {
+    if (!Number.isFinite(value)) {
+      return 'ERR';
+    }
+
+    const rounded =
+      Math.round(
+        (value + Number.EPSILON) *
+        100000000
+      ) / 100000000;
+
+    const text =
+      String(rounded);
+
+    if (text.length > 11) {
+      return rounded
+        .toExponential(5)
+        .replace('+', '');
+    }
+
+    return text;
+  }
+
+  function updateDisplay() {
+    screenValue.textContent =
+      currentValue;
+  }
+
+  function clearCalculator() {
+    currentValue = '0';
+    storedValue = null;
+    pendingOperator = null;
+    waitingForOperand = false;
+    justCalculated = false;
+
+    updateDisplay();
+  }
+
+  function inputNumber(number) {
+    if (
+      currentValue === 'ERR' ||
+      waitingForOperand ||
+      justCalculated
+    ) {
+      currentValue = number;
+      waitingForOperand = false;
+      justCalculated = false;
+
+      updateDisplay();
+
+      return;
+    }
+
+    if (currentValue === '0') {
+      currentValue = number;
+    } else if (
+      currentValue.length < 11
+    ) {
+      currentValue += number;
+    }
+
+    updateDisplay();
+  }
+
+  function calculate(
+    first,
+    second,
+    operator
+  ) {
+    if (operator === '+') {
+      return first + second;
+    }
+
+    if (operator === '−') {
+      return first - second;
+    }
+
+    if (operator === '×') {
+      return first * second;
+    }
+
+    if (operator === '÷') {
+      if (second === 0) {
+        return NaN;
+      }
+
+      return first / second;
+    }
+
+    return second;
+  }
+
+  function inputOperator(operator) {
+    if (currentValue === 'ERR') {
+      clearCalculator();
+      return;
+    }
+
+    const inputValue =
+      Number(currentValue);
+
+    if (
+      storedValue === null
+    ) {
+      storedValue =
+        inputValue;
+    } else if (
+      pendingOperator &&
+      !waitingForOperand
+    ) {
+      const result =
+        calculate(
+          storedValue,
+          inputValue,
+          pendingOperator
+        );
+
+      currentValue =
+        formatResult(result);
+
+      updateDisplay();
+
+      if (currentValue === 'ERR') {
+        storedValue = null;
+        pendingOperator = null;
+        waitingForOperand = false;
+
+        return;
+      }
+
+      storedValue =
+        Number(currentValue);
+    }
+
+    pendingOperator =
+      operator;
+
+    waitingForOperand =
+      true;
+
+    justCalculated =
+      false;
+  }
+
+  function inputEquals() {
+    if (
+      storedValue === null ||
+      !pendingOperator ||
+      currentValue === 'ERR'
+    ) {
+      return;
+    }
+
+    const secondValue =
+      Number(currentValue);
+
+    const result =
+      calculate(
+        storedValue,
+        secondValue,
+        pendingOperator
+      );
+
+    currentValue =
+      formatResult(result);
+
+    storedValue = null;
+    pendingOperator = null;
+    waitingForOperand = false;
+    justCalculated = true;
+
+    updateDisplay();
+  }
+
+  calc.addEventListener(
+    'click',
+    event => {
+      const button =
+        event.target.closest(
+          'button[data-calc]'
+        );
+
+      if (!button) {
+        return;
+      }
+
+      event.stopPropagation();
+
+      const action =
+        button.dataset.calc;
+
+      const value =
+        button.dataset.value;
+
+      if (
+        action === 'number'
+      ) {
+        inputNumber(value);
+        return;
+      }
+
+      if (
+        action === 'operator'
+      ) {
+        inputOperator(value);
+        return;
+      }
+
+      if (
+        action === 'equals'
+      ) {
+        inputEquals();
+        return;
+      }
+
+      if (
+        action === 'clear'
+      ) {
+        clearCalculator();
+      }
+    }
+  );
 
   function animate() {
     currentX +=
@@ -3046,8 +3246,11 @@ function initHomePhysicalCalculator() {
           rect.height -
           0.5;
 
-        targetX = x * 14;
-        targetY = y * 10;
+        targetX =
+          x * 14;
+
+        targetY =
+          y * 10;
       }
     );
 
@@ -3064,130 +3267,75 @@ function initHomePhysicalCalculator() {
     );
   }
 
-  if (!estimateButton) {
-    return;
-  }
-
-  let calcPreviewTimer = null;
-
-  const previewValues = [
-    '0',
-    '38',
-    '72',
-    '100%',
-    'READY'
-  ];
-
-  estimateButton.addEventListener(
-    'pointerenter',
-    () => {
-      calc.classList.add(
-        'is-calculator-ready'
-      );
-
-      let index = 0;
-
-      clearInterval(
-        calcPreviewTimer
-      );
-
-      screenValue.textContent =
-        previewValues[0];
-
-      calcPreviewTimer =
-        window.setInterval(
-          () => {
-            index += 1;
-
-            if (
-              index >=
-              previewValues.length
-            ) {
-              clearInterval(
-                calcPreviewTimer
-              );
-
-              return;
-            }
-
-            screenValue.textContent =
-              previewValues[index];
-          },
-          180
+  if (estimateButton) {
+    estimateButton.addEventListener(
+      'pointerenter',
+      () => {
+        calc.classList.add(
+          'is-calculator-ready'
         );
-    }
-  );
-
-  estimateButton.addEventListener(
-    'pointerleave',
-    () => {
-      calc.classList.remove(
-        'is-calculator-ready'
-      );
-
-      clearInterval(
-        calcPreviewTimer
-      );
-
-      screenValue.textContent = '';
-    }
-  );
-
-  estimateButton.addEventListener(
-    'click',
-    event => {
-      if (
-        estimateButton.dataset
-          .calculatorBoot ===
-        'true'
-      ) {
-        return;
       }
+    );
 
-      event.preventDefault();
-      event.stopImmediatePropagation();
+    estimateButton.addEventListener(
+      'pointerleave',
+      () => {
+        calc.classList.remove(
+          'is-calculator-ready'
+        );
+      }
+    );
 
-      estimateButton.dataset
-        .calculatorBoot =
-        'true';
-
-      clearInterval(
-        calcPreviewTimer
-      );
-
-      calc.classList.add(
-        'is-calculator-booting'
-      );
-
-      screenValue.textContent =
-        'CALC...';
-
-      window.setTimeout(
-        () => {
-          calc.classList.remove(
-            'is-calculator-booting'
-          );
-
+    estimateButton.addEventListener(
+      'click',
+      event => {
+        if (
           estimateButton.dataset
-            .calculatorBoot =
-            'false';
+            .calculatorBoot ===
+          'true'
+        ) {
+          return;
+        }
 
-          const trigger =
-            document.querySelector(
-              '.pricing-estimator-trigger'
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        estimateButton.dataset
+          .calculatorBoot =
+          'true';
+
+        calc.classList.add(
+          'is-calculator-booting'
+        );
+
+        window.setTimeout(
+          () => {
+            calc.classList.remove(
+              'is-calculator-booting'
             );
 
-          if (trigger) {
-            trigger.click();
-          }
-        },
-        320
-      );
-    },
-    true
-  );
-}
+            estimateButton.dataset
+              .calculatorBoot =
+              'false';
 
+            const trigger =
+              document.querySelector(
+                '.pricing-estimator-trigger'
+              );
+
+            if (trigger) {
+              trigger.click();
+            }
+          },
+          320
+        );
+      },
+      true
+    );
+  }
+
+  updateDisplay();
+}
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();

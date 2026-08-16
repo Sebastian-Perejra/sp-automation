@@ -2920,6 +2920,207 @@ function initHomePushHandoff() {
     updateScenes
   );
 }
+
+function initHomePhysicalCalculator() {
+  const cta =
+    document.querySelector(
+      '.home-final-cta'
+    );
+
+  if (!cta) {
+    return;
+  }
+
+  const visual =
+    cta.querySelector(
+      '.home-final-cta-visual'
+    );
+
+  const calc =
+    cta.querySelector(
+      '.home-final-calc'
+    );
+
+  const screen =
+    cta.querySelector(
+      '.home-final-calc-screen'
+    );
+
+  const buttons =
+    Array.from(
+      cta.querySelectorAll(
+        'button'
+      )
+    );
+
+  const estimateButton =
+    buttons.find(button => {
+      const text =
+        button.textContent
+          .trim()
+          .toLowerCase();
+
+      return (
+        text.includes('розрахувати') ||
+        text.includes('рассчитать') ||
+        text.includes('estimate') ||
+        text.includes('calculate')
+      );
+    });
+
+  if (
+    !visual ||
+    !calc ||
+    !screen
+  ) {
+    return;
+  }
+
+  const reducedMotion =
+    window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+  let targetX = 0;
+  let targetY = 0;
+
+  let currentX = 0;
+  let currentY = 0;
+
+  function animate() {
+    currentX +=
+      (targetX - currentX) *
+      0.08;
+
+    currentY +=
+      (targetY - currentY) *
+      0.08;
+
+    calc.style.setProperty(
+      '--calc-x',
+      `${currentX.toFixed(2)}px`
+    );
+
+    calc.style.setProperty(
+      '--calc-y',
+      `${currentY.toFixed(2)}px`
+    );
+
+    requestAnimationFrame(
+      animate
+    );
+  }
+
+  if (!reducedMotion) {
+    visual.addEventListener(
+      'pointermove',
+      event => {
+        const rect =
+          visual.getBoundingClientRect();
+
+        const x =
+          (
+            event.clientX -
+            rect.left
+          ) /
+          rect.width -
+          0.5;
+
+        const y =
+          (
+            event.clientY -
+            rect.top
+          ) /
+          rect.height -
+          0.5;
+
+        targetX = x * 14;
+        targetY = y * 10;
+      }
+    );
+
+    visual.addEventListener(
+      'pointerleave',
+      () => {
+        targetX = 0;
+        targetY = 0;
+      }
+    );
+
+    requestAnimationFrame(
+      animate
+    );
+  }
+
+  if (!estimateButton) {
+    return;
+  }
+
+  estimateButton.addEventListener(
+    'pointerenter',
+    () => {
+      calc.classList.add(
+        'is-calculator-ready'
+      );
+    }
+  );
+
+  estimateButton.addEventListener(
+    'pointerleave',
+    () => {
+      calc.classList.remove(
+        'is-calculator-ready'
+      );
+    }
+  );
+
+  estimateButton.addEventListener(
+    'click',
+    event => {
+      if (
+        estimateButton.dataset
+          .calculatorBoot === 'true'
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      estimateButton.dataset
+        .calculatorBoot =
+        'true';
+
+      calc.classList.add(
+        'is-calculator-booting'
+      );
+
+      window.setTimeout(
+        () => {
+          calc.classList.remove(
+            'is-calculator-booting'
+          );
+
+          estimateButton.dataset
+            .calculatorBoot =
+            'false';
+
+          const trigger =
+            document.querySelector(
+              '.pricing-estimator-trigger'
+            );
+
+          if (trigger) {
+            trigger.click();
+          }
+        },
+        320
+      );
+    },
+    true
+  );
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();
@@ -2931,3 +3132,4 @@ loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
 initHomePushHandoff();
+initHomePhysicalCalculator();

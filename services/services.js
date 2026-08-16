@@ -40,21 +40,23 @@
   bgA.className = "services-bg is-active";
   bgB.className = "services-bg";
 
+  bgA.style.backgroundImage =
+    `url("${images[0]}")`;
+
+  bgB.style.backgroundImage =
+    `url("${images[1]}")`;
+
   document.body.prepend(bgB);
   document.body.prepend(bgA);
 
-  bgA.style.backgroundImage = `url("${images[0]}")`;
-  bgB.style.backgroundImage = `url("${images[1]}")`;
-
   let currentIndex = 0;
-
   let activeBg = bgA;
   let hiddenBg = bgB;
 
-  const FADE_TIME = 6000;
-  const HOLD_TIME = 14000;
+  const HOLD_TIME = 15000;
+  const FADE_TIME = 4800;
 
-  const changeScene = async () => {
+  const changeBackground = async () => {
     const nextIndex =
       (currentIndex + 1) %
       images.length;
@@ -93,7 +95,7 @@
           nextIndex;
 
         window.setTimeout(
-          changeScene,
+          changeBackground,
           HOLD_TIME + FADE_TIME
         );
       });
@@ -101,7 +103,7 @@
   };
 
   window.setTimeout(
-    changeScene,
+    changeBackground,
     HOLD_TIME
   );
 
@@ -111,30 +113,30 @@
   let currentX = 0;
   let currentY = 0;
 
-  let animationFrame = null;
+  let backgroundFrame = null;
 
-  const maxMove = 16;
+  const maxMove = 14;
 
   const animateBackground = () => {
     currentX +=
       (targetX - currentX) *
-      0.075;
+      0.08;
 
     currentY +=
       (targetY - currentY) *
-      0.075;
+      0.08;
 
     document.documentElement
       .style
       .setProperty(
-        "--services-move-x",
+        "--services-bg-x",
         `${currentX}px`
       );
 
     document.documentElement
       .style
       .setProperty(
-        "--services-move-y",
+        "--services-bg-y",
         `${currentY}px`
       );
 
@@ -149,10 +151,10 @@
       );
 
     if (
-      deltaX > 0.05 ||
-      deltaY > 0.05
+      deltaX > 0.04 ||
+      deltaY > 0.04
     ) {
-      animationFrame =
+      backgroundFrame =
         requestAnimationFrame(
           animateBackground
         );
@@ -166,28 +168,28 @@
     document.documentElement
       .style
       .setProperty(
-        "--services-move-x",
+        "--services-bg-x",
         `${currentX}px`
       );
 
     document.documentElement
       .style
       .setProperty(
-        "--services-move-y",
+        "--services-bg-y",
         `${currentY}px`
       );
 
-    animationFrame = null;
+    backgroundFrame = null;
   };
 
   const startBackgroundAnimation = () => {
     if (
-      animationFrame !== null
+      backgroundFrame !== null
     ) {
       return;
     }
 
-    animationFrame =
+    backgroundFrame =
       requestAnimationFrame(
         animateBackground
       );
@@ -239,18 +241,352 @@
       }
     );
 
+  const hero =
+    document.querySelector(
+      ".services-hero"
+    );
+
+  if (hero) {
+    hero.addEventListener(
+      "pointermove",
+      event => {
+        if (
+          window.innerWidth <= 760
+        ) {
+          return;
+        }
+
+        const rect =
+          hero.getBoundingClientRect();
+
+        const x =
+          event.clientX -
+          rect.left;
+
+        const y =
+          event.clientY -
+          rect.top;
+
+        hero.style.setProperty(
+          "--services-spot-x",
+          `${x}px`
+        );
+
+        hero.style.setProperty(
+          "--services-spot-y",
+          `${y}px`
+        );
+      },
+      {
+        passive: true
+      }
+    );
+
+    hero.addEventListener(
+      "pointerleave",
+      () => {
+        hero.style.setProperty(
+          "--services-spot-x",
+          "50%"
+        );
+
+        hero.style.setProperty(
+          "--services-spot-y",
+          "50%"
+        );
+      },
+      {
+        passive: true
+      }
+    );
+  }
+
+  const revealSections =
+    document.querySelectorAll(
+      ".reveal-section"
+    );
+
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  if (reducedMotion) {
+    revealSections.forEach(
+      section => {
+        section.classList.add(
+          "is-visible"
+        );
+      }
+    );
+  } else {
+    const revealObserver =
+      new IntersectionObserver(
+        entries => {
+          entries.forEach(
+            entry => {
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+              entry.target.classList.add(
+                "is-visible"
+              );
+
+              revealObserver.unobserve(
+                entry.target
+              );
+            }
+          );
+        },
+        {
+          threshold: 0.12,
+          rootMargin:
+            "0px 0px -8% 0px"
+        }
+      );
+
+    revealSections.forEach(
+      section => {
+        revealObserver.observe(
+          section
+        );
+      }
+    );
+  }
+
+  const ecosystemBoard =
+    document.querySelector(
+      ".ecosystem-board"
+    );
+
+  const ecosystemServices =
+    document.querySelectorAll(
+      ".ecosystem-service"
+    );
+
+  if (
+    ecosystemBoard &&
+    ecosystemServices.length
+  ) {
+    ecosystemServices.forEach(
+      service => {
+        service.addEventListener(
+          "pointerenter",
+          () => {
+            if (
+              window.innerWidth <= 760
+            ) {
+              return;
+            }
+
+            ecosystemServices.forEach(
+              item => {
+                item.classList.remove(
+                  "is-active"
+                );
+              }
+            );
+
+            service.classList.add(
+              "is-active"
+            );
+
+            ecosystemBoard.classList.add(
+              "has-active-service"
+            );
+          }
+        );
+
+        service.addEventListener(
+          "pointerleave",
+          () => {
+            service.classList.remove(
+              "is-active"
+            );
+
+            ecosystemBoard.classList.remove(
+              "has-active-service"
+            );
+          }
+        );
+      }
+    );
+  }
+
+  const heroSystem =
+    document.querySelector(
+      ".services-hero-system"
+    );
+
+  if (heroSystem) {
+    let heroTargetX = 0;
+    let heroTargetY = 0;
+
+    let heroCurrentX = 0;
+    let heroCurrentY = 0;
+
+    let heroFrame = null;
+
+    const animateHeroSystem = () => {
+      heroCurrentX +=
+        (heroTargetX -
+          heroCurrentX) *
+        0.09;
+
+      heroCurrentY +=
+        (heroTargetY -
+          heroCurrentY) *
+        0.09;
+
+      heroSystem.style.transform =
+        `translate3d(${heroCurrentX}px, ${heroCurrentY}px, 0)`;
+
+      const dx =
+        Math.abs(
+          heroTargetX -
+          heroCurrentX
+        );
+
+      const dy =
+        Math.abs(
+          heroTargetY -
+          heroCurrentY
+        );
+
+      if (
+        dx > 0.03 ||
+        dy > 0.03
+      ) {
+        heroFrame =
+          requestAnimationFrame(
+            animateHeroSystem
+          );
+
+        return;
+      }
+
+      heroFrame = null;
+    };
+
+    const startHeroAnimation = () => {
+      if (
+        heroFrame !== null
+      ) {
+        return;
+      }
+
+      heroFrame =
+        requestAnimationFrame(
+          animateHeroSystem
+        );
+    };
+
+    heroSystem.addEventListener(
+      "pointermove",
+      event => {
+        if (
+          window.innerWidth <= 760
+        ) {
+          return;
+        }
+
+        const rect =
+          heroSystem
+            .getBoundingClientRect();
+
+        const x =
+          event.clientX -
+          rect.left;
+
+        const y =
+          event.clientY -
+          rect.top;
+
+        const normalizedX =
+          x / rect.width -
+          0.5;
+
+        const normalizedY =
+          y / rect.height -
+          0.5;
+
+        heroTargetX =
+          normalizedX * 8;
+
+        heroTargetY =
+          normalizedY * 8;
+
+        startHeroAnimation();
+      },
+      {
+        passive: true
+      }
+    );
+
+    heroSystem.addEventListener(
+      "pointerleave",
+      () => {
+        heroTargetX = 0;
+        heroTargetY = 0;
+
+        startHeroAnimation();
+      },
+      {
+        passive: true
+      }
+    );
+  }
+
+  const transformation =
+    document.querySelector(
+      ".services-transformation"
+    );
+
+  if (transformation) {
+    const transformationObserver =
+      new IntersectionObserver(
+        entries => {
+          entries.forEach(
+            entry => {
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+              transformation.classList.add(
+                "transformation-ready"
+              );
+
+              transformationObserver.disconnect();
+            }
+          );
+        },
+        {
+          threshold: 0.3
+        }
+      );
+
+    transformationObserver.observe(
+      transformation
+    );
+  }
+
   document.addEventListener(
     "visibilitychange",
     () => {
       if (
         document.hidden &&
-        animationFrame !== null
+        backgroundFrame !== null
       ) {
         cancelAnimationFrame(
-          animationFrame
+          backgroundFrame
         );
 
-        animationFrame = null;
+        backgroundFrame = null;
       }
     }
   );

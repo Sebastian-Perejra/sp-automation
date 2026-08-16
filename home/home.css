@@ -4434,3 +4434,81 @@ button[data-calc="clear"] {
 
   z-index: 2;
 }
+
+.home-final-calc {
+  grid-template-columns:
+    repeat(4, 42px);
+
+  grid-template-areas:
+    "screen screen screen screen"
+    "clear seven eight divide"
+    "four five six multiply"
+    "one two three minus"
+    "zero zero plus equals";
+}
+
+.home-final-calc-screen {
+  grid-area: screen;
+}
+
+.calc-clear {
+  grid-area: clear;
+}
+
+.calc-7 {
+  grid-area: seven;
+}
+
+.calc-8 {
+  grid-area: eight;
+}
+
+.calc-divide {
+  grid-area: divide;
+}
+
+.calc-4 {
+  grid-area: four;
+}
+
+.calc-5 {
+  grid-area: five;
+}
+
+.calc-6 {
+  grid-area: six;
+}
+
+.calc-multiply {
+  grid-area: multiply;
+}
+
+.calc-1 {
+  grid-area: one;
+}
+
+.calc-2 {
+  grid-area: two;
+}
+
+.calc-3 {
+  grid-area: three;
+}
+
+.calc-minus {
+  grid-area: minus;
+}
+
+.calc-0 {
+  grid-area: zero;
+
+  width: 92px !important;
+}
+
+.calc-plus {
+  grid-area: plus;
+}
+
+.calc-equals {
+  grid-area: equals;
+}

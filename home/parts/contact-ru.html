@@ -3,7 +3,16 @@
   type="button"
   onclick="openContactModal()"
 >
-  💬 Написать
+  <span class="float-action-icon">
+    ↗
+  </span>
+
+  <span class="float-action-copy">
+    <strong>Написать Себастьяну</strong>
+    <small>Напрямую, без менеджеров</small>
+  </span>
+
+  <span class="float-action-arrow">→</span>
 </button>
 
 <div
@@ -15,81 +24,106 @@
     <button
       class="contact-close"
       type="button"
+      aria-label="Закрыть"
       onclick="closeContactModal()"
     >
       ×
     </button>
 
-    <h3>Написать Себастьяну</h3>
-
-    <label for="contact-name">
-      Ваше имя
-    </label>
-
-    <input
-      id="contact-name"
-      type="text"
-      placeholder="Например, Александр"
-    >
-
-    <label>
-      Как с вами связаться?
-    </label>
-
-    <div class="contact-method-options">
-      <button
-        type="button"
-        class="contact-method-btn"
-        onclick="selectContactMethod('email', this)"
-      >
-        ✉ Почта
-      </button>
-
-      <button
-        type="button"
-        class="contact-method-btn"
-        onclick="selectContactMethod('phone', this)"
-      >
-        ☎ Телефон
-      </button>
-
-      <button
-        type="button"
-        class="contact-method-btn"
-        onclick="selectContactMethod('telegram', this)"
-      >
-        ✈ Telegram
-      </button>
+    <div class="form-modal-kicker">
+      LET'S TALK
     </div>
 
-    <input
-      id="contact-method"
-      type="text"
-      placeholder="Выберите способ связи"
-      disabled
-    >
+    <h3>
+      Что в вашем процессе отнимает время?
+    </h3>
 
-    <input
-      id="contact-method-type"
-      type="hidden"
-      value=""
-    >
+    <p class="form-modal-intro">
+      Опишите задачу своими словами.
+      Без брифов и длинных анкет.
+    </p>
 
-    <label for="contact-message">
-      Сообщение
-    </label>
+    <div class="form-field">
+      <label for="contact-name">
+        Ваше имя
+      </label>
 
-    <textarea
-      id="contact-message"
-      rows="5"
-      placeholder="Кратко опишите задачу"
-    ></textarea>
+      <input
+        id="contact-name"
+        type="text"
+        placeholder="Например, Александр"
+      >
+    </div>
 
-    <div class="turnstile-wrapper">
-      <div
-        class="cf-turnstile"
-        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
-      ></div>
+    <div class="form-field">
+      <label>
+        Как с вами связаться?
+      </label>
+
+      <div class="contact-method-options">
+        <button
+          type="button"
+          class="contact-method-btn"
+          onclick="selectContactMethod('email', this)"
+        >
+          <span>✉</span>
+          Почта
+        </button>
+
+        <button
+          type="button"
+          class="contact-method-btn"
+          onclick="selectContactMethod('phone', this)"
+        >
+          <span>☎</span>
+          Телефон
+        </button>
+
+        <button
+          type="button"
+          class="contact-method-btn"
+          onclick="selectContactMethod('telegram', this)"
+        >
+          <span>✈</span>
+          Telegram
+        </button>
+      </div>
+
+      <input
+        id="contact-method"
+        type="text"
+        placeholder="Выберите способ связи"
+        disabled
+      >
+
+      <input
+        id="contact-method-type"
+        type="hidden"
+        value=""
+      >
+    </div>
+
+    <div class="form-field">
+      <label for="contact-message">
+        Коротко о задаче
+      </label>
+
+      <textarea
+        id="contact-message"
+        rows="5"
+        placeholder="Что сейчас приходится делать вручную или что хочется упростить?"
+      ></textarea>
+    </div>
+
+    <div class="form-security">
+      <span>Защищённая отправка</span>
+
+      <div class="turnstile-wrapper">
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+        ></div>
+      </div>
     </div>
 
     <button
@@ -97,9 +131,14 @@
       type="button"
       onclick="testContactForm()"
     >
-      Отправить
+      Отправить сообщение
+      <span>→</span>
     </button>
 
     <div id="contact-status"></div>
+
+    <div class="contact-modal-note">
+      Сообщение попадает напрямую мне.
+    </div>
   </div>
 </div>

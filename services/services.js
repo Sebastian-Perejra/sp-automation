@@ -590,4 +590,197 @@
       }
     }
   );
+  const projectMap =
+  document.querySelector(
+    ".services-project-map"
+  );
+
+if (projectMap) {
+  const stages =
+    Array.from(
+      projectMap.querySelectorAll(
+        ".project-stage"
+      )
+    );
+
+  const lines =
+    Array.from(
+      projectMap.querySelectorAll(
+        ".project-line"
+      )
+    );
+
+  const number =
+    document.getElementById(
+      "project-core-number"
+    );
+
+  const title =
+    document.getElementById(
+      "project-core-title"
+    );
+
+  const description =
+    document.getElementById(
+      "project-core-description"
+    );
+
+  let activeIndex = 0;
+  let cycleTimer = null;
+  let paused = false;
+
+  const activateStage = index => {
+    activeIndex = index;
+
+    stages.forEach(
+      (stage, stageIndex) => {
+        stage.classList.toggle(
+          "is-active",
+          stageIndex === index
+        );
+      }
+    );
+
+    lines.forEach(
+      (line, lineIndex) => {
+        line.classList.toggle(
+          "is-active",
+          lineIndex === index
+        );
+      }
+    );
+
+    const stage =
+      stages[index];
+
+    if (!stage) return;
+
+    const stageNumber =
+      stage.dataset.stage
+        .padStart(2, "0");
+
+    number.textContent =
+      stageNumber;
+
+    title.textContent =
+      stage.dataset.title;
+
+    description.textContent =
+      stage.dataset.description;
+
+    projectMap.classList.add(
+      "has-focus"
+    );
+
+    window.setTimeout(
+      () => {
+        if (!paused) {
+          projectMap.classList.remove(
+            "has-focus"
+          );
+        }
+      },
+      650
+    );
+  };
+
+  const startCycle = () => {
+    window.clearInterval(
+      cycleTimer
+    );
+
+    cycleTimer =
+      window.setInterval(
+        () => {
+          if (paused) return;
+
+          const nextIndex =
+            (
+              activeIndex + 1
+            ) %
+            stages.length;
+
+          activateStage(
+            nextIndex
+          );
+        },
+        3200
+      );
+  };
+
+  stages.forEach(
+    (stage, index) => {
+      stage.addEventListener(
+        "pointerenter",
+        () => {
+          if (
+            window.innerWidth <=
+            760
+          ) {
+            return;
+          }
+
+          paused = true;
+
+          activateStage(
+            index
+          );
+
+          projectMap.classList.add(
+            "has-focus"
+          );
+        }
+      );
+
+      stage.addEventListener(
+        "pointerleave",
+        () => {
+          paused = false;
+
+          projectMap.classList.remove(
+            "has-focus"
+          );
+        }
+      );
+
+      stage.addEventListener(
+        "click",
+        () => {
+          activateStage(
+            index
+          );
+        }
+      );
+    }
+  );
+
+  projectMap.addEventListener(
+    "pointerenter",
+    () => {
+      if (
+        window.innerWidth >
+        760
+      ) {
+        paused = true;
+      }
+    }
+  );
+
+  projectMap.addEventListener(
+    "pointerleave",
+    () => {
+      paused = false;
+    }
+  );
+
+  activateStage(0);
+
+  if (
+    !window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+    startCycle();
+  }
+}
 })();

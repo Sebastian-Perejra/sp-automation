@@ -4306,3 +4306,38 @@ body.home-ready .hero-sheen {
     scale: 1;
   }
 }
+.home-final-calc-value {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 9px;
+
+  font-family: var(--font-tech);
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  color:
+    rgba(
+      34,
+      76,
+      56,
+      0.82
+    );
+
+  text-shadow:
+    0 1px 0
+    rgba(
+      255,
+      255,
+      255,
+      0.5
+    );
+
+  z-index: 2;
+}

@@ -891,6 +891,236 @@
     </a>
   </div>
 </section>
+
+  <section class="home-call-booking" id="home-call-booking">
+  <div class="home-call-booking-inner">
+    <div class="home-call-booking-copy">
+      <div class="home-section-kicker">
+        LET'S TALK
+      </div>
+
+      <h2>
+        Есть задача, которую проще обсудить голосом?
+      </h2>
+
+      <p>
+        Выберите удобную дату и желаемое время.
+        После заявки я подтвержу время напрямую.
+      </p>
+
+      <div class="home-call-booking-actions">
+        <button
+          class="home-call-booking-btn"
+          type="button"
+          onclick="openCallBookingModal()"
+        >
+          <span>Запланировать короткий разговор</span>
+          <span>→</span>
+        </button>
+
+        <button
+          class="home-call-message-btn"
+          type="button"
+          onclick="openContactModal()"
+        >
+          Написать вместо звонка
+        </button>
+      </div>
+
+      <div class="home-call-booking-note">
+        20–30 минут · Без презентаций · Без обязательств
+      </div>
+    </div>
+
+    <div class="home-call-booking-preview">
+      <div class="home-call-preview-top">
+        <span>QUICK CALL</span>
+        <span>20–30 MIN</span>
+      </div>
+
+      <div class="home-call-preview-date">
+        <span class="home-call-preview-day">MON</span>
+        <strong>17</strong>
+        <span>AUG</span>
+      </div>
+
+      <div class="home-call-preview-times">
+        <span>10:30</span>
+        <span>14:00</span>
+        <span>16:30</span>
+      </div>
+
+      <div class="home-call-preview-status">
+        <span></span>
+        Выберите удобное время
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  id="call-booking-overlay"
+  class="call-booking-overlay"
+>
+  <div class="call-booking-modal">
+    <button
+      class="call-booking-close"
+      type="button"
+      aria-label="Закрыть"
+      onclick="closeCallBookingModal()"
+    >
+      ×
+    </button>
+
+    <div class="form-modal-kicker">
+      SCHEDULE A CALL
+    </div>
+
+    <h3>
+      Выберите удобное время
+    </h3>
+
+    <p class="call-booking-intro">
+      Это запрос на звонок, а не автоматическое бронирование.
+      Я подтвержу выбранное время напрямую.
+    </p>
+
+    <div class="call-booking-layout">
+      <div class="call-booking-calendar-area">
+        <div class="call-calendar-header">
+          <button
+            id="call-calendar-prev"
+            type="button"
+            aria-label="Предыдущий месяц"
+          >
+            ←
+          </button>
+
+          <strong id="call-calendar-title"></strong>
+
+          <button
+            id="call-calendar-next"
+            type="button"
+            aria-label="Следующий месяц"
+          >
+            →
+          </button>
+        </div>
+
+        <div class="call-calendar-weekdays">
+          <span>Пн</span>
+          <span>Вт</span>
+          <span>Ср</span>
+          <span>Чт</span>
+          <span>Пт</span>
+          <span>Сб</span>
+          <span>Вс</span>
+        </div>
+
+        <div
+          id="call-calendar-days"
+          class="call-calendar-days"
+        ></div>
+
+        <input
+          id="call-booking-date"
+          type="hidden"
+          value=""
+        >
+      </div>
+
+      <div class="call-booking-time-area">
+        <div class="call-booking-time-title">
+          Желаемое время
+        </div>
+
+        <div
+          id="call-booking-times"
+          class="call-booking-times"
+        >
+          <button type="button" data-call-time="09:30">09:30</button>
+          <button type="button" data-call-time="10:30">10:30</button>
+          <button type="button" data-call-time="12:00">12:00</button>
+          <button type="button" data-call-time="14:00">14:00</button>
+          <button type="button" data-call-time="15:30">15:30</button>
+          <button type="button" data-call-time="17:00">17:00</button>
+          <button type="button" data-call-time="18:30">18:30</button>
+        </div>
+
+        <input
+          id="call-booking-time"
+          type="hidden"
+          value=""
+        >
+
+        <div class="call-booking-time-note">
+          Время будет подтверждено после отправки заявки.
+        </div>
+      </div>
+    </div>
+
+    <div class="call-booking-person">
+      <div class="form-field">
+        <label for="call-booking-name">
+          Ваше имя
+        </label>
+
+        <input
+          id="call-booking-name"
+          type="text"
+          placeholder="Например, Александр"
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="call-booking-contact">
+          Телефон, Telegram или Email
+        </label>
+
+        <input
+          id="call-booking-contact"
+          type="text"
+          placeholder="@username, +380... или email"
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="call-booking-message">
+          О чём хотите поговорить?
+        </label>
+
+        <textarea
+          id="call-booking-message"
+          rows="3"
+          placeholder="Коротко опишите задачу"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="form-security">
+      <span>Защищённая отправка</span>
+
+      <div class="turnstile-wrapper">
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+        ></div>
+      </div>
+    </div>
+
+    <button
+      id="call-booking-submit"
+      class="call-booking-submit"
+      type="button"
+      onclick="submitCallBooking()"
+    >
+      Отправить запрос на звонок
+      <span>→</span>
+    </button>
+
+    <div id="call-booking-status"></div>
+  </div>
+</div>
   <div id="home-reviews-slot"></div>
   <div id="home-contact-slot"></div>
   <div id="home-solution-picker-slot"></div>

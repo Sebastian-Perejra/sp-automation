@@ -4168,11 +4168,12 @@ button[data-calc="clear"] {
     display: flow-root;
   }
 
-  .home-push-scene > .home-hero,
-  .home-push-scene > .carousel-container,
-  .home-push-scene > .home-automation-section,
-  .home-push-scene > .home-cases-section,
-  .home-push-scene > .home-final-cta {
+    .home-push-scene > .home-hero,
+    .home-push-scene > .carousel-container,
+    .home-push-scene > .home-automation-section,
+    .home-push-scene > .home-cases-section,
+    .home-push-scene > .home-final-cta,
+    .home-push-scene > .home-process-metaphors {
     position: sticky;
     top: 82px;
 
@@ -4234,6 +4235,16 @@ button[data-calc="clear"] {
   .home-push-scene-final >
   .home-final-cta {
     margin-top: 0;
+  }
+
+  .home-push-scene-process {
+    margin-bottom: 84px;
+  }
+  
+  .home-push-scene-process >
+  .home-process-metaphors {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 

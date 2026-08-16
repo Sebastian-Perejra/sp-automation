@@ -2808,72 +2808,169 @@ function initHeroEasterEgg() {
   );
 }
 
-function initHomePushScroll() {
+function initHomeContactPush() {
   if (window.matchMedia('(max-width: 768px)').matches) return;
 
-  const items = [
-    document.querySelector('.home-hero'),
-    document.querySelector('.carousel-container'),
-    document.querySelector('.home-automation-section'),
-    document.querySelector('.home-cases-section')
-  ].filter(Boolean);
+  const selectors = [
+    '.home-hero',
+    '.carousel-container',
+    '.home-automation-section',
+    '.home-cases-section'
+  ];
+
+  const items = selectors
+    .map(selector => document.querySelector(selector))
+    .filter(Boolean);
 
   if (items.length < 2) return;
 
   const HEADER_TOP = 82;
-  const CONTACT_GAP = 14;
+  const CONTACT_GAP = 16;
 
-  items.forEach((item, index) => {
-    item.classList.add('home-push-item');
-    item.style.setProperty('--home-push-z', String(20 + index));
+  const data = items.map((item, index) => {
+    const placeholder = document.createElement('div');
+
+    placeholder.className = 'home-contact-placeholder';
+
+    item.parentNode.insertBefore(placeholder, item);
+
+    return {
+      item,
+      placeholder,
+      index,
+      originalParent: item.parentNode
+    };
   });
 
-  function updateHomePushScroll() {
-    items.forEach((item, index) => {
-      const next = items[index + 1];
+  function syncPlaceholders() {
+    data.forEach(entry => {
+      const rect = entry.item.getBoundingClientRect();
 
-      if (!next) {
-        item.style.setProperty('--home-push-y', '0px');
-        return;
+      if (!entry.item.classList.contains('home-contact-fixed')) {
+        entry.placeholder.style.height = `${entry.item.offsetHeight}px`;
       }
 
-      const nextRect = next.getBoundingClientRect();
-      const itemHeight = item.offsetHeight;
-
-      const contactPoint =
-        HEADER_TOP +
-        itemHeight +
-        CONTACT_GAP;
-
-      let push = nextRect.top - contactPoint;
-
-      if (push > 0) push = 0;
-
-      const maxPush =
-        -(itemHeight + CONTACT_GAP);
-
-      if (push < maxPush) {
-        push = maxPush;
-      }
-
-      item.style.setProperty(
-        '--home-push-y',
-        `${push}px`
-      );
+      entry.placeholder.style.width = `${entry.item.offsetWidth}px`;
     });
   }
 
-  updateHomePushScroll();
+  function resetItem(entry) {
+    const { item, placeholder } = entry;
+
+    if (!item.classList.contains('home-contact-fixed')) return;
+
+    placeholder.parentNode.insertBefore(item, placeholder.nextSibling);
+
+    item.classList.remove(
+      'home-contact-fixed',
+      'home-contact-pushing'
+    );
+
+    item.style.removeProperty('--home-contact-width');
+    item.style.removeProperty('--home-contact-left');
+    item.style.removeProperty('--home-contact-y');
+  }
+
+  function fixItem(entry) {
+    const { item, placeholder } = entry;
+
+    if (item.classList.contains('home-contact-fixed')) return;
+
+    const rect = placeholder.getBoundingClientRect();
+
+    placeholder.style.height = `${item.offsetHeight}px`;
+
+    item.style.setProperty(
+      '--home-contact-width',
+      `${rect.width}px`
+    );
+
+    item.style.setProperty(
+      '--home-contact-left',
+      `${rect.left}px`
+    );
+
+    document.body.appendChild(item);
+
+    item.classList.add('home-contact-fixed');
+  }
+
+  function update() {
+    syncPlaceholders();
+
+    let activeIndex = -1;
+
+    data.forEach((entry, index) => {
+      const rect = entry.placeholder.getBoundingClientRect();
+
+      if (rect.top <= HEADER_TOP) {
+        activeIndex = index;
+      }
+    });
+
+    data.forEach((entry, index) => {
+      if (index !== activeIndex) {
+        resetItem(entry);
+      }
+    });
+
+    if (activeIndex < 0) return;
+
+    const current = data[activeIndex];
+    const next = data[activeIndex + 1];
+
+    fixItem(current);
+
+    const currentHeight = current.item.offsetHeight;
+
+    let pushY = 0;
+
+    if (next) {
+      const nextRect =
+        next.placeholder.getBoundingClientRect();
+
+      const contactPoint =
+        HEADER_TOP +
+        currentHeight +
+        CONTACT_GAP;
+
+      if (nextRect.top < contactPoint) {
+        pushY =
+          nextRect.top -
+          contactPoint;
+
+        current.item.classList.add(
+          'home-contact-pushing'
+        );
+      } else {
+        current.item.classList.remove(
+          'home-contact-pushing'
+        );
+      }
+    }
+
+    current.item.style.setProperty(
+      '--home-contact-y',
+      `${pushY}px`
+    );
+  }
+
+  syncPlaceholders();
+  update();
 
   window.addEventListener(
     'scroll',
-    updateHomePushScroll,
+    update,
     { passive: true }
   );
 
   window.addEventListener(
     'resize',
-    updateHomePushScroll
+    () => {
+      data.forEach(resetItem);
+      syncPlaceholders();
+      update();
+    }
   );
 }
 
@@ -2887,4 +2984,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
-initHomePushScroll();
+initHomeContactPush();

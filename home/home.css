@@ -4065,3 +4065,17 @@ body.home-ready .hero-sheen {
     font-size: 17px;
   }
 }
+
+@media (min-width: 769px) {
+  .home-pinned-scene {
+    position: relative;
+  }
+
+  .home-pinned-scene > .home-hero,
+  .home-pinned-scene > .home-automation-section,
+  .home-pinned-scene > .home-cases-section {
+    position: sticky;
+    top: 82px;
+    z-index: 5;
+  }
+}

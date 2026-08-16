@@ -3852,6 +3852,11 @@ body.home-ready .hero-sheen {
     width: 34%;
   }
 }
+@media (max-width: 768px) {
+  .workspace-peek-btn {
+    margin-right: 8px;
+  }
+}
 
 .workspace-peek-progress {
   display: inline-flex;

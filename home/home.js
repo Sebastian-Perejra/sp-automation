@@ -3780,6 +3780,235 @@ function initCallBooking() {
   renderCalendar();
 }
 
+const HOME_CALL_BOOKING_TEXTS = {
+  uk: {
+    required: 'Оберіть дату, час і заповніть контактні дані.',
+    robot: 'Підтвердіть, що ви не робот.',
+    sending: 'Надсилаємо...',
+    sent: '✓ Запит на дзвінок надіслано',
+    failed: 'Не вдалося надіслати заявку. Спробуйте ще раз.',
+    send: 'Надіслати запит на дзвінок'
+  },
+
+  en: {
+    required: 'Choose a date, time and enter your contact details.',
+    robot: 'Please confirm that you are not a robot.',
+    sending: 'Sending...',
+    sent: '✓ Call request sent',
+    failed: 'Could not send the request. Please try again.',
+    send: 'Send call request'
+  },
+
+  ru: {
+    required: 'Выберите дату, время и заполните контактные данные.',
+    robot: 'Подтвердите, что вы не робот.',
+    sending: 'Отправляем...',
+    sent: '✓ Запрос на звонок отправлен',
+    failed: 'Не удалось отправить заявку. Попробуйте ещё раз.',
+    send: 'Отправить запрос на звонок'
+  }
+};
+
+const HOME_CALL_BOOKING_TEXT =
+  HOME_CALL_BOOKING_TEXTS[HOME_LANG] ||
+  HOME_CALL_BOOKING_TEXTS.uk;
+
+async function submitCallBooking() {
+  const date =
+    document.getElementById('call-booking-date')
+      ?.value || '';
+
+  const time =
+    document.getElementById('call-booking-time')
+      ?.value || '';
+
+  const name =
+    document.getElementById('call-booking-name')
+      ?.value.trim() || '';
+
+  const contact =
+    document.getElementById('call-booking-contact')
+      ?.value.trim() || '';
+
+  const message =
+    document.getElementById('call-booking-message')
+      ?.value.trim() || '';
+
+  const status =
+    document.getElementById('call-booking-status');
+
+  const button =
+    document.getElementById('call-booking-submit');
+
+  const turnstileToken =
+    document.querySelector(
+      '#call-booking-overlay [name="cf-turnstile-response"]'
+    )?.value || '';
+
+  if (!status || !button) {
+    return;
+  }
+
+  if (
+    !date ||
+    !time ||
+    !name ||
+    !contact
+  ) {
+    status.textContent =
+      HOME_CALL_BOOKING_TEXT.required;
+
+    status.style.color =
+      '#cc0000';
+
+    return;
+  }
+
+  if (!turnstileToken) {
+    status.textContent =
+      HOME_CALL_BOOKING_TEXT.robot;
+
+    status.style.color =
+      '#cc0000';
+
+    return;
+  }
+
+  status.textContent =
+    HOME_CALL_BOOKING_TEXT.sending;
+
+  status.style.color =
+    '#555';
+
+  button.disabled = true;
+  button.textContent =
+    HOME_CALL_BOOKING_TEXT.sending;
+
+  const fullMessage = [
+    '📞 ЗАПРОС НА ЗВОНОК',
+    '',
+    `Дата: ${date}`,
+    `Время: ${time}`,
+    `Имя: ${name}`,
+    `Контакт: ${contact}`,
+    '',
+    `Комментарий: ${message || '—'}`,
+    '',
+    `Язык страницы: ${HOME_LANG.toUpperCase()}`
+  ].join('\n');
+
+  try {
+    const response =
+      await fetch(
+        REVIEWS_API_URL,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'text/plain;charset=utf-8'
+          },
+
+          body:
+            JSON.stringify({
+              user_name: name,
+              user_email: contact,
+              message: fullMessage,
+              turnstileToken:
+                turnstileToken
+            })
+        }
+      );
+
+    const result =
+      await response.json();
+
+    if (!result.ok) {
+      throw new Error(
+        result.error ||
+        HOME_CALL_BOOKING_TEXT.failed
+      );
+    }
+
+    status.textContent =
+      HOME_CALL_BOOKING_TEXT.sent;
+
+    status.style.color =
+      '#0F9D58';
+
+    document.getElementById(
+      'call-booking-name'
+    ).value = '';
+
+    document.getElementById(
+      'call-booking-contact'
+    ).value = '';
+
+    document.getElementById(
+      'call-booking-message'
+    ).value = '';
+
+    document.getElementById(
+      'call-booking-date'
+    ).value = '';
+
+    document.getElementById(
+      'call-booking-time'
+    ).value = '';
+
+    document
+      .querySelectorAll(
+        '#call-booking-times button'
+      )
+      .forEach(button => {
+        button.classList.remove(
+          'is-selected'
+        );
+      });
+
+    document
+      .querySelectorAll(
+        '#call-calendar-days button'
+      )
+      .forEach(button => {
+        button.classList.remove(
+          'is-selected'
+        );
+      });
+
+    if (window.turnstile) {
+      const widget =
+        document.querySelector(
+          '#call-booking-overlay .cf-turnstile'
+        );
+
+      if (widget) {
+        window.turnstile.reset(
+          widget
+        );
+      }
+    }
+
+    setTimeout(() => {
+      closeCallBookingModal();
+    }, 1800);
+  } catch (error) {
+    console.error(error);
+
+    status.textContent =
+      error.message ||
+      HOME_CALL_BOOKING_TEXT.failed;
+
+    status.style.color =
+      '#cc0000';
+  } finally {
+    button.disabled = false;
+
+    button.textContent =
+      HOME_CALL_BOOKING_TEXT.send;
+  }
+}
+
 initHomeBackground();
 initHeroSpotlight();
 initHeroTilt();

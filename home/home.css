@@ -4071,16 +4071,12 @@ body.home-ready .hero-sheen {
     position: relative;
   }
 
-  .home-pinned-scene > .home-hero {
-    position: sticky;
-    top: 92px;
-    z-index: 5;
-  }
-
+  .home-pinned-scene > .home-hero,
+  .home-pinned-scene > .carousel-container,
   .home-pinned-scene > .home-automation-section,
   .home-pinned-scene > .home-cases-section {
     position: sticky;
-    top: 92px;
+    top: 82px;
     z-index: 5;
   }
 }

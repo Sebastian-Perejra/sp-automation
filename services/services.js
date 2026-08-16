@@ -1,84 +1,154 @@
 (() => {
   const images = [
-  "/services/assets/scheme.webp",
-  "/services/assets/scheme2.webp",
-  "/services/assets/scheme3.webp",
-  "/services/assets/scheme4.webp"
-];
+    "/services/assets/scheme.webp",
+    "/services/assets/scheme2.webp",
+    "/services/assets/scheme3.webp",
+    "/services/assets/scheme4.webp"
+  ];
 
-images.forEach(src => {
-  const img = new Image();
-  img.src = src;
-});
+  const signalSets = [
+    `
+      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path class="signal-track" d="M1260 26C1218 82 1158 120 1118 180C1078 242 1052 320 1018 396C980 480 930 540 874 604C820 664 760 720 702 806C646 890 592 950 514 1036" />
+        <path class="signal-track" d="M1088 86C1038 132 990 194 952 264C914 334 882 424 846 520C810 618 760 698 698 782C640 858 580 922 522 1018" />
+        <path class="signal-track" d="M344 1026C454 948 554 876 642 786C722 702 790 600 862 498C934 398 1002 312 1088 226C1168 144 1262 78 1386 12" />
+        <path class="signal-track" d="M1464 148C1382 192 1318 250 1260 336C1206 418 1160 520 1110 622C1060 720 988 796 898 862" />
 
-let index = 0;
+        <path class="signal-pulse signal-green flow-a" d="M1260 26C1218 82 1158 120 1118 180C1078 242 1052 320 1018 396C980 480 930 540 874 604C820 664 760 720 702 806C646 890 592 950 514 1036" />
+        <path class="signal-pulse signal-gold flow-b" d="M1088 86C1038 132 990 194 952 264C914 334 882 424 846 520C810 618 760 698 698 782C640 858 580 922 522 1018" />
+        <path class="signal-pulse signal-green flow-c" d="M344 1026C454 948 554 876 642 786C722 702 790 600 862 498C934 398 1002 312 1088 226C1168 144 1262 78 1386 12" />
+        <path class="signal-pulse signal-gold flow-d" d="M1464 148C1382 192 1318 250 1260 336C1206 418 1160 520 1110 622C1060 720 988 796 898 862" />
+      </svg>
+    `,
+    `
+      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path class="signal-track" d="M114 906C274 842 422 804 598 770C754 742 878 688 986 590C1098 486 1182 346 1280 248C1384 146 1526 114 1760 120" />
+        <path class="signal-track" d="M206 924C384 866 530 832 688 802C826 776 948 730 1058 646C1172 560 1260 448 1350 340C1440 234 1538 164 1702 154" />
+        <path class="signal-track" d="M1422 134C1512 188 1600 240 1664 322C1734 412 1786 522 1844 676" />
+        <path class="signal-track" d="M764 742C864 716 950 674 1030 608C1114 538 1184 450 1262 364C1338 280 1416 212 1514 172" />
 
-const layerA = document.createElement("div");
-const layerB = document.createElement("div");
+        <path class="signal-pulse signal-green flow-a" d="M114 906C274 842 422 804 598 770C754 742 878 688 986 590C1098 486 1182 346 1280 248C1384 146 1526 114 1760 120" />
+        <path class="signal-pulse signal-gold flow-b" d="M206 924C384 866 530 832 688 802C826 776 948 730 1058 646C1172 560 1260 448 1350 340C1440 234 1538 164 1702 154" />
+        <path class="signal-pulse signal-green flow-c" d="M1422 134C1512 188 1600 240 1664 322C1734 412 1786 522 1844 676" />
+        <path class="signal-pulse signal-gold flow-d" d="M764 742C864 716 950 674 1030 608C1114 538 1184 450 1262 364C1338 280 1416 212 1514 172" />
+      </svg>
+    `,
+    `
+      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path class="signal-track" d="M-40 286C178 314 340 360 520 432C690 500 842 550 1018 548C1186 544 1332 494 1468 432C1608 368 1740 298 1948 258" />
+        <path class="signal-track" d="M166 1032C336 914 494 836 642 736C794 632 920 520 1040 384C1148 262 1296 148 1486 70" />
+        <path class="signal-track" d="M764 548C904 542 1030 520 1148 476C1280 428 1418 362 1562 282C1704 202 1810 140 1944 108" />
+        <path class="signal-track" d="M1268 274C1358 332 1458 394 1546 466C1636 538 1712 622 1816 744" />
 
-layerA.className = "services-bg is-active";
-layerB.className = "services-bg";
+        <path class="signal-pulse signal-green flow-a" d="M-40 286C178 314 340 360 520 432C690 500 842 550 1018 548C1186 544 1332 494 1468 432C1608 368 1740 298 1948 258" />
+        <path class="signal-pulse signal-gold flow-b" d="M166 1032C336 914 494 836 642 736C794 632 920 520 1040 384C1148 262 1296 148 1486 70" />
+        <path class="signal-pulse signal-green flow-c" d="M764 548C904 542 1030 520 1148 476C1280 428 1418 362 1562 282C1704 202 1810 140 1944 108" />
+        <path class="signal-pulse signal-gold flow-d" d="M1268 274C1358 332 1458 394 1546 466C1636 538 1712 622 1816 744" />
+      </svg>
+    `,
+    `
+      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path class="signal-track" d="M314 858C496 812 684 786 876 756C1048 730 1180 680 1282 574C1386 466 1460 318 1542 222C1632 118 1740 86 1898 88" />
+        <path class="signal-track" d="M362 842C530 796 708 772 892 742C1048 716 1162 666 1262 572C1368 472 1448 336 1528 248C1604 164 1684 116 1794 104" />
+        <path class="signal-track" d="M862 736C1002 702 1112 650 1198 568C1292 478 1362 366 1442 270C1514 184 1590 130 1692 96" />
+        <path class="signal-track" d="M1288 230C1370 262 1452 304 1520 370C1588 436 1642 526 1712 646" />
 
-document.body.prepend(layerB);
-document.body.prepend(layerA);
+        <path class="signal-pulse signal-green flow-a" d="M314 858C496 812 684 786 876 756C1048 730 1180 680 1282 574C1386 466 1460 318 1542 222C1632 118 1740 86 1898 88" />
+        <path class="signal-pulse signal-gold flow-b" d="M362 842C530 796 708 772 892 742C1048 716 1162 666 1262 572C1368 472 1448 336 1528 248C1604 164 1684 116 1794 104" />
+        <path class="signal-pulse signal-green flow-c" d="M862 736C1002 702 1112 650 1198 568C1292 478 1362 366 1442 270C1514 184 1590 130 1692 96" />
+        <path class="signal-pulse signal-gold flow-d" d="M1288 230C1370 262 1452 304 1520 370C1588 436 1642 526 1712 646" />
+      </svg>
+    `
+  ];
 
-layerA.style.backgroundImage = `url("${images[0]}")`;
-layerB.style.backgroundImage = `url("${images[1]}")`;
-
-let activeLayer = layerA;
-let hiddenLayer = layerB;
-
-const FADE_TIME = 6000;
-const HOLD_TIME = 12000;
-
-const changeBackground = () => {
-  index = (index + 1) % images.length;
-
-  hiddenLayer.style.backgroundImage = `url("${images[index]}")`;
-  hiddenLayer.classList.remove("is-active");
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      hiddenLayer.classList.add("is-active");
-      activeLayer.classList.remove("is-active");
-
-      const oldActive = activeLayer;
-      activeLayer = hiddenLayer;
-      hiddenLayer = oldActive;
-
-      setTimeout(changeBackground, HOLD_TIME + FADE_TIME);
-    });
+  images.forEach(src => {
+    const img = new Image();
+    img.src = src;
   });
-};
 
-setTimeout(changeBackground, HOLD_TIME);
+  let index = 0;
 
- let targetX = 0;
-let targetY = 0;
-let currentX = 0;
-let currentY = 0;
-let animationFrame = null;
+  const bgA = document.createElement("div");
+  const bgB = document.createElement("div");
+  bgA.className = "services-bg is-active";
+  bgB.className = "services-bg";
 
-const maxMove = 18;
+  const sigA = document.createElement("div");
+  const sigB = document.createElement("div");
+  sigA.className = "services-signal-set is-active";
+  sigB.className = "services-signal-set";
 
-const animateBackground = () => {
-  currentX += (targetX - currentX) * 0.07;
-  currentY += (targetY - currentY) * 0.07;
-  
-    document.documentElement.style.setProperty(
-      "--services-move-x",
-      `${currentX}px`
-    );
-  
-    document.documentElement.style.setProperty(
-      "--services-move-y",
-      `${currentY}px`
-    );
-  
-    const distanceX = Math.abs(targetX - currentX);
-    const distanceY = Math.abs(targetY - currentY);
-  
-    if (distanceX > 0.05 || distanceY > 0.05) {
+  document.body.prepend(bgB);
+  document.body.prepend(bgA);
+  document.body.appendChild(sigB);
+  document.body.appendChild(sigA);
+
+  const applyScene = (bgLayer, sigLayer, i) => {
+    bgLayer.style.backgroundImage = `url("${images[i]}")`;
+    sigLayer.innerHTML = signalSets[i];
+  };
+
+  applyScene(bgA, sigA, 0);
+  applyScene(bgB, sigB, 1);
+
+  let activeBg = bgA;
+  let hiddenBg = bgB;
+  let activeSig = sigA;
+  let hiddenSig = sigB;
+
+  const FADE_TIME = 6000;
+  const HOLD_TIME = 12000;
+
+  const changeScene = () => {
+    index = (index + 1) % images.length;
+
+    applyScene(hiddenBg, hiddenSig, index);
+
+    hiddenBg.classList.remove("is-active");
+    hiddenSig.classList.remove("is-active");
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        hiddenBg.classList.add("is-active");
+        hiddenSig.classList.add("is-active");
+
+        activeBg.classList.remove("is-active");
+        activeSig.classList.remove("is-active");
+
+        const prevBg = activeBg;
+        activeBg = hiddenBg;
+        hiddenBg = prevBg;
+
+        const prevSig = activeSig;
+        activeSig = hiddenSig;
+        hiddenSig = prevSig;
+
+        setTimeout(changeScene, HOLD_TIME + FADE_TIME);
+      });
+    });
+  };
+
+  setTimeout(changeScene, HOLD_TIME);
+
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let animationFrame = null;
+
+  const maxMove = 18;
+
+  const animateBackground = () => {
+    currentX += (targetX - currentX) * 0.07;
+    currentY += (targetY - currentY) * 0.07;
+
+    document.documentElement.style.setProperty("--services-move-x", `${currentX}px`);
+    document.documentElement.style.setProperty("--services-move-y", `${currentY}px`);
+
+    const dx = Math.abs(targetX - currentX);
+    const dy = Math.abs(targetY - currentY);
+
+    if (dx > 0.05 || dy > 0.05) {
       animationFrame = requestAnimationFrame(animateBackground);
     } else {
       currentX = targetX;
@@ -86,105 +156,35 @@ const animateBackground = () => {
       animationFrame = null;
     }
   };
-  
+
   const startBackgroundAnimation = () => {
     if (animationFrame !== null) return;
-  
     animationFrame = requestAnimationFrame(animateBackground);
   };
-  
+
   window.addEventListener(
     "pointermove",
     event => {
       if (window.innerWidth <= 760) return;
-  
-      const signalX = event.clientX / window.innerWidth * 100;
-      const signalY = event.clientY / window.innerHeight * 100;
-  
-      document.documentElement.style.setProperty(
-        "--signal-x",
-        `${signalX}%`
-      );
-  
-      document.documentElement.style.setProperty(
-        "--signal-y",
-        `${signalY}%`
-      );
-  
+
       const x = event.clientX / window.innerWidth - 0.5;
       const y = event.clientY / window.innerHeight - 0.5;
-  
+
       targetX = x * maxMove;
       targetY = y * maxMove;
-  
+
       startBackgroundAnimation();
     },
     { passive: true }
   );
-  
+
   document.documentElement.addEventListener(
     "mouseleave",
     () => {
       targetX = 0;
       targetY = 0;
-  
       startBackgroundAnimation();
     },
     { passive: true }
   );
-  
-  animateBackground();
-
-  const signals = document.createElement("div");
-  signals.className = "services-signals";
-
-  signals.innerHTML = `
-    <svg
-      class="services-signals-svg"
-      viewBox="0 0 1200 800"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-    >
-      <path
-        class="signal-path signal-path-a"
-        d="M -80 610 C 130 570, 245 510, 350 430 S 570 290, 710 330 S 955 500, 1280 235"
-      />
-
-      <path
-        class="signal-path signal-path-b"
-        d="M -100 290 C 120 320, 225 255, 365 275 S 620 420, 755 350 S 945 195, 1270 270"
-      />
-
-      <path
-        class="signal-path signal-path-c"
-        d="M 190 860 C 250 650, 390 585, 470 505 S 555 320, 690 245 S 925 180, 1050 -80"
-      />
-
-      <path
-        class="signal-path signal-path-d"
-        d="M 40 745 C 205 650, 250 555, 410 540 S 600 635, 745 570 S 935 385, 1190 420"
-      />
-
-      <path
-        class="signal-path signal-path-e"
-        d="M 1020 850 C 900 700, 825 640, 805 505 S 890 300, 790 205 S 565 125, 510 -100"
-      />
-    </svg>
-  `;
-
-  document.body.appendChild(signals);
 })();
-
-const lightSignals = document.createElement("div");
-lightSignals.className = "light-signals";
-
-lightSignals.innerHTML = `
-  <span class="light-signal signal-1"></span>
-  <span class="light-signal signal-2"></span>
-  <span class="light-signal signal-3"></span>
-  <span class="light-signal signal-4"></span>
-  <span class="light-signal signal-5"></span>
-  <span class="light-signal signal-6"></span>
-`;
-
-document.body.appendChild(lightSignals);

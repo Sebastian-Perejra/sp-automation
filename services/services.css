@@ -48,8 +48,8 @@ body {
   opacity: 0;
   pointer-events: none;
   translate:
-    calc(var(--services-move-x, 0px) * 0.65)
-    calc(var(--services-move-y, 0px) * 0.65);
+    var(--services-move-x, 0px)
+    var(--services-move-y, 0px);
   transition: opacity 6s ease-in-out;
 }
 

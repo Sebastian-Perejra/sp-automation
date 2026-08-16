@@ -47,66 +47,86 @@
 
 setTimeout(changeBackground, 14000);
 
-  let targetX = 0;
-  let targetY = 0;
-  let currentX = 0;
-  let currentY = 0;
+ let targetX = 0;
+let targetY = 0;
+let currentX = 0;
+let currentY = 0;
+let animationFrame = null;
 
-  const maxMove = 18;
+const maxMove = 18;
 
-  window.addEventListener(
-    "pointermove",
-    event => {
-      if (window.innerWidth <= 760) return;
-
-      const signalX = event.clientX / window.innerWidth * 100;
-      const signalY = event.clientY / window.innerHeight * 100;
-      
-      document.documentElement.style.setProperty(
-        "--signal-x",
-        `${signalX}%`
-      );
-      
-      document.documentElement.style.setProperty(
-        "--signal-y",
-        `${signalY}%`
-      );
-
-      const x = event.clientX / window.innerWidth - 0.5;
-      const y = event.clientY / window.innerHeight - 0.5;
-
-      targetX = x * maxMove;
-      targetY = y * maxMove;
-    },
-    { passive: true }
-  );
-
-  window.addEventListener(
-    "pointerleave",
-    () => {
-      targetX = 0;
-      targetY = 0;
-    },
-    { passive: true }
-  );
-
-  const animateBackground = () => {
-    currentX += (targetX - currentX) * 0.055;
-    currentY += (targetY - currentY) * 0.055;
-
+const animateBackground = () => {
+  currentX += (targetX - currentX) * 0.07;
+  currentY += (targetY - currentY) * 0.07;
+  
     document.documentElement.style.setProperty(
       "--services-move-x",
       `${currentX}px`
     );
-
+  
     document.documentElement.style.setProperty(
       "--services-move-y",
       `${currentY}px`
     );
-
-    requestAnimationFrame(animateBackground);
+  
+    const distanceX = Math.abs(targetX - currentX);
+    const distanceY = Math.abs(targetY - currentY);
+  
+    if (distanceX > 0.05 || distanceY > 0.05) {
+      animationFrame = requestAnimationFrame(animateBackground);
+    } else {
+      currentX = targetX;
+      currentY = targetY;
+      animationFrame = null;
+    }
   };
-
+  
+  const startBackgroundAnimation = () => {
+    if (animationFrame !== null) return;
+  
+    animationFrame = requestAnimationFrame(animateBackground);
+  };
+  
+  window.addEventListener(
+    "pointermove",
+    event => {
+      if (window.innerWidth <= 760) return;
+  
+      const signalX = event.clientX / window.innerWidth * 100;
+      const signalY = event.clientY / window.innerHeight * 100;
+  
+      document.documentElement.style.setProperty(
+        "--signal-x",
+        `${signalX}%`
+      );
+  
+      document.documentElement.style.setProperty(
+        "--signal-y",
+        `${signalY}%`
+      );
+  
+      const x = event.clientX / window.innerWidth - 0.5;
+      const y = event.clientY / window.innerHeight - 0.5;
+  
+      targetX = x * maxMove;
+      targetY = y * maxMove;
+  
+      startBackgroundAnimation();
+    },
+    { passive: true }
+  );
+  
+  document.documentElement.addEventListener(
+    "mouseleave",
+    () => {
+      targetX = 0;
+      targetY = 0;
+  
+      startBackgroundAnimation();
+    },
+    { passive: true }
+  );
+  
   animateBackground();
 
   const signals = document.createElement("div");

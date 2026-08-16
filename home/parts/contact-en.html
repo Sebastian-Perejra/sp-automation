@@ -3,7 +3,16 @@
   type="button"
   onclick="openContactModal()"
 >
-  💬 Message
+  <span class="float-action-icon">
+    ↗
+  </span>
+
+  <span class="float-action-copy">
+    <strong>Message Sebastian</strong>
+    <small>Directly, no middlemen</small>
+  </span>
+
+  <span class="float-action-arrow">→</span>
 </button>
 
 <div
@@ -15,81 +24,106 @@
     <button
       class="contact-close"
       type="button"
+      aria-label="Close"
       onclick="closeContactModal()"
     >
       ×
     </button>
 
-    <h3>Message Sebastian</h3>
-
-    <label for="contact-name">
-      Your name
-    </label>
-
-    <input
-      id="contact-name"
-      type="text"
-      placeholder="For example, Alex"
-    >
-
-    <label>
-      How should I contact you?
-    </label>
-
-    <div class="contact-method-options">
-      <button
-        type="button"
-        class="contact-method-btn"
-        onclick="selectContactMethod('email', this)"
-      >
-        ✉ Email
-      </button>
-
-      <button
-        type="button"
-        class="contact-method-btn"
-        onclick="selectContactMethod('phone', this)"
-      >
-        ☎ Phone
-      </button>
-
-      <button
-        type="button"
-        class="contact-method-btn"
-        onclick="selectContactMethod('telegram', this)"
-      >
-        ✈ Telegram
-      </button>
+    <div class="form-modal-kicker">
+      LET'S TALK
     </div>
 
-    <input
-      id="contact-method"
-      type="text"
-      placeholder="Choose a contact method"
-      disabled
-    >
+    <h3>
+      What is slowing your process down?
+    </h3>
 
-    <input
-      id="contact-method-type"
-      type="hidden"
-      value=""
-    >
+    <p class="form-modal-intro">
+      Describe the task in your own words.
+      No briefs. No long forms.
+    </p>
 
-    <label for="contact-message">
-      Message
-    </label>
+    <div class="form-field">
+      <label for="contact-name">
+        Your name
+      </label>
 
-    <textarea
-      id="contact-message"
-      rows="5"
-      placeholder="Briefly describe your task"
-    ></textarea>
+      <input
+        id="contact-name"
+        type="text"
+        placeholder="For example, Alex"
+      >
+    </div>
 
-    <div class="turnstile-wrapper">
-      <div
-        class="cf-turnstile"
-        data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
-      ></div>
+    <div class="form-field">
+      <label>
+        How should I contact you?
+      </label>
+
+      <div class="contact-method-options">
+        <button
+          type="button"
+          class="contact-method-btn"
+          onclick="selectContactMethod('email', this)"
+        >
+          <span>✉</span>
+          Email
+        </button>
+
+        <button
+          type="button"
+          class="contact-method-btn"
+          onclick="selectContactMethod('phone', this)"
+        >
+          <span>☎</span>
+          Phone
+        </button>
+
+        <button
+          type="button"
+          class="contact-method-btn"
+          onclick="selectContactMethod('telegram', this)"
+        >
+          <span>✈</span>
+          Telegram
+        </button>
+      </div>
+
+      <input
+        id="contact-method"
+        type="text"
+        placeholder="Choose a contact method"
+        disabled
+      >
+
+      <input
+        id="contact-method-type"
+        type="hidden"
+        value=""
+      >
+    </div>
+
+    <div class="form-field">
+      <label for="contact-message">
+        Briefly about the task
+      </label>
+
+      <textarea
+        id="contact-message"
+        rows="5"
+        placeholder="What are you doing manually now, or what would you like to simplify?"
+      ></textarea>
+    </div>
+
+    <div class="form-security">
+      <span>Secure submission</span>
+
+      <div class="turnstile-wrapper">
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAEC2VWGc6kZPcKO6"
+        ></div>
+      </div>
     </div>
 
     <button
@@ -97,9 +131,14 @@
       type="button"
       onclick="testContactForm()"
     >
-      Send
+      Send message
+      <span>→</span>
     </button>
 
     <div id="contact-status"></div>
+
+    <div class="contact-modal-note">
+      Your message goes directly to me.
+    </div>
   </div>
 </div>

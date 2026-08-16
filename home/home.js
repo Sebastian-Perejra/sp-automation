@@ -2808,7 +2808,7 @@ function initHeroEasterEgg() {
   );
 }
 
-function initHomeScrollHandoff() {
+function initHomeHeroPin() {
   if (
     typeof gsap === 'undefined' ||
     typeof ScrollTrigger === 'undefined'
@@ -2824,7 +2824,9 @@ function initHomeScrollHandoff() {
     return;
   }
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(
+    ScrollTrigger
+  );
 
   const hero =
     document.querySelector(
@@ -2836,28 +2838,53 @@ function initHomeScrollHandoff() {
       '.carousel-container'
     );
 
-  if (!hero || !carousel) {
+  if (
+    !hero ||
+    !carousel ||
+    hero.parentElement.classList.contains(
+      'home-hero-pin-shell'
+    )
+  ) {
     return;
   }
 
-  const HEADER_TOP = 82;
-  const CONTACT_GAP = 12;
+  const shell =
+    document.createElement(
+      'div'
+    );
+
+  shell.className =
+    'home-hero-pin-shell';
+
+  hero.parentNode.insertBefore(
+    shell,
+    hero
+  );
+
+  shell.appendChild(
+    hero
+  );
 
   ScrollTrigger.create({
-    trigger: hero,
-    start: `top ${HEADER_TOP}px`,
+    trigger: shell,
+
+    start: 'top 82px',
+
     endTrigger: carousel,
 
     end: () =>
       `top ${
-        HEADER_TOP +
+        82 +
         hero.offsetHeight +
-        CONTACT_GAP
+        12
       }px`,
 
-    pin: hero,
+    pin: shell,
+
     pinSpacing: false,
+
     anticipatePin: 1,
+
     invalidateOnRefresh: true
   });
 
@@ -2874,4 +2901,4 @@ initHomeEntrance();
 loadHomeParts();
 initAutomationCardSpotlight();
 initHeroEasterEgg();
-initHomeScrollHandoff();
+initHomeHeroPin();

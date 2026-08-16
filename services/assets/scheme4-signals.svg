@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" width="1672" height="941" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.0" result="b1"/>
+      <feGaussianBlur stdDeviation="4.8" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowGold" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.8" result="b1"/>
+      <feGaussianBlur stdDeviation="4.5" result="b2"/>
+      <feMerge>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+    <path
+      d="M 242 750
+         C 392 721, 531 701, 666 678
+         C 798 656, 908 627, 1004 582
+         C 1100 537, 1178 480, 1247 409
+         C 1317 337, 1373 265, 1436 205"
+      stroke="#66ffb2"
+      stroke-width="4"
+      stroke-dasharray="30 315"
+      stroke-dashoffset="-25"
+      filter="url(#glowGreen)">
+      <animate attributeName="stroke-dashoffset" from="-25" to="-720" dur="8.6s" repeatCount="indefinite"/>
+    </path>
+
+    <path
+      d="M 326 770
+         C 460 744, 587 724, 710 704
+         C 834 684, 940 656, 1034 615
+         C 1125 574, 1200 521, 1266 456
+         C 1330 393, 1388 327, 1450 264"
+      stroke="#ffd56f"
+      stroke-width="3.8"
+      stroke-dasharray="26 300"
+      stroke-dashoffset="-105"
+      filter="url(#glowGold)">
+      <animate attributeName="stroke-dashoffset" from="-105" to="-750" dur="9.4s" repeatCount="indefinite"/>
+    </path>
+
+    <path
+      d="M 744 668
+         C 850 639, 937 602, 1013 553
+         C 1089 504, 1154 446, 1208 385
+         C 1263 323, 1316 267, 1380 225"
+      stroke="#69ffb4"
+      stroke-width="3.6"
+      stroke-dasharray="22 285"
+      stroke-dashoffset="-150"
+      filter="url(#glowGreen)">
+      <animate attributeName="stroke-dashoffset" from="-150" to="-720" dur="9.9s" repeatCount="indefinite"/>
+    </path>
+
+    <path
+      d="M 1183 223
+         C 1242 250, 1296 287, 1342 332
+         C 1388 377, 1426 433, 1460 492"
+      stroke="#ffd36d"
+      stroke-width="3.4"
+      stroke-dasharray="20 250"
+      stroke-dashoffset="-60"
+      filter="url(#glowGold)">
+      <animate attributeName="stroke-dashoffset" from="-60" to="-520" dur="10.2s" repeatCount="indefinite"/>
+    </path>
+
+  </g>
+</svg>

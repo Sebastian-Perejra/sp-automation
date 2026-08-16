@@ -4437,14 +4437,14 @@ button[data-calc="clear"] {
 
 .home-final-calc {
   grid-template-columns:
-    repeat(4, 42px);
+    repeat(5, 42px);
 
   grid-template-areas:
-    "screen screen screen screen"
-    "clear seven eight nine"
-    "four five six divide"
-    "one two three multiply"
-    "zero plus minus equals";
+    "screen screen screen screen screen"
+    "seven eight nine divide multiply"
+    "four five six divide multiply"
+    "one two three minus equals"
+    "clear zero plus minus equals";
 }
 
 .home-final-calc-screen {

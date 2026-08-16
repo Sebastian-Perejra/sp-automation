@@ -2817,130 +2817,107 @@ function initHomePushHandoff() {
     return;
   }
 
-  const HEADER_TOP = 82;
-  const CONTACT_GAP = 10;
-
-  const selectors = [
-    '.home-hero',
-    '.carousel-container',
-    '.home-automation-section',
-    '.home-cases-section'
+  const configs = [
+    {
+      selector: '.home-hero',
+      hold: 260,
+      type: 'hero'
+    },
+    {
+      selector: '.carousel-container',
+      hold: 220,
+      type: 'carousel'
+    },
+    {
+      selector: '.home-automation-section',
+      hold: 220,
+      type: 'automation'
+    },
+    {
+      selector: '.home-cases-section',
+      hold: 220,
+      type: 'cases'
+    },
+    {
+      selector: '.home-final-cta',
+      hold: 0,
+      type: 'final'
+    }
   ];
 
-  const elements = selectors
-    .map(selector =>
-      document.querySelector(selector)
-    )
-    .filter(Boolean);
+  const scenes = [];
 
-  if (elements.length < 2) {
-    return;
-  }
-
-  const shells = elements.map(
-    (element, index) => {
-      const shell =
-        document.createElement('div');
-
-      shell.className =
-        'home-push-shell';
-
-      shell.style.setProperty(
-        '--home-push-z',
-        String(20 + index)
+  configs.forEach(config => {
+    const element =
+      document.querySelector(
+        config.selector
       );
 
-      element.parentNode.insertBefore(
-        shell,
-        element
-      );
-
-      shell.appendChild(element);
-
-      return shell;
+    if (!element) {
+      return;
     }
-  );
 
-  function updatePush() {
-    shells.forEach(
-      (shell, index) => {
-        const next =
-          shells[index + 1];
+    if (
+      element.parentElement &&
+      element.parentElement.classList.contains(
+        'home-push-scene'
+      )
+    ) {
+      return;
+    }
 
-        if (!next) {
-          shell.style.setProperty(
-            '--home-push-y',
-            '0px'
-          );
+    const scene =
+      document.createElement(
+        'div'
+      );
 
-          return;
-        }
+    scene.className =
+      `home-push-scene home-push-scene-${config.type}`;
 
-        const shellRect =
-          shell.getBoundingClientRect();
+    scene.dataset.hold =
+      String(config.hold);
 
-        const nextRect =
-          next.getBoundingClientRect();
-
-        const shellHeight =
-          shell.offsetHeight;
-
-        let pushY = 0;
-
-        if (
-          shellRect.top <=
-          HEADER_TOP + 1
-        ) {
-          const contactPoint =
-            HEADER_TOP +
-            shellHeight +
-            CONTACT_GAP;
-
-          if (
-            nextRect.top <
-            contactPoint
-          ) {
-            pushY =
-              nextRect.top -
-              contactPoint;
-          }
-
-          const maxPush =
-            -(
-              shellHeight +
-              CONTACT_GAP
-            );
-
-          if (
-            pushY <
-            maxPush
-          ) {
-            pushY =
-              maxPush;
-          }
-        }
-
-        shell.style.setProperty(
-          '--home-push-y',
-          `${pushY}px`
-        );
-      }
+    element.parentNode.insertBefore(
+      scene,
+      element
     );
+
+    scene.appendChild(
+      element
+    );
+
+    scenes.push({
+      scene,
+      element,
+      hold: config.hold
+    });
+  });
+
+  function updateScenes() {
+    scenes.forEach(entry => {
+      const height =
+        entry.element.offsetHeight;
+
+      entry.scene.style.setProperty(
+        '--home-scene-height',
+        `${height + entry.hold}px`
+      );
+    });
   }
 
-  updatePush();
+  updateScenes();
 
   window.addEventListener(
-    'scroll',
-    updatePush,
+    'load',
+    updateScenes,
     {
-      passive: true
+      once: true
     }
   );
 
   window.addEventListener(
     'resize',
-    updatePush
+    updateScenes
   );
 }
 initHomeBackground();

@@ -2227,8 +2227,15 @@ const WORKSPACE_PEEK_FRAMES = [
 
 let workspacePeekFrameIndex = 0;
 let workspacePeekTimer = null;
+let workspacePeekPreloaded = false;
 
 function preloadWorkspacePeekFrames() {
+  if (workspacePeekPreloaded) {
+    return;
+  }
+
+  workspacePeekPreloaded = true;
+
   WORKSPACE_PEEK_FRAMES.forEach(frame => {
     const image = new Image();
     image.src = frame.src;
@@ -2339,6 +2346,8 @@ function openWorkspacePeek() {
     return;
   }
 
+  preloadWorkspacePeekFrames();
+
   overlay.classList.add(
     'show'
   );
@@ -2398,7 +2407,6 @@ function handleWorkspacePeekClick(event) {
   }
 }
 
-preloadWorkspacePeekFrames();
 document.addEventListener(
   'click',
   event => {

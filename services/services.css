@@ -29,7 +29,6 @@ body {
   transition:
   opacity 5.8s ease-in-out,
   transform 16s ease-in-out,
-  translate 0.9s ease;
   pointer-events: none;
 }
 

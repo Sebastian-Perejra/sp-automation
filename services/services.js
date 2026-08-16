@@ -7,40 +7,39 @@
   ];
 
   const signalSets = [
-    `
-      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path class="signal-pulse signal-green flow-a" d="M1260 26C1218 82 1158 120 1118 180C1078 242 1052 320 1018 396C980 480 930 540 874 604C820 664 760 720 702 806C646 890 592 950 514 1036" />
-        <path class="signal-pulse signal-gold flow-b" d="M1088 86C1038 132 990 194 952 264C914 334 882 424 846 520C810 618 760 698 698 782C640 858 580 922 522 1018" />
-        <path class="signal-pulse signal-green flow-c" d="M344 1026C454 948 554 876 642 786C722 702 790 600 862 498C934 398 1002 312 1088 226C1168 144 1262 78 1386 12" />
-        <path class="signal-pulse signal-gold flow-d" d="M1464 148C1382 192 1318 250 1260 336C1206 418 1160 520 1110 622C1060 720 988 796 898 862" />
-      </svg>
-    `,
-    `
-      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path class="signal-pulse signal-green flow-a" d="M114 906C274 842 422 804 598 770C754 742 878 688 986 590C1098 486 1182 346 1280 248C1384 146 1526 114 1760 120" />
-        <path class="signal-pulse signal-gold flow-b" d="M206 924C384 866 530 832 688 802C826 776 948 730 1058 646C1172 560 1260 448 1350 340C1440 234 1538 164 1702 154" />
-        <path class="signal-pulse signal-green flow-c" d="M1422 134C1512 188 1600 240 1664 322C1734 412 1786 522 1844 676" />
-        <path class="signal-pulse signal-gold flow-d" d="M764 742C864 716 950 674 1030 608C1114 538 1184 450 1262 364C1338 280 1416 212 1514 172" />
-      </svg>
-    `,
-    `
-      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path class="signal-pulse signal-green flow-a" d="M-40 286C178 314 340 360 520 432C690 500 842 550 1018 548C1186 544 1332 494 1468 432C1608 368 1740 298 1948 258" />
-        <path class="signal-pulse signal-gold flow-b" d="M166 1032C336 914 494 836 642 736C794 632 920 520 1040 384C1148 262 1296 148 1486 70" />
-        <path class="signal-pulse signal-green flow-c" d="M764 548C904 542 1030 520 1148 476C1280 428 1418 362 1562 282C1704 202 1810 140 1944 108" />
-        <path class="signal-pulse signal-gold flow-d" d="M1268 274C1358 332 1458 394 1546 466C1636 538 1712 622 1816 744" />
-      </svg>
-    `,
-    `
-      <svg class="services-signal-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path class="signal-pulse signal-green flow-a" d="M314 858C496 812 684 786 876 756C1048 730 1180 680 1282 574C1386 466 1460 318 1542 222C1632 118 1740 86 1898 88" />
-        <path class="signal-pulse signal-gold flow-b" d="M362 842C530 796 708 772 892 742C1048 716 1162 666 1262 572C1368 472 1448 336 1528 248C1604 164 1684 116 1794 104" />
-        <path class="signal-pulse signal-green flow-c" d="M862 736C1002 702 1112 650 1198 568C1292 478 1362 366 1442 270C1514 184 1590 130 1692 96" />
-        <path class="signal-pulse signal-gold flow-d" d="M1288 230C1370 262 1452 304 1520 370C1588 436 1642 526 1712 646" />
-      </svg>
-    `
-  ];
-
+  `
+    <svg class="services-signal-svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="signal-pulse signal-green flow-a" d="M1450 58C1360 88 1288 126 1220 178C1154 228 1092 294 1048 364C1006 432 978 502 934 566C892 628 834 678 774 732C716 784 652 830 584 874" />
+      <path class="signal-pulse signal-gold flow-b" d="M1278 86C1190 126 1112 178 1058 238C1002 300 970 370 938 442C904 520 856 584 804 642C754 700 700 750 640 798" />
+      <path class="signal-pulse signal-green flow-c" d="M1516 206C1444 236 1386 278 1332 332C1278 386 1242 450 1208 512C1176 572 1142 632 1084 686" />
+      <path class="signal-pulse signal-gold flow-d" d="M1016 156C962 208 930 270 898 336C864 408 826 478 782 538C738 598 688 650 626 706" />
+    </svg>
+  `,
+  `
+    <svg class="services-signal-svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="signal-pulse signal-green flow-a" d="M132 786C286 742 424 708 560 680C696 652 804 616 900 560C994 504 1064 434 1126 360C1190 286 1250 224 1328 178" />
+      <path class="signal-pulse signal-gold flow-b" d="M218 812C356 772 486 742 614 716C742 690 844 654 938 600C1032 546 1108 482 1174 414C1242 344 1304 286 1370 248" />
+      <path class="signal-pulse signal-green flow-c" d="M772 684C870 652 952 610 1028 554C1106 496 1170 428 1226 358C1284 286 1336 232 1408 194" />
+      <path class="signal-pulse signal-gold flow-d" d="M1180 210C1248 248 1310 292 1362 348C1416 406 1454 476 1490 548" />
+    </svg>
+  `,
+  `
+    <svg class="services-signal-svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="signal-pulse signal-green flow-a" d="M32 324C186 344 324 370 456 404C590 438 706 474 824 486C944 498 1056 484 1162 450C1270 414 1374 360 1492 300" />
+      <path class="signal-pulse signal-gold flow-b" d="M176 878C316 798 440 730 554 660C668 590 766 520 850 446C934 372 1020 292 1122 226C1222 160 1320 116 1432 82" />
+      <path class="signal-pulse signal-green flow-c" d="M676 494C788 490 892 478 994 446C1098 414 1204 368 1302 314C1402 260 1490 212 1608 174" />
+      <path class="signal-pulse signal-gold flow-d" d="M1082 260C1154 304 1216 354 1270 410C1324 466 1368 528 1416 594" />
+    </svg>
+  `,
+  `
+    <svg class="services-signal-svg" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="signal-pulse signal-green flow-a" d="M246 748C384 720 518 700 650 678C784 656 900 628 1002 582C1102 536 1180 476 1248 404C1316 332 1370 256 1430 196" />
+      <path class="signal-pulse signal-gold flow-b" d="M332 768C462 742 590 720 712 700C834 680 940 652 1032 610C1124 568 1200 514 1266 448C1332 382 1388 314 1450 252" />
+      <path class="signal-pulse signal-green flow-c" d="M748 668C850 638 936 600 1010 550C1086 500 1150 442 1204 380C1258 318 1312 260 1376 218" />
+      <path class="signal-pulse signal-gold flow-d" d="M1182 220C1240 248 1294 284 1340 330C1386 376 1424 432 1458 492" />
+    </svg>
+  `
+];
   const preload = src => {
     return new Promise(resolve => {
       const img = new Image();

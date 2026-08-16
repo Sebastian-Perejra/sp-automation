@@ -503,3 +503,6 @@ body::after {
     animation-iteration-count: 1 !important;
   }
 }
+.services-signals {
+  display: none !important;
+}

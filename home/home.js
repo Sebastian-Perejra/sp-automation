@@ -2809,6 +2809,12 @@ function initHeroEasterEgg() {
 }
 
 function initHomeHeroPin() {
+  console.log(
+  'GSAP:',
+  typeof gsap,
+  'ScrollTrigger:',
+  typeof ScrollTrigger
+);
   if (
     typeof gsap === 'undefined' ||
     typeof ScrollTrigger === 'undefined'

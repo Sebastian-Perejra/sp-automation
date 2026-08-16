@@ -46,15 +46,19 @@ body {
   inset: -24px;
   z-index: 0;
   opacity: 0;
-  pointer-events: none;
+  transform: scale(1.035);
   translate:
     var(--services-move-x, 0px)
     var(--services-move-y, 0px);
-  transition: opacity 6s ease-in-out;
+  transition:
+    opacity 6s ease-in-out,
+    transform 18s ease-in-out;
+  pointer-events: none;
 }
 
 .services-signal-set.is-active {
   opacity: 0.78;
+  transform: scale(1.065);
 }
 
 body::before {

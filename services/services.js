@@ -53,6 +53,19 @@
     event => {
       if (window.innerWidth <= 760) return;
 
+      const signalX = event.clientX / window.innerWidth * 100;
+      const signalY = event.clientY / window.innerHeight * 100;
+      
+      document.documentElement.style.setProperty(
+        "--signal-x",
+        `${signalX}%`
+      );
+      
+      document.documentElement.style.setProperty(
+        "--signal-y",
+        `${signalY}%`
+      );
+
       const x = event.clientX / window.innerWidth - 0.5;
       const y = event.clientY / window.innerHeight - 0.5;
 

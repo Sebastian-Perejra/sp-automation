@@ -4693,4 +4693,105 @@ if (
     }
   );
 }
+  const realityLaptopHotspot =
+  document.querySelector(
+    ".reality-hotspot-laptop"
+  );
+
+const ecosystemDetailView =
+  document.getElementById(
+    "ecosystem-detail-view"
+  );
+
+const ecosystemDetailImage =
+  ecosystemDetailView
+    ? ecosystemDetailView.querySelector(
+        "[data-detail-image]"
+      )
+    : null;
+
+const ecosystemDetailClose =
+  ecosystemDetailView
+    ? ecosystemDetailView.querySelector(
+        ".ecosystem-detail-close"
+      )
+    : null;
+
+const ecosystemDetailBackdrop =
+  ecosystemDetailView
+    ? ecosystemDetailView.querySelector(
+        ".ecosystem-detail-backdrop"
+      )
+    : null;
+
+if (
+  realityLaptopHotspot &&
+  ecosystemDetailView &&
+  ecosystemDetailImage &&
+  ecosystemDetailClose
+) {
+  const openLaptopDetail = () => {
+    ecosystemDetailImage.style.backgroundImage =
+      'url("/services/assets/ecosystem-laptop-dashboard.webp")';
+
+    ecosystemDetailView.classList.add(
+      "is-open"
+    );
+
+    ecosystemDetailView.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+  };
+
+  const closeLaptopDetail = () => {
+    ecosystemDetailView.classList.remove(
+      "is-open"
+    );
+
+    ecosystemDetailView.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+  };
+
+  realityLaptopHotspot.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      openLaptopDetail();
+    }
+  );
+
+  ecosystemDetailClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeLaptopDetail();
+    }
+  );
+
+  if (ecosystemDetailBackdrop) {
+    ecosystemDetailBackdrop.addEventListener(
+      "click",
+      closeLaptopDetail
+    );
+  }
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape" &&
+        ecosystemDetailView.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeLaptopDetail();
+      }
+    }
+  );
+}
 })();

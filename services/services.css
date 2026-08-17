@@ -7663,3 +7663,29 @@ body::after {
     background 0.28s ease,
     box-shadow 0.28s ease;
 }
+
+.testing-row-retest.is-fixed {
+  border-color:
+    rgba(79, 139, 105, 0.16);
+
+  background:
+    rgba(235, 246, 240, 0.78);
+
+  animation: none;
+}
+
+.testing-row-retest.is-fixed
+.testing-status {
+  transform: scale(1.03);
+
+  box-shadow:
+    0 0 0 5px
+    rgba(79, 139, 105, 0.04);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}

@@ -9126,8 +9126,8 @@ p {
   pointer-events: none;
 
   transition:
-    opacity 0.28s ease,
-    visibility 0s linear 0.28s;
+    opacity 0.5s ease,
+    visibility 0s linear 0.5s;
 }
 
 .ecosystem-detail-view.is-open {
@@ -9137,7 +9137,7 @@ p {
   pointer-events: auto;
 
   transition:
-    opacity 0.28s ease,
+    opacity 0.5s ease,
     visibility 0s;
 }
 
@@ -9146,10 +9146,10 @@ p {
   inset: 0;
 
   background:
-    rgba(4, 17, 12, 0.78);
+    rgba(5, 18, 13, 0.18);
 
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .ecosystem-detail-panel {
@@ -9159,46 +9159,62 @@ p {
 
   width:
     min(
-      calc(100vw - 70px),
-      1240px
+      760px,
+      58vw
     );
 
   aspect-ratio: 16 / 10;
 
   overflow: hidden;
 
+  margin-left: 10vw;
+
   border:
     1px solid
-    rgba(126, 191, 157, 0.18);
+    rgba(126, 191, 157, 0.2);
 
-  border-radius: 24px;
+  border-radius: 22px;
 
   background:
     #071b14;
 
   box-shadow:
-    0 40px 100px
-    rgba(0, 0, 0, 0.48);
+    0 28px 70px
+    rgba(0, 0, 0, 0.34);
 
   transform:
-    scale(0.92)
-    translateY(20px);
+    translate(
+      18vw,
+      18vh
+    )
+    scale(0.28);
+
+  transform-origin:
+    50% 50%;
+
+  opacity: 0;
 
   transition:
-    transform 0.42s
+    transform 1.15s
     cubic-bezier(
-      0.22,
+      0.16,
       1,
-      0.36,
+      0.3,
       1
-    );
+    ),
+    opacity 0.55s ease;
 }
 
 .ecosystem-detail-view.is-open
 .ecosystem-detail-panel {
   transform:
-    scale(1)
-    translateY(0);
+    translate(
+      8vw,
+      0
+    )
+    scale(1);
+
+  opacity: 1;
 }
 
 .ecosystem-detail-image {
@@ -9207,7 +9223,7 @@ p {
 
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 .ecosystem-detail-close {
@@ -9264,8 +9280,26 @@ p {
   }
 
   .ecosystem-detail-panel {
-    width: 100%;
+    width: 92vw;
+    margin-left: 0;
 
     border-radius: 18px;
+
+    transform:
+      translate(
+        0,
+        18vh
+      )
+      scale(0.42);
+  }
+
+  .ecosystem-detail-view.is-open
+  .ecosystem-detail-panel {
+    transform:
+      translate(
+        0,
+        0
+      )
+      scale(1);
   }
 }

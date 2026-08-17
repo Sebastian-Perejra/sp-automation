@@ -1525,6 +1525,15 @@
   data-service="powerbi"
   data-service-effect="powerbi"
 >
+
+          <button
+    class="ecosystem-service-fold"
+    type="button"
+    data-diagnostic-open="powerbi"
+    aria-label="Дізнатися більше про Power BI та аналітику"
+  >
+    <span></span>
+  </button>
   <div class="ecosystem-icon">
     BI
   </div>
@@ -1570,6 +1579,15 @@
   data-service="excel"
   data-service-effect="excel"
 >
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="excel"
+  aria-label="Дізнатися більше про Excel та VBA"
+>
+  <span></span>
+</button>
   <div class="ecosystem-icon">
     XL
   </div>
@@ -1613,6 +1631,15 @@
   data-service="apps"
   data-service-effect="apps"
 >
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="apps"
+  aria-label="Дізнатися більше про Google Apps Script"
+>
+  <span></span>
+</button>
   <div class="ecosystem-icon">
     GS
   </div>
@@ -1923,6 +1950,14 @@
   data-service="integration"
   data-service-effect="integration"
 >
+          <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="integration"
+  aria-label="Дізнатися більше про інтеграції та API"
+>
+  <span></span>
+</button>
   <div class="ecosystem-icon">
     ↔
   </div>
@@ -1960,6 +1995,15 @@
   data-service="process"
   data-service-effect="process"
 >
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="process"
+  aria-label="Дізнатися більше про оптимізацію процесів"
+>
+  <span></span>
+</button>
   <div class="ecosystem-icon">
     ↻
   </div>
@@ -2002,6 +2046,15 @@
   data-service="data"
   data-service-effect="data"
 >
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="data"
+  aria-label="Дізнатися більше про підготовку даних"
+>
+  <span></span>
+</button>
   <div class="ecosystem-icon">
     DB
   </div>
@@ -2059,6 +2112,292 @@
 
       </div>
 
+      <div
+  class="ecosystem-diagnostic"
+  id="ecosystem-diagnostic"
+  aria-hidden="true"
+>
+  <div class="ecosystem-diagnostic-backdrop"></div>
+
+  <div class="ecosystem-diagnostic-panel">
+
+    <button
+      class="ecosystem-diagnostic-close"
+      type="button"
+      aria-label="Закрити"
+    >
+      ×
+    </button>
+
+    <div class="ecosystem-diagnostic-main">
+
+      <div class="ecosystem-diagnostic-kicker">
+        <span data-diagnostic-code>
+          01
+        </span>
+
+        BUSINESS IMPACT
+      </div>
+
+      <h3 data-diagnostic-title>
+        Power BI та аналітика
+      </h3>
+
+      <div class="ecosystem-diagnostic-columns">
+
+        <div class="ecosystem-diagnostic-block is-pain">
+
+          <span class="ecosystem-diagnostic-label">
+            БІЛЬ
+          </span>
+
+          <strong data-diagnostic-pain-title>
+            Цифри приходять занадто пізно
+          </strong>
+
+          <p data-diagnostic-pain>
+            Звіти збираються вручну,
+            дані знаходяться у різних файлах,
+            а на перевірку цифр витрачаються години.
+          </p>
+
+        </div>
+
+        <div class="ecosystem-diagnostic-arrow">
+          →
+        </div>
+
+        <div class="ecosystem-diagnostic-block is-solution">
+
+          <span class="ecosystem-diagnostic-label">
+            РІШЕННЯ
+          </span>
+
+          <strong data-diagnostic-solution-title>
+            Актуальні дані без ручної збірки
+          </strong>
+
+          <p data-diagnostic-solution>
+            Дані збираються та оновлюються
+            автоматично, а ключові показники
+            доступні тоді, коли вони потрібні.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="ecosystem-diagnostic-impact">
+
+        <div>
+          <span>TIME</span>
+          <strong data-impact-time>
+            Менше ручної роботи
+          </strong>
+        </div>
+
+        <div>
+          <span>COST</span>
+          <strong data-impact-cost>
+            Менше операційних витрат
+          </strong>
+        </div>
+
+        <div>
+          <span>SPEED</span>
+          <strong data-impact-speed>
+            Швидші рішення
+          </strong>
+        </div>
+
+      </div>
+
+      <button
+        class="ecosystem-diagnostic-start"
+        type="button"
+      >
+        Перевірити свій процес
+
+        <span>
+          →
+        </span>
+      </button>
+
+    </div>
+
+    <div
+      class="ecosystem-quiz"
+      aria-hidden="true"
+    >
+
+      <div class="ecosystem-quiz-head">
+
+        <div>
+          <span>
+            QUICK CHECK
+          </span>
+
+          <strong data-quiz-title>
+            Міні-діагностика
+          </strong>
+        </div>
+
+        <div class="ecosystem-quiz-progress">
+          <span data-quiz-progress>
+            1 / 3
+          </span>
+
+          <div>
+            <i data-quiz-progress-bar></i>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ecosystem-quiz-body">
+
+        <div class="ecosystem-quiz-question">
+
+          <span data-quiz-question-number>
+            ПИТАННЯ 01
+          </span>
+
+          <h4 data-quiz-question>
+            Скільки часу займає ця операція?
+          </h4>
+
+          <div
+            class="ecosystem-quiz-options"
+            data-quiz-options
+          ></div>
+
+        </div>
+
+      </div>
+
+      <div class="ecosystem-quiz-footer">
+
+        <button
+          class="ecosystem-quiz-back"
+          type="button"
+        >
+          ← Назад
+        </button>
+
+        <span>
+          Оберіть один варіант
+        </span>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ecosystem-quiz-result"
+      aria-hidden="true"
+    >
+
+      <div class="ecosystem-result-score">
+
+        <span>
+          AUTOMATION POTENTIAL
+        </span>
+
+        <strong data-result-score>
+          HIGH
+        </strong>
+
+      </div>
+
+      <h3 data-result-title>
+        Тут є що автоматизувати
+      </h3>
+
+      <p data-result-description>
+        У процесі є регулярні ручні операції,
+        які потенційно можна скоротити
+        або передати автоматизації.
+      </p>
+
+      <div class="ecosystem-result-metrics">
+
+        <div>
+          <span>
+            ПОТЕНЦІАЛ
+          </span>
+
+          <strong data-result-potential>
+            Високий
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            ЧАС
+          </span>
+
+          <strong data-result-time>
+            Можлива економія
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            ЕФЕКТ
+          </span>
+
+          <strong data-result-effect>
+            Швидший процес
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ecosystem-result-summary">
+
+        <span>
+          ЩО МИ ПОБАЧИЛИ
+        </span>
+
+        <p data-result-summary>
+          Результат буде сформовано
+          на основі ваших відповідей.
+        </p>
+
+      </div>
+
+      <div class="ecosystem-result-actions">
+
+        <button
+          class="ecosystem-result-send"
+          type="button"
+        >
+          Надіслати результат Себастьяну
+
+          <span>
+            ↗
+          </span>
+        </button>
+
+        <button
+          class="ecosystem-result-restart"
+          type="button"
+        >
+          Пройти ще раз
+        </button>
+
+      </div>
+
+      <small class="ecosystem-result-note">
+        Результат тесту є орієнтовною
+        оцінкою потенціалу автоматизації.
+      </small>
+
+    </div>
+
+  </div>
+</div>
+      
       <div class="services-capabilities">
 
         <a href="solutions.html">

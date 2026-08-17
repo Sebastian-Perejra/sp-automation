@@ -9526,50 +9526,54 @@ p {
 }
 
 .reality-hotspot-line {
-  left: 16%;
-  top: 55%;
+  left: 57.5%;
+  top: 18%;
 
-  width: 18%;
-  height: 15%;
+  width: 14.5%;
+  height: 17%;
 
   transform:
-    rotate(-4deg);
+    rotate(-2deg);
 }
 
 .reality-hotspot-line:hover {
   transform:
-    rotate(-4deg)
-    scale(1.03);
+    rotate(-2deg)
+    scale(1.04);
 }
 
 .reality-hotspot-donut {
-  left: 35%;
-  top: 48%;
+  left: 74.5%;
+  top: 27%;
 
-  width: 16%;
-  height: 18%;
+  width: 11%;
+  height: 12%;
 
-  border-radius: 50%;
+  border-radius: 12px;
+
+  transform:
+    rotate(2deg);
 }
 
 .reality-hotspot-donut:hover {
   transform:
-    scale(1.03);
+    rotate(2deg)
+    scale(1.04);
 }
 
 .reality-hotspot-bars {
-  left: 51%;
-  top: 53%;
+  left: 64.5%;
+  top: 40%;
 
-  width: 17%;
-  height: 17%;
+  width: 20.5%;
+  height: 18%;
 
   transform:
-    rotate(3deg);
+    rotate(2deg);
 }
 
 .reality-hotspot-bars:hover {
   transform:
-    rotate(3deg)
-    scale(1.03);
+    rotate(2deg)
+    scale(1.04);
 }

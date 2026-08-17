@@ -3928,4 +3928,384 @@ const startLaunchUptime = () => {
     }
   );
 }
+  const dataFlowMap =
+  document.querySelector(
+    ".services-project-map"
+  );
+
+if (dataFlowMap) {
+  const dataStages =
+    Array.from(
+      dataFlowMap.querySelectorAll(
+        ".project-stage"
+      )
+    );
+
+  const dataLines =
+    Array.from(
+      dataFlowMap.querySelectorAll(
+        ".project-line"
+      )
+    );
+
+  const dataCore =
+    dataFlowMap.querySelector(
+      ".project-core"
+    );
+
+  const dataPacket =
+    document.createElement(
+      "span"
+    );
+
+  dataPacket.className =
+    "project-data-packet";
+
+  dataFlowMap.appendChild(
+    dataPacket
+  );
+
+  let dataFlowTimer = null;
+  let dataFlowFrame = null;
+  let dataFlowBusy = false;
+
+  const getPointInMap = element => {
+    const mapRect =
+      dataFlowMap.getBoundingClientRect();
+
+    const rect =
+      element.getBoundingClientRect();
+
+    return {
+      x:
+        rect.left -
+        mapRect.left +
+        rect.width / 2,
+
+      y:
+        rect.top -
+        mapRect.top +
+        rect.height / 2
+    };
+  };
+
+  const setPacketPosition = point => {
+    dataPacket.style.setProperty(
+      "--packet-x",
+      `${point.x}px`
+    );
+
+    dataPacket.style.setProperty(
+      "--packet-y",
+      `${point.y}px`
+    );
+  };
+
+  const clearDataState = () => {
+    dataPacket.classList.remove(
+      "is-moving",
+      "is-arriving"
+    );
+
+    dataStages.forEach(
+      stage => {
+        stage.classList.remove(
+          "is-data-sending"
+        );
+      }
+    );
+
+    dataLines.forEach(
+      line => {
+        line.classList.remove(
+          "is-data-active"
+        );
+      }
+    );
+
+    if (dataCore) {
+      dataCore.classList.remove(
+        "is-data-receiving"
+      );
+    }
+  };
+
+  const animatePacket = (
+    from,
+    to,
+    duration = 850
+  ) => {
+    return new Promise(
+      resolve => {
+        const start =
+          performance.now();
+
+        dataPacket.classList.add(
+          "is-moving"
+        );
+
+        const animate = now => {
+          const progress =
+            Math.min(
+              1,
+              (
+                now - start
+              ) /
+              duration
+            );
+
+          const eased =
+            1 -
+            Math.pow(
+              1 - progress,
+              3
+            );
+
+          const x =
+            from.x +
+            (
+              to.x -
+              from.x
+            ) *
+            eased;
+
+          const y =
+            from.y +
+            (
+              to.y -
+              from.y
+            ) *
+            eased;
+
+          setPacketPosition({
+            x,
+            y
+          });
+
+          if (
+            progress <
+            1
+          ) {
+            dataFlowFrame =
+              requestAnimationFrame(
+                animate
+              );
+
+            return;
+          }
+
+          dataFlowFrame =
+            null;
+
+          dataPacket.classList.add(
+            "is-arriving"
+          );
+
+          window.setTimeout(
+            () => {
+              dataPacket.classList.remove(
+                "is-arriving"
+              );
+
+              resolve();
+            },
+            140
+          );
+        };
+
+        setPacketPosition(
+          from
+        );
+
+        dataFlowFrame =
+          requestAnimationFrame(
+            animate
+          );
+      }
+    );
+  };
+
+  const sendDataToCore =
+    async (
+      index,
+      returnPacket = false
+    ) => {
+      if (
+        dataFlowBusy ||
+        !dataStages[index] ||
+        !dataLines[index] ||
+        !dataCore
+      ) {
+        return;
+      }
+
+      dataFlowBusy = true;
+
+      clearDataState();
+
+      const stage =
+        dataStages[index];
+
+      const line =
+        dataLines[index];
+
+      stage.classList.add(
+        "is-data-sending"
+      );
+
+      line.classList.add(
+        "is-data-active"
+      );
+
+      const stagePoint =
+        getPointInMap(
+          stage
+        );
+
+      const corePoint =
+        getPointInMap(
+          dataCore
+        );
+
+      await animatePacket(
+        stagePoint,
+        corePoint
+      );
+
+      dataCore.classList.add(
+        "is-data-receiving"
+      );
+
+      await new Promise(
+        resolve => {
+          window.setTimeout(
+            resolve,
+            220
+          );
+        }
+      );
+
+      if (returnPacket) {
+        await animatePacket(
+          corePoint,
+          stagePoint,
+          700
+        );
+      }
+
+      await new Promise(
+        resolve => {
+          window.setTimeout(
+            resolve,
+            180
+          );
+        }
+      );
+
+      clearDataState();
+
+      dataFlowBusy = false;
+    };
+
+  const scheduleRandomDataFlow =
+    () => {
+      window.clearTimeout(
+        dataFlowTimer
+      );
+
+      const delay =
+        4200 +
+        Math.random() *
+        2800;
+
+      dataFlowTimer =
+        window.setTimeout(
+          () => {
+            if (
+              !dataFlowBusy &&
+              !document.hidden
+            ) {
+              const randomIndex =
+                Math.floor(
+                  Math.random() *
+                  dataStages.length
+                );
+
+              sendDataToCore(
+                randomIndex,
+                false
+              );
+            }
+
+            scheduleRandomDataFlow();
+          },
+          delay
+        );
+    };
+
+  dataStages.forEach(
+    (stage, index) => {
+      stage.addEventListener(
+        "pointerenter",
+        () => {
+          if (
+            window.innerWidth <=
+            760
+          ) {
+            return;
+          }
+
+          sendDataToCore(
+            index,
+            false
+          );
+        }
+      );
+
+      stage.addEventListener(
+        "click",
+        () => {
+          sendDataToCore(
+            index,
+            true
+          );
+        }
+      );
+    }
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (
+        document.hidden
+      ) {
+        window.clearTimeout(
+          dataFlowTimer
+        );
+
+        if (
+          dataFlowFrame !==
+          null
+        ) {
+          cancelAnimationFrame(
+            dataFlowFrame
+          );
+
+          dataFlowFrame = null;
+        }
+
+        clearDataState();
+
+        dataFlowBusy = false;
+
+        return;
+      }
+
+      scheduleRandomDataFlow();
+    }
+  );
+
+  scheduleRandomDataFlow();
+}
 })();

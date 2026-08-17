@@ -3286,4 +3286,347 @@ if (
     }
   );
 }
+  const launchStage =
+  document.querySelector(
+    ".project-stage-7"
+  );
+
+const launchCard =
+  document.getElementById(
+    "project-launch-card"
+  );
+
+const launchClose =
+  launchCard
+    ? launchCard.querySelector(
+        ".launch-close"
+      )
+    : null;
+
+if (
+  launchStage &&
+  launchCard &&
+  launchClose
+) {
+  let launchStartX = 0;
+  let launchStartY = 0;
+  let launchWasDragged = false;
+
+  const positionLaunchCard = () => {
+    const map =
+      launchStage.closest(
+        ".services-project-map"
+      );
+
+    if (!map) return;
+
+    const mapRect =
+      map.getBoundingClientRect();
+
+    const stageRect =
+      launchStage
+        .getBoundingClientRect();
+
+    const cardWidth =
+      launchCard.offsetWidth ||
+      455;
+
+    const cardHeight =
+      launchCard.offsetHeight ||
+      350;
+
+    const stageCenterX =
+      stageRect.left -
+      mapRect.left +
+      stageRect.width / 2;
+
+    const stageCenterY =
+      stageRect.top -
+      mapRect.top +
+      stageRect.height / 2;
+
+    if (
+      window.innerWidth <= 760
+    ) {
+      const left =
+        (
+          mapRect.width -
+          cardWidth
+        ) / 2;
+
+      const top =
+        Math.max(
+          50,
+          (
+            mapRect.height -
+            cardHeight
+          ) / 2
+        );
+
+      launchCard.style.left =
+        `${left}px`;
+
+      launchCard.style.top =
+        `${top}px`;
+
+      launchCard.style.setProperty(
+        "--launch-origin-x",
+        "50%"
+      );
+
+      launchCard.style.setProperty(
+        "--launch-origin-y",
+        "0%"
+      );
+
+      return;
+    }
+
+    const gap = 18;
+
+    let left;
+    let top;
+
+    if (
+      stageCenterX <
+      mapRect.width * 0.5
+    ) {
+      left =
+        stageRect.right -
+        mapRect.left +
+        gap;
+    } else {
+      left =
+        stageRect.left -
+        mapRect.left -
+        cardWidth -
+        gap;
+    }
+
+    top =
+      stageCenterY -
+      cardHeight / 2;
+
+    left =
+      Math.max(
+        8,
+        Math.min(
+          left,
+          mapRect.width -
+          cardWidth -
+          8
+        )
+      );
+
+    top =
+      Math.max(
+        8,
+        Math.min(
+          top,
+          mapRect.height -
+          cardHeight -
+          8
+        )
+      );
+
+    launchCard.style.left =
+      `${left}px`;
+
+    launchCard.style.top =
+      `${top}px`;
+
+    launchCard.style.setProperty(
+      "--launch-origin-x",
+      `${stageCenterX - left}px`
+    );
+
+    launchCard.style.setProperty(
+      "--launch-origin-y",
+      `${stageCenterY - top}px`
+    );
+  };
+
+  const closePreviousStageCards =
+    () => {
+      const cards = [
+        "project-brief-card",
+        "project-analysis-card",
+        "project-architecture-card",
+        "project-development-card",
+        "project-integration-card",
+        "project-testing-card"
+      ];
+
+      cards.forEach(
+        id => {
+          const card =
+            document.getElementById(
+              id
+            );
+
+          if (!card) return;
+
+          card.classList.remove(
+            "is-open"
+          );
+
+          card.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+        }
+      );
+
+      for (
+        let stageNumber = 1;
+        stageNumber <= 6;
+        stageNumber++
+      ) {
+        const stage =
+          document.querySelector(
+            `.project-stage-${stageNumber}`
+          );
+
+        if (!stage) continue;
+
+        stage.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    };
+
+  const openLaunchCard = () => {
+    closePreviousStageCards();
+
+    positionLaunchCard();
+
+    launchCard.classList.add(
+      "is-open"
+    );
+
+    launchCard.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    launchStage.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  };
+
+  const closeLaunchCard = () => {
+    launchCard.classList.remove(
+      "is-open"
+    );
+
+    launchCard.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    launchStage.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  };
+
+  launchStage.addEventListener(
+    "pointerdown",
+    event => {
+      launchStartX =
+        event.clientX;
+
+      launchStartY =
+        event.clientY;
+
+      launchWasDragged = false;
+    }
+  );
+
+  launchStage.addEventListener(
+    "pointermove",
+    event => {
+      const distanceX =
+        Math.abs(
+          event.clientX -
+          launchStartX
+        );
+
+      const distanceY =
+        Math.abs(
+          event.clientY -
+          launchStartY
+        );
+
+      if (
+        distanceX > 6 ||
+        distanceY > 6
+      ) {
+        launchWasDragged = true;
+      }
+    }
+  );
+
+  launchStage.addEventListener(
+    "click",
+    event => {
+      if (
+        launchWasDragged
+      ) {
+        launchWasDragged = false;
+        return;
+      }
+
+      event.stopPropagation();
+
+      if (
+        launchCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeLaunchCard();
+      } else {
+        openLaunchCard();
+      }
+    }
+  );
+
+  launchClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeLaunchCard();
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape"
+      ) {
+        closeLaunchCard();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (
+        launchCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        positionLaunchCard();
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
 })();

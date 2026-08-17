@@ -2,603 +2,2768 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Services – Sebastian Perejra</title>
-  <link rel="canonical" href="https://sp-automation.com/services-en.html">
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
-    html {
-      scroll-behavior: smooth;
-    }
+  <title>Business Automation Services | Sebastian Automations</title>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Manrope', sans-serif;
-      background:#f7f4ef;
-      color: #1a1a1a;
-    }
+  <meta
+    name="description"
+    content="Business automation for Excel, Google Sheets, Power BI, Google Apps Script, integrations, APIs, dashboards, documents, and custom workflows that cut manual work and speed up decisions."
+  >
 
+  <meta
+    name="robots"
+    content="index, follow"
+  >
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 244, 239, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
+  <meta
+    name="theme-color"
+    content="#f7f4ef"
+  >
 
-    .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
+  <link
+    rel="canonical"
+    href="https://sp-automation.com/services-en.html"
+  >
 
-    .home-link {color:#35594b;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;}
-    .desktop-nav {display:flex;align-items:center;gap:28px;margin-left:auto;}
-    .desktop-nav a {position:relative;color:#52504c;text-decoration:none;font-size:14px;font-weight:600;}
-    .desktop-nav a::after {content:"";position:absolute;left:0;right:100%;bottom:-7px;height:2px;border-radius:999px;background:#35594b;transition:right .22s ease;}
-    .desktop-nav a:hover::after {right:0;}
-    .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
-    .lang-switcher button {min-width:38px;height:34px;border:1px solid #d6cec4;border-radius:10px;background:rgba(255,255,255,.8);color:#5f5a54;padding:0 9px;font-family:"Roboto Mono", monospace;font-size:11px;font-weight:600;}
-    .lang-switcher button:hover {background:#35594b;color:#fff;border-color:#35594b;}
+  <link
+    rel="alternate"
+    hreflang="uk"
+    href="https://sp-automation.com/services.html"
+  >
 
-    .page {
-  width: min(100%, 1080px);
-  margin: 0 auto;
-  padding:
-    72px
-    20px
-    max(64px, env(safe-area-inset-bottom));
-    }
+  <link
+    rel="alternate"
+    hreflang="en"
+    href="https://sp-automation.com/services-en.html"
+  >
 
-    .hero {
-      margin-bottom: 26px;
-      padding: 34px;
-      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
-      border: 1px solid #d5e4ee;
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
-      text-align: center;
-    }
+  <link
+    rel="alternate"
+    hreflang="ru"
+    href="https://sp-automation.com/services-ru.html"
+  >
 
-    .hero h1 {
-      margin: 0 0 14px;
-      color: #0F9D58;
-      font-size: clamp(2.2rem, 6vw, 3.4rem);
-      line-height: 1.05;
-    }
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href="https://sp-automation.com/services.html"
+  >
 
-    .hero p {
-      max-width: 760px;
-      margin: 0 auto;
-      color: #596771;
-      font-size: 14px;
-      line-height: 1.7;
-    }
+  <meta
+    property="og:title"
+    content="Business Automation Services | Sebastian Automations"
+  >
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
+  <meta
+    property="og:description"
+    content="From spreadsheets, data, and reporting to integrations, web apps, and end-to-end business process automation."
+  >
 
-    .service-card {
-      padding: 24px;
-      background: rgba(255,255,255,0.97);
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-    }
+  <meta
+    property="og:type"
+    content="website"
+  >
 
-    .service-card:hover {
-      transform: translateY(-3px);
-      border-color: #b9d7e9;
-      box-shadow: 0 16px 34px rgba(36, 73, 104, 0.09);
-    }
+  <meta
+    property="og:url"
+    content="https://sp-automation.com/services-en.html"
+  >
 
-    .service-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+  <meta
+    property="og:site_name"
+    content="Sebastian Automations"
+  >
 
-    .service-icon {
-      width: 46px;
-      height: 46px;
-      flex: 0 0 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 13px;
-      background: #edf6ff;
-      font-size: 23px;
-    }
+  <meta
+    property="og:locale"
+    content="en_US"
+  >
 
-    .service-card h2 {
-      margin: 0;
-      color: #007acc;
-      font-size: 17px;
-      line-height: 1.3;
-    }
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon.png"
+  >
 
-    .service-card p {
-      margin: 0 0 12px;
-      color: #58666f;
-      font-size: 12px;
-      line-height: 1.65;
-    }
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
-    .service-card ul {
-      margin: 0;
-      padding-left: 19px;
-      color: #4f5d66;
-    }
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
-    .service-card li {
-      margin-bottom: 8px;
-      font-size: 11px;
-      line-height: 1.55;
-    }
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
-    .service-card li:last-child {
-      margin-bottom: 0;
-    }
+  <link
+    rel="stylesheet"
+    href="/components/components.css"
+  >
 
-    .result {
-      margin-top: 14px;
-      padding: 12px 13px;
-      border-left: 3px solid #0F9D58;
-      border-radius: 8px;
-      background: #f2faf5;
-      color: #44524a;
-      font-size: 11px;
-      line-height: 1.55;
-    }
+  <link
+    rel="stylesheet"
+    href="/services/services.css"
+  >
 
-    .process {
-      margin-top: 20px;
-      padding: 28px;
-      background: #fff;
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
-    }
+  <link
+    rel="stylesheet"
+    href="/consent/consent.css"
+  >
 
-    .process h2 {
-      margin: 0 0 16px;
-      color: #1a1a1a;
-      font-size: 21px;
-    }
+  <link
+    rel="stylesheet"
+    href="/assistant.css"
+  >
 
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
+  <link
+    rel="stylesheet"
+    href="/nav-font-kaleidoscope.css?v=5"
+  >
 
-    .process-step {
-      padding: 16px;
-      border: 1px solid #dce6ed;
-      border-radius: 12px;
-      background: #fbfdff;
-      text-align: center;
-    }
+  <script
+    src="/components/components.js"
+    defer
+  ></script>
 
-    .process-step strong {
-      display: block;
-      margin-bottom: 7px;
-      color: #007acc;
-      font-size: 12px;
-    }
+  <script
+    src="/services/services.js"
+    defer
+  ></script>
 
-    .process-step span {
-      color: #5d6a73;
-      font-size: 10px;
-      line-height: 1.5;
-    }
+  <script
+    src="/consent/consent.js"
+    defer
+  ></script>
 
-    .cta {
-      margin-top: 20px;
-      padding: 30px;
-      text-align: center;
-      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
-      border: 1px solid #c9e2f7;
-      border-radius: 16px;
-    }
+  <script
+    src="/assistant.js"
+    defer
+  ></script>
 
-    .cta h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
-    }
-
-    .cta p {
-      margin: 0 0 18px;
-      color: #596771;
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .cta a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 20px;
-      border-radius: 9px;
-      background: #1a73e8;
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .cta a:hover {
-      background: #135fbe;
-    }
-
-    footer {
-  padding:
-    34px
-    20px
-    max(34px, env(safe-area-inset-bottom));
-  border-top: 1px solid #dfd8cf;
-  background: rgba(244, 240, 234, 0.96);
-  color: #817c75;
-  font-size: 12px;
-  text-align: center;
-}
-    footer a {
-  color: #35594b;
-  text-decoration: none;
-  margin-left: 8px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-    @media (max-width: 860px) {
-      .process-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .lang-switcher {
-        margin-left: auto;
-      }
-
-      .page {
-        padding:
-          24px
-          12px
-          max(36px, env(safe-area-inset-bottom));
-      }
-
-      .hero {
-        padding: 24px 18px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 12px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-card {
-        padding: 20px 16px;
-      }
-
-      .process {
-        padding: 22px 16px;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta {
-        padding: 24px 16px;
-      }
-
-      .cta a {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .home-link {
-        font-size: 12px;
-      }
-
-      .lang-switcher button {
-        padding: 5px 7px;
-        font-size: 10px;
-      }
-
-      .service-head {
-        align-items: flex-start;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
+  <script
+    src="/nav-font-kaleidoscope.js?v=5"
+    defer
+  ></script>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index-en.html">← Home</a>
-      <nav class="desktop-nav">
-        <a href="about-en.html">About</a>
-        <a href="pricing-en.html">Pricing</a>
-        <a href="solutions-en.html">Solutions</a>
-        <a href="faq-en.html">FAQ</a>
-        <a href="contacts-en.html">Contacts</a>
-      </nav>
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='services.html'">UA</button>
-        <button type="button" onclick="location.href='services-en.html'">EN</button>
-        <button type="button" onclick="location.href='services-ru.html'">RU</button>
+
+  <div id="site-header-slot"></div>
+
+  <main class="services-page">
+
+    <section class="services-hero reveal-section" id="services-hero">
+  <div class="services-hero-copy">
+    <div class="services-kicker">
+      SYSTEMS · DATA · AUTOMATION
+    </div>
+
+    <h1>
+      Business
+      <span>Automation</span>
+    </h1>
+
+    <p>
+      I don’t just build one-off scripts, spreadsheets, or dashboards. I take a process from the first messy requirement through design, testing, launch, and a system people can actually rely on.
+    </p>
+
+    <div class="services-hero-actions">
+      <a
+        class="services-primary-btn"
+        href="contacts-en.html"
+      >
+        Talk About Your Process
+        <span>↗</span>
+      </a>
+
+      <a
+        class="services-secondary-btn"
+        href="#services-ecosystem"
+      >
+        See What I Can Automate
+        <span>↓</span>
+      </a>
+    </div>
+
+    <div class="services-hero-metrics">
+      <div class="services-hero-metric">
+        <strong>01</strong>
+        <span>Discovery</span>
+      </div>
+
+      <div class="services-hero-metric">
+        <strong>02</strong>
+        <span>Analysis</span>
+      </div>
+
+      <div class="services-hero-metric">
+        <strong>03</strong>
+        <span>Architecture</span>
+      </div>
+
+      <div class="services-hero-metric">
+        <strong>04</strong>
+        <span>Build</span>
+      </div>
+
+      <div class="services-hero-metric">
+        <strong>05</strong>
+        <span>Integration</span>
+      </div>
+
+      <div class="services-hero-metric">
+        <strong>06</strong>
+        <span>Testing</span>
+      </div>
+
+      <div class="services-hero-metric">
+        <strong>07</strong>
+        <span>Launch</span>
       </div>
     </div>
-  </header>
+  </div>
 
-  <main class="page">
-    <section class="hero">
-      <h1>Automation Services</h1>
-      <p>
-        From formulas and reports to web applications, bots, integrations, and analytics.
-        Whether the task is small or complex, the goal is the same: save time,
-        reduce errors, and make daily work easier.
-      </p>
-    </section>
+  <div
+    class="services-project-map"
+    aria-label="Project delivery stages"
+  >
+    <svg
+      class="services-project-map-lines"
+      viewBox="0 0 620 520"
+      aria-hidden="true"
+    >
+      <line class="project-line" data-line="1" x1="310" y1="260" x2="310" y2="55"></line>
+      <line class="project-line" data-line="2" x1="310" y1="260" x2="485" y2="115"></line>
+      <line class="project-line" data-line="3" x1="310" y1="260" x2="540" y2="285"></line>
+      <line class="project-line" data-line="4" x1="310" y1="260" x2="444" y2="438"></line>
+      <line class="project-line" data-line="5" x1="310" y1="260" x2="176" y2="438"></line>
+      <line class="project-line" data-line="6" x1="310" y1="260" x2="80" y2="285"></line>
+      <line class="project-line" data-line="7" x1="310" y1="260" x2="135" y2="115"></line>
+    </svg>
 
-    <section class="services-grid">
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">⚡</div>
-          <h2>Excel and Google Sheets</h2>
-        </div>
-        <p>Automation of spreadsheets, calculations, and reports without constant copying, manual updates, or recurring mistakes.</p>
-        <ul>
-          <li>complex formulas and conditional logic;</li>
-          <li>macros, VBA, and Google Apps Script;</li>
-          <li>automated reports and email distribution;</li>
-          <li>input forms, validation, and reference tables;</li>
-          <li>data import, export, and consolidation.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> your spreadsheet becomes a reliable working tool instead of a daily puzzle.</div>
-      </article>
+    <button
+  class="project-stage project-stage-1 is-active"
+        type="button"
+        data-stage="1"
+        data-title="Discovery"
+        data-description="We define the problem, the outcome you need, and what is currently eating up time."
+        aria-expanded="false"
+        aria-controls="project-brief-card"
+      >
+        <span class="project-stage-number">01</span>
+      
+        <span class="project-stage-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 5.5h14v9H9l-4 3v-12Z"></path>
+            <path d="M8 9h8"></path>
+            <path d="M8 12h5"></path>
+          </svg>
+        </span>
+      
+        <strong>Discovery</strong>
+      </button>
+    <button
+      class="project-stage project-stage-2"
+      type="button"
+      data-stage="2"
+      data-title="Analysis"
+      data-description="I break down the process, the data, the exceptions, and the steps that still depend on manual work."
+      aria-expanded="false"
+      aria-controls="project-analysis-card"
+    >
+      <span class="project-stage-number">02</span>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">📊</div>
-          <h2>Power BI and Analytics</h2>
-        </div>
-        <p>Clear dashboards for management, sales, finance, logistics, and production teams.</p>
-        <ul>
-          <li>data models and relationships;</li>
-          <li>DAX, KPIs, and plan-versus-actual analysis;</li>
-          <li>connections to Excel, Google Sheets, SQL, and APIs;</li>
-          <li>automated refreshes;</li>
-          <li>mobile-friendly report layouts.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> key numbers are visible immediately, without manually compiling reports.</div>
-      </article>
+      <span class="project-stage-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10" cy="10" r="5"></circle>
+          <path d="m14 14 5 5"></path>
+          <path d="M8 10h4"></path>
+          <path d="M10 8v4"></path>
+        </svg>
+      </span>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🤖</div>
-          <h2>Telegram Bots and Notifications</h2>
-        </div>
-        <p>Bots for requests, reminders, alerts, commands, and automated actions.</p>
-        <ul>
-          <li>receiving commands, messages, and files;</li>
-          <li>reminders based on time or events;</li>
-          <li>website requests sent directly to Telegram;</li>
-          <li>integration with Google Sheets and Google Drive;</li>
-          <li>notifications for managers or customers.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> important information arrives automatically instead of getting lost across chats.</div>
-      </article>
+      <strong>Analysis</strong>
+    </button>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🌐</div>
-          <h2>Web Applications</h2>
-        </div>
-        <p>Custom interfaces for processes that have outgrown Excel or Google Sheets.</p>
-        <ul>
-          <li>working with spreadsheets, forms, and files;</li>
-          <li>search, cards, filters, and mobile navigation;</li>
-          <li>Google Sign-In and access control;</li>
-          <li>working with photos and links;</li>
-          <li>PWA support and home-screen installation.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> users get a simple interface instead of a complicated technical spreadsheet.</div>
-      </article>
+    <button
+      class="project-stage project-stage-3"
+      type="button"
+      data-stage="3"
+      data-title="Architecture"
+      data-description="I design the solution logic: data sources, connections, workflows, and business rules."
+      aria-expanded="false"
+      aria-controls="project-architecture-card"
+    >
+      <span class="project-stage-number">03</span>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">📄</div>
-          <h2>PDFs, Invoices, and Bank Statements</h2>
-        </div>
-        <p>Processing documents that need to be parsed, cleaned, matched, and converted into structured data.</p>
-        <ul>
-          <li>document recognition and parsing;</li>
-          <li>extracting items, amounts, and details;</li>
-          <li>matching data across documents;</li>
-          <li>classifying bank transactions;</li>
-          <li>writing results to Google Sheets or Excel.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> messy documents become structured data ready for further work.</div>
-      </article>
+      <span class="project-stage-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="4" width="6" height="5" rx="1"></rect>
+          <rect x="15" y="4" width="6" height="5" rx="1"></rect>
+          <rect x="9" y="16" width="6" height="5" rx="1"></rect>
+          <path d="M6 9v3h12V9"></path>
+          <path d="M12 12v4"></path>
+        </svg>
+      </span>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🔗</div>
-          <h2>Integrations and APIs</h2>
-        </div>
-        <p>Data exchange between different systems without manual copying.</p>
-        <ul>
-          <li>CRM, ERP, and external APIs;</li>
-          <li>Google Workspace;</li>
-          <li>websites, forms, and Telegram;</li>
-          <li>webhooks and automated triggers;</li>
-          <li>synchronization of directories and statuses.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> your systems start exchanging data automatically.</div>
-      </article>
+      <strong>Architecture</strong>
+    </button>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">☁️</div>
-          <h2>Google Drive, Permissions, and Files</h2>
-        </div>
-        <p>Automation of folders, documents, access rights, and ownership transfer.</p>
-        <ul>
-          <li>folder creation and archiving;</li>
-          <li>file copying and sorting;</li>
-          <li>permission management;</li>
-          <li>user authentication;</li>
-          <li>ownership transfer to the client.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> files stay organized, and access rights do not turn into chaos.</div>
-      </article>
+    <button
+      class="project-stage project-stage-4"
+      type="button"
+      data-stage="4"
+      data-title="Build"
+      data-description="I build the system itself: automation, interfaces, reporting, and business logic."
+      aria-expanded="false"
+      aria-controls="project-development-card"
+    >
+      <span class="project-stage-number">04</span>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">📱</div>
-          <h2>Mobile Interfaces and PWAs</h2>
-        </div>
-        <p>Adaptation of working solutions for smartphones and tablets.</p>
-        <ul>
-          <li>clear cards and large buttons;</li>
-          <li>swipe actions, search, and mobile menus;</li>
-          <li>responsive forms;</li>
-          <li>home-screen installation;</li>
-          <li>optimization for narrow screens.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> the solution is genuinely convenient to use on a phone, not merely possible to open.</div>
-      </article>
+      <span class="project-stage-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m8 7-5 5 5 5"></path>
+          <path d="m16 7 5 5-5 5"></path>
+          <path d="m14 4-4 16"></path>
+        </svg>
+      </span>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🔍</div>
-          <h2>Market Research</h2>
-        </div>
-        <p>Collection and analysis of public data to evaluate products, competitors, and market conditions.</p>
-        <ul>
-          <li>product and assortment analysis;</li>
-          <li>price and feature comparison;</li>
-          <li>competitive environment analysis;</li>
-          <li>evaluation of market segments and potential niches;</li>
-          <li>reports and dashboards based on the research.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> not just a table of numbers, but a structured view of the market.</div>
-      </article>
+      <strong>Build</strong>
+    </button>
 
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🧠</div>
-          <h2>Custom Solutions</h2>
-        </div>
-        <p>If the task does not fit into one category, the solution can combine several technologies.</p>
-        <ul>
-          <li>audit of the current process;</li>
-          <li>solution architecture and logic design;</li>
-          <li>staged development;</li>
-          <li>testing with real data;</li>
-          <li>handover of code, permissions, and documentation.</li>
-        </ul>
-        <div class="result"><strong>Result:</strong> the solution is built around your process instead of forcing your process into a generic template.</div>
-      </article>
-    </section>
+    <button
+      class="project-stage project-stage-5"
+      type="button"
+      data-stage="5"
+      data-title="Integration"
+      data-description="I connect the services, spreadsheets, APIs, forms, files, and outside systems the process depends on."
+      aria-expanded="false"
+      aria-controls="project-integration-card"
+    >
+      <span class="project-stage-number">05</span>
 
-    <section class="process">
-      <h2>How the Process Works</h2>
-      <div class="process-grid">
-        <div class="process-step">
-          <strong>1. Analysis</strong>
-          <span>I review the actual files, documents, and workflow.</span>
+      <span class="project-stage-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 7V3"></path>
+          <path d="M16 7V3"></path>
+          <path d="M6 7h12v5a6 6 0 0 1-12 0V7Z"></path>
+          <path d="M12 18v3"></path>
+        </svg>
+      </span>
+
+      <strong>Integration</strong>
+    </button>
+
+    <button
+      class="project-stage project-stage-6"
+      type="button"
+      data-stage="6"
+      data-title="Testing"
+      data-description="I test real-world scenarios, edge cases, failure handling, and system behavior before launch."
+      aria-expanded="false"
+      aria-controls="project-testing-card"
+    >
+      <span class="project-stage-number">06</span>
+
+      <span class="project-stage-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 3h6"></path>
+          <path d="M10 3v5l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"></path>
+          <path d="M8 15h8"></path>
+        </svg>
+      </span>
+
+      <strong>Testing</strong>
+    </button>
+
+    <button
+      class="project-stage project-stage-7"
+      type="button"
+      data-stage="7"
+      data-title="Launch"
+      data-description="I put the finished solution into production and make sure it runs reliably in day-to-day work."
+      aria-expanded="false"
+      aria-controls="project-launch-card"
+    >
+      <span class="project-stage-number">07</span>
+
+      <span class="project-stage-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 4c3 1 5 3 6 6l-6 6-5-1-1-5 6-6Z"></path>
+          <path d="m8 15-3 1-1 4 4-1 2-3"></path>
+          <circle cx="15" cy="9" r="1.5"></circle>
+        </svg>
+      </span>
+
+      <strong>Launch</strong>
+    </button>
+
+    <div
+  class="project-stage-detail"
+  id="project-brief-card"
+  aria-hidden="true"
+>
+  <div class="project-stage-detail-head">
+    <div>
+      <span>01 · DISCUSSION</span>
+      <strong>Project Brief</strong>
+    </div>
+
+    <button
+      class="project-stage-detail-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="project-brief-list">
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Problem</strong>
+        <p>
+          What is still being done by hand, or taking far more time than it should.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Pain Points</strong>
+        <p>
+          Where errors, duplicate work, delays, or unnecessary steps show up.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Outcome</strong>
+        <p>
+          What should happen automatically once the solution is in place.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Constraints</strong>
+        <p>
+          Timeline, access, systems, data formats, and any other real-world constraints.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="project-brief-ready">
+    <span></span>
+    BRIEF READY
+  </div>
+</div>
+
+    <div
+  class="project-analysis-detail"
+  id="project-analysis-card"
+  aria-hidden="true"
+>
+  <div class="analysis-head">
+    <div>
+      <span>02 · ANALYSIS MODE</span>
+
+      <strong>
+        Where is the process losing time?
+      </strong>
+    </div>
+
+    <button
+      class="analysis-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="analysis-flow">
+
+    <div class="analysis-node analysis-node-input">
+      <span class="analysis-node-label">
+        INPUT
+      </span>
+
+      <strong>
+        Data comes in
+      </strong>
+
+      <small>
+        Excel · CRM · Forms · Email
+      </small>
+    </div>
+
+    <div class="analysis-track analysis-track-a">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="analysis-node analysis-node-bottleneck">
+      <span class="analysis-node-label">
+        BOTTLENECK
+      </span>
+
+      <div class="analysis-bottleneck-core">
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+
+      <strong>
+        Manual review
+      </strong>
+
+      <small>
+        the bottleneck is here
+      </small>
+    </div>
+
+    <div class="analysis-track analysis-track-b">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="analysis-node analysis-node-loss">
+      <span class="analysis-node-label">
+        LOSS
+      </span>
+
+      <strong class="analysis-loss-value">
+        −18 min
+      </strong>
+
+      <small>
+        every cycle
+      </small>
+    </div>
+
+    <div class="analysis-track analysis-track-c">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="analysis-node analysis-node-fix">
+      <span class="analysis-node-label">
+        FIX
+      </span>
+
+      <strong>
+        Automated validation
+      </strong>
+
+      <small>
+        validation without manual review
+      </small>
+    </div>
+
+  </div>
+
+  <div class="analysis-result">
+    <span class="analysis-result-pulse"></span>
+
+    <div>
+      <small>
+        ROOT CAUSE
+      </small>
+
+      <strong>
+        FOUND
+      </strong>
+    </div>
+
+    <span class="analysis-result-line"></span>
+
+    <div class="analysis-result-score">
+      92%
+    </div>
+  </div>
+</div>
+
+    <div
+  class="project-architecture-detail"
+  id="project-architecture-card"
+  aria-hidden="true"
+>
+  <div class="architecture-head">
+    <div>
+      <span>03 · SYSTEM ARCHITECTURE</span>
+
+      <strong>
+        How the pieces work together
+      </strong>
+    </div>
+
+    <button
+      class="architecture-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="architecture-map">
+
+    <svg
+      class="architecture-lines"
+      viewBox="0 0 520 250"
+      aria-hidden="true"
+    >
+      <path
+        class="architecture-line line-data-logic"
+        d="M105 125 C145 125 150 125 190 125"
+      ></path>
+
+      <path
+        class="architecture-line line-logic-api"
+        d="M250 125 C280 125 285 75 320 75"
+      ></path>
+
+      <path
+        class="architecture-line line-logic-ui"
+        d="M250 125 C280 125 285 175 320 175"
+      ></path>
+
+      <path
+        class="architecture-line line-api-output"
+        d="M380 75 C420 75 420 125 445 125"
+      ></path>
+
+      <path
+        class="architecture-line line-ui-output"
+        d="M380 175 C420 175 420 125 445 125"
+      ></path>
+    </svg>
+
+    <div class="architecture-node architecture-data">
+      <span>01</span>
+      <strong>DATA</strong>
+      <small>
+        Excel · CRM · Forms
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-logic">
+      <span>02</span>
+      <strong>LOGIC</strong>
+      <small>
+        rules · workflows
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-api">
+      <span>03</span>
+      <strong>API</strong>
+      <small>
+        integrations
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-ui">
+      <span>04</span>
+      <strong>UI</strong>
+      <small>
+        interface
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-output">
+      <span>05</span>
+      <strong>OUTPUT</strong>
+      <small>
+        output
+      </small>
+    </div>
+
+    <div class="architecture-packet packet-a"></div>
+    <div class="architecture-packet packet-b"></div>
+    <div class="architecture-packet packet-c"></div>
+
+  </div>
+
+  <div class="architecture-footer">
+    <span class="architecture-status-dot"></span>
+
+    <div>
+      <small>
+        SYSTEM MAP
+      </small>
+
+      <strong>
+        CONNECTIONS VERIFIED
+      </strong>
+    </div>
+
+    <span class="architecture-footer-line"></span>
+
+    <div class="architecture-version">
+      v1.0
+    </div>
+  </div>
+</div>
+
+    <div
+  class="project-development-detail"
+  id="project-development-card"
+  aria-hidden="true"
+>
+  <div class="development-head">
+    <div>
+      <span>04 · BUILD MODE</span>
+
+      <strong>
+        Build the solution from connected modules
+      </strong>
+    </div>
+
+    <button
+      class="development-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="development-board">
+
+    <div class="development-modules">
+
+      <div class="development-module module-ui">
+        <span>UI</span>
+        <strong>Interface</strong>
+      </div>
+
+      <div class="development-module module-logic">
+        <span>LOGIC</span>
+        <strong>Rules</strong>
+      </div>
+
+      <div class="development-module module-data">
+        <span>DATA</span>
+        <strong>Sources</strong>
+      </div>
+
+      <div class="development-module module-api">
+        <span>API</span>
+        <strong>Connections</strong>
+      </div>
+
+    </div>
+
+    <div class="development-build-zone">
+
+      <div class="development-build-core">
+
+        <span class="build-core-ring ring-a"></span>
+        <span class="build-core-ring ring-b"></span>
+
+        <div class="build-core-center">
+          <strong>BUILD</strong>
+          <small>assembling</small>
         </div>
-        <div class="process-step">
-          <strong>2. Assessment</strong>
-          <span>I propose an approach and estimate the scope of work.</span>
-        </div>
-        <div class="process-step">
-          <strong>3. Development</strong>
-          <span>I build the solution in stages and test it on real scenarios.</span>
-        </div>
-        <div class="process-step">
-          <strong>4. Handover</strong>
-          <span>I deliver the solution, access rights, permissions, and instructions.</span>
+
+      </div>
+
+      <div class="development-progress">
+        <span></span>
+      </div>
+
+      <div class="development-progress-label">
+        0%
+      </div>
+
+    </div>
+
+    <div class="development-output">
+
+      <div class="development-output-icon">
+        ✓
+      </div>
+
+      <span>STATUS</span>
+
+      <strong>
+        BUILD SUCCESS
+      </strong>
+
+      <small>
+        ready for testing
+      </small>
+
+    </div>
+
+  </div>
+
+  <div class="development-log">
+
+    <span>
+      01
+    </span>
+
+    <p>
+      UI module connected
+    </p>
+
+    <span>
+      02
+    </span>
+
+    <p>
+      Business logic compiled
+    </p>
+
+    <span>
+      03
+    </span>
+
+    <p>
+      Data sources linked
+    </p>
+
+    <span>
+      04
+    </span>
+
+    <p>
+      Integration layer ready
+    </p>
+
+  </div>
+</div>
+
+    <div
+  class="project-integration-detail"
+  id="project-integration-card"
+  aria-hidden="true"
+>
+  <div class="integration-head">
+    <div>
+      <span>05 · INTEGRATION HUB</span>
+
+      <strong>
+        Make separate systems work as one
+      </strong>
+    </div>
+
+    <button
+      class="integration-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="integration-map">
+
+    <svg
+      class="integration-lines"
+      viewBox="0 0 460 245"
+      aria-hidden="true"
+    >
+      <path
+        class="integration-line integration-line-crm"
+        d="M230 122 C185 122 160 72 112 58"
+      ></path>
+
+      <path
+        class="integration-line integration-line-sheets"
+        d="M230 122 C275 122 300 72 348 58"
+      ></path>
+
+      <path
+        class="integration-line integration-line-api"
+        d="M230 122 C175 122 150 165 96 187"
+      ></path>
+
+      <path
+        class="integration-line integration-line-bot"
+        d="M230 122 C230 155 230 168 230 198"
+      ></path>
+
+      <path
+        class="integration-line integration-line-drive"
+        d="M230 122 C285 122 310 165 364 187"
+      ></path>
+    </svg>
+
+    <div class="integration-hub">
+      <span class="integration-hub-ring ring-one"></span>
+      <span class="integration-hub-ring ring-two"></span>
+
+      <div class="integration-hub-core">
+        <strong>HUB</strong>
+        <small>SYNC</small>
+      </div>
+    </div>
+
+    <div class="integration-system integration-crm">
+      <span>CRM</span>
+      <strong>Customers</strong>
+    </div>
+
+    <div class="integration-system integration-sheets">
+      <span>GS</span>
+      <strong>Sheets</strong>
+    </div>
+
+    <div class="integration-system integration-api">
+      <span>API</span>
+      <strong>External</strong>
+    </div>
+
+    <div class="integration-system integration-bot">
+      <span>BOT</span>
+      <strong>Telegram</strong>
+    </div>
+
+    <div class="integration-system integration-drive">
+      <span>DRV</span>
+      <strong>Drive</strong>
+    </div>
+
+    <i class="integration-packet packet-one"></i>
+    <i class="integration-packet packet-two"></i>
+    <i class="integration-packet packet-three"></i>
+    <i class="integration-packet packet-four"></i>
+    <i class="integration-packet packet-five"></i>
+
+  </div>
+
+  <div class="integration-status">
+    <div>
+      <span>CONNECTIONS</span>
+      <strong>5 ACTIVE</strong>
+    </div>
+
+    <i></i>
+
+    <div>
+      <span>SYNC</span>
+      <strong>OK</strong>
+    </div>
+
+    <i></i>
+
+    <div>
+      <span>LATENCY</span>
+      <strong>42 ms</strong>
+    </div>
+  </div>
+</div>
+
+    <div
+  class="project-testing-detail"
+  id="project-testing-card"
+  aria-hidden="true"
+>
+  <div class="testing-head">
+    <div>
+      <span>06 · TEST LAB</span>
+
+      <strong>
+        Test the system before it goes live
+      </strong>
+    </div>
+
+    <button
+      class="testing-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="testing-summary">
+
+    <div>
+      <span>SCENARIOS</span>
+      <strong>12</strong>
+    </div>
+
+    <div>
+      <span>PASS</span>
+      <strong>11</strong>
+    </div>
+
+    <div>
+      <span>RETEST</span>
+      <strong>1</strong>
+    </div>
+
+  </div>
+
+  <div class="testing-matrix">
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-01
+      </span>
+
+      <div>
+        <strong>
+          Core workflow
+        </strong>
+
+        <small>
+          standard day-to-day workflow
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-02
+      </span>
+
+      <div>
+        <strong>
+          Missing data
+        </strong>
+
+        <small>
+          validation with no input value
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+    <div class="testing-row testing-row-retest">
+      <span class="testing-id">
+        T-03
+      </span>
+
+      <div>
+        <strong>
+          Invalid format
+        </strong>
+
+        <small>
+          the error is handled without stopping the system
+        </small>
+      </div>
+
+      <span class="testing-status is-retest">
+        RETEST
+      </span>
+    </div>
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-04
+      </span>
+
+      <div>
+        <strong>
+          Duplicate trigger
+        </strong>
+
+        <small>
+          prevents the same action from running twice
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-05
+      </span>
+
+      <div>
+        <strong>
+          External service unavailable
+        </strong>
+
+        <small>
+          integration failure handled safely
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+  </div>
+
+  <div class="testing-footer">
+
+    <div class="testing-shield">
+      ✓
+    </div>
+
+    <div>
+      <small>
+        QUALITY GATE
+      </small>
+
+      <strong>
+        READY FOR FINAL RETEST
+      </strong>
+    </div>
+
+    <span class="testing-footer-line"></span>
+
+    <div class="testing-score">
+      92%
+    </div>
+
+  </div>
+</div>
+
+    <div
+  class="project-launch-detail"
+  id="project-launch-card"
+  aria-hidden="true"
+>
+  <div class="launch-head">
+    <div>
+      <span>07 · GO LIVE</span>
+
+      <strong>
+        The system is ready to go live
+      </strong>
+    </div>
+
+    <button
+      class="launch-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="launch-panel">
+
+    <div class="launch-readiness">
+
+      <div class="launch-readiness-ring">
+        <span>100%</span>
+      </div>
+
+      <div>
+        <small>READINESS</small>
+        <strong>READY</strong>
+      </div>
+
+    </div>
+
+    <div class="launch-checklist">
+
+      <div class="launch-check is-done">
+        <span>✓</span>
+
+        <div>
+          <strong>Logic</strong>
+          <small>verified</small>
         </div>
       </div>
+
+      <div class="launch-check is-done">
+        <span>✓</span>
+
+        <div>
+          <strong>Integrations</strong>
+          <small>connected</small>
+        </div>
+      </div>
+
+      <div class="launch-check is-done">
+        <span>✓</span>
+
+        <div>
+          <strong>Testing</strong>
+          <small>passed</small>
+        </div>
+      </div>
+
+      <div class="launch-check is-done">
+        <span>✓</span>
+
+        <div>
+          <strong>Access</strong>
+          <small>confirmed</small>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="launch-timeline">
+
+    <div class="launch-timeline-step is-complete">
+      <span></span>
+      <strong>DEPLOY</strong>
+      <small>done</small>
+    </div>
+
+    <i></i>
+
+    <div class="launch-timeline-step is-complete">
+      <span></span>
+      <strong>VERIFY</strong>
+      <small>done</small>
+    </div>
+
+    <i></i>
+
+    <div class="launch-timeline-step is-current">
+      <span></span>
+      <strong>GO LIVE</strong>
+      <small>now</small>
+    </div>
+
+    <i></i>
+
+    <div class="launch-timeline-step">
+      <span></span>
+      <strong>MONITOR</strong>
+      <small>next</small>
+    </div>
+
+  </div>
+
+  <div class="launch-status">
+
+    <span class="launch-status-light"></span>
+
+    <div>
+      <small>SYSTEM STATUS</small>
+      <strong>ONLINE</strong>
+    </div>
+
+    <span class="launch-status-line"></span>
+
+    <div class="launch-time">
+      <small>UPTIME</small>
+      <strong>00:00:01</strong>
+    </div>
+
+  </div>
+</div>
+    <div class="project-core">
+  <div class="project-core-cabinet" aria-hidden="true">
+    <div class="cabinet-title">
+      SYSTEM ARCHITECTURE
+    </div>
+
+    <svg
+      class="cabinet-wiring"
+      viewBox="0 0 220 245"
+      aria-hidden="true"
+    >
+      <g class="cabinet-ports">
+        <rect x="18" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="28" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="38" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="48" y="22" width="5" height="9" rx="1"></rect>
+
+        <rect x="167" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="177" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="187" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="197" y="22" width="5" height="9" rx="1"></rect>
+      </g>
+
+      <g class="cable cable-green">
+        <path d="M20 31 V56 Q20 64 28 64 H78 Q86 64 86 72 V95"></path>
+        <path d="M30 31 V49 Q30 57 38 57 H72 Q92 57 92 76 V95"></path>
+        <path d="M40 31 V42 Q40 50 48 50 H82 Q98 50 98 66 V95"></path>
+        <path d="M50 31 V39 Q50 45 56 45 H90 Q104 45 104 59 V95"></path>
+      </g>
+
+      <g class="cable cable-light">
+        <path d="M170 31 V55 Q170 63 162 63 H143 Q134 63 134 72 V95"></path>
+        <path d="M180 31 V49 Q180 57 172 57 H151 Q140 57 140 68 V95"></path>
+        <path d="M190 31 V43 Q190 51 182 51 H158 Q146 51 146 63 V95"></path>
+        <path d="M200 31 V39 Q200 45 194 45 H167 Q152 45 152 60 V95"></path>
+      </g>
+
+      <g class="cable cable-blue">
+        <path d="M86 122 V143 Q86 151 78 151 H45 Q35 151 35 161 V218"></path>
+        <path d="M94 122 V148 Q94 157 85 157 H53 Q43 157 43 167 V218"></path>
+      </g>
+
+      <g class="cable cable-gold">
+        <path d="M104 122 V155 Q104 163 96 163 H63 Q51 163 51 175 V218"></path>
+        <path d="M112 122 V161 Q112 169 104 169 H72 Q59 169 59 182 V218"></path>
+      </g>
+
+      <g class="cable cable-green">
+        <path d="M122 122 V151 Q122 159 130 159 H165 Q177 159 177 171 V218"></path>
+        <path d="M130 122 V145 Q130 153 138 153 H173 Q185 153 185 165 V218"></path>
+      </g>
+
+      <g class="cable cable-light">
+        <path d="M140 122 V139 Q140 147 148 147 H181 Q193 147 193 159 V218"></path>
+        <path d="M148 122 V133 Q148 141 156 141 H190 Q201 141 201 152 V218"></path>
+      </g>
+
+      <g class="cabinet-connectors">
+        <rect x="30" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="40" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="50" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="60" y="214" width="5" height="9" rx="1"></rect>
+
+        <rect x="175" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="183" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="191" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="199" y="214" width="5" height="9" rx="1"></rect>
+      </g>
+    </svg>
+
+    <div class="cabinet-module cabinet-module-input">
+      <span>INPUT</span>
+      <i></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-process">
+      <span>PROCESS</span>
+      <i class="is-on"></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-logic">
+      <span>LOGIC</span>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-integrations">
+      <span>INTEGRATIONS</span>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-output">
+      <span>OUTPUT / RESULT</span>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+    </div>
+
+    <div class="cabinet-label cabinet-label-data">
+      DATA
+    </div>
+
+    <div class="cabinet-label cabinet-label-api">
+      API
+    </div>
+
+    <div class="cabinet-label cabinet-label-ui">
+      UI
+    </div>
+
+    <div class="cabinet-status">
+      CLEAN ROUTING · CONTROLLED LOGIC
+    </div>
+  </div>
+
+ <div class="project-core-door">
+
+  <div class="project-core-door-face project-core-door-front">
+
+    <button
+      class="project-core-fold"
+      type="button"
+      aria-label="Open system architecture"
+      aria-expanded="false"
+    >
+      <span></span>
+    </button>
+
+    <div class="project-core-orbit">
+      <span></span>
+      <i></i>
+    </div>
+
+    <div class="project-core-bars">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="project-core-step">
+      STAGE <span id="project-core-number">01</span> / 07
+    </div>
+
+    <strong id="project-core-title">
+      Discovery
+    </strong>
+
+    <p id="project-core-description">
+      We define the problem, the outcome you need, and what is currently eating up time.
+    </p>
+
+    <div class="project-core-status">
+      PROJECT FLOW
+    </div>
+
+  </div>
+
+  <div
+    class="project-core-door-face project-core-door-back"
+    aria-hidden="true"
+  >
+
+    <button
+      class="project-core-close"
+      type="button"
+      aria-label="Close system"
+    >
+      ‹
+    </button>
+
+    <span class="door-hinge door-hinge-top"></span>
+    <span class="door-hinge door-hinge-bottom"></span>
+
+    <div class="door-back-rib door-back-rib-a"></div>
+    <div class="door-back-rib door-back-rib-b"></div>
+    <div class="door-back-rib door-back-rib-c"></div>
+
+    <div class="door-back-center">
+      <span></span>
+    </div>
+
+    <i class="door-bolt bolt-a"></i>
+    <i class="door-bolt bolt-b"></i>
+    <i class="door-bolt bolt-c"></i>
+    <i class="door-bolt bolt-d"></i>
+
+  </div>
+
+</div>
+</div>
+  </div>
+</section>
+
+    <section
+      class="services-ecosystem reveal-section"
+      id="services-ecosystem"
+    >
+
+      <header class="services-section-head">
+
+        <div class="services-section-kicker">
+          ECOSYSTEM
+        </div>
+
+        <h2>
+          Automation Ecosystem
+        </h2>
+
+        <p>
+          Individual tools only matter when they work together to solve a real business process.
+        </p>
+
+      </header>
+
+      <div class="ecosystem-board">
+
+        <article
+  class="ecosystem-service ecosystem-left ecosystem-row-1"
+  data-service="powerbi"
+  data-service-effect="powerbi"
+>
+
+          <button
+    class="ecosystem-service-fold"
+    type="button"
+    data-diagnostic-open="powerbi"
+    aria-label="Learn more about Power BI and analytics"
+  >
+    <span></span>
+  </button>
+  <div class="ecosystem-icon">
+    BI
+  </div>
+
+  <div class="ecosystem-service-copy">
+    <h3>Power BI &amp; Analytics</h3>
+
+    <p>
+      KPIs, dashboards, data models, automated refreshes, and decision-ready analytics.
+    </p>
+  </div>
+
+  <div
+    class="ecosystem-mini ecosystem-mini-powerbi"
+    aria-hidden="true"
+  >
+    <div class="mini-bi-grid"></div>
+
+    <svg
+      class="mini-bi-line"
+      viewBox="0 0 90 42"
+      preserveAspectRatio="none"
+    >
+      <polyline
+        points="2,34 17,30 30,32 43,20 57,24 72,10 88,14"
+      ></polyline>
+
+      <circle cx="17" cy="30" r="2"></circle>
+      <circle cx="43" cy="20" r="2"></circle>
+      <circle cx="72" cy="10" r="2"></circle>
+      <circle cx="88" cy="14" r="2"></circle>
+    </svg>
+
+    <span class="mini-bi-value">
+      +24%
+    </span>
+  </div>
+</article>
+
+<article
+  class="ecosystem-service ecosystem-left ecosystem-row-2"
+  data-service="excel"
+  data-service-effect="excel"
+>
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="excel"
+  aria-label="Learn more about Excel and VBA"
+>
+  <span></span>
+</button>
+  <div class="ecosystem-icon">
+    XL
+  </div>
+
+  <div class="ecosystem-service-copy">
+    <h3>Excel / VBA</h3>
+
+    <p>
+      Macros, calculations, forms, automated reporting, and complex business logic.
+    </p>
+  </div>
+
+  <div
+    class="ecosystem-mini ecosystem-mini-excel"
+    aria-hidden="true"
+  >
+    <div class="mini-excel-grid">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="mini-excel-formula">
+      =SUM(A1:D3)
+    </div>
+  </div>
+</article>
+
+<article
+  class="ecosystem-service ecosystem-left ecosystem-row-3"
+  data-service="apps"
+  data-service-effect="apps"
+>
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="apps"
+  aria-label="Learn more about Google Apps Script"
+>
+  <span></span>
+</button>
+  <div class="ecosystem-icon">
+    GS
+  </div>
+
+  <div class="ecosystem-service-copy">
+    <h3>Google Apps Script</h3>
+
+    <p>
+      Google Sheets, Drive, Gmail, forms, workflows, and web apps.
+    </p>
+  </div>
+
+  <div
+    class="ecosystem-mini ecosystem-mini-apps"
+    aria-hidden="true"
+  >
+    <div class="mini-apps-node">
+      TRIGGER
+    </div>
+
+    <span class="mini-apps-link">
+      →
+    </span>
+
+    <div class="mini-apps-node">
+      SCRIPT
+    </div>
+
+    <span class="mini-apps-link">
+      →
+    </span>
+
+    <div class="mini-apps-node is-result">
+      DONE
+    </div>
+
+    <span class="mini-apps-packet"></span>
+  </div>
+</article>
+
+       <div class="ecosystem-core">
+
+  <div
+    class="ecosystem-life-scene"
+    aria-hidden="true"
+  >
+    <div class="ecosystem-life-overlay">
+
+      <div class="ecosystem-life-stat">
+        <span>REPORTS</span>
+        <strong>SYNCED</strong>
+      </div>
+
+      <div class="ecosystem-life-stat">
+        <span>TASKS</span>
+        <strong>128 DONE</strong>
+      </div>
+
+      <div class="ecosystem-life-stat">
+        <span>AUTOMATION</span>
+        <strong>ACTIVE</strong>
+      </div>
+
+    </div>
+
+    <button
+      class="ecosystem-life-deeper"
+      type="button"
+    >
+      See What This Feels Like
+      <span>↓</span>
+    </button>
+  </div>
+
+  <div class="ecosystem-core-door">
+
+    <div
+      class="ecosystem-core-door-face ecosystem-core-door-front"
+    >
+
+      <button
+        class="ecosystem-core-fold"
+        type="button"
+        aria-label="Open automation outcome"
+        aria-expanded="false"
+      >
+        <span></span>
+      </button>
+
+      <div class="ecosystem-core-orbit">
+        <span></span>
+      </div>
+
+      <div class="ecosystem-core-chart">
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+
+      <h3>
+        Automation
+        <br>
+        and Reporting
+      </h3>
+
+      <p>
+        I build end-to-end solutions that connect data, rules, automated actions, interfaces, and management reporting.
+      </p>
+
+      <div class="ecosystem-core-status">
+        SYSTEM ONLINE
+      </div>
+
+    </div>
+
+    <div
+      class="ecosystem-core-door-face ecosystem-core-door-back"
+      aria-hidden="true"
+    >
+      <button
+        class="ecosystem-core-close"
+        type="button"
+        aria-label="Close"
+      >
+        ‹
+      </button>
+
+      <span class="ecosystem-hinge ecosystem-hinge-top"></span>
+      <span class="ecosystem-hinge ecosystem-hinge-bottom"></span>
+
+      <div class="ecosystem-door-back-rib rib-a"></div>
+      <div class="ecosystem-door-back-rib rib-b"></div>
+      <div class="ecosystem-door-back-rib rib-c"></div>
+
+      <span class="ecosystem-door-bolt bolt-a"></span>
+      <span class="ecosystem-door-bolt bolt-b"></span>
+      <span class="ecosystem-door-bolt bolt-c"></span>
+      <span class="ecosystem-door-bolt bolt-d"></span>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div
+  class="ecosystem-reality-view"
+  id="ecosystem-reality-view"
+  aria-hidden="true"
+>
+  <div class="ecosystem-reality-backdrop"></div>
+
+  <div class="ecosystem-reality-panel">
+
+    <button
+      class="ecosystem-reality-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <div class="ecosystem-reality-scene">
+
+      <div class="ecosystem-reality-image"></div>
+      
+      <button
+  class="reality-hotspot reality-hotspot-laptop"
+      type="button"
+      data-detail="laptop"
+      aria-label="Open laptop dashboard"
+    ></button>
+
+    <button
+      class="reality-hotspot reality-hotspot-line"
+      type="button"
+      data-detail="line"
+      aria-label="Open line chart"
+    ></button>
+    
+    <button
+      class="reality-hotspot reality-hotspot-donut"
+      type="button"
+      data-detail="donut"
+      aria-label="Open donut chart"
+    ></button>
+    
+    <button
+      class="reality-hotspot reality-hotspot-bars"
+      type="button"
+      data-detail="bars"
+      aria-label="Open bar chart"
+    ></button>
+
+      <div class="ecosystem-reality-live">
+
+        <div class="reality-live-card">
+          <span>REPORTS</span>
+          <strong>SYNCED</strong>
+          <small>2 min ago</small>
+        </div>
+
+        <div class="reality-live-card">
+          <span>TASKS</span>
+          <strong>128 PROCESSED</strong>
+          <small>running automatically</small>
+        </div>
+
+        <div class="reality-live-card">
+          <span>DATA</span>
+          <strong>UPDATED</strong>
+          <small>1 min ago</small>
+        </div>
+
+        <div class="reality-live-card">
+          <span>AUTOMATION</span>
+          <strong>ACTIVE</strong>
+          <small>23 workflows</small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ecosystem-reality-copy">
+
+      <div class="ecosystem-reality-kicker">
+        YOUR TIME
+      </div>
+
+      <h3>
+        The system keeps working —
+        <br>
+        you get your time back
+      </h3>
+
+      <p>
+        Automation handles the repetitive work, reduces manual errors, and gives your team more time to focus on the decisions that matter.
+      </p>
+
+      <div class="ecosystem-reality-benefits">
+
+        <div>
+          <span>01</span>
+          <strong>Visibility</strong>
+        </div>
+
+        <div>
+          <span>02</span>
+          <strong>Accuracy</strong>
+        </div>
+
+        <div>
+          <span>03</span>
+          <strong>Speed</strong>
+        </div>
+
+        <div>
+          <span>04</span>
+          <strong>Control</strong>
+        </div>
+
+      </div>
+
+      <div class="ecosystem-reality-status">
+        <span></span>
+        SYSTEM WORKING
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+        <div
+  class="ecosystem-detail-view"
+  id="ecosystem-detail-view"
+  aria-hidden="true"
+>
+  <div class="ecosystem-detail-backdrop"></div>
+  <div class="ecosystem-detail-tail"></div>
+
+  <div class="ecosystem-detail-panel">
+
+    <button
+      class="ecosystem-detail-close"
+      type="button"
+      aria-label="Close detail view"
+    >
+      ×
+    </button>
+
+    <div
+      class="ecosystem-detail-image"
+      data-detail-image
+    ></div>
+
+  </div>
+</div>
+        
+        <article
+  class="ecosystem-service ecosystem-right ecosystem-row-1"
+  data-service="integration"
+  data-service-effect="integration"
+>
+          <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="integration"
+  aria-label="Learn more about integrations and APIs"
+>
+  <span></span>
+</button>
+  <div class="ecosystem-icon">
+    ↔
+  </div>
+
+  <div class="ecosystem-service-copy">
+    <h3>Integrations &amp; APIs</h3>
+
+    <p>
+      CRM, ERP, websites, forms, Telegram, and external systems.
+    </p>
+  </div>
+
+  <div
+    class="ecosystem-mini ecosystem-mini-integration"
+    aria-hidden="true"
+  >
+    <div class="mini-api-system">
+      CRM
+    </div>
+
+    <div class="mini-api-channel">
+      <span class="mini-api-packet packet-a"></span>
+      <span class="mini-api-packet packet-b"></span>
+    </div>
+
+    <div class="mini-api-system">
+      API
+    </div>
+  </div>
+</article>
+
+<article
+  class="ecosystem-service ecosystem-right ecosystem-row-2"
+  data-service="process"
+  data-service-effect="process"
+>
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="process"
+  aria-label="Learn more about process optimization"
+>
+  <span></span>
+</button>
+  <div class="ecosystem-icon">
+    ↻
+  </div>
+
+  <div class="ecosystem-service-copy">
+    <h3>Process Optimization</h3>
+
+    <p>
+      I streamline the workflow by removing unnecessary manual steps, duplicate work, and avoidable delays.
+    </p>
+  </div>
+
+  <div
+    class="ecosystem-mini ecosystem-mini-process"
+    aria-hidden="true"
+  >
+    <div class="mini-process-before">
+      <span>1</span>
+      <span>2</span>
+      <span class="is-remove">3</span>
+      <span class="is-remove">4</span>
+      <span>5</span>
+    </div>
+
+    <div class="mini-process-arrow">
+      →
+    </div>
+
+    <div class="mini-process-after">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+    </div>
+  </div>
+</article>
+
+<article
+  class="ecosystem-service ecosystem-right ecosystem-row-3"
+  data-service="data"
+  data-service-effect="data"
+>
+
+  <button
+  class="ecosystem-service-fold"
+  type="button"
+  data-diagnostic-open="data"
+  aria-label="Learn more about data preparation"
+>
+  <span></span>
+</button>
+  <div class="ecosystem-icon">
+    DB
+  </div>
+
+  <div class="ecosystem-service-copy">
+    <h3>Data Preparation</h3>
+
+    <p>
+      Cleaning, normalization, validation, merging, and structure.
+    </p>
+  </div>
+
+  <div
+    class="ecosystem-mini ecosystem-mini-data"
+    aria-hidden="true"
+  >
+    <div class="mini-data-chaos">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="mini-data-arrow">
+      →
+    </div>
+
+    <div class="mini-data-clean">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</article>
+
+        <span class="ecosystem-wire wire-left-1"></span>
+        <span class="ecosystem-wire wire-left-2"></span>
+        <span class="ecosystem-wire wire-left-3"></span>
+
+        <span class="ecosystem-wire wire-right-1"></span>
+        <span class="ecosystem-wire wire-right-2"></span>
+        <span class="ecosystem-wire wire-right-3"></span>
+
+      </div>
+
+      <div
+  class="ecosystem-diagnostic"
+  id="ecosystem-diagnostic"
+  aria-hidden="true"
+>
+  <div class="ecosystem-diagnostic-backdrop"></div>
+
+  <div class="ecosystem-diagnostic-panel">
+
+    <button
+      class="ecosystem-diagnostic-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <div class="ecosystem-diagnostic-main">
+
+      <div class="ecosystem-diagnostic-kicker">
+        <span data-diagnostic-code>
+          01
+        </span>
+
+        BUSINESS IMPACT
+      </div>
+
+      <h3 data-diagnostic-title>
+        Power BI &amp; Analytics
+      </h3>
+
+      <div class="ecosystem-diagnostic-columns">
+
+        <div class="ecosystem-diagnostic-block is-pain">
+
+          <span class="ecosystem-diagnostic-label">
+            PAIN POINT
+          </span>
+
+          <strong data-diagnostic-pain-title>
+            The numbers arrive too late
+          </strong>
+
+          <p data-diagnostic-pain>
+            Reports are assembled by hand, data lives in separate files, and hours disappear into checking and reconciling numbers.
+          </p>
+
+        </div>
+
+        <div class="ecosystem-diagnostic-arrow">
+          →
+        </div>
+
+        <div class="ecosystem-diagnostic-block is-solution">
+
+          <span class="ecosystem-diagnostic-label">
+            SOLUTION
+          </span>
+
+          <strong data-diagnostic-solution-title>
+            Current numbers without manual reporting
+          </strong>
+
+          <p data-diagnostic-solution>
+            Data is collected and refreshed automatically, so key metrics are available when the business actually needs them.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="ecosystem-diagnostic-impact">
+
+        <div>
+          <span>TIME</span>
+          <strong data-impact-time>
+            Less manual work
+          </strong>
+        </div>
+
+        <div>
+          <span>COST</span>
+          <strong data-impact-cost>
+            Lower operating costs
+          </strong>
+        </div>
+
+        <div>
+          <span>SPEED</span>
+          <strong data-impact-speed>
+            Faster decisions
+          </strong>
+        </div>
+
+      </div>
+
+      <button
+        class="ecosystem-diagnostic-start"
+        type="button"
+      >
+        Check Your Process
+
+        <span>
+          →
+        </span>
+      </button>
+
+    </div>
+
+    <div
+      class="ecosystem-quiz"
+      aria-hidden="true"
+    >
+
+      <div class="ecosystem-quiz-head">
+
+        <div>
+          <span>
+            QUICK CHECK
+          </span>
+
+          <strong data-quiz-title>
+            Quick Process Check
+          </strong>
+        </div>
+
+        <div class="ecosystem-quiz-progress">
+          <span data-quiz-progress>
+            1 / 3
+          </span>
+
+          <div>
+            <i data-quiz-progress-bar></i>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ecosystem-quiz-body">
+
+        <div class="ecosystem-quiz-question">
+
+          <span data-quiz-question-number>
+            QUESTION 01
+          </span>
+
+          <h4 data-quiz-question>
+            How much time does this task take?
+          </h4>
+
+          <div
+            class="ecosystem-quiz-options"
+            data-quiz-options
+          ></div>
+
+        </div>
+
+      </div>
+
+      <div class="ecosystem-quiz-footer">
+
+        <button
+          class="ecosystem-quiz-back"
+          type="button"
+        >
+          ← Back
+        </button>
+
+        <span>
+          Choose one answer
+        </span>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ecosystem-quiz-result"
+      aria-hidden="true"
+    >
+
+      <div class="ecosystem-result-score">
+
+        <span>
+          AUTOMATION POTENTIAL
+        </span>
+
+        <strong data-result-score>
+          HIGH
+        </strong>
+
+      </div>
+
+      <h3 data-result-title>
+        There’s real automation potential here
+      </h3>
+
+      <p data-result-description>
+        This process includes recurring manual work that can likely be reduced, standardized, or handed off to automation.
+      </p>
+
+      <div class="ecosystem-result-metrics">
+
+        <div>
+          <span>
+            POTENTIAL
+          </span>
+
+          <strong data-result-potential>
+            High
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            TIME
+          </span>
+
+          <strong data-result-time>
+            Potential time savings
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            IMPACT
+          </span>
+
+          <strong data-result-effect>
+            Faster workflow
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ecosystem-result-summary">
+
+        <span>
+          WHAT YOUR ANSWERS TELL US
+        </span>
+
+        <p data-result-summary>
+          Your result will be based on the answers you provide.
+        </p>
+
+      </div>
+
+      <div class="ecosystem-result-actions">
+
+        <button
+          class="ecosystem-result-send"
+          type="button"
+        >
+          Send My Results to Sebastian
+
+          <span>
+            ↗
+          </span>
+        </button>
+
+        <button
+          class="ecosystem-result-restart"
+          type="button"
+        >
+          Retake the Check
+        </button>
+
+      </div>
+
+      <small class="ecosystem-result-note">
+        This quick check is an estimate of your automation potential, not a formal assessment.
+      </small>
+
+    </div>
+
+  </div>
+</div>
+      
+      <div class="services-capabilities">
+
+        <a href="solutions-en.html">
+          Telegram Bots
+        </a>
+
+        <a href="solutions-en.html">
+          Web Apps
+        </a>
+
+        <a href="solutions-en.html">
+          PWA
+        </a>
+
+        <a href="solutions-en.html">
+          PDFs &amp; Documents
+        </a>
+
+        <a href="solutions-en.html">
+          Google Drive
+        </a>
+
+        <a href="solutions-en.html">
+          Market Research
+        </a>
+
+        <a href="solutions-en.html">
+          Custom Logic
+        </a>
+
+      </div>
+
     </section>
 
-    <section class="cta">
-      <h2>Not sure which category your task belongs to?</h2>
-      <p>
-        That is completely normal. Describe the process in your own words,
-        and I will determine the most practical approach and whether automation makes sense.
-      </p>
-      <a href="contacts-en.html">Discuss Your Task</a>
+    <section class="services-process reveal-section">
+
+      <header class="services-section-head compact">
+
+        <div class="services-section-kicker">
+          WORKFLOW
+        </div>
+
+        <h2>
+          How It Works
+        </h2>
+
+      </header>
+
+      <div class="services-process-grid">
+
+        <article class="services-process-step">
+
+          <div class="process-step-top">
+
+            <span class="process-number">
+              1
+            </span>
+
+            <div class="process-symbol">
+              ⌕
+            </div>
+
+          </div>
+
+          <h3>
+            Analysis
+          </h3>
+
+          <p>
+            I dig into the actual process and real files to find where time is being lost.
+          </p>
+
+        </article>
+
+        <div class="process-arrow">
+          →
+        </div>
+
+        <article class="services-process-step">
+
+          <div class="process-step-top">
+
+            <span class="process-number">
+              2
+            </span>
+
+            <div class="process-symbol">
+              ◇
+            </div>
+
+          </div>
+
+          <h3>
+            Logic
+          </h3>
+
+          <p>
+            I design the solution structure, business rules, workflows, and system behavior.
+          </p>
+
+        </article>
+
+        <div class="process-arrow">
+          →
+        </div>
+
+        <article class="services-process-step">
+
+          <div class="process-step-top">
+
+            <span class="process-number">
+              3
+            </span>
+
+            <div class="process-symbol">
+              ⚙
+            </div>
+
+          </div>
+
+          <h3>
+            Automation
+          </h3>
+
+          <p>
+            I build the automations, integrations, reporting, workflows, and interfaces, then test them with real data.
+          </p>
+
+        </article>
+
+        <div class="process-arrow">
+          →
+        </div>
+
+        <article class="services-process-step">
+
+          <div class="process-step-top">
+
+            <span class="process-number">
+              4
+            </span>
+
+            <div class="process-symbol">
+              ✓
+            </div>
+
+          </div>
+
+          <h3>
+            Outcome
+          </h3>
+
+          <p>
+            You get a system that saves time and keeps doing the job after launch.
+          </p>
+
+        </article>
+
+      </div>
+
     </section>
+
+    <section class="services-transformation reveal-section">
+
+      <header class="services-section-head compact">
+
+        <div class="services-section-kicker">
+          TRANSFORMATION
+        </div>
+
+        <h2>
+          Before &amp; After
+        </h2>
+
+      </header>
+
+      <div class="transformation-board">
+
+        <div class="transformation-before">
+
+          <div class="transformation-label">
+            BEFORE
+          </div>
+
+          <h3>
+            Manual Work &amp; Chaos
+          </h3>
+
+          <div class="chaos-scene">
+
+            <div class="chaos-paper paper-a">
+              XLS
+            </div>
+
+            <div class="chaos-paper paper-b">
+              PDF
+            </div>
+
+            <div class="chaos-paper paper-c">
+              CSV
+            </div>
+
+            <div class="chaos-paper paper-d">
+              MAIL
+            </div>
+
+            <div class="chaos-laptop">
+
+              <div class="chaos-laptop-screen">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+              </div>
+
+              <div class="chaos-laptop-base"></div>
+
+            </div>
+
+          </div>
+
+          <ul>
+            <li>
+              Data scattered across files
+            </li>
+
+            <li>
+              Manual reporting and copy-paste work
+            </li>
+
+            <li>
+              Errors and duplicate records
+            </li>
+
+            <li>
+              Time burned on repetitive tasks
+            </li>
+
+            <li>
+              Hard to scale
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="transformation-switch">
+          →
+        </div>
+
+        <div class="transformation-after">
+
+          <div class="transformation-label">
+            AFTER
+          </div>
+
+          <h3>
+            Automation &amp; Control
+          </h3>
+
+          <div class="dashboard-scene">
+
+            <div class="dashboard-laptop">
+
+              <div class="dashboard-screen">
+
+                <div class="dashboard-ring"></div>
+
+                <div class="dashboard-bars">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <div class="dashboard-line">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+
+              </div>
+
+              <div class="dashboard-base"></div>
+
+            </div>
+
+            <div class="dashboard-cloud cloud-1">
+              DB
+            </div>
+
+            <div class="dashboard-cloud cloud-2">
+              BI
+            </div>
+
+            <div class="dashboard-cloud cloud-3">
+              API
+            </div>
+
+          </div>
+
+          <ul>
+            <li>
+              Data is consolidated and structured
+            </li>
+
+            <li>
+              Reports refresh automatically
+            </li>
+
+            <li>
+              Fewer manual errors
+            </li>
+
+            <li>
+              More time for analysis and decisions
+            </li>
+
+            <li>
+              The process scales more easily
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="services-final-cta reveal-section">
+
+      <div class="services-final-cta-symbol">
+        <div class="services-final-message-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="services-final-cta-copy">
+
+        <div class="services-section-kicker">
+          YOUR PROCESS
+        </div>
+
+        <h2>
+          Talk About Your Process
+        </h2>
+
+        <p>
+          Tell me what your team is still doing by hand, where errors show up, or what takes longer than it should. I’ll outline a practical automation approach and what it would take to build.
+        </p>
+
+        <span>
+          The first consultation is free.
+        </span>
+
+      </div>
+
+      <div class="services-final-cta-action">
+
+        <a href="contacts-en.html">
+          Let’s Talk
+          <span>↗</span>
+        </a>
+
+        <small>
+          Your information stays confidential
+        </small>
+
+      </div>
+
+      <div
+        class="services-final-circuit"
+        aria-hidden="true"
+      >
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+
+    </section>
+
   </main>
 
-  <footer>
-  © 2015–2026 Sebastian Automations. All rights reserved.
-  <a href="terms-en.html">Terms of Use</a>
-</footer>
+  <div id="site-footer-slot"></div>
+
 </body>
 </html>

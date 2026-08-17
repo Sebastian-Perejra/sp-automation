@@ -8655,6 +8655,96 @@ const activeCapabilityContent =
   capabilityContent[
     capabilityLanguage
   ];
+  const capabilityButtonLabels = {
+  uk: {
+    telegram:
+      "Telegram-боти",
+
+    webapps:
+      "Вебзастосунки",
+
+    pwa:
+      "PWA",
+
+    documents:
+      "PDF та документи",
+
+    drive:
+      "Google Drive",
+
+    research:
+      "Дослідження ринку",
+
+    custom:
+      "Індивідуальна логіка"
+  },
+
+  ru: {
+    telegram:
+      "Telegram-боты",
+
+    webapps:
+      "Веб-приложения",
+
+    pwa:
+      "PWA",
+
+    documents:
+      "PDF и документы",
+
+    drive:
+      "Google Drive",
+
+    research:
+      "Исследование рынка",
+
+    custom:
+      "Индивидуальная логика"
+  },
+
+  en: {
+    telegram:
+      "Telegram Bots",
+
+    webapps:
+      "Web Apps",
+
+    pwa:
+      "PWA",
+
+    documents:
+      "PDF & Documents",
+
+    drive:
+      "Google Drive",
+
+    research:
+      "Market Research",
+
+    custom:
+      "Custom Business Logic"
+  }
+};
+
+const currentCapabilityLabels =
+  capabilityButtonLabels[
+    capabilityLanguage
+  ];
+
+capabilityButtons.forEach(
+  button => {
+    const key =
+      button.dataset.capability;
+
+    if (
+      currentCapabilityLabels &&
+      currentCapabilityLabels[key]
+    ) {
+      button.textContent =
+        currentCapabilityLabels[key];
+    }
+  }
+);
 
 let activeCapability =
   "";

@@ -399,34 +399,167 @@
     </button>
 
     <div class="project-core">
-      <div class="project-core-orbit">
-        <span></span>
-        <i></i>
-      </div>
-
-      <div class="project-core-bars">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <div class="project-core-step">
-        ЕТАП <span id="project-core-number">01</span> / 07
-      </div>
-
-      <strong id="project-core-title">
-        Обговорення
-      </strong>
-
-      <p id="project-core-description">
-        Фіксуємо задачу, очікуваний результат і те,
-        що зараз забирає час.
-      </p>
-
-      <div class="project-core-status">
-        PROJECT FLOW
-      </div>
+  <div class="project-core-cabinet" aria-hidden="true">
+    <div class="cabinet-title">
+      SYSTEM ARCHITECTURE
     </div>
+
+    <svg
+      class="cabinet-wiring"
+      viewBox="0 0 220 245"
+      aria-hidden="true"
+    >
+      <g class="cabinet-ports">
+        <rect x="18" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="28" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="38" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="48" y="22" width="5" height="9" rx="1"></rect>
+
+        <rect x="167" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="177" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="187" y="22" width="5" height="9" rx="1"></rect>
+        <rect x="197" y="22" width="5" height="9" rx="1"></rect>
+      </g>
+
+      <g class="cable cable-green">
+        <path d="M20 31 V56 Q20 64 28 64 H78 Q86 64 86 72 V95"></path>
+        <path d="M30 31 V49 Q30 57 38 57 H72 Q92 57 92 76 V95"></path>
+        <path d="M40 31 V42 Q40 50 48 50 H82 Q98 50 98 66 V95"></path>
+        <path d="M50 31 V39 Q50 45 56 45 H90 Q104 45 104 59 V95"></path>
+      </g>
+
+      <g class="cable cable-light">
+        <path d="M170 31 V55 Q170 63 162 63 H143 Q134 63 134 72 V95"></path>
+        <path d="M180 31 V49 Q180 57 172 57 H151 Q140 57 140 68 V95"></path>
+        <path d="M190 31 V43 Q190 51 182 51 H158 Q146 51 146 63 V95"></path>
+        <path d="M200 31 V39 Q200 45 194 45 H167 Q152 45 152 60 V95"></path>
+      </g>
+
+      <g class="cable cable-blue">
+        <path d="M86 122 V143 Q86 151 78 151 H45 Q35 151 35 161 V218"></path>
+        <path d="M94 122 V148 Q94 157 85 157 H53 Q43 157 43 167 V218"></path>
+      </g>
+
+      <g class="cable cable-gold">
+        <path d="M104 122 V155 Q104 163 96 163 H63 Q51 163 51 175 V218"></path>
+        <path d="M112 122 V161 Q112 169 104 169 H72 Q59 169 59 182 V218"></path>
+      </g>
+
+      <g class="cable cable-green">
+        <path d="M122 122 V151 Q122 159 130 159 H165 Q177 159 177 171 V218"></path>
+        <path d="M130 122 V145 Q130 153 138 153 H173 Q185 153 185 165 V218"></path>
+      </g>
+
+      <g class="cable cable-light">
+        <path d="M140 122 V139 Q140 147 148 147 H181 Q193 147 193 159 V218"></path>
+        <path d="M148 122 V133 Q148 141 156 141 H190 Q201 141 201 152 V218"></path>
+      </g>
+
+      <g class="cabinet-connectors">
+        <rect x="30" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="40" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="50" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="60" y="214" width="5" height="9" rx="1"></rect>
+
+        <rect x="175" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="183" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="191" y="214" width="5" height="9" rx="1"></rect>
+        <rect x="199" y="214" width="5" height="9" rx="1"></rect>
+      </g>
+    </svg>
+
+    <div class="cabinet-module cabinet-module-input">
+      <span>INPUT</span>
+      <i></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-process">
+      <span>PROCESS</span>
+      <i class="is-on"></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-logic">
+      <span>LOGIC</span>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-integrations">
+      <span>INTEGRATIONS</span>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+    </div>
+
+    <div class="cabinet-module cabinet-module-output">
+      <span>OUTPUT / RESULT</span>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+      <i class="is-on"></i>
+    </div>
+
+    <div class="cabinet-label cabinet-label-data">
+      DATA
+    </div>
+
+    <div class="cabinet-label cabinet-label-api">
+      API
+    </div>
+
+    <div class="cabinet-label cabinet-label-ui">
+      UI
+    </div>
+
+    <div class="cabinet-status">
+      CLEAN ROUTING · CONTROLLED LOGIC
+    </div>
+  </div>
+
+  <div class="project-core-door">
+    <button
+      class="project-core-fold"
+      type="button"
+      aria-label="Відкрити архітектуру системи"
+      aria-expanded="false"
+    >
+      <span></span>
+    </button>
+
+    <div class="project-core-orbit">
+      <span></span>
+      <i></i>
+    </div>
+
+    <div class="project-core-bars">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="project-core-step">
+      ЕТАП <span id="project-core-number">01</span> / 07
+    </div>
+
+    <strong id="project-core-title">
+      Обговорення
+    </strong>
+
+    <p id="project-core-description">
+      Фіксуємо задачу, очікуваний результат і те,
+      що зараз забирає час.
+    </p>
+
+    <div class="project-core-status">
+      PROJECT FLOW
+    </div>
+  </div>
+</div>
   </div>
 </section>
 

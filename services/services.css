@@ -7798,12 +7798,16 @@ body::after {
 .project-core {
   opacity: 0.58;
 
-  transform:
-    scale(0.96);
-
   transition:
     opacity 0.35s ease,
-    transform 0.35s ease;
+    filter 0.35s ease;
+}
+
+.services-project-map.is-booting
+.project-core {
+  filter:
+    brightness(0.86)
+    saturate(0.88);
 }
 
 .services-project-map.is-booting
@@ -7831,12 +7835,9 @@ body::after {
 .project-core {
   opacity: 1;
 
-  transform:
-    scale(1);
-
-  box-shadow:
-    0 0 0 7px
-    rgba(77, 145, 108, 0.04);
+  filter:
+    brightness(1)
+    saturate(1);
 }
 
 .services-project-map.boot-lines-on
@@ -7867,10 +7868,11 @@ body::after {
     rgba(75, 145, 108, 0.035);
 }
 
-.services-project-map.is-boot-complete
-.project-stage {
-  opacity: 1;
-}
+  .services-project-map.is-boot-complete
+  .project-core {
+    opacity: 1;
+    filter: none;
+  }
 
 .services-project-map.is-boot-complete
 .project-core {

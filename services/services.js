@@ -4693,9 +4693,11 @@ if (
     }
   );
 }
-  const realityLaptopHotspot =
-  document.querySelector(
-    ".reality-hotspot-laptop"
+  const realityDetailHotspots =
+  Array.from(
+    document.querySelectorAll(
+      ".reality-hotspot[data-detail]"
+    )
   );
 
 const ecosystemDetailView =
@@ -4724,176 +4726,258 @@ const ecosystemDetailBackdrop =
       )
     : null;
 
+const ecosystemDetailTail =
+  ecosystemDetailView
+    ? ecosystemDetailView.querySelector(
+        ".ecosystem-detail-tail"
+      )
+    : null;
+
+const detailImages = {
+  laptop:
+    "/services/assets/ecosystem-laptop-dashboard.webp",
+
+  line:
+    "/services/assets/ecosystem-glass-line.webp",
+
+  donut:
+    "/services/assets/ecosystem-glass-donut.webp",
+
+  bars:
+    "/services/assets/ecosystem-glass-bars.webp"
+};
+
 if (
-  realityLaptopHotspot &&
+  realityDetailHotspots.length &&
   ecosystemDetailView &&
   ecosystemDetailImage &&
   ecosystemDetailClose
 ) {
-  const openLaptopDetail = () => {
-  const panel =
-    ecosystemDetailView.querySelector(
-      ".ecosystem-detail-panel"
-    );
+  const positionDetailFromHotspot =
+    hotspot => {
+      const panel =
+        ecosystemDetailView.querySelector(
+          ".ecosystem-detail-panel"
+        );
 
-  const tail =
-    ecosystemDetailView.querySelector(
-      ".ecosystem-detail-tail"
-    );
+      if (!panel) return;
 
-  const hotspotRect =
-    realityLaptopHotspot.getBoundingClientRect();
+      const hotspotRect =
+        hotspot.getBoundingClientRect();
 
-  const viewportWidth =
-    window.innerWidth;
+      const viewportWidth =
+        window.innerWidth;
 
-  const viewportHeight =
-    window.innerHeight;
+      const viewportHeight =
+        window.innerHeight;
 
-  const panelWidth =
-    Math.min(
-      610,
-      viewportWidth * 0.4
-    );
+      const panelWidth =
+        Math.min(
+          610,
+          viewportWidth * 0.4
+        );
 
-  const panelHeight =
-    panelWidth * 10 / 16;
+      const panelHeight =
+        panelWidth *
+        10 /
+        16;
 
-  const panelLeft =
-    viewportWidth -
-    viewportWidth * 0.05 -
-    panelWidth;
+      const panelLeft =
+        viewportWidth -
+        viewportWidth * 0.05 -
+        panelWidth;
 
-  const panelTop =
-    viewportHeight * 0.16;
+      const panelTop =
+        viewportHeight * 0.16;
 
-  const laptopX =
-    hotspotRect.left +
-    hotspotRect.width * 0.52;
+      const sourceX =
+        hotspotRect.left +
+        hotspotRect.width * 0.5;
 
-  const laptopY =
-    hotspotRect.top +
-    hotspotRect.height * 0.55;
+      const sourceY =
+        hotspotRect.top +
+        hotspotRect.height * 0.5;
 
-  const startX =
-    laptopX -
-    panelLeft;
+      const startX =
+        sourceX -
+        panelLeft;
 
-  const startY =
-    laptopY -
-    (
-      panelTop +
-      panelHeight
-    );
+      const startY =
+        sourceY -
+        (
+          panelTop +
+          panelHeight
+        );
 
-  ecosystemDetailView.style.setProperty(
-    "--detail-start-x",
-    `${startX}px`
-  );
+      ecosystemDetailView.style.setProperty(
+        "--detail-start-x",
+        `${startX}px`
+      );
 
-  ecosystemDetailView.style.setProperty(
-    "--detail-start-y",
-    `${startY}px`
-  );
+      ecosystemDetailView.style.setProperty(
+        "--detail-start-y",
+        `${startY}px`
+      );
 
-  if (tail) {
-    const sourceX1 =
-      hotspotRect.left +
-      hotspotRect.width * 0.43;
+      if (!ecosystemDetailTail) {
+        return;
+      }
 
-    const sourceY1 =
-      hotspotRect.top +
-      hotspotRect.height * 0.46;
+      const sourceX1 =
+        hotspotRect.left +
+        hotspotRect.width * 0.42;
 
-    const sourceX2 =
-      hotspotRect.left +
-      hotspotRect.width * 0.58;
+      const sourceY1 =
+        hotspotRect.top +
+        hotspotRect.height * 0.44;
 
-    const sourceY2 =
-      hotspotRect.top +
-      hotspotRect.height * 0.62;
+      const sourceX2 =
+        hotspotRect.left +
+        hotspotRect.width * 0.58;
 
-    const targetX =
-      panelLeft;
+      const sourceY2 =
+        hotspotRect.top +
+        hotspotRect.height * 0.60;
 
-    const targetY1 =
-      panelTop +
-      panelHeight * 0.42;
+      const targetX =
+        panelLeft;
 
-    const targetY2 =
-      panelTop +
-      panelHeight * 0.58;
+      const targetY1 =
+        panelTop +
+        panelHeight * 0.42;
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-x1",
-      `${sourceX1 / viewportWidth * 100}%`
-    );
+      const targetY2 =
+        panelTop +
+        panelHeight * 0.58;
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-y1",
-      `${sourceY1 / viewportHeight * 100}%`
-    );
+      ecosystemDetailView.style.setProperty(
+        "--tail-x1",
+        `${
+          sourceX1 /
+          viewportWidth *
+          100
+        }%`
+      );
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-x2",
-      `${sourceX2 / viewportWidth * 100}%`
-    );
+      ecosystemDetailView.style.setProperty(
+        "--tail-y1",
+        `${
+          sourceY1 /
+          viewportHeight *
+          100
+        }%`
+      );
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-y2",
-      `${sourceY2 / viewportHeight * 100}%`
-    );
+      ecosystemDetailView.style.setProperty(
+        "--tail-x2",
+        `${
+          sourceX2 /
+          viewportWidth *
+          100
+        }%`
+      );
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-panel-x1",
-      `${targetX / viewportWidth * 100}%`
-    );
+      ecosystemDetailView.style.setProperty(
+        "--tail-y2",
+        `${
+          sourceY2 /
+          viewportHeight *
+          100
+        }%`
+      );
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-panel-y1",
-      `${targetY1 / viewportHeight * 100}%`
-    );
+      ecosystemDetailView.style.setProperty(
+        "--tail-panel-x1",
+        `${
+          targetX /
+          viewportWidth *
+          100
+        }%`
+      );
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-panel-x2",
-      `${targetX / viewportWidth * 100}%`
-    );
+      ecosystemDetailView.style.setProperty(
+        "--tail-panel-y1",
+        `${
+          targetY1 /
+          viewportHeight *
+          100
+        }%`
+      );
 
-    ecosystemDetailView.style.setProperty(
-      "--tail-panel-y2",
-      `${targetY2 / viewportHeight * 100}%`
-    );
-  }
+      ecosystemDetailView.style.setProperty(
+        "--tail-panel-x2",
+        `${
+          targetX /
+          viewportWidth *
+          100
+        }%`
+      );
 
-  ecosystemDetailImage.style.backgroundImage =
-    'url("/services/assets/ecosystem-laptop-dashboard.webp")';
+      ecosystemDetailView.style.setProperty(
+        "--tail-panel-y2",
+        `${
+          targetY2 /
+          viewportHeight *
+          100
+        }%`
+      );
+    };
 
-  ecosystemDetailView.classList.add(
-    "is-open"
-  );
+  const openDetail =
+    hotspot => {
+      const detailKey =
+        hotspot.dataset.detail;
 
-  ecosystemDetailView.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-};
-  const closeLaptopDetail = () => {
-    ecosystemDetailView.classList.remove(
-      "is-open"
-    );
+      const imagePath =
+        detailImages[
+          detailKey
+        ];
 
-    ecosystemDetailView.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-  };
+      if (!imagePath) {
+        return;
+      }
 
-  realityLaptopHotspot.addEventListener(
-    "click",
-    event => {
-      event.stopPropagation();
+      positionDetailFromHotspot(
+        hotspot
+      );
 
-      openLaptopDetail();
+      ecosystemDetailImage.style.backgroundImage =
+        `url("${imagePath}")`;
+
+      ecosystemDetailView.classList.add(
+        "is-open"
+      );
+
+      ecosystemDetailView.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+    };
+
+  const closeDetail =
+    () => {
+      ecosystemDetailView.classList.remove(
+        "is-open"
+      );
+
+      ecosystemDetailView.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    };
+
+  realityDetailHotspots.forEach(
+    hotspot => {
+      hotspot.addEventListener(
+        "click",
+        event => {
+          event.stopPropagation();
+
+          openDetail(
+            hotspot
+          );
+        }
+      );
     }
   );
 
@@ -4902,14 +4986,14 @@ if (
     event => {
       event.stopPropagation();
 
-      closeLaptopDetail();
+      closeDetail();
     }
   );
 
   if (ecosystemDetailBackdrop) {
     ecosystemDetailBackdrop.addEventListener(
       "click",
-      closeLaptopDetail
+      closeDetail
     );
   }
 
@@ -4922,7 +5006,7 @@ if (
           "is-open"
         )
       ) {
-        closeLaptopDetail();
+        closeDetail();
       }
     }
   );

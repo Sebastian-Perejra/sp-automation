@@ -1211,4 +1211,303 @@ if (draggableProjectMap) {
     }
   );
 }
+  const discussionStage =
+  document.querySelector(
+    ".project-stage-1"
+  );
+
+const discussionCard =
+  document.getElementById(
+    "project-brief-card"
+  );
+
+const discussionCardClose =
+  discussionCard
+    ? discussionCard.querySelector(
+        ".project-stage-detail-close"
+      )
+    : null;
+
+if (
+  discussionStage &&
+  discussionCard &&
+  discussionCardClose
+) {
+  let discussionPointerStartX = 0;
+  let discussionPointerStartY = 0;
+  let discussionWasDragged = false;
+
+  const positionDiscussionCard = () => {
+    const map =
+      discussionStage.closest(
+        ".services-project-map"
+      );
+
+    if (!map) return;
+
+    const mapRect =
+      map.getBoundingClientRect();
+
+    const stageRect =
+      discussionStage
+        .getBoundingClientRect();
+
+    const cardWidth =
+      discussionCard.offsetWidth ||
+      330;
+
+    const cardHeight =
+      discussionCard.offsetHeight ||
+      310;
+
+    if (
+      window.innerWidth <= 760
+    ) {
+      const left =
+        (
+          mapRect.width -
+          cardWidth
+        ) / 2;
+
+      const top =
+        Math.max(
+          90,
+          (
+            mapRect.height -
+            cardHeight
+          ) / 2
+        );
+
+      discussionCard.style.left =
+        `${left}px`;
+
+      discussionCard.style.top =
+        `${top}px`;
+
+      discussionCard.style.setProperty(
+        "--detail-origin-x",
+        "50%"
+      );
+
+      discussionCard.style.setProperty(
+        "--detail-origin-y",
+        "0%"
+      );
+
+      return;
+    }
+
+    const stageCenterX =
+      stageRect.left -
+      mapRect.left +
+      stageRect.width / 2;
+
+    const stageCenterY =
+      stageRect.top -
+      mapRect.top +
+      stageRect.height / 2;
+
+    const gap = 18;
+
+    let left;
+    let top;
+
+    if (
+      stageCenterX <
+      mapRect.width * 0.48
+    ) {
+      left =
+        stageRect.right -
+        mapRect.left +
+        gap;
+    } else {
+      left =
+        stageRect.left -
+        mapRect.left -
+        cardWidth -
+        gap;
+    }
+
+    top =
+      stageCenterY -
+      cardHeight / 2;
+
+    left =
+      Math.max(
+        8,
+        Math.min(
+          left,
+          mapRect.width -
+          cardWidth -
+          8
+        )
+      );
+
+    top =
+      Math.max(
+        8,
+        Math.min(
+          top,
+          mapRect.height -
+          cardHeight -
+          8
+        )
+      );
+
+    discussionCard.style.left =
+      `${left}px`;
+
+    discussionCard.style.top =
+      `${top}px`;
+
+    const originX =
+      stageCenterX -
+      left;
+
+    const originY =
+      stageCenterY -
+      top;
+
+    discussionCard.style.setProperty(
+      "--detail-origin-x",
+      `${originX}px`
+    );
+
+    discussionCard.style.setProperty(
+      "--detail-origin-y",
+      `${originY}px`
+    );
+  };
+
+  const openDiscussionCard = () => {
+    positionDiscussionCard();
+
+    discussionCard.classList.add(
+      "is-open"
+    );
+
+    discussionCard.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    discussionStage.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  };
+
+  const closeDiscussionCard = () => {
+    discussionCard.classList.remove(
+      "is-open"
+    );
+
+    discussionCard.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    discussionStage.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  };
+
+  discussionStage.addEventListener(
+    "pointerdown",
+    event => {
+      discussionPointerStartX =
+        event.clientX;
+
+      discussionPointerStartY =
+        event.clientY;
+
+      discussionWasDragged = false;
+    }
+  );
+
+  discussionStage.addEventListener(
+    "pointermove",
+    event => {
+      const distanceX =
+        Math.abs(
+          event.clientX -
+          discussionPointerStartX
+        );
+
+      const distanceY =
+        Math.abs(
+          event.clientY -
+          discussionPointerStartY
+        );
+
+      if (
+        distanceX > 6 ||
+        distanceY > 6
+      ) {
+        discussionWasDragged = true;
+      }
+    }
+  );
+
+  discussionStage.addEventListener(
+    "click",
+    event => {
+      if (
+        discussionWasDragged
+      ) {
+        discussionWasDragged = false;
+        return;
+      }
+
+      event.stopPropagation();
+
+      if (
+        discussionCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeDiscussionCard();
+      } else {
+        openDiscussionCard();
+      }
+    }
+  );
+
+  discussionCardClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeDiscussionCard();
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape"
+      ) {
+        closeDiscussionCard();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (
+        discussionCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        positionDiscussionCard();
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
 })();

@@ -2294,3 +2294,390 @@ body::after {
     transform: none;
   }
 }
+
+.project-core {
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.project-core-cabinet,
+.project-core-door {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 245px;
+  border-radius: 28px;
+}
+
+.project-core-cabinet {
+  z-index: 1;
+  overflow: hidden;
+  border: 4px solid #163d30;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(54, 111, 82, 0.15),
+      transparent 60%
+    ),
+    linear-gradient(
+      145deg,
+      #071b15,
+      #0b261e 52%,
+      #061712
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(188, 225, 207, 0.08),
+    inset 0 0 30px rgba(0, 0, 0, 0.32),
+    0 25px 50px rgba(7, 34, 25, 0.25);
+}
+
+.project-core-door {
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 20px;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+  border: 1px solid rgba(183, 229, 205, 0.27);
+  background:
+    radial-gradient(
+      circle at 50% 4%,
+      rgba(119, 191, 154, 0.23),
+      transparent 48%
+    ),
+    linear-gradient(
+      150deg,
+      #205340,
+      #123b2e 58%,
+      #0b2d24
+    );
+  color: #ffffff;
+  text-align: center;
+  box-shadow:
+    0 30px 60px rgba(15, 53, 40, 0.27),
+    0 0 50px rgba(72, 154, 114, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition:
+    transform 0.82s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.5s ease;
+}
+
+.project-core.is-open .project-core-door {
+  transform: rotateY(-112deg);
+  box-shadow:
+    12px 28px 48px rgba(4, 25, 18, 0.24);
+}
+
+.project-core-fold {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 0 27px 0 13px;
+  cursor: pointer;
+  background:
+    linear-gradient(
+      225deg,
+      #d9ebdf 0%,
+      #a8cbb7 46%,
+      #205340 48%,
+      #123b2e 100%
+    );
+  box-shadow:
+    -6px 7px 13px rgba(4, 28, 20, 0.18);
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    filter 0.25s ease;
+}
+
+.project-core-fold::before {
+  content: "";
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  border-top: 1px solid rgba(29, 80, 59, 0.38);
+  border-right: 1px solid rgba(29, 80, 59, 0.38);
+}
+
+.project-core-fold::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  bottom: 7px;
+  width: 15px;
+  height: 1px;
+  transform: rotate(-45deg);
+  background: rgba(221, 241, 230, 0.48);
+}
+
+.project-core-fold:hover {
+  width: 52px;
+  height: 52px;
+  filter: brightness(1.07);
+}
+
+.project-core-door .project-core-orbit {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(205, 239, 221, 0.22);
+  border-radius: 50%;
+}
+
+.project-core-door .project-core-bars {
+  position: absolute;
+  top: 48px;
+}
+
+.project-core-door .project-core-step {
+  margin-top: 9px;
+}
+
+.project-core-door > strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.project-core-door > p {
+  min-height: 48px;
+  margin: 10px 0 0;
+  color: rgba(232, 243, 237, 0.66);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.project-core-door .project-core-status {
+  margin-top: 13px;
+}
+
+.cabinet-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  z-index: 4;
+  text-align: center;
+  color: rgba(185, 222, 202, 0.5);
+  font-family: "Roboto Mono", monospace;
+  font-size: 5px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.cabinet-wiring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cabinet-wiring path {
+  fill: none;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cable-green path {
+  stroke: #6db68c;
+}
+
+.cable-light path {
+  stroke: #b3cabd;
+}
+
+.cable-blue path {
+  stroke: #4e8ca1;
+}
+
+.cable-gold path {
+  stroke: #bfa55b;
+}
+
+.cabinet-ports rect,
+.cabinet-connectors rect {
+  fill: #a7bcb0;
+  stroke: rgba(222, 239, 230, 0.5);
+  stroke-width: 0.7;
+}
+
+.cabinet-module {
+  position: absolute;
+  z-index: 5;
+  width: 78px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 8px;
+  border: 1px solid rgba(193, 220, 205, 0.18);
+  border-radius: 7px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(219, 229, 222, 0.94),
+      rgba(170, 190, 178, 0.9)
+    );
+  color: #153329;
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.23),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.cabinet-module span {
+  flex: 1;
+  font-family: "Roboto Mono", monospace;
+  font-size: 5px;
+  font-weight: 700;
+}
+
+.cabinet-module i {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border: 1px solid rgba(42, 78, 59, 0.24);
+  border-radius: 50%;
+  background: rgba(68, 91, 78, 0.16);
+}
+
+.cabinet-module i.is-on {
+  background: #74d050;
+  box-shadow:
+    0 0 6px rgba(116, 208, 80, 0.65);
+}
+
+.cabinet-module-input {
+  right: 14px;
+  top: 26px;
+}
+
+.cabinet-module-process {
+  right: 17px;
+  top: 78px;
+}
+
+.cabinet-module-logic {
+  right: 17px;
+  top: 119px;
+}
+
+.cabinet-module-integrations {
+  right: 17px;
+  top: 160px;
+}
+
+.cabinet-module-output {
+  right: 14px;
+  bottom: 13px;
+  width: 91px;
+}
+
+.cabinet-label {
+  position: absolute;
+  z-index: 5;
+  padding: 3px 5px;
+  border: 1px solid rgba(173, 209, 189, 0.11);
+  border-radius: 5px;
+  background: rgba(5, 24, 18, 0.68);
+  color: rgba(190, 222, 204, 0.55);
+  font-family: "Roboto Mono", monospace;
+  font-size: 4px;
+}
+
+.cabinet-label-data {
+  left: 12px;
+  top: 71px;
+}
+
+.cabinet-label-api {
+  left: 12px;
+  top: 113px;
+}
+
+.cabinet-label-ui {
+  left: 12px;
+  top: 155px;
+}
+
+.cabinet-status {
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  z-index: 5;
+  color: rgba(160, 205, 180, 0.33);
+  font-family: "Roboto Mono", monospace;
+  font-size: 3.7px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 760px) {
+  .project-core-cabinet,
+  .project-core-door {
+    min-height: 180px;
+    border-radius: 20px;
+  }
+
+  .project-core-door {
+    padding: 20px 14px;
+  }
+
+  .project-core-fold {
+    width: 34px;
+    height: 34px;
+    border-radius: 0 19px 0 10px;
+  }
+
+  .project-core-fold:hover {
+    width: 40px;
+    height: 40px;
+  }
+
+  .project-core.is-open .project-core-door {
+    transform: rotateY(-105deg);
+  }
+
+  .cabinet-module {
+    transform: scale(0.74);
+    transform-origin: right center;
+  }
+
+  .cabinet-module-input {
+    top: 18px;
+  }
+
+  .cabinet-module-process {
+    top: 54px;
+  }
+
+  .cabinet-module-logic {
+    top: 84px;
+  }
+
+  .cabinet-module-integrations {
+    top: 114px;
+  }
+
+  .cabinet-module-output {
+    bottom: 8px;
+  }
+}

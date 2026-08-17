@@ -4205,3 +4205,659 @@ body::after {
     font-size: 5px;
   }
 }
+
+.project-architecture-detail {
+  --architecture-origin-x: 50%;
+  --architecture-origin-y: 50%;
+
+  position: absolute;
+  z-index: 66;
+
+  width: 470px;
+  padding: 20px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    scale(0.78)
+    rotateX(5deg);
+
+  transform-origin:
+    var(--architecture-origin-x)
+    var(--architecture-origin-y);
+
+  border:
+    1px solid
+    rgba(47, 89, 72, 0.14);
+
+  border-radius: 21px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(102, 164, 134, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(247, 251, 248, 0.98),
+      rgba(229, 240, 234, 0.97)
+    );
+
+  box-shadow:
+    0 30px 70px rgba(20, 47, 36, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.24s ease,
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.48s;
+}
+
+.project-architecture-detail.is-open {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    scale(1)
+    rotateX(0deg);
+
+  pointer-events: auto;
+
+  transition:
+    opacity 0.24s ease,
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+.architecture-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding-bottom: 13px;
+
+  border-bottom:
+    1px solid
+    rgba(47, 89, 72, 0.09);
+}
+
+.architecture-head span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color:
+    rgba(47, 89, 72, 0.45);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+}
+
+.architecture-head strong {
+  display: block;
+
+  max-width: 310px;
+
+  color: #23473a;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  line-height: 1.15;
+}
+
+.architecture-close {
+  width: 29px;
+  height: 29px;
+
+  flex: 0 0 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(47, 89, 72, 0.12);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.58);
+
+  color:
+    rgba(47, 89, 72, 0.55);
+
+  font-size: 17px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.architecture-close:hover {
+  transform:
+    rotate(90deg)
+    scale(1.05);
+
+  background:
+    rgba(220, 235, 227, 0.9);
+
+  color: #23473a;
+}
+
+.architecture-map {
+  position: relative;
+
+  height: 250px;
+
+  margin-top: 16px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(47, 89, 72, 0.08);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      rgba(67, 110, 91, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(67, 110, 91, 0.035) 1px,
+      transparent 1px
+    ),
+    rgba(255, 255, 255, 0.38);
+
+  background-size:
+    22px 22px,
+    22px 22px,
+    auto;
+}
+
+.architecture-lines {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+.architecture-line {
+  fill: none;
+
+  stroke:
+    rgba(71, 122, 100, 0.34);
+
+  stroke-width: 1.4;
+
+  stroke-linecap: round;
+
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+
+  transition:
+    stroke-dashoffset 0.7s ease;
+}
+
+.project-architecture-detail.is-open
+.architecture-line {
+  stroke-dashoffset: 0;
+}
+
+.project-architecture-detail.is-open
+.line-data-logic {
+  transition-delay: 0.12s;
+}
+
+.project-architecture-detail.is-open
+.line-logic-api {
+  transition-delay: 0.26s;
+}
+
+.project-architecture-detail.is-open
+.line-logic-ui {
+  transition-delay: 0.34s;
+}
+
+.project-architecture-detail.is-open
+.line-api-output {
+  transition-delay: 0.48s;
+}
+
+.project-architecture-detail.is-open
+.line-ui-output {
+  transition-delay: 0.56s;
+}
+
+.architecture-node {
+  position: absolute;
+
+  width: 82px;
+  min-height: 63px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 7px;
+
+  opacity: 0;
+
+  transform:
+    translateY(8px)
+    scale(0.9);
+
+  border:
+    1px solid
+    rgba(53, 98, 79, 0.12);
+
+  border-radius: 13px;
+
+  background:
+    rgba(248, 252, 249, 0.88);
+
+  box-shadow:
+    0 8px 20px
+    rgba(29, 60, 47, 0.06);
+
+  text-align: center;
+
+  transition:
+    opacity 0.34s ease,
+    transform 0.34s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.project-architecture-detail.is-open
+.architecture-node {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+.project-architecture-detail.is-open
+.architecture-data {
+  transition-delay: 0.08s;
+}
+
+.project-architecture-detail.is-open
+.architecture-logic {
+  transition-delay: 0.2s;
+}
+
+.project-architecture-detail.is-open
+.architecture-api {
+  transition-delay: 0.34s;
+}
+
+.project-architecture-detail.is-open
+.architecture-ui {
+  transition-delay: 0.42s;
+}
+
+.project-architecture-detail.is-open
+.architecture-output {
+  transition-delay: 0.58s;
+}
+
+.architecture-node:hover {
+  border-color:
+    rgba(53, 98, 79, 0.22);
+
+  box-shadow:
+    0 12px 24px
+    rgba(29, 60, 47, 0.1);
+}
+
+.architecture-node span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color:
+    rgba(47, 89, 72, 0.4);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 5px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+.architecture-node strong {
+  display: block;
+
+  color: #2d5544;
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.architecture-node small {
+  display: block;
+
+  margin-top: 4px;
+
+  color:
+    rgba(47, 68, 59, 0.44);
+
+  font-size: 6px;
+  line-height: 1.3;
+}
+
+.architecture-data {
+  left: 22px;
+  top: 93px;
+}
+
+.architecture-logic {
+  left: 171px;
+  top: 93px;
+}
+
+.architecture-api {
+  right: 89px;
+  top: 42px;
+}
+
+.architecture-ui {
+  right: 89px;
+  bottom: 42px;
+}
+
+.architecture-output {
+  right: 15px;
+  top: 93px;
+
+  border-color:
+    rgba(62, 122, 94, 0.2);
+
+  background:
+    rgba(229, 242, 234, 0.94);
+}
+
+.architecture-packet {
+  position: absolute;
+
+  z-index: 5;
+
+  width: 5px;
+  height: 5px;
+
+  opacity: 0;
+
+  border-radius: 50%;
+
+  background: #5c9a78;
+
+  box-shadow:
+    0 0 0 5px
+    rgba(92, 154, 120, 0.08);
+}
+
+.project-architecture-detail.is-open
+.architecture-packet {
+  opacity: 1;
+}
+
+.packet-a {
+  left: 123px;
+  top: 123px;
+}
+
+.packet-b {
+  left: 285px;
+  top: 75px;
+}
+
+.packet-c {
+  left: 285px;
+  top: 175px;
+}
+
+.project-architecture-detail.is-open
+.packet-a {
+  animation:
+    architecturePacketA
+    2.1s
+    ease-in-out
+    infinite;
+}
+
+.project-architecture-detail.is-open
+.packet-b {
+  animation:
+    architecturePacketB
+    2.4s
+    ease-in-out
+    infinite;
+}
+
+.project-architecture-detail.is-open
+.packet-c {
+  animation:
+    architecturePacketC
+    2.6s
+    ease-in-out
+    infinite;
+}
+
+.architecture-footer {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 14px;
+
+  padding:
+    10px
+    12px;
+
+  border:
+    1px solid
+    rgba(47, 89, 72, 0.08);
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.42);
+}
+
+.architecture-status-dot {
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+
+  background: #579171;
+
+  box-shadow:
+    0 0 0 5px
+    rgba(87, 145, 113, 0.07);
+}
+
+.architecture-footer small {
+  display: block;
+
+  color:
+    rgba(47, 89, 72, 0.4);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 5px;
+
+  letter-spacing: 0.13em;
+}
+
+.architecture-footer strong {
+  display: block;
+
+  margin-top: 1px;
+
+  color: #315848;
+
+  font-size: 8px;
+}
+
+.architecture-footer-line {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(71, 122, 100, 0.18),
+      rgba(71, 122, 100, 0.4)
+    );
+}
+
+.architecture-version {
+  color: #47725e;
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+@keyframes architecturePacketA {
+  0%,
+  100% {
+    transform:
+      translateX(0)
+      scale(0.7);
+  }
+
+  50% {
+    transform:
+      translateX(48px)
+      scale(1);
+  }
+}
+
+@keyframes architecturePacketB {
+  0%,
+  100% {
+    transform:
+      translateX(0)
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateX(36px)
+      translateY(-22px);
+  }
+}
+
+@keyframes architecturePacketC {
+  0%,
+  100% {
+    transform:
+      translateX(0)
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateX(36px)
+      translateY(22px);
+  }
+}
+
+@media (max-width: 760px) {
+  .project-architecture-detail {
+    width:
+      calc(100% - 24px);
+
+    max-width: 410px;
+
+    padding: 16px;
+  }
+
+  .architecture-map {
+    height: 225px;
+  }
+
+  .architecture-node {
+    width: 70px;
+    min-height: 56px;
+
+    padding: 7px 5px;
+  }
+
+  .architecture-data {
+    left: 12px;
+    top: 82px;
+  }
+
+  .architecture-logic {
+    left: 128px;
+    top: 82px;
+  }
+
+  .architecture-api {
+    right: 74px;
+    top: 34px;
+  }
+
+  .architecture-ui {
+    right: 74px;
+    bottom: 34px;
+  }
+
+  .architecture-output {
+    right: 7px;
+    top: 82px;
+  }
+}

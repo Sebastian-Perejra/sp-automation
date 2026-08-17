@@ -2558,3 +2558,517 @@ body::after {
     transition: none;
   }
 }
+
+.project-core {
+  perspective: 950px;
+  perspective-origin: 50% 45%;
+  transform-style: preserve-3d;
+}
+
+.project-core-door {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  width: 100%;
+  height: 100%;
+  min-height: 245px;
+
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+
+  background: none;
+  box-shadow: none;
+
+  transform-origin: left center;
+  transform-style: preserve-3d;
+
+  transform: rotateY(0deg);
+
+  transition:
+    transform 0.9s
+    cubic-bezier(0.2, 0.72, 0.18, 1);
+
+  will-change: transform;
+}
+
+.project-core.is-open .project-core-door {
+  transform: rotateY(-112deg);
+}
+
+.project-core-door-face {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.project-core-door-front {
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px 20px;
+
+  border:
+    1px solid
+    rgba(183, 229, 205, 0.27);
+
+  background:
+    radial-gradient(
+      circle at 50% 4%,
+      rgba(119, 191, 154, 0.23),
+      transparent 48%
+    ),
+    linear-gradient(
+      150deg,
+      #205340,
+      #123b2e 58%,
+      #0b2d24
+    );
+
+  color: #ffffff;
+
+  text-align: center;
+
+  box-shadow:
+    0 30px 60px
+    rgba(15, 53, 40, 0.27),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.15);
+}
+
+.project-core-door-back {
+  z-index: 1;
+
+  transform: rotateY(180deg);
+
+  border:
+    1px solid
+    rgba(172, 214, 192, 0.18);
+
+  background:
+    radial-gradient(
+      circle at 48% 40%,
+      rgba(61, 118, 89, 0.14),
+      transparent 62%
+    ),
+    linear-gradient(
+      145deg,
+      #153d30,
+      #0c2e24 58%,
+      #09251d
+    );
+
+  box-shadow:
+    inset 0 0 0 2px
+    rgba(255, 255, 255, 0.025),
+    inset 0 0 30px
+    rgba(0, 0, 0, 0.2),
+    8px 18px 32px
+    rgba(5, 27, 20, 0.17);
+}
+
+.project-core.is-open
+.project-core-door-back {
+  box-shadow:
+    inset 0 0 0 2px
+    rgba(255, 255, 255, 0.025),
+    inset 0 0 30px
+    rgba(0, 0, 0, 0.2),
+    -10px 22px 36px
+    rgba(5, 27, 20, 0.24);
+}
+
+.project-core-fold {
+  position: absolute;
+
+  top: -1px;
+  right: -1px;
+
+  z-index: 20;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius:
+    0 27px 0 13px;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      225deg,
+      #d9ebdf 0%,
+      #a8cbb7 46%,
+      #205340 48%,
+      #123b2e 100%
+    );
+
+  box-shadow:
+    -6px 7px 13px
+    rgba(4, 28, 20, 0.18);
+
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    filter 0.25s ease;
+}
+
+.project-core-fold:hover {
+  width: 52px;
+  height: 52px;
+
+  filter: brightness(1.07);
+}
+
+.project-core-fold::before {
+  content: "";
+
+  position: absolute;
+
+  right: 7px;
+  top: 7px;
+
+  width: 11px;
+  height: 11px;
+
+  border-top:
+    1px solid
+    rgba(29, 80, 59, 0.38);
+
+  border-right:
+    1px solid
+    rgba(29, 80, 59, 0.38);
+}
+
+.project-core-fold::after {
+  content: "";
+
+  position: absolute;
+
+  left: 7px;
+  bottom: 7px;
+
+  width: 15px;
+  height: 1px;
+
+  transform: rotate(-45deg);
+
+  background:
+    rgba(221, 241, 230, 0.48);
+}
+
+.project-core-door-front
+.project-core-orbit {
+  position: relative;
+
+  width: 70px;
+  height: 70px;
+
+  margin-bottom: 5px;
+}
+
+.project-core-door-front
+.project-core-bars {
+  position: absolute;
+
+  top: 48px;
+}
+
+.project-core-door-front
+.project-core-step {
+  margin-top: 9px;
+}
+
+.project-core-door-front
+> strong {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  line-height: 1.1;
+}
+
+.project-core-door-front
+> p {
+  min-height: 48px;
+
+  margin:
+    10px
+    0
+    0;
+
+  color:
+    rgba(232, 243, 237, 0.66);
+
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.project-core-door-front
+.project-core-status {
+  margin-top: 13px;
+}
+
+.project-core-close {
+  position: absolute;
+
+  right: 13px;
+  top: 13px;
+
+  z-index: 10;
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(183, 220, 202, 0.15);
+
+  border-radius: 50%;
+
+  background:
+    rgba(5, 30, 22, 0.34);
+
+  color:
+    rgba(199, 228, 213, 0.68);
+
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.project-core-close:hover {
+  background:
+    rgba(54, 105, 80, 0.5);
+
+  color: #ffffff;
+
+  transform:
+    translateX(-2px);
+}
+
+.door-back-rib {
+  position: absolute;
+
+  left: 22px;
+  right: 22px;
+
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(139, 186, 162, 0.12),
+      rgba(195, 224, 208, 0.19),
+      rgba(139, 186, 162, 0.12),
+      transparent
+    );
+}
+
+.door-back-rib-a {
+  top: 28%;
+}
+
+.door-back-rib-b {
+  top: 50%;
+}
+
+.door-back-rib-c {
+  top: 72%;
+}
+
+.door-back-center {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 80px;
+  height: 115px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border:
+    1px solid
+    rgba(169, 209, 188, 0.09);
+
+  border-radius: 15px;
+
+  box-shadow:
+    inset 0 0 18px
+    rgba(0, 0, 0, 0.12);
+}
+
+.door-back-center span {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 26px;
+  height: 26px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border:
+    1px solid
+    rgba(179, 217, 197, 0.11);
+
+  border-radius: 50%;
+}
+
+.door-hinge {
+  position: absolute;
+
+  left: -4px;
+
+  width: 9px;
+  height: 42px;
+
+  border:
+    1px solid
+    rgba(187, 220, 203, 0.14);
+
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #071c15,
+      #315f4b,
+      #0b281f
+    );
+
+  box-shadow:
+    2px 2px 8px
+    rgba(0, 0, 0, 0.22);
+}
+
+.door-hinge-top {
+  top: 35px;
+}
+
+.door-hinge-bottom {
+  bottom: 35px;
+}
+
+.door-bolt {
+  position: absolute;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(180, 211, 195, 0.25);
+
+  box-shadow:
+    inset 0 1px 1px
+    rgba(255, 255, 255, 0.18);
+}
+
+.bolt-a {
+  left: 15px;
+  top: 15px;
+}
+
+.bolt-b {
+  right: 15px;
+  top: 15px;
+}
+
+.bolt-c {
+  left: 15px;
+  bottom: 15px;
+}
+
+.bolt-d {
+  right: 15px;
+  bottom: 15px;
+}
+
+@media (max-width: 760px) {
+  .project-core-door {
+    min-height: 180px;
+  }
+
+  .project-core-door-face {
+    border-radius: 20px;
+  }
+
+  .project-core-door-front {
+    padding:
+      20px
+      14px;
+  }
+
+  .project-core-fold {
+    width: 34px;
+    height: 34px;
+
+    border-radius:
+      0 19px 0 10px;
+  }
+
+  .project-core-fold:hover {
+    width: 40px;
+    height: 40px;
+  }
+
+  .project-core.is-open
+  .project-core-door {
+    transform:
+      rotateY(-108deg);
+  }
+
+  .door-hinge {
+    height: 31px;
+  }
+
+  .door-hinge-top {
+    top: 25px;
+  }
+
+  .door-hinge-bottom {
+    bottom: 25px;
+  }
+}

@@ -9274,12 +9274,7 @@ p {
     rgba(29, 74, 54, 0.9);
 }
 
-@media (max-width: 760px) {
-  .ecosystem-detail-view {
-    padding: 12px;
-  }
-
-  .ecosystem-detail-panel {
+.ecosystem-detail-panel {
   position: fixed;
 
   z-index: 181;
@@ -9343,7 +9338,6 @@ p {
       0
     )
     scale(1);
-}
 }
 
 .ecosystem-detail-tail {
@@ -9416,25 +9410,39 @@ p {
       transparent 69%
     );
 }
+
 @media (max-width: 760px) {
-    width: 34vw;
-    height: 24vw;
+  .ecosystem-detail-view {
+    padding: 12px;
+  }
+
+  .ecosystem-detail-panel {
+    right: 4vw;
+    top: 14vh;
+
+    width: 72vw;
+
+    border-radius: 18px;
 
     transform:
       translate(
-        5vw,
-        7vh
+        -4vw,
+        40vh
       )
-      scaleX(0.08);
+      scale(0.18);
   }
 
   .ecosystem-detail-view.is-open
-  .ecosystem-detail-tail {
+  .ecosystem-detail-panel {
     transform:
       translate(
-        -12vw,
-        -2vh
+        0,
+        0
       )
-      scaleX(1);
+      scale(1);
+  }
+
+  .ecosystem-detail-tail {
+    display: none;
   }
 }

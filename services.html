@@ -1701,6 +1701,12 @@
     <div class="ecosystem-reality-scene">
 
       <div class="ecosystem-reality-image"></div>
+      <button
+        class="reality-hotspot reality-hotspot-laptop"
+        type="button"
+        data-detail="laptop"
+        aria-label="Відкрити дашборд ноутбука"
+      ></button>
 
       <div class="ecosystem-reality-live">
 
@@ -1784,6 +1790,31 @@
   </div>
 </div>
 
+        <div
+  class="ecosystem-detail-view"
+  id="ecosystem-detail-view"
+  aria-hidden="true"
+>
+  <div class="ecosystem-detail-backdrop"></div>
+
+  <div class="ecosystem-detail-panel">
+
+    <button
+      class="ecosystem-detail-close"
+      type="button"
+      aria-label="Закрити деталізацію"
+    >
+      ×
+    </button>
+
+    <div
+      class="ecosystem-detail-image"
+      data-detail-image
+    ></div>
+
+  </div>
+</div>
+        
         <article
           class="ecosystem-service ecosystem-right ecosystem-row-1"
           data-service="integration"

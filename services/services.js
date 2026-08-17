@@ -1829,4 +1829,355 @@ if (
     }
   );
 }
+  const architectureStage =
+  document.querySelector(
+    ".project-stage-3"
+  );
+
+const architectureCard =
+  document.getElementById(
+    "project-architecture-card"
+  );
+
+const architectureClose =
+  architectureCard
+    ? architectureCard.querySelector(
+        ".architecture-close"
+      )
+    : null;
+
+if (
+  architectureStage &&
+  architectureCard &&
+  architectureClose
+) {
+  let architectureStartX = 0;
+  let architectureStartY = 0;
+  let architectureWasDragged = false;
+
+  const positionArchitectureCard = () => {
+    const map =
+      architectureStage.closest(
+        ".services-project-map"
+      );
+
+    if (!map) return;
+
+    const mapRect =
+      map.getBoundingClientRect();
+
+    const stageRect =
+      architectureStage
+        .getBoundingClientRect();
+
+    const cardWidth =
+      architectureCard.offsetWidth ||
+      470;
+
+    const cardHeight =
+      architectureCard.offsetHeight ||
+      330;
+
+    const stageCenterX =
+      stageRect.left -
+      mapRect.left +
+      stageRect.width / 2;
+
+    const stageCenterY =
+      stageRect.top -
+      mapRect.top +
+      stageRect.height / 2;
+
+    if (
+      window.innerWidth <= 760
+    ) {
+      const left =
+        (
+          mapRect.width -
+          cardWidth
+        ) / 2;
+
+      const top =
+        Math.max(
+          60,
+          (
+            mapRect.height -
+            cardHeight
+          ) / 2
+        );
+
+      architectureCard.style.left =
+        `${left}px`;
+
+      architectureCard.style.top =
+        `${top}px`;
+
+      architectureCard.style.setProperty(
+        "--architecture-origin-x",
+        "50%"
+      );
+
+      architectureCard.style.setProperty(
+        "--architecture-origin-y",
+        "0%"
+      );
+
+      return;
+    }
+
+    const gap = 18;
+
+    let left;
+    let top;
+
+    if (
+      stageCenterX >
+      mapRect.width * 0.5
+    ) {
+      left =
+        stageRect.left -
+        mapRect.left -
+        cardWidth -
+        gap;
+    } else {
+      left =
+        stageRect.right -
+        mapRect.left +
+        gap;
+    }
+
+    top =
+      stageCenterY -
+      cardHeight / 2;
+
+    left =
+      Math.max(
+        8,
+        Math.min(
+          left,
+          mapRect.width -
+          cardWidth -
+          8
+        )
+      );
+
+    top =
+      Math.max(
+        8,
+        Math.min(
+          top,
+          mapRect.height -
+          cardHeight -
+          8
+        )
+      );
+
+    architectureCard.style.left =
+      `${left}px`;
+
+    architectureCard.style.top =
+      `${top}px`;
+
+    architectureCard.style.setProperty(
+      "--architecture-origin-x",
+      `${stageCenterX - left}px`
+    );
+
+    architectureCard.style.setProperty(
+      "--architecture-origin-y",
+      `${stageCenterY - top}px`
+    );
+  };
+
+  const closeOtherStageCards = () => {
+    const discussionCard =
+      document.getElementById(
+        "project-brief-card"
+      );
+
+    const analysisCard =
+      document.getElementById(
+        "project-analysis-card"
+      );
+
+    const discussionStage =
+      document.querySelector(
+        ".project-stage-1"
+      );
+
+    const analysisStage =
+      document.querySelector(
+        ".project-stage-2"
+      );
+
+    if (discussionCard) {
+      discussionCard.classList.remove(
+        "is-open"
+      );
+
+      discussionCard.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }
+
+    if (analysisCard) {
+      analysisCard.classList.remove(
+        "is-open"
+      );
+
+      analysisCard.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }
+
+    if (discussionStage) {
+      discussionStage.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+
+    if (analysisStage) {
+      analysisStage.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+  };
+
+  const openArchitectureCard = () => {
+    closeOtherStageCards();
+
+    positionArchitectureCard();
+
+    architectureCard.classList.add(
+      "is-open"
+    );
+
+    architectureCard.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    architectureStage.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  };
+
+  const closeArchitectureCard = () => {
+    architectureCard.classList.remove(
+      "is-open"
+    );
+
+    architectureCard.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    architectureStage.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  };
+
+  architectureStage.addEventListener(
+    "pointerdown",
+    event => {
+      architectureStartX =
+        event.clientX;
+
+      architectureStartY =
+        event.clientY;
+
+      architectureWasDragged = false;
+    }
+  );
+
+  architectureStage.addEventListener(
+    "pointermove",
+    event => {
+      const distanceX =
+        Math.abs(
+          event.clientX -
+          architectureStartX
+        );
+
+      const distanceY =
+        Math.abs(
+          event.clientY -
+          architectureStartY
+        );
+
+      if (
+        distanceX > 6 ||
+        distanceY > 6
+      ) {
+        architectureWasDragged = true;
+      }
+    }
+  );
+
+  architectureStage.addEventListener(
+    "click",
+    event => {
+      if (
+        architectureWasDragged
+      ) {
+        architectureWasDragged = false;
+        return;
+      }
+
+      event.stopPropagation();
+
+      if (
+        architectureCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeArchitectureCard();
+      } else {
+        openArchitectureCard();
+      }
+    }
+  );
+
+  architectureClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeArchitectureCard();
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape"
+      ) {
+        closeArchitectureCard();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (
+        architectureCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        positionArchitectureCard();
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
 })();

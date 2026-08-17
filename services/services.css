@@ -11905,3 +11905,92 @@ p {
     gap: 5px;
   }
 }
+.services-capabilities button {
+  position: relative;
+
+  padding-right: 30px;
+
+  overflow: hidden;
+}
+
+.services-capabilities button::after {
+  content: "↗";
+
+  position: absolute;
+
+  top: 50%;
+  right: 11px;
+
+  transform:
+    translateY(-50%)
+    translateX(-3px);
+
+  color:
+    rgba(48, 97, 73, 0.42);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 8px;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease,
+    color 0.2s ease;
+}
+
+.services-capabilities button:hover::after,
+.services-capabilities button.is-active::after {
+  opacity: 1;
+
+  transform:
+    translateY(-50%)
+    translateX(0);
+
+  color:
+    rgba(45, 103, 75, 0.78);
+}
+
+.services-capabilities button::before {
+  content: "";
+
+  position: absolute;
+
+  left: 12px;
+  right: 28px;
+  bottom: 5px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(63, 126, 94, 0.34),
+      transparent
+    );
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    left center;
+
+  transition:
+    transform 0.32s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
+}
+
+.services-capabilities button:hover::before,
+.services-capabilities button.is-active::before {
+  transform:
+    scaleX(1);
+}

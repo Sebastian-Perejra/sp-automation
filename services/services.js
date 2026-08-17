@@ -2214,64 +2214,160 @@ if (
   let developmentProgressTimer = null;
 
   const resetDevelopmentProgress = () => {
-    if (developmentProgressTimer) {
-      clearInterval(
-        developmentProgressTimer
+  if (developmentProgressTimer) {
+    clearInterval(
+      developmentProgressTimer
+    );
+
+    developmentProgressTimer = null;
+  }
+
+  if (developmentProgressLabel) {
+    developmentProgressLabel.textContent =
+      "0%";
+  }
+
+  const modules =
+    developmentCard.querySelectorAll(
+      ".development-module"
+    );
+
+  modules.forEach(
+    module => {
+      module.classList.remove(
+        "is-built"
       );
-
-      developmentProgressTimer = null;
     }
+  );
 
-    if (developmentProgressLabel) {
-      developmentProgressLabel.textContent =
-        "0%";
-    }
-  };
+  const output =
+    developmentCard.querySelector(
+      ".development-output"
+    );
 
-  const runDevelopmentProgress = () => {
-    resetDevelopmentProgress();
+  if (output) {
+    output.classList.remove(
+      "is-ready"
+    );
+  }
+};
 
-    if (!developmentProgressLabel) {
-      return;
-    }
+const runDevelopmentProgress = () => {
+  resetDevelopmentProgress();
 
-    const duration = 2800;
-    const startTime =
-      performance.now();
+  const modules =
+    Array.from(
+      developmentCard.querySelectorAll(
+        ".development-module"
+      )
+    );
 
-    developmentProgressTimer =
-      setInterval(
-        () => {
-          const elapsed =
-            performance.now() -
-            startTime;
+  const output =
+    developmentCard.querySelector(
+      ".development-output"
+    );
 
-          const progress =
-            Math.min(
-              100,
-              Math.round(
-                elapsed /
-                duration *
-                100
-              )
-            );
+  const progressBar =
+    developmentCard.querySelector(
+      ".development-progress span"
+    );
 
-          developmentProgressLabel
-            .textContent =
-            `${progress}%`;
+  if (progressBar) {
+    progressBar.style.animation =
+      "none";
 
-          if (progress >= 100) {
-            clearInterval(
-              developmentProgressTimer
-            );
+    progressBar.offsetHeight;
 
-            developmentProgressTimer =
-              null;
+    progressBar.style.animation = "";
+  }
+
+  if (!developmentProgressLabel) {
+    return;
+  }
+
+  const duration = 2800;
+
+  const startTime =
+    performance.now();
+
+  let activatedModules = 0;
+
+  developmentProgressTimer =
+    setInterval(
+      () => {
+        const elapsed =
+          performance.now() -
+          startTime;
+
+        const progress =
+          Math.min(
+            100,
+            Math.round(
+              elapsed /
+              duration *
+              100
+            )
+          );
+
+        developmentProgressLabel
+          .textContent =
+          `${progress}%`;
+
+        const nextModuleCount =
+          Math.min(
+            modules.length,
+            Math.floor(
+              progress /
+              (100 / modules.length)
+            )
+          );
+
+        if (
+          nextModuleCount >
+          activatedModules
+        ) {
+          for (
+            let i = activatedModules;
+            i < nextModuleCount;
+            i++
+          ) {
+            if (modules[i]) {
+              modules[i].classList.add(
+                "is-built"
+              );
+            }
           }
-        },
-        40
-      );
-  };
+
+          activatedModules =
+            nextModuleCount;
+        }
+
+        if (progress >= 100) {
+          clearInterval(
+            developmentProgressTimer
+          );
+
+          developmentProgressTimer =
+            null;
+
+          modules.forEach(
+            module => {
+              module.classList.add(
+                "is-built"
+              );
+            }
+          );
+
+          if (output) {
+            output.classList.add(
+              "is-ready"
+            );
+          }
+        }
+      },
+      40
+    );
+};
 
   const positionDevelopmentCard =
     () => {

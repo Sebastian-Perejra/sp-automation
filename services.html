@@ -373,6 +373,8 @@
       data-stage="6"
       data-title="Тестування"
       data-description="Перевіряю сценарії, крайні випадки, помилки та поведінку рішення перед запуском."
+      aria-expanded="false"
+      aria-controls="project-testing-card"
     >
       <span class="project-stage-number">06</span>
 
@@ -984,6 +986,177 @@
       <span>LATENCY</span>
       <strong>42 ms</strong>
     </div>
+  </div>
+</div>
+
+    <div
+  class="project-testing-detail"
+  id="project-testing-card"
+  aria-hidden="true"
+>
+  <div class="testing-head">
+    <div>
+      <span>06 · TEST LAB</span>
+
+      <strong>
+        Перевіряємо систему до запуску
+      </strong>
+    </div>
+
+    <button
+      class="testing-close"
+      type="button"
+      aria-label="Закрити"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="testing-summary">
+
+    <div>
+      <span>SCENARIOS</span>
+      <strong>12</strong>
+    </div>
+
+    <div>
+      <span>PASS</span>
+      <strong>11</strong>
+    </div>
+
+    <div>
+      <span>RETEST</span>
+      <strong>1</strong>
+    </div>
+
+  </div>
+
+  <div class="testing-matrix">
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-01
+      </span>
+
+      <div>
+        <strong>
+          Основний сценарій
+        </strong>
+
+        <small>
+          стандартний робочий цикл
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-02
+      </span>
+
+      <div>
+        <strong>
+          Порожні дані
+        </strong>
+
+        <small>
+          перевірка без вхідного значення
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+    <div class="testing-row testing-row-retest">
+      <span class="testing-id">
+        T-03
+      </span>
+
+      <div>
+        <strong>
+          Некоректний формат
+        </strong>
+
+        <small>
+          помилка обробляється без зупинки системи
+        </small>
+      </div>
+
+      <span class="testing-status is-retest">
+        RETEST
+      </span>
+    </div>
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-04
+      </span>
+
+      <div>
+        <strong>
+          Подвійний запуск
+        </strong>
+
+        <small>
+          захист від дублювання операції
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+    <div class="testing-row">
+      <span class="testing-id">
+        T-05
+      </span>
+
+      <div>
+        <strong>
+          Зовнішній сервіс недоступний
+        </strong>
+
+        <small>
+          контроль помилки інтеграції
+        </small>
+      </div>
+
+      <span class="testing-status is-pass">
+        PASS
+      </span>
+    </div>
+
+  </div>
+
+  <div class="testing-footer">
+
+    <div class="testing-shield">
+      ✓
+    </div>
+
+    <div>
+      <small>
+        QUALITY GATE
+      </small>
+
+      <strong>
+        READY FOR FINAL RETEST
+      </strong>
+    </div>
+
+    <span class="testing-footer-line"></span>
+
+    <div class="testing-score">
+      92%
+    </div>
+
   </div>
 </div>
     <div class="project-core">

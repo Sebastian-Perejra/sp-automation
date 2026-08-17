@@ -328,6 +328,8 @@
       data-stage="4"
       data-title="Розробка"
       data-description="Будую саму систему: автоматизацію, інтерфейс, звіти та бізнес-логіку."
+      aria-expanded="false"
+      aria-controls="project-development-card"
     >
       <span class="project-stage-number">04</span>
 
@@ -729,6 +731,136 @@
     <div class="architecture-version">
       v1.0
     </div>
+  </div>
+</div>
+
+    <div
+  class="project-development-detail"
+  id="project-development-card"
+  aria-hidden="true"
+>
+  <div class="development-head">
+    <div>
+      <span>04 · BUILD MODE</span>
+
+      <strong>
+        Збираємо рішення з окремих модулів
+      </strong>
+    </div>
+
+    <button
+      class="development-close"
+      type="button"
+      aria-label="Закрити"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="development-board">
+
+    <div class="development-modules">
+
+      <div class="development-module module-ui">
+        <span>UI</span>
+        <strong>Interface</strong>
+      </div>
+
+      <div class="development-module module-logic">
+        <span>LOGIC</span>
+        <strong>Rules</strong>
+      </div>
+
+      <div class="development-module module-data">
+        <span>DATA</span>
+        <strong>Sources</strong>
+      </div>
+
+      <div class="development-module module-api">
+        <span>API</span>
+        <strong>Connections</strong>
+      </div>
+
+    </div>
+
+    <div class="development-build-zone">
+
+      <div class="development-build-core">
+
+        <span class="build-core-ring ring-a"></span>
+        <span class="build-core-ring ring-b"></span>
+
+        <div class="build-core-center">
+          <strong>BUILD</strong>
+          <small>assembling</small>
+        </div>
+
+      </div>
+
+      <div class="development-progress">
+        <span></span>
+      </div>
+
+      <div class="development-progress-label">
+        0%
+      </div>
+
+    </div>
+
+    <div class="development-output">
+
+      <div class="development-output-icon">
+        ✓
+      </div>
+
+      <span>STATUS</span>
+
+      <strong>
+        BUILD SUCCESS
+      </strong>
+
+      <small>
+        ready for testing
+      </small>
+
+    </div>
+
+  </div>
+
+  <div class="development-log">
+
+    <span>
+      01
+    </span>
+
+    <p>
+      UI module connected
+    </p>
+
+    <span>
+      02
+    </span>
+
+    <p>
+      Business logic compiled
+    </p>
+
+    <span>
+      03
+    </span>
+
+    <p>
+      Data sources linked
+    </p>
+
+    <span>
+      04
+    </span>
+
+    <p>
+      Integration layer ready
+    </p>
+
   </div>
 </div>
     <div class="project-core">

@@ -8312,5 +8312,495 @@ document.addEventListener(
     }
   }
 );
+const capabilityButtons =
+  Array.from(
+    document.querySelectorAll(
+      ".services-capabilities [data-capability]"
+    )
+  );
 
+const capabilityDetail =
+  document.getElementById(
+    "capability-detail"
+  );
+
+const capabilityClose =
+  capabilityDetail
+    ? capabilityDetail.querySelector(
+        ".capability-detail-close"
+      )
+    : null;
+
+const capabilityTitle =
+  capabilityDetail
+    ? capabilityDetail.querySelector(
+        "[data-capability-title]"
+      )
+    : null;
+
+const capabilityText =
+  capabilityDetail
+    ? capabilityDetail.querySelector(
+        "[data-capability-text]"
+      )
+    : null;
+
+const capabilityResult =
+  capabilityDetail
+    ? capabilityDetail.querySelector(
+        "[data-capability-result]"
+      )
+    : null;
+
+const capabilityKicker =
+  capabilityDetail
+    ? capabilityDetail.querySelector(
+        ".capability-detail-kicker"
+      )
+    : null;
+
+const capabilityResultLabel =
+  capabilityDetail
+    ? capabilityDetail.querySelector(
+        ".capability-detail-result span"
+      )
+    : null;
+
+const capabilityLanguageValue =
+  (
+    document.documentElement.lang ||
+    "uk"
+  ).toLowerCase();
+
+const capabilityLanguage =
+  capabilityLanguageValue.startsWith("ru")
+    ? "ru"
+    : capabilityLanguageValue.startsWith("en")
+      ? "en"
+      : "uk";
+
+const capabilityContent = {
+  uk: {
+    ui: {
+      kicker:
+        "БІЗНЕС-КОРИСТЬ",
+
+      result:
+        "РЕЗУЛЬТАТ",
+
+      close:
+        "Закрити"
+    },
+
+    telegram: {
+      title:
+        "Telegram-боти",
+
+      text:
+        "Переношу в Telegram ті робочі дії, для яких не потрібна окрема складна система: заявки, повідомлення, нагадування, погодження, статуси та отримання потрібної інформації. Працівник отримує або передає дані прямо там, де вже звик працювати.",
+
+      result:
+        "Менше листування та ручних нагадувань. Швидша реакція на події, заявки й зміни."
+    },
+
+    webapps: {
+      title:
+        "Вебзастосунки",
+
+      text:
+        "Створюю невеликі робочі системи під конкретний процес: введення даних, пошук, контроль статусів, розрахунки, заявки або внутрішні кабінети. Замість ланцюжка таблиць, файлів і повідомлень користувач отримує один зрозумілий інструмент.",
+
+      result:
+        "Менше ручних переходів між файлами та сервісами. Процес стає коротшим, зрозумілішим і контрольованим."
+    },
+
+    pwa: {
+      title:
+        "PWA",
+
+      text:
+        "Робочий вебзастосунок можна зробити схожим на звичайний мобільний застосунок: його можна відкрити з іконки на телефоні та використовувати для польової роботи, заявок, перевірок або швидкого доступу до потрібних даних.",
+
+      result:
+        "Робочий інструмент завжди під рукою без окремої розробки повноцінного мобільного застосунку."
+    },
+
+    documents: {
+      title:
+        "PDF та документи",
+
+      text:
+        "Автоматизую створення документів із уже наявних даних: звітів, актів, заявок, комерційних пропозицій, довідок, PDF-файлів та інших типових документів. Система сама підставляє потрібні значення у визначений шаблон.",
+
+      result:
+        "Документи формуються за секунди замість ручного копіювання. Менше помилок, перевірок і повторної роботи."
+    },
+
+    drive: {
+      title:
+        "Google Drive",
+
+      text:
+        "Автоматизую роботу з файлами та папками: створення структури, перейменування, переміщення, пошук, сортування, надання доступу та зв'язування файлів із таблицями або іншими процесами.",
+
+      result:
+        "Менше часу на пошук і ручне впорядкування файлів. Документи опиняються там, де вони мають бути, автоматично."
+    },
+
+    research: {
+      title:
+        "Дослідження ринку",
+
+      text:
+        "Допомагаю перетворити великий обсяг зовнішньої інформації на структуровані дані: зібрати доступну інформацію, привести її до єдиного формату, порівняти варіанти та підготувати основу для аналізу.",
+
+      result:
+        "Менше часу на ручний збір і структурування інформації. Швидше отримання даних для порівняння та прийняття рішення."
+    },
+
+    custom: {
+      title:
+        "Індивідуальна логіка",
+
+      text:
+        "Якщо процес не вкладається в готовий шаблон, автоматизацію можна побудувати навколо саме ваших правил: винятків, перевірок, послідовностей, ролей, умов та нестандартних сценаріїв.",
+
+      result:
+        "Автоматизація підлаштовується під реальний процес, а не змушує бізнес перебудовуватися під обмеження готового рішення."
+    }
+  },
+
+  ru: {
+    ui: {
+      kicker:
+        "ПОЛЬЗА ДЛЯ БИЗНЕСА",
+
+      result:
+        "РЕЗУЛЬТАТ",
+
+      close:
+        "Закрыть"
+    },
+
+    telegram: {
+      title:
+        "Telegram-боты",
+
+      text:
+        "Переношу в Telegram те, для чего не нужна отдельная сложная система: заявки, уведомления, напоминания, согласования, статусы и получение нужной информации. Сотрудник получает или передаёт данные прямо в привычном рабочем канале.",
+
+      result:
+        "Меньше переписки и ручных напоминаний. Быстрее реакция на события, заявки и изменения."
+    },
+
+    webapps: {
+      title:
+        "Веб-приложения",
+
+      text:
+        "Создаю небольшие рабочие системы под конкретный процесс: ввод данных, поиск, контроль статусов, расчёты, заявки или внутренние кабинеты. Вместо цепочки таблиц, файлов и сообщений пользователь получает один понятный инструмент.",
+
+      result:
+        "Меньше ручных переходов между файлами и сервисами. Процесс становится короче, понятнее и лучше контролируется."
+    },
+
+    pwa: {
+      title:
+        "PWA",
+
+      text:
+        "Рабочее веб-приложение можно сделать похожим на обычное мобильное приложение: открывать его с иконки на телефоне и использовать для работы вне офиса, заявок, проверок или быстрого доступа к данным.",
+
+      result:
+        "Рабочий инструмент всегда под рукой без отдельной разработки полноценного мобильного приложения."
+    },
+
+    documents: {
+      title:
+        "PDF и документы",
+
+      text:
+        "Автоматизирую создание документов из уже имеющихся данных: отчётов, актов, заявок, коммерческих предложений, справок, PDF-файлов и других типовых документов. Система сама подставляет нужные значения в заданный шаблон.",
+
+      result:
+        "Документы формируются за секунды вместо ручного копирования. Меньше ошибок, проверок и повторной работы."
+    },
+
+    drive: {
+      title:
+        "Google Drive",
+
+      text:
+        "Автоматизирую работу с файлами и папками: создание структуры, переименование, перемещение, поиск, сортировку, предоставление доступа и связь файлов с таблицами или другими процессами.",
+
+      result:
+        "Меньше времени на поиск и ручную организацию файлов. Документы автоматически оказываются там, где должны быть."
+    },
+
+    research: {
+      title:
+        "Исследование рынка",
+
+      text:
+        "Помогаю превратить большой объём внешней информации в структурированные данные: собрать доступную информацию, привести её к единому формату, сравнить варианты и подготовить основу для анализа.",
+
+      result:
+        "Меньше времени на ручной сбор и структурирование информации. Быстрее получение данных для сравнения и принятия решений."
+    },
+
+    custom: {
+      title:
+        "Индивидуальная логика",
+
+      text:
+        "Если процесс не укладывается в готовый шаблон, автоматизацию можно построить вокруг именно ваших правил: исключений, проверок, последовательностей, ролей, условий и нестандартных сценариев.",
+
+      result:
+        "Автоматизация подстраивается под реальный процесс, а не заставляет бизнес перестраиваться под ограничения готового решения."
+    }
+  },
+
+  en: {
+    ui: {
+      kicker:
+        "BUSINESS VALUE",
+
+      result:
+        "OUTCOME",
+
+      close:
+        "Close"
+    },
+
+    telegram: {
+      title:
+        "Telegram Bots",
+
+      text:
+        "I can move everyday workflow actions into Telegram when a full standalone system would be overkill — requests, alerts, reminders, approvals, status updates, and quick access to business information. Your team can act without bouncing between tools.",
+
+      result:
+        "Less back-and-forth, fewer manual reminders, and faster response to requests and operational changes."
+    },
+
+    webapps: {
+      title:
+        "Web Apps",
+
+      text:
+        "I build focused internal tools around a specific workflow — data entry, search, status tracking, calculations, requests, or internal dashboards. Instead of juggling spreadsheets, files, and messages, users get one purpose-built workspace.",
+
+      result:
+        "Fewer handoffs between tools, less manual work, and a shorter, easier-to-manage process."
+    },
+
+    pwa: {
+      title:
+        "PWA",
+
+      text:
+        "A business web app can behave much like a mobile app: your team can launch it from an icon on a phone and use it for field work, requests, inspections, or quick access to operational data.",
+
+      result:
+        "A mobile-friendly business tool that stays within reach without the cost and overhead of building a separate native app."
+    },
+
+    documents: {
+      title:
+        "PDF & Document Automation",
+
+      text:
+        "I automate document generation from data you already have — reports, forms, proposals, certificates, PDFs, and other repeatable business documents. The system can populate the right template automatically instead of making someone copy the information by hand.",
+
+      result:
+        "Documents produced in seconds, with less copy-paste work, fewer mistakes, and less time spent double-checking."
+    },
+
+    drive: {
+      title:
+        "Google Drive Automation",
+
+      text:
+        "I automate repetitive file and folder work — creating folder structures, renaming and moving files, organizing documents, managing access, finding the right files, and connecting Drive content to spreadsheets or other workflows.",
+
+      result:
+        "Less time spent hunting for files and organizing folders. Documents land where they belong automatically."
+    },
+
+    research: {
+      title:
+        "Market Research",
+
+      text:
+        "I help turn large amounts of available external information into structured, usable data — collecting it, standardizing it, comparing options, and preparing a clean foundation for analysis.",
+
+      result:
+        "Less time spent gathering and organizing information, with faster access to the facts needed for comparison and decision-making."
+    },
+
+    custom: {
+      title:
+        "Custom Business Logic",
+
+      text:
+        "When your workflow does not fit an off-the-shelf template, I can build the automation around your actual rules — exceptions, validations, roles, conditions, sequences, and edge cases.",
+
+      result:
+        "The solution adapts to the way your business actually works instead of forcing your process into somebody else's template."
+    }
+  }
+};
+
+const activeCapabilityContent =
+  capabilityContent[
+    capabilityLanguage
+  ];
+
+let activeCapability =
+  "";
+
+const closeCapabilityDetail =
+  () => {
+    if (!capabilityDetail) {
+      return;
+    }
+
+    capabilityDetail.classList.remove(
+      "is-open"
+    );
+
+    capabilityDetail.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    capabilityButtons.forEach(
+      button => {
+        button.classList.remove(
+          "is-active"
+        );
+
+        button.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    );
+
+    activeCapability =
+      "";
+  };
+
+const openCapabilityDetail =
+  key => {
+    if (
+      !capabilityDetail ||
+      !activeCapabilityContent ||
+      !activeCapabilityContent[key]
+    ) {
+      return;
+    }
+
+    if (
+      activeCapability === key &&
+      capabilityDetail.classList.contains(
+        "is-open"
+      )
+    ) {
+      closeCapabilityDetail();
+      return;
+    }
+
+    const data =
+      activeCapabilityContent[key];
+
+    activeCapability =
+      key;
+
+    capabilityButtons.forEach(
+      button => {
+        const isActive =
+          button.dataset.capability ===
+          key;
+
+        button.classList.toggle(
+          "is-active",
+          isActive
+        );
+
+        button.setAttribute(
+          "aria-expanded",
+          isActive
+            ? "true"
+            : "false"
+        );
+      }
+    );
+
+    if (capabilityKicker) {
+      capabilityKicker.textContent =
+        activeCapabilityContent.ui.kicker;
+    }
+
+    if (capabilityTitle) {
+      capabilityTitle.textContent =
+        data.title;
+    }
+
+    if (capabilityText) {
+      capabilityText.textContent =
+        data.text;
+    }
+
+    if (capabilityResultLabel) {
+      capabilityResultLabel.textContent =
+        activeCapabilityContent.ui.result;
+    }
+
+    if (capabilityResult) {
+      capabilityResult.textContent =
+        data.result;
+    }
+
+    if (capabilityClose) {
+      capabilityClose.setAttribute(
+        "aria-label",
+        activeCapabilityContent.ui.close
+      );
+    }
+
+    capabilityDetail.classList.add(
+      "is-open"
+    );
+
+    capabilityDetail.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+  };
+
+capabilityButtons.forEach(
+  button => {
+    button.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    button.addEventListener(
+      "click",
+      () => {
+        openCapabilityDetail(
+          button.dataset.capability
+        );
+      }
+    );
+  }
+);
+
+if (capabilityClose) {
+  capabilityClose.addEventListener(
+    "click",
+    closeCapabilityDetail
+  );
+}
 })();

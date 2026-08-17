@@ -3364,26 +3364,27 @@ const runTestingRetest = () => {
       }
     };
 
-  const openTestingCard = () => {
-    closePreviousStageCards();
-
-    positionTestingCard();
-
-    testingCard.classList.add(
-      "is-open"
-    );
-
-    testingCard.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    testingStage.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-  };
-  runTestingRetest();
+    const openTestingCard = () => {
+      closePreviousStageCards();
+    
+      positionTestingCard();
+    
+      testingCard.classList.add(
+        "is-open"
+      );
+    
+      testingCard.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+    
+      testingStage.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+    
+      runTestingRetest();
+    };
 
     const closeTestingCard = () => {
     testingCard.classList.remove(
@@ -3525,6 +3526,88 @@ if (
   let launchStartX = 0;
   let launchStartY = 0;
   let launchWasDragged = false;
+
+  const launchUptime =
+  launchCard.querySelector(
+    ".launch-time strong"
+  );
+
+let launchUptimeTimer = null;
+let launchUptimeSeconds = 0;
+
+const formatLaunchUptime = seconds => {
+  const hours =
+    Math.floor(
+      seconds / 3600
+    );
+
+  const minutes =
+    Math.floor(
+      (seconds % 3600) / 60
+    );
+
+  const secs =
+    seconds % 60;
+
+  return [
+    hours,
+    minutes,
+    secs
+  ]
+    .map(
+      value =>
+        String(value).padStart(
+          2,
+          "0"
+        )
+    )
+    .join(":");
+};
+
+const resetLaunchUptime = () => {
+  if (launchUptimeTimer) {
+    clearInterval(
+      launchUptimeTimer
+    );
+
+    launchUptimeTimer = null;
+  }
+
+  launchUptimeSeconds = 0;
+
+  if (launchUptime) {
+    launchUptime.textContent =
+      "00:00:00";
+  }
+};
+
+const startLaunchUptime = () => {
+  resetLaunchUptime();
+
+  launchUptimeSeconds = 1;
+
+  if (launchUptime) {
+    launchUptime.textContent =
+      formatLaunchUptime(
+        launchUptimeSeconds
+      );
+  }
+
+  launchUptimeTimer =
+    setInterval(
+      () => {
+        launchUptimeSeconds += 1;
+
+        if (launchUptime) {
+          launchUptime.textContent =
+            formatLaunchUptime(
+              launchUptimeSeconds
+            );
+        }
+      },
+      1000
+    );
+};
 
   const positionLaunchCard = () => {
     const map =
@@ -3728,6 +3811,7 @@ if (
       "aria-expanded",
       "true"
     );
+    startLaunchUptime();
   };
 
   const closeLaunchCard = () => {
@@ -3744,6 +3828,7 @@ if (
       "aria-expanded",
       "false"
     );
+    resetLaunchUptime();
   };
 
   launchStage.addEventListener(

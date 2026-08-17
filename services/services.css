@@ -11451,3 +11451,56 @@ p {
     flex: none;
   }
 }
+
+.ecosystem-service::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 92px;
+  height: 1px;
+  background: rgba(58, 116, 92, 0.34);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ecosystem-service[data-service="powerbi"]::after {
+  right: -78px;
+  transform-origin: left center;
+  transform: rotate(48deg);
+}
+
+.ecosystem-service[data-service="excel"]::after {
+  right: -88px;
+  transform-origin: left center;
+  transform: rotate(0deg);
+}
+
+.ecosystem-service[data-service="apps"]::after {
+  right: -78px;
+  transform-origin: left center;
+  transform: rotate(-48deg);
+}
+
+.ecosystem-service[data-service="integration"]::after {
+  left: -78px;
+  transform-origin: right center;
+  transform: rotate(-48deg);
+}
+
+.ecosystem-service[data-service="process"]::after {
+  left: -88px;
+  transform-origin: right center;
+  transform: rotate(0deg);
+}
+
+.ecosystem-service[data-service="data"]::after {
+  left: -78px;
+  transform-origin: right center;
+  transform: rotate(48deg);
+}
+
+@media (max-width: 760px) {
+  .ecosystem-service::after {
+    display: none;
+  }
+}

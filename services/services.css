@@ -9280,129 +9280,143 @@ p {
   }
 
   .ecosystem-detail-panel {
-    width: 92vw;
-    margin-left: 0;
-
-    border-radius: 18px;
-
-    transform:
-      translate(
-        0,
-        18vh
-      )
-      scale(0.42);
-  }
-
-  .ecosystem-detail-view.is-open
-  .ecosystem-detail-panel {
-    transform:
-      translate(
-        0,
-        0
-      )
-      scale(1);
-  }
-}
-
-.ecosystem-detail-tail {
   position: fixed;
 
-  z-index: 179;
+  z-index: 181;
 
-  left: 72%;
-  top: 72%;
+  right: 7vw;
+  top: 18vh;
 
-  width: 22vw;
-  height: 18vw;
+  width:
+    min(
+      650px,
+      43vw
+    );
 
-  max-width: 300px;
-  max-height: 220px;
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(126, 191, 157, 0.2);
+
+  border-radius: 20px;
+
+  background:
+    #071b14;
+
+  box-shadow:
+    0 28px 70px
+    rgba(0, 0, 0, 0.32);
 
   opacity: 0;
 
-  pointer-events: none;
-
-  transform-origin:
-    right center;
-
-  clip-path:
-    polygon(
-      100% 24%,
-      100% 76%,
-      0% 58%,
-      0% 42%
-    );
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(37, 102, 74, 0.10),
-      rgba(64, 145, 104, 0.22),
-      rgba(92, 186, 134, 0.30)
-    );
-
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
-  filter:
-    drop-shadow(
-      0 10px 28px
-      rgba(10, 45, 32, 0.18)
-    );
-
   transform:
     translate(
-      2vw,
-      5vh
+      -7vw,
+      42vh
     )
-    scaleX(0.08);
+    scale(0.16);
+
+  transform-origin:
+    left bottom;
 
   transition:
-    transform 1.15s
+    transform 1.35s
     cubic-bezier(
       0.16,
       1,
       0.3,
       1
     ),
-    opacity 0.45s ease;
+    opacity 0.55s ease;
+}
+
+.ecosystem-detail-view.is-open
+.ecosystem-detail-panel {
+  opacity: 1;
+
+  transform:
+    translate(
+      0,
+      0
+    )
+    scale(1);
+}
+}
+
+.ecosystem-detail-tail {
+  position: fixed;
+  inset: 0;
+
+  z-index: 179;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(67, 157, 113, 0.04),
+      rgba(78, 165, 120, 0.18),
+      rgba(126, 211, 164, 0.10)
+    );
+
+  clip-path:
+    polygon(
+      51% 73%,
+      56% 78%,
+      58% 62%,
+      58% 40%
+    );
+
+  filter:
+    drop-shadow(
+      0 10px 22px
+      rgba(14, 52, 37, 0.12)
+    );
+
+  transition:
+    clip-path 1.35s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    ),
+    opacity 0.4s ease;
 }
 
 .ecosystem-detail-view.is-open
 .ecosystem-detail-tail {
   opacity: 1;
 
-  transform:
-    translate(
-      -17vw,
-      -3vh
-    )
-    scaleX(1);
+  clip-path:
+    polygon(
+      51% 73%,
+      56% 78%,
+      58% 64%,
+      58% 37%
+    );
 }
 
 .ecosystem-detail-tail::after {
   content: "";
 
   position: absolute;
-  inset: 1px;
-
-  clip-path:
-    inherit;
+  inset: 0;
 
   background:
     linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.02),
-      rgba(199, 245, 219, 0.08),
-      rgba(255, 255, 255, 0.12)
+      125deg,
+      transparent 46%,
+      rgba(205, 244, 222, 0.09) 56%,
+      transparent 69%
     );
 }
-
 @media (max-width: 760px) {
-  .ecosystem-detail-tail {
-    left: 64%;
-    top: 66%;
-
     width: 34vw;
     height: 24vw;
 

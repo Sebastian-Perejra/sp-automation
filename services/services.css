@@ -9446,3 +9446,81 @@ p {
     display: none;
   }
 }
+
+.ecosystem-detail-panel {
+  right: 5vw;
+  top: 16vh;
+
+  width: min(610px, 40vw);
+
+  margin: 0;
+
+  transform-origin:
+    left bottom;
+
+  transform:
+    translate(
+      var(--detail-start-x, 0px),
+      var(--detail-start-y, 0px)
+    )
+    scale(0.12);
+
+  opacity: 0;
+
+  transition:
+    transform 1.45s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    ),
+    opacity 0.45s ease;
+}
+
+.ecosystem-detail-view.is-open
+.ecosystem-detail-panel {
+  transform:
+    translate(
+      0,
+      0
+    )
+    scale(1);
+
+  opacity: 1;
+}
+
+.ecosystem-detail-tail {
+  clip-path:
+    polygon(
+      var(--tail-x1, 50%)
+      var(--tail-y1, 70%),
+
+      var(--tail-x2, 52%)
+      var(--tail-y2, 72%),
+
+      var(--tail-x1, 50%)
+      var(--tail-y1, 70%),
+
+      var(--tail-x2, 52%)
+      var(--tail-y2, 72%)
+    );
+}
+
+.ecosystem-detail-view.is-open
+.ecosystem-detail-tail {
+  clip-path:
+    polygon(
+      var(--tail-x1, 50%)
+      var(--tail-y1, 70%),
+
+      var(--tail-x2, 52%)
+      var(--tail-y2, 72%),
+
+      var(--tail-panel-x2, 70%)
+      var(--tail-panel-y2, 55%),
+
+      var(--tail-panel-x1, 70%)
+      var(--tail-panel-y1, 45%)
+    );
+}

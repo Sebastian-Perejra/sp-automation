@@ -281,6 +281,8 @@
       data-stage="2"
       data-title="Аналіз"
       data-description="Розбираю процес, дані, винятки та місця, де виникає ручна робота."
+      aria-expanded="false"
+      aria-controls="project-analysis-card"
     >
       <span class="project-stage-number">02</span>
 
@@ -474,6 +476,134 @@
   <div class="project-brief-ready">
     <span></span>
     BRIEF READY
+  </div>
+</div>
+
+    <div
+  class="project-analysis-detail"
+  id="project-analysis-card"
+  aria-hidden="true"
+>
+  <div class="analysis-head">
+    <div>
+      <span>02 · ANALYSIS MODE</span>
+
+      <strong>
+        Де процес втрачає ефективність?
+      </strong>
+    </div>
+
+    <button
+      class="analysis-close"
+      type="button"
+      aria-label="Закрити"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="analysis-flow">
+
+    <div class="analysis-node analysis-node-input">
+      <span class="analysis-node-label">
+        INPUT
+      </span>
+
+      <strong>
+        Дані входять
+      </strong>
+
+      <small>
+        Excel · CRM · Forms · Email
+      </small>
+    </div>
+
+    <div class="analysis-track analysis-track-a">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="analysis-node analysis-node-bottleneck">
+      <span class="analysis-node-label">
+        BOTTLENECK
+      </span>
+
+      <div class="analysis-bottleneck-core">
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+
+      <strong>
+        Ручна перевірка
+      </strong>
+
+      <small>
+        процес звужується тут
+      </small>
+    </div>
+
+    <div class="analysis-track analysis-track-b">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="analysis-node analysis-node-loss">
+      <span class="analysis-node-label">
+        LOSS
+      </span>
+
+      <strong class="analysis-loss-value">
+        −18 min
+      </strong>
+
+      <small>
+        на кожному циклі
+      </small>
+    </div>
+
+    <div class="analysis-track analysis-track-c">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="analysis-node analysis-node-fix">
+      <span class="analysis-node-label">
+        FIX
+      </span>
+
+      <strong>
+        Автовалідація
+      </strong>
+
+      <small>
+        перевірка без ручної участі
+      </small>
+    </div>
+
+  </div>
+
+  <div class="analysis-result">
+    <span class="analysis-result-pulse"></span>
+
+    <div>
+      <small>
+        ROOT CAUSE
+      </small>
+
+      <strong>
+        FOUND
+      </strong>
+    </div>
+
+    <span class="analysis-result-line"></span>
+
+    <div class="analysis-result-score">
+      92%
+    </div>
   </div>
 </div>
     

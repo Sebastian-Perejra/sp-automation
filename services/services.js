@@ -850,4 +850,365 @@ if (cabinetCloseButton) {
     }
   );
 }
+  const draggableProjectMap =
+  document.querySelector(
+    ".services-project-map"
+  );
+
+if (draggableProjectMap) {
+  const draggableStages =
+    Array.from(
+      draggableProjectMap.querySelectorAll(
+        ".project-stage"
+      )
+    );
+
+  const draggableLines =
+    Array.from(
+      draggableProjectMap.querySelectorAll(
+        ".project-line"
+      )
+    );
+
+  const projectCoreElement =
+    draggableProjectMap.querySelector(
+      ".project-core"
+    );
+
+  const SVG_NS =
+    "http://www.w3.org/2000/svg";
+
+  const getStageCenter = stage => {
+    const mapRect =
+      draggableProjectMap.getBoundingClientRect();
+
+    const stageRect =
+      stage.getBoundingClientRect();
+
+    return {
+      x:
+        stageRect.left -
+        mapRect.left +
+        stageRect.width / 2,
+
+      y:
+        stageRect.top -
+        mapRect.top +
+        stageRect.height / 2
+    };
+  };
+
+  const getCoreCenter = () => {
+    const mapRect =
+      draggableProjectMap.getBoundingClientRect();
+
+    const coreRect =
+      projectCoreElement.getBoundingClientRect();
+
+    return {
+      x:
+        coreRect.left -
+        mapRect.left +
+        coreRect.width / 2,
+
+      y:
+        coreRect.top -
+        mapRect.top +
+        coreRect.height / 2
+    };
+  };
+
+  const updateProjectLines = () => {
+    if (
+      !projectCoreElement ||
+      !draggableLines.length
+    ) {
+      return;
+    }
+
+    const mapRect =
+      draggableProjectMap.getBoundingClientRect();
+
+    const viewBoxWidth = 620;
+    const viewBoxHeight = 520;
+
+    const scaleX =
+      viewBoxWidth / mapRect.width;
+
+    const scaleY =
+      viewBoxHeight / mapRect.height;
+
+    const coreCenter =
+      getCoreCenter();
+
+    draggableStages.forEach(
+      (stage, index) => {
+        const line =
+          draggableLines[index];
+
+        if (!line) return;
+
+        const stageCenter =
+          getStageCenter(stage);
+
+        line.setAttribute(
+          "x1",
+          String(
+            coreCenter.x *
+            scaleX
+          )
+        );
+
+        line.setAttribute(
+          "y1",
+          String(
+            coreCenter.y *
+            scaleY
+          )
+        );
+
+        line.setAttribute(
+          "x2",
+          String(
+            stageCenter.x *
+            scaleX
+          )
+        );
+
+        line.setAttribute(
+          "y2",
+          String(
+            stageCenter.y *
+            scaleY
+          )
+        );
+      }
+    );
+  };
+
+  const enableStageDragging = stage => {
+    let pointerId = null;
+
+    let startPointerX = 0;
+    let startPointerY = 0;
+
+    let startLeft = 0;
+    let startTop = 0;
+
+    let stageWidth = 0;
+    let stageHeight = 0;
+
+    let dragging = false;
+
+    const handlePointerDown =
+      event => {
+        if (
+          window.innerWidth <= 760
+        ) {
+          return;
+        }
+
+        if (
+          event.button !== 0
+        ) {
+          return;
+        }
+
+        const mapRect =
+          draggableProjectMap
+            .getBoundingClientRect();
+
+        const stageRect =
+          stage
+            .getBoundingClientRect();
+
+        pointerId =
+          event.pointerId;
+
+        startPointerX =
+          event.clientX;
+
+        startPointerY =
+          event.clientY;
+
+        startLeft =
+          stageRect.left -
+          mapRect.left;
+
+        startTop =
+          stageRect.top -
+          mapRect.top;
+
+        stageWidth =
+          stageRect.width;
+
+        stageHeight =
+          stageRect.height;
+
+        dragging = true;
+
+        stage.classList.add(
+          "is-dragging"
+        );
+
+        draggableProjectMap
+          .classList.add(
+            "is-dragging-stage"
+          );
+
+        stage.style.left =
+          `${startLeft}px`;
+
+        stage.style.top =
+          `${startTop}px`;
+
+        stage.style.right =
+          "auto";
+
+        stage.style.bottom =
+          "auto";
+
+        stage.style.transform =
+          "none";
+
+        stage.setPointerCapture(
+          pointerId
+        );
+
+        event.preventDefault();
+      };
+
+    const handlePointerMove =
+      event => {
+        if (
+          !dragging ||
+          event.pointerId !==
+          pointerId
+        ) {
+          return;
+        }
+
+        const mapRect =
+          draggableProjectMap
+            .getBoundingClientRect();
+
+        const deltaX =
+          event.clientX -
+          startPointerX;
+
+        const deltaY =
+          event.clientY -
+          startPointerY;
+
+        let nextLeft =
+          startLeft +
+          deltaX;
+
+        let nextTop =
+          startTop +
+          deltaY;
+
+        nextLeft =
+          Math.max(
+            0,
+            Math.min(
+              nextLeft,
+              mapRect.width -
+              stageWidth
+            )
+          );
+
+        nextTop =
+          Math.max(
+            0,
+            Math.min(
+              nextTop,
+              mapRect.height -
+              stageHeight
+            )
+          );
+
+        stage.style.left =
+          `${nextLeft}px`;
+
+        stage.style.top =
+          `${nextTop}px`;
+
+        updateProjectLines();
+      };
+
+    const finishDragging =
+      event => {
+        if (
+          !dragging ||
+          event.pointerId !==
+          pointerId
+        ) {
+          return;
+        }
+
+        dragging = false;
+
+        stage.classList.remove(
+          "is-dragging"
+        );
+
+        draggableProjectMap
+          .classList.remove(
+            "is-dragging-stage"
+          );
+
+        try {
+          stage.releasePointerCapture(
+            pointerId
+          );
+        } catch (error) {
+        }
+
+        pointerId = null;
+
+        updateProjectLines();
+      };
+
+    stage.addEventListener(
+      "pointerdown",
+      handlePointerDown
+    );
+
+    stage.addEventListener(
+      "pointermove",
+      handlePointerMove
+    );
+
+    stage.addEventListener(
+      "pointerup",
+      finishDragging
+    );
+
+    stage.addEventListener(
+      "pointercancel",
+      finishDragging
+    );
+  };
+
+  draggableStages.forEach(
+    enableStageDragging
+  );
+
+  window.addEventListener(
+    "resize",
+    () => {
+      updateProjectLines();
+    },
+    {
+      passive: true
+    }
+  );
+
+  requestAnimationFrame(
+    () => {
+      updateProjectLines();
+    }
+  );
+}
 })();

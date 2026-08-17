@@ -12054,3 +12054,64 @@ p {
       rotate(90deg);
   }
 }
+.services-capabilities {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  width: 100%;
+
+  overflow: visible;
+}
+
+.services-capabilities button {
+  flex: 0 0 auto;
+
+  min-width: 0;
+
+  padding:
+    8px
+    25px
+    8px
+    12px;
+
+  white-space: nowrap;
+
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.services-capabilities button::after {
+  right: 9px;
+}
+
+@media (max-width: 900px) {
+  .services-capabilities {
+    justify-content: flex-start;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    flex-wrap: nowrap;
+
+    padding-bottom: 5px;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .services-capabilities::-webkit-scrollbar {
+    display: none;
+  }
+
+  .services-capabilities button {
+    flex: 0 0 auto;
+
+    font-size: 9px;
+  }
+}

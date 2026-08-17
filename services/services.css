@@ -2338,16 +2338,31 @@ body::after {
 }
 
 .project-core-door {
+  position: absolute;
+  inset: 0;
+
   z-index: 4;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
   padding: 25px 20px;
+
   transform-origin: left center;
-  transform: rotateY(0deg);
-  backface-visibility: hidden;
+
+  transform:
+    translateX(0)
+    rotateY(0deg)
+    scale(1);
+
   border: 1px solid rgba(183, 229, 205, 0.27);
+  border-radius: 28px;
+
   background:
     radial-gradient(
       circle at 50% 4%,
@@ -2360,21 +2375,32 @@ body::after {
       #123b2e 58%,
       #0b2d24
     );
+
   color: #ffffff;
+
   text-align: center;
+
   box-shadow:
     0 30px 60px rgba(15, 53, 40, 0.27),
     0 0 50px rgba(72, 154, 114, 0.09),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
   transition:
-    transform 0.82s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.5s ease;
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s ease;
+
+  backface-visibility: visible;
 }
 
 .project-core.is-open .project-core-door {
-  transform: rotateY(-112deg);
+  transform:
+    translateX(-88%)
+    rotateY(-8deg)
+    scale(0.98);
+
   box-shadow:
-    12px 28px 48px rgba(4, 25, 18, 0.24);
+    -12px 24px 42px rgba(4, 25, 18, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .project-core-fold {
@@ -2653,7 +2679,10 @@ body::after {
   }
 
   .project-core.is-open .project-core-door {
-    transform: rotateY(-105deg);
+  transform:
+    translateX(-82%)
+    rotateY(-7deg)
+    scale(0.94);
   }
 
   .cabinet-module {

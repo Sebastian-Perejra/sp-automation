@@ -11452,55 +11452,83 @@ p {
   }
 }
 
-.ecosystem-service::after {
-  content: "";
+.ecosystem-wire {
   position: absolute;
-  top: 50%;
-  width: 92px;
+
   height: 1px;
-  background: rgba(58, 116, 92, 0.34);
+
+  background:
+    rgba(67, 125, 99, 0.32);
+
   pointer-events: none;
-  z-index: 0;
+
+  z-index: 1;
+
+  transform-origin: center;
 }
 
-.ecosystem-service[data-service="powerbi"]::after {
-  right: -78px;
-  transform-origin: left center;
-  transform: rotate(48deg);
+.wire-left-1 {
+  left: 31.5%;
+  top: 32%;
+
+  width: 18%;
+
+  transform:
+    rotate(35deg);
 }
 
-.ecosystem-service[data-service="excel"]::after {
-  right: -88px;
-  transform-origin: left center;
-  transform: rotate(0deg);
+.wire-left-2 {
+  left: 31.5%;
+  top: 50%;
+
+  width: 18%;
+
+  transform:
+    rotate(0deg);
 }
 
-.ecosystem-service[data-service="apps"]::after {
-  right: -78px;
-  transform-origin: left center;
-  transform: rotate(-48deg);
+.wire-left-3 {
+  left: 31.5%;
+  top: 68%;
+
+  width: 18%;
+
+  transform:
+    rotate(-35deg);
 }
 
-.ecosystem-service[data-service="integration"]::after {
-  left: -78px;
-  transform-origin: right center;
-  transform: rotate(-48deg);
+.wire-right-1 {
+  right: 31.5%;
+  top: 32%;
+
+  width: 18%;
+
+  transform:
+    rotate(-35deg);
 }
 
-.ecosystem-service[data-service="process"]::after {
-  left: -88px;
-  transform-origin: right center;
-  transform: rotate(0deg);
+.wire-right-2 {
+  right: 31.5%;
+  top: 50%;
+
+  width: 18%;
+
+  transform:
+    rotate(0deg);
 }
 
-.ecosystem-service[data-service="data"]::after {
-  left: -78px;
-  transform-origin: right center;
-  transform: rotate(48deg);
+.wire-right-3 {
+  right: 31.5%;
+  top: 68%;
+
+  width: 18%;
+
+  transform:
+    rotate(35deg);
 }
 
 @media (max-width: 760px) {
-  .ecosystem-service::after {
+  .ecosystem-wire {
     display: none;
   }
 }

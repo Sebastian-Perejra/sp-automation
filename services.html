@@ -255,25 +255,26 @@
     </svg>
 
     <button
-      class="project-stage project-stage-1 is-active"
-      type="button"
-      data-stage="1"
-      data-title="Обговорення"
-      data-description="Фіксуємо задачу, очікуваний результат і те, що зараз забирає час."
-    >
-      <span class="project-stage-number">01</span>
-
-      <span class="project-stage-icon">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 5.5h14v9H9l-4 3v-12Z"></path>
-          <path d="M8 9h8"></path>
-          <path d="M8 12h5"></path>
-        </svg>
-      </span>
-
-      <strong>Обговорення</strong>
-    </button>
-
+  class="project-stage project-stage-1 is-active"
+        type="button"
+        data-stage="1"
+        data-title="Обговорення"
+        data-description="Фіксуємо задачу, очікуваний результат і те, що зараз забирає час."
+        aria-expanded="false"
+        aria-controls="project-brief-card"
+      >
+        <span class="project-stage-number">01</span>
+      
+        <span class="project-stage-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 5.5h14v9H9l-4 3v-12Z"></path>
+            <path d="M8 9h8"></path>
+            <path d="M8 12h5"></path>
+          </svg>
+        </span>
+      
+        <strong>Обговорення</strong>
+      </button>
     <button
       class="project-stage project-stage-2"
       type="button"
@@ -398,6 +399,84 @@
       <strong>Запуск</strong>
     </button>
 
+    <div
+  class="project-stage-detail"
+  id="project-brief-card"
+  aria-hidden="true"
+>
+  <div class="project-stage-detail-head">
+    <div>
+      <span>01 · DISCUSSION</span>
+      <strong>Project Brief</strong>
+    </div>
+
+    <button
+      class="project-stage-detail-close"
+      type="button"
+      aria-label="Закрити"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="project-brief-list">
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Задача</strong>
+        <p>
+          Що зараз робиться вручну або забирає
+          забагато часу.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Біль</strong>
+        <p>
+          Де виникають помилки, дублювання,
+          затримки або зайві дії.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Результат</strong>
+        <p>
+          Що має відбуватися автоматично
+          після впровадження рішення.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-brief-item">
+      <span class="project-brief-dot"></span>
+
+      <div>
+        <strong>Обмеження</strong>
+        <p>
+          Строки, доступи, системи,
+          формати даних та інші умови.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="project-brief-ready">
+    <span></span>
+    BRIEF READY
+  </div>
+</div>
+    
     <div class="project-core">
   <div class="project-core-cabinet" aria-hidden="true">
     <div class="cabinet-title">

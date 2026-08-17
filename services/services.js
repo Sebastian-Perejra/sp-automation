@@ -1510,4 +1510,323 @@ if (
     }
   );
 }
+  const analysisStage =
+  document.querySelector(
+    ".project-stage-2"
+  );
+
+const analysisCard =
+  document.getElementById(
+    "project-analysis-card"
+  );
+
+const analysisClose =
+  analysisCard
+    ? analysisCard.querySelector(
+        ".analysis-close"
+      )
+    : null;
+
+if (
+  analysisStage &&
+  analysisCard &&
+  analysisClose
+) {
+  let analysisStartX = 0;
+  let analysisStartY = 0;
+  let analysisWasDragged = false;
+
+  const positionAnalysisCard = () => {
+    const map =
+      analysisStage.closest(
+        ".services-project-map"
+      );
+
+    if (!map) return;
+
+    const mapRect =
+      map.getBoundingClientRect();
+
+    const stageRect =
+      analysisStage
+        .getBoundingClientRect();
+
+    const cardWidth =
+      analysisCard.offsetWidth ||
+      440;
+
+    const cardHeight =
+      analysisCard.offsetHeight ||
+      250;
+
+    const stageCenterX =
+      stageRect.left -
+      mapRect.left +
+      stageRect.width / 2;
+
+    const stageCenterY =
+      stageRect.top -
+      mapRect.top +
+      stageRect.height / 2;
+
+    if (
+      window.innerWidth <= 760
+    ) {
+      const left =
+        (
+          mapRect.width -
+          cardWidth
+        ) / 2;
+
+      const top =
+        Math.max(
+          70,
+          (
+            mapRect.height -
+            cardHeight
+          ) / 2
+        );
+
+      analysisCard.style.left =
+        `${left}px`;
+
+      analysisCard.style.top =
+        `${top}px`;
+
+      analysisCard.style.setProperty(
+        "--analysis-origin-x",
+        "50%"
+      );
+
+      analysisCard.style.setProperty(
+        "--analysis-origin-y",
+        "0%"
+      );
+
+      return;
+    }
+
+    const gap = 18;
+
+    let left;
+    let top;
+
+    if (
+      stageCenterY <
+      mapRect.height * 0.5
+    ) {
+      top =
+        stageRect.bottom -
+        mapRect.top +
+        gap;
+    } else {
+      top =
+        stageRect.top -
+        mapRect.top -
+        cardHeight -
+        gap;
+    }
+
+    left =
+      stageCenterX -
+      cardWidth / 2;
+
+    left =
+      Math.max(
+        8,
+        Math.min(
+          left,
+          mapRect.width -
+          cardWidth -
+          8
+        )
+      );
+
+    top =
+      Math.max(
+        8,
+        Math.min(
+          top,
+          mapRect.height -
+          cardHeight -
+          8
+        )
+      );
+
+    analysisCard.style.left =
+      `${left}px`;
+
+    analysisCard.style.top =
+      `${top}px`;
+
+    analysisCard.style.setProperty(
+      "--analysis-origin-x",
+      `${stageCenterX - left}px`
+    );
+
+    analysisCard.style.setProperty(
+      "--analysis-origin-y",
+      `${stageCenterY - top}px`
+    );
+  };
+
+  const openAnalysisCard = () => {
+    const discussionCard =
+      document.getElementById(
+        "project-brief-card"
+      );
+
+    const discussionStage =
+      document.querySelector(
+        ".project-stage-1"
+      );
+
+    if (discussionCard) {
+      discussionCard.classList.remove(
+        "is-open"
+      );
+
+      discussionCard.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }
+
+    if (discussionStage) {
+      discussionStage.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+
+    positionAnalysisCard();
+
+    analysisCard.classList.add(
+      "is-open"
+    );
+
+    analysisCard.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    analysisStage.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  };
+
+  const closeAnalysisCard = () => {
+    analysisCard.classList.remove(
+      "is-open"
+    );
+
+    analysisCard.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    analysisStage.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  };
+
+  analysisStage.addEventListener(
+    "pointerdown",
+    event => {
+      analysisStartX =
+        event.clientX;
+
+      analysisStartY =
+        event.clientY;
+
+      analysisWasDragged = false;
+    }
+  );
+
+  analysisStage.addEventListener(
+    "pointermove",
+    event => {
+      const distanceX =
+        Math.abs(
+          event.clientX -
+          analysisStartX
+        );
+
+      const distanceY =
+        Math.abs(
+          event.clientY -
+          analysisStartY
+        );
+
+      if (
+        distanceX > 6 ||
+        distanceY > 6
+      ) {
+        analysisWasDragged = true;
+      }
+    }
+  );
+
+  analysisStage.addEventListener(
+    "click",
+    event => {
+      if (
+        analysisWasDragged
+      ) {
+        analysisWasDragged = false;
+        return;
+      }
+
+      event.stopPropagation();
+
+      if (
+        analysisCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeAnalysisCard();
+      } else {
+        openAnalysisCard();
+      }
+    }
+  );
+
+  analysisClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeAnalysisCard();
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape"
+      ) {
+        closeAnalysisCard();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (
+        analysisCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        positionAnalysisCard();
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
 })();

@@ -10475,3 +10475,160 @@ p {
     transform: none;
   }
 }
+
+.ecosystem-service-fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
+
+  z-index: 8;
+}
+
+.ecosystem-service-fold::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 34px;
+  height: 34px;
+
+  background:
+    linear-gradient(
+      225deg,
+      rgba(255, 255, 255, 0) 0 48%,
+      rgba(58, 110, 85, 0.12) 49% 51%,
+      rgba(232, 241, 236, 0.98) 52% 100%
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      100% 100%
+    );
+
+  transition:
+    transform 0.32s ease,
+    filter 0.32s ease;
+}
+
+.ecosystem-service-fold::after {
+  content: "";
+
+  position: absolute;
+
+  top: 7px;
+  right: 7px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: rgba(57, 116, 87, 0.46);
+
+  box-shadow:
+    0 0 0 4px rgba(57, 116, 87, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.ecosystem-service-fold span {
+  position: absolute;
+
+  top: 1px;
+  right: 1px;
+
+  width: 22px;
+  height: 22px;
+
+  border-top:
+    1px solid rgba(53, 105, 81, 0.15);
+
+  border-right:
+    1px solid rgba(53, 105, 81, 0.15);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      100% 100%
+    );
+
+  opacity: 0.7;
+}
+
+.ecosystem-service-fold:hover::before {
+  transform:
+    translate(-2px, 2px)
+    rotate(-2deg);
+
+  filter:
+    drop-shadow(
+      -2px 3px 4px
+      rgba(26, 61, 46, 0.12)
+    );
+}
+
+.ecosystem-service-fold:hover::after {
+  transform: scale(1.25);
+
+  background:
+    rgba(55, 126, 89, 0.78);
+
+  box-shadow:
+    0 0 0 6px
+    rgba(55, 126, 89, 0.08);
+}
+
+.ecosystem-service-fold:focus-visible {
+  outline:
+    2px solid
+    rgba(55, 126, 89, 0.42);
+
+  outline-offset: 3px;
+
+  border-radius: 5px;
+}
+
+.ecosystem-service:hover
+.ecosystem-service-fold::before {
+  transform:
+    translate(-1px, 1px);
+}
+
+@media (max-width: 760px) {
+  .ecosystem-service-fold {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ecosystem-service-fold::before {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ecosystem-service-fold::after {
+    top: 8px;
+    right: 8px;
+
+    width: 6px;
+    height: 6px;
+  }
+}

@@ -4386,21 +4386,7 @@ if (bootProjectMap) {
 
         bootProjectMap.classList.add(
           "is-boot-complete"
-        );
-
-        const firstStage =
-          bootStages[0];
-
-        if (firstStage) {
-          firstStage.dispatchEvent(
-            new MouseEvent(
-              "click",
-              {
-                bubbles: false
-              }
-            )
-          );
-        }
+        );      
       },
       bootFinishDelay
     );

@@ -4396,4 +4396,63 @@ if (bootProjectMap) {
     );
   }
 }
+  const ecosystemCore =
+  document.querySelector(
+    ".ecosystem-core"
+  );
+
+const ecosystemFold =
+  document.querySelector(
+    ".ecosystem-core-fold"
+  );
+
+const ecosystemClose =
+  document.querySelector(
+    ".ecosystem-core-close"
+  );
+
+if (
+  ecosystemCore &&
+  ecosystemFold
+) {
+  ecosystemFold.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      const isOpen =
+        ecosystemCore.classList.toggle(
+          "is-open"
+        );
+
+      ecosystemFold.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+    }
+  );
+}
+
+if (
+  ecosystemCore &&
+  ecosystemClose
+) {
+  ecosystemClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      ecosystemCore.classList.remove(
+        "is-open"
+      );
+
+      if (ecosystemFold) {
+        ecosystemFold.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    }
+  );
+}
 })();

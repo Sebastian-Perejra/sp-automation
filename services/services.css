@@ -7949,9 +7949,9 @@ body::after {
     ),
     url("/services/assets/ecosystemsmall.webp");
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 123% auto;
 
   box-shadow:
     inset 0 0 22px

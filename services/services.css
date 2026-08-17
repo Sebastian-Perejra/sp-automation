@@ -8521,3 +8521,533 @@ p {
     bottom: 26px;
   }
 }
+
+.ecosystem-reality-view {
+  position: fixed;
+  inset: 0;
+
+  z-index: 120;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0s linear 0.3s;
+}
+
+.ecosystem-reality-view.is-open {
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0s;
+}
+
+.ecosystem-reality-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(7, 22, 17, 0.66);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.ecosystem-reality-panel {
+  position: relative;
+
+  z-index: 2;
+
+  width:
+    min(
+      calc(100vw - 56px),
+      1180px
+    );
+
+  min-height: 620px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.65fr)
+    minmax(280px, 0.72fr);
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(172, 213, 193, 0.16);
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #102d23,
+      #0a221a
+    );
+
+  box-shadow:
+    0 40px 90px
+    rgba(0, 0, 0, 0.34);
+
+  transform:
+    translateY(18px)
+    scale(0.96);
+
+  transition:
+    transform 0.46s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ecosystem-reality-view.is-open
+.ecosystem-reality-panel {
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+.ecosystem-reality-close {
+  position: absolute;
+
+  right: 18px;
+  top: 18px;
+
+  z-index: 12;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.14);
+
+  border-radius: 50%;
+
+  background:
+    rgba(7, 27, 20, 0.52);
+
+  color:
+    rgba(244, 250, 247, 0.86);
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.ecosystem-reality-close:hover {
+  transform:
+    rotate(90deg);
+
+  background:
+    rgba(29, 72, 54, 0.78);
+}
+
+.ecosystem-reality-scene {
+  position: relative;
+
+  min-height: 620px;
+
+  overflow: hidden;
+}
+
+.ecosystem-reality-image {
+  position: absolute;
+  inset: -18px;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(5, 23, 17, 0.08),
+      rgba(5, 23, 17, 0.02)
+    ),
+    url("/services/assets/ecosystembig.webp");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  transform:
+    translate3d(
+      var(--reality-x, 0px),
+      var(--reality-y, 0px),
+      0
+    )
+    scale(1.04);
+
+  will-change: transform;
+
+  transition:
+    transform 0.14s linear;
+}
+
+.ecosystem-reality-live {
+  position: absolute;
+
+  left: 28px;
+  top: 28px;
+
+  z-index: 4;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: min(420px, 56%);
+}
+
+.reality-live-card {
+  padding:
+    10px
+    12px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.14);
+
+  border-radius: 12px;
+
+  background:
+    rgba(12, 40, 30, 0.42);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 10px 24px
+    rgba(4, 20, 15, 0.12);
+}
+
+.reality-live-card span {
+  display: block;
+
+  color:
+    rgba(232, 245, 238, 0.48);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 6px;
+
+  letter-spacing: 0.13em;
+}
+
+.reality-live-card strong {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    rgba(247, 252, 249, 0.96);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.reality-live-card small {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    rgba(232, 245, 238, 0.5);
+
+  font-size: 6px;
+}
+
+.ecosystem-reality-copy {
+  position: relative;
+
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding:
+    74px
+    46px
+    44px;
+
+  background:
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(83, 145, 111, 0.11),
+      transparent 38%
+    ),
+    linear-gradient(
+      160deg,
+      #123427,
+      #0b251c
+    );
+}
+
+.ecosystem-reality-kicker {
+  margin-bottom: 14px;
+
+  color:
+    rgba(151, 196, 172, 0.62);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+}
+
+.ecosystem-reality-copy h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 34px;
+  font-weight: 600;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.04em;
+}
+
+.ecosystem-reality-copy p {
+  margin:
+    20px
+    0
+    0;
+
+  color:
+    rgba(232, 243, 237, 0.62);
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ecosystem-reality-benefits {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 10px;
+
+  margin-top: 28px;
+}
+
+.ecosystem-reality-benefits div {
+  padding:
+    12px
+    13px;
+
+  border:
+    1px solid
+    rgba(173, 211, 191, 0.1);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+.ecosystem-reality-benefits span {
+  display: block;
+
+  color:
+    rgba(143, 188, 164, 0.48);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 6px;
+}
+
+.ecosystem-reality-benefits strong {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    rgba(245, 250, 247, 0.9);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.ecosystem-reality-status {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 26px;
+
+  color:
+    rgba(151, 196, 172, 0.62);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.ecosystem-reality-status span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #67a982;
+
+  box-shadow:
+    0 0 0 5px
+    rgba(103, 169, 130, 0.08);
+}
+
+.ecosystem-reality-view.is-open
+.reality-live-card {
+  animation:
+    realityCardIn
+    0.5s
+    ease
+    both;
+}
+
+.ecosystem-reality-view.is-open
+.reality-live-card:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.ecosystem-reality-view.is-open
+.reality-live-card:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.ecosystem-reality-view.is-open
+.reality-live-card:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+@keyframes realityCardIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .ecosystem-reality-panel {
+    grid-template-columns:
+      1fr;
+
+    max-height:
+      calc(100vh - 36px);
+
+    overflow-y: auto;
+  }
+
+  .ecosystem-reality-scene {
+    min-height: 470px;
+  }
+
+  .ecosystem-reality-copy {
+    padding:
+      36px
+      28px
+      34px;
+  }
+
+  .ecosystem-reality-copy h3 {
+    font-size: 29px;
+  }
+}
+
+@media (max-width: 760px) {
+  .ecosystem-reality-view {
+    padding: 12px;
+  }
+
+  .ecosystem-reality-panel {
+    width: 100%;
+
+    border-radius: 20px;
+  }
+
+  .ecosystem-reality-scene {
+    min-height: 390px;
+  }
+
+  .ecosystem-reality-live {
+    left: 14px;
+    top: 14px;
+
+    width:
+      calc(100% - 28px);
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .ecosystem-reality-copy {
+    padding:
+      28px
+      20px
+      26px;
+  }
+
+  .ecosystem-reality-copy h3 {
+    font-size: 25px;
+  }
+
+  .ecosystem-reality-copy p {
+    font-size: 12px;
+  }
+}

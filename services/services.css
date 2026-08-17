@@ -48,7 +48,7 @@ body {
   pointer-events: none;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   transform:
     translate3d(
       var(--services-bg-x),

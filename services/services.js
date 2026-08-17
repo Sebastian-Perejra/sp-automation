@@ -5010,5 +5010,1334 @@ if (
       }
     }
   );
+
+  const diagnosticButtons =
+  Array.from(
+    document.querySelectorAll(
+      "[data-diagnostic-open]"
+    )
+  );
+
+const diagnosticView =
+  document.getElementById(
+    "ecosystem-diagnostic"
+  );
+
+const diagnosticClose =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-diagnostic-close"
+      )
+    : null;
+
+const diagnosticBackdrop =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-diagnostic-backdrop"
+      )
+    : null;
+
+const diagnosticMain =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-diagnostic-main"
+      )
+    : null;
+
+const diagnosticQuiz =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-quiz"
+      )
+    : null;
+
+const diagnosticResult =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-quiz-result"
+      )
+    : null;
+
+const diagnosticStart =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-diagnostic-start"
+      )
+    : null;
+
+const diagnosticQuizBack =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-quiz-back"
+      )
+    : null;
+
+const diagnosticSend =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-result-send"
+      )
+    : null;
+
+const diagnosticRestart =
+  diagnosticView
+    ? diagnosticView.querySelector(
+        ".ecosystem-result-restart"
+      )
+    : null;
+
+const diagnosticData = {
+  powerbi: {
+    code: "01",
+    title: "Power BI та аналітика",
+
+    painTitle:
+      "Цифри приходять занадто пізно",
+
+    pain:
+      "Звіти збираються вручну з кількох файлів або систем. Дані доводиться копіювати, звіряти та перевіряти, тому керівник отримує потрібні цифри вже після того, як вони були потрібні.",
+
+    solutionTitle:
+      "Актуальні показники без ручної збірки",
+
+    solution:
+      "Дані підтягуються та оновлюються автоматично. KPI, відхилення, продажі, витрати та інші показники видно в одному місці — без багатогодинної підготовки звіту.",
+
+    time:
+      "Менше часу на звіти",
+
+    cost:
+      "Менше ручної роботи",
+
+    speed:
+      "Швидші управлінські рішення",
+
+    quizTitle:
+      "Наскільки вам потрібна автоматична аналітика?",
+
+    questions: [
+      {
+        text:
+          "Скільки часу зазвичай займає підготовка одного регулярного звіту?",
+        options: [
+          {
+            label: "До 30 хвилин",
+            score: 0
+          },
+          {
+            label: "30 хв – 2 години",
+            score: 1
+          },
+          {
+            label: "2–5 годин",
+            score: 2
+          },
+          {
+            label: "Понад 5 годин",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Зі скількох джерел потрібно збирати дані для такого звіту?",
+        options: [
+          {
+            label: "Одне джерело",
+            score: 0
+          },
+          {
+            label: "Два джерела",
+            score: 1
+          },
+          {
+            label: "3–4 джерела",
+            score: 2
+          },
+          {
+            label: "5 або більше",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Наскільки швидко керівник може побачити актуальні цифри?",
+        options: [
+          {
+            label: "Вони оновлюються автоматично",
+            score: 0
+          },
+          {
+            label: "Потрібно зробити кілька дій",
+            score: 1
+          },
+          {
+            label: "Потрібно вручну оновити звіт",
+            score: 2
+          },
+          {
+            label: "Потрібно чекати, поки хтось його підготує",
+            score: 3
+          }
+        ]
+      }
+    ]
+  },
+
+  excel: {
+    code: "02",
+    title: "Excel / VBA",
+
+    painTitle:
+      "Людина працює як макрос",
+
+    pain:
+      "Копіювання рядків, формули, перенесення даних, перевірки та однакові операції повторюються щодня. Чим більше даних — тим більше часу й ризику помилки.",
+
+    solutionTitle:
+      "Повторювані операції виконує система",
+
+    solution:
+      "Розрахунки, перевірки, формування таблиць і звітів запускаються автоматично. Працівник займається результатом, а не механічним натисканням кнопок.",
+
+    time:
+      "Менше повторюваних дій",
+
+    cost:
+      "Менше помилок і переробок",
+
+    speed:
+      "Швидша обробка даних",
+
+    quizTitle:
+      "Скільки ручної Excel-роботи можна прибрати?",
+
+    questions: [
+      {
+        text:
+          "Скільки часу на день йде на повторювані операції в Excel?",
+        options: [
+          {
+            label: "До 15 хвилин",
+            score: 0
+          },
+          {
+            label: "15–30 хвилин",
+            score: 1
+          },
+          {
+            label: "30–90 хвилин",
+            score: 2
+          },
+          {
+            label: "Понад 90 хвилин",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Як часто доводиться копіювати, переносити або перераховувати ті самі дані?",
+        options: [
+          {
+            label: "Майже ніколи",
+            score: 0
+          },
+          {
+            label: "Кілька разів на тиждень",
+            score: 1
+          },
+          {
+            label: "Щодня",
+            score: 2
+          },
+          {
+            label: "Багато разів на день",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Як часто після ручної роботи потрібно додатково перевіряти результат?",
+        options: [
+          {
+            label: "Практично ніколи",
+            score: 0
+          },
+          {
+            label: "Іноді",
+            score: 1
+          },
+          {
+            label: "Регулярно",
+            score: 2
+          },
+          {
+            label: "Перевіряємо майже все",
+            score: 3
+          }
+        ]
+      }
+    ]
+  },
+
+  apps: {
+    code: "03",
+    title: "Google Apps Script",
+
+    painTitle:
+      "Сервіси є, але між ними працює людина",
+
+    pain:
+      "Дані з Forms переносяться в Sheets, файли створюються в Drive, листи відправляються через Gmail, статуси оновлюються вручну. Кожен маленький крок забирає час.",
+
+    solutionTitle:
+      "Одна подія запускає весь сценарій",
+
+    solution:
+      "Форма, таблиця, Gmail і Drive можуть працювати як один процес. Дані прийшли — система сама перевірила їх, створила файл, надіслала повідомлення та оновила статус.",
+
+    time:
+      "Менше переходів між сервісами",
+
+    cost:
+      "Менше ручних операцій",
+
+    speed:
+      "Процес запускається одразу",
+
+    quizTitle:
+      "Чи можна зв'язати ваші Google-процеси?",
+
+    questions: [
+      {
+        text:
+          "Скільки Google-сервісів бере участь у типовому робочому процесі?",
+        options: [
+          {
+            label: "Один",
+            score: 0
+          },
+          {
+            label: "Два",
+            score: 1
+          },
+          {
+            label: "Три",
+            score: 2
+          },
+          {
+            label: "Чотири або більше",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Як часто людина вручну запускає наступний крок після отримання даних?",
+        options: [
+          {
+            label: "Майже ніколи",
+            score: 0
+          },
+          {
+            label: "Кілька разів на тиждень",
+            score: 1
+          },
+          {
+            label: "Щодня",
+            score: 2
+          },
+          {
+            label: "Багато разів на день",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Що станеться, якщо відповідальний працівник не виконає цей крок вчасно?",
+        options: [
+          {
+            label: "Нічого критичного",
+            score: 0
+          },
+          {
+            label: "Буде невелика затримка",
+            score: 1
+          },
+          {
+            label: "Зупиниться частина процесу",
+            score: 2
+          },
+          {
+            label: "Інші люди чекатимуть результат",
+            score: 3
+          }
+        ]
+      }
+    ]
+  },
+
+  integration: {
+    code: "04",
+    title: "Інтеграції та API",
+
+    painTitle:
+      "Системи не розмовляють між собою",
+
+    pain:
+      "CRM, ERP, сайт, таблиці, Telegram та інші сервіси містять потрібні дані, але інформацію між ними переносить людина. Це створює затримки, дублікати й різні версії одних цифр.",
+
+    solutionTitle:
+      "Дані переходять між системами автоматично",
+
+    solution:
+      "API та інтеграції передають інформацію без ручного копіювання. Зміна в одній системі може автоматично запускати потрібну дію в іншій.",
+
+    time:
+      "Менше ручного перенесення",
+
+    cost:
+      "Менше дублювання роботи",
+
+    speed:
+      "Швидший обмін інформацією",
+
+    quizTitle:
+      "Наскільки ваші системи ізольовані?",
+
+    questions: [
+      {
+        text:
+          "Скільки різних систем використовується в одному бізнес-процесі?",
+        options: [
+          {
+            label: "Одна",
+            score: 0
+          },
+          {
+            label: "Дві",
+            score: 1
+          },
+          {
+            label: "3–4",
+            score: 2
+          },
+          {
+            label: "5 або більше",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Як часто дані вручну переносять з однієї системи в іншу?",
+        options: [
+          {
+            label: "Практично ніколи",
+            score: 0
+          },
+          {
+            label: "Кілька разів на тиждень",
+            score: 1
+          },
+          {
+            label: "Щодня",
+            score: 2
+          },
+          {
+            label: "Постійно протягом дня",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Чи виникає ситуація, коли в різних системах знаходяться різні версії одних даних?",
+        options: [
+          {
+            label: "Ні",
+            score: 0
+          },
+          {
+            label: "Дуже рідко",
+            score: 1
+          },
+          {
+            label: "Регулярно",
+            score: 2
+          },
+          {
+            label: "Це постійна проблема",
+            score: 3
+          }
+        ]
+      }
+    ]
+  },
+
+  process: {
+    code: "05",
+    title: "Оптимізація процесів",
+
+    painTitle:
+      "Процес довший, ніж сама робота",
+
+    pain:
+      "Зайві погодження, повторне введення інформації, очікування між етапами та дії «тому що так заведено» збільшують тривалість процесу й собівартість операції.",
+
+    solutionTitle:
+      "Менше кроків — швидший результат",
+
+    solution:
+      "Процес розкладається на етапи. Непотрібні дії прибираються, повторювані автоматизуються, а передача інформації між людьми та системами прискорюється.",
+
+    time:
+      "Коротший робочий цикл",
+
+    cost:
+      "Менше непотрібних операцій",
+
+    speed:
+      "Менше очікування між етапами",
+
+    quizTitle:
+      "Де ваш процес втрачає час?",
+
+    questions: [
+      {
+        text:
+          "Скільки основних кроків проходить типова задача від початку до результату?",
+        options: [
+          {
+            label: "1–3",
+            score: 0
+          },
+          {
+            label: "4–5",
+            score: 1
+          },
+          {
+            label: "6–8",
+            score: 2
+          },
+          {
+            label: "9 або більше",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Скільки разів інформацію потрібно погодити або передати іншій людині?",
+        options: [
+          {
+            label: "Жодного або один раз",
+            score: 0
+          },
+          {
+            label: "Два рази",
+            score: 1
+          },
+          {
+            label: "3–4 рази",
+            score: 2
+          },
+          {
+            label: "5 або більше",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Що забирає найбільше часу?",
+        options: [
+          {
+            label: "Безпосередньо сама робота",
+            score: 0
+          },
+          {
+            label: "Періодичне очікування",
+            score: 1
+          },
+          {
+            label: "Передача та перевірка інформації",
+            score: 2
+          },
+          {
+            label: "Очікування, погодження й ручні дії",
+            score: 3
+          }
+        ]
+      }
+    ]
+  },
+
+  data: {
+    code: "06",
+    title: "Підготовка даних",
+
+    painTitle:
+      "Перед аналізом дані спочатку треба ремонтувати",
+
+    pain:
+      "Різні формати, дублікати, порожні поля, неправильні назви та дані з кількох джерел змушують витрачати час на очистку ще до того, як починається сам аналіз.",
+
+    solutionTitle:
+      "Чисті дані готуються автоматично",
+
+    solution:
+      "Дані очищуються, нормалізуються, перевіряються та об'єднуються за визначеними правилами. Аналітик або керівник отримує готову основу для звіту та прийняття рішення.",
+
+    time:
+      "Менше часу на очистку",
+
+    cost:
+      "Менше повторних перевірок",
+
+    speed:
+      "Швидше від даних до рішення",
+
+    quizTitle:
+      "Скільки часу забирає підготовка даних?",
+
+    questions: [
+      {
+        text:
+          "Скільки часу зазвичай потрібно, щоб підготувати дані перед аналізом?",
+        options: [
+          {
+            label: "До 15 хвилин",
+            score: 0
+          },
+          {
+            label: "15–60 хвилин",
+            score: 1
+          },
+          {
+            label: "1–3 години",
+            score: 2
+          },
+          {
+            label: "Понад 3 години",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Зі скількох джерел або форматів надходять дані?",
+        options: [
+          {
+            label: "Одне джерело",
+            score: 0
+          },
+          {
+            label: "Два",
+            score: 1
+          },
+          {
+            label: "3–4",
+            score: 2
+          },
+          {
+            label: "5 або більше",
+            score: 3
+          }
+        ]
+      },
+      {
+        text:
+          "Як часто якість даних затримує звіт або прийняття рішення?",
+        options: [
+          {
+            label: "Практично ніколи",
+            score: 0
+          },
+          {
+            label: "Іноді",
+            score: 1
+          },
+          {
+            label: "Регулярно",
+            score: 2
+          },
+          {
+            label: "Це одна з головних проблем",
+            score: 3
+          }
+        ]
+      }
+    ]
+  }
+};
+
+const diagnosticState = {
+  service: "",
+  question: 0,
+  answers: [],
+  score: 0
+};
+
+let diagnosticPreviousOverflow = "";
+
+const setDiagnosticText = (
+  selector,
+  value
+) => {
+  if (!diagnosticView) return;
+
+  const element =
+    diagnosticView.querySelector(
+      selector
+    );
+
+  if (element) {
+    element.textContent = value;
+  }
+};
+
+const resetDiagnosticScreens = () => {
+  if (
+    !diagnosticMain ||
+    !diagnosticQuiz ||
+    !diagnosticResult
+  ) {
+    return;
+  }
+
+  diagnosticMain.classList.remove(
+    "is-hidden"
+  );
+
+  diagnosticQuiz.classList.remove(
+    "is-active"
+  );
+
+  diagnosticResult.classList.remove(
+    "is-active"
+  );
+
+  diagnosticQuiz.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  diagnosticResult.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+};
+
+const openDiagnostic = service => {
+  if (
+    !diagnosticView ||
+    !diagnosticData[service]
+  ) {
+    return;
+  }
+
+  const data =
+    diagnosticData[service];
+
+  diagnosticState.service =
+    service;
+
+  diagnosticState.question =
+    0;
+
+  diagnosticState.answers =
+    [];
+
+  diagnosticState.score =
+    0;
+
+  setDiagnosticText(
+    "[data-diagnostic-code]",
+    data.code
+  );
+
+  setDiagnosticText(
+    "[data-diagnostic-title]",
+    data.title
+  );
+
+  setDiagnosticText(
+    "[data-diagnostic-pain-title]",
+    data.painTitle
+  );
+
+  setDiagnosticText(
+    "[data-diagnostic-pain]",
+    data.pain
+  );
+
+  setDiagnosticText(
+    "[data-diagnostic-solution-title]",
+    data.solutionTitle
+  );
+
+  setDiagnosticText(
+    "[data-diagnostic-solution]",
+    data.solution
+  );
+
+  setDiagnosticText(
+    "[data-impact-time]",
+    data.time
+  );
+
+  setDiagnosticText(
+    "[data-impact-cost]",
+    data.cost
+  );
+
+  setDiagnosticText(
+    "[data-impact-speed]",
+    data.speed
+  );
+
+  setDiagnosticText(
+    "[data-quiz-title]",
+    data.quizTitle
+  );
+
+  resetDiagnosticScreens();
+
+  diagnosticView.classList.add(
+    "is-open"
+  );
+
+  diagnosticView.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  diagnosticPreviousOverflow =
+    document.body.style.overflow;
+
+  document.body.style.overflow =
+    "hidden";
+};
+
+const closeDiagnostic = () => {
+  if (!diagnosticView) return;
+
+  diagnosticView.classList.remove(
+    "is-open"
+  );
+
+  diagnosticView.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow =
+    diagnosticPreviousOverflow;
+
+  resetDiagnosticScreens();
+};
+
+const renderDiagnosticQuestion = () => {
+  if (!diagnosticView) return;
+
+  const data =
+    diagnosticData[
+      diagnosticState.service
+    ];
+
+  if (!data) return;
+
+  const question =
+    data.questions[
+      diagnosticState.question
+    ];
+
+  if (!question) return;
+
+  const total =
+    data.questions.length;
+
+  const current =
+    diagnosticState.question + 1;
+
+  setDiagnosticText(
+    "[data-quiz-question-number]",
+    `ПИТАННЯ ${String(current).padStart(2, "0")}`
+  );
+
+  setDiagnosticText(
+    "[data-quiz-question]",
+    question.text
+  );
+
+  setDiagnosticText(
+    "[data-quiz-progress]",
+    `${current} / ${total}`
+  );
+
+  const progressBar =
+    diagnosticView.querySelector(
+      "[data-quiz-progress-bar]"
+    );
+
+  if (progressBar) {
+    progressBar.style.width =
+      `${current / total * 100}%`;
+  }
+
+  const options =
+    diagnosticView.querySelector(
+      "[data-quiz-options]"
+    );
+
+  if (!options) return;
+
+  options.innerHTML = "";
+
+  question.options.forEach(
+    (option, optionIndex) => {
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.type =
+        "button";
+
+      button.className =
+        "ecosystem-quiz-option";
+
+      button.textContent =
+        option.label;
+
+      const savedAnswer =
+        diagnosticState.answers[
+          diagnosticState.question
+        ];
+
+      if (
+        savedAnswer &&
+        savedAnswer.optionIndex ===
+          optionIndex
+      ) {
+        button.classList.add(
+          "is-selected"
+        );
+      }
+
+      button.addEventListener(
+        "click",
+        () => {
+          diagnosticState.answers[
+            diagnosticState.question
+          ] = {
+            question:
+              question.text,
+            answer:
+              option.label,
+            score:
+              option.score,
+            optionIndex:
+              optionIndex
+          };
+
+          if (
+            diagnosticState.question <
+            total - 1
+          ) {
+            diagnosticState.question +=
+              1;
+
+            renderDiagnosticQuestion();
+          } else {
+            showDiagnosticResult();
+          }
+        }
+      );
+
+      options.appendChild(
+        button
+      );
+    }
+  );
+};
+
+const getDiagnosticLevel = score => {
+  if (score >= 7) {
+    return "high";
+  }
+
+  if (score >= 4) {
+    return "medium";
+  }
+
+  return "low";
+};
+
+const showDiagnosticResult = () => {
+  if (
+    !diagnosticMain ||
+    !diagnosticQuiz ||
+    !diagnosticResult
+  ) {
+    return;
+  }
+
+  const data =
+    diagnosticData[
+      diagnosticState.service
+    ];
+
+  if (!data) return;
+
+  diagnosticState.score =
+    diagnosticState.answers.reduce(
+      (total, answer) =>
+        total +
+        Number(
+          answer?.score || 0
+        ),
+      0
+    );
+
+  const level =
+    getDiagnosticLevel(
+      diagnosticState.score
+    );
+
+  let scoreLabel =
+    "LOW";
+
+  let potential =
+    "Невисокий";
+
+  let time =
+    "Точкова економія часу";
+
+  let effect =
+    "Локальне покращення";
+
+  let title =
+    "Процес уже досить ефективний";
+
+  let description =
+    "Критичної кількості ручної роботи не видно, але окремі операції все одно можна спростити або автоматизувати.";
+
+  if (level === "medium") {
+    scoreLabel =
+      "MEDIUM";
+
+    potential =
+      "Середній";
+
+    time =
+      "Кілька годин на місяць";
+
+    effect =
+      "Швидший робочий цикл";
+
+    title =
+      "Є помітний потенціал автоматизації";
+
+    description =
+      "У процесі є регулярні ручні операції та затримки. Автоматизація окремих етапів може скоротити час обробки й кількість повторної роботи.";
+  }
+
+  if (level === "high") {
+    scoreLabel =
+      "HIGH";
+
+    potential =
+      "Високий";
+
+    time =
+      "Економія може вимірюватися годинами";
+
+    effect =
+      "Швидший процес і рішення";
+
+    title =
+      "Тут точно є що автоматизувати";
+
+    description =
+      "Ваші відповіді показують значну частку ручної роботи, передачі даних або очікування. Це хороший кандидат для автоматизації та скорочення операційних витрат.";
+  }
+
+  const answersText =
+    diagnosticState.answers
+      .map(
+        answer =>
+          answer.answer
+      )
+      .join(" · ");
+
+  setDiagnosticText(
+    "[data-result-score]",
+    scoreLabel
+  );
+
+  setDiagnosticText(
+    "[data-result-title]",
+    title
+  );
+
+  setDiagnosticText(
+    "[data-result-description]",
+    description
+  );
+
+  setDiagnosticText(
+    "[data-result-potential]",
+    potential
+  );
+
+  setDiagnosticText(
+    "[data-result-time]",
+    time
+  );
+
+  setDiagnosticText(
+    "[data-result-effect]",
+    effect
+  );
+
+  setDiagnosticText(
+    "[data-result-summary]",
+    `Напрям: ${data.title}. Ваші відповіді: ${answersText}. Оцінка потенціалу: ${potential.toLowerCase()}.`
+  );
+
+  diagnosticMain.classList.add(
+    "is-hidden"
+  );
+
+  diagnosticQuiz.classList.remove(
+    "is-active"
+  );
+
+  diagnosticQuiz.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  diagnosticResult.classList.add(
+    "is-active"
+  );
+
+  diagnosticResult.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+};
+
+const startDiagnosticQuiz = () => {
+  if (
+    !diagnosticMain ||
+    !diagnosticQuiz ||
+    !diagnosticResult
+  ) {
+    return;
+  }
+
+  diagnosticState.question =
+    0;
+
+  diagnosticState.answers =
+    [];
+
+  diagnosticState.score =
+    0;
+
+  diagnosticMain.classList.add(
+    "is-hidden"
+  );
+
+  diagnosticResult.classList.remove(
+    "is-active"
+  );
+
+  diagnosticResult.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  diagnosticQuiz.classList.add(
+    "is-active"
+  );
+
+  diagnosticQuiz.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  renderDiagnosticQuestion();
+};
+
+const restartDiagnosticQuiz = () => {
+  startDiagnosticQuiz();
+};
+
+const buildDiagnosticMessage = () => {
+  const data =
+    diagnosticData[
+      diagnosticState.service
+    ];
+
+  if (!data) return "";
+
+  const level =
+    getDiagnosticLevel(
+      diagnosticState.score
+    );
+
+  const levelText =
+    level === "high"
+      ? "Високий"
+      : level === "medium"
+        ? "Середній"
+        : "Невисокий";
+
+  const lines = [
+    "Міні-діагностика з сайту",
+    "",
+    `Напрям: ${data.title}`,
+    `Потенціал автоматизації: ${levelText}`,
+    `Результат: ${diagnosticState.score} / 9`,
+    ""
+  ];
+
+  diagnosticState.answers.forEach(
+    (answer, index) => {
+      lines.push(
+        `${index + 1}. ${answer.question}`
+      );
+
+      lines.push(
+        `Відповідь: ${answer.answer}`
+      );
+
+      lines.push("");
+    }
+  );
+
+  return lines.join("\n");
+};
+
+diagnosticButtons.forEach(
+  button => {
+    button.addEventListener(
+      "click",
+      event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        openDiagnostic(
+          button.dataset
+            .diagnosticOpen
+        );
+      }
+    );
+  }
+);
+
+if (diagnosticClose) {
+  diagnosticClose.addEventListener(
+    "click",
+    closeDiagnostic
+  );
 }
+
+if (diagnosticBackdrop) {
+  diagnosticBackdrop.addEventListener(
+    "click",
+    closeDiagnostic
+  );
+}
+
+if (diagnosticStart) {
+  diagnosticStart.addEventListener(
+    "click",
+    startDiagnosticQuiz
+  );
+}
+
+if (diagnosticQuizBack) {
+  diagnosticQuizBack.addEventListener(
+    "click",
+    () => {
+      if (
+        diagnosticState.question > 0
+      ) {
+        diagnosticState.question -=
+          1;
+
+        renderDiagnosticQuestion();
+
+        return;
+      }
+
+      diagnosticQuiz.classList.remove(
+        "is-active"
+      );
+
+      diagnosticQuiz.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      diagnosticMain.classList.remove(
+        "is-hidden"
+      );
+    }
+  );
+}
+
+if (diagnosticRestart) {
+  diagnosticRestart.addEventListener(
+    "click",
+    restartDiagnosticQuiz
+  );
+}
+
+if (diagnosticSend) {
+  diagnosticSend.addEventListener(
+    "click",
+    () => {
+      const message =
+        buildDiagnosticMessage();
+
+      sessionStorage.setItem(
+        "servicesDiagnosticMessage",
+        message
+      );
+
+      sessionStorage.setItem(
+        "servicesDiagnosticSource",
+        diagnosticState.service
+      );
+
+      window.location.href =
+        "contacts.html?from=services-diagnostic";
+    }
+  );
+}
+
+document.addEventListener(
+  "keydown",
+  event => {
+    if (
+      event.key === "Escape" &&
+      diagnosticView &&
+      diagnosticView.classList.contains(
+        "is-open"
+      )
+    ) {
+      closeDiagnostic();
+    }
+  }
+);
 })();

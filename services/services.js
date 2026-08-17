@@ -783,4 +783,35 @@ if (projectMap) {
     startCycle();
   }
 }
+  const cabinetCore =
+  document.querySelector(
+    ".project-core"
+  );
+
+const cabinetFold =
+  document.querySelector(
+    ".project-core-fold"
+  );
+
+if (
+  cabinetCore &&
+  cabinetFold
+) {
+  cabinetFold.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      const isOpen =
+        cabinetCore.classList.toggle(
+          "is-open"
+        );
+
+      cabinetFold.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+    }
+  );
+}
 })();

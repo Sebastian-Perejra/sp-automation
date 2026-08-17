@@ -3065,6 +3065,121 @@ if (
   let testingStartX = 0;
   let testingStartY = 0;
   let testingWasDragged = false;
+  let testingRetestTimer = null;
+
+const resetTestingState = () => {
+  if (testingRetestTimer) {
+    clearTimeout(
+      testingRetestTimer
+    );
+
+    testingRetestTimer = null;
+  }
+
+  const retestRow =
+    testingCard.querySelector(
+      ".testing-row-retest"
+    );
+
+  const retestStatus =
+    retestRow
+      ? retestRow.querySelector(
+          ".testing-status"
+        )
+      : null;
+
+  const summaryValues =
+    testingCard.querySelectorAll(
+      ".testing-summary strong"
+    );
+
+  if (retestRow) {
+    retestRow.classList.remove(
+      "is-fixed"
+    );
+  }
+
+  if (retestStatus) {
+    retestStatus.classList.remove(
+      "is-pass"
+    );
+
+    retestStatus.classList.add(
+      "is-retest"
+    );
+
+    retestStatus.textContent =
+      "RETEST";
+  }
+
+  if (summaryValues[1]) {
+    summaryValues[1].textContent =
+      "11";
+  }
+
+  if (summaryValues[2]) {
+    summaryValues[2].textContent =
+      "1";
+  }
+};
+
+const runTestingRetest = () => {
+  resetTestingState();
+
+  testingRetestTimer =
+    setTimeout(
+      () => {
+        const retestRow =
+          testingCard.querySelector(
+            ".testing-row-retest"
+          );
+
+        const retestStatus =
+          retestRow
+            ? retestRow.querySelector(
+                ".testing-status"
+              )
+            : null;
+
+        const summaryValues =
+          testingCard.querySelectorAll(
+            ".testing-summary strong"
+          );
+
+        if (retestRow) {
+          retestRow.classList.add(
+            "is-fixed"
+          );
+        }
+
+        if (retestStatus) {
+          retestStatus.classList.remove(
+            "is-retest"
+          );
+
+          retestStatus.classList.add(
+            "is-pass"
+          );
+
+          retestStatus.textContent =
+            "PASS";
+        }
+
+        if (summaryValues[1]) {
+          summaryValues[1].textContent =
+            "12";
+        }
+
+        if (summaryValues[2]) {
+          summaryValues[2].textContent =
+            "0";
+        }
+
+        testingRetestTimer = null;
+      },
+      2200
+    );
+};
 
   const positionTestingCard = () => {
     const map =
@@ -3268,21 +3383,24 @@ if (
       "true"
     );
   };
+  runTestingRetest();
 
-  const closeTestingCard = () => {
+    const closeTestingCard = () => {
     testingCard.classList.remove(
       "is-open"
     );
-
+  
     testingCard.setAttribute(
       "aria-hidden",
       "true"
     );
-
+  
     testingStage.setAttribute(
       "aria-expanded",
       "false"
     );
+  
+    resetTestingState();
   };
 
   testingStage.addEventListener(

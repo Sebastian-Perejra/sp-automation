@@ -4455,4 +4455,242 @@ if (
     }
   );
 }
+  const ecosystemRealityButton =
+  document.querySelector(
+    ".ecosystem-life-deeper"
+  );
+
+const ecosystemRealityView =
+  document.getElementById(
+    "ecosystem-reality-view"
+  );
+
+const ecosystemRealityClose =
+  ecosystemRealityView
+    ? ecosystemRealityView.querySelector(
+        ".ecosystem-reality-close"
+      )
+    : null;
+
+const ecosystemRealityBackdrop =
+  ecosystemRealityView
+    ? ecosystemRealityView.querySelector(
+        ".ecosystem-reality-backdrop"
+      )
+    : null;
+
+const ecosystemRealityImage =
+  ecosystemRealityView
+    ? ecosystemRealityView.querySelector(
+        ".ecosystem-reality-image"
+      )
+    : null;
+
+if (
+  ecosystemRealityButton &&
+  ecosystemRealityView &&
+  ecosystemRealityClose
+) {
+  let realityTargetX = 0;
+  let realityTargetY = 0;
+
+  let realityCurrentX = 0;
+  let realityCurrentY = 0;
+
+  let realityFrame = null;
+
+  const animateRealityImage = () => {
+    realityCurrentX +=
+      (
+        realityTargetX -
+        realityCurrentX
+      ) *
+      0.08;
+
+    realityCurrentY +=
+      (
+        realityTargetY -
+        realityCurrentY
+      ) *
+      0.08;
+
+    if (ecosystemRealityImage) {
+      ecosystemRealityImage.style.setProperty(
+        "--reality-x",
+        `${realityCurrentX}px`
+      );
+
+      ecosystemRealityImage.style.setProperty(
+        "--reality-y",
+        `${realityCurrentY}px`
+      );
+    }
+
+    const deltaX =
+      Math.abs(
+        realityTargetX -
+        realityCurrentX
+      );
+
+    const deltaY =
+      Math.abs(
+        realityTargetY -
+        realityCurrentY
+      );
+
+    if (
+      deltaX > 0.03 ||
+      deltaY > 0.03
+    ) {
+      realityFrame =
+        requestAnimationFrame(
+          animateRealityImage
+        );
+
+      return;
+    }
+
+    realityFrame = null;
+  };
+
+  const startRealityAnimation = () => {
+    if (
+      realityFrame !== null
+    ) {
+      return;
+    }
+
+    realityFrame =
+      requestAnimationFrame(
+        animateRealityImage
+      );
+  };
+
+  const openRealityView = () => {
+    ecosystemRealityView.classList.add(
+      "is-open"
+    );
+
+    ecosystemRealityView.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+  };
+
+  const closeRealityView = () => {
+    ecosystemRealityView.classList.remove(
+      "is-open"
+    );
+
+    ecosystemRealityView.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow =
+      "";
+
+    realityTargetX = 0;
+    realityTargetY = 0;
+
+    startRealityAnimation();
+  };
+
+  ecosystemRealityButton.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      openRealityView();
+    }
+  );
+
+  ecosystemRealityClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeRealityView();
+    }
+  );
+
+  if (ecosystemRealityBackdrop) {
+    ecosystemRealityBackdrop.addEventListener(
+      "click",
+      closeRealityView
+    );
+  }
+
+  ecosystemRealityView.addEventListener(
+    "pointermove",
+    event => {
+      if (
+        window.innerWidth <= 900
+      ) {
+        return;
+      }
+
+      const rect =
+        ecosystemRealityView
+          .getBoundingClientRect();
+
+      const x =
+        event.clientX -
+        rect.left;
+
+      const y =
+        event.clientY -
+        rect.top;
+
+      const normalizedX =
+        x / rect.width -
+        0.5;
+
+      const normalizedY =
+        y / rect.height -
+        0.5;
+
+      realityTargetX =
+        normalizedX * 18;
+
+      realityTargetY =
+        normalizedY * 12;
+
+      startRealityAnimation();
+    },
+    {
+      passive: true
+    }
+  );
+
+  ecosystemRealityView.addEventListener(
+    "pointerleave",
+    () => {
+      realityTargetX = 0;
+      realityTargetY = 0;
+
+      startRealityAnimation();
+    },
+    {
+      passive: true
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape" &&
+        ecosystemRealityView.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeRealityView();
+      }
+    }
+  );
+}
 })();

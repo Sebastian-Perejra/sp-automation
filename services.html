@@ -304,6 +304,8 @@
       data-stage="3"
       data-title="Архітектура"
       data-description="Проєктую логіку рішення: джерела даних, зв’язки, сценарії та правила."
+      aria-expanded="false"
+      aria-controls="project-architecture-card"
     >
       <span class="project-stage-number">03</span>
 
@@ -606,7 +608,129 @@
     </div>
   </div>
 </div>
-    
+
+    <div
+  class="project-architecture-detail"
+  id="project-architecture-card"
+  aria-hidden="true"
+>
+  <div class="architecture-head">
+    <div>
+      <span>03 · SYSTEM ARCHITECTURE</span>
+
+      <strong>
+        Як частини системи працюють разом
+      </strong>
+    </div>
+
+    <button
+      class="architecture-close"
+      type="button"
+      aria-label="Закрити"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="architecture-map">
+
+    <svg
+      class="architecture-lines"
+      viewBox="0 0 520 250"
+      aria-hidden="true"
+    >
+      <path
+        class="architecture-line line-data-logic"
+        d="M105 125 C145 125 150 125 190 125"
+      ></path>
+
+      <path
+        class="architecture-line line-logic-api"
+        d="M250 125 C280 125 285 75 320 75"
+      ></path>
+
+      <path
+        class="architecture-line line-logic-ui"
+        d="M250 125 C280 125 285 175 320 175"
+      ></path>
+
+      <path
+        class="architecture-line line-api-output"
+        d="M380 75 C420 75 420 125 445 125"
+      ></path>
+
+      <path
+        class="architecture-line line-ui-output"
+        d="M380 175 C420 175 420 125 445 125"
+      ></path>
+    </svg>
+
+    <div class="architecture-node architecture-data">
+      <span>01</span>
+      <strong>DATA</strong>
+      <small>
+        Excel · CRM · Forms
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-logic">
+      <span>02</span>
+      <strong>LOGIC</strong>
+      <small>
+        правила · сценарії
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-api">
+      <span>03</span>
+      <strong>API</strong>
+      <small>
+        інтеграції
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-ui">
+      <span>04</span>
+      <strong>UI</strong>
+      <small>
+        інтерфейс
+      </small>
+    </div>
+
+    <div class="architecture-node architecture-output">
+      <span>05</span>
+      <strong>OUTPUT</strong>
+      <small>
+        результат
+      </small>
+    </div>
+
+    <div class="architecture-packet packet-a"></div>
+    <div class="architecture-packet packet-b"></div>
+    <div class="architecture-packet packet-c"></div>
+
+  </div>
+
+  <div class="architecture-footer">
+    <span class="architecture-status-dot"></span>
+
+    <div>
+      <small>
+        SYSTEM MAP
+      </small>
+
+      <strong>
+        CONNECTIONS VERIFIED
+      </strong>
+    </div>
+
+    <span class="architecture-footer-line"></span>
+
+    <div class="architecture-version">
+      v1.0
+    </div>
+  </div>
+</div>
     <div class="project-core">
   <div class="project-core-cabinet" aria-hidden="true">
     <div class="cabinet-title">

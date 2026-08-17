@@ -3177,7 +3177,7 @@ const runTestingRetest = () => {
 
         testingRetestTimer = null;
       },
-      2200
+      5000
     );
 };
 

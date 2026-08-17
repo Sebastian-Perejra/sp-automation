@@ -4731,19 +4731,152 @@ if (
   ecosystemDetailClose
 ) {
   const openLaptopDetail = () => {
-    ecosystemDetailImage.style.backgroundImage =
-      'url("/services/assets/ecosystem-laptop-dashboard.webp")';
-
-    ecosystemDetailView.classList.add(
-      "is-open"
+  const panel =
+    ecosystemDetailView.querySelector(
+      ".ecosystem-detail-panel"
     );
 
-    ecosystemDetailView.setAttribute(
-      "aria-hidden",
-      "false"
+  const tail =
+    ecosystemDetailView.querySelector(
+      ".ecosystem-detail-tail"
     );
-  };
 
+  const hotspotRect =
+    realityLaptopHotspot.getBoundingClientRect();
+
+  const viewportWidth =
+    window.innerWidth;
+
+  const viewportHeight =
+    window.innerHeight;
+
+  const panelWidth =
+    Math.min(
+      610,
+      viewportWidth * 0.4
+    );
+
+  const panelHeight =
+    panelWidth * 10 / 16;
+
+  const panelLeft =
+    viewportWidth -
+    viewportWidth * 0.05 -
+    panelWidth;
+
+  const panelTop =
+    viewportHeight * 0.16;
+
+  const laptopX =
+    hotspotRect.left +
+    hotspotRect.width * 0.52;
+
+  const laptopY =
+    hotspotRect.top +
+    hotspotRect.height * 0.55;
+
+  const startX =
+    laptopX -
+    panelLeft;
+
+  const startY =
+    laptopY -
+    (
+      panelTop +
+      panelHeight
+    );
+
+  ecosystemDetailView.style.setProperty(
+    "--detail-start-x",
+    `${startX}px`
+  );
+
+  ecosystemDetailView.style.setProperty(
+    "--detail-start-y",
+    `${startY}px`
+  );
+
+  if (tail) {
+    const sourceX1 =
+      hotspotRect.left +
+      hotspotRect.width * 0.43;
+
+    const sourceY1 =
+      hotspotRect.top +
+      hotspotRect.height * 0.46;
+
+    const sourceX2 =
+      hotspotRect.left +
+      hotspotRect.width * 0.58;
+
+    const sourceY2 =
+      hotspotRect.top +
+      hotspotRect.height * 0.62;
+
+    const targetX =
+      panelLeft;
+
+    const targetY1 =
+      panelTop +
+      panelHeight * 0.42;
+
+    const targetY2 =
+      panelTop +
+      panelHeight * 0.58;
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-x1",
+      `${sourceX1 / viewportWidth * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-y1",
+      `${sourceY1 / viewportHeight * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-x2",
+      `${sourceX2 / viewportWidth * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-y2",
+      `${sourceY2 / viewportHeight * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-panel-x1",
+      `${targetX / viewportWidth * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-panel-y1",
+      `${targetY1 / viewportHeight * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-panel-x2",
+      `${targetX / viewportWidth * 100}%`
+    );
+
+    ecosystemDetailView.style.setProperty(
+      "--tail-panel-y2",
+      `${targetY2 / viewportHeight * 100}%`
+    );
+  }
+
+  ecosystemDetailImage.style.backgroundImage =
+    'url("/services/assets/ecosystem-laptop-dashboard.webp")';
+
+  ecosystemDetailView.classList.add(
+    "is-open"
+  );
+
+  ecosystemDetailView.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+};
   const closeLaptopDetail = () => {
     ecosystemDetailView.classList.remove(
       "is-open"

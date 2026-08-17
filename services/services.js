@@ -814,4 +814,40 @@ if (
     }
   );
 }
+  const cabinetCloseButton =
+  document.querySelector(
+    ".project-core-close"
+  );
+
+if (cabinetCloseButton) {
+  cabinetCloseButton.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      const core =
+        cabinetCloseButton.closest(
+          ".project-core"
+        );
+
+      if (!core) return;
+
+      core.classList.remove(
+        "is-open"
+      );
+
+      const fold =
+        core.querySelector(
+          ".project-core-fold"
+        );
+
+      if (fold) {
+        fold.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    }
+  );
+}
 })();

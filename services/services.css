@@ -7793,3 +7793,110 @@ body::after {
     display: none;
   }
 }
+
+.services-project-map.is-booting
+.project-core {
+  opacity: 0.58;
+
+  transform:
+    scale(0.96);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.services-project-map.is-booting
+.project-line {
+  opacity: 0.08;
+
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+}
+
+.services-project-map.is-booting
+.project-stage {
+  opacity: 0.32;
+
+  transform:
+    scale(0.92);
+
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.services-project-map.boot-core-on
+.project-core {
+  opacity: 1;
+
+  transform:
+    scale(1);
+
+  box-shadow:
+    0 0 0 7px
+    rgba(77, 145, 108, 0.04);
+}
+
+.services-project-map.boot-lines-on
+.project-line {
+  opacity: 0.42;
+
+  stroke-dashoffset: 0;
+
+  transition:
+    stroke-dashoffset 0.5s ease,
+    opacity 0.4s ease;
+}
+
+.services-project-map
+.project-stage.is-boot-active {
+  opacity: 1;
+
+  transform:
+    scale(1.05);
+
+  border-color:
+    rgba(70, 137, 103, 0.22);
+
+  box-shadow:
+    0 16px 30px
+    rgba(31, 60, 47, 0.1),
+    0 0 0 6px
+    rgba(75, 145, 108, 0.035);
+}
+
+.services-project-map.is-boot-complete
+.project-stage {
+  opacity: 1;
+}
+
+.services-project-map.is-boot-complete
+.project-core {
+  opacity: 1;
+}
+
+.services-project-map.is-boot-complete
+.project-line {
+  opacity: 1;
+
+  stroke-dashoffset: 0;
+}
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .services-project-map.is-booting
+  .project-core,
+  .services-project-map.is-booting
+  .project-stage,
+  .services-project-map.is-booting
+  .project-line {
+    opacity: 1;
+
+    transform: none;
+
+    stroke-dashoffset: 0;
+  }
+}

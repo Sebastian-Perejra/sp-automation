@@ -1,607 +1,2361 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Услуги – Себастьян Перейра</title>
-  <link rel="canonical" href="https://sp-automation.com/services-ru.html">
-
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Manrope', sans-serif;
-      background:#f7f4ef;
-      color: #1a1a1a;
-    }
-
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 244, 239, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
-
-    .home-link {color:#35594b;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;}
-    .home-link:hover {color:#29483c;}
-    .desktop-nav {display:flex;align-items:center;gap:28px;margin-left:auto;}
-    .desktop-nav a {position:relative;color:#52504c;text-decoration:none;font-size:14px;font-weight:600;}
-    .desktop-nav a::after {content:"";position:absolute;left:0;right:100%;bottom:-7px;height:2px;border-radius:999px;background:#35594b;transition:right .22s ease;}
-    .desktop-nav a:hover::after {right:0;}
-    .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
-    .lang-switcher button {
-      min-width:38px;height:34px;border:1px solid #d6cec4;border-radius:10px;
-      background:rgba(255,255,255,.8);color:#5f5a54;padding:0 9px;
-      font-family:"Roboto Mono", monospace;font-size:11px;font-weight:600;
-    }
-    .lang-switcher button:hover {background:#35594b;color:#fff;border-color:#35594b;}
-
-    .page {
-  width: min(100%, 1080px);
-  margin: 0 auto;
-  padding:
-    72px
-    20px
-    max(64px, env(safe-area-inset-bottom));
-  }
-
-    .hero {
-      margin-bottom: 26px;
-      padding: 34px;
-      background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
-      border: 1px solid #d5e4ee;
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(36, 73, 104, 0.08);
-      text-align: center;
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      color: #0F9D58;
-      font-size: clamp(2.2rem, 6vw, 3.4rem);
-      line-height: 1.05;
-    }
-
-    .hero p {
-      max-width: 760px;
-      margin: 0 auto;
-      color: #596771;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .service-card {
-      padding: 24px;
-      background: rgba(255,255,255,0.97);
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-3px);
-      border-color: #b9d7e9;
-      box-shadow: 0 16px 34px rgba(36, 73, 104, 0.09);
-    }
-
-    .service-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .service-icon {
-      width: 46px;
-      height: 46px;
-      flex: 0 0 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 13px;
-      background: #edf6ff;
-      font-size: 23px;
-    }
-
-    .service-card h2 {
-      margin: 0;
-      color: #007acc;
-      font-size: 17px;
-      line-height: 1.3;
-    }
-
-    .service-card p {
-      margin: 0 0 12px;
-      color: #58666f;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    .service-card ul {
-      margin: 0;
-      padding-left: 19px;
-      color: #4f5d66;
-    }
-
-    .service-card li {
-      margin-bottom: 8px;
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    .service-card li:last-child {
-      margin-bottom: 0;
-    }
-
-    .result {
-      margin-top: 14px;
-      padding: 12px 13px;
-      border-left: 3px solid #0F9D58;
-      border-radius: 8px;
-      background: #f2faf5;
-      color: #44524a;
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    .process {
-      margin-top: 20px;
-      padding: 28px;
-      background: #fff;
-      border: 1px solid #d9e4ec;
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(36, 73, 104, 0.05);
-    }
-
-    .process h2 {
-      margin: 0 0 16px;
-      color: #1a1a1a;
-      font-size: 21px;
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .process-step {
-      padding: 16px;
-      border: 1px solid #dce6ed;
-      border-radius: 12px;
-      background: #fbfdff;
-      text-align: center;
-    }
-
-    .process-step strong {
-      display: block;
-      margin-bottom: 7px;
-      color: #007acc;
-      font-size: 12px;
-    }
-
-    .process-step span {
-      color: #5d6a73;
-      font-size: 10px;
-      line-height: 1.5;
-    }
-
-    .cta {
-      margin-top: 20px;
-      padding: 30px;
-      text-align: center;
-      background: linear-gradient(135deg, #edf6ff 0%, #f8fbfd 100%);
-      border: 1px solid #c9e2f7;
-      border-radius: 16px;
-    }
-
-    .cta h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
-    }
-
-    .cta p {
-      margin: 0 0 18px;
-      color: #596771;
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .cta a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 20px;
-      border-radius: 9px;
-      background: #1a73e8;
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .cta a:hover {
-      background: #135fbe;
-    }
-
-    footer {
-  padding:
-    34px
-    20px
-    max(34px, env(safe-area-inset-bottom));
-  border-top: 1px solid #dfd8cf;
-  background: rgba(244, 240, 234, 0.96);
-  color: #817c75;
-  font-size: 12px;
-  text-align: center;
-}
-    footer a {
-  color: #35594b;
-  text-decoration: none;
-  margin-left: 8px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-    @media (max-width: 860px) {
-      .process-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .lang-switcher {
-        margin-left: auto;
-      }
-
-      .page {
-        padding:
-          24px
-          12px
-          max(36px, env(safe-area-inset-bottom));
-      }
-
-      .hero {
-        padding: 24px 18px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 12px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-card {
-        padding: 20px 16px;
-      }
-
-      .process {
-        padding: 22px 16px;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta {
-        padding: 24px 16px;
-      }
-
-      .cta a {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .home-link {
-        font-size: 12px;
-      }
-
-      .lang-switcher button {
-        padding: 5px 7px;
-        font-size: 10px;
-      }
-
-      .service-head {
-        align-items: flex-start;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer></script>
-</head>
-
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index-ru.html">← На главную</a>
-      <nav class="desktop-nav">
-        <a href="about-ru.html">Обо мне</a>
-        <a href="pricing-ru.html">Ценовая политика</a>
-        <a href="solutions-ru.html">Решения</a>
-        <a href="faq-ru.html">FAQ</a>
-        <a href="contacts-ru.html">Контакты</a>
-      </nav>
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='services.html'">UA</button>
-        <button type="button" onclick="location.href='services-en.html'">EN</button>
-        <button type="button" onclick="location.href='services-ru.html'">RU</button>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <title>
+   Услуги автоматизации – Sebastian Automations
+  </title>
+  <meta content="Автоматизация Excel и Google Sheets, Power BI, Google Apps Script, Telegram-боты, веб-приложения, PWA, интеграции, API, документы и индивидуальные бизнес-решения." name="description"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="#f7f4ef" name="theme-color"/>
+  <link href="https://sp-automation.com/services-ru.html" rel="canonical"/>
+  <link href="https://sp-automation.com/services.html" hreflang="uk" rel="alternate"/>
+  <link href="https://sp-automation.com/services-en.html" hreflang="en" rel="alternate"/>
+  <link href="https://sp-automation.com/services-ru.html" hreflang="ru" rel="alternate"/>
+  <link href="https://sp-automation.com/services.html" hreflang="x-default" rel="alternate"/>
+  <meta content="Услуги автоматизации – Sebastian Automations" property="og:title"/>
+  <meta content="От таблиц, данных и отчётов до интеграций, веб-приложений и полной автоматизации бизнес-процессов." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://sp-automation.com/services-ru.html" property="og:url"/>
+  <meta content="Sebastian Automations" property="og:site_name"/>
+  <meta content="ru_RU" property="og:locale"/>
+  <link href="/favicon.png" rel="icon" type="image/png"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Roboto+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="/components/components.css" rel="stylesheet"/>
+  <link href="/services/services.css" rel="stylesheet"/>
+  <link href="/consent/consent.css" rel="stylesheet"/>
+  <link href="/assistant.css" rel="stylesheet"/>
+  <link href="/nav-font-kaleidoscope.css?v=5" rel="stylesheet"/>
+  <script defer="" src="/components/components.js">
+  </script>
+  <script defer="" src="/services/services.js">
+  </script>
+  <script defer="" src="/consent/consent.js">
+  </script>
+  <script defer="" src="/assistant.js">
+  </script>
+  <script defer="" src="/nav-font-kaleidoscope.js?v=5">
+  </script>
+ </head>
+ <body>
+  <div id="site-header-slot">
+  </div>
+  <main class="services-page">
+   <section class="services-hero reveal-section" id="services-hero">
+    <div class="services-hero-copy">
+     <div class="services-kicker">
+      SYSTEMS · DATA · AUTOMATION
+     </div>
+     <h1>
+      Услуги
+      <span>
+       автоматизации
+      </span>
+     </h1>
+     <p>
+      Я не просто пишу отдельные скрипты, таблицы или дашборды.
+      Я прохожу весь путь от задачи и логики до тестирования,
+      запуска и готовой системы, которой реально пользуются.
+     </p>
+     <div class="services-hero-actions">
+      <a class="services-primary-btn" href="contacts-ru.html">
+       Обсудить задачу
+       <span>
+        ↗
+       </span>
+      </a>
+      <a class="services-secondary-btn" href="#services-ecosystem">
+       Посмотреть возможности
+       <span>
+        ↓
+       </span>
+      </a>
+     </div>
+     <div class="services-hero-metrics">
+      <div class="services-hero-metric">
+       <strong>
+        01
+       </strong>
+       <span>
+        Обсуждение
+       </span>
       </div>
+      <div class="services-hero-metric">
+       <strong>
+        02
+       </strong>
+       <span>
+        Анализ
+       </span>
+      </div>
+      <div class="services-hero-metric">
+       <strong>
+        03
+       </strong>
+       <span>
+        Архитектура
+       </span>
+      </div>
+      <div class="services-hero-metric">
+       <strong>
+        04
+       </strong>
+       <span>
+        Разработка
+       </span>
+      </div>
+      <div class="services-hero-metric">
+       <strong>
+        05
+       </strong>
+       <span>
+        Интеграция
+       </span>
+      </div>
+      <div class="services-hero-metric">
+       <strong>
+        06
+       </strong>
+       <span>
+        Тестирование
+       </span>
+      </div>
+      <div class="services-hero-metric">
+       <strong>
+        07
+       </strong>
+       <span>
+        Запуск
+       </span>
+      </div>
+     </div>
     </div>
-  </header>
-
-  <main class="page">
-    <section class="hero">
-      <h1>Услуги автоматизации</h1>
-      <p>
-        От формул и отчётов до веб-приложений, интеграций и аналитики. Задача может быть небольшой или сложной — главное, чтобы решение действительно экономило время, уменьшало количество ошибок и упрощало работу.
-      </p>
-    </section>
-
-    <section class="services-grid">
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">⚡</div>
-          <h2>Excel и Google Sheets</h2>
-        </div>
-        <p>Автоматизация таблиц, расчётов и отчётов без ручного копирования и постоянного исправления ошибок.</p>
-        <ul>
-          <li>сложные формулы и логика условий;</li>
-          <li>макросы, VBA и Google Apps Script;</li>
-          <li>автоматические отчёты и рассылки;</li>
-          <li>формы ввода, проверки и справочники;</li>
-          <li>импорт, экспорт и консолидация данных.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> таблица работает как инструмент, а не как ежедневный квест.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">📊</div>
-          <h2>Power BI и аналитика</h2>
-        </div>
-        <p>Понятные дашборды для руководителей, отделов продаж, финансов, логистики и производства.</p>
-        <ul>
-          <li>модели данных и связи;</li>
-          <li>DAX, KPI и план-факт анализ;</li>
-          <li>подключение Excel, Google Sheets, SQL и API;</li>
-          <li>автоматическое обновление;</li>
-          <li>адаптация под мобильный просмотр.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> ключевые цифры видны сразу, без ручного сбора отчётов.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🤖</div>
-          <h2>Telegram-боты и уведомления</h2>
-        </div>
-        <p>Боты для заявок, напоминаний, уведомлений, команд и запуска автоматических действий.</p>
-        <ul>
-          <li>приём команд, текстов и файлов;</li>
-          <li>напоминания по времени или событию;</li>
-          <li>заявки с сайта в Telegram;</li>
-          <li>связь с Google Sheets и Drive;</li>
-          <li>уведомления менеджерам или клиентам.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> нужная информация приходит автоматически, а не теряется между чатами.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🌐</div>
-          <h2>Веб-приложения</h2>
-        </div>
-        <p>Отдельные интерфейсы для процессов, которым уже тесно в Google Таблицах или Excel.</p>
-        <ul>
-          <li>работа с таблицами, формами и файлами;</li>
-          <li>поиск, карточки, фильтры и мобильная навигация;</li>
-          <li>Google Sign-In и проверка доступов;</li>
-          <li>работа с фотографиями и ссылками;</li>
-          <li>PWA и установка на главный экран.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> пользователь получает простой интерфейс вместо сложной технической таблицы.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">📄</div>
-          <h2>PDF, инвойсы и банковские выписки</h2>
-        </div>
-        <p>Обработка документов, из которых нужно извлечь, очистить и структурировать данные.</p>
-        <ul>
-          <li>распознавание и парсинг документов;</li>
-          <li>извлечение позиций, сумм и реквизитов;</li>
-          <li>сопоставление данных между документами;</li>
-          <li>классификация банковских операций;</li>
-          <li>запись результата в Google Sheets или Excel.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> грязные документы превращаются в структурированные данные для дальнейшей работы.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🔗</div>
-          <h2>Интеграции и API</h2>
-        </div>
-        <p>Обмен данными между разными сервисами без ручного переноса информации.</p>
-        <ul>
-          <li>CRM, ERP и внешние API;</li>
-          <li>Google Workspace;</li>
-          <li>сайты, формы и Telegram;</li>
-          <li>вебхуки и автоматические триггеры;</li>
-          <li>синхронизация справочников и статусов.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> системы начинают обмениваться данными без участия человека.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">☁️</div>
-          <h2>Google Drive, доступы и файлы</h2>
-        </div>
-        <p>Автоматизация работы с папками, документами, правами доступа и передачей собственности.</p>
-        <ul>
-          <li>создание и архивирование папок;</li>
-          <li>копирование и сортировка файлов;</li>
-          <li>управление доступами;</li>
-          <li>авторизация пользователей;</li>
-          <li>передача прав заказчику.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> файлы хранятся системно, а доступы не превращаются в цирк.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">📱</div>
-          <h2>Мобильные интерфейсы и PWA</h2>
-        </div>
-        <p>Адаптация рабочих решений для смартфонов и планшетов.</p>
-        <ul>
-          <li>удобные карточки и большие кнопки;</li>
-          <li>свайпы, поиск и мобильное меню;</li>
-          <li>адаптивные формы;</li>
-          <li>добавление на главный экран;</li>
-          <li>оптимизация под узкие экраны.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> решением действительно удобно пользоваться с телефона, а не просто открывать его.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🔍</div>
-          <h2>Исследование рынка</h2>
-        </div>
-        <p>Сбор и анализ открытых данных для оценки товаров, конкурентов и рыночной ситуации.</p>
-        <ul>
-          <li>анализ товарных позиций и ассортимента;</li>
-          <li>сравнение цен и характеристик;</li>
-          <li>анализ конкурентной среды;</li>
-          <li>оценка сегментов и потенциальных ниш;</li>
-          <li>подготовка отчётов и дашбордов.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> не просто таблица с цифрами, а структурированная картина рынка.</div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-head">
-          <div class="service-icon">🧠</div>
-          <h2>Индивидуальные решения</h2>
-        </div>
-        <p>Если задача не укладывается в одну категорию, её можно собрать из нескольких технологий.</p>
-        <ul>
-          <li>аудит текущего процесса;</li>
-          <li>проектирование логики;</li>
-          <li>поэтапная разработка;</li>
-          <li>тестирование на реальных данных;</li>
-          <li>передача кода, прав и инструкций.</li>
-        </ul>
-        <div class="result"><strong>Результат:</strong> решение строится под ваш процесс, а не процесс ломается под готовый шаблон.</div>
-      </article>
-    </section>
-
-    <section class="process">
-      <h2>Как проходит работа</h2>
-      <div class="process-grid">
-        <div class="process-step">
-          <strong>1. Анализ</strong>
-          <span>Смотрю на реальные файлы, документы и процесс.</span>
-        </div>
-        <div class="process-step">
-          <strong>2. Оценка</strong>
-          <span>Предлагаю вариант реализации и оцениваю объём.</span>
-        </div>
-        <div class="process-step">
-          <strong>3. Разработка</strong>
-          <span>Делаю поэтапно и проверяю на реальных сценариях.</span>
-        </div>
-        <div class="process-step">
-          <strong>4. Передача</strong>
-          <span>Передаю решение, доступы, права и инструкции.</span>
-        </div>
+    <div aria-label="Этапы реализации проекта" class="services-project-map">
+     <svg aria-hidden="true" class="services-project-map-lines" viewbox="0 0 620 520">
+      <line class="project-line" data-line="1" x1="310" x2="310" y1="260" y2="55">
+      </line>
+      <line class="project-line" data-line="2" x1="310" x2="485" y1="260" y2="115">
+      </line>
+      <line class="project-line" data-line="3" x1="310" x2="540" y1="260" y2="285">
+      </line>
+      <line class="project-line" data-line="4" x1="310" x2="444" y1="260" y2="438">
+      </line>
+      <line class="project-line" data-line="5" x1="310" x2="176" y1="260" y2="438">
+      </line>
+      <line class="project-line" data-line="6" x1="310" x2="80" y1="260" y2="285">
+      </line>
+      <line class="project-line" data-line="7" x1="310" x2="135" y1="260" y2="115">
+      </line>
+     </svg>
+     <button aria-controls="project-brief-card" aria-expanded="false" class="project-stage project-stage-1 is-active" data-description="Фиксируем задачу, ожидаемый результат и то, что сейчас отнимает время." data-stage="1" data-title="Обсуждение" type="button">
+      <span class="project-stage-number">
+       01
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <path d="M5 5.5h14v9H9l-4 3v-12Z">
+        </path>
+        <path d="M8 9h8">
+        </path>
+        <path d="M8 12h5">
+        </path>
+       </svg>
+      </span>
+      <strong>
+       Обсуждение
+      </strong>
+     </button>
+     <button aria-controls="project-analysis-card" aria-expanded="false" class="project-stage project-stage-2" data-description="Разбираю процесс, данные, исключения и места, где возникает ручная работа." data-stage="2" data-title="Анализ" type="button">
+      <span class="project-stage-number">
+       02
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <circle cx="10" cy="10" r="5">
+        </circle>
+        <path d="m14 14 5 5">
+        </path>
+        <path d="M8 10h4">
+        </path>
+        <path d="M10 8v4">
+        </path>
+       </svg>
+      </span>
+      <strong>
+       Анализ
+      </strong>
+     </button>
+     <button aria-controls="project-architecture-card" aria-expanded="false" class="project-stage project-stage-3" data-description="Проектирую логику решения: источники данных, связи, сценарии и правила." data-stage="3" data-title="Архитектура" type="button">
+      <span class="project-stage-number">
+       03
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <rect height="5" rx="1" width="6" x="3" y="4">
+        </rect>
+        <rect height="5" rx="1" width="6" x="15" y="4">
+        </rect>
+        <rect height="5" rx="1" width="6" x="9" y="16">
+        </rect>
+        <path d="M6 9v3h12V9">
+        </path>
+        <path d="M12 12v4">
+        </path>
+       </svg>
+      </span>
+      <strong>
+       Архитектура
+      </strong>
+     </button>
+     <button aria-controls="project-development-card" aria-expanded="false" class="project-stage project-stage-4" data-description="Строю саму систему: автоматизацию, интерфейс, отчёты и бизнес-логику." data-stage="4" data-title="Разработка" type="button">
+      <span class="project-stage-number">
+       04
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <path d="m8 7-5 5 5 5">
+        </path>
+        <path d="m16 7 5 5-5 5">
+        </path>
+        <path d="m14 4-4 16">
+        </path>
+       </svg>
+      </span>
+      <strong>
+       Разработка
+      </strong>
+     </button>
+     <button aria-controls="project-integration-card" aria-expanded="false" class="project-stage project-stage-5" data-description="Соединяю нужные сервисы, таблицы, API, формы, файлы и внешние системы." data-stage="5" data-title="Интеграция" type="button">
+      <span class="project-stage-number">
+       05
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <path d="M8 7V3">
+        </path>
+        <path d="M16 7V3">
+        </path>
+        <path d="M6 7h12v5a6 6 0 0 1-12 0V7Z">
+        </path>
+        <path d="M12 18v3">
+        </path>
+       </svg>
+      </span>
+      <strong>
+       Интеграция
+      </strong>
+     </button>
+     <button aria-controls="project-testing-card" aria-expanded="false" class="project-stage project-stage-6" data-description="Проверяю сценарии, крайние случаи, ошибки и поведение решения перед запуском." data-stage="6" data-title="Тестирование" type="button">
+      <span class="project-stage-number">
+       06
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <path d="M9 3h6">
+        </path>
+        <path d="M10 3v5l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3">
+        </path>
+        <path d="M8 15h8">
+        </path>
+       </svg>
+      </span>
+      <strong>
+       Тестирование
+      </strong>
+     </button>
+     <button aria-controls="project-launch-card" aria-expanded="false" class="project-stage project-stage-7" data-description="Передаю готовое решение, запускаю его в работу и довожу до стабильного состояния." data-stage="7" data-title="Запуск" type="button">
+      <span class="project-stage-number">
+       07
+      </span>
+      <span class="project-stage-icon">
+       <svg aria-hidden="true" viewbox="0 0 24 24">
+        <path d="M14 4c3 1 5 3 6 6l-6 6-5-1-1-5 6-6Z">
+        </path>
+        <path d="m8 15-3 1-1 4 4-1 2-3">
+        </path>
+        <circle cx="15" cy="9" r="1.5">
+        </circle>
+       </svg>
+      </span>
+      <strong>
+       Запуск
+      </strong>
+     </button>
+     <div aria-hidden="true" class="project-stage-detail" id="project-brief-card">
+      <div class="project-stage-detail-head">
+       <div>
+        <span>
+         01 · DISCUSSION
+        </span>
+        <strong>
+         Project Brief
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="project-stage-detail-close" type="button">
+        ×
+       </button>
       </div>
-    </section>
-
-    <section class="cta">
-      <h2>Не знаете, к какой категории относится ваша задача?</h2>
+      <div class="project-brief-list">
+       <div class="project-brief-item">
+        <span class="project-brief-dot">
+        </span>
+        <div>
+         <strong>
+          Задача
+         </strong>
+         <p>
+          Что сейчас делается вручную или отнимает
+          слишком много времени.
+         </p>
+        </div>
+       </div>
+       <div class="project-brief-item">
+        <span class="project-brief-dot">
+        </span>
+        <div>
+         <strong>
+          Боль
+         </strong>
+         <p>
+          Где возникают ошибки, дублирование,
+          задержки или лишние действия.
+         </p>
+        </div>
+       </div>
+       <div class="project-brief-item">
+        <span class="project-brief-dot">
+        </span>
+        <div>
+         <strong>
+          Результат
+         </strong>
+         <p>
+          Что должно происходить автоматически
+          после внедрения решения.
+         </p>
+        </div>
+       </div>
+       <div class="project-brief-item">
+        <span class="project-brief-dot">
+        </span>
+        <div>
+         <strong>
+          Ограничения
+         </strong>
+         <p>
+          Сроки, доступы, системы,
+          форматы данных и другие условия.
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="project-brief-ready">
+       <span>
+       </span>
+       BRIEF READY
+      </div>
+     </div>
+     <div aria-hidden="true" class="project-analysis-detail" id="project-analysis-card">
+      <div class="analysis-head">
+       <div>
+        <span>
+         02 · ANALYSIS MODE
+        </span>
+        <strong>
+         Где процесс теряет эффективность?
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="analysis-close" type="button">
+        ×
+       </button>
+      </div>
+      <div class="analysis-flow">
+       <div class="analysis-node analysis-node-input">
+        <span class="analysis-node-label">
+         INPUT
+        </span>
+        <strong>
+         Данные поступают
+        </strong>
+        <small>
+         Excel · CRM · Forms · Email
+        </small>
+       </div>
+       <div class="analysis-track analysis-track-a">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+       </div>
+       <div class="analysis-node analysis-node-bottleneck">
+        <span class="analysis-node-label">
+         BOTTLENECK
+        </span>
+        <div class="analysis-bottleneck-core">
+         <i>
+         </i>
+         <i>
+         </i>
+         <i>
+         </i>
+        </div>
+        <strong>
+         Ручная проверка
+        </strong>
+        <small>
+         процесс сужается здесь
+        </small>
+       </div>
+       <div class="analysis-track analysis-track-b">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+       </div>
+       <div class="analysis-node analysis-node-loss">
+        <span class="analysis-node-label">
+         LOSS
+        </span>
+        <strong class="analysis-loss-value">
+         −18 min
+        </strong>
+        <small>
+         на каждом цикле
+        </small>
+       </div>
+       <div class="analysis-track analysis-track-c">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+       </div>
+       <div class="analysis-node analysis-node-fix">
+        <span class="analysis-node-label">
+         FIX
+        </span>
+        <strong>
+         Автовалидация
+        </strong>
+        <small>
+         проверка без ручного участия
+        </small>
+       </div>
+      </div>
+      <div class="analysis-result">
+       <span class="analysis-result-pulse">
+       </span>
+       <div>
+        <small>
+         ROOT CAUSE
+        </small>
+        <strong>
+         FOUND
+        </strong>
+       </div>
+       <span class="analysis-result-line">
+       </span>
+       <div class="analysis-result-score">
+        92%
+       </div>
+      </div>
+     </div>
+     <div aria-hidden="true" class="project-architecture-detail" id="project-architecture-card">
+      <div class="architecture-head">
+       <div>
+        <span>
+         03 · SYSTEM ARCHITECTURE
+        </span>
+        <strong>
+         Как части системы работают вместе
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="architecture-close" type="button">
+        ×
+       </button>
+      </div>
+      <div class="architecture-map">
+       <svg aria-hidden="true" class="architecture-lines" viewbox="0 0 520 250">
+        <path class="architecture-line line-data-logic" d="M105 125 C145 125 150 125 190 125">
+        </path>
+        <path class="architecture-line line-logic-api" d="M250 125 C280 125 285 75 320 75">
+        </path>
+        <path class="architecture-line line-logic-ui" d="M250 125 C280 125 285 175 320 175">
+        </path>
+        <path class="architecture-line line-api-output" d="M380 75 C420 75 420 125 445 125">
+        </path>
+        <path class="architecture-line line-ui-output" d="M380 175 C420 175 420 125 445 125">
+        </path>
+       </svg>
+       <div class="architecture-node architecture-data">
+        <span>
+         01
+        </span>
+        <strong>
+         DATA
+        </strong>
+        <small>
+         Excel · CRM · Forms
+        </small>
+       </div>
+       <div class="architecture-node architecture-logic">
+        <span>
+         02
+        </span>
+        <strong>
+         LOGIC
+        </strong>
+        <small>
+         правила · сценарии
+        </small>
+       </div>
+       <div class="architecture-node architecture-api">
+        <span>
+         03
+        </span>
+        <strong>
+         API
+        </strong>
+        <small>
+         интеграции
+        </small>
+       </div>
+       <div class="architecture-node architecture-ui">
+        <span>
+         04
+        </span>
+        <strong>
+         UI
+        </strong>
+        <small>
+         интерфейс
+        </small>
+       </div>
+       <div class="architecture-node architecture-output">
+        <span>
+         05
+        </span>
+        <strong>
+         OUTPUT
+        </strong>
+        <small>
+         результат
+        </small>
+       </div>
+       <div class="architecture-packet packet-a">
+       </div>
+       <div class="architecture-packet packet-b">
+       </div>
+       <div class="architecture-packet packet-c">
+       </div>
+      </div>
+      <div class="architecture-footer">
+       <span class="architecture-status-dot">
+       </span>
+       <div>
+        <small>
+         SYSTEM MAP
+        </small>
+        <strong>
+         CONNECTIONS VERIFIED
+        </strong>
+       </div>
+       <span class="architecture-footer-line">
+       </span>
+       <div class="architecture-version">
+        v1.0
+       </div>
+      </div>
+     </div>
+     <div aria-hidden="true" class="project-development-detail" id="project-development-card">
+      <div class="development-head">
+       <div>
+        <span>
+         04 · BUILD MODE
+        </span>
+        <strong>
+         Собираем решение из отдельных модулей
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="development-close" type="button">
+        ×
+       </button>
+      </div>
+      <div class="development-board">
+       <div class="development-modules">
+        <div class="development-module module-ui">
+         <span>
+          UI
+         </span>
+         <strong>
+          Interface
+         </strong>
+        </div>
+        <div class="development-module module-logic">
+         <span>
+          LOGIC
+         </span>
+         <strong>
+          Rules
+         </strong>
+        </div>
+        <div class="development-module module-data">
+         <span>
+          DATA
+         </span>
+         <strong>
+          Sources
+         </strong>
+        </div>
+        <div class="development-module module-api">
+         <span>
+          API
+         </span>
+         <strong>
+          Connections
+         </strong>
+        </div>
+       </div>
+       <div class="development-build-zone">
+        <div class="development-build-core">
+         <span class="build-core-ring ring-a">
+         </span>
+         <span class="build-core-ring ring-b">
+         </span>
+         <div class="build-core-center">
+          <strong>
+           BUILD
+          </strong>
+          <small>
+           assembling
+          </small>
+         </div>
+        </div>
+        <div class="development-progress">
+         <span>
+         </span>
+        </div>
+        <div class="development-progress-label">
+         0%
+        </div>
+       </div>
+       <div class="development-output">
+        <div class="development-output-icon">
+         ✓
+        </div>
+        <span>
+         STATUS
+        </span>
+        <strong>
+         BUILD SUCCESS
+        </strong>
+        <small>
+         ready for testing
+        </small>
+       </div>
+      </div>
+      <div class="development-log">
+       <span>
+        01
+       </span>
+       <p>
+        UI module connected
+       </p>
+       <span>
+        02
+       </span>
+       <p>
+        Business logic compiled
+       </p>
+       <span>
+        03
+       </span>
+       <p>
+        Data sources linked
+       </p>
+       <span>
+        04
+       </span>
+       <p>
+        Integration layer ready
+       </p>
+      </div>
+     </div>
+     <div aria-hidden="true" class="project-integration-detail" id="project-integration-card">
+      <div class="integration-head">
+       <div>
+        <span>
+         05 · INTEGRATION HUB
+        </span>
+        <strong>
+         Разные системы работают как одна
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="integration-close" type="button">
+        ×
+       </button>
+      </div>
+      <div class="integration-map">
+       <svg aria-hidden="true" class="integration-lines" viewbox="0 0 460 245">
+        <path class="integration-line integration-line-crm" d="M230 122 C185 122 160 72 112 58">
+        </path>
+        <path class="integration-line integration-line-sheets" d="M230 122 C275 122 300 72 348 58">
+        </path>
+        <path class="integration-line integration-line-api" d="M230 122 C175 122 150 165 96 187">
+        </path>
+        <path class="integration-line integration-line-bot" d="M230 122 C230 155 230 168 230 198">
+        </path>
+        <path class="integration-line integration-line-drive" d="M230 122 C285 122 310 165 364 187">
+        </path>
+       </svg>
+       <div class="integration-hub">
+        <span class="integration-hub-ring ring-one">
+        </span>
+        <span class="integration-hub-ring ring-two">
+        </span>
+        <div class="integration-hub-core">
+         <strong>
+          HUB
+         </strong>
+         <small>
+          SYNC
+         </small>
+        </div>
+       </div>
+       <div class="integration-system integration-crm">
+        <span>
+         CRM
+        </span>
+        <strong>
+         Customers
+        </strong>
+       </div>
+       <div class="integration-system integration-sheets">
+        <span>
+         GS
+        </span>
+        <strong>
+         Sheets
+        </strong>
+       </div>
+       <div class="integration-system integration-api">
+        <span>
+         API
+        </span>
+        <strong>
+         External
+        </strong>
+       </div>
+       <div class="integration-system integration-bot">
+        <span>
+         BOT
+        </span>
+        <strong>
+         Telegram
+        </strong>
+       </div>
+       <div class="integration-system integration-drive">
+        <span>
+         DRV
+        </span>
+        <strong>
+         Drive
+        </strong>
+       </div>
+       <i class="integration-packet packet-one">
+       </i>
+       <i class="integration-packet packet-two">
+       </i>
+       <i class="integration-packet packet-three">
+       </i>
+       <i class="integration-packet packet-four">
+       </i>
+       <i class="integration-packet packet-five">
+       </i>
+      </div>
+      <div class="integration-status">
+       <div>
+        <span>
+         CONNECTIONS
+        </span>
+        <strong>
+         5 ACTIVE
+        </strong>
+       </div>
+       <i>
+       </i>
+       <div>
+        <span>
+         SYNC
+        </span>
+        <strong>
+         OK
+        </strong>
+       </div>
+       <i>
+       </i>
+       <div>
+        <span>
+         LATENCY
+        </span>
+        <strong>
+         42 ms
+        </strong>
+       </div>
+      </div>
+     </div>
+     <div aria-hidden="true" class="project-testing-detail" id="project-testing-card">
+      <div class="testing-head">
+       <div>
+        <span>
+         06 · TEST LAB
+        </span>
+        <strong>
+         Проверяем систему до запуска
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="testing-close" type="button">
+        ×
+       </button>
+      </div>
+      <div class="testing-summary">
+       <div>
+        <span>
+         SCENARIOS
+        </span>
+        <strong>
+         12
+        </strong>
+       </div>
+       <div>
+        <span>
+         PASS
+        </span>
+        <strong>
+         11
+        </strong>
+       </div>
+       <div>
+        <span>
+         RETEST
+        </span>
+        <strong>
+         1
+        </strong>
+       </div>
+      </div>
+      <div class="testing-matrix">
+       <div class="testing-row">
+        <span class="testing-id">
+         T-01
+        </span>
+        <div>
+         <strong>
+          Основной сценарий
+         </strong>
+         <small>
+          стандартный рабочий цикл
+         </small>
+        </div>
+        <span class="testing-status is-pass">
+         PASS
+        </span>
+       </div>
+       <div class="testing-row">
+        <span class="testing-id">
+         T-02
+        </span>
+        <div>
+         <strong>
+          Пустые данные
+         </strong>
+         <small>
+          проверка без входного значения
+         </small>
+        </div>
+        <span class="testing-status is-pass">
+         PASS
+        </span>
+       </div>
+       <div class="testing-row testing-row-retest">
+        <span class="testing-id">
+         T-03
+        </span>
+        <div>
+         <strong>
+          Некорректный формат
+         </strong>
+         <small>
+          ошибка обрабатывается без остановки системы
+         </small>
+        </div>
+        <span class="testing-status is-retest">
+         RETEST
+        </span>
+       </div>
+       <div class="testing-row">
+        <span class="testing-id">
+         T-04
+        </span>
+        <div>
+         <strong>
+          Двойной запуск
+         </strong>
+         <small>
+          защита от дублирования операции
+         </small>
+        </div>
+        <span class="testing-status is-pass">
+         PASS
+        </span>
+       </div>
+       <div class="testing-row">
+        <span class="testing-id">
+         T-05
+        </span>
+        <div>
+         <strong>
+          Внешний сервис недоступен
+         </strong>
+         <small>
+          контроль ошибки интеграции
+         </small>
+        </div>
+        <span class="testing-status is-pass">
+         PASS
+        </span>
+       </div>
+      </div>
+      <div class="testing-footer">
+       <div class="testing-shield">
+        ✓
+       </div>
+       <div>
+        <small>
+         QUALITY GATE
+        </small>
+        <strong>
+         READY FOR FINAL RETEST
+        </strong>
+       </div>
+       <span class="testing-footer-line">
+       </span>
+       <div class="testing-score">
+        92%
+       </div>
+      </div>
+     </div>
+     <div aria-hidden="true" class="project-launch-detail" id="project-launch-card">
+      <div class="launch-head">
+       <div>
+        <span>
+         07 · GO LIVE
+        </span>
+        <strong>
+         Система готова к запуску
+        </strong>
+       </div>
+       <button aria-label="Закрыть" class="launch-close" type="button">
+        ×
+       </button>
+      </div>
+      <div class="launch-panel">
+       <div class="launch-readiness">
+        <div class="launch-readiness-ring">
+         <span>
+          100%
+         </span>
+        </div>
+        <div>
+         <small>
+          READINESS
+         </small>
+         <strong>
+          READY
+         </strong>
+        </div>
+       </div>
+       <div class="launch-checklist">
+        <div class="launch-check is-done">
+         <span>
+          ✓
+         </span>
+         <div>
+          <strong>
+           Логика
+          </strong>
+          <small>
+           verified
+          </small>
+         </div>
+        </div>
+        <div class="launch-check is-done">
+         <span>
+          ✓
+         </span>
+         <div>
+          <strong>
+           Интеграции
+          </strong>
+          <small>
+           connected
+          </small>
+         </div>
+        </div>
+        <div class="launch-check is-done">
+         <span>
+          ✓
+         </span>
+         <div>
+          <strong>
+           Тестирование
+          </strong>
+          <small>
+           passed
+          </small>
+         </div>
+        </div>
+        <div class="launch-check is-done">
+         <span>
+          ✓
+         </span>
+         <div>
+          <strong>
+           Доступы
+          </strong>
+          <small>
+           confirmed
+          </small>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="launch-timeline">
+       <div class="launch-timeline-step is-complete">
+        <span>
+        </span>
+        <strong>
+         DEPLOY
+        </strong>
+        <small>
+         done
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="launch-timeline-step is-complete">
+        <span>
+        </span>
+        <strong>
+         VERIFY
+        </strong>
+        <small>
+         done
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="launch-timeline-step is-current">
+        <span>
+        </span>
+        <strong>
+         GO LIVE
+        </strong>
+        <small>
+         now
+        </small>
+       </div>
+       <i>
+       </i>
+       <div class="launch-timeline-step">
+        <span>
+        </span>
+        <strong>
+         MONITOR
+        </strong>
+        <small>
+         next
+        </small>
+       </div>
+      </div>
+      <div class="launch-status">
+       <span class="launch-status-light">
+       </span>
+       <div>
+        <small>
+         SYSTEM STATUS
+        </small>
+        <strong>
+         ONLINE
+        </strong>
+       </div>
+       <span class="launch-status-line">
+       </span>
+       <div class="launch-time">
+        <small>
+         UPTIME
+        </small>
+        <strong>
+         00:00:01
+        </strong>
+       </div>
+      </div>
+     </div>
+     <div class="project-core">
+      <div aria-hidden="true" class="project-core-cabinet">
+       <div class="cabinet-title">
+        SYSTEM ARCHITECTURE
+       </div>
+       <svg aria-hidden="true" class="cabinet-wiring" viewbox="0 0 220 245">
+        <g class="cabinet-ports">
+         <rect height="9" rx="1" width="5" x="18" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="28" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="38" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="48" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="167" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="177" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="187" y="22">
+         </rect>
+         <rect height="9" rx="1" width="5" x="197" y="22">
+         </rect>
+        </g>
+        <g class="cable cable-green">
+         <path d="M20 31 V56 Q20 64 28 64 H78 Q86 64 86 72 V95">
+         </path>
+         <path d="M30 31 V49 Q30 57 38 57 H72 Q92 57 92 76 V95">
+         </path>
+         <path d="M40 31 V42 Q40 50 48 50 H82 Q98 50 98 66 V95">
+         </path>
+         <path d="M50 31 V39 Q50 45 56 45 H90 Q104 45 104 59 V95">
+         </path>
+        </g>
+        <g class="cable cable-light">
+         <path d="M170 31 V55 Q170 63 162 63 H143 Q134 63 134 72 V95">
+         </path>
+         <path d="M180 31 V49 Q180 57 172 57 H151 Q140 57 140 68 V95">
+         </path>
+         <path d="M190 31 V43 Q190 51 182 51 H158 Q146 51 146 63 V95">
+         </path>
+         <path d="M200 31 V39 Q200 45 194 45 H167 Q152 45 152 60 V95">
+         </path>
+        </g>
+        <g class="cable cable-blue">
+         <path d="M86 122 V143 Q86 151 78 151 H45 Q35 151 35 161 V218">
+         </path>
+         <path d="M94 122 V148 Q94 157 85 157 H53 Q43 157 43 167 V218">
+         </path>
+        </g>
+        <g class="cable cable-gold">
+         <path d="M104 122 V155 Q104 163 96 163 H63 Q51 163 51 175 V218">
+         </path>
+         <path d="M112 122 V161 Q112 169 104 169 H72 Q59 169 59 182 V218">
+         </path>
+        </g>
+        <g class="cable cable-green">
+         <path d="M122 122 V151 Q122 159 130 159 H165 Q177 159 177 171 V218">
+         </path>
+         <path d="M130 122 V145 Q130 153 138 153 H173 Q185 153 185 165 V218">
+         </path>
+        </g>
+        <g class="cable cable-light">
+         <path d="M140 122 V139 Q140 147 148 147 H181 Q193 147 193 159 V218">
+         </path>
+         <path d="M148 122 V133 Q148 141 156 141 H190 Q201 141 201 152 V218">
+         </path>
+        </g>
+        <g class="cabinet-connectors">
+         <rect height="9" rx="1" width="5" x="30" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="40" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="50" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="60" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="175" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="183" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="191" y="214">
+         </rect>
+         <rect height="9" rx="1" width="5" x="199" y="214">
+         </rect>
+        </g>
+       </svg>
+       <div class="cabinet-module cabinet-module-input">
+        <span>
+         INPUT
+        </span>
+        <i>
+        </i>
+        <i>
+        </i>
+        <i>
+        </i>
+       </div>
+       <div class="cabinet-module cabinet-module-process">
+        <span>
+         PROCESS
+        </span>
+        <i class="is-on">
+        </i>
+        <i>
+        </i>
+        <i>
+        </i>
+       </div>
+       <div class="cabinet-module cabinet-module-logic">
+        <span>
+         LOGIC
+        </span>
+        <i class="is-on">
+        </i>
+        <i class="is-on">
+        </i>
+        <i>
+        </i>
+       </div>
+       <div class="cabinet-module cabinet-module-integrations">
+        <span>
+         INTEGRATIONS
+        </span>
+        <i class="is-on">
+        </i>
+        <i class="is-on">
+        </i>
+        <i class="is-on">
+        </i>
+       </div>
+       <div class="cabinet-module cabinet-module-output">
+        <span>
+         OUTPUT / RESULT
+        </span>
+        <i class="is-on">
+        </i>
+        <i class="is-on">
+        </i>
+        <i class="is-on">
+        </i>
+        <i class="is-on">
+        </i>
+       </div>
+       <div class="cabinet-label cabinet-label-data">
+        DATA
+       </div>
+       <div class="cabinet-label cabinet-label-api">
+        API
+       </div>
+       <div class="cabinet-label cabinet-label-ui">
+        UI
+       </div>
+       <div class="cabinet-status">
+        CLEAN ROUTING · CONTROLLED LOGIC
+       </div>
+      </div>
+      <div class="project-core-door">
+       <div class="project-core-door-face project-core-door-front">
+        <button aria-expanded="false" aria-label="Открыть архитектуру системы" class="project-core-fold" type="button">
+         <span>
+         </span>
+        </button>
+        <div class="project-core-orbit">
+         <span>
+         </span>
+         <i>
+         </i>
+        </div>
+        <div class="project-core-bars">
+         <span>
+         </span>
+         <span>
+         </span>
+         <span>
+         </span>
+        </div>
+        <div class="project-core-step">
+         ЭТАП
+         <span id="project-core-number">
+          01
+         </span>
+         / 07
+        </div>
+        <strong id="project-core-title">
+         Обсуждение
+        </strong>
+        <p id="project-core-description">
+         Фиксируем задачу, ожидаемый результат и то,
+      что сейчас отнимает время.
+        </p>
+        <div class="project-core-status">
+         PROJECT FLOW
+        </div>
+       </div>
+       <div aria-hidden="true" class="project-core-door-face project-core-door-back">
+        <button aria-label="Закрыть систему" class="project-core-close" type="button">
+         ‹
+        </button>
+        <span class="door-hinge door-hinge-top">
+        </span>
+        <span class="door-hinge door-hinge-bottom">
+        </span>
+        <div class="door-back-rib door-back-rib-a">
+        </div>
+        <div class="door-back-rib door-back-rib-b">
+        </div>
+        <div class="door-back-rib door-back-rib-c">
+        </div>
+        <div class="door-back-center">
+         <span>
+         </span>
+        </div>
+        <i class="door-bolt bolt-a">
+        </i>
+        <i class="door-bolt bolt-b">
+        </i>
+        <i class="door-bolt bolt-c">
+        </i>
+        <i class="door-bolt bolt-d">
+        </i>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="services-ecosystem reveal-section" id="services-ecosystem">
+    <header class="services-section-head">
+     <div class="services-section-kicker">
+      ECOSYSTEM
+     </div>
+     <h2>
+      Экосистема услуг
+     </h2>
+     <p>
+      Отдельные технологии имеют смысл, когда они
+          работают вместе и решают реальный бизнес-процесс.
+     </p>
+    </header>
+    <div class="ecosystem-board">
+     <article class="ecosystem-service ecosystem-left ecosystem-row-1" data-service="powerbi" data-service-effect="powerbi">
+      <button aria-label="Узнать больше о Power BI и аналитике" class="ecosystem-service-fold" data-diagnostic-open="powerbi" type="button">
+       <span>
+       </span>
+      </button>
+      <div class="ecosystem-icon">
+       BI
+      </div>
+      <div class="ecosystem-service-copy">
+       <h3>
+        Power BI и аналитика
+       </h3>
+       <p>
+        KPI, дашборды, модели данных,
+      автоматическое обновление и аналитика.
+       </p>
+      </div>
+      <div aria-hidden="true" class="ecosystem-mini ecosystem-mini-powerbi">
+       <div class="mini-bi-grid">
+       </div>
+       <svg class="mini-bi-line" preserveaspectratio="none" viewbox="0 0 90 42">
+        <polyline points="2,34 17,30 30,32 43,20 57,24 72,10 88,14">
+        </polyline>
+        <circle cx="17" cy="30" r="2">
+        </circle>
+        <circle cx="43" cy="20" r="2">
+        </circle>
+        <circle cx="72" cy="10" r="2">
+        </circle>
+        <circle cx="88" cy="14" r="2">
+        </circle>
+       </svg>
+       <span class="mini-bi-value">
+        +24%
+       </span>
+      </div>
+     </article>
+     <article class="ecosystem-service ecosystem-left ecosystem-row-2" data-service="excel" data-service-effect="excel">
+      <button aria-label="Узнать больше об Excel и VBA" class="ecosystem-service-fold" data-diagnostic-open="excel" type="button">
+       <span>
+       </span>
+      </button>
+      <div class="ecosystem-icon">
+       XL
+      </div>
+      <div class="ecosystem-service-copy">
+       <h3>
+        Excel / VBA
+       </h3>
+       <p>
+        Макросы, расчёты, формы,
+      автоматические отчёты и сложная логика.
+       </p>
+      </div>
+      <div aria-hidden="true" class="ecosystem-mini ecosystem-mini-excel">
+       <div class="mini-excel-grid">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+       </div>
+       <div class="mini-excel-formula">
+        =SUM(A1:D3)
+       </div>
+      </div>
+     </article>
+     <article class="ecosystem-service ecosystem-left ecosystem-row-3" data-service="apps" data-service-effect="apps">
+      <button aria-label="Узнать больше о Google Apps Script" class="ecosystem-service-fold" data-diagnostic-open="apps" type="button">
+       <span>
+       </span>
+      </button>
+      <div class="ecosystem-icon">
+       GS
+      </div>
+      <div class="ecosystem-service-copy">
+       <h3>
+        Google Apps Script
+       </h3>
+       <p>
+        Google Sheets, Drive, Gmail,
+      формы, сценарии и веб-приложения.
+       </p>
+      </div>
+      <div aria-hidden="true" class="ecosystem-mini ecosystem-mini-apps">
+       <div class="mini-apps-node">
+        TRIGGER
+       </div>
+       <span class="mini-apps-link">
+        →
+       </span>
+       <div class="mini-apps-node">
+        SCRIPT
+       </div>
+       <span class="mini-apps-link">
+        →
+       </span>
+       <div class="mini-apps-node is-result">
+        DONE
+       </div>
+       <span class="mini-apps-packet">
+       </span>
+      </div>
+     </article>
+     <div class="ecosystem-core">
+      <div aria-hidden="true" class="ecosystem-life-scene">
+       <div class="ecosystem-life-overlay">
+        <div class="ecosystem-life-stat">
+         <span>
+          REPORTS
+         </span>
+         <strong>
+          SYNCED
+         </strong>
+        </div>
+        <div class="ecosystem-life-stat">
+         <span>
+          TASKS
+         </span>
+         <strong>
+          128 DONE
+         </strong>
+        </div>
+        <div class="ecosystem-life-stat">
+         <span>
+          AUTOMATION
+         </span>
+         <strong>
+          ACTIVE
+         </strong>
+        </div>
+       </div>
+       <button class="ecosystem-life-deeper" type="button">
+        Погрузиться в эту реальность
+        <span>
+         ↓
+        </span>
+       </button>
+      </div>
+      <div class="ecosystem-core-door">
+       <div class="ecosystem-core-door-face ecosystem-core-door-front">
+        <button aria-expanded="false" aria-label="Открыть результат автоматизации" class="ecosystem-core-fold" type="button">
+         <span>
+         </span>
+        </button>
+        <div class="ecosystem-core-orbit">
+         <span>
+         </span>
+        </div>
+        <div class="ecosystem-core-chart">
+         <i>
+         </i>
+         <i>
+         </i>
+         <i>
+         </i>
+        </div>
+        <h3>
+         Автоматизация
+         <br/>
+         и отчёты
+        </h3>
+        <p>
+         Проектирую сквозные решения:
+        от данных и правил до автоматических
+        действий, интерфейсов и управленческой аналитики.
+        </p>
+        <div class="ecosystem-core-status">
+         SYSTEM ONLINE
+        </div>
+       </div>
+       <div aria-hidden="true" class="ecosystem-core-door-face ecosystem-core-door-back">
+        <button aria-label="Закрыть" class="ecosystem-core-close" type="button">
+         ‹
+        </button>
+        <span class="ecosystem-hinge ecosystem-hinge-top">
+        </span>
+        <span class="ecosystem-hinge ecosystem-hinge-bottom">
+        </span>
+        <div class="ecosystem-door-back-rib rib-a">
+        </div>
+        <div class="ecosystem-door-back-rib rib-b">
+        </div>
+        <div class="ecosystem-door-back-rib rib-c">
+        </div>
+        <span class="ecosystem-door-bolt bolt-a">
+        </span>
+        <span class="ecosystem-door-bolt bolt-b">
+        </span>
+        <span class="ecosystem-door-bolt bolt-c">
+        </span>
+        <span class="ecosystem-door-bolt bolt-d">
+        </span>
+       </div>
+      </div>
+     </div>
+     <div aria-hidden="true" class="ecosystem-reality-view" id="ecosystem-reality-view">
+      <div class="ecosystem-reality-backdrop">
+      </div>
+      <div class="ecosystem-reality-panel">
+       <button aria-label="Закрыть" class="ecosystem-reality-close" type="button">
+        ×
+       </button>
+       <div class="ecosystem-reality-scene">
+        <div class="ecosystem-reality-image">
+        </div>
+        <button aria-label="Открыть дашборд ноутбука" class="reality-hotspot reality-hotspot-laptop" data-detail="laptop" type="button">
+        </button>
+        <button aria-label="Открыть линейный график" class="reality-hotspot reality-hotspot-line" data-detail="line" type="button">
+        </button>
+        <button aria-label="Открыть круговую диаграмму" class="reality-hotspot reality-hotspot-donut" data-detail="donut" type="button">
+        </button>
+        <button aria-label="Открыть столбчатую диаграмму" class="reality-hotspot reality-hotspot-bars" data-detail="bars" type="button">
+        </button>
+        <div class="ecosystem-reality-live">
+         <div class="reality-live-card">
+          <span>
+           REPORTS
+          </span>
+          <strong>
+           SYNCED
+          </strong>
+          <small>
+           2 min ago
+          </small>
+         </div>
+         <div class="reality-live-card">
+          <span>
+           TASKS
+          </span>
+          <strong>
+           128 PROCESSED
+          </strong>
+          <small>
+           running automatically
+          </small>
+         </div>
+         <div class="reality-live-card">
+          <span>
+           DATA
+          </span>
+          <strong>
+           UPDATED
+          </strong>
+          <small>
+           1 min ago
+          </small>
+         </div>
+         <div class="reality-live-card">
+          <span>
+           AUTOMATION
+          </span>
+          <strong>
+           ACTIVE
+          </strong>
+          <small>
+           23 workflows
+          </small>
+         </div>
+        </div>
+       </div>
+       <div class="ecosystem-reality-copy">
+        <div class="ecosystem-reality-kicker">
+         YOUR TIME
+        </div>
+        <h3>
+         Система работает —
+         <br/>
+         вы дышите свободнее
+        </h3>
+        <p>
+         Автоматизация забирает рутину,
+        сокращает количество ручных ошибок
+        и возвращает время для более важных задач.
+        </p>
+        <div class="ecosystem-reality-benefits">
+         <div>
+          <span>
+           01
+          </span>
+          <strong>
+           Прозрачность
+          </strong>
+         </div>
+         <div>
+          <span>
+           02
+          </span>
+          <strong>
+           Точность
+          </strong>
+         </div>
+         <div>
+          <span>
+           03
+          </span>
+          <strong>
+           Скорость
+          </strong>
+         </div>
+         <div>
+          <span>
+           04
+          </span>
+          <strong>
+           Контроль
+          </strong>
+         </div>
+        </div>
+        <div class="ecosystem-reality-status">
+         <span>
+         </span>
+         SYSTEM WORKING
+        </div>
+       </div>
+      </div>
+     </div>
+     <div aria-hidden="true" class="ecosystem-detail-view" id="ecosystem-detail-view">
+      <div class="ecosystem-detail-backdrop">
+      </div>
+      <div class="ecosystem-detail-tail">
+      </div>
+      <div class="ecosystem-detail-panel">
+       <button aria-label="Закрыть детализацию" class="ecosystem-detail-close" type="button">
+        ×
+       </button>
+       <div class="ecosystem-detail-image" data-detail-image="">
+       </div>
+      </div>
+     </div>
+     <article class="ecosystem-service ecosystem-right ecosystem-row-1" data-service="integration" data-service-effect="integration">
+      <button aria-label="Узнать больше об интеграциях и API" class="ecosystem-service-fold" data-diagnostic-open="integration" type="button">
+       <span>
+       </span>
+      </button>
+      <div class="ecosystem-icon">
+       ↔
+      </div>
+      <div class="ecosystem-service-copy">
+       <h3>
+        Интеграции и API
+       </h3>
+       <p>
+        CRM, ERP, сайты, формы,
+      Telegram и внешние системы.
+       </p>
+      </div>
+      <div aria-hidden="true" class="ecosystem-mini ecosystem-mini-integration">
+       <div class="mini-api-system">
+        CRM
+       </div>
+       <div class="mini-api-channel">
+        <span class="mini-api-packet packet-a">
+        </span>
+        <span class="mini-api-packet packet-b">
+        </span>
+       </div>
+       <div class="mini-api-system">
+        API
+       </div>
+      </div>
+     </article>
+     <article class="ecosystem-service ecosystem-right ecosystem-row-2" data-service="process" data-service-effect="process">
+      <button aria-label="Узнать больше об оптимизации процессов" class="ecosystem-service-fold" data-diagnostic-open="process" type="button">
+       <span>
+       </span>
+      </button>
+      <div class="ecosystem-icon">
+       ↻
+      </div>
+      <div class="ecosystem-service-copy">
+       <h3>
+        Оптимизация процессов
+       </h3>
+       <p>
+        Анализирую процесс, убираю
+      лишние ручные шаги, дублирование и потери.
+       </p>
+      </div>
+      <div aria-hidden="true" class="ecosystem-mini ecosystem-mini-process">
+       <div class="mini-process-before">
+        <span>
+         1
+        </span>
+        <span>
+         2
+        </span>
+        <span class="is-remove">
+         3
+        </span>
+        <span class="is-remove">
+         4
+        </span>
+        <span>
+         5
+        </span>
+       </div>
+       <div class="mini-process-arrow">
+        →
+       </div>
+       <div class="mini-process-after">
+        <span>
+         1
+        </span>
+        <span>
+         2
+        </span>
+        <span>
+         3
+        </span>
+       </div>
+      </div>
+     </article>
+     <article class="ecosystem-service ecosystem-right ecosystem-row-3" data-service="data" data-service-effect="data">
+      <button aria-label="Узнать больше о подготовке данных" class="ecosystem-service-fold" data-diagnostic-open="data" type="button">
+       <span>
+       </span>
+      </button>
+      <div class="ecosystem-icon">
+       DB
+      </div>
+      <div class="ecosystem-service-copy">
+       <h3>
+        Подготовка данных
+       </h3>
+       <p>
+        Очистка, нормализация,
+      проверка, объединение и структура.
+       </p>
+      </div>
+      <div aria-hidden="true" class="ecosystem-mini ecosystem-mini-data">
+       <div class="mini-data-chaos">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+       </div>
+       <div class="mini-data-arrow">
+        →
+       </div>
+       <div class="mini-data-clean">
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+        <span>
+        </span>
+       </div>
+      </div>
+     </article>
+     <span class="ecosystem-wire wire-left-1">
+     </span>
+     <span class="ecosystem-wire wire-left-2">
+     </span>
+     <span class="ecosystem-wire wire-left-3">
+     </span>
+     <span class="ecosystem-wire wire-right-1">
+     </span>
+     <span class="ecosystem-wire wire-right-2">
+     </span>
+     <span class="ecosystem-wire wire-right-3">
+     </span>
+    </div>
+    <div aria-hidden="true" class="ecosystem-diagnostic" id="ecosystem-diagnostic">
+     <div class="ecosystem-diagnostic-backdrop">
+     </div>
+     <div class="ecosystem-diagnostic-panel">
+      <button aria-label="Закрыть" class="ecosystem-diagnostic-close" type="button">
+       ×
+      </button>
+      <div class="ecosystem-diagnostic-main">
+       <div class="ecosystem-diagnostic-kicker">
+        <span data-diagnostic-code="">
+         01
+        </span>
+        BUSINESS IMPACT
+       </div>
+       <h3 data-diagnostic-title="">
+        Power BI и аналитика
+       </h3>
+       <div class="ecosystem-diagnostic-columns">
+        <div class="ecosystem-diagnostic-block is-pain">
+         <span class="ecosystem-diagnostic-label">
+          БОЛЬ
+         </span>
+         <strong data-diagnostic-pain-title="">
+          Цифры приходят слишком поздно
+         </strong>
+         <p data-diagnostic-pain="">
+          Отчёты собираются вручную,
+            данные находятся в разных файлах,
+            а на проверку цифр уходят часы.
+         </p>
+        </div>
+        <div class="ecosystem-diagnostic-arrow">
+         →
+        </div>
+        <div class="ecosystem-diagnostic-block is-solution">
+         <span class="ecosystem-diagnostic-label">
+          РЕШЕНИЕ
+         </span>
+         <strong data-diagnostic-solution-title="">
+          Актуальные данные без ручной сборки
+         </strong>
+         <p data-diagnostic-solution="">
+          Данные собираются и обновляются
+            автоматически, а ключевые показатели
+            доступны тогда, когда они нужны.
+         </p>
+        </div>
+       </div>
+       <div class="ecosystem-diagnostic-impact">
+        <div>
+         <span>
+          TIME
+         </span>
+         <strong data-impact-time="">
+          Меньше ручной работы
+         </strong>
+        </div>
+        <div>
+         <span>
+          COST
+         </span>
+         <strong data-impact-cost="">
+          Меньше операционных затрат
+         </strong>
+        </div>
+        <div>
+         <span>
+          SPEED
+         </span>
+         <strong data-impact-speed="">
+          Быстрее решения
+         </strong>
+        </div>
+       </div>
+       <button class="ecosystem-diagnostic-start" type="button">
+        Проверить свой процесс
+        <span>
+         →
+        </span>
+       </button>
+      </div>
+      <div aria-hidden="true" class="ecosystem-quiz">
+       <div class="ecosystem-quiz-head">
+        <div>
+         <span>
+          QUICK CHECK
+         </span>
+         <strong data-quiz-title="">
+          Мини-диагностика
+         </strong>
+        </div>
+        <div class="ecosystem-quiz-progress">
+         <span data-quiz-progress="">
+          1 / 3
+         </span>
+         <div>
+          <i data-quiz-progress-bar="">
+          </i>
+         </div>
+        </div>
+       </div>
+       <div class="ecosystem-quiz-body">
+        <div class="ecosystem-quiz-question">
+         <span data-quiz-question-number="">
+          ВОПРОС 01
+         </span>
+         <h4 data-quiz-question="">
+          Сколько времени занимает эта операция?
+         </h4>
+         <div class="ecosystem-quiz-options" data-quiz-options="">
+         </div>
+        </div>
+       </div>
+       <div class="ecosystem-quiz-footer">
+        <button class="ecosystem-quiz-back" type="button">
+         ← Назад
+        </button>
+        <span>
+         Выберите один вариант
+        </span>
+       </div>
+      </div>
+      <div aria-hidden="true" class="ecosystem-quiz-result">
+       <div class="ecosystem-result-score">
+        <span>
+         AUTOMATION POTENTIAL
+        </span>
+        <strong data-result-score="">
+         HIGH
+        </strong>
+       </div>
+       <h3 data-result-title="">
+        Здесь есть что автоматизировать
+       </h3>
+       <p data-result-description="">
+        В процессе есть регулярные ручные операции,
+        которые потенциально можно сократить
+        или передать автоматизации.
+       </p>
+       <div class="ecosystem-result-metrics">
+        <div>
+         <span>
+          ПОТЕНЦИАЛ
+         </span>
+         <strong data-result-potential="">
+          Высокий
+         </strong>
+        </div>
+        <div>
+         <span>
+          ВРЕМЯ
+         </span>
+         <strong data-result-time="">
+          Возможная экономия
+         </strong>
+        </div>
+        <div>
+         <span>
+          ЭФФЕКТ
+         </span>
+         <strong data-result-effect="">
+          Более быстрый процесс
+         </strong>
+        </div>
+       </div>
+       <div class="ecosystem-result-summary">
+        <span>
+         ЧТО МЫ УВИДЕЛИ
+        </span>
+        <p data-result-summary="">
+         Результат будет сформирован
+          на основе ваших ответов.
+        </p>
+       </div>
+       <div class="ecosystem-result-actions">
+        <button class="ecosystem-result-send" type="button">
+         Отправить результат Себастьяну
+         <span>
+          ↗
+         </span>
+        </button>
+        <button class="ecosystem-result-restart" type="button">
+         Пройти ещё раз
+        </button>
+       </div>
+       <small class="ecosystem-result-note">
+        Результат теста — ориентировочная
+        оценка потенциала автоматизации.
+       </small>
+      </div>
+     </div>
+    </div>
+    <div class="services-capabilities">
+     <a href="solutions-ru.html">
+      Telegram-боты
+     </a>
+     <a href="solutions-ru.html">
+      Веб-приложения
+     </a>
+     <a href="solutions-ru.html">
+      PWA
+     </a>
+     <a href="solutions-ru.html">
+      PDF и документы
+     </a>
+     <a href="solutions-ru.html">
+      Google Drive
+     </a>
+     <a href="solutions-ru.html">
+      Исследование рынка
+     </a>
+     <a href="solutions-ru.html">
+      Индивидуальная логика
+     </a>
+    </div>
+   </section>
+   <section class="services-process reveal-section">
+    <header class="services-section-head compact">
+     <div class="services-section-kicker">
+      WORKFLOW
+     </div>
+     <h2>
+      Как это работает
+     </h2>
+    </header>
+    <div class="services-process-grid">
+     <article class="services-process-step">
+      <div class="process-step-top">
+       <span class="process-number">
+        1
+       </span>
+       <div class="process-symbol">
+        ⌕
+       </div>
+      </div>
+      <h3>
+       Анализ
+      </h3>
       <p>
-        Это нормально. Опишите процесс своими словами — я сам определю, что здесь лучше использовать и есть ли смысл это автоматизировать.
+       Погружаюсь в задачу, смотрю
+            реальные файлы и нахожу места,
+            где теряется время.
       </p>
-      <a href="contacts-ru.html">Обсудить задачу</a>
-    </section>
+     </article>
+     <div class="process-arrow">
+      →
+     </div>
+     <article class="services-process-step">
+      <div class="process-step-top">
+       <span class="process-number">
+        2
+       </span>
+       <div class="process-symbol">
+        ◇
+       </div>
+      </div>
+      <h3>
+       Логика
+      </h3>
+      <p>
+       Проектирую структуру решения,
+            правила, сценарии и поведение
+            системы.
+      </p>
+     </article>
+     <div class="process-arrow">
+      →
+     </div>
+     <article class="services-process-step">
+      <div class="process-step-top">
+       <span class="process-number">
+        3
+       </span>
+       <div class="process-symbol">
+        ⚙
+       </div>
+      </div>
+      <h3>
+       Автоматизация
+      </h3>
+      <p>
+       Настраиваю интеграции,
+            отчёты, сценарии и интерфейсы.
+            Тестирую на реальных данных.
+      </p>
+     </article>
+     <div class="process-arrow">
+      →
+     </div>
+     <article class="services-process-step">
+      <div class="process-step-top">
+       <span class="process-number">
+        4
+       </span>
+       <div class="process-symbol">
+        ✓
+       </div>
+      </div>
+      <h3>
+       Результат
+      </h3>
+      <p>
+       Вы получаете систему,
+            которая экономит время и продолжает
+            работать после запуска.
+      </p>
+     </article>
+    </div>
+   </section>
+   <section class="services-transformation reveal-section">
+    <header class="services-section-head compact">
+     <div class="services-section-kicker">
+      TRANSFORMATION
+     </div>
+     <h2>
+      Что меняется
+     </h2>
+    </header>
+    <div class="transformation-board">
+     <div class="transformation-before">
+      <div class="transformation-label">
+       ДО
+      </div>
+      <h3>
+       Ручная работа и хаос
+      </h3>
+      <div class="chaos-scene">
+       <div class="chaos-paper paper-a">
+        XLS
+       </div>
+       <div class="chaos-paper paper-b">
+        PDF
+       </div>
+       <div class="chaos-paper paper-c">
+        CSV
+       </div>
+       <div class="chaos-paper paper-d">
+        MAIL
+       </div>
+       <div class="chaos-laptop">
+        <div class="chaos-laptop-screen">
+         <span>
+         </span>
+         <span>
+         </span>
+         <span>
+         </span>
+         <span>
+         </span>
+         <span>
+         </span>
+        </div>
+        <div class="chaos-laptop-base">
+        </div>
+       </div>
+      </div>
+      <ul>
+       <li>
+        Данные в разных файлах
+       </li>
+       <li>
+        Ручные отчёты и копирование
+       </li>
+       <li>
+        Ошибки и дубликаты
+       </li>
+       <li>
+        Время уходит на рутину
+       </li>
+       <li>
+        Сложно масштабировать
+       </li>
+      </ul>
+     </div>
+     <div class="transformation-switch">
+      →
+     </div>
+     <div class="transformation-after">
+      <div class="transformation-label">
+       ПОСЛЕ
+      </div>
+      <h3>
+       Автоматизация и порядок
+      </h3>
+      <div class="dashboard-scene">
+       <div class="dashboard-laptop">
+        <div class="dashboard-screen">
+         <div class="dashboard-ring">
+         </div>
+         <div class="dashboard-bars">
+          <span>
+          </span>
+          <span>
+          </span>
+          <span>
+          </span>
+          <span>
+          </span>
+          <span>
+          </span>
+         </div>
+         <div class="dashboard-line">
+          <i>
+          </i>
+          <i>
+          </i>
+          <i>
+          </i>
+          <i>
+          </i>
+         </div>
+        </div>
+        <div class="dashboard-base">
+        </div>
+       </div>
+       <div class="dashboard-cloud cloud-1">
+        DB
+       </div>
+       <div class="dashboard-cloud cloud-2">
+        BI
+       </div>
+       <div class="dashboard-cloud cloud-3">
+        API
+       </div>
+      </div>
+      <ul>
+       <li>
+        Данные собраны и структурированы
+       </li>
+       <li>
+        Отчёты обновляются автоматически
+       </li>
+       <li>
+        Меньше ошибок ручной работы
+       </li>
+       <li>
+        Больше времени на анализ
+       </li>
+       <li>
+        Процесс легко масштабировать
+       </li>
+      </ul>
+     </div>
+    </div>
+   </section>
+   <section class="services-final-cta reveal-section">
+    <div class="services-final-cta-symbol">
+     <div class="services-final-message-icon">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </div>
+    </div>
+    <div class="services-final-cta-copy">
+     <div class="services-section-kicker">
+      YOUR PROCESS
+     </div>
+     <h2>
+      Обсудить задачу
+     </h2>
+     <p>
+      Расскажите, что сейчас делается вручную,
+          где возникают ошибки или на что уходит
+          слишком много времени. Я предложу вариант решения
+          и оценю сложность.
+     </p>
+     <span>
+      Первая консультация бесплатна.
+     </span>
+    </div>
+    <div class="services-final-cta-action">
+     <a href="contacts-ru.html">
+      Связаться со мной
+      <span>
+       ↗
+      </span>
+     </a>
+     <small>
+      Конфиденциальность информации
+     </small>
+    </div>
+    <div aria-hidden="true" class="services-final-circuit">
+     <i>
+     </i>
+     <i>
+     </i>
+     <i>
+     </i>
+     <i>
+     </i>
+     <i>
+     </i>
+    </div>
+   </section>
   </main>
-
-  <footer>
-  © 2015–2026 Sebastian Automations. Все права защищены.
-  <a href="terms-ru.html">Условия использования</a>
-</footer>
-</body>
+  <div id="site-footer-slot">
+  </div>
+ </body>
 </html>

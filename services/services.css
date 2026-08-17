@@ -3072,3 +3072,37 @@ body::after {
     bottom: 25px;
   }
 }
+
+.project-stage {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.project-stage.is-dragging {
+  cursor: grabbing;
+
+  z-index: 20;
+
+  box-shadow:
+    0 24px 44px rgba(28, 50, 41, 0.18),
+    0 0 0 1px rgba(69, 126, 101, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+
+  transition:
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.services-project-map.is-dragging-stage {
+  cursor: grabbing;
+}
+
+@media (max-width: 760px) {
+  .project-stage {
+    touch-action: auto;
+    cursor: default;
+  }
+}

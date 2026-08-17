@@ -5011,6 +5011,7 @@ if (
     }
   );
 
+  }
   const diagnosticButtons =
   Array.from(
     document.querySelectorAll(

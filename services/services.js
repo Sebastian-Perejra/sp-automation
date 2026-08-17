@@ -2604,4 +2604,344 @@ if (
     }
   );
 }
+  const integrationStage =
+  document.querySelector(
+    ".project-stage-5"
+  );
+
+const integrationCard =
+  document.getElementById(
+    "project-integration-card"
+  );
+
+const integrationClose =
+  integrationCard
+    ? integrationCard.querySelector(
+        ".integration-close"
+      )
+    : null;
+
+if (
+  integrationStage &&
+  integrationCard &&
+  integrationClose
+) {
+  let integrationStartX = 0;
+  let integrationStartY = 0;
+  let integrationWasDragged = false;
+
+  const positionIntegrationCard = () => {
+    const map =
+      integrationStage.closest(
+        ".services-project-map"
+      );
+
+    if (!map) return;
+
+    const mapRect =
+      map.getBoundingClientRect();
+
+    const stageRect =
+      integrationStage
+        .getBoundingClientRect();
+
+    const cardWidth =
+      integrationCard.offsetWidth ||
+      455;
+
+    const cardHeight =
+      integrationCard.offsetHeight ||
+      330;
+
+    const stageCenterX =
+      stageRect.left -
+      mapRect.left +
+      stageRect.width / 2;
+
+    const stageCenterY =
+      stageRect.top -
+      mapRect.top +
+      stageRect.height / 2;
+
+    if (
+      window.innerWidth <= 760
+    ) {
+      const left =
+        (
+          mapRect.width -
+          cardWidth
+        ) / 2;
+
+      const top =
+        Math.max(
+          55,
+          (
+            mapRect.height -
+            cardHeight
+          ) / 2
+        );
+
+      integrationCard.style.left =
+        `${left}px`;
+
+      integrationCard.style.top =
+        `${top}px`;
+
+      integrationCard.style.setProperty(
+        "--integration-origin-x",
+        "50%"
+      );
+
+      integrationCard.style.setProperty(
+        "--integration-origin-y",
+        "100%"
+      );
+
+      return;
+    }
+
+    const gap = 18;
+
+    let left;
+    let top;
+
+    if (
+      stageCenterX <
+      mapRect.width * 0.5
+    ) {
+      left =
+        stageRect.right -
+        mapRect.left +
+        gap;
+    } else {
+      left =
+        stageRect.left -
+        mapRect.left -
+        cardWidth -
+        gap;
+    }
+
+    top =
+      stageCenterY -
+      cardHeight / 2;
+
+    left =
+      Math.max(
+        8,
+        Math.min(
+          left,
+          mapRect.width -
+          cardWidth -
+          8
+        )
+      );
+
+    top =
+      Math.max(
+        8,
+        Math.min(
+          top,
+          mapRect.height -
+          cardHeight -
+          8
+        )
+      );
+
+    integrationCard.style.left =
+      `${left}px`;
+
+    integrationCard.style.top =
+      `${top}px`;
+
+    integrationCard.style.setProperty(
+      "--integration-origin-x",
+      `${stageCenterX - left}px`
+    );
+
+    integrationCard.style.setProperty(
+      "--integration-origin-y",
+      `${stageCenterY - top}px`
+    );
+  };
+
+  const closePreviousStageCards = () => {
+    const cards = [
+      "project-brief-card",
+      "project-analysis-card",
+      "project-architecture-card",
+      "project-development-card"
+    ];
+
+    cards.forEach(
+      id => {
+        const card =
+          document.getElementById(
+            id
+          );
+
+        if (!card) return;
+
+        card.classList.remove(
+          "is-open"
+        );
+
+        card.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+      }
+    );
+
+    for (
+      let stageNumber = 1;
+      stageNumber <= 4;
+      stageNumber++
+    ) {
+      const stage =
+        document.querySelector(
+          `.project-stage-${stageNumber}`
+        );
+
+      if (!stage) continue;
+
+      stage.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+  };
+
+  const openIntegrationCard = () => {
+    closePreviousStageCards();
+
+    positionIntegrationCard();
+
+    integrationCard.classList.add(
+      "is-open"
+    );
+
+    integrationCard.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    integrationStage.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  };
+
+  const closeIntegrationCard = () => {
+    integrationCard.classList.remove(
+      "is-open"
+    );
+
+    integrationCard.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    integrationStage.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  };
+
+  integrationStage.addEventListener(
+    "pointerdown",
+    event => {
+      integrationStartX =
+        event.clientX;
+
+      integrationStartY =
+        event.clientY;
+
+      integrationWasDragged = false;
+    }
+  );
+
+  integrationStage.addEventListener(
+    "pointermove",
+    event => {
+      const distanceX =
+        Math.abs(
+          event.clientX -
+          integrationStartX
+        );
+
+      const distanceY =
+        Math.abs(
+          event.clientY -
+          integrationStartY
+        );
+
+      if (
+        distanceX > 6 ||
+        distanceY > 6
+      ) {
+        integrationWasDragged = true;
+      }
+    }
+  );
+
+  integrationStage.addEventListener(
+    "click",
+    event => {
+      if (
+        integrationWasDragged
+      ) {
+        integrationWasDragged = false;
+        return;
+      }
+
+      event.stopPropagation();
+
+      if (
+        integrationCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        closeIntegrationCard();
+      } else {
+        openIntegrationCard();
+      }
+    }
+  );
+
+  integrationClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeIntegrationCard();
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape"
+      ) {
+        closeIntegrationCard();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (
+        integrationCard.classList.contains(
+          "is-open"
+        )
+      ) {
+        positionIntegrationCard();
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
 })();

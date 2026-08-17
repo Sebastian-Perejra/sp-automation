@@ -7902,3 +7902,622 @@ body::after {
     stroke-dashoffset: 0;
   }
 }
+
+.ecosystem-core {
+  perspective: 1100px;
+  perspective-origin: 50% 45%;
+
+  transform-style: preserve-3d;
+
+  overflow: visible;
+
+  padding: 0;
+  border: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+}
+
+.ecosystem-life-scene,
+.ecosystem-core-door {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 28px;
+}
+
+.ecosystem-life-scene {
+  z-index: 1;
+
+  overflow: hidden;
+
+  border:
+    2px solid
+    rgba(27, 74, 56, 0.72);
+
+  background:
+    radial-gradient(
+      circle at 60% 30%,
+      rgba(209, 178, 117, 0.38),
+      transparent 35%
+    ),
+    linear-gradient(
+      150deg,
+      #395d4d,
+      #17392e 58%,
+      #0d291f
+    );
+
+  box-shadow:
+    inset 0 0 22px
+    rgba(0, 0, 0, 0.22),
+    0 24px 48px
+    rgba(10, 39, 29, 0.19);
+}
+
+.ecosystem-core-door {
+  z-index: 4;
+
+  transform-origin: left center;
+  transform-style: preserve-3d;
+
+  transform:
+    rotateY(0deg);
+
+  transition:
+    transform 0.92s
+    cubic-bezier(0.2, 0.72, 0.18, 1);
+
+  will-change: transform;
+}
+
+.ecosystem-core.is-open
+.ecosystem-core-door {
+  transform:
+    rotateY(-112deg);
+}
+
+.ecosystem-core-door-face {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.ecosystem-core-door-front {
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    28px
+    24px;
+
+  border:
+    1px solid
+    rgba(183, 229, 205, 0.25);
+
+  background:
+    radial-gradient(
+      circle at 50% 5%,
+      rgba(111, 181, 147, 0.18),
+      transparent 46%
+    ),
+    linear-gradient(
+      150deg,
+      #245842,
+      #143d2f 58%,
+      #0c2f24
+    );
+
+  color: #ffffff;
+
+  text-align: center;
+
+  box-shadow:
+    0 28px 56px
+    rgba(15, 53, 40, 0.25),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.14);
+}
+
+.ecosystem-core-door-back {
+  z-index: 1;
+
+  transform:
+    rotateY(180deg);
+
+  border:
+    1px solid
+    rgba(170, 211, 190, 0.15);
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(67, 121, 94, 0.15),
+      transparent 60%
+    ),
+    linear-gradient(
+      145deg,
+      #163d30,
+      #0c2e24 60%,
+      #08241c
+    );
+
+  box-shadow:
+    inset 0 0 0 2px
+    rgba(255, 255, 255, 0.02),
+    inset 0 0 30px
+    rgba(0, 0, 0, 0.2),
+    10px 20px 34px
+    rgba(5, 27, 20, 0.2);
+}
+
+.ecosystem-core-fold {
+  position: absolute;
+
+  top: -1px;
+  right: -1px;
+
+  z-index: 20;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+  border: 0;
+
+  border-radius:
+    0 27px 0 13px;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      225deg,
+      #d9ebdf 0%,
+      #a8cbb7 46%,
+      #205340 48%,
+      #123b2e 100%
+    );
+
+  box-shadow:
+    -6px 7px 13px
+    rgba(4, 28, 20, 0.18);
+
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    filter 0.25s ease;
+}
+
+.ecosystem-core-fold:hover {
+  width: 52px;
+  height: 52px;
+
+  filter:
+    brightness(1.07);
+}
+
+.ecosystem-core-fold::before {
+  content: "";
+
+  position: absolute;
+
+  right: 7px;
+  top: 7px;
+
+  width: 11px;
+  height: 11px;
+
+  border-top:
+    1px solid
+    rgba(29, 80, 59, 0.38);
+
+  border-right:
+    1px solid
+    rgba(29, 80, 59, 0.38);
+}
+
+.ecosystem-core-fold::after {
+  content: "";
+
+  position: absolute;
+
+  left: 7px;
+  bottom: 7px;
+
+  width: 15px;
+  height: 1px;
+
+  transform:
+    rotate(-45deg);
+
+  background:
+    rgba(221, 241, 230, 0.48);
+}
+
+.ecosystem-core-door-front
+.ecosystem-core-orbit {
+  position: relative;
+
+  width: 92px;
+  height: 92px;
+
+  margin-bottom: 12px;
+}
+
+.ecosystem-core-door-front
+.ecosystem-core-chart {
+  position: absolute;
+
+  top: 72px;
+}
+
+.ecosystem-core-door-front
+h3 {
+  margin:
+    8px
+    0
+    0;
+
+  color: #ffffff;
+}
+
+.ecosystem-core-door-front
+p {
+  margin:
+    13px
+    0
+    0;
+
+  color:
+    rgba(232, 243, 237, 0.66);
+}
+
+.ecosystem-core-door-front
+.ecosystem-core-status {
+  margin-top: 18px;
+}
+
+.ecosystem-core-close {
+  position: absolute;
+
+  right: 13px;
+  top: 13px;
+
+  z-index: 10;
+
+  width: 29px;
+  height: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(183, 220, 202, 0.14);
+
+  border-radius: 50%;
+
+  background:
+    rgba(5, 30, 22, 0.34);
+
+  color:
+    rgba(199, 228, 213, 0.68);
+
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.ecosystem-core-close:hover {
+  transform:
+    translateX(-2px);
+
+  background:
+    rgba(54, 105, 80, 0.5);
+
+  color: #ffffff;
+}
+
+.ecosystem-hinge {
+  position: absolute;
+
+  left: -4px;
+
+  width: 9px;
+  height: 42px;
+
+  border:
+    1px solid
+    rgba(187, 220, 203, 0.14);
+
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #071c15,
+      #315f4b,
+      #0b281f
+    );
+
+  box-shadow:
+    2px 2px 8px
+    rgba(0, 0, 0, 0.22);
+}
+
+.ecosystem-hinge-top {
+  top: 40px;
+}
+
+.ecosystem-hinge-bottom {
+  bottom: 40px;
+}
+
+.ecosystem-door-back-rib {
+  position: absolute;
+
+  left: 22px;
+  right: 22px;
+
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(139, 186, 162, 0.12),
+      rgba(195, 224, 208, 0.19),
+      rgba(139, 186, 162, 0.12),
+      transparent
+    );
+}
+
+.ecosystem-door-back-rib.rib-a {
+  top: 28%;
+}
+
+.ecosystem-door-back-rib.rib-b {
+  top: 50%;
+}
+
+.ecosystem-door-back-rib.rib-c {
+  top: 72%;
+}
+
+.ecosystem-door-bolt {
+  position: absolute;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(180, 211, 195, 0.25);
+}
+
+.ecosystem-door-bolt.bolt-a {
+  left: 15px;
+  top: 15px;
+}
+
+.ecosystem-door-bolt.bolt-b {
+  right: 15px;
+  top: 15px;
+}
+
+.ecosystem-door-bolt.bolt-c {
+  left: 15px;
+  bottom: 15px;
+}
+
+.ecosystem-door-bolt.bolt-d {
+  right: 15px;
+  bottom: 15px;
+}
+
+.ecosystem-life-overlay {
+  position: absolute;
+
+  left: 12px;
+  top: 12px;
+
+  z-index: 2;
+
+  display: grid;
+
+  gap: 5px;
+
+  opacity: 0;
+
+  transform:
+    translateY(-6px);
+
+  transition:
+    opacity 0.4s ease 0.35s,
+    transform 0.4s ease 0.35s;
+}
+
+.ecosystem-core.is-open
+.ecosystem-life-overlay {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.ecosystem-life-stat {
+  width: max-content;
+
+  padding:
+    5px
+    7px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.13);
+
+  border-radius: 7px;
+
+  background:
+    rgba(9, 33, 25, 0.56);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ecosystem-life-stat span {
+  display: block;
+
+  color:
+    rgba(223, 241, 231, 0.5);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 4px;
+
+  letter-spacing: 0.12em;
+}
+
+.ecosystem-life-stat strong {
+  display: block;
+
+  margin-top: 1px;
+
+  color:
+    rgba(238, 249, 243, 0.92);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-size: 6px;
+}
+
+.ecosystem-life-deeper {
+  position: absolute;
+
+  left: 50%;
+  bottom: 13px;
+
+  z-index: 4;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    8px
+    12px;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, 7px);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  border-radius: 999px;
+
+  background:
+    rgba(8, 32, 24, 0.62);
+
+  color:
+    rgba(244, 250, 247, 0.94);
+
+  font-size: 7px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  transition:
+    opacity 0.4s ease 0.55s,
+    transform 0.4s ease 0.55s,
+    background 0.2s ease;
+}
+
+.ecosystem-core.is-open
+.ecosystem-life-deeper {
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+}
+
+.ecosystem-life-deeper:hover {
+  background:
+    rgba(19, 59, 44, 0.82);
+}
+
+@media (max-width: 760px) {
+  .ecosystem-life-scene,
+  .ecosystem-core-door,
+  .ecosystem-core-door-face {
+    border-radius: 20px;
+  }
+
+  .ecosystem-core.is-open
+  .ecosystem-core-door {
+    transform:
+      rotateY(-108deg);
+  }
+
+  .ecosystem-core-fold {
+    width: 34px;
+    height: 34px;
+
+    border-radius:
+      0 19px 0 10px;
+  }
+
+  .ecosystem-hinge {
+    height: 31px;
+  }
+
+  .ecosystem-hinge-top {
+    top: 26px;
+  }
+
+  .ecosystem-hinge-bottom {
+    bottom: 26px;
+  }
+}

@@ -4308,4 +4308,106 @@ if (dataFlowMap) {
 
   scheduleRandomDataFlow();
 }
+  const bootProjectMap =
+  document.querySelector(
+    ".services-project-map"
+  );
+
+if (bootProjectMap) {
+  const bootStages =
+    Array.from(
+      bootProjectMap.querySelectorAll(
+        ".project-stage"
+      )
+    );
+
+  const bootReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  if (!bootReducedMotion) {
+    bootProjectMap.classList.add(
+      "is-booting"
+    );
+
+    window.setTimeout(
+      () => {
+        bootProjectMap.classList.add(
+          "boot-core-on"
+        );
+      },
+      180
+    );
+
+    window.setTimeout(
+      () => {
+        bootProjectMap.classList.add(
+          "boot-lines-on"
+        );
+      },
+      520
+    );
+
+    bootStages.forEach(
+      (stage, index) => {
+        window.setTimeout(
+          () => {
+            stage.classList.add(
+              "is-boot-active"
+            );
+
+            window.setTimeout(
+              () => {
+                stage.classList.remove(
+                  "is-boot-active"
+                );
+              },
+              300
+            );
+          },
+          850 + index * 170
+        );
+      }
+    );
+
+    const bootFinishDelay =
+      850 +
+      bootStages.length * 170 +
+      420;
+
+    window.setTimeout(
+      () => {
+        bootProjectMap.classList.remove(
+          "is-booting",
+          "boot-core-on",
+          "boot-lines-on"
+        );
+
+        bootProjectMap.classList.add(
+          "is-boot-complete"
+        );
+
+        const firstStage =
+          bootStages[0];
+
+        if (firstStage) {
+          firstStage.dispatchEvent(
+            new MouseEvent(
+              "click",
+              {
+                bubbles: false
+              }
+            )
+          );
+        }
+      },
+      bootFinishDelay
+    );
+  } else {
+    bootProjectMap.classList.add(
+      "is-boot-complete"
+    );
+  }
+}
 })();

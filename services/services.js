@@ -8894,13 +8894,6 @@ if (capabilityClose) {
   );
 }
 
-  if (capabilityClose) {
-  capabilityClose.addEventListener(
-    "click",
-    closeCapabilityDetail
-  );
-}
-
 const deliverySection =
   document.querySelector(
     ".services-delivery"

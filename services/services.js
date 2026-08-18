@@ -8947,14 +8947,6 @@ const openDeliverySafe =
       return;
     }
 
-    if (
-      !deliverySection.classList.contains(
-        "is-complete"
-      )
-    ) {
-      return;
-    }
-
     deliverySafe.classList.add(
       "is-open"
     );

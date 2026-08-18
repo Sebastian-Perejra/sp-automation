@@ -15984,3 +15984,152 @@ p {
     right: 12px;
   }
 }
+
+.delivery-image-viewer-image {
+  --viewer-parallax-x: 0px;
+  --viewer-parallax-y: 0px;
+
+  transform:
+    translate3d(
+      var(--viewer-parallax-x),
+      var(--viewer-parallax-y),
+      0
+    )
+    scale(1.012);
+
+  transition:
+    transform 0.18s ease-out;
+}
+
+.delivery-image-viewer.is-open
+.delivery-image-viewer-image {
+  animation: none;
+}
+
+.delivery-viewer-link {
+  position: absolute;
+
+  z-index: 5;
+
+  display: block;
+
+  border-radius: 9px;
+
+  opacity: 0;
+
+  pointer-events: auto;
+
+  transition:
+    box-shadow 0.45s ease,
+    opacity 0.45s ease;
+}
+
+.delivery-image-viewer.is-open
+.delivery-viewer-link {
+  opacity: 1;
+}
+
+.delivery-viewer-link-cases {
+  left: 36.5%;
+  top: 11.5%;
+
+  width: 9.5%;
+  height: 8%;
+}
+
+.delivery-viewer-link-price {
+  left: 47%;
+  top: 11.5%;
+
+  width: 8.3%;
+  height: 8%;
+}
+
+.delivery-viewer-link-contact {
+  left: 56.3%;
+  top: 11.5%;
+
+  width: 11%;
+  height: 8%;
+}
+
+.delivery-image-viewer.is-open
+.delivery-viewer-link.is-hinting {
+  animation:
+    deliveryViewerLinkHint
+    1.15s
+    ease
+    1;
+}
+
+.delivery-viewer-link:hover {
+  box-shadow:
+    0 0 0 1px
+    rgba(
+      205,
+      166,
+      93,
+      0.62
+    ),
+    0 0 18px
+    rgba(
+      205,
+      166,
+      93,
+      0.28
+    ),
+    inset 0 0 14px
+    rgba(
+      205,
+      166,
+      93,
+      0.08
+    );
+}
+
+@keyframes deliveryViewerLinkHint {
+  0% {
+    box-shadow: none;
+  }
+
+  35% {
+    box-shadow:
+      0 0 0 1px
+      rgba(
+        205,
+        166,
+        93,
+        0.56
+      ),
+      0 0 20px
+      rgba(
+        205,
+        166,
+        93,
+        0.26
+      );
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .delivery-image-viewer-image {
+    transform: none;
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .delivery-image-viewer-image {
+    transform: none !important;
+  }
+
+  .delivery-viewer-link {
+    animation: none !important;
+  }
+}

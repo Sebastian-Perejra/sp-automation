@@ -8954,14 +8954,19 @@ deliveryImageViewer.setAttribute(
   "aria-hidden",
   "true"
 );
-
+const deliveryImageSrc =
+  servicesLang === "ru"
+    ? "/services/assets/project_finished-ru.webp"
+    : servicesLang === "en"
+      ? "/services/assets/project_finished-en.webp"
+      : "/services/assets/project_finished.webp";
 deliveryImageViewer.innerHTML = `
   <div
     class="delivery-image-viewer-panel"
   >
     <img
       class="delivery-image-viewer-image"
-      src="/services/assets/project_finished.webp"
+      src="${deliveryImageSrc}"
       alt=""
     >
 

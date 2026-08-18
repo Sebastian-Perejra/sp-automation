@@ -16269,3 +16269,77 @@ html[lang="en"]
     inset 0 0 0 1px
     rgba(255, 213, 148, 0.08);
 }
+
+html[lang="ru"]
+.delivery-room-link::after,
+html[lang="en"]
+.delivery-room-link::after,
+html[lang="ru"]
+.delivery-viewer-link::after,
+html[lang="en"]
+.delivery-viewer-link::after {
+  inset: auto;
+
+  left: 50%;
+  top: 50%;
+
+  width: 76%;
+  height: 46%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border: 0;
+
+  border-radius: 5px;
+
+  background:
+    rgba(24, 15, 9, 0.97);
+
+  box-shadow: none;
+
+  color:
+    rgba(224, 171, 93, 0.98);
+
+  font-family:
+    "Roboto Mono",
+    monospace;
+
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+html[lang="ru"]
+.delivery-viewer-link::after,
+html[lang="en"]
+.delivery-viewer-link::after {
+  font-size: 9px;
+}
+
+html[lang="ru"]
+.delivery-room-link::after,
+html[lang="en"]
+.delivery-room-link::after {
+  font-size: 7px;
+}
+
+html[lang="ru"]
+.delivery-room-link:hover::after,
+html[lang="en"]
+.delivery-room-link:hover::after,
+html[lang="ru"]
+.delivery-viewer-link:hover::after,
+html[lang="en"]
+.delivery-viewer-link:hover::after {
+  background:
+    rgba(30, 19, 11, 0.98);
+
+  box-shadow:
+    0 0 10px
+    rgba(205, 157, 91, 0.12);
+}

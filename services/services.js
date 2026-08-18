@@ -8924,6 +8924,94 @@ if (deliverySection) {
       ".delivery-stamp"
     );
 
+  const deliveryStatus =
+  deliverySection.querySelector(
+    ".delivery-core-status"
+  );
+
+const deliveryMetrics =
+  Array.from(
+    deliverySection.querySelectorAll(
+      ".delivery-core-metric"
+    )
+  );
+
+const deliveryHoverLabels = {
+  uk: [
+    "WORKING SOLUTION",
+    "BUSINESS LOGIC",
+    "DATA CONNECTED",
+    "TESTED",
+    "HANDOVER",
+    "SCALABLE"
+  ],
+
+  ru: [
+    "WORKING SOLUTION",
+    "BUSINESS LOGIC",
+    "DATA CONNECTED",
+    "TESTED",
+    "HANDOVER",
+    "SCALABLE"
+  ],
+
+  en: [
+    "WORKING SOLUTION",
+    "BUSINESS LOGIC",
+    "DATA CONNECTED",
+    "TESTED",
+    "HANDOVER",
+    "SCALABLE"
+  ]
+};
+
+const deliveryLangValue =
+  (
+    document.documentElement.lang ||
+    "uk"
+  ).toLowerCase();
+
+const deliveryLang =
+  deliveryLangValue.startsWith("ru")
+    ? "ru"
+    : deliveryLangValue.startsWith("en")
+      ? "en"
+      : "uk";
+
+const deliveryDefaultStatus =
+  "STATUS";
+
+let deliveryStatusTimer =
+  null;
+
+const setDeliveryStatus =
+  text => {
+    if (!deliveryStatus) {
+      return;
+    }
+
+    window.clearTimeout(
+      deliveryStatusTimer
+    );
+
+    deliveryStatus.classList.add(
+      "is-changing"
+    );
+
+    deliveryStatusTimer =
+      window.setTimeout(
+        () => {
+          deliveryStatus.textContent =
+            text;
+
+          deliveryStatus.classList.remove(
+            "is-changing"
+          );
+        },
+        140
+      );
+  };
+
   let deliveryPlayed =
     false;
 
@@ -8965,6 +9053,111 @@ if (deliverySection) {
       );
     };
 
+
+  deliveryCards.forEach(
+  (card, index) => {
+    card.addEventListener(
+      "pointerenter",
+      () => {
+        if (
+          window.innerWidth <= 760
+        ) {
+          return;
+        }
+
+        deliveryCards.forEach(
+          otherCard => {
+            otherCard.classList.toggle(
+              "is-dimmed",
+              otherCard !== card
+            );
+          }
+        );
+
+        card.classList.add(
+          "is-focused"
+        );
+
+        if (deliveryCore) {
+          deliveryCore.classList.add(
+            "has-card-focus"
+          );
+        }
+
+        if (deliveryStatus) {
+          deliveryStatus.classList.add(
+            "is-focused"
+          );
+        }
+
+        const labels =
+          deliveryHoverLabels[
+            deliveryLang
+          ];
+
+        setDeliveryStatus(
+          labels[index] ||
+          deliveryDefaultStatus
+        );
+
+        deliveryMetrics.forEach(
+          (
+            metric,
+            metricIndex
+          ) => {
+            metric.classList.toggle(
+              "is-highlighted",
+              metricIndex ===
+                Math.min(
+                  index,
+                  deliveryMetrics.length -
+                    1
+                )
+            );
+          }
+        );
+      }
+    );
+
+    card.addEventListener(
+      "pointerleave",
+      () => {
+        deliveryCards.forEach(
+          otherCard => {
+            otherCard.classList.remove(
+              "is-dimmed",
+              "is-focused"
+            );
+          }
+        );
+
+        if (deliveryCore) {
+          deliveryCore.classList.remove(
+            "has-card-focus"
+          );
+        }
+
+        if (deliveryStatus) {
+          deliveryStatus.classList.remove(
+            "is-focused"
+          );
+        }
+
+        deliveryMetrics.forEach(
+          metric => {
+            metric.classList.remove(
+              "is-highlighted"
+            );
+          }
+        );
+
+        setDeliveryStatus(
+          deliveryDefaultStatus
+        );
+      }
+    );
+  }
+);
   const runDeliverySequence =
     () => {
       if (deliveryPlayed) {

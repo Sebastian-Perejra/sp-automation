@@ -8937,7 +8937,144 @@ const deliverySafeClose =
   deliverySection.querySelector(
     ".delivery-safe-close"
   );
+const deliverySafeImage =
+  deliverySection.querySelector(
+    ".delivery-safe-image"
+  );
 
+const deliveryImageViewer =
+  document.createElement(
+    "div"
+  );
+
+deliveryImageViewer.className =
+  "delivery-image-viewer";
+
+deliveryImageViewer.setAttribute(
+  "aria-hidden",
+  "true"
+);
+
+deliveryImageViewer.innerHTML = `
+  <div
+    class="delivery-image-viewer-panel"
+  >
+    <img
+      class="delivery-image-viewer-image"
+      src="/services/assets/project_finished.webp"
+      alt=""
+    >
+
+    <button
+      class="delivery-image-viewer-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+`;
+
+document.body.appendChild(
+  deliveryImageViewer
+);
+
+const deliveryImageViewerPanel =
+  deliveryImageViewer.querySelector(
+    ".delivery-image-viewer-panel"
+  );
+
+const deliveryImageViewerClose =
+  deliveryImageViewer.querySelector(
+    ".delivery-image-viewer-close"
+  );
+
+const openDeliveryImageViewer =
+  event => {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    deliveryImageViewer.classList.add(
+      "is-open"
+    );
+
+    deliveryImageViewer.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+  };
+
+const closeDeliveryImageViewer =
+  () => {
+    deliveryImageViewer.classList.remove(
+      "is-open"
+    );
+
+    deliveryImageViewer.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow =
+      "";
+  };
+
+if (deliverySafeImage) {
+  deliverySafeImage.addEventListener(
+    "click",
+    openDeliveryImageViewer
+  );
+}
+
+if (deliveryImageViewerClose) {
+  deliveryImageViewerClose.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      closeDeliveryImageViewer();
+    }
+  );
+}
+
+deliveryImageViewer.addEventListener(
+  "click",
+  event => {
+    if (
+      event.target ===
+      deliveryImageViewer
+    ) {
+      closeDeliveryImageViewer();
+    }
+  }
+);
+
+if (deliveryImageViewerPanel) {
+  deliveryImageViewerPanel.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+    }
+  );
+}
+
+document.addEventListener(
+  "keydown",
+  event => {
+    if (
+      event.key === "Escape" &&
+      deliveryImageViewer.classList.contains(
+        "is-open"
+      )
+    ) {
+      closeDeliveryImageViewer();
+    }
+  }
+);
 const openDeliverySafe = () => {
   deliverySafe.classList.add(
     "is-open"

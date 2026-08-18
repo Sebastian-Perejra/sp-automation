@@ -14416,3 +14416,163 @@ p {
     font-size: 36px;
   }
 }
+.delivery-core-circuit
+.circuit {
+  opacity: 0.28;
+
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease,
+    background 0.45s ease;
+}
+
+.delivery-core-circuit
+.circuit.is-powered {
+  opacity: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(80, 164, 117, 0.22),
+      rgba(87, 205, 133, 0.9)
+    );
+
+  filter:
+    drop-shadow(
+      0 0 4px
+      rgba(72, 201, 123, 0.34)
+    );
+}
+
+.delivery-core-circuit
+.circuit.is-powered::after {
+  background:
+    #64c98c;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(89, 196, 132, 0.09),
+    0 0 13px
+    rgba(75, 215, 131, 0.42);
+}
+
+.delivery-core-panel {
+  transition:
+    transform 0.75s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    ),
+    box-shadow 0.75s ease,
+    filter 0.75s ease;
+}
+
+.services-delivery.is-core-starting
+.delivery-core-panel {
+  transform:
+    translateY(-6px)
+    scale(1.012);
+
+  filter:
+    brightness(1.07);
+}
+
+.services-delivery.is-core-starting
+.delivery-core-panel > strong {
+  text-shadow:
+    0 0 14px
+    rgba(144, 255, 178, 0.18);
+}
+
+.delivery-core-panel.is-powered {
+  animation:
+    deliveryCorePower
+    1.1s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    )
+    both;
+}
+
+.delivery-stamp.is-delivered {
+  animation:
+    deliveryStampHit
+    0.7s
+    cubic-bezier(
+      0.18,
+      0.89,
+      0.32,
+      1.28
+    )
+    both;
+}
+
+@keyframes deliveryCorePower {
+  0% {
+    transform:
+      translateY(-8px)
+      scale(1.025);
+
+    filter:
+      brightness(1);
+  }
+
+  38% {
+    transform:
+      translateY(-11px)
+      scale(1.045);
+
+    filter:
+      brightness(1.13);
+  }
+
+  100% {
+    transform:
+      translateY(-8px)
+      scale(1.025);
+
+    filter:
+      brightness(1.04);
+  }
+}
+
+@keyframes deliveryStampHit {
+  0% {
+    opacity: 0;
+
+    transform:
+      rotate(-14deg)
+      scale(1.28);
+  }
+
+  55% {
+    opacity: 1;
+
+    transform:
+      rotate(-6deg)
+      scale(0.96);
+  }
+
+  100% {
+    opacity: 0.92;
+
+    transform:
+      rotate(-7deg)
+      scale(1.05);
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .delivery-core-panel.is-powered,
+  .delivery-stamp.is-delivered {
+    animation: none;
+  }
+}

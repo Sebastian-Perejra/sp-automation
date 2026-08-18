@@ -14495,8 +14495,7 @@ p {
       1,
       0.3,
       1
-    )
-    both;
+    );
 }
 
 .delivery-stamp.is-delivered {
@@ -14514,30 +14513,32 @@ p {
 
 @keyframes deliveryCorePower {
   0% {
-    transform:
-      translateY(-8px)
-      scale(1.025);
-
     filter:
       brightness(1);
+
+    box-shadow:
+      0 22px 34px
+      rgba(3, 45, 25, 0.28);
   }
 
   38% {
-    transform:
-      translateY(-11px)
-      scale(1.045);
-
     filter:
       brightness(1.13);
+
+    box-shadow:
+      0 28px 48px
+      rgba(3, 45, 25, 0.34),
+      0 0 42px
+      rgba(72, 201, 123, 0.18);
   }
 
   100% {
-    transform:
-      translateY(-8px)
-      scale(1.025);
-
     filter:
       brightness(1.04);
+
+    box-shadow:
+      0 22px 34px
+      rgba(3, 45, 25, 0.28);
   }
 }
 
@@ -15720,4 +15721,30 @@ p {
     transition-duration:
       0.01ms !important;
   }
+}
+.delivery-core-panel {
+  transition:
+    transform 2.35s
+    cubic-bezier(
+      0.16,
+      0.78,
+      0.18,
+      1
+    ),
+    box-shadow 1.6s ease,
+    filter 1.4s ease !important;
+}
+
+.delivery-safe:not(.is-open)
+.delivery-core-panel {
+  transform:
+    rotateY(0deg)
+    translateZ(10px) !important;
+}
+
+.delivery-safe.is-open
+.delivery-core-panel {
+  transform:
+    rotateY(-112deg)
+    translateZ(10px) !important;
 }

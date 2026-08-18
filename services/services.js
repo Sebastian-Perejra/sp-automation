@@ -8938,24 +8938,11 @@ const deliverySafeClose =
     ".delivery-safe-close"
   );
 
-const openDeliverySafe =
-  () => {
-    if (
-      !deliverySafe ||
-      !deliverySafeDoor
-    ) {
-      return;
-    }
-
-    deliverySafe.classList.add(
-      "is-open"
-    );
-
-    deliverySafeDoor.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-  };
+const openDeliverySafe = () => {
+  deliverySafe.classList.add(
+    "is-open"
+  );
+};
 
 const closeDeliverySafe =
   event => {

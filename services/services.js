@@ -8893,4 +8893,200 @@ if (capabilityClose) {
     closeCapabilityDetail
   );
 }
+
+  if (capabilityClose) {
+  capabilityClose.addEventListener(
+    "click",
+    closeCapabilityDetail
+  );
+}
+
+const deliverySection =
+  document.querySelector(
+    ".services-delivery"
+  );
+
+if (deliverySection) {
+  const deliveryCards =
+    Array.from(
+      deliverySection.querySelectorAll(
+        ".delivery-card"
+      )
+    );
+
+  const deliveryCircuits =
+    Array.from(
+      deliverySection.querySelectorAll(
+        ".delivery-core-circuit .circuit"
+      )
+    );
+
+  const deliveryCore =
+    deliverySection.querySelector(
+      ".delivery-core-panel"
+    );
+
+  const deliveryStamp =
+    deliverySection.querySelector(
+      ".delivery-stamp"
+    );
+
+  let deliveryPlayed =
+    false;
+
+  deliveryCircuits.forEach(
+    circuit => {
+      circuit.classList.remove(
+        "is-powered"
+      );
+    }
+  );
+
+  const activateCircuit =
+    index => {
+      const circuitMap = [
+        [0],
+        [1],
+        [2, 3],
+        [4],
+        [5],
+        [6, 7]
+      ];
+
+      const targets =
+        circuitMap[index] || [];
+
+      targets.forEach(
+        circuitIndex => {
+          const circuit =
+            deliveryCircuits[
+              circuitIndex
+            ];
+
+          if (circuit) {
+            circuit.classList.add(
+              "is-powered"
+            );
+          }
+        }
+      );
+    };
+
+  const runDeliverySequence =
+    () => {
+      if (deliveryPlayed) {
+        return;
+      }
+
+      deliveryPlayed =
+        true;
+
+      deliverySection.classList.add(
+        "is-running"
+      );
+
+      deliveryCards.forEach(
+        (card, index) => {
+          window.setTimeout(
+            () => {
+              card.classList.add(
+                "is-ready"
+              );
+
+              activateCircuit(
+                index
+              );
+
+              deliverySection.setAttribute(
+                "data-delivery-active",
+                String(
+                  index + 1
+                )
+              );
+            },
+            350 + index * 480
+          );
+        }
+      );
+
+      const completionDelay =
+        350 +
+        deliveryCards.length *
+          480 +
+        300;
+
+      window.setTimeout(
+        () => {
+          deliverySection.classList.add(
+            "is-core-starting"
+          );
+        },
+        completionDelay
+      );
+
+      window.setTimeout(
+        () => {
+          deliverySection.classList.add(
+            "is-complete"
+          );
+
+          deliverySection.classList.remove(
+            "is-core-starting"
+          );
+
+          if (deliveryCore) {
+            deliveryCore.classList.add(
+              "is-powered"
+            );
+          }
+        },
+        completionDelay + 700
+      );
+
+      window.setTimeout(
+        () => {
+          if (deliveryStamp) {
+            deliveryStamp.classList.add(
+              "is-delivered"
+            );
+          }
+
+          deliverySection.classList.add(
+            "is-delivered"
+          );
+        },
+        completionDelay + 1250
+      );
+    };
+
+  const deliveryObserver =
+    new IntersectionObserver(
+      entries => {
+        entries.forEach(
+          entry => {
+            if (
+              entry.isIntersecting &&
+              entry.intersectionRatio >= 0.25
+            ) {
+              runDeliverySequence();
+
+              deliveryObserver.disconnect();
+            }
+          }
+        );
+      },
+      {
+        threshold: [
+          0.25
+        ]
+      }
+    );
+
+  deliveryObserver.observe(
+    deliverySection
+  );
+}
+
+})();
+  
 })();

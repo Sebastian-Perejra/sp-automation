@@ -14760,3 +14760,27 @@ p {
     transform: none;
   }
 }
+.delivery-core-metric.is-highlighted {
+  color: #f0fff4;
+
+  transform:
+    translateX(2px);
+
+  text-shadow:
+    0 0 10px
+    rgba(108, 238, 150, 0.22);
+}
+
+.delivery-core-metric.is-highlighted i {
+  background:
+    #7bd39b;
+
+  transform:
+    scale(1.35);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(104, 213, 147, 0.09),
+    0 0 13px
+    rgba(88, 231, 143, 0.42);
+}

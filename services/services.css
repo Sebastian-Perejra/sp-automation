@@ -15260,3 +15260,9 @@ p {
     0 16px 28px
     rgba(4, 37, 22, 0.18);
 }
+.delivery-safe.is-open
+.delivery-core-panel {
+  box-shadow:
+    18px 20px 38px
+    rgba(0, 0, 0, 0.28) !important;
+}

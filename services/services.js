@@ -8989,6 +8989,136 @@ const deliveryImageViewerClose =
     ".delivery-image-viewer-close"
   );
 
+const deliveryViewerImage =
+  deliveryImageViewer.querySelector(
+    ".delivery-image-viewer-image"
+  );
+
+const viewerLinksByLang = {
+  uk: [
+    {
+      className:
+        "delivery-viewer-link-cases",
+      href:
+        "solutions.html",
+      label:
+        "Приклади"
+    },
+    {
+      className:
+        "delivery-viewer-link-price",
+      href:
+        "pricing.html",
+      label:
+        "Ціна"
+    },
+    {
+      className:
+        "delivery-viewer-link-contact",
+      href:
+        "contacts.html",
+      label:
+        "Контакти"
+    }
+  ],
+
+  ru: [
+    {
+      className:
+        "delivery-viewer-link-cases",
+      href:
+        "solutions-ru.html",
+      label:
+        "Примеры"
+    },
+    {
+      className:
+        "delivery-viewer-link-price",
+      href:
+        "pricing-ru.html",
+      label:
+        "Цена"
+    },
+    {
+      className:
+        "delivery-viewer-link-contact",
+      href:
+        "contacts-ru.html",
+      label:
+        "Контакты"
+    }
+  ],
+
+  en: [
+    {
+      className:
+        "delivery-viewer-link-cases",
+      href:
+        "solutions-en.html",
+      label:
+        "Examples"
+    },
+    {
+      className:
+        "delivery-viewer-link-price",
+      href:
+        "pricing-en.html",
+      label:
+        "Pricing"
+    },
+    {
+      className:
+        "delivery-viewer-link-contact",
+      href:
+        "contacts-en.html",
+      label:
+        "Contact"
+    }
+  ]
+};
+
+const viewerLinks =
+  viewerLinksByLang[
+    servicesLang
+  ];
+
+viewerLinks.forEach(
+  item => {
+    const link =
+      document.createElement(
+        "a"
+      );
+
+    link.className =
+      `delivery-viewer-link ${item.className}`;
+
+    link.href =
+      item.href;
+
+    link.setAttribute(
+      "aria-label",
+      item.label
+    );
+
+    deliveryImageViewerPanel.appendChild(
+      link
+    );
+  }
+);
+
+const deliveryViewerLinks =
+  Array.from(
+    deliveryImageViewerPanel.querySelectorAll(
+      ".delivery-viewer-link"
+    )
+  );
+
+let deliveryViewerHintTimer =
+  null;
+
+let deliveryViewerHintClearTimer =
+  null;
+
 const openDeliveryImageViewer =
   event => {
     if (event) {
@@ -9006,6 +9136,50 @@ const openDeliveryImageViewer =
 
     document.body.style.overflow =
       "hidden";
+
+    window.clearTimeout(
+      deliveryViewerHintTimer
+    );
+
+    window.clearTimeout(
+      deliveryViewerHintClearTimer
+    );
+
+    deliveryViewerLinks.forEach(
+      link => {
+        link.classList.remove(
+          "is-hinting"
+        );
+      }
+    );
+
+    deliveryViewerHintTimer =
+      window.setTimeout(
+        () => {
+          deliveryViewerLinks.forEach(
+            link => {
+              link.classList.add(
+                "is-hinting"
+              );
+            }
+          );
+
+          deliveryViewerHintClearTimer =
+            window.setTimeout(
+              () => {
+                deliveryViewerLinks.forEach(
+                  link => {
+                    link.classList.remove(
+                      "is-hinting"
+                    );
+                  }
+                );
+              },
+              1200
+            );
+        },
+        700
+      );
   };
 
 const closeDeliveryImageViewer =
@@ -9021,6 +9195,34 @@ const closeDeliveryImageViewer =
 
     document.body.style.overflow =
       "";
+
+    window.clearTimeout(
+      deliveryViewerHintTimer
+    );
+
+    window.clearTimeout(
+      deliveryViewerHintClearTimer
+    );
+
+    deliveryViewerLinks.forEach(
+      link => {
+        link.classList.remove(
+          "is-hinting"
+        );
+      }
+    );
+
+    if (deliveryViewerImage) {
+      deliveryViewerImage.style.setProperty(
+        "--viewer-parallax-x",
+        "0px"
+      );
+
+      deliveryViewerImage.style.setProperty(
+        "--viewer-parallax-y",
+        "0px"
+      );
+    }
   };
 
 if (deliverySafeImage) {
@@ -9058,6 +9260,73 @@ if (deliveryImageViewerPanel) {
     "click",
     event => {
       event.stopPropagation();
+    }
+  );
+}
+
+if (
+  deliveryImageViewer &&
+  deliveryViewerImage
+) {
+  deliveryImageViewer.addEventListener(
+    "pointermove",
+    event => {
+      if (
+        window.innerWidth <= 900
+      ) {
+        return;
+      }
+
+      const rect =
+        deliveryImageViewer
+          .getBoundingClientRect();
+
+      const x =
+        event.clientX -
+        rect.left;
+
+      const y =
+        event.clientY -
+        rect.top;
+
+      const normalizedX =
+        x / rect.width -
+        0.5;
+
+      const normalizedY =
+        y / rect.height -
+        0.5;
+
+      deliveryViewerImage.style.setProperty(
+        "--viewer-parallax-x",
+        `${normalizedX * 10}px`
+      );
+
+      deliveryViewerImage.style.setProperty(
+        "--viewer-parallax-y",
+        `${normalizedY * 7}px`
+      );
+    },
+    {
+      passive: true
+    }
+  );
+
+  deliveryImageViewer.addEventListener(
+    "pointerleave",
+    () => {
+      deliveryViewerImage.style.setProperty(
+        "--viewer-parallax-x",
+        "0px"
+      );
+
+      deliveryViewerImage.style.setProperty(
+        "--viewer-parallax-y",
+        "0px"
+      );
+    },
+    {
+      passive: true
     }
   );
 }

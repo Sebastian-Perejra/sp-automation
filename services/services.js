@@ -8923,6 +8923,84 @@ if (deliverySection) {
     deliverySection.querySelector(
       ".delivery-stamp"
     );
+  const deliverySafe =
+  deliverySection.querySelector(
+    ".delivery-safe"
+  );
+
+const deliverySafeDoor =
+  deliverySection.querySelector(
+    ".delivery-core-panel"
+  );
+
+const deliverySafeClose =
+  deliverySection.querySelector(
+    ".delivery-safe-close"
+  );
+
+const openDeliverySafe =
+  () => {
+    if (
+      !deliverySafe ||
+      !deliverySafeDoor
+    ) {
+      return;
+    }
+
+    if (
+      !deliverySection.classList.contains(
+        "is-complete"
+      )
+    ) {
+      return;
+    }
+
+    deliverySafe.classList.add(
+      "is-open"
+    );
+
+    deliverySafeDoor.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  };
+
+const closeDeliverySafe =
+  event => {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (
+      !deliverySafe ||
+      !deliverySafeDoor
+    ) {
+      return;
+    }
+
+    deliverySafe.classList.remove(
+      "is-open"
+    );
+
+    deliverySafeDoor.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  };
+
+if (deliverySafeDoor) {
+  deliverySafeDoor.addEventListener(
+    "click",
+    openDeliverySafe
+  );
+}
+
+if (deliverySafeClose) {
+  deliverySafeClose.addEventListener(
+    "click",
+    closeDeliverySafe
+  );
+}
 
   const deliveryStatus =
   deliverySection.querySelector(

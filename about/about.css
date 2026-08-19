@@ -608,38 +608,25 @@ body {
 
 .about-hero__portrait {
   top: 0;
-  left: -8%;
-  right: -10%;
+  left: 0;
+  right: 0;
   bottom: 0;
   width: auto;
   height: auto;
   border-radius: 14px;
-  -webkit-mask-image:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 0, 0, 0.32) 14%,
-      rgba(0, 0, 0, 0.92) 34%,
-      #000 48%,
-      #000 100%
-    );
-  mask-image:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 0, 0, 0.32) 14%,
-      rgba(0, 0, 0, 0.92) 34%,
-      #000 48%,
-      #000 100%
-    );
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .about-hero__portrait-image {
-  object-position: 38% 44%;
+  object-position: 40% 38%;
+  filter:
+    saturate(0.88)
+    contrast(1.03)
+    brightness(0.82);
 }
 
-  .about-system-node--two,
-  .about-system-node--four {
+  .about-system-node--two {
     right: 0;
   }
 

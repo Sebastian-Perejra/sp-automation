@@ -1094,7 +1094,9 @@ body {
   letter-spacing: -0.055em;
 }
 
-.about-method__heading h2 span {
+.about-method__heading h2 span,
+.about-thinking__heading h2 span,
+.about-history__heading h2 span {
   display: block;
   color: transparent;
   -webkit-text-fill-color: transparent;
@@ -1968,8 +1970,18 @@ body {
   }
 }
 
-.about-method__heading h2 span {
+.about-method__heading h2 span,
+.about-thinking__heading h2 span,
+.about-history__heading h2 span {
   animation: aboutGradientShift 8s ease-in-out infinite;
+}
+
+.about-thinking__heading h2 span {
+  animation-delay: -2.5s;
+}
+
+.about-history__heading h2 span {
+  animation-delay: -5s;
 }
 
 .about-experience {
@@ -2519,10 +2531,6 @@ body {
   letter-spacing: -0.055em;
 }
 
-.about-thinking__heading h2 span {
-  display: block;
-  color: var(--about-green-soft);
-}
 
 .about-thinking__heading p {
   max-width: 390px;
@@ -3079,11 +3087,6 @@ strong {
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.055em;
-}
-
-.about-history__heading h2 span {
-  display: block;
-  color: var(--about-green-soft);
 }
 
 .about-history__heading p {

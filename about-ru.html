@@ -1,1014 +1,948 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
-  <title>Обо мне – Себастьян Перейра</title>
-  <link rel="canonical" href="https://sp-automation.com/about-ru.html">
-  <link rel="icon" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root {
-      --page-bg: #f7f4ef;
-      --surface: #ffffff;
-      --surface-soft: #fbfaf7;
-      --surface-green: #f2f7f3;
-
-      --text-main: #242321;
-      --text-secondary: #64605b;
-      --text-muted: #817c75;
-
-      --green: #35594b;
-      --green-hover: #29483c;
-
-      --blue: #2f6f9f;
-      --blue-hover: #255a82;
-
-      --border: #e8e1d8;
-      --border-green: #d5e3d8;
-      --border-blue: #d9e5ee;
-
-      --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
-      --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
-
-      --radius-large: 28px;
-      --radius-card: 22px;
-
-      --font-main: "Manrope", sans-serif;
-      --font-tech: "Roboto Mono", monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: var(--font-main);
-      background:
-        radial-gradient(
-          circle at top left,
-          rgba(221, 233, 224, 0.5),
-          transparent 34%
-        ),
-        radial-gradient(
-          circle at top right,
-          rgba(222, 232, 239, 0.45),
-          transparent 30%
-        ),
-        var(--page-bg);
-      color: var(--text-main);
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a,
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 244, 239, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .topbar-inner {
-  width: min(100%, 1080px);
-  min-height: 72px;
-  margin: 0 auto;
-  padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 28px;
-}
-
-    .home-link {
-      color: var(--green);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-      transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .home-link:hover {
-      color: var(--green-hover);
-      transform: translateX(-2px);
-    }
-
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      margin-left: auto;
-    }
-
-    .desktop-nav a {
-      position: relative;
-      color: #52504c;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-
-    .desktop-nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 100%;
-      bottom: -7px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--green);
-      transition: right 0.22s ease;
-    }
-
-    .desktop-nav a:hover {
-      color: var(--green);
-    }
-
-    .desktop-nav a:hover::after {
-      right: 0;
-    }
-
-    .lang-switcher {
-  display: flex;
-  gap: 7px;
-  justify-self: end;
-}
-
-    .lang-switcher button {
-      min-width: 38px;
-      height: 34px;
-      padding: 0 9px;
-      border: 1px solid #d6cec4;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      color: #5f5a54;
-      font-family: var(--font-tech);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition:
-        color 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .lang-switcher button:hover {
-      border-color: var(--green);
-      background: var(--green);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .page {
-      width: min(100%, 1080px);
-      margin: 0 auto;
-      padding:
-        72px
-        24px
-        max(104px, env(safe-area-inset-bottom));
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 34px;
-      padding: 64px 56px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 42px;
-      align-items: center;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-large);
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.98),
-          rgba(249, 247, 243, 0.98)
-        );
-      box-shadow: var(--shadow-soft);
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      top: -130px;
-      left: -100px;
-      border-radius: 50%;
-      background: rgba(196, 217, 202, 0.4);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -90px;
-      bottom: -130px;
-      border-radius: 50%;
-      background: rgba(205, 218, 228, 0.45);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      margin: 0 0 24px;
-      color: var(--green);
-      font-size: clamp(3rem, 7vw, 5rem);
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 730px;
-      color: var(--text-secondary);
-      font-size: 16px;
-      line-height: 1.9;
-    }
-
-    .hero-badge {
-      min-width: 185px;
-      padding: 26px 24px;
-      border: 1px solid var(--border-green);
-      border-radius: 20px;
-      background: var(--surface-green);
-      color: var(--green);
-      text-align: center;
-      font-family: var(--font-tech);
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.7;
-      box-shadow: 0 10px 28px rgba(47, 70, 57, 0.05);
-    }
-
-    .section {
-      margin-top: 26px;
-      padding: 42px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: var(--shadow-card);
-    }
-
-    .section h2 {
-      margin: 0 0 24px;
-      color: var(--green);
-      font-size: clamp(1.65rem, 3vw, 2.1rem);
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: -0.025em;
-    }
-
-    .section p {
-      margin: 0 0 18px;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.85;
-    }
-
-    .section p:last-child {
-      margin-bottom: 0;
-    }
-
-    .section ul {
-      margin: 14px 0 0;
-      padding-left: 22px;
-      color: var(--text-secondary);
-    }
-
-    .section li {
-      margin-bottom: 12px;
-      padding-left: 4px;
-      font-size: 15px;
-      line-height: 1.75;
-    }
-
-    .section li:last-child {
-      margin-bottom: 0;
-    }
-
-    .section li::marker {
-      color: var(--green);
-    }
-
-    .highlight {
-      margin-top: 24px;
-      padding: 22px 24px;
-      border: 1px solid var(--border-green);
-      border-left: 4px solid var(--green);
-      border-radius: 16px;
-      background: var(--surface-green);
-      color: #46564d;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .capabilities {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .capability {
-      padding: 22px;
-      border: 1px solid #e8e2da;
-      border-radius: 17px;
-      background: var(--surface-soft);
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .capability:hover {
-      border-color: #cbd9ce;
-      box-shadow: 0 10px 28px rgba(47, 70, 57, 0.07);
-      transform: translateY(-2px);
-    }
-
-    .capability strong {
-      display: block;
-      margin-bottom: 9px;
-      color: var(--green);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .capability span {
-      display: block;
-      color: var(--text-secondary);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .process {
-      counter-reset: step;
-      display: grid;
-      gap: 13px;
-      margin-top: 18px;
-    }
-
-    .process-step {
-      position: relative;
-      padding: 19px 20px 19px 64px;
-      border: 1px solid #e8e2da;
-      border-radius: 16px;
-      background: var(--surface-soft);
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.7;
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .process-step:hover {
-      border-color: #cbd9ce;
-      box-shadow: 0 10px 26px rgba(47, 70, 57, 0.06);
-      transform: translateY(-1px);
-    }
-
-    .process-step::before {
-      counter-increment: step;
-      content: counter(step);
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      width: 29px;
-      height: 29px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--green);
-      color: #ffffff;
-      font-family: var(--font-tech);
-      font-size: 12px;
-      font-weight: 600;
-      transform: translateY(-50%);
-    }
-
-    .quote {
-      margin: 24px 0 0;
-      padding: 28px 30px;
-      border-radius: 18px;
-      background:
-        linear-gradient(
-          135deg,
-          #2a3430 0%,
-          #34413c 100%
-        );
-      color: #ffffff;
-      font-size: 17px;
-      font-weight: 500;
-      line-height: 1.75;
-      text-align: center;
-      box-shadow: 0 14px 34px rgba(34, 44, 40, 0.16);
-    }
-
-    .cta {
-      margin-top: 32px;
-      padding: 54px 38px;
-      border: 1px solid var(--border-blue);
-      border-radius: var(--radius-card);
-      background:
-        linear-gradient(
-          135deg,
-          #edf4f8 0%,
-          #f8f8f5 100%
-        );
-      box-shadow: var(--shadow-card);
-      text-align: center;
-    }
-
-    .cta h2 {
-      margin: 0 0 14px;
-      color: #2e4d5f;
-      font-size: clamp(1.75rem, 4vw, 2.35rem);
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: -0.03em;
-    }
-
-    .cta p {
-      max-width: 700px;
-      margin: 0 auto 28px;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .cta a {
-      display: inline-flex;
-      min-height: 50px;
-      padding: 0 24px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: var(--blue);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(47, 111, 159, 0.2);
-      transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .cta a:hover {
-      background: var(--blue-hover);
-      box-shadow: 0 14px 30px rgba(47, 111, 159, 0.26);
-      transform: translateY(-2px);
-    }
-
-    footer {
-      padding:
-        34px
-        20px
-        max(34px, env(safe-area-inset-bottom));
-      border-top: 1px solid #dfd8cf;
-      background: rgba(244, 240, 234, 0.96);
-      color: var(--text-muted);
-      font-size: 12px;
-      text-align: center;
-    }
-    footer a,
-footer a:visited {
-  color: inherit;
-  text-decoration: none;
-  font: inherit;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-    @media (max-width: 900px) {
-      .topbar-inner {
-        gap: 16px;
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      .desktop-nav {
-        gap: 18px;
-      }
-
-      .desktop-nav a {
-        font-size: 13px;
-      }
-
-      .hero {
-        padding: 54px 36px;
-      }
-
-      .section {
-        padding: 34px;
-      }
-    }
-
-    @media (max-width: 760px) {
-  .topbar-inner {
-    min-height: 64px;
-    padding:
-      max(12px, env(safe-area-inset-top))
-      14px
-      12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-  }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .lang-switcher {
-        margin-left: auto;
-      }
-
-      .page {
-        padding:
-          36px
-          14px
-          max(56px, env(safe-area-inset-bottom));
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 28px;
-        padding: 42px 22px;
-        border-radius: 22px;
-        text-align: center;
-      }
-
-      .hero h1 {
-        margin-bottom: 20px;
-        font-size: clamp(2.7rem, 14vw, 3.8rem);
-      }
-
-      .hero p {
-        font-size: 15px;
-        line-height: 1.8;
-      }
-
-      .hero-badge {
-        width: fit-content;
-        min-width: 0;
-        margin: 0 auto;
-        padding: 18px 22px;
-        font-size: 12px;
-      }
-
-      .section {
-        margin-top: 18px;
-        padding: 28px 20px;
-        border-radius: 18px;
-      }
-
-      .section h2 {
-        margin-bottom: 20px;
-        font-size: 1.6rem;
-      }
-
-      .section p,
-      .section li {
-        font-size: 14px;
-      }
-
-      .capabilities {
-        grid-template-columns: 1fr;
-        gap: 11px;
-      }
-
-      .capability {
-        padding: 18px;
-      }
-
-      .process-step {
-        padding: 17px 16px 17px 56px;
-        font-size: 13px;
-      }
-
-      .process-step::before {
-        left: 16px;
-      }
-
-      .quote {
-        padding: 24px 20px;
-        font-size: 15px;
-      }
-
-      .cta {
-        margin-top: 22px;
-        padding: 38px 20px;
-        border-radius: 18px;
-      }
-
-      .cta h2 {
-        font-size: 1.8rem;
-      }
-
-      .cta p {
-        font-size: 14px;
-      }
-
-      .cta a {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 390px) {
-      .home-link {
-        font-size: 12px;
-      }
-
-      .lang-switcher {
-        gap: 5px;
-      }
-
-      .lang-switcher button {
-        min-width: 34px;
-        height: 31px;
-        padding: 0 7px;
-        font-size: 10px;
-      }
-
-      .hero {
-        padding-left: 17px;
-        padding-right: 17px;
-      }
-
-      .section {
-        padding-left: 17px;
-        padding-right: 17px;
-      }
-
-      .highlight {
-        padding: 18px;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="/assistant.css">
-  <script src="/assistant.js" defer></script>
-  <link rel="stylesheet" href="nav-font-kaleidoscope.css?v=4">
-  <script src="nav-font-kaleidoscope.js?v=4" defer></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>
+    Обо мне — Себастьян Перейра | Автоматизация бизнес-процессов
+  </title>
+<meta content="Себастьян Перейра — автоматизация бизнес-процессов, работа с данными, Excel, Power Query, Power BI, Google Apps Script, ERP, MES и CRM." name="description"/>
+<link href="https://sp-automation.com/about-ru.html" rel="canonical"/>
+<link href="https://sp-automation.com/about.html" hreflang="uk" rel="alternate"/>
+<link href="https://sp-automation.com/about-en.html" hreflang="en" rel="alternate"/>
+<link href="https://sp-automation.com/about-ru.html" hreflang="ru" rel="alternate"/>
+<link href="https://sp-automation.com/about.html" hreflang="x-default" rel="alternate"/>
+<link href="/favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;family=Roboto+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="/components/components.css" rel="stylesheet"/>
+<link href="/about/about.css?v=6" rel="stylesheet"/>
+<link href="/assistant.css" rel="stylesheet"/>
+<link href="/consent/consent.css" rel="stylesheet"/>
+<link href="/nav-font-kaleidoscope.css?v=4" rel="stylesheet"/>
+<script defer="" src="/components/components.js"></script>
+<script defer="" src="/about/about.js?v=5"></script>
+<script defer="" src="/assistant.js"></script>
+<script defer="" src="/consent/consent.js"></script>
+<script defer="" src="/nav-font-kaleidoscope.js?v=4"></script>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index-ru.html">
-        ← На главную
-      </a>
-
-      <nav class="desktop-nav">
-        <a href="services-ru.html">Услуги</a>
-        <a href="pricing-ru.html">Ценовая политика</a>
-        <a href="solutions-ru.html">Решения</a>
-        <a href="faq-ru.html">FAQ</a>
-        <a href="contacts-ru.html">Контакты</a>
-      </nav>
-
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='about.html'">
-          UA
-        </button>
-
-        <button type="button" onclick="location.href='about-en.html'">
-          EN
-        </button>
-
-        <button type="button" onclick="location.href='about-ru.html'">
-          RU
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="page">
-    <section class="hero">
-      <div>
-        <h1>Обо мне</h1>
-
-        <p>
-          Я занимаюсь автоматизацией рабочих процессов — от сложных
-          Excel-файлов и Google Таблиц до Power BI, веб-приложений,
-          Telegram-ботов, интеграций и аналитических решений для бизнеса.
-        </p>
-      </div>
-
-      <div class="hero-badge">
-        Не просто код.<br>
-        Рабочая система.
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Что я делаю на самом деле</h2>
-
-      <p>
-        Моя задача — не просто написать формулу или скрипт. Сначала я
-        разбираюсь, как работает процесс, где возникают ошибки, что люди делают
-        вручную и какой результат им на самом деле нужен.
-      </p>
-
-      <p>
-        После этого строю решение, которое убирает лишние действия,
-        сокращает количество ошибок и делает процесс понятнее
-        для тех, кто им пользуется.
-      </p>
-
-      <div class="highlight">
-        Я не пытаюсь автоматизировать всё ради автоматизации. Если задачу
-        проще решить нормальной формулой, я не буду строить для неё
-        космический корабль.
-      </div>
-    </section>
-
-    <section class="section">
-    <h2>Как всё начиналось</h2>
-
-    <p>
-        Когда я впервые увидел компьютер в начале 2000-х годов, я не знал,
-        что такое Excel, формулы, макросы или автоматизация. Я даже не
-        подозревал, что для того, чтобы посчитать «два плюс два», формула
-        должна начинаться со знака «=».
-    </p>
-
-    <p>
-        Потом были месяцы и годы практики, сотни ошибок, сотни тысяч строк 
-        кода и постоянное желание понять, как всё работает на самом деле.
-    </p>
-
-    <p>
-        Со временем я понял, что самый ценный ресурс — это время. Нет
-        никакого смысла бесконечно переносить данные вручную, проверять одни
-        и те же цифры, копировать информацию между таблицами или тратить часы
-        на рутинную работу, если её можно поручить системе.
-    </p>
-
-    <p>
-        Именно поэтому мне нравится автоматизация. Мне нравится находить
-        повторяющиеся процессы, упрощать их и превращать часы монотонной
-        работы в несколько секунд работы системы.
-    </p>
-
-    <div class="highlight">
-        Всё началось с простого вопроса: почему «два плюс два» не работает
-        без знака «=»?
-    </div>
+<div id="site-header-slot"></div>
+<main class="about-page">
+<section class="about-hero" id="about-hero">
+<div class="about-hero__grid">
+<div class="about-hero__content">
+<div class="about-hero__eyebrow">
+<span aria-hidden="true" class="about-hero__eyebrow-dot"></span>
+<span>
+              БИЗНЕС · ДАННЫЕ · СИСТЕМЫ · АВТОМАТИЗАЦИЯ
+            </span>
+</div>
+<h1 class="about-hero__title">
+            Sebastian
+            <span>Perejra</span>
+</h1>
+<p class="about-hero__statement">
+            Превращаю сложность
+            <span>в ясность.</span>
+</p>
+<p class="about-hero__description">
+            Помогаю бизнесу разбираться в сложных процессах, наводить порядок в данных и создавать системы, которые убирают ручную работу и поддерживают реальные рабочие процессы.
+          </p>
+<div class="about-hero__facts">
+<div class="about-hero__fact">
+<span class="about-hero__fact-value">
+                11+
+              </span>
+<span class="about-hero__fact-label">
+                лет практического опыта
+              </span>
+</div>
+<div class="about-hero__fact">
+<span class="about-hero__fact-value">
+                ПРОЦЕССЫ
+              </span>
+<span class="about-hero__fact-label">
+                опыт внутри реальных процессов
+              </span>
+</div>
+<div class="about-hero__fact">
+<span class="about-hero__fact-value">
+                ↓
+              </span>
+<span class="about-hero__fact-label">
+                меньше ручной работы
+              </span>
+</div>
+</div>
+</div>
+<div class="about-hero__visual">
+<div aria-hidden="true" class="about-hero__system">
+<div class="about-system-node about-system-node--one">
+              ERP
+            </div>
+<div class="about-system-node about-system-node--two">
+              ДАННЫЕ
+            </div>
+<div class="about-system-node about-system-node--three">
+              MES
+            </div>
+<div class="about-system-node about-system-node--five">
+              BI
+            </div>
+<svg class="about-system-lines" preserveaspectratio="none" viewbox="0 0 600 620">
+<path d="M68 132
+                   C168 90 195 195 296 168
+                   S424 78 538 128"></path>
+<path d="M42 286
+                   C150 218 207 335 310 274
+                   S440 236 565 302"></path>
+<path d="M80 468
+                   C176 390 218 506 326 438
+                   S456 382 548 456"></path>
+</svg>
+</div>
+<div class="about-hero__portrait">
+<img alt="Иллюстративный образ специалиста в производственной среде" class="about-hero__portrait-image" src="/about/assets/sebastian1.webp"/>
+</div>
+<div aria-hidden="true" class="about-hero__scanline"></div>
+<div class="about-hero__status">
+<span aria-hidden="true" class="about-hero__status-dot"></span>
+<span>
+              АНАЛИЗ ПРОЦЕССА
+            </span>
+<strong>
+              АКТИВЕН
+            </strong>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="about-hero__flow">
+<svg preserveaspectratio="none" viewbox="0 0 1200 120">
+<path d="M0 62
+               C50 5 84 116 132 42
+               C174 -22 212 128 258 54
+               C302 -14 330 118 380 60
+               C426 10 450 92 500 64
+               C552 36 568 78 620 62
+               C684 43 710 70 770 62
+               C842 53 884 64 940 62
+               C1024 60 1102 62 1200 62"></path>
+</svg>
+</div>
+<div class="about-hero__scroll">
+<span>
+          ЛИСТАЙТЕ ДАЛЬШЕ
+        </span>
+<span aria-hidden="true" class="about-hero__scroll-line"></span>
+</div>
 </section>
-    <section class="section">
-      <h2>С какими задачами ко мне обращаются</h2>
-
-      <div class="capabilities">
-        <div class="capability">
-          <strong>Excel и Google Sheets</strong>
-          <span>
-            Формулы, макросы, сложные расчёты, проверки,
-            сведение данных и автоматические отчёты.
+<section class="about-origin">
+<div class="about-origin__inner">
+<div class="about-origin__content">
+<div class="about-section-label">
+<span>02</span>
+<strong>СНАЧАЛА ПРОЦЕССЫ</strong>
+</div>
+<h2 class="about-origin__title">
+            Я пришёл из процессов,
+            <span>а не из кода.</span>
+</h2>
+<p class="about-origin__lead">
+            Более 11 лет я работаю внутри реальных бизнес- и производственных процессов — там, где заказ проходит путь от клиента к системе, производству, данным и отчётности.
+          </p>
+<p class="about-origin__text">
+            Я видел, как ERP, MES, CRM, Excel, отчёты и люди взаимодействуют между собой не на схеме, а в ежедневной работе. Где возникают задержки. Где данные дублируются. Где статус заказа в системе не совпадает с тем, что происходит на самом деле.
+          </p>
+<p class="about-origin__text">
+            Именно поэтому для меня автоматизация начинается не с выбора технологии. Сначала нужно понять, как работает сам процесс и где он реально ломается.
+          </p>
+<div class="about-origin__quote">
+<span>
+              СНАЧАЛА ПРОЦЕСС
+            </span>
+<strong>
+              Технология — потом.
+            </strong>
+</div>
+</div>
+<div class="about-origin__map">
+<div class="about-origin__map-head">
+<span>
+              РЕАЛЬНЫЙ ПРОЦЕСС
+            </span>
+<strong>
+              ОТ ЗАКАЗА ДО РЕЗУЛЬТАТА
+            </strong>
+</div>
+<div class="about-origin__flow">
+<div class="about-origin__node">
+<span>01</span>
+<strong>Клиент</strong>
+<small>запрос</small>
+</div>
+<div class="about-origin__connector">
+<span></span>
+</div>
+<div class="about-origin__node">
+<span>02</span>
+<strong>Заказ</strong>
+<small>требования</small>
+</div>
+<div class="about-origin__connector">
+<span></span>
+</div>
+<div class="about-origin__node">
+<span>03</span>
+<strong>ERP</strong>
+<small>бизнес-данные</small>
+</div>
+<div class="about-origin__connector">
+<span></span>
+</div>
+<div class="about-origin__node">
+<span>04</span>
+<strong>MES</strong>
+<small>выполнение</small>
+</div>
+<div class="about-origin__connector">
+<span></span>
+</div>
+<div class="about-origin__node">
+<span>05</span>
+<strong>Производство</strong>
+<small>реальный процесс</small>
+</div>
+<div class="about-origin__connector">
+<span></span>
+</div>
+<div class="about-origin__node">
+<span>06</span>
+<strong>Данные</strong>
+<small>контроль</small>
+</div>
+<div class="about-origin__connector">
+<span></span>
+</div>
+<div class="about-origin__node">
+<span>07</span>
+<strong>Отчётность</strong>
+<small>решения</small>
+</div>
+</div>
+<div class="about-origin__problem about-origin__problem--one">
+            дублирование данных
+          </div>
+<div class="about-origin__problem about-origin__problem--two">
+            ручной шаг
+          </div>
+<div class="about-origin__problem about-origin__problem--three">
+            несоответствие статуса
+          </div>
+<div class="about-origin__map-footer">
+<span></span>
+<p>
+              Проблема редко бывает в одном инструменте. Обычно она возникает в связях между ними.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<div class="about-photo-break about-photo-break--left">
+<div class="about-photo-break__frame">
+<img alt="" src="/about/assets/server_room_tech.webp"/>
+</div>
+</div>
+<section class="about-method">
+<div class="about-method__head">
+<div class="about-section-label">
+<span>03</span>
+<strong>КАК Я РАБОТАЮ</strong>
+</div>
+<div class="about-method__heading">
+<h2>
+            Сначала понять.
+            <span>Потом автоматизировать.</span>
+</h2>
+<p>
+            Я не начинаю с инструмента. Я начинаю с вопроса: что здесь на самом деле происходит?
+          </p>
+</div>
+</div>
+<div class="about-method__flow">
+<article class="about-method__step">
+<div class="about-method__icon">
+<span></span>
+</div>
+<div class="about-method__number">
+            01
+          </div>
+<h3>
+            Понять
+          </h3>
+<p>
+            Разобрать процесс, данные, людей и реальный порядок работы.
+          </p>
+<div class="about-method__question">
+            ЧТО ПРОИСХОДИТ?
+          </div>
+</article>
+<div aria-hidden="true" class="about-method__link">
+<span></span>
+</div>
+<article class="about-method__step">
+<div class="about-method__icon">
+<span></span>
+</div>
+<div class="about-method__number">
+            02
+          </div>
+<h3>
+            Спросить «почему?»
+          </h3>
+<p>
+            Найти лишние шаги, дублирование, зависимости и слабые места.
+          </p>
+<div class="about-method__question">
+            ПОЧЕМУ ИМЕННО ТАК?
+          </div>
+</article>
+<div aria-hidden="true" class="about-method__link">
+<span></span>
+</div>
+<article class="about-method__step">
+<div class="about-method__icon">
+<span></span>
+</div>
+<div class="about-method__number">
+            03
+          </div>
+<h3>
+            Упростить
+          </h3>
+<p>
+            Убрать лишнее и оставить логику, которая действительно нужна.
+          </p>
+<div class="about-method__question">
+            ЧТО МОЖНО УБРАТЬ?
+          </div>
+</article>
+<div aria-hidden="true" class="about-method__link">
+<span></span>
+</div>
+<article class="about-method__step">
+<div class="about-method__icon">
+<span></span>
+</div>
+<div class="about-method__number">
+            04
+          </div>
+<h3>
+            Автоматизировать
+          </h3>
+<p>
+            И только после этого построить систему, которая работает стабильно.
+          </p>
+<div class="about-method__question">
+            ТЕПЕРЬ СТРОИМ.
+          </div>
+</article>
+</div>
+<div class="about-method__result">
+<span>
+          ПРОЦЕСС
+        </span>
+<div aria-hidden="true" class="about-method__result-line"></div>
+<strong>
+          Меньше сложности. Меньше ручных шагов. Больше контроля.
+        </strong>
+</div>
+</section>
+<div class="about-photo-break about-photo-break--right">
+<div class="about-photo-break__frame">
+<img alt="" src="/about/assets/Holographic%20Analytics%20Workspace.webp"/>
+</div>
+</div>
+<section class="about-experience">
+<div class="about-experience__head">
+<div class="about-section-label">
+<span>04</span>
+<strong>КАРТА ОПЫТА</strong>
+</div>
+<div class="about-experience__heading">
+<h2>
+            Не набор инструментов.
+            <span>Одна система опыта.</span>
+</h2>
+<p>
+            Мой опыт находится на пересечении бизнес-процессов, производства, данных, систем и людей, которые ими пользуются.
+          </p>
+</div>
+</div>
+<div class="about-experience__map">
+<svg aria-hidden="true" class="about-experience__lines" preserveaspectratio="none" viewbox="0 0 1000 620">
+<path d="M500 310
+               C390 220 300 170 178 132"></path>
+<path d="M500 310
+               C610 215 720 170 832 126"></path>
+<path d="M500 310
+               C360 310 270 310 140 310"></path>
+<path d="M500 310
+               C640 310 730 310 860 310"></path>
+<path d="M500 310
+               C390 405 300 455 178 500"></path>
+<path d="M500 310
+               C610 405 720 455 832 500"></path>
+<path d="M500 310
+               C470 430 455 500 446 566"></path>
+<path d="M500 310
+               C535 430 555 500 570 566"></path>
+</svg>
+<div aria-hidden="true" class="about-experience__pulse"></div>
+<div class="about-experience__core">
+<span class="about-experience__core-kicker">
+            SEBASTIAN
           </span>
-        </div>
-
-        <div class="capability">
-          <strong>Power BI и аналитика</strong>
-          <span>
-            Дашборды, KPI, план-факт анализ, визуализация,
-            модели данных и автоматическое обновление.
-          </span>
-        </div>
-
-        <div class="capability">
-          <strong>Веб-приложения</strong>
-          <span>
-            Интерфейсы для работы с таблицами, файлами, фото,
-            ссылками, формами и внутренними процессами.
-          </span>
-        </div>
-
-        <div class="capability">
-          <strong>Telegram и уведомления</strong>
-          <span>
-            Боты, напоминания, заявки с сайта, автоматические
-            уведомления и запуск действий через чат.
-          </span>
-        </div>
-
-        <div class="capability">
-          <strong>PDF, инвойсы и выписки</strong>
-          <span>
-            Извлечение, очистка, сопоставление и перенос данных
-            в таблицы или другие системы.
-          </span>
-        </div>
-
-        <div class="capability">
-          <strong>Google Drive и доступы</strong>
-          <span>
-            Папки, файлы, архивирование, права доступа,
-            авторизация пользователей и передача собственности.
-          </span>
-        </div>
-
-        <div class="capability">
-          <strong>Интеграции и API</strong>
-          <span>
-            Обмен данными между сайтами, CRM, Google Workspace,
-            Telegram и другими сервисами.
-          </span>
-        </div>
-
-        <div class="capability">
-          <strong>Мобильные решения</strong>
-          <span>
-            Адаптивные веб-интерфейсы, PWA и рабочие формы
-            для смартфонов и планшетов.
-          </span>
-        </div>
+<strong>
+            Интегратор
+            <span>процессов</span>
+</strong>
+<small>
+            бизнес ↔ системы
+          </small>
+<div aria-hidden="true" class="about-experience__core-status">
+<span></span>
+            СВЯЗАНО
+          </div>
+</div>
+<article class="about-experience__node about-experience__node--process">
+<span>01</span>
+<h3>
+            Бизнес-процессы
+          </h3>
+<p>
+            Правила, логика, роли и рабочие сценарии.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--manufacturing">
+<span>02</span>
+<h3>
+            Производство
+          </h3>
+<p>
+            Заказы, выполнение, статусы и производство.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--erp">
+<span>03</span>
+<h3>
+            ERP / MES
+          </h3>
+<p>
+            Бизнес-данные и контроль прохождения процесса.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--crm">
+<span>04</span>
+<h3>
+            CRM
+          </h3>
+<p>
+            Клиенты, активности, взаимодействия и данные.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--excel">
+<span>05</span>
+<h3>
+            Excel / Power Query
+          </h3>
+<p>
+            Подготовка, очистка, логика и моделирование.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--bi">
+<span>06</span>
+<h3>
+            Power BI
+          </h3>
+<p>
+            KPI, аналитика, модели и отчётность.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--testing">
+<span>07</span>
+<h3>
+            Тестирование / UAT
+          </h3>
+<p>
+            Сценарии, дефекты, ретест и поведение систем.
+          </p>
+</article>
+<article class="about-experience__node about-experience__node--migration">
+<span>08</span>
+<h3>
+            Миграция данных
+          </h3>
+<p>
+            Очистка, сопоставление, проверка и согласование.
+          </p>
+</article>
+</div>
+<div class="about-experience__footer">
+<span>
+          ОПЫТ ≠ СПИСОК ПРОГРАММ
+        </span>
+<strong>
+          Ценность появляется там, где эти области начинают работать вместе.
+        </strong>
+</div>
+</section>
+<section class="about-thinking">
+<div class="about-thinking__head">
+<div class="about-section-label">
+<span>05</span>
+<strong>КАК Я ДУМАЮ</strong>
+</div>
+<div class="about-thinking__heading">
+<h2>
+        Автоматизация начинается
+        <span>не с автоматизации.</span>
+</h2>
+<p>
+        Есть несколько принципов, которые я проверяю почти в каждом процессе ещё до начала технической реализации.
+      </p>
+</div>
+</div>
+<div class="about-thinking__principles">
+<article class="about-thinking__principle">
+<span class="about-thinking__number">
+        01
+      </span>
+<p>
+        Если данные вводятся дважды,
+        <strong>
+          рано или поздно они не совпадут.
+        </strong>
+</p>
+</article>
+<article class="about-thinking__principle">
+<span class="about-thinking__number">
+        02
+      </span>
+<p>
+        Автоматизация не исправляет плохой процесс.
+        <strong>
+          Она лишь делает его быстрее.
+        </strong>
+</p>
+</article>
+<article class="about-thinking__principle">
+<span class="about-thinking__number">
+        03
+      </span>
+<p>
+        Дашборд не может исправить
+        <strong>
+          плохие или ненадёжные данные.
+        </strong>
+</p>
+</article>
+<article class="about-thinking__principle">
+<span class="about-thinking__number">
+        04
+      </span>
+<p>
+        Если систему понимает только один человек,
+        <strong>
+          это зависимость, а не система.
+        </strong>
+</p>
+</article>
+<article class="about-thinking__principle">
+<span class="about-thinking__number">
+        05
+      </span>
+<p>
+        Исключения нужно проектировать
+        <strong>
+          вместе с обычным сценарием.
+        </strong>
+</p>
+</article>
+<article class="about-thinking__principle">
+<span class="about-thinking__number">
+        06
+      </span>
+<p>
+        Если пользователи ненавидят систему,
+        <strong>
+          технически правильной реализации недостаточно.
+        </strong>
+</p>
+</article>
+</div>
+<div class="about-thinking__closing">
+<span>
+      ГЛАВНЫЙ ВОПРОС
+    </span>
+<strong>
+      Делает ли это процесс проще, надёжнее и понятнее?
+    </strong>
+</div>
+</section>
+<div class="about-photo-break about-photo-break--left">
+<div class="about-photo-break__frame">
+<img alt="" src="/about/assets/Analytics%20Terminal%20Showroom.webp"/>
+</div>
+</div>
+<section class="about-proof">
+<div class="about-proof__head">
+<div class="about-section-label">
+<span>06</span>
+<strong>ПРАКТИЧЕСКИЙ ОПЫТ</strong>
+</div>
+<div class="about-proof__heading">
+<h2>
+        Не только анализировать.
+        <span>Доводить до рабочего результата.</span>
+</h2>
+<p>
+        Я работал с задачами на стыке операционной работы, корпоративных систем, данных, тестирования, отчётности и автоматизации.
+      </p>
+</div>
+</div>
+<div class="about-proof__list">
+<article class="about-proof__item">
+<div class="about-proof__index">
+        01
       </div>
-    </section>
-
-    <section class="section">
-      <h2>Исследование рынка и конкурентной среды</h2>
-
-      <p>
-        Отдельно могу проводить прикладные исследования рынка для бизнеса.
-        Это полезно, когда нужно не просто собрать цифры, а понять,
-        что происходит на рынке и как выглядит позиция компании
-        относительно конкурентов.
-      </p>
-
-      <ul>
-        <li>анализ товарных позиций и ассортимента;</li>
-        <li>сравнение цен, характеристик и позиционирования;</li>
-        <li>анализ конкурентной среды;</li>
-        <li>сбор и структурирование открытых данных;</li>
-        <li>оценка рыночных предложений и сегментов;</li>
-        <li>поиск закономерностей, отличий и потенциальных ниш;</li>
-        <li>
-          подготовка таблиц, отчётов и дашбордов
-          по результатам исследования.
-        </li>
-      </ul>
-
-      <p>
-        Результат может быть оформлен в виде аналитической таблицы,
-        презентации, дашборда или структурированного отчёта с выводами.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Как я работаю</h2>
-
-      <p>
-        Сначала я смотрю на реальные файлы, таблицы, документы или текущий
-        процесс. Затем уточняю требования, предлагаю вариант реализации
-        и оцениваю объём работы.
-      </p>
-
-      <div class="process">
-        <div class="process-step">
-          Анализ задачи и исходных данных.
-        </div>
-
-        <div class="process-step">
-          Прототип или тестовая логика.
-        </div>
-
-        <div class="process-step">
-          Разработка основного решения.
-        </div>
-
-        <div class="process-step">
-          Проверка на реальных сценариях.
-        </div>
-
-        <div class="process-step">
-          Передача доступов, прав и рабочих материалов.
-        </div>
-
-        <div class="process-step">
-          Инструкция и поддержка после запуска.
-        </div>
+<div class="about-proof__area">
+<span>
+          ПРОИЗВОДСТВЕННЫЕ ПРОЦЕССЫ
+        </span>
+<h3>
+          ERP / MES и прохождение заказа
+        </h3>
+</div>
+<div class="about-proof__body">
+<p>
+          Работа со статусами заказов, бизнес-правилами, сценариями прохождения процесса и фактическим поведением систем.
+        </p>
+</div>
+<div class="about-proof__tags">
+<span>ERP</span>
+<span>MES</span>
+<span>OPS</span>
+</div>
+</article>
+<article class="about-proof__item">
+<div class="about-proof__index">
+        02
       </div>
-    </section>
-
-    <section class="section">
-      <h2>Что получает заказчик</h2>
-
-      <ul>
-        <li>
-          готовое рабочее решение, а не набор разрозненных кусков кода;
-        </li>
-        <li>понятную логику работы;</li>
-        <li>
-          доступ к формулам, скриптам и настройкам,
-          если иное не согласовано отдельно;
-        </li>
-        <li>передачу необходимых прав и собственности;</li>
-        <li>тестирование на реальных сценариях;</li>
-        <li>инструкцию или техническую схему;</li>
-        <li>возможность дальнейшей доработки;</li>
-        <li>поддержку после запуска.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Почему я этим занимаюсь</h2>
-
-      <p>
-        Мне нравится находить места, где люди каждый день тратят время на
-        повторяющиеся действия, и превращать их в кнопку, автоматический
-        процесс или понятный интерфейс.
-      </p>
-
-      <div class="quote">
-        «Серьёзно? И это всё время можно было не делать вручную?»
+<div class="about-proof__area">
+<span>
+          ДАННЫЕ
+        </span>
+<h3>
+          Подготовка, очистка и сверка
+        </h3>
+</div>
+<div class="about-proof__body">
+<p>
+          Очистка данных, сопоставление, проверка соответствия, подготовка к миграции и контроль результата.
+        </p>
+</div>
+<div class="about-proof__tags">
+<span>Excel</span>
+<span>Power Query</span>
+<span>Migration</span>
+</div>
+</article>
+<article class="about-proof__item">
+<div class="about-proof__index">
+        03
       </div>
-    </section>
-
-    <section class="section">
-      <h2>Без лишних обещаний</h2>
-
-      <p>
-        Я не обещаю автоматизировать абсолютно всё. Если задача технически
-        нецелесообразна, слишком дорогая или выходит за пределы моей
-        компетенции, я говорю об этом прямо.
-      </p>
-
-      <p>
-        Но если процесс можно сделать быстрее, точнее и проще —
-        скорее всего, я найду способ.
-      </p>
-    </section>
-
-    <section class="cta">
-      <h2>Есть задача, которая отнимает слишком много времени?</h2>
-
-      <p>
-        Напишите мне. Посмотрю, что можно автоматизировать,
-        упростить или превратить в нормальный рабочий процесс.
-      </p>
-
-      <a href="contacts-ru.html">
-        Перейти к контактам
-      </a>
-    </section>
-  </main>
-
-  <footer>
-  © 2015–2026 Sebastian Automations. Все права защищены.
-  <a href="terms-ru.html">Условия использования</a>
-</footer>
-  <script src="nav-font-kaleidoscope.js"></script>
+<div class="about-proof__area">
+<span>
+          ТЕСТИРОВАНИЕ
+        </span>
+<h3>
+          Сценарии, дефекты и UAT
+        </h3>
+</div>
+<div class="about-proof__body">
+<p>
+          Воспроизведение дефектов, подготовка доказательств, проверка исправлений, ретест и поддержка пользовательского тестирования.
+        </p>
+</div>
+<div class="about-proof__tags">
+<span>Testing</span>
+<span>UAT</span>
+<span>Retest</span>
+</div>
+</article>
+<article class="about-proof__item">
+<div class="about-proof__index">
+        04
+      </div>
+<div class="about-proof__area">
+<span>
+          АНАЛИТИКА
+        </span>
+<h3>
+          KPI, модели и отчётность
+        </h3>
+</div>
+<div class="about-proof__body">
+<p>
+          Подготовка данных для анализа, построение моделей, показателей, отчётов и аналитических дашбордов.
+        </p>
+</div>
+<div class="about-proof__tags">
+<span>Power BI</span>
+<span>DAX</span>
+<span>KPI</span>
+</div>
+</article>
+<article class="about-proof__item">
+<div class="about-proof__index">
+        05
+      </div>
+<div class="about-proof__area">
+<span>
+          АВТОМАТИЗАЦИЯ
+        </span>
+<h3>
+          Ручная работа → управляемая логика
+        </h3>
+</div>
+<div class="about-proof__body">
+<p>
+          Автоматизация повторяющихся операций, обработки данных, проверок, отчётности и рабочих сценариев.
+        </p>
+</div>
+<div class="about-proof__tags">
+<span>VBA</span>
+<span>Apps Script</span>
+<span>JavaScript</span>
+</div>
+</article>
+<article class="about-proof__item">
+<div class="about-proof__index">
+        06
+      </div>
+<div class="about-proof__area">
+<span>
+          ИНТЕГРАЦИИ
+        </span>
+<h3>
+          CRM, системы и рабочие данные
+        </h3>
+</div>
+<div class="about-proof__body">
+<p>
+          Работа с интеграционными сценариями, логикой обмена данными, поведением CRM и взаимодействием между системами.
+        </p>
+</div>
+<div class="about-proof__tags">
+<span>CRM</span>
+<span>Integration</span>
+<span>Data Flow</span>
+</div>
+</article>
+</div>
+<div class="about-proof__bottom">
+<span>
+      ОТ ПРОБЛЕМЫ К РЕЗУЛЬТАТУ
+    </span>
+<div aria-hidden="true" class="about-proof__bottom-line"></div>
+<strong>
+      Понять → проверить → упростить → реализовать → протестировать
+    </strong>
+</div>
+</section>
+<div class="about-photo-break about-photo-break--right">
+<div class="about-photo-break__frame">
+<img alt="" src="/about/assets/glass_data_chart.webp"/>
+</div>
+</div>
+<section class="about-history" id="about-history">
+<div class="about-history__sticky">
+<div class="about-history__head">
+<div class="about-section-label">
+<span>07</span>
+<strong>ИСТОРИЯ ОПЫТА</strong>
+</div>
+<div class="about-history__heading">
+<h2>
+          Инструменты менялись.
+          <span>
+            Подход становился системнее.
+          </span>
+</h2>
+<p>
+          От первого знакомства с Excel до моделей данных, корпоративных систем, аналитики и собственных автоматизаций.
+        </p>
+</div>
+</div>
+<div class="about-history__viewport">
+<div class="about-history__track">
+<article class="about-history__card">
+<div class="about-history__year">
+            2000-е
+          </div>
+<span class="about-history__stage">
+            НАЧАЛО
+          </span>
+<h3>
+            Первые шаги в Excel
+          </h3>
+<p>
+            Первое знакомство с таблицами, формулами и структурированной работой с информацией.
+          </p>
+<div class="about-history__tags">
+<span>EXCEL</span>
+</div>
+</article>
+<article class="about-history__card">
+<div class="about-history__year">
+            2015
+          </div>
+<span class="about-history__stage">
+            РАБОЧАЯ ПРАКТИКА
+          </span>
+<h3>
+            Excel становится рабочим инструментом
+          </h3>
+<p>
+            Начал значительно глубже использовать Excel в реальных задачах. В этот же период начался практический опыт работы с ERP и реальными бизнес- и производственными процессами.
+          </p>
+<div class="about-history__tags">
+<span>EXCEL</span>
+<span>ERP</span>
+<span>OPS</span>
+</div>
+</article>
+<article class="about-history__card">
+<div class="about-history__year">
+            2016–2017
+          </div>
+<span class="about-history__stage">
+            МОДЕЛИ ДАННЫХ
+          </span>
+<h3>
+            Power Pivot и DAX
+          </h3>
+<p>
+            В Excel начал работать с Power Pivot, связями между таблицами и моделями данных. Через это пришло понимание базовой логики DAX.
+          </p>
+<div class="about-history__tags">
+<span>POWER PIVOT</span>
+<span>DATA MODEL</span>
+<span>DAX</span>
+</div>
+</article>
+<article class="about-history__card">
+<div class="about-history__year">
+            2017
+          </div>
+<span class="about-history__stage">
+            АНАЛИТИКА
+          </span>
+<h3>
+            Переход к Power BI
+          </h3>
+<p>
+            После понимания базовой логики DAX открыл для себя Power BI. Начал создавать модели, аналитические отчёты и визуализации.
+          </p>
+<div class="about-history__tags">
+<span>DAX</span>
+<span>POWER BI</span>
+<span>REPORTING</span>
+</div>
+</article>
+<article class="about-history__card">
+<div class="about-history__year">
+            2018
+          </div>
+<span class="about-history__stage">
+            БИЗНЕС-СИСТЕМЫ
+          </span>
+<h3>
+            CRM и более широкий контекст
+          </h3>
+<p>
+            Начал практически работать с CRM. К производственным процессам добавились клиентские данные, активности и взаимодействие между разными частями бизнеса.
+          </p>
+<div class="about-history__tags">
+<span>CRM</span>
+<span>DATA</span>
+<span>PROCESSES</span>
+</div>
+</article>
+<article class="about-history__card">
+<div class="about-history__year">
+            2024
+          </div>
+<span class="about-history__stage">
+            СОБСТВЕННЫЕ ПРОЕКТЫ
+          </span>
+<h3>
+            Sebastian Automations
+          </h3>
+<p>
+            Начал отдельно развивать собственные прикладные проекты: автоматизации, обработку данных, отчётность, веб-инструменты и кастомную бизнес-логику.
+          </p>
+<div class="about-history__tags">
+<span>AUTOMATION</span>
+<span>APPS SCRIPT</span>
+<span>WEB</span>
+</div>
+</article>
+<article class="about-history__card about-history__card--today">
+<div class="about-history__year">
+            Сегодня
+          </div>
+<span class="about-history__stage">
+            СИСТЕМНЫЙ ПОДХОД
+          </span>
+<h3>
+            От инструментов к системе
+          </h3>
+<p>
+            Сегодня объединяю опыт работы с процессами, ERP, MES, CRM, Excel, Power Query, Power BI, тестированием, данными и автоматизацией.
+          </p>
+<div class="about-history__today-flow">
+<span>ПОНЯТЬ</span>
+<i></i>
+<span>УПРОСТИТЬ</span>
+<i></i>
+<span>АВТОМАТИЗИРОВАТЬ</span>
+</div>
+<div class="about-history__tags">
+<span>PROCESS</span>
+<span>DATA</span>
+<span>SYSTEMS</span>
+</div>
+</article>
+</div>
+</div>
+<div class="about-history__bottom">
+<span>
+        2000-е
+      </span>
+<div class="about-history__progress">
+<div class="about-history__progress-fill"></div>
+</div>
+<span>
+        СЕГОДНЯ
+      </span>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer-slot"></div>
 </body>
 </html>

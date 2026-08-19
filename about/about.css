@@ -1096,7 +1096,23 @@ body {
 
 .about-method__heading h2 span {
   display: block;
-  color: var(--about-green-soft);
+  color: transparent;
+  background-image:
+    linear-gradient(
+      90deg,
+      #ff4f9a 0%,
+      #ff5fae 22%,
+      #d96dff 52%,
+      #8f7cff 74%,
+      #5ca6ff 100%
+    );
+  background-size: 140% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 18px rgba(217, 109, 255, 0.10),
+    0 0 26px rgba(92, 166, 255, 0.08);
 }
 
 .about-method__heading p {
@@ -1484,4 +1500,22 @@ body {
   .about-method__result {
     margin-top: 32px;
   }
+}
+
+@keyframes aboutGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.about-method__heading h2 span {
+  animation: aboutGradientShift 8s ease-in-out infinite;
 }

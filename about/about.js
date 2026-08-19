@@ -77,8 +77,8 @@
 
     scrollDistance =
       Math.max(
-        maxShift * 1.65,
-        window.innerHeight * 1.6
+        maxShift * 1.9,
+        window.innerHeight * 1.8
       );
 
     section.style.height =

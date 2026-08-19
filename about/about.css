@@ -3032,7 +3032,7 @@ strong {
   position: relative;
   width: 100%;
   margin: 0;
-  padding: 32px 0 24px;
+  padding: 30px 0 24px;
   overflow: visible;
   border: 0;
   border-radius: 0;
@@ -3081,7 +3081,7 @@ strong {
 }
 
 .about-history__heading h2 {
-  max-width: 900px;
+  max-width: 920px;
   margin: 0;
   color: #ffffff;
   font-size: clamp(46px, 4.2vw, 64px);
@@ -3123,7 +3123,7 @@ strong {
   position: relative;
   z-index: 3;
   width: 100%;
-  margin-top: 24px;
+  margin-top: 22px;
   overflow: visible;
 }
 
@@ -3132,14 +3132,14 @@ strong {
   width: max-content;
   display: flex;
   align-items: stretch;
-  gap: 34px;
+  gap: 100px;
   padding:
-    26px
+    30px
     max(
-      56px,
+      78px,
       calc((100vw - 1380px) / 2 + 68px)
     )
-    12px;
+    18px;
   border-top: 1px solid rgba(166, 255, 72, 0.14);
   transform: translate3d(0, 0, 0);
   will-change: transform;
@@ -3147,13 +3147,13 @@ strong {
 
 .about-history__card {
   position: relative;
-  flex: 0 0 clamp(430px, 31vw, 500px);
-  min-height: clamp(310px, 37vh, 350px);
-  padding: 34px 34px 28px;
+  flex: 0 0 clamp(520px, 36vw, 620px);
+  min-height: clamp(390px, 43vh, 430px);
+  padding: 42px 42px 36px;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(166, 255, 72, 0.14);
-  border-radius: 22px;
+  border-radius: 26px;
   background:
     linear-gradient(
       180deg,
@@ -3161,8 +3161,8 @@ strong {
       rgba(7, 13, 9, 0.96)
     );
   box-shadow:
-    0 22px 60px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    0 24px 70px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
   transition:
     transform 0.25s ease,
     border-color 0.25s ease,
@@ -3172,10 +3172,10 @@ strong {
 .about-history__card::before {
   content: "";
   position: absolute;
-  top: -27px;
-  left: 34px;
+  top: -31px;
+  left: 42px;
   width: 1px;
-  height: 21px;
+  height: 25px;
   background:
     linear-gradient(
       180deg,
@@ -3185,7 +3185,7 @@ strong {
 }
 
 .about-history__card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: rgba(166, 255, 72, 0.3);
   background:
     linear-gradient(
@@ -3197,14 +3197,14 @@ strong {
 
 .about-history__year {
   color: #ffffff;
-  font-size: 38px;
+  font-size: 44px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.045em;
 }
 
 .about-history__stage {
-  margin-top: 15px;
+  margin-top: 17px;
   color: rgba(166, 255, 72, 0.48);
   font-family: var(--about-font-tech);
   font-size: 8px;
@@ -3212,33 +3212,33 @@ strong {
 }
 
 .about-history__card h3 {
-  max-width: 390px;
-  margin: 24px 0 0;
+  max-width: 450px;
+  margin: 30px 0 0;
   color: rgba(245, 249, 246, 0.97);
-  font-size: 24px;
+  font-size: 27px;
   font-weight: 500;
-  line-height: 1.24;
+  line-height: 1.22;
   letter-spacing: -0.03em;
 }
 
 .about-history__card p {
-  max-width: 390px;
-  margin: 16px 0 0;
+  max-width: 440px;
+  margin: 20px 0 0;
   color: rgba(218, 228, 220, 0.64);
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.75;
 }
 
 .about-history__tags {
   margin-top: auto;
-  padding-top: 24px;
+  padding-top: 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
 }
 
 .about-history__tags span {
-  padding: 7px 9px;
+  padding: 8px 10px;
   border: 1px solid rgba(166, 255, 72, 0.15);
   border-radius: 7px;
   color: rgba(196, 224, 201, 0.68);
@@ -3263,10 +3263,10 @@ strong {
 }
 
 .about-history__today-flow {
-  margin-top: 20px;
+  margin-top: 22px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   color: rgba(166, 255, 72, 0.62);
   font-family: var(--about-font-tech);
   font-size: 7px;
@@ -3274,7 +3274,7 @@ strong {
 }
 
 .about-history__today-flow i {
-  width: 18px;
+  width: 20px;
   height: 1px;
   background: rgba(166, 255, 72, 0.38);
 }
@@ -3283,7 +3283,7 @@ strong {
   position: relative;
   z-index: 3;
   width: min(100% - 72px, 1380px);
-  margin: 18px auto 0;
+  margin: 20px auto 0;
   padding: 0 68px;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -3321,7 +3321,7 @@ strong {
     position: sticky;
     top: 76px;
     height: calc(100svh - 76px);
-    min-height: 640px;
+    min-height: 720px;
     display: flex;
     flex-direction: column;
   }
@@ -3350,18 +3350,19 @@ strong {
 
   .about-history__heading {
     grid-template-columns:
-      minmax(0, 1.25fr)
-      minmax(240px, 0.75fr);
+      minmax(0, 1.2fr)
+      minmax(240px, 0.8fr);
     gap: 38px;
   }
 
-  .about-history__card {
-    flex-basis: clamp(400px, 46vw, 460px);
-  }
-
   .about-history__track {
+    gap: 72px;
     padding-left: 44px;
     padding-right: 44px;
+  }
+
+  .about-history__card {
+    flex-basis: clamp(470px, 55vw, 540px);
   }
 }
 
@@ -3374,6 +3375,7 @@ strong {
   .about-history__sticky {
     position: relative;
     top: auto;
+    width: 100%;
     height: auto;
     min-height: 0;
     padding: 48px 0 36px;
@@ -3406,22 +3408,27 @@ strong {
   }
 
   .about-history__track {
-    gap: 18px;
-    padding:
-      26px
-      26px
-      12px;
+    gap: 22px;
+    padding: 26px 26px 12px;
     transform: none !important;
   }
 
   .about-history__card {
-    flex: 0 0 min(82vw, 340px);
-    min-height: 330px;
-    padding: 28px 24px 24px;
+    flex: 0 0 min(84vw, 360px);
+    min-height: 340px;
+    padding: 30px 26px 26px;
   }
 
   .about-history__year {
-    font-size: 30px;
+    font-size: 32px;
+  }
+
+  .about-history__card h3 {
+    font-size: 21px;
+  }
+
+  .about-history__card p {
+    font-size: 12px;
   }
 }
 
@@ -3445,153 +3452,22 @@ strong {
   }
 
   .about-history__track {
+    gap: 18px;
     padding-left: 17px;
     padding-right: 17px;
   }
 
   .about-history__card {
-    flex-basis: min(84vw, 320px);
-    min-height: 320px;
-    padding: 26px 22px 22px;
+    flex-basis: min(86vw, 330px);
+    min-height: 325px;
+    padding: 27px 22px 23px;
   }
 
-  .about-history__card h3 {
-    font-size: 20px;
-  }
-
-  .about-history__card p {
-    font-size: 12px;
+  .about-history__year {
+    font-size: 29px;
   }
 
   .about-history__bottom {
     margin-top: 22px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .about-history__sticky {
-    width: calc(100% - 44px);
-    padding:
-      68px
-      44px
-      52px;
-  }
-}
-
-@media (max-width: 850px) {
-  .about-history {
-    height: auto !important;
-  }
-
-  .about-history__sticky {
-    position: relative !important;
-    top: auto !important;
-    width: calc(100% - 28px);
-    height: auto !important;
-    padding:
-      54px
-      26px
-      46px;
-    border-radius: 22px;
-  }
-
-  .about-history__heading {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  .about-history__heading p {
-    margin-left: 0;
-  }
-
-  .about-history__card {
-    flex-basis: 294px;
-  }
-}
-
-@media (max-width: 560px) {
-  .about-history {
-    margin-bottom: 30px;
-  }
-
-  .about-history__sticky {
-    width: calc(100% - 18px);
-    padding:
-      38px
-      17px
-      34px;
-    border-radius: 17px;
-  }
-
-  .about-history__heading h2 {
-    font-size:
-      clamp(
-        36px,
-        12vw,
-        48px
-      );
-  }
-
-  .about-history__heading p {
-    font-size: 13px;
-  }
-
-  .about-history__viewport {
-    margin-top: 34px;
-  }
-
-  .about-history__card {
-    flex-basis:
-      min(
-        82vw,
-        292px
-      );
-    min-height: 310px;
-    padding: 25px 22px 21px;
-  }
-
-  .about-history__year {
-    font-size: 27px;
-  }
-
-  .about-history__bottom {
-    margin-top: 24px;
-  }
-}
-
-@media (min-width: 851px) {
-  .about-history {
-    position: relative;
-    margin-bottom: 54px;
-  }
-
-  .about-history__sticky {
-    position: sticky;
-    top: 92px;
-    height: calc(100vh - 108px);
-    min-height: 640px;
-    max-height: 820px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .about-history__head {
-    flex: 0 0 auto;
-  }
-
-  .about-history__viewport {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .about-history__track {
-    padding-right: 72px;
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-  }
-
-  .about-history__bottom {
-    flex: 0 0 auto;
   }
 }

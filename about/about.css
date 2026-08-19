@@ -2843,8 +2843,8 @@ strong {
 .about-proof__body p {
   max-width: 470px;
   margin: 0;
-  color: rgba(208, 220, 211, 0.5);
-  font-size: 11px;
+  color: rgba(218, 228, 220, 0.64);
+  font-size: 12px;
   line-height: 1.7;
 }
 
@@ -2858,10 +2858,10 @@ strong {
 
 .about-proof__tags span {
   padding: 7px 9px;
-  border: 1px solid rgba(166, 255, 72, 0.11);
+  border: 1px solid rgba(166, 255, 72, 0.16);
   border-radius: 7px;
-  background: rgba(8, 16, 10, 0.62);
-  color: rgba(183, 212, 188, 0.54);
+  background: rgba(8, 16, 10, 0.72);
+  color: rgba(195, 220, 200, 0.68);
   font-family: var(--about-font-tech);
   font-size: 7px;
   white-space: nowrap;

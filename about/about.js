@@ -447,10 +447,46 @@ function startSmoothMotion() {
     observer.observe(map);
   }
 
+  function initPhotoBreaks() {
+  const photos =
+    document.querySelectorAll(
+      ".about-photo-break"
+    );
+
+  if (!photos.length) return;
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add(
+            "is-photo-visible"
+          );
+
+          observer.unobserve(
+            entry.target
+          );
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin:
+          "0px 0px -8% 0px"
+      }
+    );
+
+  photos.forEach(photo => {
+    observer.observe(photo);
+  });
+}
+
   initHistory();
   initHero();
   initExperience();
   initReveals();
   initMethod();
   initOrigin();
+  initPhotoBreaks();
 })();

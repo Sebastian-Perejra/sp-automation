@@ -2459,3 +2459,252 @@ body {
     border-top: 1px solid rgba(166, 255, 72, 0.18);
   }
 }
+
+.about-thinking {
+  position: relative;
+  width: min(100% - 72px, 1380px);
+  margin: 0 auto 54px;
+  padding: 78px 68px 68px;
+  overflow: hidden;
+  border: 1px solid rgba(142, 181, 152, 0.12);
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      circle at 82% 14%,
+      rgba(72, 126, 81, 0.11),
+      transparent 30%
+    ),
+    rgba(6, 10, 8, 0.97);
+}
+
+.about-thinking::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(150, 190, 160, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(150, 190, 160, 0.022) 1px,
+      transparent 1px
+    );
+  background-size: 46px 46px;
+}
+
+.about-thinking__head {
+  position: relative;
+  z-index: 2;
+}
+
+.about-thinking__heading {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(280px, 0.8fr);
+  gap: 72px;
+  align-items: end;
+}
+
+.about-thinking__heading h2 {
+  max-width: 760px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(42px, 4.6vw, 68px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.about-thinking__heading h2 span {
+  display: block;
+  color: var(--about-green-soft);
+}
+
+.about-thinking__heading p {
+  max-width: 390px;
+  margin: 0 0 4px auto;
+  color: var(--about-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.about-thinking__principles {
+  position: relative;
+  z-index: 2;
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(166, 255, 72, 0.1);
+  border-left: 1px solid rgba(166, 255, 72, 0.1);
+}
+
+.about-thinking__principle {
+  position: relative;
+  min-height: 190px;
+  padding: 32px 34px 34px 76px;
+  border-right: 1px solid rgba(166, 255, 72, 0.1);
+  border-bottom: 1px solid rgba(166, 255, 72, 0.1);
+  background:
+    rgba(8, 14, 10, 0.56);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.about-thinking__principle:hover {
+  z-index: 3;
+  background:
+    rgba(14, 25, 17, 0.82);
+  transform: translateY(-2px);
+}
+
+.about-thinking__number {
+  position: absolute;
+  top: 34px;
+  left: 30px;
+  color: rgba(166, 255, 72, 0.34);
+  font-family: var(--about-font-tech);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.about-thinking__principle p {
+  max-width: 500px;
+  margin: 0;
+  color: rgba(220, 230, 223, 0.55);
+  font-size: clamp(18px, 1.65vw, 24px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+}
+
+.about-thinking__principle strong {
+  display: block;
+  margin-top: 5px;
+  color: rgba(247, 250, 248, 0.94);
+  font-weight: 500;
+}
+
+.about-thinking__principle:nth-child(2)
+strong,
+.about-thinking__principle:nth-child(5)
+strong {
+  color: var(--about-green-soft);
+}
+
+.about-thinking__closing {
+  position: relative;
+  z-index: 2;
+  margin-top: 34px;
+  padding: 22px 26px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 34px;
+  align-items: center;
+  border: 1px solid rgba(166, 255, 72, 0.1);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(166, 255, 72, 0.04),
+      rgba(166, 255, 72, 0.015)
+    );
+}
+
+.about-thinking__closing span {
+  color: rgba(166, 255, 72, 0.42);
+  font-family: var(--about-font-tech);
+  font-size: 7px;
+  letter-spacing: 0.14em;
+}
+
+.about-thinking__closing strong {
+  padding-left: 28px;
+  border-left: 1px solid rgba(166, 255, 72, 0.18);
+  color: rgba(235, 241, 237, 0.76);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+  .about-thinking {
+    width: calc(100% - 44px);
+    padding: 68px 44px 58px;
+  }
+}
+
+@media (max-width: 850px) {
+  .about-thinking {
+    width: calc(100% - 28px);
+    padding: 54px 26px;
+    border-radius: 22px;
+  }
+
+  .about-thinking__heading {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .about-thinking__heading p {
+    margin-left: 0;
+  }
+
+  .about-thinking__principles {
+    grid-template-columns: 1fr;
+    margin-top: 42px;
+  }
+
+  .about-thinking__principle {
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-thinking {
+    width: calc(100% - 18px);
+    margin-bottom: 30px;
+    padding: 38px 17px;
+    border-radius: 17px;
+  }
+
+  .about-thinking__heading h2 {
+    font-size: clamp(36px, 12vw, 48px);
+  }
+
+  .about-thinking__heading p {
+    font-size: 13px;
+  }
+
+  .about-thinking__principle {
+    min-height: 0;
+    padding: 28px 20px 28px 54px;
+  }
+
+  .about-thinking__number {
+    top: 31px;
+    left: 18px;
+  }
+
+  .about-thinking__principle p {
+    font-size: 18px;
+  }
+
+  .about-thinking__closing {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 19px;
+  }
+
+  .about-thinking__closing strong {
+    padding-top: 12px;
+    padding-left: 0;
+    border-top: 1px solid rgba(166, 255, 72, 0.18);
+    border-left: 0;
+  }
+}

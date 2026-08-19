@@ -3399,3 +3399,40 @@ strong {
     margin-top: 24px;
   }
 }
+
+@media (min-width: 851px) {
+  .about-history {
+    position: relative;
+    margin-bottom: 54px;
+  }
+
+  .about-history__sticky {
+    position: sticky;
+    top: 92px;
+    height: calc(100vh - 108px);
+    min-height: 640px;
+    max-height: 820px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-history__head {
+    flex: 0 0 auto;
+  }
+
+  .about-history__viewport {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .about-history__track {
+    padding-right: 72px;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .about-history__bottom {
+    flex: 0 0 auto;
+  }
+}

@@ -3933,3 +3933,133 @@ strong {
     filter: none;
   }
 }
+
+.about-photo-break {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: clamp(240px, 27vw, 390px);
+  margin: -8px 0 44px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.about-photo-break__frame {
+  position: absolute;
+  top: 50%;
+  width: min(48vw, 760px);
+  height: 88%;
+  overflow: hidden;
+  border-radius: 28px;
+  transform: translateY(-50%);
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.28),
+    0 0 60px rgba(255, 255, 255, 0.035);
+}
+
+.about-photo-break--left
+.about-photo-break__frame {
+  left: -3vw;
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      #000 0%,
+      #000 72%,
+      transparent 100%
+    );
+  mask-image:
+    linear-gradient(
+      90deg,
+      #000 0%,
+      #000 72%,
+      transparent 100%
+    );
+}
+
+.about-photo-break--right
+.about-photo-break__frame {
+  right: -3vw;
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 28%,
+      #000 100%
+    );
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 28%,
+      #000 100%
+    );
+}
+
+.about-photo-break__frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.06);
+  filter:
+    saturate(0.92)
+    contrast(1.02)
+    brightness(0.98);
+  animation:
+    aboutPhotoDrift
+    12s ease-in-out infinite alternate;
+}
+
+.about-photo-break:nth-of-type(even)
+.about-photo-break__frame img {
+  animation-delay: -6s;
+}
+
+@keyframes aboutPhotoDrift {
+  from {
+    transform:
+      scale(1.06)
+      translate3d(0, 6px, 0);
+  }
+
+  to {
+    transform:
+      scale(1.1)
+      translate3d(0, -8px, 0);
+  }
+}
+
+@media (max-width: 850px) {
+  .about-photo-break {
+    height: 220px;
+    margin-bottom: 30px;
+  }
+
+  .about-photo-break__frame {
+    width: 76vw;
+    height: 86%;
+    border-radius: 20px;
+  }
+
+  .about-photo-break--left
+  .about-photo-break__frame {
+    left: -10vw;
+  }
+
+  .about-photo-break--right
+  .about-photo-break__frame {
+    right: -10vw;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-photo-break {
+    height: 180px;
+    margin-bottom: 24px;
+  }
+
+  .about-photo-break__frame {
+    width: 88vw;
+    border-radius: 16px;
+  }
+}

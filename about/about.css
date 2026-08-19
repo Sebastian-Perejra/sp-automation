@@ -1097,22 +1097,23 @@ body {
 .about-method__heading h2 span {
   display: block;
   color: transparent;
-  background-image:
+  -webkit-text-fill-color: transparent;
+  background:
     linear-gradient(
       90deg,
-      #ff4f9a 0%,
-      #ff5fae 22%,
-      #d96dff 52%,
-      #8f7cff 74%,
-      #5ca6ff 100%
+      #ff3f91 0%,
+      #ff52ae 20%,
+      #e159ff 45%,
+      #a768ff 68%,
+      #5d9dff 100%
     );
-  background-size: 140% 100%;
+  background-size: 160% 100%;
   background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   text-shadow:
-    0 0 18px rgba(217, 109, 255, 0.10),
-    0 0 26px rgba(92, 166, 255, 0.08);
+    0 0 18px rgba(225, 89, 255, 0.10),
+    0 0 28px rgba(93, 157, 255, 0.08);
 }
 
 .about-method__heading p {

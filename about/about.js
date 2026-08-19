@@ -81,42 +81,102 @@
       section.style.height =
         `${sticky.offsetHeight + scrollDistance + holdDistance}px`;
 
-      update();
+      updateTarget();
     }
 
-    function update() {
-      if (!desktop.matches) return;
+    let targetProgress = 0;
+let currentProgress = 0;
+let animationFrame = null;
 
-      const rect = section.getBoundingClientRect();
+function updateTarget() {
+  if (!desktop.matches) return;
 
-      const stickyTop =
-        parseFloat(getComputedStyle(sticky).top) || 76;
+  const rect =
+    section.getBoundingClientRect();
 
-      const travelled = stickyTop - rect.top;
+  const stickyTop =
+    parseFloat(
+      getComputedStyle(sticky).top
+    ) || 76;
 
-      const progress =
-        scrollDistance > 0
-          ? clamp(travelled / scrollDistance, 0, 1)
-          : 0;
+  const travelled =
+    stickyTop - rect.top;
 
-      const translate = maxShift * progress;
+  targetProgress =
+    scrollDistance > 0
+      ? clamp(
+          travelled / scrollDistance,
+          0,
+          1
+        )
+      : 0;
 
-      track.style.transform =
-        `translate3d(${-translate}px, 0, 0)`;
+  startSmoothMotion();
+}
 
-      progressFill.style.transform =
-        `scaleX(${progress})`;
+function startSmoothMotion() {
+  if (animationFrame) return;
 
-      activateCard();
+  function animate() {
+    const difference =
+      targetProgress -
+      currentProgress;
+
+    currentProgress +=
+      difference * 0.095;
+
+    if (
+      Math.abs(difference) <
+      0.00015
+    ) {
+      currentProgress =
+        targetProgress;
     }
+
+    const translate =
+      maxShift *
+      currentProgress;
+
+    track.style.transform =
+      `translate3d(${
+        -translate
+      }px, 0, 0)`;
+
+    progressFill.style.transform =
+      `scaleX(${
+        currentProgress
+      })`;
+
+    activateCard();
+
+    if (
+      Math.abs(
+        targetProgress -
+        currentProgress
+      ) > 0.00015
+    ) {
+      animationFrame =
+        requestAnimationFrame(
+          animate
+        );
+    } else {
+      animationFrame = null;
+    }
+  }
+
+  animationFrame =
+    requestAnimationFrame(
+      animate
+    );
+}
 
     function requestUpdate() {
       if (ticking) return;
-
+    
       ticking = true;
-
+    
       requestAnimationFrame(() => {
-        update();
+        updateTarget();
         ticking = false;
       });
     }

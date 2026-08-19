@@ -311,12 +311,30 @@ body {
 .about-hero__portrait {
   position: absolute;
   z-index: 4;
-  top: 5%;
-  left: 4%;
-  right: -8%;
-  bottom: 5%;
+  top: -4%;
+  left: -8%;
+  right: -10%;
+  bottom: -5%;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 0 22px 22px 0;
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 8%,
+      rgba(0, 0, 0, 0.85) 27%,
+      #000 42%,
+      #000 100%
+    );
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 8%,
+      rgba(0, 0, 0, 0.85) 27%,
+      #000 42%,
+      #000 100%
+    );
 }
 
 .about-hero__portrait::before {
@@ -347,10 +365,18 @@ body {
   z-index: 3;
   inset: 0;
   pointer-events: none;
-  border: 1px solid rgba(166, 255, 72, 0.08);
-  border-radius: inherit;
-  box-shadow:
-    inset 0 0 80px rgba(4, 9, 6, 0.2);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 12, 9, 0.42) 0%,
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(7, 12, 9, 0.08) 0%,
+      transparent 45%,
+      rgba(7, 12, 9, 0.32) 100%
+    );
 }
 
 .about-hero__portrait-image {
@@ -360,7 +386,7 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: 46% 50%;
+  object-position: 38% 42%;
   filter:
     saturate(0.78)
     contrast(1.06)
@@ -515,7 +541,12 @@ body {
   }
 
   .about-hero__portrait {
-    width: min(66%, 380px);
+    top: 0;
+    left: -4%;
+    right: -6%;
+    bottom: 0;
+    width: auto;
+    height: auto;
   }
 
   .about-hero__facts {
@@ -579,11 +610,37 @@ body {
     min-height: 390px;
   }
 
-  .about-hero__portrait {
-    top: 8%;
-    width: min(76%, 310px);
-    height: 82%;
-  }
+.about-hero__portrait {
+  top: 0;
+  left: -8%;
+  right: -10%;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  border-radius: 14px;
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.32) 14%,
+      rgba(0, 0, 0, 0.92) 34%,
+      #000 48%,
+      #000 100%
+    );
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.32) 14%,
+      rgba(0, 0, 0, 0.92) 34%,
+      #000 48%,
+      #000 100%
+    );
+}
+
+.about-hero__portrait-image {
+  object-position: 38% 44%;
+}
 
   .about-system-node--two,
   .about-system-node--four {

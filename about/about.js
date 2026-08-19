@@ -1,25 +1,30 @@
 (() => {
-  const section = document.querySelector(
-    ".about-history"
-  );
+  const section =
+    document.querySelector(
+      ".about-history"
+    );
 
   if (!section) return;
 
-  const sticky = section.querySelector(
-    ".about-history__sticky"
-  );
+  const sticky =
+    section.querySelector(
+      ".about-history__sticky"
+    );
 
-  const viewport = section.querySelector(
-    ".about-history__viewport"
-  );
+  const viewport =
+    section.querySelector(
+      ".about-history__viewport"
+    );
 
-  const track = section.querySelector(
-    ".about-history__track"
-  );
+  const track =
+    section.querySelector(
+      ".about-history__track"
+    );
 
-  const progressFill = section.querySelector(
-    ".about-history__progress-fill"
-  );
+  const progressFill =
+    section.querySelector(
+      ".about-history__progress-fill"
+    );
 
   if (
     !sticky ||
@@ -30,48 +35,51 @@
     return;
   }
 
-  const desktopQuery = window.matchMedia(
-    "(min-width: 851px)"
-  );
+  const desktop =
+    window.matchMedia(
+      "(min-width: 851px)"
+    );
 
   let maxShift = 0;
   let scrollDistance = 0;
   let ticking = false;
 
-  function clamp(
+  const clamp = (
     value,
     min,
     max
-  ) {
+  ) => {
     return Math.min(
       Math.max(value, min),
       max
     );
-  }
+  };
 
   function reset() {
     section.style.height = "";
-
     track.style.transform = "";
-
     progressFill.style.transform =
       "scaleX(0)";
   }
 
   function measure() {
-    if (!desktopQuery.matches) {
+    if (!desktop.matches) {
       reset();
       return;
     }
 
-    maxShift = Math.max(
-      0,
-      track.scrollWidth -
-      viewport.clientWidth
-    );
+    maxShift =
+      Math.max(
+        0,
+        track.scrollWidth -
+        viewport.clientWidth
+      );
 
     scrollDistance =
-      maxShift * 1.08;
+      Math.max(
+        maxShift * 1.65,
+        window.innerHeight * 1.6
+      );
 
     section.style.height =
       `${
@@ -83,14 +91,19 @@
   }
 
   function update() {
-    if (!desktopQuery.matches) {
+    if (!desktop.matches) {
       return;
     }
 
     const rect =
       section.getBoundingClientRect();
 
-    const stickyTop = 92;
+    const stickyTop =
+      parseFloat(
+        getComputedStyle(
+          sticky
+        ).top
+      ) || 76;
 
     const travelled =
       stickyTop -
@@ -145,7 +158,7 @@
     measure
   );
 
-  desktopQuery.addEventListener(
+  desktop.addEventListener(
     "change",
     measure
   );
@@ -158,8 +171,13 @@
         measure
       );
 
-    observer.observe(viewport);
-    observer.observe(track);
+    observer.observe(
+      viewport
+    );
+
+    observer.observe(
+      track
+    );
   }
 
   measure();

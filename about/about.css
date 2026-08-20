@@ -4511,3 +4511,76 @@ strong {
     animation: none;
   }
 }
+
+.about-history__card,
+.about-history__card--today {
+  background:
+    linear-gradient(
+      145deg,
+      #f6f1e8 0%,
+      #eee5d8 55%,
+      #e7dccd 100%
+    );
+  border-color: rgba(123, 105, 78, 0.24);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.about-history__card:hover,
+.about-history__card.is-active {
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf2 0%,
+      #f3eadf 55%,
+      #eadfce 100%
+    );
+  border-color: rgba(115, 145, 80, 0.42);
+  box-shadow:
+    0 34px 86px rgba(0, 0, 0, 0.26),
+    0 0 34px rgba(166, 255, 72, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.about-history__year {
+  color: #26241f;
+}
+
+.about-history__stage {
+  color: #6f8650;
+}
+
+.about-history__card h3 {
+  color: #292720;
+}
+
+.about-history__card p {
+  color: rgba(52, 48, 40, 0.72);
+}
+
+.about-history__tags span {
+  border-color: rgba(101, 116, 78, 0.22);
+  background: rgba(255, 255, 255, 0.46);
+  color: rgba(55, 66, 46, 0.72);
+}
+
+.about-history__today-flow {
+  color: #647c45;
+}
+
+.about-history__today-flow i {
+  background: rgba(100, 124, 69, 0.5);
+}
+
+.about-history__card::after {
+  background:
+    radial-gradient(
+      320px circle
+      at
+      var(--history-x, 50%)
+      var(--history-y, 50%),
+      rgba(145, 178, 102, 0.12),
+      transparent 68%
+    );
+}

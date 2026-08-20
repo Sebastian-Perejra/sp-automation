@@ -4126,13 +4126,6 @@ strong {
     justify-self: start;
   }
 
-  #site-header-slot .home-link {
-    display: inline-flex !important;
-    grid-column: 2;
-    justify-self: start;
-    white-space: nowrap;
-  }
-
   #site-header-slot .desktop-nav {
     display: none !important;
   }

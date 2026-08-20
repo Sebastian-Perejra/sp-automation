@@ -198,6 +198,7 @@ body::after {
 
 .services-hero h1 span {
   display: block;
+  width: max-content;
   color: #31594a;
 }
 

@@ -4106,51 +4106,93 @@ strong {
 
 @media (max-width: 760px) {
   #site-header-slot {
-    position: relative;
-    z-index: 100000;
-    height: 64px;
+    height: auto;
   }
 
   #site-header-slot .topbar {
     display: block !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    z-index: 100000 !important;
   }
 
   #site-header-slot .topbar-inner {
-    min-height: 64px !important;
-    grid-template-columns: auto 1fr auto !important;
-    grid-template-rows: 1fr !important;
-    align-items: center !important;
+    min-height: 64px;
+    grid-template-columns: auto auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+  }
+
+  #site-header-slot .mobile-menu-button {
+    display: flex !important;
+    grid-column: 1;
+    justify-self: start;
   }
 
   #site-header-slot .home-link {
-    display: none !important;
+    display: inline-flex !important;
+    grid-column: 2;
+    justify-self: start;
+    white-space: nowrap;
   }
 
   #site-header-slot .desktop-nav {
     display: none !important;
   }
 
-  #site-header-slot .mobile-menu-button {
-    display: flex !important;
-    grid-column: 1 !important;
-    justify-self: start !important;
-  }
-
   #site-header-slot .lang-switcher {
-    display: flex !important;
-    grid-column: 3 !important;
-    justify-self: end !important;
+    grid-column: 4;
+    justify-self: end;
+    margin-left: 0;
   }
 
-  .mobile-menu {
-    top: 64px !important;
-    z-index: 99999 !important;
+  .about-hero {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-hero {
+    width: calc(100% - 20px);
+    margin-top: 18px;
+    padding:
+      34px
+      22px
+      72px;
+  }
+
+  .about-hero__eyebrow {
+    font-size: 7px;
+    line-height: 1.55;
+  }
+
+  .about-hero__title {
+    font-size: clamp(
+      46px,
+      15vw,
+      62px
+    );
+    line-height: 0.94;
+  }
+
+  .about-hero__statement {
+    font-size: clamp(
+      25px,
+      7.5vw,
+      32px
+    );
+  }
+
+  .about-hero__facts {
+    width: 100%;
+  }
+
+  .about-hero__fact {
+    grid-template-columns:
+      minmax(100px, auto)
+      1fr;
+    gap: 16px;
+  }
+
+  .about-hero__fact-value {
+    white-space: nowrap;
   }
 }
 .about-history__track {

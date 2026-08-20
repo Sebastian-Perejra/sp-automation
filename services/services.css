@@ -16328,3 +16328,30 @@ p {
     background-position: 0% 50%;
   }
 }
+
+.services-final-cta h2 {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff3f91 0%,
+      #ff52ae 20%,
+      #e159ff 45%,
+      #a768ff 68%,
+      #5d9dff 100%
+    );
+
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation:
+    servicesGradientShift
+    8s
+    ease-in-out
+    infinite;
+}

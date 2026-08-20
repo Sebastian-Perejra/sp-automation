@@ -404,33 +404,141 @@
     frame
   );
 }
-  
-  async function init() {
-    const lang =
-      getLanguage();
 
-    const currentPage =
-      getCurrentPage();
-    ensureCosmicFrame();
-
-    await Promise.all([
-      loadComponent(
-        "#site-header-slot",
-        "/components/header.html"
-      ),
-      loadComponent(
-        "#site-footer-slot",
-        "/components/footer.html"
-      )
-    ]);
-
-    setupHeader(
-      lang,
-      currentPage
+  function ensureSiteMapSlot() {
+  let slot =
+    document.querySelector(
+      "#site-map-slot"
     );
 
-    setupFooter(lang);
+  if (slot) {
+    return slot;
   }
+
+  slot =
+    document.createElement(
+      "div"
+    );
+
+  slot.id =
+    "site-map-slot";
+
+  document.body.appendChild(
+    slot
+  );
+
+  return slot;
+}
+
+function siteMapUrl(lang) {
+  if (lang === "en") {
+    return "/components/site-map/site-map-en.html";
+  }
+
+  if (lang === "ru") {
+    return "/components/site-map/site-map-ru.html";
+  }
+
+  return "/components/site-map/site-map.html";
+}
+
+function ensureSiteMapCss() {
+  if (
+    document.querySelector(
+      'link[data-site-map-css]'
+    )
+  ) {
+    return;
+  }
+
+  const link =
+    document.createElement(
+      "link"
+    );
+
+  link.rel =
+    "stylesheet";
+
+  link.href =
+    "/components/site-map/site-map.css";
+
+  link.dataset.siteMapCss =
+    "true";
+
+  document.head.appendChild(
+    link
+  );
+}
+
+function loadSiteMapScript() {
+  if (
+    document.querySelector(
+      'script[data-site-map-js]'
+    )
+  ) {
+    return;
+  }
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+  script.src =
+    "/components/site-map/site-map.js";
+
+  script.defer =
+    true;
+
+  script.dataset.siteMapJs =
+    "true";
+
+  document.body.appendChild(
+    script
+  );
+}
+  
+async function init() {
+  const lang =
+    getLanguage();
+
+  const currentPage =
+    getCurrentPage();
+
+  ensureCosmicFrame();
+  ensureSiteMapSlot();
+  ensureSiteMapCss();
+
+  document.documentElement.dataset.siteLanguage =
+    lang;
+
+  document.documentElement.dataset.sitePage =
+    currentPage;
+
+  await Promise.all([
+    loadComponent(
+      "#site-header-slot",
+      "/components/header.html"
+    ),
+    loadComponent(
+      "#site-footer-slot",
+      "/components/footer.html"
+    ),
+    loadComponent(
+      "#site-map-slot",
+      siteMapUrl(lang)
+    )
+  ]);
+
+  setupHeader(
+    lang,
+    currentPage
+  );
+
+  setupFooter(lang);
+
+  loadSiteMapScript();
+}
 
   if (
     document.readyState ===

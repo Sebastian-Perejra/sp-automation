@@ -2160,3 +2160,30 @@
     font-size: 6.5px;
   }
 }
+
+@media (max-width: 760px) {
+  .site-map-scene {
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .site-map-scene__stage {
+    aspect-ratio: 1.48 / 1;
+  }
+
+  .site-map-hotspot strong {
+    font-size: 8px;
+  }
+
+  .site-map-info {
+    margin-top: -2px;
+  }
+
+  .site-map-campus {
+    min-height: 690px;
+  }
+
+  .site-map-legend {
+    margin-bottom: 0;
+  }
+}

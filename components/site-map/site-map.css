@@ -2085,3 +2085,78 @@
     flex: 0 0 7px;
   }
 }
+
+@media (max-width: 760px) {
+  .site-map-panel__top {
+    padding-bottom: 8px;
+  }
+
+  .site-map-scene {
+    gap: 10px;
+  }
+
+  .site-map-scene__stage {
+    margin-top: 0;
+    aspect-ratio: 1.52 / 1;
+  }
+
+  .site-map-hotspot {
+    padding: 4px 5px;
+  }
+
+  .site-map-hotspot strong {
+    font-size: 7.6px;
+    line-height: 1;
+    letter-spacing: 0.015em;
+  }
+
+  .site-map-hotspot__here {
+    top: -18px;
+    font-size: 4.8px;
+  }
+
+  .site-map-info {
+    padding: 15px 15px 14px;
+  }
+
+  .site-map-info__title {
+    margin-top: 11px;
+    font-size: 20px;
+  }
+
+  .site-map-info p {
+    margin-top: 11px;
+    font-size: 8.5px;
+    line-height: 1.5;
+  }
+
+  .site-map-info__divider {
+    margin: 13px 0 11px;
+  }
+
+  .site-map-info__next {
+    margin-top: 8px;
+  }
+
+  .site-map-info__next-label {
+    font-size: 5.5px;
+  }
+
+  .site-map-info__next strong {
+    font-size: 8.5px;
+  }
+
+  .site-map-info__next > i {
+    width: 25px;
+    height: 25px;
+    flex-basis: 25px;
+  }
+
+  .site-map-legend {
+    padding: 9px 10px;
+  }
+
+  .site-map-legend span {
+    font-size: 6.5px;
+  }
+}

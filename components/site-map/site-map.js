@@ -743,7 +743,7 @@
       "[data-map-route-head]"
     );
 
-  const mapImage =
+const mapImage =
   campus.querySelector(
     ".site-map-scene__image"
   );
@@ -753,11 +753,15 @@ const hotspots =
     ".site-map-hotspot"
   );
 
-let parallaxFrame = null;
+let targetX = 0;
+let targetY = 0;
 
-function updateParallax(
-  event
-) {
+let currentX = 0;
+let currentY = 0;
+
+let pointerInside = false;
+
+function updateParallaxTarget(event) {
   if (
     !stage ||
     !mapImage ||
@@ -769,118 +773,112 @@ function updateParallax(
   const rect =
     stage.getBoundingClientRect();
 
-  const centerX =
-    rect.left +
-    rect.width / 2;
-
-  const centerY =
-    rect.top +
-    rect.height / 2;
-
-  const normalizedX =
+  const x =
     (
       event.clientX -
-      centerX
-    ) /
-    (
-      rect.width / 2
-    );
+      rect.left
+    ) / rect.width;
 
-  const normalizedY =
+  const y =
     (
       event.clientY -
-      centerY
-    ) /
-    (
-      rect.height / 2
-    );
+      rect.top
+    ) / rect.height;
 
-  const imageX =
-    normalizedX * -5;
+  targetX =
+    (x - 0.5) * 2;
 
-  const imageY =
-    normalizedY * -4;
+  targetY =
+    (y - 0.5) * 2;
 
-  const hotspotX =
-    normalizedX * 3;
-
-  const hotspotY =
-    normalizedY * 2;
-
-  if (parallaxFrame) {
-    cancelAnimationFrame(
-      parallaxFrame
-    );
-  }
-
-  parallaxFrame =
-    requestAnimationFrame(
-      () => {
-        mapImage.style.setProperty(
-          "--map-parallax-x",
-          `${imageX}px`
-        );
-
-        mapImage.style.setProperty(
-          "--map-parallax-y",
-          `${imageY}px`
-        );
-
-        hotspots.forEach(
-          hotspot => {
-            hotspot.style.setProperty(
-              "--map-hotspot-x",
-              `${hotspotX}px`
-            );
-
-            hotspot.style.setProperty(
-              "--map-hotspot-y",
-              `${hotspotY}px`
-            );
-          }
-        );
-      }
-    );
+  pointerInside = true;
 }
 
-function resetParallax() {
-  if (!mapImage) {
-    return;
+function resetParallaxTarget() {
+  targetX = 0;
+  targetY = 0;
+
+  pointerInside = false;
+}
+
+function animateLivingMap(time) {
+  if (
+    mapImage &&
+    stage
+  ) {
+    const smoothing =
+      0.055;
+
+    currentX +=
+      (
+        targetX -
+        currentX
+      ) * smoothing;
+
+    currentY +=
+      (
+        targetY -
+        currentY
+      ) * smoothing;
+
+    const imageX =
+      currentX * -3.5;
+
+    const imageY =
+      currentY * -2.8;
+
+    const hotspotX =
+      currentX * 1.6;
+
+    const hotspotY =
+      currentY * 1.2;
+
+    const breathe =
+      1 +
+      Math.sin(
+        time / 1700
+      ) * 0.0055;
+
+    mapImage.style.transform =
+      `
+        translate3d(
+          ${imageX}px,
+          ${imageY}px,
+          0
+        )
+        scale(${breathe})
+      `;
+
+    hotspots.forEach(
+      hotspot => {
+        const baseX =
+          hotspot.style.getPropertyValue(
+            "--map-x"
+          );
+
+        hotspot.style.translate =
+          `${hotspotX}px ${hotspotY}px`;
+      }
+    );
   }
 
-  mapImage.style.setProperty(
-    "--map-parallax-x",
-    "0px"
-  );
-
-  mapImage.style.setProperty(
-    "--map-parallax-y",
-    "0px"
-  );
-
-  hotspots.forEach(
-    hotspot => {
-      hotspot.style.setProperty(
-        "--map-hotspot-x",
-        "0px"
-      );
-
-      hotspot.style.setProperty(
-        "--map-hotspot-y",
-        "0px"
-      );
-    }
+  requestAnimationFrame(
+    animateLivingMap
   );
 }
 
 stage.addEventListener(
   "mousemove",
-  updateParallax
+  updateParallaxTarget
 );
 
 stage.addEventListener(
   "mouseleave",
-  resetParallax
+  resetParallaxTarget
+);
+
+requestAnimationFrame(
+  animateLivingMap
 );
 
   function openMap() {

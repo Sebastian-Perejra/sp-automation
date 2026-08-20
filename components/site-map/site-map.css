@@ -201,10 +201,10 @@
   inset: 0;
 
   background:
-    rgba(3, 10, 8, 0.72);
+    rgba(3, 10, 8, 0.48);
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
 }
 
 .site-map-panel {

@@ -4115,7 +4115,7 @@ strong {
 
   #site-header-slot .topbar-inner {
     min-height: 64px;
-    grid-template-columns: auto auto 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: 14px;
     align-items: center;
   }
@@ -4126,12 +4126,16 @@ strong {
     justify-self: start;
   }
 
+  #site-header-slot .home-link {
+  display: none !important;
+}
+
   #site-header-slot .desktop-nav {
     display: none !important;
   }
 
   #site-header-slot .lang-switcher {
-    grid-column: 4;
+    grid-column: 3;
     justify-self: end;
     margin-left: 0;
   }

@@ -4104,6 +4104,49 @@ strong {
   }
 }
 
+@media (max-width: 760px) {
+  #site-header-slot {
+    height: auto;
+  }
+
+  #site-header-slot .topbar {
+    display: block !important;
+  }
+
+  #site-header-slot .topbar-inner {
+    min-height: 64px;
+    grid-template-columns: auto auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+  }
+
+  #site-header-slot .mobile-menu-button {
+    display: flex !important;
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  #site-header-slot .home-link {
+    display: inline-flex !important;
+    grid-column: 2;
+    justify-self: start;
+    white-space: nowrap;
+  }
+
+  #site-header-slot .desktop-nav {
+    display: none !important;
+  }
+
+  #site-header-slot .lang-switcher {
+    grid-column: 4;
+    justify-self: end;
+    margin-left: 0;
+  }
+
+  .about-hero {
+    margin-top: 20px;
+  }
+}
 
 @media (max-width: 560px) {
   .about-hero {

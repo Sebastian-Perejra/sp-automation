@@ -4584,3 +4584,37 @@ strong {
       transparent 68%
     );
 }
+
+.about-final-cta__simplify {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 3%;
+  width: min(47%, 650px);
+  height: 78%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.96;
+  -webkit-mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 12%,
+      #000 26%,
+      #000 100%
+    );
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 12%,
+      #000 26%,
+      #000 100%
+    );
+}
+
+@media (max-width: 850px) {
+  .about-final-cta__simplify {
+    display: none;
+  }
+}

@@ -19,3 +19,41 @@
     <small>Где я сейчас?</small>
   </span>
 </button>
+
+<div
+  class="site-map-overlay"
+  data-site-map-overlay
+  aria-hidden="true"
+>
+  <div
+    class="site-map-overlay__backdrop"
+    data-site-map-close
+  ></div>
+
+  <div
+    class="site-map-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Карта сайта"
+  >
+    <button
+      class="site-map-panel__close"
+      type="button"
+      aria-label="Закрыть карту"
+      data-site-map-close
+    >
+      ×
+    </button>
+
+    <div class="site-map-panel__top">
+      <span>SYSTEM NAVIGATION</span>
+      <strong>Карта сайта</strong>
+      <small>Вы здесь · найдите следующий маршрут</small>
+    </div>
+
+    <div
+      class="site-map-campus"
+      data-site-map-campus
+    ></div>
+  </div>
+</div>

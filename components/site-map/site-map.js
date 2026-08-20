@@ -30,49 +30,63 @@
     document.documentElement.dataset.sitePage ||
     "index";
 
-  const pages = {
-    index: {
-      title: "HOME",
-      label: "Головна",
-      icon: "⌂"
-    },
-    about: {
-      title: "ABOUT",
-      label: "Про мене",
-      icon: "○"
-    },
-    services: {
-      title: "SERVICES",
-      label: "Послуги та автоматизація",
-      icon: "⚙"
-    },
-    solutions: {
-      title: "SOLUTIONS",
-      label: "Рішення та кейси",
-      icon: "▦"
-    },
-    pricing: {
-      title: "PRICING",
-      label: "Цінова політика",
-      icon: "$"
-    },
-    faq: {
-      title: "FAQ",
-      label: "Питання та відповіді",
-      icon: "?"
-    },
-    contacts: {
-      title: "CONTACTS",
-      label: "Контакти",
-      icon: "✉"
-    },
-    terms: {
-      title: "TERMS",
-      label: "Системна зона",
-      icon: "◇"
-    }
-  };
+  const pageNames = {
+  uk: {
+    index: "ГОЛОВНА",
+    about: "ПРО МЕНЕ",
+    services: "ПОСЛУГИ",
+    solutions: "РІШЕННЯ",
+    pricing: "ЦІНОВА ПОЛІТИКА",
+    faq: "FAQ",
+    contacts: "КОНТАКТИ",
+    terms: "УМОВИ"
+  },
+  en: {
+    index: "HOME",
+    about: "ABOUT",
+    services: "SERVICES",
+    solutions: "SOLUTIONS",
+    pricing: "PRICING",
+    faq: "FAQ",
+    contacts: "CONTACTS",
+    terms: "TERMS"
+  },
+  ru: {
+    index: "ГЛАВНАЯ",
+    about: "ОБО МНЕ",
+    services: "УСЛУГИ",
+    solutions: "РЕШЕНИЯ",
+    pricing: "ЦЕНОВАЯ ПОЛИТИКА",
+    faq: "FAQ",
+    contacts: "КОНТАКТЫ",
+    terms: "УСЛОВИЯ"
+  }
+};
 
+const pageIcons = {
+  index: "⌂",
+  about: "○",
+  services: "⚙",
+  solutions: "▦",
+  pricing: "$",
+  faq: "?",
+  contacts: "✉",
+  terms: "◇"
+};
+
+const currentNames =
+  pageNames[lang] ||
+  pageNames.uk;
+
+const pages = Object.fromEntries(
+  Object.keys(currentNames).map(page => [
+    page,
+    {
+      name: currentNames[page],
+      icon: pageIcons[page]
+    }
+  ])
+);
   const info = {
     index: {
       text:
@@ -207,52 +221,42 @@
   }
 
   function hotspot(page) {
-    const data =
-      pages[page];
+  const data =
+    pages[page];
 
-    const position =
-      positions[page];
+  const position =
+    positions[page];
 
-    const active =
-      currentPage === page;
+  const active =
+    currentPage === page;
 
-    return `
-      <a
-        class="site-map-hotspot${active ? " is-current" : ""}"
-        href="${pageUrl(page)}"
-        data-map-page="${page}"
-        style="
-          --map-x:${position.x}%;
-          --map-y:${position.y}%;
-        "
-      >
-        ${
-          active
-            ? `
-              <span class="site-map-hotspot__here">
-                ВИ ТУТ
-              </span>
-            `
-            : ""
-        }
+  return `
+    <a
+      class="site-map-hotspot${active ? " is-current" : ""}"
+      href="${pageUrl(page)}"
+      data-map-page="${page}"
+      aria-label="${data.name}"
+      style="
+        --map-x:${position.x}%;
+        --map-y:${position.y}%;
+      "
+    >
+      ${
+        active
+          ? `
+            <span class="site-map-hotspot__here">
+              ВИ ТУТ
+            </span>
+          `
+          : ""
+      }
 
-        <span
-          class="site-map-hotspot__icon"
-          aria-hidden="true"
-        >
-          ${data.icon}
-        </span>
-
-        <strong>
-          ${data.title}
-        </strong>
-
-        <small>
-          ${data.label}
-        </small>
-      </a>
-    `;
-  }
+      <strong>
+        ${data.name}
+      </strong>
+    </a>
+  `;
+}
 
   const current =
     pages[currentPage] ||
@@ -278,12 +282,8 @@
         </div>
 
         <strong class="site-map-info__title">
-          ${current.title}
+          ${current.name}
         </strong>
-
-        <span class="site-map-info__label">
-          ${current.label}
-        </span>
 
         <p>
           ${currentInfo.text}
@@ -300,8 +300,7 @@
           href="${pageUrl(currentInfo.next[0])}"
         >
           <span>
-            <strong>${nextOne.title}</strong>
-            <small>${nextOne.label}</small>
+            <strong>${nextOne.name}</strong>
           </span>
 
           <i>→</i>
@@ -312,8 +311,7 @@
           href="${pageUrl(currentInfo.next[1])}"
         >
           <span>
-            <strong>${nextTwo.title}</strong>
-            <small>${nextTwo.label}</small>
+            <strong>${nextTwo.name}</strong>
           </span>
 
           <i>→</i>

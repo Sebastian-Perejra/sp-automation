@@ -162,39 +162,39 @@ const pages = Object.fromEntries(
   };
 
   const positions = {
-    index: {
-      x: 50,
-      y: 15
-    },
-    about: {
-      x: 26,
-      y: 29
-    },
-    services: {
-      x: 50,
-      y: 47
-    },
-    solutions: {
-      x: 74,
-      y: 29
-    },
-    pricing: {
-      x: 26,
-      y: 62
-    },
-    faq: {
-      x: 74,
-      y: 62
-    },
-    contacts: {
-      x: 50,
-      y: 78
-    },
-    terms: {
-      x: 88,
-      y: 78
-    }
-  };
+  index: {
+    x: 50,
+    y: 11.8
+  },
+  about: {
+    x: 25.5,
+    y: 25.8
+  },
+  services: {
+    x: 50,
+    y: 43.5
+  },
+  solutions: {
+    x: 74.5,
+    y: 25.8
+  },
+  pricing: {
+    x: 25,
+    y: 58.7
+  },
+  faq: {
+    x: 74.5,
+    y: 58.7
+  },
+  contacts: {
+    x: 50,
+    y: 74.4
+  },
+  terms: {
+    x: 87.5,
+    y: 74
+  }
+};
 
   function pageUrl(page) {
     if (page === "index") {

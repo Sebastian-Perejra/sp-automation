@@ -743,6 +743,146 @@
       "[data-map-route-head]"
     );
 
+  const mapImage =
+  campus.querySelector(
+    ".site-map-scene__image"
+  );
+
+const hotspots =
+  campus.querySelectorAll(
+    ".site-map-hotspot"
+  );
+
+let parallaxFrame = null;
+
+function updateParallax(
+  event
+) {
+  if (
+    !stage ||
+    !mapImage ||
+    isRouting
+  ) {
+    return;
+  }
+
+  const rect =
+    stage.getBoundingClientRect();
+
+  const centerX =
+    rect.left +
+    rect.width / 2;
+
+  const centerY =
+    rect.top +
+    rect.height / 2;
+
+  const normalizedX =
+    (
+      event.clientX -
+      centerX
+    ) /
+    (
+      rect.width / 2
+    );
+
+  const normalizedY =
+    (
+      event.clientY -
+      centerY
+    ) /
+    (
+      rect.height / 2
+    );
+
+  const imageX =
+    normalizedX * -5;
+
+  const imageY =
+    normalizedY * -4;
+
+  const hotspotX =
+    normalizedX * 3;
+
+  const hotspotY =
+    normalizedY * 2;
+
+  if (parallaxFrame) {
+    cancelAnimationFrame(
+      parallaxFrame
+    );
+  }
+
+  parallaxFrame =
+    requestAnimationFrame(
+      () => {
+        mapImage.style.setProperty(
+          "--map-parallax-x",
+          `${imageX}px`
+        );
+
+        mapImage.style.setProperty(
+          "--map-parallax-y",
+          `${imageY}px`
+        );
+
+        hotspots.forEach(
+          hotspot => {
+            hotspot.style.setProperty(
+              "--map-hotspot-x",
+              `${hotspotX}px`
+            );
+
+            hotspot.style.setProperty(
+              "--map-hotspot-y",
+              `${hotspotY}px`
+            );
+          }
+        );
+      }
+    );
+}
+
+function resetParallax() {
+  if (!mapImage) {
+    return;
+  }
+
+  mapImage.style.setProperty(
+    "--map-parallax-x",
+    "0px"
+  );
+
+  mapImage.style.setProperty(
+    "--map-parallax-y",
+    "0px"
+  );
+
+  hotspots.forEach(
+    hotspot => {
+      hotspot.style.setProperty(
+        "--map-hotspot-x",
+        "0px"
+      );
+
+      hotspot.style.setProperty(
+        "--map-hotspot-y",
+        "0px"
+      );
+    }
+  );
+}
+
+stage.addEventListener(
+  "mousemove",
+  updateParallax
+);
+
+stage.addEventListener(
+  "mouseleave",
+  resetParallax
+);
+
   function openMap() {
     overlay.classList.add(
       "is-open"

@@ -2190,18 +2190,21 @@
 
 @media (max-width: 760px) {
   .site-map-overlay {
-    z-index: 99999;
+    top: 58px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: calc(100dvh - 58px);
+
+    padding: 8px;
   }
 
   .site-map-panel {
-    z-index: 1;
-  }
+    width: 100%;
+    height: 100%;
 
-  .site-map-panel__close {
-    z-index: 100001;
-  }
-
-  .site-map-panel__top {
-    z-index: 100000;
+    max-height: none;
   }
 }
+

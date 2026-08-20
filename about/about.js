@@ -482,6 +482,502 @@ function startSmoothMotion() {
   });
 }
 
+function initFinalSimplifier() {
+  const canvas =
+    document.querySelector(
+      ".about-final-cta__simplify"
+    );
+
+  const section =
+    document.querySelector(
+      ".about-final-cta"
+    );
+
+  if (!canvas || !section) return;
+
+  const ctx =
+    canvas.getContext("2d");
+
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let currentProgress = 0;
+  let animationFrame = null;
+
+  const random =
+    (min, max) =>
+      min +
+      Math.random() *
+      (max - min);
+
+  const threads =
+    Array.from(
+      { length: 46 },
+      () => ({
+        x: random(0.02, 0.48),
+        y: random(0.08, 0.92),
+        c1x: random(0.2, 0.52),
+        c1y: random(-0.08, 1.08),
+        c2x: random(0.45, 0.68),
+        c2y: random(0.18, 0.82),
+        alpha: random(0.12, 0.48),
+        width: random(0.35, 1.25),
+        hue:
+          Math.random() > 0.82
+            ? "pink"
+            : Math.random() > 0.88
+              ? "blue"
+              : "green"
+      })
+    );
+
+  const particles =
+    Array.from(
+      { length: 95 },
+      () => ({
+        x: random(0.02, 0.6),
+        y: random(0.06, 0.94),
+        size: random(0.7, 2.5),
+        alpha: random(0.16, 0.76),
+        hue:
+          Math.random() > 0.82
+            ? "pink"
+            : "green"
+      })
+    );
+
+  function ease(value) {
+    return (
+      1 -
+      Math.pow(
+        1 - value,
+        3
+      )
+    );
+  }
+
+  function mix(a, b, amount) {
+    return (
+      a +
+      (b - a) *
+      amount
+    );
+  }
+
+  function resize() {
+    const rect =
+      canvas.getBoundingClientRect();
+
+    dpr =
+      Math.min(
+        window.devicePixelRatio || 1,
+        2
+      );
+
+    width =
+      rect.width;
+
+    height =
+      rect.height;
+
+    canvas.width =
+      Math.round(
+        width * dpr
+      );
+
+    canvas.height =
+      Math.round(
+        height * dpr
+      );
+
+    ctx.setTransform(
+      dpr,
+      0,
+      0,
+      dpr,
+      0,
+      0
+    );
+
+    draw(
+      currentProgress
+    );
+  }
+
+  function draw(progress) {
+    currentProgress =
+      progress;
+
+    ctx.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
+
+    const t =
+      ease(progress);
+
+    const dotX =
+      width * 0.83;
+
+    const dotY =
+      height * 0.5;
+
+    const finalRadius =
+      Math.min(
+        64,
+        height * 0.18
+      );
+
+    threads.forEach(
+      thread => {
+        const startX =
+          mix(
+            thread.x * width,
+            dotX - finalRadius * 0.35,
+            t
+          );
+
+        const startY =
+          mix(
+            thread.y * height,
+            dotY,
+            t
+          );
+
+        const control1X =
+          mix(
+            thread.c1x * width,
+            dotX - 150,
+            t
+          );
+
+        const control1Y =
+          mix(
+            thread.c1y * height,
+            dotY,
+            t
+          );
+
+        const control2X =
+          mix(
+            thread.c2x * width,
+            dotX - 70,
+            t
+          );
+
+        const control2Y =
+          mix(
+            thread.c2y * height,
+            dotY,
+            t
+          );
+
+        let color;
+
+        if (
+          thread.hue ===
+          "pink"
+        ) {
+          color =
+            `rgba(255,82,174,${
+              thread.alpha *
+              (1 - progress)
+            })`;
+        } else if (
+          thread.hue ===
+          "blue"
+        ) {
+          color =
+            `rgba(93,157,255,${
+              thread.alpha *
+              (1 - progress)
+            })`;
+        } else {
+          color =
+            `rgba(166,255,72,${
+              thread.alpha *
+              (1 - progress)
+            })`;
+        }
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          startX,
+          startY
+        );
+
+        ctx.bezierCurveTo(
+          control1X,
+          control1Y,
+          control2X,
+          control2Y,
+          dotX,
+          dotY
+        );
+
+        ctx.strokeStyle =
+          color;
+
+        ctx.lineWidth =
+          thread.width;
+
+        ctx.stroke();
+      }
+    );
+
+    particles.forEach(
+      particle => {
+        const x =
+          mix(
+            particle.x *
+              width,
+            dotX,
+            t
+          );
+
+        const y =
+          mix(
+            particle.y *
+              height,
+            dotY,
+            t
+          );
+
+        const alpha =
+          particle.alpha *
+          Math.max(
+            0,
+            1 - progress
+          );
+
+        ctx.beginPath();
+
+        ctx.arc(
+          x,
+          y,
+          particle.size,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle =
+          particle.hue ===
+          "pink"
+            ? `rgba(255,82,174,${alpha})`
+            : `rgba(166,255,72,${alpha})`;
+
+        ctx.fill();
+      }
+    );
+
+    const dotProgress =
+      ease(
+        Math.max(
+          0,
+          Math.min(
+            1,
+            (
+              progress -
+              0.18
+            ) /
+              0.82
+          )
+        )
+      );
+
+    const radius =
+      mix(
+        10,
+        finalRadius,
+        dotProgress
+      );
+
+    const halo =
+      ctx.createRadialGradient(
+        dotX,
+        dotY,
+        radius * 0.3,
+        dotX,
+        dotY,
+        radius * 2.2
+      );
+
+    halo.addColorStop(
+      0,
+      "rgba(210,255,103,0.45)"
+    );
+
+    halo.addColorStop(
+      0.35,
+      "rgba(166,255,72,0.18)"
+    );
+
+    halo.addColorStop(
+      1,
+      "rgba(166,255,72,0)"
+    );
+
+    ctx.beginPath();
+
+    ctx.arc(
+      dotX,
+      dotY,
+      radius * 2.2,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      halo;
+
+    ctx.fill();
+
+    const sphere =
+      ctx.createRadialGradient(
+        dotX - radius * 0.3,
+        dotY - radius * 0.32,
+        radius * 0.08,
+        dotX,
+        dotY,
+        radius
+      );
+
+    sphere.addColorStop(
+      0,
+      "#f4ffad"
+    );
+
+    sphere.addColorStop(
+      0.38,
+      "#d5ff62"
+    );
+
+    sphere.addColorStop(
+      1,
+      "#a6ff48"
+    );
+
+    ctx.beginPath();
+
+    ctx.arc(
+      dotX,
+      dotY,
+      radius,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      sphere;
+
+    ctx.fill();
+
+    ctx.strokeStyle =
+      "rgba(235,255,191,0.55)";
+
+    ctx.lineWidth = 1;
+
+    ctx.stroke();
+  }
+
+  function play() {
+    if (
+      animationFrame
+    ) {
+      cancelAnimationFrame(
+        animationFrame
+      );
+    }
+
+    const start =
+      performance.now();
+
+    const duration =
+      5200;
+
+    function frame(now) {
+      const progress =
+        Math.min(
+          1,
+          (
+            now -
+            start
+          ) /
+            duration
+        );
+
+      draw(progress);
+
+      if (
+        progress < 1
+      ) {
+        animationFrame =
+          requestAnimationFrame(
+            frame
+          );
+      } else {
+        animationFrame =
+          null;
+      }
+    }
+
+    animationFrame =
+      requestAnimationFrame(
+        frame
+      );
+  }
+
+  resize();
+
+  window.addEventListener(
+    "resize",
+    resize
+  );
+
+  if (
+    reducedMotion
+  ) {
+    draw(1);
+    return;
+  }
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+        entries.forEach(
+          entry => {
+            if (
+              !entry.isIntersecting
+            ) {
+              return;
+            }
+
+            play();
+
+            observer.unobserve(
+              section
+            );
+          }
+        );
+      },
+      {
+        threshold: 0.35
+      }
+    );
+
+  observer.observe(
+    section
+  );
+}
+  
   initHistory();
   initHero();
   initExperience();
@@ -489,4 +985,5 @@ function startSmoothMotion() {
   initMethod();
   initOrigin();
   initPhotoBreaks();
+  initFinalSimplifier();
 })();

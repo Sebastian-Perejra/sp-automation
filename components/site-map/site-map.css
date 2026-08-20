@@ -2187,3 +2187,21 @@
     margin-bottom: 0;
   }
 }
+
+@media (max-width: 760px) {
+  .site-map-overlay {
+    z-index: 99999;
+  }
+
+  .site-map-panel {
+    z-index: 1;
+  }
+
+  .site-map-panel__close {
+    z-index: 100001;
+  }
+
+  .site-map-panel__top {
+    z-index: 100000;
+  }
+}

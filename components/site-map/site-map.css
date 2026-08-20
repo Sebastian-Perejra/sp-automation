@@ -1314,15 +1314,12 @@
 
   z-index: 5;
 
-  min-width: 126px;
-
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   padding:
-    12px
-    14px
+    7px
     11px;
 
   transform:
@@ -1330,122 +1327,82 @@
 
   border:
     1px solid
-    rgba(185, 216, 199, 0.15);
+    rgba(190, 230, 207, 0.08);
 
-  border-radius: 14px;
+  border-radius: 9px;
 
   background:
-    rgba(4, 18, 13, 0.86);
+    rgba(2, 13, 9, 0.16);
 
-  color: #ffffff;
+  color:
+    rgba(246, 252, 248, 0.94);
 
   text-align: center;
   text-decoration: none;
 
   box-shadow:
-    0 14px 30px
-    rgba(0, 0, 0, 0.34);
-
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
+    0 3px 12px
+    rgba(0, 0, 0, 0.12);
 
   transition:
     transform 0.25s
     cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.25s ease,
     background 0.25s ease,
-    box-shadow 0.25s ease;
+    color 0.25s ease,
+    text-shadow 0.25s ease;
 }
 
 .site-map-hotspot:hover {
   transform:
     translate(-50%, -50%)
-    translateY(-5px)
+    translateY(-3px)
     scale(1.04);
 
   border-color:
-    rgba(118, 222, 157, 0.38);
+    rgba(120, 224, 159, 0.24);
 
   background:
-    rgba(8, 32, 22, 0.94);
+    rgba(4, 28, 18, 0.36);
 
-  box-shadow:
-    0 20px 38px
-    rgba(0, 0, 0, 0.4),
-    0 0 28px
-    rgba(75, 199, 120, 0.12);
-}
+  color: #ffffff;
 
-.site-map-hotspot__icon {
-  width: 26px;
-  height: 26px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-bottom: 5px;
-
-  border:
-    1px solid
-    rgba(183, 219, 199, 0.15);
-
-  border-radius: 50%;
-
-  background:
-    rgba(255, 255, 255, 0.035);
-
-  color:
-    rgba(220, 238, 229, 0.78);
-
-  font-size: 12px;
+  text-shadow:
+    0 0 13px
+    rgba(111, 232, 154, 0.4);
 }
 
 .site-map-hotspot strong {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.1;
-}
 
-.site-map-hotspot small {
-  margin-top: 4px;
+  letter-spacing: 0.045em;
 
-  color:
-    rgba(222, 235, 228, 0.58);
+  white-space: nowrap;
 
-  font-size: 8px;
-  line-height: 1.2;
+  text-shadow:
+    0 2px 5px
+    rgba(0, 0, 0, 0.82);
 }
 
 .site-map-hotspot.is-current {
   border-color:
-    rgba(105, 235, 149, 0.66);
+    rgba(106, 231, 149, 0.24);
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(17, 77, 48, 0.94),
-      rgba(7, 45, 27, 0.96)
-    );
+    rgba(14, 72, 43, 0.3);
+
+  color:
+    #a9f4c1;
 
   box-shadow:
-    0 22px 42px
-    rgba(0, 0, 0, 0.4),
-    0 0 0 1px
-    rgba(106, 231, 149, 0.08),
-    0 0 34px
-    rgba(75, 210, 121, 0.22);
-}
+    0 0 18px
+    rgba(75, 210, 121, 0.12);
 
-.site-map-hotspot.is-current
-.site-map-hotspot__icon {
-  color: #a7f3bd;
-
-  border-color:
-    rgba(130, 236, 166, 0.32);
-
-  background:
-    rgba(99, 219, 141, 0.1);
+  text-shadow:
+    0 0 12px
+    rgba(102, 230, 148, 0.34);
 }
 
 .site-map-hotspot__here {

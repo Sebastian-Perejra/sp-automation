@@ -81,79 +81,260 @@
       )
     );
 
-  const info = {
-    index: {
-      text:
-        "Почніть звідси, щоб швидко зрозуміти, чим я займаюся і як побудований сайт.",
-      next: [
-        "services",
-        "solutions"
-      ]
-    },
+const mapTranslations = {
+  uk: {
+    here: "ВИ ТУТ",
+    recommended: "РЕКОМЕНДОВАНІ ДАЛІ:",
+    legendHere: "Ви тут",
+    legendMain: "Основні розділи",
+    legendSystem: "Системна зона",
 
-    about: {
-      text:
-        "Мій досвід, підхід до задач і те, як я поєдную бізнес-процеси, системи, дані та автоматизацію.",
-      next: [
-        "services",
-        "solutions"
-      ]
-    },
+    info: {
+      index: {
+        text:
+          "Почніть звідси, щоб швидко зрозуміти, чим я займаюся і як побудований сайт.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
 
-    services: {
-      text:
-        "Тут зібрані напрями автоматизації, з якими я працюю, і формат вирішення бізнес-задач.",
-      next: [
-        "solutions",
-        "contacts"
-      ]
-    },
+      about: {
+        text:
+          "Мій досвід, підхід до задач і те, як я поєдную бізнес-процеси, системи, дані та автоматизацію.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
 
-    solutions: {
-      text:
-        "Практичні сценарії, кейси та приклади того, як автоматизація працює в реальних процесах.",
-      next: [
-        "pricing",
-        "contacts"
-      ]
-    },
+      services: {
+        text:
+          "Тут зібрані напрями автоматизації, з якими я працюю, і формат вирішення бізнес-задач.",
+        next: [
+          "solutions",
+          "contacts"
+        ]
+      },
 
-    pricing: {
-      text:
-        "Модель співпраці, підхід до оцінки задач і принципи формування вартості.",
-      next: [
-        "faq",
-        "contacts"
-      ]
-    },
+      solutions: {
+        text:
+          "Практичні сценарії, кейси та приклади того, як автоматизація працює в реальних процесах.",
+        next: [
+          "pricing",
+          "contacts"
+        ]
+      },
 
-    faq: {
-      text:
-        "Відповіді на часті питання про роботу, автоматизацію, строки, підхід і співпрацю.",
-      next: [
-        "services",
-        "contacts"
-      ]
-    },
+      pricing: {
+        text:
+          "Модель співпраці, підхід до оцінки задач і принципи формування вартості.",
+        next: [
+          "faq",
+          "contacts"
+        ]
+      },
 
-    contacts: {
-      text:
-        "Точка старту для нової задачі. Опишіть процес або проблему — далі розберемося разом.",
-      next: [
-        "services",
-        "solutions"
-      ]
-    },
+      faq: {
+        text:
+          "Відповіді на часті питання про роботу, автоматизацію, строки, підхід і співпрацю.",
+        next: [
+          "services",
+          "contacts"
+        ]
+      },
 
-    terms: {
-      text:
-        "Системна інформація про умови використання сайту та його матеріалів.",
-      next: [
-        "index",
-        "contacts"
-      ]
+      contacts: {
+        text:
+          "Точка старту для нової задачі. Опишіть процес або проблему — далі розберемося разом.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      terms: {
+        text:
+          "Системна інформація про умови використання сайту та його матеріалів.",
+        next: [
+          "index",
+          "contacts"
+        ]
+      }
     }
-  };
+  },
+
+  ru: {
+    here: "ВЫ ЗДЕСЬ",
+    recommended: "РЕКОМЕНДУЕМ ДАЛЬШЕ:",
+    legendHere: "Вы здесь",
+    legendMain: "Основные разделы",
+    legendSystem: "Системная зона",
+
+    info: {
+      index: {
+        text:
+          "Начните отсюда, чтобы быстро понять, чем я занимаюсь и как устроен сайт.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      about: {
+        text:
+          "Мой опыт, подход к задачам и то, как я объединяю бизнес-процессы, системы, данные и автоматизацию.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      services: {
+        text:
+          "Здесь собраны направления автоматизации, с которыми я работаю, и подход к решению бизнес-задач.",
+        next: [
+          "solutions",
+          "contacts"
+        ]
+      },
+
+      solutions: {
+        text:
+          "Практические сценарии, кейсы и примеры того, как автоматизация работает в реальных процессах.",
+        next: [
+          "pricing",
+          "contacts"
+        ]
+      },
+
+      pricing: {
+        text:
+          "Модель сотрудничества, подход к оценке задач и принципы формирования стоимости.",
+        next: [
+          "faq",
+          "contacts"
+        ]
+      },
+
+      faq: {
+        text:
+          "Ответы на частые вопросы о работе, автоматизации, сроках, подходе и сотрудничестве.",
+        next: [
+          "services",
+          "contacts"
+        ]
+      },
+
+      contacts: {
+        text:
+          "Точка старта для новой задачи. Опишите процесс или проблему — дальше разберёмся вместе.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      terms: {
+        text:
+          "Системная информация об условиях использования сайта и его материалов.",
+        next: [
+          "index",
+          "contacts"
+        ]
+      }
+    }
+  },
+
+  en: {
+    here: "YOU ARE HERE",
+    recommended: "RECOMMENDED NEXT:",
+    legendHere: "You are here",
+    legendMain: "Main sections",
+    legendSystem: "System area",
+
+    info: {
+      index: {
+        text:
+          "Start here for a quick overview of what I do and how the site is structured.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      about: {
+        text:
+          "My experience, approach to problem-solving, and how I connect business processes, systems, data, and automation.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      services: {
+        text:
+          "Explore the automation areas I work with and how I approach real business challenges.",
+        next: [
+          "solutions",
+          "contacts"
+        ]
+      },
+
+      solutions: {
+        text:
+          "Practical scenarios, case studies, and examples of automation working in real business processes.",
+        next: [
+          "pricing",
+          "contacts"
+        ]
+      },
+
+      pricing: {
+        text:
+          "How I structure collaboration, estimate tasks, and approach project pricing.",
+        next: [
+          "faq",
+          "contacts"
+        ]
+      },
+
+      faq: {
+        text:
+          "Answers to common questions about my work, automation, timelines, approach, and collaboration.",
+        next: [
+          "services",
+          "contacts"
+        ]
+      },
+
+      contacts: {
+        text:
+          "The starting point for a new task. Describe the process or problem, and we can take it from there.",
+        next: [
+          "services",
+          "solutions"
+        ]
+      },
+
+      terms: {
+        text:
+          "System information covering the terms for using this site and its materials.",
+        next: [
+          "index",
+          "contacts"
+        ]
+      }
+    }
+  }
+};
+
+const mapUi =
+  mapTranslations[lang] ||
+  mapTranslations.uk;
+
+const info =
+  mapUi.info;
 
   const positions = {
   index: {
@@ -381,9 +562,9 @@
         ${
           active
             ? `
-              <span class="site-map-hotspot__here">
-                ВИ ТУТ
-              </span>
+          <span class="site-map-hotspot__here">
+            ${mapUi.here}
+          </span>
             `
             : ""
         }
@@ -593,10 +774,10 @@
     <div class="site-map-scene">
 
       <aside class="site-map-info">
-        <div class="site-map-info__here">
-          <i></i>
-          ВИ ТУТ
-        </div>
+      <div class="site-map-info__here">
+        <i></i>
+        ${mapUi.here}
+      </div>
 
         <strong class="site-map-info__title">
           ${current.name}
@@ -609,7 +790,7 @@
         <div class="site-map-info__divider"></div>
 
         <span class="site-map-info__next-label">
-          РЕКОМЕНДОВАНІ ДАЛІ:
+          ${mapUi.recommended}
         </span>
 
         <a
@@ -640,17 +821,17 @@
       <div class="site-map-legend">
         <span>
           <i class="is-current"></i>
-          Ви тут
+          ${mapUi.legendHere}
         </span>
-
+      
         <span>
           <i></i>
-          Основні розділи
+          ${mapUi.legendMain}
         </span>
-
+      
         <span>
           <i class="is-system"></i>
-          Системна зона
+          ${mapUi.legendSystem}
         </span>
       </div>
 

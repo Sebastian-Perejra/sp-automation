@@ -16359,10 +16359,20 @@ p {
 }
 
 @media (max-width: 760px) {
+  .services-hero-copy {
+    text-align: left;
+  }
+
   .services-hero h1 {
-    width: max-content;
-    max-width: 100%;
+    width: 100%;
+    max-width: none;
     margin: 14px 0 16px;
+    text-align: left;
+  }
+
+  .services-hero-copy > p {
+    margin-left: 0;
+    margin-right: 0;
     text-align: left;
   }
 }

@@ -4614,7 +4614,18 @@ strong {
 }
 
 @media (max-width: 850px) {
+  .about-final-cta {
+    padding-bottom: 250px;
+  }
+
   .about-final-cta__simplify {
-    display: none;
+    display: block;
+    top: auto;
+    right: 50%;
+    bottom: 24px;
+    width: 88%;
+    height: 170px;
+    transform: translateX(50%);
+    opacity: 0.95;
   }
 }

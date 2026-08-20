@@ -16357,3 +16357,12 @@ p {
     ease-in-out
     infinite;
 }
+
+@media (max-width: 760px) {
+  .services-hero h1 {
+    width: max-content;
+    max-width: 100%;
+    margin: 14px auto 16px;
+    text-align: left;
+  }
+}

@@ -30,47 +30,155 @@
     document.documentElement.dataset.sitePage ||
     "index";
 
-  const copy = {
-    uk: {
-      here: "ВИ ТУТ",
-      pages: {
-        index: ["HOME", "Головна"],
-        about: ["ABOUT", "Про мене"],
-        services: ["SERVICES", "Послуги"],
-        solutions: ["SOLUTIONS", "Рішення та кейси"],
-        pricing: ["PRICING", "Цінова політика"],
-        faq: ["FAQ", "Питання та відповіді"],
-        contacts: ["CONTACTS", "Контакти"],
-        terms: ["TERMS", "Системна зона"]
-      }
+  const pages = {
+    index: {
+      title: "HOME",
+      label: "Головна",
+      icon: "⌂"
+    },
+    about: {
+      title: "ABOUT",
+      label: "Про мене",
+      icon: "○"
+    },
+    services: {
+      title: "SERVICES",
+      label: "Послуги та автоматизація",
+      icon: "⚙"
+    },
+    solutions: {
+      title: "SOLUTIONS",
+      label: "Рішення та кейси",
+      icon: "▦"
+    },
+    pricing: {
+      title: "PRICING",
+      label: "Цінова політика",
+      icon: "$"
+    },
+    faq: {
+      title: "FAQ",
+      label: "Питання та відповіді",
+      icon: "?"
+    },
+    contacts: {
+      title: "CONTACTS",
+      label: "Контакти",
+      icon: "✉"
+    },
+    terms: {
+      title: "TERMS",
+      label: "Системна зона",
+      icon: "◇"
+    }
+  };
+
+  const info = {
+    index: {
+      text:
+        "Почніть звідси, щоб швидко зрозуміти, чим я займаюся і як побудований сайт.",
+      next: [
+        "services",
+        "solutions"
+      ]
     },
 
-    ru: {
-      here: "ВЫ ЗДЕСЬ",
-      pages: {
-        index: ["HOME", "Главная"],
-        about: ["ABOUT", "Обо мне"],
-        services: ["SERVICES", "Услуги"],
-        solutions: ["SOLUTIONS", "Решения и кейсы"],
-        pricing: ["PRICING", "Ценовая политика"],
-        faq: ["FAQ", "Вопросы и ответы"],
-        contacts: ["CONTACTS", "Контакты"],
-        terms: ["TERMS", "Системная зона"]
-      }
+    about: {
+      text:
+        "Мій досвід, підхід до задач і те, як я поєдную бізнес-процеси, системи, дані та автоматизацію.",
+      next: [
+        "services",
+        "solutions"
+      ]
     },
 
-    en: {
-      here: "YOU ARE HERE",
-      pages: {
-        index: ["HOME", "Home"],
-        about: ["ABOUT", "About me"],
-        services: ["SERVICES", "Services"],
-        solutions: ["SOLUTIONS", "Solutions & cases"],
-        pricing: ["PRICING", "Pricing"],
-        faq: ["FAQ", "Questions & answers"],
-        contacts: ["CONTACTS", "Contacts"],
-        terms: ["TERMS", "System zone"]
-      }
+    services: {
+      text:
+        "Тут зібрані напрями автоматизації, з якими я працюю, і формат вирішення бізнес-задач.",
+      next: [
+        "solutions",
+        "contacts"
+      ]
+    },
+
+    solutions: {
+      text:
+        "Практичні сценарії, кейси та приклади того, як автоматизація працює в реальних процесах.",
+      next: [
+        "pricing",
+        "contacts"
+      ]
+    },
+
+    pricing: {
+      text:
+        "Модель співпраці, підхід до оцінки задач і принципи формування вартості.",
+      next: [
+        "faq",
+        "contacts"
+      ]
+    },
+
+    faq: {
+      text:
+        "Відповіді на часті питання про роботу, автоматизацію, строки, підхід і співпрацю.",
+      next: [
+        "services",
+        "contacts"
+      ]
+    },
+
+    contacts: {
+      text:
+        "Точка старту для нової задачі. Опишіть процес або проблему — далі розберемося разом.",
+      next: [
+        "services",
+        "solutions"
+      ]
+    },
+
+    terms: {
+      text:
+        "Системна інформація про умови використання сайту та його матеріалів.",
+      next: [
+        "index",
+        "contacts"
+      ]
+    }
+  };
+
+  const positions = {
+    index: {
+      x: 50,
+      y: 15
+    },
+    about: {
+      x: 26,
+      y: 29
+    },
+    services: {
+      x: 50,
+      y: 47
+    },
+    solutions: {
+      x: 74,
+      y: 29
+    },
+    pricing: {
+      x: 26,
+      y: 62
+    },
+    faq: {
+      x: 74,
+      y: 62
+    },
+    contacts: {
+      x: 50,
+      y: 78
+    },
+    terms: {
+      x: 88,
+      y: 78
     }
   };
 
@@ -98,71 +206,155 @@
     return `/${page}.html`;
   }
 
-  function building(page, className) {
-    const item =
-      copy[lang]?.pages[page] ||
-      copy.uk.pages[page];
+  function hotspot(page) {
+    const data =
+      pages[page];
+
+    const position =
+      positions[page];
 
     const active =
       currentPage === page;
 
     return `
       <a
-        class="site-campus-building ${className}${active ? " is-current" : ""}"
+        class="site-map-hotspot${active ? " is-current" : ""}"
         href="${pageUrl(page)}"
-        data-campus-page="${page}"
+        data-map-page="${page}"
+        style="
+          --map-x:${position.x}%;
+          --map-y:${position.y}%;
+        "
       >
         ${
           active
-            ? `<span class="site-campus-you-are-here">${copy[lang]?.here || copy.uk.here}</span>`
+            ? `
+              <span class="site-map-hotspot__here">
+                ВИ ТУТ
+              </span>
+            `
             : ""
         }
 
-        <span class="site-campus-building__roof"></span>
-
-        <span class="site-campus-building__body">
-          <span class="site-campus-building__windows">
-            <i></i>
-            <i></i>
-            <i></i>
-          </span>
-
-          <strong>${item[0]}</strong>
-          <small>${item[1]}</small>
+        <span
+          class="site-map-hotspot__icon"
+          aria-hidden="true"
+        >
+          ${data.icon}
         </span>
+
+        <strong>
+          ${data.title}
+        </strong>
+
+        <small>
+          ${data.label}
+        </small>
       </a>
     `;
   }
 
+  const current =
+    pages[currentPage] ||
+    pages.index;
+
+  const currentInfo =
+    info[currentPage] ||
+    info.index;
+
+  const nextOne =
+    pages[currentInfo.next[0]];
+
+  const nextTwo =
+    pages[currentInfo.next[1]];
+
   campus.innerHTML = `
-    <div class="site-campus-world">
-      <div class="site-campus-ground"></div>
+    <div class="site-map-scene">
 
-      <svg
-        class="site-campus-roads"
-        viewBox="0 0 1000 620"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path d="M500 90 L500 310"></path>
-        <path d="M500 310 L270 210"></path>
-        <path d="M500 310 L730 210"></path>
-        <path d="M500 310 L280 430"></path>
-        <path d="M500 310 L720 430"></path>
-        <path d="M500 310 L500 535"></path>
-        <path d="M720 430 L865 500"></path>
-      </svg>
+      <aside class="site-map-info">
+        <div class="site-map-info__here">
+          <i></i>
+          ВИ ТУТ
+        </div>
 
-      <div class="site-campus-center-glow"></div>
+        <strong class="site-map-info__title">
+          ${current.title}
+        </strong>
 
-      ${building("index", "site-campus-home")}
-      ${building("about", "site-campus-about")}
-      ${building("services", "site-campus-services")}
-      ${building("solutions", "site-campus-solutions")}
-      ${building("pricing", "site-campus-pricing")}
-      ${building("faq", "site-campus-faq")}
-      ${building("contacts", "site-campus-contacts")}
-      ${building("terms", "site-campus-terms")}
+        <span class="site-map-info__label">
+          ${current.label}
+        </span>
+
+        <p>
+          ${currentInfo.text}
+        </p>
+
+        <div class="site-map-info__divider"></div>
+
+        <span class="site-map-info__next-label">
+          РЕКОМЕНДОВАНІ ДАЛІ:
+        </span>
+
+        <a
+          class="site-map-info__next"
+          href="${pageUrl(currentInfo.next[0])}"
+        >
+          <span>
+            <strong>${nextOne.title}</strong>
+            <small>${nextOne.label}</small>
+          </span>
+
+          <i>→</i>
+        </a>
+
+        <a
+          class="site-map-info__next"
+          href="${pageUrl(currentInfo.next[1])}"
+        >
+          <span>
+            <strong>${nextTwo.title}</strong>
+            <small>${nextTwo.label}</small>
+          </span>
+
+          <i>→</i>
+        </a>
+      </aside>
+
+      <div class="site-map-legend">
+        <span>
+          <i class="is-current"></i>
+          Ви тут
+        </span>
+
+        <span>
+          <i></i>
+          Основні розділи
+        </span>
+
+        <span>
+          <i class="is-system"></i>
+          Системна зона
+        </span>
+      </div>
+
+      <div class="site-map-scene__stage">
+        <img
+          class="site-map-scene__image"
+          src="/components/site-map/campus_at_night.webp"
+          alt=""
+          draggable="false"
+        >
+
+        ${hotspot("index")}
+        ${hotspot("about")}
+        ${hotspot("services")}
+        ${hotspot("solutions")}
+        ${hotspot("pricing")}
+        ${hotspot("faq")}
+        ${hotspot("contacts")}
+        ${hotspot("terms")}
+      </div>
+
     </div>
   `;
 

@@ -2208,3 +2208,13 @@
   }
 }
 
+@media (max-width: 760px) {
+  .site-map-hotspot[data-map-page="index"] {
+    top: 13%;
+  }
+
+  .site-map-hotspot[data-map-page="index"]
+  .site-map-hotspot__here {
+    top: -17px;
+  }
+}

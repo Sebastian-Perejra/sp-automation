@@ -16284,3 +16284,46 @@ p {
     height: 8%;
   }
 }
+
+.services-hero h1 span,
+.services-ecosystem .services-section-head h2,
+.services-transformation .services-section-head h2 {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff3f91 0%,
+      #ff52ae 20%,
+      #e159ff 45%,
+      #a768ff 68%,
+      #5d9dff 100%
+    );
+
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation:
+    servicesGradientShift
+    8s
+    ease-in-out
+    infinite;
+}
+
+@keyframes servicesGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

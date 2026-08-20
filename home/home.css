@@ -6812,3 +6812,46 @@ button[data-calc="clear"] {
       rgba(238, 246, 241, 0.98);
   }
 }
+
+.home-hero__tagline span,
+.home-hero__tagline strong {
+  display: block;
+}
+
+.home-hero__tagline strong {
+  width: fit-content;
+  margin: 5px auto 0;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background:
+    linear-gradient(
+      90deg,
+      #ff3f91 0%,
+      #ff52ae 20%,
+      #e159ff 45%,
+      #a768ff 68%,
+      #5d9dff 100%
+    );
+  background-size: 160% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 500;
+  animation:
+    homeGradientShift
+    8s ease-in-out infinite;
+}
+
+@keyframes homeGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

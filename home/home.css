@@ -6813,15 +6813,22 @@ button[data-calc="clear"] {
   }
 }
 
-.home-hero__tagline span,
 .home-hero__tagline strong {
   display: block;
+  margin-top: 5px;
+  color: var(--text-secondary);
+  -webkit-text-fill-color: currentColor;
+  background: none;
+  animation: none;
 }
 
-.home-hero__tagline strong {
-  width: fit-content;
-  margin: 5px auto 0;
-  color: transparent;
+.typewriter,
+.home-section-head h2,
+.home-cases-head h2,
+.home-process-metaphors-head h2,
+.home-call-booking-copy h2,
+.home-motto-line strong {
+  color: transparent !important;
   -webkit-text-fill-color: transparent;
   background:
     linear-gradient(
@@ -6832,14 +6839,21 @@ button[data-calc="clear"] {
       #a768ff 68%,
       #5d9dff 100%
     );
-  background-size: 160% 100%;
+  background-size: 180% 100%;
   background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
-  font-weight: 500;
   animation:
     homeGradientShift
     8s ease-in-out infinite;
+}
+
+.typewriter {
+  border-right-color: #35594b;
+  animation:
+    typing 1.35s steps(20) 1 normal both,
+    blink-caret 0.7s step-end 3,
+    homeGradientShift 8s ease-in-out infinite;
 }
 
 @keyframes homeGradientShift {

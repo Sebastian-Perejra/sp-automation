@@ -156,39 +156,39 @@
   };
 
   const positions = {
-    index: {
-      x: 50,
-      y: 11.8
-    },
-    about: {
-      x: 25.5,
-      y: 25.8
-    },
-    services: {
-      x: 50,
-      y: 43.5
-    },
-    solutions: {
-      x: 74.5,
-      y: 25.8
-    },
-    pricing: {
-      x: 25,
-      y: 58.7
-    },
-    faq: {
-      x: 74.5,
-      y: 58.7
-    },
-    contacts: {
-      x: 50,
-      y: 74.4
-    },
-    terms: {
-      x: 87.5,
-      y: 74
-    }
-  };
+  index: {
+    x: 50,
+    y: 6.8
+  },
+  about: {
+    x: 25.8,
+    y: 20.8
+  },
+  services: {
+    x: 50,
+    y: 37.7
+  },
+  solutions: {
+    x: 74.8,
+    y: 20.8
+  },
+  pricing: {
+    x: 24.2,
+    y: 52.8
+  },
+  faq: {
+    x: 74.3,
+    y: 52.8
+  },
+  contacts: {
+    x: 50,
+    y: 68.2
+  },
+  terms: {
+    x: 88.6,
+    y: 68.2
+  }
+};
 
   const routeEdges = [
     {

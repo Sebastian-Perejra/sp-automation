@@ -826,6 +826,34 @@ body {
 }
 
 .featured-case--01 .featured-case__visual::before {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(7,13,9,.28),
+      rgba(7,13,9,.06)
+    ),
+    url("/solutions/assets/Bright%20Modern%20Workspace%20by%20the%20Window.webp");
+}
+
+.featured-case--02 .featured-case__visual::before {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(7,13,9,.05),
+      rgba(7,13,9,.28)
+    ),
+    url("/solutions/assets/Automated%20Factory%20with%20Indoor%20Greenery.webp");
+}
+
+.featured-case--03 .featured-case__visual::before {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(7,13,9,.26),
+      rgba(7,13,9,.05)
+    ),
+    url("/solutions/assets/Integrated%20Process%20Flow%20Workspace.webp");
+}
 
 .featured-case__grid {
   position: absolute;

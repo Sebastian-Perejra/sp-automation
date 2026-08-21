@@ -34,6 +34,7 @@
   --radius-small: 12px;
   --font-main: "Manrope", sans-serif;
   --font-tech: "Roboto Mono", monospace;
+  --font-display: "Inter Tight", sans-serif;
 }
 
 * {
@@ -3753,4 +3754,14 @@ body {
   .final-system {
     min-height: 400px;
   }
+}
+
+.solutions-hero__title,
+.solutions-featured__intro h2,
+.case-finder__head h2,
+.solution-process__header h2,
+.solutions-final-cta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.055em;
 }

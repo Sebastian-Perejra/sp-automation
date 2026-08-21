@@ -97,7 +97,7 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="/solutions/solutions.css?v=1">
+  <link rel="stylesheet" href="/solutions/solutions.css?v=2">
 <link rel="stylesheet" href="/components/components.css">
 <link rel="stylesheet" href="/consent/consent.css">
 <link rel="stylesheet" href="/assistant.css">
@@ -123,7 +123,7 @@
 <body>
   <div id="site-header-slot"></div>
 
-<main class="solutions-page">
+<main class="page solutions-page">
     <section class="solutions-hero" id="solutions-hero">
       <div class="solutions-hero__grid">
         <div class="solutions-hero__content">
@@ -244,6 +244,153 @@
       </div>
     </section>
 
+
+    <section class="solutions-featured" id="featured-cases">
+      <div class="solutions-featured__intro">
+        <div>
+          <span class="solutions-featured__eyebrow">FEATURED CASES</span>
+          <h2>Три рішення, де бізнес-логіка видно найкраще</h2>
+        </div>
+
+        <p>
+          Не просто «зробили дашборд» або «написали скрипт».
+          Тут показано, як дані, процес і логіка перетворюються
+          на інструмент для щоденного управління.
+        </p>
+      </div>
+
+      <article class="featured-case featured-case--01">
+        <div class="featured-case__content">
+          <div class="featured-case__index-row">
+            <span class="featured-case__index">01</span>
+            <span class="featured-case__type">MANAGEMENT BI</span>
+          </div>
+
+          <h3>Управлінська звітність без ручного Excel</h3>
+
+          <p class="featured-case__lead">
+            ERP → Power Query → модель даних → DAX →
+            інтерактивний Power BI-звіт для керівництва.
+          </p>
+
+          <div class="featured-case__impact">
+            <div>
+              <span>РЕЗУЛЬТАТ</span>
+              <strong>Одна актуальна версія даних замість кількох Excel-файлів</strong>
+            </div>
+
+            <div>
+              <span>ОНОВЛЕННЯ</span>
+              <strong>Автоматичне підключення та регулярне оновлення моделі</strong>
+            </div>
+
+            <div>
+              <span>ЕФЕКТ</span>
+              <strong>Потенційно до 156 годин ручної роботи на рік</strong>
+            </div>
+          </div>
+
+          <div class="featured-case__tags">
+            <span>POWER BI</span>
+            <span>POWER QUERY</span>
+            <span>DAX</span>
+            <span>ERP / SAP / 1C</span>
+            <span>PLAN / FACT</span>
+          </div>
+
+          <button
+            class="featured-case__open"
+            type="button"
+            data-open-case="6"
+          >
+            Відкрити кейс
+            <span>↘</span>
+          </button>
+        </div>
+
+        <div class="featured-case__visual" aria-hidden="true">
+          <div class="bi-preview">
+            <div class="bi-preview__topbar">
+              <div>
+                <span class="bi-preview__brand">P</span>
+                <strong>Executive Analytics</strong>
+              </div>
+
+              <span class="bi-preview__live">
+                <i></i>
+                LIVE MODEL
+              </span>
+            </div>
+
+            <div class="bi-preview__filters">
+              <span>2026</span>
+              <span>ALL REGIONS</span>
+              <span>ALL CHANNELS</span>
+            </div>
+
+            <div class="bi-preview__kpis">
+              <div>
+                <small>REVENUE</small>
+                <strong>12.8M</strong>
+                <span>▲ 8.4%</span>
+              </div>
+
+              <div>
+                <small>GROSS PROFIT</small>
+                <strong>4.1M</strong>
+                <span>▲ 6.9%</span>
+              </div>
+
+              <div>
+                <small>MARGIN</small>
+                <strong>32.0%</strong>
+                <span>PLAN 30.5%</span>
+              </div>
+            </div>
+
+            <div class="bi-preview__main">
+              <div class="bi-preview__chart">
+                <div class="bi-preview__chart-head">
+                  <span>PLAN / FACT</span>
+                  <strong>94.7%</strong>
+                </div>
+
+                <div class="bi-preview__bars">
+                  <i style="height: 42%"></i>
+                  <i style="height: 58%"></i>
+                  <i style="height: 53%"></i>
+                  <i style="height: 69%"></i>
+                  <i style="height: 76%"></i>
+                  <i style="height: 86%"></i>
+                  <i style="height: 82%"></i>
+                  <i style="height: 94%"></i>
+                </div>
+              </div>
+
+              <div class="bi-preview__donut-wrap">
+                <div class="bi-preview__donut">
+                  <span>32%</span>
+                </div>
+
+                <small>MARGIN</small>
+              </div>
+            </div>
+
+            <div class="bi-preview__signal">
+              <span>✦</span>
+              <p>
+                Управлінський висновок формується автоматично
+                після зміни фільтрів.
+              </p>
+            </div>
+          </div>
+
+          <div class="featured-case__glow"></div>
+          <div class="featured-case__grid"></div>
+        </div>
+      </article>
+    </section>
+
     <div class="solutions-cases-anchor" id="cases-start"></div>
     <div id="case1-container"></div>
     <div id="case2-container"></div>
@@ -329,6 +476,37 @@
       await loadScript(
         "/solutions/cases/page-scroll-nav.js"
       );
+
+      document
+        .querySelectorAll("[data-open-case]")
+        .forEach(button => {
+          button.addEventListener("click", () => {
+            const caseNumber = button.dataset.openCase;
+            const item = document.getElementById(
+              `case-${caseNumber}`
+            );
+
+            if (!item) return;
+
+            const trigger = item.querySelector(
+              ".case-accordion-trigger"
+            );
+
+            if (
+              trigger &&
+              !item.classList.contains("open")
+            ) {
+              trigger.click();
+            }
+
+            setTimeout(() => {
+              item.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
+            }, 120);
+          });
+        });
     })
     .catch(error => {
       console.error(error);

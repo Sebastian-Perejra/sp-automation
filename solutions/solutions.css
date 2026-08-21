@@ -1,900 +1,1726 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
-  <title>Рішення з автоматизації та Power BI | Sebastian Automations</title>
-
-  <meta
-    name="description"
-    content="Реальні кейси з автоматизації бізнес-процесів, Power BI, Excel, Google Apps Script, ERP, CRM, OCR, PDF та інтеграцій. Від хаосу в даних і процесах — до керованої системи."
-  >
-
-  <meta
-    name="robots"
-    content="index, follow"
-  >
-
-  <meta
-    name="theme-color"
-    content="#090d0a"
-  >
-
-  <link
-    rel="canonical"
-    href="https://sp-automation.com/solutions.html"
-  >
-
-  <link
-    rel="alternate"
-    hreflang="uk"
-    href="https://sp-automation.com/solutions.html"
-  >
-
-  <link
-    rel="alternate"
-    hreflang="en"
-    href="https://sp-automation.com/solutions-en.html"
-  >
-
-  <link
-    rel="alternate"
-    hreflang="ru"
-    href="https://sp-automation.com/solutions-ru.html"
-  >
-
-  <link
-    rel="alternate"
-    hreflang="x-default"
-    href="https://sp-automation.com/solutions.html"
-  >
-
-  <meta
-    property="og:title"
-    content="Рішення з автоматизації та Power BI | Sebastian Automations"
-  >
-
-  <meta
-    property="og:description"
-    content="Реальні кейси: автоматизація, Power BI, ERP/CRM, OCR, PDF, Google Workspace та цифрові процеси — від хаосу до керованої системи."
-  >
-
-  <meta
-    property="og:type"
-    content="website"
-  >
-
-  <meta
-    property="og:url"
-    content="https://sp-automation.com/solutions.html"
-  >
-
-  <meta
-    property="og:site_name"
-    content="Sebastian Automations"
-  >
-
-  <meta
-    property="og:locale"
-    content="uk_UA"
-  >
-
-  <link
-    rel="icon"
-    type="image/png"
-    href="/favicon.png"
-  >
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="/solutions/solutions.css?v=6">
-<link rel="stylesheet" href="/components/components.css">
-<link rel="stylesheet" href="/consent/consent.css">
-<link rel="stylesheet" href="/assistant.css">
-
-<link rel="stylesheet" href="/solutions/cases/case-1/case1.css">
-<link rel="stylesheet" href="/solutions/cases/case-2/case2.css">
-<link rel="stylesheet" href="/solutions/cases/case-3/case3.css">
-<link rel="stylesheet" href="/solutions/cases/case-4/case4.css">
-<link rel="stylesheet" href="/solutions/cases/case-5/case5.css">
-<link rel="stylesheet" href="/solutions/cases/case-6/case6.css">
-<link rel="stylesheet" href="/solutions/cases/case-7/case7.css">
-
-<link rel="stylesheet" href="/solutions/cases/cases-accordion.css">
-<link rel="stylesheet" href="/solutions/cases/page-scroll-nav.css">
-<link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
-
-<script src="/components/components.js" defer></script>
-<script src="/consent/consent.js" defer></script>
-<script src="/assistant.js" defer></script>
-<script src="/nav-font-kaleidoscope.js?v=5" defer></script>
-</head>
-
-<body>
-  <div id="site-header-slot"></div>
-
-<main class="page solutions-page">
-    <section class="solutions-hero" id="solutions-hero">
-      <div class="solutions-hero__grid">
-        <div class="solutions-hero__content">
-          <div class="solutions-hero__eyebrow">
-            <span class="solutions-hero__eyebrow-dot" aria-hidden="true"></span>
-            <span>FROM CHAOS TO CONTROL</span>
-          </div>
-
-          <h1 class="solutions-hero__title">
-            Від хаосу в процесах —
-            <span>до системи, яку видно і контролюєш</span>
-          </h1>
-
-          <p class="solutions-hero__description">
-            Реальні кейси з автоматизації, аналітики та цифрових процесів —
-            з фокусом не лише на інструментах, а на бізнес-результаті.
-          </p>
-
-          <div class="solutions-hero__actions">
-            <a class="solutions-hero__cta solutions-hero__cta--primary" href="#cases-start">
-              Переглянути кейси
-              <span>↓</span>
-            </a>
-
-            <a class="solutions-hero__cta solutions-hero__cta--secondary" href="contacts.html">
-              Обговорити задачу
-              <span>↗</span>
-            </a>
-          </div>
-
-          <div class="solutions-hero__proof">
-            Power BI · Автоматизація · Google Workspace · ERP / CRM · Звітність
-          </div>
-        </div>
-
-        <div class="solutions-hero__visual" aria-hidden="true">
-          <div class="solutions-system">
-            <div class="solutions-system__label">PROCESS SYSTEM</div>
-
-            <div class="solutions-system__node solutions-system__node--chaos">
-              <span>01</span>
-              <strong>CHAOS</strong>
-              <small>ручні кроки</small>
-            </div>
-
-            <div class="solutions-system__node solutions-system__node--data">
-              <span>02</span>
-              <strong>DATA</strong>
-              <small>структура</small>
-            </div>
-
-            <div class="solutions-system__node solutions-system__node--logic">
-              <span>03</span>
-              <strong>LOGIC</strong>
-              <small>автоматизація</small>
-            </div>
-
-            <div class="solutions-system__node solutions-system__node--control">
-              <span>04</span>
-              <strong>CONTROL</strong>
-              <small>видимий результат</small>
-            </div>
-
-            <svg class="solutions-system__lines" viewBox="0 0 640 520" preserveAspectRatio="none">
-              <path d="M80 110 C180 110 155 235 265 235 S360 115 470 115"></path>
-              <path d="M110 385 C205 315 280 410 365 335 S455 260 555 300"></path>
-              <path d="M160 110 C220 180 220 255 285 315"></path>
-              <path d="M470 115 C470 205 430 260 365 335"></path>
-            </svg>
-
-            <div class="solutions-system__pulse solutions-system__pulse--one"></div>
-            <div class="solutions-system__pulse solutions-system__pulse--two"></div>
-            <div class="solutions-system__pulse solutions-system__pulse--three"></div>
-
-            <div class="solutions-system__status">
-              <span></span>
-              SYSTEM ONLINE
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="solutions-hero__flow" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0 62 C50 5 84 116 132 42 C174 -22 212 128 258 54 C302 -14 330 118 380 60 C426 10 450 92 500 64 C552 36 568 78 620 62 C684 43 710 70 770 62 C842 53 884 64 940 62 C1024 60 1102 62 1200 62"></path>
-        </svg>
-      </div>
-
-      <div class="solutions-hero__scroll">
-        <span>КЕЙСИ НИЖЧЕ</span>
-        <span class="solutions-hero__scroll-line" aria-hidden="true"></span>
-      </div>
-    </section>
-
-    <section class="solutions-proof-strip">
-      <div class="solutions-proof-strip__item">
-        <span>01</span>
-        <strong>ПРОЦЕС</strong>
-        <small>спочатку розуміємо, що реально відбувається</small>
-      </div>
-
-      <div class="solutions-proof-strip__item">
-        <span>02</span>
-        <strong>ДАНІ</strong>
-        <small>прибираємо хаос, дублювання та ручну звірку</small>
-      </div>
-
-      <div class="solutions-proof-strip__item">
-        <span>03</span>
-        <strong>ЛОГІКА</strong>
-        <small>будуємо керовану автоматизацію під процес</small>
-      </div>
-
-      <div class="solutions-proof-strip__item">
-        <span>04</span>
-        <strong>КОНТРОЛЬ</strong>
-        <small>отримуємо систему, результат якої видно</small>
-      </div>
-    </section>
-
-
-    <section class="solutions-featured" id="featured-cases">
-      <div class="solutions-featured__intro">
-        <div>
-          <span class="solutions-featured__eyebrow">FEATURED CASES</span>
-          <h2>Три рішення, де бізнес-логіка видно найкраще</h2>
-        </div>
-
-        <p>
-          Не просто «зробили дашборд» або «написали скрипт».
-          Тут показано, як дані, процес і логіка перетворюються
-          на інструмент для щоденного управління.
-        </p>
-      </div>
-
-      <article class="featured-case featured-case--01">
-        <div class="featured-case__content">
-          <div class="featured-case__index-row">
-            <span class="featured-case__index">01</span>
-            <span class="featured-case__type">MANAGEMENT BI</span>
-          </div>
-
-          <h3>Управлінська звітність без ручного Excel</h3>
-
-          <p class="featured-case__lead">
-            ERP → Power Query → модель даних → DAX →
-            інтерактивний Power BI-звіт для керівництва.
-          </p>
-
-          <div class="featured-case__impact">
-            <div>
-              <span>РЕЗУЛЬТАТ</span>
-              <strong>Одна актуальна версія даних замість кількох Excel-файлів</strong>
-            </div>
-
-            <div>
-              <span>ОНОВЛЕННЯ</span>
-              <strong>Автоматичне підключення та регулярне оновлення моделі</strong>
-            </div>
-
-            <div>
-              <span>ЕФЕКТ</span>
-              <strong>Потенційно до 156 годин ручної роботи на рік</strong>
-            </div>
-          </div>
-
-          <div class="featured-case__tags">
-            <span>POWER BI</span>
-            <span>POWER QUERY</span>
-            <span>DAX</span>
-            <span>ERP / SAP / 1C</span>
-            <span>PLAN / FACT</span>
-          </div>
-
-          <button
-            class="featured-case__open"
-            type="button"
-            data-open-case="6"
-          >
-            Відкрити кейс
-            <span>↘</span>
-          </button>
-        </div>
-
-        <div class="featured-case__visual" aria-hidden="true">
-          <div class="bi-preview">
-            <div class="bi-preview__topbar">
-              <div>
-                <span class="bi-preview__brand">P</span>
-                <strong>Executive Analytics</strong>
-              </div>
-
-              <span class="bi-preview__live">
-                <i></i>
-                LIVE MODEL
-              </span>
-            </div>
-
-            <div class="bi-preview__filters">
-              <span>2026</span>
-              <span>ALL REGIONS</span>
-              <span>ALL CHANNELS</span>
-            </div>
-
-            <div class="bi-preview__kpis">
-              <div>
-                <small>REVENUE</small>
-                <strong>12.8M</strong>
-                <span>▲ 8.4%</span>
-              </div>
-
-              <div>
-                <small>GROSS PROFIT</small>
-                <strong>4.1M</strong>
-                <span>▲ 6.9%</span>
-              </div>
-
-              <div>
-                <small>MARGIN</small>
-                <strong>32.0%</strong>
-                <span>PLAN 30.5%</span>
-              </div>
-            </div>
-
-            <div class="bi-preview__main">
-              <div class="bi-preview__chart">
-                <div class="bi-preview__chart-head">
-                  <span>PLAN / FACT</span>
-                  <strong>94.7%</strong>
-                </div>
-
-                <div class="bi-preview__bars">
-                  <i style="height: 42%"></i>
-                  <i style="height: 58%"></i>
-                  <i style="height: 53%"></i>
-                  <i style="height: 69%"></i>
-                  <i style="height: 76%"></i>
-                  <i style="height: 86%"></i>
-                  <i style="height: 82%"></i>
-                  <i style="height: 94%"></i>
-                </div>
-              </div>
-
-              <div class="bi-preview__donut-wrap">
-                <div class="bi-preview__donut">
-                  <span>32%</span>
-                </div>
-
-                <small>MARGIN</small>
-              </div>
-            </div>
-
-            <div class="bi-preview__signal">
-              <span>✦</span>
-              <p>
-                Управлінський висновок формується автоматично
-                після зміни фільтрів.
-              </p>
-            </div>
-          </div>
-
-          <div class="featured-case__glow"></div>
-          <div class="featured-case__grid"></div>
-        </div>
-      </article>
-
-      <section class="solutions-visual-break solutions-visual-break--factory" aria-label="Візуальна пауза">
-        <div class="solutions-visual-break__scene" aria-hidden="true">
-          <div class="factory-sky"></div>
-          <div class="factory-grid"></div>
-
-          <div class="factory-building factory-building--one">
-            <span></span><span></span><span></span><span></span>
-          </div>
-
-          <div class="factory-building factory-building--two">
-            <span></span><span></span><span></span>
-          </div>
-
-          <div class="factory-building factory-building--three">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-
-          <div class="factory-line factory-line--one"></div>
-          <div class="factory-line factory-line--two"></div>
-          <div class="factory-line factory-line--three"></div>
-
-          <div class="factory-signal factory-signal--one"></div>
-          <div class="factory-signal factory-signal--two"></div>
-          <div class="factory-signal factory-signal--three"></div>
-        </div>
-
-        <div class="solutions-visual-break__copy">
-          <span>OPERATIONS / CAPACITY / DELIVERY</span>
-          <p>
-            Коли система бачить не лише цифри, а й реальні обмеження процесу —
-            планування перестає бути здогадкою.
-          </p>
-        </div>
-      </section>
-
-      <article class="featured-case featured-case--02">
-        <div class="featured-case__visual featured-case__visual--capacity" aria-hidden="true">
-          <div class="capacity-preview">
-            <div class="capacity-preview__head">
-              <div>
-                <span>PRODUCTION CONTROL</span>
-                <strong>Capacity Planner</strong>
-              </div>
-
-              <div class="capacity-preview__mode">
-                <span>QUEUE</span>
-                <span class="active">PRIORITY</span>
-              </div>
-            </div>
-
-            <div class="capacity-preview__lines">
-              <div class="capacity-preview__line">
-                <div>
-                  <span>LINE 01</span>
-                  <strong>250</strong>
-                  <small>units / day</small>
-                </div>
-
-                <div class="capacity-preview__track">
-                  <i style="width:72%"></i>
-                </div>
-
-                <b>72%</b>
-              </div>
-
-              <div class="capacity-preview__line">
-                <div>
-                  <span>LINE 02</span>
-                  <strong>400</strong>
-                  <small>units / day</small>
-                </div>
-
-                <div class="capacity-preview__track">
-                  <i style="width:88%"></i>
-                </div>
-
-                <b>88%</b>
-              </div>
-
-              <div class="capacity-preview__line">
-                <div>
-                  <span>LINE 03</span>
-                  <strong>600</strong>
-                  <small>units / day</small>
-                </div>
-
-                <div class="capacity-preview__track">
-                  <i style="width:61%"></i>
-                </div>
-
-                <b>61%</b>
-              </div>
-            </div>
-
-            <div class="capacity-preview__calendar">
-              <span class="free">01</span>
-              <span class="medium">02</span>
-              <span class="full">03</span>
-              <span class="full">04</span>
-              <span class="medium">05</span>
-              <span class="free">06</span>
-              <span class="medium">07</span>
-              <span class="full">08</span>
-              <span class="full">09</span>
-              <span class="medium">10</span>
-              <span class="free">11</span>
-              <span class="medium">12</span>
-              <span class="full">13</span>
-              <span class="medium">14</span>
-            </div>
-
-            <div class="capacity-preview__orders">
-              <div>
-                <span>ORD-0048</span>
-                <strong>URGENT</strong>
-                <small>08.08 → 10.08</small>
-              </div>
-
-              <div>
-                <span>ORD-0061</span>
-                <strong>HIGH</strong>
-                <small>11.08 → 12.08</small>
-              </div>
-
-              <div>
-                <span>ORD-0079</span>
-                <strong>NORMAL</strong>
-                <small>14.08 → 14.08</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="featured-case__glow featured-case__glow--capacity"></div>
-          <div class="featured-case__grid"></div>
-        </div>
-
-        <div class="featured-case__content">
-          <div class="featured-case__index-row">
-            <span class="featured-case__index">02</span>
-            <span class="featured-case__type">PRODUCTION CAPACITY</span>
-          </div>
-
-          <h3>Планування потужностей і строків без ручної диспетчеризації</h3>
-
-          <p class="featured-case__lead">
-            100 замовлень → виробничі лінії → добова потужність →
-            черга або пріоритет → розрахункова дата готовності.
-          </p>
-
-          <div class="featured-case__impact">
-            <div>
-              <span>ВХІД</span>
-              <strong>Замовлення, кількість, лінія, бажана дата та пріоритет</strong>
-            </div>
-
-            <div>
-              <span>ЛОГІКА</span>
-              <strong>Розподіл обсягу по календарних днях з урахуванням потужності</strong>
-            </div>
-
-            <div>
-              <span>КОНТРОЛЬ</span>
-              <strong>Дата готовності, статус замовлення та завантаження кожної лінії</strong>
-            </div>
-          </div>
-
-          <div class="featured-case__tags">
-            <span>CAPACITY</span>
-            <span>PRODUCTION</span>
-            <span>PRIORITY</span>
-            <span>SCHEDULING</span>
-            <span>DELIVERY DATE</span>
-          </div>
-
-          <button
-            class="featured-case__open"
-            type="button"
-            data-open-case="4"
-          >
-            Відкрити кейс
-            <span>↘</span>
-          </button>
-        </div>
-      </article>
-
-      <section class="solutions-visual-break solutions-visual-break--supply" aria-label="Візуальна пауза">
-        <div class="supply-break__copy">
-          <span>ORDER / BOM / STOCK / PURCHASE</span>
-          <p>
-            Закупівля стає керованою, коли система бачить не лише замовлення,
-            а й склад виробу, залишки та реальну потребу в компонентах.
-          </p>
-        </div>
-
-        <div class="supply-break__scene" aria-hidden="true">
-          <div class="supply-break__rack supply-break__rack--one">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-
-          <div class="supply-break__rack supply-break__rack--two">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-
-          <div class="supply-break__rack supply-break__rack--three">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-
-          <div class="supply-break__route supply-break__route--one"></div>
-          <div class="supply-break__route supply-break__route--two"></div>
-
-          <div class="supply-break__scanner">
-            <span></span>
-            <strong>STOCK CHECK</strong>
-            <small>SYNCED</small>
-          </div>
-
-          <div class="supply-break__pulse supply-break__pulse--one"></div>
-          <div class="supply-break__pulse supply-break__pulse--two"></div>
-        </div>
-      </section>
-
-      <article class="featured-case featured-case--03">
-        <div class="featured-case__content">
-          <div class="featured-case__index-row">
-            <span class="featured-case__index">03</span>
-            <span class="featured-case__type">BOM / PROCUREMENT</span>
-          </div>
-
-          <h3>Закупівлі без ручного перерахунку комплектуючих</h3>
-
-          <p class="featured-case__lead">
-            Замовлення готових виробів → BOM → загальна потреба →
-            складські залишки → точний список до закупівлі.
-          </p>
-
-          <div class="featured-case__impact">
-            <div>
-              <span>ПОТРЕБА</span>
-              <strong>Кількість виробів автоматично розкладається на комплектуючі за BOM</strong>
-            </div>
-
-            <div>
-              <span>ЗАЛИШКИ</span>
-              <strong>Система віднімає доступний складський запас по кожній позиції</strong>
-            </div>
-
-            <div>
-              <span>РЕЗУЛЬТАТ</span>
-              <strong>Готовий перелік: що саме і в якій кількості потрібно закупити</strong>
-            </div>
-          </div>
-
-          <div class="featured-case__tags">
-            <span>BOM</span>
-            <span>MRP LOGIC</span>
-            <span>STOCK</span>
-            <span>COMPONENTS</span>
-            <span>PROCUREMENT</span>
-          </div>
-
-          <button
-            class="featured-case__open"
-            type="button"
-            data-open-case="5"
-          >
-            Відкрити кейс
-            <span>↘</span>
-          </button>
-        </div>
-
-        <div class="featured-case__visual featured-case__visual--bom" aria-hidden="true">
-          <div class="bom-preview">
-            <div class="bom-preview__head">
-              <div>
-                <span>COMPONENT REQUIREMENTS</span>
-                <strong>BOM Procurement Planner</strong>
-              </div>
-
-              <span class="bom-preview__status">
-                <i></i>
-                CALCULATED
-              </span>
-            </div>
-
-            <div class="bom-preview__orders">
-              <div>
-                <span>ORDER 01</span>
-                <strong>10</strong>
-                <small>В'язальні машини</small>
-              </div>
-
-              <div>
-                <span>ORDER 02</span>
-                <strong>5</strong>
-                <small>Прибиральні машини</small>
-              </div>
-
-              <div>
-                <span>ORDER 03</span>
-                <strong>3</strong>
-                <small>Фрезерні машини</small>
-              </div>
-            </div>
-
-            <div class="bom-preview__flow">
-              <div class="bom-preview__flow-node">
-                <span>01</span>
-                <strong>ORDERS</strong>
-                <small>готові вироби</small>
-              </div>
-
-              <div class="bom-preview__flow-arrow">→</div>
-
-              <div class="bom-preview__flow-node">
-                <span>02</span>
-                <strong>BOM</strong>
-                <small>склад виробу</small>
-              </div>
-
-              <div class="bom-preview__flow-arrow">→</div>
-
-              <div class="bom-preview__flow-node">
-                <span>03</span>
-                <strong>STOCK</strong>
-                <small>залишки</small>
-              </div>
-
-              <div class="bom-preview__flow-arrow">→</div>
-
-              <div class="bom-preview__flow-node bom-preview__flow-node--accent">
-                <span>04</span>
-                <strong>BUY</strong>
-                <small>до закупівлі</small>
-              </div>
-            </div>
-
-            <div class="bom-preview__table">
-              <div class="bom-preview__row bom-preview__row--head">
-                <span>COMPONENT</span>
-                <span>NEED</span>
-                <span>STOCK</span>
-                <span>BUY</span>
-              </div>
-
-              <div class="bom-preview__row">
-                <span>Motor M-24</span>
-                <span>18</span>
-                <span>7</span>
-                <strong>11</strong>
-              </div>
-
-              <div class="bom-preview__row">
-                <span>Controller C-8</span>
-                <span>36</span>
-                <span>12</span>
-                <strong>24</strong>
-              </div>
-
-              <div class="bom-preview__row">
-                <span>Frame F-16</span>
-                <span>18</span>
-                <span>20</span>
-                <strong class="bom-preview__zero">0</strong>
-              </div>
-
-              <div class="bom-preview__row">
-                <span>Bearing B-04</span>
-                <span>72</span>
-                <span>19</span>
-                <strong>53</strong>
-              </div>
-            </div>
-
-            <div class="bom-preview__footer">
-              <span>PROCUREMENT LIST READY</span>
-              <strong>4 COMPONENT GROUPS</strong>
-            </div>
-          </div>
-
-          <div class="featured-case__glow featured-case__glow--bom"></div>
-          <div class="featured-case__grid"></div>
-        </div>
-      </article>
-    </section>
-
-    <div class="solutions-cases-anchor" id="cases-start"></div>
-    <div id="case1-container"></div>
-    <div id="case2-container"></div>
-    <div id="case3-container"></div>
-    <div id="case4-container"></div>
-    <div id="case5-container"></div>
-    <div id="case6-container"></div>
-    <div id="case7-container"></div>
-    <section class="section-card upcoming">
-      <h2>Що з’явиться далі</h2>
-
-      <p>
-        Тут поступово будуть додаватися схеми архітектури,
-        знеособлені кейси, демонстраційні макети, блок-схеми процесів,
-        приклади інтерфейсів і короткі описи результатів.
-      </p>
-    </section>
-
-    <section class="contact-box">
-      <h2>Потрібен детальніший приклад?</h2>
-
-      <p>
-        Додаткову інформацію можна надати після попереднього узгодження
-        або підписання NDA.
-      </p>
-
-      <a href="contacts.html">
-        Зв’язатися зі мною
-      </a>
-    </section>
-  </main>
-  <div id="site-footer-slot"></div>
-
-  <script>
-  const solutionCases = [1, 2, 3, 4, 5, 6, 7];
-
-  function loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = resolve;
-      script.onerror = reject;
-      document.body.appendChild(script);
-    });
+:root {
+  --solutions-bg: #090d0a;
+  --solutions-bg-soft: #0f1511;
+  --solutions-panel: rgba(17, 24, 19, 0.78);
+  --solutions-line: rgba(166, 255, 72, 0.17);
+  --solutions-line-strong: rgba(166, 255, 72, 0.46);
+  --solutions-lime: #a6ff48;
+  --solutions-lime-soft: #c6ff8b;
+  --solutions-text: #f4f6f2;
+  --solutions-muted: #a8b0a8;
+  --solutions-deep-muted: #707971;
+  --solutions-max: 1320px;
+
+  --page-bg: #f7f4ef;
+  --surface: #ffffff;
+  --surface-soft: #fbfaf7;
+  --surface-green: #f2f7f3;
+  --text-main: #242321;
+  --text-secondary: #64605b;
+  --text-muted: #817c75;
+  --green: #35594b;
+  --green-hover: #29483c;
+  --green-soft: #dce9df;
+  --blue: #2f6f9f;
+  --blue-hover: #255a82;
+  --purple: #6665a8;
+  --border: #e8e1d8;
+  --border-green: #d5e3d8;
+  --border-blue: #d9e5ee;
+  --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
+  --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
+  --radius-large: 28px;
+  --radius-card: 22px;
+  --radius-small: 12px;
+  --font-main: "Manrope", sans-serif;
+  --font-tech: "Roboto Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--solutions-bg);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--solutions-bg);
+  color: var(--solutions-text);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.solutions-page {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 11% 8%, rgba(166, 255, 72, 0.075), transparent 27%),
+    radial-gradient(circle at 88% 15%, rgba(93, 130, 105, 0.12), transparent 30%),
+    var(--solutions-bg);
+}
+
+.solutions-hero {
+  position: relative;
+  width: min(calc(100% - 44px), var(--solutions-max));
+  min-height: 760px;
+  margin: 0 auto;
+  padding: 108px 0 74px;
+  border-bottom: 1px solid rgba(166, 255, 72, 0.12);
+}
+
+.solutions-hero__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(470px, 0.92fr);
+  gap: clamp(50px, 7vw, 110px);
+  align-items: center;
+}
+
+.solutions-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 34px;
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.solutions-hero__eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--solutions-lime);
+  box-shadow: 0 0 18px rgba(166, 255, 72, 0.75);
+}
+
+.solutions-hero__title {
+  max-width: 790px;
+  margin: 0;
+  color: #f7f8f5;
+  font-size: clamp(54px, 6vw, 92px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.solutions-hero__title span {
+  display: block;
+  margin-top: 9px;
+  color: var(--solutions-lime-soft);
+}
+
+.solutions-hero__description {
+  max-width: 720px;
+  margin: 34px 0 0;
+  color: var(--solutions-muted);
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.72;
+}
+
+.solutions-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+
+.solutions-hero__cta {
+  display: inline-flex;
+  min-height: 52px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    color 0.22s ease;
+}
+
+.solutions-hero__cta:hover {
+  transform: translateY(-2px);
+}
+
+.solutions-hero__cta--primary {
+  border: 1px solid var(--solutions-lime);
+  background: var(--solutions-lime);
+  color: #10150f;
+}
+
+.solutions-hero__cta--secondary {
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  background: rgba(255, 255, 255, 0.035);
+  color: #eef3ec;
+}
+
+.solutions-hero__cta--secondary:hover {
+  border-color: rgba(166, 255, 72, 0.55);
+}
+
+.solutions-hero__proof {
+  margin-top: 30px;
+  color: #7f8b82;
+  font-family: var(--font-tech);
+  font-size: 10px;
+  line-height: 1.65;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.solutions-hero__visual {
+  position: relative;
+  min-height: 540px;
+}
+
+.solutions-system {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 1px solid rgba(166, 255, 72, 0.18);
+  border-radius: 2px;
+  background:
+    linear-gradient(rgba(166, 255, 72, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(166, 255, 72, 0.035) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(17, 27, 20, 0.96), rgba(8, 12, 9, 0.98));
+  background-size: 42px 42px, 42px 42px, auto;
+  box-shadow:
+    inset 0 0 80px rgba(166, 255, 72, 0.025),
+    0 40px 100px rgba(0, 0, 0, 0.35);
+}
+
+.solutions-system::before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  pointer-events: none;
+}
+
+.solutions-system__label {
+  position: absolute;
+  top: 28px;
+  left: 30px;
+  color: #677069;
+  font-family: var(--font-tech);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.solutions-system__node {
+  position: absolute;
+  z-index: 3;
+  width: 150px;
+  padding: 14px 16px;
+  border: 1px solid rgba(166, 255, 72, 0.21);
+  background: rgba(11, 17, 13, 0.89);
+  backdrop-filter: blur(10px);
+}
+
+.solutions-system__node span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 8px;
+}
+
+.solutions-system__node strong {
+  display: block;
+  color: #eef4eb;
+  font-family: var(--font-tech);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.solutions-system__node small {
+  display: block;
+  margin-top: 6px;
+  color: #697269;
+  font-size: 9px;
+}
+
+.solutions-system__node--chaos {
+  top: 82px;
+  left: 42px;
+}
+
+.solutions-system__node--data {
+  top: 212px;
+  left: 202px;
+}
+
+.solutions-system__node--logic {
+  right: 50px;
+  bottom: 102px;
+}
+
+.solutions-system__node--control {
+  top: 88px;
+  right: 44px;
+  border-color: rgba(166, 255, 72, 0.48);
+  box-shadow: 0 0 40px rgba(166, 255, 72, 0.08);
+}
+
+.solutions-system__lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: rgba(166, 255, 72, 0.32);
+  stroke-width: 1.25;
+}
+
+.solutions-system__pulse {
+  position: absolute;
+  z-index: 2;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--solutions-lime);
+  box-shadow: 0 0 18px rgba(166, 255, 72, 0.85);
+  animation: solutionsPulse 2.4s ease-in-out infinite;
+}
+
+.solutions-system__pulse--one {
+  top: 201px;
+  left: 220px;
+}
+
+.solutions-system__pulse--two {
+  top: 116px;
+  right: 193px;
+  animation-delay: 0.8s;
+}
+
+.solutions-system__pulse--three {
+  right: 205px;
+  bottom: 176px;
+  animation-delay: 1.5s;
+}
+
+@keyframes solutionsPulse {
+  0%, 100% {
+    opacity: 0.28;
+    transform: scale(0.7);
   }
 
-  async function loadSolutionCase(caseNumber) {
-    const container = document.getElementById(
-      `case${caseNumber}-container`
-    );
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
 
-    if (!container) {
-      return;
-    }
+.solutions-system__status {
+  position: absolute;
+  right: 28px;
+  bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #8b968d;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  letter-spacing: 0.11em;
+}
 
-    const basePath = `/solutions/cases/case-${caseNumber}`;
+.solutions-system__status span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--solutions-lime);
+  box-shadow: 0 0 13px rgba(166, 255, 72, 0.7);
+}
 
-    const response = await fetch(
-      `${basePath}/case-${caseNumber}.html`
-    );
+.solutions-hero__flow {
+  position: absolute;
+  right: 0;
+  bottom: 66px;
+  left: 0;
+  opacity: 0.32;
+  pointer-events: none;
+}
 
-    if (!response.ok) {
-      throw new Error(
-        `Не вдалося завантажити кейс №${caseNumber}`
-      );
-    }
+.solutions-hero__flow svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
 
-    container.innerHTML = await response.text();
+.solutions-hero__flow path {
+  fill: none;
+  stroke: rgba(166, 255, 72, 0.35);
+  stroke-width: 1.3;
+}
 
-    await loadScript(
-      `${basePath}/case-${caseNumber}.js`
-    );
+.solutions-hero__scroll {
+  position: absolute;
+  bottom: 26px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #626d65;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+}
+
+.solutions-hero__scroll-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(166, 255, 72, 0.5), transparent);
+}
+
+.solutions-proof-strip {
+  width: min(calc(100% - 44px), var(--solutions-max));
+  margin: 0 auto 72px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(166, 255, 72, 0.12);
+  border-bottom: 1px solid rgba(166, 255, 72, 0.12);
+}
+
+.solutions-proof-strip__item {
+  position: relative;
+  min-height: 145px;
+  padding: 30px 28px;
+}
+
+.solutions-proof-strip__item + .solutions-proof-strip__item {
+  border-left: 1px solid rgba(166, 255, 72, 0.12);
+}
+
+.solutions-proof-strip__item span {
+  display: block;
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+}
+
+.solutions-proof-strip__item strong {
+  display: block;
+  margin-top: 18px;
+  color: #edf3eb;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.solutions-proof-strip__item small {
+  display: block;
+  max-width: 230px;
+  margin-top: 8px;
+  color: #737d75;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.solutions-cases-anchor {
+  width: 100%;
+  height: 1px;
+  scroll-margin-top: 100px;
+}
+
+#case1-container,
+#case2-container,
+#case3-container,
+#case4-container,
+#case5-container,
+#case6-container,
+#case7-container,
+.section-card,
+.contact-box {
+  width: min(calc(100% - 44px), 1180px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#case1-container,
+#case2-container,
+#case3-container,
+#case4-container,
+#case5-container,
+#case6-container,
+#case7-container {
+  position: relative;
+  z-index: 2;
+}
+
+.section-card.upcoming {
+  margin-top: 46px;
+}
+
+.contact-box {
+  margin-bottom: 80px;
+}
+
+@media (max-width: 1040px) {
+  .solutions-hero {
+    min-height: auto;
+    padding-top: 82px;
   }
 
-  Promise.all(
-    solutionCases.map(loadSolutionCase)
-  )
-    .then(async () => {
-      await loadScript(
-        "/solutions/cases/cases-accordion.js"
-      );
+  .solutions-hero__grid {
+    grid-template-columns: 1fr;
+  }
 
-      await loadScript(
-        "/solutions/cases/page-scroll-nav.js"
-      );
+  .solutions-hero__visual {
+    min-height: 470px;
+  }
 
-      document
-        .querySelectorAll("[data-open-case]")
-        .forEach(button => {
-          button.addEventListener("click", () => {
-            const caseNumber = button.dataset.openCase;
-            const item = document.getElementById(
-              `case-${caseNumber}`
-            );
+  .solutions-proof-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-            if (!item) return;
+  .solutions-proof-strip__item:nth-child(3) {
+    border-left: 0;
+    border-top: 1px solid rgba(166, 255, 72, 0.12);
+  }
 
-            const trigger = item.querySelector(
-              ".case-accordion-trigger"
-            );
+  .solutions-proof-strip__item:nth-child(4) {
+    border-top: 1px solid rgba(166, 255, 72, 0.12);
+  }
+}
 
-            if (
-              trigger &&
-              !item.classList.contains("open")
-            ) {
-              trigger.click();
-            }
+@media (max-width: 760px) {
+  .solutions-hero {
+    width: calc(100% - 24px);
+    padding: 58px 4px 68px;
+  }
 
-            setTimeout(() => {
-              item.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-              });
-            }, 120);
-          });
-        });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-</body>
-</html>
+  .solutions-hero__eyebrow {
+    margin-bottom: 24px;
+    font-size: 9px;
+  }
+
+  .solutions-hero__title {
+    font-size: clamp(42px, 13vw, 62px);
+  }
+
+  .solutions-hero__description {
+    margin-top: 26px;
+    font-size: 15px;
+  }
+
+  .solutions-hero__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .solutions-hero__cta {
+    width: 100%;
+  }
+
+  .solutions-hero__proof {
+    font-size: 8px;
+  }
+
+  .solutions-hero__visual {
+    min-height: 410px;
+  }
+
+  .solutions-system__node {
+    width: 118px;
+    padding: 11px 12px;
+  }
+
+  .solutions-system__node--chaos {
+    top: 72px;
+    left: 20px;
+  }
+
+  .solutions-system__node--data {
+    top: 188px;
+    left: 96px;
+  }
+
+  .solutions-system__node--control {
+    top: 78px;
+    right: 18px;
+  }
+
+  .solutions-system__node--logic {
+    right: 22px;
+    bottom: 84px;
+  }
+
+  .solutions-proof-strip {
+    width: calc(100% - 24px);
+    grid-template-columns: 1fr;
+    margin-bottom: 42px;
+  }
+
+  .solutions-proof-strip__item + .solutions-proof-strip__item {
+    border-left: 0;
+    border-top: 1px solid rgba(166, 255, 72, 0.12);
+  }
+
+  .solutions-proof-strip__item {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+
+  #case1-container,
+  #case2-container,
+  #case3-container,
+  #case4-container,
+  #case5-container,
+  #case6-container,
+  #case7-container,
+  .section-card,
+  .contact-box {
+    width: calc(100% - 20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solutions-system__pulse {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.solutions-featured {
+  position: relative;
+  width: min(calc(100% - 48px), 1380px);
+  margin: 0 auto 120px;
+}
+
+.solutions-featured::before {
+  content: "SOLUTIONS";
+  position: absolute;
+  top: 64px;
+  right: -10px;
+  z-index: 0;
+  color: rgba(255,255,255,.018);
+  font-family: var(--font-tech);
+  font-size: clamp(90px, 14vw, 210px);
+  font-weight: 700;
+  letter-spacing: -.06em;
+  pointer-events: none;
+}
+
+.solutions-featured__intro {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr);
+  gap: 90px;
+  align-items: end;
+  padding: 70px 0 44px;
+  border-bottom: 1px solid rgba(166,255,72,.14);
+}
+
+.solutions-featured__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .18em;
+}
+
+.solutions-featured__intro h2 {
+  max-width: 790px;
+  margin: 20px 0 0;
+  color: #f4f7f2;
+  font-size: clamp(42px, 5.3vw, 76px);
+  font-weight: 500;
+  line-height: .99;
+  letter-spacing: -.052em;
+}
+
+.solutions-featured__intro p {
+  max-width: 520px;
+  margin: 0 0 4px;
+  color: #89948b;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.featured-case {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0,.88fr) minmax(540px,1.12fr);
+  min-height: 760px;
+  margin-top: 42px;
+  overflow: hidden;
+  border: 1px solid rgba(166,255,72,.14);
+  border-radius: 2px;
+  background:
+    linear-gradient(135deg, rgba(18,27,20,.97), rgba(7,11,8,.99));
+  box-shadow: 0 50px 120px rgba(0,0,0,.34);
+}
+
+.featured-case::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow: inset 0 0 120px rgba(166,255,72,.016);
+  pointer-events: none;
+}
+
+.featured-case__content {
+  position: relative;
+  z-index: 3;
+  padding: clamp(54px,5.5vw,84px);
+  border-right: 1px solid rgba(166,255,72,.11);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.018), transparent 44%);
+}
+
+.featured-case__index-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 46px;
+}
+
+.featured-case__index {
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.featured-case__type {
+  color: #6e796f;
+  font-family: var(--font-tech);
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+
+.featured-case h3 {
+  max-width: 640px;
+  margin: 0;
+  color: #f7f8f5;
+  font-size: clamp(42px,4.7vw,70px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.05em;
+}
+
+.featured-case__lead {
+  max-width: 620px;
+  margin: 28px 0 0;
+  color: #aab3ab;
+  font-size: 16px;
+  line-height: 1.76;
+}
+
+.featured-case__impact {
+  display: grid;
+  margin-top: 38px;
+  border-top: 1px solid rgba(166,255,72,.11);
+  border-bottom: 1px solid rgba(166,255,72,.11);
+}
+
+.featured-case__impact > div {
+  display: grid;
+  grid-template-columns: 106px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+}
+
+.featured-case__impact > div + div {
+  border-top: 1px solid rgba(255,255,255,.055);
+}
+
+.featured-case__impact span {
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 7px;
+  letter-spacing: .14em;
+}
+
+.featured-case__impact strong {
+  color: #cfd6d0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.featured-case__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.featured-case__tags span {
+  padding: 8px 10px;
+  border: 1px solid rgba(166,255,72,.15);
+  background: rgba(166,255,72,.035);
+  color: #89938b;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  letter-spacing: .09em;
+}
+
+.featured-case__open {
+  display: inline-flex;
+  min-height: 50px;
+  margin-top: 30px;
+  padding: 0 20px;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--solutions-lime);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--solutions-lime);
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .22s ease;
+}
+
+.featured-case__open:hover {
+  background: var(--solutions-lime);
+  color: #0b110c;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(166,255,72,.13);
+}
+
+.featured-case__visual {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  overflow: hidden;
+  padding: 58px;
+  background: #071009;
+}
+
+.featured-case__visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: .34;
+  filter: saturate(.75) contrast(1.08) brightness(.72);
+  transform: scale(1.025);
+}
+
+.featured-case--01 .featured-case__visual::before {
+  background-image:
+    linear-gradient(90deg, rgba(7,13,9,.84), rgba(7,13,9,.4)),
+    url("/about/assets/Holographic%20Analytics%20Workspace.webp");
+}
+
+.featured-case--02 .featured-case__visual::before {
+  background-image:
+    linear-gradient(90deg, rgba(7,13,9,.38), rgba(7,13,9,.84)),
+    url("/about/assets/server_room_tech.webp");
+}
+
+.featured-case--03 .featured-case__visual::before {
+  background-image:
+    linear-gradient(90deg, rgba(7,13,9,.84), rgba(7,13,9,.36)),
+    url("/about/assets/Analytics%20Terminal%20Showroom.webp");
+}
+
+.featured-case__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(rgba(166,255,72,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(166,255,72,.03) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+}
+
+.featured-case__glow {
+  position: absolute;
+  z-index: 1;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  background: rgba(166,255,72,.075);
+  filter: blur(88px);
+}
+
+.bi-preview,
+.capacity-preview,
+.bom-preview {
+  position: relative;
+  z-index: 4;
+  width: min(100%, 640px);
+  padding: 22px;
+  border: 1px solid rgba(184,255,109,.22);
+  background: rgba(8,14,10,.74);
+  box-shadow:
+    0 44px 100px rgba(0,0,0,.55),
+    inset 0 0 70px rgba(166,255,72,.025);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.bi-preview {
+  transform: perspective(1200px) rotateY(-4deg) rotateX(1deg);
+}
+
+.capacity-preview {
+  transform: perspective(1200px) rotateY(4deg) rotateX(1deg);
+}
+
+.bom-preview {
+  transform: perspective(1200px) rotateY(-4deg) rotateX(1deg);
+}
+
+.bi-preview__topbar,
+.capacity-preview__head,
+.bom-preview__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(166,255,72,.12);
+}
+
+.bi-preview__topbar > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bi-preview__brand {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  background: var(--solutions-lime);
+  color: #0c120d;
+  font-family: var(--font-tech);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.bi-preview__topbar strong,
+.capacity-preview__head strong,
+.bom-preview__head strong {
+  color: #eef3ec;
+  font-size: 11px;
+}
+
+.bi-preview__live,
+.bom-preview__status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #7d887f;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  letter-spacing: .1em;
+}
+
+.bi-preview__live i,
+.bom-preview__status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--solutions-lime);
+  box-shadow: 0 0 13px rgba(166,255,72,.75);
+}
+
+.bi-preview__filters {
+  display: flex;
+  gap: 6px;
+  padding: 14px 0;
+}
+
+.bi-preview__filters span,
+.capacity-preview__mode span {
+  padding: 6px 8px;
+  border: 1px solid rgba(255,255,255,.08);
+  color: #6f7a72;
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.bi-preview__kpis,
+.bom-preview__orders {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+}
+
+.bi-preview__kpis > div,
+.bom-preview__orders > div {
+  min-height: 92px;
+  padding: 13px;
+  border: 1px solid rgba(166,255,72,.1);
+  background: rgba(255,255,255,.02);
+}
+
+.bi-preview__kpis small,
+.bi-preview__kpis span,
+.bom-preview__orders span,
+.bom-preview__orders small {
+  display: block;
+  color: #6a756d;
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.bi-preview__kpis strong,
+.bom-preview__orders strong {
+  display: block;
+  margin: 10px 0 7px;
+  color: #f0f4ef;
+  font-family: var(--font-tech);
+  font-size: 18px;
+}
+
+.bi-preview__kpis span {
+  color: #8fc16a;
+}
+
+.bi-preview__main {
+  display: grid;
+  grid-template-columns: 1.45fr .55fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bi-preview__chart,
+.bi-preview__donut-wrap {
+  min-height: 190px;
+  padding: 14px;
+  border: 1px solid rgba(166,255,72,.1);
+  background: rgba(255,255,255,.018);
+}
+
+.bi-preview__chart-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.bi-preview__chart-head span,
+.bi-preview__donut-wrap small {
+  color: #6d786f;
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.bi-preview__chart-head strong {
+  color: var(--solutions-lime-soft);
+  font-family: var(--font-tech);
+  font-size: 11px;
+}
+
+.bi-preview__bars {
+  height: 132px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      rgba(255,255,255,.035) 32px
+    );
+}
+
+.bi-preview__bars i {
+  flex: 1;
+  min-height: 8px;
+  background: linear-gradient(180deg,var(--solutions-lime),#55753e);
+  opacity: .84;
+}
+
+.bi-preview__donut-wrap {
+  display: grid;
+  place-items: center;
+  align-content: center;
+}
+
+.bi-preview__donut {
+  display: grid;
+  width: 112px;
+  height: 112px;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--solutions-lime) 0 32%, rgba(166,255,72,.08) 32% 100%);
+}
+
+.bi-preview__donut::before {
+  content: "";
+  grid-area: 1 / 1;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: #0c120d;
+}
+
+.bi-preview__donut span {
+  position: relative;
+  z-index: 2;
+  grid-area: 1 / 1;
+  color: #eff4ec;
+  font-family: var(--font-tech);
+  font-size: 14px;
+}
+
+.bi-preview__signal {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid rgba(166,255,72,.13);
+  background: rgba(166,255,72,.035);
+}
+
+.bi-preview__signal span {
+  color: var(--solutions-lime);
+}
+
+.bi-preview__signal p {
+  margin: 0;
+  color: #7d887f;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.capacity-preview__head > div:first-child span,
+.bom-preview__head > div:first-child span {
+  display: block;
+  color: #6f7a72;
+  font-family: var(--font-tech);
+  font-size: 6px;
+  letter-spacing: .12em;
+}
+
+.capacity-preview__head strong,
+.bom-preview__head strong {
+  display: block;
+  margin-top: 7px;
+}
+
+.capacity-preview__mode {
+  display: flex;
+  gap: 5px;
+}
+
+.capacity-preview__mode span.active {
+  border-color: rgba(166,255,72,.36);
+  background: rgba(166,255,72,.08);
+  color: var(--solutions-lime);
+}
+
+.capacity-preview__lines {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.capacity-preview__line {
+  display: grid;
+  grid-template-columns: 108px 1fr 42px;
+  gap: 12px;
+  align-items: center;
+  min-height: 78px;
+  padding: 12px;
+  border: 1px solid rgba(166,255,72,.09);
+  background: rgba(255,255,255,.018);
+}
+
+.capacity-preview__line > div:first-child span,
+.capacity-preview__line > div:first-child small {
+  display: block;
+  color: #657068;
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.capacity-preview__line > div:first-child strong {
+  display: inline-block;
+  margin: 5px 4px 3px 0;
+  color: #eff4ed;
+  font-family: var(--font-tech);
+  font-size: 15px;
+}
+
+.capacity-preview__track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(166,255,72,.08);
+}
+
+.capacity-preview__track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg,#648d43,var(--solutions-lime));
+}
+
+.capacity-preview__line b {
+  color: #9ba79e;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  text-align: right;
+}
+
+.capacity-preview__calendar {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 5px;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid rgba(166,255,72,.09);
+}
+
+.capacity-preview__calendar span {
+  display: grid;
+  height: 34px;
+  place-items: center;
+  border-radius: 3px;
+  color: #7e897f;
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.capacity-preview__calendar .free { background: rgba(76,118,69,.2); }
+.capacity-preview__calendar .medium { background: rgba(170,142,52,.2); }
+.capacity-preview__calendar .full { background: rgba(156,66,66,.22); }
+
+.capacity-preview__orders {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.capacity-preview__orders > div {
+  padding: 10px;
+  border: 1px solid rgba(166,255,72,.08);
+  background: rgba(255,255,255,.015);
+}
+
+.capacity-preview__orders span,
+.capacity-preview__orders small {
+  display: block;
+  color: #68736b;
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.capacity-preview__orders strong {
+  display: block;
+  margin: 7px 0 5px;
+  color: var(--solutions-lime-soft);
+  font-family: var(--font-tech);
+  font-size: 7px;
+}
+
+.bom-preview__flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.bom-preview__flow-node {
+  padding: 10px 8px;
+  border: 1px solid rgba(166,255,72,.09);
+  background: rgba(255,255,255,.015);
+}
+
+.bom-preview__flow-node span,
+.bom-preview__flow-node small {
+  display: block;
+  color: #68736b;
+  font-family: var(--font-tech);
+  font-size: 5px;
+}
+
+.bom-preview__flow-node strong {
+  display: block;
+  margin: 6px 0 4px;
+  color: #dfe6dd;
+  font-family: var(--font-tech);
+  font-size: 7px;
+}
+
+.bom-preview__flow-node--accent {
+  border-color: rgba(166,255,72,.34);
+  background: rgba(166,255,72,.06);
+}
+
+.bom-preview__flow-node--accent strong {
+  color: var(--solutions-lime);
+}
+
+.bom-preview__flow-arrow {
+  color: rgba(166,255,72,.48);
+  font-family: var(--font-tech);
+  font-size: 10px;
+}
+
+.bom-preview__table {
+  margin-top: 8px;
+  border: 1px solid rgba(166,255,72,.09);
+}
+
+.bom-preview__row {
+  display: grid;
+  grid-template-columns: 1.8fr repeat(3,.55fr);
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 10px;
+  align-items: center;
+}
+
+.bom-preview__row + .bom-preview__row {
+  border-top: 1px solid rgba(255,255,255,.045);
+}
+
+.bom-preview__row span,
+.bom-preview__row strong {
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.bom-preview__row span {
+  color: #78837b;
+}
+
+.bom-preview__row strong {
+  color: var(--solutions-lime-soft);
+}
+
+.bom-preview__row--head {
+  background: rgba(166,255,72,.035);
+}
+
+.bom-preview__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 8px;
+  padding: 11px;
+  border: 1px solid rgba(166,255,72,.13);
+  background: rgba(166,255,72,.035);
+}
+
+.bom-preview__footer span,
+.bom-preview__footer strong {
+  font-family: var(--font-tech);
+  font-size: 6px;
+}
+
+.bom-preview__footer span {
+  color: var(--solutions-lime);
+}
+
+.bom-preview__footer strong {
+  color: #7b867d;
+}
+
+.featured-case--02 {
+  grid-template-columns: minmax(540px,1.12fr) minmax(0,.88fr);
+}
+
+.featured-case--02 .featured-case__content {
+  border-right: 0;
+  border-left: 1px solid rgba(166,255,72,.11);
+}
+
+.solutions-visual-break {
+  position: relative;
+  min-height: 500px;
+  margin: 74px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(166,255,72,.12);
+  border-bottom: 1px solid rgba(166,255,72,.12);
+  box-shadow: 0 30px 90px rgba(0,0,0,.25);
+}
+
+.solutions-visual-break--factory {
+  display: grid;
+  grid-template-columns: minmax(0,1.25fr) minmax(360px,.75fr);
+}
+
+.solutions-visual-break__scene {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg,rgba(5,10,7,.18),rgba(5,10,7,.58)),
+    url("/about/assets/server_room_tech.webp") center/cover no-repeat;
+}
+
+.solutions-visual-break__scene::after,
+.supply-break__scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 48%, rgba(4,8,5,.78)),
+    linear-gradient(90deg, rgba(4,8,5,.16), rgba(4,8,5,.6));
+}
+
+.solutions-visual-break__copy,
+.supply-break__copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 54px 46px;
+  background:
+    linear-gradient(160deg,rgba(166,255,72,.045),transparent 50%),
+    #0a0f0b;
+}
+
+.solutions-visual-break__copy {
+  border-left: 1px solid rgba(166,255,72,.11);
+}
+
+.solutions-visual-break__copy span,
+.supply-break__copy span {
+  color: var(--solutions-lime);
+  font-family: var(--font-tech);
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.solutions-visual-break__copy p,
+.supply-break__copy p {
+  max-width: 460px;
+  margin: 22px 0 0;
+  color: #d1d7d1;
+  font-size: clamp(23px,2.5vw,36px);
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: -.03em;
+}
+
+.solutions-visual-break--supply {
+  display: grid;
+  grid-template-columns: minmax(360px,.7fr) minmax(0,1.3fr);
+}
+
+.supply-break__copy {
+  border-right: 1px solid rgba(166,255,72,.11);
+}
+
+.supply-break__scene {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg,rgba(5,10,7,.5),rgba(5,10,7,.16)),
+    url("/about/assets/glass_data_chart.webp") center/cover no-repeat;
+}
+
+.factory-sky,
+.factory-grid,
+.factory-building,
+.factory-line,
+.factory-signal,
+.supply-break__rack,
+.supply-break__route,
+.supply-break__scanner,
+.supply-break__pulse {
+  z-index: 3;
+}
+
+.cases-accordion-toolbar,
+.case-accordion-item {
+  border-color: rgba(166,255,72,.12) !important;
+  background: rgba(11,17,13,.88) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,.24) !important;
+}
+
+.cases-accordion-toolbar {
+  margin-top: 64px !important;
+  padding: 20px 22px !important;
+}
+
+.cases-accordion-toolbar-text strong {
+  color: #f0f4ef !important;
+}
+
+.cases-accordion-toolbar-text span {
+  color: #727d74 !important;
+}
+
+.cases-accordion-toolbar button {
+  border-color: rgba(166,255,72,.18) !important;
+  background: rgba(166,255,72,.03) !important;
+  color: var(--solutions-lime) !important;
+  border-radius: 2px !important;
+}
+
+.cases-accordion-toolbar button:hover {
+  background: var(--solutions-lime) !important;
+  color: #0b110c !important;
+}
+
+.case-accordion-trigger,
+.case-accordion-item.open .case-accordion-trigger {
+  background:
+    linear-gradient(90deg,rgba(166,255,72,.035),transparent 42%),
+    #0d140f !important;
+  color: #f0f4ef !important;
+}
+
+.case-accordion-trigger:hover {
+  background:
+    linear-gradient(90deg,rgba(166,255,72,.075),transparent 50%),
+    #101812 !important;
+}
+
+.case-accordion-number {
+  border: 1px solid rgba(166,255,72,.2) !important;
+  border-radius: 2px !important;
+  background: rgba(166,255,72,.07) !important;
+  color: var(--solutions-lime) !important;
+}
+
+.case-accordion-heading strong {
+  color: #edf2eb !important;
+}
+
+.case-accordion-heading span {
+  color: #778179 !important;
+}
+
+.case-accordion-icon {
+  border-color: rgba(166,255,72,.18) !important;
+  border-radius: 2px !important;
+  background: rgba(166,255,72,.03) !important;
+}
+
+.case-accordion-icon::before,
+.case-accordion-icon::after {
+  background: var(--solutions-lime) !important;
+}
+
+.case-accordion-item.open .case-accordion-trigger {
+  border-bottom-color: rgba(166,255,72,.12) !important;
+}
+
+.section-card.upcoming,
+.contact-box {
+  width: min(calc(100% - 48px), 1180px);
+  border: 1px solid rgba(166,255,72,.13);
+  border-radius: 2px;
+  background:
+    linear-gradient(135deg,rgba(166,255,72,.04),transparent 46%),
+    rgba(10,15,11,.94);
+  color: #e9eee8;
+  box-shadow: 0 30px 90px rgba(0,0,0,.22);
+}
+
+.section-card.upcoming {
+  margin-top: 54px;
+  padding: 44px;
+}
+
+.section-card.upcoming h2,
+.contact-box h2 {
+  color: #eef3ec;
+}
+
+.section-card.upcoming p,
+.contact-box p {
+  color: #8d978f;
+}
+
+.contact-box {
+  margin-top: 26px;
+  margin-bottom: 90px;
+  padding: 62px 42px;
+}
+
+.contact-box a {
+  border-radius: 2px;
+  background: var(--solutions-lime);
+  color: #0a100b;
+  box-shadow: 0 14px 38px rgba(166,255,72,.12);
+}
+
+.solutions-hero {
+  min-height: calc(100svh - 72px);
+  padding-top: clamp(92px,10vh,130px);
+}
+
+.solutions-hero__visual::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background:
+    linear-gradient(90deg,rgba(7,13,9,.92) 0%,rgba(7,13,9,.3) 48%,rgba(7,13,9,.2) 100%),
+    url("/about/assets/Analytics%20Terminal%20Showroom.webp") center/cover no-repeat;
+  opacity: .44;
+  filter: saturate(.78) contrast(1.08) brightness(.76);
+}
+
+.solutions-system {
+  z-index: 2;
+  background:
+    linear-gradient(rgba(166,255,72,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(166,255,72,.03) 1px,transparent 1px),
+    rgba(8,13,9,.46);
+  background-size: 42px 42px,42px 42px,auto;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.solutions-proof-strip {
+  margin-bottom: 98px;
+}
+
+@media (max-width: 1040px) {
+  .solutions-featured__intro,
+  .featured-case,
+  .featured-case--02,
+  .solutions-visual-break--factory,
+  .solutions-visual-break--supply {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-case__content {
+    border-right: 0;
+    border-bottom: 1px solid rgba(166,255,72,.11);
+  }
+
+  .featured-case--02 .featured-case__content {
+    border-left: 0;
+    border-top: 1px solid rgba(166,255,72,.11);
+  }
+
+  .featured-case__visual {
+    min-height: 620px;
+  }
+
+  .solutions-visual-break__copy,
+  .supply-break__copy {
+    min-height: 250px;
+    border: 0;
+    border-top: 1px solid rgba(166,255,72,.11);
+  }
+}
+
+@media (max-width: 760px) {
+  .solutions-featured {
+    width: calc(100% - 24px);
+    margin-bottom: 64px;
+  }
+
+  .solutions-featured__intro {
+    gap: 24px;
+    padding: 42px 0 30px;
+  }
+
+  .solutions-featured__intro h2 {
+    font-size: clamp(34px,10vw,50px);
+  }
+
+  .featured-case {
+    min-height: 0;
+    margin-top: 26px;
+  }
+
+  .featured-case__content {
+    padding: 34px 20px;
+  }
+
+  .featured-case h3 {
+    font-size: clamp(36px,10vw,50px);
+  }
+
+  .featured-case__impact > div {
+    grid-template-columns: 78px 1fr;
+  }
+
+  .featured-case__visual {
+    min-height: 450px;
+    padding: 20px 12px;
+  }
+
+  .bi-preview,
+  .capacity-preview,
+  .bom-preview {
+    padding: 14px;
+    transform: none;
+  }
+
+  .bi-preview__main {
+    grid-template-columns: 1fr;
+  }
+
+  .bi-preview__donut-wrap {
+    display: none;
+  }
+
+  .capacity-preview__orders,
+  .bom-preview__orders,
+  .bom-preview__flow {
+    grid-template-columns: 1fr;
+  }
+
+  .bom-preview__flow-arrow {
+    display: none;
+  }
+
+  .solutions-visual-break {
+    min-height: 0;
+    margin: 42px 0;
+  }
+
+  .solutions-visual-break__scene,
+  .supply-break__scene {
+    min-height: 330px;
+  }
+
+  .solutions-visual-break__copy,
+  .supply-break__copy {
+    min-height: 0;
+    padding: 30px 22px;
+  }
+
+  .solutions-visual-break__copy p,
+  .supply-break__copy p {
+    font-size: 22px;
+  }
+
+  .section-card.upcoming,
+  .contact-box {
+    width: calc(100% - 20px);
+  }
+}

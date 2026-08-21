@@ -2319,5 +2319,405 @@ if (
     );
   });
 }
+
+  const biPreview =
+  document.querySelector(
+    ".featured-case--01 .bi-preview"
+  );
+
+if (biPreview) {
+  const filters =
+    Array.from(
+      biPreview.querySelectorAll(
+        ".bi-preview__filters span"
+      )
+    );
+
+  const kpiCards =
+    Array.from(
+      biPreview.querySelectorAll(
+        ".bi-preview__kpis > div"
+      )
+    );
+
+  const bars =
+    Array.from(
+      biPreview.querySelectorAll(
+        ".bi-preview__bars i"
+      )
+    );
+
+  const chartValue =
+    biPreview.querySelector(
+      ".bi-preview__chart-head strong"
+    );
+
+  const donutValue =
+    biPreview.querySelector(
+      ".bi-preview__donut span"
+    );
+
+  const donut =
+    biPreview.querySelector(
+      ".bi-preview__donut"
+    );
+
+  const signal =
+    biPreview.querySelector(
+      ".bi-preview__signal p"
+    );
+
+  const revenue =
+    kpiCards[0]?.querySelector(
+      "strong"
+    );
+
+  const revenueDelta =
+    kpiCards[0]?.querySelector(
+      "span"
+    );
+
+  const profit =
+    kpiCards[1]?.querySelector(
+      "strong"
+    );
+
+  const profitDelta =
+    kpiCards[1]?.querySelector(
+      "span"
+    );
+
+  const margin =
+    kpiCards[2]?.querySelector(
+      "strong"
+    );
+
+  const marginPlan =
+    kpiCards[2]?.querySelector(
+      "span"
+    );
+
+  const filterOptions = [
+    ["2026", "2025", "2024"],
+    [
+      "ALL REGIONS",
+      "WEST",
+      "CENTRAL",
+      "EAST"
+    ],
+    [
+      "ALL CHANNELS",
+      "B2B",
+      "RETAIL",
+      "ONLINE"
+    ]
+  ];
+
+  const states = {
+    year: 0,
+    region: 0,
+    channel: 0
+  };
+
+  const scenarios = [
+    {
+      revenue: "12.8M",
+      revenueDelta: "▲ 8.4%",
+      profit: "4.1M",
+      profitDelta: "▲ 6.9%",
+      margin: "32.0%",
+      marginPlan: "PLAN 30.5%",
+      chart: "94.7%",
+      donut: 32,
+      bars: [42, 58, 53, 69, 76, 86, 82, 94],
+      signal:
+        "Загальний результат стабільний: факт близький до плану, маржа вище цільового рівня."
+    },
+    {
+      revenue: "10.9M",
+      revenueDelta: "▲ 4.1%",
+      profit: "3.2M",
+      profitDelta: "▲ 2.7%",
+      margin: "29.4%",
+      marginPlan: "PLAN 30.5%",
+      chart: "88.2%",
+      donut: 29,
+      bars: [34, 46, 51, 58, 63, 69, 78, 82],
+      signal:
+        "По вибраному зрізу виручка зростає, але маржа нижча за план. Потрібна перевірка структури продажів."
+    },
+    {
+      revenue: "14.6M",
+      revenueDelta: "▲ 11.8%",
+      profit: "5.0M",
+      profitDelta: "▲ 9.6%",
+      margin: "34.3%",
+      marginPlan: "PLAN 30.5%",
+      chart: "101.6%",
+      donut: 34,
+      bars: [48, 55, 62, 74, 81, 89, 96, 100],
+      signal:
+        "Вибраний сегмент перевищує план. Найбільший внесок дають останні періоди."
+    },
+    {
+      revenue: "9.7M",
+      revenueDelta: "▼ 1.9%",
+      profit: "2.8M",
+      profitDelta: "▼ 3.4%",
+      margin: "28.9%",
+      marginPlan: "PLAN 30.5%",
+      chart: "82.4%",
+      donut: 29,
+      bars: [61, 57, 52, 49, 45, 54, 59, 63],
+      signal:
+        "Є відхилення від плану. Варто перевірити регіон, канал і динаміку останніх періодів."
+    }
+  ];
+
+  function getScenarioIndex() {
+    return (
+      states.year +
+      states.region * 2 +
+      states.channel * 3
+    ) % scenarios.length;
+  }
+
+  function applyScenario() {
+    const scenario =
+      scenarios[
+        getScenarioIndex()
+      ];
+
+    if (revenue) {
+      revenue.textContent =
+        scenario.revenue;
+    }
+
+    if (revenueDelta) {
+      revenueDelta.textContent =
+        scenario.revenueDelta;
+    }
+
+    if (profit) {
+      profit.textContent =
+        scenario.profit;
+    }
+
+    if (profitDelta) {
+      profitDelta.textContent =
+        scenario.profitDelta;
+    }
+
+    if (margin) {
+      margin.textContent =
+        scenario.margin;
+    }
+
+    if (marginPlan) {
+      marginPlan.textContent =
+        scenario.marginPlan;
+    }
+
+    if (chartValue) {
+      chartValue.textContent =
+        scenario.chart;
+    }
+
+    if (donutValue) {
+      donutValue.textContent =
+        `${scenario.donut}%`;
+    }
+
+    if (donut) {
+      donut.style.background =
+        `conic-gradient(
+          var(--solutions-lime) 0 ${scenario.donut}%,
+          rgba(166,255,72,.08) ${scenario.donut}% 100%
+        )`;
+    }
+
+    bars.forEach(
+      (bar, index) => {
+        bar.style.height =
+          `${scenario.bars[index]}%`;
+      }
+    );
+
+    if (signal) {
+      signal.textContent =
+        scenario.signal;
+    }
+  }
+
+  filters.forEach(
+    (filter, index) => {
+      filter.setAttribute(
+        "role",
+        "button"
+      );
+
+      filter.tabIndex = 0;
+
+      const activate = () => {
+        const keys = [
+          "year",
+          "region",
+          "channel"
+        ];
+
+        const key =
+          keys[index];
+
+        states[key] =
+          (
+            states[key] + 1
+          ) %
+          filterOptions[index]
+            .length;
+
+        filter.textContent =
+          filterOptions[index][
+            states[key]
+          ];
+
+        filters.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        filter.classList.add(
+          "is-active"
+        );
+
+        applyScenario();
+      };
+
+      filter.addEventListener(
+        "click",
+        activate
+      );
+
+      filter.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  kpiCards.forEach(
+    (card, index) => {
+      card.setAttribute(
+        "role",
+        "button"
+      );
+
+      card.tabIndex = 0;
+
+      const activate = () => {
+        kpiCards.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        card.classList.add(
+          "is-active"
+        );
+
+        const texts = [
+          "Виручка показує загальний обсяг продажів у вибраному зрізі.",
+          "Gross Profit показує фінансовий результат після зміни фільтрів.",
+          "Маржа одразу порівнюється з цільовим плановим рівнем."
+        ];
+
+        if (signal) {
+          signal.textContent =
+            texts[index];
+        }
+      };
+
+      card.addEventListener(
+        "click",
+        activate
+      );
+
+      card.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  bars.forEach(
+    (bar, index) => {
+      bar.setAttribute(
+        "role",
+        "button"
+      );
+
+      bar.tabIndex = 0;
+
+      const activate = () => {
+        bars.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        bar.classList.add(
+          "is-active"
+        );
+
+        if (chartValue) {
+          chartValue.textContent =
+            `${82 + index * 2.4}%`;
+        }
+
+        if (signal) {
+          signal.textContent =
+            `Період ${index + 1}: вибрано окрему точку для детальнішого аналізу план / факт.`;
+        }
+      };
+
+      bar.addEventListener(
+        "click",
+        activate
+      );
+
+      bar.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+}
   renderResults("");
 })();

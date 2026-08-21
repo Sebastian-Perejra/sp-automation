@@ -97,7 +97,7 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="/solutions/solutions.css?v=6">
+  <link rel="stylesheet" href="/solutions/solutions.css?v=7">
 <link rel="stylesheet" href="/components/components.css">
 <link rel="stylesheet" href="/consent/consent.css">
 <link rel="stylesheet" href="/assistant.css">
@@ -110,14 +110,15 @@
 <link rel="stylesheet" href="/solutions/cases/case-6/case6.css">
 <link rel="stylesheet" href="/solutions/cases/case-7/case7.css">
 
-<link rel="stylesheet" href="/solutions/cases/cases-accordion.css">
-<link rel="stylesheet" href="/solutions/cases/page-scroll-nav.css">
 <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
 
 <script src="/components/components.js" defer></script>
 <script src="/consent/consent.js" defer></script>
 <script src="/assistant.js" defer></script>
 <script src="/nav-font-kaleidoscope.js?v=5" defer></script>
+<script src="/solutions/search/search-dictionary.js?v=1" defer></script>
+<script src="/solutions/search/search-uk.js?v=1" defer></script>
+<script src="/solutions/solutions.js?v=1" defer></script>
 </head>
 
 <body>
@@ -776,21 +777,128 @@
     </section>
 
     <div class="solutions-cases-anchor" id="cases-start"></div>
-    <div id="case1-container"></div>
-    <div id="case2-container"></div>
-    <div id="case3-container"></div>
-    <div id="case4-container"></div>
-    <div id="case5-container"></div>
-    <div id="case6-container"></div>
-    <div id="case7-container"></div>
-    <section class="section-card upcoming">
-      <h2>Що з’явиться далі</h2>
 
-      <p>
-        Тут поступово будуть додаватися схеми архітектури,
-        знеособлені кейси, демонстраційні макети, блок-схеми процесів,
-        приклади інтерфейсів і короткі описи результатів.
-      </p>
+    <section class="case-finder" id="case-finder">
+      <div class="case-finder__head">
+        <div>
+          <span class="case-finder__eyebrow">SMART CASE FINDER</span>
+          <h2>
+            Знайди свій кейс.
+            <span>Навіть якщо не знаєш, як він називається.</span>
+          </h2>
+        </div>
+
+        <p>
+          Опиши проблему своїми словами. Пошук розуміє українські,
+          російські й англійські формулювання, скорочення, синоніми,
+          назви технологій та частину типових помилок у написанні.
+        </p>
+      </div>
+
+      <div class="case-finder__search-shell">
+        <div class="case-finder__search-top">
+          <span class="case-finder__search-label">
+            ОПИШИ ЗАДАЧУ АБО ВВЕДИ ТЕХНОЛОГІЮ
+          </span>
+
+          <span class="case-finder__search-state" id="case-search-state">
+            SMART MATCHING / UA · RU · EN
+          </span>
+        </div>
+
+        <div class="case-finder__input-row">
+          <span class="case-finder__prompt" aria-hidden="true">›</span>
+
+          <input
+            class="case-finder__input"
+            id="case-search-input"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Наприклад: щомісяця вручну збираю звіти з Excel..."
+            aria-label="Пошук по кейсах"
+          >
+
+          <button
+            class="case-finder__clear"
+            id="case-search-clear"
+            type="button"
+            aria-label="Очистити пошук"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="case-finder__suggestions" id="case-search-suggestions">
+          <button type="button" data-search-suggestion="звітність">звітність</button>
+          <button type="button" data-search-suggestion="Power BI">Power BI</button>
+          <button type="button" data-search-suggestion="PDF інвойси">PDF інвойси</button>
+          <button type="button" data-search-suggestion="закупівлі">закупівлі</button>
+          <button type="button" data-search-suggestion="виробничі строки">виробничі строки</button>
+          <button type="button" data-search-suggestion="об'єднати Excel файли">об'єднати Excel</button>
+          <button type="button" data-search-suggestion="банківські платежі">банківські платежі</button>
+        </div>
+
+        <div class="case-finder__engine">
+          <span></span>
+          <p>
+            Пошук аналізує не тільки назву кейсу:
+            технології · проблему · результат · синоніми · альтернативні назви · бізнес-контекст
+          </p>
+        </div>
+      </div>
+
+      <div class="case-finder__result-head">
+        <div>
+          <span id="case-search-caption">РЕКОМЕНДОВАНІ КЕЙСИ</span>
+          <strong id="case-search-count"></strong>
+        </div>
+
+        <span class="case-finder__result-hint">
+          ENTER — відкрити перший результат
+        </span>
+      </div>
+
+      <div
+        class="case-finder__results"
+        id="case-search-results"
+        aria-live="polite"
+      ></div>
+
+      <div class="case-finder__empty" id="case-search-empty" hidden>
+        <span>NO EXACT MATCH</span>
+        <h3>Спробуй описати задачу інакше.</h3>
+        <p>
+          Можна вводити не назву технології, а саму проблему:
+          «ручний звіт», «рахую закупівлю», «не знаю дату готовності»,
+          «треба зібрати сотні файлів».
+        </p>
+      </div>
+    </section>
+
+    <section class="case-detail-stage" id="case-detail-stage" hidden>
+      <div class="case-detail-stage__chrome">
+        <div>
+          <span id="case-detail-number">CASE</span>
+          <strong id="case-detail-title">DETAIL VIEW</strong>
+        </div>
+
+        <button
+          class="case-detail-stage__close"
+          id="case-detail-close"
+          type="button"
+          aria-label="Закрити кейс"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="case-detail-stage__loading" id="case-detail-loading" hidden>
+        <span></span>
+        <strong>Завантажую кейс...</strong>
+      </div>
+
+      <div class="case-detail-stage__body" id="case-detail-body"></div>
     </section>
 
     <section class="contact-box">
@@ -808,93 +916,6 @@
   </main>
   <div id="site-footer-slot"></div>
 
-  <script>
-  const solutionCases = [1, 2, 3, 4, 5, 6, 7];
 
-  function loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = resolve;
-      script.onerror = reject;
-      document.body.appendChild(script);
-    });
-  }
-
-  async function loadSolutionCase(caseNumber) {
-    const container = document.getElementById(
-      `case${caseNumber}-container`
-    );
-
-    if (!container) {
-      return;
-    }
-
-    const basePath = `/solutions/cases/case-${caseNumber}`;
-
-    const response = await fetch(
-      `${basePath}/case-${caseNumber}.html`
-    );
-
-    if (!response.ok) {
-      throw new Error(
-        `Не вдалося завантажити кейс №${caseNumber}`
-      );
-    }
-
-    container.innerHTML = await response.text();
-
-    await loadScript(
-      `${basePath}/case-${caseNumber}.js`
-    );
-  }
-
-  Promise.all(
-    solutionCases.map(loadSolutionCase)
-  )
-    .then(async () => {
-      await loadScript(
-        "/solutions/cases/cases-accordion.js"
-      );
-
-      await loadScript(
-        "/solutions/cases/page-scroll-nav.js"
-      );
-
-      document
-        .querySelectorAll("[data-open-case]")
-        .forEach(button => {
-          button.addEventListener("click", () => {
-            const caseNumber = button.dataset.openCase;
-            const item = document.getElementById(
-              `case-${caseNumber}`
-            );
-
-            if (!item) return;
-
-            const trigger = item.querySelector(
-              ".case-accordion-trigger"
-            );
-
-            if (
-              trigger &&
-              !item.classList.contains("open")
-            ) {
-              trigger.click();
-            }
-
-            setTimeout(() => {
-              item.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-              });
-            }, 120);
-          });
-        });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-</script>
 </body>
 </html>

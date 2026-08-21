@@ -2202,5 +2202,122 @@ if (
       closeCase
     );
 
+  const processSteps =
+  Array.from(
+    document.querySelectorAll(
+      "[data-process-step]"
+    )
+  );
+
+const processScenes =
+  Array.from(
+    document.querySelectorAll(
+      "[data-process-scene]"
+    )
+  );
+
+const processStatus =
+  document.getElementById(
+    "process-stage-status"
+  );
+
+const processLabels = {
+  1: "STAGE 01 / DISCOVERY",
+  2: "STAGE 02 / DATA",
+  3: "STAGE 03 / LOGIC",
+  4: "STAGE 04 / AUTOMATION",
+  5: "STAGE 05 / CONTROL"
+};
+
+function activateProcessStage(
+  stageNumber
+) {
+  processSteps.forEach(step => {
+    step.classList.toggle(
+      "is-active",
+      Number(
+        step.dataset.processStep
+      ) === stageNumber
+    );
+  });
+
+  processScenes.forEach(scene => {
+    scene.classList.toggle(
+      "is-active",
+      Number(
+        scene.dataset.processScene
+      ) === stageNumber
+    );
+  });
+
+  if (processStatus) {
+    processStatus.textContent =
+      processLabels[stageNumber] ||
+      "";
+  }
+}
+
+if (
+  processSteps.length &&
+  processScenes.length
+) {
+  const processObserver =
+    new IntersectionObserver(
+      entries => {
+        const visible =
+          entries
+            .filter(
+              entry =>
+                entry.isIntersecting
+            )
+            .sort(
+              (a, b) =>
+                b.intersectionRatio -
+                a.intersectionRatio
+            );
+
+        if (!visible.length) {
+          return;
+        }
+
+        activateProcessStage(
+          Number(
+            visible[0].target
+              .dataset.processStep
+          )
+        );
+      },
+      {
+        root: null,
+        rootMargin:
+          "-28% 0px -42% 0px",
+        threshold: [
+          0,
+          0.2,
+          0.4,
+          0.6,
+          0.8
+        ]
+      }
+    );
+
+  processSteps.forEach(step => {
+    processObserver.observe(step);
+  });
+
+  processSteps.forEach(step => {
+    step.addEventListener(
+      "mouseenter",
+      () => {
+        activateProcessStage(
+          Number(
+            step.dataset
+              .processStep
+          )
+        );
+      }
+    );
+  });
+}
   renderResults("");
 })();

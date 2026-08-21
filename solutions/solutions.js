@@ -37,6 +37,12 @@
 
   const stateNode =
     document.getElementById("case-search-state");
+  
+  const understoodNode =
+  document.getElementById("case-search-understood");
+
+const conceptsNode =
+  document.getElementById("case-search-concepts");
 
   const stage =
     document.getElementById("case-detail-stage");
@@ -1772,6 +1778,57 @@
   ) {
     const query =
       normalize(rawQuery);
+
+    const detectedForDisplay =
+  query
+    ? detectConcepts(query)
+    : [];
+
+const expandedForDisplay =
+  query
+    ? expandConcepts(detectedForDisplay)
+    : [];
+
+if (
+  understoodNode &&
+  conceptsNode
+) {
+  conceptsNode.innerHTML = "";
+
+  if (!query) {
+    understoodNode.hidden = true;
+  } else {
+    const displayConcepts =
+      expandedForDisplay
+        .filter(match =>
+          match.direct ||
+          match.confidence >= 0.28
+        )
+        .slice(0, 5);
+
+    if (displayConcepts.length) {
+      understoodNode.hidden = false;
+
+      displayConcepts.forEach(match => {
+        const chip =
+          document.createElement("span");
+
+        chip.className =
+          match.direct
+            ? "case-finder__concept case-finder__concept--direct"
+            : "case-finder__concept";
+
+        chip.textContent =
+          conceptLabels[match.concept] ||
+          match.concept;
+
+        conceptsNode.appendChild(chip);
+      });
+    } else {
+      understoodNode.hidden = true;
+    }
+  }
+}
 
     latestResults =
       searchCases(query);

@@ -826,34 +826,6 @@ body {
 }
 
 .featured-case--01 .featured-case__visual::before {
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(7,13,9,.32),
-      rgba(7,13,9,.08)
-    ),
-    url("/solutions/assets/glass_bi.webp");
-}
-
-.featured-case--02 .featured-case__visual::before {
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(7,13,9,.08),
-      rgba(7,13,9,.34)
-    ),
-    url("/solutions/assets/production_control_room.webp");
-}
-
-.featured-case--03 .featured-case__visual::before {
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(7,13,9,.30),
-      rgba(7,13,9,.07)
-    ),
-    url("/solutions/assets/procurement_room.webp");
-}
 
 .featured-case__grid {
   position: absolute;
@@ -1392,10 +1364,10 @@ body {
   background:
     linear-gradient(
       90deg,
-      rgba(5,10,7,.05),
-      rgba(5,10,7,.28)
+      rgba(5,10,7,.04),
+      rgba(5,10,7,.16)
     ),
-    url("/solutions/assets/modern_production_room_control.webp")
+    url("/solutions/assets/Sunlit%20Modern%20Office%20with%20Data%20Strategy%20Books.webp")
       center / cover no-repeat;
 }
 
@@ -1407,13 +1379,13 @@ body {
   background:
     linear-gradient(
       180deg,
-      transparent 62%,
-      rgba(4,8,5,.38)
+      transparent 64%,
+      rgba(4,8,5,.32)
     ),
     linear-gradient(
       90deg,
-      rgba(4,8,5,.04),
-      rgba(4,8,5,.16)
+      rgba(4,8,5,.03),
+      rgba(4,8,5,.12)
     );
 }
 
@@ -1469,12 +1441,13 @@ body {
   background:
     linear-gradient(
       90deg,
-      rgba(5,10,7,.25),
-      rgba(5,10,7,.04)
+      rgba(5,10,7,.15),
+      rgba(5,10,7,.03)
     ),
-    url("/solutions/assets/supply_chain_excellence_dashboard.webp")
+    url("/solutions/assets/Modern%20Office%20Overlooking%20Industrial%20Innovation.webp")
       center / cover no-repeat;
 }
+  
 .factory-sky,
 .factory-grid,
 .factory-building,

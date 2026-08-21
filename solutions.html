@@ -97,7 +97,7 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="/solutions/solutions.css?v=3">
+  <link rel="stylesheet" href="/solutions/solutions.css?v=4">
 <link rel="stylesheet" href="/components/components.css">
 <link rel="stylesheet" href="/consent/consent.css">
 <link rel="stylesheet" href="/assistant.css">
@@ -572,6 +572,205 @@
             Відкрити кейс
             <span>↘</span>
           </button>
+        </div>
+      </article>
+
+      <section class="solutions-visual-break solutions-visual-break--supply" aria-label="Візуальна пауза">
+        <div class="supply-break__copy">
+          <span>ORDER / BOM / STOCK / PURCHASE</span>
+          <p>
+            Закупівля стає керованою, коли система бачить не лише замовлення,
+            а й склад виробу, залишки та реальну потребу в компонентах.
+          </p>
+        </div>
+
+        <div class="supply-break__scene" aria-hidden="true">
+          <div class="supply-break__rack supply-break__rack--one">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <div class="supply-break__rack supply-break__rack--two">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <div class="supply-break__rack supply-break__rack--three">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <div class="supply-break__route supply-break__route--one"></div>
+          <div class="supply-break__route supply-break__route--two"></div>
+
+          <div class="supply-break__scanner">
+            <span></span>
+            <strong>STOCK CHECK</strong>
+            <small>SYNCED</small>
+          </div>
+
+          <div class="supply-break__pulse supply-break__pulse--one"></div>
+          <div class="supply-break__pulse supply-break__pulse--two"></div>
+        </div>
+      </section>
+
+      <article class="featured-case featured-case--03">
+        <div class="featured-case__content">
+          <div class="featured-case__index-row">
+            <span class="featured-case__index">03</span>
+            <span class="featured-case__type">BOM / PROCUREMENT</span>
+          </div>
+
+          <h3>Закупівлі без ручного перерахунку комплектуючих</h3>
+
+          <p class="featured-case__lead">
+            Замовлення готових виробів → BOM → загальна потреба →
+            складські залишки → точний список до закупівлі.
+          </p>
+
+          <div class="featured-case__impact">
+            <div>
+              <span>ПОТРЕБА</span>
+              <strong>Кількість виробів автоматично розкладається на комплектуючі за BOM</strong>
+            </div>
+
+            <div>
+              <span>ЗАЛИШКИ</span>
+              <strong>Система віднімає доступний складський запас по кожній позиції</strong>
+            </div>
+
+            <div>
+              <span>РЕЗУЛЬТАТ</span>
+              <strong>Готовий перелік: що саме і в якій кількості потрібно закупити</strong>
+            </div>
+          </div>
+
+          <div class="featured-case__tags">
+            <span>BOM</span>
+            <span>MRP LOGIC</span>
+            <span>STOCK</span>
+            <span>COMPONENTS</span>
+            <span>PROCUREMENT</span>
+          </div>
+
+          <button
+            class="featured-case__open"
+            type="button"
+            data-open-case="5"
+          >
+            Відкрити кейс
+            <span>↘</span>
+          </button>
+        </div>
+
+        <div class="featured-case__visual featured-case__visual--bom" aria-hidden="true">
+          <div class="bom-preview">
+            <div class="bom-preview__head">
+              <div>
+                <span>COMPONENT REQUIREMENTS</span>
+                <strong>BOM Procurement Planner</strong>
+              </div>
+
+              <span class="bom-preview__status">
+                <i></i>
+                CALCULATED
+              </span>
+            </div>
+
+            <div class="bom-preview__orders">
+              <div>
+                <span>ORDER 01</span>
+                <strong>10</strong>
+                <small>В'язальні машини</small>
+              </div>
+
+              <div>
+                <span>ORDER 02</span>
+                <strong>5</strong>
+                <small>Прибиральні машини</small>
+              </div>
+
+              <div>
+                <span>ORDER 03</span>
+                <strong>3</strong>
+                <small>Фрезерні машини</small>
+              </div>
+            </div>
+
+            <div class="bom-preview__flow">
+              <div class="bom-preview__flow-node">
+                <span>01</span>
+                <strong>ORDERS</strong>
+                <small>готові вироби</small>
+              </div>
+
+              <div class="bom-preview__flow-arrow">→</div>
+
+              <div class="bom-preview__flow-node">
+                <span>02</span>
+                <strong>BOM</strong>
+                <small>склад виробу</small>
+              </div>
+
+              <div class="bom-preview__flow-arrow">→</div>
+
+              <div class="bom-preview__flow-node">
+                <span>03</span>
+                <strong>STOCK</strong>
+                <small>залишки</small>
+              </div>
+
+              <div class="bom-preview__flow-arrow">→</div>
+
+              <div class="bom-preview__flow-node bom-preview__flow-node--accent">
+                <span>04</span>
+                <strong>BUY</strong>
+                <small>до закупівлі</small>
+              </div>
+            </div>
+
+            <div class="bom-preview__table">
+              <div class="bom-preview__row bom-preview__row--head">
+                <span>COMPONENT</span>
+                <span>NEED</span>
+                <span>STOCK</span>
+                <span>BUY</span>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Motor M-24</span>
+                <span>18</span>
+                <span>7</span>
+                <strong>11</strong>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Controller C-8</span>
+                <span>36</span>
+                <span>12</span>
+                <strong>24</strong>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Frame F-16</span>
+                <span>18</span>
+                <span>20</span>
+                <strong class="bom-preview__zero">0</strong>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Bearing B-04</span>
+                <span>72</span>
+                <span>19</span>
+                <strong>53</strong>
+              </div>
+            </div>
+
+            <div class="bom-preview__footer">
+              <span>PROCUREMENT LIST READY</span>
+              <strong>4 COMPONENT GROUPS</strong>
+            </div>
+          </div>
+
+          <div class="featured-case__glow featured-case__glow--bom"></div>
+          <div class="featured-case__grid"></div>
         </div>
       </article>
     </section>

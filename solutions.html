@@ -116,9 +116,12 @@
 <script src="/consent/consent.js" defer></script>
 <script src="/assistant.js" defer></script>
 <script src="/nav-font-kaleidoscope.js?v=5" defer></script>
-<script src="/solutions/search/search-dictionary.js?v=1" defer></script>
-<script src="/solutions/search/search-uk.js?v=1" defer></script>
-<script src="/solutions/solutions.js?v=1" defer></script>
+<script src="/solutions/search/search-dictionary.js?v=2" defer></script>
+<script src="/solutions/search/search-language-uk.js?v=2" defer></script>
+<script src="/solutions/search/search-language-ru.js?v=2" defer></script>
+<script src="/solutions/search/search-language-en.js?v=2" defer></script>
+<script src="/solutions/search/search-uk.js?v=2" defer></script>
+<script src="/solutions/solutions.js?v=2" defer></script>
 </head>
 
 <body>
@@ -781,18 +784,35 @@
     <section class="case-finder" id="case-finder">
       <div class="case-finder__head">
         <div>
-          <span class="case-finder__eyebrow">SMART CASE FINDER</span>
+          <span class="case-finder__eyebrow">
+            SMART CASE FINDER / SEMANTIC MATCHING
+          </span>
+      
           <h2>
-            Знайди свій кейс.
-            <span>Навіть якщо не знаєш, як він називається.</span>
+            Не шукайте назву рішення.
+            <span>Опишіть проблему.</span>
           </h2>
         </div>
-
+      
         <p>
-          Опиши проблему своїми словами. Пошук розуміє українські,
-          російські й англійські формулювання, скорочення, синоніми,
-          назви технологій та частину типових помилок у написанні.
+          Розумний пошук зіставляє ваш запит із реальними кейсами
+          за змістом, а не лише за точним збігом слів.
+          Він розуміє українські, російські та англійські формулювання,
+          синоніми, скорочення, типові помилки та бізнес-контекст.
         </p>
+      </div>
+      
+      <div class="case-finder__promise">
+        <span>01</span>
+      
+        <div>
+          <strong>Спробуйте написати так, як сказали б колезі.</strong>
+      
+          <p>
+            Не знаєте термінології? Це нормально.
+            Просто опишіть, що зараз робите вручну або яку проблему хочете вирішити.
+          </p>
+        </div>
       </div>
 
       <div class="case-finder__search-shell">
@@ -829,15 +849,66 @@
           </button>
         </div>
 
-        <div class="case-finder__suggestions" id="case-search-suggestions">
-          <button type="button" data-search-suggestion="звітність">звітність</button>
-          <button type="button" data-search-suggestion="Power BI">Power BI</button>
-          <button type="button" data-search-suggestion="PDF інвойси">PDF інвойси</button>
-          <button type="button" data-search-suggestion="закупівлі">закупівлі</button>
-          <button type="button" data-search-suggestion="виробничі строки">виробничі строки</button>
-          <button type="button" data-search-suggestion="об'єднати Excel файли">об'єднати Excel</button>
-          <button type="button" data-search-suggestion="банківські платежі">банківські платежі</button>
-        </div>
+          <div class="case-finder__suggestions" id="case-search-suggestions">
+            <button
+              type="button"
+              data-search-suggestion="щомісяця вручну збираю звіт"
+            >
+              щомісяця вручну збираю звіт
+            </button>
+          
+            <button
+              type="button"
+              data-search-suggestion="павер биай"
+            >
+              павер биай
+            </button>
+          
+            <button
+              type="button"
+              data-search-suggestion="не знаю коли буде готове замовлення"
+            >
+              не знаю коли буде готове замовлення
+            </button>
+          
+            <button
+              type="button"
+              data-search-suggestion="треба витягнути дані з PDF"
+            >
+              треба витягнути дані з PDF
+            </button>
+          
+            <button
+              type="button"
+              data-search-suggestion="рахую закупівлі руками"
+            >
+              рахую закупівлі руками
+            </button>
+          
+            <button
+              type="button"
+              data-search-suggestion="хочу бот у Telegram"
+            >
+              хочу бот у Telegram
+            </button>
+          </div>
+          
+          <div class="case-finder__capabilities">
+            <div>
+              <strong>UA · RU · EN</strong>
+              <span>Розуміє різні мови</span>
+            </div>
+          
+            <div>
+              <strong>TYPO TOLERANT</strong>
+              <span>Розпізнає помилки та скорочення</span>
+            </div>
+          
+            <div>
+              <strong>CONTEXT MATCHING</strong>
+              <span>Шукає за змістом задачі</span>
+            </div>
+          </div>
 
         <div class="case-finder__engine">
           <span></span>
@@ -848,6 +919,21 @@
         </div>
       </div>
 
+      <div
+        class="case-finder__understood"
+        id="case-search-understood"
+        hidden
+      >
+        <span class="case-finder__understood-label">
+          Я ЗРОЗУМІВ ВАШ ЗАПИТ ЯК
+        </span>
+      
+        <div
+          class="case-finder__understood-concepts"
+          id="case-search-concepts"
+        ></div>
+      </div>
+      
       <div class="case-finder__result-head">
         <div>
           <span id="case-search-caption">РЕКОМЕНДОВАНІ КЕЙСИ</span>

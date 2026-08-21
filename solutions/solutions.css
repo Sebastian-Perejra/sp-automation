@@ -16,7 +16,7 @@
   --surface-soft: #fbfaf7;
   --surface-green: #f2f7f3;
   --text-main: #242321;
-  --text-secondary: #64605b;а
+  --text-secondary: #64605b;
   --text-muted: #817c75;
   --green: #35594b;
   --green-hover: #29483c;
@@ -34,7 +34,6 @@
   --radius-small: 12px;
   --font-main: "Manrope", sans-serif;
   --font-tech: "Roboto Mono", monospace;
-  --font-display: "Inter Tight", sans-serif;
 }
 
 * {
@@ -3761,7 +3760,63 @@ body {
 .case-finder__head h2,
 .solution-process__header h2,
 .solutions-final-cta h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  line-height: 0.98;
   letter-spacing: -0.055em;
+}
+
+.solutions-hero__title {
+  font-weight: 550;
+  line-height: 0.91;
+  letter-spacing: -0.065em;
+}
+
+.solutions-hero__title span {
+  letter-spacing: -0.075em;
+}
+
+.solutions-hero__title span,
+.solutions-featured__intro h2,
+.case-finder__head h2 span,
+.solution-process__header h2 span,
+.solutions-final-cta h2 span {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff3f91 0%,
+      #ff52ae 20%,
+      #e159ff 45%,
+      #a768ff 68%,
+      #5d9dff 100%
+    );
+
+  background-size: 180% 100%;
+  background-position: 0% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation:
+    solutionsGradientShift
+    8s
+    ease-in-out
+    infinite;
+}
+
+@keyframes solutionsGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }

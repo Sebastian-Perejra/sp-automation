@@ -57,7 +57,9 @@
     const abs = Math.abs(value);
 
     if (abs >= 1_000_000) {
-      return `${(value / 1_000_000).toFixed(1).replace(".", ",")} млн`;
+      return `${(value / 1_000_000)
+        .toFixed(1)
+        .replace(".", ",")} млн`;
     }
 
     if (abs >= 1_000) {
@@ -68,7 +70,9 @@
   };
 
   const formatPercent = (value, digits = 1) =>
-    `${Number(value || 0).toFixed(digits).replace(".", ",")}%`;
+    `${Number(value || 0)
+      .toFixed(digits)
+      .replace(".", ",")}%`;
 
   const sleep = (ms) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -250,7 +254,7 @@
       "Соки",
       "Fresh Day",
       "Мультифрукт 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       31,
       0.64
     ],
@@ -258,7 +262,7 @@
       "Соки",
       "Fresh Day",
       "Яблоко-персик 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       32,
       0.65
     ],
@@ -266,7 +270,7 @@
       "Вода",
       "Aqua North",
       "Вода негазированная 1,5 л",
-      "ПЕТ",
+      "ПЭТ",
       24,
       0.58
     ],
@@ -274,7 +278,7 @@
       "Вода",
       "Aqua North",
       "Вода газированная 1,5 л",
-      "ПЕТ",
+      "ПЭТ",
       25,
       0.59
     ],
@@ -282,7 +286,7 @@
       "Вода",
       "Aqua North",
       "Вода негазированная 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       17,
       0.57
     ],
@@ -290,7 +294,7 @@
       "Вода",
       "Aqua North",
       "Вода газированная 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       18,
       0.58
     ],
@@ -298,7 +302,7 @@
       "Лимонады",
       "Lemon Boom",
       "Лимонад лимон 1 л",
-      "ПЕТ",
+      "ПЭТ",
       38,
       0.63
     ],
@@ -306,7 +310,7 @@
       "Лимонады",
       "Lemon Boom",
       "Лимонад апельсин 1 л",
-      "ПЕТ",
+      "ПЭТ",
       39,
       0.64
     ],
@@ -314,7 +318,7 @@
       "Лимонады",
       "Lemon Boom",
       "Лимонад тархун 1 л",
-      "ПЕТ",
+      "ПЭТ",
       40,
       0.65
     ],
@@ -322,7 +326,7 @@
       "Лимонады",
       "Lemon Boom",
       "Лимонад кола 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       27,
       0.62
     ],
@@ -330,7 +334,7 @@
       "Холодный чай",
       "Ice Tea Garden",
       "Чай персик 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       29,
       0.61
     ],
@@ -338,7 +342,7 @@
       "Холодный чай",
       "Ice Tea Garden",
       "Чай лимон 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       29,
       0.61
     ],
@@ -346,7 +350,7 @@
       "Холодный чай",
       "Ice Tea Garden",
       "Чай манго 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       31,
       0.63
     ],
@@ -377,7 +381,7 @@
     [
       "Детские напитки",
       "Happy Kids",
-      "Напиток яблочный 0,2 л",
+      "Напиток яблоко 0,2 л",
       "Tetra Pak",
       18,
       0.66
@@ -417,7 +421,7 @@
     [
       "Соки",
       "Green Valley",
-      "Сок вишнёвый 1 л",
+      "Сок вишневый 1 л",
       "Tetra Pak",
       53,
       0.69
@@ -425,7 +429,7 @@
     [
       "Лимонады",
       "Lemon Boom",
-      "Лимонад имбирный 0,33 л",
+      "Лимонад имбирь 0,33 л",
       "Стекло",
       34,
       0.66
@@ -433,8 +437,8 @@
     [
       "Холодный чай",
       "Ice Tea Garden",
-      "Чай зелёный 1 л",
-      "ПЕТ",
+      "Чай зеленый 1 л",
+      "ПЭТ",
       43,
       0.64
     ],
@@ -449,7 +453,7 @@
     [
       "Детские напитки",
       "Happy Kids",
-      "Напиток грушевый 0,2 л",
+      "Напиток груша 0,2 л",
       "Tetra Pak",
       19,
       0.67
@@ -457,8 +461,8 @@
     [
       "Вода",
       "Aqua North",
-      "Вода спортивная 0,75 л",
-      "ПЕТ",
+      "Вода спорт 0,75 л",
+      "ПЭТ",
       26,
       0.60
     ],
@@ -466,7 +470,7 @@
       "Соки",
       "Fresh Day",
       "Смузи ягодный 0,3 л",
-      "ПЕТ",
+      "ПЭТ",
       49,
       0.72
     ],
@@ -474,7 +478,7 @@
       "Соки",
       "Fresh Day",
       "Смузи манго 0,3 л",
-      "ПЕТ",
+      "ПЭТ",
       51,
       0.73
     ],
@@ -490,7 +494,7 @@
       "Холодный чай",
       "Ice Tea Garden",
       "Чай малина 0,5 л",
-      "ПЕТ",
+      "ПЭТ",
       32,
       0.64
     ],
@@ -1096,7 +1100,8 @@
 
     return formatMoneyShort(value);
   }
-    function compareToPreviousYear(
+
+  function compareToPreviousYear(
     rows,
     field
   ) {
@@ -1252,10 +1257,10 @@
     $("case6-kpi-plan-status")
       .textContent =
         summary.planCompletion >= 1
-          ? "План выполнен"
+          ? "план выполнен"
           : summary.planCompletion >= 0.9
-            ? "Требует внимания"
-            : "Критическое отклонение";
+            ? "требует внимания"
+            : "критическое отклонение";
   }
 
   function renderExecutiveSummary(rows) {
@@ -1346,49 +1351,53 @@
     const groups =
       groupBy(sourceRows, "year");
 
-    const values = [2024, 2025, 2026].map((year) => {
-      const list = groups.get(year) || [];
+    const values =
+      [2024, 2025, 2026].map((year) => {
+        const list =
+          groups.get(year) || [];
 
-      return {
-        year,
-        value: metricValue(list)
-      };
-    });
+        return {
+          year,
+          value: metricValue(list)
+        };
+      });
 
     const max = Math.max(
       ...values.map((item) => item.value),
       1
     );
 
-    yearChart.innerHTML = values
-      .map((item) => {
-        const height = Math.max(
-          8,
-          (item.value / max) * 145
-        );
+    yearChart.innerHTML =
+      values
+        .map((item) => {
+          const height =
+            Math.max(
+              8,
+              (item.value / max) * 145
+            );
 
-        const active =
-          state.filters.year === String(item.year)
-            ? "active"
-            : "";
+          const active =
+            state.filters.year ===
+            String(item.year)
+              ? "active"
+              : "";
 
-        return `
-          <div
-            class="case6-year-column ${active}"
-            data-case6-year="${item.year}"
-          >
-            <b>${metricLabel(item.value)}</b>
-            <i style="height: ${height}px"></i>
-            <span>${item.year}</span>
-          </div>
-        `;
-      })
-      .join("");
+          return `
+            <div
+              class="case6-year-column ${active}"
+              data-case6-year="${item.year}"
+            >
+              <b>${metricLabel(item.value)}</b>
+              <i style="height: ${height}px"></i>
+              <span>${item.year}</span>
+            </div>
+          `;
+        })
+        .join("");
 
     $$("[data-case6-year]").forEach((node) => {
       node.addEventListener("click", () => {
-        const year =
-          node.dataset.case6Year;
+        const year = node.dataset.case6Year;
 
         state.filters.year =
           state.filters.year === year
@@ -1419,10 +1428,7 @@
       summary.plan
         ? Math.min(
             120,
-            (
-              summary.revenue /
-              summary.plan
-            ) * 100
+            (summary.revenue / summary.plan) * 100
           )
         : 0;
 
@@ -1430,10 +1436,7 @@
       summary.plan
         ? Math.min(
             120,
-            (
-              forecast /
-              summary.plan
-            ) * 100
+            (forecast / summary.plan) * 100
           )
         : 0;
 
@@ -1455,16 +1458,10 @@
     $("case6-plan-warning").textContent =
       forecastPercent >= 100
         ? `✓ При текущей динамике прогноз превышает план на ${formatMoney(
-            Math.max(
-              0,
-              forecast - summary.plan
-            )
+            Math.max(0, forecast - summary.plan)
           )}.`
         : `⚠ При текущей динамике план может быть недовыполнен на ${formatMoney(
-            Math.max(
-              0,
-              summary.plan - forecast
-            )
+            Math.max(0, summary.plan - forecast)
           )}.`;
   }
 
@@ -1608,10 +1605,7 @@
           const width =
             Math.max(
               4,
-              (
-                item.value /
-                max
-              ) * 100
+              (item.value / max) * 100
             );
 
           return `
@@ -1666,8 +1660,7 @@
       ).entries()
     ]
       .map(([name, list]) => {
-        const summary =
-          summarize(list);
+        const summary = summarize(list);
 
         return {
           name,
@@ -1772,10 +1765,7 @@
           const width =
             Math.max(
               4,
-              (
-                item.value /
-                max
-              ) * 100
+              (item.value / max) * 100
             );
 
           return `
@@ -1797,7 +1787,8 @@
         })
         .join("");
   }
-    function renderAlerts(rows) {
+
+  function renderAlerts(rows) {
     const summary = summarize(rows);
 
     const byRegion = [
@@ -1863,7 +1854,7 @@
         text:
           summary.planCompletion < 1
             ? "Текущий срез не достигает планового уровня."
-            : "План выполнен, но стоит контролировать маржинальность."
+            : "План выполнен, но маржинальность стоит продолжать контролировать."
       },
       {
         type:
@@ -2292,7 +2283,7 @@
       "Загрузка таблиц продаж, клиентов и товаров…",
       "Очистка и преобразование данных в Power Query…",
       "Обновление связей модели данных…",
-      "Перерасчёт DAX-показателей и KPI…",
+      "Пересчёт DAX-показателей и KPI…",
       "Обновление визуализаций и перекрёстной фильтрации…"
     ];
 
@@ -2339,7 +2330,8 @@
     buildButton.textContent =
       "↻ Обновить модель ещё раз";
   }
-    [
+
+  [
     [filterYear, "year"],
     [filterQuarter, "quarter"],
     [filterRegion, "region"],

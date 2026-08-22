@@ -4803,10 +4803,24 @@ box-shadow:
     --solutions-bg-x: 0px;
     --solutions-bg-y: 0px;
 
+    background:
+      radial-gradient(
+        circle at 50% 42%,
+        rgba(26, 52, 39, .14),
+        rgba(5, 10, 7, .42) 50%,
+        rgba(4, 8, 6, .62) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(5, 9, 7, .44),
+        rgba(5, 9, 7, .60)
+      ),
+      url("/solutions/assets/Modern%20Lobby%20with%20Skyline%20Views-mob.webp");
+
     background-size:
-      auto,
-      auto,
-      auto 100vh;
+      100% 100%,
+      100% 100%,
+      100% auto;
 
     background-position:
       center,

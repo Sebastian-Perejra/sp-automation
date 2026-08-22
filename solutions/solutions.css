@@ -4802,14 +4802,26 @@ box-shadow:
   .solutions-page {
     --solutions-bg-x: 0px;
     --solutions-bg-y: 0px;
+
+    background-size:
+      auto,
+      auto,
+      auto 100vh;
+
+    background-position:
+      center,
+      center,
+      center top;
+
+    background-repeat:
+      no-repeat,
+      no-repeat,
+      repeat-y;
+
     background-attachment:
       scroll,
       scroll,
       scroll;
-    background-position:
-      center,
-      center,
-      center;
   }
 }
 

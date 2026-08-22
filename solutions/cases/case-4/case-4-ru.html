@@ -1,0 +1,467 @@
+<section class="capacity-case" id="production-capacity-case">
+  <div class="case-demo-kicker">Реальный кейс №4</div>
+
+  <h2>Планирование производственных мощностей и сроков выполнения заказов</h2>
+
+  <p class="case-demo-subtitle">
+    Система получает список входящих заказов, учитывает назначенную
+    производственную линию и её суточную мощность, после чего автоматически
+    распределяет объём по календарным дням и рассчитывает фактическую дату
+    готовности каждого заказа. Все данные ниже являются демонстрационными.
+  </p>
+
+  <div class="capacity-problem-solution">
+    <article class="capacity-story-card capacity-story-card--problem">
+      <span class="capacity-story-label">
+        БОЛЬ
+      </span>
+
+      <h3>
+        Производственный план держался на ручных проверках и опыте диспетчера
+      </h3>
+
+      <p>
+        Когда поступал новый заказ, нужно было вручную проверить,
+        какая линия может его выполнить, сколько заказов уже стоит в очереди,
+        сколько единиц реально можно произвести за день и не заберёт ли
+        новый заказ мощность, уже обещанную другому клиенту.
+      </p>
+
+      <ul>
+        <li>заказы просматривались по одному;</li>
+        <li>загрузка линий сверялась вручную в Excel или производственных планах;</li>
+        <li>дата готовности часто оценивалась приблизительно;</li>
+        <li>срочный заказ заставлял пересчитывать очередь заново;</li>
+        <li>план приходилось проверять несколько раз, чтобы избежать накладок;</li>
+        <li>ошибка в одном расчёте могла сдвинуть сроки следующих заказов.</li>
+      </ul>
+    </article>
+
+    <article class="capacity-story-card capacity-story-card--solution">
+      <span class="capacity-story-label">
+        РЕШЕНИЕ
+      </span>
+
+      <h3>
+        Система сама распределяет заказы по доступной производственной мощности
+      </h3>
+
+      <p>
+        Вместо ручного просмотра очереди система берёт все заказы,
+        производительность каждой линии и правила приоритета,
+        после чего автоматически распределяет объём по календарным дням.
+      </p>
+
+      <ul>
+        <li>видна реальная загрузка каждой производственной линии;</li>
+        <li>дата готовности рассчитывается автоматически;</li>
+        <li>перегруженные дни видны сразу;</li>
+        <li>приоритетный заказ можно вставить без ручного пересчёта;</li>
+        <li>при изменении мощности весь план перестраивается автоматически;</li>
+        <li>планировщик видит конкретный календарь загрузки, а не предположения.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="capacity-settings">
+    <div class="capacity-settings-head">
+      <div>
+        <strong>Настройка производственных мощностей</strong>
+        <span>
+          Измените производительность линий и повторно рассчитайте производственный план
+        </span>
+      </div>
+
+      <div class="capacity-period">
+        Период заказов: 01.01.2026–02.08.2026
+      </div>
+    </div>
+
+    <div class="capacity-lines">
+      <article class="capacity-line-card" data-line="line1">
+        <div class="capacity-line-name">
+          <span>Линия 1</span>
+          <small>Стальная труба</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line1"
+            aria-label="Уменьшить мощность Линии 1"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line1">250</strong>
+            <span>ед./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line1"
+            aria-label="Увеличить мощность Линии 1"
+          >
+            +
+          </button>
+        </div>
+      </article>
+
+      <article class="capacity-line-card" data-line="line2">
+        <div class="capacity-line-name">
+          <span>Линия 2</span>
+          <small>Стальной уголок</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line2"
+            aria-label="Уменьшить мощность Линии 2"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line2">400</strong>
+            <span>ед./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line2"
+            aria-label="Увеличить мощность Линии 2"
+          >
+            +
+          </button>
+        </div>
+      </article>
+
+      <article class="capacity-line-card" data-line="line3">
+        <div class="capacity-line-name">
+          <span>Линия 3</span>
+          <small>Стальной профиль</small>
+        </div>
+
+        <div class="capacity-control">
+          <button
+            class="capacity-minus"
+            type="button"
+            data-capacity-action="minus"
+            data-capacity-line="line3"
+            aria-label="Уменьшить мощность Линии 3"
+          >
+            −
+          </button>
+
+          <div class="capacity-value">
+            <strong id="capacity-line3">600</strong>
+            <span>ед./день</span>
+          </div>
+
+          <button
+            class="capacity-plus"
+            type="button"
+            data-capacity-action="plus"
+            data-capacity-line="line3"
+            aria-label="Увеличить мощность Линии 3"
+          >
+            +
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="capacity-orders-panel">
+    <div class="capacity-panel-head">
+      <div>
+        <strong>Входящие производственные заказы</strong>
+        <span>100 демонстрационных заказов</span>
+      </div>
+
+      <div class="capacity-orders-status" id="capacity-orders-status">
+        Ожидают расчёта
+      </div>
+    </div>
+
+    <div class="capacity-table-wrap">
+      <table class="capacity-orders-table">
+        <thead>
+          <tr>
+            <th>Заказ</th>
+            <th>Дата поступления</th>
+            <th>Код изделия</th>
+            <th>Изделие</th>
+            <th>Количество</th>
+            <th>Линия</th>
+            <th>Желаемая дата</th>
+            <th>Расчётная дата</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+
+        <tbody id="capacity-orders-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="capacity-mode-panel">
+    <div>
+      <strong>Режим планирования</strong>
+      <span>
+        Выберите логику распределения доступной производственной мощности
+      </span>
+    </div>
+
+    <div class="capacity-mode-switch">
+      <button
+        class="capacity-mode-button active"
+        type="button"
+        data-capacity-mode="queue"
+      >
+        По очереди
+      </button>
+
+      <button
+        class="capacity-mode-button"
+        type="button"
+        data-capacity-mode="priority"
+      >
+        По приоритету
+      </button>
+    </div>
+  </div>
+
+  <div class="capacity-action">
+    <button
+      class="capacity-calculate-button"
+      id="capacity-calculate"
+      type="button"
+    >
+      ⚙ Рассчитать производственный план
+    </button>
+  </div>
+
+  <div class="capacity-calculation" id="capacity-loader">
+    <div class="capacity-calculation__head">
+      <div class="capacity-calculation__pulse"></div>
+
+      <div>
+        <strong id="capacity-calculation-title">
+          Подготовка расчёта
+        </strong>
+
+        <span id="capacity-calculation-text">
+          Анализирую производственные данные
+        </span>
+      </div>
+
+      <div
+        class="capacity-calculation__percent"
+        id="capacity-calculation-percent"
+      >
+        0%
+      </div>
+    </div>
+
+    <div class="capacity-calculation__track">
+      <span id="capacity-calculation-progress"></span>
+    </div>
+
+    <div class="capacity-calculation__steps">
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="1"
+      >
+        <span>01</span>
+        <strong>Заказы</strong>
+      </div>
+
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="2"
+      >
+        <span>02</span>
+        <strong>Мощность</strong>
+      </div>
+
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="3"
+      >
+        <span>03</span>
+        <strong>Календарь</strong>
+      </div>
+
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="4"
+      >
+        <span>04</span>
+        <strong>Сроки</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="capacity-output" id="capacity-output">
+    <div class="capacity-summary">
+      <article class="capacity-summary-item">
+        <span>Заказов рассчитано</span>
+        <strong id="capacity-summary-orders">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Общий объём</span>
+        <strong id="capacity-summary-units">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Заказов с переносом</span>
+        <strong id="capacity-summary-delayed">0</strong>
+      </article>
+
+      <article class="capacity-summary-item">
+        <span>Последняя дата плана</span>
+        <strong id="capacity-summary-last-date">—</strong>
+      </article>
+    </div>
+
+    <div class="capacity-dashboard-grid">
+      <article class="capacity-dashboard-card">
+        <div class="capacity-dashboard-head">
+          <div>
+            <strong>Средняя загрузка линий</strong>
+            <span>по рассчитанному производственному плану</span>
+          </div>
+        </div>
+
+        <div class="capacity-utilization">
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Линия 1</span>
+              <strong id="capacity-util-line1-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line1"
+              ></div>
+            </div>
+          </div>
+
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Линия 2</span>
+              <strong id="capacity-util-line2-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line2"
+              ></div>
+            </div>
+          </div>
+
+          <div class="capacity-utilization-row">
+            <div class="capacity-utilization-label">
+              <span>Линия 3</span>
+              <strong id="capacity-util-line3-text">0%</strong>
+            </div>
+
+            <div class="capacity-utilization-track">
+              <div
+                class="capacity-utilization-fill"
+                id="capacity-util-line3"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="capacity-dashboard-card">
+        <div class="capacity-dashboard-head">
+          <div>
+            <strong>Загрузка по дням</strong>
+            <span>календарь производственных мощностей</span>
+          </div>
+        </div>
+
+        <div class="capacity-calendar-shell">
+          <div class="capacity-calendar-nav">
+            <button
+              class="capacity-calendar-arrow"
+              id="capacity-calendar-prev"
+              type="button"
+              aria-label="Предыдущий месяц"
+            >
+              ←
+            </button>
+
+            <strong id="capacity-calendar-title">
+              —
+            </strong>
+
+            <button
+              class="capacity-calendar-arrow"
+              id="capacity-calendar-next"
+              type="button"
+              aria-label="Следующий месяц"
+            >
+              →
+            </button>
+          </div>
+
+          <div class="capacity-calendar-weekdays">
+            <span>ПН</span>
+            <span>ВТ</span>
+            <span>СР</span>
+            <span>ЧТ</span>
+            <span>ПТ</span>
+            <span>СБ</span>
+            <span>ВС</span>
+          </div>
+
+          <div
+            class="capacity-calendar"
+            id="capacity-calendar"
+          ></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="capacity-legend">
+      <span>
+        <i class="capacity-legend-free"></i>
+        0–59% · Есть запас мощности
+      </span>
+
+      <span>
+        <i class="capacity-legend-medium"></i>
+        60–89% · Высокая загрузка
+      </span>
+
+      <span>
+        <i class="capacity-legend-full"></i>
+        90–100% · Почти / полностью загружено
+      </span>
+    </div>
+
+    <div class="demo-cta">
+      <a href="contacts-ru.html">
+        Хочу автоматизировать планирование производства
+      </a>
+    </div>
+  </div>
+</section>

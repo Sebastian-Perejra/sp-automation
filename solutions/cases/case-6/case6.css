@@ -1973,3 +1973,22 @@
     width: 100%;
   }
 }
+
+@media (max-width: 600px) {
+  .case6-info-card p {
+    color: #5f5852;
+    opacity: 1;
+  }
+
+  .case6-problem p {
+    color: #76514f;
+  }
+
+  .case6-solution p {
+    color: #4f6859;
+  }
+
+  .case6-info-card ul {
+    color: #5f5852;
+  }
+}

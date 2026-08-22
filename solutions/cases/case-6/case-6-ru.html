@@ -1,8 +1,4 @@
-<section
-  class="case6"
-  id="powerbi-management-case"
-  data-case6-lang="ru"
->
+<section class="case6" id="powerbi-management-case">
   <div class="case6-header">
     <div class="case6-kicker">Реальный кейс №6</div>
 
@@ -13,10 +9,10 @@
     <p class="case6-subtitle">
       Компания производит и продаёт соки, минеральную воду, лимонады,
       холодный чай и энергетические напитки. Данные о продажах хранятся
-      в учётной системе — например, 1С, SAP или другой ERP.
-      Раньше сотрудник ежемесячно вручную выгружал данные в Excel,
-      дополнял старый файл, проверял формулы, обновлял сводные таблицы
-      и формировал новую версию отчёта для руководства.
+      в учётной или ERP-системе — например, 1С, SAP или другой бизнес-платформе.
+      Раньше сотрудник каждый месяц вручную выгружал данные в Excel,
+      обновлял существующий файл, проверял формулы, сводные таблицы
+      и готовил новую версию отчёта для руководства.
     </p>
   </div>
 
@@ -24,41 +20,34 @@
     <article class="case6-info-card case6-problem">
       <span class="case6-info-label">Проблема</span>
 
-      <h3>
-        Управленческий отчёт устаревал ещё до момента отправки
-      </h3>
+      <h3>Управленческий отчёт устаревал ещё до момента отправки</h3>
 
       <p>
         Данные вручную переносились из учётной системы в Excel.
-        Каждое обновление занимало много времени, зависело от конкретного
-        сотрудника и создавало риск ошибок в формулах, диапазонах,
+        Каждое обновление занимало время, зависело от конкретного сотрудника
+        и создавало риск ошибок в формулах, диапазонах,
         сводных таблицах и графиках.
       </p>
 
       <ul>
-        <li>несколько версий одного отчёта;</li>
+        <li>несколько версий одного и того же отчёта;</li>
         <li>ручное копирование новых данных;</li>
         <li>задержка управленческой информации;</li>
-        <li>невозможность быстро изменить аналитический срез;</li>
-        <li>
-          зависимость от сотрудника, который готовит Excel-файл.
-        </li>
+        <li>сложно быстро изменить аналитический срез;</li>
+        <li>зависимость от сотрудника, который ведёт Excel-файл.</li>
       </ul>
     </article>
 
     <article class="case6-info-card case6-solution">
       <span class="case6-info-label">Решение</span>
 
-      <h3>
-        Автоматическое обновление модели и интерактивный Power BI-отчёт
-      </h3>
+      <h3>Автоматическое обновление данных и интерактивный отчёт Power BI</h3>
 
       <p>
         Power BI подключается к источнику через коннектор, API,
         ODBC-подключение или напрямую к базе данных.
         Если система находится во внутренней сети компании,
-        используется локальный шлюз данных —
-        On-premises Data Gateway.
+        используется локальный шлюз данных — On-premises Data Gateway.
       </p>
 
       <ul>
@@ -66,9 +55,7 @@
         <li>единая модель для всех пользователей;</li>
         <li>фильтры, слайсеры и перекрёстная фильтрация;</li>
         <li>план-факт анализ и пороговые показатели;</li>
-        <li>
-          доступ руководства к актуальным показателям каждый день.
-        </li>
+        <li>ежедневный доступ руководства к актуальным цифрам.</li>
       </ul>
     </article>
   </div>
@@ -77,16 +64,14 @@
     <article class="case6-before-card">
       <span class="case6-stage-label">Было</span>
 
-      <strong>
-        Excel-файл, который обновляется вручную
-      </strong>
+      <strong>Excel-файл с ручным обновлением</strong>
 
       <div class="case6-before-details">
         <span>500 строк продаж</span>
         <span>2024–2026 годы</span>
         <span>25 колонок</span>
         <span>несколько версий файла</span>
-        <span>до 15 часов ручной работы ежемесячно</span>
+        <span>до 15 часов ручной работы в месяц</span>
       </div>
     </article>
 
@@ -97,12 +82,10 @@
     <article class="case6-after-card">
       <span class="case6-stage-label">Стало</span>
 
-      <strong>
-        Единый интерактивный Power BI-отчёт
-      </strong>
+      <strong>Единый интерактивный отчёт Power BI</strong>
 
       <div class="case6-before-details">
-        <span>автоматическое обновление</span>
+        <span>автоматическое обновление данных</span>
         <span>одна актуальная версия</span>
         <span>фильтры и детализация</span>
         <span>ежедневный доступ руководства</span>
@@ -214,7 +197,8 @@
       </div>
     </div>
   </div>
-    <section class="case6-dashboard" id="case6-dashboard">
+
+  <section class="case6-dashboard" id="case6-dashboard">
     <div class="case6-powerbi-shell">
       <aside class="case6-sidebar">
         <div class="case6-brand">
@@ -412,37 +396,57 @@
         <div class="case6-kpis">
           <article class="case6-kpi">
             <span>Выручка</span>
+
             <strong id="case6-kpi-revenue">0</strong>
-            <small id="case6-kpi-revenue-change">—</small>
+
+            <small id="case6-kpi-revenue-change">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Валовая прибыль</span>
+
             <strong id="case6-kpi-profit">0</strong>
-            <small id="case6-kpi-profit-change">—</small>
+
+            <small id="case6-kpi-profit-change">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Маржинальность</span>
+
             <strong id="case6-kpi-margin">0%</strong>
-            <small id="case6-kpi-margin-change">—</small>
+
+            <small id="case6-kpi-margin-change">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Выполнение плана</span>
+
             <strong id="case6-kpi-plan">0%</strong>
-            <small id="case6-kpi-plan-status">—</small>
+
+            <small id="case6-kpi-plan-status">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Продано единиц</span>
+
             <strong id="case6-kpi-quantity">0</strong>
+
             <small>по выбранному срезу</small>
           </article>
 
           <article class="case6-kpi">
             <span>Активные клиенты</span>
+
             <strong id="case6-kpi-customers">0</strong>
+
             <small>уникальных покупателей</small>
           </article>
         </div>
@@ -604,7 +608,7 @@
             <div class="case6-visual-head">
               <div>
                 <strong>Топ товаров</strong>
-                <span>ABC-анализ номенклатуры</span>
+                <span>ABC-анализ ассортимента</span>
               </div>
             </div>
 
@@ -776,7 +780,8 @@
 
         <p>
           Пользователь может изменить частоту подготовки отчёта,
-          длительность одного цикла и количество задействованных сотрудников.
+          продолжительность одного цикла и количество сотрудников,
+          участвующих в процессе.
         </p>
       </div>
     </div>
@@ -834,16 +839,19 @@
     <div class="case6-time-result">
       <article>
         <span>До автоматизации</span>
+
         <strong id="case6-time-before">180 ч/год</strong>
       </article>
 
       <article>
         <span>После автоматизации</span>
+
         <strong id="case6-time-after">24 ч/год</strong>
       </article>
 
       <article class="case6-time-saving-highlight">
         <span>Потенциальная экономия</span>
+
         <strong id="case6-time-saving">156 ч/год</strong>
       </article>
     </div>
@@ -877,7 +885,7 @@
     <article>
       <span>5</span>
       <strong>Power BI</strong>
-      <small>актуальный управленческий отчёт</small>
+      <small>актуальная управленческая отчётность</small>
     </article>
   </div>
 

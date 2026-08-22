@@ -5,184 +5,239 @@
     <h2>Автоматический расчёт потребности в комплектующих</h2>
 
     <p class="case5-subtitle">
-      Производственное предприятие ежемесячно планирует выпуск нескольких
-      видов оборудования. Раньше сотрудники вручную рассчитывали количество
-      двигателей, датчиков, контроллеров, редукторов и других комплектующих.
-      После автоматизации расчёт стал занимать несколько секунд вместо
-      нескольких часов.
+      Отдел продаж формирует заказы на готовые машины и производственное
+      оборудование. Для каждого изделия существует собственная спецификация BOM
+      с перечнем деталей и количеством комплектующих на одну единицу продукции.
+      Система автоматически переводит заказы на готовые изделия
+      в общую потребность в компонентах, сравнивает её с текущими складскими
+      остатками и рассчитывает точное количество комплектующих,
+      которые необходимо закупить.
     </p>
   </div>
 
   <div class="case5-problem-solution">
     <article class="case5-info-card case5-problem">
-      <span class="case5-info-label">ПРОБЛЕМА</span>
+      <span class="case5-info-label">Проблема</span>
 
-      <h3>Сложные расчёты и ошибки</h3>
+      <h3>
+        Ручной расчёт потребности быстро превращается
+        в сложную сверку
+      </h3>
 
       <p>
-        Специалисты вручную работали с десятками спецификаций, сравнивали
-        складские остатки, рассчитывали дефицит и формировали заявки
-        поставщикам.
+        До автоматизации закупщику приходится вручную просматривать
+        заказы на готовые изделия, открывать соответствующие спецификации BOM,
+        определять количество каждого компонента на одну единицу продукции
+        и умножать его на фактический объём заказа.
+      </p>
+
+      <p>
+        Если одна и та же деталь используется в нескольких изделиях,
+        потребность по ней нужно дополнительно объединить в одну общую позицию.
+        После этого отдельно проверяются складские остатки, резервы
+        и фактический дефицит.
+      </p>
+
+      <p>
+        При изменении количества заказанных машин или состава изделия
+        весь расчёт приходится выполнять заново. В результате легко пропустить
+        позицию, дважды учесть один и тот же компонент, заказать лишнее
+        или обнаружить нехватку уже перед запуском производства.
       </p>
     </article>
 
     <article class="case5-info-card case5-solution">
-      <span class="case5-info-label">РЕШЕНИЕ</span>
+      <span class="case5-info-label">Решение</span>
 
-      <h3>Автоматическое планирование</h3>
+      <h3>
+        Система автоматически преобразует заказы
+        в точную потребность к закупке
+      </h3>
 
       <p>
-        Система автоматически анализирует план производства, определяет
-        необходимое количество компонентов, сравнивает результаты с остатками
-        на складе и формирует перечень позиций для закупки.
+        Пользователь задаёт количество заказанных машин и актуальные
+        складские остатки. Система автоматически раскрывает BOM каждого изделия
+        и рассчитывает полную потребность в комплектующих.
+      </p>
+
+      <p>
+        Одинаковые компоненты, используемые в разных изделиях,
+        объединяются в одну позицию. После этого система сравнивает
+        общую потребность с доступными складскими остатками
+        и определяет фактический дефицит.
+      </p>
+
+      <p>
+        В результате закупщик сразу видит, что именно нужно приобрести,
+        в каком количестве и какие позиции уже полностью покрываются складом.
+        Если объём заказов или остатки меняются, новый расчёт
+        можно выполнить повторно за несколько секунд.
       </p>
     </article>
   </div>
 
-  <div class="case5-calculate-area">
-    <button
-      class="case5-calculate-button"
-      id="case5-calculate-button"
-      type="button"
-    >
-      ⚙ Рассчитать потребность в комплектующих
-    </button>
-
-    <div class="case5-loader" id="case5-loader">
-      <span class="case5-spinner"></span>
-
-      <span id="case5-loader-text">
-        Анализ заказов и спецификаций BOM...
-      </span>
-    </div>
-  </div>
-
   <div class="case5-results" id="case5-results">
-
-    <div class="case5-summary">
-      <article class="case5-summary-card">
-        <span>ПРОИЗВОДСТВО</span>
-        <strong id="case5-total-machines">0</strong>
-        <small>Всего единиц оборудования</small>
-      </article>
-
-      <article class="case5-summary-card">
-        <span>ПОТРЕБНОСТЬ</span>
-        <strong id="case5-total-need">0</strong>
-        <small>Необходимые комплектующие</small>
-      </article>
-
-      <article class="case5-summary-card">
-        <span>СКЛАД</span>
-        <strong id="case5-total-stock">0</strong>
-        <small>Используемые остатки</small>
-      </article>
-
-      <article class="case5-summary-card">
-        <span>ЗАКУПКА</span>
-        <strong id="case5-total-buy">0</strong>
-        <small>Необходимо заказать</small>
-      </article>
-    </div>
-
     <div class="case5-grid">
-
       <section class="case5-orders-panel">
-
         <div class="case5-panel-head">
-          <strong>План производства</strong>
-          <span>Введите необходимое количество оборудования</span>
+          <div>
+            <strong>Заказы от отдела продаж</strong>
+            <span>Измените количество машин</span>
+          </div>
         </div>
 
         <div class="case5-machines">
+          <label class="case5-machine-card">
+            <span class="case5-machine-code">SP-100</span>
 
-          <article class="case5-machine-card">
-            <div class="case5-machine-code">SP100</div>
-
-            <strong>Упаковочная линия</strong>
+            <strong>Упаковочная машина</strong>
 
             <small>
-              Электродвигатели, датчики, пневматика
+              Автоматическая упаковка готовой продукции
             </small>
 
-            <input id="case5-machine-sp100" type="number" min="0" value="10">
-          </article>
+            <input
+              id="case5-machine-sp100"
+              type="number"
+              min="0"
+              value="10"
+            >
+          </label>
 
-          <article class="case5-machine-card">
-            <div class="case5-machine-code">FM20</div>
+          <label class="case5-machine-card">
+            <span class="case5-machine-code">FM-20</span>
 
             <strong>Фрезерный станок</strong>
 
             <small>
-              Редукторы, шпиндели, система ЧПУ
+              Механическая обработка металлических деталей
             </small>
 
-            <input id="case5-machine-fm20" type="number" min="0" value="5">
-          </article>
+            <input
+              id="case5-machine-fm20"
+              type="number"
+              min="0"
+              value="5"
+            >
+          </label>
 
-          <article class="case5-machine-card">
-            <div class="case5-machine-code">ML5</div>
+          <label class="case5-machine-card">
+            <span class="case5-machine-code">ML-5</span>
 
-            <strong>Маркировочная система</strong>
+            <strong>Маркировочная линия</strong>
 
             <small>
-              Контроллеры, печатающие модули
+              Нанесение маркировки на готовую продукцию
             </small>
 
-            <input id="case5-machine-ml5" type="number" min="0" value="3">
-          </article>
-
+            <input
+              id="case5-machine-ml5"
+              type="number"
+              min="0"
+              value="3"
+            >
+          </label>
         </div>
 
+        <div class="case5-formula">
+          <strong>Логика расчёта</strong>
+
+          <span>
+            К закупке = общая потребность − складской остаток,
+            но не меньше нуля
+          </span>
+        </div>
       </section>
 
       <section class="case5-parts-panel">
-
         <div class="case5-panel-head">
-          <strong>Комплектующие и складские остатки</strong>
-
-          <span>
-            Система автоматически определяет дефицит
-          </span>
+          <div>
+            <strong>Комплектующие и складские остатки</strong>
+            <span>
+              Остатки можно изменить вручную перед расчётом
+            </span>
+          </div>
         </div>
 
         <div
           class="case5-parts-list"
           id="case5-parts-list"
         ></div>
-
       </section>
+    </div>
 
+    <div class="case5-calculate-area">
+      <button
+        class="case5-calculate-button"
+        id="case5-calculate-button"
+        type="button"
+      >
+        ⚙ Рассчитать потребность в комплектующих
+      </button>
+
+      <div
+        class="case5-loader"
+        id="case5-loader"
+      >
+        <span class="case5-spinner"></span>
+
+        <span id="case5-loader-text">
+          Анализ заказов и спецификаций BOM…
+        </span>
+      </div>
+    </div>
+
+    <div class="case5-summary">
+      <article class="case5-summary-card">
+        <span>Заказано машин</span>
+        <strong id="case5-total-machines">18</strong>
+        <small>всех типов</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>Общая потребность</span>
+        <strong id="case5-total-need">0</strong>
+        <small>комплектующих</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>Покрывает склад</span>
+        <strong id="case5-total-stock">0</strong>
+        <small>единиц</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>К закупке</span>
+        <strong id="case5-total-buy">0</strong>
+        <small>единиц</small>
+      </article>
     </div>
 
     <div class="case5-flow">
-
       <article>
         <span>1</span>
-        <strong>Заказ</strong>
-        <small>Получение плана производства</small>
+        <strong>Заказы</strong>
+        <small>количество готовых машин</small>
       </article>
 
       <article>
         <span>2</span>
-        <strong>BOM</strong>
-        <small>Анализ спецификаций</small>
+        <strong>Раскрытие BOM</strong>
+        <small>состав каждого изделия</small>
       </article>
 
       <article>
         <span>3</span>
-        <strong>Склад</strong>
-        <small>Проверка остатков</small>
+        <strong>Проверка склада</strong>
+        <small>актуальные остатки</small>
       </article>
 
       <article>
         <span>4</span>
-        <strong>Закупка</strong>
-        <small>Формирование заявки</small>
+        <strong>Список закупки</strong>
+        <small>точный дефицит комплектующих</small>
       </article>
-
     </div>
-
   </div>
 
   <div class="case5-cta">

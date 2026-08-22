@@ -1,4 +1,23 @@
 (() => {
+  const ui =
+  window.SOLUTIONS_UI || {};
+
+const finderUi =
+  ui.finder || {};
+
+const processUi =
+  ui.process || {};
+
+const heroUi =
+  Array.isArray(ui.hero)
+    ? ui.hero
+    : [];
+
+const biUi =
+  ui.bi || {};
+
+const bomUi =
+  ui.bom || {};
   const dictionary =
     window.SOLUTIONS_SEARCH_DICTIONARY || {};
 
@@ -472,57 +491,8 @@ const conceptsNode =
     }
   };
 
-  const conceptLabels = {
-    automation: "автоматизація",
-    reporting: "звітність",
-    powerbi: "Power BI",
-    dashboard: "дашборд",
-    analytics: "аналітика",
-    kpi: "KPI",
-    planfact: "план-факт",
-    excel: "Excel",
-    powerquery: "Power Query",
-    data_consolidation: "об’єднання файлів",
-    data_cleaning: "очищення даних",
-    pdf: "PDF",
-    invoice: "інвойси",
-    packing: "packing list",
-    ocr: "OCR",
-    google_drive: "Google Drive",
-    google_sheets: "Google Sheets",
-    apps_script: "Apps Script",
-    bank: "банк",
-    payments: "платежі",
-    categorization: "категоризація",
-    counterparty: "контрагенти",
-    bom: "BOM",
-    procurement: "закупівлі",
-    stock: "залишки",
-    mrp: "MRP",
-    production: "виробництво",
-    capacity: "потужності",
-    scheduling: "планування",
-    deadline: "строки",
-    priority: "пріоритет",
-    erp: "ERP",
-    crm: "CRM",
-    mes: "MES",
-    api: "API",
-    integration: "інтеграція",
-    telegram: "Telegram",
-    bot: "бот",
-    notifications: "нагадування",
-    email: "Email",
-    documents: "документи",
-    webapp: "Web App",
-    pwa: "PWA",
-    data_matching: "зіставлення",
-    finance: "фінанси",
-    sales: "продажі",
-    forecast: "прогноз",
-    errors: "помилки",
-    realtime: "актуальні дані"
-  };
+const conceptLabels =
+  ui.concepts || {};
 
   const latinToUk = {
     q:"й",w:"ц",e:"у",r:"к",t:"е",
@@ -1838,20 +1808,20 @@ if (
     emptyNode.hidden =
       latestResults.length > 0;
 
-    captionNode.textContent =
-      query
-        ? "НАЙБІЛЬШ РЕЛЕВАНТНІ РІШЕННЯ"
-        : "РЕКОМЕНДОВАНІ КЕЙСИ";
+captionNode.textContent =
+  query
+    ? finderUi.relevant
+    : finderUi.recommended;
 
-    countNode.textContent =
-      query
-        ? `Знайдено: ${latestResults.length}`
-        : `${latestResults.length} кейсів`;
+countNode.textContent =
+  query
+    ? `${finderUi.found}: ${latestResults.length}`
+    : `${latestResults.length} ${finderUi.cases}`;
 
-    stateNode.textContent =
-      query
-        ? `SMART MATCH / ${query.toUpperCase()}`
-        : "SMART MATCHING / UA · RU · EN";
+stateNode.textContent =
+  query
+    ? `SMART MATCH / ${query.toUpperCase()}`
+    : finderUi.smartDefault;
 
     latestResults
       .forEach(
@@ -1902,7 +1872,7 @@ if (
 
               <div class="case-result-card__why">
                 <span>
-                  ЧОМУ ЦЕЙ КЕЙС
+                  ${finderUi.why}
                 </span>
 
                 <div>
@@ -1924,7 +1894,7 @@ if (
                 </span>
 
                 <strong>
-                  ВІДКРИТИ ↘
+                  ${finderUi.open}
                 </strong>
               </div>
             </button>

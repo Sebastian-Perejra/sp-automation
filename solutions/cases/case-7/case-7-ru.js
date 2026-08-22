@@ -240,7 +240,8 @@
       source: "Харьков_02_07.xlsx"
     }
   ];
-    const storesData = [
+
+  const storesData = [
     { name: "Киев-01", value: 18450 },
     { name: "Львов-03", value: 16320 },
     { name: "Одесса-02", value: 14870 },
@@ -291,7 +292,7 @@
       state: "good"
     },
     {
-      title: "Выявлены дубликаты",
+      title: "Обнаружены дубликаты",
       description: "строки исключены из общего массива",
       value: "7",
       state: "warning"
@@ -314,7 +315,7 @@
     "Сканирование общей папки…",
     "Поиск новых Excel-файлов…",
     "Проверка структуры таблиц…",
-    "Удаление служебных строк и итогов…",
+    "Удаление служебных строк и промежуточных итогов…",
     "Объединение данных в единый массив…",
     "Проверка дубликатов и ошибок…",
     "Обновление аналитики и KPI…"
@@ -487,7 +488,8 @@
         });
     });
   }
-    function renderCategories() {
+
+  function renderCategories() {
     const gradientParts = [];
     let currentValue = 0;
 
@@ -626,13 +628,18 @@
     resetPipeline();
     markFilesAsProcessing();
 
-    for (let index = 0; index < pipelineSteps.length; index++) {
+    for (
+      let index = 0;
+      index < pipelineSteps.length;
+      index++
+    ) {
       activatePipelineStep(index);
       loaderText.textContent = loaderMessages[index];
       await sleep(700);
     }
 
     loaderText.textContent = loaderMessages[6];
+
     await sleep(600);
 
     completePipeline();
@@ -648,5 +655,8 @@
   renderRisks();
   renderQuality();
 
-  refreshButton.addEventListener("click", runRefresh);
+  refreshButton.addEventListener(
+    "click",
+    runRefresh
+  );
 })();

@@ -11,15 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressValue = document.querySelector(".pricing-estimator-progress-value");
   const progressLabel = document.querySelector(".pricing-estimator-progress-label");
 
-  if (
-    !trigger ||
-    !panel ||
-    !overlay ||
-    !closeButton ||
-    !content
-  ) {
-    return;
-  }
+    if (
+      !panel ||
+      !overlay ||
+      !closeButton ||
+      !content
+    ) {
+      return;
+    }
 
   const questions = {
     start: {
@@ -1718,7 +1717,20 @@ function goToContacts(estimate = null) {
     "contacts.html?from=estimator";
 }
 
+  if (trigger) {
   trigger.addEventListener("click", openEstimator);
+}
+
+document.addEventListener("click", event => {
+  const button = event.target.closest("[data-pricing-estimator-open]");
+
+  if (!button) {
+    return;
+  }
+
+  event.preventDefault();
+  openEstimator();
+});
   closeButton.addEventListener("click", closeEstimator);
   overlay.addEventListener("click", closeEstimator);
 

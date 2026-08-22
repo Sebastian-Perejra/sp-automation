@@ -93,7 +93,7 @@
       date: "01.07.2026",
       store: "Kyiv-01",
       code: "J-001",
-      product: "Apple juice 1 L",
+      product: "Apple Juice 1 L",
       category: "Juices",
       startStock: 121,
       incoming: 40,
@@ -123,7 +123,7 @@
       date: "01.07.2026",
       store: "Lviv-03",
       code: "C-024",
-      product: "Ground coffee 250 g",
+      product: "Ground Coffee 250 g",
       category: "Coffee",
       startStock: 74,
       incoming: 35,
@@ -138,7 +138,7 @@
       date: "01.07.2026",
       store: "Odesa-02",
       code: "T-008",
-      product: "Black tea 100 g",
+      product: "Black Tea 100 g",
       category: "Tea",
       startStock: 96,
       incoming: 20,
@@ -153,8 +153,8 @@
       date: "01.07.2026",
       store: "Dnipro-04",
       code: "S-012",
-      product: "Oatmeal cookies",
-      category: "Sweets",
+      product: "Oat Cookies",
+      category: "Confectionery",
       startStock: 63,
       incoming: 50,
       sales: 46,
@@ -168,7 +168,7 @@
       date: "01.07.2026",
       store: "Kharkiv-05",
       code: "J-004",
-      product: "Orange juice 1 L",
+      product: "Orange Juice 1 L",
       category: "Juices",
       startStock: 88,
       incoming: 30,
@@ -198,7 +198,7 @@
       date: "02.07.2026",
       store: "Lviv-03",
       code: "C-024",
-      product: "Ground coffee 250 g",
+      product: "Ground Coffee 250 g",
       category: "Coffee",
       startStock: 81,
       incoming: 0,
@@ -213,7 +213,7 @@
       date: "02.07.2026",
       store: "Odesa-02",
       code: "T-008",
-      product: "Black tea 100 g",
+      product: "Black Tea 100 g",
       category: "Tea",
       startStock: 84,
       incoming: 0,
@@ -228,8 +228,8 @@
       date: "02.07.2026",
       store: "Kharkiv-05",
       code: "S-012",
-      product: "Oatmeal cookies",
-      category: "Sweets",
+      product: "Oat Cookies",
+      category: "Confectionery",
       startStock: 65,
       incoming: 0,
       sales: 33,
@@ -240,7 +240,8 @@
       source: "Kharkiv_02_07.xlsx"
     }
   ];
-    const storesData = [
+
+  const storesData = [
     { name: "Kyiv-01", value: 18450 },
     { name: "Lviv-03", value: 16320 },
     { name: "Odesa-02", value: 14870 },
@@ -253,32 +254,32 @@
     { name: "Water", value: 23, color: "#2f80ed" },
     { name: "Coffee", value: 18, color: "#d7a900" },
     { name: "Tea", value: 14, color: "#8a5bd7" },
-    { name: "Sweets", value: 11, color: "#ed7d31" }
+    { name: "Confectionery", value: 11, color: "#ed7d31" }
   ];
 
   const riskData = [
     {
-      product: "Oatmeal cookies",
+      product: "Oat Cookies",
       description: "Kharkiv-05 · stock below minimum level",
-      value: "30 pcs",
+      value: "30 units",
       state: "critical"
     },
     {
-      product: "Ground coffee 250 g",
-      description: "Lviv-03 · approximately 2 days of stock",
-      value: "52 pcs",
+      product: "Ground Coffee 250 g",
+      description: "Lviv-03 · approximately 2 days of stock remaining",
+      value: "52 units",
       state: "warning"
     },
     {
-      product: "Black tea 100 g",
+      product: "Black Tea 100 g",
       description: "Odesa-02 · replenishment required",
-      value: "56 pcs",
+      value: "56 units",
       state: "warning"
     },
     {
-      product: "Orange juice 1 L",
+      product: "Orange Juice 1 L",
       description: "Kharkiv-05 · sales are increasing",
-      value: "78 pcs",
+      value: "78 units",
       state: "warning"
     }
   ];
@@ -286,19 +287,19 @@
   const qualityData = [
     {
       title: "Files processed successfully",
-      description: "structure matches the template",
+      description: "structure matches the expected template",
       value: "998",
       state: "good"
     },
     {
       title: "Duplicates detected",
-      description: "rows excluded from the consolidated dataset",
+      description: "duplicate rows excluded from the consolidated dataset",
       value: "7",
       state: "warning"
     },
     {
       title: "Structure errors",
-      description: "a required column is missing",
+      description: "required column is missing",
       value: "2",
       state: "error"
     },
@@ -312,11 +313,11 @@
 
   const loaderMessages = [
     "Scanning the shared folder…",
-    "Searching for new Excel files…",
+    "Detecting new Excel files…",
     "Validating table structures…",
-    "Removing service rows and totals…",
-    "Combining data into one dataset…",
-    "Checking duplicates and errors…",
+    "Removing service rows and subtotals…",
+    "Combining data into one consolidated dataset…",
+    "Checking for duplicates and data issues…",
     "Refreshing analytics and KPIs…"
   ];
 
@@ -435,7 +436,7 @@
             <td>${formatNumber(row.returns)}</td>
             <td>${formatNumber(row.writeOff)}</td>
             <td>${formatNumber(row.endStock)}</td>
-            <td>${formatNumber(row.amount)}</td>
+            <td>${formatNumber(row.amount)} UAH</td>
             <td>${row.source}</td>
           </tr>
         `
@@ -487,7 +488,8 @@
         });
     });
   }
-    function renderCategories() {
+
+  function renderCategories() {
     const gradientParts = [];
     let currentValue = 0;
 
@@ -600,7 +602,7 @@
     animateStat(statRows, 286450);
     animateStat(statDuplicates, 7);
     animateStat(statErrors, 2);
-    animateStat(statTime, 24, " sec");
+    animateStat(statTime, 24, " s");
 
     renderArrayRows();
     renderStoreBars();
@@ -626,13 +628,18 @@
     resetPipeline();
     markFilesAsProcessing();
 
-    for (let index = 0; index < pipelineSteps.length; index++) {
+    for (
+      let index = 0;
+      index < pipelineSteps.length;
+      index++
+    ) {
       activatePipelineStep(index);
       loaderText.textContent = loaderMessages[index];
       await sleep(700);
     }
 
     loaderText.textContent = loaderMessages[6];
+
     await sleep(600);
 
     completePipeline();
@@ -648,5 +655,8 @@
   renderRisks();
   renderQuality();
 
-  refreshButton.addEventListener("click", runRefresh);
+  refreshButton.addEventListener(
+    "click",
+    runRefresh
+  );
 })();

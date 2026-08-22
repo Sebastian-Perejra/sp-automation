@@ -785,11 +785,11 @@
     if (load >= 0.9) {
       return "capacity-full";
     }
-
-    if (load >= 0.35) {
+  
+    if (load >= 0.6) {
       return "capacity-medium";
     }
-
+  
     return "capacity-free";
   }
 

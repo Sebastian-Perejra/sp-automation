@@ -173,19 +173,19 @@
   ];
 
   const channels = [
-    "National chains",
-    "Regional chains",
+    "National Retail Chains",
+    "Regional Retail Chains",
     "Distributors",
     "HoReCa",
-    "Online stores"
+    "Online Stores"
   ];
 
   const customerSegments = [
-    "Key",
+    "Key Account",
     "Growing",
     "Stable",
     "New",
-    "At risk"
+    "At Risk"
   ];
 
   const customers = [
@@ -208,7 +208,7 @@
     "Mega Store LLC",
     "Best Market LLC",
     "Sunny Region LLC",
-    "Carpathian Trade LLC",
+    "Carpathia Trade LLC",
     "Dnipro Food LLC",
     "Prime Distribution LLC",
     "Eco Marketing LLC",
@@ -216,7 +216,7 @@
     "Pulse Trade LLC",
     "Family Market LLC",
     "Continent Food LLC",
-    "New Trade LLC",
+    "Nova Trade LLC",
     "Fora Partner LLC",
     "Fresh Choice LLC"
   ];
@@ -225,7 +225,7 @@
     [
       "Juices",
       "Green Valley",
-      "Apple juice 1 L",
+      "Apple Juice 1 L",
       "Tetra Pak",
       43,
       0.68
@@ -233,7 +233,7 @@
     [
       "Juices",
       "Green Valley",
-      "Orange juice 1 L",
+      "Orange Juice 1 L",
       "Tetra Pak",
       48,
       0.69
@@ -241,7 +241,7 @@
     [
       "Juices",
       "Green Valley",
-      "Tomato juice 0.95 L",
+      "Tomato Juice 0.95 L",
       "Tetra Pak",
       46,
       0.66
@@ -249,7 +249,7 @@
     [
       "Juices",
       "Fresh Day",
-      "Multifruit 0.5 L",
+      "Multifruit Drink 0.5 L",
       "PET",
       31,
       0.64
@@ -257,7 +257,7 @@
     [
       "Juices",
       "Fresh Day",
-      "Apple and peach 0.5 L",
+      "Apple & Peach 0.5 L",
       "PET",
       32,
       0.65
@@ -265,7 +265,7 @@
     [
       "Water",
       "Aqua North",
-      "Still water 1.5 L",
+      "Still Water 1.5 L",
       "PET",
       24,
       0.58
@@ -273,7 +273,7 @@
     [
       "Water",
       "Aqua North",
-      "Sparkling water 1.5 L",
+      "Sparkling Water 1.5 L",
       "PET",
       25,
       0.59
@@ -281,7 +281,7 @@
     [
       "Water",
       "Aqua North",
-      "Still water 0.5 L",
+      "Still Water 0.5 L",
       "PET",
       17,
       0.57
@@ -289,69 +289,69 @@
     [
       "Water",
       "Aqua North",
-      "Sparkling water 0.5 L",
+      "Sparkling Water 0.5 L",
       "PET",
       18,
       0.58
     ],
     [
-      "Lemonades",
+      "Soft Drinks",
       "Lemon Boom",
-      "Lemon lemonade 1 L",
+      "Lemon Soda 1 L",
       "PET",
       38,
       0.63
     ],
     [
-      "Lemonades",
+      "Soft Drinks",
       "Lemon Boom",
-      "Orange lemonade 1 L",
+      "Orange Soda 1 L",
       "PET",
       39,
       0.64
     ],
     [
-      "Lemonades",
+      "Soft Drinks",
       "Lemon Boom",
-      "Tarragon lemonade 1 L",
+      "Tarragon Soda 1 L",
       "PET",
       40,
       0.65
     ],
     [
-      "Lemonades",
+      "Soft Drinks",
       "Lemon Boom",
-      "Cola lemonade 0.5 L",
+      "Cola 0.5 L",
       "PET",
       27,
       0.62
     ],
     [
-      "Iced tea",
+      "Iced Tea",
       "Ice Tea Garden",
-      "Peach tea 0.5 L",
+      "Peach Tea 0.5 L",
       "PET",
       29,
       0.61
     ],
     [
-      "Iced tea",
+      "Iced Tea",
       "Ice Tea Garden",
-      "Lemon tea 0.5 L",
+      "Lemon Tea 0.5 L",
       "PET",
       29,
       0.61
     ],
     [
-      "Iced tea",
+      "Iced Tea",
       "Ice Tea Garden",
-      "Mango tea 0.5 L",
+      "Mango Tea 0.5 L",
       "PET",
       31,
       0.63
     ],
     [
-      "Energy drinks",
+      "Energy Drinks",
       "Energy Pulse",
       "Energy Original 0.5 L",
       "Can",
@@ -359,7 +359,7 @@
       0.67
     ],
     [
-      "Energy drinks",
+      "Energy Drinks",
       "Energy Pulse",
       "Energy Zero 0.5 L",
       "Can",
@@ -367,7 +367,7 @@
       0.70
     ],
     [
-      "Energy drinks",
+      "Energy Drinks",
       "Energy Pulse",
       "Energy Mango 0.5 L",
       "Can",
@@ -375,25 +375,25 @@
       0.69
     ],
     [
-      "Kids drinks",
+      "Kids Drinks",
       "Happy Kids",
-      "Apple drink 0.2 L",
+      "Apple Drink 0.2 L",
       "Tetra Pak",
       18,
       0.66
     ],
     [
-      "Kids drinks",
+      "Kids Drinks",
       "Happy Kids",
-      "Multifruit drink 0.2 L",
+      "Multifruit Drink 0.2 L",
       "Tetra Pak",
       19,
       0.67
     ],
     [
-      "Kids drinks",
+      "Kids Drinks",
       "Happy Kids",
-      "Banana and strawberry drink 0.2 L",
+      "Banana & Strawberry Drink 0.2 L",
       "Tetra Pak",
       20,
       0.68
@@ -401,7 +401,7 @@
     [
       "Water",
       "Aqua North",
-      "Mineral water 1 L",
+      "Mineral Water 1 L",
       "Glass",
       36,
       0.61
@@ -409,7 +409,7 @@
     [
       "Juices",
       "Green Valley",
-      "Pomegranate juice 1 L",
+      "Pomegranate Juice 1 L",
       "Tetra Pak",
       62,
       0.72
@@ -417,29 +417,29 @@
     [
       "Juices",
       "Green Valley",
-      "Cherry juice 1 L",
+      "Cherry Juice 1 L",
       "Tetra Pak",
       53,
       0.69
     ],
     [
-      "Lemonades",
+      "Soft Drinks",
       "Lemon Boom",
-      "Ginger lemonade 0.33 L",
+      "Ginger Soda 0.33 L",
       "Glass",
       34,
       0.66
     ],
     [
-      "Iced tea",
+      "Iced Tea",
       "Ice Tea Garden",
-      "Green tea 1 L",
+      "Green Tea 1 L",
       "PET",
       43,
       0.64
     ],
     [
-      "Energy drinks",
+      "Energy Drinks",
       "Energy Pulse",
       "Energy Coffee 0.33 L",
       "Can",
@@ -447,9 +447,9 @@
       0.71
     ],
     [
-      "Kids drinks",
+      "Kids Drinks",
       "Happy Kids",
-      "Pear drink 0.2 L",
+      "Pear Drink 0.2 L",
       "Tetra Pak",
       19,
       0.67
@@ -457,7 +457,7 @@
     [
       "Water",
       "Aqua North",
-      "Sports water 0.75 L",
+      "Sports Water 0.75 L",
       "PET",
       26,
       0.60
@@ -465,7 +465,7 @@
     [
       "Juices",
       "Fresh Day",
-      "Berry smoothie 0.3 L",
+      "Berry Smoothie 0.3 L",
       "PET",
       49,
       0.72
@@ -473,29 +473,29 @@
     [
       "Juices",
       "Fresh Day",
-      "Mango smoothie 0.3 L",
+      "Mango Smoothie 0.3 L",
       "PET",
       51,
       0.73
     ],
     [
-      "Lemonades",
+      "Soft Drinks",
       "Lemon Boom",
-      "Classic tonic 0.33 L",
+      "Classic Tonic 0.33 L",
       "Can",
       32,
       0.65
     ],
     [
-      "Iced tea",
+      "Iced Tea",
       "Ice Tea Garden",
-      "Raspberry tea 0.5 L",
+      "Raspberry Tea 0.5 L",
       "PET",
       32,
       0.64
     ],
     [
-      "Energy drinks",
+      "Energy Drinks",
       "Energy Pulse",
       "Energy Citrus 0.5 L",
       "Can",
@@ -507,10 +507,10 @@
   const categoryColors = {
     "Juices": "#f2c811",
     "Water": "#2f80ed",
-    "Lemonades": "#00a36c",
-    "Iced tea": "#8a5bd7",
-    "Energy drinks": "#ed7d31",
-    "Kids drinks": "#6f7683"
+    "Soft Drinks": "#00a36c",
+    "Iced Tea": "#8a5bd7",
+    "Energy Drinks": "#ed7d31",
+    "Kids Drinks": "#6f7683"
   };
 
   const state = {
@@ -602,7 +602,7 @@
 
           const seasonalFactor =
             category === "Water" ||
-            category === "Lemonades"
+            category === "Soft Drinks"
               ? [
                   0.85,
                   0.88,
@@ -632,7 +632,7 @@
                     1.17,
                     1.24
                   ][month]
-                : category === "Energy drinks"
+                : category === "Energy Drinks"
                   ? [
                       1.00,
                       1.01,
@@ -668,13 +668,13 @@
                     : 0.88;
 
           const channelFactor =
-            channel === "National chains"
+            channel === "National Retail Chains"
               ? 1.24
               : channel === "Distributors"
                 ? 1.10
                 : channel === "HoReCa"
                   ? 0.82
-                  : channel === "Online stores"
+                  : channel === "Online Stores"
                     ? 0.72
                     : 1;
 
@@ -700,13 +700,13 @@
             );
 
           const discount =
-            channel === "National chains"
+            channel === "National Retail Chains"
               ? 0.09 +
                 (i % 5) * 0.005
               : channel === "Distributors"
                 ? 0.05 +
                   (i % 4) * 0.004
-                : channel === "Regional chains"
+                : channel === "Regional Retail Chains"
                   ? 0.035 +
                     (i % 3) * 0.004
                   : 0.015 +
@@ -730,7 +730,7 @@
 
           if (
             year === 2026 &&
-            category === "Energy drinks"
+            category === "Energy Drinks"
           ) {
             costRate += 0.045;
           }
@@ -743,7 +743,7 @@
           }
 
           if (
-            channel === "National chains"
+            channel === "National Retail Chains"
           ) {
             costRate += 0.018;
           }
@@ -853,7 +853,7 @@
       data.map((row) => `
         <tr>
           <td>
-            ${row.date.toLocaleDateString("en-US")}
+            ${row.date.toLocaleDateString("en-GB")}
           </td>
           <td>${row.year}</td>
           <td>${row.quarter}</td>
@@ -870,12 +870,20 @@
           <td>${row.product}</td>
           <td>${row.packaging}</td>
           <td>${formatNumber(row.quantity)}</td>
-          <td>${row.unitPrice.toFixed(2)}</td>
+          <td>
+            ${row.unitPrice.toFixed(2)}
+          </td>
           <td>${formatNumber(row.revenue)}</td>
           <td>${formatNumber(row.cost)}</td>
-          <td>${formatNumber(row.grossProfit)}</td>
-          <td>${formatPercent(row.margin * 100)}</td>
-          <td>${formatPercent(row.discount * 100)}</td>
+          <td>
+            ${formatNumber(row.grossProfit)}
+          </td>
+          <td>
+            ${formatPercent(row.margin * 100)}
+          </td>
+          <td>
+            ${formatPercent(row.discount * 100)}
+          </td>
           <td>${formatNumber(row.plan)}</td>
           <td>
             ${formatPercent(
@@ -1086,7 +1094,8 @@
 
     return formatMoneyShort(value);
   }
-    function compareToPreviousYear(
+
+  function compareToPreviousYear(
     rows,
     field
   ) {
@@ -1217,35 +1226,35 @@
     $("case6-kpi-revenue-change")
       .textContent =
         revenueChange === null
-          ? "no comparison data"
+          ? "no comparison baseline"
           : `${revenueChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(revenueChange)
-            )} versus previous year`;
+            )} vs previous year`;
 
     $("case6-kpi-profit-change")
       .textContent =
         profitChange === null
-          ? "no comparison data"
+          ? "no comparison baseline"
           : `${profitChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(profitChange)
-            )} versus previous year`;
+            )} vs previous year`;
 
     $("case6-kpi-margin-change")
       .textContent =
         marginChange === null
-          ? "no comparison data"
+          ? "no comparison baseline"
           : `${marginChange >= 0 ? "▲" : "▼"} ${formatPercent(
               Math.abs(marginChange),
               2
-            )} versus previous year`;
+            )} vs previous year`;
 
     $("case6-kpi-plan-status")
       .textContent =
         summary.planCompletion >= 1
-          ? "Plan achieved"
+          ? "plan achieved"
           : summary.planCompletion >= 0.9
-            ? "Needs attention"
-            : "Critical variance";
+            ? "needs attention"
+            : "critical variance";
   }
 
   function renderExecutiveSummary(rows) {
@@ -1303,7 +1312,7 @@
 
     const changeText =
       revenueChange === null
-        ? "There is not enough data in the selected view to compare it with the previous year."
+        ? "There is not enough data in the selected view to compare performance with the previous year."
         : `Revenue ${
             revenueChange >= 0
               ? "increased"
@@ -1322,9 +1331,9 @@
 
     $("case6-executive-text")
       .textContent =
-        `${changeText} The largest sales contribution comes from “${topCategory}”, while “${topRegion}” is the leading region. Current margin is ${formatPercent(
+        `${changeText} The strongest sales contribution comes from the ${topCategory} category, while ${topRegion} is the leading region. Current gross margin is ${formatPercent(
           summary.margin * 100
-        )}, and plan achievement is ${formatPercent(
+        )}, with plan achievement at ${formatPercent(
           summary.planCompletion * 100
         )}.`;
   }
@@ -1336,49 +1345,53 @@
     const groups =
       groupBy(sourceRows, "year");
 
-    const values = [2024, 2025, 2026].map((year) => {
-      const list = groups.get(year) || [];
+    const values =
+      [2024, 2025, 2026].map((year) => {
+        const list =
+          groups.get(year) || [];
 
-      return {
-        year,
-        value: metricValue(list)
-      };
-    });
+        return {
+          year,
+          value: metricValue(list)
+        };
+      });
 
     const max = Math.max(
       ...values.map((item) => item.value),
       1
     );
 
-    yearChart.innerHTML = values
-      .map((item) => {
-        const height = Math.max(
-          8,
-          (item.value / max) * 145
-        );
+    yearChart.innerHTML =
+      values
+        .map((item) => {
+          const height =
+            Math.max(
+              8,
+              (item.value / max) * 145
+            );
 
-        const active =
-          state.filters.year === String(item.year)
-            ? "active"
-            : "";
+          const active =
+            state.filters.year ===
+            String(item.year)
+              ? "active"
+              : "";
 
-        return `
-          <div
-            class="case6-year-column ${active}"
-            data-case6-year="${item.year}"
-          >
-            <b>${metricLabel(item.value)}</b>
-            <i style="height: ${height}px"></i>
-            <span>${item.year}</span>
-          </div>
-        `;
-      })
-      .join("");
+          return `
+            <div
+              class="case6-year-column ${active}"
+              data-case6-year="${item.year}"
+            >
+              <b>${metricLabel(item.value)}</b>
+              <i style="height: ${height}px"></i>
+              <span>${item.year}</span>
+            </div>
+          `;
+        })
+        .join("");
 
     $$("[data-case6-year]").forEach((node) => {
       node.addEventListener("click", () => {
-        const year =
-          node.dataset.case6Year;
+        const year = node.dataset.case6Year;
 
         state.filters.year =
           state.filters.year === year
@@ -1409,10 +1422,7 @@
       summary.plan
         ? Math.min(
             120,
-            (
-              summary.revenue /
-              summary.plan
-            ) * 100
+            (summary.revenue / summary.plan) * 100
           )
         : 0;
 
@@ -1420,10 +1430,7 @@
       summary.plan
         ? Math.min(
             120,
-            (
-              forecast /
-              summary.plan
-            ) * 100
+            (forecast / summary.plan) * 100
           )
         : 0;
 
@@ -1444,17 +1451,11 @@
 
     $("case6-plan-warning").textContent =
       forecastPercent >= 100
-        ? `✓ At the current pace, the forecast exceeds the plan by ${formatMoney(
-            Math.max(
-              0,
-              forecast - summary.plan
-            )
+        ? `✓ At the current run rate, the forecast is expected to exceed plan by ${formatMoney(
+            Math.max(0, forecast - summary.plan)
           )}.`
-        : `⚠ At the current pace, the plan may fall short by ${formatMoney(
-            Math.max(
-              0,
-              summary.plan - forecast
-            )
+        : `⚠ At the current run rate, the plan may be missed by ${formatMoney(
+            Math.max(0, summary.plan - forecast)
           )}.`;
   }
 
@@ -1598,10 +1599,7 @@
           const width =
             Math.max(
               4,
-              (
-                item.value /
-                max
-              ) * 100
+              (item.value / max) * 100
             );
 
           return `
@@ -1656,8 +1654,7 @@
       ).entries()
     ]
       .map(([name, list]) => {
-        const summary =
-          summarize(list);
+        const summary = summarize(list);
 
         return {
           name,
@@ -1762,10 +1759,7 @@
           const width =
             Math.max(
               4,
-              (
-                item.value /
-                max
-              ) * 100
+              (item.value / max) * 100
             );
 
           return `
@@ -1787,7 +1781,8 @@
         })
         .join("");
   }
-    function renderAlerts(rows) {
+
+  function renderAlerts(rows) {
     const summary = summarize(rows);
 
     const byRegion = [
@@ -1852,8 +1847,8 @@
 
         text:
           summary.planCompletion < 1
-            ? "The current view is below the planned level."
-            : "The plan has been achieved, but margin should still be monitored."
+            ? "The current selection is below the planned level."
+            : "Plan is on track, but margin performance should still be monitored."
       },
       {
         type:
@@ -1868,7 +1863,7 @@
           }: lowest plan achievement`,
 
         text:
-          `Result — ${formatPercent(
+          `Current result: ${formatPercent(
             (
               byRegion[0]?.summary
                 .planCompletion || 0
@@ -1891,7 +1886,7 @@
           }: lowest margin`,
 
         text:
-          `Margin — ${formatPercent(
+          `Current margin: ${formatPercent(
             (
               byManager[0]?.summary.margin ||
               0
@@ -1908,7 +1903,7 @@
           }: sales leader`,
 
         text:
-          `Revenue — ${formatMoneyShort(
+          `Revenue: ${formatMoneyShort(
             byCategory[0]?.summary.revenue ||
             0
           )}.`
@@ -1965,7 +1960,7 @@
         </strong>
 
         <span>
-          Main factors driving the result
+          Key factors driving the result
         </span>
       </div>
 
@@ -1980,7 +1975,7 @@
             </strong>
 
             <span>
-              Channel revenue —
+              Channel revenue:
               ${formatMoneyShort(
                 branch.revenue
               )}
@@ -2009,7 +2004,7 @@
           <tr>
             <td>
               ${row.date.toLocaleDateString(
-                "en-US"
+                "en-GB"
               )}
             </td>
 
@@ -2278,12 +2273,12 @@
     loader.classList.add("active");
 
     const messages = [
-      "Connecting to ERP and checking the data gateway…",
+      "Connecting to ERP and validating the data gateway…",
       "Loading sales, customer and product tables…",
       "Cleaning and transforming data in Power Query…",
       "Refreshing data model relationships…",
       "Recalculating DAX measures and KPIs…",
-      "Refreshing visualizations and cross-filtering…"
+      "Refreshing visuals and cross-filtering…"
     ];
 
     for (
@@ -2329,7 +2324,8 @@
     buildButton.textContent =
       "↻ Refresh model again";
   }
-    [
+
+  [
     [filterYear, "year"],
     [filterQuarter, "quarter"],
     [filterRegion, "region"],
@@ -2375,7 +2371,7 @@
 
       const titles = {
         overview:
-          "Management overview",
+          "Executive overview",
 
         sales:
           "Sales analysis",
@@ -2398,7 +2394,7 @@
           titles[
             button.dataset.case6Page
           ] ||
-          "Management overview";
+          "Executive overview";
     });
   });
 

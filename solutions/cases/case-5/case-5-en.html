@@ -1,16 +1,15 @@
 <section class="case5" id="components-planning-case">
   <div class="case5-header">
-    <div class="case5-kicker">Real case study #5</div>
+    <div class="case5-kicker">Real case #5</div>
 
-    <h2>Automated component requirements calculation</h2>
+    <h2>Automated component requirements planning</h2>
 
     <p class="case5-subtitle">
-      The sales department creates orders for finished machines and production
-      equipment. Each product has its own bill of materials (BOM), containing
-      component codes and the required quantity per unit. The system converts
-      finished-product orders into total component requirements, compares them
-      with current warehouse stock and calculates the exact quantity that needs
-      to be purchased.
+      The sales team creates orders for finished machines and production equipment.
+      Each product has its own BOM defining the components and quantities required
+      to build one unit. The system automatically converts finished-goods orders
+      into total component demand, compares it with current stock levels
+      and calculates exactly what still needs to be purchased.
     </p>
   </div>
 
@@ -18,81 +17,70 @@
     <article class="case5-info-card case5-problem">
       <span class="case5-info-label">Problem</span>
 
-      <h3>Manual calculations take too much time</h3>
+      <h3>
+        Manual requirements planning quickly turns into
+        a complex reconciliation exercise
+      </h3>
 
       <p>
-        A purchasing specialist has to open multiple specifications, multiply
-        component quantities by the number of ordered machines, consolidate
-        identical parts and compare the result with warehouse stock. This
-        creates a risk of calculation errors, shortages, excessive purchases
-        and production delays.
+        Before automation, the buyer has to review each finished-goods order,
+        open the relevant BOM, identify how many units of every component
+        are required for one finished product and multiply those quantities
+        by the actual order volume.
+      </p>
+
+      <p>
+        If the same component is used in several different products,
+        the requirements have to be consolidated into a single total.
+        Stock on hand, reservations and the actual shortage then need
+        to be checked separately.
+      </p>
+
+      <p>
+        Whenever the ordered quantity changes or a product specification
+        is updated, the entire calculation has to be repeated.
+        This makes it easy to miss a component, count the same item twice,
+        purchase too much or discover a shortage only when production
+        is about to start.
       </p>
     </article>
 
     <article class="case5-info-card case5-solution">
       <span class="case5-info-label">Solution</span>
 
-      <h3>Automated purchasing planning</h3>
+      <h3>
+        The system automatically converts orders
+        into exact purchasing requirements
+      </h3>
 
       <p>
-        The user enters the number of ordered machines and the available stock.
-        The system expands each product BOM, consolidates requirements by
-        component code and calculates the exact shortage that must be purchased.
+        The user enters the quantities of ordered machines and the current
+        stock levels. The system automatically expands the BOM for every product
+        and calculates the full component requirement.
+      </p>
+
+      <p>
+        Identical components used across different products are consolidated
+        into a single line. The system then compares total demand with available
+        inventory and calculates the actual shortage.
+      </p>
+
+      <p>
+        As a result, the buyer immediately sees exactly what needs to be purchased,
+        in what quantity, and which items are already fully covered by stock.
+        If order quantities or inventory levels change, a new calculation
+        can be generated again in just a few seconds.
       </p>
     </article>
   </div>
 
-  <div class="case5-calculate-area">
-    <button
-      class="case5-calculate-button"
-      id="case5-calculate-button"
-      type="button"
-    >
-      ⚙ Calculate component requirements
-    </button>
-
-    <div class="case5-loader" id="case5-loader">
-      <span class="case5-spinner"></span>
-
-      <span id="case5-loader-text">
-        Analysing orders and BOM specifications...
-      </span>
-    </div>
-  </div>
-
   <div class="case5-results" id="case5-results">
-    <div class="case5-summary">
-      <article class="case5-summary-card">
-        <span>Machines ordered</span>
-        <strong id="case5-total-machines">0</strong>
-        <small>all product types</small>
-      </article>
-
-      <article class="case5-summary-card">
-        <span>Total requirement</span>
-        <strong id="case5-total-need">0</strong>
-        <small>components required</small>
-      </article>
-
-      <article class="case5-summary-card">
-        <span>Covered by stock</span>
-        <strong id="case5-total-stock">0</strong>
-        <small>available units used</small>
-      </article>
-
-      <article class="case5-summary-card">
-        <span>To be purchased</span>
-        <strong id="case5-total-buy">0</strong>
-        <small>missing units</small>
-      </article>
-    </div>
-
     <div class="case5-grid">
       <section class="case5-orders-panel">
         <div class="case5-panel-head">
           <div>
-            <strong>Orders from the sales department</strong>
-            <span>Change the number of machines</span>
+            <strong>Sales orders</strong>
+            <span>Adjust the number of machines</span>
           </div>
         </div>
 
@@ -137,7 +125,7 @@
             <strong>Marking line</strong>
 
             <small>
-              Product identification and marking
+              Product marking for finished goods
             </small>
 
             <input
@@ -153,7 +141,7 @@
           <strong>Calculation logic</strong>
 
           <span>
-            Quantity to purchase = total requirement − available stock,
+            To purchase = total requirement − stock on hand,
             but never less than zero
           </span>
         </div>
@@ -162,8 +150,10 @@
       <section class="case5-parts-panel">
         <div class="case5-panel-head">
           <div>
-            <strong>Consolidated component requirements</strong>
-            <span>Warehouse stock can be changed manually</span>
+            <strong>Components and stock levels</strong>
+            <span>
+              Stock quantities can be adjusted manually before calculation
+            </span>
           </div>
         </div>
 
@@ -174,36 +164,83 @@
       </section>
     </div>
 
+    <div class="case5-calculate-area">
+      <button
+        class="case5-calculate-button"
+        id="case5-calculate-button"
+        type="button"
+      >
+        ⚙ Calculate component requirements
+      </button>
+
+      <div
+        class="case5-loader"
+        id="case5-loader"
+      >
+        <span class="case5-spinner"></span>
+
+        <span id="case5-loader-text">
+          Analyzing orders and BOM specifications…
+        </span>
+      </div>
+    </div>
+
+    <div class="case5-summary">
+      <article class="case5-summary-card">
+        <span>Machines ordered</span>
+        <strong id="case5-total-machines">18</strong>
+        <small>across all types</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>Total requirement</span>
+        <strong id="case5-total-need">0</strong>
+        <small>components</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>Covered by stock</span>
+        <strong id="case5-total-stock">0</strong>
+        <small>units</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>To purchase</span>
+        <strong id="case5-total-buy">0</strong>
+        <small>units</small>
+      </article>
+    </div>
+
     <div class="case5-flow">
       <article>
         <span>1</span>
-        <strong>Order</strong>
-        <small>finished-machine quantities</small>
+        <strong>Orders</strong>
+        <small>finished machine quantities</small>
       </article>
 
       <article>
         <span>2</span>
         <strong>BOM expansion</strong>
-        <small>components per product</small>
+        <small>component structure of each product</small>
       </article>
 
       <article>
         <span>3</span>
         <strong>Stock check</strong>
-        <small>current warehouse balance</small>
+        <small>current inventory levels</small>
       </article>
 
       <article>
         <span>4</span>
         <strong>Purchase list</strong>
-        <small>exact component shortage</small>
+        <small>exact component shortages</small>
       </article>
     </div>
   </div>
 
   <div class="case5-cta">
     <a href="contacts-en.html">
-      I want to automate purchasing planning
+      I want to automate procurement planning
     </a>
   </div>
 </section>

@@ -2112,11 +2112,12 @@ executeCaseScript(
 
 stageBody.innerHTML = `
   <div class="case-detail-stage__error">
-    ${finderUi.loadError}
+    ${finderUi.loadError}<br><br>
+    ${escapeHtml(error.message)}
   </div>
 `;
 
-      console.error(error);
+console.error(error);
     }
   }
 

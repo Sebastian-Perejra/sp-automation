@@ -839,15 +839,24 @@
         `${percent}%`
       );
       
-      day.innerHTML = `
-        <span class="capacity-day-number">
-          ${date.getDate()}
-        </span>
-      
-        <span class="capacity-day-percent">
-          ${percent}%
-        </span>
-      `;
+      const monthShort =
+      date.toLocaleDateString("uk-UA", {
+        month: "short"
+      });
+    
+    day.innerHTML = `
+      <span class="capacity-day-number">
+        ${date.getDate()}
+      </span>
+    
+      <span class="capacity-day-month">
+        ${monthShort}
+      </span>
+    
+      <span class="capacity-day-percent">
+        ${percent}%
+      </span>
+    `;
 
       day.dataset.load =
         `${capacityFormatDate(date)} • ` +

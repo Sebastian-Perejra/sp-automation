@@ -4589,3 +4589,81 @@ box-shadow:
 .case-finder__empty p {
   font-size: 14px;
 }
+
+.case-result-card__button {
+  min-height: 360px;
+  padding: 28px;
+}
+
+.case-result-card__number {
+  font-size: 13px;
+}
+
+.case-result-card__badge {
+  padding: 7px 9px;
+  font-size: 9px;
+}
+
+.case-result-card__type {
+  margin-top: 28px;
+  font-size: 10px;
+}
+
+.case-result-card h3 {
+  margin-top: 14px;
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1.12;
+}
+
+.case-result-card p {
+  margin-top: 18px;
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.case-result-card__why {
+  padding-top: 28px;
+}
+
+.case-result-card__why > span {
+  margin-bottom: 10px;
+  font-size: 9px;
+}
+
+.case-result-card__why > div {
+  gap: 8px;
+}
+
+.case-result-card__why i {
+  padding: 7px 9px;
+  font-size: 9px;
+}
+
+.case-result-card__footer {
+  margin-top: 22px;
+  padding-top: 18px;
+}
+
+.case-result-card__footer span {
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.case-result-card__footer strong {
+  font-size: 10px;
+}
+
+@media (max-width: 760px) {
+  .case-result-card__button {
+    min-height: 320px;
+    padding: 22px;
+  }
+
+  .case-result-card h3 {
+    font-size: 25px;
+  }
+
+  .case-result-card p {
+    font-size: 13px;
+  }
+}

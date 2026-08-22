@@ -4213,14 +4213,13 @@ box-shadow:
 .solutions-system__lines path.is-active {
   stroke: rgba(166,255,72,.95);
   stroke-width: 2;
-  stroke-dasharray: 18 14;
+  stroke-dasharray: 10 8;
   stroke-dashoffset: 0;
   filter:
     drop-shadow(0 0 4px rgba(166,255,72,.65))
     drop-shadow(0 0 10px rgba(166,255,72,.28));
-  animation:
-    solutionsPathFlow 1.15s linear infinite;
-}
+    animation:
+    solutionsPathFlow .9s linear infinite;}
 
 .solutions-system__lines path.is-muted {
   opacity: .22;
@@ -4233,7 +4232,7 @@ box-shadow:
   }
 
   to {
-    stroke-dashoffset: -32;
+    stroke-dashoffset: -18;
   }
 }
 

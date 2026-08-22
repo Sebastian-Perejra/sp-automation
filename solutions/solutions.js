@@ -1591,7 +1591,7 @@ const conceptsNode =
       reasons:
         Array.from(reasons)
           .filter(Boolean)
-          .slice(0, 6),
+          .slice(0, 7),
       matchedConcepts:
         matchedConcepts
           .sort(
@@ -1614,7 +1614,7 @@ const conceptsNode =
             b.item.priority -
             a.item.priority
         )
-        .slice(0, 6)
+        .slice(0, 7)
         .map(indexed => ({
           item:
             indexed.item,

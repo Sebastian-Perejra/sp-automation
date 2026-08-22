@@ -16,6 +16,96 @@
       line-height: 1.8;
     }
 
+.case2-problem-solution {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.case2-info-card {
+  min-width: 0;
+  padding: 24px 24px 26px;
+  border-radius: 18px;
+}
+
+.case2-info-label {
+  display: inline-flex;
+  min-height: 24px;
+  padding: 0 10px;
+  align-items: center;
+  border-radius: 999px;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.case2-info-card h3 {
+  margin: 14px 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.case2-info-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+  opacity: 1;
+}
+
+.case2-info-card p + p {
+  margin-top: 12px;
+}
+
+.case2-problem {
+  border: 1px solid #efc8c5;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 246, 245, .98),
+      rgba(255, 250, 249, .98)
+    );
+}
+
+.case2-problem .case2-info-label {
+  background: #f7d9d7;
+  color: #a5423e;
+}
+
+.case2-problem h3 {
+  color: #a33e3a;
+}
+
+.case2-problem p {
+  color: #704f4c;
+}
+
+.case2-solution {
+  border: 1px solid #c9ded0;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(243, 250, 245, .98),
+      rgba(249, 252, 250, .98)
+    );
+}
+
+.case2-solution .case2-info-label {
+  background: #dcecdf;
+  color: #356347;
+}
+
+.case2-solution h3 {
+  color: #315c42;
+}
+
+.case2-solution p {
+  color: #4d6556;
+}
+
 .demo-panel-head {
       padding: 16px 18px;
       border-bottom: 1px solid #e7e0d8;
@@ -445,6 +535,25 @@
         border-radius: 18px;
       }
 
+      .case2-problem-solution {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 22px;
+      }
+      
+      .case2-info-card {
+        padding: 20px 18px 22px;
+      }
+      
+      .case2-info-card h3 {
+        font-size: 15px;
+      }
+      
+      .case2-info-card p {
+        font-size: 12px;
+        line-height: 1.7;
+      }
+          
       .pipeline-body {
         grid-template-columns: 1fr;
       }

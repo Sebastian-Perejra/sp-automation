@@ -62,7 +62,7 @@ const case5Parts = {
   },
 
   M007: {
-    name: "Печатающий модуль",
+    name: "Печатный модуль",
     stock: 1
   },
 
@@ -319,7 +319,7 @@ async function case5RunCalculation() {
   case5Loader.classList.add("active");
 
   case5LoaderText.textContent =
-    "Анализ заказов отдела продаж…";
+    "Анализ заказов от отдела продаж…";
 
   await case5Sleep(450);
 

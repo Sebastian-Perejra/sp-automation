@@ -1,35 +1,74 @@
-<section
-  class="capacity-case"
-  id="production-capacity-case"
->
-  <div class="case-demo-kicker">
-    Real case study #4
-  </div>
+<section class="capacity-case" id="production-capacity-case">
+  <div class="case-demo-kicker">Real case #4</div>
 
-  <h2>
-    Production Capacity and Order Scheduling
-  </h2>
+  <h2>Production capacity and order delivery planning</h2>
 
   <p class="case-demo-subtitle">
-    The system receives a list of incoming orders,
-    takes into account the assigned production line
-    and its daily capacity, then automatically
-    distributes the required volume across calendar
-    days and calculates the actual completion date
-    for each order. All data shown below is for
-    demonstration purposes.
+    The system receives a list of incoming orders, takes into account the assigned
+    production line and its daily capacity, then automatically distributes the workload
+    across calendar days and calculates the actual completion date for each order.
+    All data below is for demonstration purposes only.
   </p>
+
+  <div class="capacity-problem-solution">
+    <article class="capacity-story-card capacity-story-card--problem">
+      <span class="capacity-story-label">
+        PAIN
+      </span>
+
+      <h3>
+        Production planning relied on manual checks and the dispatcher’s experience
+      </h3>
+
+      <p>
+        When a new order arrived, it was necessary to manually check
+        which production line could handle it, how many orders were already in the queue,
+        how many units could realistically be produced per day, and whether
+        the new order would consume capacity already promised to another customer.
+      </p>
+
+      <ul>
+        <li>orders were reviewed one by one;</li>
+        <li>line utilization was checked manually in Excel or production plans;</li>
+        <li>completion dates were often estimated approximately;</li>
+        <li>an urgent order required recalculating the queue again;</li>
+        <li>the plan had to be checked several times to avoid overlaps;</li>
+        <li>an error in one calculation could shift the deadlines of subsequent orders.</li>
+      </ul>
+    </article>
+
+    <article class="capacity-story-card capacity-story-card--solution">
+      <span class="capacity-story-label">
+        SOLUTION
+      </span>
+
+      <h3>
+        The system automatically allocates orders across available capacity
+      </h3>
+
+      <p>
+        Instead of manually reviewing the queue, the system takes all orders,
+        the productivity of each production line and the priority rules,
+        then automatically distributes the workload across calendar days.
+      </p>
+
+      <ul>
+        <li>the actual utilization of each production line is visible;</li>
+        <li>completion dates are calculated automatically;</li>
+        <li>overloaded days are immediately visible;</li>
+        <li>priority orders can be inserted without manual recalculation;</li>
+        <li>when capacity changes, the entire plan is rebuilt automatically;</li>
+        <li>the planner sees a specific production calendar instead of assumptions.</li>
+      </ul>
+    </article>
+  </div>
 
   <div class="capacity-settings">
     <div class="capacity-settings-head">
       <div>
-        <strong>
-          Production Capacity Settings
-        </strong>
-
+        <strong>Production capacity settings</strong>
         <span>
-          Adjust line capacity and recalculate
-          the production plan
+          Change line productivity and recalculate the production plan
         </span>
       </div>
 
@@ -39,13 +78,10 @@
     </div>
 
     <div class="capacity-lines">
-      <article
-        class="capacity-line-card"
-        data-line="line1"
-      >
+      <article class="capacity-line-card" data-line="line1">
         <div class="capacity-line-name">
           <span>Line 1</span>
-          <small>Steel Pipe</small>
+          <small>Steel pipe</small>
         </div>
 
         <div class="capacity-control">
@@ -54,17 +90,14 @@
             type="button"
             data-capacity-action="minus"
             data-capacity-line="line1"
-            aria-label="Decrease Line 1 capacity"
+            aria-label="Decrease capacity of Line 1"
           >
             −
           </button>
 
           <div class="capacity-value">
-            <strong id="capacity-line1">
-              250
-            </strong>
-
-            <span>pcs/day</span>
+            <strong id="capacity-line1">250</strong>
+            <span>units/day</span>
           </div>
 
           <button
@@ -72,20 +105,17 @@
             type="button"
             data-capacity-action="plus"
             data-capacity-line="line1"
-            aria-label="Increase Line 1 capacity"
+            aria-label="Increase capacity of Line 1"
           >
             +
           </button>
         </div>
       </article>
 
-      <article
-        class="capacity-line-card"
-        data-line="line2"
-      >
+      <article class="capacity-line-card" data-line="line2">
         <div class="capacity-line-name">
           <span>Line 2</span>
-          <small>Steel Corner</small>
+          <small>Steel angle</small>
         </div>
 
         <div class="capacity-control">
@@ -94,17 +124,14 @@
             type="button"
             data-capacity-action="minus"
             data-capacity-line="line2"
-            aria-label="Decrease Line 2 capacity"
+            aria-label="Decrease capacity of Line 2"
           >
             −
           </button>
 
           <div class="capacity-value">
-            <strong id="capacity-line2">
-              400
-            </strong>
-
-            <span>pcs/day</span>
+            <strong id="capacity-line2">400</strong>
+            <span>units/day</span>
           </div>
 
           <button
@@ -112,19 +139,17 @@
             type="button"
             data-capacity-action="plus"
             data-capacity-line="line2"
-            aria-label="Increase Line 2 capacity"
+            aria-label="Increase capacity of Line 2"
           >
             +
           </button>
         </div>
       </article>
-            <article
-        class="capacity-line-card"
-        data-line="line3"
-      >
+
+      <article class="capacity-line-card" data-line="line3">
         <div class="capacity-line-name">
           <span>Line 3</span>
-          <small>Steel Profile</small>
+          <small>Steel profile</small>
         </div>
 
         <div class="capacity-control">
@@ -133,17 +158,14 @@
             type="button"
             data-capacity-action="minus"
             data-capacity-line="line3"
-            aria-label="Decrease Line 3 capacity"
+            aria-label="Decrease capacity of Line 3"
           >
             −
           </button>
 
           <div class="capacity-value">
-            <strong id="capacity-line3">
-              600
-            </strong>
-
-            <span>pcs/day</span>
+            <strong id="capacity-line3">600</strong>
+            <span>units/day</span>
           </div>
 
           <button
@@ -151,7 +173,7 @@
             type="button"
             data-capacity-action="plus"
             data-capacity-line="line3"
-            aria-label="Increase Line 3 capacity"
+            aria-label="Increase capacity of Line 3"
           >
             +
           </button>
@@ -163,20 +185,12 @@
   <div class="capacity-orders-panel">
     <div class="capacity-panel-head">
       <div>
-        <strong>
-          Incoming Production Orders
-        </strong>
-
-        <span>
-          100 orders for demonstration
-        </span>
+        <strong>Incoming production orders</strong>
+        <span>100 demo orders</span>
       </div>
 
-      <div
-        class="capacity-orders-status"
-        id="capacity-orders-status"
-      >
-        Waiting for calculation
+      <div class="capacity-orders-status" id="capacity-orders-status">
+        Awaiting calculation
       </div>
     </div>
 
@@ -185,13 +199,13 @@
         <thead>
           <tr>
             <th>Order</th>
-            <th>Received Date</th>
-            <th>Product Code</th>
+            <th>Received</th>
+            <th>Product code</th>
             <th>Product</th>
             <th>Quantity</th>
             <th>Line</th>
-            <th>Requested Date</th>
-            <th>Scheduled Date</th>
+            <th>Requested date</th>
+            <th>Calculated date</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -200,15 +214,12 @@
       </table>
     </div>
   </div>
-    <div class="capacity-mode-panel">
-    <div>
-      <strong>
-        Planning Mode
-      </strong>
 
+  <div class="capacity-mode-panel">
+    <div>
+      <strong>Planning mode</strong>
       <span>
-        Select how the available production
-        capacity is allocated
+        Select how the available production capacity should be allocated
       </span>
     </div>
 
@@ -237,70 +248,100 @@
       id="capacity-calculate"
       type="button"
     >
-      ⚙ Calculate Production Plan
+      ⚙ Calculate production plan
     </button>
   </div>
 
-  <div
-    class="capacity-loader"
-    id="capacity-loader"
-  >
-    <span class="capacity-spinner"></span>
+  <div class="capacity-calculation" id="capacity-loader">
+    <div class="capacity-calculation__head">
+      <div class="capacity-calculation__pulse"></div>
 
-    <span>
-      Distributing orders across calendar
-      days and validating available capacity…
-    </span>
+      <div>
+        <strong id="capacity-calculation-title">
+          Preparing calculation
+        </strong>
+
+        <span id="capacity-calculation-text">
+          Analyzing production data
+        </span>
+      </div>
+
+      <div
+        class="capacity-calculation__percent"
+        id="capacity-calculation-percent"
+      >
+        0%
+      </div>
+    </div>
+
+    <div class="capacity-calculation__track">
+      <span id="capacity-calculation-progress"></span>
+    </div>
+
+    <div class="capacity-calculation__steps">
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="1"
+      >
+        <span>01</span>
+        <strong>Orders</strong>
+      </div>
+
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="2"
+      >
+        <span>02</span>
+        <strong>Capacity</strong>
+      </div>
+
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="3"
+      >
+        <span>03</span>
+        <strong>Calendar</strong>
+      </div>
+
+      <div
+        class="capacity-calculation__step"
+        data-capacity-step="4"
+      >
+        <span>04</span>
+        <strong>Deadlines</strong>
+      </div>
+    </div>
   </div>
 
-  <div
-    class="capacity-output"
-    id="capacity-output"
-  >
+  <div class="capacity-output" id="capacity-output">
     <div class="capacity-summary">
       <article class="capacity-summary-item">
         <span>Orders calculated</span>
-
-        <strong id="capacity-summary-orders">
-          0
-        </strong>
+        <strong id="capacity-summary-orders">0</strong>
       </article>
 
       <article class="capacity-summary-item">
-        <span>Total amount</span>
-
-        <strong id="capacity-summary-units">
-          0
-        </strong>
+        <span>Total volume</span>
+        <strong id="capacity-summary-units">0</strong>
       </article>
 
       <article class="capacity-summary-item">
-        <span>Orders delayed</span>
-
-        <strong id="capacity-summary-delayed">
-          0
-        </strong>
+        <span>Delayed orders</span>
+        <strong id="capacity-summary-delayed">0</strong>
       </article>
 
       <article class="capacity-summary-item">
-        <span>Final Plan Date</span>
-
-        <strong id="capacity-summary-last-date">
-          —
-        </strong>
+        <span>Last planned date</span>
+        <strong id="capacity-summary-last-date">—</strong>
       </article>
     </div>
-        <div class="capacity-dashboard-grid">
+
+    <div class="capacity-dashboard-grid">
       <article class="capacity-dashboard-card">
         <div class="capacity-dashboard-head">
           <div>
-            <strong>
-              Average Line Utilization
-            </strong>
-
-            <span>
-              Based on the calculated production plan
-            </span>
+            <strong>Average line utilization</strong>
+            <span>based on the calculated production plan</span>
           </div>
         </div>
 
@@ -308,10 +349,7 @@
           <div class="capacity-utilization-row">
             <div class="capacity-utilization-label">
               <span>Line 1</span>
-
-              <strong id="capacity-util-line1-text">
-                0%
-              </strong>
+              <strong id="capacity-util-line1-text">0%</strong>
             </div>
 
             <div class="capacity-utilization-track">
@@ -325,10 +363,7 @@
           <div class="capacity-utilization-row">
             <div class="capacity-utilization-label">
               <span>Line 2</span>
-
-              <strong id="capacity-util-line2-text">
-                0%
-              </strong>
+              <strong id="capacity-util-line2-text">0%</strong>
             </div>
 
             <div class="capacity-utilization-track">
@@ -342,10 +377,7 @@
           <div class="capacity-utilization-row">
             <div class="capacity-utilization-label">
               <span>Line 3</span>
-
-              <strong id="capacity-util-line3-text">
-                0%
-              </strong>
+              <strong id="capacity-util-line3-text">0%</strong>
             </div>
 
             <div class="capacity-utilization-track">
@@ -361,43 +393,74 @@
       <article class="capacity-dashboard-card">
         <div class="capacity-dashboard-head">
           <div>
-            <strong>
-              Daily Utilization
-            </strong>
-
-            <span>
-              Production capacity calendar
-            </span>
+            <strong>Daily utilization</strong>
+            <span>production capacity calendar</span>
           </div>
         </div>
 
-        <div
-          class="capacity-calendar"
-          id="capacity-calendar"
-        ></div>
+        <div class="capacity-calendar-shell">
+          <div class="capacity-calendar-nav">
+            <button
+              class="capacity-calendar-arrow"
+              id="capacity-calendar-prev"
+              type="button"
+              aria-label="Previous month"
+            >
+              ←
+            </button>
+
+            <strong id="capacity-calendar-title">
+              —
+            </strong>
+
+            <button
+              class="capacity-calendar-arrow"
+              id="capacity-calendar-next"
+              type="button"
+              aria-label="Next month"
+            >
+              →
+            </button>
+          </div>
+
+          <div class="capacity-calendar-weekdays">
+            <span>MON</span>
+            <span>TUE</span>
+            <span>WED</span>
+            <span>THU</span>
+            <span>FRI</span>
+            <span>SAT</span>
+            <span>SUN</span>
+          </div>
+
+          <div
+            class="capacity-calendar"
+            id="capacity-calendar"
+          ></div>
+        </div>
       </article>
     </div>
 
     <div class="capacity-legend">
       <span>
         <i class="capacity-legend-free"></i>
-        Available Capacity
+        0–59% · Capacity available
       </span>
 
       <span>
         <i class="capacity-legend-medium"></i>
-        Partial Utilization
+        60–89% · High utilization
       </span>
 
       <span>
         <i class="capacity-legend-full"></i>
-        Full Utilization
+        90–100% · Nearly / fully utilized
       </span>
     </div>
 
     <div class="demo-cta">
       <a href="contacts-en.html">
-        I Want to Automate Production Planning
+        I want to automate production planning
       </a>
     </div>
   </div>

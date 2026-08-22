@@ -1043,3 +1043,141 @@
 .capacity-day--empty::after {
   display: none;
 }
+
+.capacity-output.is-calculating {
+  opacity: .42;
+  filter: saturate(.7);
+  pointer-events: none;
+  transition:
+    opacity .25s ease,
+    filter .25s ease;
+}
+
+.capacity-output.is-revealed {
+  animation: capacityResultReveal .8s ease both;
+}
+
+.capacity-output.is-revealed
+.capacity-summary-item {
+  animation: capacityKpiReveal .55s ease both;
+}
+
+.capacity-output.is-revealed
+.capacity-summary-item:nth-child(1) {
+  animation-delay: .05s;
+}
+
+.capacity-output.is-revealed
+.capacity-summary-item:nth-child(2) {
+  animation-delay: .12s;
+}
+
+.capacity-output.is-revealed
+.capacity-summary-item:nth-child(3) {
+  animation-delay: .19s;
+}
+
+.capacity-output.is-revealed
+.capacity-summary-item:nth-child(4) {
+  animation-delay: .26s;
+}
+
+.capacity-output.is-revealed
+.capacity-utilization-fill {
+  animation: capacityBarGlow .8s ease both;
+}
+
+.capacity-output.is-revealed
+.capacity-calendar {
+  animation: capacityCalendarReveal .65s ease both;
+}
+
+.capacity-output.is-revealed
+.capacity-day {
+  animation: capacityDayPop .35s ease both;
+}
+
+.capacity-output.is-revealed
+.capacity-day:nth-child(3n + 1) {
+  animation-delay: .05s;
+}
+
+.capacity-output.is-revealed
+.capacity-day:nth-child(3n + 2) {
+  animation-delay: .1s;
+}
+
+.capacity-output.is-revealed
+.capacity-day:nth-child(3n) {
+  animation-delay: .15s;
+}
+
+@keyframes capacityResultReveal {
+  0% {
+    opacity: .55;
+    transform: translateY(8px);
+    filter: saturate(.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: saturate(1);
+  }
+}
+
+@keyframes capacityKpiReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes capacityBarGlow {
+  0% {
+    filter: brightness(1.35);
+    box-shadow:
+      0 0 0 rgba(53, 89, 75, 0);
+  }
+
+  50% {
+    filter: brightness(1.1);
+    box-shadow:
+      0 0 18px rgba(53, 89, 75, .18);
+  }
+
+  100% {
+    filter: brightness(1);
+    box-shadow:
+      0 0 0 rgba(53, 89, 75, 0);
+  }
+}
+
+@keyframes capacityCalendarReveal {
+  0% {
+    opacity: .35;
+    transform: scale(.985);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes capacityDayPop {
+  0% {
+    opacity: .3;
+    transform: translateY(5px) scale(.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

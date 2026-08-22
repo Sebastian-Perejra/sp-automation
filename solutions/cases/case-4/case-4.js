@@ -833,9 +833,21 @@
 
       day.className =
         `capacity-day ${capacityPlannerDayClass(load)}`;
-
-      day.textContent =
-        String(date.getDate());
+      
+      day.style.setProperty(
+        "--capacity-day-fill",
+        `${percent}%`
+      );
+      
+      day.innerHTML = `
+        <span class="capacity-day-number">
+          ${date.getDate()}
+        </span>
+      
+        <span class="capacity-day-percent">
+          ${percent}%
+        </span>
+      `;
 
       day.dataset.load =
         `${capacityFormatDate(date)} • ` +

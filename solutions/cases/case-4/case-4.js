@@ -408,6 +408,9 @@
 
   let capacityPlanningMode = "queue";
   let capacityLastPlan = null;
+  let capacityCalendarMonth = null;
+  let capacityCalendarMinMonth = null;
+  let capacityCalendarMaxMonth = null;
 
   function capacityPlannerDateKey(date) {
     const year = date.getFullYear();
@@ -790,81 +793,335 @@
     return "capacity-free";
   }
 
-  function capacityPlannerRenderCalendar(
-    usage,
-    allDates
+  function capacityMonthStart(date) {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  );
+}
+
+function capacityMonthKey(date) {
+  return (
+    date.getFullYear() * 12 +
+    date.getMonth()
+  );
+}
+
+function capacityCalendarMonthName(date) {
+  const name =
+    date.toLocaleDateString(
+      "uk-UA",
+      {
+        month: "long",
+        year: "numeric"
+      }
+    );
+
+  return (
+    name.charAt(0).toUpperCase() +
+    name.slice(1)
+  );
+}
+
+function capacityPlannerRenderCalendar(
+  usage,
+  allDates,
+  resetMonth = false
+) {
+  capacityCalendar.innerHTML = "";
+
+  if (!allDates.length) {
+    return;
+  }
+
+  const firstUsageDate =
+    capacityPlannerParseDateKey(
+      allDates[0]
+    );
+
+  const lastUsageDate =
+    capacityPlannerParseDateKey(
+      allDates[
+        allDates.length - 1
+      ]
+    );
+
+  capacityCalendarMinMonth =
+    capacityMonthStart(
+      firstUsageDate
+    );
+
+  capacityCalendarMaxMonth =
+    capacityMonthStart(
+      lastUsageDate
+    );
+
+  if (
+    resetMonth ||
+    !capacityCalendarMonth
   ) {
-    capacityCalendar.innerHTML = "";
-
-    if (!allDates.length) return;
-
-    const visibleDates =
-      allDates.slice(-35);
-
-    visibleDates.forEach(dateKey => {
-      const date =
-        capacityPlannerParseDateKey(
-          dateKey
-        );
-
-      const load =
-        capacityPlannerDayLoad(
-          usage,
-          dateKey
-        );
-
-      const percent =
-        Math.round(load * 100);
-
-      const line1Used =
-        usage.line1[dateKey] || 0;
-
-      const line2Used =
-        usage.line2[dateKey] || 0;
-
-      const line3Used =
-        usage.line3[dateKey] || 0;
-
-      const day =
-        document.createElement("div");
-
-      day.className =
-        `capacity-day ${capacityPlannerDayClass(load)}`;
-      
-      day.style.setProperty(
-        "--capacity-day-fill",
-        `${percent}%`
+    capacityCalendarMonth =
+      capacityMonthStart(
+        firstUsageDate
       );
-      
-      const monthShort =
-      date.toLocaleDateString("uk-UA", {
-        month: "short"
-      });
-    
+  }
+
+  if (
+    capacityMonthKey(
+      capacityCalendarMonth
+    ) <
+    capacityMonthKey(
+      capacityCalendarMinMonth
+    )
+  ) {
+    capacityCalendarMonth =
+      new Date(
+        capacityCalendarMinMonth
+      );
+  }
+
+  if (
+    capacityMonthKey(
+      capacityCalendarMonth
+    ) >
+    capacityMonthKey(
+      capacityCalendarMaxMonth
+    )
+  ) {
+    capacityCalendarMonth =
+      new Date(
+        capacityCalendarMaxMonth
+      );
+  }
+
+  const title =
+    document.getElementById(
+      "capacity-calendar-title"
+    );
+
+  const prev =
+    document.getElementById(
+      "capacity-calendar-prev"
+    );
+
+  const next =
+    document.getElementById(
+      "capacity-calendar-next"
+    );
+
+  if (title) {
+    title.textContent =
+      capacityCalendarMonthName(
+        capacityCalendarMonth
+      );
+  }
+
+  if (prev) {
+    prev.disabled =
+      capacityMonthKey(
+        capacityCalendarMonth
+      ) <=
+      capacityMonthKey(
+        capacityCalendarMinMonth
+      );
+  }
+
+  if (next) {
+    next.disabled =
+      capacityMonthKey(
+        capacityCalendarMonth
+      ) >=
+      capacityMonthKey(
+        capacityCalendarMaxMonth
+      );
+  }
+
+  const year =
+    capacityCalendarMonth
+      .getFullYear();
+
+  const month =
+    capacityCalendarMonth
+      .getMonth();
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    );
+
+  const lastDay =
+    new Date(
+      year,
+      month + 1,
+      0
+    );
+
+  const firstWeekday =
+    (firstDay.getDay() + 6) % 7;
+
+  for (
+    let index = 0;
+    index < firstWeekday;
+    index++
+  ) {
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+    empty.className =
+      "capacity-day capacity-day--empty";
+
+    capacityCalendar.appendChild(
+      empty
+    );
+  }
+
+  for (
+    let dayNumber = 1;
+    dayNumber <= lastDay.getDate();
+    dayNumber++
+  ) {
+    const date =
+      new Date(
+        year,
+        month,
+        dayNumber
+      );
+
+    const dateKey =
+      capacityPlannerDateKey(
+        date
+      );
+
+    const load =
+      capacityPlannerDayLoad(
+        usage,
+        dateKey
+      );
+
+    const percent =
+      Math.round(
+        load * 100
+      );
+
+    const line1Used =
+      usage.line1[dateKey] || 0;
+
+    const line2Used =
+      usage.line2[dateKey] || 0;
+
+    const line3Used =
+      usage.line3[dateKey] || 0;
+
+    const day =
+      document.createElement(
+        "div"
+      );
+
+    day.className =
+      `capacity-day ${capacityPlannerDayClass(load)}`;
+
+    day.style.setProperty(
+      "--capacity-day-fill",
+      `${percent}%`
+    );
+
     day.innerHTML = `
       <span class="capacity-day-number">
-        ${date.getDate()}
+        ${dayNumber}
       </span>
-    
-      <span class="capacity-day-month">
-        ${monthShort}
-      </span>
-    
+
       <span class="capacity-day-percent">
         ${percent}%
       </span>
     `;
 
-      day.dataset.load =
-        `${capacityFormatDate(date)} • ` +
-        `середнє завантаження ${percent}% • ` +
-        `Л1: ${line1Used}/${capacityPlannerValues.line1} • ` +
-        `Л2: ${line2Used}/${capacityPlannerValues.line2} • ` +
-        `Л3: ${line3Used}/${capacityPlannerValues.line3}`;
+    day.dataset.load =
+      `${capacityFormatDate(date)} • ` +
+      `завантаження ${percent}% • ` +
+      `Л1: ${line1Used}/${capacityPlannerValues.line1} • ` +
+      `Л2: ${line2Used}/${capacityPlannerValues.line2} • ` +
+      `Л3: ${line3Used}/${capacityPlannerValues.line3}`;
 
-      capacityCalendar.appendChild(day);
-    });
+    capacityCalendar.appendChild(
+      day
+    );
   }
+}
+
+  document
+  .getElementById(
+    "capacity-calendar-prev"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+      if (
+        !capacityLastPlan ||
+        !capacityCalendarMonth
+      ) {
+        return;
+      }
+
+      capacityCalendarMonth =
+        new Date(
+          capacityCalendarMonth
+            .getFullYear(),
+          capacityCalendarMonth
+            .getMonth() - 1,
+          1
+        );
+
+      const allDates =
+        capacityPlannerGetUsageDates(
+          capacityLastPlan.usage
+        );
+
+      capacityPlannerRenderCalendar(
+        capacityLastPlan.usage,
+        allDates
+      );
+    }
+  );
+
+document
+  .getElementById(
+    "capacity-calendar-next"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+      if (
+        !capacityLastPlan ||
+        !capacityCalendarMonth
+      ) {
+        return;
+      }
+
+      capacityCalendarMonth =
+        new Date(
+          capacityCalendarMonth
+            .getFullYear(),
+          capacityCalendarMonth
+            .getMonth() + 1,
+          1
+        );
+
+      const allDates =
+        capacityPlannerGetUsageDates(
+          capacityLastPlan.usage
+        );
+
+      capacityPlannerRenderCalendar(
+        capacityLastPlan.usage,
+        allDates
+      );
+    }
+  );
 
   function capacityPlannerUpdateSummary(
     allDates
@@ -1035,7 +1292,8 @@
 
         capacityPlannerRenderCalendar(
           capacityLastPlan.usage,
-          allDates
+          allDates,
+          true
         );
 
         capacityLoader.classList.remove("active");

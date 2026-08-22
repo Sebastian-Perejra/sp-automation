@@ -157,7 +157,7 @@ if (!assistantHasGreeted) {
 
     waitingTimer = setTimeout(() => {
         message.textContent = assistantFollowUp[lang].waiting;
-    }, 60000);
+    }, 120000);
 
     goodbyeTimer = setTimeout(() => {
         message.textContent = assistantFollowUp[lang].goodbye;
@@ -192,7 +192,7 @@ function resetInactivityTimer() {
     inactivityTimer = setTimeout(() => {
         showAssistant();
         playAssistantSound();
-    }, 60000);
+    }, 120000);
 }
 
 let assistantAudioContext = null;

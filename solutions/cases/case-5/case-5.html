@@ -14,203 +14,230 @@
     </p>
   </div>
 
-<div class="case5-problem-solution">
-  <article class="case5-info-card case5-problem">
-    <span class="case5-info-label">Проблема</span>
+  <div class="case5-problem-solution">
+    <article class="case5-info-card case5-problem">
+      <span class="case5-info-label">Проблема</span>
 
-    <h3>Ручний розрахунок потреби швидко перетворюється на складну звірку</h3>
+      <h3>
+        Ручний розрахунок потреби швидко перетворюється
+        на складну звірку
+      </h3>
 
-    <p>
-      До автоматизації закупівельнику доводиться вручну переглядати
-      замовлення на готові вироби, відкривати специфікації BOM,
-      визначати кількість кожної комплектуючої на одиницю продукції
-      та множити її на фактичний обсяг замовлення.
-    </p>
+      <p>
+        До автоматизації закупівельнику доводиться вручну переглядати
+        замовлення на готові вироби, відкривати специфікації BOM,
+        визначати кількість кожної комплектуючої на одиницю продукції
+        та множити її на фактичний обсяг замовлення.
+      </p>
 
-    <p>
-      Якщо одна й та сама деталь використовується у кількох виробах,
-      її потребу потрібно додатково звести в одну загальну позицію.
-      Після цього окремо перевіряються складські залишки, резерви
-      та фактичний дефіцит.
-    </p>
+      <p>
+        Якщо одна й та сама деталь використовується у кількох виробах,
+        її потребу потрібно додатково звести в одну загальну позицію.
+        Після цього окремо перевіряються складські залишки, резерви
+        та фактичний дефіцит.
+      </p>
 
-    <p>
-      При зміні кількості замовлених машин або складу виробу весь
-      розрахунок доводиться повторювати. Через це легко пропустити
-      позицію, двічі врахувати компонент, замовити зайве або виявити
-      нестачу вже перед запуском виробництва.
-    </p>
-  </article>
+      <p>
+        При зміні кількості замовлених машин або складу виробу весь
+        розрахунок доводиться повторювати. Через це легко пропустити
+        позицію, двічі врахувати компонент, замовити зайве або виявити
+        нестачу вже перед запуском виробництва.
+      </p>
+    </article>
 
-  <article class="case5-info-card case5-solution">
-    <span class="case5-info-label">Рішення</span>
+    <article class="case5-info-card case5-solution">
+      <span class="case5-info-label">Рішення</span>
 
-    <h3>Система автоматично переводить замовлення у точну потребу до закупівлі</h3>
+      <h3>
+        Система автоматично переводить замовлення
+        у точну потребу до закупівлі
+      </h3>
 
-    <p>
-      Користувач задає кількість замовлених машин і актуальні складські
-      залишки. Система автоматично розкриває BOM кожного виробу
-      та розраховує повну потребу в комплектуючих.
-    </p>
+      <p>
+        Користувач задає кількість замовлених машин і актуальні складські
+        залишки. Система автоматично розкриває BOM кожного виробу
+        та розраховує повну потребу в комплектуючих.
+      </p>
 
-    <p>
-      Однакові компоненти з різних виробів об’єднуються в одну позицію,
-      після чого система порівнює загальну потребу зі складськими
-      залишками та визначає реальний дефіцит.
-    </p>
+      <p>
+        Однакові компоненти з різних виробів об’єднуються в одну позицію,
+        після чого система порівнює загальну потребу зі складськими
+        залишками та визначає реальний дефіцит.
+      </p>
 
-    <p>
-      У результаті закупівельник одразу бачить, що саме потрібно
-      закупити, у якій кількості та які позиції вже повністю покриває
-      склад. Якщо замовлення або залишки змінюються, новий розрахунок
-      формується повторно за кілька секунд.
-    </p>
-  </article>
-</div>
+      <p>
+        У результаті закупівельник одразу бачить, що саме потрібно
+        закупити, у якій кількості та які позиції вже повністю покриває
+        склад. Якщо замовлення або залишки змінюються, новий розрахунок
+        формується повторно за кілька секунд.
+      </p>
+    </article>
+  </div>
 
   <div class="case5-results" id="case5-results">
-  <div class="case5-summary">
-    <article class="case5-summary-card">
-      <span>Замовлено машин</span>
-      <strong id="case5-total-machines">18</strong>
-      <small>усіх типів</small>
-    </article>
-
-    <article class="case5-summary-card">
-      <span>Загальна потреба</span>
-      <strong id="case5-total-need">0</strong>
-      <small>комплектуючих</small>
-    </article>
-
-    <article class="case5-summary-card">
-      <span>Покриває склад</span>
-      <strong id="case5-total-stock">0</strong>
-      <small>одиниць</small>
-    </article>
-
-    <article class="case5-summary-card">
-      <span>До закупівлі</span>
-      <strong id="case5-total-buy">0</strong>
-      <small>одиниць</small>
-    </article>
-  </div>
-
-  <div class="case5-grid">
-    <section class="case5-orders-panel">
-      <div class="case5-panel-head">
-        <div>
-          <strong>Замовлення від відділу продажів</strong>
-          <span>Змініть кількість машин</span>
+    <div class="case5-grid">
+      <section class="case5-orders-panel">
+        <div class="case5-panel-head">
+          <div>
+            <strong>Замовлення від відділу продажів</strong>
+            <span>Змініть кількість машин</span>
+          </div>
         </div>
-      </div>
 
-      <div class="case5-machines">
-        <label class="case5-machine-card">
-          <span class="case5-machine-code">SP-100</span>
-          <strong>Пакувальна машина</strong>
-          <small>Автоматичне пакування готової продукції</small>
+        <div class="case5-machines">
+          <label class="case5-machine-card">
+            <span class="case5-machine-code">SP-100</span>
 
-          <input
-            id="case5-machine-sp100"
-            type="number"
-            min="0"
-            value="10"
-          >
-        </label>
+            <strong>Пакувальна машина</strong>
 
-        <label class="case5-machine-card">
-          <span class="case5-machine-code">FM-20</span>
-          <strong>Фрезерний верстат</strong>
-          <small>Механічна обробка металевих деталей</small>
+            <small>
+              Автоматичне пакування готової продукції
+            </small>
 
-          <input
-            id="case5-machine-fm20"
-            type="number"
-            min="0"
-            value="5"
-          >
-        </label>
+            <input
+              id="case5-machine-sp100"
+              type="number"
+              min="0"
+              value="10"
+            >
+          </label>
 
-        <label class="case5-machine-card">
-          <span class="case5-machine-code">ML-5</span>
-          <strong>Маркувальна лінія</strong>
-          <small>Нанесення маркування на готову продукцію</small>
+          <label class="case5-machine-card">
+            <span class="case5-machine-code">FM-20</span>
 
-          <input
-            id="case5-machine-ml5"
-            type="number"
-            min="0"
-            value="3"
-          >
-        </label>
-      </div>
+            <strong>Фрезерний верстат</strong>
 
-      <div class="case5-formula">
-        <strong>Логіка розрахунку</strong>
+            <small>
+              Механічна обробка металевих деталей
+            </small>
 
-        <span>
-          До закупівлі = загальна потреба − складський залишок,
-          але не менше нуля
-        </span>
-      </div>
-    </section>
+            <input
+              id="case5-machine-fm20"
+              type="number"
+              min="0"
+              value="5"
+            >
+          </label>
 
-    <section class="case5-parts-panel">
-      <div class="case5-panel-head">
-        <div>
-          <strong>Зведена потреба в комплектуючих</strong>
-          <span>Залишки можна змінювати вручну</span>
+          <label class="case5-machine-card">
+            <span class="case5-machine-code">ML-5</span>
+
+            <strong>Маркувальна лінія</strong>
+
+            <small>
+              Нанесення маркування на готову продукцію
+            </small>
+
+            <input
+              id="case5-machine-ml5"
+              type="number"
+              min="0"
+              value="3"
+            >
+          </label>
         </div>
-      </div>
 
-      <div class="case5-parts-list" id="case5-parts-list"></div>
-    </section>
-  </div>
+        <div class="case5-formula">
+          <strong>Логіка розрахунку</strong>
+
+          <span>
+            До закупівлі = загальна потреба − складський залишок,
+            але не менше нуля
+          </span>
+        </div>
+      </section>
+
+      <section class="case5-parts-panel">
+        <div class="case5-panel-head">
+          <div>
+            <strong>Комплектуючі та складські залишки</strong>
+            <span>
+              Залишки можна змінювати вручну перед розрахунком
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="case5-parts-list"
+          id="case5-parts-list"
+        ></div>
+      </section>
+    </div>
 
     <div class="case5-calculate-area">
-    <button
-      class="case5-calculate-button"
-      id="case5-calculate-button"
-      type="button"
-    >
-      ⚙ Розрахувати потребу в комплектуючих
-    </button>
-  
-    <div class="case5-loader" id="case5-loader">
-      <span class="case5-spinner"></span>
-  
-      <span id="case5-loader-text">
-        Аналіз замовлень і специфікацій BOM…
-      </span>
+      <button
+        class="case5-calculate-button"
+        id="case5-calculate-button"
+        type="button"
+      >
+        ⚙ Розрахувати потребу в комплектуючих
+      </button>
+
+      <div
+        class="case5-loader"
+        id="case5-loader"
+      >
+        <span class="case5-spinner"></span>
+
+        <span id="case5-loader-text">
+          Аналіз замовлень і специфікацій BOM…
+        </span>
+      </div>
+    </div>
+
+    <div class="case5-summary">
+      <article class="case5-summary-card">
+        <span>Замовлено машин</span>
+        <strong id="case5-total-machines">18</strong>
+        <small>усіх типів</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>Загальна потреба</span>
+        <strong id="case5-total-need">0</strong>
+        <small>комплектуючих</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>Покриває склад</span>
+        <strong id="case5-total-stock">0</strong>
+        <small>одиниць</small>
+      </article>
+
+      <article class="case5-summary-card">
+        <span>До закупівлі</span>
+        <strong id="case5-total-buy">0</strong>
+        <small>одиниць</small>
+      </article>
+    </div>
+
+    <div class="case5-flow">
+      <article>
+        <span>1</span>
+        <strong>Замовлення</strong>
+        <small>кількість готових машин</small>
+      </article>
+
+      <article>
+        <span>2</span>
+        <strong>Розкриття BOM</strong>
+        <small>склад кожного виробу</small>
+      </article>
+
+      <article>
+        <span>3</span>
+        <strong>Перевірка складу</strong>
+        <small>актуальні залишки</small>
+      </article>
+
+      <article>
+        <span>4</span>
+        <strong>Список закупівлі</strong>
+        <small>точний дефіцит деталей</small>
+      </article>
     </div>
   </div>
-    
-  <div class="case5-flow">
-    <article>
-      <span>1</span>
-      <strong>Замовлення</strong>
-      <small>кількість готових машин</small>
-    </article>
 
-    <article>
-      <span>2</span>
-      <strong>Розкриття BOM</strong>
-      <small>склад кожного виробу</small>
-    </article>
-
-    <article>
-      <span>3</span>
-      <strong>Перевірка складу</strong>
-      <small>актуальні залишки</small>
-    </article>
-
-    <article>
-      <span>4</span>
-      <strong>Список закупівлі</strong>
-      <small>точний дефіцит деталей</small>
-    </article>
-  </div>
-</div>
   <div class="case5-cta">
     <a href="contacts.html">
       Хочу автоматизувати планування закупівель

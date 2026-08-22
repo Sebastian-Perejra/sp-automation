@@ -1256,58 +1256,222 @@ document
     });
   });
 
-  capacityCalculateButton.addEventListener(
-    "click",
-    () => {
-      capacityCalculateButton.disabled = true;
-      capacityCalculateButton.textContent =
-        "Розрахунок...";
+capacityCalculateButton.addEventListener(
+  "click",
+  async () => {
+    capacityCalculateButton.disabled = true;
+    capacityCalculateButton.textContent =
+      "Розрахунок...";
 
-      capacityLoader.classList.add("active");
+    const calculationTitle =
+      document.getElementById(
+        "capacity-calculation-title"
+      );
 
-      capacityOrdersStatus.textContent =
-        capacityPlanningMode === "priority"
-          ? "Перерахунок із пріоритетним витісненням замовлень..."
-          : "Послідовний розподіл замовлень за виробничими днями...";
+    const calculationText =
+      document.getElementById(
+        "capacity-calculation-text"
+      );
 
-      setTimeout(() => {
-        capacityLastPlan =
-          capacityPlannerCalculatePlan();
+    const calculationPercent =
+      document.getElementById(
+        "capacity-calculation-percent"
+      );
 
-        const allDates =
-          capacityPlannerGetUsageDates(
-            capacityLastPlan.usage
+    const calculationProgress =
+      document.getElementById(
+        "capacity-calculation-progress"
+      );
+
+    const calculationSteps =
+      Array.from(
+        document.querySelectorAll(
+          "[data-capacity-step]"
+        )
+      );
+
+    const wait = milliseconds =>
+      new Promise(resolve =>
+        setTimeout(resolve, milliseconds)
+      );
+
+    const setStep = (
+      step,
+      percent,
+      title,
+      text
+    ) => {
+      calculationSteps.forEach(item => {
+        const itemStep =
+          Number(
+            item.dataset.capacityStep
           );
 
-        capacityPlannerUpdateTable();
-
-        capacityPlannerUpdateSummary(
-          allDates
+        item.classList.toggle(
+          "is-active",
+          itemStep === step
         );
 
-        capacityPlannerUpdateUtilization(
-          capacityLastPlan.usage,
-          allDates
+        item.classList.toggle(
+          "is-done",
+          itemStep < step
         );
+      });
 
-        capacityPlannerRenderCalendar(
-          capacityLastPlan.usage,
-          allDates,
-          true
-        );
+      calculationPercent.textContent =
+        `${percent}%`;
 
-        capacityLoader.classList.remove("active");
+      calculationProgress.style.width =
+        `${percent}%`;
 
-        capacityCalculateButton.disabled = false;
+      calculationTitle.textContent =
+        title;
 
-        capacityCalculateButton.textContent =
-          "↻ Перерахувати виробничий план";
+      calculationText.textContent =
+        text;
+    };
 
-        capacityOutput.dataset.calculated =
-          "true";
-      }, 1100);
-    }
-  );
+    capacityLoader.classList.remove(
+      "is-complete"
+    );
+
+    calculationSteps.forEach(item => {
+      item.classList.remove(
+        "is-active",
+        "is-done"
+      );
+    });
+
+    calculationProgress.style.width =
+      "0%";
+
+    calculationPercent.textContent =
+      "0%";
+
+    capacityLoader.classList.add(
+      "active"
+    );
+
+    capacityOutput.classList.add(
+      "is-calculating"
+    );
+
+    setStep(
+      1,
+      15,
+      "Аналізую замовлення",
+      "Перевіряю 100 виробничих замовлень"
+    );
+
+    await wait(420);
+
+    setStep(
+      2,
+      38,
+      "Перевіряю потужність",
+      "Зіставляю обсяг із можливостями виробничих ліній"
+    );
+
+    await wait(460);
+
+    capacityLastPlan =
+      capacityPlannerCalculatePlan();
+
+    const allDates =
+      capacityPlannerGetUsageDates(
+        capacityLastPlan.usage
+      );
+
+    setStep(
+      3,
+      68,
+      "Формую календар",
+      "Розподіляю обсяг за доступними виробничими днями"
+    );
+
+    await wait(500);
+
+    capacityPlannerUpdateUtilization(
+      capacityLastPlan.usage,
+      allDates
+    );
+
+    capacityPlannerRenderCalendar(
+      capacityLastPlan.usage,
+      allDates,
+      true
+    );
+
+    setStep(
+      4,
+      88,
+      "Перевіряю строки",
+      "Порівнюю бажані та розрахункові дати готовності"
+    );
+
+    await wait(500);
+
+    capacityPlannerUpdateTable();
+
+    capacityPlannerUpdateSummary(
+      allDates
+    );
+
+    calculationSteps.forEach(item => {
+      item.classList.remove(
+        "is-active"
+      );
+
+      item.classList.add(
+        "is-done"
+      );
+    });
+
+    calculationProgress.style.width =
+      "100%";
+
+    calculationPercent.textContent =
+      "100%";
+
+    calculationTitle.textContent =
+      "План розраховано";
+
+    calculationText.textContent =
+      `${capacityOrders.length} замовлень розподілено по виробничому календарю`;
+
+    capacityLoader.classList.add(
+      "is-complete"
+    );
+
+    await wait(650);
+
+    capacityLoader.classList.remove(
+      "active"
+    );
+
+    capacityOutput.classList.remove(
+      "is-calculating"
+    );
+
+    capacityOutput.classList.add(
+      "is-revealed"
+    );
+
+    setTimeout(() => {
+      capacityOutput.classList.remove(
+        "is-revealed"
+      );
+    }, 900);
+
+    capacityCalculateButton.disabled = false;
+
+    capacityCalculateButton.textContent =
+      "↻ Перерахувати виробничий план";
+
+    capacityOutput.dataset.calculated =
+      "true";
+  }
+);
 
   ["line1", "line2", "line3"]
     .forEach(capacityPlannerUpdateValue);

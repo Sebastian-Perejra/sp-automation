@@ -698,3 +698,42 @@
     font-size: 11px;
   }
 }
+
+.capacity-summary-item span {
+  color: #6d6a66;
+}
+
+.capacity-summary-item strong {
+  color: #35594b;
+}
+
+.capacity-dashboard-head strong {
+  display: block;
+  color: #35594b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.capacity-dashboard-head span {
+  color: #77736e;
+}
+
+.capacity-utilization-label span {
+  color: #5f5b57;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.capacity-utilization-label strong {
+  color: #35594b;
+  font-family: var(--font-tech);
+  font-size: 11px;
+}
+
+.capacity-legend span {
+  color: #625f5a;
+}
+
+.capacity-day {
+  color: #4f4c48;
+}

@@ -1,0 +1,263 @@
+<section class="tg-case" id="telegram-bot-case">
+  <div class="tg-case-header">
+    <div class="tg-case-kicker">Реальний кейс №8</div>
+
+    <h2>Автоматизація нагадувань і задач через Telegram-бота</h2>
+
+    <p class="tg-case-subtitle">
+      Користувач пересилає повідомлення боту або створює нагадування вручну,
+      обирає час і сценарій сповіщення, а система автоматично повертає задачу
+      у потрібний момент. У результаті важливі домовленості, follow-up,
+      особисті нотатки та робочі задачі не губляться в потоці повідомлень.
+    </p>
+  </div>
+
+  <div class="tg-problem-solution">
+    <article class="tg-info-card tg-problem">
+      <span class="tg-info-label">Проблема</span>
+
+      <h3>
+        Повідомлення, задачі та домовленості губляться в чатах
+      </h3>
+
+      <p>
+        У Telegram щодня проходять десятки повідомлень: прохання, ідеї,
+        посилання, відповіді клієнтам, особисті нагадування та робочі задачі.
+        Часто людина бачить повідомлення в незручний момент, відкладає реакцію
+        “на потім”, а потім воно просто зникає у стрічці чату.
+      </p>
+
+      <p>
+        Через це з’являються типові проблеми: забуті відповіді, пропущені
+        дедлайни, втрачені follow-up, повторні ручні нагадування самому собі
+        та постійна залежність від пам’яті замість системи.
+      </p>
+
+      <p>
+        У результаті інформація начебто є, але контролю над нею немає.
+        Telegram використовується як робочий канал, але не дає нормального
+        механізму доведення задач до виконання.
+      </p>
+    </article>
+
+    <article class="tg-info-card tg-solution">
+      <span class="tg-info-label">Рішення</span>
+
+      <h3>
+        Telegram-бот ставить нагадування, повертає задачу вчасно
+        та допомагає довести її до виконання
+      </h3>
+
+      <p>
+        Користувач може переслати повідомлення боту, написати власну нотатку
+        або швидко створити задачу вручну. Після цього він обирає готовий
+        сценарій часу: через 5 хвилин, через годину, сьогодні ввечері,
+        завтра зранку або на конкретну дату й час.
+      </p>
+
+      <p>
+        Бот зберігає нагадування, а у потрібний момент надсилає його назад
+        разом із контекстом і кнопками дії: “Виконано”, “Відкласти”,
+        “Нагадати ще раз”. За потреби можна увімкнути повторні нагадування,
+        поки задача не буде закрита.
+      </p>
+
+      <p>
+        У результаті користувач отримує простий та швидкий механізм контролю
+        прямо в Telegram без окремого таск-менеджера, а важливі повідомлення
+        перестають губитися в чатах.
+      </p>
+    </article>
+  </div>
+
+  <div class="tg-demo-grid">
+    <section class="tg-panel tg-source-panel">
+      <div class="tg-panel-head">
+        <div>
+          <strong>Вхідне повідомлення</strong>
+          <span>пересланий текст або швидка ручна задача</span>
+        </div>
+      </div>
+
+      <div class="tg-source-window" id="tg-source-window">
+        <article class="tg-source-card active" data-tg-source="1">
+          <span class="tg-source-badge">Чат</span>
+          <p>Надіслати комерційну пропозицію клієнту до 16:00</p>
+          <small>Повідомлення буде переслане боту</small>
+        </article>
+
+        <article class="tg-source-card" data-tg-source="2">
+          <span class="tg-source-badge">Чат</span>
+          <p>Передзвонити клієнту завтра о 10:00</p>
+          <small>Повідомлення буде переслане боту</small>
+        </article>
+
+        <article class="tg-source-card" data-tg-source="3">
+          <span class="tg-source-badge">Нотатка</span>
+          <p>Перевірити оплату рахунку після обіду</p>
+          <small>Задача створюється вручну</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="tg-panel tg-bot-panel">
+      <div class="tg-panel-head">
+        <div>
+          <strong>Telegram-бот</strong>
+          <span>бот приймає задачу та планує нагадування</span>
+        </div>
+      </div>
+
+      <div class="tg-bot-window" id="tg-bot-window">
+        <div class="tg-chat-message tg-chat-message-user" id="tg-user-message">
+          Надіслати комерційну пропозицію клієнту до 16:00
+        </div>
+
+        <div class="tg-chat-message tg-chat-message-bot" id="tg-bot-reply">
+          Коли нагадати?
+        </div>
+
+        <div class="tg-quick-actions" id="tg-quick-actions">
+          <button type="button">Через 5 хв</button>
+          <button type="button">Через 1 год</button>
+          <button type="button">Сьогодні ввечері</button>
+          <button type="button">Завтра зранку</button>
+        </div>
+
+        <div class="tg-chat-message tg-chat-message-system" id="tg-confirmation">
+          Нагадування буде надіслано сьогодні о 15:30
+        </div>
+
+        <div class="tg-reminder-card" id="tg-reminder-card">
+          <div class="tg-reminder-head">
+            <strong>Активне нагадування</strong>
+            <span>15:30</span>
+          </div>
+
+          <p>Надіслати комерційну пропозицію клієнту</p>
+
+          <div class="tg-reminder-meta">
+            <span>Статус: активне</span>
+            <span>Повтор: вимкнено</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tg-panel tg-result-panel">
+      <div class="tg-panel-head">
+        <div>
+          <strong>Список нагадувань</strong>
+          <span>активні, відкладені та виконані задачі</span>
+        </div>
+      </div>
+
+      <div class="tg-result-window" id="tg-result-window">
+        <article class="tg-result-item active">
+          <div>
+            <strong>Надіслати комерційну пропозицію</strong>
+            <small>Сьогодні, 15:30</small>
+          </div>
+          <span class="tg-status-chip active">Активне</span>
+        </article>
+
+        <article class="tg-result-item snoozed">
+          <div>
+            <strong>Передзвонити клієнту</strong>
+            <small>Завтра, 10:00</small>
+          </div>
+          <span class="tg-status-chip snoozed">Відкладено</span>
+        </article>
+
+        <article class="tg-result-item done">
+          <div>
+            <strong>Перевірити оплату рахунку</strong>
+            <small>Сьогодні, 13:00</small>
+          </div>
+          <span class="tg-status-chip done">Виконано</span>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="tg-flow">
+    <article>
+      <span>1</span>
+      <strong>Повідомлення</strong>
+      <small>пересланий текст або ручна задача</small>
+    </article>
+
+    <article>
+      <span>2</span>
+      <strong>Бот</strong>
+      <small>прийом задачі та вибір сценарію</small>
+    </article>
+
+    <article>
+      <span>3</span>
+      <strong>Планування</strong>
+      <small>час, дата або повтор</small>
+    </article>
+
+    <article>
+      <span>4</span>
+      <strong>Нагадування</strong>
+      <small>повернення задачі у потрібний момент</small>
+    </article>
+
+    <article>
+      <span>5</span>
+      <strong>Дія</strong>
+      <small>виконати, відкласти або повторити</small>
+    </article>
+  </div>
+
+  <div class="tg-demo-controls">
+    <div class="tg-demo-progress-wrap">
+      <div class="tg-demo-progress-label">
+        <span id="tg-demo-status">Готово до запуску</span>
+        <span id="tg-demo-counter">0 / 5</span>
+      </div>
+
+      <div class="tg-demo-progress-track">
+        <div class="tg-demo-progress-bar" id="tg-demo-progress"></div>
+      </div>
+    </div>
+
+    <button
+      class="tg-demo-run-button"
+      id="tg-demo-run"
+      type="button"
+    >
+      ▶ Запустити демо
+    </button>
+  </div>
+
+  <div class="tg-demo-stats">
+    <div class="tg-demo-stat">
+      <strong id="tg-stat-created">0</strong>
+      <span>нагадувань створено</span>
+    </div>
+
+    <div class="tg-demo-stat">
+      <strong id="tg-stat-sent">0</strong>
+      <span>нагадувань надіслано</span>
+    </div>
+
+    <div class="tg-demo-stat">
+      <strong id="tg-stat-snoozed">0</strong>
+      <span>відкладено</span>
+    </div>
+
+    <div class="tg-demo-stat">
+      <strong id="tg-stat-done">0</strong>
+      <span>виконано</span>
+    </div>
+  </div>
+
+  <div class="tg-case-cta">
+    <a href="contacts.html">
+      Хочу такого Telegram-бота
+    </a>
+  </div>
+</section>

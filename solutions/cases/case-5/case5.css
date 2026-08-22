@@ -665,3 +665,13 @@
 .case5-solution h3 {
   color: #315b43;
 }
+
+@media (max-width: 760px) {
+  .case5-results.visible .case5-summary {
+    max-height: 1000px;
+  }
+
+  .case5-results.visible .case5-flow {
+    max-height: 1200px;
+  }
+}

@@ -1,136 +1,420 @@
 <section class="dashboard-case" id="dashboard-case">
-      <div class="case-demo-kicker">Реальний кейс №3</div>
-      <h2>Автоматичне створення дашборда з Excel-таблиці</h2>
-      <p class="case-demo-subtitle">
-        Вхідні дані — 200 рядків продажів із датою, роком, місяцем, днем,
-        товаром, категорією, клієнтом, кількістю та сумою. Після натискання
-        кнопки система агрегує масив, розраховує KPI та будує чотири графіки.
-        Усі дані нижче демонстраційні.
+  <div class="case-demo-kicker">Реальний кейс №3</div>
+
+  <h2>Автоматичне створення дашборда з Excel-таблиці</h2>
+
+  <p class="case-demo-subtitle">
+    Вхідні дані — звичайна Excel-таблиця з продажами: дата, товар,
+    категорія, клієнт, кількість та сума. Система автоматично обробляє
+    масив, розраховує ключові показники та формує інтерактивний дашборд
+    із фільтрами й аналітичними зрізами.
+  </p>
+
+  <div class="case3-problem-solution">
+    <article class="case3-info-card case3-problem">
+      <span class="case3-info-label">Проблема</span>
+
+      <h3>
+        Дані є, але для кожного нового запитання доводиться знову
+        працювати з таблицею
+      </h3>
+
+      <p>
+        Продажі часто накопичуються у звичайному Excel-файлі:
+        сотні або тисячі рядків із датами, товарами, категоріями,
+        клієнтами, кількістю та сумами.
       </p>
 
-      <div class="dashboard-raw" id="dashboard-raw">
-        <div class="dashboard-raw-head">
-          <strong>Сирий масив продажів</strong>
-          <span>200 РЯДКІВ</span>
-        </div>
+      <p>
+        Щоб подивитися виручку за окремий місяць, категорію або клієнта,
+        користувач фільтрує таблицю, створює зведення, перераховує
+        показники та окремо оновлює графіки.
+      </p>
 
-        <div class="dashboard-table-wrap">
-          <table class="dashboard-table">
-            <thead>
-              <tr>
-                <th>Дата</th>
-                <th>Рік</th>
-                <th>Місяць</th>
-                <th>День</th>
-                <th>Товар</th>
-                <th>Категорія</th>
-                <th>Клієнт</th>
-                <th>Кількість</th>
-                <th>Сума, грн</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tbody id="dashboard-raw-body"></tbody>
-            </tbody>
-          </table>
-        </div>
+      <p>
+        Це нормально для разового аналізу, але при регулярній роботі
+        однакові операції постійно повторюються й займають зайвий час.
+      </p>
+    </article>
+
+    <article class="case3-info-card case3-solution">
+      <span class="case3-info-label">Рішення</span>
+
+      <h3>
+        Excel-масив автоматично перетворюється на інтерактивний
+        аналітичний дашборд
+      </h3>
+
+      <p>
+        Система агрегує вихідні дані, розраховує KPI та будує
+        аналітичні графіки без ручного створення кожного зрізу.
+      </p>
+
+      <p>
+        Користувач може вибирати рік, місяць, категорію, клієнта
+        або товар за допомогою слайсерів і одразу бачити,
+        як змінюються всі показники дашборда.
+      </p>
+
+      <p>
+        У результаті одна таблиця стає готовим інструментом
+        для регулярного аналізу продажів і швидкої перевірки
+        потрібного зрізу даних.
+      </p>
+    </article>
+  </div>
+
+  <div class="dashboard-raw" id="dashboard-raw">
+    <div class="dashboard-raw-head">
+      <strong>Сирий масив продажів</strong>
+      <span>200 РЯДКІВ</span>
+    </div>
+
+    <div class="dashboard-table-wrap">
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Рік</th>
+            <th>Місяць</th>
+            <th>День</th>
+            <th>Товар</th>
+            <th>Категорія</th>
+            <th>Клієнт</th>
+            <th>Кількість</th>
+            <th>Сума, грн</th>
+          </tr>
+        </thead>
+
+        <tbody id="dashboard-raw-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="dashboard-action">
+    <button
+      class="dashboard-build-button"
+      id="dashboard-build"
+      type="button"
+    >
+      ⚙ Побудувати дашборд
+    </button>
+  </div>
+
+  <div class="dashboard-loader" id="dashboard-loader">
+    <span class="dashboard-spinner"></span>
+
+    <span>
+      Агрегація даних, розрахунок KPI та побудова графіків…
+    </span>
+  </div>
+
+  <div class="dashboard-output" id="dashboard-output">
+    <div class="dashboard-workspace-head">
+      <div>
+        <span class="dashboard-workspace-label">
+          SALES ANALYTICS
+        </span>
+
+        <strong>
+          Аналітичний дашборд продажів
+        </strong>
+
+        <small id="dashboard-filter-status">
+          200 рядків у поточному зрізі
+        </small>
       </div>
 
-      <div class="dashboard-action">
-        <button class="dashboard-build-button" id="dashboard-build" type="button">
-          ⚙ Побудувати дашборд
+      <div class="dashboard-refresh-state">
+        <span></span>
+
+        <div>
+          <small>Стан даних</small>
+          <strong>Актуально</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-slicer-toolbar">
+      <div class="dashboard-slicer-heading">
+        <div>
+          <span>Інтерактивні фільтри</span>
+          <small>
+            Працюють як слайсери: вибір одразу змінює весь дашборд
+          </small>
+        </div>
+
+        <button
+          class="dashboard-reset-filters"
+          id="dashboard-reset-filters"
+          type="button"
+        >
+          Скинути фільтри
         </button>
       </div>
 
-      <div class="dashboard-loader" id="dashboard-loader">
-        <span class="dashboard-spinner"></span>
-        <span>Агрегація даних, розрахунок KPI та побудова графіків…</span>
+      <div class="dashboard-slicers">
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Рік</strong>
+            <span id="dashboard-year-count">Усі</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options"
+            id="dashboard-slicer-year"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Місяць</strong>
+            <span id="dashboard-month-count">Усі</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options dashboard-slicer-options-months"
+            id="dashboard-slicer-month"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Категорія</strong>
+            <span id="dashboard-category-count">Усі</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options"
+            id="dashboard-slicer-category"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Клієнт</strong>
+            <span id="dashboard-client-count">Усі</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options dashboard-slicer-options-scroll"
+            id="dashboard-slicer-client"
+          ></div>
+        </section>
       </div>
+    </div>
 
-      <div class="dashboard-output" id="dashboard-output">
-        <div class="dashboard-filters">
-          <div class="dashboard-filter"><small>Період</small><strong>01.01.2024–31.12.2024</strong></div>
-          <div class="dashboard-filter"><small>Рік</small><strong>Усі</strong></div>
-          <div class="dashboard-filter"><small>Місяць</small><strong>Усі</strong></div>
-          <div class="dashboard-filter"><small>Категорія</small><strong>Усі</strong></div>
-          <div class="dashboard-filter"><small>Клієнт</small><strong>Усі</strong></div>
-        </div>
+    <div class="dashboard-kpis">
+      <article class="dashboard-kpi">
+        <span>Загальна виручка</span>
+        <strong id="dashboard-kpi-revenue">0</strong>
+        <em>грн</em>
+      </article>
 
-        <div class="dashboard-kpis">
-          <div class="dashboard-kpi"><span>Загальна виручка</span><strong>1 245 600</strong><em>▲ 18,7%</em></div>
-          <div class="dashboard-kpi"><span>Продано одиниць</span><strong>1 862</strong><em>▲ 12,3%</em></div>
-          <div class="dashboard-kpi"><span>Середній чек</span><strong>669 грн</strong><em>▲ 5,1%</em></div>
-          <div class="dashboard-kpi"><span>Унікальних клієнтів</span><strong>48</strong><em>▲ 9,1%</em></div>
-        </div>
+      <article class="dashboard-kpi">
+        <span>Продано одиниць</span>
+        <strong id="dashboard-kpi-quantity">0</strong>
+        <em>одиниць</em>
+      </article>
 
-        <div class="dashboard-charts">
-          <article class="dashboard-chart">
+      <article class="dashboard-kpi">
+        <span>Середній чек</span>
+        <strong id="dashboard-kpi-average">0</strong>
+        <em>грн / рядок</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Унікальних клієнтів</span>
+        <strong id="dashboard-kpi-clients">0</strong>
+        <em>клієнтів</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Операцій у вибірці</span>
+        <strong id="dashboard-kpi-orders">0</strong>
+        <em>рядків</em>
+      </article>
+
+      <article class="dashboard-kpi dashboard-kpi-accent">
+        <span>Лідер за виручкою</span>
+        <strong id="dashboard-kpi-leader">—</strong>
+        <em id="dashboard-kpi-leader-value">0 грн</em>
+      </article>
+    </div>
+
+    <div class="dashboard-charts">
+      <article class="dashboard-chart dashboard-chart-wide">
+        <div class="dashboard-chart-head">
+          <div>
             <h3>Динаміка виручки за місяцями</h3>
-            <div class="monthly-chart">
-              <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Динаміка виручки">
-                <defs>
-                  <linearGradient id="dashboard-area" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#35594b" stop-opacity=".28"/>
-                    <stop offset="100%" stop-color="#35594b" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0 105 L55 92 L110 125 L165 67 L220 83 L275 58 L330 74 L385 126 L440 120 L495 70 L550 47 L600 25 L600 160 L0 160 Z" fill="url(#dashboard-area)"/>
-                <polyline points="0,105 55,92 110,125 165,67 220,83 275,58 330,74 385,126 440,120 495,70 550,47 600,25" fill="none" stroke="#35594b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <div class="months-row">
-                <span>Січ</span><span>Лют</span><span>Бер</span><span>Кві</span><span>Тра</span><span>Чер</span>
-                <span>Лип</span><span>Сер</span><span>Вер</span><span>Жов</span><span>Лис</span><span>Гру</span>
-              </div>
-            </div>
-          </article>
+            <small>Поточний відфільтрований зріз</small>
+          </div>
 
-          <article class="dashboard-chart">
-            <h3>Порівняння виручки за роками</h3>
-            <div class="years-chart">
-              <div class="year-column"><b>1 020 000</b><i style="height:105px;"></i><span>2023</span></div>
-              <div class="year-column"><b>1 245 600</b><i style="height:140px;"></i><span>2024</span></div>
-            </div>
-          </article>
-
-          <article class="dashboard-chart">
-            <h3>Частка виручки за категоріями</h3>
-            <div class="category-wrap">
-              <div class="category-donut"></div>
-              <div class="category-legend">
-                <div><span class="category-name"><span class="category-dot" style="background:#3478e5;"></span>Ноутбуки</span><strong>42%</strong></div>
-                <div><span class="category-name"><span class="category-dot" style="background:#0f9d58;"></span>Монітори</span><strong>27%</strong></div>
-                <div><span class="category-name"><span class="category-dot" style="background:#f5aa20;"></span>Аксесуари</span><strong>20%</strong></div>
-                <div><span class="category-name"><span class="category-dot" style="background:#8854d0;"></span>Інше</span><strong>11%</strong></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="dashboard-chart">
-            <h3>Топ товарів за виручкою</h3>
-            <div class="products-bars">
-              <div class="product-bar-row"><span>Ноутбук HP 15</span><div class="product-track"><div class="product-fill" style="width:100%;"></div></div><span class="product-value">285 000</span></div>
-              <div class="product-bar-row"><span>Dell Inspiron</span><div class="product-track"><div class="product-fill" style="width:78%;"></div></div><span class="product-value">210 500</span></div>
-              <div class="product-bar-row"><span>Монітор LG 24</span><div class="product-track"><div class="product-fill" style="width:67%;"></div></div><span class="product-value">180 000</span></div>
-              <div class="product-bar-row"><span>Миша Logitech</span><div class="product-track"><div class="product-fill" style="width:36%;"></div></div><span class="product-value">95 400</span></div>
-              <div class="product-bar-row"><span>A4Tech</span><div class="product-track"><div class="product-fill" style="width:25%;"></div></div><span class="product-value">67 200</span></div>
-            </div>
-          </article>
+          <strong id="dashboard-peak-month">—</strong>
         </div>
 
-        <div class="case-demo-controls">
-          <div class="demo-progress-wrap">
-            <div class="demo-progress-label">
-              <span>Готовий аналітичний дашборд</span>
-              <span>200 / 200</span>
-            </div>
-            <div class="demo-progress-track">
-              <div class="demo-progress-bar" style="width:100%;"></div>
-            </div>
+        <div class="monthly-chart">
+          <svg
+            id="dashboard-monthly-svg"
+            viewBox="0 0 600 180"
+            preserveAspectRatio="none"
+            aria-label="Динаміка виручки"
+          >
+            <defs>
+              <linearGradient
+                id="dashboard-area"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stop-color="#35594b"
+                  stop-opacity=".30"
+                />
+
+                <stop
+                  offset="100%"
+                  stop-color="#35594b"
+                  stop-opacity="0"
+                />
+              </linearGradient>
+            </defs>
+
+            <path
+              id="dashboard-monthly-area"
+              fill="url(#dashboard-area)"
+            ></path>
+
+            <polyline
+              id="dashboard-monthly-line"
+              fill="none"
+              stroke="#35594b"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></polyline>
+          </svg>
+
+          <div class="months-row" id="dashboard-month-labels"></div>
+        </div>
+      </article>
+
+      <article class="dashboard-chart">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Порівняння виручки за роками</h3>
+            <small>Фактичні значення з вибірки</small>
           </div>
         </div>
 
-        <div class="demo-cta">
-          <a href="contacts.html">Хочу такий дашборд</a>
+        <div
+          class="years-chart"
+          id="dashboard-years-chart"
+        ></div>
+      </article>
+
+      <article class="dashboard-chart">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Частка виручки за категоріями</h3>
+            <small>Структура продажів</small>
+          </div>
+        </div>
+
+        <div class="category-wrap">
+          <div
+            class="category-donut"
+            id="dashboard-category-donut"
+          ></div>
+
+          <div
+            class="category-legend"
+            id="dashboard-category-legend"
+          ></div>
+        </div>
+      </article>
+
+      <article class="dashboard-chart dashboard-chart-wide">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Топ товарів за виручкою</h3>
+            <small>Позиції з найбільшим оборотом</small>
+          </div>
+        </div>
+
+        <div
+          class="products-bars"
+          id="dashboard-products-bars"
+        ></div>
+      </article>
+    </div>
+
+    <div class="dashboard-detail-table">
+      <div class="dashboard-detail-head">
+        <div>
+          <strong>Деталізація вибірки</strong>
+          <span>
+            Найбільші товарні позиції у поточному зрізі
+          </span>
+        </div>
+
+        <span id="dashboard-detail-count">
+          0 позицій
+        </span>
+      </div>
+
+      <div class="dashboard-detail-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Товар</th>
+              <th>Категорія</th>
+              <th>Кількість</th>
+              <th>Виручка</th>
+              <th>Частка</th>
+            </tr>
+          </thead>
+
+          <tbody id="dashboard-detail-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div
+      class="dashboard-empty-state"
+      id="dashboard-empty-state"
+      hidden
+    >
+      За вибраними фільтрами дані відсутні.
+    </div>
+
+    <div class="case-demo-controls">
+      <div class="demo-progress-wrap">
+        <div class="demo-progress-label">
+          <span>
+            Готовий інтерактивний дашборд
+          </span>
+
+          <span id="dashboard-progress-value">
+            200 / 200
+          </span>
+        </div>
+
+        <div class="demo-progress-track">
+          <div
+            class="demo-progress-bar"
+            id="dashboard-progress-bar"
+          ></div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div class="demo-cta">
+      <a href="contacts.html">
+        Хочу такий дашборд
+      </a>
+    </div>
+  </div>
+</section>

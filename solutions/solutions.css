@@ -4998,3 +4998,70 @@ box-shadow:
 .process-clean {
   margin: -30px auto 0;
 }
+
+.process-chaos__file {
+  min-width: 96px;
+  padding: 12px 14px;
+  font-size: 9px;
+  color: #aab3ac;
+}
+
+.process-chaos__center small,
+.process-chaos__center span {
+  font-size: 8px;
+  color: #929d95;
+}
+
+.process-chaos__center strong {
+  font-size: 34px;
+}
+
+.process-logic__node {
+  min-width: 126px;
+  padding: 16px;
+}
+
+.process-logic__node small {
+  font-size: 8px;
+  color: #919c94;
+}
+
+.process-logic__node strong {
+  margin-top: 7px;
+  font-size: 11px;
+  color: #eef3ed;
+}
+
+.process-automation__node small {
+  font-size: 8px;
+  color: #8f9a92;
+}
+
+.process-automation__node strong {
+  font-size: 11px;
+}
+
+.process-control__kpis small {
+  font-size: 8px;
+  color: #8e9991;
+}
+
+.process-control__kpis strong {
+  font-size: 12px;
+}
+
+.process-control__signal {
+  font-size: 8px;
+}
+
+.final-system__row small {
+  font-size: 8px;
+}
+
+.final-system__row strong {
+  font-size: 10px;
+}
+
+.final-system__state {
+  font-size: 7px;
+}

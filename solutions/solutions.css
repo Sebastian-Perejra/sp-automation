@@ -5065,30 +5065,3 @@ box-shadow:
 .final-system__state {
   font-size: 7px;
 }
-
-.case5-info-card p {
-  color: #5d665f;
-  font-size: 14px;
-  line-height: 1.7;
-  opacity: 1;
-}
-
-.case5-problem p {
-  color: #7b4d4d;
-}
-
-.case5-solution p {
-  color: #4f6758;
-}
-
-.case5-info-card h3 {
-  color: #27483a;
-}
-
-.case5-problem h3 {
-  color: #a23d3d;
-}
-
-.case5-solution h3 {
-  color: #315b43;
-}

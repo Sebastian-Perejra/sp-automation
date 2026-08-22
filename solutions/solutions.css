@@ -2352,6 +2352,10 @@ box-shadow:
     );
 }
 
+.case-detail-stage__loading[hidden] {
+  display: none;
+}
+
 .case-detail-stage__loading > span {
   width: 26px;
   height: 26px;

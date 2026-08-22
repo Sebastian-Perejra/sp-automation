@@ -1,0 +1,420 @@
+<section class="dashboard-case" id="dashboard-case">
+  <div class="case-demo-kicker">Реальный кейс №3</div>
+
+  <h2>Автоматическое создание дашборда из Excel-таблицы</h2>
+
+  <p class="case-demo-subtitle">
+    Входные данные — обычная Excel-таблица с продажами: дата, товар,
+    категория, клиент, количество и сумма. Система автоматически обрабатывает
+    массив, рассчитывает ключевые показатели и формирует интерактивный дашборд
+    с фильтрами и аналитическими срезами.
+  </p>
+
+  <div class="case3-problem-solution">
+    <article class="case3-info-card case3-problem">
+      <span class="case3-info-label">Проблема</span>
+
+      <h3>
+        Данные есть, но для каждого нового вопроса приходится снова
+        работать с таблицей
+      </h3>
+
+      <p>
+        Продажи часто накапливаются в обычном Excel-файле:
+        сотни или тысячи строк с датами, товарами, категориями,
+        клиентами, количеством и суммами.
+      </p>
+
+      <p>
+        Чтобы посмотреть выручку за отдельный месяц, категорию или клиента,
+        пользователь фильтрует таблицу, создаёт сводные данные, пересчитывает
+        показатели и отдельно обновляет графики.
+      </p>
+
+      <p>
+        Это нормально для разового анализа, но при регулярной работе
+        одни и те же операции постоянно повторяются и занимают лишнее время.
+      </p>
+    </article>
+
+    <article class="case3-info-card case3-solution">
+      <span class="case3-info-label">Решение</span>
+
+      <h3>
+        Excel-массив автоматически превращается в интерактивный
+        аналитический дашборд
+      </h3>
+
+      <p>
+        Система агрегирует исходные данные, рассчитывает KPI и строит
+        аналитические графики без ручного создания каждого отдельного среза.
+      </p>
+
+      <p>
+        Пользователь может выбирать год, месяц, категорию, клиента
+        или товар с помощью слайсеров и сразу видеть,
+        как изменяются все показатели дашборда.
+      </p>
+
+      <p>
+        В результате одна таблица становится готовым инструментом
+        для регулярного анализа продаж и быстрой проверки
+        нужного среза данных.
+      </p>
+    </article>
+  </div>
+
+  <div class="dashboard-raw" id="dashboard-raw">
+    <div class="dashboard-raw-head">
+      <strong>Исходный массив продаж</strong>
+      <span>200 СТРОК</span>
+    </div>
+
+    <div class="dashboard-table-wrap">
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Год</th>
+            <th>Месяц</th>
+            <th>День</th>
+            <th>Товар</th>
+            <th>Категория</th>
+            <th>Клиент</th>
+            <th>Количество</th>
+            <th>Сумма, грн</th>
+          </tr>
+        </thead>
+
+        <tbody id="dashboard-raw-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="dashboard-action">
+    <button
+      class="dashboard-build-button"
+      id="dashboard-build"
+      type="button"
+    >
+      ⚙ Построить дашборд
+    </button>
+  </div>
+
+  <div class="dashboard-loader" id="dashboard-loader">
+    <span class="dashboard-spinner"></span>
+
+    <span>
+      Агрегация данных, расчёт KPI и построение графиков…
+    </span>
+  </div>
+
+  <div class="dashboard-output" id="dashboard-output">
+    <div class="dashboard-workspace-head">
+      <div>
+        <span class="dashboard-workspace-label">
+          SALES ANALYTICS
+        </span>
+
+        <strong>
+          Аналитический дашборд продаж
+        </strong>
+
+        <small id="dashboard-filter-status">
+          200 строк в текущем срезе
+        </small>
+      </div>
+
+      <div class="dashboard-refresh-state">
+        <span></span>
+
+        <div>
+          <small>Состояние данных</small>
+          <strong>Актуально</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-slicer-toolbar">
+      <div class="dashboard-slicer-heading">
+        <div>
+          <span>Интерактивные фильтры</span>
+          <small>
+            Работают как слайсеры: выбор сразу изменяет весь дашборд
+          </small>
+        </div>
+
+        <button
+          class="dashboard-reset-filters"
+          id="dashboard-reset-filters"
+          type="button"
+        >
+          Сбросить фильтры
+        </button>
+      </div>
+
+      <div class="dashboard-slicers">
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Год</strong>
+            <span id="dashboard-year-count">Все</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options"
+            id="dashboard-slicer-year"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Месяц</strong>
+            <span id="dashboard-month-count">Все</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options dashboard-slicer-options-months"
+            id="dashboard-slicer-month"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Категория</strong>
+            <span id="dashboard-category-count">Все</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options"
+            id="dashboard-slicer-category"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Клиент</strong>
+            <span id="dashboard-client-count">Все</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options dashboard-slicer-options-scroll"
+            id="dashboard-slicer-client"
+          ></div>
+        </section>
+      </div>
+    </div>
+
+    <div class="dashboard-kpis">
+      <article class="dashboard-kpi">
+        <span>Общая выручка</span>
+        <strong id="dashboard-kpi-revenue">0</strong>
+        <em>грн</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Продано единиц</span>
+        <strong id="dashboard-kpi-quantity">0</strong>
+        <em>единиц</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Средний чек</span>
+        <strong id="dashboard-kpi-average">0</strong>
+        <em>грн / строка</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Уникальных клиентов</span>
+        <strong id="dashboard-kpi-clients">0</strong>
+        <em>клиентов</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Операций в выборке</span>
+        <strong id="dashboard-kpi-orders">0</strong>
+        <em>строк</em>
+      </article>
+
+      <article class="dashboard-kpi dashboard-kpi-accent">
+        <span>Лидер по выручке</span>
+        <strong id="dashboard-kpi-leader">—</strong>
+        <em id="dashboard-kpi-leader-value">0 грн</em>
+      </article>
+    </div>
+
+    <div class="dashboard-charts">
+      <article class="dashboard-chart dashboard-chart-wide">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Динамика выручки по месяцам</h3>
+            <small>Текущий отфильтрованный срез</small>
+          </div>
+
+          <strong id="dashboard-peak-month">—</strong>
+        </div>
+
+        <div class="monthly-chart">
+          <svg
+            id="dashboard-monthly-svg"
+            viewBox="0 0 600 180"
+            preserveAspectRatio="none"
+            aria-label="Динамика выручки"
+          >
+            <defs>
+              <linearGradient
+                id="dashboard-area"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stop-color="#35594b"
+                  stop-opacity=".30"
+                />
+
+                <stop
+                  offset="100%"
+                  stop-color="#35594b"
+                  stop-opacity="0"
+                />
+              </linearGradient>
+            </defs>
+
+            <path
+              id="dashboard-monthly-area"
+              fill="url(#dashboard-area)"
+            ></path>
+
+            <polyline
+              id="dashboard-monthly-line"
+              fill="none"
+              stroke="#35594b"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></polyline>
+          </svg>
+
+          <div class="months-row" id="dashboard-month-labels"></div>
+        </div>
+      </article>
+
+      <article class="dashboard-chart">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Сравнение выручки по годам</h3>
+            <small>Фактические значения из выборки</small>
+          </div>
+        </div>
+
+        <div
+          class="years-chart"
+          id="dashboard-years-chart"
+        ></div>
+      </article>
+
+      <article class="dashboard-chart">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Доля выручки по категориям</h3>
+            <small>Структура продаж</small>
+          </div>
+        </div>
+
+        <div class="category-wrap">
+          <div
+            class="category-donut"
+            id="dashboard-category-donut"
+          ></div>
+
+          <div
+            class="category-legend"
+            id="dashboard-category-legend"
+          ></div>
+        </div>
+      </article>
+
+      <article class="dashboard-chart dashboard-chart-wide">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Топ товаров по выручке</h3>
+            <small>Позиции с наибольшим оборотом</small>
+          </div>
+        </div>
+
+        <div
+          class="products-bars"
+          id="dashboard-products-bars"
+        ></div>
+      </article>
+    </div>
+
+    <div class="dashboard-detail-table">
+      <div class="dashboard-detail-head">
+        <div>
+          <strong>Детализация выборки</strong>
+          <span>
+            Крупнейшие товарные позиции в текущем срезе
+          </span>
+        </div>
+
+        <span id="dashboard-detail-count">
+          0 позиций
+        </span>
+      </div>
+
+      <div class="dashboard-detail-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Товар</th>
+              <th>Категория</th>
+              <th>Количество</th>
+              <th>Выручка</th>
+              <th>Доля</th>
+            </tr>
+          </thead>
+
+          <tbody id="dashboard-detail-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div
+      class="dashboard-empty-state"
+      id="dashboard-empty-state"
+      hidden
+    >
+      По выбранным фильтрам данные отсутствуют.
+    </div>
+
+    <div class="case-demo-controls">
+      <div class="demo-progress-wrap">
+        <div class="demo-progress-label">
+          <span>
+            Готовый интерактивный дашборд
+          </span>
+
+          <span id="dashboard-progress-value">
+            200 / 200
+          </span>
+        </div>
+
+        <div class="demo-progress-track">
+          <div
+            class="demo-progress-bar"
+            id="dashboard-progress-bar"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-cta">
+      <a href="contacts-ru.html">
+        Хочу такой дашборд
+      </a>
+    </div>
+  </div>
+</section>

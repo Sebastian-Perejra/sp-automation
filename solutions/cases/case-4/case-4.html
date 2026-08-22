@@ -251,12 +251,66 @@
     </button>
   </div>
 
-  <div class="capacity-loader" id="capacity-loader">
-    <span class="capacity-spinner"></span>
-    <span>
-      Розподіл замовлень за календарними днями та перевірка доступної потужності…
-    </span>
+ <div class="capacity-calculation" id="capacity-loader">
+  <div class="capacity-calculation__head">
+    <div class="capacity-calculation__pulse"></div>
+
+    <div>
+      <strong id="capacity-calculation-title">
+        Готую розрахунок
+      </strong>
+
+      <span id="capacity-calculation-text">
+        Аналізую виробничі дані
+      </span>
+    </div>
+
+    <div
+      class="capacity-calculation__percent"
+      id="capacity-calculation-percent"
+    >
+      0%
+    </div>
   </div>
+
+  <div class="capacity-calculation__track">
+    <span id="capacity-calculation-progress"></span>
+  </div>
+
+  <div class="capacity-calculation__steps">
+    <div
+      class="capacity-calculation__step"
+      data-capacity-step="1"
+    >
+      <span>01</span>
+      <strong>Замовлення</strong>
+    </div>
+
+    <div
+      class="capacity-calculation__step"
+      data-capacity-step="2"
+    >
+      <span>02</span>
+      <strong>Потужність</strong>
+    </div>
+
+    <div
+      class="capacity-calculation__step"
+      data-capacity-step="3"
+    >
+      <span>03</span>
+      <strong>Календар</strong>
+    </div>
+
+    <div
+      class="capacity-calculation__step"
+      data-capacity-step="4"
+    >
+      <span>04</span>
+      <strong>Строки</strong>
+    </div>
+  </div>
+</div>
 
   <div class="capacity-output" id="capacity-output">
     <div class="capacity-summary">

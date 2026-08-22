@@ -264,7 +264,7 @@ body {
 
 .solutions-system__node--logic {
   right: 50px;
-  bottom: 102px;
+  bottom: 180px;
 }
 
 .solutions-system__node--control {
@@ -4168,18 +4168,19 @@ box-shadow:
 }
 
 .solutions-system__node span {
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .solutions-system__node strong {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .solutions-system__node small {
   margin-top: 7px;
-  color: #8c978f;
-  font-size: 11px;
-  line-height: 1.35;
+  color: #a2ada4;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .solutions-system__node:hover,
@@ -4194,7 +4195,7 @@ box-shadow:
 }
 
 .solutions-system__node.is-muted {
-  opacity: .42;
+  opacity: .68;
 }
 
 .solutions-system__node.is-active strong {
@@ -4205,17 +4206,35 @@ box-shadow:
   transition:
     stroke .3s ease,
     opacity .3s ease,
-    filter .3s ease;
+    filter .3s ease,
+    stroke-width .3s ease;
 }
 
 .solutions-system__lines path.is-active {
-  stroke: rgba(166,255,72,.92);
+  stroke: rgba(166,255,72,.95);
   stroke-width: 2;
-  filter: drop-shadow(0 0 5px rgba(166,255,72,.55));
+  stroke-dasharray: 18 14;
+  stroke-dashoffset: 0;
+  filter:
+    drop-shadow(0 0 4px rgba(166,255,72,.65))
+    drop-shadow(0 0 10px rgba(166,255,72,.28));
+  animation:
+    solutionsPathFlow 1.15s linear infinite;
 }
 
 .solutions-system__lines path.is-muted {
-  opacity: .16;
+  opacity: .22;
+  animation: none;
+}
+
+@keyframes solutionsPathFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -32;
+  }
 }
 
 .solutions-system__pulse {
@@ -4226,10 +4245,35 @@ box-shadow:
 
 .solutions-system__pulse.is-active {
   opacity: 1;
-  transform: scale(1.7);
+  transform: scale(1.8);
   box-shadow:
-    0 0 10px rgba(166,255,72,.95),
-    0 0 28px rgba(166,255,72,.72);
+    0 0 8px rgba(166,255,72,1),
+    0 0 20px rgba(166,255,72,.8),
+    0 0 38px rgba(166,255,72,.42);
+  animation:
+    solutionsActivePulse 1.15s ease-in-out infinite;
+}
+
+@keyframes solutionsActivePulse {
+  0%,
+  100% {
+    transform: scale(1.35);
+    opacity: .65;
+  }
+
+  50% {
+    transform: scale(2);
+    opacity: 1;
+  }
+}
+
+.solutions-system__lines {
+  overflow: visible;
+}
+
+.solutions-system__lines path {
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
 }
 
 .solutions-system__info {

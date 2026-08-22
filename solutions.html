@@ -128,6 +128,80 @@
 <body>
   <div id="site-header-slot"></div>
 
+  <div class="pricing-estimator-overlay" aria-hidden="true"></div>
+
+<aside
+  class="pricing-estimator-panel"
+  aria-hidden="true"
+  aria-label="Калькулятор вартості проєкту"
+>
+  <button
+    class="pricing-estimator-close"
+    type="button"
+    aria-label="Закрити калькулятор"
+  >
+    ×
+  </button>
+
+  <div class="pricing-estimator-panel-inner">
+
+    <div class="pricing-estimator-panel-kicker">
+      Попередня оцінка
+    </div>
+
+    <h2 class="pricing-estimator-panel-title">
+      Розрахувати вартість проєкту
+    </h2>
+
+    <p class="pricing-estimator-panel-text">
+      Дайте відповіді на кілька коротких запитань, щоб отримати орієнтовну оцінку.
+    </p>
+
+    <div class="pricing-estimator-progress">
+      <div class="pricing-estimator-progress-head">
+        <span class="pricing-estimator-progress-label">
+          Початок
+        </span>
+
+        <span class="pricing-estimator-progress-value">
+          0%
+        </span>
+      </div>
+
+      <div class="pricing-estimator-progress-track">
+        <span class="pricing-estimator-progress-bar"></span>
+      </div>
+    </div>
+
+    <div class="pricing-estimator-content"></div>
+
+    <div class="pricing-estimator-navigation">
+      <button
+        class="pricing-estimator-back"
+        type="button"
+        disabled
+      >
+        ← Назад
+      </button>
+
+      <button
+        class="pricing-estimator-reset"
+        type="button"
+      >
+        Скинути все
+      </button>
+    </div>
+
+    <button
+      class="pricing-estimator-tired"
+      type="button"
+    >
+      Я втомився відповідати — залишити запит
+    </button>
+
+  </div>
+</aside>
+
 <main class="page solutions-page">
     <section class="solutions-hero" id="solutions-hero">
       <div class="solutions-hero__grid">

@@ -2048,13 +2048,53 @@ if (
         return;
       }
 
-      stageBody.innerHTML =
-        caseHtml;
+stageBody.innerHTML =
+  caseHtml;
 
-      executeCaseScript(
-        caseJs,
-        `${basePath}/case-${caseId}.js`
+const caseRoot =
+  stageBody.firstElementChild;
+
+if (
+  caseRoot &&
+  !caseRoot.querySelector(
+    "[data-pricing-estimator-open]"
+  )
+) {
+  const cta =
+    caseRoot.querySelector(
+      '[class$="-cta"]'
+    );
+
+  if (cta) {
+    const estimatorButton =
+      document.createElement(
+        "button"
       );
+
+    estimatorButton.type =
+      "button";
+
+    estimatorButton.className =
+      "case-detail-estimator-button";
+
+    estimatorButton.setAttribute(
+      "data-pricing-estimator-open",
+      ""
+    );
+
+    estimatorButton.innerHTML =
+      'Розрахувати вартість <span>▦</span>';
+
+    cta.appendChild(
+      estimatorButton
+    );
+  }
+}
+
+executeCaseScript(
+  caseJs,
+  `${basePath}/case-${caseId}.js`
+);
 
       stage.classList.remove(
         "loading"

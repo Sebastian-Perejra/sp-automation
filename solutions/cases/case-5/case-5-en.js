@@ -57,7 +57,7 @@ const case5Parts = {
   },
 
   M006: {
-    name: "CNC control system",
+    name: "CNC system",
     stock: 2
   },
 
@@ -180,7 +180,7 @@ function case5CreatePartRow(
     </div>
 
     <label class="case5-part-cell">
-      <span>In stock</span>
+      <span>Stock</span>
 
       <input
         class="case5-stock-input"
@@ -314,34 +314,34 @@ async function case5RunCalculation() {
   case5CalculateButton.disabled = true;
 
   case5CalculateButton.textContent =
-    "Calculating...";
+    "Calculating requirements…";
 
   case5Loader.classList.add("active");
 
   case5LoaderText.textContent =
-    "Analysing sales orders...";
+    "Analyzing sales orders…";
 
   await case5Sleep(450);
 
   case5LoaderText.textContent =
-    "Expanding BOM specifications...";
+    "Expanding BOM specifications…";
 
   await case5Sleep(500);
 
   case5LoaderText.textContent =
-    "Checking warehouse stock...";
+    "Checking current stock levels…";
 
   await case5Sleep(500);
 
   case5LoaderText.textContent =
-    "Calculating component shortages...";
+    "Calculating component shortages…";
 
   await case5Sleep(500);
 
   case5RenderCalculation();
 
   case5LoaderText.textContent =
-    "Purchase list generated";
+    "Purchase requirements generated";
 
   await case5Sleep(350);
 

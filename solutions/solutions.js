@@ -3233,5 +3233,359 @@ if (capacityPreview) {
 
   applyCapacityScenario();
 }
+
+  const bomPreview =
+  document.querySelector(
+    ".featured-case--03 .bom-preview"
+  );
+
+if (bomPreview) {
+  const orderCards =
+    Array.from(
+      bomPreview.querySelectorAll(
+        ".bom-preview__orders > div"
+      )
+    );
+
+  const flowNodes =
+    Array.from(
+      bomPreview.querySelectorAll(
+        ".bom-preview__flow-node"
+      )
+    );
+
+  const tableRows =
+    Array.from(
+      bomPreview.querySelectorAll(
+        ".bom-preview__row:not(.bom-preview__row--head)"
+      )
+    );
+
+  const footerCount =
+    bomPreview.querySelector(
+      ".bom-preview__footer strong"
+    );
+
+  const scenarios = [
+    {
+      orderQty: 10,
+      rows: [
+        ["Motor M-24", 20, 7, 13],
+        ["Controller C-8", 30, 12, 18],
+        ["Frame F-16", 10, 20, 0],
+        ["Bearing B-04", 40, 19, 21]
+      ]
+    },
+    {
+      orderQty: 5,
+      rows: [
+        ["Motor M-24", 5, 7, 0],
+        ["Controller C-8", 10, 12, 0],
+        ["Frame F-16", 10, 20, 0],
+        ["Bearing B-04", 30, 19, 11]
+      ]
+    },
+    {
+      orderQty: 3,
+      rows: [
+        ["Motor M-24", 6, 7, 0],
+        ["Controller C-8", 6, 12, 0],
+        ["Frame F-16", 3, 20, 0],
+        ["Bearing B-04", 12, 19, 0]
+      ]
+    }
+  ];
+
+  function animateFlow() {
+    flowNodes.forEach(
+      node =>
+        node.classList.remove(
+          "is-active"
+        )
+    );
+
+    flowNodes.forEach(
+      (node, index) => {
+        setTimeout(
+          () => {
+            flowNodes.forEach(
+              item =>
+                item.classList.remove(
+                  "is-active"
+                )
+            );
+
+            node.classList.add(
+              "is-active"
+            );
+          },
+          index * 220
+        );
+      }
+    );
+
+    setTimeout(
+      () => {
+        flowNodes.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        flowNodes[
+          flowNodes.length - 1
+        ]?.classList.add(
+          "is-active"
+        );
+      },
+      flowNodes.length * 220
+    );
+  }
+
+  function applyBomScenario(index) {
+    const scenario =
+      scenarios[index];
+
+    orderCards.forEach(
+      item =>
+        item.classList.remove(
+          "is-active"
+        )
+    );
+
+    orderCards[index]
+      ?.classList.add(
+        "is-active"
+      );
+
+    tableRows.forEach(
+      (row, rowIndex) => {
+        const data =
+          scenario.rows[rowIndex];
+
+        if (!data) {
+          return;
+        }
+
+        const cells =
+          row.querySelectorAll(
+            "span, strong"
+          );
+
+        if (cells[0]) {
+          cells[0].textContent =
+            data[0];
+        }
+
+        if (cells[1]) {
+          cells[1].textContent =
+            data[1];
+        }
+
+        if (cells[2]) {
+          cells[2].textContent =
+            data[2];
+        }
+
+        if (cells[3]) {
+          cells[3].textContent =
+            data[3];
+        }
+
+        row.classList.remove(
+          "is-zero",
+          "is-buy"
+        );
+
+        if (data[3] === 0) {
+          row.classList.add(
+            "is-zero"
+          );
+        } else {
+          row.classList.add(
+            "is-buy"
+          );
+        }
+      }
+    );
+
+    const buyGroups =
+      scenario.rows.filter(
+        row => row[3] > 0
+      ).length;
+
+    if (footerCount) {
+      footerCount.textContent =
+        `${buyGroups} COMPONENT GROUPS`;
+    }
+
+    animateFlow();
+  }
+
+  orderCards.forEach(
+    (card, index) => {
+      card.setAttribute(
+        "role",
+        "button"
+      );
+
+      card.tabIndex = 0;
+
+      const activate = () => {
+        applyBomScenario(index);
+      };
+
+      card.addEventListener(
+        "click",
+        activate
+      );
+
+      card.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  flowNodes.forEach(
+    (node, index) => {
+      node.setAttribute(
+        "role",
+        "button"
+      );
+
+      node.tabIndex = 0;
+
+      const activate = () => {
+        flowNodes.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        node.classList.add(
+          "is-active"
+        );
+
+        tableRows.forEach(
+          item =>
+            item.classList.remove(
+              "is-highlighted"
+            )
+        );
+
+        if (index === 0) {
+          orderCards.forEach(
+            item =>
+              item.classList.add(
+                "is-soft-active"
+              )
+          );
+        } else {
+          orderCards.forEach(
+            item =>
+              item.classList.remove(
+                "is-soft-active"
+              )
+          );
+        }
+
+        if (index === 3) {
+          tableRows.forEach(
+            row => {
+              const buy =
+                row.querySelector(
+                  "strong"
+                );
+
+              if (
+                buy &&
+                Number(
+                  buy.textContent
+                ) > 0
+              ) {
+                row.classList.add(
+                  "is-highlighted"
+                );
+              }
+            }
+          );
+        }
+      };
+
+      node.addEventListener(
+        "click",
+        activate
+      );
+
+      node.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  tableRows.forEach(
+    row => {
+      row.setAttribute(
+        "role",
+        "button"
+      );
+
+      row.tabIndex = 0;
+
+      const activate = () => {
+        tableRows.forEach(
+          item =>
+            item.classList.remove(
+              "is-highlighted"
+            )
+        );
+
+        row.classList.add(
+          "is-highlighted"
+        );
+      };
+
+      row.addEventListener(
+        "click",
+        activate
+      );
+
+      row.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  applyBomScenario(0);
+}
   renderResults("");
 })();

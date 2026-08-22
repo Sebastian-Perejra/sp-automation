@@ -3840,5 +3840,96 @@ if (heroSystem) {
   activateHeroNode(0);
   startHeroCycle();
 }
+  const solutionsPage =
+  document.querySelector(
+    ".solutions-page"
+  );
+
+if (
+  solutionsPage &&
+  window.matchMedia(
+    "(pointer: fine)"
+  ).matches &&
+  !window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+) {
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let frameId = null;
+
+  const renderBackgroundParallax =
+    () => {
+      currentX +=
+        (targetX - currentX) *
+        .075;
+
+      currentY +=
+        (targetY - currentY) *
+        .075;
+
+      solutionsPage.style.setProperty(
+        "--solutions-bg-x",
+        `${currentX}px`
+      );
+
+      solutionsPage.style.setProperty(
+        "--solutions-bg-y",
+        `${currentY}px`
+      );
+
+      const distance =
+        Math.abs(
+          targetX - currentX
+        ) +
+        Math.abs(
+          targetY - currentY
+        );
+
+      if (distance > .05) {
+        frameId =
+          requestAnimationFrame(
+            renderBackgroundParallax
+          );
+      } else {
+        frameId = null;
+      }
+    };
+
+  window.addEventListener(
+    "mousemove",
+    event => {
+      const x =
+        event.clientX /
+          window.innerWidth -
+        .5;
+
+      const y =
+        event.clientY /
+          window.innerHeight -
+        .5;
+
+      targetX =
+        x * -24;
+
+      targetY =
+        y * -16;
+
+      if (!frameId) {
+        frameId =
+          requestAnimationFrame(
+            renderBackgroundParallax
+          );
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
+
+renderResults("");
   renderResults("");
 })();

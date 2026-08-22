@@ -3929,7 +3929,59 @@ if (
     }
   );
 }
+const motionPhotos =
+  document.querySelectorAll(
+    ".featured-case__visual, .solutions-visual-break__scene, .supply-break__scene"
+  );
+
+if (
+  motionPhotos.length &&
+  !window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+) {
+  const photoObserver =
+    new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (
+            entry.isIntersecting
+          ) {
+            entry.target.classList.remove(
+              "is-photo-active"
+            );
+
+            requestAnimationFrame(
+              () => {
+                requestAnimationFrame(
+                  () => {
+                    entry.target.classList.add(
+                      "is-photo-active"
+                    );
+                  }
+                );
+              }
+            );
+          } else {
+            entry.target.classList.remove(
+              "is-photo-active"
+            );
+          }
+        });
+      },
+      {
+        threshold: 0.28
+      }
+    );
+
+  motionPhotos.forEach(
+    photo => {
+      photoObserver.observe(
+        photo
+      );
+    }
+  );
+}
 
 renderResults("");
-  renderResults("");
 })();

@@ -2338,27 +2338,47 @@ box-shadow:
 }
 
 .case-detail-stage__loading {
-  min-height: 280px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 16px;
+  display: flex;
+  min-height: 74px;
+  padding: 16px 20px;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid rgba(166,255,72,.08);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(166,255,72,.045),
+      transparent 55%
+    );
 }
 
-.case-detail-stage__loading span {
-  width: 34px;
-  height: 34px;
+.case-detail-stage__loading > span {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
   border: 2px solid rgba(166,255,72,.12);
   border-top-color: var(--solutions-lime);
   border-radius: 50%;
   animation: caseFinderSpin .8s linear infinite;
 }
 
+.case-detail-stage__loading > div {
+  display: grid;
+  gap: 3px;
+}
+
 .case-detail-stage__loading strong {
-  color: #78847b;
+  color: #d9e2da;
   font-family: var(--font-tech);
-  font-size: 8px;
+  font-size: 9px;
   letter-spacing: .1em;
+}
+
+.case-detail-stage__loading small {
+  color: #69756c;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  letter-spacing: .05em;
 }
 
 .case-detail-stage__error {

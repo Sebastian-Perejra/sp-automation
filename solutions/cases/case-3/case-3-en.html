@@ -1,31 +1,75 @@
 <section class="dashboard-case" id="dashboard-case">
-  <div class="case-demo-kicker">
-    Real case study #3
-  </div>
+  <div class="case-demo-kicker">Real case #3</div>
 
-  <h2>
-    Automatic dashboard creation from an Excel dataset
-  </h2>
+  <h2>Automated dashboard creation from an Excel table</h2>
 
   <p class="case-demo-subtitle">
-    The source dataset contains 200 sales rows with date, year, month, day,
-    product, category, client, quantity and amount. After the button is pressed,
-    the system aggregates the data, calculates KPIs and builds four charts.
-    All data below is fictional and used for demonstration.
+    The input is a standard Excel sales table containing date, product,
+    category, customer, quantity and amount. The system automatically processes
+    the dataset, calculates key metrics and builds an interactive dashboard
+    with filters and analytical views.
   </p>
 
-  <div
-    class="dashboard-raw"
-    id="dashboard-raw"
-  >
-    <div class="dashboard-raw-head">
-      <strong>
-        Raw sales dataset
-      </strong>
+  <div class="case3-problem-solution">
+    <article class="case3-info-card case3-problem">
+      <span class="case3-info-label">Problem</span>
 
-      <span>
-        200 ROWS
-      </span>
+      <h3>
+        The data already exists, but every new question requires
+        working with the spreadsheet again
+      </h3>
+
+      <p>
+        Sales data is often accumulated in a regular Excel file:
+        hundreds or thousands of rows containing dates, products,
+        categories, customers, quantities and amounts.
+      </p>
+
+      <p>
+        To review revenue for a specific month, category or customer,
+        the user filters the table, creates summaries, recalculates
+        metrics and separately updates the charts.
+      </p>
+
+      <p>
+        This works well for one-time analysis, but in regular reporting
+        the same operations are repeated again and again and consume
+        unnecessary time.
+      </p>
+    </article>
+
+    <article class="case3-info-card case3-solution">
+      <span class="case3-info-label">Solution</span>
+
+      <h3>
+        The Excel dataset is automatically transformed into
+        an interactive analytical dashboard
+      </h3>
+
+      <p>
+        The system aggregates the source data, calculates KPIs
+        and builds analytical charts without manually creating
+        every individual view.
+      </p>
+
+      <p>
+        The user can select year, month, category, customer
+        or product using slicers and immediately see how
+        every dashboard metric changes.
+      </p>
+
+      <p>
+        As a result, a single spreadsheet becomes a ready-to-use
+        tool for recurring sales analysis and fast investigation
+        of any required data segment.
+      </p>
+    </article>
+  </div>
+
+  <div class="dashboard-raw" id="dashboard-raw">
+    <div class="dashboard-raw-head">
+      <strong>Raw sales dataset</strong>
+      <span>200 ROWS</span>
     </div>
 
     <div class="dashboard-table-wrap">
@@ -38,7 +82,7 @@
             <th>Day</th>
             <th>Product</th>
             <th>Category</th>
-            <th>Client</th>
+            <th>Customer</th>
             <th>Quantity</th>
             <th>Amount, UAH</th>
           </tr>
@@ -59,10 +103,7 @@
     </button>
   </div>
 
-  <div
-    class="dashboard-loader"
-    id="dashboard-loader"
-  >
+  <div class="dashboard-loader" id="dashboard-loader">
     <span class="dashboard-spinner"></span>
 
     <span>
@@ -70,71 +111,157 @@
     </span>
   </div>
 
-  <div
-    class="dashboard-output"
-    id="dashboard-output"
-  >
-    <div class="dashboard-filters">
-      <div class="dashboard-filter">
-        <small>Period</small>
-        <strong>01.01.2024–31.12.2024</strong>
+  <div class="dashboard-output" id="dashboard-output">
+    <div class="dashboard-workspace-head">
+      <div>
+        <span class="dashboard-workspace-label">
+          SALES ANALYTICS
+        </span>
+
+        <strong>
+          Sales analytics dashboard
+        </strong>
+
+        <small id="dashboard-filter-status">
+          200 rows in the current selection
+        </small>
       </div>
 
-      <div class="dashboard-filter">
-        <small>Year</small>
-        <strong>All</strong>
-      </div>
+      <div class="dashboard-refresh-state">
+        <span></span>
 
-      <div class="dashboard-filter">
-        <small>Month</small>
-        <strong>All</strong>
-      </div>
-
-      <div class="dashboard-filter">
-        <small>Category</small>
-        <strong>All</strong>
-      </div>
-
-      <div class="dashboard-filter">
-        <small>Client</small>
-        <strong>All</strong>
+        <div>
+          <small>Data status</small>
+          <strong>Up to date</strong>
+        </div>
       </div>
     </div>
-        <div class="dashboard-kpis">
-      <div class="dashboard-kpi">
+
+    <div class="dashboard-slicer-toolbar">
+      <div class="dashboard-slicer-heading">
+        <div>
+          <span>Interactive filters</span>
+
+          <small>
+            Work like slicers: every selection updates the entire dashboard immediately
+          </small>
+        </div>
+
+        <button
+          class="dashboard-reset-filters"
+          id="dashboard-reset-filters"
+          type="button"
+        >
+          Reset filters
+        </button>
+      </div>
+
+      <div class="dashboard-slicers">
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Year</strong>
+            <span id="dashboard-year-count">All</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options"
+            id="dashboard-slicer-year"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Month</strong>
+            <span id="dashboard-month-count">All</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options dashboard-slicer-options-months"
+            id="dashboard-slicer-month"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Category</strong>
+            <span id="dashboard-category-count">All</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options"
+            id="dashboard-slicer-category"
+          ></div>
+        </section>
+
+        <section class="dashboard-slicer">
+          <div class="dashboard-slicer-head">
+            <strong>Customer</strong>
+            <span id="dashboard-client-count">All</span>
+          </div>
+
+          <div
+            class="dashboard-slicer-options dashboard-slicer-options-scroll"
+            id="dashboard-slicer-client"
+          ></div>
+        </section>
+      </div>
+    </div>
+
+    <div class="dashboard-kpis">
+      <article class="dashboard-kpi">
         <span>Total revenue</span>
-        <strong>1 245 600</strong>
-        <em>▲ 18.7%</em>
-      </div>
+        <strong id="dashboard-kpi-revenue">0</strong>
+        <em>UAH</em>
+      </article>
 
-      <div class="dashboard-kpi">
+      <article class="dashboard-kpi">
         <span>Units sold</span>
-        <strong>1 862</strong>
-        <em>▲ 12.3%</em>
-      </div>
+        <strong id="dashboard-kpi-quantity">0</strong>
+        <em>units</em>
+      </article>
 
-      <div class="dashboard-kpi">
-        <span>Average order value</span>
-        <strong>669 UAH</strong>
-        <em>▲ 5.1%</em>
-      </div>
+      <article class="dashboard-kpi">
+        <span>Average transaction</span>
+        <strong id="dashboard-kpi-average">0</strong>
+        <em>UAH / row</em>
+      </article>
 
-      <div class="dashboard-kpi">
-        <span>Unique clients</span>
-        <strong>48</strong>
-        <em>▲ 9.1%</em>
-      </div>
+      <article class="dashboard-kpi">
+        <span>Unique customers</span>
+        <strong id="dashboard-kpi-clients">0</strong>
+        <em>customers</em>
+      </article>
+
+      <article class="dashboard-kpi">
+        <span>Transactions in selection</span>
+        <strong id="dashboard-kpi-orders">0</strong>
+        <em>rows</em>
+      </article>
+
+      <article class="dashboard-kpi dashboard-kpi-accent">
+        <span>Revenue leader</span>
+        <strong id="dashboard-kpi-leader">—</strong>
+        <em id="dashboard-kpi-leader-value">0 UAH</em>
+      </article>
     </div>
 
     <div class="dashboard-charts">
-      <article class="dashboard-chart">
-        <h3>Monthly revenue trend</h3>
+      <article class="dashboard-chart dashboard-chart-wide">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Monthly revenue trend</h3>
+            <small>Current filtered selection</small>
+          </div>
+
+          <strong id="dashboard-peak-month">—</strong>
+        </div>
 
         <div class="monthly-chart">
           <svg
-            viewBox="0 0 600 160"
+            id="dashboard-monthly-svg"
+            viewBox="0 0 600 180"
             preserveAspectRatio="none"
-            aria-label="Monthly revenue trend"
+            aria-label="Revenue trend"
           >
             <defs>
               <linearGradient
@@ -147,7 +274,7 @@
                 <stop
                   offset="0%"
                   stop-color="#35594b"
-                  stop-opacity=".28"
+                  stop-opacity=".30"
                 />
 
                 <stop
@@ -159,202 +286,125 @@
             </defs>
 
             <path
-              d="M0 105 L55 92 L110 125 L165 67 L220 83 L275 58 L330 74 L385 126 L440 120 L495 70 L550 47 L600 25 L600 160 L0 160 Z"
+              id="dashboard-monthly-area"
               fill="url(#dashboard-area)"
-            />
+            ></path>
 
             <polyline
-              points="0,105 55,92 110,125 165,67 220,83 275,58 330,74 385,126 440,120 495,70 550,47 600,25"
+              id="dashboard-monthly-line"
               fill="none"
               stroke="#35594b"
               stroke-width="5"
               stroke-linecap="round"
               stroke-linejoin="round"
-            />
+            ></polyline>
           </svg>
 
-          <div class="months-row">
-            <span>Jan</span>
-            <span>Feb</span>
-            <span>Mar</span>
-            <span>Apr</span>
-            <span>May</span>
-            <span>Jun</span>
-            <span>Jul</span>
-            <span>Aug</span>
-            <span>Sep</span>
-            <span>Oct</span>
-            <span>Nov</span>
-            <span>Dec</span>
-          </div>
+          <div
+            class="months-row"
+            id="dashboard-month-labels"
+          ></div>
         </div>
       </article>
 
       <article class="dashboard-chart">
-        <h3>Revenue comparison by year</h3>
-
-        <div class="years-chart">
-          <div class="year-column">
-            <b>1 020 000</b>
-            <i style="height: 105px;"></i>
-            <span>2023</span>
-          </div>
-
-          <div class="year-column">
-            <b>1 245 600</b>
-            <i style="height: 140px;"></i>
-            <span>2024</span>
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Revenue comparison by year</h3>
+            <small>Actual values from the current selection</small>
           </div>
         </div>
+
+        <div
+          class="years-chart"
+          id="dashboard-years-chart"
+        ></div>
       </article>
-            <article class="dashboard-chart">
-        <h3>Revenue share by category</h3>
+
+      <article class="dashboard-chart">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Revenue share by category</h3>
+            <small>Sales structure</small>
+          </div>
+        </div>
 
         <div class="category-wrap">
-          <div class="category-donut"></div>
+          <div
+            class="category-donut"
+            id="dashboard-category-donut"
+          ></div>
 
-          <div class="category-legend">
-            <div>
-              <span class="category-name">
-                <span
-                  class="category-dot"
-                  style="background: #3478e5;"
-                ></span>
-                Laptops
-              </span>
-
-              <strong>42%</strong>
-            </div>
-
-            <div>
-              <span class="category-name">
-                <span
-                  class="category-dot"
-                  style="background: #0f9d58;"
-                ></span>
-                Monitors
-              </span>
-
-              <strong>27%</strong>
-            </div>
-
-            <div>
-              <span class="category-name">
-                <span
-                  class="category-dot"
-                  style="background: #f5aa20;"
-                ></span>
-                Accessories
-              </span>
-
-              <strong>20%</strong>
-            </div>
-
-            <div>
-              <span class="category-name">
-                <span
-                  class="category-dot"
-                  style="background: #8854d0;"
-                ></span>
-                Other
-              </span>
-
-              <strong>11%</strong>
-            </div>
-          </div>
+          <div
+            class="category-legend"
+            id="dashboard-category-legend"
+          ></div>
         </div>
       </article>
 
-      <article class="dashboard-chart">
-        <h3>Top products by revenue</h3>
-
-        <div class="products-bars">
-          <div class="product-bar-row">
-            <span>HP 15 Laptop</span>
-
-            <div class="product-track">
-              <div
-                class="product-fill"
-                style="width: 100%;"
-              ></div>
-            </div>
-
-            <span class="product-value">
-              285 000
-            </span>
-          </div>
-
-          <div class="product-bar-row">
-            <span>Dell Inspiron</span>
-
-            <div class="product-track">
-              <div
-                class="product-fill"
-                style="width: 78%;"
-              ></div>
-            </div>
-
-            <span class="product-value">
-              210 500
-            </span>
-          </div>
-
-          <div class="product-bar-row">
-            <span>LG 24 Monitor</span>
-
-            <div class="product-track">
-              <div
-                class="product-fill"
-                style="width: 67%;"
-              ></div>
-            </div>
-
-            <span class="product-value">
-              180 000
-            </span>
-          </div>
-
-          <div class="product-bar-row">
-            <span>Logitech Mouse</span>
-
-            <div class="product-track">
-              <div
-                class="product-fill"
-                style="width: 36%;"
-              ></div>
-            </div>
-
-            <span class="product-value">
-              95 400
-            </span>
-          </div>
-
-          <div class="product-bar-row">
-            <span>A4Tech Keyboard</span>
-
-            <div class="product-track">
-              <div
-                class="product-fill"
-                style="width: 25%;"
-              ></div>
-            </div>
-
-            <span class="product-value">
-              67 200
-            </span>
+      <article class="dashboard-chart dashboard-chart-wide">
+        <div class="dashboard-chart-head">
+          <div>
+            <h3>Top products by revenue</h3>
+            <small>Products with the highest turnover</small>
           </div>
         </div>
+
+        <div
+          class="products-bars"
+          id="dashboard-products-bars"
+        ></div>
       </article>
+    </div>
+
+    <div class="dashboard-detail-table">
+      <div class="dashboard-detail-head">
+        <div>
+          <strong>Selection details</strong>
+
+          <span>
+            Largest product positions in the current selection
+          </span>
+        </div>
+
+        <span id="dashboard-detail-count">
+          0 positions
+        </span>
+      </div>
+
+      <div class="dashboard-detail-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Revenue</th>
+              <th>Share</th>
+            </tr>
+          </thead>
+
+          <tbody id="dashboard-detail-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div
+      class="dashboard-empty-state"
+      id="dashboard-empty-state"
+      hidden
+    >
+      No data is available for the selected filters.
     </div>
 
     <div class="case-demo-controls">
       <div class="demo-progress-wrap">
         <div class="demo-progress-label">
           <span>
-            Completed analytical dashboard
+            Interactive dashboard ready
           </span>
 
-          <span>
+          <span id="dashboard-progress-value">
             200 / 200
           </span>
         </div>
@@ -362,7 +412,7 @@
         <div class="demo-progress-track">
           <div
             class="demo-progress-bar"
-            style="width: 100%;"
+            id="dashboard-progress-bar"
           ></div>
         </div>
       </div>
@@ -370,7 +420,7 @@
 
     <div class="demo-cta">
       <a href="contacts-en.html">
-        I want a similar dashboard
+        I want a dashboard like this
       </a>
     </div>
   </div>

@@ -62,14 +62,14 @@ body {
   background:
     radial-gradient(
       circle at 50% 42%,
-      rgba(25, 48, 36, .18),
-      rgba(5, 9, 7, .58) 48%,
-      rgba(4, 7, 5, .82) 100%
+      rgba(38, 68, 52, .08),
+      rgba(6, 11, 8, .20) 52%,
+      rgba(4, 8, 6, .34) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(5, 9, 7, .70),
-      rgba(5, 9, 7, .82)
+      rgba(5, 9, 7, .14),
+      rgba(5, 9, 7, .30)
     ),
     url("/solutions/assets/Modern%20Glass%20Office%20with%20City%20Views.webp");
   background-size:

@@ -21,10 +21,21 @@ const bomUi =
   const dictionary =
     window.SOLUTIONS_SEARCH_DICTIONARY || {};
 
-  const cases =
-    Array.isArray(window.SOLUTIONS_CASES_UK)
-      ? window.SOLUTIONS_CASES_UK
-      : [];
+const pageLanguage =
+  document.documentElement.lang
+    ?.toLowerCase() || "uk";
+
+const casesSource =
+  pageLanguage.startsWith("en")
+    ? window.SOLUTIONS_CASES_EN
+    : pageLanguage.startsWith("ru")
+      ? window.SOLUTIONS_CASES_RU
+      : window.SOLUTIONS_CASES_UK;
+
+const cases =
+  Array.isArray(casesSource)
+    ? casesSource
+    : [];
 
   const languageLayers = [
     window.SOLUTIONS_SEARCH_LANGUAGE_UK,
@@ -2052,8 +2063,8 @@ if (
       ""
     );
 
-    estimatorButton.innerHTML =
-      'Розрахувати вартість <span>▦</span>';
+estimatorButton.innerHTML =
+  `${finderUi.price} <span>▦</span>`;
 
     cta.appendChild(
       estimatorButton
@@ -2087,12 +2098,11 @@ executeCaseScript(
       stageLoading.hidden =
         true;
 
-      stageBody.innerHTML = `
-        <div class="case-detail-stage__error">
-          Не вдалося завантажити кейс.
-          Спробуй оновити сторінку.
-        </div>
-      `;
+stageBody.innerHTML = `
+  <div class="case-detail-stage__error">
+    ${finderUi.loadError}
+  </div>
+`;
 
       console.error(error);
     }
@@ -2231,13 +2241,8 @@ const processStatus =
     "process-stage-status"
   );
 
-const processLabels = {
-  1: "STAGE 01 / DISCOVERY",
-  2: "STAGE 02 / DATA",
-  3: "STAGE 03 / LOGIC",
-  4: "STAGE 04 / AUTOMATION",
-  5: "STAGE 05 / CONTROL"
-};
+const processLabels =
+  processUi;
 
 function activateProcessStage(
   stageNumber
@@ -2407,21 +2412,15 @@ if (biPreview) {
       "span"
     );
 
-  const filterOptions = [
-    ["2026", "2025", "2024"],
-    [
-      "ALL REGIONS",
-      "WEST",
-      "CENTRAL",
-      "EAST"
-    ],
-    [
-      "ALL CHANNELS",
-      "B2B",
-      "RETAIL",
-      "ONLINE"
-    ]
-  ];
+const filterOptions = [
+  biUi.filters?.years || [
+    "2026",
+    "2025",
+    "2024"
+  ],
+  biUi.filters?.regions || [],
+  biUi.filters?.channels || []
+];
 
   const states = {
     year: 0,
@@ -2441,7 +2440,7 @@ if (biPreview) {
       donut: 32,
       bars: [42, 58, 53, 69, 76, 86, 82, 94],
       signal:
-        "Загальний результат стабільний: факт близький до плану, маржа вище цільового рівня."
+  biUi.scenarios?.[0] || ""
     },
     {
       revenue: "10.9M",
@@ -2453,8 +2452,8 @@ if (biPreview) {
       chart: "88.2%",
       donut: 29,
       bars: [34, 46, 51, 58, 63, 69, 78, 82],
-      signal:
-        "По вибраному зрізу виручка зростає, але маржа нижча за план. Потрібна перевірка структури продажів."
+signal:
+  biUi.scenarios?.[1] || ""
     },
     {
       revenue: "14.6M",
@@ -2466,8 +2465,8 @@ if (biPreview) {
       chart: "101.6%",
       donut: 34,
       bars: [48, 55, 62, 74, 81, 89, 96, 100],
-      signal:
-        "Вибраний сегмент перевищує план. Найбільший внесок дають останні періоди."
+signal:
+  biUi.scenarios?.[2] || ""
     },
     {
       revenue: "9.7M",
@@ -2479,8 +2478,8 @@ if (biPreview) {
       chart: "82.4%",
       donut: 29,
       bars: [61, 57, 52, 49, 45, 54, 59, 63],
-      signal:
-        "Є відхилення від плану. Варто перевірити регіон, канал і динаміку останніх періодів."
+signal:
+  biUi.scenarios?.[3] || ""
     }
   ];
 
@@ -2645,11 +2644,12 @@ if (biPreview) {
           "is-active"
         );
 
-        const texts = [
-          "Виручка показує загальний обсяг продажів у вибраному зрізі.",
-          "Gross Profit показує фінансовий результат після зміни фільтрів.",
-          "Маржа одразу порівнюється з цільовим плановим рівнем."
-        ];
+const texts =
+  Array.isArray(
+    biUi.kpis
+  )
+    ? biUi.kpis
+    : [];
 
         if (signal) {
           signal.textContent =
@@ -2704,8 +2704,8 @@ if (biPreview) {
         }
 
         if (signal) {
-          signal.textContent =
-            `Період ${index + 1}: вибрано окрему точку для детальнішого аналізу план / факт.`;
+signal.textContent =
+  `${biUi.period || ""} ${index + 1}: ${biUi.periodDetail || ""}`;
         }
       };
 
@@ -3425,10 +3425,10 @@ if (bomPreview) {
         row => row[3] > 0
       ).length;
 
-    if (footerCount) {
-      footerCount.textContent =
-        `${buyGroups} COMPONENT GROUPS`;
-    }
+if (footerCount) {
+  footerCount.textContent =
+    `${buyGroups} ${bomUi.componentGroups || ""}`;
+}
 
     animateFlow();
   }
@@ -3640,44 +3640,48 @@ if (heroSystem) {
       "solutions-system-info-text"
     );
 
-  const states = [
-    {
-      label: "01 / CHAOS",
-      title:
-        "Ручні кроки та розрізнені дії",
-      text:
-        "Процес залежить від людей, пам’яті та ручного контролю.",
-      paths: [0, 2],
-      pulses: [0]
-    },
-    {
-      label: "02 / DATA",
-      title:
-        "Дані стають структурованими",
-      text:
-        "Збираємо джерела в одну логіку та прибираємо дублікати.",
-      paths: [0, 2],
-      pulses: [0, 1]
-    },
-    {
-      label: "03 / LOGIC",
-      title:
-        "Правила працюють автоматично",
-      text:
-        "Розрахунки, маршрути та перевірки виконуються без ручних кроків.",
-      paths: [1, 2, 3],
-      pulses: [1, 2]
-    },
-    {
-      label: "04 / CONTROL",
-      title:
-        "Результат видно і контролюється",
-      text:
-        "Користувач бачить стан процесу, відхилення та результат в одному місці.",
-      paths: [0, 1, 3],
-      pulses: [2]
-    }
-  ];
+const states = [
+  {
+    label:
+      heroUi[0]?.label || "",
+    title:
+      heroUi[0]?.title || "",
+    text:
+      heroUi[0]?.text || "",
+    paths: [0, 2],
+    pulses: [0]
+  },
+  {
+    label:
+      heroUi[1]?.label || "",
+    title:
+      heroUi[1]?.title || "",
+    text:
+      heroUi[1]?.text || "",
+    paths: [0, 2],
+    pulses: [0, 1]
+  },
+  {
+    label:
+      heroUi[2]?.label || "",
+    title:
+      heroUi[2]?.title || "",
+    text:
+      heroUi[2]?.text || "",
+    paths: [1, 2, 3],
+    pulses: [1, 2]
+  },
+  {
+    label:
+      heroUi[3]?.label || "",
+    title:
+      heroUi[3]?.title || "",
+    text:
+      heroUi[3]?.text || "",
+    paths: [0, 1, 3],
+    pulses: [2]
+  }
+];
 
   let activeIndex = 0;
   let autoTimer = null;

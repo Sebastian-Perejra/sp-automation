@@ -4669,58 +4669,97 @@ box-shadow:
 }
 
 .solutions-visual-break__scene,
-.supply-break__scene {
+.supply-break__scene,
+.featured-case__visual {
   isolation: isolate;
+}
+
+.solutions-visual-break--factory {
+  border-radius: 22px 0 0 22px;
 }
 
 .solutions-visual-break__scene {
   border-radius: 22px 0 0 22px;
 }
 
+.featured-case--02 {
+  border-radius: 22px 2px 2px 22px;
+}
+
+.featured-case--02 .featured-case__visual {
+  border-radius: 22px 0 0 22px;
+}
+
+
+.solutions-visual-break--supply {
+  border-radius: 0 22px 22px 0;
+}
+
 .supply-break__scene {
   border-radius: 0 22px 22px 0;
 }
 
-.solutions-visual-break__scene::before,
-.supply-break__scene::before {
-  content: "";
-  position: absolute;
-  top: 4%;
-  bottom: 4%;
-  z-index: 4;
-  width: 74px;
-  pointer-events: none;
-  filter: blur(4px);
+.featured-case--01,
+.featured-case--03 {
+  border-radius: 2px 22px 22px 2px;
 }
 
-.solutions-visual-break__scene::before {
+.featured-case--01 .featured-case__visual,
+.featured-case--03 .featured-case__visual {
+  border-radius: 0 22px 22px 0;
+}
+
+.solutions-visual-break__scene::before,
+.supply-break__scene::before,
+.featured-case--01 .featured-case__visual::after,
+.featured-case--02 .featured-case__visual::after,
+.featured-case--03 .featured-case__visual::after {
+  content: "";
+  position: absolute;
+  top: 3%;
+  bottom: 3%;
+  z-index: 8;
+  width: 72px;
+  pointer-events: none;
+}
+
+.solutions-visual-break__scene::before,
+.featured-case--02 .featured-case__visual::after {
   left: -2px;
+
   background:
     linear-gradient(
       90deg,
       #090d0a 0%,
-      rgba(9, 13, 10, .82) 18%,
-      rgba(9, 13, 10, .44) 48%,
-      rgba(9, 13, 10, .12) 76%,
+      rgba(9, 13, 10, .78) 18%,
+      rgba(9, 13, 10, .38) 48%,
+      rgba(9, 13, 10, .10) 76%,
       transparent 100%
     );
+
+  filter: blur(4px);
+
   box-shadow:
-    -10px 0 14px rgba(175, 201, 183, .10),
-    -22px 0 24px rgba(175, 201, 183, .07);
+    -14px 0 20px rgba(177, 204, 185, .08);
 }
 
-.supply-break__scene::before {
+.supply-break__scene::before,
+.featured-case--01 .featured-case__visual::after,
+.featured-case--03 .featured-case__visual::after {
   right: -2px;
+
   background:
     linear-gradient(
       270deg,
       #090d0a 0%,
-      rgba(9, 13, 10, .82) 18%,
-      rgba(9, 13, 10, .44) 48%,
-      rgba(9, 13, 10, .12) 76%,
+      rgba(9, 13, 10, .78) 18%,
+      rgba(9, 13, 10, .38) 48%,
+      rgba(9, 13, 10, .10) 76%,
       transparent 100%
     );
+
+  filter: blur(4px);
+
   box-shadow:
-    10px 0 14px rgba(175, 201, 183, .10),
-    22px 0 24px rgba(175, 201, 183, .07);
+    14px 0 20px rgba(177, 204, 185, .08);
 }

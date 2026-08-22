@@ -4909,3 +4909,20 @@ box-shadow:
 .solutions-proof-strip__item small {
   color: #a4aea6;
 }
+
+.solutions-page {
+  padding-bottom: 110px;
+}
+
+#site-footer-slot {
+  position: relative;
+  margin-top: -110px;
+  padding-top: 110px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 9, 7, 0),
+      rgba(5, 9, 7, .72) 58%,
+      #090d0a 100%
+    );
+}

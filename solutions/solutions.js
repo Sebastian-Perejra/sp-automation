@@ -3587,5 +3587,218 @@ if (bomPreview) {
 
   applyBomScenario(0);
 }
+
+  const heroSystem =
+  document.querySelector(
+    ".solutions-system"
+  );
+
+if (heroSystem) {
+  const nodes =
+    Array.from(
+      heroSystem.querySelectorAll(
+        ".solutions-system__node"
+      )
+    );
+
+  const paths =
+    Array.from(
+      heroSystem.querySelectorAll(
+        ".solutions-system__lines path"
+      )
+    );
+
+  const pulses =
+    Array.from(
+      heroSystem.querySelectorAll(
+        ".solutions-system__pulse"
+      )
+    );
+
+  const infoLabel =
+    document.getElementById(
+      "solutions-system-info-label"
+    );
+
+  const infoTitle =
+    document.getElementById(
+      "solutions-system-info-title"
+    );
+
+  const infoText =
+    document.getElementById(
+      "solutions-system-info-text"
+    );
+
+  const states = [
+    {
+      label: "01 / CHAOS",
+      title:
+        "Ручні кроки та розрізнені дії",
+      text:
+        "Процес залежить від людей, пам’яті та ручного контролю.",
+      paths: [0, 2],
+      pulses: [0]
+    },
+    {
+      label: "02 / DATA",
+      title:
+        "Дані стають структурованими",
+      text:
+        "Збираємо джерела в одну логіку та прибираємо дублікати.",
+      paths: [0, 2],
+      pulses: [0, 1]
+    },
+    {
+      label: "03 / LOGIC",
+      title:
+        "Правила працюють автоматично",
+      text:
+        "Розрахунки, маршрути та перевірки виконуються без ручних кроків.",
+      paths: [1, 2, 3],
+      pulses: [1, 2]
+    },
+    {
+      label: "04 / CONTROL",
+      title:
+        "Результат видно і контролюється",
+      text:
+        "Користувач бачить стан процесу, відхилення та результат в одному місці.",
+      paths: [0, 1, 3],
+      pulses: [2]
+    }
+  ];
+
+  let activeIndex = 0;
+  let autoTimer = null;
+  let isHovering = false;
+
+  function activateHeroNode(
+    index
+  ) {
+    activeIndex = index;
+
+    nodes.forEach(
+      (node, nodeIndex) => {
+        node.classList.toggle(
+          "is-active",
+          nodeIndex === index
+        );
+
+        node.classList.toggle(
+          "is-muted",
+          nodeIndex !== index
+        );
+      }
+    );
+
+    paths.forEach(
+      (path, pathIndex) => {
+        const active =
+          states[index]
+            .paths
+            .includes(pathIndex);
+
+        path.classList.toggle(
+          "is-active",
+          active
+        );
+
+        path.classList.toggle(
+          "is-muted",
+          !active
+        );
+      }
+    );
+
+    pulses.forEach(
+      (pulse, pulseIndex) => {
+        pulse.classList.toggle(
+          "is-active",
+          states[index]
+            .pulses
+            .includes(
+              pulseIndex
+            )
+        );
+      }
+    );
+
+    if (infoLabel) {
+      infoLabel.textContent =
+        states[index].label;
+    }
+
+    if (infoTitle) {
+      infoTitle.textContent =
+        states[index].title;
+    }
+
+    if (infoText) {
+      infoText.textContent =
+        states[index].text;
+    }
+  }
+
+  function startHeroCycle() {
+    clearInterval(
+      autoTimer
+    );
+
+    autoTimer =
+      setInterval(() => {
+        if (isHovering) {
+          return;
+        }
+
+        const nextIndex =
+          (
+            activeIndex + 1
+          ) % nodes.length;
+
+        activateHeroNode(
+          nextIndex
+        );
+      }, 2800);
+  }
+
+  nodes.forEach(
+    (node, index) => {
+      node.addEventListener(
+        "mouseenter",
+        () => {
+          isHovering = true;
+          activateHeroNode(
+            index
+          );
+        }
+      );
+
+      node.addEventListener(
+        "mouseleave",
+        () => {
+          isHovering = false;
+        }
+      );
+    }
+  );
+
+  heroSystem.addEventListener(
+    "mouseenter",
+    () => {
+      isHovering = true;
+    }
+  );
+
+  heroSystem.addEventListener(
+    "mouseleave",
+    () => {
+      isHovering = false;
+    }
+  );
+
+  activateHeroNode(0);
+  startHeroCycle();
+}
   renderResults("");
 })();

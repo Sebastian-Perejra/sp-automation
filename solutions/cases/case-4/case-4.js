@@ -756,30 +756,27 @@
   }
 
   function capacityPlannerDayLoad(
-    usage,
-    dateKey
-  ) {
-    const lineLoads =
-      ["line1", "line2", "line3"]
-        .map(line => {
-          const used =
-            usage[line][dateKey] || 0;
+  usage,
+  dateKey
+) {
+  const lineLoads =
+    ["line1", "line2", "line3"]
+      .map(line => {
+        const used =
+          usage[line][dateKey] || 0;
 
-          const capacity =
-            capacityPlannerValues[line];
+        const capacity =
+          capacityPlannerValues[line];
 
-          return capacity > 0
-            ? used / capacity
-            : 0;
-        });
+        return capacity > 0
+          ? used / capacity
+          : 0;
+      });
 
-    return (
-      lineLoads.reduce(
-        (sum, value) => sum + value,
-        0
-      ) / lineLoads.length
-    );
-  }
+  return Math.max(
+    ...lineLoads
+  );
+}
 
   function capacityPlannerDayClass(load) {
     if (load >= 0.9) {

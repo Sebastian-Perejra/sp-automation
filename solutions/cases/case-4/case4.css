@@ -799,3 +799,52 @@
 .capacity-day.is-full {
   background: #f7c9c9;
 }
+
+.capacity-day {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 54px;
+  padding: 7px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid rgba(53, 89, 75, .08);
+  background: #f4f7f4;
+}
+
+.capacity-day::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: var(--capacity-day-fill, 0%);
+  transition: width .45s ease;
+}
+
+.capacity-day.capacity-free::before {
+  background: rgba(95, 170, 115, .20);
+}
+
+.capacity-day.capacity-medium::before {
+  background: rgba(230, 182, 62, .36);
+}
+
+.capacity-day.capacity-full::before {
+  background: rgba(223, 92, 92, .42);
+}
+
+.capacity-day-number {
+  color: #35594b;
+  font-family: var(--font-tech);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.capacity-day-percent {
+  color: #706b65;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 600;
+}

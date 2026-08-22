@@ -1,88 +1,76 @@
 <section class="case6" id="powerbi-management-case">
   <div class="case6-header">
-    <div class="case6-kicker">REAL CASE STUDY #6</div>
+    <div class="case6-kicker">Real case #6</div>
 
     <h2>
-      Management Reporting Automation in Power&nbsp;BI
+      Management reporting automation in Power&nbsp;BI
     </h2>
 
     <p class="case6-subtitle">
-      The company manufactures and sells juices, mineral water,
-      lemonades, iced tea and energy drinks. Sales data is stored
-      in an accounting system such as 1C, SAP or another ERP platform.
-      Previously, an employee manually exported the data to Excel
-      every month, added it to the existing file, checked formulas,
-      refreshed pivot tables and prepared a new report version
-      for management.
+      The company manufactures and sells juices, mineral water, soft drinks,
+      iced tea and energy drinks. Sales data is stored in an accounting
+      or ERP system such as 1C, SAP or another business platform.
+      Previously, an employee exported the data to Excel every month,
+      updated an existing workbook, checked formulas, refreshed pivot tables
+      and prepared a new management report for distribution.
     </p>
   </div>
 
   <div class="case6-problem-solution">
     <article class="case6-info-card case6-problem">
-      <span class="case6-info-label">PROBLEM</span>
+      <span class="case6-info-label">Problem</span>
 
-      <h3>
-        The management report became outdated before it was even sent
-      </h3>
+      <h3>The management report was already outdated by the time it was sent</h3>
 
       <p>
-        Data was manually transferred from the accounting system
-        into Excel. Every update required a significant amount of time,
-        depended on one specific employee and created a risk of errors
-        in formulas, ranges, pivot tables and charts.
+        Data had to be transferred manually from the source system into Excel.
+        Every update took time, depended on a specific employee and created
+        a risk of errors in formulas, ranges, pivot tables and charts.
       </p>
 
       <ul>
         <li>multiple versions of the same report;</li>
         <li>manual copying of new data;</li>
         <li>delayed management information;</li>
-        <li>no ability to quickly change the analytical view;</li>
-        <li>
-          dependence on the employee responsible for the Excel file.
-        </li>
+        <li>limited ability to change the analytical view quickly;</li>
+        <li>dependency on the employee maintaining the Excel workbook.</li>
       </ul>
     </article>
 
     <article class="case6-info-card case6-solution">
-      <span class="case6-info-label">SOLUTION</span>
+      <span class="case6-info-label">Solution</span>
 
-      <h3>
-        Automatic model refresh and an interactive Power BI report
-      </h3>
+      <h3>Automated data refresh and an interactive Power BI report</h3>
 
       <p>
-        Power BI connects to the source through a connector, API,
+        Power BI connects to the data source through a connector, API,
         ODBC connection or directly to the database.
-        If the system is located inside the company network,
+        If the source system is hosted inside the company network,
         an On-premises Data Gateway is used.
       </p>
 
       <ul>
-        <li>automatic scheduled data refresh;</li>
-        <li>one shared model for all users;</li>
+        <li>scheduled automatic data refresh;</li>
+        <li>a single reporting model for all users;</li>
         <li>filters, slicers and cross-filtering;</li>
-        <li>plan-versus-actual analysis and thresholds;</li>
-        <li>
-          daily access to up-to-date indicators for management.
-        </li>
+        <li>plan-versus-actual analysis and threshold indicators;</li>
+        <li>daily access to up-to-date management figures.</li>
       </ul>
     </article>
   </div>
 
   <div class="case6-before-after">
     <article class="case6-before-card">
-      <span class="case6-stage-label">BEFORE</span>
+      <span class="case6-stage-label">Before</span>
 
-      <strong>
-        An Excel file updated manually
-      </strong>
+      <strong>Manually maintained Excel workbook</strong>
 
       <div class="case6-before-details">
         <span>500 sales rows</span>
         <span>2024–2026</span>
         <span>25 columns</span>
         <span>multiple file versions</span>
-        <span>up to 15 hours of manual work every month</span>
+        <span>up to 15 hours of manual work per month</span>
       </div>
     </article>
 
@@ -91,17 +79,15 @@
     </div>
 
     <article class="case6-after-card">
-      <span class="case6-stage-label">AFTER</span>
+      <span class="case6-stage-label">After</span>
 
-      <strong>
-        One interactive Power BI report
-      </strong>
+      <strong>One interactive Power BI report</strong>
 
       <div class="case6-before-details">
-        <span>automatic refresh</span>
+        <span>automatic data refresh</span>
         <span>one current version</span>
-        <span>filters and drill-down</span>
-        <span>daily management access</span>
+        <span>filters and drill-down analysis</span>
+        <span>daily access for management</span>
         <span>up to 156 hours saved per year</span>
       </div>
     </article>
@@ -113,7 +99,7 @@
         <strong>Source sales dataset</strong>
 
         <span>
-          500 demo transactions for 2024–2026
+          500 demo transactions covering 2024–2026
         </span>
       </div>
 
@@ -142,7 +128,7 @@
             <th>Category</th>
             <th>Brand</th>
             <th>Product</th>
-            <th>Packaging</th>
+            <th>Package</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Revenue</th>
@@ -186,7 +172,7 @@
 
       <div class="case6-pipeline-step" data-case6-step="1">
         <span>2</span>
-        <strong>Table loading</strong>
+        <strong>Load tables</strong>
       </div>
 
       <div class="case6-pipeline-step" data-case6-step="2">
@@ -210,6 +196,7 @@
       </div>
     </div>
   </div>
+
   <section class="case6-dashboard" id="case6-dashboard">
     <div class="case6-powerbi-shell">
       <aside class="case6-sidebar">
@@ -295,7 +282,7 @@
             </span>
 
             <h3 id="case6-report-title">
-              Management overview
+              Executive overview
             </h3>
           </div>
 
@@ -408,37 +395,57 @@
         <div class="case6-kpis">
           <article class="case6-kpi">
             <span>Revenue</span>
+
             <strong id="case6-kpi-revenue">0</strong>
-            <small id="case6-kpi-revenue-change">—</small>
+
+            <small id="case6-kpi-revenue-change">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Gross profit</span>
+
             <strong id="case6-kpi-profit">0</strong>
-            <small id="case6-kpi-profit-change">—</small>
+
+            <small id="case6-kpi-profit-change">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Margin</span>
+
             <strong id="case6-kpi-margin">0%</strong>
-            <small id="case6-kpi-margin-change">—</small>
+
+            <small id="case6-kpi-margin-change">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Plan achievement</span>
+
             <strong id="case6-kpi-plan">0%</strong>
-            <small id="case6-kpi-plan-status">—</small>
+
+            <small id="case6-kpi-plan-status">
+              —
+            </small>
           </article>
 
           <article class="case6-kpi">
             <span>Units sold</span>
+
             <strong id="case6-kpi-quantity">0</strong>
+
             <small>for the selected view</small>
           </article>
 
           <article class="case6-kpi">
             <span>Active customers</span>
+
             <strong id="case6-kpi-customers">0</strong>
+
             <small>unique buyers</small>
           </article>
         </div>
@@ -450,8 +457,8 @@
             <span>Automated management insight</span>
 
             <p id="case6-executive-text">
-              After filters are applied, the system automatically explains
-              what happened to revenue, profit, margin, regions and categories.
+              Once filters are applied, the system automatically explains
+              what changed in revenue, profit, margin, regions and categories.
             </p>
           </div>
         </article>
@@ -460,8 +467,8 @@
           <article class="case6-visual case6-year-chart-card">
             <div class="case6-visual-head">
               <div>
-                <strong>Yearly trend</strong>
-                <span>2024 versus 2025 versus 2026</span>
+                <strong>Year-over-year performance</strong>
+                <span>2024 vs 2025 vs 2026</span>
               </div>
 
               <button
@@ -526,7 +533,7 @@
             <div class="case6-visual-head">
               <div>
                 <strong>Sales by category</strong>
-                <span>click a segment to filter</span>
+                <span>click a segment to filter the report</span>
               </div>
 
               <button
@@ -554,8 +561,8 @@
           <article class="case6-visual">
             <div class="case6-visual-head">
               <div>
-                <strong>Regional ranking</strong>
-                <span>cross-filtering across the report</span>
+                <strong>Region ranking</strong>
+                <span>cross-filter the entire report</span>
               </div>
 
               <button
@@ -599,7 +606,7 @@
             <div class="case6-visual-head">
               <div>
                 <strong>Top products</strong>
-                <span>ABC product analysis</span>
+                <span>ABC analysis of the product portfolio</span>
               </div>
             </div>
 
@@ -609,11 +616,12 @@
             ></div>
           </article>
         </div>
+
         <div class="case6-analysis-grid">
           <article class="case6-alerts-card">
             <div class="case6-visual-head">
               <div>
-                <strong>Requires attention</strong>
+                <strong>Needs attention</strong>
                 <span>automated management alerts</span>
               </div>
             </div>
@@ -628,7 +636,7 @@
             <div class="case6-visual-head">
               <div>
                 <strong>Driver tree</strong>
-                <span>why margin has changed</span>
+                <span>what caused the change in margin</span>
               </div>
             </div>
 
@@ -645,7 +653,7 @@
               <strong>What-if analysis</strong>
 
               <span>
-                Change price, volume or cost and see the forecast
+                Adjust price, volume or cost and review the forecast
               </span>
             </div>
 
@@ -769,8 +777,8 @@
         <h3>How much manual work can be eliminated</h3>
 
         <p>
-          The user can change the report frequency, duration of one
-          reporting cycle and the number of employees involved.
+          Adjust the reporting frequency, the time required for one reporting cycle
+          and the number of employees involved.
         </p>
       </div>
     </div>
@@ -813,7 +821,7 @@
       </label>
 
       <label class="case6-time-control">
-        <span>Review after automation</span>
+        <span>Review time after automation</span>
 
         <input
           id="case6-hours-after"
@@ -828,16 +836,19 @@
     <div class="case6-time-result">
       <article>
         <span>Before automation</span>
+
         <strong id="case6-time-before">180 hrs/year</strong>
       </article>
 
       <article>
         <span>After automation</span>
+
         <strong id="case6-time-after">24 hrs/year</strong>
       </article>
 
       <article class="case6-time-saving-highlight">
-        <span>Potential saving</span>
+        <span>Potential time saved</span>
+
         <strong id="case6-time-saving">156 hrs/year</strong>
       </article>
     </div>
@@ -847,7 +858,7 @@
     <article>
       <span>1</span>
       <strong>ERP / 1C / SAP</strong>
-      <small>source accounting data</small>
+      <small>source business data</small>
     </article>
 
     <article>
@@ -859,7 +870,7 @@
     <article>
       <span>3</span>
       <strong>Power Query</strong>
-      <small>data cleansing and transformation</small>
+      <small>cleaning and transformation</small>
     </article>
 
     <article>
@@ -871,7 +882,7 @@
     <article>
       <span>5</span>
       <strong>Power BI</strong>
-      <small>up-to-date management report</small>
+      <small>up-to-date management reporting</small>
     </article>
   </div>
 

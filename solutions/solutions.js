@@ -1678,29 +1678,32 @@ const conceptLabels =
       .slice(0, 10);
   }
 
-  function resultBadge(
-    index,
-    result,
-    query
-  ) {
-    if (!query) {
-      return result.item.featured
-        ? "FEATURED"
-        : "RECOMMENDED";
-    }
+function resultBadge(
+  index,
+  result,
+  query
+) {
+  const badges =
+    finderUi.badges || {};
 
-    if (index === 0) {
-      return "TOP MATCH";
-    }
-
-    if (
-      result.score >= 220
-    ) {
-      return "STRONG MATCH";
-    }
-
-    return "RELEVANT";
+  if (!query) {
+    return result.item.featured
+      ? badges.featured || ""
+      : badges.recommended || "";
   }
+
+  if (index === 0) {
+    return badges.top || "";
+  }
+
+  if (
+    result.score >= 220
+  ) {
+    return badges.strong || "";
+  }
+
+  return badges.relevant || "";
+}
 
   function reasonLabels(
     result
@@ -1983,20 +1986,29 @@ stateNode.textContent =
     });
 
     try {
-      const basePath =
-        `/solutions/cases/case-${caseId}`;
+const basePath =
+  `/solutions/cases/case-${caseId}`;
 
-      const [
-        htmlResponse,
-        jsResponse
-      ] = await Promise.all([
-        fetch(
-          `${basePath}/case-${caseId}.html`
-        ),
-        fetch(
-          `${basePath}/case-${caseId}.js?v=2`
-        )
-      ]);
+const languageSuffix =
+  pageLanguage.startsWith("en")
+    ? "-en"
+    : pageLanguage.startsWith("ru")
+      ? "-ru"
+      : "";
+
+const caseHtmlPath =
+  `${basePath}/case-${caseId}${languageSuffix}.html`;
+
+const caseJsPath =
+  `${basePath}/case-${caseId}${languageSuffix}.js`;
+
+const [
+  htmlResponse,
+  jsResponse
+] = await Promise.all([
+  fetch(caseHtmlPath),
+  fetch(caseJsPath)
+]);
 
       if (
         !htmlResponse.ok
@@ -2074,7 +2086,7 @@ estimatorButton.innerHTML =
 
 executeCaseScript(
   caseJs,
-  `${basePath}/case-${caseId}.js`
+  caseJsPath
 );
 
       stage.classList.remove(

@@ -4060,3 +4060,79 @@ box-shadow:
   box-shadow:
     0 10px 26px rgba(0,0,0,.2);
 }
+
+.featured-case--03 .bom-preview__orders > div,
+.featured-case--03 .bom-preview__flow-node,
+.featured-case--03 .bom-preview__row:not(.bom-preview__row--head) {
+  cursor: pointer;
+}
+
+.featured-case--03 .bom-preview__orders > div {
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.featured-case--03 .bom-preview__orders > div:hover,
+.featured-case--03 .bom-preview__orders > div.is-active {
+  border-color: rgba(166,255,72,.42);
+  background: rgba(166,255,72,.06);
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.22);
+}
+
+.featured-case--03 .bom-preview__orders > div.is-soft-active {
+  border-color: rgba(166,255,72,.22);
+  background: rgba(166,255,72,.03);
+}
+
+.featured-case--03 .bom-preview__flow-node {
+  transition:
+    border-color .22s ease,
+    background .22s ease,
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.featured-case--03 .bom-preview__flow-node:hover,
+.featured-case--03 .bom-preview__flow-node.is-active {
+  border-color: rgba(166,255,72,.52);
+  background: rgba(166,255,72,.08);
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 22px rgba(166,255,72,.12);
+}
+
+.featured-case--03 .bom-preview__flow-node.is-active strong {
+  color: var(--solutions-lime);
+}
+
+.featured-case--03 .bom-preview__row:not(.bom-preview__row--head) {
+  transition:
+    background .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.featured-case--03 .bom-preview__row:not(.bom-preview__row--head):hover,
+.featured-case--03 .bom-preview__row.is-highlighted {
+  background: rgba(166,255,72,.055);
+  transform: translateX(3px);
+  box-shadow:
+    inset 3px 0 0 var(--solutions-lime);
+}
+
+.featured-case--03 .bom-preview__row.is-buy strong {
+  color: var(--solutions-lime);
+}
+
+.featured-case--03 .bom-preview__row.is-zero {
+  opacity: .62;
+}
+
+.featured-case--03 .bom-preview__row.is-zero strong {
+  color: #69736b;
+}

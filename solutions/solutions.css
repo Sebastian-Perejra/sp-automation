@@ -4456,3 +4456,41 @@ box-shadow:
   gap: 12px;
   align-items: center;
 }
+
+.case-finder__input {
+  caret-color: var(--solutions-lime);
+  cursor: text;
+}
+
+.case-finder__input:focus {
+  outline: none;
+}
+
+.case-finder__input:focus::placeholder {
+  opacity: .28;
+  transition: opacity .2s ease;
+}
+
+.case-finder__search-shell {
+  transition:
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background .22s ease,
+    transform .22s ease;
+}
+
+.case-finder__search-shell:focus-within {
+  border-color: rgba(166, 255, 72, .62);
+  box-shadow:
+    0 0 0 1px rgba(166, 255, 72, .08),
+    0 0 34px rgba(166, 255, 72, .08),
+    0 18px 44px rgba(0, 0, 0, .34),
+    inset 0 1px 0 rgba(255, 255, 255, .05);
+}
+
+.case-finder__search-shell:focus-within
+.case-finder__prompt {
+  color: var(--solutions-lime);
+  text-shadow:
+    0 0 14px rgba(166, 255, 72, .45);
+}

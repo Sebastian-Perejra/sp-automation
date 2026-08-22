@@ -570,3 +570,131 @@
     flex: 1;
   }
 }
+
+.capacity-problem-solution {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 34px 0 38px;
+}
+
+.capacity-story-card {
+  padding: 28px;
+  border-radius: 22px;
+  border: 1px solid rgba(53, 89, 75, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 16px 38px rgba(33, 46, 39, 0.045);
+}
+
+.capacity-story-card--problem {
+  border-color: rgba(185, 83, 70, 0.22);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 245, 243, 0.96),
+      rgba(255, 250, 248, 0.9)
+    );
+}
+
+.capacity-story-card--solution {
+  border-color: rgba(53, 89, 75, 0.22);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(243, 249, 245, 0.98),
+      rgba(248, 252, 249, 0.92)
+    );
+}
+
+.capacity-story-label {
+  display: inline-flex;
+  margin-bottom: 16px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.capacity-story-card--problem .capacity-story-label {
+  background: rgba(185, 83, 70, 0.1);
+  color: #a8483d;
+}
+
+.capacity-story-card--solution .capacity-story-label {
+  background: rgba(53, 89, 75, 0.1);
+  color: #35594b;
+}
+
+.capacity-story-card h3 {
+  margin: 0 0 16px;
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.capacity-story-card--problem h3 {
+  color: #9d4037;
+}
+
+.capacity-story-card--solution h3 {
+  color: #35594b;
+}
+
+.capacity-story-card p {
+  margin: 0 0 18px;
+  color: #5f625f;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.capacity-story-card ul {
+  margin: 0;
+  padding-left: 19px;
+}
+
+.capacity-story-card li {
+  margin-bottom: 9px;
+  color: #555b57;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.capacity-story-card li:last-child {
+  margin-bottom: 0;
+}
+
+.capacity-story-card--problem li::marker {
+  color: #b95346;
+}
+
+.capacity-story-card--solution li::marker {
+  color: #35594b;
+}
+
+@media (max-width: 760px) {
+  .capacity-problem-solution {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 26px 0 30px;
+  }
+
+  .capacity-story-card {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .capacity-story-card h3 {
+    font-size: 17px;
+  }
+
+  .capacity-story-card p {
+    font-size: 12px;
+  }
+
+  .capacity-story-card li {
+    font-size: 11px;
+  }
+}

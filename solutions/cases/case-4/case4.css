@@ -311,17 +311,6 @@
   border-radius: 8px;
 }
 
-.capacity-free {
-  background: #e6f3e9;
-}
-
-.capacity-medium {
-  background: #ffe9ae;
-}
-
-.capacity-full {
-  background: #ffc7c7;
-}
 
 .capacity-legend {
   display: flex;
@@ -340,18 +329,6 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-}
-
-.capacity-legend-free {
-  background: #e6f3e9;
-}
-
-.capacity-legend-medium {
-  background: #ffe9ae;
-}
-
-.capacity-legend-full {
-  background: #ffc7c7;
 }
 
 @media (max-width: 760px) {
@@ -744,62 +721,6 @@
   gap: 10px;
 }
 
-.capacity-month-divider {
-  grid-column: 1 / -1;
-  margin: 6px 0 2px;
-  padding: 0 4px 6px;
-  border-bottom: 1px solid rgba(53, 89, 75, 0.12);
-  color: #35594b;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.capacity-day {
-  min-height: 58px;
-  padding: 8px 8px 7px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  font-size: 11px;
-  font-weight: 600;
-  color: #4f4c48;
-  line-height: 1.1;
-}
-
-.capacity-day-date {
-  color: #35594b;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.capacity-day-month {
-  color: #7b776f;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.capacity-day-load {
-  color: #6b685f;
-  font-size: 10px;
-}
-
-.capacity-day.is-free {
-  background: #e6f2e8;
-}
-
-.capacity-day.is-medium {
-  background: #f5df9b;
-}
-
-.capacity-day.is-full {
-  background: #f7c9c9;
-}
-
 .capacity-day {
   position: relative;
   overflow: hidden;
@@ -847,4 +768,13 @@
   font-family: var(--font-tech);
   font-size: 8px;
   font-weight: 600;
+}
+
+.capacity-day-month {
+  color: #7a766f;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
 }

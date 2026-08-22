@@ -4494,3 +4494,98 @@ box-shadow:
   text-shadow:
     0 0 14px rgba(166, 255, 72, .45);
 }
+
+.case-finder__eyebrow {
+  font-size: 11px;
+}
+
+.case-finder__head p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.case-finder__promise strong {
+  font-size: 16px;
+}
+
+.case-finder__promise p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.case-finder__search-label,
+.case-finder__search-state {
+  font-size: 9px;
+}
+
+.case-finder__suggestions button {
+  font-size: 9px;
+  padding: 9px 12px;
+}
+
+.case-finder__capabilities strong {
+  font-size: 9px;
+}
+
+.case-finder__capabilities span {
+  font-size: 12px;
+}
+
+.case-finder__engine {
+  font-size: 9px;
+}
+
+.case-finder__understood-label {
+  font-size: 9px;
+}
+
+.case-finder__concept {
+  font-size: 9px;
+  padding: 9px 12px;
+}
+
+.case-finder__result-head span,
+.case-finder__result-head strong {
+  font-size: 9px;
+}
+
+.case-result-card__number {
+  font-size: 12px;
+}
+
+.case-result-card__badge {
+  font-size: 8px;
+}
+
+.case-result-card__type {
+  font-size: 9px;
+}
+
+.case-result-card p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.case-result-card__why > span {
+  font-size: 8px;
+}
+
+.case-result-card__why i {
+  font-size: 8px;
+}
+
+.case-result-card__footer span {
+  font-size: 8px;
+}
+
+.case-result-card__footer strong {
+  font-size: 9px;
+}
+
+.case-finder__empty > span {
+  font-size: 9px;
+}
+
+.case-finder__empty p {
+  font-size: 14px;
+}

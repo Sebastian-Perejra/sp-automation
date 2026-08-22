@@ -778,3 +778,22 @@
   letter-spacing: .03em;
   text-transform: uppercase;
 }
+
+.capacity-legend-free {
+  background: #8bc79b;
+}
+
+.capacity-legend-medium {
+  background: #e4ba4f;
+}
+
+.capacity-legend-full {
+  background: #df6b6b;
+}
+
+.capacity-legend i {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}

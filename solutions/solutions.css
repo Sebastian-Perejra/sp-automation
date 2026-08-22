@@ -3977,3 +3977,86 @@ box-shadow:
   box-shadow:
     0 0 18px rgba(166,255,72,.24);
 }
+
+.featured-case--02 .capacity-preview__mode span,
+.featured-case--02 .capacity-preview__line,
+.featured-case--02 .capacity-preview__calendar span,
+.featured-case--02 .capacity-preview__orders > div {
+  cursor: pointer;
+}
+
+.featured-case--02 .capacity-preview__mode span {
+  transition:
+    color .2s ease,
+    border-color .2s ease,
+    background .2s ease,
+    transform .2s ease;
+}
+
+.featured-case--02 .capacity-preview__mode span:hover,
+.featured-case--02 .capacity-preview__mode span.active {
+  border-color: rgba(166,255,72,.46);
+  background: rgba(166,255,72,.09);
+  color: var(--solutions-lime);
+  transform: translateY(-1px);
+}
+
+.featured-case--02 .capacity-preview__line {
+  transition:
+    border-color .22s ease,
+    background .22s ease,
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.featured-case--02 .capacity-preview__line:hover,
+.featured-case--02 .capacity-preview__line.is-active {
+  border-color: rgba(166,255,72,.42);
+  background: rgba(166,255,72,.055);
+  transform: translateX(4px);
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.22);
+}
+
+.featured-case--02 .capacity-preview__track i {
+  transition:
+    width .4s ease;
+}
+
+.featured-case--02 .capacity-preview__calendar span {
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    filter .18s ease;
+  border: 1px solid transparent;
+}
+
+.featured-case--02 .capacity-preview__calendar span:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.3);
+}
+
+.featured-case--02 .capacity-preview__calendar span.is-active {
+  border-color: var(--solutions-lime);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 0 18px rgba(166,255,72,.16);
+}
+
+.featured-case--02 .capacity-preview__orders > div {
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.featured-case--02 .capacity-preview__orders > div:hover,
+.featured-case--02 .capacity-preview__orders > div.is-active {
+  border-color: rgba(166,255,72,.42);
+  background: rgba(166,255,72,.06);
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.2);
+}

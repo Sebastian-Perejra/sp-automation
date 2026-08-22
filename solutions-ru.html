@@ -7,9 +7,87 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <title>Решения – Sebastian Automations</title>
-  <link rel="canonical" href="https://sp-automation.com/solutions-ru.html">
-  <link rel="icon" href="favicon.png">
+  <title>Решения по автоматизации и Power BI | Sebastian Automations</title>
+
+  <meta
+    name="description"
+    content="Реальные кейсы по автоматизации бизнес-процессов, Power BI, Excel, Google Apps Script, ERP, CRM, OCR, PDF и интеграциям. От хаоса в данных и процессах — к управляемой системе."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+  <meta
+    name="theme-color"
+    content="#090d0a"
+  >
+
+  <link
+    rel="canonical"
+    href="https://sp-automation.com/solutions-ru.html"
+  >
+
+  <link
+    rel="alternate"
+    hreflang="uk"
+    href="https://sp-automation.com/solutions.html"
+  >
+
+  <link
+    rel="alternate"
+    hreflang="en"
+    href="https://sp-automation.com/solutions-en.html"
+  >
+
+  <link
+    rel="alternate"
+    hreflang="ru"
+    href="https://sp-automation.com/solutions-ru.html"
+  >
+
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href="https://sp-automation.com/solutions.html"
+  >
+
+  <meta
+    property="og:title"
+    content="Решения по автоматизации и Power BI | Sebastian Automations"
+  >
+
+  <meta
+    property="og:description"
+    content="Реальные кейсы: автоматизация, Power BI, ERP/CRM, OCR, PDF, Google Workspace и цифровые процессы — от хаоса к управляемой системе."
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:url"
+    content="https://sp-automation.com/solutions-ru.html"
+  >
+
+  <meta
+    property="og:site_name"
+    content="Sebastian Automations"
+  >
+
+  <meta
+    property="og:locale"
+    content="ru_RU"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon.png"
+  >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,4857 +97,1647 @@
     rel="stylesheet"
   >
 
-  <style>
-    :root {
-      --page-bg: #f7f4ef;
-      --surface: #ffffff;
-      --surface-soft: #fbfaf7;
-      --surface-green: #f2f7f3;
-
-      --text-main: #242321;
-      --text-secondary: #64605b;
-      --text-muted: #817c75;
-
-      --green: #35594b;
-      --green-hover: #29483c;
-      --green-soft: #dce9df;
-
-      --blue: #2f6f9f;
-      --blue-hover: #255a82;
-
-      --purple: #6665a8;
-
-      --border: #e8e1d8;
-      --border-green: #d5e3d8;
-      --border-blue: #d9e5ee;
-
-      --shadow-soft: 0 18px 55px rgba(48, 43, 37, 0.055);
-      --shadow-card: 0 10px 34px rgba(48, 43, 37, 0.045);
-
-      --radius-large: 28px;
-      --radius-card: 22px;
-      --radius-small: 12px;
-
-      --font-main: "Manrope", sans-serif;
-      --font-tech: "Roboto Mono", monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: var(--font-main);
-      background:
-        radial-gradient(
-          circle at top left,
-          rgba(221, 233, 224, 0.5),
-          transparent 34%
-        ),
-        radial-gradient(
-          circle at top right,
-          rgba(222, 232, 239, 0.45),
-          transparent 30%
-        ),
-        var(--page-bg);
-      color: var(--text-main);
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a,
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 244, 239, 0.88);
-      border-bottom: 1px solid rgba(223, 216, 207, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .topbar-inner {
-    width: min(100%, 1080px);
-    min-height: 72px;
-    margin: 0 auto;
-    padding:
-    max(14px, env(safe-area-inset-top))
-    28px
-    14px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 28px;
-    }
-
-    .home-link {
-      color: var(--green);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .home-link:hover {
-      color: var(--green-hover);
-      transform: translateX(-2px);
-    }
-
-    .desktop-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    margin-left: auto;
-    }
-
-    .desktop-nav a {
-      position: relative;
-      color: #52504c;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-
-    .desktop-nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 100%;
-      bottom: -7px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--green);
-      transition: right 0.22s ease;
-    }
-
-    .desktop-nav a:hover {
-      color: var(--green);
-    }
-
-    .desktop-nav a:hover::after {
-      right: 0;
-    }
-    .desktop-nav a[href="solutions-ru.html"] {
-  padding: 9px 14px;
-  border-radius: 10px;
-  background: var(--green);
-  color: #ffffff;
-}
-
-.desktop-nav a[href="solutions-ru.html"]::after {
-  display: none;
-}
-
-.desktop-nav a[href="solutions-ru.html"]:hover {
-  background: var(--green-hover);
-  color: #ffffff;
-}
-
-    .lang-switcher {
-    display: flex;
-    gap: 7px;
-    justify-self: end;
-    }
-
-    .lang-switcher button {
-      min-width: 38px;
-      height: 34px;
-      padding: 0 9px;
-      border: 1px solid #d6cec4;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      color: #5f5a54;
-      font-family: var(--font-tech);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition:
-        color 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .lang-switcher button:hover {
-      border-color: var(--green);
-      background: var(--green);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .page {
-      width: min(100%, 1080px);
-      margin: 0 auto;
-      padding:
-        72px
-        24px
-        max(104px, env(safe-area-inset-bottom));
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 36px;
-      padding: 70px 58px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-large);
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.98),
-          rgba(249, 247, 243, 0.98)
-        );
-      box-shadow: var(--shadow-soft);
-      text-align: left;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      top: -130px;
-      left: -100px;
-      border-radius: 50%;
-      background: rgba(196, 217, 202, 0.4);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -90px;
-      bottom: -130px;
-      border-radius: 50%;
-      background: rgba(205, 218, 228, 0.45);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      margin: 0 0 26px;
-      color: var(--green);
-      font-size: clamp(3rem, 7vw, 5rem);
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
-
-  .hero p {
-    max-width: 820px;
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 16px;
-    line-height: 1.9;
-    font-weight: 400;
-    }
-
-    .hero p + p {
-      margin-top: 18px;
-    }
-
-    .notice-box {
-      max-width: 720px;
-      margin: 30px 0 0;
-      padding: 16px 20px;
-      border: 1px solid var(--border-green);
-      border-radius: 14px;
-      background: var(--surface-green);
-      color: #3f614d;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.65;
-    }
-
-    .section-card {
-      margin-top: 26px;
-      padding: 42px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: var(--shadow-card);
-    }
-
-    .section-card h2 {
-      margin: 0 0 24px;
-      color: var(--green);
-      font-size: clamp(1.65rem, 3vw, 2.1rem);
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: -0.025em;
-    }
-
-    .section-card p {
-      margin: 0;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.85;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 11px;
-    }
-
-    .tags span {
-      padding: 10px 14px;
-      border: 1px solid #ded8cf;
-      border-radius: 999px;
-      background: var(--surface-soft);
-      color: #4d5651;
-      font-family: var(--font-tech);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      transition:
-        border-color 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .tags span:hover {
-      border-color: #b9cdbf;
-      background: var(--surface-green);
-      color: var(--green);
-      transform: translateY(-1px);
-    }
-
-    .solutions-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .solutions-list li {
-      position: relative;
-      min-height: 82px;
-      padding: 20px 20px 20px 56px;
-      border: 1px solid #e8e2da;
-      border-radius: 16px;
-      background: #fcfbf9;
-      color: #5c5954;
-      font-size: 14px;
-      line-height: 1.6;
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .solutions-list li:hover {
-      border-color: #cbd9ce;
-      box-shadow: 0 10px 28px rgba(47, 70, 57, 0.07);
-      transform: translateY(-2px);
-    }
-
-    .solutions-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      width: 25px;
-      height: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--green);
-      color: #ffffff;
-      font-family: var(--font-tech);
-      font-size: 12px;
-      font-weight: 600;
-      transform: translateY(-50%);
-    }
-
-    .upcoming {
-      border-color: #dedcf0;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(253, 252, 255, 0.98),
-          rgba(247, 246, 252, 0.98)
-        );
-    }
-
-    .upcoming h2 {
-      color: var(--purple);
-    }
-
-    .contact-box {
-      margin-top: 32px;
-      padding: 54px 38px;
-      border: 1px solid var(--border-blue);
-      border-radius: var(--radius-card);
-      background:
-        linear-gradient(
-          135deg,
-          #edf4f8 0%,
-          #f8f8f5 100%
-        );
-      box-shadow: var(--shadow-card);
-      text-align: center;
-    }
-
-    .contact-box h2 {
-      margin: 0 0 14px;
-      color: #2e4d5f;
-      font-size: clamp(1.75rem, 4vw, 2.35rem);
-      font-weight: 600;
-      line-height: 1.25;
-      letter-spacing: -0.03em;
-    }
-
-    .contact-box p {
-      max-width: 650px;
-      margin: 0 auto 28px;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .contact-box a {
-      display: inline-flex;
-      min-height: 50px;
-      padding: 0 24px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: var(--blue);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(47, 111, 159, 0.2);
-      transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .contact-box a:hover {
-      background: var(--blue-hover);
-      box-shadow: 0 14px 30px rgba(47, 111, 159, 0.26);
-      transform: translateY(-2px);
-    }
-
-    footer {
-      padding:
-        34px
-        20px
-        max(34px, env(safe-area-inset-bottom));
-      border-top: 1px solid #dfd8cf;
-      background: rgba(244, 240, 234, 0.96);
-      color: var(--text-muted);
-      font-size: 12px;
-      text-align: center;
-    }
-    footer a,
-footer a:visited {
-  color: inherit;
-  text-decoration: none;
-  font: inherit;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-    @media (max-width: 860px) {
-      .topbar-inner {
-        gap: 16px;
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      .desktop-nav {
-        gap: 18px;
-      }
-
-      .desktop-nav a {
-        font-size: 13px;
-      }
-
-      .hero {
-        padding: 58px 36px;
-      }
-
-      .section-card {
-        padding: 34px;
-      }
-    }
-  @media (max-width: 760px) {
-    .topbar-inner {
-    min-height: 64px;
-    padding:
-    max(12px, env(safe-area-inset-top))
-    14px
-    12px;
-    grid-template-columns: 1fr auto;
-    gap: 14px;
-    }
-
-      .desktop-nav {
-        display: none;
-      }
-
-      .lang-switcher {
-      margin-left: 0;
-      justify-self: end;
-      }
-
-      .page {
-        padding:
-          36px
-          14px
-          max(56px, env(safe-area-inset-bottom));
-      }
-
-      .hero {
-        margin-bottom: 24px;
-        padding: 42px 22px;
-        border-radius: 22px;
-      }
-
-      .hero h1 {
-        margin-bottom: 20px;
-        font-size: clamp(2.6rem, 14vw, 3.7rem);
-      }
-
-      .hero p {
-        font-size: 15px;
-        line-height: 1.8;
-      }
-
-      .notice-box {
-        margin-top: 24px;
-        padding: 15px 16px;
-        font-size: 12px;
-      }
-
-      .section-card {
-        margin-top: 18px;
-        padding: 28px 20px;
-        border-radius: 18px;
-      }
-
-      .section-card h2 {
-        margin-bottom: 20px;
-        font-size: 1.6rem;
-      }
-
-      .section-card p {
-        font-size: 14px;
-        line-height: 1.75;
-      }
-
-      .tags {
-        gap: 9px;
-      }
-
-      .tags span {
-        padding: 9px 11px;
-        font-size: 10px;
-      }
-
-      .solutions-list {
-        grid-template-columns: 1fr;
-        gap: 11px;
-      }
-
-      .solutions-list li {
-        min-height: auto;
-        padding: 17px 16px 17px 51px;
-        font-size: 13px;
-      }
-
-      .solutions-list li::before {
-        left: 17px;
-      }
-
-      .contact-box {
-        margin-top: 22px;
-        padding: 38px 20px;
-        border-radius: 18px;
-      }
-
-      .contact-box h2 {
-        font-size: 1.8rem;
-      }
-
-      .contact-box p {
-        font-size: 14px;
-      }
-
-      .contact-box a {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 390px) {
-      .home-link {
-        font-size: 12px;
-      }
-
-      .lang-switcher {
-        gap: 5px;
-      }
-
-      .lang-switcher button {
-        min-width: 34px;
-        height: 31px;
-        padding: 0 7px;
-        font-size: 10px;
-      }
-
-      .hero {
-        padding-left: 17px;
-        padding-right: 17px;
-      }
-
-      .hero p {
-        font-size: 14px;
-      }
-
-      .section-card {
-        padding-left: 17px;
-        padding-right: 17px;
-      }
-    }
-
-    .case-demo {
-      margin-top: 26px;
-      padding: 42px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      background: rgba(255, 255, 255, 0.97);
-      box-shadow: var(--shadow-card);
-    }
-
-    .case-demo-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 28px;
-    }
-
-    .case-demo-kicker {
-      margin-bottom: 8px;
-      color: var(--green);
-      font-family: var(--font-tech);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .case-demo h2 {
-      margin: 0 0 10px;
-      color: var(--green);
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-    }
-
-    .case-demo-subtitle {
-      max-width: 760px;
-      margin: 0;
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .case-demo-grid {
-      display: grid;
-      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-      gap: 18px;
-    }
-
-    .statement-panel,
-    .result-panel {
-      min-width: 0;
-      border: 1px solid #e7e0d8;
-      border-radius: 18px;
-      background: #fcfbf9;
-      overflow: hidden;
-    }
-
-    .demo-panel-head {
-      padding: 16px 18px;
-      border-bottom: 1px solid #e7e0d8;
-      background: rgba(247, 244, 239, .9);
-    }
-
-    .demo-panel-title {
-      color: #3f3b37;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .demo-panel-note {
-      margin-top: 3px;
-      color: var(--text-muted);
-      font-family: var(--font-tech);
-      font-size: 9px;
-    }
-
-    .statement-window {
-      height: 390px;
-      overflow: auto;
-      padding: 12px;
-      background: #f8f7f4;
-    }
-
-    .statement-line {
-      display: grid;
-      grid-template-columns: 72px 1fr 86px;
-      gap: 10px;
-      padding: 10px 11px;
-      border-bottom: 1px dashed #ddd5cc;
-      color: #4e4a45;
-      font-family: var(--font-tech);
-      font-size: 10px;
-      line-height: 1.45;
-      opacity: .42;
-      transition: opacity .22s ease, background .22s ease, transform .22s ease;
-    }
-
-    .statement-line.active {
-      opacity: 1;
-      background: #fff9e8;
-      transform: translateX(2px);
-    }
-
-    .statement-line.done {
-      opacity: .82;
-      background: #f7faf7;
-    }
-
-    .statement-date {
-      color: #7d766e;
-      white-space: nowrap;
-    }
-
-    .statement-text {
-      overflow-wrap: anywhere;
-    }
-
-    .statement-amount {
-      text-align: right;
-      white-space: nowrap;
-      font-weight: 600;
-    }
-
-    .result-window {
-      height: 390px;
-      overflow: auto;
-      background: #ffffff;
-    }
-
-    .result-table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-
-    .result-table th,
-    .result-table td {
-      padding: 11px 10px;
-      border-bottom: 1px solid #eee8e0;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    .result-table th {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      background: #f7f4ef;
-      color: #5c5751;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .result-table td {
-      color: #504b46;
-      font-size: 10px;
-      line-height: 1.45;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: opacity .22s ease, transform .22s ease;
-    }
-
-    .result-table tr.show td {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .category-chip {
-      display: inline-flex;
-      padding: 5px 8px;
-      border: 1px solid #d9e6dc;
-      border-radius: 999px;
-      background: #f3f8f4;
-      color: var(--green);
-      font-family: var(--font-tech);
-      font-size: 9px;
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .case-demo-controls {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: center;
-      margin-top: 18px;
-      padding: 16px 18px;
-      border: 1px solid var(--border-green);
-      border-radius: 16px;
-      background: var(--surface-green);
-    }
-
-    .demo-progress-wrap {
-      min-width: 0;
-    }
-
-    .demo-progress-label {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 8px;
-      color: #50675a;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .demo-progress-track {
-      height: 8px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #dce8df;
-    }
-
-    .demo-progress-bar {
-      width: 0;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--green), #5f8a72);
-      transition: width .22s ease;
-    }
-
-    .demo-run-button {
-      min-height: 46px;
-      padding: 0 20px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--green);
-      color: #fff;
-      font-family: var(--font-main);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(53, 89, 75, .18);
-      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
-    }
-
-    .demo-run-button:hover {
-      background: var(--green-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(53, 89, 75, .24);
-    }
-
-    .demo-run-button:disabled {
-      opacity: .62;
-      cursor: wait;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .case-demo-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .demo-stat {
-      padding: 15px 14px;
-      border: 1px solid #e8e2da;
-      border-radius: 14px;
-      background: #fcfbf9;
-      text-align: center;
-    }
-
-    .demo-stat strong {
-      display: block;
-      color: var(--green);
-      font-family: var(--font-tech);
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .demo-stat span {
-      display: block;
-      margin-top: 7px;
-      color: var(--text-muted);
-      font-size: 10px;
-      line-height: 1.35;
-    }
-
-    .demo-cta {
-      display: flex;
-      justify-content: center;
-      margin-top: 18px;
-    }
-
-    .demo-cta a {
-      display: inline-flex;
-      min-height: 48px;
-      padding: 0 22px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: var(--blue);
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 10px 24px rgba(47, 111, 159, .18);
-      transition: background .2s ease, transform .2s ease;
-    }
-
-    .demo-cta a:hover {
-      background: var(--blue-hover);
-      transform: translateY(-1px);
-    }
-
-    @media (max-width: 900px) {
-      .case-demo {
-        padding: 32px;
-      }
-
-      .case-demo-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .statement-window,
-      .result-window {
-        height: 340px;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .case-demo {
-        margin-top: 18px;
-        padding: 26px 16px;
-        border-radius: 18px;
-      }
-
-      .case-demo-header {
-        display: block;
-        margin-bottom: 20px;
-      }
-
-      .case-demo h2 {
-        font-size: 1.8rem;
-      }
-
-      .statement-window,
-      .result-window {
-        height: 310px;
-      }
-
-      .statement-line {
-        grid-template-columns: 62px 1fr;
-        font-size: 9px;
-      }
-
-      .statement-amount {
-        grid-column: 2;
-        text-align: left;
-      }
-
-      .case-demo-controls {
-        grid-template-columns: 1fr;
-      }
-
-      .demo-run-button {
-        width: 100%;
-      }
-
-      .case-demo-stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .result-table th:nth-child(1),
-      .result-table td:nth-child(1) {
-        display: none;
-      }
-    }
-
-
-    .statement-line.warning {
-      opacity: 1;
-      background: #fff5dc;
-    }
-
-    .statement-line.error {
-      opacity: 1;
-      background: #ffe8e8;
-    }
-
-    .category-chip.warning {
-      border-color: #efd28a;
-      background: #fff5dc;
-      color: #8b6500;
-    }
-
-    .category-chip.error {
-      border-color: #efb0b0;
-      background: #ffe8e8;
-      color: #9a2f2f;
-    }
-
-    .result-table tr.warning td {
-      background: #fffaf0;
-    }
-
-    .result-table tr.error td {
-      background: #fff2f2;
-    }
-
-
-    .pdf-case {
-      margin-top: 26px;
-      padding: 42px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      background: rgba(255, 255, 255, 0.97);
-      box-shadow: var(--shadow-card);
-    }
-
-    .pdf-case h2 {
-      margin: 0 0 10px;
-      color: var(--green);
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-    }
-
-    .pdf-case-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 0.78fr 1.32fr;
-      gap: 16px;
-      margin-top: 28px;
-    }
-
-    .drive-panel,
-    .pipeline-panel,
-    .sheet-panel {
-      min-width: 0;
-      overflow: hidden;
-      border: 1px solid #e7e0d8;
-      border-radius: 18px;
-      background: #fcfbf9;
-    }
-
-    .drive-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 14px;
-      border-bottom: 1px solid #e7e0d8;
-      background: #f7f4ef;
-      color: #5e5953;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .drive-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #d8d0c7;
-    }
-
-    .drive-body {
-      min-height: 370px;
-      padding: 14px;
-    }
-
-    .drive-folder {
-      margin-bottom: 12px;
-      overflow: hidden;
-      border: 1px solid #e5ddd4;
-      border-radius: 13px;
-      background: #fff;
-    }
-
-    .drive-folder-title {
-      padding: 11px 12px;
-      border-bottom: 1px solid #eee7df;
-      background: #fbfaf7;
-      color: #46413d;
-      font-family: var(--font-tech);
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-    .drive-files {
-      min-height: 54px;
-      padding: 8px;
-    }
-
-    .drive-empty {
-      padding: 10px;
-      color: #a09a93;
-      font-family: var(--font-tech);
-      font-size: 9px;
-      text-align: center;
-    }
-
-    .drive-file {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 6px;
-      padding: 8px;
-      border: 1px solid transparent;
-      border-radius: 9px;
-      color: #56514c;
-      font-family: var(--font-tech);
-      font-size: 9px;
-      line-height: 1.35;
-      transition: opacity .2s ease, transform .25s ease, background .2s ease, border-color .2s ease;
-    }
-
-    .drive-file:last-child {
-      margin-bottom: 0;
-    }
-
-    .drive-file.processing {
-      border-color: #efd28a;
-      background: #fff7e5;
-      transform: translateX(3px);
-    }
-
-    .drive-file.archived {
-      border-color: #d2e3d6;
-      background: #f3f8f4;
-    }
-
-    .pdf-icon {
-      display: grid;
-      width: 27px;
-      height: 32px;
-      place-items: center;
-      border-radius: 5px;
-      background: #c6534f;
-      color: #fff;
-      font-size: 7px;
-      font-weight: 700;
-    }
-
-    .pipeline-body {
-      min-height: 370px;
-      padding: 18px 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .pipeline-step {
-      position: relative;
-      padding: 12px 12px 12px 42px;
-      border: 1px solid #e5ddd4;
-      border-radius: 12px;
-      background: #fff;
-      color: #68615a;
-      font-size: 11px;
-      font-weight: 700;
-      transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
-    }
-
-    .pipeline-step + .pipeline-step {
-      margin-top: 17px;
-    }
-
-    .pipeline-step + .pipeline-step::before {
-      content: "↓";
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      color: #aaa198;
-      font-family: var(--font-tech);
-      transform: translateX(-50%);
-    }
-
-    .pipeline-step span {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      width: 21px;
-      height: 21px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #ece7e0;
-      color: #827a72;
-      font-family: var(--font-tech);
-      font-size: 9px;
-      transform: translateY(-50%);
-    }
-
-    .pipeline-step.active {
-      border-color: #efd28a;
-      background: #fff7e5;
-      color: #725400;
-      transform: translateX(2px);
-    }
-
-    .pipeline-step.done {
-      border-color: #cfe0d3;
-      background: #f3f8f4;
-      color: var(--green);
-    }
-
-    .pipeline-step.done span {
-      background: var(--green);
-      color: #fff;
-    }
-
-    .sheet-tabs {
-      display: flex;
-      gap: 6px;
-      padding: 10px 12px 0;
-      border-bottom: 1px solid #e7e0d8;
-      background: #f7f4ef;
-    }
-
-    .sheet-tab {
-      padding: 8px 11px;
-      border: 1px solid #ddd5cc;
-      border-bottom: 0;
-      border-radius: 9px 9px 0 0;
-      background: #eee9e3;
-      color: #7b746c;
-      font-family: var(--font-tech);
-      font-size: 9px;
-      cursor: pointer;
-    }
-
-    .sheet-tab.active {
-      background: #fff;
-      color: var(--green);
-      font-weight: 700;
-    }
-
-    .pdf-sheet-window {
-      height: 370px;
-      overflow: auto;
-      background: #fff;
-    }
-
-    .pdf-result-table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-
-    .pdf-result-table th,
-    .pdf-result-table td {
-      padding: 9px 8px;
-      border-right: 1px solid #eee8e0;
-      border-bottom: 1px solid #eee8e0;
-      text-align: left;
-      vertical-align: top;
-      font-size: 9px;
-      line-height: 1.35;
-    }
-
-    .pdf-result-table th {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      background: #f7f4ef;
-      color: #5f5953;
-      font-weight: 700;
-    }
-
-    .pdf-result-table td {
-      color: #514c47;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity .22s ease, transform .22s ease;
-    }
-
-    .pdf-result-table tr.show td {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .pdf-case-controls {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: center;
-      margin-top: 18px;
-      padding: 16px 18px;
-      border: 1px solid var(--border-blue);
-      border-radius: 16px;
-      background: #f1f6f9;
-    }
-
-    .pdf-log {
-      min-height: 42px;
-      color: #50616a;
-      font-family: var(--font-tech);
-      font-size: 10px;
-      line-height: 1.55;
-    }
-
-    .pdf-run-button {
-      min-height: 46px;
-      padding: 0 20px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--blue);
-      color: #fff;
-      font-family: var(--font-main);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(47,111,159,.18);
-      transition: background .2s ease, transform .2s ease;
-    }
-
-    .pdf-run-button:hover {
-      background: var(--blue-hover);
-      transform: translateY(-1px);
-    }
-
-    .pdf-run-button:disabled {
-      opacity: .62;
-      cursor: wait;
-      transform: none;
-    }
-
-    .pdf-summary {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .pdf-summary-item {
-      padding: 14px 12px;
-      border: 1px solid #e8e2da;
-      border-radius: 14px;
-      background: #fcfbf9;
-      text-align: center;
-    }
-
-    .pdf-summary-item strong {
-      display: block;
-      color: var(--blue);
-      font-family: var(--font-tech);
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .pdf-summary-item span {
-      display: block;
-      margin-top: 7px;
-      color: var(--text-muted);
-      font-size: 10px;
-      line-height: 1.35;
-    }
-
-    @media (max-width: 980px) {
-      .pdf-case-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .drive-body,
-      .pipeline-body {
-        min-height: auto;
-      }
-
-      .pipeline-body {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 8px;
-      }
-
-      .pipeline-step + .pipeline-step {
-        margin-top: 0;
-      }
-
-      .pipeline-step + .pipeline-step::before {
-        content: "→";
-        top: 50%;
-        left: -8px;
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    @media (max-width: 760px) {
-      .pdf-case {
-        margin-top: 18px;
-        padding: 26px 16px;
-        border-radius: 18px;
-      }
-
-      .pipeline-body {
-        grid-template-columns: 1fr;
-      }
-
-      .pipeline-step + .pipeline-step {
-        margin-top: 17px;
-      }
-
-      .pipeline-step + .pipeline-step::before {
-        content: "↓";
-        top: -18px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .pdf-case-controls {
-        grid-template-columns: 1fr;
-      }
-
-      .pdf-run-button {
-        width: 100%;
-      }
-
-      .pdf-summary {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .pdf-result-table th:nth-child(1),
-      .pdf-result-table td:nth-child(1),
-      .pdf-result-table th:nth-child(6),
-      .pdf-result-table td:nth-child(6) {
-        display: none;
-      }
-    }
-
-    .dashboard-case {
-      margin-top: 26px;
-      padding: 42px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      background: rgba(255,255,255,.97);
-      box-shadow: var(--shadow-card);
-    }
-
-    .dashboard-case h2 {
-      margin: 0 0 10px;
-      color: var(--green);
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-    }
-
-    .dashboard-raw {
-      margin-top: 26px;
-      overflow: hidden;
-      border: 1px solid #e7e0d8;
-      border-radius: 18px;
-      background: #fcfbf9;
-      transition: opacity .35s ease, transform .35s ease, max-height .5s ease;
-    }
-
-    .dashboard-raw.hidden {
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-12px);
-      pointer-events: none;
-    }
-
-    .dashboard-raw-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 15px 18px;
-      border-bottom: 1px solid #e7e0d8;
-      background: #f7f4ef;
-    }
-
-    .dashboard-raw-head strong {
-      color: #3f3b37;
-      font-size: 14px;
-    }
-
-    .dashboard-raw-head span {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--green);
-      color: #fff;
-      font-family: var(--font-tech);
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .dashboard-table-wrap {
-      max-height: 420px;
-      overflow: auto;
-    }
-
-    .dashboard-table {
-      width: 100%;
-      min-width: 850px;
-      border-collapse: collapse;
-    }
-
-    .dashboard-table th,
-    .dashboard-table td {
-      padding: 10px 11px;
-      border-right: 1px solid #eee8e0;
-      border-bottom: 1px solid #eee8e0;
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    .dashboard-table th {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      background: var(--green);
-      color: #fff;
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .dashboard-table td {
-      color: #57524d;
-      font-family: var(--font-tech);
-      font-size: 9px;
-    }
-
-    .dashboard-action {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .dashboard-build-button {
-      min-height: 48px;
-      padding: 0 22px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--green);
-      color: #fff;
-      font-family: var(--font-main);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(53,89,75,.18);
-      transition: background .2s ease, transform .2s ease;
-    }
-
-    .dashboard-build-button:hover {
-      background: var(--green-hover);
-      transform: translateY(-1px);
-    }
-
-    .dashboard-build-button:disabled {
-      opacity: .65;
-      cursor: wait;
-      transform: none;
-    }
-
-    .dashboard-loader {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 44px;
-      color: var(--text-secondary);
-      font-size: 12px;
-    }
-
-    .dashboard-loader.active {
-      display: flex;
-    }
-
-    .dashboard-spinner {
-      width: 18px;
-      height: 18px;
-      border: 2px solid #cfe0d3;
-      border-top-color: var(--green);
-      border-radius: 50%;
-      animation: dashboardSpin .8s linear infinite;
-    }
-
-    @keyframes dashboardSpin {
-      to { transform: rotate(360deg); }
-    }
-
-    .dashboard-output {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .5s ease, transform .5s ease, max-height .8s ease;
-    }
-
-    .dashboard-output.visible {
-      max-height: 1800px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .dashboard-filters {
-      display: grid;
-      grid-template-columns: 1.5fr repeat(4,1fr);
-      gap: 10px;
-      margin-bottom: 12px;
-      padding: 12px;
-      border: 1px solid #e7e0d8;
-      border-radius: 14px;
-      background: #f8f7f4;
-    }
-
-    .dashboard-filter {
-      padding: 9px 10px;
-      border: 1px solid #e7e0d8;
-      border-radius: 10px;
-      background: #fff;
-    }
-
-    .dashboard-filter small {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--text-muted);
-      font-size: 8px;
-    }
-
-    .dashboard-filter strong {
-      color: #4b4641;
-      font-size: 9px;
-    }
-
-    .dashboard-kpis {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .dashboard-kpi {
-      padding: 16px;
-      border: 1px solid #e7e0d8;
-      border-radius: 14px;
-      background: #fcfbf9;
-    }
-
-    .dashboard-kpi:nth-child(1) { background:#f2f8f3; border-color:#d4e4d7; }
-    .dashboard-kpi:nth-child(2) { background:#f2f7fb; border-color:#d9e5ee; }
-    .dashboard-kpi:nth-child(3) { background:#fff8e9; border-color:#efdfb8; }
-    .dashboard-kpi:nth-child(4) { background:#f7f3fb; border-color:#dfd8ed; }
-
-    .dashboard-kpi span {
-      display: block;
-      color: var(--text-secondary);
-      font-size: 9px;
-    }
-
-    .dashboard-kpi strong {
-      display: block;
-      margin: 7px 0 5px;
-      color: #2f2c29;
-      font-family: var(--font-tech);
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .dashboard-kpi em {
-      color: #0f8a4b;
-      font-size: 8px;
-      font-style: normal;
-      font-weight: 700;
-    }
-
-    .dashboard-charts {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 12px;
-    }
-
-    .dashboard-chart {
-      min-height: 260px;
-      padding: 16px;
-      border: 1px solid #e7e0d8;
-      border-radius: 15px;
-      background: #fff;
-    }
-
-    .dashboard-chart h3 {
-      margin: 0 0 16px;
-      color: #49443f;
-      font-size: 12px;
-    }
-
-    .monthly-chart {
-      position: relative;
-      height: 185px;
-      padding: 10px 6px 24px 32px;
-      border-left: 1px solid #ddd6ce;
-      border-bottom: 1px solid #ddd6ce;
-      background: repeating-linear-gradient(to bottom,transparent 0,transparent 43px,#f0ece7 44px);
-    }
-
-    .monthly-chart svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .months-row {
-      position: absolute;
-      left: 28px;
-      right: 0;
-      bottom: 2px;
-      display: flex;
-      justify-content: space-between;
-      color: #8c857e;
-      font-size: 7px;
-    }
-
-    .years-chart {
-      height: 185px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 44px;
-      padding: 20px 20px 0;
-      border-bottom: 1px solid #ddd6ce;
-      background: repeating-linear-gradient(to bottom,transparent 0,transparent 42px,#f0ece7 43px);
-    }
-
-    .year-column {
-      width: 82px;
-      text-align: center;
-    }
-
-    .year-column b {
-      display: block;
-      margin-bottom: 6px;
-      color: #4b4641;
-      font-size: 9px;
-    }
-
-    .year-column i {
-      display: block;
-      width: 100%;
-      border-radius: 8px 8px 0 0;
-      background: linear-gradient(180deg,#7b73c8,#56519b);
-      transform-origin: bottom;
-      animation: growYear .9s ease both;
-    }
-
-    .year-column span {
-      display: block;
-      margin-top: 7px;
-      color: #847d76;
-      font-size: 8px;
-    }
-
-    @keyframes growYear {
-      from { transform: scaleY(0); }
-      to { transform: scaleY(1); }
-    }
-
-    .category-wrap {
-      display: grid;
-      grid-template-columns: 145px 1fr;
-      align-items: center;
-      gap: 22px;
-      min-height: 180px;
-    }
-
-    .category-donut {
-      width: 145px;
-      height: 145px;
-      border-radius: 50%;
-      position: relative;
-      background: conic-gradient(#3478e5 0 42%,#0f9d58 42% 69%,#f5aa20 69% 89%,#8854d0 89% 100%);
-    }
-
-    .category-donut::after {
-      content: "100%";
-      position: absolute;
-      inset: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #fff;
-      color: #4f4944;
-      font-family: var(--font-tech);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .category-legend {
-      display: grid;
-      gap: 10px;
-    }
-
-    .category-legend div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      color: #5c5651;
-      font-size: 9px;
-    }
-
-    .category-name {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .category-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .products-bars {
-      display: grid;
-      gap: 12px;
-    }
-
-    .product-bar-row {
-      display: grid;
-      grid-template-columns: 110px 1fr 62px;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .product-bar-row span {
-      color: #5d5752;
-      font-size: 8px;
-    }
-
-    .product-track {
-      height: 11px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #ece8e3;
-    }
-
-    .product-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg,#2f80ed,#64afff);
-      transform-origin: left;
-      animation: growProduct .9s ease both;
-    }
-
-    .product-value {
-      text-align: right;
-      font-family: var(--font-tech);
-      font-weight: 700;
-    }
-
-    @keyframes growProduct {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
-    }
-
-    @media (max-width: 760px) {
-      .dashboard-case {
-        margin-top: 18px;
-        padding: 26px 16px;
-        border-radius: 18px;
-      }
-
-      .dashboard-filters {
-        grid-template-columns: repeat(2,1fr);
-      }
-
-      .dashboard-filter:first-child {
-        grid-column: 1 / -1;
-      }
-
-      .dashboard-kpis,
-      .dashboard-charts {
-        grid-template-columns: 1fr;
-      }
-
-      .category-wrap {
-        grid-template-columns: 1fr;
-        justify-items: center;
-      }
-
-      .category-legend {
-        width: 100%;
-      }
-
-      .product-bar-row {
-        grid-template-columns: 90px 1fr 52px;
-      }
-    }
-
-    .capacity-case {
-  margin-top: 26px;
-  padding: 42px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  background: rgba(255,255,255,.97);
-  box-shadow: var(--shadow-card);
-}
-
-.capacity-settings {
-  margin-top: 28px;
-  padding: 20px;
-  border: 1px solid #e7e0d8;
-  border-radius: 18px;
-  background: #f8f7f4;
-}
-
-.capacity-settings-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.capacity-settings-head strong {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-.capacity-settings-head span,
-.capacity-period {
-  color: var(--text-muted);
-  font-size: 11px;
-}
-
-.capacity-lines {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.capacity-line-card {
-  padding: 18px;
-  border: 1px solid #e7e0d8;
-  border-radius: 16px;
-  background: #fff;
-}
-
-.capacity-line-name span {
-  display: block;
-  font-weight: 700;
-}
-
-.capacity-line-name small {
-  color: var(--text-muted);
-}
-
-.capacity-control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 18px;
-}
-
-.capacity-minus,
-.capacity-plus {
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 10px;
-  background: var(--green);
-  color: #fff;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.capacity-value {
-  text-align: center;
-}
-
-.capacity-value strong {
-  display: block;
-  color: var(--green);
-  font-family: var(--font-tech);
-  font-size: 24px;
-}
-
-.capacity-value span {
-  color: var(--text-muted);
-  font-size: 10px;
-}
-
-.capacity-orders-panel {
-  margin-top: 20px;
-  overflow: hidden;
-  border: 1px solid #e7e0d8;
-  border-radius: 18px;
-}
-
-.capacity-panel-head {
-  display: flex;
-  justify-content: space-between;
-  padding: 18px;
-  background: #f7f4ef;
-}
-
-.capacity-panel-head strong {
-  display: block;
-}
-
-.capacity-panel-head span,
-.capacity-orders-status {
-  color: var(--text-muted);
-  font-size: 10px;
-}
-
-.capacity-table-wrap {
-  max-height: 420px;
-  overflow: auto;
-}
-
-.capacity-orders-table {
-  width: 100%;
-  min-width: 1100px;
-  border-collapse: collapse;
-}
-
-.capacity-orders-table th,
-.capacity-orders-table td {
-  padding: 10px;
-  border-bottom: 1px solid #eee8e0;
-  white-space: nowrap;
-  font-size: 10px;
-}
-
-.capacity-orders-table th {
-  position: sticky;
-  top: 0;
-  background: var(--green);
-  color: #fff;
-}
-
-.capacity-action {
-  display: flex;
-  justify-content: center;
-  margin-top: 22px;
-}
-
-.capacity-calculate-button {
-  min-height: 50px;
-  padding: 0 24px;
-  border: 0;
-  border-radius: 12px;
-  background: var(--green);
-  color: #fff;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.capacity-loader {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.capacity-loader.active {
-  display: flex;
-}
-
-.capacity-spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #d9e5ee;
-  border-top-color: var(--green);
-  border-radius: 50%;
-  animation: capacitySpin .8s linear infinite;
-}
-
-@keyframes capacitySpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.capacity-output {
-  margin-top: 24px;
-}
-
-.capacity-summary {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 12px;
-}
-
-.capacity-summary-item {
-  padding: 18px;
-  border: 1px solid #e7e0d8;
-  border-radius: 16px;
-  background: #fcfbf9;
-}
-
-.capacity-summary-item span {
-  display: block;
-  font-size: 10px;
-}
-
-.capacity-summary-item strong {
-  display: block;
-  margin-top: 8px;
-  font-size: 24px;
-}
-
-.capacity-dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.capacity-dashboard-card {
-  padding: 18px;
-  border: 1px solid #e7e0d8;
-  border-radius: 18px;
-}
-
-.capacity-dashboard-head span {
-  color: var(--text-muted);
-  font-size: 10px;
-}
-
-.capacity-utilization-row {
-  margin-top: 18px;
-}
-
-.capacity-utilization-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.capacity-utilization-track {
-  height: 12px;
-  border-radius: 999px;
-  background: #ece8e3;
-}
-
-.capacity-utilization-fill {
-  width: 0;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg,#35594b,#70a588);
-}
-
-.capacity-calendar {
-  display: grid;
-  grid-template-columns: repeat(7,1fr);
-  gap: 8px;
-  margin-top: 20px;
-}
-
-.capacity-day {
-  height: 38px;
-  border-radius: 8px;
-}
-
-.capacity-free {
-  background: #e6f3e9;
-}
-
-.capacity-medium {
-  background: #ffe9ae;
-}
-
-.capacity-full {
-  background: #ffc7c7;
-}
-
-.capacity-legend {
-  display: flex;
-  gap: 18px;
-  margin-top: 18px;
-}
-
-.capacity-legend span {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 11px;
-}
-
-.capacity-legend i {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.capacity-legend-free {
-  background: #e6f3e9;
-}
-
-.capacity-legend-medium {
-  background: #ffe9ae;
-}
-
-.capacity-legend-full {
-  background: #ffc7c7;
-}
-
-@media (max-width: 760px) {
-
-  .capacity-case {
-    padding: 26px 16px;
-  }
-
-  .capacity-lines,
-  .capacity-summary,
-  .capacity-dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .capacity-settings-head {
-    display: block;
-  }
-
-  .capacity-legend {
-    flex-direction: column;
-  }
-}
-    .capacity-orders-table td {
-  color: #57524d;
-  font-family: var(--font-tech);
-}
-
-.capacity-orders-table tbody tr:hover td {
-  background: #f7faf7;
-}
-
-.capacity-orders-table tbody tr[data-capacity-priority="urgent"] td {
-  background: #fff8f0;
-}
-
-.capacity-status,
-.capacity-priority {
-  display: inline-flex;
-  align-items: center;
-  margin: 2px 4px 2px 0;
-  padding: 5px 8px;
-  border-radius: 999px;
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.capacity-status-waiting {
-  border: 1px solid #ded8cf;
-  background: #f5f2ed;
-  color: #777069;
-}
-
-.capacity-status-ok {
-  border: 1px solid #cfe2d4;
-  background: #edf7ef;
-  color: #287047;
-}
-
-.capacity-status-warning {
-  border: 1px solid #efd798;
-  background: #fff5d9;
-  color: #876400;
-}
-
-.capacity-status-error {
-  border: 1px solid #efbaba;
-  background: #ffeaea;
-  color: #9b3434;
-}
-
-.capacity-priority-normal {
-  border: 1px solid #dfe2e0;
-  background: #f5f6f5;
-  color: #6e716f;
-}
-
-.capacity-priority-high {
-  border: 1px solid #d5d8ec;
-  background: #f2f3fb;
-  color: #585a91;
-}
-
-.capacity-priority-urgent {
-  border: 1px solid #efbaba;
-  background: #fff0f0;
-  color: #a03434;
-}
-    .capacity-mode-panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 20px;
-  padding: 17px 18px;
-  border: 1px solid var(--border-green);
-  border-radius: 16px;
-  background: var(--surface-green);
-}
-
-.capacity-mode-panel strong {
-  display: block;
-  color: var(--green);
-  font-size: 13px;
-}
-
-.capacity-mode-panel span {
-  display: block;
-  margin-top: 3px;
-  color: var(--text-muted);
-  font-size: 10px;
-}
-
-.capacity-mode-switch {
-  display: flex;
-  gap: 7px;
-  padding: 4px;
-  border-radius: 12px;
-  background: #e1ebe3;
-}
-
-.capacity-mode-button {
-  min-height: 38px;
-  padding: 0 14px;
-  border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: #647168;
-  font-family: var(--font-main);
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.capacity-mode-button.active {
-  background: #ffffff;
-  color: var(--green);
-  box-shadow: 0 5px 14px rgba(53, 89, 75, .13);
-}
-
-.capacity-calculate-button:disabled {
-  opacity: .62;
-  cursor: wait;
-}
-
-.capacity-orders-table tbody tr.capacity-row-updated td {
-  animation: capacityRowUpdate .55s ease;
-}
-
-@keyframes capacityRowUpdate {
-  0% {
-    background: #e9f4eb;
-  }
-
-  100% {
-    background: transparent;
-  }
-}
-
-.capacity-day {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-width: 0;
-  color: #5c5751;
-  font-family: var(--font-tech);
-  font-size: 8px;
-  font-weight: 600;
-}
-
-.capacity-day::after {
-  content: attr(data-load);
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 7px);
-  z-index: 5;
-  width: max-content;
-  max-width: 180px;
-  padding: 6px 8px;
-  border-radius: 7px;
-  background: #34322f;
-  color: #ffffff;
-  font-size: 8px;
-  line-height: 1.4;
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, 4px);
-  transition:
-    opacity .18s ease,
-    visibility .18s ease,
-    transform .18s ease;
-  pointer-events: none;
-}
-
-.capacity-day:hover::after {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-}
-
-@media (max-width: 760px) {
-  .capacity-mode-panel {
-    display: block;
-  }
-
-  .capacity-mode-switch {
-    margin-top: 14px;
-  }
-
-  .capacity-mode-button {
-    flex: 1;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="/solutions/solutions.css?v=7">
+  <link rel="stylesheet" href="/components/components.css">
+  <link rel="stylesheet" href="/consent/consent.css">
   <link rel="stylesheet" href="/assistant.css">
-  <link rel="stylesheet" href="cases/case-5/case5.css">
-  <link rel="stylesheet" href="cases/case-6/case6.css">
-  <link rel="stylesheet" href="cases/case-7/case7.css">
-  <link rel="stylesheet" href="cases/cases-accordion.css">
-  <link rel="stylesheet" href="cases/page-scroll-nav.css">
-  <link rel="stylesheet" href="nav-font-kaleidoscope.css">
 
-<script src="/assistant.js" defer></script>
+  <link rel="stylesheet" href="/solutions/cases/case-1/case1.css">
+  <link rel="stylesheet" href="/solutions/cases/case-2/case2.css">
+  <link rel="stylesheet" href="/solutions/cases/case-3/case3.css">
+  <link rel="stylesheet" href="/solutions/cases/case-4/case4.css">
+  <link rel="stylesheet" href="/solutions/cases/case-5/case5.css">
+  <link rel="stylesheet" href="/solutions/cases/case-6/case6.css">
+  <link rel="stylesheet" href="/solutions/cases/case-7/case7.css">
+
+  <link rel="stylesheet" href="/nav-font-kaleidoscope.css?v=5">
+
+  <script src="/components/components.js" defer></script>
+  <script src="/consent/consent.js" defer></script>
+  <script src="/assistant.js" defer></script>
+  <script src="/nav-font-kaleidoscope.js?v=5" defer></script>
+  <script src="/solutions/search/search-dictionary.js?v=2" defer></script>
+  <script src="/solutions/search/search-language-uk.js?v=2" defer></script>
+  <script src="/solutions/search/search-language-ru.js?v=2" defer></script>
+  <script src="/solutions/search/search-language-en.js?v=2" defer></script>
+  <script src="/solutions/search/search-ru.js?v=2" defer></script>
+  <script src="/solutions/solutions-ru.js" defer></script>
+  <script src="/solutions/solutions.js?v=2" defer></script>
+
+  <link rel="stylesheet" href="/themes/noir-lime/estimator/pricing-estimator.css">
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="home-link" href="index-ru.html">← На главную</a>
+  <div id="site-header-slot"></div>
 
-      <nav class="desktop-nav">
-        <a href="about-ru.html">Обо мне</a>
-        <a href="services-ru.html">Услуги</a>
-        <a href="pricing-ru.html">Ценовая политика</a>
-        <a href="solutions-ru.html">Решения</a>
-        <a href="faq-ru.html">FAQ</a>
-        <a href="contacts-ru.html">Контакты</a>
-      </nav>
+  <div class="pricing-estimator-overlay" aria-hidden="true"></div>
 
-      <div class="lang-switcher">
-        <button type="button" onclick="location.href='solutions.html'">UA</button>
-        <button type="button" onclick="location.href='solutions-en.html'">EN</button>
-        <button type="button" onclick="location.href='solutions-ru.html'">RU</button>
+  <aside
+    class="pricing-estimator-panel"
+    aria-hidden="true"
+    aria-label="Калькулятор стоимости проекта"
+  >
+    <button
+      class="pricing-estimator-close"
+      type="button"
+      aria-label="Закрыть калькулятор"
+    >
+      ×
+    </button>
+
+    <div class="pricing-estimator-panel-inner">
+
+      <div class="pricing-estimator-panel-kicker">
+        Предварительная оценка
       </div>
+
+      <h2 class="pricing-estimator-panel-title">
+        Рассчитать стоимость проекта
+      </h2>
+
+      <p class="pricing-estimator-panel-text">
+        Ответьте на несколько коротких вопросов, чтобы получить ориентировочную оценку.
+      </p>
+
+      <div class="pricing-estimator-progress">
+        <div class="pricing-estimator-progress-head">
+          <span class="pricing-estimator-progress-label">
+            Начало
+          </span>
+
+          <span class="pricing-estimator-progress-value">
+            0%
+          </span>
+        </div>
+
+        <div class="pricing-estimator-progress-track">
+          <span class="pricing-estimator-progress-bar"></span>
+        </div>
+      </div>
+
+      <div class="pricing-estimator-content"></div>
+
+      <div class="pricing-estimator-navigation">
+        <button
+          class="pricing-estimator-back"
+          type="button"
+          disabled
+        >
+          ← Назад
+        </button>
+
+        <button
+          class="pricing-estimator-reset"
+          type="button"
+        >
+          Сбросить всё
+        </button>
+      </div>
+
+      <button
+        class="pricing-estimator-tired"
+        type="button"
+      >
+        Я устал отвечать — оставить запрос
+      </button>
+
     </div>
-  </header>
+  </aside>
 
-  <main class="page">
-    <section class="hero">
-      <h1>Решения</h1>
+  <main class="page solutions-page">
+    <section class="solutions-hero" id="solutions-hero">
+      <div class="solutions-hero__grid">
+        <div class="solutions-hero__content">
+          <div class="solutions-hero__eyebrow">
+            <span class="solutions-hero__eyebrow-dot" aria-hidden="true"></span>
+            <span>FROM CHAOS TO CONTROL</span>
+          </div>
 
-      <p>
-        Большинство моих проектов защищены соглашениями о конфиденциальности
-        или принципом неразглашения по умолчанию. Поэтому я не публикую
-        реальные названия компаний, внутреннюю документацию, рабочие скриншоты,
-        исходные данные или структуру систем заказчиков.
-      </p>
+          <h1 class="solutions-hero__title">
+            От хаоса в процессах —
+            <span>к системе, которую видно и можно контролировать</span>
+          </h1>
 
-      <p>
-        Вместо этого здесь будут появляться обезличенные примеры,
-        архитектура решений, логика процессов, демонстрационные стенды
-        и описание результатов без раскрытия конфиденциальной информации.
-      </p>
+          <p class="solutions-hero__description">
+            Реальные кейсы по автоматизации, аналитике и цифровым процессам —
+            с фокусом не только на инструментах, но и на бизнес-результате.
+          </p>
 
-      <div class="notice-box">
-        Раздел уже открыт и будет постепенно наполняться новыми материалами.
+          <div class="solutions-hero__actions">
+            <a
+              class="solutions-hero__cta solutions-hero__cta--primary"
+              href="#cases-start"
+            >
+              Посмотреть кейсы
+              <span>↓</span>
+            </a>
+
+            <a
+              class="solutions-hero__cta solutions-hero__cta--secondary"
+              href="contacts-ru.html"
+            >
+              Обсудить задачу
+              <span>↗</span>
+            </a>
+          </div>
+
+          <div class="solutions-hero__proof">
+            Power BI · Автоматизация · Google Workspace · ERP / CRM · Отчётность
+          </div>
+        </div>
+
+        <div class="solutions-hero__visual" aria-hidden="true">
+          <div class="solutions-system">
+            <div class="solutions-system__label">PROCESS SYSTEM</div>
+
+            <div class="solutions-system__node solutions-system__node--chaos">
+              <span>01</span>
+              <strong>CHAOS</strong>
+              <small>ручные шаги</small>
+            </div>
+
+            <div class="solutions-system__node solutions-system__node--data">
+              <span>02</span>
+              <strong>DATA</strong>
+              <small>структура</small>
+            </div>
+
+            <div class="solutions-system__node solutions-system__node--logic">
+              <span>03</span>
+              <strong>LOGIC</strong>
+              <small>автоматизация</small>
+            </div>
+
+            <div class="solutions-system__node solutions-system__node--control">
+              <span>04</span>
+              <strong>CONTROL</strong>
+              <small>видимый результат</small>
+            </div>
+
+            <svg
+              class="solutions-system__lines"
+              viewBox="0 0 640 520"
+              preserveAspectRatio="none"
+            >
+              <path d="M80 110 C180 110 155 235 265 235 S360 115 470 115"></path>
+              <path d="M345 285 C385 300 405 320 445 330"></path>
+              <path d="M160 110 C220 180 220 255 285 315"></path>
+              <path d="M470 115 C470 205 430 260 365 335"></path>
+            </svg>
+
+            <div class="solutions-system__pulse solutions-system__pulse--one"></div>
+            <div class="solutions-system__pulse solutions-system__pulse--two"></div>
+            <div class="solutions-system__pulse solutions-system__pulse--three"></div>
+
+            <div class="solutions-system__info">
+              <span id="solutions-system-info-label">
+                01 / CHAOS
+              </span>
+
+              <strong id="solutions-system-info-title">
+                Ручные шаги и разрозненные действия
+              </strong>
+
+              <p id="solutions-system-info-text">
+                Процесс зависит от людей, памяти и ручного контроля.
+              </p>
+            </div>
+
+            <div class="solutions-system__status">
+              <span></span>
+              SYSTEM ONLINE
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solutions-hero__flow" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0 62 C50 5 84 116 132 42 C174 -22 212 128 258 54 C302 -14 330 118 380 60 C426 10 450 92 500 64 C552 36 568 78 620 62 C684 43 710 70 770 62 C842 53 884 64 940 62 C1024 60 1102 62 1200 62"></path>
+        </svg>
+      </div>
+
+      <div class="solutions-hero__scroll">
+        <span>КЕЙСЫ НИЖЕ</span>
+        <span class="solutions-hero__scroll-line" aria-hidden="true"></span>
       </div>
     </section>
 
-    <section class="section-card">
-      <h2>Технологии и направления</h2>
+    <section class="solutions-proof-strip">
+      <div class="solutions-proof-strip__item">
+        <span>01</span>
+        <strong>ПРОЦЕСС</strong>
+        <small>сначала понимаем, что на самом деле происходит</small>
+      </div>
 
-      <div class="tags">
-        <span>Google Sheets</span>
-        <span>Google Apps Script</span>
-        <span>Excel</span>
-        <span>VBA</span>
-        <span>Power BI</span>
-        <span>Telegram</span>
-        <span>API</span>
-        <span>OCR</span>
-        <span>PDF</span>
-        <span>CRM</span>
-        <span>ERP</span>
-        <span>Google Drive</span>
-        <span>PWA</span>
-        <span>HTML/CSS</span>
-        <span>JavaScript</span>
-        <span>Email</span>
+      <div class="solutions-proof-strip__item">
+        <span>02</span>
+        <strong>ДАННЫЕ</strong>
+        <small>убираем хаос, дублирование и ручную сверку</small>
+      </div>
+
+      <div class="solutions-proof-strip__item">
+        <span>03</span>
+        <strong>ЛОГИКА</strong>
+        <small>строим управляемую автоматизацию вокруг процесса</small>
+      </div>
+
+      <div class="solutions-proof-strip__item">
+        <span>04</span>
+        <strong>КОНТРОЛЬ</strong>
+        <small>получаем систему, результат которой виден</small>
       </div>
     </section>
 
-    <section class="section-card">
-      <h2>Типовые задачи</h2>
-
-      <ul class="solutions-list">
-        <li>Автоматическая обработка банковских выписок.</li>
-        <li>Обработка инвойсов и упаковочных листов.</li>
-        <li>Автоматическое формирование отчётов и документов.</li>
-        <li>Создание Telegram-ботов и систем напоминаний.</li>
-        <li>Разработка веб-приложений для внутренних процессов.</li>
-        <li>Создание мобильных веб-приложений и PWA.</li>
-        <li>Интеграция внешних API и сервисов.</li>
-        <li>Автоматизация Google Drive и прав доступа.</li>
-        <li>Создание дашбордов и систем управленческой аналитики.</li>
-        <li>Обработка, очистка и сопоставление данных.</li>
-        <li>Исследование рынка и конкурентной среды.</li>
-        <li>Индивидуальные решения для нестандартных бизнес-процессов.</li>
-      </ul>
-    </section>
-
-
-    <section class="case-demo" id="bank-statement-case">
-      <div class="case-demo-header">
+    <section class="solutions-featured" id="featured-cases">
+      <div class="solutions-featured__intro">
         <div>
-          <div class="case-demo-kicker">Реальный кейс №1</div>
-          <h2>Автоматическая обработка банковских выписок</h2>
-          <p class="case-demo-subtitle">
-            Система читает «грязные» строки банковской выписки, определяет контрагента, сумму и назначение платежа, а затем автоматически распределяет операции по категориям. Ниже используются полностью вымышленные демонстрационные данные.
+          <span class="solutions-featured__eyebrow">
+            FEATURED CASES
+          </span>
+
+          <h2>
+            Три решения, где бизнес-логику видно лучше всего
+          </h2>
+        </div>
+
+        <p>
+          Не просто «сделали дашборд» или «написали скрипт».
+          Здесь показано, как данные, процесс и логика превращаются
+          в инструмент для ежедневного управления.
+        </p>
+      </div>
+
+      <article class="featured-case featured-case--01">
+        <div class="featured-case__content">
+          <div class="featured-case__index-row">
+            <span class="featured-case__index">01</span>
+            <span class="featured-case__type">MANAGEMENT BI</span>
+          </div>
+
+          <h3>
+            Управленческая отчётность без ручного Excel
+          </h3>
+
+          <p class="featured-case__lead">
+            ERP → Power Query → модель данных → DAX →
+            интерактивный Power BI-отчёт для руководства.
+          </p>
+
+          <div class="featured-case__impact">
+            <div>
+              <span>РЕЗУЛЬТАТ</span>
+              <strong>
+                Одна актуальная версия данных вместо нескольких Excel-файлов
+              </strong>
+            </div>
+
+            <div>
+              <span>ОБНОВЛЕНИЕ</span>
+              <strong>
+                Автоматическое подключение и регулярное обновление модели
+              </strong>
+            </div>
+
+            <div>
+              <span>ЭФФЕКТ</span>
+              <strong>
+                Потенциально до 156 часов ручной работы в год
+              </strong>
+            </div>
+          </div>
+
+          <div class="featured-case__tags">
+            <span>POWER BI</span>
+            <span>POWER QUERY</span>
+            <span>DAX</span>
+            <span>ERP / SAP / 1C</span>
+            <span>PLAN / FACT</span>
+          </div>
+
+          <button
+            class="featured-case__open"
+            type="button"
+            data-open-case="6"
+          >
+            Открыть кейс
+            <span>↘</span>
+          </button>
+        </div>
+
+        <div class="featured-case__visual" aria-hidden="true">
+          <div class="bi-preview">
+            <div class="bi-preview__topbar">
+              <div>
+                <span class="bi-preview__brand">P</span>
+                <strong>Executive Analytics</strong>
+              </div>
+
+              <span class="bi-preview__live">
+                <i></i>
+                LIVE MODEL
+              </span>
+            </div>
+
+            <div class="bi-preview__filters">
+              <span>2026</span>
+              <span>ALL REGIONS</span>
+              <span>ALL CHANNELS</span>
+            </div>
+
+            <div class="bi-preview__kpis">
+              <div>
+                <small>REVENUE</small>
+                <strong>12.8M</strong>
+                <span>▲ 8.4%</span>
+              </div>
+
+              <div>
+                <small>GROSS PROFIT</small>
+                <strong>4.1M</strong>
+                <span>▲ 6.9%</span>
+              </div>
+
+              <div>
+                <small>MARGIN</small>
+                <strong>32.0%</strong>
+                <span>PLAN 30.5%</span>
+              </div>
+            </div>
+
+            <div class="bi-preview__main">
+              <div class="bi-preview__chart">
+                <div class="bi-preview__chart-head">
+                  <span>PLAN / FACT</span>
+                  <strong>94.7%</strong>
+                </div>
+
+                <div class="bi-preview__bars">
+                  <i style="height: 42%"></i>
+                  <i style="height: 58%"></i>
+                  <i style="height: 53%"></i>
+                  <i style="height: 69%"></i>
+                  <i style="height: 76%"></i>
+                  <i style="height: 86%"></i>
+                  <i style="height: 82%"></i>
+                  <i style="height: 94%"></i>
+                </div>
+              </div>
+
+              <div class="bi-preview__donut-wrap">
+                <div class="bi-preview__donut">
+                  <span>32%</span>
+                </div>
+
+                <small>MARGIN</small>
+              </div>
+            </div>
+
+            <div class="bi-preview__signal">
+              <span>✦</span>
+
+              <p>
+                Управленческий вывод формируется автоматически
+                после изменения фильтров.
+              </p>
+            </div>
+          </div>
+
+          <div class="featured-case__glow"></div>
+          <div class="featured-case__grid"></div>
+        </div>
+      </article>
+
+      <section
+        class="solutions-visual-break solutions-visual-break--factory"
+        aria-label="Визуальная пауза"
+      >
+        <div class="solutions-visual-break__scene" aria-hidden="true">
+          <div class="factory-sky"></div>
+          <div class="factory-grid"></div>
+
+          <div class="factory-building factory-building--one">
+            <span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="factory-building factory-building--two">
+            <span></span><span></span><span></span>
+          </div>
+
+          <div class="factory-building factory-building--three">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="factory-line factory-line--one"></div>
+          <div class="factory-line factory-line--two"></div>
+          <div class="factory-line factory-line--three"></div>
+
+          <div class="factory-signal factory-signal--one"></div>
+          <div class="factory-signal factory-signal--two"></div>
+          <div class="factory-signal factory-signal--three"></div>
+        </div>
+
+        <div class="solutions-visual-break__copy">
+          <span>OPERATIONS / CAPACITY / DELIVERY</span>
+
+          <p>
+            Когда система видит не только цифры, но и реальные ограничения процесса —
+            планирование перестаёт быть догадкой.
+          </p>
+        </div>
+      </section>
+
+      <article class="featured-case featured-case--02">
+        <div
+          class="featured-case__visual featured-case__visual--capacity"
+          aria-hidden="true"
+        >
+          <div class="capacity-preview">
+            <div class="capacity-preview__head">
+              <div>
+                <span>PRODUCTION CONTROL</span>
+                <strong>Capacity Planner</strong>
+              </div>
+
+              <div class="capacity-preview__mode">
+                <span>QUEUE</span>
+                <span class="active">PRIORITY</span>
+              </div>
+            </div>
+
+            <div class="capacity-preview__lines">
+              <div class="capacity-preview__line">
+                <div>
+                  <span>LINE 01</span>
+                  <strong>250</strong>
+                  <small>units / day</small>
+                </div>
+
+                <div class="capacity-preview__track">
+                  <i style="width:72%"></i>
+                </div>
+
+                <b>72%</b>
+              </div>
+
+              <div class="capacity-preview__line">
+                <div>
+                  <span>LINE 02</span>
+                  <strong>400</strong>
+                  <small>units / day</small>
+                </div>
+
+                <div class="capacity-preview__track">
+                  <i style="width:88%"></i>
+                </div>
+
+                <b>88%</b>
+              </div>
+
+              <div class="capacity-preview__line">
+                <div>
+                  <span>LINE 03</span>
+                  <strong>600</strong>
+                  <small>units / day</small>
+                </div>
+
+                <div class="capacity-preview__track">
+                  <i style="width:61%"></i>
+                </div>
+
+                <b>61%</b>
+              </div>
+            </div>
+
+            <div class="capacity-preview__calendar">
+              <span class="free">01</span>
+              <span class="medium">02</span>
+              <span class="full">03</span>
+              <span class="full">04</span>
+              <span class="medium">05</span>
+              <span class="free">06</span>
+              <span class="medium">07</span>
+              <span class="full">08</span>
+              <span class="full">09</span>
+              <span class="medium">10</span>
+              <span class="free">11</span>
+              <span class="medium">12</span>
+              <span class="full">13</span>
+              <span class="medium">14</span>
+            </div>
+
+            <div class="capacity-preview__orders">
+              <div>
+                <span>ORD-0048</span>
+                <strong>URGENT</strong>
+                <small>08.08 → 10.08</small>
+              </div>
+
+              <div>
+                <span>ORD-0061</span>
+                <strong>HIGH</strong>
+                <small>11.08 → 12.08</small>
+              </div>
+
+              <div>
+                <span>ORD-0079</span>
+                <strong>NORMAL</strong>
+                <small>14.08 → 14.08</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="featured-case__glow featured-case__glow--capacity"></div>
+          <div class="featured-case__grid"></div>
+        </div>
+
+        <div class="featured-case__content">
+          <div class="featured-case__index-row">
+            <span class="featured-case__index">02</span>
+            <span class="featured-case__type">PRODUCTION CAPACITY</span>
+          </div>
+
+          <h3>
+            Планирование мощностей и сроков без ручной диспетчеризации
+          </h3>
+
+          <p class="featured-case__lead">
+            100 заказов → производственные линии → суточная мощность →
+            очередь или приоритет → расчётная дата готовности.
+          </p>
+
+          <div class="featured-case__impact">
+            <div>
+              <span>ВХОД</span>
+              <strong>
+                Заказ, количество, линия, желаемая дата и приоритет
+              </strong>
+            </div>
+
+            <div>
+              <span>ЛОГИКА</span>
+              <strong>
+                Распределение объёма по календарным дням с учётом мощности
+              </strong>
+            </div>
+
+            <div>
+              <span>КОНТРОЛЬ</span>
+              <strong>
+                Дата готовности, статус заказа и загрузка каждой линии
+              </strong>
+            </div>
+          </div>
+
+          <div class="featured-case__tags">
+            <span>CAPACITY</span>
+            <span>PRODUCTION</span>
+            <span>PRIORITY</span>
+            <span>SCHEDULING</span>
+            <span>DELIVERY DATE</span>
+          </div>
+
+          <button
+            class="featured-case__open"
+            type="button"
+            data-open-case="4"
+          >
+            Открыть кейс
+            <span>↘</span>
+          </button>
+        </div>
+      </article>
+
+      <section
+        class="solutions-visual-break solutions-visual-break--supply"
+        aria-label="Визуальная пауза"
+      >
+        <div class="supply-break__copy">
+          <span>ORDER / BOM / STOCK / PURCHASE</span>
+
+          <p>
+            Закупки становятся управляемыми, когда система видит не только заказ,
+            но и состав изделия, остатки и реальную потребность в компонентах.
+          </p>
+        </div>
+
+        <div class="supply-break__scene" aria-hidden="true">
+          <div class="supply-break__rack supply-break__rack--one">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <div class="supply-break__rack supply-break__rack--two">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <div class="supply-break__rack supply-break__rack--three">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+
+          <div class="supply-break__route supply-break__route--one"></div>
+          <div class="supply-break__route supply-break__route--two"></div>
+
+          <div class="supply-break__scanner">
+            <span></span>
+            <strong>STOCK CHECK</strong>
+            <small>SYNCED</small>
+          </div>
+
+          <div class="supply-break__pulse supply-break__pulse--one"></div>
+          <div class="supply-break__pulse supply-break__pulse--two"></div>
+        </div>
+      </section>
+
+      <article class="featured-case featured-case--03">
+        <div class="featured-case__content">
+          <div class="featured-case__index-row">
+            <span class="featured-case__index">03</span>
+            <span class="featured-case__type">BOM / PROCUREMENT</span>
+          </div>
+
+          <h3>
+            Закупки без ручного пересчёта комплектующих
+          </h3>
+
+          <p class="featured-case__lead">
+            Заказы готовых изделий → BOM → общая потребность →
+            складские остатки → точный список к закупке.
+          </p>
+
+          <div class="featured-case__impact">
+            <div>
+              <span>ПОТРЕБНОСТЬ</span>
+              <strong>
+                Количество изделий автоматически раскладывается
+                на комплектующие по BOM
+              </strong>
+            </div>
+
+            <div>
+              <span>ОСТАТКИ</span>
+              <strong>
+                Система вычитает доступный складской запас по каждой позиции
+              </strong>
+            </div>
+
+            <div>
+              <span>РЕЗУЛЬТАТ</span>
+              <strong>
+                Готовый список: что именно и в каком количестве нужно закупить
+              </strong>
+            </div>
+          </div>
+
+          <div class="featured-case__tags">
+            <span>BOM</span>
+            <span>MRP LOGIC</span>
+            <span>STOCK</span>
+            <span>COMPONENTS</span>
+            <span>PROCUREMENT</span>
+          </div>
+
+          <button
+            class="featured-case__open"
+            type="button"
+            data-open-case="5"
+          >
+            Открыть кейс
+            <span>↘</span>
+          </button>
+        </div>
+
+        <div
+          class="featured-case__visual featured-case__visual--bom"
+          aria-hidden="true"
+        >
+          <div class="bom-preview">
+            <div class="bom-preview__head">
+              <div>
+                <span>COMPONENT REQUIREMENTS</span>
+                <strong>BOM Procurement Planner</strong>
+              </div>
+
+              <span class="bom-preview__status">
+                <i></i>
+                CALCULATED
+              </span>
+            </div>
+
+            <div class="bom-preview__orders">
+              <div>
+                <span>ORDER 01</span>
+                <strong>10</strong>
+                <small>Вязальные машины</small>
+              </div>
+
+              <div>
+                <span>ORDER 02</span>
+                <strong>5</strong>
+                <small>Уборочные машины</small>
+              </div>
+
+              <div>
+                <span>ORDER 03</span>
+                <strong>3</strong>
+                <small>Фрезерные машины</small>
+              </div>
+            </div>
+
+            <div class="bom-preview__flow">
+              <div class="bom-preview__flow-node">
+                <span>01</span>
+                <strong>ORDERS</strong>
+                <small>готовые изделия</small>
+              </div>
+
+              <div class="bom-preview__flow-arrow">→</div>
+
+              <div class="bom-preview__flow-node">
+                <span>02</span>
+                <strong>BOM</strong>
+                <small>состав изделия</small>
+              </div>
+
+              <div class="bom-preview__flow-arrow">→</div>
+
+              <div class="bom-preview__flow-node">
+                <span>03</span>
+                <strong>STOCK</strong>
+                <small>остатки</small>
+              </div>
+
+              <div class="bom-preview__flow-arrow">→</div>
+
+              <div class="bom-preview__flow-node bom-preview__flow-node--accent">
+                <span>04</span>
+                <strong>BUY</strong>
+                <small>к закупке</small>
+              </div>
+            </div>
+
+            <div class="bom-preview__table">
+              <div class="bom-preview__row bom-preview__row--head">
+                <span>COMPONENT</span>
+                <span>NEED</span>
+                <span>STOCK</span>
+                <span>BUY</span>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Motor M-24</span>
+                <span>18</span>
+                <span>7</span>
+                <strong>11</strong>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Controller C-8</span>
+                <span>36</span>
+                <span>12</span>
+                <strong>24</strong>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Frame F-16</span>
+                <span>18</span>
+                <span>20</span>
+                <strong class="bom-preview__zero">0</strong>
+              </div>
+
+              <div class="bom-preview__row">
+                <span>Bearing B-04</span>
+                <span>72</span>
+                <span>19</span>
+                <strong>53</strong>
+              </div>
+            </div>
+
+            <div class="bom-preview__footer">
+              <span>PROCUREMENT LIST READY</span>
+              <strong>4 COMPONENT GROUPS</strong>
+            </div>
+          </div>
+
+          <div class="featured-case__glow featured-case__glow--bom"></div>
+          <div class="featured-case__grid"></div>
+        </div>
+      </article>
+    </section>
+
+    <div class="solutions-cases-anchor" id="cases-start"></div>
+
+    <section class="case-finder" id="case-finder">
+      <div class="case-finder__head">
+        <div>
+          <span class="case-finder__eyebrow">
+            SMART CASE FINDER / SEMANTIC MATCHING
+          </span>
+
+          <h2>
+            Не ищите название решения.
+            <span>Опишите проблему.</span>
+          </h2>
+        </div>
+
+        <p>
+          Умный поиск сопоставляет ваш запрос с реальными кейсами
+          по смыслу, а не только по точному совпадению слов.
+          Он понимает украинские, русские и английские формулировки,
+          синонимы, сокращения, типичные ошибки и бизнес-контекст.
+        </p>
+      </div>
+
+      <div class="case-finder__promise">
+        <span>01</span>
+
+        <div>
+          <strong>
+            Попробуйте написать так, как объяснили бы коллеге.
+          </strong>
+
+          <p>
+            Не знаете терминологию? Это нормально.
+            Просто опишите, что сейчас делаете вручную
+            или какую проблему хотите решить.
           </p>
         </div>
       </div>
 
-      <div class="case-demo-grid">
-        <div class="statement-panel">
-          <div class="demo-panel-head">
-            <div class="demo-panel-title">Исходная банковская выписка</div>
-            <div class="demo-panel-note">100 сырых строк • банковские выписки • OCR • разные форматы</div>
-          </div>
-          <div class="statement-window" id="statement-window"></div>
-        </div>
+      <div class="case-finder__search-shell">
+        <div class="case-finder__search-top">
+          <span class="case-finder__search-label">
+            ОПИШИТЕ ЗАДАЧУ ИЛИ ВВЕДИТЕ ТЕХНОЛОГИЮ
+          </span>
 
-        <div class="result-panel">
-          <div class="demo-panel-head">
-            <div class="demo-panel-title">Результат после обработки</div>
-            <div class="demo-panel-note">контрагент • категория • сумма</div>
-          </div>
-          <div class="result-window">
-            <table class="result-table">
-              <thead>
-                <tr>
-                  <th style="width:22%;">Дата</th>
-                  <th style="width:34%;">Контрагент</th>
-                  <th style="width:28%;">Категория</th>
-                  <th style="width:16%;">Сумма</th>
-                </tr>
-              </thead>
-              <tbody id="result-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="case-demo-controls">
-        <div class="demo-progress-wrap">
-          <div class="demo-progress-label">
-            <span id="demo-status">Готово к запуску</span>
-            <span id="demo-counter">0 / 100</span>
-          </div>
-          <div class="demo-progress-track">
-            <div class="demo-progress-bar" id="demo-progress"></div>
-          </div>
-        </div>
-
-        <button class="demo-run-button" id="demo-run" type="button">
-          ▶ Запустить обработку
-        </button>
-      </div>
-
-      <div class="case-demo-stats">
-        <div class="demo-stat">
-          <strong id="stat-rows">0</strong>
-          <span>строк обработано</span>
-        </div>
-        <div class="demo-stat">
-          <strong id="stat-clients">0</strong>
-          <span>контрагентов найдено</span>
-        </div>
-        <div class="demo-stat">
-          <strong id="stat-categories">0</strong>
-          <span>категорий определено</span>
-        </div>
-        <div class="demo-stat">
-          <strong id="stat-errors">0</strong>
-          <span>требуют проверки</span>
-        </div>
-      </div>
-
-      <div class="demo-cta">
-        <a href="contacts-ru.html">Хочу такое же решение</a>
-      </div>
-    </section>
-
-
-
-    <section class="pdf-case" id="pdf-parser-case">
-      <div class="case-demo-kicker">Реальный кейс №2</div>
-      <h2>Автоматический парсинг PDF-инвойсов и упаковочных листов</h2>
-      <p class="case-demo-subtitle">
-        PDF-файлы загружаются во входящую папку Google Drive. После запуска скрипт распознаёт текст, определяет тип документа, разбирает позиции, записывает данные на листы RAW и УПАКОВ, сопоставляет вес по составному ключу и переносит обработанный файл в архив. Все названия, артикулы, количества и цены ниже вымышлены.
-      </p>
-
-      <div class="pdf-case-grid">
-        <div class="drive-panel">
-          <div class="drive-toolbar">
-            <span class="drive-dot"></span>
-            <span class="drive-dot"></span>
-            <span class="drive-dot"></span>
-            <span style="margin-left:4px;">Google Drive — Demo Workspace</span>
-          </div>
-
-          <div class="drive-body">
-            <div class="drive-folder">
-              <div class="drive-folder-title">📁 PDF_IN</div>
-              <div class="drive-files" id="pdf-in-files"></div>
-            </div>
-
-            <div class="drive-folder">
-              <div class="drive-folder-title">📁 PDF_ARCHIVE</div>
-              <div class="drive-files" id="pdf-archive-files">
-                <div class="drive-empty">Архив пуст</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pipeline-panel">
-          <div class="demo-panel-head">
-            <div class="demo-panel-title">Сценарий обработки</div>
-            <div class="demo-panel-note">Drive → OCR → Parser → Sheets → Archive</div>
-          </div>
-
-          <div class="pipeline-body">
-            <div class="pipeline-step" data-pdf-step="0"><span>1</span>PDF_IN</div>
-            <div class="pipeline-step" data-pdf-step="1"><span>2</span>OCR через Google Docs</div>
-            <div class="pipeline-step" data-pdf-step="2"><span>3</span>Парсинг позиций</div>
-            <div class="pipeline-step" data-pdf-step="3"><span>4</span>RAW / УПАКОВ</div>
-            <div class="pipeline-step" data-pdf-step="4"><span>5</span>PDF_ARCHIVE</div>
-          </div>
-        </div>
-
-        <div class="sheet-panel">
-          <div class="sheet-tabs">
-            <button class="sheet-tab active" type="button" data-sheet-tab="RAW">RAW</button>
-            <button class="sheet-tab" type="button" data-sheet-tab="УПАКОВ">УПАКОВ</button>
-          </div>
-
-          <div class="pdf-sheet-window">
-            <table class="pdf-result-table">
-              <thead id="pdf-table-head"></thead>
-              <tbody id="pdf-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="pdf-case-controls">
-        <div class="pdf-log" id="pdf-log">
-          Готово к запуску. У папці PDF_IN знаходяться 3 демонстраційні PDF-файли.
-        </div>
-
-        <button class="pdf-run-button" id="pdf-run" type="button">
-          ▶ Запустить парсинг
-        </button>
-      </div>
-
-      <div class="pdf-summary">
-        <div class="pdf-summary-item">
-          <strong id="pdf-stat-files">0</strong>
-          <span>PDF обработано</span>
-        </div>
-        <div class="pdf-summary-item">
-          <strong id="pdf-stat-rows">0</strong>
-          <span>позиций распознано</span>
-        </div>
-        <div class="pdf-summary-item">
-          <strong id="pdf-stat-weights">0</strong>
-          <span>весов сопоставлено</span>
-        </div>
-        <div class="pdf-summary-item">
-          <strong id="pdf-stat-errors">0</strong>
-          <span>требуют проверки</span>
-        </div>
-      </div>
-
-      <div class="demo-cta">
-        <a href="contacts-ru.html">Хочу автоматизировать PDF</a>
-      </div>
-    </section>
-
-    <section class="dashboard-case" id="dashboard-case">
-      <div class="case-demo-kicker">Реальный кейс №3</div>
-      <h2>Автоматическое создание дашборда из Excel-таблицы</h2>
-      <p class="case-demo-subtitle">
-        Исходные данные — 200 строк продаж с датой, годом, месяцем, днём,
-        товаром, категорией, клиентом, количеством и суммой. После нажатия
-        кнопки система агрегирует массив, рассчитывает KPI и строит четыре графика.
-        Все данные ниже демонстрационные.
-      </p>
-
-      <div class="dashboard-raw" id="dashboard-raw">
-        <div class="dashboard-raw-head">
-          <strong>Сырой массив продаж</strong>
-          <span>200 СТРОК</span>
-        </div>
-
-        <div class="dashboard-table-wrap">
-          <table class="dashboard-table">
-            <thead>
-              <tr>
-                <th>Дата</th>
-                <th>Год</th>
-                <th>Месяц</th>
-                <th>День</th>
-                <th>Товар</th>
-                <th>Категория</th>
-                <th>Клиент</th>
-                <th>Количество</th>
-                <th>Сумма, грн</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tbody id="dashboard-raw-body"></tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="dashboard-action">
-        <button class="dashboard-build-button" id="dashboard-build" type="button">
-          ⚙ Построить дашборд
-        </button>
-      </div>
-
-      <div class="dashboard-loader" id="dashboard-loader">
-        <span class="dashboard-spinner"></span>
-        <span>Агрегация данных, расчёт KPI и построение графиков…</span>
-      </div>
-
-      <div class="dashboard-output" id="dashboard-output">
-        <div class="dashboard-filters">
-          <div class="dashboard-filter"><small>Период</small><strong>01.01.2024–31.12.2024</strong></div>
-          <div class="dashboard-filter"><small>Год</small><strong>Все</strong></div>
-          <div class="dashboard-filter"><small>Месяц</small><strong>Все</strong></div>
-          <div class="dashboard-filter"><small>Категория</small><strong>Все</strong></div>
-          <div class="dashboard-filter"><small>Клиент</small><strong>Все</strong></div>
-        </div>
-
-        <div class="dashboard-kpis">
-          <div class="dashboard-kpi"><span>Общая выручка</span><strong>1 245 600</strong><em>▲ 18,7%</em></div>
-          <div class="dashboard-kpi"><span>Продано единиц</span><strong>1 862</strong><em>▲ 12,3%</em></div>
-          <div class="dashboard-kpi"><span>Средний чек</span><strong>669 грн</strong><em>▲ 5,1%</em></div>
-          <div class="dashboard-kpi"><span>Уникальных клиентов</span><strong>48</strong><em>▲ 9,1%</em></div>
-        </div>
-
-        <div class="dashboard-charts">
-          <article class="dashboard-chart">
-            <h3>Динамика выручки по месяцам</h3>
-            <div class="monthly-chart">
-              <svg viewBox="0 0 600 160" preserveAspectRatio="none" aria-label="Динаміка виручки">
-                <defs>
-                  <linearGradient id="dashboard-area" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#35594b" stop-opacity=".28"/>
-                    <stop offset="100%" stop-color="#35594b" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0 105 L55 92 L110 125 L165 67 L220 83 L275 58 L330 74 L385 126 L440 120 L495 70 L550 47 L600 25 L600 160 L0 160 Z" fill="url(#dashboard-area)"/>
-                <polyline points="0,105 55,92 110,125 165,67 220,83 275,58 330,74 385,126 440,120 495,70 550,47 600,25" fill="none" stroke="#35594b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <div class="months-row">
-                <span>Янв</span><span>Фев</span><span>Мар</span><span>Апр</span><span>Май</span><span>Июн</span>
-                <span>Июл</span><span>Авг</span><span>Сен</span><span>Окт</span><span>Ноя</span><span>Дек</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="dashboard-chart">
-            <h3>Сравнение выручки по годам</h3>
-            <div class="years-chart">
-              <div class="year-column"><b>1 020 000</b><i style="height:105px;"></i><span>2023</span></div>
-              <div class="year-column"><b>1 245 600</b><i style="height:140px;"></i><span>2024</span></div>
-            </div>
-          </article>
-
-          <article class="dashboard-chart">
-            <h3>Доля выручки по категориям</h3>
-            <div class="category-wrap">
-              <div class="category-donut"></div>
-              <div class="category-legend">
-                <div><span class="category-name"><span class="category-dot" style="background:#3478e5;"></span>Ноутбуки</span><strong>42%</strong></div>
-                <div><span class="category-name"><span class="category-dot" style="background:#0f9d58;"></span>Мониторы</span><strong>27%</strong></div>
-                <div><span class="category-name"><span class="category-dot" style="background:#f5aa20;"></span>Аксессуары</span><strong>20%</strong></div>
-                <div><span class="category-name"><span class="category-dot" style="background:#8854d0;"></span>Другое</span><strong>11%</strong></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="dashboard-chart">
-            <h3>Топ товаров по выручке</h3>
-            <div class="products-bars">
-              <div class="product-bar-row"><span>Ноутбук HP 15</span><div class="product-track"><div class="product-fill" style="width:100%;"></div></div><span class="product-value">285 000</span></div>
-              <div class="product-bar-row"><span>Dell Inspiron</span><div class="product-track"><div class="product-fill" style="width:78%;"></div></div><span class="product-value">210 500</span></div>
-              <div class="product-bar-row"><span>Монитор LG 24</span><div class="product-track"><div class="product-fill" style="width:67%;"></div></div><span class="product-value">180 000</span></div>
-              <div class="product-bar-row"><span>Миша Logitech</span><div class="product-track"><div class="product-fill" style="width:36%;"></div></div><span class="product-value">95 400</span></div>
-              <div class="product-bar-row"><span>A4Tech</span><div class="product-track"><div class="product-fill" style="width:25%;"></div></div><span class="product-value">67 200</span></div>
-            </div>
-          </article>
-        </div>
-
-        <div class="case-demo-controls">
-          <div class="demo-progress-wrap">
-            <div class="demo-progress-label">
-              <span>Готовый аналитический дашборд</span>
-              <span>200 / 200</span>
-            </div>
-            <div class="demo-progress-track">
-              <div class="demo-progress-bar" style="width:100%;"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="demo-cta">
-          <a href="contacts-ru.html">Хочу такой дашборд</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="capacity-case" id="production-capacity-case">
-  <div class="case-demo-kicker">Реальный кейс №4</div>
-
-  <h2>Планирование производственных мощностей и сроков исполнения заказов</h2>
-
-  <p class="case-demo-subtitle">
-    Система получает список входящих заказов, учитывает выбранную
-    производственную линию и её суточную мощность, после чего автоматически
-    распределяет объем по календарным дням и расчитывает фактическую дату
-    готовности каждого заказа. Все данные ниже демонстрационные.
-  </p>
-
-  <div class="capacity-settings">
-    <div class="capacity-settings-head">
-      <div>
-        <strong>Настройка производственных мощностей</strong>
-        <span>
-          Измените продуктивность линий и повторно расчитайте производственный план
-        </span>
-      </div>
-
-      <div class="capacity-period">
-        Период заказов: 01.01.2026–02.08.2026
-      </div>
-    </div>
-
-    <div class="capacity-lines">
-      <article class="capacity-line-card" data-line="line1">
-        <div class="capacity-line-name">
-          <span>Линия 1</span>
-          <small>Стальная труба</small>
-        </div>
-
-        <div class="capacity-control">
-          <button
-            class="capacity-minus"
-            type="button"
-            data-capacity-action="minus"
-            data-capacity-line="line1"
-            aria-label="Уменьшить мощность Линии 1"
+          <span
+            class="case-finder__search-state"
+            id="case-search-state"
           >
-            −
-          </button>
+            SMART MATCHING / UA · RU · EN
+          </span>
+        </div>
 
-          <div class="capacity-value">
-            <strong id="capacity-line1">250</strong>
-            <span>ед./день</span>
-          </div>
+        <div class="case-finder__input-row">
+          <span class="case-finder__prompt" aria-hidden="true">›</span>
+
+          <input
+            class="case-finder__input"
+            id="case-search-input"
+            type="search"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Например: каждый месяц вручную собираю отчёты из Excel..."
+            aria-label="Поиск по кейсам"
+          >
 
           <button
-            class="capacity-plus"
+            class="case-finder__clear"
+            id="case-search-clear"
             type="button"
-            data-capacity-action="plus"
-            data-capacity-line="line1"
-            aria-label="Увеличить мощность Линии 1"
+            aria-label="Очистить поиск"
           >
-            +
+            ×
           </button>
-        </div>
-      </article>
-
-      <article class="capacity-line-card" data-line="line2">
-        <div class="capacity-line-name">
-          <span>Линия 2</span>
-          <small>Стальной уголок</small>
-        </div>
-
-        <div class="capacity-control">
-          <button
-            class="capacity-minus"
-            type="button"
-            data-capacity-action="minus"
-            data-capacity-line="line2"
-            aria-label="Уменьшить мощность Линии 2"
-          >
-            −
-          </button>
-
-          <div class="capacity-value">
-            <strong id="capacity-line2">400</strong>
-            <span>ед./день</span>
-          </div>
-
-          <button
-            class="capacity-plus"
-            type="button"
-            data-capacity-action="plus"
-            data-capacity-line="line2"
-            aria-label="Увеличить мощность Линии 2"
-          >
-            +
-          </button>
-        </div>
-      </article>
-
-      <article class="capacity-line-card" data-line="line3">
-        <div class="capacity-line-name">
-          <span>Линия 3</span>
-          <small>Стальной профиль</small>
-        </div>
-
-        <div class="capacity-control">
-          <button
-            class="capacity-minus"
-            type="button"
-            data-capacity-action="minus"
-            data-capacity-line="line3"
-            aria-label="Уменьшить мощность Линии 3"
-          >
-            −
-          </button>
-
-          <div class="capacity-value">
-            <strong id="capacity-line3">600</strong>
-            <span>ед./день</span>
-          </div>
-
-          <button
-            class="capacity-plus"
-            type="button"
-            data-capacity-action="plus"
-            data-capacity-line="line3"
-            aria-label="Увеличить мощность Линии 3"
-          >
-            +
-          </button>
-        </div>
-      </article>
-    </div>
-  </div>
-
-  <div class="capacity-orders-panel">
-    <div class="capacity-panel-head">
-      <div>
-        <strong>Входящие производственные заказы</strong>
-        <span>100 демонстрационных заказов</span>
-      </div>
-
-      <div class="capacity-orders-status" id="capacity-orders-status">
-        Ожидают расчета
-      </div>
-    </div>
-
-    <div class="capacity-table-wrap">
-      <table class="capacity-orders-table">
-        <thead>
-          <tr>
-            <th>Заказ</th>
-            <th>Дата поступления</th>
-            <th>Код изделия</th>
-            <th>Изделие</th>
-            <th>Кол-во</th>
-            <th>Линия</th>
-            <th>Желаемая дата</th>
-            <th>Расчетная дата</th>
-            <th>Статус</th>
-          </tr>
-        </thead>
-
-        <tbody id="capacity-orders-body"></tbody>
-      </table>
-    </div>
-  </div>
-
-      <div class="capacity-mode-panel">
-  <div>
-    <strong>Режим планирования</strong>
-    <span>
-      Выберите логику распределения доступной производственной мощности
-    </span>
-  </div>
-
-  <div class="capacity-mode-switch">
-    <button
-      class="capacity-mode-button active"
-      type="button"
-      data-capacity-mode="queue"
-    >
-      По очереди
-    </button>
-
-    <button
-      class="capacity-mode-button"
-      type="button"
-      data-capacity-mode="priority"
-    >
-      По приоритету
-    </button>
-  </div>
-</div>
-  <div class="capacity-action">
-    <button
-      class="capacity-calculate-button"
-      id="capacity-calculate"
-      type="button"
-    >
-      ⚙ Расчитать производственный план
-    </button>
-  </div>
-
-  <div class="capacity-loader" id="capacity-loader">
-    <span class="capacity-spinner"></span>
-    <span>
-      Распределение заказов по календарным дням и проверка доступной мощности…
-    </span>
-  </div>
-
-  <div class="capacity-output" id="capacity-output">
-    <div class="capacity-summary">
-      <article class="capacity-summary-item">
-        <span>Заказов расчитано</span>
-        <strong id="capacity-summary-orders">0</strong>
-      </article>
-
-      <article class="capacity-summary-item">
-        <span>Общий объем</span>
-        <strong id="capacity-summary-units">0</strong>
-      </article>
-
-      <article class="capacity-summary-item">
-        <span>Зааказов с переносом</span>
-        <strong id="capacity-summary-delayed">0</strong>
-      </article>
-
-      <article class="capacity-summary-item">
-        <span>Последняя дата плана</span>
-        <strong id="capacity-summary-last-date">—</strong>
-      </article>
-    </div>
-
-    <div class="capacity-dashboard-grid">
-      <article class="capacity-dashboard-card">
-        <div class="capacity-dashboard-head">
-          <div>
-            <strong>Средняя загрузка линий</strong>
-            <span>по расчитаному производственному плану</span>
-          </div>
-        </div>
-
-        <div class="capacity-utilization">
-          <div class="capacity-utilization-row">
-            <div class="capacity-utilization-label">
-              <span>Линия 1</span>
-              <strong id="capacity-util-line1-text">0%</strong>
-            </div>
-
-            <div class="capacity-utilization-track">
-              <div
-                class="capacity-utilization-fill"
-                id="capacity-util-line1"
-              ></div>
-            </div>
-          </div>
-
-          <div class="capacity-utilization-row">
-            <div class="capacity-utilization-label">
-              <span>Линия 2</span>
-              <strong id="capacity-util-line2-text">0%</strong>
-            </div>
-
-            <div class="capacity-utilization-track">
-              <div
-                class="capacity-utilization-fill"
-                id="capacity-util-line2"
-              ></div>
-            </div>
-          </div>
-
-          <div class="capacity-utilization-row">
-            <div class="capacity-utilization-label">
-              <span>Линия 3</span>
-              <strong id="capacity-util-line3-text">0%</strong>
-            </div>
-
-            <div class="capacity-utilization-track">
-              <div
-                class="capacity-utilization-fill"
-                id="capacity-util-line3"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="capacity-dashboard-card">
-        <div class="capacity-dashboard-head">
-          <div>
-            <strong>Загрузка по дням</strong>
-            <span>календарь производственных мощностей</span>
-          </div>
         </div>
 
         <div
-          class="capacity-calendar"
-          id="capacity-calendar"
+          class="case-finder__suggestions"
+          id="case-search-suggestions"
+        >
+          <button
+            type="button"
+            data-search-suggestion="каждый месяц вручную собираю отчёт"
+          >
+            каждый месяц вручную собираю отчёт
+          </button>
+
+          <button
+            type="button"
+            data-search-suggestion="павер биай"
+          >
+            павер биай
+          </button>
+
+          <button
+            type="button"
+            data-search-suggestion="не знаю когда будет готов заказ"
+          >
+            не знаю когда будет готов заказ
+          </button>
+
+          <button
+            type="button"
+            data-search-suggestion="нужно извлечь данные из PDF"
+          >
+            нужно извлечь данные из PDF
+          </button>
+
+          <button
+            type="button"
+            data-search-suggestion="считаю закупки вручную"
+          >
+            считаю закупки вручную
+          </button>
+
+          <button
+            type="button"
+            data-search-suggestion="хочу бот в Telegram"
+          >
+            хочу бот в Telegram
+          </button>
+        </div>
+
+        <div class="case-finder__capabilities">
+          <div>
+            <strong>UA · RU · EN</strong>
+            <span>Понимает разные языки</span>
+          </div>
+
+          <div>
+            <strong>TYPO TOLERANT</strong>
+            <span>Распознаёт ошибки и сокращения</span>
+          </div>
+
+          <div>
+            <strong>CONTEXT MATCHING</strong>
+            <span>Ищет по смыслу задачи</span>
+          </div>
+        </div>
+
+        <div class="case-finder__engine">
+          <span></span>
+
+          <p>
+            Поиск анализирует не только название кейса:
+            технологии · проблему · результат · синонимы · альтернативные названия · бизнес-контекст
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="case-finder__understood"
+        id="case-search-understood"
+        hidden
+      >
+        <span class="case-finder__understood-label">
+          Я ПОНЯЛ ВАШ ЗАПРОС КАК
+        </span>
+
+        <div
+          class="case-finder__understood-concepts"
+          id="case-search-concepts"
         ></div>
-      </article>
-    </div>
+      </div>
 
-    <div class="capacity-legend">
-      <span>
-        <i class="capacity-legend-free"></i>
-        Свободная мощность
-      </span>
+      <div class="case-finder__result-head">
+        <div>
+          <span id="case-search-caption">
+            РЕКОМЕНДОВАННЫЕ КЕЙСЫ
+          </span>
 
-      <span>
-        <i class="capacity-legend-medium"></i>
-        Частичная загрузка
-      </span>
+          <strong id="case-search-count"></strong>
+        </div>
 
-      <span>
-        <i class="capacity-legend-full"></i>
-        Полная загрузка
-      </span>
-    </div>
+        <span class="case-finder__result-hint">
+          ENTER — открыть первый результат
+        </span>
+      </div>
 
-    <div class="demo-cta">
-      <a href="contacts-ru.html">
-        Хочу автоматизировать планирование производства
-      </a>
-    </div>
-  </div>
-</section>
-    <div id="case5-container"></div>
-    <div id="case6-container"></div>
-    <div id="case7-container"></div>
-    <section class="section-card upcoming">
-      <h2>Что появится дальше</h2>
+      <div
+        class="case-finder__results"
+        id="case-search-results"
+        aria-live="polite"
+      ></div>
 
-      <p>
-        Здесь постепенно будут добавляться архитектурные схемы,
-        обезличенные кейсы, демонстрационные макеты, блок-схемы процессов,
-        примеры интерфейсов и краткие описания результатов.
-      </p>
+      <div
+        class="case-finder__empty"
+        id="case-search-empty"
+        hidden
+      >
+        <span>NO EXACT MATCH</span>
+
+        <h3>
+          Попробуйте описать задачу иначе.
+        </h3>
+
+        <p>
+          Можно вводить не название технологии, а саму проблему:
+          «ручной отчёт», «считаю закупки», «не знаю дату готовности»,
+          «нужно собрать сотни файлов».
+        </p>
+      </div>
     </section>
 
-    <section class="contact-box">
-      <h2>Нужен более подробный пример?</h2>
+    <section
+      class="case-detail-stage"
+      id="case-detail-stage"
+      hidden
+    >
+      <div class="case-detail-stage__chrome">
+        <div>
+          <span id="case-detail-number">
+            CASE
+          </span>
 
-      <p>
-        Дополнительную информацию можно предоставить после предварительного
-        согласования или подписания соглашения о неразглашении (NDA).
-      </p>
+          <strong id="case-detail-title">
+            DETAIL VIEW
+          </strong>
+        </div>
 
-      <a href="contacts-ru.html">
-        Связаться со мной
-      </a>
+        <button
+          class="case-detail-stage__close"
+          id="case-detail-close"
+          type="button"
+          aria-label="Закрыть кейс"
+        >
+          ×
+        </button>
+      </div>
+
+      <div
+        class="case-detail-stage__loading"
+        id="case-detail-loading"
+        hidden
+      >
+        <span></span>
+
+        <div>
+          <strong>
+            Открываю кейс
+          </strong>
+
+          <small>
+            Подключаю интерактивные элементы
+          </small>
+        </div>
+      </div>
+
+      <div
+        class="case-detail-stage__body"
+        id="case-detail-body"
+      ></div>
+    </section>
+
+    <section
+      class="solution-process"
+      id="solution-process"
+    >
+      <div class="solution-process__header">
+        <div>
+          <span class="solution-process__eyebrow">
+            КАК СТРОЯТСЯ РЕШЕНИЯ / 05 ЭТАПОВ
+          </span>
+
+          <h2>
+            Не начинаем с инструмента.
+            <span>Начинаем с процесса.</span>
+          </h2>
+        </div>
+
+        <p>
+          Power BI, Apps Script, API, Excel или другой инструмент появляется
+          только тогда, когда понятно, что именно нужно изменить.
+          Сначала — процесс и логика. Потом — технология.
+        </p>
+      </div>
+
+      <div class="solution-process__workspace">
+        <div class="solution-process__visual">
+          <div class="process-terminal">
+            <div class="process-terminal__top">
+              <div>
+                <span class="process-terminal__dot"></span>
+                <strong>ЛОГИКА ПРОЦЕССА</strong>
+              </div>
+
+              <span id="process-stage-status">
+                ЭТАП 01 / АНАЛИЗ
+              </span>
+            </div>
+
+            <div class="process-terminal__screen">
+              <div
+                class="process-scene process-scene--01 is-active"
+                data-process-scene="1"
+              >
+                <div class="process-chaos">
+                  <span class="process-chaos__file process-chaos__file--1">
+                    EXCEL
+                  </span>
+
+                  <span class="process-chaos__file process-chaos__file--2">
+                    PDF
+                  </span>
+
+                  <span class="process-chaos__file process-chaos__file--3">
+                    ПОЧТА
+                  </span>
+
+                  <span class="process-chaos__file process-chaos__file--4">
+                    ERP
+                  </span>
+
+                  <span class="process-chaos__file process-chaos__file--5">
+                    ВРУЧНУЮ
+                  </span>
+
+                  <div class="process-chaos__center">
+                    <small>ВХОД</small>
+                    <strong>?</strong>
+                    <span>ПРОЦЕСС</span>
+                  </div>
+                </div>
+
+                <div class="process-terminal__caption">
+                  <span>01 / АНАЛИЗ</span>
+
+                  <strong>
+                    Сначала видим реальную картину процесса.
+                  </strong>
+                </div>
+              </div>
+
+              <div
+                class="process-scene process-scene--02"
+                data-process-scene="2"
+              >
+                <div class="process-clean">
+                  <div class="process-clean__raw">
+                    <span>ДАННЫЕ_01</span>
+                    <span>ДАННЫЕ_02</span>
+                    <span>ДУБЛИКАТ</span>
+                    <span>ПУСТО</span>
+                    <span>ДАННЫЕ_05</span>
+                  </div>
+
+                  <div class="process-clean__flow">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </div>
+
+                  <div class="process-clean__ready">
+                    <span>ID</span>
+                    <span>ДАТА</span>
+                    <span>ЗНАЧЕНИЕ</span>
+                    <span>СТАТУС</span>
+                  </div>
+                </div>
+
+                <div class="process-terminal__caption">
+                  <span>02 / ДАННЫЕ</span>
+
+                  <strong>
+                    Данные получают структуру, которой можно доверять.
+                  </strong>
+                </div>
+              </div>
+
+              <div
+                class="process-scene process-scene--03"
+                data-process-scene="3"
+              >
+                <div class="process-logic">
+                  <div class="process-logic__node process-logic__node--input">
+                    <small>ВХОД</small>
+                    <strong>ЗАКАЗ</strong>
+                  </div>
+
+                  <div class="process-logic__branch">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                  <div class="process-logic__node process-logic__node--rule">
+                    <small>ПРАВИЛО</small>
+                    <strong>ЕСЛИ / ТО</strong>
+                  </div>
+
+                  <div class="process-logic__node process-logic__node--exception">
+                    <small>ИСКЛЮЧЕНИЕ</small>
+                    <strong>ПРОВЕРКА</strong>
+                  </div>
+
+                  <div class="process-logic__node process-logic__node--output">
+                    <small>ВЫХОД</small>
+                    <strong>РЕЗУЛЬТАТ</strong>
+                  </div>
+                </div>
+
+                <div class="process-terminal__caption">
+                  <span>03 / ЛОГИКА</span>
+
+                  <strong>
+                    Фиксируем правила, исключения и ожидаемое поведение.
+                  </strong>
+                </div>
+              </div>
+
+              <div
+                class="process-scene process-scene--04"
+                data-process-scene="4"
+              >
+                <div class="process-automation">
+                  <div class="process-automation__node">
+                    <small>ИСТОЧНИК</small>
+                    <strong>ERP</strong>
+                  </div>
+
+                  <span class="process-automation__line">
+                    <i></i>
+                  </span>
+
+                  <div
+                    class="process-automation__node process-automation__node--core"
+                  >
+                    <small>АВТОМАТИЗАЦИЯ</small>
+                    <strong>МОДУЛЬ</strong>
+                  </div>
+
+                  <span class="process-automation__line">
+                    <i></i>
+                  </span>
+
+                  <div class="process-automation__node">
+                    <small>ВЫХОД</small>
+                    <strong>ГОТОВО</strong>
+                  </div>
+                </div>
+
+                <div class="process-terminal__caption">
+                  <span>04 / АВТОМАТИЗАЦИЯ</span>
+
+                  <strong>
+                    Ручные шаги превращаются в управляемый поток.
+                  </strong>
+                </div>
+              </div>
+
+              <div
+                class="process-scene process-scene--05"
+                data-process-scene="5"
+              >
+                <div class="process-control">
+                  <div class="process-control__kpis">
+                    <div>
+                      <small>СТАТУС</small>
+                      <strong>АКТИВНО</strong>
+                    </div>
+
+                    <div>
+                      <small>ОШИБКИ</small>
+                      <strong>0</strong>
+                    </div>
+
+                    <div>
+                      <small>СИНХР.</small>
+                      <strong>АКТИВНО</strong>
+                    </div>
+                  </div>
+
+                  <div class="process-control__chart">
+                    <i style="height:38%"></i>
+                    <i style="height:52%"></i>
+                    <i style="height:46%"></i>
+                    <i style="height:68%"></i>
+                    <i style="height:61%"></i>
+                    <i style="height:82%"></i>
+                    <i style="height:76%"></i>
+                    <i style="height:94%"></i>
+                  </div>
+
+                  <div class="process-control__signal">
+                    <span></span>
+                    СИСТЕМА ПОД КОНТРОЛЕМ
+                  </div>
+                </div>
+
+                <div class="process-terminal__caption">
+                  <span>05 / КОНТРОЛЬ</span>
+
+                  <strong>
+                    Результат становится видимым, измеримым и контролируемым.
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="process-terminal__bottom">
+              <span>
+                СНАЧАЛА БИЗНЕС-ЛОГИКА
+              </span>
+
+              <span>
+                ДАННЫЕ → ПРАВИЛА → АВТОМАТИЗАЦИЯ → КОНТРОЛЬ
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="solution-process__steps">
+          <article
+            class="process-step is-active"
+            data-process-step="1"
+          >
+            <span class="process-step__number">01</span>
+
+            <div>
+              <span class="process-step__label">
+                АНАЛИЗ
+              </span>
+
+              <h3>
+                Разобрать процесс
+              </h3>
+
+              <p>
+                Найти, где возникает ручная работа, дублирование, ожидание,
+                ошибки и зависимость от конкретного человека.
+              </p>
+
+              <strong>
+                ПРОЦЕСС → ПРОБЛЕМА → ПРИЧИНА
+              </strong>
+            </div>
+          </article>
+
+          <article
+            class="process-step"
+            data-process-step="2"
+          >
+            <span class="process-step__number">02</span>
+
+            <div>
+              <span class="process-step__label">
+                ДАННЫЕ
+              </span>
+
+              <h3>
+                Привести данные в порядок
+              </h3>
+
+              <p>
+                Очистить, сопоставить, нормализовать и сформировать
+                одну понятную структуру вместо хаоса источников.
+              </p>
+
+              <strong>
+                СЫРЫЕ ДАННЫЕ → ОЧИСТКА → СТРУКТУРА
+              </strong>
+            </div>
+          </article>
+
+          <article
+            class="process-step"
+            data-process-step="3"
+          >
+            <span class="process-step__number">03</span>
+
+            <div>
+              <span class="process-step__label">
+                БИЗНЕС-ЛОГИКА
+              </span>
+
+              <h3>
+                Построить логику
+              </h3>
+
+              <p>
+                Описать правила, условия, исключения, приоритеты
+                и ожидаемое поведение системы в разных сценариях.
+              </p>
+
+              <strong>
+                ПРАВИЛА → ИСКЛЮЧЕНИЯ → РЕЗУЛЬТАТ
+              </strong>
+            </div>
+          </article>
+
+          <article
+            class="process-step"
+            data-process-step="4"
+          >
+            <span class="process-step__number">04</span>
+
+            <div>
+              <span class="process-step__label">
+                АВТОМАТИЗАЦИЯ
+              </span>
+
+              <h3>
+                Автоматизировать
+              </h3>
+
+              <p>
+                Соединить источники, убрать повторяющиеся действия
+                и оставить человеку только те решения,
+                где он действительно нужен.
+              </p>
+
+              <strong>
+                ВХОД → МОДУЛЬ → ВЫХОД
+              </strong>
+            </div>
+          </article>
+
+          <article
+            class="process-step"
+            data-process-step="5"
+          >
+            <span class="process-step__number">05</span>
+
+            <div>
+              <span class="process-step__label">
+                КОНТРОЛЬ
+              </span>
+
+              <h3>
+                Дать контроль
+              </h3>
+
+              <p>
+                Статусы, KPI, отчёты, уведомления и прозрачность процесса —
+                чтобы результат автоматизации можно было видеть и проверять.
+              </p>
+
+              <strong>
+                ВИДИМОСТЬ → КОНТРОЛЬ → РЕШЕНИЕ
+              </strong>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="solutions-final-cta">
+      <div
+        class="solutions-final-cta__glow"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        class="solutions-final-cta__grid"
+        aria-hidden="true"
+      ></div>
+
+      <div class="solutions-final-cta__content">
+        <span class="solutions-final-cta__eyebrow">
+          ВАШ ПРОЦЕСС / СЛЕДУЮЩИЙ КЕЙС
+        </span>
+
+        <h2>
+          Есть процесс, который до сих пор держится
+          <span>на Excel, письмах и памяти людей?</span>
+        </h2>
+
+        <p>
+          Не нужно знать название технологии или готового решения.
+          Опишите, что сейчас происходит вручную —
+          и начнём с самого процесса.
+        </p>
+
+        <div class="solutions-final-cta__actions">
+          <a
+            class="solutions-final-cta__primary"
+            href="contacts-ru.html"
+          >
+            Обсудить задачу
+            <span>↗</span>
+          </a>
+
+          <a
+            class="solutions-final-cta__secondary"
+            href="services-ru.html"
+          >
+            Посмотреть услуги
+            <span>→</span>
+          </a>
+        </div>
+
+        <div class="solutions-final-cta__meta">
+          <span>ПРОЦЕСС</span>
+          <i>→</i>
+          <span>ДАННЫЕ</span>
+          <i>→</i>
+          <span>ЛОГИКА</span>
+          <i>→</i>
+          <span>АВТОМАТИЗАЦИЯ</span>
+          <i>→</i>
+          <span>КОНТРОЛЬ</span>
+        </div>
+      </div>
+
+      <div
+        class="solutions-final-cta__visual"
+        aria-hidden="true"
+      >
+        <div class="final-system">
+          <div class="final-system__top">
+            <div>
+              <span></span>
+              ДИАГНОСТИКА ПРОЦЕССА
+            </div>
+
+            <strong>
+              ГОТОВО
+            </strong>
+          </div>
+
+          <div class="final-system__body">
+            <div class="final-system__row">
+              <span>
+                01
+              </span>
+
+              <div>
+                <small>
+                  ВХОД
+                </small>
+
+                <strong>
+                  РУЧНОЙ ПРОЦЕСС
+                </strong>
+              </div>
+
+              <i class="final-system__state final-system__state--muted">
+                ВЫЯВЛЕНО
+              </i>
+            </div>
+
+            <div class="final-system__row">
+              <span>
+                02
+              </span>
+
+              <div>
+                <small>
+                  АНАЛИЗ
+                </small>
+
+                <strong>
+                  ДАННЫЕ + ПРАВИЛА
+                </strong>
+              </div>
+
+              <i class="final-system__state">
+                ОПИСАНО
+              </i>
+            </div>
+
+            <div class="final-system__row">
+              <span>
+                03
+              </span>
+
+              <div>
+                <small>
+                  ПОСТРОЕНИЕ
+                </small>
+
+                <strong>
+                  АВТОМАТИЗАЦИЯ
+                </strong>
+              </div>
+
+              <i class="final-system__state">
+                ГОТОВО
+              </i>
+            </div>
+
+            <div class="final-system__route">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="final-system__result">
+              <small>
+                ВЫХОД
+              </small>
+
+              <strong>
+                ВИДИМЫЙ КОНТРОЛЬ
+              </strong>
+
+              <span>
+                СИСТЕМА АКТИВНА
+              </span>
+            </div>
+          </div>
+
+          <div class="final-system__scan"></div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-  © 2015–2026 Sebastian Automations. Все права защищены.
-  <a href="terms-ru.html">Условия использования</a>
-</footer>
-
-  <script>
-    const bankRows = [["03.07.2026", "CARD*4821 POS 19:44 NOVUS KYIV UA MCC5411 REF 884521", "-1 286,40", "NOVUS", "Продукты", "ok"], ["03.07.2026", "UAH KOM 0.00 / PEREKAZ Z KARTY 5168****1047 VID IVANENKO O.O.", "+12 500,00", "Іваненко О.О.", "Поступление", "ok"], ["04.07.2026", "MONO PAY*GOOGLE ADS 874201 IE DUBLIN IRL 04/07", "-2 940,18", "Google Ads", "Реклама", "ok"], ["04.07.2026", "PLATIZH ZA RAH 1048-26 TOV VEKTOR SERVIS BEZ PDV", "-7 200,00", "ТОВ «Вектор Сервіс»", "Услуги", "ok"], ["05.07.2026", "ATM CASH WD 005771 KYIV PR-T PEREMOHY 12 KOM 80.00", "-4 000,00", "Банкомат", "Снятие наличных", "ok"], ["05.07.2026", "NOVA POSHTA 02041 KYIV TERMINAL 330192 MCC4215", "-486,00", "Нова пошта", "Логистика", "ok"], ["06.07.2026", "EPICENTR K POS 8871 BUD MATERIALY CHECK 001947", "-3 742,90", "Епіцентр", "Хозяйственные расходы", "ok"], ["06.07.2026", "P2P CREDIT 4149****7720 KOVALENKO SERHII D.", "+8 000,00", "Коваленко С.Д.", "Поступление", "ok"], ["07.07.2026", "FOP MELNYK O.V. RAH 708 OPлата za druk etyketok", "-5 600,00", "ФОП Мельник О.В.", "Полиграфия", "ok"], ["07.07.2026", "UBER *TRIP HELP.UBER.COM NL 07-07 AUTH 102944", "-318,72", "Uber", "Транспорт", "ok"], ["08.07.2026", "VAT PAYMENT 2 KV 2026 EDPR 3011400000 PRYZN 101", "-18 760,00", "Налоговая служба", "Налоги", "ok"], ["08.07.2026", "ROZETKA UA KYIV ORDER RZK-4938172 OFFICE MOUSE", "-1 149,00", "Rozetka", "Офисные расходы", "ok"], ["09.07.2026", "APPLE.COM/BILL 800-275-2273 IRL ICLOUD+ 200GB", "-149,00", "Apple", "Подписки", "ok"], ["09.07.2026", "TOV MHP POSTACHANNYA ZA DOG 14/26 RAH 553", " +34 980,00", "ТОВ «МХП»", "Оплата клиента", "ok"], ["10.07.2026", "WOG A-95 31.42L ST 083 KYIV OBL TERM 774912", "-1 842,65", "WOG", "Топливо", "ok"], ["10.07.2026", "FOP PETRENKO A.A. AVANS ZA DIZAYN MAKETIV", "-3 000,00", "ФОП Петренко А.А.", "Дизайн", "ok"], ["11.07.2026", "SILPO 118 POS 2881 MCC 5411 KYIV 11.07.26", "-947,31", "Сільпо", "Продукты", "ok"], ["11.07.2026", "PRIVAT24 KOMISIYA ZA RKO TARIF BUSINESS", "-199,00", "ПриватБанк", "Банковские комиссии", "ok"], ["12.07.2026", "TOV NOVA LINIYA CHECK 62287 INSTRUMENTY SKLAD", "-2 386,50", "Новая линия", "Хозяйственные расходы", "ok"], ["12.07.2026", "PEREKAZ VID TOV ALFA TRADE RAH 204 POSLUGY", " +21 400,00", "ТОВ «Альфа Трейд»", "Оплата клиента", "ok"], ["13.07.2026", "MICROSOFT*SUBSCRIPTION MSFT IE M365 BUSINESS", "-512,40", "Microsoft", "Подписки", "ok"], ["13.07.2026", "BOLT.EU/R/240713 KYIV UA RIDE 229184", "-204,00", "Bolt", "Транспорт", "ok"], ["14.07.2026", "PAYMENT TO FOP BONDARENKO V.V. HOSTING 1 YEAR", "-2 100,00", "ФОП Бондаренко В.В.", "Хостинг", "ok"], ["14.07.2026", "CREDIT P2P 5355****8802 SHEVCHENKO N.M.", "+5 000,00", "Шевченко Н.М.", "Поступление", "ok"], ["15.07.2026", "KYIVSTAR B2B INV 726193 TEL +380980746698", "-450,00", "Kyivstar", "Связь", "ok"], ["15.07.2026", "PROM.UA ORDER 883420 PACKING TAPE 48MM 36PCS", "-1 764,00", "Prom.ua", "Упаковочные материалы", "ok"], ["16.07.2026", "UKRPOSHTA VIDPR 18 POSHLYNA TRACK RR004891UA", "-392,80", "Укрпошта", "Логистика", "ok"], ["16.07.2026", "TOV BETA LOGISTICS RAH 912 DOSTAVKA 14.07", "-6 480,00", "ТОВ «Бета Логістик»", "Логистика", "ok"], ["17.07.2026", "AMAZON WEB SERVICES AWS EMEA INV 994-20817", "-873,44", "Amazon Web Services", "Облачные сервисы", "ok"], ["17.07.2026", "PEREKAZ VID FOP KLYMENKO O.P. CONSULTING JULY", " +9 600,00", "ФОП Клименко О.П.", "Оплата клиента", "ok"], ["18.07.2026", "METRO CASH&CARRY 0184 KYIV OFFICE WATER COFFEE", "-1 328,16", "METRO", "Офисные расходы", "ok"], ["18.07.2026", "GOOGLE*WORKSPACE G.CO/HELPPAY# IE 18JUL", "-772,22", "Google Workspace", "Подписки", "ok"], ["19.07.2026", "FOP ROMANENKO S.S. REMONT PRINTERA RAH 91", "-1 250,00", "ФОП Романенко С.С.", "Ремонт", "ok"], ["19.07.2026", "MONOBANK REWARD CASHBACK JUL 2026", " +184,37", "Monobank", "Кешбэк", "ok"], ["20.07.2026", "OKKO POS 7081 DIESEL 38.20L TERM 811294", "-2 121,48", "OKKO", "Топливо", "ok"], ["20.07.2026", "CANVA*PRO SYDNEY AU CARD 4821 MONTHLY", "-499,00", "Canva", "Подписки", "ok"], ["21.07.2026", "TOV GAMMA PACK RAH 772 KARTONNI KOROBKY 500PCS", "-14 850,00", "ТОВ «Гамма Пак»", "Упаковочные материалы", "ok"], ["21.07.2026", "PEREKAZ ZA DOG 18-07 TOV DELTA PLUS", " +18 900,00", "ТОВ «Дельта Плюс»", "Оплата клиента", "ok"], ["22.07.2026", "LIFECELL BUSINESS ACC 380630001122 JULY", "-310,00", "Lifecell", "Связь", "ok"], ["22.07.2026", "FOP HRITSENKO M.I. BUHG POSLUGY 07/2026", "-4 500,00", "ФОП Гриценко М.І.", "Бухгалтерия", "ok"], ["23.07.2026", "ZOOM.US 888-799-9666 SAN JOSE US PRO PLAN", "-611,74", "Zoom", "Подписки", "ok"], ["23.07.2026", "P2P CREDIT 5457****1409 TKACHENKO VIKTOR", " +2 500,00", "Ткаченко В.", "Поступление", "ok"], ["24.07.2026", "AUTOLUX CARGO KYIV ODESA TTN 7749201", "-786,00", "Autolux", "Логистика", "ok"], ["24.07.2026", "EPICENTR K POS 1091 LED LAMPS CABLE CHECK 729", "-1 093,55", "Епіцентр", "Хозяйственные расходы", "ok"], ["25.07.2026", "FOP LISOVYI D.P. TARGET ADS JULY PART 2", "-6 000,00", "ФОП Лісовий Д.П.", "Реклама", "ok"], ["25.07.2026", "TOV OMEGA RETAIL RAH 443 OPLATA ZA POSLUGY", " +27 300,00", "ТОВ «Омега Рітейл»", "Оплата клиента", "ok"], ["26.07.2026", "PRIVATBANK ACQUIRING FEE TERMINAL 03 JULY", "-628,40", "ПриватБанк", "Банковские комиссии", "ok"], ["26.07.2026", "DIIA.SIGN BUSINESS CERTIFICATE 1 YEAR", "-300,00", "Дія", "Электронная подпись", "ok"], ["27.07.2026", "NOVA POSHTA 00017 POSYLKA 20499000219482", "-224,00", "Нова пошта", "Логистика", "ok"], ["27.07.2026", "PEREKAZ VID TOV SIGMA GROUP FINAL PAYMENT", " +42 000,00", "ТОВ «Сігма Груп»", "Оплата клиента", "ok"], ["01.09.2025", "ЕСВ с зарплаты за 1 половину сентября 2025 г.;101/570.50/UAH/UA273052990000026004010112233/3011400000/код 30114000", "-570,50", "Налоговая служба", "ЕСВ", "ok"], ["01.09.2025", "НДФЛ с зарплаты за 1 половину сентября 2025 г.;101/466.77/UAH/UA118999980000000000000123456/Казначейство", "-466,77", "Налоговая служба", "НДФЛ", "ok"], ["01.09.2025", "Военный сбор с зарплаты за 1 половину сентября 2025 г.;101/166.70/UAH/код бюджета 11011000", "-166,70", "Налоговая служба", "Военный сбор", "ok"], ["02.09.2025", "Зарплата за 1 половину сентября 2025 г. Ведомость №09-1; карточный счёт сотрудника", "-2 567,25", "Сотрудники", "Заработная плата", "ok"], ["02.09.2025", "Перечисление собственных средств на текущий счёт. Без НДС. Взнос владельца", " +8 000,00", "Владелец", "Собственные средства", "ok"], ["03.09.2025", "ЕСВ с больничных за август 2025 г.;101/312.84/UAH/счёт UA273052990000026004010112233", "-312,84", "Налоговая служба", "ЕСВ", "ok"], ["03.09.2025", "НДФЛ с больничных за август 2025 г.;101/198.44/UAH/11010100", "-198,44", "Налоговая служба", "НДФЛ", "ok"], ["03.09.2025", "Военный сбор с больничных за август 2025 г.;101/71.18/UAH/11011000", "-71,18", "Налоговая служба", "Военный сбор", "ok"], ["04.09.2025", "Комиссия за расчётно-кассовое обслуживание согласно тарифам банка за 09/2025", "-180,00", "Банк", "Банковские комиссии", "ok"], ["04.09.2025", "Оплата больничных за август 2025 г. Ведомость 08-L; реестр 147", "-1 102,40", "Сотрудники", "Больничные", "ok"], ["05.09.2025", "101;ЕСВ за наёмных сотрудников за август 2025;3011400000;период 08/2025", "-1 284,60", "Налоговая служба", "ЕСВ", "ok"], ["05.09.2025", "101;НДФЛ за наёмных сотрудников август 2025;11010100;без НДС", "-1 014,22", "Налоговая служба", "НДФЛ", "ok"], ["05.09.2025", "101;военный сбор за наёмных сотрудников август 2025;11011000;без НДС", "-362,22", "Налоговая служба", "Военный сбор", "ok"], ["06.09.2025", "Выплата заработной платы за август 2025 согласно ведомости №08-2", "-6 480,00", "Сотрудники", "Заработная плата", "ok"], ["06.09.2025", "Возврат неиспользованных подотчётных средств сотрудником, авансовый отчёт №44", " +540,00", "Сотрудник", "Возврат подотчётных средств", "ok"], ["07.09.2025", "Оплата аренды офиса за сентябрь 2025 согласно договору №15/О; без НДС", "-12 000,00", "Арендодатель", "Аренда", "ok"], ["07.09.2025", "Оплата электроэнергии за август 2025 л/с 102771; показатель 18432; в т.ч. НДС", "-2 744,19", "Поставщик электроэнергии", "Коммунальные услуги", "ok"], ["08.09.2025", "Оплата услуг банка за перевод зарплаты на карточные счета сотрудников", "-92,40", "Банк", "Банковские комиссии", "ok"], ["08.09.2025", "Платёж за интернет сентябрь 2025; лицевой счёт 771928; договор ИН-221", "-480,00", "Интернет-провайдер", "Интернет", "ok"], ["09.09.2025", "Единый налог за III кв. 2025;101;18050400;ФЛП;без НДС", "-4 200,00", "Налоговая служба", "Единый налог", "ok"], ["09.09.2025", "Оплата услуг бухгалтера за август 2025 согласно акту №32 от 31.08.2025", "-3 500,00", "Бухгалтер", "Бухгалтерские услуги", "ok"], ["10.09.2025", "Перевод на корпоративную карту для хозяйственных расходов; под отчёт сотруднику", "-3 000,00", "Сотрудник", "Подотчётные средства", "ok"], ["10.09.2025", "Возврат ошибочно перечисленных средств по платёжному поручению №884", " +1 250,00", "Контрагент", "Возврат средств", "ok"], ["11.09.2025", "101/ЕСВ/заработная плата/2 половина сентября 2025/UA273052990000026004010112233", "-612,04", "Налоговая служба", "ЕСВ", "ok"], ["11.09.2025", "101/НДФЛ/заработная плата/2 половина сентября 2025/UA118999980000000000000123456", "-500,76", "Налоговая служба", "НДФЛ", "ok"], ["11.09.2025", "101/военный сбор/заработная плата/2 половина сентября 2025/11011000", "-178,84", "Налоговая служба", "Военный сбор", "ok"], ["12.09.2025", "Зарплата за 2 половину сентября 2025 года согласно ведомости №09-2", "-2 765,00", "Сотрудники", "Заработная плата", "ok"], ["12.09.2025", "Оплата мобильной связи, корпоративный пакет BUSINESS 09/2025, тел. 0980746698", "-420,00", "Мобильный оператор", "Связь", "ok"], ["13.09.2025", "Оплата домена и SSL-сертификата sp-automation.com на 12 мес.; INV#SSL-9921", "-1 890,00", "Хостинг-провайдер", "Хостинг", "ok"], ["13.09.2025", "Оплата услуг курьерской доставки по реестру №118 от 12.09.2025", "-740,00", "Курьерская служба", "Логистика", "ok"], ["14.09.2025", "Перечисление благотворительной помощи согласно письму №77; без НДС", "-1 000,00", "Благотворительный фонд", "Благотворительность", "ok"], ["14.09.2025", "Оплата канцтоваров по счёту №221-09; бумага А4, ручки, файлы", "-1 384,60", "Поставщик канцтоваров", "Офисные расходы", "ok"], ["15.09.2025", "Начисленная пеня за просрочку налогового обязательства;101;1400", "-84,18", "Налоговая служба", "Пеня", "ok"], ["15.09.2025", "Оплата аудита и проверки отчётности за 8 мес. 2025; акт №09/15", "-5 600,00", "Аудитор", "Аудиторские услуги", "ok"], ["16.09.2025", "Компенсация командировочных расходов по авансовому отчёту №52: проезд+отель", "-3 944,70", "Сотрудник", "Командировка", "ok"], ["16.09.2025", "Оплата программного обеспечения, лицензия 09/2025, invoice 84711", "-2 246,80", "Поставщик ПО", "Программное обеспечение", "ok"], ["17.09.2025", "Возврат налога согласно уточняющему расчёту;код бюджета 11010100", " +622,15", "Налоговая служба", "Возврат налогов", "ok"], ["17.09.2025", "Перевод между собственными счетами UA26040250010059660 -> UA90322001000012345", " +15 000,00", "Собственные счета", "Внутренний перевод", "ok"], ["18.09.2025", "Перевод между собственными счетами UA90322001000012345 -> UA26040250010059660", "-15 000,00", "Собственные счета", "Внутренний перевод", "ok"], ["18.09.2025", "Оплата поставщику за материалы по счёту №991/09; частичная предоплата 50%", "-8 750,00", "Поставщик материалов", "Материалы", "ok"], ["19.09.2025", "Поступление оплаты от клиента за консультационные услуги, счёт №45", " +12 400,00", "Клиент", "Оплата клиента", "ok"], ["19.09.2025", "Возврат клиенту излишне уплаченных средств по счёту №45", "-400,00", "Клиент", "Возврат клиенту", "ok"], ["20.09.2025", "Оплата получения выписки/справки/сервисный сбор, документ №A-774", "-180,00", "Государственный сервис", "Административные расходы", "ok"], ["20.09.2025", "Оплата ремонта офисного принтера и замены картриджа, акт 55", "-1 420,00", "Сервисный центр", "Ремонт", "ok"], ["21.09.2025", "Перевод средств за услуги по договору без номера; назначение сокращено", "-2 900,00", "Не определено", "Требует проверки", "warning"], ["21.09.2025", "Платёж 0921/77; счёт 44001; услуги по акту; без НДС; контрагент не указан", "-1 775,00", "Не определено", "Требует проверки", "warning"], ["22.09.2025", "Перевод средств по договорённости; детализация отсутствует; реф 008814", "-980,00", "Не определено", "Неоднозначная категория", "warning"], ["22.09.2025", "UA26040250010059660/платёж/101/код 8847/строка повреждена OCR ### ??? 77A", "-643,17", "Не определено", "Не классифицировано", "error"], ["23.09.2025", "Оплата услуг банка: открытие дополнительного счёта и SMS-информирование", "-250,00", "Банк", "Банковские комиссии", "ok"], ["23.09.2025", "Поступление собственных средств на счёт для покрытия кассового разрыва; без НДС", " +6 000,00", "Владелец", "Собственные средства", "ok"]];
-
-    const statementWindow = document.getElementById("statement-window");
-    const resultBody = document.getElementById("result-body");
-    const runButton = document.getElementById("demo-run");
-    const progress = document.getElementById("demo-progress");
-    const statusText = document.getElementById("demo-status");
-    const counterText = document.getElementById("demo-counter");
-    const statRows = document.getElementById("stat-rows");
-    const statClients = document.getElementById("stat-clients");
-    const statCategories = document.getElementById("stat-categories");
-    const statErrors = document.getElementById("stat-errors");
-
-    function renderSourceRows() {
-      statementWindow.innerHTML = "";
-
-      bankRows.forEach((row, index) => {
-        const item = document.createElement("div");
-        item.className = "statement-line";
-        item.dataset.index = index;
-
-        item.innerHTML = `
-          <span class="statement-date">${row[0]}</span>
-          <span class="statement-text">${row[1]}</span>
-          <span class="statement-amount">${row[2]}</span>
-        `;
-
-        statementWindow.appendChild(item);
-      });
-    }
-
-    function resetDemo() {
-      renderSourceRows();
-      resultBody.innerHTML = "";
-      progress.style.width = "0%";
-      statusText.textContent = "Готово к запуску";
-      counterText.textContent = `0 / ${bankRows.length}`;
-      statRows.textContent = "0";
-      statClients.textContent = "0";
-      statCategories.textContent = "0";
-      statErrors.textContent = "0";
-    }
-
-    function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    async function runDemo() {
-      runButton.disabled = true;
-      runButton.textContent = "Обработка...";
-
-      resetDemo();
-
-      const clients = new Set();
-      const categories = new Set();
-      const lines = Array.from(document.querySelectorAll(".statement-line"));
-
-      for (let i = 0; i < bankRows.length; i++) {
-        const row = bankRows[i];
-        const line = lines[i];
-
-        if (i > 0) {
-          lines[i - 1].classList.remove("active");
-          lines[i - 1].classList.add("done");
-        }
-
-        line.classList.add("active");
-        line.scrollIntoView({ block: "nearest", behavior: "smooth" });
-
-        statusText.textContent = `Распознавание и категоризация строки ${i + 1}`;
-        counterText.textContent = `${i + 1} / ${bankRows.length}`;
-        progress.style.width = `${((i + 1) / bankRows.length) * 100}%`;
-
-        const status = row[5] || "ok";
-
-        if (status !== "error") {
-          clients.add(row[3]);
-          categories.add(row[4]);
-        }
-
-        if (status === "warning") {
-          line.classList.add("warning");
-        }
-
-        if (status === "error") {
-          line.classList.add("error");
-        }
-
-        const tr = document.createElement("tr");
-        tr.className = status === "ok" ? "" : status;
-
-        const chipClass =
-          status === "warning"
-            ? "category-chip warning"
-            : status === "error"
-              ? "category-chip error"
-              : "category-chip";
-
-        const categoryLabel =
-          status === "warning"
-            ? "⚠ " + row[4]
-            : status === "error"
-              ? "✖ " + row[4]
-              : row[4];
-
-        tr.innerHTML = `
-          <td>${row[0]}</td>
-          <td>${row[3]}</td>
-          <td><span class="${chipClass}">${categoryLabel}</span></td>
-          <td>${row[2]}</td>
-        `;
-
-        resultBody.appendChild(tr);
-
-        requestAnimationFrame(() => {
-          tr.classList.add("show");
-        });
-
-        tr.scrollIntoView({ block: "nearest", behavior: "smooth" });
-
-        const issueCount = bankRows
-          .slice(0, i + 1)
-          .filter(item => (item[5] || "ok") !== "ok")
-          .length;
-
-        statRows.textContent = String(i + 1);
-        statClients.textContent = String(clients.size);
-        statCategories.textContent = String(categories.size);
-        statErrors.textContent = String(issueCount);
-
-        await sleep(55);
-      }
-
-      lines[bankRows.length - 1].classList.remove("active");
-      lines[bankRows.length - 1].classList.add("done");
-
-      statusText.textContent =
-        "Готово: 96 операцій оброблено • 3 требуют проверки • 1 не розпізнано";
-      runButton.disabled = false;
-      runButton.textContent = "↻ Запустить ещё раз";
-    }
-
-    runButton.addEventListener("click", runDemo);
-
-    resetDemo();
-  </script>
-
-
-  <script>
-    const pdfDemoDocuments = [{"name": "Invoice_Aurora_4821.pdf", "type": "invoice", "rows": [["10", "410201/AX", "Profile Aurora 45 silver", "6.0", "120", "Piece", "18.40", "2208.00", "76042100", "DE", "46.8000"], ["20", "410315/BK", "Corner Nova 45 reinforced", "", "240", "Pcs", "3.25", "780.00", "76169990", "DE", "21.6000"], ["30", "420118/CL", "Clip Vector S black", "", "600", "Pcs", "0.84", "504.00", "39269097", "PL", "12.3000"], ["40", "430722/DP", "Base plate Delta 90", "", "80", "Piece", "11.50", "920.00", "73269098", "CZ", "38.4000"]]}, {"name": "PackingList_Aurora_4821.pdf", "type": "packing", "rows": [["10", "410201/AX", "Profile Aurora 45 silver", "6.0", "120", "Piece", "46.8000", "76042100", "118.50", "132.40", "2 Palette"], ["20", "410315/BK", "Corner Nova 45 reinforced", "", "240", "Pcs", "21.6000", "76169990", "118.50", "132.40", "2 Palette"], ["30", "420118/CL", "Clip Vector S black", "", "600", "Pcs", "12.3000", "39269097", "118.50", "132.40", "2 Palette"], ["40", "430722/DP", "Base plate Delta 90", "", "80", "Piece", "38.4000", "73269098", "118.50", "132.40", "2 Palette"]]}, {"name": "Invoice_Nova_4822.pdf", "type": "invoice", "rows": [["10", "510144/ER", "Swivel Link Orbit M12", "", "40", "Piece", "7.80", "312.00", "73181900", "DE", "8.2000"], ["20", "510288/FS", "Guard unit Sigma 60", "", "25", "Piece", "24.60", "615.00", "73269098", "DE", "19.7500"], ["30", "520901/GT", "Ring bolt Terra M16", "", "90", "Pcs", "2.15", "193.50", "73181595", "PL", ""]]}];
-
-    const pdfInFiles = document.getElementById("pdf-in-files");
-    const pdfArchiveFiles = document.getElementById("pdf-archive-files");
-    const pdfRun = document.getElementById("pdf-run");
-    const pdfLog = document.getElementById("pdf-log");
-    const pdfTableHead = document.getElementById("pdf-table-head");
-    const pdfTableBody = document.getElementById("pdf-table-body");
-    const pdfSteps = Array.from(document.querySelectorAll("[data-pdf-step]"));
-    const pdfTabs = Array.from(document.querySelectorAll("[data-sheet-tab]"));
-    const pdfStatFiles = document.getElementById("pdf-stat-files");
-    const pdfStatRows = document.getElementById("pdf-stat-rows");
-    const pdfStatWeights = document.getElementById("pdf-stat-weights");
-    const pdfStatErrors = document.getElementById("pdf-stat-errors");
-
-    let activePdfSheet = "RAW";
-    const parsedPdfRows = {
-      RAW: [],
-      "УПАКОВ": []
-    };
-
-    function pdfSleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    function createDriveFile(documentData, state = "") {
-      const file = document.createElement("div");
-      file.className = "drive-file" + (state ? " " + state : "");
-      file.dataset.pdfName = documentData.name;
-      file.innerHTML = `
-        <span class="pdf-icon">PDF</span>
-        <span>${documentData.name}</span>
-      `;
-      return file;
-    }
-
-    function resetPdfCase() {
-      pdfInFiles.innerHTML = "";
-      pdfArchiveFiles.innerHTML = '<div class="drive-empty">Архив пуст</div>';
-
-      pdfDemoDocuments.forEach(item => {
-        pdfInFiles.appendChild(createDriveFile(item));
-      });
-
-      parsedPdfRows.RAW = [];
-      parsedPdfRows["УПАКОВ"] = [];
-
-      pdfSteps.forEach(step => {
-        step.classList.remove("active", "done");
-      });
-
-      pdfStatFiles.textContent = "0";
-      pdfStatRows.textContent = "0";
-      pdfStatWeights.textContent = "0";
-      pdfStatErrors.textContent = "0";
-      pdfLog.textContent =
-        "Готово к запуску. У папці PDF_IN знаходяться 3 демонстраційні PDF-файли.";
-
-      renderPdfTable();
-    }
-
-    function setPdfStep(index) {
-      pdfSteps.forEach((step, stepIndex) => {
-        step.classList.toggle("active", stepIndex === index);
-        if (stepIndex < index) {
-          step.classList.add("done");
-          step.classList.remove("active");
-        }
-      });
-    }
-
-    function finishPdfSteps() {
-      pdfSteps.forEach(step => {
-        step.classList.remove("active");
-        step.classList.add("done");
-      });
-    }
-
-    function renderPdfTable() {
-      const isRaw = activePdfSheet === "RAW";
-
-      pdfTableHead.innerHTML = isRaw
-        ? `
-          <tr>
-            <th>Pos</th>
-            <th>Article</th>
-            <th>Description</th>
-            <th>Length</th>
-            <th>Qty</th>
-            <th>Unit</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Weight</th>
-          </tr>
-        `
-        : `
-          <tr>
-            <th>Pos</th>
-            <th>Article</th>
-            <th>Description</th>
-            <th>Length</th>
-            <th>Qty</th>
-            <th>Unit</th>
-            <th>Weight</th>
-            <th>Net</th>
-            <th>Gross</th>
-          </tr>
-        `;
-
-      pdfTableBody.innerHTML = "";
-
-      parsedPdfRows[activePdfSheet].forEach(row => {
-        const tr = document.createElement("tr");
-
-        if (isRaw) {
-          tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${row[4]}</td>
-            <td>${row[5]}</td>
-            <td>${row[6]}</td>
-            <td>${row[7]}</td>
-            <td>${row[10] || "⚠"}</td>
-          `;
-        } else {
-          tr.innerHTML = `
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${row[4]}</td>
-            <td>${row[5]}</td>
-            <td>${row[6]}</td>
-            <td>${row[8]}</td>
-            <td>${row[9]}</td>
-          `;
-        }
-
-        pdfTableBody.appendChild(tr);
-        requestAnimationFrame(() => tr.classList.add("show"));
-      });
-    }
-
-    pdfTabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        activePdfSheet = tab.dataset.sheetTab;
-
-        pdfTabs.forEach(item => {
-          item.classList.toggle(
-            "active",
-            item.dataset.sheetTab === activePdfSheet
-          );
-        });
-
-        renderPdfTable();
-      });
-    });
-
-    async function runPdfCase() {
-      pdfRun.disabled = true;
-      pdfRun.textContent = "Обработка...";
-      resetPdfCase();
-
-      let processedFiles = 0;
-      let parsedRows = 0;
-      let matchedWeights = 0;
-      let warnings = 0;
-
-      for (let docIndex = 0; docIndex < pdfDemoDocuments.length; docIndex++) {
-        const current = pdfDemoDocuments[docIndex];
-        const fileNode = pdfInFiles.querySelector(
-          `[data-pdf-name="${current.name}"]`
-        );
-
-        fileNode.classList.add("processing");
-        setPdfStep(0);
-        pdfLog.textContent =
-          `Найден ${current.name} в папке PDF_IN. Читаю файл...`;
-        await pdfSleep(650);
-
-        setPdfStep(1);
-        pdfLog.textContent =
-          `Создан временный Google Docs. Выполняется OCR: ${current.name}`;
-        await pdfSleep(750);
-
-        setPdfStep(2);
-        pdfLog.textContent =
-          current.type === "invoice"
-            ? "Найден Invoice. Розбираю номер, дату, артикул, Pos, кількість, ціну та тариф."
-            : "Найден Packing List. Розбираю вагу, Net Weight, Gross Weight та упаковки.";
-        await pdfSleep(700);
-
-        setPdfStep(3);
-
-        if (current.type === "invoice") {
-          current.rows.forEach(row => {
-            parsedPdfRows.RAW.push(row);
-            parsedRows++;
-
-            if (row[10]) {
-              matchedWeights++;
-            } else {
-              warnings++;
-            }
-          });
-
-          activePdfSheet = "RAW";
-        } else {
-          current.rows.forEach(row => {
-            parsedPdfRows["УПАКОВ"].push(row);
-            parsedRows++;
-          });
-
-          activePdfSheet = "УПАКОВ";
-        }
-
-        pdfTabs.forEach(item => {
-          item.classList.toggle(
-            "active",
-            item.dataset.sheetTab === activePdfSheet
-          );
-        });
-
-        renderPdfTable();
-
-        pdfLog.textContent =
-          current.type === "invoice"
-            ? `Данные записаны на лист RAW. Распознано ${current.rows.length} позиции.`
-            : `Данные записаны на лист УПАКОВ. Вес готов к сопоставлению с RAW.`;
-
-        pdfStatRows.textContent = String(parsedRows);
-        pdfStatWeights.textContent = String(matchedWeights);
-        pdfStatErrors.textContent = String(warnings);
-        await pdfSleep(700);
-
-        setPdfStep(4);
-
-        if (pdfArchiveFiles.querySelector(".drive-empty")) {
-          pdfArchiveFiles.innerHTML = "";
-        }
-
-        fileNode.remove();
-        pdfArchiveFiles.appendChild(createDriveFile(current, "archived"));
-
-        processedFiles++;
-        pdfStatFiles.textContent = String(processedFiles);
-        pdfLog.textContent =
-          `${current.name} успешно перемещён из PDF_IN в PDF_ARCHIVE.`;
-
-        await pdfSleep(650);
-      }
-
-      finishPdfSteps();
-      activePdfSheet = "RAW";
-
-      pdfTabs.forEach(item => {
-        item.classList.toggle(
-          "active",
-          item.dataset.sheetTab === "RAW"
-        );
-      });
-
-      renderPdfTable();
-
-      pdfLog.textContent =
-        "Готово: 3 PDF обработано, дані записано до RAW та УПАКОВ, 1 вага потребує ручної перевірки.";
-      pdfRun.disabled = false;
-      pdfRun.textContent = "↻ Запустить ещё раз";
-    }
-
-    pdfRun.addEventListener("click", runPdfCase);
-
-    resetPdfCase();
-  </script>
-
-
-
-  <script>
-    const dashboardRawBody = document.getElementById("dashboard-raw-body");
-
-    const dashboardProducts = [
-      ["Ноутбук HP 15", "Ноутбуки", 23000],
-      ["Dell Inspiron 3520", "Ноутбуки", 28500],
-      ["Lenovo IdeaPad 3", "Ноутбуки", 26400],
-      ["Монитор LG 24", "Мониторы", 9000],
-      ["Монітор Samsung 27", "Мониторы", 11800],
-      ["Мышь Logitech M185", "Аксессуары", 450],
-      ["Клавиатура A4Tech", "Аксессуары", 750],
-      ["SSD Kingston 1TB", "Комплектующие", 3200],
-      ["Роутер TP-Link", "Сетевое оборудование", 2100],
-      ["Принтер Canon", "Оргтехника", 7600]
-    ];
-
-    const dashboardClients = [
-      "ООО «Альфа»",
-      "ООО «Бета»",
-      "ООО «Гамма»",
-      "ООО «Дельта»",
-      "ИП Иваненко",
-      "ИП Петренко",
-      "ООО «Омега»",
-      "ООО «Вектор»",
-      "ООО «Прайм»",
-      "ИП Коваленко"
-    ];
-
-    function renderDashboardRawRows() {
-      const startDate = new Date(2023, 0, 3);
-      const rows = [];
-
-      for (let i = 0; i < 200; i++) {
-        const currentDate = new Date(startDate);
-        currentDate.setDate(startDate.getDate() + i * 3);
-
-        const product = dashboardProducts[i % dashboardProducts.length];
-        const client = dashboardClients[(i * 3) % dashboardClients.length];
-        const quantity = 1 + ((i * 7) % 12);
-        const amount = product[2] * quantity;
-
-        rows.push(`
-          <tr>
-            <td>${currentDate.toLocaleDateString("ru-RU")}</td>
-            <td>${currentDate.getFullYear()}</td>
-            <td>${currentDate.toLocaleDateString("uk-UA", { month: "long" })}</td>
-            <td>${currentDate.getDate()}</td>
-            <td>${product[0]}</td>
-            <td>${product[1]}</td>
-            <td>${client}</td>
-            <td>${quantity}</td>
-            <td>${amount.toLocaleString("ru-RU")}</td>
-          </tr>
-        `);
-      }
-
-      dashboardRawBody.innerHTML = rows.join("");
-    }
-
-    renderDashboardRawRows();
-
-    const dashboardBuildButton = document.getElementById("dashboard-build");
-    const dashboardRaw = document.getElementById("dashboard-raw");
-    const dashboardLoader = document.getElementById("dashboard-loader");
-    const dashboardOutput = document.getElementById("dashboard-output");
-
-    let dashboardIsBuilt = false;
-
-    dashboardBuildButton.addEventListener("click", () => {
-      if (dashboardIsBuilt) {
-        dashboardOutput.classList.remove("visible");
-        dashboardRaw.classList.remove("hidden");
-        dashboardBuildButton.textContent = "⚙ Построить дашборд";
-        dashboardIsBuilt = false;
-        return;
-      }
-
-      dashboardBuildButton.disabled = true;
-      dashboardBuildButton.textContent = "Обработка данных…";
-      dashboardLoader.classList.add("active");
-
-      setTimeout(() => {
-        dashboardRaw.classList.add("hidden");
-        dashboardLoader.classList.remove("active");
-        dashboardOutput.classList.add("visible");
-        dashboardBuildButton.disabled = false;
-        dashboardBuildButton.textContent = "↩ Показать сырые данные";
-        dashboardIsBuilt = true;
-      }, 1300);
-    });
-  </script>
-  <script>
-  const capacityProducts = [
-    {
-      code: "ST-025",
-      name: "Стальная труба Ø25",
-      line: "line1",
-      lineLabel: "Линия 1"
-    },
-    {
-      code: "ST-040",
-      name: "Стальная труба Ø40",
-      line: "line1",
-      lineLabel: "Линия 1"
-    },
-    {
-      code: "AN-050",
-      name: "Стальной уголок 50×50",
-      line: "line2",
-      lineLabel: "Линия 2"
-    },
-    {
-      code: "AN-075",
-      name: "Стальной уголок 75×75",
-      line: "line2",
-      lineLabel: "Линия 2"
-    },
-    {
-      code: "PR-040",
-      name: "Стальной профиль 40×40",
-      line: "line3",
-      lineLabel: "Линия 3"
-    },
-    {
-      code: "PR-060",
-      name: "Стальной профиль 60×60",
-      line: "line3",
-      lineLabel: "Линия 3"
-    }
-  ];
-
-  const capacityPriorities = [
-    {
-      key: "normal",
-      label: "Обычный"
-    },
-    {
-      key: "high",
-      label: "Высокий"
-    },
-    {
-      key: "urgent",
-      label: "Срочный"
-    }
-  ];
-
-  const capacityOrdersBody =
-    document.getElementById("capacity-orders-body");
-
-  const capacityOrdersStatus =
-    document.getElementById("capacity-orders-status");
-
-  const capacityStartDate =
-    new Date(2026, 0, 1);
-
-  const capacityEndDate =
-    new Date(2026, 7, 2);
-
-  let capacityOrders = [];
-
-  function capacityCloneDate(date) {
-    return new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    );
-  }
-
-  function capacityAddDays(date, days) {
-    const result = capacityCloneDate(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
-  function capacityFormatDate(date) {
-    return date.toLocaleDateString("uk-UA", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
-    });
-  }
-
-  function capacityDaysBetween(start, end) {
-    const milliseconds =
-      capacityCloneDate(end) - capacityCloneDate(start);
-
-    return Math.floor(
-      milliseconds / (1000 * 60 * 60 * 24)
-    );
-  }
-
-  function capacityCreateOrders() {
-    const totalPeriodDays =
-      capacityDaysBetween(
-        capacityStartDate,
-        capacityEndDate
-      );
-
-    const orders = [];
-
-    for (let index = 0; index < 100; index++) {
-      const product =
-        capacityProducts[
-          (index * 5 + Math.floor(index / 4)) %
-          capacityProducts.length
-        ];
-
-      const receivedOffset =
-        Math.floor(
-          (index / 99) * totalPeriodDays
-        );
-
-      const receivedDate =
-        capacityAddDays(
-          capacityStartDate,
-          receivedOffset
-        );
-
-      const quantityBase =
-        product.line === "line1"
-          ? 180
-          : product.line === "line2"
-            ? 260
-            : 380;
-
-      const quantityStep =
-        product.line === "line1"
-          ? 37
-          : product.line === "line2"
-            ? 53
-            : 71;
-
-      const quantity =
-        quantityBase +
-        ((index * quantityStep) % 1450);
-
-      const priority =
-        index % 13 === 0
-          ? capacityPriorities[2]
-          : index % 5 === 0
-            ? capacityPriorities[1]
-            : capacityPriorities[0];
-
-      const requestedLeadTime =
-        priority.key === "urgent"
-          ? 2 + (index % 3)
-          : priority.key === "high"
-            ? 4 + (index % 5)
-            : 7 + (index % 10);
-
-      let requestedDate =
-        capacityAddDays(
-          receivedDate,
-          requestedLeadTime
-        );
-
-      if (requestedDate > capacityEndDate) {
-        requestedDate =
-          capacityCloneDate(capacityEndDate);
-      }
-
-      orders.push({
-        id: `ORD-${String(index + 1).padStart(4, "0")}`,
-        receivedDate,
-        productCode: product.code,
-        productName: product.name,
-        quantity,
-        line: product.line,
-        lineLabel: product.lineLabel,
-        requestedDate,
-        calculatedDate: null,
-        priority: priority.key,
-        priorityLabel: priority.label,
-        status: "waiting"
-      });
-    }
-
-    return orders;
-  }
-
-  function capacityPriorityClass(priority) {
-    if (priority === "urgent") {
-      return "capacity-priority-urgent";
-    }
-
-    if (priority === "high") {
-      return "capacity-priority-high";
-    }
-
-    return "capacity-priority-normal";
-  }
-
-  function capacityStatusMarkup(order) {
-    if (order.status === "on-time") {
-      return `
-        <span class="capacity-status capacity-status-ok">
-          Вчасно
-        </span>
-      `;
-    }
-
-    if (order.status === "delayed") {
-      return `
-        <span class="capacity-status capacity-status-warning">
-          Перенесено
-        </span>
-      `;
-    }
-
-    if (order.status === "critical") {
-      return `
-        <span class="capacity-status capacity-status-error">
-          Перевантаження
-        </span>
-      `;
-    }
-
-    return `
-      <span class="capacity-status capacity-status-waiting">
-        Ожидает
-      </span>
-    `;
-  }
-
-  function capacityRenderOrders() {
-    capacityOrdersBody.innerHTML =
-      capacityOrders
-        .map(order => {
-          const calculatedDate =
-            order.calculatedDate
-              ? capacityFormatDate(
-                  order.calculatedDate
-                )
-              : "—";
-
-          return `
-            <tr
-              data-capacity-order="${order.id}"
-              data-capacity-line="${order.line}"
-              data-capacity-priority="${order.priority}"
-            >
-              <td>
-                <strong>${order.id}</strong>
-              </td>
-
-              <td>
-                ${capacityFormatDate(
-                  order.receivedDate
-                )}
-              </td>
-
-              <td>
-                ${order.productCode}
-              </td>
-
-              <td>
-                ${order.productName}
-              </td>
-
-              <td>
-                ${order.quantity.toLocaleString("uk-UA")}
-              </td>
-
-              <td>
-                ${order.lineLabel}
-              </td>
-
-              <td>
-                ${capacityFormatDate(
-                  order.requestedDate
-                )}
-              </td>
-
-              <td class="capacity-calculated-date">
-                ${calculatedDate}
-              </td>
-
-              <td>
-                ${capacityStatusMarkup(order)}
-
-                <span
-                  class="capacity-priority ${capacityPriorityClass(
-                    order.priority
-                  )}"
-                >
-                  ${order.priorityLabel}
-                </span>
-              </td>
-            </tr>
-          `;
-        })
-        .join("");
-
-    capacityOrdersStatus.textContent =
-      `${capacityOrders.length} замовлень очікують розрахунку`;
-  }
-
-  function capacityResetInitialValues() {
-    const output =
-      document.getElementById("capacity-output");
-
-    const calendar =
-      document.getElementById("capacity-calendar");
-
-    const summaryOrders =
-      document.getElementById(
-        "capacity-summary-orders"
-      );
-
-    const summaryUnits =
-      document.getElementById(
-        "capacity-summary-units"
-      );
-
-    const summaryDelayed =
-      document.getElementById(
-        "capacity-summary-delayed"
-      );
-
-    const summaryLastDate =
-      document.getElementById(
-        "capacity-summary-last-date"
-      );
-
-    summaryOrders.textContent = "0";
-    summaryUnits.textContent = "0";
-    summaryDelayed.textContent = "0";
-    summaryLastDate.textContent = "—";
-
-    calendar.innerHTML = "";
-
-    ["line1", "line2", "line3"].forEach(line => {
-      const fill =
-        document.getElementById(
-          `capacity-util-${line}`
-        );
-
-      const text =
-        document.getElementById(
-          `capacity-util-${line}-text`
-        );
-
-      fill.style.width = "0%";
-      text.textContent = "0%";
-    });
-
-    output.dataset.calculated = "false";
-  }
-
-  capacityOrders =
-    capacityCreateOrders();
-
-  capacityRenderOrders();
-  capacityResetInitialValues();
-
-  const capacityPlannerValues = {
-    line1: 250,
-    line2: 400,
-    line3: 600
-  };
-
-  const capacityPlannerStep = 50;
-  const capacityPlannerMinimum = 50;
-  const capacityPlannerMaximum = 2000;
-
-  const capacityCalculateButton =
-    document.getElementById("capacity-calculate");
-
-  const capacityLoader =
-    document.getElementById("capacity-loader");
-
-  const capacityOutput =
-    document.getElementById("capacity-output");
-
-  const capacityCalendar =
-    document.getElementById("capacity-calendar");
-
-  const capacitySummaryOrders =
-    document.getElementById("capacity-summary-orders");
-
-  const capacitySummaryUnits =
-    document.getElementById("capacity-summary-units");
-
-  const capacitySummaryDelayed =
-    document.getElementById("capacity-summary-delayed");
-
-  const capacitySummaryLastDate =
-    document.getElementById("capacity-summary-last-date");
-
-  const capacityModeButtons =
-    Array.from(
-      document.querySelectorAll("[data-capacity-mode]")
-    );
-
-  const capacityControlButtons =
-    Array.from(
-      document.querySelectorAll("[data-capacity-action]")
-    );
-
-  let capacityPlanningMode = "queue";
-  let capacityLastPlan = null;
-
-  function capacityPlannerDateKey(date) {
-    const year = date.getFullYear();
-    const month =
-      String(date.getMonth() + 1).padStart(2, "0");
-    const day =
-      String(date.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-  }
-
-  function capacityPlannerParseDateKey(key) {
-    const [year, month, day] =
-      key.split("-").map(Number);
-
-    return new Date(year, month - 1, day);
-  }
-
-  function capacityPlannerCompareDates(a, b) {
-    return (
-      capacityCloneDate(a).getTime() -
-      capacityCloneDate(b).getTime()
-    );
-  }
-
-  function capacityPlannerPriorityRank(priority) {
-    if (priority === "urgent") return 3;
-    if (priority === "high") return 2;
-    return 1;
-  }
-
-  function capacityPlannerDelayDays(order) {
-    if (!order.calculatedDate) return 0;
-
-    return Math.max(
-      0,
-      capacityDaysBetween(
-        order.requestedDate,
-        order.calculatedDate
-      )
-    );
-  }
-
-  function capacityPlannerSetStatus(order) {
-    const delayDays =
-      capacityPlannerDelayDays(order);
-
-    if (delayDays === 0) {
-      order.status = "on-time";
-      return;
-    }
-
-    if (delayDays <= 5) {
-      order.status = "delayed";
-      return;
-    }
-
-    order.status = "critical";
-  }
-
-  function capacityPlannerSortOrders(orders) {
-    return [...orders].sort((a, b) => {
-      if (a.line !== b.line) {
-        return a.line.localeCompare(b.line);
-      }
-
-      if (capacityPlanningMode === "priority") {
-        const priorityDifference =
-          capacityPlannerPriorityRank(b.priority) -
-          capacityPlannerPriorityRank(a.priority);
-
-        if (priorityDifference !== 0) {
-          return priorityDifference;
-        }
-
-        const requestedDifference =
-          capacityPlannerCompareDates(
-            a.requestedDate,
-            b.requestedDate
-          );
-
-        if (requestedDifference !== 0) {
-          return requestedDifference;
-        }
-      }
-
-      const receivedDifference =
-        capacityPlannerCompareDates(
-          a.receivedDate,
-          b.receivedDate
-        );
-
-      if (receivedDifference !== 0) {
-        return receivedDifference;
-      }
-
-      const requestedDifference =
-        capacityPlannerCompareDates(
-          a.requestedDate,
-          b.requestedDate
-        );
-
-      if (requestedDifference !== 0) {
-        return requestedDifference;
-      }
-
-      return a.id.localeCompare(b.id);
-    });
-  }
-
-  function capacityPlannerCreateUsage() {
-    return {
-      line1: {},
-      line2: {},
-      line3: {}
-    };
-  }
-
-  function capacityPlannerGetUsed(
-    usage,
-    line,
-    date
-  ) {
-    const key =
-      capacityPlannerDateKey(date);
-
-    return usage[line][key] || 0;
-  }
-
-  function capacityPlannerAddUsed(
-    usage,
-    line,
-    date,
-    amount
-  ) {
-    const key =
-      capacityPlannerDateKey(date);
-
-    usage[line][key] =
-      (usage[line][key] || 0) + amount;
-  }
-
-  function capacityPlannerScheduleOrder(
-    order,
-    usage
-  ) {
-    let remaining =
-      order.quantity;
-
-    let currentDate =
-      capacityCloneDate(order.receivedDate);
-
-    let lastProductionDate =
-      capacityCloneDate(order.receivedDate);
-
-    let safetyCounter = 0;
-
-    while (remaining > 0 && safetyCounter < 3000) {
-      safetyCounter++;
-
-      const dailyCapacity =
-        capacityPlannerValues[order.line];
-
-      const used =
-        capacityPlannerGetUsed(
-          usage,
-          order.line,
-          currentDate
-        );
-
-      const available =
-        Math.max(0, dailyCapacity - used);
-
-      if (available > 0) {
-        const produced =
-          Math.min(available, remaining);
-
-        capacityPlannerAddUsed(
-          usage,
-          order.line,
-          currentDate,
-          produced
-        );
-
-        remaining -= produced;
-        lastProductionDate =
-          capacityCloneDate(currentDate);
-      }
-
-      if (remaining > 0) {
-        currentDate =
-          capacityAddDays(currentDate, 1);
-      }
-    }
-
-    order.calculatedDate =
-      lastProductionDate;
-
-    capacityPlannerSetStatus(order);
-  }
-
-  function capacityPlannerCalculatePlan() {
-    const usage =
-      capacityPlannerCreateUsage();
-
-    capacityOrders.forEach(order => {
-      order.calculatedDate = null;
-      order.status = "waiting";
-    });
-
-    const sortedOrders =
-      capacityPlannerSortOrders(capacityOrders);
-
-    sortedOrders.forEach(order => {
-      capacityPlannerScheduleOrder(
-        order,
-        usage
-      );
-    });
-
-    return {
-      usage,
-      orders: sortedOrders
-    };
-  }
-
-  function capacityPlannerUpdateTable() {
-    capacityRenderOrders();
-
-    capacityOrders.forEach((order, index) => {
-      const row =
-        document.querySelector(
-          `[data-capacity-order="${order.id}"]`
-        );
-
-      if (!row) return;
-
-      setTimeout(() => {
-        row.classList.add(
-          "capacity-row-updated"
-        );
-
-        setTimeout(() => {
-          row.classList.remove(
-            "capacity-row-updated"
-          );
-        }, 600);
-      }, Math.min(index * 8, 700));
-    });
-  }
-
-  function capacityPlannerGetUsageDates(usage) {
-    const keys = new Set();
-
-    Object.values(usage).forEach(lineUsage => {
-      Object.keys(lineUsage).forEach(key => {
-        keys.add(key);
-      });
-    });
-
-    return Array.from(keys)
-      .sort((a, b) => {
-        return (
-          capacityPlannerParseDateKey(a) -
-          capacityPlannerParseDateKey(b)
-        );
-      });
-  }
-
-  function capacityPlannerCalculateUtilization(
-    usage,
-    line,
-    allDates
-  ) {
-    if (!allDates.length) return 0;
-
-    const totalUsed =
-      Object.values(usage[line])
-        .reduce(
-          (sum, value) => sum + value,
-          0
-        );
-
-    const firstDate =
-      capacityPlannerParseDateKey(
-        allDates[0]
-      );
-
-    const lastDate =
-      capacityPlannerParseDateKey(
-        allDates[allDates.length - 1]
-      );
-
-    const periodDays =
-      capacityDaysBetween(
-        firstDate,
-        lastDate
-      ) + 1;
-
-    const availableCapacity =
-      periodDays *
-      capacityPlannerValues[line];
-
-    if (availableCapacity === 0) {
-      return 0;
-    }
-
-    return Math.min(
-      100,
-      Math.round(
-        (totalUsed / availableCapacity) *
-        100
-      )
-    );
-  }
-
-  function capacityPlannerUpdateUtilization(
-    usage,
-    allDates
-  ) {
-    ["line1", "line2", "line3"]
-      .forEach(line => {
-        const percent =
-          capacityPlannerCalculateUtilization(
-            usage,
-            line,
-            allDates
-          );
-
-        const fill =
-          document.getElementById(
-            `capacity-util-${line}`
-          );
-
-        const text =
-          document.getElementById(
-            `capacity-util-${line}-text`
-          );
-
-        fill.style.width =
-          `${percent}%`;
-
-        text.textContent =
-          `${percent}%`;
-      });
-  }
-
-  function capacityPlannerDayLoad(
-    usage,
-    dateKey
-  ) {
-    const lineLoads =
-      ["line1", "line2", "line3"]
-        .map(line => {
-          const used =
-            usage[line][dateKey] || 0;
-
-          const capacity =
-            capacityPlannerValues[line];
-
-          return capacity > 0
-            ? used / capacity
-            : 0;
-        });
-
-    return (
-      lineLoads.reduce(
-        (sum, value) => sum + value,
-        0
-      ) / lineLoads.length
-    );
-  }
-
-  function capacityPlannerDayClass(load) {
-    if (load >= 0.9) {
-      return "capacity-full";
-    }
-
-    if (load >= 0.35) {
-      return "capacity-medium";
-    }
-
-    return "capacity-free";
-  }
-
-  function capacityPlannerRenderCalendar(
-    usage,
-    allDates
-  ) {
-    capacityCalendar.innerHTML = "";
-
-    if (!allDates.length) return;
-
-    const visibleDates =
-      allDates.slice(-35);
-
-    visibleDates.forEach(dateKey => {
-      const date =
-        capacityPlannerParseDateKey(
-          dateKey
-        );
-
-      const load =
-        capacityPlannerDayLoad(
-          usage,
-          dateKey
-        );
-
-      const percent =
-        Math.round(load * 100);
-
-      const line1Used =
-        usage.line1[dateKey] || 0;
-
-      const line2Used =
-        usage.line2[dateKey] || 0;
-
-      const line3Used =
-        usage.line3[dateKey] || 0;
-
-      const day =
-        document.createElement("div");
-
-      day.className =
-        `capacity-day ${capacityPlannerDayClass(load)}`;
-
-      day.textContent =
-        String(date.getDate());
-
-      day.dataset.load =
-        `${capacityFormatDate(date)} • ` +
-        `середнє завантаження ${percent}% • ` +
-        `Л1: ${line1Used}/${capacityPlannerValues.line1} • ` +
-        `Л2: ${line2Used}/${capacityPlannerValues.line2} • ` +
-        `Л3: ${line3Used}/${capacityPlannerValues.line3}`;
-
-      capacityCalendar.appendChild(day);
-    });
-  }
-
-  function capacityPlannerUpdateSummary(
-    allDates
-  ) {
-    const totalUnits =
-      capacityOrders.reduce(
-        (sum, order) =>
-          sum + order.quantity,
-        0
-      );
-
-    const delayedOrders =
-      capacityOrders.filter(order => {
-        return (
-          order.status === "delayed" ||
-          order.status === "critical"
-        );
-      }).length;
-
-    const lastDate =
-      capacityOrders.reduce(
-        (latest, order) => {
-          if (!order.calculatedDate) {
-            return latest;
-          }
-
-          if (
-            !latest ||
-            order.calculatedDate > latest
-          ) {
-            return order.calculatedDate;
-          }
-
-          return latest;
-        },
-        null
-      );
-
-    capacitySummaryOrders.textContent =
-      capacityOrders.length
-        .toLocaleString("uk-UA");
-
-    capacitySummaryUnits.textContent =
-      totalUnits.toLocaleString("uk-UA");
-
-    capacitySummaryDelayed.textContent =
-      delayedOrders.toLocaleString("uk-UA");
-
-    capacitySummaryLastDate.textContent =
-      lastDate
-        ? capacityFormatDate(lastDate)
-        : "—";
-
-    capacityOrdersStatus.textContent =
-      capacityPlanningMode === "priority"
-        ? `Розраховано за пріоритетом • ${delayedOrders} із перенесенням`
-        : `Розраховано за чергою • ${delayedOrders} із перенесенням`;
-  }
-
-  function capacityPlannerResetResult() {
-    capacityOrders.forEach(order => {
-      order.calculatedDate = null;
-      order.status = "waiting";
-    });
-
-    capacityRenderOrders();
-    capacityResetInitialValues();
-
-    capacityOrdersStatus.textContent =
-      `${capacityOrders.length} замовлень очікують розрахунку`;
-
-    capacityLastPlan = null;
-  }
-
-  function capacityPlannerUpdateValue(line) {
-    const valueElement =
-      document.getElementById(
-        `capacity-${line}`
-      );
-
-    valueElement.textContent =
-      capacityPlannerValues[line]
-        .toLocaleString("uk-UA");
-  }
-
-  capacityControlButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      const line =
-        button.dataset.capacityLine;
-
-      const action =
-        button.dataset.capacityAction;
-
-      if (!line || !action) return;
-
-      if (action === "plus") {
-        capacityPlannerValues[line] =
-          Math.min(
-            capacityPlannerMaximum,
-            capacityPlannerValues[line] +
-            capacityPlannerStep
-          );
-      }
-
-      if (action === "minus") {
-        capacityPlannerValues[line] =
-          Math.max(
-            capacityPlannerMinimum,
-            capacityPlannerValues[line] -
-            capacityPlannerStep
-          );
-      }
-
-      capacityPlannerUpdateValue(line);
-      capacityPlannerResetResult();
-    });
-  });
-
-  capacityModeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      capacityPlanningMode =
-        button.dataset.capacityMode;
-
-      capacityModeButtons.forEach(item => {
-        item.classList.toggle(
-          "active",
-          item === button
-        );
-      });
-
-      capacityPlannerResetResult();
-    });
-  });
-
-  capacityCalculateButton.addEventListener(
-    "click",
-    () => {
-      capacityCalculateButton.disabled = true;
-      capacityCalculateButton.textContent =
-        "Расчет...";
-
-      capacityLoader.classList.add("active");
-      capacityOrdersStatus.textContent =
-        capacityPlanningMode === "priority"
-          ? "Перерасчет с приоритетным вытеснением заказов..."
-          : "Последовательное распределение заказов по производственным дням...";
-
-      setTimeout(() => {
-        capacityLastPlan =
-          capacityPlannerCalculatePlan();
-
-        const allDates =
-          capacityPlannerGetUsageDates(
-            capacityLastPlan.usage
-          );
-
-        capacityPlannerUpdateTable();
-
-        capacityPlannerUpdateSummary(
-          allDates
-        );
-
-        capacityPlannerUpdateUtilization(
-          capacityLastPlan.usage,
-          allDates
-        );
-
-        capacityPlannerRenderCalendar(
-          capacityLastPlan.usage,
-          allDates
-        );
-
-        capacityLoader.classList.remove("active");
-
-        capacityCalculateButton.disabled = false;
-        capacityCalculateButton.textContent =
-          "↻ Пересчитать производственный план";
-
-        capacityOutput.dataset.calculated =
-          "true";
-      }, 1100);
-    }
-  );
-
-  ["line1", "line2", "line3"]
-    .forEach(capacityPlannerUpdateValue);
-</script>
-  <script>
-  fetch("cases/case-5/case5-ru.html")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Не удалось загрузить кейс №5");
-      }
-
-      return response.text();
-    })
-    .then(html => {
-      const container = document.getElementById("case5-container");
-      container.innerHTML = html;
-
-      const script = document.createElement("script");
-      script.src = "cases/case-5/case5-ru.js";
-      document.body.appendChild(script);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-  <script>
-  fetch("cases/case-6/case6-ru.html")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Не удалось загрузить кейс №6");
-      }
-
-      return response.text();
-    })
-    .then(html => {
-      const container =
-        document.getElementById("case6-container");
-
-      container.innerHTML = html;
-
-      const script =
-        document.createElement("script");
-
-      script.src =
-        "cases/case-6/case6-ru.js";
-
-      document.body.appendChild(script);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-  <script>
-  fetch("cases/case-7/case7-ru.html")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Не удалось загрузить кейс №7");
-      }
-
-      return response.text();
-    })
-    .then(html => {
-      const container = document.getElementById("case7-container");
-      container.innerHTML = html;
-
-      const script = document.createElement("script");
-      script.src = "cases/case-7/case7-ru.js";
-      document.body.appendChild(script);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-</script>
-  <script src="cases/cases-accordion.js"></script>
-  <script src="cases/page-scroll-nav.js"></script>
+  <div id="site-footer-slot"></div>
+
+  <script
+    src="/themes/noir-lime/estimator/pricing-estimator.js"
+    defer
+  ></script>
 </body>
 </html>

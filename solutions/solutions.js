@@ -2719,5 +2719,519 @@ if (biPreview) {
     }
   );
 }
+
+  const capacityPreview =
+  document.querySelector(
+    ".featured-case--02 .capacity-preview"
+  );
+
+if (capacityPreview) {
+  const modes =
+    Array.from(
+      capacityPreview.querySelectorAll(
+        ".capacity-preview__mode span"
+      )
+    );
+
+  const lines =
+    Array.from(
+      capacityPreview.querySelectorAll(
+        ".capacity-preview__line"
+      )
+    );
+
+  const days =
+    Array.from(
+      capacityPreview.querySelectorAll(
+        ".capacity-preview__calendar span"
+      )
+    );
+
+  const orders =
+    Array.from(
+      capacityPreview.querySelectorAll(
+        ".capacity-preview__orders > div"
+      )
+    );
+
+  const scenarios = {
+    queue: {
+      lines: [
+        {
+          capacity: 250,
+          load: 64
+        },
+        {
+          capacity: 400,
+          load: 78
+        },
+        {
+          capacity: 600,
+          load: 57
+        }
+      ],
+      days: [
+        "free",
+        "medium",
+        "medium",
+        "full",
+        "full",
+        "medium",
+        "free",
+        "medium",
+        "full",
+        "full",
+        "medium",
+        "free",
+        "medium",
+        "medium"
+      ],
+      orders: [
+        {
+          priority: "NORMAL",
+          date: "08.08 → 11.08"
+        },
+        {
+          priority: "NORMAL",
+          date: "11.08 → 13.08"
+        },
+        {
+          priority: "NORMAL",
+          date: "14.08 → 15.08"
+        }
+      ]
+    },
+
+    priority: {
+      lines: [
+        {
+          capacity: 250,
+          load: 72
+        },
+        {
+          capacity: 400,
+          load: 88
+        },
+        {
+          capacity: 600,
+          load: 61
+        }
+      ],
+      days: [
+        "free",
+        "medium",
+        "full",
+        "full",
+        "medium",
+        "free",
+        "medium",
+        "full",
+        "full",
+        "medium",
+        "free",
+        "medium",
+        "full",
+        "medium"
+      ],
+      orders: [
+        {
+          priority: "URGENT",
+          date: "08.08 → 10.08"
+        },
+        {
+          priority: "HIGH",
+          date: "11.08 → 12.08"
+        },
+        {
+          priority: "NORMAL",
+          date: "14.08 → 14.08"
+        }
+      ]
+    }
+  };
+
+  let activeMode =
+    "priority";
+
+  function applyCapacityScenario() {
+    const scenario =
+      scenarios[activeMode];
+
+    lines.forEach(
+      (line, index) => {
+        const data =
+          scenario.lines[index];
+
+        const capacity =
+          line.querySelector(
+            "strong"
+          );
+
+        const track =
+          line.querySelector(
+            ".capacity-preview__track i"
+          );
+
+        const load =
+          line.querySelector(
+            "b"
+          );
+
+        if (capacity) {
+          capacity.textContent =
+            data.capacity;
+        }
+
+        if (track) {
+          track.style.width =
+            `${data.load}%`;
+        }
+
+        if (load) {
+          load.textContent =
+            `${data.load}%`;
+        }
+      }
+    );
+
+    days.forEach(
+      (day, index) => {
+        day.classList.remove(
+          "free",
+          "medium",
+          "full",
+          "is-active"
+        );
+
+        day.classList.add(
+          scenario.days[index]
+        );
+      }
+    );
+
+    orders.forEach(
+      (order, index) => {
+        const priority =
+          order.querySelector(
+            "strong"
+          );
+
+        const date =
+          order.querySelector(
+            "small"
+          );
+
+        if (priority) {
+          priority.textContent =
+            scenario.orders[index]
+              .priority;
+        }
+
+        if (date) {
+          date.textContent =
+            scenario.orders[index]
+              .date;
+        }
+      }
+    );
+  }
+
+  modes.forEach(
+    (mode, index) => {
+      mode.setAttribute(
+        "role",
+        "button"
+      );
+
+      mode.tabIndex = 0;
+
+      const activate = () => {
+        activeMode =
+          index === 0
+            ? "queue"
+            : "priority";
+
+        modes.forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+        mode.classList.add(
+          "active"
+        );
+
+        lines.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        orders.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        days.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        applyCapacityScenario();
+      };
+
+      mode.addEventListener(
+        "click",
+        activate
+      );
+
+      mode.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  lines.forEach(
+    (line, index) => {
+      line.setAttribute(
+        "role",
+        "button"
+      );
+
+      line.tabIndex = 0;
+
+      const activate = () => {
+        lines.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        line.classList.add(
+          "is-active"
+        );
+
+        const lineLoads = [
+          [82, 76, 91, 94, 73, 44, 68, 85, 92, 79, 48, 67, 88, 71],
+          [58, 72, 89, 96, 84, 65, 75, 91, 94, 86, 63, 77, 92, 81],
+          [41, 55, 62, 76, 68, 39, 51, 66, 78, 71, 43, 59, 73, 64]
+        ];
+
+        days.forEach(
+          (day, dayIndex) => {
+            const load =
+              lineLoads[index][
+                dayIndex
+              ];
+
+            day.classList.remove(
+              "free",
+              "medium",
+              "full",
+              "is-active"
+            );
+
+            if (load >= 85) {
+              day.classList.add(
+                "full"
+              );
+            } else if (
+              load >= 60
+            ) {
+              day.classList.add(
+                "medium"
+              );
+            } else {
+              day.classList.add(
+                "free"
+              );
+            }
+          }
+        );
+      };
+
+      line.addEventListener(
+        "click",
+        activate
+      );
+
+      line.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  days.forEach(
+    (day, index) => {
+      day.setAttribute(
+        "role",
+        "button"
+      );
+
+      day.tabIndex = 0;
+
+      const activate = () => {
+        days.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        day.classList.add(
+          "is-active"
+        );
+
+        orders.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        if (index <= 4) {
+          orders[0]
+            ?.classList.add(
+              "is-active"
+            );
+        } else if (
+          index <= 9
+        ) {
+          orders[1]
+            ?.classList.add(
+              "is-active"
+            );
+        } else {
+          orders[2]
+            ?.classList.add(
+              "is-active"
+            );
+        }
+      };
+
+      day.addEventListener(
+        "click",
+        activate
+      );
+
+      day.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  orders.forEach(
+    (order, index) => {
+      order.setAttribute(
+        "role",
+        "button"
+      );
+
+      order.tabIndex = 0;
+
+      const activate = () => {
+        orders.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        order.classList.add(
+          "is-active"
+        );
+
+        lines.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        lines[
+          index % lines.length
+        ]?.classList.add(
+          "is-active"
+        );
+
+        days.forEach(
+          item =>
+            item.classList.remove(
+              "is-active"
+            )
+        );
+
+        const ranges = [
+          [2, 3, 4],
+          [7, 8, 9],
+          [11, 12, 13]
+        ];
+
+        ranges[index]
+          .forEach(dayIndex => {
+            days[
+              dayIndex
+            ]?.classList.add(
+              "is-active"
+            );
+          });
+      };
+
+      order.addEventListener(
+        "click",
+        activate
+      );
+
+      order.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            activate();
+          }
+        }
+      );
+    }
+  );
+
+  applyCapacityScenario();
+}
   renderResults("");
 })();

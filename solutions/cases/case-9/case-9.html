@@ -6,8 +6,8 @@
 
     <p class="quote-case-subtitle">
       Повний цикл підготовки комерційної пропозиції для виробничої компанії:
-      вхідний запит, пошук клієнта, вибір джерела номенклатури та цін,
-      формування позицій, умови доставки, генерація PDF і підготовка листа клієнту.
+      від листа клієнта та реального робочого столу менеджера до пошуку клієнта,
+      вибору джерела номенклатури й цін, формування позицій, доставки, PDF та відправлення.
     </p>
   </div>
 
@@ -86,12 +86,19 @@
     </h3>
 
     <p>
-      Менеджер не змінює звичні системи. Він обирає,
-      де у його компанії зберігаються клієнти, товари, ціни та документи,
-      а процес автоматично збирає ці дані в одну комерційну пропозицію.
+      Після отримання листа менеджер відкриває на робочому столі звичайний ярлик
+      «Комерційні пропозиції». Це внутрішня програма компанії: вона відкривається
+      як звичайне робоче вікно та підключається до тих джерел, які вже використовує бізнес.
     </p>
 
     <div class="quote-solution-points">
+      <div>
+        <span>✓</span>
+        <p>
+          Менеджер працює в одному зрозумілому вікні, а не відкриває скрипти або технічні консолі.
+        </p>
+      </div>
+
       <div>
         <span>✓</span>
         <p>
@@ -154,110 +161,78 @@
 
       <div class="quote-progress">
         <span>Етап</span>
-        <strong id="quote-step-counter">1 / 8</strong>
+        <strong id="quote-step-counter">1 / 9</strong>
       </div>
     </div>
 
     <div class="quote-workspace">
       <aside class="quote-flow-nav">
-        <button
-          type="button"
-          class="quote-flow-step active"
-          data-quote-step="1"
-        >
+        <button type="button" class="quote-flow-step active" data-quote-step="1">
           <span>01</span>
-
           <div>
             <strong>Запит клієнта</strong>
             <small>Вхідний email</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="2"
-        >
+        <button type="button" class="quote-flow-step" data-quote-step="2">
           <span>02</span>
+          <div>
+            <strong>Робочий стіл</strong>
+            <small>Відкрити програму</small>
+          </div>
+        </button>
 
+        <button type="button" class="quote-flow-step" data-quote-step="3">
+          <span>03</span>
           <div>
             <strong>Клієнт</strong>
             <small>Знайти або створити</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="3"
-        >
-          <span>03</span>
-
+        <button type="button" class="quote-flow-step" data-quote-step="4">
+          <span>04</span>
           <div>
             <strong>Номенклатура</strong>
             <small>Обрати джерело</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="4"
-        >
-          <span>04</span>
-
+        <button type="button" class="quote-flow-step" data-quote-step="5">
+          <span>05</span>
           <div>
             <strong>Позиції</strong>
             <small>Кількість, ціна, знижка</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="5"
-        >
-          <span>05</span>
-
+        <button type="button" class="quote-flow-step" data-quote-step="6">
+          <span>06</span>
           <div>
             <strong>Доставка</strong>
             <small>Адреса та умови</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="6"
-        >
-          <span>06</span>
-
+        <button type="button" class="quote-flow-step" data-quote-step="7">
+          <span>07</span>
           <div>
             <strong>Пропозиція</strong>
             <small>Перевірка та PDF</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="7"
-        >
-          <span>07</span>
-
+        <button type="button" class="quote-flow-step" data-quote-step="8">
+          <span>08</span>
           <div>
             <strong>Збереження</strong>
             <small>CRM / Drive / ERP</small>
           </div>
         </button>
 
-        <button
-          type="button"
-          class="quote-flow-step"
-          data-quote-step="8"
-        >
-          <span>08</span>
-
+        <button type="button" class="quote-flow-step" data-quote-step="9">
+          <span>09</span>
           <div>
             <strong>Відправлення</strong>
             <small>Email клієнту</small>
@@ -365,13 +340,147 @@
             class="quote-primary-action quote-next-action"
             id="quote-start"
           >
-            Почати підготовку пропозиції
+            Згорнути пошту та перейти до робочого столу
           </button>
         </section>
 
         <section
-          class="quote-stage-panel"
+          class="quote-stage-panel quote-desktop-panel"
           data-quote-panel="2"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>MANAGER DESKTOP</span>
+            <strong>Лист прочитано. Що менеджер робить далі?</strong>
+          </div>
+
+          <p class="quote-panel-description">
+            Перед вами робочий стіл менеджера. Тут є звичні системи, файли та ярлик внутрішньої програми
+            «Комерційні пропозиції». Можна подивитися, де лежать дані, або одразу відкрити програму.
+          </p>
+
+          <div class="quote-desktop" id="quote-desktop">
+            <div class="quote-desktop-wallpaper">
+              <div class="quote-desktop-brand">
+                <span>SALES DESKTOP</span>
+                <strong>Fresh Drinks Europe</strong>
+                <small>Sales Department · workstation SD-14</small>
+              </div>
+
+              <div class="quote-desktop-icons">
+                <button type="button" class="quote-desktop-icon" data-desktop-app="outlook">
+                  <span class="quote-app-icon quote-app-outlook">O</span>
+                  <strong>Outlook</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon quote-desktop-icon-main" data-desktop-app="offers">
+                  <span class="quote-app-icon quote-app-offers">Q</span>
+                  <strong>Комерційні<br>пропозиції</strong>
+                  <small>Рекомендовано</small>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="excel">
+                  <span class="quote-app-icon quote-app-excel">X</span>
+                  <strong>PriceList<br>2026.xlsx</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="erp">
+                  <span class="quote-app-icon quote-app-erp">ERP</span>
+                  <strong>ERP Sales</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="crm">
+                  <span class="quote-app-icon quote-app-crm">CRM</span>
+                  <strong>CRM</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="drive">
+                  <span class="quote-app-icon quote-app-drive">D</span>
+                  <strong>Google Drive</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="pc">
+                  <span class="quote-app-icon quote-app-pc">PC</span>
+                  <strong>This PC</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="archive">
+                  <span class="quote-app-icon quote-app-archive">A</span>
+                  <strong>Quotes<br>Archive</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-file" data-desktop-app="notes">
+                  <span>TXT</span>
+                  <strong>call_notes.txt</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-file" data-desktop-app="oldprice">
+                  <span>XLS</span>
+                  <strong>price_old_DO_NOT_USE.xlsx</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-file" data-desktop-app="drafts">
+                  <span>DIR</span>
+                  <strong>draft_quotes</strong>
+                </button>
+              </div>
+
+              <div class="quote-desktop-hint">
+                <span>Наступна дія</span>
+                <strong>Відкрийте «Комерційні пропозиції»</strong>
+                <small>Це звичайна внутрішня програма менеджера, а не технічний скрипт.</small>
+              </div>
+
+              <div class="quote-desktop-window" id="quote-desktop-window" hidden>
+                <div class="quote-desktop-window-head">
+                  <div>
+                    <span id="quote-desktop-window-icon">Q</span>
+                    <strong id="quote-desktop-window-title">Комерційні пропозиції</strong>
+                  </div>
+
+                  <div class="quote-window-controls">
+                    <button type="button" data-window-action="minimize" aria-label="Згорнути">−</button>
+                    <button type="button" data-window-action="close" aria-label="Закрити">×</button>
+                  </div>
+                </div>
+
+                <div class="quote-desktop-window-body" id="quote-desktop-window-body"></div>
+              </div>
+            </div>
+
+            <div class="quote-taskbar">
+              <button type="button" class="quote-start-menu" aria-label="Start">⊞</button>
+
+              <div class="quote-taskbar-apps">
+                <button type="button" data-desktop-app="outlook">O</button>
+                <button type="button" data-desktop-app="offers">Q</button>
+                <button type="button" data-desktop-app="excel">X</button>
+                <button type="button" data-desktop-app="erp">ERP</button>
+              </div>
+
+              <div class="quote-taskbar-status">
+                <span>UK</span>
+                <span>09:01</span>
+                <span>23.08.2026</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-desktop-explainer">
+            <div>
+              <span>Що це?</span>
+              <strong>Окрема робоча програма для менеджера</strong>
+            </div>
+            <p>
+              Вона може працювати у браузері або відкриватися ярликом як звичайний застосунок.
+              Менеджер бачить тільки зрозумілий інтерфейс, а підключення до CRM, ERP, 1С, Excel чи Drive працюють у фоні.
+            </p>
+          </div>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="3"
           hidden
         >
           <div class="quote-panel-head">
@@ -542,7 +651,7 @@
 
         <section
           class="quote-stage-panel"
-          data-quote-panel="3"
+          data-quote-panel="4"
           hidden
         >
           <div class="quote-panel-head">
@@ -674,7 +783,7 @@
 
         <section
           class="quote-stage-panel"
-          data-quote-panel="4"
+          data-quote-panel="5"
           hidden
         >
           <div class="quote-panel-head">
@@ -765,7 +874,7 @@
 
         <section
           class="quote-stage-panel"
-          data-quote-panel="5"
+          data-quote-panel="6"
           hidden
         >
           <div class="quote-panel-head">
@@ -853,7 +962,7 @@
 
         <section
           class="quote-stage-panel"
-          data-quote-panel="6"
+          data-quote-panel="7"
           hidden
         >
           <div class="quote-panel-head">
@@ -999,7 +1108,7 @@
 
         <section
           class="quote-stage-panel"
-          data-quote-panel="7"
+          data-quote-panel="8"
           hidden
         >
           <div class="quote-panel-head">
@@ -1070,13 +1179,22 @@
 
         <section
           class="quote-stage-panel"
-          data-quote-panel="8"
+          data-quote-panel="9"
           hidden
         >
           <div class="quote-panel-head">
-            <span>OUTGOING EMAIL</span>
-            <strong>Комерційна пропозиція готова до відправлення</strong>
+            <span>OUTLOOK · OUTGOING EMAIL</span>
+            <strong>Повертаємось до пошти та відправляємо готовий PDF</strong>
           </div>
+
+          <div class="quote-mail-client-shell">
+            <div class="quote-mail-client-top">
+              <div>
+                <span class="quote-app-icon quote-app-outlook">O</span>
+                <strong>Outlook</strong>
+              </div>
+              <span>New message · Draft</span>
+            </div>
 
           <div class="quote-email quote-email-outgoing">
             <div class="quote-email-meta">
@@ -1122,6 +1240,7 @@
                 <small>Commercial quotation</small>
               </div>
             </div>
+          </div>
           </div>
 
           <button
@@ -1203,58 +1322,29 @@
   </div>
 </div>
   <div class="quote-lifecycle">
-    <div>
-      <span>01</span>
-      <strong>Request</strong>
-    </div>
-
+    <div><span>01</span><strong>Email</strong></div>
     <i>→</i>
-
-    <div>
-      <span>02</span>
-      <strong>Customer</strong>
-    </div>
-
+    <div><span>02</span><strong>Desktop</strong></div>
     <i>→</i>
-
-    <div>
-      <span>03</span>
-      <strong>Products</strong>
-    </div>
-
+    <div><span>03</span><strong>Program</strong></div>
     <i>→</i>
-
-    <div>
-      <span>04</span>
-      <strong>Pricing</strong>
-    </div>
-
+    <div><span>04</span><strong>Customer</strong></div>
     <i>→</i>
-
-    <div>
-      <span>05</span>
-      <strong>Delivery</strong>
-    </div>
-
+    <div><span>05</span><strong>Products</strong></div>
     <i>→</i>
-
-    <div>
-      <span>06</span>
-      <strong>PDF</strong>
-    </div>
-
+    <div><span>06</span><strong>Pricing</strong></div>
     <i>→</i>
-
-    <div>
-      <span>07</span>
-      <strong>Send</strong>
-    </div>
+    <div><span>07</span><strong>Delivery</strong></div>
+    <i>→</i>
+    <div><span>08</span><strong>PDF</strong></div>
+    <i>→</i>
+    <div><span>09</span><strong>Send</strong></div>
   </div>
 
   <div class="quote-business-impact">
     <article>
       <span>До</span>
-      <strong>Email → Excel → ERP → Word → PDF → Email</strong>
+      <strong>Email → пошук файлів → ERP / CRM → шаблон → PDF → Email</strong>
       <small>
         ручне перенесення даних між кількома джерелами
       </small>
@@ -1262,9 +1352,9 @@
 
     <article>
       <span>Після</span>
-      <strong>Один керований quotation workflow</strong>
+      <strong>Одна програма на робочому столі менеджера</strong>
       <small>
-        джерела даних залишаються тими самими, але процес стає зв’язаним
+        джерела даних залишаються тими самими, але менеджер працює в одному зрозумілому інтерфейсі
       </small>
     </article>
 

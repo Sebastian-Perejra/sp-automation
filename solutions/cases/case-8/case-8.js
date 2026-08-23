@@ -5,44 +5,41 @@
 
   const chatArea = root.querySelector("#tg-chat-area");
   const dynamicZone = root.querySelector("#tg-dynamic-zone");
-  const mainMenu = root.querySelector("#tg-main-menu");
-
   const addButton = root.querySelector("#tg-add-reminder");
   const openListButton = root.querySelector("#tg-open-list");
   const deleteButton = root.querySelector("#tg-delete-reminder");
   const helpButton = root.querySelector("#tg-help");
-
   const replyKeyboard = root.querySelector("#tg-reply-keyboard");
-
   const input = root.querySelector("#tg-message-input");
   const sendButton = root.querySelector("#tg-send-button");
-
   const stepCounter = root.querySelector("#tg-step-counter");
   const guideMessage = root.querySelector("#tg-guide-message");
   const guideSteps = [
     ...root.querySelectorAll("[data-tg-guide-step]")
   ];
-
   const resetButton = root.querySelector("#tg-reset-demo");
-
   const shareModal = root.querySelector("#tg-share-modal");
   const shareClose = root.querySelector("#tg-share-close");
   const shareReminderText = root.querySelector(
     "#tg-share-reminder-text"
   );
-
   const shareContacts = [
     ...root.querySelectorAll("[data-tg-contact]")
   ];
 
-  let currentStep = 1;
+  let reminder = createEmptyReminder();
 
-  let reminder = {
-    text: "",
-    timeLabel: "",
-    mode: "",
-    created: false
-  };
+  function createEmptyReminder() {
+    return {
+      text: "",
+      timeLabel: "",
+      scheduledAt: null,
+      mode: "",
+      created: false,
+      status: "",
+      snoozed: false
+    };
+  }
 
   function scrollChat() {
     requestAnimationFrame(() => {
@@ -58,6 +55,16 @@
       hour: "2-digit",
       minute: "2-digit"
     });
+  }
+
+  function formatDateTime(date) {
+    return new Intl.DateTimeFormat("uk-UA", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }).format(date);
   }
 
   function createMessage(text, type = "bot") {
@@ -95,8 +102,6 @@
   }
 
   function setGuide(step, text) {
-    currentStep = step;
-
     stepCounter.textContent = `${step} / 7`;
     guideMessage.textContent = text;
 
@@ -117,26 +122,37 @@
     clearHints();
   }
 
+  function completeGuide(text) {
+    stepCounter.textContent = "7 / 7";
+    guideMessage.textContent = text;
+
+    guideSteps.forEach(item => {
+      item.classList.remove("active");
+      item.classList.add("done");
+    });
+
+    clearHints();
+  }
+
   function enableComposer(placeholder) {
     input.disabled = false;
     input.value = "";
     input.placeholder = placeholder;
-
     sendButton.disabled = true;
 
     input.classList.add("tg-next-action");
 
     setTimeout(() => {
       input.focus();
-    }, 200);
+    }, 150);
   }
 
   function disableComposer() {
     input.disabled = true;
     input.value = "";
     input.placeholder = "Message";
-
     sendButton.disabled = true;
+
     input.classList.remove("tg-next-action");
     sendButton.classList.remove("tg-next-action");
   }
@@ -179,41 +195,260 @@
     });
   }
 
+  function startNewReminder() {
+    hideReplyKeyboard();
+
+    createMessage("➕ Додати", "user");
+
+    setGuide(
+      2,
+      "Напишіть текст нагадування у полі Message."
+    );
+
+    setMainMenuEnabled(false);
+
+    setTimeout(() => {
+      createMessage(
+        "Напиши, про що тобі нагадати?"
+      );
+
+      enableComposer(
+        "Наприклад: передзвонити клієнту"
+      );
+    }, 300);
+  }
+
+  function handleReminderText() {
+    const value = input.value.trim();
+
+    if (!value) return;
+
+    reminder = createEmptyReminder();
+    reminder.text = value;
+
+    createMessage(value, "user");
+
+    disableComposer();
+
+    setTimeout(() => {
+      createMessage("Коли тобі нагадати?");
+      showTimeOptions();
+    }, 300);
+  }
+
   function showTimeOptions() {
     setGuide(
       3,
-      "Тепер оберіть, коли бот має повернути це нагадування."
+      "Оберіть швидкий варіант або вкажіть точну дату та час."
     );
 
     showReplyKeyboard([
       {
         label: "5 хв",
-        action: () => chooseTime("через 5 хвилин")
+        action: () =>
+          chooseRelativeTime(5, "через 5 хвилин")
       },
       {
         label: "10 хв",
-        action: () => chooseTime("через 10 хвилин")
+        action: () =>
+          chooseRelativeTime(10, "через 10 хвилин")
       },
       {
         label: "30 хв",
-        action: () => chooseTime("через 30 хвилин")
+        action: () =>
+          chooseRelativeTime(30, "через 30 хвилин")
       },
       {
         label: "1 година",
-        action: () => chooseTime("через 1 годину")
+        action: () =>
+          chooseRelativeTime(60, "через 1 годину")
       },
       {
         label: "Сьогодні ввечері",
-        action: () => chooseTime("сьогодні ввечері")
+        action: chooseTonight
       },
       {
         label: "Завтра зранку",
-        action: () => chooseTime("завтра зранку")
+        action: chooseTomorrowMorning
+      },
+      {
+        label: "Завтра о...",
+        action: showTomorrowTimePicker
+      },
+      {
+        label: "📅 Обрати дату і час",
+        action: showCustomDateTimePicker
       }
     ]);
   }
 
-  function chooseTime(label) {
+  function chooseRelativeTime(minutes, label) {
+    const date =
+      new Date(Date.now() + minutes * 60000);
+
+    setChosenTime(date, label);
+  }
+
+  function chooseTonight() {
+    const now = new Date();
+    const date = new Date(now);
+
+    date.setHours(19, 0, 0, 0);
+
+    if (date <= now) {
+      date.setDate(date.getDate() + 1);
+    }
+
+    setChosenTime(
+      date,
+      `сьогодні ввечері · ${formatDateTime(date)}`
+    );
+  }
+
+  function chooseTomorrowMorning() {
+    const date = new Date();
+
+    date.setDate(date.getDate() + 1);
+    date.setHours(8, 0, 0, 0);
+
+    setChosenTime(
+      date,
+      `завтра зранку · ${formatDateTime(date)}`
+    );
+  }
+
+  function showTomorrowTimePicker() {
+    hideReplyKeyboard();
+
+    createMessage("Завтра о...", "user");
+
+    setGuide(
+      3,
+      "Оберіть точний час на завтра."
+    );
+
+    replyKeyboard.hidden = false;
+
+    const picker = document.createElement("div");
+    picker.className = "tg-date-picker";
+
+    picker.innerHTML = `
+      <span>Завтра</span>
+      <input
+        type="time"
+        class="tg-picker-time"
+        value="10:00"
+      >
+      <button
+        type="button"
+        class="tg-picker-confirm tg-next-action"
+      >
+        Підтвердити
+      </button>
+    `;
+
+    replyKeyboard.appendChild(picker);
+
+    const timeInput =
+      picker.querySelector(".tg-picker-time");
+
+    const confirm =
+      picker.querySelector(".tg-picker-confirm");
+
+    confirm.addEventListener("click", () => {
+      const time = timeInput.value;
+
+      if (!time) return;
+
+      const [hours, minutes] =
+        time.split(":").map(Number);
+
+      const date = new Date();
+
+      date.setDate(date.getDate() + 1);
+      date.setHours(hours, minutes, 0, 0);
+
+      setChosenTime(
+        date,
+        `завтра о ${time}`
+      );
+    });
+  }
+
+  function showCustomDateTimePicker() {
+    hideReplyKeyboard();
+
+    createMessage("📅 Обрати дату і час", "user");
+
+    setGuide(
+      3,
+      "Оберіть будь-яку дату та точний час."
+    );
+
+    replyKeyboard.hidden = false;
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const minDate =
+      tomorrow.toISOString().slice(0, 10);
+
+    const picker = document.createElement("div");
+    picker.className = "tg-date-picker tg-date-picker-custom";
+
+    picker.innerHTML = `
+      <input
+        type="date"
+        class="tg-picker-date"
+        min="${minDate}"
+        value="${minDate}"
+      >
+      <input
+        type="time"
+        class="tg-picker-time"
+        value="10:00"
+      >
+      <button
+        type="button"
+        class="tg-picker-confirm tg-next-action"
+      >
+        Підтвердити
+      </button>
+    `;
+
+    replyKeyboard.appendChild(picker);
+
+    const dateInput =
+      picker.querySelector(".tg-picker-date");
+
+    const timeInput =
+      picker.querySelector(".tg-picker-time");
+
+    const confirm =
+      picker.querySelector(".tg-picker-confirm");
+
+    confirm.addEventListener("click", () => {
+      if (
+        !dateInput.value ||
+        !timeInput.value
+      ) {
+        return;
+      }
+
+      const date =
+        new Date(
+          `${dateInput.value}T${timeInput.value}:00`
+        );
+
+      setChosenTime(
+        date,
+        formatDateTime(date)
+      );
+    });
+  }
+
+  function setChosenTime(date, label) {
+    reminder.scheduledAt = date;
     reminder.timeLabel = label;
 
     hideReplyKeyboard();
@@ -221,24 +456,22 @@
     createMessage(label, "user");
 
     setTimeout(() => {
-      createMessage(
-        "Як нагадувати?"
-      );
-
+      createMessage("Як нагадувати?");
       showModeOptions();
-    }, 350);
+    }, 300);
   }
 
   function showModeOptions() {
     setGuide(
       4,
-      "Оберіть режим: один раз або повторювати нагадування, поки задача не буде виконана."
+      "Оберіть: нагадати один раз або повторювати, поки задача не буде виконана."
     );
 
     showReplyKeyboard([
       {
         label: "Один раз",
-        action: () => chooseMode("Один раз")
+        action: () =>
+          chooseMode("Один раз")
       },
       {
         label: "Повторювати до виконання",
@@ -255,43 +488,250 @@
 
     createMessage(mode, "user");
 
-    setTimeout(() => {
-      createReminder();
-    }, 350);
+    setTimeout(createReminder, 300);
   }
 
   function createReminder() {
     reminder.created = true;
+    reminder.status = "active";
+    reminder.snoozed = false;
 
     createMessage(
-      `✅ Нагадування створено.\n\n${reminder.text}\n\nКоли: ${reminder.timeLabel}\nРежим: ${reminder.mode}`
+      `✅ Нагадування створено.\n\n${reminder.text}\n\n⏰ ${reminder.timeLabel}\n🔁 ${reminder.mode}`
     );
 
     setGuide(
       5,
-      "Готово. Бот зберіг нагадування. Тепер відкрийте список і перевірте, що задача там є."
+      "Нагадування готове. Тепер можете перевірити, як воно спрацює."
     );
 
-    renderCreatedActions();
+    showCreatedActions();
   }
 
-  function renderCreatedActions() {
-    hideReplyKeyboard();
-
+  function showCreatedActions() {
     showReplyKeyboard([
       {
-        label: "📋 Відкрити список",
+        label: "🔔 Перевірити нагадування",
+        action: testReminder
+      },
+      {
+        label: "📋 Список",
         action: () => showReminderList(true)
       },
       {
         label: "↗ Передати іншому",
-        action: () => openShare()
+        action: openShare
       },
       {
         label: "➕ Створити ще",
-        action: () => startNewReminder()
+        action: startNewReminder
       }
     ]);
+  }
+
+  function playReminderSignal() {
+    if (
+      "vibrate" in navigator
+    ) {
+      navigator.vibrate([
+        120,
+        80,
+        120
+      ]);
+    }
+
+    try {
+      const AudioContextClass =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+      if (!AudioContextClass) {
+        return;
+      }
+
+      const context =
+        new AudioContextClass();
+
+      const oscillator =
+        context.createOscillator();
+
+      const gain =
+        context.createGain();
+
+      oscillator.frequency.value = 720;
+      oscillator.type = "sine";
+
+      gain.gain.setValueAtTime(
+        0.0001,
+        context.currentTime
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.13,
+        context.currentTime + 0.02
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        context.currentTime + 0.28
+      );
+
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+
+      oscillator.start();
+      oscillator.stop(
+        context.currentTime + 0.3
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function testReminder() {
+    hideReplyKeyboard();
+
+    setGuide(
+      6,
+      "Зараз бот імітує реальне спрацювання створеного нагадування."
+    );
+
+    createMessage(
+      "🔔 Перевірити нагадування",
+      "user"
+    );
+
+    setTimeout(() => {
+      playReminderSignal();
+
+      createMessage(
+        `⏰ Нагадування!\n\n${reminder.text}\n\nДавай, час виконати те, що ти запланував 🙂`
+      );
+
+      showReminderActions();
+    }, 650);
+  }
+
+  function showReminderActions() {
+    showReplyKeyboard([
+      {
+        label: "✅ Виконано",
+        action: markDone
+      },
+      {
+        label: "⏰ Відкласти",
+        action: showSnoozeOptions
+      },
+      {
+        label: "↗ Передати іншому",
+        action: openShare
+      }
+    ]);
+  }
+
+  function showSnoozeOptions() {
+    hideReplyKeyboard();
+
+    createMessage(
+      "⏰ Відкласти",
+      "user"
+    );
+
+    setTimeout(() => {
+      createMessage(
+        "Добре. Через скільки нагадати ще раз?"
+      );
+
+      showReplyKeyboard([
+        {
+          label: "1 хв",
+          action: () =>
+            applySnooze(1)
+        },
+        {
+          label: "10 хв",
+          action: () =>
+            applySnooze(10)
+        },
+        {
+          label: "30 хв",
+          action: () =>
+            applySnooze(30)
+        },
+        {
+          label: "1 година",
+          action: () =>
+            applySnooze(60)
+        }
+      ]);
+    }, 300);
+  }
+
+  function applySnooze(minutes) {
+    hideReplyKeyboard();
+
+    const label =
+      minutes === 60
+        ? "1 година"
+        : `${minutes} хв`;
+
+    createMessage(label, "user");
+
+    const date =
+      new Date(Date.now() + minutes * 60000);
+
+    reminder.scheduledAt = date;
+    reminder.timeLabel =
+      `через ${label}`;
+
+    reminder.snoozed = true;
+    reminder.status = "snoozed";
+
+    setTimeout(() => {
+      createMessage(
+        `👌 Домовились. Нагадаю ще раз через ${label}.\n\nНаступне нагадування: ${formatDateTime(date)}`
+      );
+
+      showReplyKeyboard([
+        {
+          label: "🔔 Перевірити ще раз",
+          action: testReminder
+        },
+        {
+          label: "📋 Список",
+          action: () =>
+            showReminderList(false)
+        }
+      ]);
+    }, 300);
+  }
+
+  function markDone() {
+    hideReplyKeyboard();
+
+    createMessage("✅ Виконано", "user");
+
+    reminder.status = "done";
+    reminder.created = false;
+
+    setTimeout(() => {
+      createMessage(
+        `✅ Готово!\n\n“${reminder.text}” позначено як виконане. Більше нагадувати не буду.`
+      );
+
+      completeGuide(
+        "Повний цикл завершено: задача створена, нагадування спрацювало та було виконане."
+      );
+
+      showReplyKeyboard([
+        {
+          label: "➕ Створити нове",
+          action: startNewReminder
+        }
+      ]);
+
+      setMainMenuEnabled(true);
+    }, 300);
   }
 
   function showReminderList(fromFlow = false) {
@@ -305,17 +745,28 @@
 
     hideReplyKeyboard();
 
-    createMessage("📋 Ваші активні нагадування:");
+    createMessage(
+      "📋 Ваші активні нагадування:"
+    );
 
-    const card = document.createElement("div");
-    card.className = "tg-message tg-message-bot";
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "tg-message tg-message-bot";
+
+    const status =
+      reminder.status === "snoozed"
+        ? "Відкладено"
+        : "Активне";
 
     card.innerHTML = `
       <div class="tg-message-text">
         <strong>№1</strong><br>
         ${escapeHtml(reminder.text)}<br><br>
         ⏰ ${escapeHtml(reminder.timeLabel)}<br>
-        🔁 ${escapeHtml(reminder.mode)}
+        🔁 ${escapeHtml(reminder.mode)}<br>
+        ● ${status}
       </div>
       <span class="tg-message-time">${getTime()}</span>
     `;
@@ -325,26 +776,26 @@
     if (fromFlow) {
       setGuide(
         6,
-        "Нагадування є у списку. Тепер спробуйте передати його іншій людині."
+        "Створене нагадування зберігається у списку."
       );
     }
 
     showReplyKeyboard([
       {
+        label: "🔔 Перевірити",
+        action: testReminder
+      },
+      {
         label: "↗ Передати іншому",
-        action: () => openShare()
+        action: openShare
       },
       {
         label: "✅ Виконано",
-        action: () => markDone()
+        action: markDone
       },
       {
         label: "⏰ Відкласти",
-        action: () => snoozeReminder()
-      },
-      {
-        label: "➕ Нове нагадування",
-        action: () => startNewReminder()
+        action: showSnoozeOptions
       }
     ]);
 
@@ -352,7 +803,7 @@
   }
 
   function openShare() {
-    if (!reminder.created) {
+    if (!reminder.text) {
       createMessage(
         "Спочатку створіть нагадування."
       );
@@ -367,7 +818,7 @@
 
     setGuide(
       7,
-      "Оберіть контакт — так виглядає передача нагадування іншій людині."
+      "Оберіть контакт, якому потрібно передати нагадування."
     );
   }
 
@@ -382,147 +833,25 @@
       `↗ Нагадування передано: ${contactName}`
     );
 
-    hideReplyKeyboard();
+    completeGuide(
+      `Нагадування передано контакту “${contactName}”.`
+    );
 
     showReplyKeyboard([
       {
-        label: "➕ Створити нове",
-        action: () => startNewReminder()
+        label: "🔔 Перевірити нагадування",
+        action: testReminder
       },
       {
-        label: "📋 Список",
-        action: () => showReminderList(false)
+        label: "➕ Створити нове",
+        action: startNewReminder
       }
     ]);
-
-    guideMessage.textContent =
-      `Готово. Нагадування передано контакту “${contactName}”. Ви пройшли повний сценарій.`;
-
-    stepCounter.textContent = "7 / 7";
-
-    guideSteps.forEach(item => {
-      item.classList.remove("active");
-      item.classList.add("done");
-    });
-  }
-
-  function markDone() {
-    hideReplyKeyboard();
-
-    createMessage("✅ Виконано", "user");
-
-    setTimeout(() => {
-      createMessage(
-        "Готово. Нагадування закрито."
-      );
-
-      reminder.created = false;
-
-      showReplyKeyboard([
-        {
-          label: "➕ Створити нове",
-          action: () => startNewReminder()
-        }
-      ]);
-    }, 300);
-  }
-
-  function snoozeReminder() {
-    hideReplyKeyboard();
-
-    createMessage("⏰ Відкласти", "user");
-
-    setTimeout(() => {
-      createMessage(
-        "На скільки відкласти?"
-      );
-
-      showReplyKeyboard([
-        {
-          label: "5 хв",
-          action: () => applySnooze("5 хвилин")
-        },
-        {
-          label: "10 хв",
-          action: () => applySnooze("10 хвилин")
-        },
-        {
-          label: "30 хв",
-          action: () => applySnooze("30 хвилин")
-        },
-        {
-          label: "1 година",
-          action: () => applySnooze("1 годину")
-        }
-      ]);
-    }, 300);
-  }
-
-  function applySnooze(label) {
-    hideReplyKeyboard();
-
-    createMessage(label, "user");
-
-    setTimeout(() => {
-      createMessage(
-        `⏰ Нагадування відкладено на ${label}.`
-      );
-
-      renderCreatedActions();
-    }, 300);
-  }
-
-  function startNewReminder() {
-    hideReplyKeyboard();
-
-    createMessage("➕ Додати", "user");
-
-    setGuide(
-      2,
-      "Напишіть будь-яку власну задачу у полі Message і натисніть кнопку відправлення."
-    );
-
-    setMainMenuEnabled(false);
-
-    setTimeout(() => {
-      createMessage(
-        "Напиши текст нагадування:"
-      );
-
-      enableComposer(
-        "Наприклад: передзвонити клієнту"
-      );
-    }, 350);
-  }
-
-  function handleReminderText() {
-    const value = input.value.trim();
-
-    if (!value) return;
-
-    reminder = {
-      text: value,
-      timeLabel: "",
-      mode: "",
-      created: false
-    };
-
-    createMessage(value, "user");
-
-    disableComposer();
-
-    setTimeout(() => {
-      createMessage(
-        "Коли нагадати?"
-      );
-
-      showTimeOptions();
-    }, 350);
   }
 
   function showHelp() {
     createMessage(
-      "Я можу створювати нагадування, показувати список, відкладати задачі, повторювати їх до виконання та передавати іншій людині."
+      "Я можу створювати нагадування на швидкий або точний час, повторювати їх до виконання, відкладати, показувати список і передавати задачі іншим людям."
     );
   }
 
@@ -544,6 +873,7 @@
         label: "Так, видалити",
         action: () => {
           reminder.created = false;
+          reminder.status = "deleted";
 
           hideReplyKeyboard();
 
@@ -577,12 +907,7 @@
   }
 
   function resetDemo() {
-    reminder = {
-      text: "",
-      timeLabel: "",
-      mode: "",
-      created: false
-    };
+    reminder = createEmptyReminder();
 
     dynamicZone.innerHTML = "";
 
@@ -596,7 +921,9 @@
       "Натисніть “Додати”, щоб створити перше нагадування."
     );
 
-    addButton.classList.add("tg-next-action");
+    addButton.classList.add(
+      "tg-next-action"
+    );
 
     closeShare();
 
@@ -607,7 +934,8 @@
     const hasText =
       input.value.trim().length > 0;
 
-    sendButton.disabled = !hasText;
+    sendButton.disabled =
+      !hasText;
 
     input.classList.toggle(
       "tg-next-action",
@@ -620,15 +948,18 @@
     );
   });
 
-  input.addEventListener("keydown", event => {
-    if (
-      event.key === "Enter" &&
-      !sendButton.disabled
-    ) {
-      event.preventDefault();
-      handleReminderText();
+  input.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Enter" &&
+        !sendButton.disabled
+      ) {
+        event.preventDefault();
+        handleReminderText();
+      }
     }
-  });
+  );
 
   sendButton.addEventListener(
     "click",
@@ -642,7 +973,8 @@
 
   openListButton.addEventListener(
     "click",
-    () => showReminderList(false)
+    () =>
+      showReminderList(false)
   );
 
   deleteButton.addEventListener(
@@ -668,18 +1000,24 @@
   shareModal.addEventListener(
     "click",
     event => {
-      if (event.target === shareModal) {
+      if (
+        event.target ===
+        shareModal
+      ) {
         closeShare();
       }
     }
   );
 
   shareContacts.forEach(contact => {
-    contact.addEventListener("click", () => {
-      completeShare(
-        contact.dataset.tgContact
-      );
-    });
+    contact.addEventListener(
+      "click",
+      () => {
+        completeShare(
+          contact.dataset.tgContact
+        );
+      }
+    );
   });
 
   document.addEventListener(

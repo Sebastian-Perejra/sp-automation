@@ -71,6 +71,17 @@ window.SOLUTIONS_UI = {
     5: "STAGE 05 / CONTROL"
   },
 
+    diagnostics: {
+    manual: "MANUAL PROCESS",
+    rules: "DATA + RULES",
+    automation: "AUTOMATION",
+    output: "VISIBLE CONTROL",
+  
+    detected: "DETECTED",
+    defined: "DEFINED",
+    ready: "READY"
+  },
+
   hero: [
     {
       label: "01 / CHAOS",

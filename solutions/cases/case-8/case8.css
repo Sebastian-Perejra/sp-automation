@@ -949,3 +949,39 @@
     grid-template-columns: 1fr;
   }
 }
+
+.tg-app-profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.tg-open-telegram {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #58b9ef;
+  font-size: 7px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color .2s ease,
+    opacity .2s ease;
+}
+
+.tg-open-telegram:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 520px) {
+  .tg-app-profile-meta {
+    gap: 5px;
+  }
+
+  .tg-open-telegram {
+    font-size: 6px;
+  }
+}

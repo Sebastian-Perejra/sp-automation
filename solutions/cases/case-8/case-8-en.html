@@ -1,0 +1,537 @@
+<section class="tg-case" id="telegram-bot-case">
+  <div class="tg-case-header">
+    <div class="tg-case-kicker">Real case study #8</div>
+
+    <h2>Automating reminders and task follow-up with a Telegram bot</h2>
+
+    <p class="tg-case-subtitle">
+      Users create reminders directly in Telegram: enter a task,
+      choose when it should come back, select the reminder mode,
+      and let the bot bring it back at the right moment.
+      Important messages, follow-ups and personal tasks no longer depend
+      on memory or disappear in busy chat histories.
+    </p>
+  </div>
+
+  <div class="tg-problem-solution">
+    <article class="tg-info-card tg-problem">
+      <span class="tg-info-label">The pain</span>
+
+      <h3>
+        Messages, tasks and commitments get buried in chat history
+      </h3>
+
+      <p>
+        An important message often arrives at the wrong moment.
+        You read it, think “I’ll get back to this later”, move on to something else
+        and eventually forget about it.
+      </p>
+
+      <p>
+        That is how client replies, follow-ups, calls, payments,
+        personal notes and other small but important actions get missed.
+      </p>
+
+      <p>
+        Telegram may already contain all the information you need,
+        but the conversation itself does not guarantee that the task
+        will actually be completed.
+      </p>
+    </article>
+
+    <article class="tg-info-card tg-solution">
+      <span class="tg-info-label">The solution</span>
+
+      <h3>
+        The Telegram bot turns a message into a controlled reminder
+      </h3>
+
+      <p>
+        The user opens the bot, taps “Add”, enters the task,
+        chooses the date and time, and selects how the reminder should behave.
+        The bot stores the task and brings it back automatically when needed.
+      </p>
+
+      <p>
+        A reminder can be completed, snoozed, repeated,
+        reviewed in the list or passed to another person.
+      </p>
+
+      <p>
+        The entire workflow stays inside Telegram —
+        without a separate task manager or another tool to maintain.
+      </p>
+    </article>
+  </div>
+
+  <div class="tg-live-demo">
+    <div class="tg-live-demo-head">
+      <div>
+        <span class="tg-live-demo-kicker">INTERACTIVE DEMO</span>
+
+        <strong>Create a reminder yourself</strong>
+
+        <p>
+          Follow the same flow a real user goes through in the Telegram bot.
+          The next available action will be highlighted.
+        </p>
+      </div>
+
+      <div class="tg-demo-state">
+        <span>Step</span>
+        <strong id="tg-step-counter">1 / 7</strong>
+      </div>
+    </div>
+
+    <div class="tg-phone-stage">
+      <div class="tg-phone-shell">
+        <div class="tg-phone-statusbar">
+          <span>21:48</span>
+
+          <div class="tg-phone-status-icons">
+            <span>●●●</span>
+            <span>◔</span>
+            <span>▰</span>
+          </div>
+        </div>
+
+        <div class="tg-app-header">
+          <button
+            class="tg-app-back"
+            type="button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            ‹
+          </button>
+
+          <div class="tg-bot-avatar">
+            <span>SP</span>
+          </div>
+
+          <div class="tg-app-profile">
+            <strong>Sebastian_reminder_bot</strong>
+
+            <div class="tg-app-profile-meta">
+              <span id="tg-bot-online-status">@sebastian_reminder_bot</span>
+
+              <a
+                class="tg-open-telegram"
+                href="https://t.me/sebastian_reminder_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Telegram ↗
+              </a>
+            </div>
+          </div>
+
+          <button
+            class="tg-app-menu"
+            type="button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            ⋮
+          </button>
+        </div>
+
+        <div class="tg-chat-area" id="tg-chat-area">
+          <div class="tg-chat-date">
+            Today
+          </div>
+
+          <div class="tg-message tg-message-bot" data-tg-message="welcome">
+            <div class="tg-message-text">
+              Hi 👋
+
+              I’ll help you remember important things.
+              Create reminders, review your list,
+              snooze tasks or pass them to someone else.
+            </div>
+
+            <span class="tg-message-time">21:48</span>
+          </div>
+
+          <div class="tg-message tg-message-bot" data-tg-message="menu">
+            <div class="tg-message-text">
+              What would you like to do?
+            </div>
+
+            <span class="tg-message-time">21:48</span>
+          </div>
+
+          <div
+            class="tg-inline-keyboard tg-inline-keyboard-main"
+            id="tg-main-menu"
+          >
+            <button
+              type="button"
+              class="tg-inline-button tg-next-action"
+              id="tg-add-reminder"
+            >
+              ➕ Add
+            </button>
+
+            <button
+              type="button"
+              class="tg-inline-button"
+              id="tg-open-list"
+            >
+              📋 List
+            </button>
+
+            <button
+              type="button"
+              class="tg-inline-button"
+              id="tg-delete-reminder"
+            >
+              🗑 Delete
+            </button>
+
+            <button
+              type="button"
+              class="tg-inline-button"
+              id="tg-help"
+            >
+              ❓ Help
+            </button>
+          </div>
+
+          <div
+            class="tg-dynamic-zone"
+            id="tg-dynamic-zone"
+          ></div>
+        </div>
+
+        <div
+          class="tg-reply-keyboard"
+          id="tg-reply-keyboard"
+          hidden
+        ></div>
+
+        <div class="tg-composer">
+          <button
+            type="button"
+            class="tg-attach-button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            ＋
+          </button>
+
+          <input
+            type="text"
+            id="tg-message-input"
+            placeholder="Message"
+            autocomplete="off"
+            disabled
+          >
+
+          <button
+            type="button"
+            class="tg-send-button"
+            id="tg-send-button"
+            disabled
+          >
+            ➤
+          </button>
+        </div>
+      </div>
+
+      <aside class="tg-demo-guide">
+        <div class="tg-guide-head">
+          <span>LIVE FLOW</span>
+          <strong>What is happening now</strong>
+        </div>
+
+        <div
+          class="tg-guide-message"
+          id="tg-guide-message"
+        >
+          Tap “Add” to create your first reminder.
+        </div>
+
+        <div class="tg-guide-steps">
+          <div
+            class="tg-guide-step active"
+            data-tg-guide-step="1"
+          >
+            <span>01</span>
+
+            <div>
+              <strong>Start creating</strong>
+              <small>Tap “Add”</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="2"
+          >
+            <span>02</span>
+
+            <div>
+              <strong>Enter the task</strong>
+              <small>Type the reminder text</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="3"
+          >
+            <span>03</span>
+
+            <div>
+              <strong>Choose when</strong>
+              <small>Quick option or exact date and time</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="4"
+          >
+            <span>04</span>
+
+            <div>
+              <strong>Choose the mode</strong>
+              <small>Once or repeat until completed</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="5"
+          >
+            <span>05</span>
+
+            <div>
+              <strong>Create the reminder</strong>
+              <small>The bot stores the task</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="6"
+          >
+            <span>06</span>
+
+            <div>
+              <strong>Test the reminder</strong>
+              <small>See what happens when it fires</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="7"
+          >
+            <span>07</span>
+
+            <div>
+              <strong>Take action</strong>
+              <small>Complete, snooze or pass it on</small>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="tg-reset-demo"
+          id="tg-reset-demo"
+          type="button"
+        >
+          ↻ Start again
+        </button>
+      </aside>
+    </div>
+  </div>
+
+  <div
+    class="tg-share-modal"
+    id="tg-share-modal"
+    hidden
+  >
+    <div class="tg-share-dialog">
+      <div class="tg-share-dialog-head">
+        <strong>Share reminder</strong>
+
+        <button
+          type="button"
+          id="tg-share-close"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="tg-share-search">
+        <span>⌕</span>
+
+        <input
+          type="text"
+          placeholder="Search"
+          tabindex="-1"
+        >
+      </div>
+
+      <div class="tg-share-contact-list">
+        <button
+          type="button"
+          class="tg-share-contact"
+          data-tg-contact="Alex"
+        >
+          <span class="tg-share-avatar">A</span>
+
+          <div>
+            <strong>Alex</strong>
+            <small>online</small>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="tg-share-contact"
+          data-tg-contact="Maria"
+        >
+          <span class="tg-share-avatar">M</span>
+
+          <div>
+            <strong>Maria</strong>
+            <small>last seen recently</small>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="tg-share-contact"
+          data-tg-contact="Work chat"
+        >
+          <span class="tg-share-avatar">W</span>
+
+          <div>
+            <strong>Work chat</strong>
+            <small>12 members</small>
+          </div>
+        </button>
+      </div>
+
+      <div class="tg-share-preview">
+        <span>Reminder</span>
+
+        <strong id="tg-share-reminder-text">
+          —
+        </strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="tg-capabilities">
+    <div class="tg-capabilities-head">
+      <span>WHAT ELSE THE BOT CAN DO</span>
+
+      <strong>
+        One simple interface — several automation scenarios
+      </strong>
+    </div>
+
+    <div class="tg-capabilities-grid">
+      <article>
+        <span>01</span>
+        <strong>Quick reminders</strong>
+
+        <p>
+          In 5, 10, 15 or 30 minutes, or in 1, 2, 5 or 12 hours.
+        </p>
+      </article>
+
+      <article>
+        <span>02</span>
+        <strong>Exact date and time</strong>
+
+        <p>
+          Tomorrow at a specific time, tonight, tomorrow morning
+          or any custom date and time.
+        </p>
+      </article>
+
+      <article>
+        <span>03</span>
+        <strong>Repeat until completed</strong>
+
+        <p>
+          The bot can keep reminding the user until the task is actually completed.
+        </p>
+      </article>
+
+      <article>
+        <span>04</span>
+        <strong>Snooze</strong>
+
+        <p>
+          Postpone a reminder for a few minutes or an hour
+          without creating a new task.
+        </p>
+      </article>
+
+      <article>
+        <span>05</span>
+        <strong>Forwarded messages</strong>
+
+        <p>
+          Text, sender, channel and source link can be stored together
+          with the reminder.
+        </p>
+      </article>
+
+      <article>
+        <span>06</span>
+        <strong>List and control</strong>
+
+        <p>
+          Active reminders can be reviewed, deleted,
+          rescheduled or completed.
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <div class="tg-business-impact">
+    <article>
+      <span>Before</span>
+
+      <strong>Relying on memory</strong>
+
+      <small>
+        tasks stay buried among dozens of messages
+      </small>
+    </article>
+
+    <article>
+      <span>After</span>
+
+      <strong>One message → one controlled task</strong>
+
+      <small>
+        the bot brings it back exactly when it is needed
+      </small>
+    </article>
+
+    <article>
+      <span>Result</span>
+
+      <strong>Fewer missed follow-ups</strong>
+
+      <small>
+        Telegram becomes part of the automated workflow
+      </small>
+    </article>
+  </div>
+
+  <div class="tg-case-cta">
+    <a href="contacts-en.html">
+      I want a Telegram bot like this
+    </a>
+  </div>
+</section>

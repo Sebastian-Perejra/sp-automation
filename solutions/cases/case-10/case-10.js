@@ -17,11 +17,21 @@
   const $ = id => caseRoot.querySelector(`#${id}`);
   const get = id => $(id).value.trim();
 
-  const controls = [
-    ...caseRoot.querySelectorAll('input, select, textarea')
-  ];
+const controls = [
+  ...caseRoot.querySelectorAll('input, select, textarea')
+];
 
-  const documentStack = $('documentStack');
+const defaultState =
+  Object.fromEntries(
+    controls.map(el => [
+      el.id,
+      el.type === 'checkbox'
+        ? el.checked
+        : el.value
+    ])
+  );
+
+const documentStack = $('documentStack');
   const previewScroll = caseRoot.querySelector('.preview-scroll');
 
   const contractBlocks = Array.from(

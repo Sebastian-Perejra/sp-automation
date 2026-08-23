@@ -1572,7 +1572,7 @@ const conceptLabels =
       reasons:
         Array.from(reasons)
           .filter(Boolean)
-          .slice(0, 9),
+          .slice(0, 10),
       matchedConcepts:
         matchedConcepts
           .sort(
@@ -1595,7 +1595,7 @@ const conceptLabels =
             b.item.priority -
             a.item.priority
         )
-        .slice(0, 9)
+        .slice(0, 10)
         .map(indexed => ({
           item:
             indexed.item,

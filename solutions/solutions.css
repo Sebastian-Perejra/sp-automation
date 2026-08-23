@@ -10675,8 +10675,8 @@ box-shadow:
   }
 
   .process-step {
-    min-height: 72vh;
-    padding: 46px 0 80px;
+    min-height: 0;
+    padding: 34px 0 46px;
   }
 
   .process-step:first-child {

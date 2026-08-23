@@ -11,7 +11,8 @@
         solutions: "Рішення",
         faq: "FAQ",
         contacts: "Контакти",
-        terms: "Умови використання"
+        terms: "Умови використання",
+        online: "онлайн"
       },
       ticker:
         "Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Автоматичні звіти · Автоматизація Excel · Обробка даних · Очищення даних · Парсинг даних · Інтеграції · Макроси · Кастомна логіка · Автоматизація бізнес-процесів · Аналітичні дашборди · Автоматизація Google Sheets · Вебзастосунки · JavaScript · Індивідуальні рішення для бізнесу ·",
@@ -30,7 +31,8 @@
         solutions: "Solutions",
         faq: "FAQ",
         contacts: "Contacts",
-        terms: "Terms of Use"
+        terms: "Terms of Use",
+        online: "online"
       },
       ticker:
         "Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Automated reports · Excel automation · Data processing · Data cleaning · Data parsing · Integrations · Macros · Custom logic · Business process automation · Analytics dashboards · Google Sheets automation · Web applications · JavaScript · Custom business solutions ·",
@@ -49,7 +51,8 @@
         solutions: "Решения",
         faq: "FAQ",
         contacts: "Контакты",
-        terms: "Условия использования"
+        terms: "Условия использования",
+        online: "онлайн"
       },
       ticker:
         "Excel VBA · Google Apps Script · Power BI · DAX · Power Query · Автоматические отчёты · Автоматизация Excel · Обработка данных · Очистка данных · Парсинг данных · Интеграции · Макросы · Кастомная логика · Автоматизация бизнес-процессов · Аналитические дашборды · Автоматизация Google Sheets · Веб-приложения · JavaScript · Индивидуальные решения для бизнеса ·",
@@ -371,6 +374,128 @@
     }
   }
 
+  const ONLINE_COUNTER_URL =
+  "https://script.google.com/macros/s/AKfycbxEum9eoquL-62JQCWQzyJ-VX5MUjrwlt7RtU82hUB2yDxP7R7M10IyTxkVr3s2kptx0w/exec";
+
+function setupOnlineCounter(lang) {
+  const countElement =
+    document.querySelector(
+      "[data-component-online-count]"
+    );
+
+  const labelElement =
+    document.querySelector(
+      "[data-component-online-label]"
+    );
+
+  if (
+    !countElement ||
+    !labelElement
+  ) {
+    return;
+  }
+
+  labelElement.textContent =
+    languages[lang].online;
+
+  const storageKey =
+    "sp_online_visitor_id";
+
+  let visitorId =
+    localStorage.getItem(
+      storageKey
+    );
+
+  if (!visitorId) {
+    visitorId =
+      window.crypto?.randomUUID
+        ? window.crypto.randomUUID()
+        : `${Date.now().toString(36)}-${Math.random()
+            .toString(36)
+            .slice(2)}`;
+
+    localStorage.setItem(
+      storageKey,
+      visitorId
+    );
+  }
+
+  let requestNumber = 0;
+
+  function pingOnlineCounter() {
+    const callbackName =
+      `spOnlineCounter_${Date.now()}_${requestNumber++}`;
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+    const cleanup =
+      () => {
+        try {
+          delete window[
+            callbackName
+          ];
+        } catch {}
+
+        script.remove();
+      };
+
+    window[callbackName] =
+      value => {
+        const count =
+          Number(value);
+
+        if (
+          Number.isFinite(count)
+        ) {
+          countElement.textContent =
+            String(
+              Math.max(
+                0,
+                Math.round(count)
+              )
+            );
+        }
+
+        cleanup();
+      };
+
+    script.onerror =
+      cleanup;
+
+    script.src =
+      `${ONLINE_COUNTER_URL}` +
+      `?callback=${encodeURIComponent(callbackName)}` +
+      `&id=${encodeURIComponent(visitorId)}` +
+      `&t=${Date.now()}`;
+
+    script.async =
+      true;
+
+    document.head.appendChild(
+      script
+    );
+  }
+
+  pingOnlineCounter();
+
+  window.setInterval(
+    pingOnlineCounter,
+    30000
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (!document.hidden) {
+        pingOnlineCounter();
+      }
+    }
+  );
+}
+
   function ensureCosmicFrame() {
   if (
     document.querySelector(
@@ -536,6 +661,8 @@ async function init() {
   );
 
   setupFooter(lang);
+
+  setupOnlineCounter(lang);
 
   loadSiteMapScript();
 }

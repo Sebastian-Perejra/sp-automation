@@ -1,0 +1,538 @@
+<section class="tg-case" id="telegram-bot-case">
+  <div class="tg-case-header">
+    <div class="tg-case-kicker">Реальный кейс №8</div>
+
+    <h2>Автоматизация напоминаний и задач через Telegram-бота</h2>
+
+    <p class="tg-case-subtitle">
+      Пользователь создаёт напоминания прямо в Telegram: вводит задачу,
+      выбирает, когда о ней напомнить, задаёт режим повторения,
+      а бот возвращает её в нужный момент.
+      Важные сообщения, follow-up и личные задачи больше не зависят
+      от памяти и не теряются в потоке чатов.
+    </p>
+  </div>
+
+  <div class="tg-problem-solution">
+    <article class="tg-info-card tg-problem">
+      <span class="tg-info-label">Боль</span>
+
+      <h3>
+        Сообщения, задачи и договорённости теряются в истории чатов
+      </h3>
+
+      <p>
+        Важное сообщение часто приходит в неудобный момент.
+        Человек его читает, думает «вернусь к этому позже»,
+        переключается на другие дела и в итоге просто забывает.
+      </p>
+
+      <p>
+        Так теряются ответы клиентам, follow-up, звонки, платежи,
+        личные заметки и другие небольшие, но важные действия.
+      </p>
+
+      <p>
+        В Telegram уже может находиться вся необходимая информация,
+        но сам чат не гарантирует, что задача действительно будет выполнена.
+      </p>
+    </article>
+
+    <article class="tg-info-card tg-solution">
+      <span class="tg-info-label">Решение</span>
+
+      <h3>
+        Telegram-бот превращает сообщение в контролируемое напоминание
+      </h3>
+
+      <p>
+        Пользователь открывает бота, нажимает «Добавить», вводит задачу,
+        выбирает дату и время, а затем задаёт режим напоминания.
+        Бот сохраняет задачу и автоматически возвращает её тогда,
+        когда она действительно нужна.
+      </p>
+
+      <p>
+        Напоминание можно выполнить, отложить, повторять,
+        посмотреть в списке или передать другому человеку.
+      </p>
+
+      <p>
+        Вся логика работает прямо внутри Telegram —
+        без отдельного таск-менеджера и ещё одного приложения.
+      </p>
+    </article>
+  </div>
+
+  <div class="tg-live-demo">
+    <div class="tg-live-demo-head">
+      <div>
+        <span class="tg-live-demo-kicker">INTERACTIVE DEMO</span>
+
+        <strong>Создайте напоминание самостоятельно</strong>
+
+        <p>
+          Пройдите тот же путь, который проходит реальный пользователь Telegram-бота.
+          Следующее доступное действие будет подсвечиваться.
+        </p>
+      </div>
+
+      <div class="tg-demo-state">
+        <span>Шаг</span>
+        <strong id="tg-step-counter">1 / 7</strong>
+      </div>
+    </div>
+
+    <div class="tg-phone-stage">
+      <div class="tg-phone-shell">
+        <div class="tg-phone-statusbar">
+          <span>21:48</span>
+
+          <div class="tg-phone-status-icons">
+            <span>●●●</span>
+            <span>◔</span>
+            <span>▰</span>
+          </div>
+        </div>
+
+        <div class="tg-app-header">
+          <button
+            class="tg-app-back"
+            type="button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            ‹
+          </button>
+
+          <div class="tg-bot-avatar">
+            <span>SP</span>
+          </div>
+
+          <div class="tg-app-profile">
+            <strong>Sebastian_reminder_bot</strong>
+
+            <div class="tg-app-profile-meta">
+              <span id="tg-bot-online-status">@sebastian_reminder_bot</span>
+
+              <a
+                class="tg-open-telegram"
+                href="https://t.me/sebastian_reminder_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Telegram ↗
+              </a>
+            </div>
+          </div>
+
+          <button
+            class="tg-app-menu"
+            type="button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            ⋮
+          </button>
+        </div>
+
+        <div class="tg-chat-area" id="tg-chat-area">
+          <div class="tg-chat-date">
+            Сегодня
+          </div>
+
+          <div class="tg-message tg-message-bot" data-tg-message="welcome">
+            <div class="tg-message-text">
+              Привет 👋
+
+              Я помогу не забывать важные дела.
+              Создавай напоминания, просматривай список,
+              откладывай задачи или передавай их другим людям.
+            </div>
+
+            <span class="tg-message-time">21:48</span>
+          </div>
+
+          <div class="tg-message tg-message-bot" data-tg-message="menu">
+            <div class="tg-message-text">
+              Что хочешь сделать?
+            </div>
+
+            <span class="tg-message-time">21:48</span>
+          </div>
+
+          <div
+            class="tg-inline-keyboard tg-inline-keyboard-main"
+            id="tg-main-menu"
+          >
+            <button
+              type="button"
+              class="tg-inline-button tg-next-action"
+              id="tg-add-reminder"
+            >
+              ➕ Добавить
+            </button>
+
+            <button
+              type="button"
+              class="tg-inline-button"
+              id="tg-open-list"
+            >
+              📋 Список
+            </button>
+
+            <button
+              type="button"
+              class="tg-inline-button"
+              id="tg-delete-reminder"
+            >
+              🗑 Удалить
+            </button>
+
+            <button
+              type="button"
+              class="tg-inline-button"
+              id="tg-help"
+            >
+              ❓ Помощь
+            </button>
+          </div>
+
+          <div
+            class="tg-dynamic-zone"
+            id="tg-dynamic-zone"
+          ></div>
+        </div>
+
+        <div
+          class="tg-reply-keyboard"
+          id="tg-reply-keyboard"
+          hidden
+        ></div>
+
+        <div class="tg-composer">
+          <button
+            type="button"
+            class="tg-attach-button"
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            ＋
+          </button>
+
+          <input
+            type="text"
+            id="tg-message-input"
+            placeholder="Сообщение"
+            autocomplete="off"
+            disabled
+          >
+
+          <button
+            type="button"
+            class="tg-send-button"
+            id="tg-send-button"
+            disabled
+          >
+            ➤
+          </button>
+        </div>
+      </div>
+
+      <aside class="tg-demo-guide">
+        <div class="tg-guide-head">
+          <span>LIVE FLOW</span>
+          <strong>Что происходит сейчас</strong>
+        </div>
+
+        <div
+          class="tg-guide-message"
+          id="tg-guide-message"
+        >
+          Нажмите «Добавить», чтобы создать первое напоминание.
+        </div>
+
+        <div class="tg-guide-steps">
+          <div
+            class="tg-guide-step active"
+            data-tg-guide-step="1"
+          >
+            <span>01</span>
+
+            <div>
+              <strong>Начать создание</strong>
+              <small>Нажать «Добавить»</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="2"
+          >
+            <span>02</span>
+
+            <div>
+              <strong>Ввести задачу</strong>
+              <small>Написать текст напоминания</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="3"
+          >
+            <span>03</span>
+
+            <div>
+              <strong>Выбрать время</strong>
+              <small>Быстрый вариант или точная дата и время</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="4"
+          >
+            <span>04</span>
+
+            <div>
+              <strong>Выбрать режим</strong>
+              <small>Один раз или повторять до выполнения</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="5"
+          >
+            <span>05</span>
+
+            <div>
+              <strong>Создать напоминание</strong>
+              <small>Бот сохраняет задачу</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="6"
+          >
+            <span>06</span>
+
+            <div>
+              <strong>Проверить напоминание</strong>
+              <small>Посмотреть, что произойдёт при срабатывании</small>
+            </div>
+          </div>
+
+          <div
+            class="tg-guide-step"
+            data-tg-guide-step="7"
+          >
+            <span>07</span>
+
+            <div>
+              <strong>Выбрать действие</strong>
+              <small>Выполнить, отложить или передать</small>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="tg-reset-demo"
+          id="tg-reset-demo"
+          type="button"
+        >
+          ↻ Начать сначала
+        </button>
+      </aside>
+    </div>
+  </div>
+
+  <div
+    class="tg-share-modal"
+    id="tg-share-modal"
+    hidden
+  >
+    <div class="tg-share-dialog">
+      <div class="tg-share-dialog-head">
+        <strong>Передать напоминание</strong>
+
+        <button
+          type="button"
+          id="tg-share-close"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="tg-share-search">
+        <span>⌕</span>
+
+        <input
+          type="text"
+          placeholder="Поиск"
+          tabindex="-1"
+        >
+      </div>
+
+      <div class="tg-share-contact-list">
+        <button
+          type="button"
+          class="tg-share-contact"
+          data-tg-contact="Александр"
+        >
+          <span class="tg-share-avatar">А</span>
+
+          <div>
+            <strong>Александр</strong>
+            <small>online</small>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="tg-share-contact"
+          data-tg-contact="Мария"
+        >
+          <span class="tg-share-avatar">М</span>
+
+          <div>
+            <strong>Мария</strong>
+            <small>была недавно</small>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          class="tg-share-contact"
+          data-tg-contact="Рабочий чат"
+        >
+          <span class="tg-share-avatar">Р</span>
+
+          <div>
+            <strong>Рабочий чат</strong>
+            <small>12 участников</small>
+          </div>
+        </button>
+      </div>
+
+      <div class="tg-share-preview">
+        <span>Напоминание</span>
+
+        <strong id="tg-share-reminder-text">
+          —
+        </strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="tg-capabilities">
+    <div class="tg-capabilities-head">
+      <span>ЧТО ЕЩЁ УМЕЕТ БОТ</span>
+
+      <strong>
+        Один простой интерфейс — несколько сценариев автоматизации
+      </strong>
+    </div>
+
+    <div class="tg-capabilities-grid">
+      <article>
+        <span>01</span>
+        <strong>Быстрые напоминания</strong>
+
+        <p>
+          Через 5, 10, 15 или 30 минут, а также через 1, 2, 5 или 12 часов.
+        </p>
+      </article>
+
+      <article>
+        <span>02</span>
+        <strong>Точная дата и время</strong>
+
+        <p>
+          Завтра в конкретное время, сегодня вечером,
+          завтра утром или любая произвольная дата и время.
+        </p>
+      </article>
+
+      <article>
+        <span>03</span>
+        <strong>Повтор до выполнения</strong>
+
+        <p>
+          Бот может продолжать напоминать о задаче,
+          пока пользователь действительно её не выполнит.
+        </p>
+      </article>
+
+      <article>
+        <span>04</span>
+        <strong>Отложить</strong>
+
+        <p>
+          Перенести напоминание на несколько минут или на час
+          без создания новой задачи.
+        </p>
+      </article>
+
+      <article>
+        <span>05</span>
+        <strong>Пересланные сообщения</strong>
+
+        <p>
+          Текст, автор, канал и исходная ссылка могут сохраняться
+          вместе с напоминанием.
+        </p>
+      </article>
+
+      <article>
+        <span>06</span>
+        <strong>Список и управление</strong>
+
+        <p>
+          Активные напоминания можно просматривать, удалять,
+          переносить и отмечать как выполненные.
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <div class="tg-business-impact">
+    <article>
+      <span>До</span>
+
+      <strong>Полагаться на память</strong>
+
+      <small>
+        задачи остаются среди десятков сообщений
+      </small>
+    </article>
+
+    <article>
+      <span>После</span>
+
+      <strong>Одно сообщение → одна контролируемая задача</strong>
+
+      <small>
+        бот возвращает её именно тогда, когда она нужна
+      </small>
+    </article>
+
+    <article>
+      <span>Результат</span>
+
+      <strong>Меньше потерянных follow-up</strong>
+
+      <small>
+        Telegram становится частью автоматизированного процесса
+      </small>
+    </article>
+  </div>
+
+  <div class="tg-case-cta">
+    <a href="contacts-ru.html">
+      Хочу такого Telegram-бота
+    </a>
+  </div>
+</section>

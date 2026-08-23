@@ -250,7 +250,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 5px;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.62);
   font-family: var(--component-font-tech);
   font-size: 9px;
   font-weight: 400;

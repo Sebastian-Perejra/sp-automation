@@ -810,10 +810,159 @@
     presetDstu
   );
 
-  $('printBtn').addEventListener(
-    'click',
-    () => window.print()
-  );
+$('printBtn').addEventListener(
+  'click',
+  () => {
+    const frame =
+      document.createElement('iframe');
+
+    frame.style.position =
+      'fixed';
+
+    frame.style.right =
+      '0';
+
+    frame.style.bottom =
+      '0';
+
+    frame.style.width =
+      '0';
+
+    frame.style.height =
+      '0';
+
+    frame.style.border =
+      '0';
+
+    const styles =
+      getComputedStyle(caseRoot);
+
+    const variables = [
+      '--doc-font',
+      '--doc-size',
+      '--doc-line',
+      '--doc-left',
+      '--doc-right',
+      '--doc-top',
+      '--doc-bottom',
+      '--doc-title',
+      '--doc-section'
+    ];
+
+    const rootStyle =
+      variables
+        .map(name =>
+          `${name}:${styles.getPropertyValue(name).trim()}`
+        )
+        .join(';');
+
+    document.body.appendChild(
+      frame
+    );
+
+    const printDocument =
+      frame.contentDocument;
+
+    printDocument.open();
+
+    printDocument.write(`
+      <!DOCTYPE html>
+      <html lang="uk">
+      <head>
+        <meta charset="UTF-8">
+        <title>Договір ${get('contractNo')}</title>
+        <link
+          rel="stylesheet"
+          href="/solutions/cases/case-10/case10.css"
+        >
+        <style>
+          @page{
+            size:A4 portrait;
+            margin:0;
+          }
+
+          html,
+          body{
+            margin:0!important;
+            padding:0!important;
+            background:#fff!important;
+          }
+
+          #contract-generator-case{
+            ${rootStyle};
+            width:auto!important;
+          }
+
+          #contract-generator-case .document-stack{
+            zoom:1!important;
+            margin:0!important;
+          }
+
+          #contract-generator-case .doc-page{
+            margin:0!important;
+            box-shadow:none!important;
+            break-after:page;
+            page-break-after:always;
+          }
+
+          #contract-generator-case .doc-page:last-child{
+            break-after:auto;
+            page-break-after:auto;
+          }
+        </style>
+      </head>
+      <body>
+        <div
+          id="contract-generator-case"
+          style="${rootStyle}"
+        >
+          <div class="document-stack">
+            ${documentStack.innerHTML}
+          </div>
+        </div>
+      </body>
+      </html>
+    `);
+
+    printDocument.close();
+
+    const printNow = () => {
+      frame.contentWindow.focus();
+      frame.contentWindow.print();
+
+      setTimeout(
+        () => {
+          frame.remove();
+        },
+        1000
+      );
+    };
+
+    const stylesheet =
+      printDocument.querySelector(
+        'link[rel="stylesheet"]'
+      );
+
+    if (stylesheet) {
+      stylesheet.addEventListener(
+        'load',
+        () => {
+          setTimeout(
+            printNow,
+            150
+          );
+        }
+      );
+
+      stylesheet.addEventListener(
+        'error',
+        printNow
+      );
+    } else {
+      printNow();
+    }
+  }
+);
 
   $('buildBtn').addEventListener(
     'click',

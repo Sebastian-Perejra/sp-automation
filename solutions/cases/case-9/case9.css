@@ -1665,3 +1665,717 @@
   background: #f2f7f4;
   box-shadow: 0 8px 18px rgba(53,89,75,.1);
 }
+
+.quote-system-options button.selected {
+  border-color: #7fa68a;
+  background: #edf6f0;
+  box-shadow: 0 0 0 3px rgba(80,126,94,.08);
+}
+
+.quote-desktop-panel {
+  overflow: hidden;
+}
+
+.quote-desktop {
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid #9eb2a6;
+  border-radius: 16px;
+  background: #203f35;
+  box-shadow: 0 22px 48px rgba(20,42,31,.18);
+}
+
+.quote-desktop-wallpaper {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  padding: 22px 22px 70px;
+  background:
+    linear-gradient(135deg, rgba(12,42,49,.92), rgba(42,86,70,.88)),
+    radial-gradient(circle at 78% 24%, rgba(145,206,105,.35), transparent 26%),
+    radial-gradient(circle at 25% 78%, rgba(55,135,175,.26), transparent 30%);
+}
+
+.quote-desktop-wallpaper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0 58%, rgba(255,255,255,.035) 58% 59%, transparent 59%),
+    linear-gradient(30deg, transparent 0 70%, rgba(255,255,255,.025) 70% 71%, transparent 71%);
+  pointer-events: none;
+}
+
+.quote-desktop-brand {
+  position: absolute;
+  top: 26px;
+  right: 28px;
+  z-index: 1;
+  width: min(310px, 36%);
+  text-align: right;
+  color: rgba(255,255,255,.82);
+}
+
+.quote-desktop-brand span {
+  display: block;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: #b9de9f;
+}
+
+.quote-desktop-brand strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.quote-desktop-brand small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255,255,255,.52);
+  font-size: 8px;
+}
+
+.quote-desktop-icons {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 86px);
+  grid-auto-rows: minmax(82px, auto);
+  gap: 10px 12px;
+  width: 290px;
+}
+
+.quote-desktop-icon,
+.quote-desktop-file {
+  position: relative;
+  display: flex;
+  min-height: 82px;
+  padding: 6px 4px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+.quote-desktop-icon:hover,
+.quote-desktop-file:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.2);
+  background: rgba(255,255,255,.1);
+}
+
+.quote-desktop-icon-main {
+  border-color: rgba(202,239,179,.38);
+  background: rgba(137,208,68,.11);
+  box-shadow: 0 0 0 3px rgba(137,208,68,.055);
+  animation: quoteDesktopRecommend 2s ease-in-out infinite;
+}
+
+.quote-desktop-icon-main small {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  padding: 3px 5px;
+  border-radius: 999px;
+  background: #d9f1c6;
+  color: #31523e;
+  font-size: 6px;
+  font-weight: 850;
+}
+
+@keyframes quoteDesktopRecommend {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(137,208,68,.055);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(137,208,68,.07);
+  }
+}
+
+.quote-app-icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,.95);
+  color: #294b3d;
+  font-family: var(--font-tech);
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(0,0,0,.17);
+}
+
+.quote-app-outlook {
+  background: #eaf3ff;
+  color: #2863a7;
+}
+
+.quote-app-offers {
+  background: #e9f5e6;
+  color: #3c6f45;
+}
+
+.quote-app-excel {
+  background: #e3f2e8;
+  color: #1f6c42;
+}
+
+.quote-app-erp {
+  background: #eef0ff;
+  color: #454c9c;
+  font-size: 8px;
+}
+
+.quote-app-crm {
+  background: #fff0df;
+  color: #9a5d27;
+  font-size: 8px;
+}
+
+.quote-app-drive {
+  background: #fff7d7;
+  color: #74691b;
+}
+
+.quote-app-pc,
+.quote-app-archive {
+  background: #edf1f3;
+  color: #52616a;
+  font-size: 8px;
+}
+
+.quote-desktop-icon strong,
+.quote-desktop-file strong {
+  display: block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 7px;
+  font-weight: 650;
+  line-height: 1.25;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+.quote-desktop-file span {
+  display: flex;
+  width: 38px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 5px;
+  background: rgba(255,255,255,.9);
+  color: #4b5c53;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 850;
+  box-shadow: 0 7px 14px rgba(0,0,0,.13);
+}
+
+.quote-desktop-hint {
+  position: absolute;
+  right: 26px;
+  bottom: 84px;
+  z-index: 3;
+  width: min(330px, 42%);
+  padding: 14px 16px;
+  border: 1px solid rgba(214,239,200,.25);
+  border-radius: 12px;
+  background: rgba(10,36,29,.73);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  box-shadow: 0 14px 30px rgba(0,0,0,.16);
+}
+
+.quote-desktop-hint span {
+  display: block;
+  color: #bce09e;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.quote-desktop-hint strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.quote-desktop-hint small {
+  display: block;
+  margin-top: 5px;
+  color: rgba(255,255,255,.62);
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.quote-taskbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  min-height: 48px;
+  padding: 6px 10px;
+  border-top: 1px solid rgba(255,255,255,.11);
+  background: rgba(16,29,25,.96);
+  color: #fff;
+}
+
+.quote-start-menu,
+.quote-taskbar-apps button {
+  display: flex;
+  min-width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 7px;
+  background: rgba(255,255,255,.055);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.quote-start-menu {
+  font-size: 18px;
+}
+
+.quote-taskbar-apps {
+  display: flex;
+  gap: 5px;
+}
+
+.quote-taskbar-status {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: rgba(255,255,255,.72);
+  font-size: 7px;
+}
+
+.quote-desktop-window {
+  position: absolute;
+  top: 48px;
+  left: 110px;
+  right: 90px;
+  z-index: 10;
+  overflow: hidden;
+  border: 1px solid rgba(16,34,27,.2);
+  border-radius: 12px;
+  background: #f7f9f8;
+  box-shadow: 0 30px 70px rgba(0,0,0,.38);
+  animation: quoteWindowOpen .18s ease-out;
+}
+
+.quote-desktop-window[hidden] {
+  display: none;
+}
+
+@keyframes quoteWindowOpen {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.quote-desktop-window-head {
+  display: flex;
+  min-height: 42px;
+  padding: 6px 8px 6px 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #d8dfdb;
+  background: #fff;
+}
+
+.quote-desktop-window-head > div:first-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#quote-desktop-window-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #e8f3e8;
+  color: #416c4d;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 850;
+}
+
+#quote-desktop-window-title {
+  color: #3f4a44;
+  font-size: 9px;
+}
+
+.quote-window-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.quote-window-controls button {
+  width: 30px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: #f0f3f1;
+  color: #56615b;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.quote-window-controls button:hover {
+  background: #e3e9e5;
+}
+
+.quote-desktop-window-body {
+  min-height: 340px;
+  max-height: 440px;
+  overflow: auto;
+  padding: 18px;
+  color: #4d5852;
+}
+
+.quote-app-screen-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #dfe5e1;
+}
+
+.quote-app-screen-head span {
+  display: block;
+  color: #6b8c74;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.quote-app-screen-head strong {
+  display: block;
+  margin-top: 4px;
+  color: #33473d;
+  font-size: 16px;
+}
+
+.quote-app-screen-head small {
+  display: block;
+  margin-top: 5px;
+  color: #87918c;
+  font-size: 8px;
+}
+
+.quote-app-status-pill {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eaf4ed;
+  color: #426750;
+  font-size: 7px;
+  font-weight: 800;
+}
+
+.quote-app-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.quote-app-dashboard > div {
+  padding: 12px;
+  border: 1px solid #dce4df;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.quote-app-dashboard small {
+  display: block;
+  color: #8b958f;
+  font-size: 7px;
+}
+
+.quote-app-dashboard strong {
+  display: block;
+  margin-top: 4px;
+  color: #3d4b43;
+  font-size: 11px;
+}
+
+.quote-app-new-offer {
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid #b8d1bf;
+  border-radius: 12px;
+  background: #eef7f1;
+}
+
+.quote-app-new-offer > span {
+  display: block;
+  color: #698977;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 850;
+}
+
+.quote-app-new-offer strong {
+  display: block;
+  margin-top: 5px;
+  color: #35594b;
+  font-size: 11px;
+}
+
+.quote-app-new-offer p {
+  margin: 6px 0 0;
+  color: #6f7c75;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.quote-mini-table {
+  margin-top: 14px;
+  overflow: hidden;
+  border: 1px solid #dfe5e1;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.quote-mini-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr .8fr;
+  gap: 8px;
+  padding: 8px 9px;
+  border-top: 1px solid #edf0ee;
+  font-size: 7px;
+}
+
+.quote-mini-row:first-child {
+  border-top: 0;
+}
+
+.quote-mini-row.head {
+  background: #f1f5f2;
+  color: #68756e;
+  font-weight: 850;
+}
+
+.quote-source-folders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.quote-source-folders > div {
+  padding: 11px;
+  border: 1px solid #dfe5e1;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.quote-source-folders strong {
+  display: block;
+  color: #44524a;
+  font-size: 9px;
+}
+
+.quote-source-folders small {
+  display: block;
+  margin-top: 4px;
+  color: #8b948f;
+  font-size: 7px;
+  line-height: 1.4;
+}
+
+.quote-desktop-explainer {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 13px;
+  padding: 13px 14px;
+  border: 1px solid #d9e3dd;
+  border-radius: 11px;
+  background: #f5f8f6;
+}
+
+.quote-desktop-explainer span {
+  display: block;
+  color: #71915e;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 850;
+}
+
+.quote-desktop-explainer strong {
+  display: block;
+  margin-top: 4px;
+  color: #35594b;
+  font-size: 10px;
+}
+
+.quote-desktop-explainer p {
+  margin: 0;
+  color: #758079;
+  font-size: 8px;
+  line-height: 1.55;
+}
+
+.quote-mail-client-shell {
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid #cfdad4;
+  border-radius: 14px;
+  background: #eef2ef;
+}
+
+.quote-mail-client-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 12px;
+  border-bottom: 1px solid #d6dfda;
+  background: #fff;
+}
+
+.quote-mail-client-top > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quote-mail-client-top .quote-app-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  box-shadow: none;
+  font-size: 8px;
+}
+
+.quote-mail-client-top strong {
+  color: #3f4a44;
+  font-size: 9px;
+}
+
+.quote-mail-client-top > span {
+  color: #8b948f;
+  font-size: 7px;
+}
+
+.quote-mail-client-shell .quote-email {
+  margin: 12px;
+  background: #fff;
+}
+
+#quote-try-again {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+@media (max-width: 900px) {
+  .quote-desktop-wallpaper {
+    min-height: 620px;
+  }
+
+  .quote-desktop-window {
+    left: 52px;
+    right: 52px;
+  }
+
+  .quote-desktop-hint {
+    width: min(350px, 48%);
+  }
+}
+
+@media (max-width: 760px) {
+  .quote-desktop-wallpaper {
+    min-height: 690px;
+    padding: 18px 12px 70px;
+  }
+
+  .quote-desktop-brand {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    margin: 0 4px 14px;
+    text-align: left;
+  }
+
+  .quote-desktop-brand strong {
+    font-size: 15px;
+  }
+
+  .quote-desktop-icons {
+    grid-template-columns: repeat(3, minmax(72px, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
+
+  .quote-desktop-hint {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    margin-top: 14px;
+  }
+
+  .quote-desktop-window {
+    top: 74px;
+    left: 8px;
+    right: 8px;
+  }
+
+  .quote-desktop-window-body {
+    min-height: 390px;
+    max-height: 470px;
+    padding: 13px;
+  }
+
+  .quote-taskbar-status span:first-child {
+    display: none;
+  }
+
+  .quote-taskbar-status {
+    gap: 4px;
+  }
+
+  .quote-app-dashboard,
+  .quote-source-folders,
+  .quote-desktop-explainer {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-desktop-explainer {
+    gap: 7px;
+  }
+}

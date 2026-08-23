@@ -443,5 +443,82 @@ window.SOLUTIONS_CASES_EN = [
     "better follow-up control",
     "tasks directly in Telegram"
   ]
- }
+  },
+
+  {
+    id: 9,
+    title: "From customer inquiry to ready-to-send sales quotation",
+    type: "SALES AUTOMATION",
+    short: "Incoming email → Sales Quotations app → customer → products and prices → delivery → PDF → save → send.",
+    featured: false,
+    priority: 82,
+    concepts: [
+      "automation",
+      "sales",
+      "quotation",
+      "documents",
+      "workflow",
+      "integration",
+      "crm",
+      "erp"
+    ],
+    tools: [
+      "Outlook",
+      "Excel",
+      "ERP",
+      "CRM",
+      "1C",
+      "PDF"
+    ],
+    tags: [
+      "quotation",
+      "sales quotation",
+      "commercial offer",
+      "sales automation",
+      "CRM",
+      "ERP",
+      "Excel",
+      "PDF"
+    ],
+    aliases: [
+      "sales quotation automation",
+      "quotation automation",
+      "commercial offer automation",
+      "automated quotation process",
+      "create quotation from email",
+      "generate quotation from customer request",
+      "sales quote generator",
+      "quotation workflow",
+      "automated commercial offer",
+      "generate pdf quotation",
+      "prices from excel",
+      "prices from erp",
+      "prices from 1c",
+      "customer data from crm"
+    ],
+    problems: [
+      "I prepare quotations manually",
+      "I manually copy customer requests from email",
+      "I search for customer data in CRM or ERP",
+      "I search for product prices in Excel or ERP",
+      "I copy prices between different systems",
+      "I sometimes use outdated price lists",
+      "old customer data remains in copied quotation templates",
+      "delivery costs are calculated separately",
+      "I manually create PDF quotations",
+      "quotation history is scattered across files and systems"
+    ],
+    outcomes: [
+      "guided quotation workflow",
+      "customer request imported from email",
+      "customer data loaded from the selected source",
+      "products and prices loaded from the selected source",
+      "delivery included in the quotation process",
+      "automatic PDF generation",
+      "quotation saved in one module",
+      "prepared customer email with PDF attachment",
+      "less manual copying",
+      "fewer quotation errors"
+    ]
+  }
 ];

@@ -71,6 +71,17 @@ window.SOLUTIONS_UI = {
     5: "ЭТАП 05 / КОНТРОЛЬ"
   },
 
+    diagnostics: {
+    manual: "РУЧНОЙ ПРОЦЕСС",
+    rules: "ДАННЫЕ + ПРАВИЛА",
+    automation: "АВТОМАТИЗАЦИЯ",
+    output: "ВИДИМЫЙ КОНТРОЛЬ",
+  
+    detected: "ОБНАРУЖЕНО",
+    defined: "ОПРЕДЕЛЕНО",
+    ready: "ГОТОВО"
+  },
+
   hero: [
     {
       label: "01 / CHAOS",

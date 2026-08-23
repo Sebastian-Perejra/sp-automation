@@ -547,7 +547,22 @@ function update() {
 
 function presetDstu() {
   setState({
-    ...defaultState
+    fontFamily: 'Times New Roman',
+    fontSize: '12',
+    lineHeight: '1.15',
+    titleSize: '14',
+
+    marginLeft: '30',
+    marginRight: '10',
+    marginTop: '20',
+    marginBottom: '20',
+
+    justify: true,
+    pageNumbers: true,
+    headerOn: false,
+    logoOn: false,
+    footerOn: false,
+    borderOn: false
   });
 
   $('presetName').textContent =
@@ -559,22 +574,22 @@ function presetDstu() {
 
 function presetCorporate() {
   setState({
-    ...defaultState,
-
     fontFamily: 'Arial',
     fontSize: '11',
     lineHeight: '1.15',
+    titleSize: '14',
 
     marginLeft: '20',
     marginRight: '20',
     marginTop: '24',
     marginBottom: '22',
 
+    justify: true,
+    pageNumbers: true,
     headerOn: true,
     logoOn: true,
     footerOn: true,
-    borderOn: true,
-    pageNumbers: true
+    borderOn: true
   });
 
   $('presetName').textContent =

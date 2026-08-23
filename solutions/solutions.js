@@ -3973,618 +3973,259 @@ renderResults("");
 })();
 
 (() => {
-  const ui =
-    window.SOLUTIONS_UI || {};
-
-  const diagnostics =
-    ui.diagnostics || {};
-
-  const labels = {
-    manual:
-      diagnostics.manual ||
-      "MANUAL PROCESS",
-
-    rules:
-      diagnostics.rules ||
-      "DATA + RULES",
-
-    automation:
-      diagnostics.automation ||
-      "AUTOMATION",
-
-    output:
-      diagnostics.output ||
-      "VISIBLE CONTROL",
-
-    detected:
-      diagnostics.detected ||
-      "DETECTED",
-
-    defined:
-      diagnostics.defined ||
-      "DEFINED",
-
-    ready:
-      diagnostics.ready ||
-      "READY"
-  };
-
-  const findByText = (text) => {
-    const target =
-      String(text || "")
-        .trim()
-        .toUpperCase();
-
-    return [
-      ...document.querySelectorAll(
-        "body *"
-      )
-    ].find((el) => {
-      if (
-        el.children.length > 0
-      ) {
-        return false;
-      }
-
-      return (
-        el.textContent
-          .trim()
-          .toUpperCase() ===
-        target
-      );
-    });
-  };
-
-  const manualText =
-    findByText(
-      labels.manual
-    );
-
-  const rulesText =
-    findByText(
-      labels.rules
-    );
-
-  const automationText =
-    findByText(
-      labels.automation
-    );
-
-  const outputText =
-    findByText(
-      labels.output
-    );
-
-  if (
-    !manualText ||
-    !rulesText ||
-    !automationText ||
-    !outputText
-  ) {
-    return;
-  }
-
-  const commonAncestor =
-    (nodes) => {
-      let el =
-        nodes[0];
-
-      while (
-        el &&
-        el !== document.body
-      ) {
-        if (
-          nodes.every(
-            node =>
-              el.contains(node)
-          )
-        ) {
-          return el;
-        }
-
-        el =
-          el.parentElement;
-      }
-
-      return null;
-    };
-
   const panel =
-    commonAncestor([
-      manualText,
-      rulesText,
-      automationText,
-      outputText
-    ]);
+    document.querySelector(".final-system");
 
-  if (!panel) {
-    return;
-  }
-
-  panel.classList.add(
-    "process-diagnostic-animated"
-  );
-
-  const rowLabels = [
-    labels.manual,
-    labels.rules,
-    labels.automation
-  ].map(
-    value =>
-      value.toUpperCase()
-  );
-
-  const getRow =
-    (node) => {
-      let el =
-        node.parentElement;
-
-      while (
-        el &&
-        el !== panel
-      ) {
-        const text =
-          el.textContent
-            .toUpperCase();
-
-        const matches =
-          rowLabels.some(
-            label =>
-              text.includes(
-                label
-              )
-          );
-
-        if (matches) {
-          const rect =
-            el.getBoundingClientRect();
-
-          if (
-            rect.height > 22 &&
-            rect.height < 140
-          ) {
-            return el;
-          }
-        }
-
-        el =
-          el.parentElement;
-      }
-
-      return node.parentElement;
-    };
+  if (!panel) return;
 
   const rows = [
-    getRow(
-      manualText
-    ),
-    getRow(
-      rulesText
-    ),
-    getRow(
-      automationText
-    )
+    ...panel.querySelectorAll(".final-system__row")
   ];
 
-  rows.forEach(
-    row => {
-      row?.classList.add(
-        "process-diagnostic-row"
-      );
-    }
-  );
-
-  const findStatus =
-    (row, word) => {
-      if (!row) {
-        return null;
-      }
-
-      const target =
-        String(word || "")
-          .trim()
-          .toUpperCase();
-
-      return [
-        ...row.querySelectorAll(
-          "*"
-        )
-      ].find((el) => {
-        if (
-          el.children.length > 0
-        ) {
-          return false;
-        }
-
-        return (
-          el.textContent
-            .trim()
-            .toUpperCase() ===
-          target
-        );
-      });
-    };
-
-  const statuses = [
-    findStatus(
-      rows[0],
-      labels.detected
-    ),
-
-    findStatus(
-      rows[1],
-      labels.defined
-    ),
-
-    findStatus(
-      rows[2],
-      labels.ready
-    )
+  const states = [
+    ...panel.querySelectorAll(".final-system__state")
   ];
 
-  statuses.forEach(
-    status => {
-      status?.classList.add(
-        "process-diagnostic-status"
-      );
-    }
-  );
+  const route =
+    panel.querySelector(".final-system__route");
 
-  let output =
-    outputText.parentElement;
+  const dots = route
+    ? [...route.querySelectorAll("span")]
+    : [];
 
-  while (
-    output &&
-    output !== panel
+  const result =
+    panel.querySelector(".final-system__result");
+
+  const scan =
+    panel.querySelector(".final-system__scan");
+
+  if (
+    rows.length < 3 ||
+    states.length < 3 ||
+    !route ||
+    !result
   ) {
-    const rect =
-      output.getBoundingClientRect();
-
-    if (
-      rect.width > 180 &&
-      rect.height > 40
-    ) {
-      break;
-    }
-
-    output =
-      output.parentElement;
+    return;
   }
-
-  output?.classList.add(
-    "process-diagnostic-output"
-  );
-
-  const candidates = [
-    ...panel.querySelectorAll(
-      "*"
-    )
-  ];
-
-  let track =
-    null;
-
-  candidates.forEach(
-    (el) => {
-      const rect =
-        el.getBoundingClientRect();
-
-      if (
-        !track &&
-        rect.width > 180 &&
-        rect.height <= 12 &&
-        rect.height >= 1
-      ) {
-        track =
-          el;
-      }
-    }
-  );
-
-  if (track) {
-    track.classList.add(
-      "process-diagnostic-track"
-    );
-  }
-
-  const dots =
-    candidates
-      .filter(
-        (el) => {
-          const rect =
-            el.getBoundingClientRect();
-
-          return (
-            rect.width >= 3 &&
-            rect.width <= 12 &&
-            rect.height >= 3 &&
-            rect.height <= 12 &&
-            Math.abs(
-              rect.width -
-              rect.height
-            ) < 3
-          );
-        }
-      )
-      .filter(
-        (el) => {
-          const rect =
-            el.getBoundingClientRect();
-
-          const style =
-            getComputedStyle(
-              el
-            );
-
-          const radius =
-            parseFloat(
-              style.borderRadius
-            ) || 0;
-
-          return (
-            style.borderRadius ===
-              "50%" ||
-            radius >=
-              rect.width / 2
-          );
-        }
-      )
-      .slice(-4);
-
-  dots.forEach(
-    dot => {
-      dot.classList.add(
-        "process-diagnostic-dot"
-      );
-    }
-  );
 
   let timers = [];
-  let cycleTimer =
-    null;
+  let cycleTimer = null;
+  let running = false;
 
-  const clearTimers =
-    () => {
-      timers.forEach(
-        timer =>
-          clearTimeout(
-            timer
-          )
+  const later = (fn, delay) => {
+    timers.push(
+      setTimeout(fn, delay)
+    );
+  };
+
+  const clearTimers = () => {
+    timers.forEach(clearTimeout);
+    timers = [];
+
+    if (cycleTimer) {
+      clearTimeout(cycleTimer);
+      cycleTimer = null;
+    }
+  };
+
+  const reset = () => {
+    panel.classList.remove(
+      "is-scanning",
+      "is-complete"
+    );
+
+    rows.forEach(row => {
+      row.classList.remove(
+        "is-active",
+        "is-done"
       );
+    });
 
-      timers = [];
+    states.forEach(state => {
+      state.classList.remove(
+        "is-active",
+        "is-done"
+      );
+    });
 
-      if (cycleTimer) {
-        clearTimeout(
-          cycleTimer
-        );
+    dots.forEach(dot => {
+      dot.classList.remove(
+        "is-active",
+        "is-done"
+      );
+    });
 
-        cycleTimer =
-          null;
-      }
-    };
+    route.classList.remove(
+      "is-running"
+    );
 
-  const reset =
-    () => {
-      panel.classList.remove(
+    result.classList.remove(
+      "is-active"
+    );
+
+    scan?.classList.remove(
+      "is-active"
+    );
+  };
+
+  const runCycle = () => {
+    clearTimers();
+    reset();
+
+    running = true;
+
+    requestAnimationFrame(() => {
+      panel.classList.add(
         "is-scanning"
       );
 
-      rows.forEach(
-        row => {
-          row?.classList.remove(
-            "is-active"
-          );
-        }
+      scan?.classList.add(
+        "is-active"
+      );
+    });
+
+    later(() => {
+      rows[0].classList.add(
+        "is-active"
       );
 
-      statuses.forEach(
-        status => {
-          status?.classList.remove(
-            "is-active",
+      states[0].classList.add(
+        "is-active"
+      );
+    }, 500);
+
+    later(() => {
+      rows[0].classList.remove(
+        "is-active"
+      );
+
+      rows[0].classList.add(
+        "is-done"
+      );
+
+      states[0].classList.remove(
+        "is-active"
+      );
+
+      states[0].classList.add(
+        "is-done"
+      );
+
+      rows[1].classList.add(
+        "is-active"
+      );
+
+      states[1].classList.add(
+        "is-active"
+      );
+    }, 1600);
+
+    later(() => {
+      rows[1].classList.remove(
+        "is-active"
+      );
+
+      rows[1].classList.add(
+        "is-done"
+      );
+
+      states[1].classList.remove(
+        "is-active"
+      );
+
+      states[1].classList.add(
+        "is-done"
+      );
+
+      rows[2].classList.add(
+        "is-active"
+      );
+
+      states[2].classList.add(
+        "is-active"
+      );
+    }, 2700);
+
+    later(() => {
+      rows[2].classList.remove(
+        "is-active"
+      );
+
+      rows[2].classList.add(
+        "is-done"
+      );
+
+      states[2].classList.remove(
+        "is-active"
+      );
+
+      states[2].classList.add(
+        "is-done"
+      );
+
+      route.classList.add(
+        "is-running"
+      );
+    }, 3800);
+
+    dots.forEach((dot, index) => {
+      later(() => {
+        dots.forEach(item => {
+          item.classList.remove(
+            "is-active"
+          );
+        });
+
+        dot.classList.add(
+          "is-active"
+        );
+
+        if (index > 0) {
+          dots[index - 1].classList.add(
             "is-done"
           );
         }
-      );
+      }, 4200 + index * 350);
+    });
 
-      dots.forEach(
-        dot => {
-          dot.classList.remove(
-            "is-active"
-          );
-        }
-      );
+    later(() => {
+      dots.forEach(dot => {
+        dot.classList.remove(
+          "is-active"
+        );
 
-      track?.classList.remove(
-        "is-running"
-      );
+        dot.classList.add(
+          "is-done"
+        );
+      });
 
-      output?.classList.remove(
+      result.classList.add(
         "is-active"
       );
-    };
 
-  const later =
-    (
-      callback,
-      delay
-    ) => {
-      timers.push(
-        setTimeout(
-          callback,
-          delay
-        )
+      panel.classList.add(
+        "is-complete"
       );
-    };
+    }, 5700);
 
-  const runCycle =
-    () => {
-      clearTimers();
-      reset();
-
-      requestAnimationFrame(
-        () => {
-          panel.classList.add(
-            "is-scanning"
-          );
-        }
+    later(() => {
+      result.classList.remove(
+        "is-active"
       );
+    }, 7000);
 
-      later(
-        () => {
-          rows[0]
-            ?.classList.add(
-              "is-active"
-            );
-
-          statuses[0]
-            ?.classList.add(
-              "is-active"
-            );
-        },
-        450
+    cycleTimer =
+      setTimeout(
+        runCycle,
+        8200
       );
+  };
 
-      later(
-        () => {
-          statuses[0]
-            ?.classList.remove(
-              "is-active"
-            );
-
-          statuses[0]
-            ?.classList.add(
-              "is-done"
-            );
-
-          rows[0]
-            ?.classList.remove(
-              "is-active"
-            );
-
-          rows[1]
-            ?.classList.add(
-              "is-active"
-            );
-
-          statuses[1]
-            ?.classList.add(
-              "is-active"
-            );
-        },
-        1450
-      );
-
-      later(
-        () => {
-          statuses[1]
-            ?.classList.remove(
-              "is-active"
-            );
-
-          statuses[1]
-            ?.classList.add(
-              "is-done"
-            );
-
-          rows[1]
-            ?.classList.remove(
-              "is-active"
-            );
-
-          rows[2]
-            ?.classList.add(
-              "is-active"
-            );
-
-          statuses[2]
-            ?.classList.add(
-              "is-active"
-            );
-        },
-        2450
-      );
-
-      later(
-        () => {
-          statuses[2]
-            ?.classList.remove(
-              "is-active"
-            );
-
-          statuses[2]
-            ?.classList.add(
-              "is-done"
-            );
-
-          rows[2]
-            ?.classList.remove(
-              "is-active"
-            );
-
-          track?.classList.add(
-            "is-running"
-          );
-
-          dots.forEach(
-            (
-              dot,
-              index
-            ) => {
-              later(
-                () => {
-                  dots.forEach(
-                    item => {
-                      item.classList.remove(
-                        "is-active"
-                      );
-                    }
-                  );
-
-                  dot.classList.add(
-                    "is-active"
-                  );
-                },
-                index * 330
-              );
-            }
-          );
-        },
-        3450
-      );
-
-      later(
-        () => {
-          dots.forEach(
-            dot => {
-              dot.classList.remove(
-                "is-active"
-              );
-            }
-          );
-
-          output?.classList.add(
-            "is-active"
-          );
-        },
-        5000
-      );
-
-      later(
-        () => {
-          output?.classList.remove(
-            "is-active"
-          );
-        },
-        6500
-      );
-
-      cycleTimer =
-        setTimeout(
-          runCycle,
-          7600
-        );
-    };
+  const stopCycle = () => {
+    running = false;
+    clearTimers();
+    reset();
+  };
 
   const observer =
     new IntersectionObserver(
@@ -4593,25 +4234,22 @@ renderResults("");
           entries[0];
 
         if (
-          entry.isIntersecting
+          entry.isIntersecting &&
+          !running
         ) {
-          if (
-            !cycleTimer
-          ) {
-            runCycle();
-          }
-        } else {
-          clearTimers();
-          reset();
+          runCycle();
+        }
+
+        if (
+          !entry.isIntersecting
+        ) {
+          stopCycle();
         }
       },
       {
-        threshold:
-          0.35
+        threshold: 0.3
       }
     );
 
-  observer.observe(
-    panel
-  );
+  observer.observe(panel);
 })();

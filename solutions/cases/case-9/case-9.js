@@ -244,7 +244,7 @@ const transitionText =
     })}`;
   }
 
-  function showStep(step) {
+  function showStep(step, scrollBehavior = "smooth") {
     state.step = step;
 
     panels.forEach(panel => {
@@ -268,7 +268,7 @@ const transitionText =
 
     if (activePanel) {
       activePanel.scrollIntoView({
-        behavior: "smooth",
+        behavior: scrollBehavior,
         block: "nearest"
       });
     }
@@ -1047,10 +1047,10 @@ pdfModal.addEventListener(
 
   closePdfModal();
 
-  showStep(1);
+  showStep(1, "auto");
 
-  root.scrollIntoView({
-    behavior: "smooth",
+root.scrollIntoView({
+    behavior: "auto",
     block: "start"
   });
 }

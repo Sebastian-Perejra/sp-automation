@@ -520,5 +520,95 @@ window.SOLUTIONS_CASES_EN = [
       "less manual copying",
       "fewer quotation errors"
     ]
-  }
+  },
+{
+  id: 10,
+  title: "Automated contract generation from an approved template",
+  type: "CONTRACT AUTOMATION",
+  short: "Client details + legal and banking information + commercial terms → approved contract template → validation → print or PDF.",
+  featured: true,
+  priority: 88,
+  concepts: [
+    "automation",
+    "contract",
+    "documents",
+    "document_generation",
+    "template",
+    "excel",
+    "vba",
+    "pdf",
+    "data_entry",
+    "workflow"
+  ],
+  tools: [
+    "Excel",
+    "VBA",
+    "Word",
+    "PDF"
+  ],
+  tags: [
+    "contract",
+    "contract generator",
+    "document automation",
+    "contract template",
+    "client details",
+    "Excel",
+    "VBA",
+    "PDF"
+  ],
+  aliases: [
+    "automated contract generation",
+    "automatic contract generator",
+    "contract generator",
+    "generate contract automatically",
+    "contract automation",
+    "agreement generator",
+    "service agreement generator",
+    "generate agreement from template",
+    "contract from template",
+    "agreement from template",
+    "populate contract automatically",
+    "auto-fill contract",
+    "insert client details into contract",
+    "populate contract with client data",
+    "contract from excel",
+    "generate contract from excel",
+    "excel contract generator",
+    "generate agreement from client data",
+    "document generation",
+    "document automation",
+    "automated document creation",
+    "generate contract pdf",
+    "export agreement to pdf",
+    "contract workflow automation"
+  ],
+  problems: [
+    "every new contract starts as a copy of the previous one",
+    "I manually replace client details in contracts",
+    "I have to find every reference to the previous client",
+    "old client information can remain in a copied contract",
+    "I enter the same information several times",
+    "I manually update company names and authorized representatives",
+    "I manually update addresses bank details and iban",
+    "standard contracts take too long to prepare",
+    "different employees format contracts differently",
+    "I need to generate contracts automatically from a template",
+    "I need to create contracts from client data",
+    "I want to fill out a form and generate a contract",
+    "I need contracts generated as PDF files"
+  ],
+  outcomes: [
+    "ready-to-use contract from an approved template",
+    "automatic insertion of client details",
+    "consistent contract formatting",
+    "less manual copying",
+    "fewer errors in legal and banking details",
+    "automatic insertion of commercial terms",
+    "live contract preview",
+    "automatic page numbering",
+    "configurable document formatting",
+    "print-ready contract",
+    "PDF contract export"
+  ]
+}
 ];

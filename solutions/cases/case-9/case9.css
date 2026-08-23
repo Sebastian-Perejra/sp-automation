@@ -2762,3 +2762,443 @@
     text-align: left;
   }
 }
+
+.quote-desktop-window {
+  top: 34px;
+  left: 76px;
+  right: 56px;
+}
+
+#quote-desktop-window-title {
+  font-size: 11px;
+}
+
+.quote-desktop-window-body {
+  min-height: 380px;
+  max-height: 470px;
+  padding: 22px;
+  font-size: 10px;
+}
+
+.quote-app-screen-head span {
+  font-size: 8px;
+}
+
+.quote-app-screen-head strong {
+  font-size: 18px;
+}
+
+.quote-app-screen-head small {
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.quote-app-status-pill {
+  font-size: 8px;
+}
+
+.quote-app-dashboard small {
+  font-size: 8px;
+}
+
+.quote-app-dashboard strong {
+  font-size: 12px;
+}
+
+.quote-app-new-offer > span {
+  font-size: 8px;
+}
+
+.quote-app-new-offer strong {
+  font-size: 12px;
+}
+
+.quote-app-new-offer p {
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.quote-mini-row {
+  font-size: 8px;
+}
+
+.quote-source-folders strong {
+  font-size: 10px;
+}
+
+.quote-source-folders small {
+  font-size: 8px;
+}
+
+.quote-desktop-icon strong,
+.quote-desktop-file strong {
+  font-size: 8px;
+}
+
+.quote-desktop-hint strong {
+  font-size: 12px;
+}
+
+.quote-desktop-hint small {
+  font-size: 9px;
+}
+
+.quote-desktop-explainer strong {
+  font-size: 11px;
+}
+
+.quote-desktop-explainer p {
+  font-size: 9px;
+}
+
+.quote-taskbar-mail,
+.quote-taskbar-next {
+  position: relative;
+}
+
+.quote-mail-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e2574c;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+  box-shadow: 0 0 0 3px rgba(226,87,76,.16);
+}
+
+.quote-mail-badge[hidden] {
+  display: none;
+}
+
+.quote-mail-alert {
+  animation: quoteMailAlert 1.15s ease-in-out infinite;
+}
+
+.quote-taskbar-next {
+  animation: quoteTaskbarNext 1.25s ease-in-out infinite;
+}
+
+@keyframes quoteMailAlert {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(77,145,222,.18);
+    background: rgba(255,255,255,.055);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px rgba(77,145,222,.1);
+    background: rgba(79,139,205,.28);
+  }
+}
+
+@keyframes quoteTaskbarNext {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(137,208,68,.16);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px rgba(137,208,68,.09);
+    background: rgba(137,208,68,.18);
+  }
+}
+
+.quote-outlook-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.quote-outlook-mail {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #dce4df;
+  border-radius: 10px;
+  background: #fff;
+  color: #46524b;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+.quote-outlook-mail:hover {
+  transform: translateY(-1px);
+  border-color: #a9c5b2;
+  background: #f7faf8;
+  box-shadow: 0 8px 20px rgba(32,58,43,.07);
+}
+
+.quote-outlook-mail-new {
+  border-color: #9fc5a9;
+  background: #f0f7f2;
+  box-shadow: 0 0 0 3px rgba(74,133,89,.06);
+}
+
+.quote-outlook-mail-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3976bd;
+  box-shadow: 0 0 0 4px rgba(57,118,189,.1);
+}
+
+.quote-outlook-mail div strong {
+  display: block;
+  color: #35483e;
+  font-size: 10px;
+}
+
+.quote-outlook-mail div span {
+  display: block;
+  margin-top: 3px;
+  color: #59675f;
+  font-size: 9px;
+}
+
+.quote-outlook-mail div small {
+  display: block;
+  margin-top: 3px;
+  color: #8a948e;
+  font-size: 8px;
+}
+
+.quote-outlook-mail time {
+  align-self: start;
+  color: #77837c;
+  font-size: 8px;
+}
+
+.quote-opened-mail-meta {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid #dde4e0;
+  border-radius: 10px;
+  background: #f6f8f7;
+}
+
+.quote-opened-mail-meta > div {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+}
+
+.quote-opened-mail-meta small {
+  color: #8c9690;
+  font-size: 8px;
+}
+
+.quote-opened-mail-meta strong {
+  color: #455149;
+  font-size: 9px;
+}
+
+.quote-opened-mail-body {
+  margin-top: 14px;
+  color: #4f5c55;
+  font-size: 9px;
+  line-height: 1.7;
+}
+
+.quote-opened-mail-body p {
+  margin: 0 0 10px;
+}
+
+.quote-mail-minimize-tip {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 11px 12px;
+  border: 1px solid #b7d2bf;
+  border-radius: 10px;
+  background: #eef7f1;
+}
+
+.quote-mail-minimize-tip span {
+  color: #567865;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.quote-mail-minimize-tip strong {
+  color: #35594b;
+  font-size: 10px;
+}
+
+.quote-window-control-next {
+  animation: quoteWindowControlNext 1.1s ease-in-out infinite;
+}
+
+@keyframes quoteWindowControlNext {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(137,208,68,.12);
+    background: #f0f3f1;
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgba(137,208,68,.1);
+    background: #dff0e3;
+  }
+}
+
+.quote-module-save-card {
+  margin-top: 16px;
+  padding: 17px;
+  border: 1px solid #bdd3c4;
+  border-radius: 14px;
+  background: #f2f8f4;
+}
+
+.quote-module-save-head {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.quote-module-save-head small,
+.quote-module-save-data small {
+  display: block;
+  color: #86928b;
+  font-size: 8px;
+}
+
+.quote-module-save-head strong {
+  display: block;
+  margin-top: 3px;
+  color: #35594b;
+  font-size: 12px;
+}
+
+.quote-module-save-head div > span {
+  display: block;
+  margin-top: 4px;
+  color: #6f7d75;
+  font-size: 9px;
+}
+
+.quote-module-save-data {
+  display: grid;
+  grid-template-columns: 1.4fr .7fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.quote-module-save-data > div {
+  padding: 10px;
+  border: 1px solid rgba(96,132,108,.16);
+  border-radius: 9px;
+  background: rgba(255,255,255,.72);
+}
+
+.quote-module-save-data strong {
+  display: block;
+  margin-top: 4px;
+  color: #46534b;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.quote-module-save-status {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.quote-module-save-status[hidden] {
+  display: none;
+}
+
+.quote-module-save-status > div {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 11px;
+  border: 1px solid #dfe5e1;
+  border-radius: 9px;
+  background: #fafbfa;
+  color: #68746e;
+  font-size: 9px;
+}
+
+.quote-module-save-status > div.done {
+  border-color: #bdd4c3;
+  background: #f0f7f2;
+  color: #35594b;
+}
+
+.quote-module-sync-note {
+  margin-top: 14px;
+  padding: 12px 13px;
+  border: 1px dashed #cbd9d0;
+  border-radius: 10px;
+  background: #fafcfb;
+}
+
+.quote-module-sync-note span {
+  color: #5f7b6a;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.quote-module-sync-note p {
+  margin: 5px 0 0;
+  color: #7b867f;
+  font-size: 8px;
+  line-height: 1.55;
+}
+
+.quote-outgoing-in-window {
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .quote-desktop-window {
+    left: 34px;
+    right: 34px;
+  }
+}
+
+@media (max-width: 760px) {
+  .quote-desktop-window {
+    top: 26px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .quote-desktop-window-body {
+    min-height: 350px;
+    max-height: 500px;
+    padding: 16px;
+  }
+
+  .quote-app-screen-head strong {
+    font-size: 16px;
+  }
+
+  .quote-module-save-data {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-outlook-mail {
+    grid-template-columns: 10px minmax(0, 1fr) auto;
+  }
+}

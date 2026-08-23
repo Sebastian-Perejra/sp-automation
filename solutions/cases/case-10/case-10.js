@@ -805,10 +805,46 @@
     presetCorporate
   );
 
-  $('resetBtn').addEventListener(
-    'click',
-    presetDstu
-  );
+$('resetBtn').addEventListener(
+  'click',
+  () => {
+    setState(defaultState);
+
+    $('presetName').textContent =
+      'За замовчуванням: ДСТУ';
+
+    $('previewStatus').textContent =
+      'ДСТУ 4163:2020';
+
+    zoom = 0.72;
+    applyZoom();
+
+    const firstTab =
+      caseRoot.querySelector(
+        '.tab[data-tab="data"]'
+      );
+
+    caseRoot
+      .querySelectorAll('.tab')
+      .forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+    caseRoot
+      .querySelectorAll('.tab-content')
+      .forEach(content => {
+        content.classList.remove('active');
+      });
+
+    firstTab.classList.add('active');
+    $('tab-data').classList.add('active');
+
+    if (previewScroll) {
+      previewScroll.scrollTop = 0;
+      previewScroll.scrollLeft = 0;
+    }
+  }
+);
 
 $('printBtn').addEventListener(
   'click',

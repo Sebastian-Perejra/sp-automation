@@ -85,6 +85,44 @@
   const sendEmailButton = root.querySelector("#quote-send-email");
   const completeBlock = root.querySelector("#quote-complete");
 
+  const pdfModal = root.querySelector("#quote-pdf-modal");
+const pdfModalClose = root.querySelector("#quote-pdf-modal-close");
+const pdfApprove = root.querySelector("#quote-pdf-approve");
+const documentModal = root.querySelector("#quote-document-modal");
+
+const stageNode = root.querySelector(".quote-stage");
+
+const transitionLayer = document.createElement("div");
+
+transitionLayer.className = "quote-stage-transition";
+transitionLayer.hidden = true;
+
+transitionLayer.innerHTML = `
+  <div class="quote-transition-inner">
+    <span class="quote-transition-label">PROCESSING</span>
+    <strong id="quote-transition-title"></strong>
+    <p id="quote-transition-text"></p>
+
+    <div class="quote-transition-track">
+      <i></i>
+    </div>
+
+    <div class="quote-transition-statuses">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+`;
+
+stageNode.appendChild(transitionLayer);
+
+const transitionTitle =
+  transitionLayer.querySelector("#quote-transition-title");
+
+const transitionText =
+  transitionLayer.querySelector("#quote-transition-text");
+
   const productData = {
     "orange-1l": {
       sku: "J-O-1000-TP",
@@ -235,6 +273,23 @@
     }
   }
 
+  function transitionToStep(
+  step,
+  title,
+  text,
+  delay = 950
+) {
+  transitionTitle.textContent = title;
+  transitionText.textContent = text;
+
+  transitionLayer.hidden = false;
+
+  setTimeout(() => {
+    transitionLayer.hidden = true;
+    showStep(step);
+  }, delay);
+}
+
   function selectSystem(buttons, activeButton) {
     buttons.forEach(button => {
       button.classList.toggle(
@@ -317,11 +372,15 @@
     });
   }
 
-  function useExistingCustomer() {
-    state.customerMode = "existing";
+function useExistingCustomer() {
+  state.customerMode = "existing";
 
-    showStep(3);
-  }
+  transitionToStep(
+    3,
+    "Клієнта ідентифіковано",
+    "Реквізити та комерційні умови завантажено з обраного джерела."
+  );
+}
 
   function showNewCustomer() {
     state.customerMode = "new";
@@ -360,7 +419,11 @@
         state.customer.name;
     }
 
-    showStep(3);
+    transitionToStep(
+      3,
+      "Картку клієнта створено",
+      "Дані клієнта готові для використання у комерційній пропозиції."
+    );
   }
 
   function setupProductSource(source, button) {
@@ -600,7 +663,12 @@
 
   function showBuilder() {
     renderBuilder();
-    showStep(4);
+  
+    transitionToStep(
+      4,
+      "Позиції зібрано",
+      "Номенклатура та базові ціни перенесені до quotation builder."
+    );
   }
 
   function returnToProducts() {
@@ -717,80 +785,106 @@
   }
 
   function runPdfGeneration() {
-    resetGeneration();
+  resetGeneration();
 
-    generationStatus.hidden = false;
-    generatePdfButton.disabled = true;
-    generatePdfButton.textContent =
-      "Формування...";
+  generationStatus.hidden = false;
+  generatePdfButton.disabled = true;
+  generatePdfButton.textContent =
+    "Формування...";
 
-    generationStates.forEach(
-      (item, index) => {
-        setTimeout(() => {
-          item.classList.add("done");
+  generationStates.forEach(
+    (item, index) => {
+      setTimeout(() => {
+        item.classList.add("done");
 
-          const icon =
-            item.querySelector("span");
+        const icon =
+          item.querySelector("span");
 
-          if (icon) {
-            icon.textContent = "✓";
-          }
+        if (icon) {
+          icon.textContent = "✓";
+        }
 
-          if (
-            index ===
-            generationStates.length - 1
-          ) {
-            setTimeout(() => {
-              pdfResult.hidden = false;
+        if (
+          index ===
+          generationStates.length - 1
+        ) {
+          setTimeout(() => {
+            pdfResult.hidden = false;
+            pdfResult.classList.add("is-ready");
 
-              generatePdfButton.textContent =
-                "PDF готовий ✓";
+            generatePdfButton.textContent =
+              "PDF готовий ✓";
 
-              setTimeout(() => {
-                showStep(7);
-              }, 800);
-            }, 250);
-          }
-        }, 450 * (index + 1));
-      }
-    );
-  }
+            previewPdfButton.classList.add(
+              "quote-next-action"
+            );
+
+            previewPdfButton.textContent =
+              "Відкрити PDF";
+
+            pdfResult.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+          }, 350);
+        }
+      }, 520 * (index + 1));
+    }
+  );
+}
 
   function previewDocument() {
-    const document =
-      root.querySelector("#quote-document");
+  const sourceDocument =
+    root.querySelector("#quote-document");
 
-    if (!document) return;
+  if (!sourceDocument) return;
 
-    document.animate(
-      [
-        {
-          transform: "scale(1)",
-          boxShadow:
-            "0 14px 34px rgba(31,42,36,.14)"
-        },
-        {
-          transform: "scale(1.015)",
-          boxShadow:
-            "0 22px 48px rgba(31,42,36,.22)"
-        },
-        {
-          transform: "scale(1)",
-          boxShadow:
-            "0 14px 34px rgba(31,42,36,.14)"
-        }
-      ],
-      {
-        duration: 650,
-        easing: "ease"
-      }
-    );
+  documentModal.innerHTML =
+    sourceDocument.innerHTML;
 
-    document.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+  pdfModal.hidden = false;
+
+  previewPdfButton.classList.remove(
+    "quote-next-action"
+  );
+
+  document.body.style.overflow = "hidden";
+}
+
+  function closePdfModal() {
+  pdfModal.hidden = true;
+  document.body.style.overflow = "";
+}
+
+function approvePdf() {
+  closePdfModal();
+
+  transitionToStep(
+    7,
+    "Комерційну пропозицію перевірено",
+    "PDF підтверджено. Тепер визначимо, де зберегти фінальний документ.",
+    1050
+  );
+}
+
+  pdfModalClose.addEventListener(
+  "click",
+  closePdfModal
+);
+
+pdfApprove.addEventListener(
+  "click",
+  approvePdf
+);
+
+pdfModal.addEventListener(
+  "click",
+  event => {
+    if (event.target === pdfModal) {
+      closePdfModal();
+    }
   }
+);
 
   function selectStorage(source, button) {
     state.storageSource = source;
@@ -831,12 +925,19 @@
         behavior: "smooth",
         block: "nearest"
       });
-    }, 900);
+    }, 1400);
   }
 
   startButton.addEventListener(
     "click",
-    () => showStep(2)
+    () => {
+      transitionToStep(
+        2,
+        "Запит прийнято в роботу",
+        "Переходимо до ідентифікації клієнта та його реквізитів.",
+        900
+      );
+    }
   );
 
   customerSourceButtons.forEach(button => {
@@ -933,7 +1034,13 @@
 
   termsReadyButton.addEventListener(
     "click",
-    () => showStep(5)
+    () => {
+      transitionToStep(
+        5,
+        "Комерційні умови зафіксовано",
+        "Кількість, ціни, знижки та умови оплати готові. Переходимо до доставки."
+      );
+    }
   );
 
   [
@@ -956,7 +1063,13 @@
     () => {
       prepareDocument();
       resetGeneration();
-      showStep(6);
+  
+      transitionToStep(
+        6,
+        "Дані для пропозиції готові",
+        "Клієнт, товари, ціни та доставка зібрані в один документ.",
+        1100
+      );
     }
   );
 
@@ -981,7 +1094,14 @@
 
   storageReadyButton.addEventListener(
     "click",
-    () => showStep(8)
+    () => {
+      transitionToStep(
+        8,
+        "Комерційну пропозицію збережено",
+        "Фінальний PDF зафіксовано у вибраному сховищі. Готуємо лист клієнту.",
+        1000
+      );
+    }
   );
 
   sendEmailButton.addEventListener(

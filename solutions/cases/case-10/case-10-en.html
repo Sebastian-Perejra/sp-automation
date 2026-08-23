@@ -1,0 +1,1173 @@
+<section class="contract-case-intro" id="contract-generator-case">
+
+  <div class="contract-case-inner">
+
+    <div class="case-demo-kicker">
+      REAL-WORLD CASE #10
+    </div>
+
+    <h1>
+      Generate contracts automatically
+      from an approved template
+    </h1>
+
+    <p class="contract-case-subtitle">
+      Client information, billing details, and commercial terms are entered once.
+      The system inserts them into the approved contract template,
+      applies the selected formatting, and prepares the document for printing or PDF export.
+    </p>
+
+    <div class="contract-problem-solution">
+
+      <article class="contract-story-card contract-story-card--problem">
+
+        <span class="contract-story-label">
+          PAIN POINT
+        </span>
+
+        <h2>
+          Every new contract started with a copy of the last one
+        </h2>
+
+        <p>
+          A manager opens a previous client's contract,
+          makes a copy, and manually replaces the company name,
+          contact person, legal details, bank information,
+          dates, pricing, and commercial terms.
+        </p>
+
+        <ul>
+          <li>
+            the same information has to be updated in multiple places throughout the document;
+          </li>
+
+          <li>
+            every reference to the previous client has to be found and replaced manually;
+          </li>
+
+          <li>
+            one missed company name, address, or IBAN can end up in another client's contract;
+          </li>
+
+          <li>
+            every change requires another full review of the document;
+          </li>
+
+          <li>
+            different employees may format the same type of contract differently;
+          </li>
+
+          <li>
+            preparing a standard agreement takes time even though most of the document never changes.
+          </li>
+        </ul>
+
+      </article>
+
+      <article class="contract-story-card contract-story-card--solution">
+
+        <span class="contract-story-label">
+          SOLUTION
+        </span>
+
+        <h2>
+          One approved template. A new contract in minutes.
+        </h2>
+
+        <p>
+          The company's approved contract template is configured once.
+          From then on, the user works only with a simple data-entry form,
+          while the complete contract is generated automatically.
+        </p>
+
+        <ul>
+          <li>
+            client details are entered once and inserted everywhere they are needed;
+          </li>
+
+          <li>
+            pricing, deposits, deadlines, and other terms automatically flow into the correct clauses;
+          </li>
+
+          <li>
+            the template keeps the company's approved structure and wording intact;
+          </li>
+
+          <li>
+            fonts, margins, headers, footers, page numbers, and borders are controlled through settings;
+          </li>
+
+          <li>
+            formatting changes appear instantly in the live preview;
+          </li>
+
+          <li>
+            the finished agreement can be printed or saved as a PDF.
+          </li>
+        </ul>
+
+      </article>
+
+    </div>
+
+    <div class="contract-demo-bridge">
+
+      <div>
+        <span>LIVE DEMO</span>
+
+        <strong>
+          Try building a contract yourself
+        </strong>
+
+        <p>
+          Change the contract details or formatting on the left —
+          the document on the right updates instantly.
+        </p>
+      </div>
+
+      <div class="contract-demo-arrow">
+        ↓
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="app">
+
+    <div class="titlebar">
+      <div class="excel-mark">X</div>
+      <div>
+        <strong>Contract Generator.xlsm</strong>
+        <span class="file-type">— product simulation</span>
+      </div>
+      <div class="live">
+        <span class="live-dot"></span>
+        Live preview
+      </div>
+    </div>
+
+    <div class="ribbon">
+      <button id="presetDstu">DSTU 4163:2020</button>
+      <button id="presetCorporate">Corporate</button>
+      <div class="ribbon-sep"></div>
+      <span class="preset-badge" id="presetName">Default: DSTU</span>
+      <div style="flex:1"></div>
+      <button id="resetBtn">Reset</button>
+      <button id="printBtn">Print / PDF</button>
+      <button class="primary" id="buildBtn">Generate Contract</button>
+    </div>
+
+    <div class="workspace">
+
+      <aside class="editor">
+
+        <div class="tabs">
+          <button class="tab active" data-tab="data">Contract</button>
+          <button class="tab" data-tab="style">Formatting</button>
+          <button class="tab" data-tab="parties">Parties</button>
+        </div>
+
+        <div class="tab-content active" id="tab-data">
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Contract Details</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field">
+                <label>Contract number</label>
+                <input id="contractNo" value="SA-2026-001">
+              </div>
+
+              <div class="field">
+                <label>Contract date</label>
+                <input id="contractDate" type="date" value="2026-08-23">
+              </div>
+
+              <div class="field">
+                <label>Place of execution</label>
+                <input id="place" value="Lviv, Ukraine">
+              </div>
+
+              <div class="field">
+                <label>Effective through</label>
+                <input id="endDate" type="date" value="2026-12-31">
+              </div>
+
+              <div class="field full">
+                <label>Scope of services</label>
+                <textarea id="serviceText">design and implementation of analytics reporting systems, business process automation, data preparation, and data integration</textarea>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Commercial Terms</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field">
+                <label>Contract value, UAH</label>
+                <input id="price" type="number" min="0" step="1000" value="120000">
+              </div>
+
+              <div class="field">
+                <label>Upfront payment, %</label>
+                <input id="advance" type="number" min="0" max="100" value="20">
+              </div>
+
+              <div class="field">
+                <label>Delivery time, business days</label>
+                <input id="workDays" type="number" min="1" value="30">
+              </div>
+
+              <div class="field">
+                <label>Warranty period, calendar days</label>
+                <input id="warrantyDays" type="number" min="0" value="14">
+              </div>
+
+              <div class="field full">
+                <label>Service Provider VAT status</label>
+                <select id="providerVat">
+                  <option value="no" selected>Not VAT registered</option>
+                  <option value="yes">VAT registered</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Live Validation</h3>
+            </div>
+
+            <div class="section-body" style="grid-template-columns:1fr">
+              <div class="hint">
+                Changes made on the left appear in the contract immediately.
+                In the production version, “Generate Contract” can also run validation checks,
+                lock the document revision, and prepare the final export.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-style">
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Typography</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field">
+                <label>Body font</label>
+                <select id="fontFamily">
+                  <option value="Times New Roman" selected>Times New Roman</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Calibri">Calibri</option>
+                  <option value="Georgia">Georgia</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Body text size, pt</label>
+                <input id="fontSize" type="number" min="9" max="16" step="0.5" value="12">
+              </div>
+
+              <div class="field">
+                <label>Line spacing</label>
+                <select id="lineHeight">
+                  <option value="1">1.0</option>
+                  <option value="1.15" selected>1.15</option>
+                  <option value="1.25">1.25</option>
+                  <option value="1.5">1.5</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Title size, pt</label>
+                <input id="titleSize" type="number" min="12" max="18" value="14">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Page Margins, mm</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field">
+                <label>Left</label>
+                <input id="marginLeft" type="number" min="5" max="45" value="30">
+              </div>
+
+              <div class="field">
+                <label>Right</label>
+                <input id="marginRight" type="number" min="5" max="45" value="10">
+              </div>
+
+              <div class="field">
+                <label>Top</label>
+                <input id="marginTop" type="number" min="10" max="40" value="20">
+              </div>
+
+              <div class="field">
+                <label>Bottom</label>
+                <input id="marginBottom" type="number" min="10" max="40" value="20">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Document Elements</h3>
+            </div>
+
+            <div class="section-body" style="grid-template-columns:1fr">
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Justified text</strong>
+                  <small>Align body text evenly along both margins</small>
+                </div>
+                <label class="switch">
+                  <input id="justify" type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Page numbers</strong>
+                  <small>DSTU format: starting on page 2, centered at the top</small>
+                </div>
+                <label class="switch">
+                  <input id="pageNumbers" type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Header</strong>
+                  <small>Add a corporate document header</small>
+                </div>
+                <label class="switch">
+                  <input id="headerOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Logo in header</strong>
+                  <small>Display the company logo inside the header</small>
+                </div>
+                <label class="switch">
+                  <input id="logoOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Footer</strong>
+                  <small>Add a website or document reference</small>
+                </div>
+                <label class="switch">
+                  <input id="footerOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Page border</strong>
+                  <small>Add a subtle border around each page</small>
+                </div>
+                <label class="switch">
+                  <input id="borderOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Header & Footer</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field full">
+                <label>Header text</label>
+                <input id="headerText" value="SP Automation · Contract Generator">
+              </div>
+
+              <div class="field full">
+                <label>Footer text</label>
+                <input id="footerText" value="sp-automation.com">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-parties">
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Client</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field full">
+                <label>Legal name</label>
+                <input id="customerName" value="DEMO SYSTEMS UKRAINE LLC">
+              </div>
+
+              <div class="field full">
+                <label>Authorized representative</label>
+                <input id="customerDirector" value="Maria KOVALENKO">
+              </div>
+
+              <div class="field">
+                <label>Company registration number</label>
+                <input id="customerEdrpou" value="00000000">
+              </div>
+
+              <div class="field">
+                <label>Tax ID</label>
+                <input id="customerIpn" value="000000000000">
+              </div>
+
+              <div class="field full">
+                <label>VAT status</label>
+                <select id="customerVat">
+                  <option selected>VAT registered</option>
+                  <option>Not VAT registered</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label>Registered address</label>
+                <input id="customerAddress" value="17 Prykladna St., Kyiv, 01001, Ukraine">
+              </div>
+
+              <div class="field full">
+                <label>IBAN</label>
+                <input id="customerIban" value="UA00 0000 0000 0000 0000 0000 000">
+              </div>
+
+              <div class="field">
+                <label>Bank</label>
+                <input id="customerBank" value="DEMO BANK JSC">
+              </div>
+
+              <div class="field">
+                <label>Bank code</label>
+                <input id="customerMfo" value="000000">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Service Provider</h3>
+            </div>
+
+            <div class="section-body">
+
+              <div class="field full">
+                <label>Legal name / full name</label>
+                <input id="providerName" value="SEBASTIAN PEREJRA, SOLE PROPRIETOR">
+              </div>
+
+              <div class="field">
+                <label>Tax ID</label>
+                <input id="providerTax" value="0000000000">
+              </div>
+
+              <div class="field">
+                <label>Tax regime</label>
+                <input id="providerTaxSystem" value="single tax, Group 3">
+              </div>
+
+              <div class="field full">
+                <label>Registered address</label>
+                <input id="providerAddress" value="8 Automation St., Lviv, 79000, Ukraine">
+              </div>
+
+              <div class="field full">
+                <label>IBAN</label>
+                <input id="providerIban" value="UA00 0000 0000 0000 0000 0000 000">
+              </div>
+
+              <div class="field">
+                <label>Bank</label>
+                <input id="providerBank" value="TECH BANK JSC">
+              </div>
+
+              <div class="field">
+                <label>Bank code</label>
+                <input id="providerMfo" value="000000">
+              </div>
+
+              <div class="field full">
+                <label>Email</label>
+                <input id="providerEmail" value="demo@sp-automation.com">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </aside>
+
+      <main class="preview">
+
+        <div class="preview-toolbar">
+          <strong>Contract Preview</strong>
+          <span class="preset-badge" id="previewStatus">DSTU 4163:2020</span>
+          <div class="spacer"></div>
+          <button class="zoom-btn" id="zoomOut">−</button>
+          <span class="zoom-label" id="zoomLabel">72%</span>
+          <button class="zoom-btn" id="zoomIn">+</button>
+        </div>
+
+        <div class="preview-scroll">
+
+          <div class="document-stack" id="documentStack">
+
+            <section class="doc-page" data-page="1">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Service Agreement</span>
+              </div>
+
+              <div class="page-inner">
+
+                <h1 class="doc-title">
+                  SERVICE AGREEMENT
+                </h1>
+
+                <p class="doc-subtitle">
+                  for automation and business analytics services
+                </p>
+
+                <div class="doc-meta">
+                  <div id="outDate">August 23, 2026</div>
+                  <div>No. <span id="outNo">SA-2026-001</span></div>
+                </div>
+
+                <p class="doc-place" id="outPlace">
+                  Lviv, Ukraine
+                </p>
+
+                <p class="doc-preamble" id="outPreamble"></p>
+
+                <h2 class="section-title">
+                  1. SCOPE OF SERVICES
+                </h2>
+
+                <p class="clause level2" id="clause11"></p>
+
+                <p class="clause level2">
+                  1.2. The specific scope of services, functional requirements,
+                  deliverables, and work priorities may be agreed by the Parties
+                  in a statement of work, commercial proposal, or written electronic correspondence.
+                  Any such written agreement will be sufficient authorization
+                  for the Service Provider to perform the applicable work.
+                </p>
+
+                <p class="clause level2" id="clause13"></p>
+
+                <h2 class="section-title">
+                  2. RIGHTS AND RESPONSIBILITIES OF THE PARTIES
+                </h2>
+
+                <p class="clause level2">
+                  2.1. The Service Provider will:
+                </p>
+
+                <p class="clause level3">
+                  2.1.1. perform the services within the agreed scope
+                  and in a professional and workmanlike manner;
+                </p>
+
+                <p class="clause level3">
+                  2.1.2. protect the Client's confidential information
+                  obtained in connection with this Agreement;
+                </p>
+
+                <p class="clause level3">
+                  2.1.3. promptly notify the Client of circumstances
+                  that may materially affect the schedule or the quality of the deliverables;
+                </p>
+
+                <p class="clause level3">
+                  2.1.4. provide reasonable status updates
+                  on the agreed work upon the Client's request.
+                </p>
+
+                <p class="clause level2">
+                  2.2. The Service Provider may:
+                </p>
+
+                <p class="clause level3">
+                  2.2.1. request from the Client any data, documents,
+                  system access, technical information, and approvals
+                  reasonably required to perform the services;
+                </p>
+
+                <p class="clause level3">
+                  2.2.2. determine the technical methods and implementation approach
+                  used to perform the services unless otherwise agreed in writing;
+                </p>
+
+                <p class="clause level3">
+                  2.2.3. suspend work if payment is overdue
+                  or if the Client fails to provide required information,
+                  approvals, or system access;
+                </p>
+
+                <p class="clause level3">
+                  2.2.4. reference a general, non-confidential description
+                  of the completed project in its portfolio unless the Parties
+                  agree otherwise in writing.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Demo Template</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="2">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Service Agreement</span>
+              </div>
+
+              <div class="page-num">2</div>
+
+              <div class="page-inner">
+
+                <p class="clause level2">
+                  2.3. The Client will:
+                </p>
+
+                <p class="clause level3">
+                  2.3.1. provide the Service Provider with the data,
+                  documents, system access, and other information
+                  reasonably required to perform the services;
+                </p>
+
+                <p class="clause level3">
+                  2.3.2. designate an authorized representative
+                  who can provide timely decisions, approvals, and feedback;
+                </p>
+
+                <p class="clause level3">
+                  2.3.3. review deliverables within a reasonable time,
+                  provide specific feedback, and make payments
+                  in accordance with this Agreement;
+                </p>
+
+                <p class="clause level3">
+                  2.3.4. maintain any third-party software licenses,
+                  subscriptions, or service accounts required
+                  for the completed solution to operate.
+                </p>
+
+                <p class="clause level2">
+                  2.4. Any delay caused by the Client's failure
+                  to provide required data, approvals, access, or payment
+                  will result in a corresponding extension of the project schedule.
+                </p>
+
+                <h2 class="section-title">
+                  3. FEES AND PAYMENT TERMS
+                </h2>
+
+                <p class="clause level2" id="clause31"></p>
+
+                <p class="clause level2" id="clause32"></p>
+
+                <p class="clause level2">
+                  3.3. The remaining balance will be paid either by project milestone
+                  or upon completion of the agreed scope of work,
+                  based on invoices issued by the Service Provider
+                  and deliverables accepted by the Client.
+                </p>
+
+                <p class="clause level2">
+                  3.4. If the Client does not provide specific written objections
+                  within five business days after receiving a deliverable,
+                  that deliverable will be deemed accepted.
+                </p>
+
+                <p class="clause level2">
+                  3.5. Any additional requirements, changes, or services
+                  outside the agreed scope will be performed only after
+                  the Parties agree on the related fees and schedule.
+                </p>
+
+                <h2 class="section-title">
+                  4. DELIVERY AND ACCEPTANCE
+                </h2>
+
+                <p class="clause level2">
+                  4.1. Upon completion of the applicable scope of work,
+                  the Service Provider will deliver the completed work
+                  in the agreed format and, if applicable,
+                  provide an acceptance certificate or similar completion document.
+                </p>
+
+                <p class="clause level2">
+                  4.2. The Client will review the deliverables within five business days
+                  and either confirm acceptance or provide
+                  a specific list of reasonable objections.
+                </p>
+
+                <p class="clause level2">
+                  4.3. The Service Provider will correct, at no additional charge,
+                  defects caused by its failure to meet the agreed requirements.
+                  New requirements or changes to previously approved functionality
+                  are not considered defect corrections.
+                </p>
+
+                <p class="clause level2">
+                  4.4. Once a deliverable has been accepted,
+                  any subsequent changes that are not defect corrections
+                  will be treated as additional work.
+                </p>
+
+                <h2 class="section-title">
+                  5. WARRANTY
+                </h2>
+
+                <p class="clause level2" id="clause51"></p>
+
+                <p class="clause level2">
+                  5.2. The warranty does not cover issues caused by changes
+                  to source data, information systems, configurations,
+                  third-party software, APIs, or external services
+                  made after delivery.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Demo Template</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="3">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Service Agreement</span>
+              </div>
+
+              <div class="page-num">3</div>
+
+              <div class="page-inner">
+
+                <h2 class="section-title">
+                  6. LIABILITY
+                </h2>
+
+                <p class="clause level2">
+                  6.1. Each Party will be responsible for its failure
+                  to perform its obligations under this Agreement
+                  in accordance with applicable law.
+                </p>
+
+                <p class="clause level2">
+                  6.2. To the maximum extent permitted by applicable law,
+                  the Service Provider's aggregate liability arising from
+                  a specific scope of work will not exceed the amount
+                  actually paid by the Client for that scope of work.
+                </p>
+
+                <p class="clause level2">
+                  6.3. The Service Provider is not responsible for the accuracy
+                  or completeness of data supplied by the Client,
+                  or for outages, functionality changes, licensing changes,
+                  or other actions of third-party software and service providers.
+                </p>
+
+                <p class="clause level2">
+                  6.4. If payment is more than five calendar days overdue,
+                  the Service Provider may suspend work until the outstanding balance
+                  has been paid in full. The project schedule will be extended
+                  for the duration of the suspension.
+                </p>
+
+                <h2 class="section-title">
+                  7. DISPUTE RESOLUTION
+                </h2>
+
+                <p class="clause level2">
+                  7.1. The Parties will first attempt to resolve any dispute
+                  arising out of or relating to this Agreement
+                  through good-faith discussions and written communication.
+                </p>
+
+                <p class="clause level2">
+                  7.2. If the Parties are unable to resolve a dispute amicably,
+                  the dispute will be handled in accordance
+                  with the applicable laws of Ukraine.
+                </p>
+
+                <h2 class="section-title">
+                  8. INTELLECTUAL PROPERTY
+                </h2>
+
+                <p class="clause level2">
+                  8.1. Upon full payment for the applicable services,
+                  the Client will receive the transferable economic rights
+                  to deliverables created specifically for the Client,
+                  unless the Parties agree otherwise in writing.
+                </p>
+
+                <p class="clause level2">
+                  8.2. The Service Provider retains ownership
+                  of pre-existing and reusable materials, including general-purpose
+                  modules, methods, templates, algorithms, technical approaches,
+                  know-how, and other materials that are not unique to the Client.
+                </p>
+
+                <p class="clause level2">
+                  8.3. Until full payment has been received,
+                  the Client may use delivered materials solely
+                  for review and testing purposes.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Demo Template</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="4">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Service Agreement</span>
+              </div>
+
+              <div class="page-num">4</div>
+
+              <div class="page-inner">
+
+                <h2 class="section-title">
+                  9. TERM AND TERMINATION
+                </h2>
+
+                <p class="clause level2" id="clause91"></p>
+
+                <p class="clause level2">
+                  9.2. Amendments to this Agreement may be approved in writing,
+                  including by email or other electronic communication,
+                  unless applicable law requires a different form.
+                </p>
+
+                <p class="clause level2">
+                  9.3. Either Party may request early termination of this Agreement.
+                  In that event, the Client will pay for all services
+                  actually performed through the effective termination date.
+                </p>
+
+                <h2 class="section-title">
+                  10. CONFIDENTIALITY
+                </h2>
+
+                <p class="clause level2">
+                  10.1. Neither Party will disclose the other Party's
+                  confidential information to any third party
+                  without prior written consent, except where disclosure
+                  is required by applicable law.
+                </p>
+
+                <p class="clause level2">
+                  10.2. Confidential information includes,
+                  without limitation, non-public financial information,
+                  system architecture, business processes, technical documentation,
+                  credentials, and access information.
+                </p>
+
+                <p class="clause level2">
+                  10.3. The confidentiality obligations under this Agreement
+                  will remain in effect during the term of the Agreement
+                  and for three years after termination.
+                </p>
+
+                <h2 class="section-title">
+                  11. FORCE MAJEURE
+                </h2>
+
+                <p class="clause level2">
+                  11.1. A Party will not be liable for failure or delay
+                  in performing its obligations to the extent caused
+                  by circumstances beyond that Party's reasonable control
+                  that could not reasonably have been anticipated or prevented.
+                </p>
+
+                <p class="clause level2">
+                  11.2. The affected Party will notify the other Party
+                  within a reasonable period after becoming aware
+                  of the applicable force majeure event.
+                </p>
+
+                <p class="clause level2">
+                  11.3. Performance deadlines will be extended
+                  for the period during which the force majeure event
+                  materially prevents performance.
+                </p>
+
+                <h2 class="section-title">
+                  12. GENERAL PROVISIONS
+                </h2>
+
+                <p class="clause level2">
+                  12.1. Each Party confirms that the contact,
+                  legal, and banking information provided in this Agreement
+                  is accurate and agrees to promptly notify the other Party
+                  of any material changes.
+                </p>
+
+                <p class="clause level2">
+                  12.2. Electronic correspondence between authorized representatives
+                  of the Parties may be used to approve routine technical
+                  and organizational matters related to performance of the services.
+                </p>
+
+                <p class="clause level2">
+                  12.3. If any provision of this Agreement is determined
+                  to be invalid or unenforceable, the remaining provisions
+                  will remain in full force and effect.
+                </p>
+
+                <p class="clause level2">
+                  12.4. This Agreement is executed in English in two counterparts,
+                  each of which has equal legal effect,
+                  with one counterpart for each Party.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Demo Template</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="5">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Service Agreement</span>
+              </div>
+
+              <div class="page-num">5</div>
+
+              <div class="page-inner">
+
+                <h2 class="requisites-title">
+                  13. PARTY INFORMATION AND SIGNATURES
+                </h2>
+
+                <p class="requisites-intro">
+                  The Parties confirm that the information below is current
+                  and execute this Agreement through their authorized representatives.
+                </p>
+
+                <div class="requisites">
+
+                  <div class="req-col">
+
+                    <h4>CLIENT</h4>
+
+                    <p id="reqCustomerName"></p>
+
+                    <p>
+                      Company Registration No.:
+                      <span id="reqCustomerEdrpou"></span>
+                    </p>
+
+                    <p>
+                      Tax ID:
+                      <span id="reqCustomerIpn"></span>
+                    </p>
+
+                    <p>
+                      VAT Status:
+                      <span id="reqCustomerVat"></span>
+                    </p>
+
+                    <p>
+                      Address:
+                      <span id="reqCustomerAddress"></span>
+                    </p>
+
+                    <p>
+                      IBAN:
+                      <span id="reqCustomerIban"></span>
+                    </p>
+
+                    <p>
+                      Bank:
+                      <span id="reqCustomerBank"></span>
+                    </p>
+
+                    <p>
+                      Bank Code:
+                      <span id="reqCustomerMfo"></span>
+                    </p>
+
+                    <p>
+                      Authorized Representative:
+                      <span id="reqCustomerDirector"></span>
+                    </p>
+
+                    <div class="signature">
+                      <span>Signature</span>
+                      <span class="line"></span>
+                      <strong id="sigCustomer"></strong>
+                    </div>
+
+                  </div>
+
+                  <div class="req-col">
+
+                    <h4>SERVICE PROVIDER</h4>
+
+                    <p id="reqProviderName"></p>
+
+                    <p>
+                      Tax ID:
+                      <span id="reqProviderTax"></span>
+                    </p>
+
+                    <p>
+                      VAT Status:
+                      <span id="reqProviderVat"></span>
+                    </p>
+
+                    <p>
+                      Tax Regime:
+                      <span id="reqProviderTaxSystem"></span>
+                    </p>
+
+                    <p>
+                      Address:
+                      <span id="reqProviderAddress"></span>
+                    </p>
+
+                    <p>
+                      IBAN:
+                      <span id="reqProviderIban"></span>
+                    </p>
+
+                    <p>
+                      Bank:
+                      <span id="reqProviderBank"></span>
+                    </p>
+
+                    <p>
+                      Bank Code:
+                      <span id="reqProviderMfo"></span>
+                    </p>
+
+                    <p>
+                      Email:
+                      <span id="reqProviderEmail"></span>
+                    </p>
+
+                    <div class="signature">
+                      <span>Signature</span>
+                      <span class="line"></span>
+                      <strong>Sebastian PEREJRA</strong>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <p class="demo-note">
+                  Note: All company names, identification numbers, addresses,
+                  and banking details shown in this demo are fictional
+                  and are used solely to demonstrate how the contract generator works.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Demo Template</span>
+              </div>
+
+            </section>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <div class="flash" id="flash">
+    Contract generated · validation complete
+  </div>
+
+</section>

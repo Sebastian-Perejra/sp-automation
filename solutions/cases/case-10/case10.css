@@ -6,7 +6,6 @@
   --line:#d8dde2;
   --muted:#66717d;
   --text:#17202a;
-
   --doc-font:"Times New Roman",serif;
   --doc-size:12pt;
   --doc-line:1.15;
@@ -16,7 +15,6 @@
   --doc-bottom:20mm;
   --doc-title:14pt;
   --doc-section:12pt;
-
   width:100%;
   color:var(--text);
   font-family:Inter,Segoe UI,Arial,sans-serif;
@@ -33,11 +31,6 @@
 #contract-generator-case textarea{
   font:inherit;
 }
-
-
-/* =========================================================
-   INTRO
-   ========================================================= */
 
 #contract-generator-case .contract-case-intro{
   position:relative;
@@ -94,11 +87,6 @@
   font-size:17px;
   line-height:1.65;
 }
-
-
-/* =========================================================
-   PAIN / SOLUTION
-   ========================================================= */
 
 #contract-generator-case .contract-problem-solution{
   display:grid;
@@ -238,11 +226,6 @@
   box-shadow:0 0 0 4px rgba(59,149,96,.10);
 }
 
-
-/* =========================================================
-   LIVE DEMO BRIDGE
-   ========================================================= */
-
 #contract-generator-case .contract-demo-bridge{
   display:flex;
   align-items:center;
@@ -291,11 +274,6 @@
   font-size:23px;
   box-shadow:0 8px 22px rgba(16,124,65,.2);
 }
-
-
-/* =========================================================
-   APP
-   ========================================================= */
 
 #contract-generator-case .app{
   height:100vh;
@@ -359,11 +337,6 @@
   box-shadow:0 0 0 4px rgba(147,245,186,.12);
 }
 
-
-/* =========================================================
-   RIBBON
-   ========================================================= */
-
 #contract-generator-case .ribbon{
   display:flex;
   align-items:center;
@@ -414,11 +387,6 @@
   border:1px solid #cde8d7;
 }
 
-
-/* =========================================================
-   WORKSPACE
-   ========================================================= */
-
 #contract-generator-case .workspace{
   min-height:0;
   display:grid;
@@ -432,11 +400,6 @@
   display:grid;
   grid-template-rows:auto 1fr;
 }
-
-
-/* =========================================================
-   TABS
-   ========================================================= */
 
 #contract-generator-case .tabs{
   display:flex;
@@ -473,11 +436,6 @@
 #contract-generator-case .tab-content.active{
   display:block;
 }
-
-
-/* =========================================================
-   FORM CARDS
-   ========================================================= */
 
 #contract-generator-case .section-card{
   margin-bottom:14px;
@@ -560,11 +518,6 @@
   line-height:1.35;
 }
 
-
-/* =========================================================
-   SWITCHES
-   ========================================================= */
-
 #contract-generator-case .switch-row{
   display:flex;
   align-items:center;
@@ -636,11 +589,6 @@
   transform:translateX(16px);
 }
 
-
-/* =========================================================
-   PREVIEW
-   ========================================================= */
-
 #contract-generator-case .preview{
   min-width:0;
   min-height:0;
@@ -695,11 +643,6 @@
   zoom:.72;
 }
 
-
-/* =========================================================
-   A4 PAGE
-   ========================================================= */
-
 #contract-generator-case .doc-page{
   width:210mm;
   height:297mm;
@@ -710,7 +653,6 @@
   background:#fff;
   color:#111;
   box-shadow:0 4px 18px rgba(29,42,51,.18);
-
   font-family:var(--doc-font);
   font-size:var(--doc-size);
   line-height:var(--doc-line);
@@ -723,7 +665,6 @@
   position:relative;
   z-index:1;
   overflow:hidden;
-
   padding:
     var(--doc-top)
     var(--doc-right)
@@ -739,11 +680,6 @@
   pointer-events:none;
   border:1px solid rgba(90,100,108,.36);
 }
-
-
-/* =========================================================
-   PAGE HEADER / FOOTER
-   ========================================================= */
 
 #contract-generator-case .doc-header{
   display:none;
@@ -819,11 +755,6 @@
   display:block;
 }
 
-
-/* =========================================================
-   CONTRACT TEXT
-   ========================================================= */
-
 #contract-generator-case .doc-title{
   margin:0 0 5pt;
   text-align:center;
@@ -882,11 +813,6 @@
   text-indent:-13mm;
 }
 
-
-/* =========================================================
-   REQUISITES
-   ========================================================= */
-
 #contract-generator-case .requisites-title{
   margin:0 0 8pt;
   text-align:center;
@@ -925,11 +851,6 @@
   margin:0 0 4pt;
   line-height:1.22;
 }
-
-
-/* =========================================================
-   SIGNATURES
-   ========================================================= */
 
 #contract-generator-case .signature{
   display:grid;
@@ -972,11 +893,6 @@
   text-align:center;
 }
 
-
-/* =========================================================
-   FLASH
-   ========================================================= */
-
 #contract-generator-case .flash{
   position:fixed;
   right:24px;
@@ -999,13 +915,7 @@
   transform:translateY(0);
 }
 
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
 @media (max-width:1100px){
-
   #contract-generator-case .workspace{
     grid-template-columns:390px 1fr;
   }
@@ -1016,7 +926,6 @@
 }
 
 @media (max-width:800px){
-
   #contract-generator-case .contract-case-intro{
     padding:44px 18px 34px;
   }
@@ -1067,13 +976,7 @@
   }
 }
 
-
-/* =========================================================
-   PRINT / PDF
-   ========================================================= */
-
 @media print{
-
   body *{
     visibility:hidden;
   }

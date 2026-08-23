@@ -108,9 +108,52 @@ button,input,select,textarea{font:inherit}
 .req-col{border-top:1px solid #777;padding-top:5mm}
 .req-col h4{text-align:center;margin:0 0 8pt;font-size:11.5pt;text-transform:uppercase}
 .req-col p{margin:0 0 3pt;line-height:1.15}
-.signature{margin-top:13mm;display:grid;grid-template-columns:auto 1fr auto;gap:4mm;align-items:end}
-.signature .line{border-bottom:1px solid #222;min-width:35mm;height:1em}
-.demo-note{margin-top:12mm;font-size:8pt;color:#666;font-style:italic;text-align:center}
+.signature{
+  margin-top:14mm;
+  display:grid;
+  grid-template-columns:auto minmax(24mm,1fr);
+  grid-template-areas:
+    "role line"
+    ". name";
+  column-gap:4mm;
+  row-gap:2.5mm;
+  align-items:end;
+}
+
+.signature > span:first-child{
+  grid-area:role;
+  white-space:nowrap;
+}
+
+.signature .line{
+  grid-area:line;
+  width:100%;
+  min-width:0;
+  height:1em;
+  border-bottom:1px solid #222;
+}
+
+.signature strong{
+  grid-area:name;
+  display:block;
+  justify-self:end;
+  max-width:38mm;
+  text-align:right;
+  font-size:10.5pt;
+  line-height:1.15;
+  white-space:normal;
+}
+
+.demo-note{
+  margin-top:18mm;
+  padding-top:5mm;
+  border-top:1px solid #d6d6d6;
+  font-size:7.5pt;
+  line-height:1.35;
+  color:#777;
+  font-style:italic;
+  text-align:center;
+}
 .flash{position:fixed;right:24px;bottom:24px;background:#173f2b;color:#fff;padding:12px 15px;border-radius:8px;box-shadow:0 8px 26px rgba(0,0,0,.22);font-size:12px;opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s;z-index:99}
 .flash.show{opacity:1;transform:translateY(0)}
 @media (max-width:1100px){
@@ -364,6 +407,59 @@ button,input,select,textarea{font:inherit}
     align-items:flex-start;
     padding:19px;
   }
+}
+
+
+#contract-generator-case .doc-page[data-page="5"] .page-inner{
+  display:flex;
+  flex-direction:column;
+  min-height:297mm;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .requisites-title{
+  margin-top:0;
+  margin-bottom:7pt;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .requisites-intro{
+  max-width:150mm;
+  margin:0 auto 10mm;
+  line-height:1.45;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .requisites{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10mm;
+  align-items:stretch;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .req-col{
+  display:flex;
+  flex-direction:column;
+  min-height:118mm;
+  padding-top:5mm;
+  border-top:1px solid #777;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .req-col h4{
+  margin-bottom:7mm;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .req-col p{
+  margin:0 0 4pt;
+  line-height:1.28;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .signature{
+  margin-top:auto;
+  padding-top:16mm;
+}
+
+#contract-generator-case .doc-page[data-page="5"] .demo-note{
+  margin-top:auto;
+  padding-top:5mm;
+  border-top:1px solid #d6d6d6;
 }
 
 @media print{

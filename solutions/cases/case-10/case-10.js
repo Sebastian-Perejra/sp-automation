@@ -818,7 +818,27 @@ const documentStack = $('documentStack');
 $('resetBtn').addEventListener(
   'click',
   () => {
-    setState(defaultState);
+    controls.forEach(el => {
+      if (el.type === 'checkbox') {
+        el.checked = el.defaultChecked;
+        return;
+      }
+
+      if (el.tagName === 'SELECT') {
+        const selected =
+          Array.from(el.options).find(
+            option => option.defaultSelected
+          ) || el.options[0];
+
+        if (selected) {
+          el.value = selected.value;
+        }
+
+        return;
+      }
+
+      el.value = el.defaultValue;
+    });
 
     $('presetName').textContent =
       'За замовчуванням: ДСТУ';
@@ -828,11 +848,6 @@ $('resetBtn').addEventListener(
 
     zoom = 0.72;
     applyZoom();
-
-    const firstTab =
-      caseRoot.querySelector(
-        '.tab[data-tab="data"]'
-      );
 
     caseRoot
       .querySelectorAll('.tab')
@@ -846,13 +861,22 @@ $('resetBtn').addEventListener(
         content.classList.remove('active');
       });
 
+    const firstTab =
+      caseRoot.querySelector(
+        '.tab[data-tab="data"]'
+      );
+
     firstTab.classList.add('active');
     $('tab-data').classList.add('active');
 
-    if (previewScroll) {
-      previewScroll.scrollTop = 0;
-      previewScroll.scrollLeft = 0;
-    }
+    update();
+
+    requestAnimationFrame(() => {
+      if (previewScroll) {
+        previewScroll.scrollTop = 0;
+        previewScroll.scrollLeft = 0;
+      }
+    });
   }
 );
 

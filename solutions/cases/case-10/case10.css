@@ -70,7 +70,7 @@
   text-transform:uppercase;
 }
 
-#contract-generator-case.contract-case-intro h1{
+#contract-generator-case > .contract-case-inner > h1{
   max-width:900px;
   margin:0;
   color:#17231d;
@@ -390,7 +390,7 @@
 #contract-generator-case .workspace{
   min-height:0;
   display:grid;
-  grid-template-columns:minmax(400px,34vw) 1fr;
+  grid-template-columns:minmax(350px,40%) minmax(0,60%);
 }
 
 #contract-generator-case .editor{
@@ -634,7 +634,7 @@
 #contract-generator-case .preview-scroll{
   position:relative;
   overflow:auto;
-  padding:28px 22px 60px;
+  padding:20px 12px 50px;
 }
 
 #contract-generator-case .document-stack{
@@ -675,7 +675,7 @@
 #contract-generator-case .doc-page.border-on::after{
   content:"";
   position:absolute;
-  inset:8mm;
+  inset:3.5mm;
   z-index:4;
   pointer-events:none;
   border:1px solid rgba(90,100,108,.36);
@@ -922,7 +922,7 @@
 
 @media (max-width:1100px){
   #contract-generator-case .workspace{
-    grid-template-columns:390px 1fr;
+    grid-template-columns:360px 1fr;
   }
 
   #contract-generator-case .document-stack{

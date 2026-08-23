@@ -387,5 +387,61 @@ window.SOLUTIONS_CASES_EN = [
       "automatic ingestion of new files",
       "clean data"
     ]
-  }
+  },
+
+  {
+  id: 8,
+  title: "Automating reminders and task follow-up with a Telegram bot",
+  type: "TELEGRAM AUTOMATION",
+  short: "Message or task → choose a time → reminder → snooze / complete / pass to someone else.",
+  featured: false,
+  priority: 78,
+  concepts: [
+    "automation",
+    "telegram",
+    "bot",
+    "notifications",
+    "realtime"
+  ],
+  tools: [
+    "Telegram",
+    "Telegram Bot API",
+    "Google Apps Script"
+  ],
+  tags: [
+    "Telegram",
+    "bot",
+    "reminders",
+    "tasks",
+    "follow-up"
+  ],
+  aliases: [
+    "telegram bot",
+    "reminder bot",
+    "telegram reminders",
+    "task reminder bot",
+    "follow-up bot",
+    "telegram task automation",
+    "remind me later",
+    "message to reminder",
+    "repeat reminder"
+  ],
+  problems: [
+    "tasks get lost in chats",
+    "messages get buried in Telegram",
+    "I forget to follow up",
+    "I need reminders for client tasks",
+    "I want to create reminders from messages",
+    "I forget to reply to clients",
+    "I need repeated reminders until a task is completed"
+  ],
+  outcomes: [
+    "automatic reminders",
+    "task control",
+    "repeat reminders",
+    "fewer missed tasks",
+    "better follow-up control",
+    "tasks directly in Telegram"
+  ]
+ }
 ];

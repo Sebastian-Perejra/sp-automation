@@ -4190,9 +4190,17 @@ button[data-calc="clear"] {
 
   .home-push-scene-carousel {
     padding-top: 0;
-    margin-top: -440px;
+    margin-top: -180px;
     margin-bottom: 110px;
   }
+
+  .home-push-scene-hero > .home-hero {
+  z-index: 3;
+}
+
+.home-push-scene-carousel > .carousel-container {
+  z-index: 2;
+}
 
   .home-push-scene-carousel >
   .carousel-container {

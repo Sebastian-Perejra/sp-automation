@@ -32,7 +32,7 @@
   font:inherit;
 }
 
-#contract-generator-case .contract-case-intro{
+#contract-generator-case.contract-case-intro{
   position:relative;
   padding:72px 32px 54px;
   background:
@@ -70,7 +70,7 @@
   text-transform:uppercase;
 }
 
-#contract-generator-case .contract-case-intro h1{
+#contract-generator-case.contract-case-intro h1{
   max-width:900px;
   margin:0;
   color:#17231d;
@@ -833,9 +833,13 @@
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10mm;
+  align-items:stretch;
 }
 
 #contract-generator-case .req-col{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
   padding-top:5mm;
   border-top:1px solid #777;
 }
@@ -857,7 +861,8 @@
   grid-template-columns:auto minmax(18mm,1fr) auto;
   gap:2.5mm;
   align-items:end;
-  margin-top:14mm;
+  margin-top:auto;
+  padding-top:14mm;
 }
 
 #contract-generator-case .signature > span:first-child{
@@ -926,7 +931,7 @@
 }
 
 @media (max-width:800px){
-  #contract-generator-case .contract-case-intro{
+    #contract-generator-case.contract-case-intro{
     padding:44px 18px 34px;
   }
 

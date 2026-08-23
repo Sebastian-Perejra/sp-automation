@@ -1,0 +1,1212 @@
+
+<section class="quote-case" id="quotation-case">
+  <div class="quote-case-header">
+    <div class="quote-case-kicker">Реальный кейс №9</div>
+
+    <h2>От запроса клиента до готового коммерческого предложения</h2>
+
+    <p class="quote-case-subtitle">
+      Полный цикл подготовки коммерческого предложения для производственной компании:
+      от письма клиента и реального рабочего стола менеджера до поиска клиента,
+      выбора источника номенклатуры и цен, формирования позиций, доставки, PDF и отправки.
+    </p>
+  </div>
+
+  <div class="quote-problem-solution">
+  <article class="quote-info-card quote-problem">
+    <span class="quote-info-label">Проблема</span>
+
+    <h3>
+      Коммерческое предложение часто собирается вручную из данных,
+      которые разбросаны между разными системами
+    </h3>
+
+    <p>
+      Запрос приходит по электронной почте, данные клиента ищутся в CRM,
+      ERP, 1С или Excel, а номенклатура и актуальные цены — в другом источнике,
+      а сам документ формируется в Word, Excel или старом шаблоне.
+    </p>
+
+    <div class="quote-pain-points">
+      <div>
+        <span>01</span>
+        <strong>Риск неактуальной цены</strong>
+        <small>
+          Менеджер может взять старый прайс или не учесть индивидуальную цену для клиента.
+        </small>
+      </div>
+
+      <div>
+        <span>02</span>
+        <strong>Ошибки при копировании</strong>
+        <small>
+          SKU, количество, реквизиты, адрес доставки или условия оплаты переносятся вручную.
+        </small>
+      </div>
+
+      <div>
+        <span>03</span>
+        <strong>Старые данные в шаблоне</strong>
+        <small>
+          В скопированном предложении могут остаться другой клиент, дата, цена или условия.
+        </small>
+      </div>
+
+      <div>
+        <span>04</span>
+        <strong>Непрозрачные скидки</strong>
+        <small>
+          Не всегда понятно, какую скидку менеджер может предоставить и когда требуется согласование.
+        </small>
+      </div>
+
+      <div>
+        <span>05</span>
+        <strong>Доставка рассчитывается отдельно</strong>
+        <small>
+          Стоимость, адрес, Incoterms и срок доставки могут существовать отдельно от самого процесса подготовки коммерческого предложения.
+        </small>
+      </div>
+
+      <div>
+        <span>06</span>
+        <strong>Нет единой истории</strong>
+        <small>
+          После отправки сложно быстро понять, что именно, когда и по какой цене было предложено.
+        </small>
+      </div>
+    </div>
+  </article>
+
+  <article class="quote-info-card quote-solution">
+    <span class="quote-info-label">Решение</span>
+
+    <h3>
+      Один управляемый процесс связывает запрос, клиента,
+      номенклатуру, цены, доставку и финальный документ
+    </h3>
+
+    <p>
+      После получения письма менеджер открывает на рабочем столе обычный ярлык
+      «Коммерческие предложения». Это внутренняя программа компании: она открывается
+      как обычное рабочее окно и подключается к тем источникам, которые уже использует бизнес.
+    </p>
+
+    <div class="quote-solution-points">
+      <div>
+        <span>✓</span>
+        <p>
+          Менеджер работает в одном понятном окне, а не открывает скрипты или технические консоли.
+        </p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>
+          У каждой цены есть понятный источник: ERP, 1С, CRM, Excel или другая база.
+        </p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>
+          Данные клиента и реквизиты подтягиваются из справочника клиентов.
+        </p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>
+          Количество, скидки, доставка и коммерческие условия контролируются в одном месте.
+        </p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>
+          PDF генерируется из актуальных данных, а не из скопированного старого файла.
+        </p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>
+          Готовое предложение сохраняется в модуле «Коммерческие предложения», а нужные интеграции работают в фоне.
+        </p>
+      </div>
+    </div>
+
+    <div class="quote-value-box">
+      <span>Ценность кейса</span>
+
+      <strong>
+        Меньше ручного переноса данных, меньше ошибок
+        и значительно прозрачнее процесс от запроса до отправленного PDF.
+      </strong>
+    </div>
+  </article>
+</div>
+
+  <div class="quote-demo">
+    <div class="quote-demo-head">
+      <div>
+        <span class="quote-demo-kicker">INTERACTIVE BUSINESS FLOW</span>
+
+        <strong>Пройдите полный путь менеджера самостоятельно</strong>
+
+        <p>
+          На каждом этапе выберите вариант, который больше всего похож
+          на реальный процесс в вашей компании.
+        </p>
+      </div>
+
+      <div class="quote-progress">
+        <span>Этап</span>
+        <strong id="quote-step-counter">1 / 9</strong>
+      </div>
+    </div>
+
+    <div class="quote-workspace">
+      <aside class="quote-flow-nav">
+        <button type="button" class="quote-flow-step active" data-quote-step="1">
+          <span>01</span>
+          <div>
+            <strong>Запрос клиента</strong>
+            <small>Входящий email</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="2">
+          <span>02</span>
+          <div>
+            <strong>Рабочий стол</strong>
+            <small>Открыть программу</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="3">
+          <span>03</span>
+          <div>
+            <strong>Клиент</strong>
+            <small>Найти или создать</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="4">
+          <span>04</span>
+          <div>
+            <strong>Номенклатура</strong>
+            <small>Выбрать источник</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="5">
+          <span>05</span>
+          <div>
+            <strong>Позиции</strong>
+            <small>Количество, цена, скидка</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="6">
+          <span>06</span>
+          <div>
+            <strong>Доставка</strong>
+            <small>Адрес и условия</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="7">
+          <span>07</span>
+          <div>
+            <strong>Предложение</strong>
+            <small>Проверка и PDF</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="8">
+          <span>08</span>
+          <div>
+            <strong>Сохранение</strong>
+            <small>В модуле предложений</small>
+          </div>
+        </button>
+
+        <button type="button" class="quote-flow-step" data-quote-step="9">
+          <span>09</span>
+          <div>
+            <strong>Отправка</strong>
+            <small>Email клиенту</small>
+          </div>
+        </button>
+      </aside>
+
+      <div class="quote-stage">
+        <section
+          class="quote-stage-panel quote-desktop-panel active"
+          data-quote-panel="1"
+          data-quote-panel-alias="2,9"
+        >
+          <div class="quote-panel-head">
+            <span id="quote-desktop-stage-label">WORKSTATION · NEW EMAIL</span>
+            <strong id="quote-desktop-stage-title">На рабочем компьютере менеджера новое письмо</strong>
+          </div>
+
+          <p class="quote-panel-description" id="quote-desktop-stage-description">
+            Начните как в реальном рабочем дне: нажмите на подсвеченную иконку Outlook на нижней панели,
+            откройте новое письмо FreshMarket, прочитайте его и сверните почтовое окно.
+          </p>
+
+          <div class="quote-desktop" id="quote-desktop">
+            <div class="quote-desktop-wallpaper">
+              <div class="quote-desktop-brand">
+                <span>SALES DESKTOP</span>
+                <strong>Fresh Drinks Europe</strong>
+                <small>Sales Department · workstation SD-14</small>
+              </div>
+
+              <div class="quote-desktop-icons">
+                <button type="button" class="quote-desktop-icon" data-desktop-app="outlook">
+                  <span class="quote-app-icon quote-app-outlook">O</span>
+                  <strong>Outlook</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" id="quote-desktop-offers-icon" data-desktop-app="offers">
+                  <span class="quote-app-icon quote-app-offers">Q</span>
+                  <strong>Коммерческие<br>предложения</strong>
+                  <small id="quote-offers-recommendation" hidden>Следующий шаг</small>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="excel">
+                  <span class="quote-app-icon quote-app-excel">X</span>
+                  <strong>PriceList<br>2026.xlsx</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="erp">
+                  <span class="quote-app-icon quote-app-erp">ERP</span>
+                  <strong>ERP Sales</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="crm">
+                  <span class="quote-app-icon quote-app-crm">CRM</span>
+                  <strong>CRM</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="drive">
+                  <span class="quote-app-icon quote-app-drive">D</span>
+                  <strong>Google Drive</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="pc">
+                  <span class="quote-app-icon quote-app-pc">PC</span>
+                  <strong>This PC</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-icon" data-desktop-app="archive">
+                  <span class="quote-app-icon quote-app-archive">A</span>
+                  <strong>Quotes<br>Archive</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-file" data-desktop-app="notes">
+                  <span>TXT</span>
+                  <strong>call_notes.txt</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-file" data-desktop-app="oldprice">
+                  <span>XLS</span>
+                  <strong>price_old_DO_NOT_USE.xlsx</strong>
+                </button>
+
+                <button type="button" class="quote-desktop-file" data-desktop-app="drafts">
+                  <span>DIR</span>
+                  <strong>draft_quotes</strong>
+                </button>
+              </div>
+
+              <div class="quote-desktop-hint" id="quote-desktop-hint">
+                <span id="quote-desktop-hint-label">НОВОЕ СООБЩЕНИЕ</span>
+                <strong id="quote-desktop-hint-title">Откройте Outlook на нижней панели</strong>
+                <small id="quote-desktop-hint-text">На почту только что пришёл новый запрос клиента. Начните с него.</small>
+              </div>
+
+              <div class="quote-desktop-window" id="quote-desktop-window" hidden>
+                <div class="quote-desktop-window-head">
+                  <div>
+                    <span id="quote-desktop-window-icon">O</span>
+                    <strong id="quote-desktop-window-title">Outlook</strong>
+                  </div>
+
+                  <div class="quote-window-controls">
+                    <button type="button" data-window-action="minimize" aria-label="Свернуть">−</button>
+                    <button type="button" data-window-action="close" aria-label="Закрыть">×</button>
+                  </div>
+                </div>
+
+                <div class="quote-desktop-window-body" id="quote-desktop-window-body"></div>
+              </div>
+            </div>
+
+            <div class="quote-taskbar">
+              <button type="button" class="quote-start-menu" aria-label="Start">⊞</button>
+
+              <div class="quote-taskbar-apps">
+                <button
+                  type="button"
+                  class="quote-taskbar-mail quote-mail-alert"
+                  id="quote-taskbar-outlook"
+                  data-desktop-app="outlook"
+                  aria-label="Outlook · 1 новое письмо"
+                >
+                  O
+                  <span class="quote-mail-badge" id="quote-mail-badge">1</span>
+                </button>
+                <button type="button" id="quote-taskbar-offers" data-desktop-app="offers">Q</button>
+                <button type="button" data-desktop-app="excel">X</button>
+                <button type="button" data-desktop-app="erp">ERP</button>
+              </div>
+
+              <div class="quote-taskbar-status">
+                <span>UK</span>
+                <span>09:01</span>
+                <span>23.08.2026</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-desktop-explainer">
+            <div>
+              <span>Реальный сценарий</span>
+              <strong id="quote-desktop-explainer-title">Сначала менеджер работает с входящей почтой</strong>
+            </div>
+            <p id="quote-desktop-explainer-text">
+              После прочтения письма он просто сворачивает Outlook. Перед ним остаётся тот же рабочий стол,
+              где он открывает отдельную программу «Коммерческие предложения». Никакого перехода на другую страницу нет.
+            </p>
+          </div>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="3"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>CUSTOMER MASTER</span>
+            <strong>Где в вашей компании хранятся клиенты?</strong>
+          </div>
+
+          <p class="quote-panel-description">
+            Выберите сценарий, наиболее похожий на процесс в вашей компании.
+          </p>
+
+          <div class="quote-system-options">
+            <button type="button" data-customer-source="crm">
+              <span>CRM</span>
+              <strong>Customer database</strong>
+              <small>Salesforce, Dynamics или другая CRM</small>
+            </button>
+
+            <button type="button" data-customer-source="erp">
+              <span>ERP</span>
+              <strong>Customer master</strong>
+              <small>SAP, Oracle, CPMS или другая ERP</small>
+            </button>
+
+            <button type="button" data-customer-source="1c">
+              <span>1С</span>
+              <strong>Контрагенты</strong>
+              <small>Справочник клиентов в 1С</small>
+            </button>
+
+            <button type="button" data-customer-source="excel">
+              <span>XLSX</span>
+              <strong>Excel / Sheets</strong>
+              <small>Таблица с клиентами и реквизитами</small>
+            </button>
+          </div>
+
+          <div
+            class="quote-customer-search"
+            id="quote-customer-search"
+            hidden
+          >
+            <label>
+              Поиск клиента
+              <input
+                type="text"
+                id="quote-customer-query"
+                value="FreshMarket Distribution GmbH"
+              >
+            </label>
+
+            <button
+              type="button"
+              id="quote-find-customer"
+            >
+              Найти
+            </button>
+          </div>
+
+          <div
+            class="quote-customer-result"
+            id="quote-customer-result"
+            hidden
+          >
+            <span class="quote-result-state">MATCH FOUND</span>
+
+            <strong>FreshMarket Distribution GmbH</strong>
+
+            <div class="quote-customer-fields">
+              <div>
+                <small>Customer ID</small>
+                <span>DE-10482</span>
+              </div>
+
+              <div>
+                <small>VAT ID</small>
+                <span>DE349827156</span>
+              </div>
+
+              <div>
+                <small>Currency</small>
+                <span>EUR</span>
+              </div>
+
+              <div>
+                <small>Payment terms</small>
+                <span>30 days</span>
+              </div>
+
+              <div>
+                <small>Country</small>
+                <span>Germany</span>
+              </div>
+
+              <div>
+                <small>Delivery city</small>
+                <span>Hamburg</span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="quote-primary-action"
+              id="quote-use-customer"
+            >
+              Использовать этого клиента
+            </button>
+
+            <button
+              type="button"
+              class="quote-secondary-action"
+              id="quote-create-customer"
+            >
+              Это новый клиент
+            </button>
+          </div>
+
+          <div
+            class="quote-new-customer"
+            id="quote-new-customer"
+            hidden
+          >
+            <div class="quote-form-grid">
+              <label>
+                Company name
+                <input type="text" value="FreshMarket Distribution GmbH">
+              </label>
+
+              <label>
+                Contact person
+                <input type="text" value="Anna Keller">
+              </label>
+
+              <label>
+                Email
+                <input type="email" value="purchasing@freshmarket.de">
+              </label>
+
+              <label>
+                VAT ID
+                <input type="text" placeholder="VAT ID">
+              </label>
+
+              <label>
+                Country
+                <input type="text" value="Germany">
+              </label>
+
+              <label>
+                Currency
+                <select>
+                  <option>EUR</option>
+                  <option>USD</option>
+                  <option>UAH</option>
+                </select>
+              </label>
+            </div>
+
+            <button
+              type="button"
+              class="quote-primary-action"
+              id="quote-save-customer"
+            >
+              Создать карточку клиента
+            </button>
+          </div>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="4"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>PRODUCT & PRICE SOURCE</span>
+            <strong>Где у вас хранятся номенклатура и цены?</strong>
+          </div>
+
+          <div class="quote-system-options">
+            <button type="button" data-product-source="excel">
+              <span>XLSX</span>
+              <strong>Excel price list</strong>
+              <small>Прайс-лист или master-файл</small>
+            </button>
+
+            <button type="button" data-product-source="erp">
+              <span>ERP</span>
+              <strong>ERP catalogue</strong>
+              <small>Номенклатура и продажные цены</small>
+            </button>
+
+            <button type="button" data-product-source="1c">
+              <span>1С</span>
+              <strong>Номенклатура</strong>
+              <small>Товары, виды цен и остатки</small>
+            </button>
+
+            <button type="button" data-product-source="crm">
+              <span>CRM</span>
+              <strong>Product catalogue</strong>
+              <small>Продукты и индивидуальную цену для клиентаs</small>
+            </button>
+          </div>
+
+          <div
+            class="quote-product-browser"
+            id="quote-product-browser"
+            hidden
+          >
+            <div class="quote-product-toolbar">
+              <label>
+                Поиск по SKU или названию
+                <input
+                  type="text"
+                  id="quote-product-search"
+                  placeholder="Например: orange 1L"
+                >
+              </label>
+
+              <span id="quote-product-source-label">
+                Price source
+              </span>
+            </div>
+
+            <div class="quote-product-table">
+              <div class="quote-product-row quote-product-head">
+                <span>SKU</span>
+                <span>Продукт</span>
+                <span>Упаковка</span>
+                <span>Pack</span>
+                <span>Base price</span>
+                <span></span>
+              </div>
+
+              <div class="quote-product-row" data-product="orange-1l">
+                <span>J-O-1000-TP</span>
+                <span>Orange Juice 100%</span>
+                <span>1 L Tetra Pak</span>
+                <span>12 pcs</span>
+                <span>€1.18</span>
+                <button type="button">Добавить</button>
+              </div>
+
+              <div class="quote-product-row" data-product="apple-1l">
+                <span>J-A-1000-TP</span>
+                <span>Apple Juice 100%</span>
+                <span>1 L Tetra Pak</span>
+                <span>12 pcs</span>
+                <span>€1.06</span>
+                <button type="button">Добавить</button>
+              </div>
+
+              <div class="quote-product-row" data-product="multi-200">
+                <span>J-M-0200-TP</span>
+                <span>Multivitamin Juice</span>
+                <span>0.2 L carton</span>
+                <span>24 pcs</span>
+                <span>€0.34</span>
+                <button type="button">Добавить</button>
+              </div>
+
+              <div class="quote-product-row" data-product="tomato-1l">
+                <span>J-T-1000-TP</span>
+                <span>Tomato Juice</span>
+                <span>1 L Tetra Pak</span>
+                <span>12 pcs</span>
+                <span>€1.12</span>
+                <button type="button">Добавить</button>
+              </div>
+
+              <div class="quote-product-row" data-product="orange-500">
+                <span>J-O-0500-PET</span>
+                <span>Orange Drink</span>
+                <span>0.5 L PET</span>
+                <span>12 pcs</span>
+                <span>€0.69</span>
+                <button type="button">Добавить</button>
+              </div>
+
+              <div class="quote-product-row" data-product="apple-200">
+                <span>J-A-0200-TP</span>
+                <span>Apple Juice</span>
+                <span>0.2 L carton</span>
+                <span>24 pcs</span>
+                <span>€0.31</span>
+                <button type="button">Добавить</button>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="quote-primary-action"
+            id="quote-products-ready"
+            hidden
+          >
+            Перейти к формированию предложения
+          </button>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="5"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>QUOTATION BUILDER</span>
+            <strong>Позиции коммерческого предложения</strong>
+          </div>
+
+          <div class="quote-builder-customer">
+            <span>Customer</span>
+            <strong id="quote-builder-customer-name">
+              FreshMarket Distribution GmbH
+            </strong>
+          </div>
+
+          <div class="quote-builder-table" id="quote-builder-table">
+            <div class="quote-builder-row quote-builder-head">
+              <span>SKU</span>
+              <span>Продукт</span>
+              <span>Qty</span>
+              <span>Price</span>
+              <span>Discount</span>
+              <span>Total</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="quote-add-position"
+            id="quote-add-more-products"
+          >
+            + Добавить ещё позицию
+          </button>
+
+          <div class="quote-commercial-terms">
+            <label>
+              Currency
+              <select id="quote-currency">
+                <option>EUR</option>
+                <option>USD</option>
+              </select>
+            </label>
+
+            <label>
+              Payment terms
+              <select id="quote-payment-terms">
+                <option>30 days</option>
+                <option>14 days</option>
+                <option>Prepayment</option>
+                <option>50% advance / 50% after delivery</option>
+              </select>
+            </label>
+
+            <label>
+              Offer validity
+              <select id="quote-validity">
+                <option>30 days</option>
+                <option>14 days</option>
+                <option>7 days</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="quote-totals">
+            <div>
+              <span>Subtotal</span>
+              <strong id="quote-subtotal">€0.00</strong>
+            </div>
+
+            <div>
+              <span>Discount</span>
+              <strong id="quote-discount-total">€0.00</strong>
+            </div>
+
+            <div class="quote-total-main">
+              <span>Total</span>
+              <strong id="quote-grand-total">€0.00</strong>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="quote-primary-action"
+            id="quote-terms-ready"
+          >
+            Перейти к доставке
+          </button>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="6"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>DELIVERY TERMS</span>
+            <strong>Уточните условия доставки</strong>
+          </div>
+
+          <div class="quote-form-grid quote-delivery-form">
+            <label>
+              Country
+              <input
+                type="text"
+                id="quote-delivery-country"
+                value="Germany"
+              >
+            </label>
+
+            <label>
+              City
+              <input
+                type="text"
+                id="quote-delivery-city"
+                value="Hamburg"
+              >
+            </label>
+
+            <label class="quote-field-wide">
+              Delivery address
+              <input
+                type="text"
+                id="quote-delivery-address"
+                value="Billstraße 120, 20539 Hamburg"
+              >
+            </label>
+
+            <label>
+              Requested delivery date
+              <input
+                type="date"
+                id="quote-delivery-date"
+                value="2026-09-15"
+              >
+            </label>
+
+            <label>
+              Delivery terms
+              <select id="quote-incoterms">
+                <option>DAP Hamburg</option>
+                <option>EXW Factory</option>
+                <option>FCA Factory</option>
+                <option>DDP Hamburg</option>
+              </select>
+            </label>
+
+            <label>
+              Delivery cost
+              <input
+                type="number"
+                id="quote-delivery-cost"
+                value="420"
+                min="0"
+                step="10"
+              >
+            </label>
+
+            <label>
+              Lead time
+              <select id="quote-lead-time">
+                <option>10 working days</option>
+                <option>12 working days</option>
+                <option>15 working days</option>
+                <option>20 working days</option>
+              </select>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            class="quote-primary-action"
+            id="quote-delivery-ready"
+          >
+            Проверить коммерческое предложение
+          </button>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="7"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>LIVE DOCUMENT PREVIEW</span>
+            <strong>Коммерческое предложение готово к генерации</strong>
+          </div>
+
+          <div class="quote-document-wrap">
+            <div class="quote-document" id="quote-document">
+              <div class="quote-document-top">
+                <div>
+                  <span>SEBASTIAN AUTOMATION</span>
+                  <strong>COMMERCIAL OFFER</strong>
+                </div>
+
+                <div>
+                  <small>Quotation No.</small>
+                  <strong>Q-2026-00841</strong>
+                </div>
+              </div>
+
+              <div class="quote-document-meta">
+                <div>
+                  <small>Customer</small>
+                  <strong>FreshMarket Distribution GmbH</strong>
+                  <span>Hamburg, Germany</span>
+                </div>
+
+                <div>
+                  <small>Date</small>
+                  <strong>23 August 2026</strong>
+
+                  <small>Valid for</small>
+                  <strong>30 days</strong>
+                </div>
+              </div>
+
+              <div class="quote-document-products">
+                <div class="quote-document-row quote-document-head">
+                  <span>Product</span>
+                  <span>Qty</span>
+                  <span>Unit price</span>
+                  <span>Total</span>
+                </div>
+
+                <div id="quote-document-lines"></div>
+              </div>
+
+              <div class="quote-document-summary">
+                <div>
+                  <span>Products</span>
+                  <strong id="quote-document-products-total">€0.00</strong>
+                </div>
+
+                <div>
+                  <span>Delivery</span>
+                  <strong id="quote-document-delivery">€420.00</strong>
+                </div>
+
+                <div class="quote-document-grand">
+                  <span>TOTAL</span>
+                  <strong id="quote-document-total">€0.00</strong>
+                </div>
+              </div>
+
+              <div class="quote-document-terms">
+                <div>
+                  <small>Payment terms</small>
+                  <strong id="quote-document-payment">30 days</strong>
+                </div>
+
+                <div>
+                  <small>Delivery</small>
+                  <strong id="quote-document-incoterms">DAP Hamburg</strong>
+                </div>
+
+                <div>
+                  <small>Delivery address</small>
+                  <strong id="quote-document-address">
+                    Billstraße 120, 20539 Hamburg, Germany
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="quote-primary-action"
+            id="quote-generate-pdf"
+          >
+            Сформировать PDF
+          </button>
+
+          <div
+            class="quote-generation-status"
+            id="quote-generation-status"
+            hidden
+          >
+            <div data-generation-state="customer">
+              <span>○</span>
+              <strong>Customer data inserted</strong>
+            </div>
+
+            <div data-generation-state="products">
+              <span>○</span>
+              <strong>Products and prices inserted</strong>
+            </div>
+
+            <div data-generation-state="delivery">
+              <span>○</span>
+              <strong>Delivery terms added</strong>
+            </div>
+
+            <div data-generation-state="number">
+              <span>○</span>
+              <strong>Quotation number generated</strong>
+            </div>
+
+            <div data-generation-state="pdf">
+              <span>○</span>
+              <strong>PDF created</strong>
+            </div>
+          </div>
+
+          <div
+            class="quote-pdf-result"
+            id="quote-pdf-result"
+            hidden
+          >
+            <span>PDF</span>
+
+            <div>
+              <strong>Q-2026-00841_FreshMarket_Distribution.pdf</strong>
+              <small>Commercial quotation · ready</small>
+            </div>
+
+            <button type="button" id="quote-preview-pdf">
+              Preview
+            </button>
+          </div>
+        </section>
+
+        <section
+          class="quote-stage-panel"
+          data-quote-panel="8"
+          hidden
+        >
+          <div class="quote-panel-head">
+            <span>COMMERCIAL OFFERS · SAVE</span>
+            <strong>Сохраните готовое предложение в той же программе</strong>
+          </div>
+
+          <p class="quote-panel-description">
+            На этом этапе менеджер уже не выбирает, куда сохранять PDF. Программа «Коммерческие предложения»
+            автоматически сохраняет карточку предложения, финальный PDF и историю действий в собственном модуле.
+          </p>
+
+          <div class="quote-module-save-card">
+            <div class="quote-module-save-head">
+              <span class="quote-app-icon quote-app-offers">Q</span>
+              <div>
+                <small>Коммерческие предложения</small>
+                <strong>Q-2026-00841 · FreshMarket Distribution GmbH</strong>
+                <span>Готово к сохранению в истории предложений</span>
+              </div>
+            </div>
+
+            <div class="quote-module-save-data">
+              <div>
+                <small>Документ</small>
+                <strong>Q-2026-00841_FreshMarket_Distribution.pdf</strong>
+              </div>
+              <div>
+                <small>Статус</small>
+                <strong>Ready to save</strong>
+              </div>
+              <div>
+                <small>Клиент</small>
+                <strong>DE-10482 · FreshMarket</strong>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="quote-primary-action quote-next-action"
+              id="quote-save-offer"
+            >
+              Сохранить предложение
+            </button>
+          </div>
+
+          <div
+            class="quote-module-save-status"
+            id="quote-module-save-status"
+            hidden
+          >
+            <div data-save-state="record">
+              <span>○</span>
+              <strong>Создаём запись Q-2026-00841</strong>
+            </div>
+            <div data-save-state="pdf">
+              <span>○</span>
+              <strong>Прикрепляем финальный PDF</strong>
+            </div>
+            <div data-save-state="history">
+              <span>○</span>
+              <strong>Обновляем историю клиента</strong>
+            </div>
+          </div>
+
+          <div
+            class="quote-storage-result"
+            id="quote-storage-result"
+            hidden
+          >
+            <span>✓</span>
+            <div>
+              <strong>Предложение сохранено в модуле</strong>
+              <small id="quote-storage-location">Коммерческие предложения → FreshMarket → Q-2026-00841</small>
+            </div>
+          </div>
+
+          <div class="quote-module-sync-note">
+            <span>Интеграции настраиваются один раз</span>
+            <p>
+              При необходимости модуль может автоматически синхронизировать копию с CRM, ERP, Google Drive,
+              SharePoint или сетевой папкой. Менеджеру не нужно выбирать хранилище при каждом новом предложении.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="quote-primary-action"
+            id="quote-storage-ready"
+            hidden
+          >
+            Открыть Outlook для отправки
+          </button>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <div
+  class="quote-pdf-modal"
+  id="quote-pdf-modal"
+  hidden
+>
+  <div class="quote-pdf-modal-dialog">
+    <div class="quote-pdf-modal-head">
+      <div>
+        <span>PDF PREVIEW</span>
+        <strong>Q-2026-00841_FreshMarket_Distribution.pdf</strong>
+      </div>
+
+      <button
+        type="button"
+        id="quote-pdf-modal-close"
+        aria-label="Закрыть PDF"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="quote-pdf-modal-stage">
+      <div
+        class="quote-document quote-document-modal"
+        id="quote-document-modal"
+      ></div>
+    </div>
+
+    <div class="quote-pdf-modal-footer">
+      <span>
+        Проверьте клиента, позиции, цены, доставку и коммерческие условия.
+      </span>
+
+      <button
+        type="button"
+        class="quote-primary-action"
+        id="quote-pdf-approve"
+      >
+        PDF проверен — продолжить
+      </button>
+    </div>
+  </div>
+</div>
+  <div class="quote-lifecycle">
+    <div><span>01</span><strong>Email</strong></div>
+    <i>→</i>
+    <div><span>02</span><strong>Desktop</strong></div>
+    <i>→</i>
+    <div><span>03</span><strong>Customer</strong></div>
+    <i>→</i>
+    <div><span>04</span><strong>Products</strong></div>
+    <i>→</i>
+    <div><span>05</span><strong>Pricing</strong></div>
+    <i>→</i>
+    <div><span>06</span><strong>Delivery</strong></div>
+    <i>→</i>
+    <div><span>07</span><strong>PDF</strong></div>
+    <i>→</i>
+    <div><span>08</span><strong>Save</strong></div>
+    <i>→</i>
+    <div><span>09</span><strong>Send</strong></div>
+  </div>
+
+  <div class="quote-business-impact">
+    <article>
+      <span>До</span>
+      <strong>Email → поиск файлов → ERP / CRM → шаблон → PDF → Email</strong>
+      <small>
+        ручной перенос данных между несколькими источниками
+      </small>
+    </article>
+
+    <article>
+      <span>После</span>
+      <strong>Одна программа на рабочем столе менеджера</strong>
+      <small>
+        источники данных остаются теми же, но менеджер работает в одном понятном интерфейсе
+      </small>
+    </article>
+
+    <article>
+      <span>Результат</span>
+      <strong>Быстрее формирование предложений и меньше ручных ошибок</strong>
+      <small>
+        у каждой цены, позиции и реквизита есть понятный источник
+      </small>
+    </article>
+  </div>
+
+  <div class="quote-case-cta">
+    <a href="contacts-ru.html">
+      Хочу автоматизировать процесс подготовки коммерческих предложений
+    </a>
+  </div>
+</section>

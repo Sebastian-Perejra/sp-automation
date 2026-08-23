@@ -374,3 +374,65 @@ button,input,select,textarea{font:inherit}
   .doc-page{box-shadow:none;margin:0;page-break-after:always}
   .doc-page:last-child{page-break-after:auto}
 }
+
+#contract-generator-case .contract-story-card--problem{
+  border-color:#ead7d7;
+  background:
+    radial-gradient(
+      circle at 8% 0%,
+      rgba(196,92,92,.10),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      #fff8f8 0%,
+      #fdf2f2 100%
+    );
+  box-shadow:
+    0 14px 34px rgba(91,47,47,.055),
+    inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+#contract-generator-case .contract-story-card--solution{
+  border-color:#c9dfd0;
+  background:
+    radial-gradient(
+      circle at 92% 0%,
+      rgba(60,150,91,.11),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      #f5fbf7 0%,
+      #edf7f0 100%
+    );
+  box-shadow:
+    0 14px 34px rgba(34,88,53,.055),
+    inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+#contract-generator-case .contract-story-card--problem:before{
+  background:#c98686;
+}
+
+#contract-generator-case .contract-story-card--solution:before{
+  background:#3b9560;
+}
+
+#contract-generator-case .contract-story-card--problem .contract-story-label{
+  color:#9b5d5d;
+}
+
+#contract-generator-case .contract-story-card--solution .contract-story-label{
+  color:#347c50;
+}
+
+#contract-generator-case .contract-story-card--problem li:before{
+  background:#c78a8a;
+  box-shadow:0 0 0 4px rgba(199,138,138,.10);
+}
+
+#contract-generator-case .contract-story-card--solution li:before{
+  background:#3b9560;
+  box-shadow:0 0 0 4px rgba(59,149,96,.10);
+}

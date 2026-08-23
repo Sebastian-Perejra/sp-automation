@@ -922,6 +922,11 @@
   border:1px solid #d8e5db;
   border-radius:18px;
   background:linear-gradient(135deg,#f7fbf8 0%,#eef6f0 100%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
 #contract-generator-case .contract-case-cta a{

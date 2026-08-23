@@ -10185,3 +10185,204 @@ box-shadow:
 .final-system__state {
   font-size: 7px;
 }
+
+.process-diagnostic-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.process-diagnostic-animated::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 43%,
+    rgba(165, 255, 64, 0.045) 48%,
+    rgba(165, 255, 64, 0.10) 50%,
+    rgba(165, 255, 64, 0.045) 52%,
+    transparent 57%,
+    transparent 100%
+  );
+  transform: translateX(-130%);
+  opacity: 0;
+}
+
+.process-diagnostic-animated.is-scanning::after {
+  animation: processDiagnosticScan 1.25s ease-in-out;
+}
+
+.process-diagnostic-row {
+  position: relative;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+.process-diagnostic-row::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a5ff40;
+  box-shadow:
+    0 0 0 0 rgba(165, 255, 64, 0),
+    0 0 0 rgba(165, 255, 64, 0);
+  transform: translateY(-50%) scale(0.55);
+  opacity: 0.25;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.process-diagnostic-row.is-active {
+  transform: translateX(3px);
+}
+
+.process-diagnostic-row.is-active::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  box-shadow:
+    0 0 0 5px rgba(165, 255, 64, 0.08),
+    0 0 16px rgba(165, 255, 64, 0.65);
+}
+
+.process-diagnostic-status {
+  transition:
+    color 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.process-diagnostic-status.is-active {
+  color: #b6ff4c !important;
+  border-color: rgba(166, 255, 68, 0.55) !important;
+  background: rgba(128, 255, 32, 0.075) !important;
+  box-shadow:
+    inset 0 0 16px rgba(128, 255, 32, 0.04),
+    0 0 14px rgba(128, 255, 32, 0.08);
+  transform: scale(1.035);
+}
+
+.process-diagnostic-status.is-done {
+  color: #a5ff40 !important;
+}
+
+.process-diagnostic-track {
+  position: relative;
+  overflow: visible;
+}
+
+.process-diagnostic-track::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 22%;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(180, 255, 78, 0.95),
+    transparent
+  );
+  box-shadow: 0 0 10px rgba(165, 255, 64, 0.65);
+  opacity: 0;
+  transform: translate(-100%, -50%);
+}
+
+.process-diagnostic-track.is-running::after {
+  opacity: 1;
+  animation: processDiagnosticPulse 1.55s linear;
+}
+
+.process-diagnostic-dot {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.process-diagnostic-dot.is-active {
+  transform: scale(1.65);
+  opacity: 1 !important;
+  box-shadow:
+    0 0 0 5px rgba(165, 255, 64, 0.09),
+    0 0 18px rgba(165, 255, 64, 0.9);
+}
+
+.process-diagnostic-output {
+  transition:
+    transform 0.5s ease,
+    border-color 0.5s ease,
+    background 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.process-diagnostic-output.is-active {
+  transform: translateY(-2px);
+  border-color: rgba(165, 255, 64, 0.55) !important;
+  background-color: rgba(113, 184, 42, 0.07) !important;
+  box-shadow:
+    inset 0 0 26px rgba(165, 255, 64, 0.035),
+    0 0 22px rgba(165, 255, 64, 0.06);
+}
+
+.process-diagnostic-output.is-active strong,
+.process-diagnostic-output.is-active span {
+  text-shadow: 0 0 12px rgba(165, 255, 64, 0.18);
+}
+
+@keyframes processDiagnosticScan {
+  0% {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  82% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(130%);
+    opacity: 0;
+  }
+}
+
+@keyframes processDiagnosticPulse {
+  0% {
+    transform: translate(-100%, -50%);
+  }
+
+  100% {
+    transform: translate(500%, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-diagnostic-animated::after,
+  .process-diagnostic-track::after {
+    animation: none !important;
+  }
+
+  .process-diagnostic-row,
+  .process-diagnostic-status,
+  .process-diagnostic-dot,
+  .process-diagnostic-output {
+    transition: none !important;
+  }
+}

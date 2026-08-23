@@ -1639,3 +1639,29 @@
     width: 100%;
   }
 }
+
+#quote-try-again {
+  margin-top: 12px;
+  margin-left: 0;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid #adc5b5;
+  border-radius: 9px;
+  background: #fff;
+  color: #35594b;
+  font-size: 9px;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+#quote-try-again:hover {
+  transform: translateY(-1px);
+  border-color: #7fa08b;
+  background: #f2f7f4;
+  box-shadow: 0 8px 18px rgba(53,89,75,.1);
+}

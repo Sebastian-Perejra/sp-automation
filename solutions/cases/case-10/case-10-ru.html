@@ -1,0 +1,1165 @@
+<section class="contract-case-intro" id="contract-generator-case">
+
+  <div class="contract-case-inner">
+
+    <div class="case-demo-kicker">
+      Реальный кейс №10
+    </div>
+
+    <h1>
+      Автоматическое формирование договоров
+      из готового шаблона
+    </h1>
+
+    <p class="contract-case-subtitle">
+      Данные контрагента, реквизиты и коммерческие условия вводятся один раз.
+      Система подставляет их в согласованный шаблон договора,
+      применяет нужное оформление и готовит документ к печати или PDF.
+    </p>
+
+    <div class="contract-problem-solution">
+
+      <article class="contract-story-card contract-story-card--problem">
+
+        <span class="contract-story-label">
+          БОЛЬ
+        </span>
+
+        <h2>
+          Новый договор начинался с копии старого
+        </h2>
+
+        <p>
+          Менеджер открывает договор предыдущего клиента,
+          создаёт копию и вручную заменяет название компании,
+          директора, реквизиты, банковские данные,
+          даты, суммы и коммерческие условия.
+        </p>
+
+        <ul>
+          <li>
+            одни и те же данные переписываются в нескольких местах документа;
+          </li>
+
+          <li>
+            приходится вручную искать все упоминания предыдущего контрагента;
+          </li>
+
+          <li>
+            одно пропущенное название, адрес или IBAN может попасть
+            в договор другого клиента;
+          </li>
+
+          <li>
+            после каждого изменения приходится повторно проверять
+            весь документ;
+          </li>
+
+          <li>
+            разные сотрудники могут оформлять договоры
+            по-разному;
+          </li>
+
+          <li>
+            подготовка стандартного документа занимает время,
+            хотя большая часть его текста вообще не меняется.
+          </li>
+        </ul>
+
+      </article>
+
+      <article class="contract-story-card contract-story-card--solution">
+
+        <span class="contract-story-label">
+          РЕШЕНИЕ
+        </span>
+
+        <h2>
+          Один шаблон — новый договор за несколько минут
+        </h2>
+
+        <p>
+          Действующий шаблон компании один раз настраивается
+          в генераторе. После этого пользователь работает только
+          с формой ввода данных, а готовый договор
+          формируется автоматически.
+        </p>
+
+        <ul>
+          <li>
+            реквизиты вводятся один раз и подставляются
+            во все нужные места;
+          </li>
+
+          <li>
+            суммы, аванс, сроки и другие условия автоматически
+            попадают в соответствующие пункты;
+          </li>
+
+          <li>
+            шаблон сохраняет согласованную структуру
+            и формулировки компании;
+          </li>
+
+          <li>
+            шрифт, поля, колонтитулы, нумерация страниц
+            и рамки управляются настройками;
+          </li>
+
+          <li>
+            изменения оформления сразу видны
+            в предварительном просмотре;
+          </li>
+
+          <li>
+            готовый документ можно распечатать
+            или сохранить в PDF.
+          </li>
+        </ul>
+
+      </article>
+
+    </div>
+
+    <div class="contract-demo-bridge">
+
+      <div>
+        <span>LIVE DEMO</span>
+
+        <strong>
+          Попробуйте сформировать договор сами
+        </strong>
+
+        <p>
+          Измените реквизиты или оформление слева —
+          результат сразу изменится в документе справа.
+        </p>
+      </div>
+
+      <div class="contract-demo-arrow">
+        ↓
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="app">
+
+    <div class="titlebar">
+      <div class="excel-mark">X</div>
+      <div>
+        <strong>Contract Generator.xlsm</strong>
+        <span class="file-type">— симуляция продукта</span>
+      </div>
+      <div class="live">
+        <span class="live-dot"></span>
+        Live preview
+      </div>
+    </div>
+
+    <div class="ribbon">
+      <button id="presetDstu">ДСТУ 4163:2020</button>
+      <button id="presetCorporate">Корпоративный</button>
+      <div class="ribbon-sep"></div>
+      <span class="preset-badge" id="presetName">По умолчанию: ДСТУ</span>
+      <div style="flex:1"></div>
+      <button id="resetBtn">Сбросить</button>
+      <button id="printBtn">Печать / PDF</button>
+      <button class="primary" id="buildBtn">Сформировать договор</button>
+    </div>
+
+    <div class="workspace">
+
+      <aside class="editor">
+
+        <div class="tabs">
+          <button class="tab active" data-tab="data">Данные</button>
+          <button class="tab" data-tab="style">Оформление</button>
+          <button class="tab" data-tab="parties">Реквизиты</button>
+        </div>
+
+        <div class="tab-content active" id="tab-data">
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Данные договора</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field">
+                <label>Номер договора</label>
+                <input id="contractNo" value="SA-2026-001">
+              </div>
+
+              <div class="field">
+                <label>Дата договора</label>
+                <input id="contractDate" type="date" value="2026-08-23">
+              </div>
+
+              <div class="field">
+                <label>Место составления</label>
+                <input id="place" value="г. Львов">
+              </div>
+
+              <div class="field">
+                <label>Срок действия до</label>
+                <input id="endDate" type="date" value="2026-12-31">
+              </div>
+
+              <div class="field full">
+                <label>Название / описание услуг</label>
+                <textarea id="serviceText">разработка и внедрение систем аналитической отчётности, автоматизация бизнес-процессов, подготовка и интеграция данных</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Коммерческие условия</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field">
+                <label>Стоимость, грн</label>
+                <input id="price" type="number" min="0" step="1000" value="120000">
+              </div>
+
+              <div class="field">
+                <label>Аванс, %</label>
+                <input id="advance" type="number" min="0" max="100" value="20">
+              </div>
+
+              <div class="field">
+                <label>Срок выполнения, раб. дней</label>
+                <input id="workDays" type="number" min="1" value="30">
+              </div>
+
+              <div class="field">
+                <label>Гарантия, календ. дней</label>
+                <input id="warrantyDays" type="number" min="0" value="14">
+              </div>
+
+              <div class="field full">
+                <label>НДС Исполнителя</label>
+                <select id="providerVat">
+                  <option value="no" selected>Не плательщик НДС</option>
+                  <option value="yes">Плательщик НДС</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Быстрая проверка</h3>
+            </div>
+
+            <div class="section-body" style="grid-template-columns:1fr">
+              <div class="hint">
+                Изменения слева сразу отображаются в договоре справа.
+                Кнопка «Сформировать договор» в финальной версии будет запускать проверки,
+                фиксацию редакции и экспорт.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-style">
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Типографика</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field">
+                <label>Основной шрифт</label>
+                <select id="fontFamily">
+                  <option value="Times New Roman" selected>Times New Roman</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Calibri">Calibri</option>
+                  <option value="Georgia">Georgia</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Размер текста, pt</label>
+                <input id="fontSize" type="number" min="9" max="16" step="0.5" value="12">
+              </div>
+
+              <div class="field">
+                <label>Межстрочный интервал</label>
+                <select id="lineHeight">
+                  <option value="1">1,0</option>
+                  <option value="1.15" selected>1,15</option>
+                  <option value="1.25">1,25</option>
+                  <option value="1.5">1,5</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Заголовок, pt</label>
+                <input id="titleSize" type="number" min="12" max="18" value="14">
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Поля страницы, мм</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field">
+                <label>Левое</label>
+                <input id="marginLeft" type="number" min="5" max="45" value="30">
+              </div>
+
+              <div class="field">
+                <label>Правое</label>
+                <input id="marginRight" type="number" min="5" max="45" value="10">
+              </div>
+
+              <div class="field">
+                <label>Верхнее</label>
+                <input id="marginTop" type="number" min="10" max="40" value="20">
+              </div>
+
+              <div class="field">
+                <label>Нижнее</label>
+                <input id="marginBottom" type="number" min="10" max="40" value="20">
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Элементы документа</h3>
+            </div>
+
+            <div class="section-body" style="grid-template-columns:1fr">
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Выравнивание по ширине</strong>
+                  <small>Ровный левый и правый край основного текста</small>
+                </div>
+                <label class="switch">
+                  <input id="justify" type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Нумерация страниц</strong>
+                  <small>ДСТУ: со второй страницы, сверху по центру</small>
+                </div>
+                <label class="switch">
+                  <input id="pageNumbers" type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Верхний колонтитул</strong>
+                  <small>Корпоративная шапка документа</small>
+                </div>
+                <label class="switch">
+                  <input id="headerOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Логотип в шапке</strong>
+                  <small>Показывается вместе с верхним колонтитулом</small>
+                </div>
+                <label class="switch">
+                  <input id="logoOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Нижний колонтитул</strong>
+                  <small>Сайт / служебная отметка</small>
+                </div>
+                <label class="switch">
+                  <input id="footerOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div class="meta">
+                  <strong>Тонкая рамка</strong>
+                  <small>Декоративная рамка вокруг страницы</small>
+                </div>
+                <label class="switch">
+                  <input id="borderOn" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Колонтитулы</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field full">
+                <label>Текст шапки</label>
+                <input id="headerText" value="SP Automation · Contract Generator">
+              </div>
+
+              <div class="field full">
+                <label>Текст футера</label>
+                <input id="footerText" value="sp-automation.com">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-content" id="tab-parties">
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Заказчик</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field full">
+                <label>Название</label>
+                <input id="customerName" value="ООО «ДЕМО СИСТЕМЫ УКРАИНА»">
+              </div>
+
+              <div class="field full">
+                <label>Руководитель</label>
+                <input id="customerDirector" value="Мария КОВАЛЕНКО">
+              </div>
+
+              <div class="field">
+                <label>ЕГРПОУ</label>
+                <input id="customerEdrpou" value="00000000">
+              </div>
+
+              <div class="field">
+                <label>ИНН</label>
+                <input id="customerIpn" value="000000000000">
+              </div>
+
+              <div class="field full">
+                <label>Статус НДС</label>
+                <select id="customerVat">
+                  <option selected>плательщик НДС</option>
+                  <option>не плательщик НДС</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label>Адрес</label>
+                <input id="customerAddress" value="ул. Примерная, д. 17, Киев, 01001">
+              </div>
+
+              <div class="field full">
+                <label>IBAN</label>
+                <input id="customerIban" value="UA00 0000 0000 0000 0000 0000 000">
+              </div>
+
+              <div class="field">
+                <label>Банк</label>
+                <input id="customerBank" value="АО «ДЕМО БАНК»">
+              </div>
+
+              <div class="field">
+                <label>МФО</label>
+                <input id="customerMfo" value="000000">
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-head">
+              <h3>Исполнитель</h3>
+            </div>
+
+            <div class="section-body">
+              <div class="field full">
+                <label>Название / ФИО</label>
+                <input id="providerName" value="ФЛП ПЕРЕЙРА СЕБАСТЬЯН">
+              </div>
+
+              <div class="field">
+                <label>РНОКПП</label>
+                <input id="providerTax" value="0000000000">
+              </div>
+
+              <div class="field">
+                <label>Система</label>
+                <input id="providerTaxSystem" value="единый налог, 3 группа">
+              </div>
+
+              <div class="field full">
+                <label>Адрес</label>
+                <input id="providerAddress" value="ул. Автоматизации, д. 8, г. Львов, 79000">
+              </div>
+
+              <div class="field full">
+                <label>IBAN</label>
+                <input id="providerIban" value="UA00 0000 0000 0000 0000 0000 000">
+              </div>
+
+              <div class="field">
+                <label>Банк</label>
+                <input id="providerBank" value="АО «ТЕХ БАНК»">
+              </div>
+
+              <div class="field">
+                <label>МФО</label>
+                <input id="providerMfo" value="000000">
+              </div>
+
+              <div class="field full">
+                <label>E-mail</label>
+                <input id="providerEmail" value="demo@sp-automation.com">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </aside>
+
+      <main class="preview">
+
+        <div class="preview-toolbar">
+          <strong>Предварительный просмотр договора</strong>
+          <span class="preset-badge" id="previewStatus">ДСТУ 4163:2020</span>
+          <div class="spacer"></div>
+          <button class="zoom-btn" id="zoomOut">−</button>
+          <span class="zoom-label" id="zoomLabel">72%</span>
+          <button class="zoom-btn" id="zoomIn">+</button>
+        </div>
+
+        <div class="preview-scroll">
+
+          <div class="document-stack" id="documentStack">
+
+            <section class="doc-page" data-page="1">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Договор оказания услуг</span>
+              </div>
+
+              <div class="page-inner">
+
+                <h1 class="doc-title">ДОГОВОР ОКАЗАНИЯ УСЛУГ</h1>
+
+                <p class="doc-subtitle">
+                  об оказании услуг по автоматизации и аналитической отчётности
+                </p>
+
+                <div class="doc-meta">
+                  <div id="outDate">23 августа 2026 года</div>
+                  <div>№ <span id="outNo">SA-2026-001</span></div>
+                </div>
+
+                <p class="doc-place" id="outPlace">г. Львов</p>
+
+                <p class="doc-preamble" id="outPreamble"></p>
+
+                <h2 class="section-title">1. ПРЕДМЕТ ДОГОВОРА</h2>
+
+                <p class="clause level2" id="clause11"></p>
+
+                <p class="clause level2">
+                  1.2. Конкретный объём услуг, функциональные требования,
+                  перечень результатов и приоритетность работ согласовываются
+                  Сторонами в техническом задании, коммерческом предложении
+                  или путём электронной переписки. Такие согласования являются
+                  достаточным основанием для выполнения соответствующего объёма работ.
+                </p>
+
+                <p class="clause level2" id="clause13"></p>
+
+                <h2 class="section-title">2. ПРАВА И ОБЯЗАННОСТИ СТОРОН</h2>
+
+                <p class="clause level2">2.1. Исполнитель обязан:</p>
+
+                <p class="clause level3">
+                  2.1.1. оказывать услуги в пределах согласованного объёма
+                  и с надлежащим профессиональным качеством;
+                </p>
+
+                <p class="clause level3">
+                  2.1.2. не разглашать конфиденциальную информацию Заказчика,
+                  полученную во время выполнения настоящего Договора;
+                </p>
+
+                <p class="clause level3">
+                  2.1.3. информировать Заказчика об обстоятельствах,
+                  которые могут повлиять на сроки или результат выполнения работ;
+                </p>
+
+                <p class="clause level3">
+                  2.1.4. по запросу Заказчика предоставлять информацию
+                  о состоянии выполнения согласованных работ.
+                </p>
+
+                <p class="clause level2">2.2. Исполнитель имеет право:</p>
+
+                <p class="clause level3">
+                  2.2.1. получать от Заказчика данные, документы, доступы,
+                  техническую информацию и согласования,
+                  необходимые для выполнения работ;
+                </p>
+
+                <p class="clause level3">
+                  2.2.2. самостоятельно определять технические способы
+                  и методы выполнения работ, если иное прямо
+                  не согласовано Сторонами;
+                </p>
+
+                <p class="clause level3">
+                  2.2.3. приостановить выполнение работ в случае просрочки оплаты
+                  или непредоставления Заказчиком необходимых данных либо доступов
+                  до момента устранения соответствующих обстоятельств;
+                </p>
+
+                <p class="clause level3">
+                  2.2.4. использовать общее описание выполненного проекта
+                  в собственном портфолио без раскрытия конфиденциальной
+                  информации Заказчика, если иное письменно не согласовано Сторонами.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Демонстрационный шаблон</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="2">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Договор оказания услуг</span>
+              </div>
+
+              <div class="page-num">2</div>
+
+              <div class="page-inner">
+
+                <p class="clause level2">2.3. Заказчик обязан:</p>
+
+                <p class="clause level3">
+                  2.3.1. своевременно предоставлять Исполнителю исходные данные,
+                  документы, доступы к информационным системам и другую информацию,
+                  необходимую для выполнения работ;
+                </p>
+
+                <p class="clause level3">
+                  2.3.2. назначить ответственное лицо для оперативного
+                  согласования решений и предоставления обратной связи;
+                </p>
+
+                <p class="clause level3">
+                  2.3.3. своевременно проверять результаты работ,
+                  предоставлять обоснованные замечания и осуществлять оплату
+                  в соответствии с настоящим Договором;
+                </p>
+
+                <p class="clause level3">
+                  2.3.4. самостоятельно обеспечивать наличие и действительность
+                  лицензий на программные продукты и сервисы третьих лиц,
+                  если они необходимы для работы результата.
+                </p>
+
+                <p class="clause level2">
+                  2.4. В случае задержки со стороны Заказчика в предоставлении данных,
+                  доступов, согласований или оплаты сроки выполнения работ
+                  продлеваются на соответствующий период задержки.
+                </p>
+
+                <h2 class="section-title">
+                  3. СТОИМОСТЬ УСЛУГ И ПОРЯДОК РАСЧЁТОВ
+                </h2>
+
+                <p class="clause level2" id="clause31"></p>
+
+                <p class="clause level2" id="clause32"></p>
+
+                <p class="clause level2">
+                  3.3. Остаток стоимости услуг оплачивается поэтапно
+                  или после завершения согласованного объёма работ
+                  в соответствии со счетами Исполнителя
+                  и фактически принятыми результатами.
+                </p>
+
+                <p class="clause level2">
+                  3.4. Если Заказчик в течение 5 рабочих дней
+                  с момента получения результата не предоставляет письменных
+                  обоснованных замечаний, соответствующий результат
+                  считается согласованным.
+                </p>
+
+                <p class="clause level2">
+                  3.5. Дополнительные требования, изменения или работы,
+                  выходящие за пределы согласованного объёма,
+                  выполняются после отдельного согласования стоимости и сроков.
+                </p>
+
+                <h2 class="section-title">
+                  4. ПОРЯДОК СДАЧИ И ПРИЁМКИ УСЛУГ
+                </h2>
+
+                <p class="clause level2">
+                  4.1. После завершения согласованного объёма работ
+                  Исполнитель передаёт Заказчику результат в согласованной форме
+                  и, при необходимости, Акт приёма-передачи оказанных услуг.
+                </p>
+
+                <p class="clause level2">
+                  4.2. Заказчик в течение 5 рабочих дней с даты получения результата
+                  обязан подтвердить его принятие либо предоставить конкретный
+                  перечень обоснованных замечаний.
+                </p>
+
+                <p class="clause level2">
+                  4.3. Исполнитель без дополнительной оплаты устраняет ошибки,
+                  возникшие по его вине и заключающиеся в несоответствии результата
+                  согласованным требованиям. Новые требования или изменения
+                  согласованной логики не считаются исправлением ошибок.
+                </p>
+
+                <p class="clause level2">
+                  4.4. После согласования результата дальнейшие изменения,
+                  не связанные с исправлением ошибок Исполнителя,
+                  рассматриваются как новый объём работ.
+                </p>
+
+                <h2 class="section-title">
+                  5. ГАРАНТИЙНЫЕ ОБЯЗАТЕЛЬСТВА
+                </h2>
+
+                <p class="clause level2" id="clause51"></p>
+
+                <p class="clause level2">
+                  5.2. Гарантия не распространяется на случаи изменения
+                  исходных данных, структуры информационных систем, настроек,
+                  программного обеспечения или сервисов третьих лиц
+                  после передачи результата.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Демонстрационный шаблон</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="3">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Договор оказания услуг</span>
+              </div>
+
+              <div class="page-num">3</div>
+
+              <div class="page-inner">
+
+                <h2 class="section-title">
+                  6. ОТВЕТСТВЕННОСТЬ СТОРОН
+                </h2>
+
+                <p class="clause level2">
+                  6.1. Стороны несут ответственность за неисполнение
+                  или ненадлежащее исполнение обязательств
+                  в соответствии с настоящим Договором
+                  и действующим законодательством Украины.
+                </p>
+
+                <p class="clause level2">
+                  6.2. Ответственность Исполнителя в любом случае
+                  ограничивается суммой, фактически уплаченной Заказчиком
+                  за тот объём работ, в пределах которого возникла ответственность.
+                </p>
+
+                <p class="clause level2">
+                  6.3. Исполнитель не несёт ответственности за достоверность
+                  и полноту данных, предоставленных Заказчиком,
+                  а также за технические сбои, изменения функционала
+                  или политики лицензирования программных продуктов
+                  и сервисов третьих лиц.
+                </p>
+
+                <p class="clause level2">
+                  6.4. В случае просрочки оплаты более чем на 5 календарных дней
+                  Исполнитель имеет право приостановить выполнение работ
+                  до момента полного погашения задолженности.
+                  Сроки выполнения работ продлеваются на период такого приостановления.
+                </p>
+
+                <h2 class="section-title">
+                  7. РАЗРЕШЕНИЕ СПОРОВ
+                </h2>
+
+                <p class="clause level2">
+                  7.1. Споры и разногласия, возникающие в связи
+                  с настоящим Договором, Стороны стремятся разрешать
+                  путём переговоров и письменного обмена позициями.
+                </p>
+
+                <p class="clause level2">
+                  7.2. Если Стороны не достигли согласия,
+                  спор подлежит разрешению в соответствии
+                  с действующим законодательством Украины
+                  в установленном законом порядке.
+                </p>
+
+                <h2 class="section-title">
+                  8. ПРАВА ИНТЕЛЛЕКТУАЛЬНОЙ СОБСТВЕННОСТИ
+                </h2>
+
+                <p class="clause level2">
+                  8.1. Имущественные права на индивидуально созданный
+                  для Заказчика результат работ переходят к Заказчику
+                  после полной оплаты соответствующего объёма услуг,
+                  если иное не согласовано Сторонами.
+                </p>
+
+                <p class="clause level2">
+                  8.2. Универсальные модули, методики, шаблоны,
+                  алгоритмы, технические подходы и другие наработки Исполнителя,
+                  существовавшие до заключения настоящего Договора
+                  либо имеющие универсальный характер,
+                  остаются в собственности Исполнителя.
+                </p>
+
+                <p class="clause level2">
+                  8.3. До момента полной оплаты Заказчик имеет право
+                  использовать переданный результат исключительно
+                  для тестирования и проверки.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Демонстрационный шаблон</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="4">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Договор оказания услуг</span>
+              </div>
+
+              <div class="page-num">4</div>
+
+              <div class="page-inner">
+
+                <h2 class="section-title">
+                  9. СРОК ДЕЙСТВИЯ ДОГОВОРА
+                </h2>
+
+                <p class="clause level2" id="clause91"></p>
+
+                <p class="clause level2">
+                  9.2. Изменения к настоящему Договору могут согласовываться
+                  Сторонами в письменной форме, в том числе путём обмена
+                  электронными сообщениями, если законодательство
+                  не требует иной формы.
+                </p>
+
+                <p class="clause level2">
+                  9.3. Каждая Сторона имеет право инициировать
+                  досрочное прекращение Договора.
+                  При этом Заказчик обязан оплатить фактически выполненный
+                  на дату прекращения объём работ.
+                </p>
+
+                <h2 class="section-title">
+                  10. КОНФИДЕНЦИАЛЬНОСТЬ
+                </h2>
+
+                <p class="clause level2">
+                  10.1. Стороны обязуются не разглашать третьим лицам
+                  конфиденциальную информацию, полученную при выполнении
+                  настоящего Договора, без предварительного письменного
+                  согласия другой Стороны, кроме случаев,
+                  прямо предусмотренных законодательством.
+                </p>
+
+                <p class="clause level2">
+                  10.2. К конфиденциальной информации относятся,
+                  в частности, непубличные финансовые данные,
+                  структура информационных систем, бизнес-процессы,
+                  техническая документация, учётные данные
+                  и параметры доступа.
+                </p>
+
+                <p class="clause level2">
+                  10.3. Обязанность по сохранению конфиденциальности
+                  действует в течение срока действия Договора
+                  и 3 лет после его прекращения.
+                </p>
+
+                <h2 class="section-title">
+                  11. ФОРС-МАЖОРНЫЕ ОБСТОЯТЕЛЬСТВА
+                </h2>
+
+                <p class="clause level2">
+                  11.1. Сторона освобождается от ответственности
+                  за неисполнение обязательств, если оно стало прямым
+                  следствием обстоятельств непреодолимой силы,
+                  которые такая Сторона не могла разумно предвидеть
+                  или предотвратить.
+                </p>
+
+                <p class="clause level2">
+                  11.2. Сторона, для которой возникла невозможность
+                  выполнения обязательств, обязана уведомить другую Сторону
+                  в разумный срок после возникновения соответствующих обстоятельств.
+                </p>
+
+                <p class="clause level2">
+                  11.3. Срок выполнения обязательств продлевается
+                  на период фактического действия обстоятельств непреодолимой силы.
+                </p>
+
+                <h2 class="section-title">
+                  12. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ
+                </h2>
+
+                <p class="clause level2">
+                  12.1. Стороны подтверждают правильность указанных
+                  в настоящем Договоре реквизитов и обязуются своевременно
+                  уведомлять друг друга об их изменении.
+                </p>
+
+                <p class="clause level2">
+                  12.2. Электронная переписка между уполномоченными
+                  представителями Сторон признаётся надлежащим способом
+                  оперативного согласования технических и организационных
+                  вопросов выполнения работ.
+                </p>
+
+                <p class="clause level2">
+                  12.3. Если отдельное положение настоящего Договора
+                  будет признано недействительным, это не влияет
+                  на действительность остальных положений Договора.
+                </p>
+
+                <p class="clause level2">
+                  12.4. Договор составлен на русском языке
+                  в двух экземплярах одинаковой юридической силы —
+                  по одному для каждой из Сторон.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Демонстрационный шаблон</span>
+              </div>
+
+            </section>
+
+            <section class="doc-page" data-page="5">
+
+              <div class="doc-header">
+                <div class="brand">
+                  <img class="header-logo" alt="">
+                  <span class="header-label">SP Automation · Contract Generator</span>
+                </div>
+                <span>Договор оказания услуг</span>
+              </div>
+
+              <div class="page-num">5</div>
+
+              <div class="page-inner">
+
+                <h2 class="requisites-title">
+                  13. МЕСТОНАХОЖДЕНИЕ, РЕКВИЗИТЫ И ПОДПИСИ СТОРОН
+                </h2>
+
+                <p class="requisites-intro">
+                  Стороны подтверждают актуальность приведённых ниже реквизитов
+                  и подписывают настоящий Договор уполномоченными представителями.
+                </p>
+
+                <div class="requisites">
+
+                  <div class="req-col">
+
+                    <h4>ЗАКАЗЧИК</h4>
+
+                    <p id="reqCustomerName"></p>
+
+                    <p>
+                      Код ЕГРПОУ:
+                      <span id="reqCustomerEdrpou"></span>
+                    </p>
+
+                    <p>
+                      ИНН:
+                      <span id="reqCustomerIpn"></span>
+                    </p>
+
+                    <p>
+                      Статус НДС:
+                      <span id="reqCustomerVat"></span>
+                    </p>
+
+                    <p>
+                      Адрес:
+                      <span id="reqCustomerAddress"></span>
+                    </p>
+
+                    <p>
+                      IBAN:
+                      <span id="reqCustomerIban"></span>
+                    </p>
+
+                    <p>
+                      Банк:
+                      <span id="reqCustomerBank"></span>
+                    </p>
+
+                    <p>
+                      МФО:
+                      <span id="reqCustomerMfo"></span>
+                    </p>
+
+                    <p>
+                      Директор:
+                      <span id="reqCustomerDirector"></span>
+                    </p>
+
+                    <div class="signature">
+                      <span>Директор</span>
+                      <span class="line"></span>
+                      <strong id="sigCustomer"></strong>
+                    </div>
+
+                  </div>
+
+                  <div class="req-col">
+
+                    <h4>ИСПОЛНИТЕЛЬ</h4>
+
+                    <p id="reqProviderName"></p>
+
+                    <p>
+                      РНОКПП:
+                      <span id="reqProviderTax"></span>
+                    </p>
+
+                    <p>
+                      Статус НДС:
+                      <span id="reqProviderVat"></span>
+                    </p>
+
+                    <p>
+                      Система налогообложения:
+                      <span id="reqProviderTaxSystem"></span>
+                    </p>
+
+                    <p>
+                      Адрес:
+                      <span id="reqProviderAddress"></span>
+                    </p>
+
+                    <p>
+                      IBAN:
+                      <span id="reqProviderIban"></span>
+                    </p>
+
+                    <p>
+                      Банк:
+                      <span id="reqProviderBank"></span>
+                    </p>
+
+                    <p>
+                      МФО:
+                      <span id="reqProviderMfo"></span>
+                    </p>
+
+                    <p>
+                      E-mail:
+                      <span id="reqProviderEmail"></span>
+                    </p>
+
+                    <div class="signature">
+                      <span>ФЛП</span>
+                      <span class="line"></span>
+                      <strong>Себастьян ПЕРЕЙРА</strong>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <p class="demo-note">
+                  Примечание. Все названия контрагентов, коды, адреса
+                  и банковские реквизиты в этом демонстрационном документе
+                  являются вымышленными и используются исключительно
+                  для презентации работы генератора договоров.
+                </p>
+
+              </div>
+
+              <div class="doc-footer">
+                <span class="footer-label">sp-automation.com</span>
+                <span>Демонстрационный шаблон</span>
+              </div>
+
+            </section>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <div class="flash" id="flash">
+    Договор сформирован · проверки пройдены
+  </div>
+
+</section>

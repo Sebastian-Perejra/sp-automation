@@ -130,7 +130,7 @@
       <div>
         <span>✓</span>
         <p>
-          Готова пропозиція зберігається у потрібній системі та одразу готується до відправлення.
+          Готова пропозиція зберігається у модулі «Комерційні пропозиції», а потрібні інтеграції працюють у фоні.
         </p>
       </div>
     </div>
@@ -227,7 +227,7 @@
           <span>08</span>
           <div>
             <strong>Збереження</strong>
-            <small>CRM / Drive / ERP</small>
+            <small>У модулі пропозицій</small>
           </div>
         </button>
 
@@ -242,122 +242,18 @@
 
       <div class="quote-stage">
         <section
-          class="quote-stage-panel active"
+          class="quote-stage-panel quote-desktop-panel active"
           data-quote-panel="1"
+          data-quote-panel-alias="2,9"
         >
           <div class="quote-panel-head">
-            <span>INBOX</span>
-            <strong>Новий запит на комерційну пропозицію</strong>
+            <span id="quote-desktop-stage-label">WORKSTATION · NEW EMAIL</span>
+            <strong id="quote-desktop-stage-title">На робочому комп’ютері менеджера новий лист</strong>
           </div>
 
-          <div class="quote-email">
-            <div class="quote-email-toolbar">
-              <span>Inbox</span>
-              <span>23 Aug 2026 · 08:42</span>
-            </div>
-
-            <div class="quote-email-meta">
-              <div>
-                <small>From</small>
-                <strong>purchasing@freshmarket.de</strong>
-              </div>
-
-              <div>
-                <small>Company</small>
-                <strong>FreshMarket Distribution GmbH</strong>
-              </div>
-
-              <div>
-                <small>Subject</small>
-                <strong>Request for quotation — juice assortment</strong>
-              </div>
-            </div>
-
-            <div class="quote-email-body">
-              <p>Hello,</p>
-
-              <p>
-                Please provide your commercial offer for the following products:
-              </p>
-
-              <div class="quote-request-table">
-                <div class="quote-request-row quote-request-head">
-                  <span>Product</span>
-                  <span>Pack</span>
-                  <span>Quantity</span>
-                </div>
-
-                <div class="quote-request-row">
-                  <span>Orange juice</span>
-                  <span>1 L carton</span>
-                  <span>12,000 pcs</span>
-                </div>
-
-                <div class="quote-request-row">
-                  <span>Apple juice</span>
-                  <span>1 L carton</span>
-                  <span>8,000 pcs</span>
-                </div>
-
-                <div class="quote-request-row">
-                  <span>Multivitamin juice</span>
-                  <span>0.2 L carton</span>
-                  <span>24,000 pcs</span>
-                </div>
-
-                <div class="quote-request-row">
-                  <span>Tomato juice</span>
-                  <span>1 L carton</span>
-                  <span>5,000 pcs</span>
-                </div>
-              </div>
-
-              <p>
-                Delivery address:<br>
-                FreshMarket Distribution GmbH<br>
-                Billstraße 120<br>
-                20539 Hamburg, Germany
-              </p>
-
-              <p>
-                Preferred delivery date: 15 September 2026.
-              </p>
-
-              <p>
-                Please include delivery cost and payment terms in the quotation.
-              </p>
-
-              <p>
-                Best regards,<br>
-                Anna Keller<br>
-                Purchasing Department
-              </p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            class="quote-primary-action quote-next-action"
-            id="quote-start"
-          >
-            Згорнути пошту та перейти до робочого столу
-          </button>
-        </section>
-
-        <section
-          class="quote-stage-panel quote-desktop-panel"
-          data-quote-panel="2"
-          hidden
-        >
-          <div class="quote-panel-head">
-            <span>MANAGER DESKTOP</span>
-            <strong>Лист прочитано. Що менеджер робить далі?</strong>
-          </div>
-
-          <p class="quote-panel-description">
-            Перед вами робочий стіл менеджера. Тут є звичні системи, файли та ярлик внутрішньої програми
-            «Комерційні пропозиції». Після відкриття програми запит FreshMarket ще не з’являється сам — менеджер сам обирає,
-            звідки взяти вхідний запит.
+          <p class="quote-panel-description" id="quote-desktop-stage-description">
+            Почніть як у реальному робочому дні: натисніть на підсвічену іконку Outlook у нижній панелі,
+            відкрийте новий лист FreshMarket, прочитайте його і згорніть поштове вікно.
           </p>
 
           <div class="quote-desktop" id="quote-desktop">
@@ -374,10 +270,10 @@
                   <strong>Outlook</strong>
                 </button>
 
-                <button type="button" class="quote-desktop-icon quote-desktop-icon-main" data-desktop-app="offers">
+                <button type="button" class="quote-desktop-icon" id="quote-desktop-offers-icon" data-desktop-app="offers">
                   <span class="quote-app-icon quote-app-offers">Q</span>
                   <strong>Комерційні<br>пропозиції</strong>
-                  <small>Рекомендовано</small>
+                  <small id="quote-offers-recommendation" hidden>Наступний крок</small>
                 </button>
 
                 <button type="button" class="quote-desktop-icon" data-desktop-app="excel">
@@ -426,17 +322,17 @@
                 </button>
               </div>
 
-              <div class="quote-desktop-hint">
-                <span>Наступна дія</span>
-                <strong>Відкрийте «Комерційні пропозиції»</strong>
-                <small>Це звичайна внутрішня програма менеджера, а не технічний скрипт.</small>
+              <div class="quote-desktop-hint" id="quote-desktop-hint">
+                <span id="quote-desktop-hint-label">НОВЕ ПОВІДОМЛЕННЯ</span>
+                <strong id="quote-desktop-hint-title">Відкрийте Outlook у нижній панелі</strong>
+                <small id="quote-desktop-hint-text">На пошту щойно надійшов новий запит клієнта. Почніть із нього.</small>
               </div>
 
               <div class="quote-desktop-window" id="quote-desktop-window" hidden>
                 <div class="quote-desktop-window-head">
                   <div>
-                    <span id="quote-desktop-window-icon">Q</span>
-                    <strong id="quote-desktop-window-title">Комерційні пропозиції</strong>
+                    <span id="quote-desktop-window-icon">O</span>
+                    <strong id="quote-desktop-window-title">Outlook</strong>
                   </div>
 
                   <div class="quote-window-controls">
@@ -453,8 +349,17 @@
               <button type="button" class="quote-start-menu" aria-label="Start">⊞</button>
 
               <div class="quote-taskbar-apps">
-                <button type="button" data-desktop-app="outlook">O</button>
-                <button type="button" data-desktop-app="offers">Q</button>
+                <button
+                  type="button"
+                  class="quote-taskbar-mail quote-mail-alert"
+                  id="quote-taskbar-outlook"
+                  data-desktop-app="outlook"
+                  aria-label="Outlook · 1 новий лист"
+                >
+                  O
+                  <span class="quote-mail-badge" id="quote-mail-badge">1</span>
+                </button>
+                <button type="button" id="quote-taskbar-offers" data-desktop-app="offers">Q</button>
                 <button type="button" data-desktop-app="excel">X</button>
                 <button type="button" data-desktop-app="erp">ERP</button>
               </div>
@@ -469,13 +374,12 @@
 
           <div class="quote-desktop-explainer">
             <div>
-              <span>Що це?</span>
-              <strong>Окрема робоча програма для менеджера</strong>
+              <span>Реальний сценарій</span>
+              <strong id="quote-desktop-explainer-title">Спочатку менеджер працює з вхідною поштою</strong>
             </div>
-            <p>
-              Вона може працювати у браузері або відкриватися ярликом як звичайний застосунок.
-              Програма не «вгадує» лист клієнта: менеджер натискає «Створити нову пропозицію»,
-              обирає імпорт з Outlook і сам вказує потрібний лист. Лише після цього дані потрапляють у процес.
+            <p id="quote-desktop-explainer-text">
+              Після прочитання листа він просто згортає Outlook. Перед ним залишається той самий робочий стіл,
+              де він відкриває окрему програму «Комерційні пропозиції». Ніякого переходу на іншу сторінку немає.
             </p>
           </div>
         </section>
@@ -1114,46 +1018,66 @@
           hidden
         >
           <div class="quote-panel-head">
-            <span>DOCUMENT STORAGE</span>
-            <strong>Де у вашій компанії зберігаються комерційні пропозиції?</strong>
+            <span>COMMERCIAL OFFERS · SAVE</span>
+            <strong>Збережіть готову пропозицію у тій самій програмі</strong>
           </div>
 
-          <div class="quote-system-options">
-            <button type="button" data-storage-source="crm">
-              <span>CRM</span>
-              <strong>Opportunity / Account</strong>
-              <small>Прикріпити PDF до клієнта або угоди</small>
-            </button>
+          <p class="quote-panel-description">
+            На цьому етапі менеджер уже не вибирає, куди класти PDF. Програма «Комерційні пропозиції»
+            зберігає картку пропозиції, фінальний PDF та історію дій у власному модулі автоматично.
+          </p>
 
-            <button type="button" data-storage-source="sharepoint">
-              <span>SP</span>
-              <strong>SharePoint</strong>
-              <small>Документи команди продажів</small>
-            </button>
+          <div class="quote-module-save-card">
+            <div class="quote-module-save-head">
+              <span class="quote-app-icon quote-app-offers">Q</span>
+              <div>
+                <small>Комерційні пропозиції</small>
+                <strong>Q-2026-00841 · FreshMarket Distribution GmbH</strong>
+                <span>Готово до збереження в історії пропозицій</span>
+              </div>
+            </div>
 
-            <button type="button" data-storage-source="drive">
-              <span>DRIVE</span>
-              <strong>Google Drive</strong>
-              <small>Папка клієнта та історія пропозицій</small>
-            </button>
+            <div class="quote-module-save-data">
+              <div>
+                <small>Документ</small>
+                <strong>Q-2026-00841_FreshMarket_Distribution.pdf</strong>
+              </div>
+              <div>
+                <small>Статус</small>
+                <strong>Ready to save</strong>
+              </div>
+              <div>
+                <small>Клієнт</small>
+                <strong>DE-10482 · FreshMarket</strong>
+              </div>
+            </div>
 
-            <button type="button" data-storage-source="onedrive">
-              <span>ONE</span>
-              <strong>OneDrive</strong>
-              <small>Корпоративне файлове сховище</small>
+            <button
+              type="button"
+              class="quote-primary-action quote-next-action"
+              id="quote-save-offer"
+            >
+              Зберегти пропозицію
             </button>
+          </div>
 
-            <button type="button" data-storage-source="erp">
-              <span>ERP</span>
-              <strong>ERP documents</strong>
-              <small>Зберегти документ у системі</small>
-            </button>
-
-            <button type="button" data-storage-source="folder">
-              <span>FILE</span>
-              <strong>Network folder</strong>
-              <small>Звичайна структура папок компанії</small>
-            </button>
+          <div
+            class="quote-module-save-status"
+            id="quote-module-save-status"
+            hidden
+          >
+            <div data-save-state="record">
+              <span>○</span>
+              <strong>Створюємо запис Q-2026-00841</strong>
+            </div>
+            <div data-save-state="pdf">
+              <span>○</span>
+              <strong>Прикріплюємо фінальний PDF</strong>
+            </div>
+            <div data-save-state="history">
+              <span>○</span>
+              <strong>Оновлюємо історію клієнта</strong>
+            </div>
           </div>
 
           <div
@@ -1162,11 +1086,18 @@
             hidden
           >
             <span>✓</span>
-
             <div>
-              <strong>Quotation saved</strong>
-              <small id="quote-storage-location"></small>
+              <strong>Пропозицію збережено у модулі</strong>
+              <small id="quote-storage-location">Комерційні пропозиції → FreshMarket → Q-2026-00841</small>
             </div>
+          </div>
+
+          <div class="quote-module-sync-note">
+            <span>Інтеграції налаштовуються один раз</span>
+            <p>
+              За потреби модуль може автоматично синхронізувати копію з CRM, ERP, Google Drive,
+              SharePoint або мережевою папкою. Менеджеру не потрібно обирати сховище під час кожної пропозиції.
+            </p>
           </div>
 
           <button
@@ -1175,107 +1106,10 @@
             id="quote-storage-ready"
             hidden
           >
-            Підготувати email клієнту
+            Відкрити Outlook для відправлення
           </button>
         </section>
 
-        <section
-          class="quote-stage-panel"
-          data-quote-panel="9"
-          hidden
-        >
-          <div class="quote-panel-head">
-            <span>OUTLOOK · OUTGOING EMAIL</span>
-            <strong>Повертаємось до пошти та відправляємо готовий PDF</strong>
-          </div>
-
-          <div class="quote-mail-client-shell">
-            <div class="quote-mail-client-top">
-              <div>
-                <span class="quote-app-icon quote-app-outlook">O</span>
-                <strong>Outlook</strong>
-              </div>
-              <span>New message · Draft</span>
-            </div>
-
-          <div class="quote-email quote-email-outgoing">
-            <div class="quote-email-meta">
-              <div>
-                <small>To</small>
-                <strong>purchasing@freshmarket.de</strong>
-              </div>
-
-              <div>
-                <small>Subject</small>
-                <strong>Commercial Offer Q-2026-00841</strong>
-              </div>
-            </div>
-
-            <div class="quote-email-body">
-              <p>Dear Anna,</p>
-
-              <p>
-                Thank you for your inquiry.
-              </p>
-
-              <p>
-                Please find attached our commercial offer
-                for the requested juice assortment.
-              </p>
-
-              <p>
-                The quotation includes delivery to Hamburg
-                and is valid for 30 days.
-              </p>
-
-              <p>
-                Best regards,<br>
-                Sebastian Perejra
-              </p>
-            </div>
-
-            <div class="quote-email-attachment">
-              <span>PDF</span>
-
-              <div>
-                <strong>Q-2026-00841_FreshMarket_Distribution.pdf</strong>
-                <small>Commercial quotation</small>
-              </div>
-            </div>
-          </div>
-          </div>
-
-          <button
-            type="button"
-            class="quote-primary-action"
-            id="quote-send-email"
-          >
-            Надіслати комерційну пропозицію
-          </button>
-
-          <div
-            class="quote-complete"
-            id="quote-complete"
-            hidden
-          >
-            <span>✓</span>
-
-            <div>
-              <strong>Commercial offer sent</strong>
-              <p>
-                Запит клієнта пройшов повний шлях —
-                від вхідного email до готової та відправленої PDF-пропозиції.
-              </p>
-              <button
-                type="button"
-                class="quote-secondary-action"
-                id="quote-try-again"
-              >
-                Спробувати ще раз
-              </button>
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   </div>
@@ -1328,17 +1162,17 @@
     <i>→</i>
     <div><span>02</span><strong>Desktop</strong></div>
     <i>→</i>
-    <div><span>03</span><strong>Email import</strong></div>
+    <div><span>03</span><strong>Customer</strong></div>
     <i>→</i>
-    <div><span>04</span><strong>Customer</strong></div>
+    <div><span>04</span><strong>Products</strong></div>
     <i>→</i>
-    <div><span>05</span><strong>Products</strong></div>
+    <div><span>05</span><strong>Pricing</strong></div>
     <i>→</i>
-    <div><span>06</span><strong>Pricing</strong></div>
+    <div><span>06</span><strong>Delivery</strong></div>
     <i>→</i>
-    <div><span>07</span><strong>Delivery</strong></div>
+    <div><span>07</span><strong>PDF</strong></div>
     <i>→</i>
-    <div><span>08</span><strong>PDF</strong></div>
+    <div><span>08</span><strong>Save</strong></div>
     <i>→</i>
     <div><span>09</span><strong>Send</strong></div>
   </div>

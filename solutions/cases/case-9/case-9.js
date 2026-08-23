@@ -84,6 +84,7 @@
 
   const sendEmailButton = root.querySelector("#quote-send-email");
   const completeBlock = root.querySelector("#quote-complete");
+  const tryAgainButton = root.querySelector("#quote-try-again");
 
   const pdfModal = root.querySelector("#quote-pdf-modal");
 const pdfModalClose = root.querySelector("#quote-pdf-modal-close");
@@ -928,6 +929,131 @@ pdfModal.addEventListener(
     }, 1400);
   }
 
+  function resetCase() {
+  state = {
+    step: 1,
+    customerSource: "",
+    customerMode: "existing",
+    productSource: "",
+    selectedProducts: [],
+    storageSource: "",
+    customer: {
+      name: "FreshMarket Distribution GmbH",
+      id: "DE-10482",
+      vat: "DE349827156",
+      currency: "EUR",
+      paymentTerms: "30 days",
+      country: "Germany",
+      city: "Hamburg"
+    }
+  };
+
+  customerSourceButtons.forEach(button => {
+    button.classList.remove("selected");
+  });
+
+  productSourceButtons.forEach(button => {
+    button.classList.remove("selected");
+  });
+
+  storageButtons.forEach(button => {
+    button.classList.remove("selected");
+  });
+
+  customerSearch.hidden = true;
+  customerResult.hidden = true;
+  newCustomerForm.hidden = true;
+
+  customerQuery.value =
+    "FreshMarket Distribution GmbH";
+
+  productBrowser.hidden = true;
+  productSearch.value = "";
+
+  productRows.forEach(row => {
+    row.hidden = false;
+
+    const button =
+      row.querySelector("button");
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Додати";
+    }
+  });
+
+  productsReadyButton.hidden = true;
+
+  builderTable
+    .querySelectorAll(".quote-builder-item")
+    .forEach(row => row.remove());
+
+  currencySelect.value = "EUR";
+  paymentTermsSelect.value = "30 days";
+  validitySelect.value = "30 days";
+
+  subtotalElement.textContent = "€0.00";
+  discountTotalElement.textContent = "€0.00";
+  grandTotalElement.textContent = "€0.00";
+
+  deliveryCountry.value = "Germany";
+  deliveryCity.value = "Hamburg";
+  deliveryAddress.value =
+    "Billstraße 120, 20539 Hamburg";
+
+  deliveryDate.value =
+    "2026-09-15";
+
+  incotermsSelect.value =
+    "DAP Hamburg";
+
+  deliveryCostInput.value =
+    "420";
+
+  leadTimeSelect.value =
+    "10 working days";
+
+  documentLines.innerHTML = "";
+  documentProductsTotal.textContent = "€0.00";
+  documentDelivery.textContent = "€420.00";
+  documentTotal.textContent = "€0.00";
+  documentPayment.textContent = "30 days";
+  documentIncoterms.textContent = "DAP Hamburg";
+  documentAddress.textContent =
+    "Billstraße 120, 20539 Hamburg, Germany";
+
+  resetGeneration();
+
+  pdfResult.classList.remove("is-ready");
+
+  previewPdfButton.classList.remove(
+    "quote-next-action"
+  );
+
+  previewPdfButton.textContent =
+    "Preview";
+
+  storageResult.hidden = true;
+  storageReadyButton.hidden = true;
+  storageLocation.textContent = "";
+
+  completeBlock.hidden = true;
+
+  sendEmailButton.disabled = false;
+  sendEmailButton.textContent =
+    "Надіслати комерційну пропозицію";
+
+  transitionLayer.hidden = true;
+
+  closePdfModal();
+
+  showStep(1);
+
+  root.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
   startButton.addEventListener(
     "click",
     () => {
@@ -1120,5 +1246,9 @@ pdfModal.addEventListener(
     });
   });
 
+  tryAgainButton?.addEventListener(
+  "click",
+  resetCase
+);
   showStep(1);
 })();

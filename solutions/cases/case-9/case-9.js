@@ -13,13 +13,24 @@
 
   const stepCounter = root.querySelector("#quote-step-counter");
 
-  const startButton = root.querySelector("#quote-start");
-
   const desktop = root.querySelector("#quote-desktop");
   const desktopWindow = root.querySelector("#quote-desktop-window");
   const desktopWindowTitle = root.querySelector("#quote-desktop-window-title");
   const desktopWindowIcon = root.querySelector("#quote-desktop-window-icon");
   const desktopWindowBody = root.querySelector("#quote-desktop-window-body");
+  const desktopStageLabel = root.querySelector("#quote-desktop-stage-label");
+  const desktopStageTitle = root.querySelector("#quote-desktop-stage-title");
+  const desktopStageDescription = root.querySelector("#quote-desktop-stage-description");
+  const desktopHintLabel = root.querySelector("#quote-desktop-hint-label");
+  const desktopHintTitle = root.querySelector("#quote-desktop-hint-title");
+  const desktopHintText = root.querySelector("#quote-desktop-hint-text");
+  const desktopExplainerTitle = root.querySelector("#quote-desktop-explainer-title");
+  const desktopExplainerText = root.querySelector("#quote-desktop-explainer-text");
+  const mailBadge = root.querySelector("#quote-mail-badge");
+  const taskbarOutlook = root.querySelector("#quote-taskbar-outlook");
+  const taskbarOffers = root.querySelector("#quote-taskbar-offers");
+  const desktopOffersIcon = root.querySelector("#quote-desktop-offers-icon");
+  const offersRecommendation = root.querySelector("#quote-offers-recommendation");
 
   const desktopAppButtons = [
     ...root.querySelectorAll("[data-desktop-app]")
@@ -93,17 +104,15 @@
   const pdfResult = root.querySelector("#quote-pdf-result");
   const previewPdfButton = root.querySelector("#quote-preview-pdf");
 
-  const storageButtons = [
-    ...root.querySelectorAll("[data-storage-source]")
+  const saveOfferButton = root.querySelector("#quote-save-offer");
+  const saveStatus = root.querySelector("#quote-module-save-status");
+
+  const saveStates = [
+    ...root.querySelectorAll("[data-save-state]")
   ];
 
   const storageResult = root.querySelector("#quote-storage-result");
-  const storageLocation = root.querySelector("#quote-storage-location");
   const storageReadyButton = root.querySelector("#quote-storage-ready");
-
-  const sendEmailButton = root.querySelector("#quote-send-email");
-  const completeBlock = root.querySelector("#quote-complete");
-  const tryAgainButton = root.querySelector("#quote-try-again");
 
   const pdfModal = root.querySelector("#quote-pdf-modal");
   const pdfModalClose = root.querySelector("#quote-pdf-modal-close");
@@ -237,33 +246,12 @@
     }
   };
 
-  const storageSources = {
-    crm:
-      "CRM → FreshMarket Distribution GmbH → Opportunity Q-2026-00841",
-
-    sharepoint:
-      "SharePoint → Sales → FreshMarket → Quotations → 2026",
-
-    drive:
-      "Google Drive → Customers → FreshMarket → Quotations → 2026",
-
-    onedrive:
-      "OneDrive → Sales → Customers → FreshMarket → Quotations",
-
-    erp:
-      "ERP → Customer DE-10482 → Sales Documents → Quotations",
-
-    folder:
-      "\\\\Sales\\Customers\\FreshMarket\\Quotations\\2026"
-  };
-
   let state = {
     step: 1,
     customerSource: "",
     customerMode: "existing",
     productSource: "",
     selectedProducts: [],
-    storageSource: "",
 
     customer: {
       name: "FreshMarket Distribution GmbH",
@@ -287,8 +275,8 @@
             <span>SALES TOOL</span>
             <strong>Комерційні пропозиції</strong>
             <small>
-              Внутрішня програма для підготовки, перевірки
-              та відправлення комерційних пропозицій.
+              Внутрішня програма для підготовки,
+              перевірки та відправлення комерційних пропозицій.
             </small>
           </div>
 
@@ -345,48 +333,80 @@
       render: () => `
         <div class="quote-app-screen-head">
           <div>
-            <span>MAIL</span>
-            <strong>Inbox</strong>
+            <span>OUTLOOK · INBOX</span>
+            <strong>Вхідні</strong>
             <small>
-              Останні вхідні повідомлення менеджера.
+              1 новий лист · корпоративна пошта менеджера.
             </small>
           </div>
 
           <span class="quote-app-status-pill">
-            ONLINE
+            1 NEW
           </span>
         </div>
 
-        <div class="quote-mini-table">
-          <div class="quote-mini-row head">
-            <span>Від</span>
-            <span>Тема</span>
-            <span>Час</span>
-          </div>
+        <div class="quote-outlook-list">
+          <button
+            type="button"
+            class="quote-outlook-mail quote-outlook-mail-new"
+            data-outlook-mail="freshmarket"
+          >
+            <span class="quote-outlook-mail-dot"></span>
 
-          <div class="quote-mini-row">
-            <span>FreshMarket</span>
-            <span>
-              Request for quotation — juice assortment
-            </span>
-            <span>08:42</span>
-          </div>
+            <div>
+              <strong>
+                FreshMarket Distribution GmbH
+              </strong>
 
-          <div class="quote-mini-row">
-            <span>Logistics</span>
-            <span>
-              Hamburg delivery slots
-            </span>
-            <span>08:17</span>
-          </div>
+              <span>
+                Request for quotation — juice assortment
+              </span>
 
-          <div class="quote-mini-row">
-            <span>Production</span>
-            <span>
-              Weekly availability update
-            </span>
-            <span>07:55</span>
-          </div>
+              <small>
+                purchasing@freshmarket.de
+              </small>
+            </div>
+
+            <time>08:42</time>
+          </button>
+
+          <button
+            type="button"
+            class="quote-outlook-mail"
+            data-outlook-mail="logistics"
+          >
+            <span></span>
+
+            <div>
+              <strong>Logistics Team</strong>
+              <span>Hamburg delivery slots</span>
+
+              <small>
+                logistics@freshdrinks.example
+              </small>
+            </div>
+
+            <time>08:17</time>
+          </button>
+
+          <button
+            type="button"
+            class="quote-outlook-mail"
+            data-outlook-mail="production"
+          >
+            <span></span>
+
+            <div>
+              <strong>Production Planning</strong>
+              <span>Weekly availability update</span>
+
+              <small>
+                planning@freshdrinks.example
+              </small>
+            </div>
+
+            <time>07:55</time>
+          </button>
         </div>
       `
     },
@@ -794,12 +814,420 @@
     }
   };
 
+  const desktopSession = {
+    activeApp: "",
+    openedMail: "",
+    mailRead: false,
+    workspaceUnlocked: false,
+    outgoingReady: false
+  };
+
+  function setDesktopStage(step) {
+    if (step === 1) {
+      desktopStageLabel.textContent =
+        "WORKSTATION · NEW EMAIL";
+
+      desktopStageTitle.textContent =
+        "На робочому комп’ютері менеджера новий лист";
+
+      desktopStageDescription.textContent =
+        "Натисніть на підсвічену іконку Outlook у нижній панелі, відкрийте новий лист FreshMarket, прочитайте його і згорніть поштове вікно.";
+
+      desktopHintLabel.textContent =
+        "НОВЕ ПОВІДОМЛЕННЯ";
+
+      desktopHintTitle.textContent =
+        "Відкрийте Outlook у нижній панелі";
+
+      desktopHintText.textContent =
+        "На пошту щойно надійшов новий запит клієнта. Почніть із нього.";
+
+      desktopExplainerTitle.textContent =
+        "Спочатку менеджер працює з вхідною поштою";
+
+      desktopExplainerText.textContent =
+        "Після прочитання листа він просто згортає Outlook. Перед ним залишається той самий робочий стіл, де він відкриває окрему програму «Комерційні пропозиції».";
+
+      taskbarOutlook?.classList.add(
+        "quote-mail-alert"
+      );
+
+      taskbarOffers?.classList.remove(
+        "quote-taskbar-next"
+      );
+
+      desktopOffersIcon?.classList.remove(
+        "quote-desktop-icon-main"
+      );
+
+      if (offersRecommendation) {
+        offersRecommendation.hidden = true;
+      }
+
+      return;
+    }
+
+    if (step === 2) {
+      desktopStageLabel.textContent =
+        "MANAGER DESKTOP";
+
+      desktopStageTitle.textContent =
+        "Лист прочитано. Тепер відкрийте програму для пропозицій";
+
+      desktopStageDescription.textContent =
+        "Outlook згорнуто, і перед вами залишився той самий робочий стіл менеджера. Відкрийте «Комерційні пропозиції» та створіть нову пропозицію.";
+
+      desktopHintLabel.textContent =
+        "НАСТУПНА ДІЯ";
+
+      desktopHintTitle.textContent =
+        "Відкрийте «Комерційні пропозиції»";
+
+      desktopHintText.textContent =
+        "Програма відкривається як звичайний робочий застосунок і далі веде менеджера по процесу.";
+
+      desktopExplainerTitle.textContent =
+        "Пошта згорнута — робочий стіл залишився перед менеджером";
+
+      desktopExplainerText.textContent =
+        "Тепер він відкриває окрему програму «Комерційні пропозиції». Після цього сам вибирає імпорт із Outlook і потрібний лист.";
+
+      taskbarOutlook?.classList.remove(
+        "quote-mail-alert"
+      );
+
+      taskbarOffers?.classList.add(
+        "quote-taskbar-next"
+      );
+
+      desktopOffersIcon?.classList.add(
+        "quote-desktop-icon-main"
+      );
+
+      if (offersRecommendation) {
+        offersRecommendation.hidden = false;
+      }
+
+      return;
+    }
+
+    if (step === 9) {
+      desktopStageLabel.textContent =
+        "WORKSTATION · OUTGOING EMAIL";
+
+      desktopStageTitle.textContent =
+        "Пропозицію збережено. Залишилось відправити лист клієнту";
+
+      desktopStageDescription.textContent =
+        "Поверніться до Outlook через нижню панель. Там уже підготовлено чернетку листа з фінальним PDF.";
+
+      desktopHintLabel.textContent =
+        "ГОТОВА ЧЕРНЕТКА";
+
+      desktopHintTitle.textContent =
+        "Відкрийте Outlook";
+
+      desktopHintText.textContent =
+        "У пошті вже підготовлено лист клієнту та прикріплено збережений PDF.";
+
+      desktopExplainerTitle.textContent =
+        "Фінальний крок знову відбувається у звичній пошті";
+
+      desktopExplainerText.textContent =
+        "Менеджер відкриває Outlook, перевіряє готову чернетку з PDF і натискає «Надіслати».";
+
+      if (mailBadge) {
+        mailBadge.hidden = false;
+        mailBadge.textContent = "1";
+      }
+
+      taskbarOutlook?.classList.add(
+        "quote-mail-alert"
+      );
+
+      taskbarOffers?.classList.remove(
+        "quote-taskbar-next"
+      );
+
+      desktopOffersIcon?.classList.remove(
+        "quote-desktop-icon-main"
+      );
+
+      if (offersRecommendation) {
+        offersRecommendation.hidden = true;
+      }
+    }
+  }
+
+  function renderOpenedEmail() {
+    desktopSession.activeApp =
+      "outlook";
+
+    desktopSession.openedMail =
+      "freshmarket";
+
+    desktopSession.mailRead =
+      true;
+
+    if (mailBadge) {
+      mailBadge.hidden = true;
+    }
+
+    taskbarOutlook?.classList.remove(
+      "quote-mail-alert"
+    );
+
+    desktopWindowIcon.textContent =
+      "O";
+
+    desktopWindowTitle.textContent =
+      "Outlook · Request for quotation";
+
+    desktopWindowBody.innerHTML = `
+      <div class="quote-app-screen-head quote-opened-mail-head">
+        <div>
+          <span>OUTLOOK · MESSAGE</span>
+
+          <strong>
+            Request for quotation — juice assortment
+          </strong>
+
+          <small>
+            FreshMarket Distribution GmbH ·
+            23 Aug 2026 · 08:42
+          </small>
+        </div>
+
+        <span class="quote-app-status-pill">
+          READ
+        </span>
+      </div>
+
+      <div class="quote-opened-mail-meta">
+        <div>
+          <small>From</small>
+          <strong>purchasing@freshmarket.de</strong>
+        </div>
+
+        <div>
+          <small>To</small>
+          <strong>sales@freshdrinks.example</strong>
+        </div>
+      </div>
+
+      <div class="quote-opened-mail-body">
+        <p>Hello,</p>
+
+        <p>
+          Please provide your commercial offer
+          for the following products:
+        </p>
+
+        <div class="quote-request-table">
+          <div class="quote-request-row quote-request-head">
+            <span>Product</span>
+            <span>Pack</span>
+            <span>Quantity</span>
+          </div>
+
+          <div class="quote-request-row">
+            <span>Orange juice</span>
+            <span>1 L carton</span>
+            <span>12,000 pcs</span>
+          </div>
+
+          <div class="quote-request-row">
+            <span>Apple juice</span>
+            <span>1 L carton</span>
+            <span>8,000 pcs</span>
+          </div>
+
+          <div class="quote-request-row">
+            <span>Multivitamin juice</span>
+            <span>0.2 L carton</span>
+            <span>24,000 pcs</span>
+          </div>
+
+          <div class="quote-request-row">
+            <span>Tomato juice</span>
+            <span>1 L carton</span>
+            <span>5,000 pcs</span>
+          </div>
+        </div>
+
+        <p>
+          Delivery address:<br>
+          FreshMarket Distribution GmbH<br>
+          Billstraße 120<br>
+          20539 Hamburg, Germany
+        </p>
+
+        <p>
+          Preferred delivery date:
+          15 September 2026.
+        </p>
+
+        <p>
+          Please include delivery cost
+          and payment terms in the quotation.
+        </p>
+
+        <p>
+          Best regards,<br>
+          Anna Keller<br>
+          Purchasing Department
+        </p>
+      </div>
+
+      <div class="quote-mail-minimize-tip">
+        <span>Лист прочитано ✓</span>
+
+        <strong>
+          Тепер згорніть Outlook кнопкою «−»
+          у верхньому правому куті.
+        </strong>
+      </div>
+    `;
+
+    const minimizeButton =
+      root.querySelector(
+        '[data-window-action="minimize"]'
+      );
+
+    minimizeButton?.classList.add(
+      "quote-window-control-next"
+    );
+  }
+
+  function renderOutgoingDraft() {
+    desktopSession.activeApp =
+      "outlook";
+
+    desktopWindowIcon.textContent =
+      "O";
+
+    desktopWindowTitle.textContent =
+      "Outlook · New message";
+
+    desktopWindowBody.innerHTML = `
+      <div class="quote-app-screen-head">
+        <div>
+          <span>OUTLOOK · DRAFT</span>
+          <strong>Готовий лист клієнту</strong>
+
+          <small>
+            PDF уже прикріплено з модуля
+            «Комерційні пропозиції».
+          </small>
+        </div>
+
+        <span class="quote-app-status-pill">
+          DRAFT
+        </span>
+      </div>
+
+      <div class="quote-email quote-email-outgoing quote-outgoing-in-window">
+        <div class="quote-email-meta">
+          <div>
+            <small>To</small>
+            <strong>
+              purchasing@freshmarket.de
+            </strong>
+          </div>
+
+          <div>
+            <small>Subject</small>
+            <strong>
+              Commercial Offer Q-2026-00841
+            </strong>
+          </div>
+        </div>
+
+        <div class="quote-email-body">
+          <p>Dear Anna,</p>
+
+          <p>
+            Thank you for your inquiry.
+          </p>
+
+          <p>
+            Please find attached our commercial offer
+            for the requested juice assortment.
+          </p>
+
+          <p>
+            The quotation includes delivery to Hamburg
+            and is valid for 30 days.
+          </p>
+
+          <p>
+            Best regards,<br>
+            Sebastian Perejra
+          </p>
+        </div>
+
+        <div class="quote-email-attachment">
+          <span>PDF</span>
+
+          <div>
+            <strong>
+              Q-2026-00841_FreshMarket_Distribution.pdf
+            </strong>
+
+            <small>
+              Commercial quotation · saved in module
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="quote-primary-action quote-next-action"
+        id="quote-send-email"
+      >
+        Надіслати комерційну пропозицію
+      </button>
+
+      <div
+        class="quote-complete"
+        id="quote-complete"
+        hidden
+      >
+        <span>✓</span>
+
+        <div>
+          <strong>
+            Commercial offer sent
+          </strong>
+
+          <p>
+            Запит клієнта пройшов повний шлях —
+            від нового листа на робочому столі
+            до збереженої та відправленої PDF-пропозиції.
+          </p>
+
+          <button
+            type="button"
+            class="quote-secondary-action"
+            id="quote-try-again"
+          >
+            Спробувати ще раз
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
   function renderNewOfferStart() {
     desktopWindowBody.innerHTML = `
       <div class="quote-app-screen-head">
         <div>
           <span>NEW QUOTATION</span>
-          <strong>Звідки взяти запит клієнта?</strong>
+          <strong>
+            Звідки взяти запит клієнта?
+          </strong>
+
           <small>
             Програма нічого не підставляє сама.
             Менеджер обирає джерело запиту.
@@ -818,7 +1246,11 @@
           id="quote-import-email"
         >
           <span>OUTLOOK</span>
-          <strong>Імпортувати запит з email</strong>
+
+          <strong>
+            Імпортувати запит з email
+          </strong>
+
           <small>
             Показати доступні листи
             з підключеної корпоративної пошти.
@@ -831,7 +1263,11 @@
           id="quote-create-manual"
         >
           <span>MANUAL</span>
-          <strong>Створити вручну</strong>
+
+          <strong>
+            Створити вручну
+          </strong>
+
           <small>
             Якщо запит отримано телефоном,
             у месенджері або іншим способом.
@@ -859,9 +1295,11 @@
       <div class="quote-app-screen-head">
         <div>
           <span>OUTLOOK CONNECTION</span>
+
           <strong>
             Оберіть лист, з якого створити пропозицію
           </strong>
+
           <small>
             Підключено:
             sales@freshdrinks.example · Microsoft 365
@@ -917,6 +1355,7 @@
           <div>
             <strong>Logistics Team</strong>
             <span>Hamburg delivery slots</span>
+
             <small>
               logistics@freshdrinks.example
             </small>
@@ -935,10 +1374,14 @@
           </span>
 
           <div>
-            <strong>Production Planning</strong>
+            <strong>
+              Production Planning
+            </strong>
+
             <span>
               Weekly availability update
             </span>
+
             <small>
               planning@freshdrinks.example
             </small>
@@ -963,9 +1406,11 @@
       <div class="quote-app-screen-head">
         <div>
           <span>NOT AN RFQ</span>
+
           <strong>
             Цей лист не схожий на запит клієнта
           </strong>
+
           <small>
             Оберіть лист із запитом
             на комерційну пропозицію.
@@ -981,7 +1426,9 @@
         <span>!</span>
 
         <div>
-          <strong>Дані не імпортовано</strong>
+          <strong>
+            Дані не імпортовано
+          </strong>
 
           <p>
             Лист не містить запиту на товари,
@@ -1005,7 +1452,11 @@
       <div class="quote-app-screen-head">
         <div>
           <span>IMPORT FROM OUTLOOK</span>
-          <strong>Розбираємо вибраний лист</strong>
+
+          <strong>
+            Розбираємо вибраний лист
+          </strong>
+
           <small>
             FreshMarket Distribution GmbH · 08:42
           </small>
@@ -1030,7 +1481,9 @@
 
         <div data-import-state="products">
           <span>○</span>
-          <strong>Читаємо запитані товари</strong>
+          <strong>
+            Читаємо запитані товари
+          </strong>
           <small>4 позиції</small>
         </div>
 
@@ -1128,13 +1581,18 @@
     analysisItems.forEach(
       (item, index) => {
         setTimeout(() => {
-          item.classList.add("done");
+          item.classList.add(
+            "done"
+          );
 
           const icon =
-            item.querySelector("span");
+            item.querySelector(
+              "span"
+            );
 
           if (icon) {
-            icon.textContent = "✓";
+            icon.textContent =
+              "✓";
           }
 
           if (
@@ -1143,7 +1601,8 @@
           ) {
             setTimeout(() => {
               if (importResult) {
-                importResult.hidden = false;
+                importResult.hidden =
+                  false;
               }
 
               if (importStatus) {
@@ -1165,17 +1624,35 @@
       return;
     }
 
+    desktopSession.activeApp =
+      appName;
+
     desktopWindowIcon.textContent =
       app.icon;
 
     desktopWindowTitle.textContent =
       app.title;
 
-    desktopWindowBody.innerHTML =
-      app.render();
+    if (
+      appName === "outlook" &&
+      state.step === 9
+    ) {
+      renderOutgoingDraft();
+    } else {
+      desktopWindowBody.innerHTML =
+        app.render();
+    }
 
     desktopWindow.hidden =
       false;
+
+    root.querySelectorAll(
+      "[data-window-action]"
+    ).forEach(button => {
+      button.classList.remove(
+        "quote-window-control-next"
+      );
+    });
 
     desktopWindow.scrollIntoView({
       behavior: "smooth",
@@ -1192,9 +1669,41 @@
       true;
   }
 
+  function minimizeDesktopWindow() {
+    if (!desktopWindow) {
+      return;
+    }
+
+    desktopWindow.hidden =
+      true;
+
+    root.querySelectorAll(
+      "[data-window-action]"
+    ).forEach(button => {
+      button.classList.remove(
+        "quote-window-control-next"
+      );
+    });
+
+    if (
+      state.step === 1 &&
+      desktopSession.activeApp === "outlook" &&
+      desktopSession.mailRead
+    ) {
+      desktopSession.workspaceUnlocked =
+        true;
+
+      showStep(
+        2,
+        "auto"
+      );
+    }
+  }
+
   function money(value) {
     const currency =
-      currencySelect?.value || "EUR";
+      currencySelect?.value ||
+      "EUR";
 
     const symbol =
       currency === "USD"
@@ -1214,7 +1723,8 @@
     step,
     scrollBehavior = "smooth"
   ) {
-    state.step = step;
+    state.step =
+      step;
 
     panels.forEach(panel => {
       const panelStep =
@@ -1222,12 +1732,32 @@
           panel.dataset.quotePanel
         );
 
+      const aliases =
+        (
+          panel.dataset.quotePanelAlias ||
+          ""
+        )
+          .split(",")
+          .map(
+            value =>
+              Number(
+                value.trim()
+              )
+          )
+          .filter(
+            Number.isFinite
+          );
+
+      const isActive =
+        panelStep === step ||
+        aliases.includes(step);
+
       panel.hidden =
-        panelStep !== step;
+        !isActive;
 
       panel.classList.toggle(
         "active",
-        panelStep === step
+        isActive
       );
     });
 
@@ -1251,10 +1781,42 @@
     stepCounter.textContent =
       `${step} / 9`;
 
+    if (
+      step === 1 ||
+      step === 2 ||
+      step === 9
+    ) {
+      setDesktopStage(step);
+    }
+
     const activePanel =
-      root.querySelector(
-        `[data-quote-panel="${step}"]`
-      );
+      panels.find(panel => {
+        const panelStep =
+          Number(
+            panel.dataset.quotePanel
+          );
+
+        const aliases =
+          (
+            panel.dataset.quotePanelAlias ||
+            ""
+          )
+            .split(",")
+            .map(
+              value =>
+                Number(
+                  value.trim()
+                )
+            )
+            .filter(
+              Number.isFinite
+            );
+
+        return (
+          panelStep === step ||
+          aliases.includes(step)
+        );
+      });
 
     if (activePanel) {
       activePanel.scrollIntoView({
@@ -1349,8 +1911,12 @@
     }
 
     const knownCustomer =
-      query.includes("freshmarket") ||
-      query.includes("fresh market");
+      query.includes(
+        "freshmarket"
+      ) ||
+      query.includes(
+        "fresh market"
+      );
 
     if (knownCustomer) {
       state.customerMode =
@@ -1577,9 +2143,11 @@
       .querySelectorAll(
         ".quote-builder-item"
       )
-      .forEach(row => {
-        row.remove();
-      });
+      .forEach(
+        row => {
+          row.remove();
+        }
+      );
 
     state.selectedProducts.forEach(
       (item, index) => {
@@ -1694,7 +2262,9 @@
         );
 
       const item =
-        state.selectedProducts[index];
+        state.selectedProducts[
+          index
+        ];
 
       const qty =
         Number(
@@ -1750,8 +2320,11 @@
   }
 
   function getTotals() {
-    let subtotal = 0;
-    let discount = 0;
+    let subtotal =
+      0;
+
+    let discount =
+      0;
 
     state.selectedProducts.forEach(
       item => {
@@ -2081,7 +2654,7 @@
     transitionToStep(
       8,
       "Комерційну пропозицію перевірено",
-      "PDF підтверджено. Тепер визначимо, де зберегти фінальний документ.",
+      "PDF підтверджено. Тепер збережемо пропозицію у модулі «Комерційні пропозиції».",
       1050
     );
   }
@@ -2108,34 +2681,112 @@
     }
   );
 
-  function selectStorage(
-    source,
-    button
-  ) {
-    state.storageSource =
-      source;
+  function saveOffer() {
+    if (!saveOfferButton) {
+      return;
+    }
 
-    selectSystem(
-      storageButtons,
-      button
+    saveOfferButton.disabled =
+      true;
+
+    saveOfferButton.textContent =
+      "Збереження...";
+
+    saveOfferButton.classList.remove(
+      "quote-next-action"
     );
 
-    storageResult.hidden =
+    saveStatus.hidden =
       false;
+
+    storageResult.hidden =
+      true;
 
     storageReadyButton.hidden =
-      false;
+      true;
 
-    storageLocation.textContent =
-      storageSources[source];
+    saveStates.forEach(item => {
+      item.classList.remove(
+        "done"
+      );
 
-    storageResult.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest"
+      const icon =
+        item.querySelector(
+          "span"
+        );
+
+      if (icon) {
+        icon.textContent =
+          "○";
+      }
     });
+
+    saveStates.forEach(
+      (item, index) => {
+        setTimeout(() => {
+          item.classList.add(
+            "done"
+          );
+
+          const icon =
+            item.querySelector(
+              "span"
+            );
+
+          if (icon) {
+            icon.textContent =
+              "✓";
+          }
+
+          if (
+            index ===
+            saveStates.length - 1
+          ) {
+            setTimeout(() => {
+              saveOfferButton.textContent =
+                "Збережено ✓";
+
+              storageResult.hidden =
+                false;
+
+              storageReadyButton.hidden =
+                false;
+
+              storageReadyButton.classList.add(
+                "quote-next-action"
+              );
+
+              storageResult.scrollIntoView({
+                behavior:
+                  "smooth",
+                block:
+                  "nearest"
+              });
+            }, 300);
+          }
+        }, 480 * (index + 1));
+      }
+    );
   }
 
   function sendQuotation() {
+    const sendEmailButton =
+      desktopWindowBody.querySelector(
+        "#quote-send-email"
+      );
+
+    const completeBlock =
+      desktopWindowBody.querySelector(
+        "#quote-complete"
+      );
+
+    if (
+      !sendEmailButton ||
+      !completeBlock
+    ) {
+      return;
+    }
+
     sendEmailButton.disabled =
       true;
 
@@ -2149,20 +2800,27 @@
       completeBlock.hidden =
         false;
 
-      flowSteps.forEach(
-        item => {
-          item.classList.remove(
-            "active"
-          );
+      flowSteps.forEach(item => {
+        item.classList.remove(
+          "active"
+        );
 
-          item.classList.add(
-            "done"
-          );
-        }
-      );
+        item.classList.add(
+          "done"
+        );
+      });
 
       stepCounter.textContent =
         "9 / 9";
+
+      taskbarOutlook?.classList.remove(
+        "quote-mail-alert"
+      );
+
+      if (mailBadge) {
+        mailBadge.hidden =
+          true;
+      }
 
       completeBlock.scrollIntoView({
         behavior: "smooth",
@@ -2175,11 +2833,9 @@
     state = {
       step: 1,
       customerSource: "",
-      customerMode:
-        "existing",
+      customerMode: "existing",
       productSource: "",
       selectedProducts: [],
-      storageSource: "",
 
       customer: {
         name:
@@ -2221,14 +2877,6 @@
       }
     );
 
-    storageButtons.forEach(
-      button => {
-        button.classList.remove(
-          "selected"
-        );
-      }
-    );
-
     customerSearch.hidden =
       true;
 
@@ -2247,25 +2895,23 @@
     productSearch.value =
       "";
 
-    productRows.forEach(
-      row => {
-        row.hidden =
+    productRows.forEach(row => {
+      row.hidden =
+        false;
+
+      const button =
+        row.querySelector(
+          "button"
+        );
+
+      if (button) {
+        button.disabled =
           false;
 
-        const button =
-          row.querySelector(
-            "button"
-          );
-
-        if (button) {
-          button.disabled =
-            false;
-
-          button.textContent =
-            "Додати";
-        }
+        button.textContent =
+          "Додати";
       }
-    );
+    });
 
     productsReadyButton.hidden =
       true;
@@ -2274,11 +2920,9 @@
       .querySelectorAll(
         ".quote-builder-item"
       )
-      .forEach(
-        row => {
-          row.remove();
-        }
-      );
+      .forEach(row => {
+        row.remove();
+      });
 
     currencySelect.value =
       "EUR";
@@ -2353,23 +2997,67 @@
     previewPdfButton.textContent =
       "Preview";
 
+    saveStatus.hidden =
+      true;
+
+    saveStates.forEach(item => {
+      item.classList.remove(
+        "done"
+      );
+
+      const icon =
+        item.querySelector(
+          "span"
+        );
+
+      if (icon) {
+        icon.textContent =
+          "○";
+      }
+    });
+
+    saveOfferButton.disabled =
+      false;
+
+    saveOfferButton.textContent =
+      "Зберегти пропозицію";
+
+    saveOfferButton.classList.add(
+      "quote-next-action"
+    );
+
     storageResult.hidden =
       true;
 
     storageReadyButton.hidden =
       true;
 
-    storageLocation.textContent =
+    storageReadyButton.classList.remove(
+      "quote-next-action"
+    );
+
+    desktopSession.activeApp =
       "";
 
-    completeBlock.hidden =
-      true;
+    desktopSession.openedMail =
+      "";
 
-    sendEmailButton.disabled =
+    desktopSession.mailRead =
       false;
 
-    sendEmailButton.textContent =
-      "Надіслати комерційну пропозицію";
+    desktopSession.workspaceUnlocked =
+      false;
+
+    desktopSession.outgoingReady =
+      false;
+
+    if (mailBadge) {
+      mailBadge.hidden =
+        false;
+
+      mailBadge.textContent =
+        "1";
+    }
 
     transitionLayer.hidden =
       true;
@@ -2387,18 +3075,6 @@
       block: "start"
     });
   }
-
-  startButton.addEventListener(
-    "click",
-    () => {
-      transitionToStep(
-        2,
-        "Лист прочитано",
-        "Менеджер повертається на робочий стіл і відкриває програму для комерційних пропозицій.",
-        950
-      );
-    }
-  );
 
   desktopAppButtons.forEach(
     button => {
@@ -2418,6 +3094,14 @@
       button.addEventListener(
         "click",
         () => {
+          if (
+            button.dataset.windowAction ===
+            "minimize"
+          ) {
+            minimizeDesktopWindow();
+            return;
+          }
+
           closeDesktopWindow();
         }
       );
@@ -2427,6 +3111,11 @@
   desktop?.addEventListener(
     "click",
     event => {
+      const outlookMailButton =
+        event.target.closest(
+          "[data-outlook-mail]"
+        );
+
       const newOfferButton =
         event.target.closest(
           "#quote-open-new-offer"
@@ -2456,6 +3145,27 @@
         event.target.closest(
           "#quote-confirm-import"
         );
+
+      const sendButton =
+        event.target.closest(
+          "#quote-send-email"
+        );
+
+      const tryAgain =
+        event.target.closest(
+          "#quote-try-again"
+        );
+
+      if (outlookMailButton) {
+        if (
+          outlookMailButton.dataset.outlookMail ===
+          "freshmarket"
+        ) {
+          renderOpenedEmail();
+        }
+
+        return;
+      }
 
       if (newOfferButton) {
         renderNewOfferStart();
@@ -2503,6 +3213,17 @@
           "Клієнта, позиції, адресу та дату зчитано з вибраного листа. Тепер перевіримо картку клієнта.",
           1000
         );
+
+        return;
+      }
+
+      if (sendButton) {
+        sendQuotation();
+        return;
+      }
+
+      if (tryAgain) {
+        resetCase();
       }
     }
   );
@@ -2672,64 +3393,48 @@
     previewDocument
   );
 
-  storageButtons.forEach(
-    button => {
-      button.addEventListener(
-        "click",
-        () => {
-          selectStorage(
-            button.dataset.storageSource,
-            button
-          );
-        }
-      );
-    }
+  saveOfferButton.addEventListener(
+    "click",
+    saveOffer
   );
 
   storageReadyButton.addEventListener(
     "click",
     () => {
+      desktopSession.outgoingReady =
+        true;
+
+      closeDesktopWindow();
+
       transitionToStep(
         9,
-        "Комерційну пропозицію збережено",
-        "Фінальний PDF зафіксовано у вибраному сховищі. Готуємо лист клієнту.",
+        "Пропозицію збережено у модулі",
+        "Повертаємось на робочий стіл. В Outlook уже підготовлено чернетку листа з фінальним PDF.",
         1000
       );
     }
   );
 
-  sendEmailButton.addEventListener(
-    "click",
-    sendQuotation
-  );
+  flowSteps.forEach(item => {
+    item.addEventListener(
+      "click",
+      () => {
+        const target =
+          Number(
+            item.dataset.quoteStep
+          );
 
-  flowSteps.forEach(
-    item => {
-      item.addEventListener(
-        "click",
-        () => {
-          const target =
-            Number(
-              item.dataset.quoteStep
-            );
-
-          if (
-            target <=
-            state.step
-          ) {
-            showStep(
-              target
-            );
-          }
+        if (
+          target <=
+          state.step
+        ) {
+          showStep(
+            target
+          );
         }
-      );
-    }
-  );
-
-  tryAgainButton?.addEventListener(
-    "click",
-    resetCase
-  );
+      }
+    );
+  });
 
   showStep(1);
 })();

@@ -3971,3 +3971,285 @@ if (
 
 renderResults("");
 })();
+
+(() => {
+  const findByText = (text) => {
+    return [...document.querySelectorAll("body *")].find((el) => {
+      if (el.children.length > 0) return false;
+      return el.textContent.trim().toUpperCase() === text;
+    });
+  };
+
+  const manualText = findByText("MANUAL PROCESS");
+  const rulesText = findByText("DATA + RULES");
+  const automationText = findByText("AUTOMATION");
+  const outputText = findByText("VISIBLE CONTROL");
+
+  if (!manualText || !rulesText || !automationText || !outputText) return;
+
+  const commonAncestor = (nodes) => {
+    let el = nodes[0];
+
+    while (el && el !== document.body) {
+      if (nodes.every((node) => el.contains(node))) {
+        return el;
+      }
+
+      el = el.parentElement;
+    }
+
+    return null;
+  };
+
+  const panel = commonAncestor([
+    manualText,
+    rulesText,
+    automationText,
+    outputText
+  ]);
+
+  if (!panel) return;
+
+  panel.classList.add("process-diagnostic-animated");
+
+  const getRow = (node) => {
+    let el = node.parentElement;
+
+    while (el && el !== panel) {
+      const text = el.textContent.toUpperCase();
+
+      if (
+        text.includes("MANUAL PROCESS") ||
+        text.includes("DATA + RULES") ||
+        text.includes("AUTOMATION")
+      ) {
+        const rect = el.getBoundingClientRect();
+
+        if (rect.height > 22 && rect.height < 140) {
+          return el;
+        }
+      }
+
+      el = el.parentElement;
+    }
+
+    return node.parentElement;
+  };
+
+  const rows = [
+    getRow(manualText),
+    getRow(rulesText),
+    getRow(automationText)
+  ];
+
+  rows.forEach((row) => {
+    row?.classList.add("process-diagnostic-row");
+  });
+
+  const findStatus = (row, words) => {
+    if (!row) return null;
+
+    return [...row.querySelectorAll("*")].find((el) => {
+      if (el.children.length > 0) return false;
+
+      const value = el.textContent.trim().toUpperCase();
+
+      return words.includes(value);
+    });
+  };
+
+  const statuses = [
+    findStatus(rows[0], ["DETECTED"]),
+    findStatus(rows[1], ["DEFINED"]),
+    findStatus(rows[2], ["READY"])
+  ];
+
+  statuses.forEach((status) => {
+    status?.classList.add("process-diagnostic-status");
+  });
+
+  let output = outputText.parentElement;
+
+  while (output && output !== panel) {
+    const rect = output.getBoundingClientRect();
+
+    if (rect.width > 180 && rect.height > 40) {
+      break;
+    }
+
+    output = output.parentElement;
+  }
+
+  output?.classList.add("process-diagnostic-output");
+
+  const candidates = [...panel.querySelectorAll("*")];
+
+  let track = null;
+
+  candidates.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+
+    if (
+      !track &&
+      rect.width > 180 &&
+      rect.height <= 12 &&
+      rect.height >= 1
+    ) {
+      track = el;
+    }
+  });
+
+  if (track) {
+    track.classList.add("process-diagnostic-track");
+  }
+
+  const dots = candidates
+    .filter((el) => {
+      const rect = el.getBoundingClientRect();
+
+      return (
+        rect.width >= 3 &&
+        rect.width <= 12 &&
+        rect.height >= 3 &&
+        rect.height <= 12 &&
+        Math.abs(rect.width - rect.height) < 3
+      );
+    })
+    .filter((el) => {
+      const style = getComputedStyle(el);
+
+      return (
+        style.borderRadius === "50%" ||
+        parseFloat(style.borderRadius) >= rectSafe(el).width / 2
+      );
+    })
+    .slice(-4);
+
+  function rectSafe(el) {
+    return el.getBoundingClientRect();
+  }
+
+  dots.forEach((dot) => {
+    dot.classList.add("process-diagnostic-dot");
+  });
+
+  let timers = [];
+  let cycleTimer = null;
+
+  const clearTimers = () => {
+    timers.forEach((timer) => clearTimeout(timer));
+    timers = [];
+
+    if (cycleTimer) {
+      clearTimeout(cycleTimer);
+      cycleTimer = null;
+    }
+  };
+
+  const reset = () => {
+    panel.classList.remove("is-scanning");
+
+    rows.forEach((row) => {
+      row?.classList.remove("is-active");
+    });
+
+    statuses.forEach((status) => {
+      status?.classList.remove("is-active", "is-done");
+    });
+
+    dots.forEach((dot) => {
+      dot.classList.remove("is-active");
+    });
+
+    track?.classList.remove("is-running");
+    output?.classList.remove("is-active");
+  };
+
+  const later = (callback, delay) => {
+    timers.push(setTimeout(callback, delay));
+  };
+
+  const runCycle = () => {
+    clearTimers();
+    reset();
+
+    requestAnimationFrame(() => {
+      panel.classList.add("is-scanning");
+    });
+
+    later(() => {
+      rows[0]?.classList.add("is-active");
+      statuses[0]?.classList.add("is-active");
+    }, 450);
+
+    later(() => {
+      statuses[0]?.classList.remove("is-active");
+      statuses[0]?.classList.add("is-done");
+      rows[0]?.classList.remove("is-active");
+
+      rows[1]?.classList.add("is-active");
+      statuses[1]?.classList.add("is-active");
+    }, 1450);
+
+    later(() => {
+      statuses[1]?.classList.remove("is-active");
+      statuses[1]?.classList.add("is-done");
+      rows[1]?.classList.remove("is-active");
+
+      rows[2]?.classList.add("is-active");
+      statuses[2]?.classList.add("is-active");
+    }, 2450);
+
+    later(() => {
+      statuses[2]?.classList.remove("is-active");
+      statuses[2]?.classList.add("is-done");
+      rows[2]?.classList.remove("is-active");
+
+      track?.classList.add("is-running");
+
+      dots.forEach((dot, index) => {
+        later(() => {
+          dots.forEach((item) => {
+            item.classList.remove("is-active");
+          });
+
+          dot.classList.add("is-active");
+        }, index * 330);
+      });
+    }, 3450);
+
+    later(() => {
+      dots.forEach((dot) => {
+        dot.classList.remove("is-active");
+      });
+
+      output?.classList.add("is-active");
+    }, 5000);
+
+    later(() => {
+      output?.classList.remove("is-active");
+    }, 6500);
+
+    cycleTimer = setTimeout(runCycle, 7600);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+
+      if (entry.isIntersecting) {
+        if (!cycleTimer) {
+          runCycle();
+        }
+      } else {
+        clearTimers();
+        reset();
+      }
+    },
+    {
+      threshold: 0.35
+    }
+  );
+
+  observer.observe(panel);
+})();

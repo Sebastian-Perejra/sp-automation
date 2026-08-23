@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-site-language="ru" data-site-page="terms">
 <head>
   <meta charset="UTF-8">
 
@@ -54,6 +54,11 @@
   >
 
   <link
+  rel="stylesheet"
+  href="/components/site-map/site-map.css"
+>
+
+  <link
     rel="stylesheet"
     href="/assistant.css"
   >
@@ -75,6 +80,66 @@
 </head>
 
 <body>
+
+  <button
+  class="site-map-trigger"
+  type="button"
+  aria-label="Открыть карту сайта"
+  data-site-map-trigger
+>
+  <span class="site-map-trigger__icon" aria-hidden="true">
+    <svg viewBox="0 0 32 32">
+      <path d="M3.5 7.5 11 4l10 4 7.5-3.5v20L21 28l-10-4-7.5 3.5z"></path>
+      <path d="M11 4v20"></path>
+      <path d="M21 8v20"></path>
+      <path d="M16 10.5c-2.4 0-4.3 1.9-4.3 4.3 0 3.2 4.3 7.1 4.3 7.1s4.3-3.9 4.3-7.1c0-2.4-1.9-4.3-4.3-4.3z"></path>
+      <circle cx="16" cy="14.8" r="1.5"></circle>
+    </svg>
+  </span>
+
+  <span class="site-map-trigger__copy">
+    <strong>Карта сайта</strong>
+    <small>Где я сейчас?</small>
+  </span>
+</button>
+
+<div
+  class="site-map-overlay"
+  data-site-map-overlay
+  aria-hidden="true"
+>
+  <div
+    class="site-map-overlay__backdrop"
+    data-site-map-close
+  ></div>
+
+  <div
+    class="site-map-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Карта сайта"
+  >
+    <button
+      class="site-map-panel__close"
+      type="button"
+      aria-label="Закрыть карту"
+      data-site-map-close
+    >
+      ×
+    </button>
+
+    <div class="site-map-panel__top">
+      <span>НАВИГАЦИЯ ПО САЙТУ</span>
+      <strong>Карта сайта</strong>
+      <small>Вы здесь · найдите следующий маршрут</small>
+    </div>
+
+    <div
+      class="site-map-campus"
+      data-site-map-campus
+    ></div>
+  </div>
+</div>
 
   <div
     class="terms-background"
@@ -891,6 +956,6 @@
 
   <script src="/themes/noir-lime/terms/terms.js"></script>
   <script src="/consent/consent.js"></script>
-
+  <script src="/components/site-map/site-map.js" defer></script>
 </body>
 </html>

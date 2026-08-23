@@ -34,65 +34,61 @@
 
 #contract-generator-case.contract-case-intro{
   position:relative;
-  padding:72px 32px 54px;
-  background:
-    radial-gradient(
-      circle at 15% 0%,
-      rgba(16,124,65,.12),
-      transparent 36%
-    ),
-    linear-gradient(
-      180deg,
-      #f8faf9 0%,
-      #edf2ef 100%
-    );
-  border-bottom:1px solid #d5ddd8;
+  margin-top:26px;
+  padding:42px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-card);
+  background:rgba(255,255,255,.97);
+  box-shadow:var(--shadow-card);
 }
 
 #contract-generator-case .contract-case-inner{
-  width:min(1380px,100%);
-  margin:0 auto;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
 }
 
 #contract-generator-case .case-demo-kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:16px;
-  padding:7px 11px;
-  border:1px solid rgba(16,124,65,.22);
-  border-radius:999px;
-  background:rgba(16,124,65,.07);
-  color:#0b6a38;
+  margin-bottom:8px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--green);
+  font-family:var(--font-tech);
   font-size:11px;
-  font-weight:800;
-  letter-spacing:.11em;
+  font-weight:600;
+  letter-spacing:.06em;
   text-transform:uppercase;
 }
 
 #contract-generator-case > .contract-case-inner > h1{
-  max-width:900px;
-  margin:0;
-  color:#17231d;
-  font-size:clamp(32px,4.2vw,62px);
-  line-height:1.02;
-  letter-spacing:-.045em;
-  font-weight:760;
+  max-width:950px;
+  margin:0 0 10px;
+  color:var(--green);
+  font-size:clamp(1.8rem,3.5vw,2.5rem);
+  font-weight:600;
+  line-height:1.15;
+  letter-spacing:-.035em;
 }
 
 #contract-generator-case .contract-case-subtitle{
-  max-width:900px;
-  margin:22px 0 0;
-  color:#66736c;
-  font-size:17px;
-  line-height:1.65;
+  max-width:820px;
+  margin:0;
+  color:var(--text-secondary);
+  font-size:14px;
+  line-height:1.8;
 }
 
 #contract-generator-case .contract-problem-solution{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:18px;
-  margin-top:42px;
+  margin-top:28px;
 }
 
 #contract-generator-case .contract-story-card{

@@ -1378,3 +1378,264 @@
     margin-left: 0;
   }
 }
+
+.quote-stage {
+  position: relative;
+}
+
+.quote-stage-transition {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  min-height: 580px;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border: 1px solid #dce4df;
+  border-radius: 17px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(115,160,91,.07), transparent 30%),
+    rgba(250,252,250,.985);
+  backdrop-filter: blur(5px);
+}
+
+.quote-stage-transition[hidden] {
+  display: none;
+}
+
+.quote-transition-inner {
+  width: min(420px, 100%);
+  text-align: center;
+}
+
+.quote-transition-label {
+  display: block;
+  color: #71915e;
+  font-family: var(--font-tech);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.quote-transition-inner strong {
+  display: block;
+  margin-top: 8px;
+  color: #34483d;
+  font-size: 17px;
+}
+
+.quote-transition-inner p {
+  margin: 7px 0 0;
+  color: #7d8781;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.quote-transition-track {
+  position: relative;
+  height: 3px;
+  margin: 22px auto 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dfe7e1;
+}
+
+.quote-transition-track i {
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 35%;
+  height: 100%;
+  border-radius: inherit;
+  background: #5f8d68;
+  animation: quoteTransitionMove .9s ease-in-out infinite;
+}
+
+.quote-transition-statuses {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 13px;
+}
+
+.quote-transition-statuses span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ccd8d0;
+  animation: quoteTransitionDot 1s ease-in-out infinite;
+}
+
+.quote-transition-statuses span:nth-child(2) {
+  animation-delay: .16s;
+}
+
+.quote-transition-statuses span:nth-child(3) {
+  animation-delay: .32s;
+}
+
+@keyframes quoteTransitionMove {
+  0% {
+    left: -35%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes quoteTransitionDot {
+  0%,
+  100% {
+    transform: scale(.8);
+    background: #ccd8d0;
+  }
+
+  50% {
+    transform: scale(1.15);
+    background: #5f8d68;
+  }
+}
+
+.quote-pdf-result.is-ready {
+  border-color: #91b49d;
+  box-shadow: 0 0 0 4px rgba(94,139,105,.08);
+}
+
+#quote-preview-pdf.quote-next-action {
+  animation: quotePulse 1.4s ease-in-out infinite;
+}
+
+.quote-pdf-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(9,16,12,.76);
+  backdrop-filter: blur(10px);
+}
+
+.quote-pdf-modal[hidden] {
+  display: none;
+}
+
+.quote-pdf-modal-dialog {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(920px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  background: #eef1ef;
+  box-shadow: 0 35px 90px rgba(0,0,0,.4);
+}
+
+.quote-pdf-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #d7dfda;
+  background: #fff;
+}
+
+.quote-pdf-modal-head span {
+  display: block;
+  color: #708679;
+  font-family: var(--font-tech);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.quote-pdf-modal-head strong {
+  display: block;
+  margin-top: 4px;
+  color: #3e4b44;
+  font-size: 10px;
+}
+
+.quote-pdf-modal-head button {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #edf2ef;
+  color: #4c5d53;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.quote-pdf-modal-stage {
+  overflow: auto;
+  padding: 26px;
+}
+
+.quote-document-modal {
+  width: min(700px, 100%);
+  margin: 0 auto;
+  padding: 42px;
+}
+
+.quote-pdf-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px 18px;
+  border-top: 1px solid #d7dfda;
+  background: #fff;
+}
+
+.quote-pdf-modal-footer span {
+  max-width: 500px;
+  color: #78827c;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.quote-pdf-modal-footer .quote-primary-action {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .quote-stage-transition {
+    min-height: 420px;
+  }
+
+  .quote-pdf-modal {
+    padding: 10px;
+  }
+
+  .quote-pdf-modal-dialog {
+    max-height: calc(100vh - 20px);
+    border-radius: 15px;
+  }
+
+  .quote-pdf-modal-stage {
+    padding: 12px;
+  }
+
+  .quote-document-modal {
+    min-width: 620px;
+    padding: 28px;
+  }
+
+  .quote-pdf-modal-footer {
+    display: grid;
+  }
+
+  .quote-pdf-modal-footer .quote-primary-action {
+    width: 100%;
+  }
+}

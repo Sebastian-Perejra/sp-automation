@@ -1,456 +1,697 @@
 (() => {
-  const caseRoot = document.querySelector("#telegram-bot-case");
+  const root = document.querySelector("#telegram-bot-case");
 
-  if (!caseRoot) return;
+  if (!root) return;
 
-  const runButton = caseRoot.querySelector("#tg-demo-run");
-  const progress = caseRoot.querySelector("#tg-demo-progress");
-  const statusText = caseRoot.querySelector("#tg-demo-status");
-  const counterText = caseRoot.querySelector("#tg-demo-counter");
+  const chatArea = root.querySelector("#tg-chat-area");
+  const dynamicZone = root.querySelector("#tg-dynamic-zone");
+  const mainMenu = root.querySelector("#tg-main-menu");
 
-  const sourceCards = [
-    ...caseRoot.querySelectorAll("[data-tg-source]")
+  const addButton = root.querySelector("#tg-add-reminder");
+  const openListButton = root.querySelector("#tg-open-list");
+  const deleteButton = root.querySelector("#tg-delete-reminder");
+  const helpButton = root.querySelector("#tg-help");
+
+  const replyKeyboard = root.querySelector("#tg-reply-keyboard");
+
+  const input = root.querySelector("#tg-message-input");
+  const sendButton = root.querySelector("#tg-send-button");
+
+  const stepCounter = root.querySelector("#tg-step-counter");
+  const guideMessage = root.querySelector("#tg-guide-message");
+  const guideSteps = [
+    ...root.querySelectorAll("[data-tg-guide-step]")
   ];
 
-  const userMessage = caseRoot.querySelector("#tg-user-message");
-  const botReply = caseRoot.querySelector("#tg-bot-reply");
-  const quickActions = [
-    ...caseRoot.querySelectorAll("#tg-quick-actions button")
-  ];
-  const confirmation = caseRoot.querySelector("#tg-confirmation");
-  const reminderCard = caseRoot.querySelector("#tg-reminder-card");
+  const resetButton = root.querySelector("#tg-reset-demo");
 
-  const flowSteps = [
-    ...caseRoot.querySelectorAll(".tg-flow article")
-  ];
+  const shareModal = root.querySelector("#tg-share-modal");
+  const shareClose = root.querySelector("#tg-share-close");
+  const shareReminderText = root.querySelector(
+    "#tg-share-reminder-text"
+  );
 
-  const resultItems = [
-    ...caseRoot.querySelectorAll(".tg-result-item")
+  const shareContacts = [
+    ...root.querySelectorAll("[data-tg-contact]")
   ];
 
-  const statCreated = caseRoot.querySelector("#tg-stat-created");
-  const statSent = caseRoot.querySelector("#tg-stat-sent");
-  const statSnoozed = caseRoot.querySelector("#tg-stat-snoozed");
-  const statDone = caseRoot.querySelector("#tg-stat-done");
+  let currentStep = 1;
 
-  const scenarios = [
-    {
-      source: "Надіслати комерційну пропозицію клієнту до 16:00",
-      bot: "Коли нагадати?",
-      actionIndex: 2,
-      actionText: "Сьогодні ввечері",
-      confirmation: "Нагадування створено на сьогодні, 19:00",
-      reminderTitle: "Надіслати комерційну пропозицію клієнту",
-      reminderTime: "19:00",
-      reminderStatus: "активне",
-      repeat: "вимкнено"
-    },
-    {
-      source: "Передзвонити клієнту завтра о 10:00",
-      bot: "Коли нагадати?",
-      actionIndex: 3,
-      actionText: "Завтра зранку",
-      confirmation: "Нагадування створено на завтра, 10:00",
-      reminderTitle: "Передзвонити клієнту",
-      reminderTime: "10:00",
-      reminderStatus: "активне",
-      repeat: "увімкнено"
-    },
-    {
-      source: "Перевірити оплату рахунку після обіду",
-      bot: "Коли нагадати?",
-      actionIndex: 1,
-      actionText: "Через 1 год",
-      confirmation: "Нагадування створено на 14:30",
-      reminderTitle: "Перевірити оплату рахунку",
-      reminderTime: "14:30",
-      reminderStatus: "активне",
-      repeat: "вимкнено"
-    }
-  ];
+  let reminder = {
+    text: "",
+    timeLabel: "",
+    mode: "",
+    created: false
+  };
 
-  const sleep = delay =>
-    new Promise(resolve => setTimeout(resolve, delay));
-
-  function setFlowStep(index) {
-    flowSteps.forEach((step, stepIndex) => {
-      step.classList.toggle("active", stepIndex === index);
-    });
-
-    counterText.textContent =
-      `${Math.min(index + 1, 5)} / 5`;
-
-    progress.style.width =
-      `${Math.min(((index + 1) / 5) * 100, 100)}%`;
-  }
-
-  function resetQuickActions() {
-    quickActions.forEach(button => {
-      button.classList.remove("active");
+  function scrollChat() {
+    requestAnimationFrame(() => {
+      chatArea.scrollTo({
+        top: chatArea.scrollHeight,
+        behavior: "smooth"
+      });
     });
   }
 
-  function resetResultItems() {
-    resultItems.forEach(item => {
-      item.classList.remove("active", "snoozed", "done");
+  function getTime() {
+    return new Date().toLocaleTimeString("uk-UA", {
+      hour: "2-digit",
+      minute: "2-digit"
     });
-
-    resultItems[0]?.classList.add("active");
-    resultItems[1]?.classList.add("snoozed");
-    resultItems[2]?.classList.add("done");
-
-    const chips = [
-      ...caseRoot.querySelectorAll(".tg-status-chip")
-    ];
-
-    if (chips[0]) {
-      chips[0].className = "tg-status-chip active";
-      chips[0].textContent = "Активне";
-    }
-
-    if (chips[1]) {
-      chips[1].className = "tg-status-chip snoozed";
-      chips[1].textContent = "Відкладено";
-    }
-
-    if (chips[2]) {
-      chips[2].className = "tg-status-chip done";
-      chips[2].textContent = "Виконано";
-    }
   }
 
-  function setReminderCard(data) {
-    const head = reminderCard.querySelector(".tg-reminder-head");
-    const title = reminderCard.querySelector("p");
-    const meta = reminderCard.querySelectorAll(".tg-reminder-meta span");
+  function createMessage(text, type = "bot") {
+    const message = document.createElement("div");
 
-    if (head) {
-      const strong = head.querySelector("strong");
-      const time = head.querySelector("span");
+    message.className =
+      type === "user"
+        ? "tg-message tg-message-user"
+        : "tg-message tg-message-bot";
 
-      if (strong) {
-        strong.textContent = "Активне нагадування";
-      }
+    const body = document.createElement("div");
+    body.className = "tg-message-text";
+    body.textContent = text;
 
-      if (time) {
-        time.textContent = data.reminderTime;
-      }
-    }
+    const time = document.createElement("span");
+    time.className = "tg-message-time";
+    time.textContent = getTime();
 
-    if (title) {
-      title.textContent = data.reminderTitle;
-    }
+    message.appendChild(body);
+    message.appendChild(time);
 
-    if (meta[0]) {
-      meta[0].textContent =
-        `Статус: ${data.reminderStatus}`;
-    }
+    dynamicZone.appendChild(message);
 
-    if (meta[1]) {
-      meta[1].textContent =
-        `Повтор: ${data.repeat}`;
-    }
+    scrollChat();
+
+    return message;
   }
 
-  function resetDemo() {
-    sourceCards.forEach((card, index) => {
-      card.classList.toggle("active", index === 0);
-    });
-
-    userMessage.textContent =
-      scenarios[0].source;
-
-    botReply.textContent =
-      scenarios[0].bot;
-
-    confirmation.textContent =
-      "Нагадування буде надіслано сьогодні о 15:30";
-
-    setReminderCard({
-      reminderTitle:
-        "Надіслати комерційну пропозицію клієнту",
-      reminderTime: "15:30",
-      reminderStatus: "активне",
-      repeat: "вимкнено"
-    });
-
-    resetQuickActions();
-    resetResultItems();
-
-    flowSteps.forEach(step => {
-      step.classList.remove("active");
-    });
-
-    progress.style.width = "0%";
-    statusText.textContent = "Готово до запуску";
-    counterText.textContent = "0 / 5";
-
-    statCreated.textContent = "0";
-    statSent.textContent = "0";
-    statSnoozed.textContent = "0";
-    statDone.textContent = "0";
+  function clearHints() {
+    root
+      .querySelectorAll(".tg-next-action")
+      .forEach(element => {
+        element.classList.remove("tg-next-action");
+      });
   }
 
-  async function animateSourceTransfer(data, scenarioIndex) {
-    sourceCards.forEach((card, index) => {
-      card.classList.toggle(
+  function setGuide(step, text) {
+    currentStep = step;
+
+    stepCounter.textContent = `${step} / 7`;
+    guideMessage.textContent = text;
+
+    guideSteps.forEach((item, index) => {
+      const number = index + 1;
+
+      item.classList.toggle(
         "active",
-        index === scenarioIndex
+        number === step
+      );
+
+      item.classList.toggle(
+        "done",
+        number < step
       );
     });
 
-    const activeCard = sourceCards[scenarioIndex];
-
-    activeCard?.classList.add("processing");
-
-    statusText.textContent =
-      "Повідомлення пересилається боту";
-
-    setFlowStep(0);
-
-    await sleep(650);
-
-    userMessage.textContent =
-      data.source;
-
-    activeCard?.classList.remove("processing");
+    clearHints();
   }
 
-  async function animateBotReply(data) {
-    statusText.textContent =
-      "Бот прийняв задачу";
+  function enableComposer(placeholder) {
+    input.disabled = false;
+    input.value = "";
+    input.placeholder = placeholder;
 
-    setFlowStep(1);
+    sendButton.disabled = true;
 
-    botReply.textContent =
-      "Аналізую повідомлення…";
+    input.classList.add("tg-next-action");
 
-    await sleep(500);
-
-    botReply.textContent =
-      data.bot;
-
-    await sleep(450);
+    setTimeout(() => {
+      input.focus();
+    }, 200);
   }
 
-  async function animateScheduling(data) {
-    statusText.textContent =
-      "Вибір часу нагадування";
+  function disableComposer() {
+    input.disabled = true;
+    input.value = "";
+    input.placeholder = "Message";
 
-    setFlowStep(2);
+    sendButton.disabled = true;
+    input.classList.remove("tg-next-action");
+    sendButton.classList.remove("tg-next-action");
+  }
 
-    resetQuickActions();
+  function hideReplyKeyboard() {
+    replyKeyboard.hidden = true;
+    replyKeyboard.innerHTML = "";
+  }
 
-    const action =
-      quickActions[data.actionIndex];
+  function showReplyKeyboard(buttons) {
+    replyKeyboard.innerHTML = "";
+    replyKeyboard.hidden = false;
 
-    if (action) {
-      action.classList.add("active");
-    }
+    buttons.forEach((buttonData, index) => {
+      const button = document.createElement("button");
 
-    await sleep(650);
+      button.type = "button";
+      button.textContent = buttonData.label;
 
-    confirmation.textContent =
-      data.confirmation;
+      if (index === 0) {
+        button.classList.add("tg-next-action");
+      }
 
-    setReminderCard(data);
+      button.addEventListener("click", () => {
+        buttonData.action(button);
+      });
 
-    statCreated.textContent =
-      String(
-        Number(statCreated.textContent) + 1
+      replyKeyboard.appendChild(button);
+    });
+  }
+
+  function setMainMenuEnabled(enabled) {
+    [
+      addButton,
+      openListButton,
+      deleteButton,
+      helpButton
+    ].forEach(button => {
+      button.disabled = !enabled;
+    });
+  }
+
+  function showTimeOptions() {
+    setGuide(
+      3,
+      "Тепер оберіть, коли бот має повернути це нагадування."
+    );
+
+    showReplyKeyboard([
+      {
+        label: "5 хв",
+        action: () => chooseTime("через 5 хвилин")
+      },
+      {
+        label: "10 хв",
+        action: () => chooseTime("через 10 хвилин")
+      },
+      {
+        label: "30 хв",
+        action: () => chooseTime("через 30 хвилин")
+      },
+      {
+        label: "1 година",
+        action: () => chooseTime("через 1 годину")
+      },
+      {
+        label: "Сьогодні ввечері",
+        action: () => chooseTime("сьогодні ввечері")
+      },
+      {
+        label: "Завтра зранку",
+        action: () => chooseTime("завтра зранку")
+      }
+    ]);
+  }
+
+  function chooseTime(label) {
+    reminder.timeLabel = label;
+
+    hideReplyKeyboard();
+
+    createMessage(label, "user");
+
+    setTimeout(() => {
+      createMessage(
+        "Як нагадувати?"
       );
 
-    await sleep(500);
+      showModeOptions();
+    }, 350);
   }
 
-  async function animateReminder(data) {
-    statusText.textContent =
-      "Нагадування спрацювало";
+  function showModeOptions() {
+    setGuide(
+      4,
+      "Оберіть режим: один раз або повторювати нагадування, поки задача не буде виконана."
+    );
 
-    setFlowStep(3);
+    showReplyKeyboard([
+      {
+        label: "Один раз",
+        action: () => chooseMode("Один раз")
+      },
+      {
+        label: "Повторювати до виконання",
+        action: () =>
+          chooseMode("Повторювати до виконання")
+      }
+    ]);
+  }
 
-    botReply.textContent =
-      `⏰ Нагадування: ${data.reminderTitle}`;
+  function chooseMode(mode) {
+    reminder.mode = mode;
 
-    confirmation.textContent =
-      "Що зробити із задачею?";
+    hideReplyKeyboard();
 
-    statSent.textContent =
-      String(
-        Number(statSent.textContent) + 1
+    createMessage(mode, "user");
+
+    setTimeout(() => {
+      createReminder();
+    }, 350);
+  }
+
+  function createReminder() {
+    reminder.created = true;
+
+    createMessage(
+      `✅ Нагадування створено.\n\n${reminder.text}\n\nКоли: ${reminder.timeLabel}\nРежим: ${reminder.mode}`
+    );
+
+    setGuide(
+      5,
+      "Готово. Бот зберіг нагадування. Тепер відкрийте список і перевірте, що задача там є."
+    );
+
+    renderCreatedActions();
+  }
+
+  function renderCreatedActions() {
+    hideReplyKeyboard();
+
+    showReplyKeyboard([
+      {
+        label: "📋 Відкрити список",
+        action: () => showReminderList(true)
+      },
+      {
+        label: "↗ Передати іншому",
+        action: () => openShare()
+      },
+      {
+        label: "➕ Створити ще",
+        action: () => startNewReminder()
+      }
+    ]);
+  }
+
+  function showReminderList(fromFlow = false) {
+    if (!reminder.created) {
+      createMessage(
+        "Активних нагадувань поки немає."
       );
 
-    await sleep(650);
-  }
-
-  async function animateAction(scenarioIndex) {
-    statusText.textContent =
-      "Користувач обирає дію";
-
-    setFlowStep(4);
-
-    const item =
-      resultItems[scenarioIndex];
-
-    const chip =
-      item?.querySelector(".tg-status-chip");
-
-    if (!item || !chip) {
       return;
     }
 
-    if (scenarioIndex === 1) {
-      item.classList.remove("active", "done");
-      item.classList.add("snoozed");
+    hideReplyKeyboard();
 
-      chip.className =
-        "tg-status-chip snoozed";
+    createMessage("📋 Ваші активні нагадування:");
 
-      chip.textContent =
-        "Відкладено";
+    const card = document.createElement("div");
+    card.className = "tg-message tg-message-bot";
 
-      confirmation.textContent =
-        "Нагадування відкладено на 10 хв";
+    card.innerHTML = `
+      <div class="tg-message-text">
+        <strong>№1</strong><br>
+        ${escapeHtml(reminder.text)}<br><br>
+        ⏰ ${escapeHtml(reminder.timeLabel)}<br>
+        🔁 ${escapeHtml(reminder.mode)}
+      </div>
+      <span class="tg-message-time">${getTime()}</span>
+    `;
 
-      statSnoozed.textContent =
-        String(
-          Number(statSnoozed.textContent) + 1
-        );
-    } else {
-      item.classList.remove("active", "snoozed");
-      item.classList.add("done");
+    dynamicZone.appendChild(card);
 
-      chip.className =
-        "tg-status-chip done";
-
-      chip.textContent =
-        "Виконано";
-
-      confirmation.textContent =
-        "Задачу позначено як виконану";
-
-      statDone.textContent =
-        String(
-          Number(statDone.textContent) + 1
-        );
+    if (fromFlow) {
+      setGuide(
+        6,
+        "Нагадування є у списку. Тепер спробуйте передати його іншій людині."
+      );
     }
 
-    await sleep(700);
+    showReplyKeyboard([
+      {
+        label: "↗ Передати іншому",
+        action: () => openShare()
+      },
+      {
+        label: "✅ Виконано",
+        action: () => markDone()
+      },
+      {
+        label: "⏰ Відкласти",
+        action: () => snoozeReminder()
+      },
+      {
+        label: "➕ Нове нагадування",
+        action: () => startNewReminder()
+      }
+    ]);
+
+    scrollChat();
   }
 
-  async function runScenario(
-    data,
-    scenarioIndex
-  ) {
-    await animateSourceTransfer(
-      data,
-      scenarioIndex
-    );
-
-    await animateBotReply(data);
-
-    await animateScheduling(data);
-
-    await animateReminder(data);
-
-    await animateAction(scenarioIndex);
-  }
-
-  async function runDemo() {
-    runButton.disabled = true;
-    runButton.textContent =
-      "Демо виконується…";
-
-    resetDemo();
-
-    for (
-      let index = 0;
-      index < scenarios.length;
-      index++
-    ) {
-      await runScenario(
-        scenarios[index],
-        index
+  function openShare() {
+    if (!reminder.created) {
+      createMessage(
+        "Спочатку створіть нагадування."
       );
 
-      if (
-        index <
-        scenarios.length - 1
-      ) {
-        statusText.textContent =
-          "Переходимо до наступної задачі";
-
-        await sleep(700);
-
-        flowSteps.forEach(step => {
-          step.classList.remove("active");
-        });
-
-        progress.style.width = "0%";
-        counterText.textContent = "0 / 5";
-
-        resetQuickActions();
-      }
+      return;
     }
 
-    flowSteps.forEach(step => {
-      step.classList.remove("active");
-    });
+    shareReminderText.textContent =
+      reminder.text;
 
-    progress.style.width = "100%";
-    counterText.textContent = "5 / 5";
+    shareModal.hidden = false;
 
-    statusText.textContent =
-      "Готово: задачі створено, нагадування надіслано, статуси оновлено";
-
-    runButton.disabled = false;
-    runButton.textContent =
-      "↻ Запустити ще раз";
+    setGuide(
+      7,
+      "Оберіть контакт — так виглядає передача нагадування іншій людині."
+    );
   }
 
-  quickActions.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      resetQuickActions();
-      button.classList.add("active");
+  function closeShare() {
+    shareModal.hidden = true;
+  }
 
-      confirmation.textContent =
-        `Обрано: ${button.textContent.trim()}`;
+  function completeShare(contactName) {
+    closeShare();
 
-      setFlowStep(2);
+    createMessage(
+      `↗ Нагадування передано: ${contactName}`
+    );
+
+    hideReplyKeyboard();
+
+    showReplyKeyboard([
+      {
+        label: "➕ Створити нове",
+        action: () => startNewReminder()
+      },
+      {
+        label: "📋 Список",
+        action: () => showReminderList(false)
+      }
+    ]);
+
+    guideMessage.textContent =
+      `Готово. Нагадування передано контакту “${contactName}”. Ви пройшли повний сценарій.`;
+
+    stepCounter.textContent = "7 / 7";
+
+    guideSteps.forEach(item => {
+      item.classList.remove("active");
+      item.classList.add("done");
     });
+  }
+
+  function markDone() {
+    hideReplyKeyboard();
+
+    createMessage("✅ Виконано", "user");
+
+    setTimeout(() => {
+      createMessage(
+        "Готово. Нагадування закрито."
+      );
+
+      reminder.created = false;
+
+      showReplyKeyboard([
+        {
+          label: "➕ Створити нове",
+          action: () => startNewReminder()
+        }
+      ]);
+    }, 300);
+  }
+
+  function snoozeReminder() {
+    hideReplyKeyboard();
+
+    createMessage("⏰ Відкласти", "user");
+
+    setTimeout(() => {
+      createMessage(
+        "На скільки відкласти?"
+      );
+
+      showReplyKeyboard([
+        {
+          label: "5 хв",
+          action: () => applySnooze("5 хвилин")
+        },
+        {
+          label: "10 хв",
+          action: () => applySnooze("10 хвилин")
+        },
+        {
+          label: "30 хв",
+          action: () => applySnooze("30 хвилин")
+        },
+        {
+          label: "1 година",
+          action: () => applySnooze("1 годину")
+        }
+      ]);
+    }, 300);
+  }
+
+  function applySnooze(label) {
+    hideReplyKeyboard();
+
+    createMessage(label, "user");
+
+    setTimeout(() => {
+      createMessage(
+        `⏰ Нагадування відкладено на ${label}.`
+      );
+
+      renderCreatedActions();
+    }, 300);
+  }
+
+  function startNewReminder() {
+    hideReplyKeyboard();
+
+    createMessage("➕ Додати", "user");
+
+    setGuide(
+      2,
+      "Напишіть будь-яку власну задачу у полі Message і натисніть кнопку відправлення."
+    );
+
+    setMainMenuEnabled(false);
+
+    setTimeout(() => {
+      createMessage(
+        "Напиши текст нагадування:"
+      );
+
+      enableComposer(
+        "Наприклад: передзвонити клієнту"
+      );
+    }, 350);
+  }
+
+  function handleReminderText() {
+    const value = input.value.trim();
+
+    if (!value) return;
+
+    reminder = {
+      text: value,
+      timeLabel: "",
+      mode: "",
+      created: false
+    };
+
+    createMessage(value, "user");
+
+    disableComposer();
+
+    setTimeout(() => {
+      createMessage(
+        "Коли нагадати?"
+      );
+
+      showTimeOptions();
+    }, 350);
+  }
+
+  function showHelp() {
+    createMessage(
+      "Я можу створювати нагадування, показувати список, відкладати задачі, повторювати їх до виконання та передавати іншій людині."
+    );
+  }
+
+  function showDelete() {
+    if (!reminder.created) {
+      createMessage(
+        "Немає активних нагадувань для видалення."
+      );
+
+      return;
+    }
+
+    createMessage(
+      `Видалити нагадування “${reminder.text}”?`
+    );
+
+    showReplyKeyboard([
+      {
+        label: "Так, видалити",
+        action: () => {
+          reminder.created = false;
+
+          hideReplyKeyboard();
+
+          createMessage(
+            "🗑 Нагадування видалено."
+          );
+
+          setMainMenuEnabled(true);
+        }
+      },
+      {
+        label: "Скасувати",
+        action: () => {
+          hideReplyKeyboard();
+
+          createMessage(
+            "Видалення скасовано."
+          );
+        }
+      }
+    ]);
+  }
+
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function resetDemo() {
+    reminder = {
+      text: "",
+      timeLabel: "",
+      mode: "",
+      created: false
+    };
+
+    dynamicZone.innerHTML = "";
+
+    hideReplyKeyboard();
+    disableComposer();
+
+    setMainMenuEnabled(true);
+
+    setGuide(
+      1,
+      "Натисніть “Додати”, щоб створити перше нагадування."
+    );
+
+    addButton.classList.add("tg-next-action");
+
+    closeShare();
+
+    chatArea.scrollTop = 0;
+  }
+
+  input.addEventListener("input", () => {
+    const hasText =
+      input.value.trim().length > 0;
+
+    sendButton.disabled = !hasText;
+
+    input.classList.toggle(
+      "tg-next-action",
+      !hasText
+    );
+
+    sendButton.classList.toggle(
+      "tg-next-action",
+      hasText
+    );
   });
 
-  sourceCards.forEach((card, index) => {
-    card.addEventListener("click", () => {
-      sourceCards.forEach(item => {
-        item.classList.remove("active");
-      });
-
-      card.classList.add("active");
-
-      const data =
-        scenarios[index];
-
-      if (!data) return;
-
-      userMessage.textContent =
-        data.source;
-
-      botReply.textContent =
-        data.bot;
-
-      confirmation.textContent =
-        "Оберіть час нагадування";
-
-      setReminderCard(data);
-
-      resetQuickActions();
-    });
+  input.addEventListener("keydown", event => {
+    if (
+      event.key === "Enter" &&
+      !sendButton.disabled
+    ) {
+      event.preventDefault();
+      handleReminderText();
+    }
   });
 
-  runButton.addEventListener(
+  sendButton.addEventListener(
     "click",
-    runDemo
+    handleReminderText
+  );
+
+  addButton.addEventListener(
+    "click",
+    startNewReminder
+  );
+
+  openListButton.addEventListener(
+    "click",
+    () => showReminderList(false)
+  );
+
+  deleteButton.addEventListener(
+    "click",
+    showDelete
+  );
+
+  helpButton.addEventListener(
+    "click",
+    showHelp
+  );
+
+  resetButton.addEventListener(
+    "click",
+    resetDemo
+  );
+
+  shareClose.addEventListener(
+    "click",
+    closeShare
+  );
+
+  shareModal.addEventListener(
+    "click",
+    event => {
+      if (event.target === shareModal) {
+        closeShare();
+      }
+    }
+  );
+
+  shareContacts.forEach(contact => {
+    contact.addEventListener("click", () => {
+      completeShare(
+        contact.dataset.tgContact
+      );
+    });
+  });
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape" &&
+        !shareModal.hidden
+      ) {
+        closeShare();
+      }
+    }
   );
 
   resetDemo();

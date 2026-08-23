@@ -293,7 +293,7 @@
           </div>
 
           <span class="quote-app-status-pill">
-            CONNECTED
+            READY
           </span>
         </div>
 
@@ -309,22 +309,22 @@
           </div>
 
           <div>
-            <small>Джерела даних</small>
-            <strong>4 активні</strong>
+            <small>Підключення</small>
+            <strong>Outlook · ERP · CRM</strong>
           </div>
         </div>
 
-        <div class="quote-app-new-offer">
-          <span>НОВИЙ ЗАПИТ</span>
+        <div class="quote-app-new-offer quote-app-start-card">
+          <span>НОВА ПРОПОЗИЦІЯ</span>
 
           <strong>
-            FreshMarket Distribution GmbH
+            Почніть нову комерційну пропозицію
           </strong>
 
           <p>
-            Лист уже прочитано. Далі менеджер запускає нову пропозицію,
-            а програма по черзі допомагає знайти клієнта,
-            товари, ціни, доставку та сформувати PDF.
+            На стартовому екрані немає даних FreshMarket.
+            Спочатку менеджер сам вирішує,
+            звідки взяти запит клієнта.
           </p>
 
           <button
@@ -401,7 +401,8 @@
             <span>EXCEL PRICE LIST</span>
             <strong>PriceList_2026.xlsx</strong>
             <small>
-              Один із можливих джерел номенклатури та базових цін.
+              Один із можливих джерел
+              номенклатури та базових цін.
             </small>
           </div>
 
@@ -547,7 +548,6 @@
           <div>
             <span>CLOUD STORAGE</span>
             <strong>Google Drive</strong>
-
             <small>
               Приклад файлового сховища,
               де компанія може тримати прайси й готові PDF.
@@ -600,7 +600,6 @@
           <div>
             <span>FILE EXPLORER</span>
             <strong>This PC</strong>
-
             <small>
               Реалістичний приклад того,
               як дані можуть бути розкидані
@@ -654,7 +653,6 @@
           <div>
             <span>ARCHIVE</span>
             <strong>Previous quotations</strong>
-
             <small>
               Історія того, що вже пропонували клієнтам.
             </small>
@@ -702,7 +700,6 @@
           <div>
             <span>TEXT FILE</span>
             <strong>call_notes.txt</strong>
-
             <small>
               Звичайний робочий файл,
               який не є частиною автоматизованого процесу.
@@ -733,7 +730,6 @@
           <div>
             <span>OLD FILE</span>
             <strong>price_old_DO_NOT_USE.xlsx</strong>
-
             <small>
               Саме такі файли створюють ризик
               використання неактуальної ціни.
@@ -767,7 +763,6 @@
           <div>
             <span>FOLDER</span>
             <strong>draft_quotes</strong>
-
             <small>
               Чернетки старого ручного процесу.
             </small>
@@ -799,10 +794,376 @@
     }
   };
 
-  function openDesktopApp(appName) {
-    const app = desktopApps[appName];
+  function renderNewOfferStart() {
+    desktopWindowBody.innerHTML = `
+      <div class="quote-app-screen-head">
+        <div>
+          <span>NEW QUOTATION</span>
+          <strong>Звідки взяти запит клієнта?</strong>
+          <small>
+            Програма нічого не підставляє сама.
+            Менеджер обирає джерело запиту.
+          </small>
+        </div>
 
-    if (!app || !desktopWindow) return;
+        <span class="quote-app-status-pill">
+          STEP 1
+        </span>
+      </div>
+
+      <div class="quote-import-choice">
+        <button
+          type="button"
+          class="quote-import-option quote-import-option-main"
+          id="quote-import-email"
+        >
+          <span>OUTLOOK</span>
+          <strong>Імпортувати запит з email</strong>
+          <small>
+            Показати доступні листи
+            з підключеної корпоративної пошти.
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="quote-import-option"
+          id="quote-create-manual"
+        >
+          <span>MANUAL</span>
+          <strong>Створити вручну</strong>
+          <small>
+            Якщо запит отримано телефоном,
+            у месенджері або іншим способом.
+          </small>
+        </button>
+      </div>
+
+      <div class="quote-integration-note">
+        <span>Як це працює?</span>
+
+        <p>
+          У цьому прикладі програма підключена
+          до корпоративного Outlook.
+          Вона бачить лише доступну менеджеру
+          поштову скриньку після дозволеного підключення.
+          Лист потрапить у пропозицію тільки після того,
+          як менеджер сам його вибере.
+        </p>
+      </div>
+    `;
+  }
+
+  function renderEmailImportList() {
+    desktopWindowBody.innerHTML = `
+      <div class="quote-app-screen-head">
+        <div>
+          <span>OUTLOOK CONNECTION</span>
+          <strong>
+            Оберіть лист, з якого створити пропозицію
+          </strong>
+          <small>
+            Підключено:
+            sales@freshdrinks.example · Microsoft 365
+          </small>
+        </div>
+
+        <span class="quote-app-status-pill">
+          CONNECTED
+        </span>
+      </div>
+
+      <div class="quote-import-toolbar">
+        <span>Вхідні · сьогодні</span>
+        <strong>3 листи</strong>
+      </div>
+
+      <div class="quote-import-mail-list">
+        <button
+          type="button"
+          class="quote-import-mail quote-import-mail-main"
+          data-import-mail="freshmarket"
+        >
+          <span class="quote-import-mail-time">
+            08:42
+          </span>
+
+          <div>
+            <strong>
+              FreshMarket Distribution GmbH
+            </strong>
+
+            <span>
+              Request for quotation — juice assortment
+            </span>
+
+            <small>
+              purchasing@freshmarket.de
+            </small>
+          </div>
+
+          <i>RFQ</i>
+        </button>
+
+        <button
+          type="button"
+          class="quote-import-mail"
+          data-import-mail="logistics"
+        >
+          <span class="quote-import-mail-time">
+            08:17
+          </span>
+
+          <div>
+            <strong>Logistics Team</strong>
+            <span>Hamburg delivery slots</span>
+            <small>
+              logistics@freshdrinks.example
+            </small>
+          </div>
+
+          <i>INFO</i>
+        </button>
+
+        <button
+          type="button"
+          class="quote-import-mail"
+          data-import-mail="production"
+        >
+          <span class="quote-import-mail-time">
+            07:55
+          </span>
+
+          <div>
+            <strong>Production Planning</strong>
+            <span>
+              Weekly availability update
+            </span>
+            <small>
+              planning@freshdrinks.example
+            </small>
+          </div>
+
+          <i>INFO</i>
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="quote-secondary-action quote-import-back"
+        id="quote-import-back"
+      >
+        Назад
+      </button>
+    `;
+  }
+
+  function renderWrongEmail() {
+    desktopWindowBody.innerHTML = `
+      <div class="quote-app-screen-head">
+        <div>
+          <span>NOT AN RFQ</span>
+          <strong>
+            Цей лист не схожий на запит клієнта
+          </strong>
+          <small>
+            Оберіть лист із запитом
+            на комерційну пропозицію.
+          </small>
+        </div>
+
+        <span class="quote-app-status-pill">
+          SKIPPED
+        </span>
+      </div>
+
+      <div class="quote-import-warning">
+        <span>!</span>
+
+        <div>
+          <strong>Дані не імпортовано</strong>
+
+          <p>
+            Лист не містить запиту на товари,
+            кількість і комерційні умови.
+          </p>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="quote-primary-action"
+        id="quote-import-email"
+      >
+        Повернутися до списку листів
+      </button>
+    `;
+  }
+
+  function renderEmailAnalysis() {
+    desktopWindowBody.innerHTML = `
+      <div class="quote-app-screen-head">
+        <div>
+          <span>IMPORT FROM OUTLOOK</span>
+          <strong>Розбираємо вибраний лист</strong>
+          <small>
+            FreshMarket Distribution GmbH · 08:42
+          </small>
+        </div>
+
+        <span class="quote-app-status-pill">
+          READING
+        </span>
+      </div>
+
+      <div
+        class="quote-import-analysis"
+        id="quote-import-analysis"
+      >
+        <div data-import-state="sender">
+          <span>○</span>
+          <strong>Визначаємо клієнта</strong>
+          <small>
+            FreshMarket Distribution GmbH
+          </small>
+        </div>
+
+        <div data-import-state="products">
+          <span>○</span>
+          <strong>Читаємо запитані товари</strong>
+          <small>4 позиції</small>
+        </div>
+
+        <div data-import-state="delivery">
+          <span>○</span>
+          <strong>
+            Зчитуємо адресу та дату доставки
+          </strong>
+          <small>
+            Hamburg · 15.09.2026
+          </small>
+        </div>
+
+        <div data-import-state="terms">
+          <span>○</span>
+          <strong>
+            Фіксуємо додаткові умови
+          </strong>
+          <small>
+            Delivery cost · payment terms
+          </small>
+        </div>
+      </div>
+
+      <div
+        class="quote-import-result"
+        id="quote-import-result"
+        hidden
+      >
+        <div class="quote-import-result-head">
+          <span>✓</span>
+
+          <div>
+            <strong>
+              Запит імпортовано з Outlook
+            </strong>
+
+            <small>
+              Тепер дані можна перевірити
+              та доповнити у процесі підготовки пропозиції.
+            </small>
+          </div>
+        </div>
+
+        <div class="quote-import-summary">
+          <div>
+            <small>Клієнт</small>
+            <strong>
+              FreshMarket Distribution GmbH
+            </strong>
+          </div>
+
+          <div>
+            <small>Позиції</small>
+            <strong>4 товари</strong>
+          </div>
+
+          <div>
+            <small>Доставка</small>
+            <strong>Hamburg, Germany</strong>
+          </div>
+
+          <div>
+            <small>Дата</small>
+            <strong>15 Sep 2026</strong>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="quote-primary-action quote-next-action"
+          id="quote-confirm-import"
+        >
+          Продовжити підготовку пропозиції
+        </button>
+      </div>
+    `;
+
+    const analysisItems = [
+      ...desktopWindowBody.querySelectorAll(
+        "[data-import-state]"
+      )
+    ];
+
+    const importResult =
+      desktopWindowBody.querySelector(
+        "#quote-import-result"
+      );
+
+    const importStatus =
+      desktopWindowBody.querySelector(
+        ".quote-app-status-pill"
+      );
+
+    analysisItems.forEach(
+      (item, index) => {
+        setTimeout(() => {
+          item.classList.add("done");
+
+          const icon =
+            item.querySelector("span");
+
+          if (icon) {
+            icon.textContent = "✓";
+          }
+
+          if (
+            index ===
+            analysisItems.length - 1
+          ) {
+            setTimeout(() => {
+              if (importResult) {
+                importResult.hidden = false;
+              }
+
+              if (importStatus) {
+                importStatus.textContent =
+                  "IMPORTED";
+              }
+            }, 350);
+          }
+        }, 430 * (index + 1));
+      }
+    );
+  }
+
+  function openDesktopApp(appName) {
+    const app =
+      desktopApps[appName];
+
+    if (!app || !desktopWindow) {
+      return;
+    }
 
     desktopWindowIcon.textContent =
       app.icon;
@@ -813,7 +1174,8 @@
     desktopWindowBody.innerHTML =
       app.render();
 
-    desktopWindow.hidden = false;
+    desktopWindow.hidden =
+      false;
 
     desktopWindow.scrollIntoView({
       behavior: "smooth",
@@ -822,9 +1184,12 @@
   }
 
   function closeDesktopWindow() {
-    if (!desktopWindow) return;
+    if (!desktopWindow) {
+      return;
+    }
 
-    desktopWindow.hidden = true;
+    desktopWindow.hidden =
+      true;
   }
 
   function money(value) {
@@ -853,7 +1218,9 @@
 
     panels.forEach(panel => {
       const panelStep =
-        Number(panel.dataset.quotePanel);
+        Number(
+          panel.dataset.quotePanel
+        );
 
       panel.hidden =
         panelStep !== step;
@@ -866,7 +1233,9 @@
 
     flowSteps.forEach(item => {
       const itemStep =
-        Number(item.dataset.quoteStep);
+        Number(
+          item.dataset.quoteStep
+        );
 
       item.classList.toggle(
         "active",
@@ -975,7 +1344,9 @@
         .trim()
         .toLowerCase();
 
-    if (!query) return;
+    if (!query) {
+      return;
+    }
 
     const knownCustomer =
       query.includes("freshmarket") ||
@@ -1213,7 +1584,9 @@
     state.selectedProducts.forEach(
       (item, index) => {
         const row =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         row.className =
           "quote-builder-row quote-builder-item";
@@ -2059,16 +2432,78 @@
           "#quote-open-new-offer"
         );
 
-      if (!newOfferButton) {
+      const importEmailButton =
+        event.target.closest(
+          "#quote-import-email"
+        );
+
+      const manualButton =
+        event.target.closest(
+          "#quote-create-manual"
+        );
+
+      const backButton =
+        event.target.closest(
+          "#quote-import-back"
+        );
+
+      const mailButton =
+        event.target.closest(
+          "[data-import-mail]"
+        );
+
+      const confirmImportButton =
+        event.target.closest(
+          "#quote-confirm-import"
+        );
+
+      if (newOfferButton) {
+        renderNewOfferStart();
         return;
       }
 
-      transitionToStep(
-        3,
-        "Програму відкрито",
-        "Створюємо нову комерційну пропозицію та починаємо з ідентифікації клієнта.",
-        1000
-      );
+      if (importEmailButton) {
+        renderEmailImportList();
+        return;
+      }
+
+      if (backButton) {
+        renderNewOfferStart();
+        return;
+      }
+
+      if (mailButton) {
+        if (
+          mailButton.dataset.importMail ===
+          "freshmarket"
+        ) {
+          renderEmailAnalysis();
+        } else {
+          renderWrongEmail();
+        }
+
+        return;
+      }
+
+      if (manualButton) {
+        transitionToStep(
+          3,
+          "Створено порожню пропозицію",
+          "Запит буде внесено вручну. Починаємо з ідентифікації клієнта.",
+          900
+        );
+
+        return;
+      }
+
+      if (confirmImportButton) {
+        transitionToStep(
+          3,
+          "Запит імпортовано з Outlook",
+          "Клієнта, позиції, адресу та дату зчитано з вибраного листа. Тепер перевіримо картку клієнта.",
+          1000
+        );
+      }
     }
   );
 

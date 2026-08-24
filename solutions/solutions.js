@@ -1572,7 +1572,7 @@ const conceptLabels =
       reasons:
         Array.from(reasons)
           .filter(Boolean)
-          .slice(0, 11),
+          .slice(0, 12),
       matchedConcepts:
         matchedConcepts
           .sort(
@@ -1595,7 +1595,7 @@ const conceptLabels =
             b.item.priority -
             a.item.priority
         )
-        .slice(0, 11)
+        .slice(0, 12)
         .map(indexed => ({
           item:
             indexed.item,
@@ -1675,7 +1675,7 @@ const conceptLabels =
           a.item.priority
         );
       })
-      .slice(0, 11);
+      .slice(0, 12);
   }
 
 function resultBadge(
@@ -2006,54 +2006,95 @@ stateNode.textContent =
       block: "start"
     });
 
-    try {
-const basePath =
-  `/solutions/cases/case-${caseId}`;
+try {
 
-const languageSuffix =
-  pageLanguage.startsWith("en")
-    ? "-en"
-    : pageLanguage.startsWith("ru")
-      ? "-ru"
-      : "";
+  if (caseId === 12) {
+    const basePath =
+      "/solutions/cases/case12";
 
-const caseHtmlPath =
-  `${basePath}/case-${caseId}${languageSuffix}.html`;
+    const htmlResponse =
+      await fetch(
+        `${basePath}/index.html?v=1`
+      );
 
-const caseJsPath =
-  `${basePath}/case-${caseId}${languageSuffix}.js`;
+    if (!htmlResponse.ok) {
+      throw new Error(
+        "Case 12 HTML failed"
+      );
+    }
 
-const [
-  htmlResponse,
-  jsResponse
-] = await Promise.all([
-  fetch(caseHtmlPath),
-  fetch(caseJsPath)
-]);
+    const fullHtml =
+      await htmlResponse.text();
+
+    if (
+      requestId !==
+      detailRequestId
+    ) {
+      return;
+    }
+
+    const parser =
+      new DOMParser();
+
+    const parsed =
+      parser.parseFromString(
+        fullHtml,
+        "text/html"
+      );
+
+    const caseShell =
+      parsed.querySelector(
+        "#transportCase"
+      );
+
+    if (!caseShell) {
+      throw new Error(
+        "Case 12 root #transportCase not found"
+      );
+    }
+
+    stageBody.innerHTML =
+      caseShell.outerHTML;
+
+    stageBody.classList.add(
+      "c12-body"
+    );
+
+    if (window.C12) {
+      delete window.C12;
+    }
+
+    const moduleFiles = [
+      "case12-i18n.js",
+      "case12-data.js",
+      "case12-rules.js",
+      "case12-simulation.js",
+      "case12-ui.js",
+      "case12.js"
+    ];
+
+    for (
+      const fileName
+      of moduleFiles
+    ) {
+      const modulePath =
+        `${basePath}/${fileName}?v=1`;
+
+      const moduleResponse =
+        await fetch(
+          modulePath
+        );
 
       if (
-        !htmlResponse.ok
+        !moduleResponse.ok
       ) {
         throw new Error(
-          `Case ${caseId} HTML failed`
+          `Case 12 module failed: ${fileName}`
         );
       }
 
-      if (
-        !jsResponse.ok
-      ) {
-        throw new Error(
-          `Case ${caseId} JS failed`
-        );
-      }
-
-      const [
-        caseHtml,
-        caseJs
-      ] = await Promise.all([
-        htmlResponse.text(),
-        jsResponse.text()
-      ]);
+      const moduleCode =
+        await moduleResponse.text();
 
       if (
         requestId !==
@@ -2062,53 +2103,117 @@ const [
         return;
       }
 
-stageBody.innerHTML =
-  caseHtml;
-
-const caseRoot =
-  stageBody.firstElementChild;
-
-if (
-  caseRoot &&
-  !caseRoot.querySelector(
-    "[data-pricing-estimator-open]"
-  )
-) {
-  const cta =
-    caseRoot.querySelector(
-      '[class$="-cta"]'
-    );
-
-  if (cta) {
-    const estimatorButton =
-      document.createElement(
-        "button"
+      executeCaseScript(
+        moduleCode,
+        modulePath
       );
+    }
 
-    estimatorButton.type =
-      "button";
+  } else {
 
-    estimatorButton.className =
-      "case-detail-estimator-button";
+    const basePath =
+      `/solutions/cases/case-${caseId}`;
 
-    estimatorButton.setAttribute(
-      "data-pricing-estimator-open",
-      ""
-    );
+    const languageSuffix =
+      pageLanguage.startsWith("en")
+        ? "-en"
+        : pageLanguage.startsWith("ru")
+          ? "-ru"
+          : "";
 
-estimatorButton.innerHTML =
-  `${finderUi.price} <span>▦</span>`;
+    const caseHtmlPath =
+      `${basePath}/case-${caseId}${languageSuffix}.html`;
 
-    cta.appendChild(
-      estimatorButton
+    const caseJsPath =
+      `${basePath}/case-${caseId}${languageSuffix}.js`;
+
+    const [
+      htmlResponse,
+      jsResponse
+    ] = await Promise.all([
+      fetch(caseHtmlPath),
+      fetch(caseJsPath)
+    ]);
+
+    if (
+      !htmlResponse.ok
+    ) {
+      throw new Error(
+        `Case ${caseId} HTML failed`
+      );
+    }
+
+    if (
+      !jsResponse.ok
+    ) {
+      throw new Error(
+        `Case ${caseId} JS failed`
+      );
+    }
+
+    const [
+      caseHtml,
+      caseJs
+    ] = await Promise.all([
+      htmlResponse.text(),
+      jsResponse.text()
+    ]);
+
+    if (
+      requestId !==
+      detailRequestId
+    ) {
+      return;
+    }
+
+    stageBody.innerHTML =
+      caseHtml;
+
+    const caseRoot =
+      stageBody.firstElementChild;
+
+    if (
+      caseRoot &&
+      !caseRoot.querySelector(
+        "[data-pricing-estimator-open]"
+      )
+    ) {
+      const cta =
+        caseRoot.querySelector(
+          '[class$="-cta"]'
+        );
+
+      if (cta) {
+        const estimatorButton =
+          document.createElement(
+            "button"
+          );
+
+        estimatorButton.type =
+          "button";
+
+        estimatorButton.className =
+          "case-detail-estimator-button";
+
+        estimatorButton.setAttribute(
+          "data-pricing-estimator-open",
+          ""
+        );
+
+        estimatorButton.innerHTML =
+          `${finderUi.price} <span>▦</span>`;
+
+        cta.appendChild(
+          estimatorButton
+        );
+      }
+    }
+
+    executeCaseScript(
+      caseJs,
+      caseJsPath
     );
   }
-}
-
-executeCaseScript(
-  caseJs,
-  caseJsPath
-);
 
       stage.classList.remove(
         "loading"

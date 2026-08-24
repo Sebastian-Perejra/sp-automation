@@ -3780,3 +3780,270 @@
     height: 30px;
   }
 }
+
+#ar-case .ar-timewarp {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease,
+    visibility 0.18s ease;
+}
+
+#ar-case .ar-timewarp.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#ar-case .ar-timewarp-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(13, 22, 18, 0.18) 0%,
+      rgba(7, 13, 10, 0.42) 100%
+    );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+#ar-case .ar-timewarp-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  width: min(520px, calc(100vw - 32px));
+  padding: 22px 22px 20px;
+  border: 1px solid rgba(149, 207, 78, 0.3);
+  border-radius: 22px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9, 18, 14, 0.96),
+      rgba(12, 25, 18, 0.96)
+    );
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(160, 231, 78, 0.08) inset;
+  transform: scale(0.94);
+  transition: transform 0.22s ease;
+}
+
+#ar-case .ar-timewarp.is-visible .ar-timewarp-card {
+  transform: scale(1);
+}
+
+#ar-case .ar-timewarp-clock {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+#ar-case .ar-timewarp-clock-face {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(164, 233, 86, 0.55);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.08),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.01)
+    ),
+    #101b14;
+  box-shadow:
+    0 0 0 8px rgba(112, 191, 57, 0.08),
+    0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+#ar-case .ar-timewarp-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(207, 244, 168, 0.78);
+  transform-origin: center -44px;
+}
+
+#ar-case .ar-timewarp-mark-12 {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+#ar-case .ar-timewarp-mark-3 {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+#ar-case .ar-timewarp-mark-6 {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+#ar-case .ar-timewarp-mark-9 {
+  transform: translate(-50%, -50%) rotate(270deg);
+}
+
+#ar-case .ar-timewarp-hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  border-radius: 999px;
+  transform-origin: 50% calc(100% - 6px);
+}
+
+#ar-case .ar-timewarp-hand-hour {
+  width: 4px;
+  height: 26px;
+  background: #d6f7b1;
+  margin-left: -2px;
+  margin-top: -20px;
+  animation: arTimewarpHour 1.12s linear infinite;
+}
+
+#ar-case .ar-timewarp-hand-minute {
+  width: 3px;
+  height: 38px;
+  background: #9ee85d;
+  margin-left: -1.5px;
+  margin-top: -32px;
+  animation: arTimewarpMinute 0.52s linear infinite;
+}
+
+#ar-case .ar-timewarp-hand-second {
+  width: 2px;
+  height: 44px;
+  background: #ffffff;
+  margin-left: -1px;
+  margin-top: -38px;
+  animation: arTimewarpSecond 0.22s linear infinite;
+}
+
+#ar-case .ar-timewarp-clock-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #8fe33f;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 16px rgba(160, 231, 78, 0.38);
+}
+
+#ar-case .ar-timewarp-rings {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+}
+
+#ar-case .ar-timewarp-rings::before,
+#ar-case .ar-timewarp-rings::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(161, 229, 83, 0.28);
+  border-radius: 50%;
+  animation: arTimewarpPulse 1.15s ease-out infinite;
+}
+
+#ar-case .ar-timewarp-rings::after {
+  animation-delay: 0.38s;
+}
+
+#ar-case .ar-timewarp-text strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #f4fff0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+#ar-case .ar-timewarp-text p {
+  margin: 0;
+  color: rgba(236, 247, 232, 0.78);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+@keyframes arTimewarpHour {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+@keyframes arTimewarpMinute {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(2160deg);
+  }
+}
+
+@keyframes arTimewarpSecond {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(4320deg);
+  }
+}
+
+@keyframes arTimewarpPulse {
+  0% {
+    transform: scale(0.86);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  #ar-case .ar-timewarp-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: min(360px, calc(100vw - 24px));
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  #ar-case .ar-timewarp-clock {
+    margin: 0 auto;
+    width: 104px;
+    height: 104px;
+  }
+
+  #ar-case .ar-timewarp-clock-face {
+    width: 104px;
+    height: 104px;
+  }
+
+  #ar-case .ar-timewarp-text strong {
+    font-size: 19px;
+  }
+
+  #ar-case .ar-timewarp-text p {
+    font-size: 13px;
+  }
+}

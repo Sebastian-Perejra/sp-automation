@@ -1,0 +1,2660 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Кейс 12 — Керування транспортними замовленнями | Sebastian Perejra</title>
+
+  <meta
+    name="description"
+    content="Інтерактивний кейс керування транспортними замовленнями: приймання заявок, планування перевезень, автопарк, водії, контроль доставки, документи та аналітика."
+  >
+
+  <meta name="robots" content="index,follow">
+
+  <link rel="stylesheet" href="./case12.css">
+</head>
+
+<body class="c12-body">
+
+  <div class="c12-shell" id="transportCase">
+
+    <!-- =========================================================
+         BACKGROUND / AMBIENT LAYER
+    ========================================================== -->
+
+    <div class="c12-ambient" aria-hidden="true">
+      <div class="c12-ambient-grid"></div>
+      <div class="c12-ambient-glow c12-ambient-glow--one"></div>
+      <div class="c12-ambient-glow c12-ambient-glow--two"></div>
+      <div class="c12-ambient-noise"></div>
+    </div>
+
+
+    <!-- =========================================================
+         TOP BAR
+    ========================================================== -->
+
+    <header class="c12-topbar">
+
+      <div class="c12-topbar__left">
+
+        <a
+          class="c12-back"
+          href="../solutions.html"
+          aria-label="Повернутися до рішень"
+        >
+          <span class="c12-back__arrow">←</span>
+          <span>Рішення</span>
+        </a>
+
+        <div class="c12-topbar__divider"></div>
+
+        <div class="c12-case-label">
+          <span class="c12-case-label__dot"></span>
+
+          <div>
+            <span class="c12-case-label__eyebrow">ІНТЕРАКТИВНИЙ КЕЙС</span>
+            <strong>№12 · Transport Operations</strong>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="c12-topbar__center">
+
+        <div class="c12-system-status">
+          <span class="c12-system-status__pulse"></span>
+          <span>Система працює</span>
+        </div>
+
+      </div>
+
+
+      <div class="c12-topbar__right">
+
+        <button
+          class="c12-mode-switch is-active"
+          type="button"
+          data-mode="guided"
+        >
+          Guided
+        </button>
+
+        <button
+          class="c12-mode-switch"
+          type="button"
+          data-mode="explore"
+        >
+          Explore
+        </button>
+
+        <button
+          class="c12-sound-toggle"
+          type="button"
+          aria-label="Увімкнути або вимкнути звук"
+          data-sound-toggle
+        >
+          <span>◉</span>
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         GLOBAL ORDER STRIP
+    ========================================================== -->
+
+    <section
+      class="c12-order-strip"
+      data-global-order-strip
+      hidden
+    >
+
+      <div class="c12-order-strip__identity">
+
+        <span class="c12-order-strip__label">
+          ГОЛОВНЕ ПЕРЕВЕЗЕННЯ
+        </span>
+
+        <strong data-main-order-id>
+          TR-2026-00184
+        </strong>
+
+      </div>
+
+
+      <div class="c12-order-strip__route">
+
+        <span>Львів</span>
+
+        <div class="c12-route-line">
+          <span class="c12-route-line__dot"></span>
+          <span class="c12-route-line__track"></span>
+          <span class="c12-route-line__truck">▰</span>
+          <span class="c12-route-line__track"></span>
+          <span class="c12-route-line__dot"></span>
+        </div>
+
+        <span>Краків</span>
+
+      </div>
+
+
+      <div class="c12-order-strip__status">
+
+        <span class="c12-status-pill" data-main-order-status>
+          НОВЕ
+        </span>
+
+      </div>
+
+
+      <div class="c12-order-strip__time">
+
+        <span>Поточний час симуляції</span>
+
+        <strong data-simulation-clock>
+          26.08.2026 · 09:45
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         INTRO / HERO
+    ========================================================== -->
+
+    <main>
+
+      <section
+        class="c12-scene c12-scene--intro is-active"
+        data-scene="intro"
+      >
+
+        <div class="c12-intro">
+
+          <div class="c12-intro__copy">
+
+            <div class="c12-kicker">
+              <span></span>
+              КЕЙС №12 · ЛОГІСТИКА
+            </div>
+
+            <h1>
+              Одне перевезення.
+              <br>
+              <em>П'ять точок зору.</em>
+              <br>
+              Один процес.
+            </h1>
+
+            <p class="c12-intro__lead">
+              Замовлення надходять телефоном, електронною поштою,
+              через месенджери, транспортні біржі та від постійних
+              клієнтів. Подивіться, як одна операційна система
+              перетворює цей потік на контрольований процес —
+              від заявки до доставки.
+            </p>
+
+
+            <div class="c12-intro__actions">
+
+              <button
+                class="c12-primary-action"
+                type="button"
+                data-start-story
+              >
+                <span>Розпочати зміну</span>
+                <span class="c12-primary-action__arrow">→</span>
+              </button>
+
+              <button
+                class="c12-secondary-action"
+                type="button"
+                data-open-overview
+              >
+                Як це працює
+              </button>
+
+            </div>
+
+
+            <div class="c12-intro__micro">
+
+              <div>
+                <strong>200</strong>
+                <span>замовлень</span>
+              </div>
+
+              <div>
+                <strong>12</strong>
+                <span>власних авто</span>
+              </div>
+
+              <div>
+                <strong>14</strong>
+                <span>водіїв</span>
+              </div>
+
+              <div>
+                <strong>5</strong>
+                <span>перевізників</span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- COMPANY MECHANISM -->
+
+          <div class="c12-intro__visual">
+
+            <div class="c12-network">
+
+              <div class="c12-network__core">
+
+                <span class="c12-network__core-label">
+                  ЄДИНИЙ ПРОЦЕС
+                </span>
+
+                <strong>200</strong>
+
+                <span>перевезень</span>
+
+                <div class="c12-network__core-pulse"></div>
+
+              </div>
+
+
+              <button
+                class="c12-role-node c12-role-node--dispatcher"
+                type="button"
+                data-role-jump="dispatcher"
+              >
+                <span class="c12-role-node__icon">⌨</span>
+
+                <span class="c12-role-node__text">
+                  <small>РОЛЬ 01</small>
+                  <strong>Диспетчер</strong>
+                  <em>Приймає заявки</em>
+                </span>
+              </button>
+
+
+              <button
+                class="c12-role-node c12-role-node--manager"
+                type="button"
+                data-role-jump="manager"
+              >
+                <span class="c12-role-node__icon">↔</span>
+
+                <span class="c12-role-node__text">
+                  <small>РОЛЬ 02</small>
+                  <strong>Логіст</strong>
+                  <em>Планує ресурси</em>
+                </span>
+              </button>
+
+
+              <button
+                class="c12-role-node c12-role-node--driver"
+                type="button"
+                data-role-jump="driver"
+              >
+                <span class="c12-role-node__icon">▰</span>
+
+                <span class="c12-role-node__text">
+                  <small>РОЛЬ 03</small>
+                  <strong>Водій</strong>
+                  <em>Виконує рейс</em>
+                </span>
+              </button>
+
+
+              <button
+                class="c12-role-node c12-role-node--customer"
+                type="button"
+                data-role-jump="customer"
+              >
+                <span class="c12-role-node__icon">◎</span>
+
+                <span class="c12-role-node__text">
+                  <small>РОЛЬ 04</small>
+                  <strong>Клієнт</strong>
+                  <em>Бачить результат</em>
+                </span>
+              </button>
+
+
+              <button
+                class="c12-role-node c12-role-node--owner"
+                type="button"
+                data-role-jump="owner"
+              >
+                <span class="c12-role-node__icon">⌁</span>
+
+                <span class="c12-role-node__text">
+                  <small>РОЛЬ 05</small>
+                  <strong>Власник</strong>
+                  <em>Контролює бізнес</em>
+                </span>
+              </button>
+
+
+              <div class="c12-network__source c12-network__source--email">
+                <span>✉</span>
+                Email
+              </div>
+
+              <div class="c12-network__source c12-network__source--phone">
+                <span>☎</span>
+                Телефон
+              </div>
+
+              <div class="c12-network__source c12-network__source--messenger">
+                <span>●</span>
+                Messenger
+              </div>
+
+              <div class="c12-network__source c12-network__source--exchange">
+                <span>⇄</span>
+                Біржа
+              </div>
+
+
+              <svg
+                class="c12-network__lines"
+                viewBox="0 0 1000 700"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path data-network-path d="M140 170 C300 180 340 320 500 350"></path>
+                <path data-network-path d="M130 500 C290 490 350 400 500 350"></path>
+                <path data-network-path d="M850 120 C700 160 660 300 500 350"></path>
+                <path data-network-path d="M880 520 C720 500 660 410 500 350"></path>
+                <path data-network-path d="M500 70 C500 180 500 250 500 350"></path>
+              </svg>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================================
+           WORKSPACE WRAPPER
+      ======================================================== -->
+
+      <section
+        class="c12-workspace"
+        data-workspace
+        hidden
+      >
+
+        <!-- ROLE NAVIGATION -->
+
+        <nav
+          class="c12-role-nav"
+          aria-label="Ролі в процесі перевезення"
+        >
+
+          <button
+            class="c12-role-tab is-active"
+            type="button"
+            data-role="dispatcher"
+          >
+            <span>01</span>
+            <strong>Диспетчер</strong>
+          </button>
+
+          <button
+            class="c12-role-tab"
+            type="button"
+            data-role="manager"
+          >
+            <span>02</span>
+            <strong>Логіст</strong>
+          </button>
+
+          <button
+            class="c12-role-tab"
+            type="button"
+            data-role="driver"
+          >
+            <span>03</span>
+            <strong>Водій</strong>
+          </button>
+
+          <button
+            class="c12-role-tab"
+            type="button"
+            data-role="customer"
+          >
+            <span>04</span>
+            <strong>Клієнт</strong>
+          </button>
+
+          <button
+            class="c12-role-tab"
+            type="button"
+            data-role="owner"
+          >
+            <span>05</span>
+            <strong>Власник</strong>
+          </button>
+
+        </nav>
+
+
+        <!-- =====================================================
+             SCENE: DISPATCHER
+        ====================================================== -->
+
+        <section
+          class="c12-role-scene is-active"
+          data-role-scene="dispatcher"
+        >
+
+          <div class="c12-scene-heading">
+
+            <div>
+
+              <span class="c12-scene-heading__index">
+                01 · ДИСПЕТЧЕР
+              </span>
+
+              <h2>
+                Усі заявки.
+                <em>Одна точка входу.</em>
+              </h2>
+
+              <p>
+                Заявки надходять з різних каналів.
+                Диспетчер фіксує підтверджене перевезення,
+                а система запускає подальший процес.
+              </p>
+
+            </div>
+
+
+            <div class="c12-scene-heading__live">
+
+              <span class="c12-live-dot"></span>
+
+              <div>
+                <small>ЗАРАЗ У СИСТЕМІ</small>
+                <strong>
+                  <span data-live-order-count>200</span>
+                  замовлень
+                </strong>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="c12-dispatch-grid">
+
+            <!-- INCOMING SOURCES -->
+
+            <aside class="c12-panel c12-incoming-panel">
+
+              <div class="c12-panel__header">
+
+                <div>
+                  <span class="c12-panel__eyebrow">
+                    ВХІДНІ КАНАЛИ
+                  </span>
+
+                  <h3>Нові звернення</h3>
+                </div>
+
+                <span class="c12-counter" data-incoming-total>
+                  15
+                </span>
+
+              </div>
+
+
+              <button
+                class="c12-source-row is-hot"
+                type="button"
+                data-source="email"
+              >
+                <span class="c12-source-row__icon">✉</span>
+
+                <span class="c12-source-row__content">
+                  <strong>Email</strong>
+                  <small>3 нові заявки</small>
+                </span>
+
+                <span class="c12-source-row__count">3</span>
+              </button>
+
+
+              <button
+                class="c12-source-row"
+                type="button"
+                data-source="phone"
+              >
+                <span class="c12-source-row__icon">☎</span>
+
+                <span class="c12-source-row__content">
+                  <strong>Телефон</strong>
+                  <small>2 звернення</small>
+                </span>
+
+                <span class="c12-source-row__count">2</span>
+              </button>
+
+
+              <button
+                class="c12-source-row"
+                type="button"
+                data-source="messenger"
+              >
+                <span class="c12-source-row__icon">●</span>
+
+                <span class="c12-source-row__content">
+                  <strong>Месенджери</strong>
+                  <small>4 звернення</small>
+                </span>
+
+                <span class="c12-source-row__count">4</span>
+              </button>
+
+
+              <button
+                class="c12-source-row"
+                type="button"
+                data-source="exchange"
+              >
+                <span class="c12-source-row__icon">⇄</span>
+
+                <span class="c12-source-row__content">
+                  <strong>Транспортні біржі</strong>
+                  <small>6 потенційних</small>
+                </span>
+
+                <span class="c12-source-row__count">6</span>
+              </button>
+
+
+              <div class="c12-incoming-stream">
+
+                <div class="c12-stream-title">
+                  <span class="c12-live-dot"></span>
+                  ЖИВИЙ ПОТІК
+                </div>
+
+                <div
+                  class="c12-stream-list"
+                  data-incoming-stream
+                ></div>
+
+              </div>
+
+            </aside>
+
+
+            <!-- INCOMING REQUEST -->
+
+            <article class="c12-panel c12-request-panel">
+
+              <div class="c12-panel__header">
+
+                <div>
+                  <span class="c12-panel__eyebrow">
+                    EMAIL · 09:47
+                  </span>
+
+                  <h3>Запит на перевезення</h3>
+                </div>
+
+                <span class="c12-new-badge">
+                  NEW
+                </span>
+
+              </div>
+
+
+              <div class="c12-email-card">
+
+                <div class="c12-email-card__meta">
+
+                  <div>
+                    <small>ВІД</small>
+                    <strong>WestWood Ukraine</strong>
+                  </div>
+
+                  <div>
+                    <small>КОНТАКТ</small>
+                    <strong>Ірина Мельник</strong>
+                  </div>
+
+                </div>
+
+
+                <div class="c12-email-card__subject">
+                  Перевезення Львів → Краків · 26.08
+                </div>
+
+
+                <div class="c12-email-card__body">
+
+                  <p>Доброго дня.</p>
+
+                  <p>
+                    Потрібне перевезення вантажу зі Львова
+                    до Кракова.
+                  </p>
+
+                  <dl>
+
+                    <div>
+                      <dt>Завантаження</dt>
+                      <dd>26.08 · 10:00</dd>
+                    </div>
+
+                    <div>
+                      <dt>Доставка</dt>
+                      <dd>28.08 · до 14:00</dd>
+                    </div>
+
+                    <div>
+                      <dt>Вантаж</dt>
+                      <dd>12 палет</dd>
+                    </div>
+
+                    <div>
+                      <dt>Вага</dt>
+                      <dd>4 800 кг</dd>
+                    </div>
+
+                    <div>
+                      <dt>Автомобіль</dt>
+                      <dd>Тент</dd>
+                    </div>
+
+                  </dl>
+
+                </div>
+
+
+                <button
+                  class="c12-primary-action c12-primary-action--full"
+                  type="button"
+                  data-create-main-order
+                >
+                  <span>Створити замовлення</span>
+                  <span>→</span>
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <!-- ORDER REGISTER -->
+
+            <article class="c12-panel c12-register-panel">
+
+              <div class="c12-panel__header">
+
+                <div>
+                  <span class="c12-panel__eyebrow">
+                    GOOGLE SHEETS
+                  </span>
+
+                  <h3>Реєстр перевезень</h3>
+                </div>
+
+                <div class="c12-register-tools">
+
+                  <button
+                    type="button"
+                    data-filter-orders="all"
+                  >
+                    Усі
+                  </button>
+
+                  <button
+                    type="button"
+                    data-filter-orders="attention"
+                  >
+                    Увага
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <div class="c12-table-wrap">
+
+                <table class="c12-table">
+
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Маршрут</th>
+                      <th>Клієнт</th>
+                      <th>Завантаження</th>
+                      <th>Авто</th>
+                      <th>Статус</th>
+                    </tr>
+                  </thead>
+
+                  <tbody data-orders-table></tbody>
+
+                </table>
+
+              </div>
+
+
+              <div class="c12-table-footer">
+
+                <span>
+                  Показано
+                  <strong data-visible-orders>12</strong>
+                  із
+                  <strong>200</strong>
+                </span>
+
+                <button
+                  type="button"
+                  data-open-all-orders
+                >
+                  Відкрити весь реєстр →
+                </button>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SCENE: LOGISTICS MANAGER
+        ====================================================== -->
+
+        <section
+          class="c12-role-scene"
+          data-role-scene="manager"
+        >
+
+          <div class="c12-scene-heading">
+
+            <div>
+              <span class="c12-scene-heading__index">
+                02 · ЛОГІСТ
+              </span>
+
+              <h2>
+                Замовлення є.
+                <em>Хто його повезе?</em>
+              </h2>
+
+              <p>
+                Логіст бачить доступні ресурси,
+                перевіряє вимоги до транспорту та призначає
+                автомобіль і водія.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="c12-planning-layout">
+
+            <div class="c12-panel c12-planning-orders">
+
+              <div class="c12-panel__header">
+
+                <div>
+                  <span class="c12-panel__eyebrow">
+                    ПЛАНУВАННЯ
+                  </span>
+
+                  <h3>Очікують призначення</h3>
+                </div>
+
+                <span
+                  class="c12-counter"
+                  data-waiting-assignment-count
+                >
+                  7
+                </span>
+
+              </div>
+
+
+              <div
+                class="c12-order-card c12-order-card--main"
+                draggable="true"
+                data-draggable-order="TR-2026-00184"
+              >
+
+                <div class="c12-order-card__top">
+
+                  <strong>TR-2026-00184</strong>
+
+                  <span>ГОЛОВНИЙ КЕЙС</span>
+
+                </div>
+
+
+                <div class="c12-order-card__route">
+                  Львів
+                  <span>→</span>
+                  Краків
+                </div>
+
+
+                <div class="c12-order-card__specs">
+
+                  <span>12 палет</span>
+                  <span>4 800 кг</span>
+                  <span>Тент</span>
+
+                </div>
+
+
+                <div class="c12-order-card__deadline">
+
+                  <small>ДОСТАВКА ДО</small>
+                  <strong>28.08 · 14:00</strong>
+
+                </div>
+
+
+                <div class="c12-drag-hint">
+                  Перетягніть на автомобіль →
+                </div>
+
+              </div>
+
+
+              <div
+                class="c12-mini-orders"
+                data-planning-orders
+              ></div>
+
+            </div>
+
+
+            <div class="c12-panel c12-fleet-board">
+
+              <div class="c12-panel__header">
+
+                <div>
+                  <span class="c12-panel__eyebrow">
+                    АВТОПАРК
+                  </span>
+
+                  <h3>Доступні ресурси</h3>
+                </div>
+
+
+                <div class="c12-fleet-summary">
+
+                  <span>
+                    <i class="is-free"></i>
+                    2 вільні
+                  </span>
+
+                  <span>
+                    <i class="is-busy"></i>
+                    8 у рейсі
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="c12-vehicle-grid">
+
+                <article
+                  class="c12-vehicle-card is-valid"
+                  data-vehicle="BC4587KA"
+                  data-drop-target
+                >
+
+                  <div class="c12-vehicle-card__status">
+                    ВІЛЬНИЙ
+                  </div>
+
+                  <div class="c12-truck-visual">
+                    <span class="c12-truck-visual__cab"></span>
+                    <span class="c12-truck-visual__trailer"></span>
+                  </div>
+
+                  <h4>DAF XF</h4>
+
+                  <strong>BC 4587 KA</strong>
+
+                  <dl>
+                    <div>
+                      <dt>Тип</dt>
+                      <dd>Тент</dd>
+                    </div>
+
+                    <div>
+                      <dt>Вантажність</dt>
+                      <dd>22 000 кг</dd>
+                    </div>
+
+                    <div>
+                      <dt>Водій</dt>
+                      <dd>Олександр Петренко</dd>
+                    </div>
+
+                    <div>
+                      <dt>Локація</dt>
+                      <dd>Львів</dd>
+                    </div>
+                  </dl>
+
+                </article>
+
+
+                <article
+                  class="c12-vehicle-card is-conflict"
+                  data-vehicle="BC9123TT"
+                  data-drop-target
+                >
+
+                  <div class="c12-vehicle-card__status">
+                    У РЕЙСІ
+                  </div>
+
+                  <div class="c12-truck-visual">
+                    <span class="c12-truck-visual__cab"></span>
+                    <span class="c12-truck-visual__trailer"></span>
+                  </div>
+
+                  <h4>MAN TGX</h4>
+
+                  <strong>BC 9123 TT</strong>
+
+                  <dl>
+                    <div>
+                      <dt>Тип</dt>
+                      <dd>Тент</dd>
+                    </div>
+
+                    <div>
+                      <dt>Вантажність</dt>
+                      <dd>22 000 кг</dd>
+                    </div>
+
+                    <div>
+                      <dt>Водій</dt>
+                      <dd>Андрій Бондар</dd>
+                    </div>
+
+                    <div>
+                      <dt>Доступний</dt>
+                      <dd>27.08 · 18:00</dd>
+                    </div>
+                  </dl>
+
+                </article>
+
+
+                <article
+                  class="c12-vehicle-card is-invalid"
+                  data-vehicle="BC7731AA"
+                  data-drop-target
+                >
+
+                  <div class="c12-vehicle-card__status">
+                    ВІЛЬНИЙ
+                  </div>
+
+                  <div class="c12-truck-visual c12-truck-visual--small">
+                    <span class="c12-truck-visual__cab"></span>
+                    <span class="c12-truck-visual__trailer"></span>
+                  </div>
+
+                  <h4>Mercedes Atego</h4>
+
+                  <strong>BC 7731 AA</strong>
+
+                  <dl>
+                    <div>
+                      <dt>Тип</dt>
+                      <dd>Фургон</dd>
+                    </div>
+
+                    <div>
+                      <dt>Вантажність</dt>
+                      <dd>3 500 кг</dd>
+                    </div>
+
+                    <div>
+                      <dt>Водій</dt>
+                      <dd>Ігор Мельник</dd>
+                    </div>
+
+                    <div>
+                      <dt>Локація</dt>
+                      <dd>Львів</dd>
+                    </div>
+                  </dl>
+
+                </article>
+
+              </div>
+
+            </div>
+
+
+            <aside class="c12-panel c12-carriers-panel">
+
+              <div class="c12-panel__header">
+
+                <div>
+                  <span class="c12-panel__eyebrow">
+                    АЛЬТЕРНАТИВА
+                  </span>
+
+                  <h3>Залучені перевізники</h3>
+                </div>
+
+              </div>
+
+
+              <div
+                class="c12-carrier-list"
+                data-carriers-list
+              ></div>
+
+            </aside>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SCENE: DRIVER
+        ====================================================== -->
+
+        <section
+          class="c12-role-scene"
+          data-role-scene="driver"
+        >
+
+          <div class="c12-scene-heading">
+
+            <div>
+              <span class="c12-scene-heading__index">
+                03 · ВОДІЙ
+              </span>
+
+              <h2>
+                Мінімум інтерфейсу.
+                <em>Тільки рейс.</em>
+              </h2>
+
+              <p>
+                Водію не потрібен доступ до всієї таблиці.
+                Він бачить лише своє завдання та фіксує
+                ключові події перевезення.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="c12-driver-layout">
+
+            <div class="c12-phone-stage">
+
+              <div class="c12-phone">
+
+                <div class="c12-phone__speaker"></div>
+
+                <div class="c12-phone__screen">
+
+                  <div class="c12-driver-app">
+
+                    <header class="c12-driver-app__header">
+
+                      <div>
+                        <small>ДОБРОГО РАНКУ</small>
+                        <strong>Олександр</strong>
+                      </div>
+
+                      <span class="c12-driver-avatar">
+                        ОП
+                      </span>
+
+                    </header>
+
+
+                    <div class="c12-driver-trip">
+
+                      <span class="c12-driver-trip__label">
+                        ПОТОЧНИЙ РЕЙС
+                      </span>
+
+                      <strong>TR-2026-00184</strong>
+
+
+                      <div class="c12-driver-route">
+
+                        <div>
+                          <small>ЗАВАНТАЖЕННЯ</small>
+                          <strong>Львів</strong>
+                          <span>26.08 · 10:00</span>
+                        </div>
+
+                        <span class="c12-driver-route__line">
+                          ↓
+                        </span>
+
+                        <div>
+                          <small>ДОСТАВКА</small>
+                          <strong>Краків</strong>
+                          <span>28.08 · 14:00</span>
+                        </div>
+
+                      </div>
+
+
+                      <div class="c12-driver-cargo">
+
+                        <span>12 палет</span>
+                        <span>4 800 кг</span>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="c12-driver-actions">
+
+                      <button
+                        type="button"
+                        data-driver-action="start"
+                      >
+                        Розпочати рейс
+                      </button>
+
+                      <button
+                        type="button"
+                        data-driver-action="arrived"
+                        disabled
+                      >
+                        Прибув на завантаження
+                      </button>
+
+                      <button
+                        type="button"
+                        data-driver-action="loaded"
+                        disabled
+                      >
+                        Вантаж завантажено
+                      </button>
+
+                      <button
+                        type="button"
+                        data-driver-action="transit"
+                        disabled
+                      >
+                        Вирушив до клієнта
+                      </button>
+
+                      <button
+                        class="is-warning"
+                        type="button"
+                        data-driver-action="delay"
+                        disabled
+                      >
+                        Повідомити про затримку
+                      </button>
+
+                      <button
+                        type="button"
+                        data-driver-action="delivered"
+                        disabled
+                      >
+                        Завершити доставку
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="c12-driver-side">
+
+              <div class="c12-panel">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      СТАН РЕЙСУ
+                    </span>
+
+                    <h3>TR-2026-00184</h3>
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="c12-trip-timeline"
+                  data-trip-timeline
+                >
+
+                  <div class="is-current">
+                    <span></span>
+                    <strong>Призначено</strong>
+                    <small>Очікує старту</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>Завантаження</strong>
+                    <small>—</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>У дорозі</strong>
+                    <small>—</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>Доставка</strong>
+                    <small>—</small>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="c12-panel c12-documents-panel">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      ДОКУМЕНТИ
+                    </span>
+
+                    <h3>Документи рейсу</h3>
+                  </div>
+
+                </div>
+
+
+                <button
+                  class="c12-upload-box"
+                  type="button"
+                  data-upload-cmr
+                >
+                  <span>＋</span>
+                  <strong>Додати CMR / POD</strong>
+                  <small>Фото або PDF</small>
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SCENE: CUSTOMER
+        ====================================================== -->
+
+        <section
+          class="c12-role-scene"
+          data-role-scene="customer"
+        >
+
+          <div class="c12-scene-heading">
+
+            <div>
+              <span class="c12-scene-heading__index">
+                04 · КЛІЄНТ
+              </span>
+
+              <h2>
+                Без дзвінків:
+                <em>«Де моя машина?»</em>
+              </h2>
+
+              <p>
+                Клієнт бачить тільки потрібну йому інформацію:
+                підтвердження, поточний статус, ETA,
+                доставку та документи.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="c12-customer-layout">
+
+            <div class="c12-customer-tracking">
+
+              <div class="c12-tracking-card">
+
+                <header class="c12-tracking-card__header">
+
+                  <div>
+                    <span>ВІДСТЕЖЕННЯ ПЕРЕВЕЗЕННЯ</span>
+                    <strong>TR-2026-00184</strong>
+                  </div>
+
+                  <span
+                    class="c12-status-pill"
+                    data-customer-status
+                  >
+                    ПІДТВЕРДЖЕНО
+                  </span>
+
+                </header>
+
+
+                <div class="c12-tracking-route">
+
+                  <div>
+                    <small>ЗВІДКИ</small>
+                    <strong>Львів</strong>
+                    <span>Україна</span>
+                  </div>
+
+
+                  <div class="c12-tracking-route__journey">
+
+                    <span class="c12-tracking-route__point"></span>
+                    <span class="c12-tracking-route__line"></span>
+                    <span class="c12-tracking-route__vehicle">▰</span>
+                    <span class="c12-tracking-route__line"></span>
+                    <span class="c12-tracking-route__point"></span>
+
+                  </div>
+
+
+                  <div>
+                    <small>КУДИ</small>
+                    <strong>Краків</strong>
+                    <span>Польща</span>
+                  </div>
+
+                </div>
+
+
+                <div class="c12-tracking-eta">
+
+                  <small>ОЧІКУВАНА ДОСТАВКА</small>
+
+                  <strong data-customer-eta>
+                    28 серпня · 14:00
+                  </strong>
+
+                </div>
+
+
+                <div
+                  class="c12-customer-timeline"
+                  data-customer-timeline
+                >
+
+                  <div class="is-done">
+                    <span></span>
+                    <strong>Заявку отримано</strong>
+                    <small>26.08 · 09:47</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>Перевезення підтверджено</strong>
+                    <small>—</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>Вантаж забрано</strong>
+                    <small>—</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>У дорозі</strong>
+                    <small>—</small>
+                  </div>
+
+                  <div>
+                    <span></span>
+                    <strong>Доставлено</strong>
+                    <small>—</small>
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="c12-delivery-result"
+                  data-delivery-result
+                  hidden
+                >
+
+                  <span class="c12-delivery-result__check">
+                    ✓
+                  </span>
+
+                  <div>
+                    <small>ДОСТАВЛЕНО</small>
+                    <strong>28.08.2026 · 15:43</strong>
+                    <span>Отримав: Jan Kowalski</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    data-download-pod
+                  >
+                    CMR / POD ↓
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <aside class="c12-customer-notifications">
+
+              <div class="c12-panel">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      ПОВІДОМЛЕННЯ
+                    </span>
+
+                    <h3>Що отримує клієнт</h3>
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="c12-message-stack"
+                  data-customer-messages
+                ></div>
+
+              </div>
+
+            </aside>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SCENE: OWNER
+        ====================================================== -->
+
+        <section
+          class="c12-role-scene"
+          data-role-scene="owner"
+        >
+
+          <div class="c12-scene-heading">
+
+            <div>
+              <span class="c12-scene-heading__index">
+                05 · ВЛАСНИК
+              </span>
+
+              <h2>
+                Не таблиця.
+                <em>Картина бізнесу.</em>
+              </h2>
+
+              <p>
+                Операційні дані перетворюються на зрозумілу
+                картину: перевезення, ризики, автопарк,
+                клієнти та фінансовий результат.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="c12-owner-dashboard">
+
+            <div class="c12-owner-kpis">
+
+              <button
+                class="c12-kpi-card"
+                type="button"
+                data-owner-filter="active"
+              >
+                <span>АКТИВНІ ПЕРЕВЕЗЕННЯ</span>
+                <strong data-kpi-active>47</strong>
+                <small>зараз у роботі</small>
+              </button>
+
+
+              <button
+                class="c12-kpi-card"
+                type="button"
+                data-owner-filter="today"
+              >
+                <span>ДОСТАВКИ СЬОГОДНІ</span>
+                <strong data-kpi-today>12</strong>
+                <small>за планом</small>
+              </button>
+
+
+              <button
+                class="c12-kpi-card is-warning"
+                type="button"
+                data-owner-filter="attention"
+              >
+                <span>ПОТРЕБУЮТЬ УВАГИ</span>
+                <strong data-kpi-attention>3</strong>
+                <small>натисніть для деталей</small>
+              </button>
+
+
+              <div class="c12-kpi-card">
+
+                <span>ВЧАСНА ДОСТАВКА</span>
+                <strong data-kpi-ontime>96,4%</strong>
+                <small>за останні 30 днів</small>
+
+              </div>
+
+            </div>
+
+
+            <div class="c12-owner-grid">
+
+              <!-- OPERATIONS -->
+
+              <article class="c12-panel c12-operations-panel">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      CONTROL TOWER
+                    </span>
+
+                    <h3>Операції зараз</h3>
+                  </div>
+
+                  <span class="c12-live-dot"></span>
+
+                </div>
+
+
+                <div
+                  class="c12-operation-map"
+                  data-operation-map
+                >
+
+                  <div class="c12-map-grid"></div>
+
+                  <span
+                    class="c12-map-city"
+                    style="--x: 22%; --y: 55%;"
+                  >
+                    Львів
+                  </span>
+
+                  <span
+                    class="c12-map-city"
+                    style="--x: 49%; --y: 29%;"
+                  >
+                    Варшава
+                  </span>
+
+                  <span
+                    class="c12-map-city"
+                    style="--x: 44%; --y: 47%;"
+                  >
+                    Краків
+                  </span>
+
+                  <span
+                    class="c12-map-city"
+                    style="--x: 70%; --y: 72%;"
+                  >
+                    Будапешт
+                  </span>
+
+                  <span
+                    class="c12-map-city"
+                    style="--x: 79%; --y: 88%;"
+                  >
+                    Бухарест
+                  </span>
+
+                  <div
+                    class="c12-map-routes"
+                    data-map-routes
+                  ></div>
+
+                </div>
+
+              </article>
+
+
+              <!-- FLEET -->
+
+              <article class="c12-panel c12-owner-fleet">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      АВТОПАРК
+                    </span>
+
+                    <h3>12 автомобілів</h3>
+                  </div>
+
+                </div>
+
+
+                <div class="c12-fleet-bars">
+
+                  <div>
+                    <span>У рейсі</span>
+
+                    <div>
+                      <i style="--value: 67%;"></i>
+                    </div>
+
+                    <strong data-fleet-transit>8</strong>
+                  </div>
+
+                  <div>
+                    <span>Вільні</span>
+
+                    <div>
+                      <i style="--value: 17%;"></i>
+                    </div>
+
+                    <strong data-fleet-free>2</strong>
+                  </div>
+
+                  <div>
+                    <span>Зарезервовано</span>
+
+                    <div>
+                      <i style="--value: 8%;"></i>
+                    </div>
+
+                    <strong data-fleet-reserved>1</strong>
+                  </div>
+
+                  <div>
+                    <span>Сервіс</span>
+
+                    <div>
+                      <i style="--value: 8%;"></i>
+                    </div>
+
+                    <strong data-fleet-service>1</strong>
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- FINANCE -->
+
+              <article class="c12-panel c12-finance-panel">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      ЦЕЙ ТИЖДЕНЬ
+                    </span>
+
+                    <h3>Фінансовий результат</h3>
+                  </div>
+
+                </div>
+
+
+                <div class="c12-finance-kpis">
+
+                  <div>
+                    <small>ДОХІД</small>
+                    <strong data-finance-revenue>
+                      €84 600
+                    </strong>
+                  </div>
+
+                  <div>
+                    <small>ВИТРАТИ</small>
+                    <strong data-finance-cost>
+                      €66 760
+                    </strong>
+                  </div>
+
+                  <div>
+                    <small>МАРЖА</small>
+                    <strong data-finance-margin>
+                      €17 840
+                    </strong>
+                  </div>
+
+                  <div>
+                    <small>МАРЖИНАЛЬНІСТЬ</small>
+                    <strong data-finance-margin-percent>
+                      21,1%
+                    </strong>
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- ORDER SOURCES -->
+
+              <article class="c12-panel c12-sources-chart">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      КАНАЛИ
+                    </span>
+
+                    <h3>Звідки приходять замовлення</h3>
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="c12-donut-wrap"
+                  data-source-chart
+                >
+
+                  <div class="c12-donut">
+                    <div class="c12-donut__center">
+                      <strong>200</strong>
+                      <span>замовлень</span>
+                    </div>
+                  </div>
+
+
+                  <div class="c12-chart-legend">
+
+                    <span>
+                      <i></i>
+                      Email · 31%
+                    </span>
+
+                    <span>
+                      <i></i>
+                      Біржі · 26%
+                    </span>
+
+                    <span>
+                      <i></i>
+                      Телефон · 19%
+                    </span>
+
+                    <span>
+                      <i></i>
+                      Постійні клієнти · 16%
+                    </span>
+
+                    <span>
+                      <i></i>
+                      Інше · 8%
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- ATTENTION -->
+
+              <article class="c12-panel c12-attention-panel">
+
+                <div class="c12-panel__header">
+
+                  <div>
+                    <span class="c12-panel__eyebrow">
+                      ACTION REQUIRED
+                    </span>
+
+                    <h3>Потребують уваги</h3>
+                  </div>
+
+                  <span class="c12-counter is-warning">
+                    3
+                  </span>
+
+                </div>
+
+
+                <div
+                  class="c12-attention-list"
+                  data-attention-list
+                ></div>
+
+              </article>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TIME MACHINE
+        ====================================================== -->
+
+        <section
+          class="c12-time-machine"
+          data-time-machine
+        >
+
+          <div class="c12-time-machine__header">
+
+            <div>
+
+              <span class="c12-panel__eyebrow">
+                ЧАС ПЕРЕВЕЗЕННЯ
+              </span>
+
+              <strong data-time-machine-label>
+                26 серпня · 09:45
+              </strong>
+
+            </div>
+
+
+            <div class="c12-time-machine__hint">
+              <span>↔</span>
+              Перетягуйте час і дивіться,
+              як змінюється вся система
+            </div>
+
+          </div>
+
+
+          <div class="c12-time-machine__control">
+
+            <span class="c12-time-machine__date">
+              26 СЕР
+            </span>
+
+            <div class="c12-time-range-wrap">
+
+              <div class="c12-time-range__events">
+
+                <span style="--position: 9%;">
+                  Заявка
+                </span>
+
+                <span style="--position: 24%;">
+                  Призначення
+                </span>
+
+                <span style="--position: 39%;">
+                  Завантаження
+                </span>
+
+                <span style="--position: 65%;">
+                  Затримка
+                </span>
+
+                <span style="--position: 92%;">
+                  Доставка
+                </span>
+
+              </div>
+
+
+              <input
+                class="c12-time-range"
+                type="range"
+                min="0"
+                max="100"
+                value="4"
+                step="1"
+                aria-label="Час перевезення"
+                data-time-slider
+              >
+
+              <div class="c12-time-range__progress">
+                <span data-time-progress></span>
+              </div>
+
+            </div>
+
+            <span class="c12-time-machine__date">
+              28 СЕР
+            </span>
+
+          </div>
+
+
+          <div class="c12-time-machine__stats">
+
+            <span>
+              Активні:
+              <strong data-time-active>47</strong>
+            </span>
+
+            <span>
+              У дорозі:
+              <strong data-time-transit>31</strong>
+            </span>
+
+            <span>
+              Увага:
+              <strong data-time-attention>2</strong>
+            </span>
+
+            <span>
+              Доставлено:
+              <strong data-time-delivered>118</strong>
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             AUTOMATION FEED
+        ====================================================== -->
+
+        <aside
+          class="c12-automation-feed"
+          data-automation-feed
+        >
+
+          <button
+            class="c12-automation-feed__toggle"
+            type="button"
+            data-automation-toggle
+          >
+
+            <span class="c12-automation-feed__pulse"></span>
+
+            <span>
+              <small>АВТОМАТИЗАЦІЯ</small>
+              <strong>Система зробила сама</strong>
+            </span>
+
+            <span
+              class="c12-automation-feed__count"
+              data-automation-count
+            >
+              0
+            </span>
+
+          </button>
+
+
+          <div class="c12-automation-feed__body">
+
+            <div
+              class="c12-automation-events"
+              data-automation-events
+            >
+
+              <div class="c12-empty-automation">
+                Виконайте першу дію —
+                тут з'являться автоматичні операції системи.
+              </div>
+
+            </div>
+
+          </div>
+
+        </aside>
+
+      </section>
+
+
+      <!-- =======================================================
+           ONE EVENT / FIVE VIEWS
+      ======================================================== -->
+
+      <section
+        class="c12-event-ripple"
+        data-event-ripple
+        hidden
+      >
+
+        <div class="c12-event-ripple__intro">
+
+          <span class="c12-kicker">
+            ОДНА ПОДІЯ
+          </span>
+
+          <h2>
+            Одне оновлення.
+            <em>П'ять реакцій.</em>
+          </h2>
+
+          <p>
+            Водій повідомив про затримку.
+            Дані внесено один раз.
+            Далі система сама передає потрібну інформацію
+            кожному учаснику процесу.
+          </p>
+
+        </div>
+
+
+        <div class="c12-ripple-system">
+
+          <div class="c12-ripple-core">
+
+            <span>+2 ГОД</span>
+
+            <strong>ЗАТРИМКА</strong>
+
+            <small>TR-2026-00184</small>
+
+          </div>
+
+
+          <div class="c12-ripple-card" data-ripple-role="driver">
+
+            <small>ВОДІЙ</small>
+            <strong>Затримку зафіксовано</strong>
+            <span>✓</span>
+
+          </div>
+
+
+          <div class="c12-ripple-card" data-ripple-role="manager">
+
+            <small>ЛОГІСТ</small>
+            <strong>Ризик запізнення</strong>
+            <span>⚠</span>
+
+          </div>
+
+
+          <div class="c12-ripple-card" data-ripple-role="dispatcher">
+
+            <small>ДИСПЕТЧЕР</small>
+            <strong>Замовлення підсвічено</strong>
+            <span>⚠</span>
+
+          </div>
+
+
+          <div class="c12-ripple-card" data-ripple-role="customer">
+
+            <small>КЛІЄНТ</small>
+            <strong>Нове ETA · 16:00</strong>
+            <span>✉</span>
+
+          </div>
+
+
+          <div class="c12-ripple-card" data-ripple-role="owner">
+
+            <small>ВЛАСНИК</small>
+            <strong>Увага: 2 → 3</strong>
+            <span>↑</span>
+
+          </div>
+
+
+          <svg
+            class="c12-ripple-lines"
+            viewBox="0 0 1000 650"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M500 325 L180 120"></path>
+            <path d="M500 325 L820 120"></path>
+            <path d="M500 325 L130 510"></path>
+            <path d="M500 325 L870 510"></path>
+            <path d="M500 325 L500 610"></path>
+          </svg>
+
+        </div>
+
+
+        <button
+          class="c12-primary-action"
+          type="button"
+          data-close-ripple
+        >
+          Продовжити перевезення →
+        </button>
+
+      </section>
+
+
+      <!-- =======================================================
+           UNDER THE HOOD
+      ======================================================== -->
+
+      <section
+        class="c12-underhood"
+        data-underhood
+        hidden
+      >
+
+        <div class="c12-underhood__heading">
+
+          <span class="c12-kicker">
+            ПІД КАПОТОМ
+          </span>
+
+          <h2>
+            Не нова корпоративна система.
+            <em>Чітка бізнес-логіка.</em>
+          </h2>
+
+          <p>
+            Процес можна побудувати навколо інструментів,
+            якими команда вже користується.
+          </p>
+
+        </div>
+
+
+        <div class="c12-stack">
+
+          <article class="c12-stack-card">
+
+            <span class="c12-stack-card__number">01</span>
+
+            <div>
+              <small>ДАНІ ТА РОБОЧЕ СЕРЕДОВИЩЕ</small>
+              <h3>Google Sheets</h3>
+              <p>
+                Замовлення, клієнти, автопарк,
+                водії, перевізники, статуси та історія.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="c12-stack-card">
+
+            <span class="c12-stack-card__number">02</span>
+
+            <div>
+              <small>БІЗНЕС-ЛОГІКА</small>
+              <h3>Google Apps Script</h3>
+              <p>
+                Перевірки, статуси, timestamps,
+                автоматичні дії, повідомлення та контроль.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="c12-stack-card">
+
+            <span class="c12-stack-card__number">03</span>
+
+            <div>
+              <small>ДОКУМЕНТИ</small>
+              <h3>Google Drive</h3>
+              <p>
+                CMR, POD, фотографії та документи
+                конкретного перевезення.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="c12-stack-card">
+
+            <span class="c12-stack-card__number">04</span>
+
+            <div>
+              <small>КОМУНІКАЦІЯ</small>
+              <h3>Email</h3>
+              <p>
+                Підтвердження, зміни ETA,
+                доставка та внутрішні повідомлення.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="c12-stack-card">
+
+            <span class="c12-stack-card__number">05</span>
+
+            <div>
+              <small>ЗОВНІШНІ ІНТЕРФЕЙСИ</small>
+              <h3>HTML · CSS · JavaScript</h3>
+              <p>
+                Мобільний інтерфейс водія,
+                Track & Trace та спеціальні робочі екрани.
+              </p>
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================================
+           BEFORE / AFTER
+      ======================================================== -->
+
+      <section
+        class="c12-before-after"
+        data-before-after
+        hidden
+      >
+
+        <div class="c12-before-after__side c12-before">
+
+          <span class="c12-before-after__label">
+            ДО
+          </span>
+
+          <h2>
+            Інформація
+            <em>розкидана.</em>
+          </h2>
+
+
+          <div class="c12-chaos">
+
+            <span>EMAIL</span>
+            <span>ТЕЛЕФОН</span>
+            <span>VIBER</span>
+            <span>БІРЖА</span>
+            <span>EXCEL</span>
+            <span>НОТАТКИ</span>
+            <span>ПАМ'ЯТЬ</span>
+
+          </div>
+
+        </div>
+
+
+        <div class="c12-before-after__arrow">
+          →
+        </div>
+
+
+        <div class="c12-before-after__side c12-after">
+
+          <span class="c12-before-after__label">
+            ПІСЛЯ
+          </span>
+
+          <h2>
+            Один
+            <em>операційний процес.</em>
+          </h2>
+
+
+          <div class="c12-process-chain">
+
+            <span>Заявка</span>
+            <i>→</i>
+
+            <span>Планування</span>
+            <i>→</i>
+
+            <span>Рейс</span>
+            <i>→</i>
+
+            <span>Доставка</span>
+            <i>→</i>
+
+            <span>Документи</span>
+            <i>→</i>
+
+            <span>Аналітика</span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================================
+           FINAL CTA
+      ======================================================== -->
+
+      <section
+        class="c12-final"
+        data-final-section
+        hidden
+      >
+
+        <div class="c12-final__content">
+
+          <span class="c12-kicker">
+            НЕ ЗАВЖДИ ПОТРІБНА НОВА СИСТЕМА
+          </span>
+
+          <h2>
+            Іноді потрібно,
+            щоб ваш процес
+            <em>нарешті працював як система.</em>
+          </h2>
+
+          <p>
+            Робочий процес можна побудувати навколо
+            Google Sheets та інструментів, які команда
+            вже знає — з перевірками, автоматизацією,
+            контролем і аналітикою.
+          </p>
+
+
+          <div class="c12-final__actions">
+
+            <a
+              class="c12-primary-action"
+              href="../contacts.html"
+            >
+              Обговорити свій процес →
+            </a>
+
+            <button
+              class="c12-secondary-action"
+              type="button"
+              data-restart-case
+            >
+              Пройти кейс ще раз
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="c12-final__system">
+
+          <div class="c12-final-core">
+            <span>YOUR</span>
+            <strong>PROCESS</strong>
+          </div>
+
+          <span>Orders</span>
+          <span>People</span>
+          <span>Fleet</span>
+          <span>Documents</span>
+          <span>Customers</span>
+          <span>Analytics</span>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         MODAL: ALL ORDERS
+    ========================================================== -->
+
+    <div
+      class="c12-modal"
+      data-orders-modal
+      hidden
+    >
+
+      <div
+        class="c12-modal__backdrop"
+        data-close-orders-modal
+      ></div>
+
+
+      <div
+        class="c12-modal__window c12-modal__window--wide"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Усі замовлення"
+      >
+
+        <header class="c12-modal__header">
+
+          <div>
+            <span class="c12-panel__eyebrow">
+              ОПЕРАЦІЙНА БАЗА
+            </span>
+
+            <h2>200 перевезень</h2>
+          </div>
+
+
+          <button
+            class="c12-modal__close"
+            type="button"
+            aria-label="Закрити"
+            data-close-orders-modal
+          >
+            ×
+          </button>
+
+        </header>
+
+
+        <div class="c12-orders-toolbar">
+
+          <label class="c12-search">
+
+            <span>⌕</span>
+
+            <input
+              type="search"
+              placeholder="ID, клієнт, місто, водій, автомобіль..."
+              data-orders-search
+            >
+
+          </label>
+
+
+          <select data-orders-status-filter>
+            <option value="all">Усі статуси</option>
+            <option value="new">Нові</option>
+            <option value="planning">Планування</option>
+            <option value="assigned">Призначено</option>
+            <option value="transit">У дорозі</option>
+            <option value="delivered">Доставлено</option>
+            <option value="attention">Потребують уваги</option>
+          </select>
+
+
+          <select data-orders-execution-filter>
+            <option value="all">Усі перевезення</option>
+            <option value="own">Власний транспорт</option>
+            <option value="carrier">Залучений перевізник</option>
+          </select>
+
+        </div>
+
+
+        <div class="c12-table-wrap c12-table-wrap--modal">
+
+          <table class="c12-table c12-table--large">
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Створено</th>
+                <th>Клієнт</th>
+                <th>Маршрут</th>
+                <th>Вантаж</th>
+                <th>Завантаження</th>
+                <th>Доставка</th>
+                <th>Виконання</th>
+                <th>Автомобіль</th>
+                <th>Водій</th>
+                <th>Статус</th>
+                <th>Маржа</th>
+              </tr>
+            </thead>
+
+            <tbody data-all-orders-table></tbody>
+
+          </table>
+
+        </div>
+
+
+        <footer class="c12-modal__footer">
+
+          <span data-modal-orders-summary>
+            200 замовлень
+          </span>
+
+        </footer>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MODAL: BUSINESS RULE MESSAGE
+    ========================================================== -->
+
+    <div
+      class="c12-modal"
+      data-rule-modal
+      hidden
+    >
+
+      <div
+        class="c12-modal__backdrop"
+        data-close-rule-modal
+      ></div>
+
+
+      <div
+        class="c12-modal__window c12-modal__window--small"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Перевірка бізнес-правила"
+      >
+
+        <div
+          class="c12-rule-result"
+          data-rule-result
+        >
+
+          <span class="c12-rule-result__icon">
+            ⚠
+          </span>
+
+          <span class="c12-panel__eyebrow">
+            БІЗНЕС-ПРАВИЛО
+          </span>
+
+          <h3 data-rule-title>
+            Неможливо призначити автомобіль
+          </h3>
+
+          <p data-rule-description>
+            Цей автомобіль не відповідає вимогам замовлення.
+          </p>
+
+          <button
+            class="c12-primary-action"
+            type="button"
+            data-close-rule-modal
+          >
+            Зрозуміло
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         TOASTS
+    ========================================================== -->
+
+    <div
+      class="c12-toast-stack"
+      aria-live="polite"
+      data-toast-stack
+    ></div>
+
+  </div>
+
+
+  <!-- ===========================================================
+       DATA / LOGIC
+  ============================================================ -->
+
+  <script src="./case12-i18n.js"></script>
+  <script src="./case12-data.js"></script>
+  <script src="./case12-rules.js"></script>
+  <script src="./case12-simulation.js"></script>
+  <script src="./case12-ui.js"></script>
+  <script src="./case12.js"></script>
+
+</body>
+</html>

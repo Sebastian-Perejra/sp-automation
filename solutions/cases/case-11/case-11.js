@@ -1443,150 +1443,226 @@ const arTimewarpText =
     }
   }
 
-  async function advanceTime() {
-    if (
-      state.busy ||
-      !state.nextDate ||
-      !state.pendingTimeContext
-    ) {
-      return;
-    }
+async function advanceTime() {
+  if (
+    state.busy ||
+    !state.nextDate ||
+    !state.pendingTimeContext
+  ) {
+    return;
+  }
 
-    setBusy(true);
+  setBusy(true);
 
-    const context =
-      state.pendingTimeContext;
+  const token =
+    state.runToken;
 
-    state.currentDate =
-      cloneDate(state.nextDate);
+  const context =
+    state.pendingTimeContext;
 
-    state.nextDate = null;
-    state.pendingTimeContext = null;
+  const oldDate =
+    cloneDate(state.currentDate);
 
-    if (els.timeTravel) {
-      els.timeTravel.hidden = true;
-    }
+  const newDate =
+    cloneDate(state.nextDate);
 
-    updateSimulationHeader();
-
-    activateStep("erp");
-    setProcessing(true);
-
-    setStatus(
-      "ПОВТОРНА ПЕРЕВІРКА"
+  const daysForward =
+    Math.max(
+      1,
+      differenceInDays(
+        newDate,
+        oldDate
+      )
     );
 
-    addSystemEvent(
-      "success",
-      "Час симуляції змінено",
-      `Поточна дата: ${formatDate(state.currentDate)}.`
-    );
+  let title =
+    `Минає ${pluralDays(daysForward)}`;
 
-    addAudit(
-      "success",
-      "Настала контрольна дата",
-      `Автоматична перевірка запущена ${formatDate(state.currentDate)}.`
-    );
+  let text =
+    `Система переносить процес з ${formatDate(oldDate)} на ${formatDate(newDate)}.`;
 
-    const token =
-      state.runToken;
+  if (
+    context.type ===
+    "manager-postpone"
+  ) {
+    title =
+      `Минає ${pluralDays(daysForward)}`;
 
-    if (!(await wait(500, token))) {
-      return;
-    }
+    text =
+      `Настає дата, на яку менеджер відклав рішення — ${formatDate(newDate)}.`;
+  }
 
-    await simulateUnpaidCheck();
+  if (
+    context.type ===
+    "escalation"
+  ) {
+    title =
+      `Минає ${pluralDays(daysForward)}`;
 
-    setProcessing(false);
+    text =
+      `Система доходить до наступної контрольної дати — ${formatDate(newDate)}.`;
+  }
+
+  if (
+    context.type ===
+    "promise-check"
+  ) {
+    title =
+      "Настає обіцяна дата";
+
+    text =
+      `Клієнт обіцяв оплату до ${formatDate(newDate)}. Система переходить до повторної перевірки.`;
+  }
+
+  if (
+    context.type ===
+    "claim-deadline"
+  ) {
+    title =
+      "Минає строк після претензії";
+
+    text =
+      `Система переходить до контрольної дати ${formatDate(newDate)} та перевіряє результат.`;
+  }
+
+  showTimewarp(
+    title,
+    text
+  );
+
+  if (!(await wait(1200, token))) {
     setBusy(false);
+    return;
+  }
 
+  state.currentDate =
+    newDate;
+
+  state.nextDate = null;
+  state.pendingTimeContext = null;
+
+  if (els.timeTravel) {
+    els.timeTravel.hidden = true;
+  }
+
+  updateSimulationHeader();
+
+  activateStep("erp");
+  setProcessing(true);
+
+  setStatus(
+    "ПОВТОРНА ПЕРЕВІРКА"
+  );
+
+  addSystemEvent(
+    "success",
+    "Час симуляції змінено",
+    `Поточна дата: ${formatDate(state.currentDate)}.`
+  );
+
+  addAudit(
+    "success",
+    "Настала контрольна дата",
+    `Автоматична перевірка запущена ${formatDate(state.currentDate)}.`
+  );
+
+  if (!(await wait(500, token))) {
+    setBusy(false);
+    return;
+  }
+
+  await simulateUnpaidCheck();
+
+  setProcessing(false);
+  setBusy(false);
+
+  if (
+    context.type ===
+    "manager-postpone"
+  ) {
     if (
-      context.type ===
-      "manager-postpone"
+      context.sourceType ===
+      "claim"
     ) {
-      if (
-        context.sourceType ===
-        "claim"
-      ) {
-        showClaimGate();
-      } else {
-        await prepareLevel(
-          context.level
-        );
-      }
-
-      return;
-    }
-
-    if (
-      context.type ===
-      "escalation"
-    ) {
+      showClaimGate();
+    } else {
       await prepareLevel(
         context.level
       );
-
-      return;
     }
 
-    if (
-      context.type ===
-      "promise-check"
-    ) {
-      activateStep("monitor");
-
-      setStatus(
-        "ОБІЦЯНА ДАТА НАСТАЛА",
-        "warning"
-      );
-
-      addSystemEvent(
-        "warning",
-        "Настала обіцяна дата оплати",
-        `Станом на ${formatDate(state.currentDate)} повну оплату в ${getSourceName()} не знайдено.`
-      );
-
-      addAudit(
-        "warning",
-        "Обіцяну дату перевірено",
-        "Система очікує фактичний результат: оплату, часткову оплату або відсутність платежу."
-      );
-
-      showCustomerOutcome(
-        "promise-check"
-      );
-
-      return;
-    }
-
-    if (
-      context.type ===
-      "claim-deadline"
-    ) {
-      activateStep("monitor");
-
-      setStatus(
-        "СТРОК ПРЕТЕНЗІЇ МИНУВ",
-        "warning"
-      );
-
-      addSystemEvent(
-        "warning",
-        "Строк добровільного погашення минув",
-        "Повну оплату після претензії не підтверджено."
-      );
-
-      addAudit(
-        "warning",
-        "Строк після претензії завершився",
-        `Станом на ${formatDate(state.currentDate)} борг залишається відкритим.`
-      );
-
-      showCustomerOutcome(
-        "claim-deadline"
-      );
-    }
+    return;
   }
+
+  if (
+    context.type ===
+    "escalation"
+  ) {
+    await prepareLevel(
+      context.level
+    );
+
+    return;
+  }
+
+  if (
+    context.type ===
+    "promise-check"
+  ) {
+    activateStep("monitor");
+
+    setStatus(
+      "ОБІЦЯНА ДАТА НАСТАЛА",
+      "warning"
+    );
+
+    addSystemEvent(
+      "warning",
+      "Настала обіцяна дата оплати",
+      `Станом на ${formatDate(state.currentDate)} повну оплату в ${getSourceName()} не знайдено.`
+    );
+
+    addAudit(
+      "warning",
+      "Обіцяну дату перевірено",
+      "Система очікує фактичний результат: оплату, часткову оплату або відсутність платежу."
+    );
+
+    showCustomerOutcome(
+      "promise-check"
+    );
+
+    return;
+  }
+
+  if (
+    context.type ===
+    "claim-deadline"
+  ) {
+    activateStep("monitor");
+
+    setStatus(
+      "СТРОК ПРЕТЕНЗІЇ МИНУВ",
+      "warning"
+    );
+
+    addSystemEvent(
+      "warning",
+      "Строк добровільного погашення минув",
+      "Повну оплату після претензії не підтверджено."
+    );
+
+    addAudit(
+      "warning",
+      "Строк після претензії завершився",
+      `Станом на ${formatDate(state.currentDate)} борг залишається відкритим.`
+    );
+
+    showCustomerOutcome(
+      "claim-deadline"
+    );
+  }
+}
 
   async function simulateUnpaidCheck() {
     const token =
@@ -2823,8 +2899,7 @@ const arTimewarpText =
 
   let arTimewarpTimer = null;
 
-function showTimewarp(
-  title =
+function showTimewarp(  title =
     "Перемотування часу",
   text =
     "Система швидко переносить сценарій до наступної контрольної дати."
@@ -2864,7 +2939,7 @@ function showTimewarp(
         "aria-hidden",
         "true"
       );
-    }, 1150);
+    }, 1350);
 }
 
   function restartProcess() {

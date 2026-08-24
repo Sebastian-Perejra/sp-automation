@@ -1572,7 +1572,7 @@ const conceptLabels =
       reasons:
         Array.from(reasons)
           .filter(Boolean)
-          .slice(0, 10),
+          .slice(0, 11),
       matchedConcepts:
         matchedConcepts
           .sort(
@@ -1675,7 +1675,7 @@ const conceptLabels =
           a.item.priority
         );
       })
-      .slice(0, 10);
+      .slice(0, 11);
   }
 
 function resultBadge(

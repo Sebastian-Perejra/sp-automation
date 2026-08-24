@@ -1595,7 +1595,7 @@ const conceptLabels =
             b.item.priority -
             a.item.priority
         )
-        .slice(0, 10)
+        .slice(0, 11)
         .map(indexed => ({
           item:
             indexed.item,

@@ -10683,3 +10683,43 @@ box-shadow:
     padding-top: 34px;
   }
 }
+
+.case-result-card__desktop-note {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  column-gap: 9px;
+  row-gap: 2px;
+  margin-top: 14px;
+  padding: 10px 11px;
+  border: 1px solid rgba(209, 155, 0, 0.24);
+  border-radius: 10px;
+  background: rgba(242, 200, 17, 0.08);
+  text-align: left;
+}
+
+.case-result-card__desktop-note > span {
+  grid-row: 1 / span 2;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 7px;
+  background: rgba(242, 200, 17, 0.16);
+  color: #a37c00;
+  font-size: 13px;
+}
+
+.case-result-card__desktop-note strong {
+  color: #66531a;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.case-result-card__desktop-note small {
+  color: #81755a;
+  font-size: 8px;
+  line-height: 1.45;
+}

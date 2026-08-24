@@ -49,6 +49,21 @@
     4: "Претензія щодо погашення простроченої заборгованості за рахунком INV-4821"
   };
 
+  const arTimewarp =
+  document.getElementById(
+    "arTimewarp"
+  );
+
+const arTimewarpTitle =
+  document.getElementById(
+    "arTimewarpTitle"
+  );
+
+const arTimewarpText =
+  document.getElementById(
+    "arTimewarpText"
+  );
+
   const stepOrder = [
     "erp",
     "detect",
@@ -2805,6 +2820,52 @@
       `;
     }
   }
+
+  let arTimewarpTimer = null;
+
+function showTimewarp(
+  title =
+    "Перемотування часу",
+  text =
+    "Система швидко переносить сценарій до наступної контрольної дати."
+) {
+  if (!arTimewarp) return;
+
+  if (arTimewarpTimer) {
+    clearTimeout(arTimewarpTimer);
+  }
+
+  if (arTimewarpTitle) {
+    arTimewarpTitle.textContent =
+      title;
+  }
+
+  if (arTimewarpText) {
+    arTimewarpText.textContent =
+      text;
+  }
+
+  arTimewarp.classList.add(
+    "is-visible"
+  );
+
+  arTimewarp.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  arTimewarpTimer =
+    window.setTimeout(() => {
+      arTimewarp.classList.remove(
+        "is-visible"
+      );
+
+      arTimewarp.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }, 1150);
+}
 
   function restartProcess() {
     state.runToken += 1;

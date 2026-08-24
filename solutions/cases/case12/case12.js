@@ -1,0 +1,1267 @@
+(function () {
+  "use strict";
+
+  const C12 = window.C12 = window.C12 || {};
+
+  if (
+    !C12.data ||
+    !C12.rules ||
+    !C12.simulation ||
+    !C12.ui ||
+    !C12.state
+  ) {
+    console.error(
+      "[CASE 12] case12.js requires data, rules, simulation and ui modules"
+    );
+    return;
+  }
+
+
+  /* ============================================================
+     HELPERS
+  ============================================================ */
+
+  const $ = (selector, root = document) => {
+    return root.querySelector(selector);
+  };
+
+
+  const $$ = (selector, root = document) => {
+    return Array.from(
+      root.querySelectorAll(selector)
+    );
+  };
+
+
+  const sleep = (ms) => {
+    return new Promise(resolve => {
+      window.setTimeout(resolve, ms);
+    });
+  };
+
+
+  /* ============================================================
+     STORY STATE
+  ============================================================ */
+
+  C12.story = {
+    step: 0,
+
+    steps: [
+      "dispatcher",
+      "manager",
+      "driver",
+      "customer",
+      "owner"
+    ],
+
+    locked: false
+  };
+
+
+  /* ============================================================
+     MODE
+  ============================================================ */
+
+  function setMode(mode) {
+    if (
+      ![
+        "guided",
+        "explore"
+      ].includes(mode)
+    ) {
+      return;
+    }
+
+    C12.state.mode =
+      mode;
+
+    $$(
+      "[data-mode]"
+    ).forEach(
+      button => {
+        button.classList.toggle(
+          "is-active",
+          button.dataset.mode ===
+            mode
+        );
+      }
+    );
+
+    if (mode === "guided") {
+      C12.ui.showToast(
+        "Guided mode",
+        "Кейс веде вас через ролі по черзі.",
+        "info"
+      );
+    }
+
+    else {
+      C12.ui.showToast(
+        "Explore mode",
+        "Можна вільно переходити між ролями та етапами.",
+        "info"
+      );
+    }
+  }
+
+
+  /* ============================================================
+     SOUND
+  ============================================================ */
+
+  function toggleSound() {
+    C12.state.soundEnabled =
+      !C12.state.soundEnabled;
+
+    const button =
+      $(
+        "[data-sound-toggle]"
+      );
+
+    if (button) {
+      button.classList.toggle(
+        "is-active",
+        C12.state.soundEnabled
+      );
+    }
+
+    C12.ui.showToast(
+      C12.state.soundEnabled
+        ? "Звук увімкнено"
+        : "Звук вимкнено",
+      "",
+      "info",
+      1800
+    );
+  }
+
+
+  /* ============================================================
+     CREATE MAIN ORDER
+  ============================================================ */
+
+  async function createMainOrder() {
+    if (
+      C12.state.mainOrderCreated
+    ) {
+      C12.ui.showToast(
+        "Замовлення вже створено",
+        "TR-2026-00184 уже знаходиться в реєстрі.",
+        "info"
+      );
+
+      return;
+    }
+
+    C12.state.mainOrderCreated =
+      true;
+
+    C12.mainOrder.status =
+      "new";
+
+    C12.mainOrder.statusLabel =
+      C12.statuses.new.label;
+
+    C12.mainOrder.history.push({
+      time:
+        C12.state
+          .simulationTime,
+
+      status:
+        "new",
+
+      title:
+        "Замовлення створено",
+
+      actor:
+        "Диспетчер"
+    });
+
+    C12.ui.addAutomationBatch(
+      C12.automationTemplates
+        .orderCreated
+    );
+
+    C12.ui.showToast(
+      "TR-2026-00184 створено",
+      "Замовлення додано до реєстру перевезень.",
+      "success"
+    );
+
+    C12.simulation.setPosition(
+      9,
+      {
+        source:
+          "dispatcher-create"
+      }
+    );
+
+    await sleep(700);
+
+    if (
+      C12.state.mode ===
+      "guided"
+    ) {
+      C12.ui.showToast(
+        "Далі — планування",
+        "Тепер подивимося на це саме замовлення очима логіста.",
+        "info",
+        3200
+      );
+
+      await sleep(900);
+
+      C12.ui.showRole(
+        "manager"
+      );
+    }
+  }
+
+
+  /* ============================================================
+     DRAG & DROP
+  ============================================================ */
+
+  let draggedOrderId =
+    null;
+
+
+  function bindDragAndDrop() {
+    const draggable =
+      $(
+        '[data-draggable-order="TR-2026-00184"]'
+      );
+
+    if (draggable) {
+      draggable.addEventListener(
+        "dragstart",
+        event => {
+          if (
+            C12.state.mainOrderAssigned
+          ) {
+            event.preventDefault();
+            return;
+          }
+
+          draggedOrderId =
+            draggable.dataset
+              .draggableOrder;
+
+          draggable.classList.add(
+            "is-dragging"
+          );
+
+          if (
+            event.dataTransfer
+          ) {
+            event.dataTransfer
+              .setData(
+                "text/plain",
+                draggedOrderId
+              );
+
+            event.dataTransfer
+              .effectAllowed =
+                "move";
+          }
+        }
+      );
+
+
+      draggable.addEventListener(
+        "dragend",
+        () => {
+          draggable.classList.remove(
+            "is-dragging"
+          );
+
+          $$(
+            "[data-drop-target]"
+          ).forEach(
+            card => {
+              card.classList.remove(
+                "is-drag-over"
+              );
+            }
+          );
+
+          draggedOrderId =
+            null;
+        }
+      );
+    }
+
+
+    $$(
+      "[data-drop-target]"
+    ).forEach(
+      card => {
+
+        card.addEventListener(
+          "dragover",
+          event => {
+            event.preventDefault();
+
+            card.classList.add(
+              "is-drag-over"
+            );
+
+            if (
+              event.dataTransfer
+            ) {
+              event.dataTransfer
+                .dropEffect =
+                  "move";
+            }
+          }
+        );
+
+
+        card.addEventListener(
+          "dragleave",
+          () => {
+            card.classList.remove(
+              "is-drag-over"
+            );
+          }
+        );
+
+
+        card.addEventListener(
+          "drop",
+          event => {
+            event.preventDefault();
+
+            card.classList.remove(
+              "is-drag-over"
+            );
+
+            const orderId =
+              event.dataTransfer
+                ?.getData(
+                  "text/plain"
+                ) ||
+              draggedOrderId ||
+              C12.mainOrder.id;
+
+            const vehiclePlate =
+              card.dataset.vehicle;
+
+            handleVehicleDrop(
+              orderId,
+              vehiclePlate
+            );
+          }
+        );
+      }
+    );
+  }
+
+
+  /* ============================================================
+     VEHICLE DROP RESULT
+  ============================================================ */
+
+  async function handleVehicleDrop(
+    orderId,
+    vehiclePlate
+  ) {
+    const validation =
+      C12.rules
+        .validateVehicleForOrder(
+          vehiclePlate,
+          orderId
+        );
+
+    if (
+      !validation.valid
+    ) {
+      C12.ui.showRuleModal(
+        validation
+      );
+
+      C12.ui.showToast(
+        "Призначення неможливе",
+        validation.blocking
+          ?.description ||
+        "Автомобіль не відповідає умовам.",
+        "warning",
+        3600
+      );
+
+      return;
+    }
+
+
+    const result =
+      C12.rules
+        .assignVehicleToOrder(
+          vehiclePlate,
+          orderId
+        );
+
+    if (
+      !result.success
+    ) {
+      C12.ui.showRuleModal(
+        result.validation
+      );
+
+      return;
+    }
+
+
+    C12.state.mainOrderAssigned =
+      true;
+
+
+    C12.ui.addAutomationBatch(
+      C12.automationTemplates
+        .vehicleAssigned
+    );
+
+
+    C12.ui.showToast(
+      "Автомобіль призначено",
+      "DAF XF · BC 4587 KA · Олександр Петренко",
+      "success"
+    );
+
+
+    C12.simulation.setPosition(
+      24,
+      {
+        source:
+          "manager-assignment"
+      }
+    );
+
+
+    await sleep(800);
+
+
+    if (
+      C12.state.mode ===
+      "guided"
+    ) {
+      C12.ui.showToast(
+        "Ресурс призначено",
+        "Тепер подивимося, що бачить водій.",
+        "info"
+      );
+
+      await sleep(1000);
+
+      C12.ui.showRole(
+        "driver"
+      );
+    }
+  }
+
+
+  /* ============================================================
+     VEHICLE CARD CLICK FALLBACK
+
+     На мобільному drag&drop не завжди зручний.
+     Тому клік по картці теж запускає перевірку.
+  ============================================================ */
+
+  function bindVehicleClicks() {
+    $$(
+      "[data-vehicle]"
+    ).forEach(
+      card => {
+        card.addEventListener(
+          "click",
+          () => {
+            if (
+              C12.state.mainOrderAssigned
+            ) {
+              return;
+            }
+
+            handleVehicleDrop(
+              C12.mainOrder.id,
+              card.dataset.vehicle
+            );
+          }
+        );
+      }
+    );
+  }
+
+
+  /* ============================================================
+     CARRIER ASSIGNMENT
+  ============================================================ */
+
+  function bindCarriers() {
+    document.addEventListener(
+      "click",
+      event => {
+        const button =
+          event.target.closest(
+            "[data-carrier]"
+          );
+
+        if (!button) {
+          return;
+        }
+
+        if (
+          C12.state.mainOrderAssigned
+        ) {
+          C12.ui.showToast(
+            "Ресурс уже призначено",
+            "Спочатку потрібно скасувати поточне призначення.",
+            "info"
+          );
+
+          return;
+        }
+
+        const carrierName =
+          button.dataset
+            .carrier;
+
+        const validation =
+          C12.rules
+            .validateCarrierForOrder(
+              carrierName,
+              C12.mainOrder
+            );
+
+        if (
+          !validation.valid
+        ) {
+          C12.ui.showRuleModal(
+            validation
+          );
+
+          return;
+        }
+
+        const result =
+          C12.rules
+            .assignCarrierToOrder(
+              carrierName,
+              C12.mainOrder
+            );
+
+        if (
+          !result.success
+        ) {
+          C12.ui.showRuleModal(
+            result.validation
+          );
+
+          return;
+        }
+
+        C12.state.mainOrderAssigned =
+          true;
+
+        C12.ui.showToast(
+          "Перевізника призначено",
+          `${carrierName} виконає перевезення.`,
+          "success"
+        );
+
+        C12.ui.addAutomationEvent(
+          `Перевізника ${carrierName} призначено на TR-2026-00184`
+        );
+
+        C12.simulation.setPosition(
+          24,
+          {
+            source:
+              "carrier-assignment"
+          }
+        );
+      }
+    );
+  }
+
+
+  /* ============================================================
+     DRIVER ACTIONS
+  ============================================================ */
+
+  async function handleDriverAction(
+    action
+  ) {
+    switch (action) {
+
+      case "start": {
+        const result =
+          C12.simulation
+            .driverAction(
+              "start"
+            );
+
+        if (
+          !result.success
+        ) {
+          return;
+        }
+
+        C12.ui.addAutomationBatch(
+          C12.automationTemplates
+            .tripStarted
+        );
+
+        C12.ui.showToast(
+          "Рейс розпочато",
+          "Час старту зафіксовано.",
+          "success"
+        );
+
+        break;
+      }
+
+
+      case "arrived": {
+        const result =
+          C12.simulation
+            .driverAction(
+              "arrived"
+            );
+
+        if (
+          !result.success
+        ) {
+          return;
+        }
+
+        C12.ui.addAutomationEvent(
+          "Зафіксовано прибуття на завантаження"
+        );
+
+        C12.ui.showToast(
+          "Автомобіль прибув",
+          "Точка завантаження — Львів.",
+          "success"
+        );
+
+        break;
+      }
+
+
+      case "loaded": {
+        const result =
+          C12.simulation
+            .driverAction(
+              "loaded"
+            );
+
+        if (
+          !result.success
+        ) {
+          return;
+        }
+
+        C12.ui.addAutomationBatch(
+          C12.automationTemplates
+            .cargoLoaded
+        );
+
+        C12.ui.showToast(
+          "Вантаж завантажено",
+          "12 палет · 4 800 кг.",
+          "success"
+        );
+
+        await sleep(700);
+
+        C12.simulation
+          .driverAction(
+            "transit"
+          );
+
+        C12.ui.showToast(
+          "Вантаж у дорозі",
+          "ETA: 28 серпня · 14:00.",
+          "info"
+        );
+
+        break;
+      }
+
+
+      case "transit": {
+        const result =
+          C12.simulation
+            .driverAction(
+              "transit"
+            );
+
+        if (
+          !result.success
+        ) {
+          return;
+        }
+
+        C12.ui.showToast(
+          "Рух до клієнта",
+          "Перевезення перейшло у статус «У дорозі».",
+          "success"
+        );
+
+        break;
+      }
+
+
+      case "delay": {
+        C12.simulation
+          .reportDelay(2);
+
+        C12.ui.addAutomationBatch(
+          C12.automationTemplates
+            .delayReported
+        );
+
+        C12.ui.showToast(
+          "Затримка +2 години",
+          "ETA клієнта автоматично оновлено.",
+          "warning"
+        );
+
+        break;
+      }
+
+
+      case "delivered": {
+        C12.simulation
+          .completeDelivery({
+            receivedBy:
+              "Jan Kowalski",
+            pod:
+              true,
+            cmr:
+              true
+          });
+
+        C12.ui.addAutomationBatch(
+          C12.automationTemplates
+            .delivered
+        );
+
+        C12.ui.showToast(
+          "Доставку завершено",
+          "Отримав: Jan Kowalski.",
+          "success"
+        );
+
+        await sleep(900);
+
+        if (
+          C12.state.mode ===
+          "guided"
+        ) {
+          C12.ui.showRole(
+            "customer"
+          );
+        }
+
+        break;
+      }
+    }
+  }
+
+
+  function bindDriverActions() {
+    $$(
+      "[data-driver-action]"
+    ).forEach(
+      button => {
+        button.addEventListener(
+          "click",
+          () => {
+            handleDriverAction(
+              button.dataset
+                .driverAction
+            );
+          }
+        );
+      }
+    );
+  }
+
+
+  /* ============================================================
+     CREATE BUTTON
+  ============================================================ */
+
+  function bindCreateOrder() {
+    $(
+      "[data-create-main-order]"
+    )?.addEventListener(
+      "click",
+      createMainOrder
+    );
+  }
+
+
+  /* ============================================================
+     MODES
+  ============================================================ */
+
+  function bindModes() {
+    $$(
+      "[data-mode]"
+    ).forEach(
+      button => {
+        button.addEventListener(
+          "click",
+          () => {
+            setMode(
+              button.dataset.mode
+            );
+          }
+        );
+      }
+    );
+  }
+
+
+  /* ============================================================
+     SOUND
+  ============================================================ */
+
+  function bindSound() {
+    $(
+      "[data-sound-toggle]"
+    )?.addEventListener(
+      "click",
+      toggleSound
+    );
+  }
+
+
+  /* ============================================================
+     KEYBOARD
+  ============================================================ */
+
+  function bindKeyboard() {
+    document.addEventListener(
+      "keydown",
+      event => {
+        if (
+          event.key ===
+          "Escape"
+        ) {
+          C12.ui.closeOrdersModal();
+          C12.ui.closeRuleModal();
+          C12.ui.closeAutomationFeed();
+        }
+
+        if (
+          event.key ===
+          "ArrowRight" &&
+          event.altKey
+        ) {
+          C12.simulation
+            .nextMilestone();
+        }
+
+        if (
+          event.key ===
+          "ArrowLeft" &&
+          event.altKey
+        ) {
+          C12.simulation
+            .previousMilestone();
+        }
+      }
+    );
+  }
+
+
+  /* ============================================================
+     GUIDED STORY REACTIONS
+  ============================================================ */
+
+  function bindGuidedStory() {
+    document.addEventListener(
+      "c12:rolechange",
+      event => {
+        if (
+          C12.state.mode !==
+          "guided"
+        ) {
+          return;
+        }
+
+        const role =
+          event.detail.role;
+
+        const index =
+          C12.story.steps
+            .indexOf(role);
+
+        if (
+          index >= 0
+        ) {
+          C12.story.step =
+            index;
+        }
+      }
+    );
+
+
+    document.addEventListener(
+      "c12:storyevent",
+      async event => {
+        if (
+          C12.state.mode !==
+          "guided"
+        ) {
+          return;
+        }
+
+        const name =
+          event.detail.event;
+
+        if (
+          name ===
+          "delayed"
+        ) {
+          return;
+        }
+
+        if (
+          name ===
+          "delivered"
+        ) {
+          await sleep(1500);
+
+          C12.ui.showRole(
+            "customer"
+          );
+
+          await sleep(1100);
+
+          C12.ui.showToast(
+            "Клієнт бачить результат",
+            "Тепер залишився погляд власника.",
+            "info"
+          );
+
+          await sleep(1200);
+
+          C12.ui.showRole(
+            "owner"
+          );
+
+          await sleep(800);
+
+          C12.ui.showEndSections();
+        }
+      }
+    );
+  }
+
+
+  /* ============================================================
+     ATTENTION ORDERS
+  ============================================================ */
+
+  function bindAttentionItems() {
+    document.addEventListener(
+      "click",
+      event => {
+        const button =
+          event.target.closest(
+            "[data-attention-order]"
+          );
+
+        if (!button) {
+          return;
+        }
+
+        const id =
+          button.dataset
+            .attentionOrder;
+
+        C12.ui.showToast(
+          id,
+          "Відкрито проблемне перевезення.",
+          "warning"
+        );
+
+        C12.ui.openOrdersModal();
+      }
+    );
+  }
+
+
+  /* ============================================================
+     MAIN ORDER ROW CLICK
+  ============================================================ */
+
+  function bindOrderRows() {
+    document.addEventListener(
+      "click",
+      event => {
+        const row =
+          event.target.closest(
+            "[data-order-row]"
+          );
+
+        if (!row) {
+          return;
+        }
+
+        const id =
+          row.dataset.orderRow;
+
+        if (
+          id !==
+          C12.mainOrder.id
+        ) {
+          C12.ui.showToast(
+            id,
+            "Демонстраційне перевезення з реєстру.",
+            "info"
+          );
+
+          return;
+        }
+
+        C12.ui.showToast(
+          "TR-2026-00184",
+          "Це головне перевезення інтерактивного кейсу.",
+          "success"
+        );
+      }
+    );
+  }
+
+
+  /* ============================================================
+     LIVE INCOMING FLOW
+
+     Щоб диспетчерський екран не виглядав мертвим.
+  ============================================================ */
+
+  function startIncomingFlow() {
+    const container =
+      $(
+        "[data-incoming-stream]"
+      );
+
+    if (!container) {
+      return;
+    }
+
+    let index =
+      6;
+
+    window.setInterval(
+      () => {
+        if (
+          document.hidden ||
+          !C12.state.storyStarted
+        ) {
+          return;
+        }
+
+        const request =
+          C12.incomingRequests[
+            index %
+            C12.incomingRequests.length
+          ];
+
+        index += 1;
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "c12-stream-item is-new";
+
+        item.innerHTML = `
+          <div class="c12-stream-item__top">
+            <span>
+              ${request.sourceLabel}
+            </span>
+
+            <small>
+              щойно
+            </small>
+          </div>
+
+          <strong>
+            ${request.client}
+          </strong>
+
+          <span>
+            ${request.route}
+          </span>
+
+          <small>
+            ${request.text}
+          </small>
+        `;
+
+        container.prepend(
+          item
+        );
+
+        while (
+          container.children
+            .length > 6
+        ) {
+          container.lastElementChild
+            ?.remove();
+        }
+
+        const live =
+          $(
+            "[data-live-order-count]"
+          );
+
+        if (live) {
+          const current =
+            Number(
+              live.textContent ||
+              200
+            );
+
+          live.textContent =
+            String(
+              current + 1
+            );
+        }
+
+      },
+      8500
+    );
+  }
+
+
+  /* ============================================================
+     RESET HOOK
+  ============================================================ */
+
+  function bindReset() {
+    document.addEventListener(
+      "c12:simulationreset",
+      () => {
+        C12.story.step =
+          0;
+
+        C12.state
+          .mainOrderAssigned =
+          false;
+
+        C12.state
+          .mainOrderCreated =
+          false;
+      }
+    );
+  }
+
+
+  /* ============================================================
+     SAFETY CHECK
+  ============================================================ */
+
+  function runStartupChecks() {
+    const storyChecks =
+      C12.rules
+        .getMainStoryVehicleChecks();
+
+    if (
+      !storyChecks
+        .validVehicle
+        .valid
+    ) {
+      console.error(
+        "[CASE 12] Main DAF must be valid",
+        storyChecks.validVehicle
+      );
+    }
+
+    if (
+      storyChecks
+        .busyVehicle
+        .valid
+    ) {
+      console.error(
+        "[CASE 12] MAN must be blocked"
+      );
+    }
+
+    if (
+      storyChecks
+        .smallVehicle
+        .valid
+    ) {
+      console.error(
+        "[CASE 12] Mercedes must be blocked"
+      );
+    }
+  }
+
+
+  /* ============================================================
+     INIT
+  ============================================================ */
+
+  function init() {
+    bindModes();
+
+    bindSound();
+
+    bindCreateOrder();
+
+    bindDragAndDrop();
+
+    bindVehicleClicks();
+
+    bindCarriers();
+
+    bindDriverActions();
+
+    bindKeyboard();
+
+    bindGuidedStory();
+
+    bindAttentionItems();
+
+    bindOrderRows();
+
+    bindReset();
+
+    startIncomingFlow();
+
+    runStartupChecks();
+
+    console.info(
+      "[CASE 12] Main controller loaded"
+    );
+  }
+
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+    document.addEventListener(
+      "DOMContentLoaded",
+      init,
+      {
+        once: true
+      }
+    );
+  }
+
+  else {
+    init();
+  }
+
+})();

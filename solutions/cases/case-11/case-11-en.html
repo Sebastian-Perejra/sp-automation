@@ -1,0 +1,2910 @@
+<section
+  class="ar-case"
+  id="ar-case"
+  data-ar-case
+  data-ar-language="en"
+>
+
+  <div class="ar-case-intro">
+
+    <div class="case-demo-kicker">
+      Real-world case #11 · CLOSED-LOOP AUTOMATION
+    </div>
+
+    <h2 class="ar-case-title">
+      Accounts receivable that drives itself to resolution
+    </h2>
+
+    <p class="ar-case-lead">
+      The system checks payment status in SAP or 1C, identifies past-due invoices,
+      determines the next action, prepares the right customer communication,
+      asks the account manager for approval when needed, remembers deferred decisions,
+      tracks promises to pay, reacts to partial payments,
+      and closes the case automatically once the balance is fully settled.
+    </p>
+
+    <div class="ar-value-strip">
+
+      <div class="ar-value-item">
+        <span>01</span>
+        <strong>Detect</strong>
+        <small>
+          Automatically identifies a past-due invoice.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>02</span>
+        <strong>Prepare</strong>
+        <small>
+          Selects the right scenario and prepares the message.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>03</span>
+        <strong>Approve</strong>
+        <small>
+          Critical decisions remain with a person.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>04</span>
+        <strong>Monitor</strong>
+        <small>
+          Tracks payments, deadlines, and customer responses.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>05</span>
+        <strong>Escalate</strong>
+        <small>
+          Moves to the next level based on defined rules.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>06</span>
+        <strong>Close</strong>
+        <small>
+          Automatically completes the cycle once payment is confirmed.
+        </small>
+      </div>
+
+    </div>
+
+    <div class="ar-story-grid">
+
+      <article class="ar-story-card ar-story-card--before">
+
+        <div class="ar-story-head">
+          <span>BEFORE</span>
+          <strong>Manual AR follow-up</strong>
+        </div>
+
+        <p>
+          The account manager opens the accounting system,
+          searches for unpaid invoices, checks email,
+          tries to remember previous conversations,
+          writes another follow-up, sets a personal reminder,
+          and repeats the same process a few days later.
+        </p>
+
+        <ul>
+          <li>
+            some overdue invoices are noticed too late;
+          </li>
+
+          <li>
+            customer payment promises get buried in email threads;
+          </li>
+
+          <li>
+            the manager has to remember every follow-up;
+          </li>
+
+          <li>
+            each employee communicates with customers differently;
+          </li>
+
+          <li>
+            a postponed decision can easily be forgotten;
+          </li>
+
+          <li>
+            partial payments require manual recalculation;
+          </li>
+
+          <li>
+            there is no single history of decisions and actions;
+          </li>
+
+          <li>
+            escalation depends on one person's memory;
+          </li>
+
+          <li>
+            even after payment, the case may still need to be closed manually.
+          </li>
+        </ul>
+
+      </article>
+
+      <article class="ar-story-card ar-story-card--after">
+
+        <div class="ar-story-head">
+          <span>AFTER</span>
+          <strong>A controlled closed-loop workflow</strong>
+        </div>
+
+        <p>
+          The system understands what happened,
+          prepares the next appropriate action,
+          and brings in the account manager only when
+          a human decision is actually required.
+        </p>
+
+        <ul>
+          <li>
+            checks invoice and payment status in SAP or 1C;
+          </li>
+
+          <li>
+            calculates days past due;
+          </li>
+
+          <li>
+            selects the approved communication template;
+          </li>
+
+          <li>
+            inserts current invoice details and the outstanding balance;
+          </li>
+
+          <li>
+            requests manager approval where required;
+          </li>
+
+          <li>
+            records the manager's decision in the history;
+          </li>
+
+          <li>
+            automatically returns to deferred decisions on the right date;
+          </li>
+
+          <li>
+            tracks the customer's promise-to-pay date;
+          </li>
+
+          <li>
+            recalculates the balance after a partial payment;
+          </li>
+
+          <li>
+            stops automation when a dispute requires human judgment;
+          </li>
+
+          <li>
+            automatically closes the case once payment is received in full.
+          </li>
+        </ul>
+
+      </article>
+
+    </div>
+
+  </div>
+
+  <div class="ar-simulator">
+
+    <div class="ar-simulator-topbar">
+
+      <div class="ar-simulator-brand">
+
+        <span class="ar-simulator-mark"></span>
+
+        <div>
+          <small>DEMO ENVIRONMENT</small>
+          <strong>AR Control Center</strong>
+        </div>
+
+      </div>
+
+      <div class="ar-simulator-meta">
+
+        <div>
+          <span>CASE</span>
+          <strong>AR-2026-004821</strong>
+        </div>
+
+        <div>
+          <span>STATUS</span>
+
+          <strong
+            class="ar-runtime-status"
+            id="arRuntimeStatus"
+          >
+            READY TO START
+          </strong>
+        </div>
+
+        <div>
+          <span>SIMULATION TIME</span>
+
+          <strong id="arSimulationTime">
+            08/24/2026 · 08:00
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-prehistory">
+
+      <div class="ar-prehistory-copy">
+
+        <span class="ar-section-kicker">
+          BACKGROUND
+        </span>
+
+        <h3>
+          One invoice. One customer.
+          One process nobody has to keep in their head anymore.
+        </h3>
+
+        <p>
+          Raduga LLC received goods from
+          Demo Company LLC totaling
+          <strong>UAH 350,000.00</strong>.
+        </p>
+
+        <p>
+          The agreed payment term is
+          <strong>30 calendar days</strong>.
+        </p>
+
+        <p>
+          Payment was due on
+          <strong>08/23/2026</strong>.
+        </p>
+
+        <p>
+          Today is
+          <strong>08/24/2026</strong>.
+        </p>
+
+        <p>
+          As of 8:00 AM, no payment has been recorded
+          in the accounting system.
+        </p>
+
+        <p>
+          The system has not taken any action yet.
+          This is where the simulation begins.
+        </p>
+
+      </div>
+
+      <div class="ar-prehistory-data">
+
+        <div>
+          <span>Customer</span>
+          <strong>Raduga LLC</strong>
+        </div>
+
+        <div>
+          <span>Contract</span>
+          <strong>DG-2026-114</strong>
+        </div>
+
+        <div>
+          <span>Invoice</span>
+          <strong>INV-4821</strong>
+        </div>
+
+        <div>
+          <span>Invoice date</span>
+          <strong>07/24/2026</strong>
+        </div>
+
+        <div>
+          <span>Invoice amount</span>
+          <strong>UAH 350,000.00</strong>
+        </div>
+
+        <div>
+          <span>Paid</span>
+
+          <strong id="arPaidAmount">
+            UAH 0.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Outstanding</span>
+
+          <strong id="arOutstandingAmount">
+            UAH 350,000.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Due date</span>
+          <strong>08/23/2026</strong>
+        </div>
+
+        <div>
+          <span>Days past due</span>
+
+          <strong id="arDaysOverdue">
+            1 day
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-source-panel">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>DATA SOURCE</span>
+
+          <strong>
+            Where the system gets the actual balance and payment status
+          </strong>
+        </div>
+
+        <span class="ar-panel-state">
+          CONNECTED
+        </span>
+
+      </div>
+
+      <div class="ar-source-options">
+
+        <button
+          type="button"
+          class="ar-source-option active"
+          data-ar-source="sap"
+        >
+
+          <span class="ar-source-logo">
+            SAP
+          </span>
+
+          <div>
+            <strong>SAP</strong>
+
+            <small>
+              Customer open items and accounting transactions
+            </small>
+          </div>
+
+          <i>ACTIVE</i>
+
+        </button>
+
+        <button
+          type="button"
+          class="ar-source-option"
+          data-ar-source="1c"
+        >
+
+          <span class="ar-source-logo">
+            1C
+          </span>
+
+          <div>
+            <strong>1C</strong>
+
+            <small>
+              Customer balances and recorded payments
+            </small>
+          </div>
+
+          <i>AVAILABLE</i>
+
+        </button>
+
+      </div>
+
+      <p class="ar-source-note">
+        In a real implementation, the source could be SAP, 1C,
+        another ERP platform, an accounting database,
+        a bank statement, CRM, or any other system
+        that provides reliable receivables and payment status data.
+      </p>
+
+    </div>
+
+    <div class="ar-policy-panel">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>COLLECTION POLICY</span>
+
+          <strong>
+            Choose how the system should handle overdue balances
+          </strong>
+        </div>
+
+        <span id="arPolicyLabel">
+          Standard
+        </span>
+
+      </div>
+
+      <div class="ar-policy-switch">
+
+        <button
+          type="button"
+          class="ar-policy-button active"
+          data-ar-policy="standard"
+        >
+          <strong>
+            Standard
+          </strong>
+
+          <span>
+            Balanced intervals between follow-ups and escalation.
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="ar-policy-button"
+          data-ar-policy="key"
+        >
+          <strong>
+            Key Account
+          </strong>
+
+          <span>
+            Softer communication, longer intervals,
+            and more cautious escalation.
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="ar-policy-button"
+          data-ar-policy="strict"
+        >
+          <strong>
+            Strict
+          </strong>
+
+          <span>
+            Shorter intervals and faster escalation
+            to the next collection stage.
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="ar-rules-panel">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>BUSINESS RULES</span>
+
+          <strong>
+            How the system responds to different situations
+          </strong>
+        </div>
+
+        <span>
+          ACTIVE RULES
+        </span>
+
+      </div>
+
+      <div class="ar-rules-grid">
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="reminder1"
+        >
+          <span>1–3 days</span>
+
+          <strong>
+            Reminder #1
+          </strong>
+
+          <small>
+            Friendly payment-status follow-up.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="reminder2"
+        >
+          <span>5+ days</span>
+
+          <strong>
+            Reminder #2
+          </strong>
+
+          <small>
+            Follow up again and request a confirmed payment date.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="reminder3"
+        >
+          <span>10+ days</span>
+
+          <strong>
+            Final reminder
+          </strong>
+
+          <small>
+            Final warning before formal escalation.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="claim"
+        >
+          <span>20+ days</span>
+
+          <strong>
+            Formal demand
+          </strong>
+
+          <small>
+            Formal demand letter requiring separate manager approval.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="promise"
+        >
+          <span>Promise to pay</span>
+
+          <strong>
+            Pause
+          </strong>
+
+          <small>
+            Do not contact the customer again before the promised date.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="partial"
+        >
+          <span>Partial payment</span>
+
+          <strong>
+            Recalculate
+          </strong>
+
+          <small>
+            Continue the process only for the remaining balance.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="dispute"
+        >
+          <span>Dispute</span>
+
+          <strong>
+            Stop automation
+          </strong>
+
+          <small>
+            Route the exception to a person for review.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="paid"
+        >
+          <span>Paid in full</span>
+
+          <strong>
+            Close case
+          </strong>
+
+          <small>
+            Automatically complete the workflow after payment is confirmed.
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-process-overview">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>PROCESS FLOW</span>
+
+          <strong>
+            The full cycle at a glance
+          </strong>
+        </div>
+
+        <span>
+          CLOSED LOOP
+        </span>
+
+      </div>
+
+      <div class="ar-process-map">
+
+        <div
+          class="ar-process-node active"
+          data-ar-step="erp"
+        >
+          <span>01</span>
+
+          <strong>SAP / 1C</strong>
+
+          <small>
+            Check open balance
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="detect"
+        >
+          <span>02</span>
+
+          <strong>Detect</strong>
+
+          <small>
+            Identify past due
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="prepare"
+        >
+          <span>03</span>
+
+          <strong>Prepare</strong>
+
+          <small>
+            Template, details, balance
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="approval"
+        >
+          <span>04</span>
+
+          <strong>Approve</strong>
+
+          <small>
+            Manager decision
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="send"
+        >
+          <span>05</span>
+
+          <strong>Send</strong>
+
+          <small>
+            Customer email
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="monitor"
+        >
+          <span>06</span>
+
+          <strong>Monitor</strong>
+
+          <small>
+            Payment, reply, promise, dispute
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="result"
+        >
+          <span>07</span>
+
+          <strong>Resolve</strong>
+
+          <small>
+            Close or escalate
+          </small>
+        </div>
+
+      </div>
+
+      <div class="ar-branch-map">
+
+        <div class="ar-branch-origin">
+          <strong>
+            MONITOR
+          </strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Paid in full</span>
+          <strong>→ CLOSE</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Partial payment</span>
+          <strong>→ RECALCULATE → CONTINUE</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Promise to pay</span>
+          <strong>→ WAIT → RECHECK</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>No response</span>
+          <strong>→ ESCALATE</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Dispute</span>
+          <strong>→ HUMAN REVIEW</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-start-scene">
+
+      <div class="ar-start-copy">
+
+        <span>
+          SIMULATION
+        </span>
+
+        <strong>
+          Today is August 24, 2026.
+          The invoice became past due yesterday.
+        </strong>
+
+        <p>
+          The system has not taken any action yet.
+          Start the workflow and explore different paths:
+          approve or postpone emails, simulate customer responses,
+          receive full or partial payment,
+          handle a broken promise to pay,
+          or route a dispute for human review.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="ar-start-button"
+        id="arStartButton"
+      >
+        <span>▶</span>
+        Start process
+      </button>
+
+    </div>
+
+    <div
+      class="ar-runtime"
+      id="arRuntime"
+    >
+
+      <div class="ar-runtime-main">
+
+        <section class="ar-system-console">
+
+          <div class="ar-window-header">
+
+            <div>
+              <span>SYSTEM</span>
+
+              <strong>
+                Process activity
+              </strong>
+            </div>
+
+            <div class="ar-window-header-state">
+              <i></i>
+              ACTIVE
+            </div>
+
+          </div>
+
+          <div
+            class="ar-system-feed"
+            id="arSystemFeed"
+          >
+
+            <div class="ar-empty-state">
+
+              <strong>
+                Waiting to start
+              </strong>
+
+              <p>
+                This panel shows what the system is checking,
+                which rule fired,
+                and why the workflow moves to the next step.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <section class="ar-manager-console ar-telegram-console">
+
+          <div class="ar-telegram-appbar">
+
+            <div class="ar-telegram-avatar">
+              AR
+            </div>
+
+            <div class="ar-telegram-contact">
+
+              <strong>
+                AR Control Bot
+              </strong>
+
+              <span>
+                bot
+              </span>
+
+            </div>
+
+            <div class="ar-telegram-header-actions">
+
+              <button
+                type="button"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                ⌕
+              </button>
+
+              <button
+                type="button"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                ⋮
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="ar-telegram-service">
+            Today
+          </div>
+
+          <div
+            class="ar-chat ar-telegram-chat"
+            id="arManagerChat"
+          >
+
+            <div class="ar-chat-empty">
+
+              <div class="ar-telegram-empty-icon">
+                ✈
+              </div>
+
+              <strong>
+                AR Control Bot
+              </strong>
+
+              <p>
+                System updates and approval requests will appear in this chat.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div
+            class="ar-manager-actions ar-telegram-inline-keyboard"
+            id="arManagerActions"
+            hidden
+          >
+
+            <button
+              type="button"
+              class="ar-action-primary"
+              data-ar-manager-action="approve"
+            >
+              ✓ Yes, send it
+            </button>
+
+            <button
+              type="button"
+              data-ar-manager-action="preview"
+            >
+              Preview email
+            </button>
+
+            <button
+              type="button"
+              data-ar-manager-action="postpone"
+            >
+              Remind me later
+            </button>
+
+            <button
+              type="button"
+              data-ar-manager-action="decline"
+            >
+              Don't send
+            </button>
+
+          </div>
+
+          <div class="ar-telegram-composer">
+
+            <button
+              type="button"
+              tabindex="-1"
+              aria-hidden="true"
+              class="ar-telegram-attach"
+            >
+              ⌕
+            </button>
+
+            <div class="ar-telegram-input">
+              Message
+            </div>
+
+            <button
+              type="button"
+              tabindex="-1"
+              aria-hidden="true"
+              class="ar-telegram-emoji"
+            >
+              ☺
+            </button>
+
+            <button
+              type="button"
+              tabindex="-1"
+              aria-hidden="true"
+              class="ar-telegram-mic"
+            >
+              ●
+            </button>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <aside class="ar-audit-console">
+
+        <div class="ar-window-header">
+
+          <div>
+            <span>AUDIT TRAIL</span>
+
+            <strong>
+              Complete process history
+            </strong>
+          </div>
+
+          <button
+            type="button"
+            class="ar-audit-expand"
+            data-ar-audit-expand
+          >
+            Expand
+          </button>
+
+        </div>
+
+        <div
+          class="ar-audit-log"
+          id="arAuditLog"
+        >
+
+          <div class="ar-audit-empty">
+            No events recorded yet.
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+    <div
+      class="ar-postpone-panel"
+      id="arPostponePanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>MANAGER DECISION</span>
+
+          <strong>
+            When should the system bring this back?
+          </strong>
+        </div>
+
+      </div>
+
+      <p class="ar-panel-description">
+        The email does not disappear.
+        The system records your decision,
+        keeps the draft in context,
+        and returns to the same issue on the date you choose.
+      </p>
+
+      <div class="ar-postpone-options">
+
+        <button
+          type="button"
+          data-ar-postpone-days="1"
+        >
+          Tomorrow
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-days="3"
+        >
+          In 3 days
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-days="5"
+        >
+          In 5 days
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-days="7"
+        >
+          In 7 days
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-custom
+        >
+          Choose date
+        </button>
+
+      </div>
+
+      <div class="ar-postpone-custom">
+
+        <label>
+          Next reminder
+
+          <input
+            type="date"
+            id="arPostponeDate"
+            value="2026-08-27"
+          >
+        </label>
+
+        <button
+          type="button"
+          data-ar-postpone-confirm
+        >
+          Save date
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-time-travel"
+      id="arTimeTravel"
+      hidden
+    >
+
+      <div>
+        <span>SIMULATION CONTROL</span>
+
+        <strong id="arNextEventText">
+          Next checkpoint: 08/27/2026
+        </strong>
+      </div>
+
+      <button
+        type="button"
+        id="arAdvanceTimeButton"
+      >
+        Fast-forward →
+      </button>
+
+    </div>
+
+    <div
+      class="ar-timewarp"
+      id="arTimewarp"
+      aria-hidden="true"
+    >
+
+      <div class="ar-timewarp-backdrop"></div>
+
+      <div class="ar-timewarp-card">
+
+        <div class="ar-timewarp-clock">
+
+          <div class="ar-timewarp-clock-face">
+
+            <span class="ar-timewarp-mark ar-timewarp-mark-12"></span>
+            <span class="ar-timewarp-mark ar-timewarp-mark-3"></span>
+            <span class="ar-timewarp-mark ar-timewarp-mark-6"></span>
+            <span class="ar-timewarp-mark ar-timewarp-mark-9"></span>
+
+            <span class="ar-timewarp-hand ar-timewarp-hand-hour"></span>
+            <span class="ar-timewarp-hand ar-timewarp-hand-minute"></span>
+            <span class="ar-timewarp-hand ar-timewarp-hand-second"></span>
+
+            <span class="ar-timewarp-clock-core"></span>
+
+          </div>
+
+          <div class="ar-timewarp-rings"></div>
+
+        </div>
+
+        <div class="ar-timewarp-text">
+
+          <strong id="arTimewarpTitle">
+            Fast-forwarding
+          </strong>
+
+          <p id="arTimewarpText">
+            The simulation is moving to the next control date.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-customer-outcome"
+      id="arCustomerOutcome"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>CUSTOMER EVENT</span>
+
+          <strong>
+            What happened after the customer was contacted?
+          </strong>
+        </div>
+
+        <span>
+          DEMO CONTROL
+        </span>
+
+      </div>
+
+      <p class="ar-customer-outcome-intro">
+        In a live process, these events would come from SAP, 1C,
+        a bank statement, email, or CRM.
+        In this demo, you choose what happens next.
+      </p>
+
+      <div class="ar-outcome-grid">
+
+        <button
+          type="button"
+          class="ar-outcome-card ar-outcome-card--paid"
+          data-ar-outcome="paid"
+        >
+          <span>✓</span>
+
+          <strong>
+            Payment received
+          </strong>
+
+          <small>
+            UAH 350,000.00 received in full
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="partial"
+        >
+          <span>½</span>
+
+          <strong>
+            Partial payment
+          </strong>
+
+          <small>
+            The customer paid only part of the balance
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="promise"
+        >
+          <span>◷</span>
+
+          <strong>
+            Promise to pay
+          </strong>
+
+          <small>
+            The customer provided a specific payment date
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="no-response"
+        >
+          <span>…</span>
+
+          <strong>
+            No response
+          </strong>
+
+          <small>
+            No payment and no response from the customer
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card ar-outcome-card--warning"
+          data-ar-outcome="dispute"
+        >
+          <span>!</span>
+
+          <strong>
+            Customer disputes balance
+          </strong>
+
+          <small>
+            A dispute has been raised over the delivery or amount
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="payment-proof"
+        >
+          <span>↗</span>
+
+          <strong>
+            Payment confirmation sent
+          </strong>
+
+          <small>
+            The customer says the payment has already been initiated
+          </small>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-promise-panel"
+      id="arPromisePanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>PROMISE TO PAY</span>
+
+          <strong>
+            The customer provided a specific payment date
+          </strong>
+        </div>
+
+        <span>
+          ESCALATION PAUSED
+        </span>
+
+      </div>
+
+      <div class="ar-customer-reply">
+
+        <span class="ar-reply-author">
+          accounting@raduga.ua
+        </span>
+
+        <p>
+          Hi,
+          We expect to make payment for invoice INV-4821 on August 29.
+          Please note that date in your records.
+        </p>
+
+      </div>
+
+      <div class="ar-promise-detected">
+
+        <span>
+          SYSTEM DETECTED
+        </span>
+
+        <strong>
+          Promise-to-pay date: 08/29/2026
+        </strong>
+
+        <p>
+          No additional reminders will be sent before the promised date.
+          Once that date arrives, the system will automatically check payment status again.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        data-ar-promise-accept
+      >
+        Continue simulation
+      </button>
+
+    </div>
+
+    <div
+      class="ar-promise-broken-panel"
+      id="arPromiseBrokenPanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>PROMISE TO PAY MISSED</span>
+
+          <strong>
+            The promised date has arrived, but payment has not
+          </strong>
+        </div>
+
+        <span class="ar-danger-state">
+          ESCALATION RESUMED
+        </span>
+
+      </div>
+
+      <p>
+        The system remembers that the customer committed to a specific payment date.
+        Instead of going back to an earlier soft reminder,
+        the workflow moves forward to the next collection stage.
+      </p>
+
+      <div class="ar-promise-broken-data">
+
+        <div>
+          <span>Promised date</span>
+          <strong>08/29/2026</strong>
+        </div>
+
+        <div>
+          <span>Payment status</span>
+          <strong>Not found</strong>
+        </div>
+
+        <div>
+          <span>Decision</span>
+          <strong>Next collection stage</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-partial-panel"
+      id="arPartialPanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>PARTIAL PAYMENT</span>
+
+          <strong>
+            Outstanding balance recalculated automatically
+          </strong>
+        </div>
+
+        <span>
+          CASE REMAINS OPEN
+        </span>
+
+      </div>
+
+      <div class="ar-payment-reconciliation">
+
+        <div>
+          <span>Balance before payment</span>
+
+          <strong>
+            UAH 350,000.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Payment received</span>
+
+          <strong>
+            UAH 200,000.00
+          </strong>
+        </div>
+
+        <div>
+          <span>New outstanding balance</span>
+
+          <strong>
+            UAH 150,000.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Status</span>
+
+          <strong>
+            PARTIALLY PAID
+          </strong>
+        </div>
+
+      </div>
+
+      <p>
+        The case stays open.
+        Every future email, manager notification,
+        and payment check will now use
+        the actual outstanding balance of UAH 150,000.00.
+      </p>
+
+      <button
+        type="button"
+        data-ar-partial-continue
+      >
+        Continue monitoring balance
+      </button>
+
+    </div>
+
+    <div
+      class="ar-dispute-panel"
+      id="arDisputePanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>EXCEPTION DETECTED</span>
+
+          <strong>
+            The customer disputes the balance
+          </strong>
+        </div>
+
+        <span class="ar-danger-state">
+          AUTOMATION PAUSED
+        </span>
+
+      </div>
+
+      <div class="ar-customer-reply">
+
+        <span class="ar-reply-author">
+          purchasing@raduga.ua
+        </span>
+
+        <p>
+          Hi,
+          We are not able to approve payment of the full amount
+          because there is still an unresolved issue
+          with part of the delivered goods.
+          We would like to resolve the quality issue before payment is completed.
+        </p>
+
+      </div>
+
+      <div class="ar-dispute-actions">
+
+        <div>
+          <span>SYSTEM DECISION</span>
+
+          <strong>
+            Automated collection activity stopped
+          </strong>
+
+          <p>
+            The system does not send a more aggressive follow-up
+            because a business dispute now requires human judgment.
+            The complete history of the case remains available.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          data-ar-dispute-review
+        >
+          Send for human review
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-payment-proof-panel"
+      id="arPaymentProofPanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>PAYMENT CONFIRMATION</span>
+
+          <strong>
+            The customer says payment has already been initiated
+          </strong>
+        </div>
+
+        <span>
+          PAYMENT VERIFICATION
+        </span>
+
+      </div>
+
+      <div class="ar-customer-reply">
+
+        <span class="ar-reply-author">
+          accounting@raduga.ua
+        </span>
+
+        <p>
+          Hi,
+          Payment was initiated today at 10:42 AM.
+          We have attached the payment confirmation.
+          Please check whether the funds have been received.
+        </p>
+
+      </div>
+
+      <div class="ar-proof-file">
+
+        <span>PDF</span>
+
+        <div>
+          <strong>
+            payment_order_INV-4821.pdf
+          </strong>
+
+          <small>
+            248 KB · received 08/24/2026 at 10:47 AM
+          </small>
+        </div>
+
+      </div>
+
+      <div class="ar-proof-result">
+
+        <span>
+          SYSTEM ACTION
+        </span>
+
+        <strong>
+          Hold escalation until payment is rechecked
+        </strong>
+
+        <p>
+          The case moves into payment-verification status.
+          After the accounting data refreshes,
+          the system checks SAP or 1C again
+          before deciding what to do next.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        data-ar-proof-check
+      >
+        Simulate payment recheck
+      </button>
+
+    </div>
+
+    <div
+      class="ar-letter-modal"
+      id="arLetterModal"
+      aria-hidden="true"
+    >
+
+      <div
+        class="ar-modal-backdrop"
+        data-ar-letter-close
+      ></div>
+
+      <div class="ar-letter-window">
+
+        <div class="ar-letter-window-head">
+
+          <div>
+            <span id="arLetterTemplateNumber">
+              TEMPLATE #1
+            </span>
+
+            <strong id="arLetterTemplateName">
+              Friendly payment reminder
+            </strong>
+          </div>
+
+          <button
+            type="button"
+            data-ar-letter-close
+            aria-label="Close"
+          >
+            ×
+          </button>
+
+        </div>
+
+        <div class="ar-letter-layout">
+
+          <div class="ar-letter-document">
+
+            <div class="ar-email-fields">
+
+              <div>
+                <span>From</span>
+
+                <strong>
+                  accounts@demo-company.ua
+                </strong>
+              </div>
+
+              <div>
+                <span>To</span>
+
+                <strong>
+                  accounting@raduga.ua
+                </strong>
+              </div>
+
+              <div>
+                <span>CC</span>
+
+                <strong>
+                  manager@demo-company.ua
+                </strong>
+              </div>
+
+              <div>
+                <span>Subject</span>
+
+                <strong id="arLetterSubject">
+                  Payment status for invoice INV-4821
+                </strong>
+              </div>
+
+            </div>
+
+            <div
+              class="ar-letter-content"
+              id="arLetterContent"
+            ></div>
+
+          </div>
+
+          <aside class="ar-letter-data">
+
+            <span class="ar-section-kicker">
+              POPULATED AUTOMATICALLY
+            </span>
+
+            <h4>
+              Data inserted by the system
+            </h4>
+
+            <div class="ar-auto-field">
+              <span>Customer</span>
+              <strong>Raduga LLC</strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Contact</span>
+              <strong>Olha Kravchenko</strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Contract</span>
+              <strong>DG-2026-114</strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Invoice</span>
+              <strong>INV-4821</strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Invoice date</span>
+              <strong>07/24/2026</strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Due date</span>
+              <strong>08/23/2026</strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Outstanding balance</span>
+
+              <strong id="arLetterOutstanding">
+                UAH 350,000.00
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Days past due</span>
+
+              <strong id="arLetterOverdue">
+                1
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Previous contacts</span>
+
+              <strong id="arLetterPreviousContacts">
+                0
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Account manager</span>
+              <strong>Oleksandr Kovalenko</strong>
+            </div>
+
+          </aside>
+
+        </div>
+
+        <div class="ar-letter-modal-actions">
+
+          <button
+            type="button"
+            data-ar-letter-close
+          >
+            Back
+          </button>
+
+          <button
+            type="button"
+            class="ar-action-primary"
+            data-ar-letter-send
+          >
+            Approve and send
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-template-library"
+      id="arTemplateLibrary"
+    >
+
+      <template
+        id="arTemplate1"
+        data-ar-template="1"
+      >
+
+        <div class="ar-real-letter">
+
+          <p>
+            Hi Olha,
+          </p>
+
+          <p>
+            I wanted to follow up on payment status for invoice INV-4821
+            dated July 24, 2026, in the amount of UAH 350,000.00.
+          </p>
+
+          <p>
+            Under the agreed payment terms, the invoice was due on August 23, 2026.
+          </p>
+
+          <p>
+            As of August 24, 2026, we do not yet see the payment reflected in our accounting system.
+          </p>
+
+          <p>
+            If payment has already been sent and is still processing,
+            please feel free to forward the payment confirmation
+            and we will verify it on our side.
+          </p>
+
+          <p>
+            If payment has not yet been made,
+            could you please let us know the expected payment date
+            so we can update our records accordingly?
+          </p>
+
+          <p>
+            If you need any additional information
+            or copies of the supporting documents from us,
+            please let me know.
+          </p>
+
+          <p>
+            Thank you, and I would appreciate a quick update when you have a moment.
+          </p>
+
+          <p class="ar-letter-signature">
+            Best regards,<br>
+            Oleksandr Kovalenko<br>
+            Account Manager<br>
+            Demo Company LLC<br>
+            manager@demo-company.ua<br>
+            +38 (044) 555-21-18
+          </p>
+
+        </div>
+
+      </template>
+
+      <template
+        id="arTemplate2"
+        data-ar-template="2"
+      >
+
+        <div class="ar-real-letter">
+
+          <p>
+            Hi Olha,
+          </p>
+
+          <p>
+            I'm following up again regarding payment for invoice INV-4821 dated July 24, 2026.
+          </p>
+
+          <p>
+            The invoice amount is UAH 350,000.00,
+            and payment was due on August 23, 2026.
+          </p>
+
+          <p>
+            As of today, the balance remains outstanding
+            and we do not see the payment posted in our accounting system.
+          </p>
+
+          <p>
+            We previously reached out to confirm the payment status,
+            but at this point we have not received either the payment
+            or a confirmed payment date.
+          </p>
+
+          <p>
+            Please let us know when payment is expected,
+            or advise us if there is an issue preventing the payment from being processed.
+          </p>
+
+          <p>
+            Having a confirmed payment date helps us keep our receivables records current
+            and plan our account activity appropriately.
+          </p>
+
+          <p>
+            If payment has already been sent,
+            please forward the payment confirmation
+            so we can verify receipt as quickly as possible.
+          </p>
+
+          <p>
+            We would appreciate an update by the end of the business day.
+          </p>
+
+          <p class="ar-letter-signature">
+            Best regards,<br>
+            Oleksandr Kovalenko<br>
+            Account Manager<br>
+            Demo Company LLC<br>
+            manager@demo-company.ua<br>
+            +38 (044) 555-21-18
+          </p>
+
+        </div>
+
+      </template>
+
+      <template
+        id="arTemplate3"
+        data-ar-template="3"
+      >
+
+        <div class="ar-real-letter">
+
+          <p>
+            Hello,
+          </p>
+
+          <p>
+            This is a final follow-up regarding the outstanding balance
+            of UAH 350,000.00 on invoice INV-4821 dated July 24, 2026.
+          </p>
+
+          <p>
+            Under the agreed payment terms, payment was due on August 23, 2026.
+            The invoice is now past due.
+          </p>
+
+          <p>
+            We have previously contacted your company
+            to confirm payment status and request settlement of the outstanding balance.
+          </p>
+
+          <p>
+            Despite those follow-ups,
+            payment has not been received
+            and we do not have an agreed payment schedule on file.
+          </p>
+
+          <p>
+            Please arrange payment of the full outstanding balance as soon as possible,
+            or provide written confirmation of the reason for the delay
+            together with a firm payment date.
+          </p>
+
+          <p>
+            If payment has already been sent,
+            please provide payment confirmation
+            so we can verify the transaction and update the account accordingly.
+          </p>
+
+          <p>
+            If we do not receive payment,
+            a confirmed payment date,
+            or an agreed payment plan,
+            the account will move to the next stage
+            of our internal past-due receivables process.
+          </p>
+
+          <p>
+            We would prefer to resolve this directly
+            without moving to a formal collection step.
+          </p>
+
+          <p class="ar-letter-signature">
+            Best regards,<br>
+            Oleksandr Kovalenko<br>
+            Account Manager<br>
+            Demo Company LLC<br>
+            manager@demo-company.ua<br>
+            +38 (044) 555-21-18
+          </p>
+
+        </div>
+
+      </template>
+
+      <template
+        id="arTemplate4"
+        data-ar-template="4"
+      >
+
+        <article class="ar-formal-claim-document">
+
+          <div class="ar-claim-company">
+
+            <strong>
+              Demo Company LLC
+            </strong>
+
+            <span>
+              15 Dilova St., Kyiv 01001, Ukraine
+            </span>
+
+            <span>
+              EDRPOU 40112233
+            </span>
+
+            <span>
+              accounts@demo-company.ua
+            </span>
+
+          </div>
+
+          <div class="ar-claim-recipient">
+
+            <span>
+              To:
+            </span>
+
+            <strong>
+              Raduga LLC
+            </strong>
+
+            <span>
+              EDRPOU 38974561
+            </span>
+
+            <span>
+              28 Naberezhna St., Kyiv 04071, Ukraine
+            </span>
+
+          </div>
+
+          <div class="ar-claim-meta">
+
+            <span>
+              Ref. DC-CLAIM-2026-041
+            </span>
+
+            <span>
+              September 12, 2026
+            </span>
+
+          </div>
+
+          <h3>
+            FORMAL DEMAND FOR PAYMENT
+          </h3>
+
+          <h4>
+            Outstanding past-due balance
+          </h4>
+
+          <p>
+            Demo Company LLC and Raduga LLC entered into Supply Agreement
+            DG-2026-114 dated June 24, 2026.
+          </p>
+
+          <p>
+            Under that agreement, Demo Company LLC supplied the goods
+            supported by the applicable delivery documentation
+            and issued invoice INV-4821 dated July 24, 2026,
+            in the total amount of UAH 350,000.00.
+          </p>
+
+          <p>
+            The agreed payment term is 30 calendar days.
+            Payment was due on August 23, 2026.
+          </p>
+
+          <p>
+            As of September 12, 2026,
+            payment for invoice INV-4821 has not been received
+            by Demo Company LLC.
+          </p>
+
+          <p>
+            Accordingly, the outstanding past-due balance owed by
+            Raduga LLC to Demo Company LLC is UAH 350,000.00.
+          </p>
+
+          <p>
+            Before this formal demand was issued,
+            multiple payment reminders were sent
+            requesting settlement of the balance
+            and confirmation of the expected payment date.
+          </p>
+
+          <div class="ar-claim-history">
+
+            <div>
+              <span>08/24/2026</span>
+
+              <strong>
+                First payment reminder
+              </strong>
+            </div>
+
+            <div>
+              <span>08/29/2026</span>
+
+              <strong>
+                Second payment reminder
+              </strong>
+            </div>
+
+            <div>
+              <span>09/05/2026</span>
+
+              <strong>
+                Final payment reminder
+              </strong>
+            </div>
+
+          </div>
+
+          <p>
+            Despite these prior communications,
+            the balance remains unpaid.
+          </p>
+
+          <p>
+            We therefore request payment of the full outstanding balance
+            of UAH 350,000.00 within five business days
+            of receipt of this letter.
+          </p>
+
+          <p>
+            Once payment has been made,
+            please send payment confirmation to
+            accounts@demo-company.ua.
+          </p>
+
+          <p>
+            If the outstanding balance is not resolved within that period,
+            the matter may be referred for legal review
+            to determine appropriate next steps,
+            including available formal recovery options.
+          </p>
+
+          <p>
+            This letter is intended to provide an opportunity
+            to resolve the past-due balance voluntarily
+            before the matter is moved to further review.
+          </p>
+
+          <div class="ar-claim-attachments">
+
+            <strong>
+              Attachments:
+            </strong>
+
+            <ol>
+              <li>
+                Copy of Supply Agreement DG-2026-114.
+              </li>
+
+              <li>
+                Copy of invoice INV-4821.
+              </li>
+
+              <li>
+                Copies of delivery documentation.
+              </li>
+
+              <li>
+                History of prior payment communications.
+              </li>
+            </ol>
+
+          </div>
+
+          <div class="ar-claim-signature">
+
+            <div>
+              <span>
+                Director
+              </span>
+
+              <strong>
+                Andrii Kovalenko
+              </strong>
+            </div>
+
+            <div>
+              <span>
+                Demo Company LLC
+              </span>
+            </div>
+
+          </div>
+
+        </article>
+
+      </template>
+
+    </div>
+
+    <div
+      class="ar-claim-gate"
+      id="arClaimGate"
+      hidden
+    >
+
+      <div class="ar-claim-gate-alert">
+
+        <span>
+          MANAGER APPROVAL REQUIRED
+        </span>
+
+        <strong>
+          The workflow has reached the formal-demand stage
+        </strong>
+
+        <p>
+          The document is ready,
+          but the system does not perform a legally significant action
+          without separate approval from the responsible person.
+        </p>
+
+      </div>
+
+      <div class="ar-claim-gate-data">
+
+        <div>
+          <span>Outstanding balance</span>
+
+          <strong>
+            UAH 350,000.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Days past due</span>
+
+          <strong>
+            20+ days
+          </strong>
+        </div>
+
+        <div>
+          <span>Previous reminders</span>
+
+          <strong>
+            3
+          </strong>
+        </div>
+
+        <div>
+          <span>Possible next stage</span>
+
+          <strong>
+            Legal review
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ar-claim-gate-actions">
+
+        <button
+          type="button"
+          data-ar-claim-preview
+        >
+          Preview demand
+        </button>
+
+        <button
+          type="button"
+          class="ar-action-primary"
+          data-ar-claim-approve
+        >
+          Approve and send
+        </button>
+
+        <button
+          type="button"
+          data-ar-claim-postpone
+        >
+          Postpone decision
+        </button>
+
+        <button
+          type="button"
+          data-ar-claim-stop
+        >
+          Stop process
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-legal-package"
+      id="arLegalPackage"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>LEGAL HANDOFF</span>
+
+          <strong>
+            Case package assembled automatically
+          </strong>
+        </div>
+
+        <span>
+          READY FOR REVIEW
+        </span>
+
+      </div>
+
+      <div class="ar-legal-files">
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Contract_DG-2026-114.pdf
+          </strong>
+
+          <small>
+            Supply agreement
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Invoice_INV-4821.pdf
+          </strong>
+
+          <small>
+            Invoice
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Delivery_Documents.pdf
+          </strong>
+
+          <small>
+            Delivery documentation
+          </small>
+        </div>
+
+        <div>
+          <span>EML</span>
+
+          <strong>
+            Reminder_History.eml
+          </strong>
+
+          <small>
+            Prior customer communication
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Formal_Demand.pdf
+          </strong>
+
+          <small>
+            Formal demand letter
+          </small>
+        </div>
+
+        <div>
+          <span>CSV</span>
+
+          <strong>
+            Audit_Trail.csv
+          </strong>
+
+          <small>
+            System and human decision history
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            AR_Case_Summary.pdf
+          </strong>
+
+          <small>
+            Case summary
+          </small>
+        </div>
+
+      </div>
+
+      <div class="ar-legal-note">
+
+        <strong>
+          The system does not make legal decisions for people.
+        </strong>
+
+        <p>
+          It gathers the documents,
+          structures the facts,
+          adds the complete history of prior actions,
+          and hands legal counsel a prepared case package
+          for professional review.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-success-screen"
+      id="arSuccessScreen"
+      hidden
+    >
+
+      <div class="ar-success-icon">
+        ✓
+      </div>
+
+      <span>
+        CASE CLOSED
+      </span>
+
+      <h3>
+        Balance paid in full
+      </h3>
+
+      <p>
+        SAP or 1C confirmed receipt of the funds.
+        The outstanding balance on invoice INV-4821 is UAH 0.00.
+      </p>
+
+      <div class="ar-success-data">
+
+        <div>
+          <span>Invoice</span>
+
+          <strong>
+            INV-4821
+          </strong>
+        </div>
+
+        <div>
+          <span>Received</span>
+
+          <strong>
+            UAH 350,000.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Outstanding</span>
+
+          <strong>
+            UAH 0.00
+          </strong>
+        </div>
+
+        <div>
+          <span>Final status</span>
+
+          <strong>
+            CLOSED
+          </strong>
+        </div>
+
+      </div>
+
+      <p class="ar-success-summary">
+        The account manager does not need to recheck the invoice,
+        search through previous emails,
+        clear personal reminders,
+        or manually close the case.
+        Once the payment appeared in the source system,
+        the workflow completed itself.
+      </p>
+
+      <button
+        type="button"
+        data-ar-restart
+      >
+        Try another scenario
+      </button>
+
+    </div>
+
+    <div
+      class="ar-manual-review-screen"
+      id="arManualReviewScreen"
+      hidden
+    >
+
+      <span>
+        HUMAN REVIEW
+      </span>
+
+      <h3>
+        The automated workflow stopped exactly where it should
+      </h3>
+
+      <p>
+        The system detected a situation
+        where continuing the standard collection workflow
+        without human judgment could be inappropriate.
+      </p>
+
+      <div class="ar-review-reason">
+
+        <span>
+          Reason
+        </span>
+
+        <strong>
+          Customer dispute
+        </strong>
+
+      </div>
+
+      <p>
+        The case has been routed to the responsible manager
+        or another team for review.
+        Every previous event, email, decision, and document
+        remains available in the case history.
+      </p>
+
+      <button
+        type="button"
+        data-ar-restart
+      >
+        Try another scenario
+      </button>
+
+    </div>
+
+    <div class="ar-business-value">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>BUSINESS VALUE</span>
+
+          <strong>
+            What the system actually takes off your team's plate
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ar-business-value-grid">
+
+        <div>
+          <span>01</span>
+
+          <strong>
+            Nothing falls through the cracks
+          </strong>
+
+          <p>
+            The system automatically finds invoices
+            that have moved past their due date.
+          </p>
+        </div>
+
+        <div>
+          <span>02</span>
+
+          <strong>
+            No need to remember every follow-up
+          </strong>
+
+          <p>
+            The manager does not have to remember
+            when to return to a specific customer.
+          </p>
+        </div>
+
+        <div>
+          <span>03</span>
+
+          <strong>
+            No manual data copying
+          </strong>
+
+          <p>
+            Amounts, dates, customer details,
+            invoice numbers, and prior history
+            are pulled in automatically.
+          </p>
+        </div>
+
+        <div>
+          <span>04</span>
+
+          <strong>
+            No rewriting the same email
+          </strong>
+
+          <p>
+            Each collection stage uses an approved communication template.
+          </p>
+        </div>
+
+        <div>
+          <span>05</span>
+
+          <strong>
+            Context stays with the case
+          </strong>
+
+          <p>
+            Every approval, rejection, postponement,
+            and customer response is recorded in the Audit Trail.
+          </p>
+        </div>
+
+        <div>
+          <span>06</span>
+
+          <strong>
+            Customers are not chased unnecessarily
+          </strong>
+
+          <p>
+            If the customer provides a promise-to-pay date,
+            the system pauses outreach until that date.
+          </p>
+        </div>
+
+        <div>
+          <span>07</span>
+
+          <strong>
+            Partial payments are handled correctly
+          </strong>
+
+          <p>
+            The balance is recalculated automatically,
+            and every future communication uses the current amount due.
+          </p>
+        </div>
+
+        <div>
+          <span>08</span>
+
+          <strong>
+            Exceptions stay human
+          </strong>
+
+          <p>
+            A dispute or unusual situation
+            automatically routes the case to a person
+            instead of blindly escalating.
+          </p>
+        </div>
+
+        <div>
+          <span>09</span>
+
+          <strong>
+            No manual case closure
+          </strong>
+
+          <p>
+            Once the funds are actually received,
+            the system completes the workflow automatically.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-integration-map">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>INTEGRATION MAP</span>
+
+          <strong>
+            What a real implementation could look like
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ar-integration-flow">
+
+        <div class="ar-integration-node">
+          <span>ACCOUNTING</span>
+
+          <strong>
+            SAP / 1C
+          </strong>
+
+          <small>
+            Balance, payments, open items
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node ar-integration-node--core">
+          <span>LOGIC</span>
+
+          <strong>
+            Automation Engine
+          </strong>
+
+          <small>
+            Rules, dates, states, scenarios
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node">
+          <span>MANAGER</span>
+
+          <strong>
+            Telegram / Email
+          </strong>
+
+          <small>
+            Approvals and decisions
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node">
+          <span>CUSTOMER</span>
+
+          <strong>
+            Email
+          </strong>
+
+          <small>
+            Follow-ups and replies
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node">
+          <span>HISTORY</span>
+
+          <strong>
+            Audit Trail
+          </strong>
+
+          <small>
+            Full process traceability
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-final-message">
+
+      <span>
+        CLOSED-LOOP AUTOMATION
+      </span>
+
+      <h3>
+        Finding the problem is not enough.
+        The system should drive it all the way to resolution.
+      </h3>
+
+      <p>
+        People make the decisions that require judgment and experience.
+        The system handles everything around those decisions:
+        monitoring, memory, document preparation,
+        follow-ups, deadlines, rechecks,
+        the audit trail, and the next action.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="ar-case-cta">
+
+    <div>
+      <span>
+        Have a similar manual process?
+      </span>
+
+      <strong>
+        The workflow can be built around your rules,
+        your accounting system,
+        and the way your business actually operates.
+      </strong>
+    </div>
+
+    <a href="contacts-en.html">
+      I want this kind of automation
+    </a>
+
+  </div>
+
+</section>

@@ -527,6 +527,40 @@ footer {
   text-decoration: underline;
 }
 
+.footer-online {
+  position: absolute;
+  right: 28px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: "Roboto Mono", monospace;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.footer-online__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #86b594;
+  box-shadow: 0 0 7px rgba(134, 181, 148, 0.48);
+}
+
+.footer-online [data-terms-online-count] {
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .footer-online {
+    display: none;
+  }
+}
+
 @keyframes footerTicker {
   from {
     transform: translateX(0);

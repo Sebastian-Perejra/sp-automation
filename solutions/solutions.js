@@ -1880,9 +1880,27 @@ stateNode.textContent =
                 ${escapeHtml(item.title)}
               </h3>
 
-              <p>
+                          <p>
                 ${escapeHtml(item.short)}
               </p>
+
+              ${
+                item.desktopNote
+                  ? `
+                    <div class="case-result-card__desktop-note">
+                      <span>▣</span>
+
+                      <strong>
+                        Краще на комп’ютері
+                      </strong>
+
+                      <small>
+                        ${escapeHtml(item.desktopNote)}
+                      </small>
+                    </div>
+                  `
+                  : ""
+              }
 
               <div class="case-result-card__why">
                 <span>

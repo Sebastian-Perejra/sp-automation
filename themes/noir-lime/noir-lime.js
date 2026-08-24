@@ -660,5 +660,115 @@ document.addEventListener(
     }
   }
 );
-  
+  const CONTACTS_ONLINE_COUNTER_URL =
+  "https://script.google.com/macros/s/AKfycbxEum9eoquL-62JQCWQzyJ-VX5MUjrwlt7RtU82hUB2yDxP7R7M10IyTxkVr3s2kptx0w/exec";
+
+function setupContactsOnlineCounter() {
+  const countElement =
+    document.querySelector(
+      "[data-contacts-online-count]"
+    );
+
+  if (!countElement) {
+    return;
+  }
+
+  const storageKey =
+    "sp_online_visitor_id";
+
+  let visitorId =
+    localStorage.getItem(
+      storageKey
+    );
+
+  if (!visitorId) {
+    visitorId =
+      window.crypto?.randomUUID
+        ? window.crypto.randomUUID()
+        : `${Date.now().toString(36)}-${Math.random()
+            .toString(36)
+            .slice(2)}`;
+
+    localStorage.setItem(
+      storageKey,
+      visitorId
+    );
+  }
+
+  let requestNumber = 0;
+
+  function pingOnlineCounter() {
+    const callbackName =
+      `spContactsOnline_${Date.now()}_${requestNumber++}`;
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+    const cleanup = () => {
+      try {
+        delete window[
+          callbackName
+        ];
+      } catch {}
+
+      script.remove();
+    };
+
+    window[callbackName] =
+      value => {
+        const count =
+          Number(value);
+
+        if (
+          Number.isFinite(count)
+        ) {
+          countElement.textContent =
+            String(
+              Math.max(
+                0,
+                Math.round(count)
+              )
+            );
+        }
+
+        cleanup();
+      };
+
+    script.onerror =
+      cleanup;
+
+    script.src =
+      `${CONTACTS_ONLINE_COUNTER_URL}` +
+      `?callback=${encodeURIComponent(callbackName)}` +
+      `&id=${encodeURIComponent(visitorId)}` +
+      `&t=${Date.now()}`;
+
+    script.async =
+      true;
+
+    document.head.appendChild(
+      script
+    );
+  }
+
+  pingOnlineCounter();
+
+  window.setInterval(
+    pingOnlineCounter,
+    30000
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (!document.hidden) {
+        pingOnlineCounter();
+      }
+    }
+  );
+}
+
+setupContactsOnlineCounter();
   })();

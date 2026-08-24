@@ -1891,7 +1891,10 @@ stateNode.textContent =
                       <span>▣</span>
 
                       <strong>
-                        Краще на комп’ютері
+                        ${escapeHtml(
+                          item.desktopNoteTitle ||
+                          "Краще на комп’ютері"
+                        )}
                       </strong>
 
                       <small>

@@ -1,0 +1,2870 @@
+<section
+  class="ar-case"
+  id="ar-case"
+  data-ar-case
+  data-ar-language="uk"
+>
+
+  <div class="ar-case-intro">
+
+    <div class="case-demo-kicker">
+      Реальний кейс №11 · CLOSED-LOOP AUTOMATION
+    </div>
+
+    <h2 class="ar-case-title">
+      Дебіторська заборгованість,
+      яка сама веде процес до результату
+    </h2>
+
+    <p class="ar-case-lead">
+      Система перевіряє оплату в SAP або 1C, виявляє прострочення,
+      визначає наступну дію, автоматично готує потрібний лист,
+      запитує рішення менеджера, пам’ятає відкладені дії,
+      контролює обіцянки клієнта, реагує на часткові платежі
+      та закриває процес після фактичного погашення заборгованості.
+    </p>
+
+    <div class="ar-value-strip">
+
+      <div class="ar-value-item">
+        <span>01</span>
+        <strong>Виявити</strong>
+        <small>
+          Система сама знаходить прострочений рахунок.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>02</span>
+        <strong>Підготувати</strong>
+        <small>
+          Обирає сценарій та формує готовий лист.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>03</span>
+        <strong>Погодити</strong>
+        <small>
+          Критичне рішення залишається за людиною.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>04</span>
+        <strong>Контролювати</strong>
+        <small>
+          Стежить за оплатою, строками та відповідями.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>05</span>
+        <strong>Ескалювати</strong>
+        <small>
+          Наступний рівень запускається за правилами.
+        </small>
+      </div>
+
+      <div class="ar-value-item">
+        <span>06</span>
+        <strong>Закрити</strong>
+        <small>
+          Після оплати цикл завершується автоматично.
+        </small>
+      </div>
+
+    </div>
+
+    <div class="ar-story-grid">
+
+      <article class="ar-story-card ar-story-card--before">
+
+        <div class="ar-story-head">
+          <span>ДО</span>
+          <strong>Ручний контроль дебіторки</strong>
+        </div>
+
+        <p>
+          Менеджер сам відкриває бухгалтерську систему,
+          шукає неоплачені рахунки, перевіряє пошту,
+          згадує попередні домовленості, готує лист,
+          ставить собі нагадування і через декілька днів
+          повторює все знову.
+        </p>
+
+        <ul>
+          <li>
+            частину прострочень помічають із запізненням;
+          </li>
+
+          <li>
+            обіцянки клієнтів губляться у листуванні;
+          </li>
+
+          <li>
+            менеджер повинен пам’ятати про повторні контакти;
+          </li>
+
+          <li>
+            кожен співробітник пише клієнтам у своєму стилі;
+          </li>
+
+          <li>
+            відкладене рішення легко просто забути;
+          </li>
+
+          <li>
+            часткові оплати потребують ручного перерахунку;
+          </li>
+
+          <li>
+            немає єдиної історії всіх рішень;
+          </li>
+
+          <li>
+            ескалація залежить від пам’яті конкретної людини;
+          </li>
+
+          <li>
+            після оплати кейс часто закривається вручну.
+          </li>
+        </ul>
+
+      </article>
+
+      <article class="ar-story-card ar-story-card--after">
+
+        <div class="ar-story-head">
+          <span>ПІСЛЯ</span>
+          <strong>Керований closed-loop процес</strong>
+        </div>
+
+        <p>
+          Система сама розуміє, що відбулося,
+          готує наступну допустиму дію
+          і залучає менеджера лише там,
+          де справді потрібне людське рішення.
+        </p>
+
+        <ul>
+          <li>
+            перевіряє статус рахунку в SAP або 1C;
+          </li>
+
+          <li>
+            визначає кількість днів прострочення;
+          </li>
+
+          <li>
+            обирає погоджений шаблон комунікації;
+          </li>
+
+          <li>
+            підставляє фактичні реквізити та суму боргу;
+          </li>
+
+          <li>
+            запитує підтвердження менеджера;
+          </li>
+
+          <li>
+            фіксує відповідь менеджера в історії;
+          </li>
+
+          <li>
+            повертається до відкладеного питання у потрібний день;
+          </li>
+
+          <li>
+            контролює обіцяну клієнтом дату оплати;
+          </li>
+
+          <li>
+            перераховує залишок після часткової оплати;
+          </li>
+
+          <li>
+            зупиняє автоматику, якщо виникає спір;
+          </li>
+
+          <li>
+            після повної оплати сама закриває кейс.
+          </li>
+        </ul>
+
+      </article>
+
+    </div>
+
+  </div>
+
+  <div class="ar-simulator">
+
+    <div class="ar-simulator-topbar">
+
+      <div class="ar-simulator-brand">
+
+        <span class="ar-simulator-mark"></span>
+
+        <div>
+          <small>ДЕМОСЕРЕДОВИЩЕ</small>
+          <strong>AR Control Center</strong>
+        </div>
+
+      </div>
+
+      <div class="ar-simulator-meta">
+
+        <div>
+          <span>КЕЙС</span>
+          <strong>AR-2026-004821</strong>
+        </div>
+
+        <div>
+          <span>СТАТУС</span>
+          <strong
+            class="ar-runtime-status"
+            id="arRuntimeStatus"
+          >
+            ГОТОВО ДО ЗАПУСКУ
+          </strong>
+        </div>
+
+        <div>
+          <span>ЧАС СИМУЛЯЦІЇ</span>
+          <strong id="arSimulationTime">
+            24.08.2026 · 08:00
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-prehistory">
+
+      <div class="ar-prehistory-copy">
+
+        <span class="ar-section-kicker">
+          ПЕРЕДІСТОРІЯ
+        </span>
+
+        <h3>
+          Один рахунок. Один клієнт.
+          Один процес, який більше не потрібно тримати в голові.
+        </h3>
+
+        <p>
+          ТОВ «Радуга» отримало товар від
+          ТОВ «Демо Компані»
+          на суму
+          <strong>350 000,00 грн</strong>.
+        </p>
+
+        <p>
+          Договором передбачено відстрочку платежу
+          <strong>30 календарних днів</strong>.
+        </p>
+
+        <p>
+          Гранична дата оплати —
+          <strong>23.08.2026</strong>.
+        </p>
+
+        <p>
+          Сьогодні —
+          <strong>24.08.2026</strong>.
+        </p>
+
+        <p>
+          Станом на 08:00 оплата
+          в бухгалтерській системі не зареєстрована.
+        </p>
+
+        <p>
+          Система ще не виконувала жодних дій.
+          Саме з цього моменту починається симуляція.
+        </p>
+
+      </div>
+
+      <div class="ar-prehistory-data">
+
+        <div>
+          <span>Контрагент</span>
+          <strong>ТОВ «Радуга»</strong>
+        </div>
+
+        <div>
+          <span>Договір</span>
+          <strong>DG-2026-114</strong>
+        </div>
+
+        <div>
+          <span>Рахунок</span>
+          <strong>INV-4821</strong>
+        </div>
+
+        <div>
+          <span>Дата рахунку</span>
+          <strong>24.07.2026</strong>
+        </div>
+
+        <div>
+          <span>Сума рахунку</span>
+          <strong>350 000,00 грн</strong>
+        </div>
+
+        <div>
+          <span>Оплачено</span>
+          <strong id="arPaidAmount">
+            0,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Залишок</span>
+          <strong id="arOutstandingAmount">
+            350 000,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Строк оплати</span>
+          <strong>23.08.2026</strong>
+        </div>
+
+        <div>
+          <span>Прострочення</span>
+          <strong id="arDaysOverdue">
+            1 день
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-source-panel">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ДЖЕРЕЛО ДАНИХ</span>
+          <strong>
+            Звідки система отримує факт заборгованості та оплати
+          </strong>
+        </div>
+
+        <span class="ar-panel-state">
+          ПІДКЛЮЧЕНО
+        </span>
+
+      </div>
+
+      <div class="ar-source-options">
+
+        <button
+          type="button"
+          class="ar-source-option active"
+          data-ar-source="sap"
+        >
+
+          <span class="ar-source-logo">
+            SAP
+          </span>
+
+          <div>
+            <strong>SAP</strong>
+            <small>
+              Відкриті позиції клієнта та бухгалтерські операції
+            </small>
+          </div>
+
+          <i>АКТИВНО</i>
+
+        </button>
+
+        <button
+          type="button"
+          class="ar-source-option"
+          data-ar-source="1c"
+        >
+
+          <span class="ar-source-logo">
+            1C
+          </span>
+
+          <div>
+            <strong>1C</strong>
+            <small>
+              Розрахунки з контрагентами та факт оплати
+            </small>
+          </div>
+
+          <i>ДОСТУПНО</i>
+
+        </button>
+
+      </div>
+
+      <p class="ar-source-note">
+        У реальному проєкті джерелом може бути SAP, 1C,
+        інша ERP-система, бухгалтерська база,
+        банківська виписка, CRM або будь-яке інше джерело,
+        де доступний фактичний статус взаєморозрахунків.
+      </p>
+
+    </div>
+
+    <div class="ar-policy-panel">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ПОЛІТИКА РОБОТИ З БОРГОМ</span>
+          <strong>
+            Оберіть модель поведінки системи
+          </strong>
+        </div>
+
+        <span id="arPolicyLabel">
+          Стандартна
+        </span>
+
+      </div>
+
+      <div class="ar-policy-switch">
+
+        <button
+          type="button"
+          class="ar-policy-button active"
+          data-ar-policy="standard"
+        >
+          <strong>
+            Стандартна
+          </strong>
+
+          <span>
+            Збалансовані інтервали між нагадуваннями
+            та ескалацією.
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="ar-policy-button"
+          data-ar-policy="key"
+        >
+          <strong>
+            Ключовий клієнт
+          </strong>
+
+          <span>
+            М’якша комунікація,
+            довші паузи та обережніша ескалація.
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="ar-policy-button"
+          data-ar-policy="strict"
+        >
+          <strong>
+            Жорсткий контроль
+          </strong>
+
+          <span>
+            Коротші інтервали
+            та швидший перехід до наступного рівня.
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="ar-rules-panel">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>БІЗНЕС-ПРАВИЛА</span>
+          <strong>
+            Як система поводиться в різних ситуаціях
+          </strong>
+        </div>
+
+        <span>
+          АКТИВНІ ПРАВИЛА
+        </span>
+
+      </div>
+
+      <div class="ar-rules-grid">
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="reminder1"
+        >
+          <span>1–3 дні</span>
+
+          <strong>
+            Нагадування №1
+          </strong>
+
+          <small>
+            Дружнє уточнення статусу платежу.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="reminder2"
+        >
+          <span>5+ днів</span>
+
+          <strong>
+            Нагадування №2
+          </strong>
+
+          <small>
+            Повторне звернення з проханням
+            підтвердити дату оплати.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="reminder3"
+        >
+          <span>10+ днів</span>
+
+          <strong>
+            Нагадування №3
+          </strong>
+
+          <small>
+            Фінальне попередження
+            перед офіційною ескалацією.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card"
+          data-ar-rule="claim"
+        >
+          <span>20+ днів</span>
+
+          <strong>
+            Претензія
+          </strong>
+
+          <small>
+            Офіційний документ
+            з окремим підтвердженням менеджера.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="promise"
+        >
+          <span>Обіцянка оплати</span>
+
+          <strong>
+            Пауза
+          </strong>
+
+          <small>
+            Не турбувати клієнта
+            до погодженої дати платежу.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="partial"
+        >
+          <span>Часткова оплата</span>
+
+          <strong>
+            Перерахувати
+          </strong>
+
+          <small>
+            Продовжити процес
+            тільки щодо фактичного залишку.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="dispute"
+        >
+          <span>Спір</span>
+
+          <strong>
+            Зупинити автоматику
+          </strong>
+
+          <small>
+            Передати нестандартну ситуацію
+            на ручний розгляд.
+          </small>
+        </div>
+
+        <div
+          class="ar-rule-card ar-rule-card--special"
+          data-ar-rule="paid"
+        >
+          <span>Повна оплата</span>
+
+          <strong>
+            Закрити кейс
+          </strong>
+
+          <small>
+            Автоматично завершити процес
+            після підтвердження надходження коштів.
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-process-overview">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>СХЕМА ПРОЦЕСУ</span>
+          <strong>
+            Весь цикл з висоти пташиного польоту
+          </strong>
+        </div>
+
+        <span>
+          CLOSED LOOP
+        </span>
+
+      </div>
+
+      <div class="ar-process-map">
+
+        <div
+          class="ar-process-node active"
+          data-ar-step="erp"
+        >
+          <span>01</span>
+          <strong>SAP / 1C</strong>
+          <small>
+            Перевірка взаєморозрахунків
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="detect"
+        >
+          <span>02</span>
+          <strong>Виявлення</strong>
+          <small>
+            Пошук прострочення
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="prepare"
+        >
+          <span>03</span>
+          <strong>Підготовка</strong>
+          <small>
+            Шаблон, реквізити, сума
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="approval"
+        >
+          <span>04</span>
+          <strong>Погодження</strong>
+          <small>
+            Рішення менеджера
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="send"
+        >
+          <span>05</span>
+          <strong>Відправлення</strong>
+          <small>
+            Email клієнту
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="monitor"
+        >
+          <span>06</span>
+          <strong>Контроль</strong>
+          <small>
+            Оплата, відповідь, обіцянка, спір
+          </small>
+        </div>
+
+        <div class="ar-process-arrow">
+          →
+        </div>
+
+        <div
+          class="ar-process-node"
+          data-ar-step="result"
+        >
+          <span>07</span>
+          <strong>Результат</strong>
+          <small>
+            Закриття або наступний рівень
+          </small>
+        </div>
+
+      </div>
+
+      <div class="ar-branch-map">
+
+        <div class="ar-branch-origin">
+          <strong>
+            КОНТРОЛЬ
+          </strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Оплата</span>
+          <strong>→ ЗАКРИТИ</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Часткова оплата</span>
+          <strong>→ ПЕРЕРАХУВАТИ → ПРОДОВЖИТИ</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Обіцянка оплати</span>
+          <strong>→ ЧЕКАТИ → ПЕРЕВІРИТИ</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Немає відповіді</span>
+          <strong>→ ЕСКАЛЮВАТИ</strong>
+        </div>
+
+        <div class="ar-branch-path">
+          <span>Спір</span>
+          <strong>→ РУЧНИЙ РОЗГЛЯД</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-start-scene">
+
+      <div class="ar-start-copy">
+
+        <span>
+          СИМУЛЯЦІЯ
+        </span>
+
+        <strong>
+          Сьогодні 24.08.2026.
+          Учора сплив строк оплати.
+        </strong>
+
+        <p>
+          Система ще нічого не робила.
+          Запустіть процес і самостійно пройдіть різні варіанти:
+          погоджуйте або відкладайте листи,
+          імітуйте відповіді клієнта,
+          отримання платежу,
+          часткову оплату,
+          порушену обіцянку або спір.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="ar-start-button"
+        id="arStartButton"
+      >
+        <span>▶</span>
+        Запустити процес
+      </button>
+
+    </div>
+
+    <div
+      class="ar-runtime"
+      id="arRuntime"
+    >
+
+      <div class="ar-runtime-main">
+
+        <section class="ar-system-console">
+
+          <div class="ar-window-header">
+
+            <div>
+              <span>СИСТЕМА</span>
+              <strong>
+                Хід процесу
+              </strong>
+            </div>
+
+            <div class="ar-window-header-state">
+              <i></i>
+              АКТИВНА
+            </div>
+
+          </div>
+
+          <div
+            class="ar-system-feed"
+            id="arSystemFeed"
+          >
+
+            <div class="ar-empty-state">
+
+              <strong>
+                Процес очікує запуску
+              </strong>
+
+              <p>
+                Тут буде видно,
+                що саме перевіряє система,
+                яке правило спрацювало
+                і чому процес переходить
+                до наступного кроку.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <section class="ar-manager-console">
+
+          <div class="ar-window-header">
+
+            <div>
+              <span>КАНАЛ МЕНЕДЖЕРА</span>
+              <strong>
+                Telegram
+              </strong>
+            </div>
+
+            <div class="ar-telegram-live">
+              <i></i>
+              БОТ ПІДКЛЮЧЕНИЙ
+            </div>
+
+          </div>
+
+          <div
+            class="ar-chat"
+            id="arManagerChat"
+          >
+
+            <div class="ar-chat-empty">
+
+              <strong>
+                Нових повідомлень немає
+              </strong>
+
+              <p>
+                Коли системі буде потрібне
+                рішення менеджера,
+                запит з’явиться тут.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div
+            class="ar-manager-actions"
+            id="arManagerActions"
+            hidden
+          >
+
+            <button
+              type="button"
+              class="ar-action-primary"
+              data-ar-manager-action="approve"
+            >
+              Так, відправити
+            </button>
+
+            <button
+              type="button"
+              data-ar-manager-action="preview"
+            >
+              Переглянути лист
+            </button>
+
+            <button
+              type="button"
+              data-ar-manager-action="postpone"
+            >
+              Нагадати пізніше
+            </button>
+
+            <button
+              type="button"
+              data-ar-manager-action="decline"
+            >
+              Ні, поки не відправляти
+            </button>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <aside class="ar-audit-console">
+
+        <div class="ar-window-header">
+
+          <div>
+            <span>AUDIT TRAIL</span>
+            <strong>
+              Повна історія процесу
+            </strong>
+          </div>
+
+          <button
+            type="button"
+            class="ar-audit-expand"
+            data-ar-audit-expand
+          >
+            Розгорнути
+          </button>
+
+        </div>
+
+        <div
+          class="ar-audit-log"
+          id="arAuditLog"
+        >
+
+          <div class="ar-audit-empty">
+            Подій ще не зафіксовано.
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+    <div
+      class="ar-postpone-panel"
+      id="arPostponePanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>РІШЕННЯ МЕНЕДЖЕРА</span>
+          <strong>
+            Коли повернутися до цього питання?
+          </strong>
+        </div>
+
+      </div>
+
+      <p class="ar-panel-description">
+        Лист нікуди не зникає.
+        Система запам’ятає ваше рішення,
+        зафіксує його в історії
+        і повернеться до цього самого питання
+        у вибраний день.
+      </p>
+
+      <div class="ar-postpone-options">
+
+        <button
+          type="button"
+          data-ar-postpone-days="1"
+        >
+          Завтра
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-days="3"
+        >
+          Через 3 дні
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-days="5"
+        >
+          Через 5 днів
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-days="7"
+        >
+          Через 7 днів
+        </button>
+
+        <button
+          type="button"
+          data-ar-postpone-custom
+        >
+          Обрати дату
+        </button>
+
+      </div>
+
+      <div class="ar-postpone-custom">
+
+        <label>
+          Наступне нагадування
+
+          <input
+            type="date"
+            id="arPostponeDate"
+            value="2026-08-27"
+          >
+        </label>
+
+        <button
+          type="button"
+          data-ar-postpone-confirm
+        >
+          Зберегти дату
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-time-travel"
+      id="arTimeTravel"
+      hidden
+    >
+
+      <div>
+        <span>КЕРУВАННЯ СИМУЛЯЦІЄЮ</span>
+
+        <strong id="arNextEventText">
+          Наступна контрольна дата: 27.08.2026
+        </strong>
+      </div>
+
+      <button
+        type="button"
+        id="arAdvanceTimeButton"
+      >
+        Перемотати час →
+      </button>
+
+    </div>
+
+    <div
+      class="ar-customer-outcome"
+      id="arCustomerOutcome"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ПОДІЯ З БОКУ КЛІЄНТА</span>
+          <strong>
+            Що сталося після контакту з клієнтом?
+          </strong>
+        </div>
+
+        <span>
+          КЕРУВАННЯ ДЕМО
+        </span>
+
+      </div>
+
+      <p class="ar-customer-outcome-intro">
+        У реальному процесі ці події надходили б
+        із SAP, 1C, банківської виписки,
+        email або CRM.
+        У демо ви самі обираєте,
+        як розвиватиметься ситуація.
+      </p>
+
+      <div class="ar-outcome-grid">
+
+        <button
+          type="button"
+          class="ar-outcome-card ar-outcome-card--paid"
+          data-ar-outcome="paid"
+        >
+          <span>✓</span>
+
+          <strong>
+            Оплата надійшла
+          </strong>
+
+          <small>
+            350 000,00 грн зараховано повністю
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="partial"
+        >
+          <span>½</span>
+
+          <strong>
+            Часткова оплата
+          </strong>
+
+          <small>
+            Клієнт оплатив лише частину заборгованості
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="promise"
+        >
+          <span>◷</span>
+
+          <strong>
+            Обіцяли оплатити
+          </strong>
+
+          <small>
+            Клієнт назвав конкретну дату платежу
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="no-response"
+        >
+          <span>…</span>
+
+          <strong>
+            Немає відповіді
+          </strong>
+
+          <small>
+            Оплати немає, клієнт не відповідає
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card ar-outcome-card--warning"
+          data-ar-outcome="dispute"
+        >
+          <span>!</span>
+
+          <strong>
+            Клієнт не погоджується
+          </strong>
+
+          <small>
+            Виник спір щодо поставки або суми
+          </small>
+        </button>
+
+        <button
+          type="button"
+          class="ar-outcome-card"
+          data-ar-outcome="payment-proof"
+        >
+          <span>↗</span>
+
+          <strong>
+            Надіслано платіжне доручення
+          </strong>
+
+          <small>
+            Клієнт стверджує, що платіж уже проведено
+          </small>
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-promise-panel"
+      id="arPromisePanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ОБІЦЯНКА ОПЛАТИ</span>
+          <strong>
+            Клієнт назвав конкретну дату
+          </strong>
+        </div>
+
+        <span>
+          ЕСКАЛАЦІЮ ПРИЗУПИНЕНО
+        </span>
+
+      </div>
+
+      <div class="ar-customer-reply">
+
+        <span class="ar-reply-author">
+          accounting@raduga.ua
+        </span>
+
+        <p>
+          Добрий день.
+          Оплату за рахунком INV-4821
+          плануємо провести 29 серпня.
+          Просимо врахувати цю дату.
+        </p>
+
+      </div>
+
+      <div class="ar-promise-detected">
+
+        <span>
+          СИСТЕМА ВИЗНАЧИЛА
+        </span>
+
+        <strong>
+          Обіцяна дата оплати: 29.08.2026
+        </strong>
+
+        <p>
+          Нові нагадування клієнту не надсилатимуться
+          до настання обіцяної дати.
+          Після цього система автоматично
+          повторно перевірить оплату.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        data-ar-promise-accept
+      >
+        Продовжити симуляцію
+      </button>
+
+    </div>
+
+    <div
+      class="ar-promise-broken-panel"
+      id="arPromiseBrokenPanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ОБІЦЯНКУ ПОРУШЕНО</span>
+          <strong>
+            Обіцяна дата настала, але оплати немає
+          </strong>
+        </div>
+
+        <span class="ar-danger-state">
+          ЕСКАЛАЦІЮ ВІДНОВЛЕНО
+        </span>
+
+      </div>
+
+      <p>
+        Система пам’ятає,
+        що клієнт сам назвав дату платежу.
+        Тому процес не повертається
+        до попереднього м’якого нагадування,
+        а переходить до наступного рівня.
+      </p>
+
+      <div class="ar-promise-broken-data">
+
+        <div>
+          <span>Обіцяна дата</span>
+          <strong>29.08.2026</strong>
+        </div>
+
+        <div>
+          <span>Факт оплати</span>
+          <strong>Не знайдено</strong>
+        </div>
+
+        <div>
+          <span>Рішення</span>
+          <strong>Наступний рівень</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-partial-panel"
+      id="arPartialPanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ЧАСТКОВА ОПЛАТА</span>
+          <strong>
+            Залишок перераховано автоматично
+          </strong>
+        </div>
+
+        <span>
+          КЕЙС ЗАЛИШАЄТЬСЯ ВІДКРИТИМ
+        </span>
+
+      </div>
+
+      <div class="ar-payment-reconciliation">
+
+        <div>
+          <span>Борг до оплати</span>
+          <strong>
+            350 000,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Надійшло</span>
+          <strong>
+            200 000,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Новий залишок</span>
+          <strong>
+            150 000,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Статус</span>
+          <strong>
+            ЧАСТКОВО ОПЛАЧЕНО
+          </strong>
+        </div>
+
+      </div>
+
+      <p>
+        Кейс не закривається.
+        Усі наступні листи,
+        повідомлення менеджеру
+        та контрольні перевірки
+        використовуватимуть вже фактичний залишок
+        150 000,00 грн.
+      </p>
+
+      <button
+        type="button"
+        data-ar-partial-continue
+      >
+        Продовжити контроль залишку
+      </button>
+
+    </div>
+
+    <div
+      class="ar-dispute-panel"
+      id="arDisputePanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ВИЯВЛЕНО НЕСТАНДАРТНУ СИТУАЦІЮ</span>
+          <strong>
+            Клієнт оспорює заборгованість
+          </strong>
+        </div>
+
+        <span class="ar-danger-state">
+          АВТОМАТИЗАЦІЮ ПРИЗУПИНЕНО
+        </span>
+
+      </div>
+
+      <div class="ar-customer-reply">
+
+        <span class="ar-reply-author">
+          purchasing@raduga.ua
+        </span>
+
+        <p>
+          Добрий день.
+          Ми не можемо підтвердити оплату зазначеної суми,
+          оскільки маємо невирішене питання
+          щодо частини поставленого товару.
+          Просимо спочатку узгодити претензію щодо якості.
+        </p>
+
+      </div>
+
+      <div class="ar-dispute-actions">
+
+        <div>
+          <span>РІШЕННЯ СИСТЕМИ</span>
+
+          <strong>
+            Автоматичне стягнення зупинено
+          </strong>
+
+          <p>
+            Система не надсилає жорсткіше нагадування,
+            оскільки виник бізнес-спір,
+            який потребує участі людини.
+            Уся попередня історія при цьому зберігається.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          data-ar-dispute-review
+        >
+          Передати на ручний розгляд
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-payment-proof-panel"
+      id="arPaymentProofPanel"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ПІДТВЕРДЖЕННЯ ОПЛАТИ</span>
+          <strong>
+            Клієнт стверджує, що платіж уже проведено
+          </strong>
+        </div>
+
+        <span>
+          ПЕРЕВІРКА ОПЛАТИ
+        </span>
+
+      </div>
+
+      <div class="ar-customer-reply">
+
+        <span class="ar-reply-author">
+          accounting@raduga.ua
+        </span>
+
+        <p>
+          Добрий день.
+          Оплату було проведено сьогодні о 10:42.
+          Платіжне доручення додаємо.
+          Просимо перевірити надходження коштів.
+        </p>
+
+      </div>
+
+      <div class="ar-proof-file">
+
+        <span>PDF</span>
+
+        <div>
+          <strong>
+            payment_order_INV-4821.pdf
+          </strong>
+
+          <small>
+            248 KB · отримано 24.08.2026 о 10:47
+          </small>
+        </div>
+
+      </div>
+
+      <div class="ar-proof-result">
+
+        <span>
+          ДІЯ СИСТЕМИ
+        </span>
+
+        <strong>
+          Не ескалювати до завершення повторної перевірки
+        </strong>
+
+        <p>
+          Кейс переводиться у статус перевірки платежу.
+          Після оновлення бухгалтерських даних
+          система ще раз звернеться до SAP або 1C
+          і лише після цього прийме наступне рішення.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        data-ar-proof-check
+      >
+        Симулювати повторну перевірку
+      </button>
+
+    </div>
+
+    <div
+      class="ar-letter-modal"
+      id="arLetterModal"
+      aria-hidden="true"
+    >
+
+      <div
+        class="ar-modal-backdrop"
+        data-ar-letter-close
+      ></div>
+
+      <div class="ar-letter-window">
+
+        <div class="ar-letter-window-head">
+
+          <div>
+            <span id="arLetterTemplateNumber">
+              ШАБЛОН №1
+            </span>
+
+            <strong id="arLetterTemplateName">
+              Дружнє нагадування про оплату
+            </strong>
+          </div>
+
+          <button
+            type="button"
+            data-ar-letter-close
+            aria-label="Закрити"
+          >
+            ×
+          </button>
+
+        </div>
+
+        <div class="ar-letter-layout">
+
+          <div class="ar-letter-document">
+
+            <div class="ar-email-fields">
+
+              <div>
+                <span>Від</span>
+                <strong>
+                  accounts@demo-company.ua
+                </strong>
+              </div>
+
+              <div>
+                <span>Кому</span>
+                <strong>
+                  accounting@raduga.ua
+                </strong>
+              </div>
+
+              <div>
+                <span>Копія</span>
+                <strong>
+                  manager@demo-company.ua
+                </strong>
+              </div>
+
+              <div>
+                <span>Тема</span>
+                <strong id="arLetterSubject">
+                  Уточнення статусу оплати за рахунком INV-4821
+                </strong>
+              </div>
+
+            </div>
+
+            <div
+              class="ar-letter-content"
+              id="arLetterContent"
+            ></div>
+
+          </div>
+
+          <aside class="ar-letter-data">
+
+            <span class="ar-section-kicker">
+              ЗАПОВНЕНО АВТОМАТИЧНО
+            </span>
+
+            <h4>
+              Які дані система підставила сама
+            </h4>
+
+            <div class="ar-auto-field">
+              <span>Контрагент</span>
+              <strong>
+                ТОВ «Радуга»
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Контактна особа</span>
+              <strong>
+                Ольга Кравченко
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Договір</span>
+              <strong>
+                DG-2026-114
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Рахунок</span>
+              <strong>
+                INV-4821
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Дата рахунку</span>
+              <strong>
+                24.07.2026
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Строк оплати</span>
+              <strong>
+                23.08.2026
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Поточний борг</span>
+              <strong id="arLetterOutstanding">
+                350 000,00 грн
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Днів прострочення</span>
+              <strong id="arLetterOverdue">
+                1
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Попередніх звернень</span>
+              <strong id="arLetterPreviousContacts">
+                0
+              </strong>
+            </div>
+
+            <div class="ar-auto-field">
+              <span>Відповідальний менеджер</span>
+              <strong>
+                Олександр Коваленко
+              </strong>
+            </div>
+
+          </aside>
+
+        </div>
+
+        <div class="ar-letter-modal-actions">
+
+          <button
+            type="button"
+            data-ar-letter-close
+          >
+            Повернутися
+          </button>
+
+          <button
+            type="button"
+            class="ar-action-primary"
+            data-ar-letter-send
+          >
+            Підтвердити та відправити
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-template-library"
+      id="arTemplateLibrary"
+    >
+
+      <template
+        id="arTemplate1"
+        data-ar-template="1"
+      >
+
+        <div class="ar-real-letter">
+
+          <p>
+            Добрий день, Ольго.
+          </p>
+
+          <p>
+            Хотіли б уточнити статус оплати
+            за рахунком № INV-4821 від 24.07.2026
+            на суму 350 000,00 грн.
+          </p>
+
+          <p>
+            Відповідно до погоджених умов розрахунків
+            строк оплати за зазначеним рахунком
+            настав 23.08.2026.
+          </p>
+
+          <p>
+            Станом на 24.08.2026 надходження коштів
+            за цим рахунком
+            у нашій обліковій системі
+            поки не відображено.
+          </p>
+
+          <p>
+            Можливо, платіж уже було здійснено
+            та він ще знаходиться в обробці банком.
+            У такому разі будемо вдячні,
+            якщо ви зможете надіслати
+            підтвердження платежу.
+          </p>
+
+          <p>
+            Якщо оплату ще не проведено,
+            будь ласка, повідомте орієнтовну дату її здійснення,
+            щоб ми могли відповідно оновити інформацію
+            у своїй системі.
+          </p>
+
+          <p>
+            Якщо з нашого боку потрібна
+            будь-яка додаткова інформація
+            або повторне надання документів,
+            будь ласка, повідомте.
+          </p>
+
+          <p>
+            Дякуємо за співпрацю
+            та будемо вдячні за коротке підтвердження.
+          </p>
+
+          <p class="ar-letter-signature">
+            З повагою,<br>
+            Олександр Коваленко<br>
+            менеджер по роботі з клієнтами<br>
+            ТОВ «Демо Компані»<br>
+            manager@demo-company.ua<br>
+            +38 (044) 555-21-18
+          </p>
+
+        </div>
+
+      </template>
+
+      <template
+        id="arTemplate2"
+        data-ar-template="2"
+      >
+
+        <div class="ar-real-letter">
+
+          <p>
+            Добрий день, Ольго.
+          </p>
+
+          <p>
+            Повертаємося до питання оплати
+            за рахунком № INV-4821 від 24.07.2026.
+          </p>
+
+          <p>
+            Сума рахунку становить
+            350 000,00 грн,
+            а погоджений строк оплати
+            настав 23.08.2026.
+          </p>
+
+          <p>
+            Станом на поточну дату
+            заборгованість залишається непогашеною,
+            а надходження коштів
+            у нашій обліковій системі
+            не зареєстровано.
+          </p>
+
+          <p>
+            Раніше ми вже зверталися
+            з проханням уточнити статус платежу,
+            однак станом на цей момент
+            не отримали ані оплати,
+            ані підтвердженої дати
+            її здійснення.
+          </p>
+
+          <p>
+            Просимо повідомити,
+            коли саме буде проведено оплату,
+            або поінформувати нас,
+            якщо існують будь-які обставини,
+            що перешкоджають виконанню платежу.
+          </p>
+
+          <p>
+            Для нас важливо мати
+            актуальну інформацію
+            щодо очікуваного строку
+            погашення заборгованості
+            для коректного планування
+            взаєморозрахунків
+            та подальшої співпраці.
+          </p>
+
+          <p>
+            Якщо платіж уже здійснено,
+            просимо надіслати підтвердження,
+            щоб ми могли оперативно
+            перевірити його зарахування.
+          </p>
+
+          <p>
+            Будемо вдячні за відповідь
+            до кінця поточного робочого дня.
+          </p>
+
+          <p class="ar-letter-signature">
+            З повагою,<br>
+            Олександр Коваленко<br>
+            менеджер по роботі з клієнтами<br>
+            ТОВ «Демо Компані»<br>
+            manager@demo-company.ua<br>
+            +38 (044) 555-21-18
+          </p>
+
+        </div>
+
+      </template>
+
+      <template
+        id="arTemplate3"
+        data-ar-template="3"
+      >
+
+        <div class="ar-real-letter">
+
+          <p>
+            Добрий день.
+          </p>
+
+          <p>
+            Звертаємо вашу увагу,
+            що за рахунком № INV-4821
+            від 24.07.2026
+            залишається непогашена заборгованість
+            у розмірі 350 000,00 грн.
+          </p>
+
+          <p>
+            Відповідно до погоджених умов
+            строк оплати настав 23.08.2026.
+            На поточну дату
+            встановлений строк виконання
+            грошового зобов’язання перевищено.
+          </p>
+
+          <p>
+            Раніше на адресу вашої компанії
+            вже направлялися повідомлення
+            щодо необхідності уточнення статусу
+            та погашення заборгованості.
+          </p>
+
+          <p>
+            Незважаючи на попередні звернення,
+            оплата на наш рахунок
+            станом на цей момент не надійшла,
+            а погоджений графік погашення
+            відсутній.
+          </p>
+
+          <p>
+            Просимо забезпечити оплату
+            всієї суми заборгованості
+            у найкоротший можливий строк
+            або негайно надати письмову інформацію
+            щодо причин затримки
+            та підтвердженої дати платежу.
+          </p>
+
+          <p>
+            Якщо платіж уже проведено,
+            просимо направити
+            відповідне підтвердження
+            для перевірки
+            та коректного закриття заборгованості
+            в обліковій системі.
+          </p>
+
+          <p>
+            У разі відсутності оплати,
+            підтвердженої дати платежу
+            або погодженого графіка погашення
+            питання буде передано
+            на наступний рівень внутрішньої ескалації
+            відповідно до встановленої процедури
+            роботи з простроченою
+            дебіторською заборгованістю.
+          </p>
+
+          <p>
+            Сподіваємося врегулювати питання
+            без переходу до формальної процедури стягнення.
+          </p>
+
+          <p class="ar-letter-signature">
+            З повагою,<br>
+            Олександр Коваленко<br>
+            менеджер по роботі з клієнтами<br>
+            ТОВ «Демо Компані»<br>
+            manager@demo-company.ua<br>
+            +38 (044) 555-21-18
+          </p>
+
+        </div>
+
+      </template>
+
+      <template
+        id="arTemplate4"
+        data-ar-template="4"
+      >
+
+        <article class="ar-formal-claim-document">
+
+          <div class="ar-claim-company">
+
+            <strong>
+              ТОВ «Демо Компані»
+            </strong>
+
+            <span>
+              01001, м. Київ,
+              вул. Ділова, 15
+            </span>
+
+            <span>
+              ЄДРПОУ 40112233
+            </span>
+
+            <span>
+              accounts@demo-company.ua
+            </span>
+
+          </div>
+
+          <div class="ar-claim-recipient">
+
+            <span>
+              Кому:
+            </span>
+
+            <strong>
+              ТОВ «Радуга»
+            </strong>
+
+            <span>
+              ЄДРПОУ 38974561
+            </span>
+
+            <span>
+              04071, м. Київ,
+              вул. Набережна, 28
+            </span>
+
+          </div>
+
+          <div class="ar-claim-meta">
+
+            <span>
+              Вих. № DC-CLAIM-2026-041
+            </span>
+
+            <span>
+              від 12.09.2026
+            </span>
+
+          </div>
+
+          <h3>
+            ПРЕТЕНЗІЯ
+          </h3>
+
+          <h4>
+            щодо погашення простроченої заборгованості
+          </h4>
+
+          <p>
+            Між ТОВ «Демо Компані»
+            та ТОВ «Радуга»
+            укладено Договір поставки
+            № DG-2026-114 від 24.06.2026.
+          </p>
+
+          <p>
+            На виконання умов зазначеного Договору
+            ТОВ «Демо Компані»
+            здійснило поставку товару,
+            що підтверджується
+            відповідними первинними документами,
+            та виставило рахунок
+            № INV-4821 від 24.07.2026
+            на загальну суму
+            350 000,00 грн.
+          </p>
+
+          <p>
+            Відповідно до погоджених сторонами умов
+            строк оплати становить
+            30 календарних днів.
+            Граничною датою виконання
+            зобов’язання з оплати
+            було 23.08.2026.
+          </p>
+
+          <p>
+            Станом на 12.09.2026
+            оплата за рахунком № INV-4821
+            на рахунок ТОВ «Демо Компані»
+            не надійшла.
+          </p>
+
+          <p>
+            Таким чином,
+            сума простроченої заборгованості
+            ТОВ «Радуга»
+            перед ТОВ «Демо Компані»
+            становить 350 000,00 грн.
+          </p>
+
+          <p>
+            До направлення цієї претензії
+            представникам ТОВ «Радуга»
+            неодноразово направлялися повідомлення
+            щодо необхідності
+            погашення заборгованості
+            та уточнення строку оплати.
+          </p>
+
+          <div class="ar-claim-history">
+
+            <div>
+              <span>24.08.2026</span>
+
+              <strong>
+                Перше нагадування про оплату
+              </strong>
+            </div>
+
+            <div>
+              <span>29.08.2026</span>
+
+              <strong>
+                Повторне нагадування
+              </strong>
+            </div>
+
+            <div>
+              <span>05.09.2026</span>
+
+              <strong>
+                Фінальне попередження
+              </strong>
+            </div>
+
+          </div>
+
+          <p>
+            Незважаючи на зазначені звернення,
+            заборгованість залишається непогашеною.
+          </p>
+
+          <p>
+            У зв’язку з викладеним
+            вимагаємо погасити
+            заборгованість
+            у розмірі 350 000,00 грн
+            у повному обсязі
+            протягом 5 робочих днів
+            з моменту отримання цієї претензії.
+          </p>
+
+          <p>
+            Після здійснення оплати
+            просимо направити
+            підтвердження платежу
+            на адресу
+            accounts@demo-company.ua.
+          </p>
+
+          <p>
+            У разі непогашення заборгованості
+            у зазначений строк
+            матеріали можуть бути передані
+            юридичному підрозділу
+            для оцінки подальших дій,
+            у тому числі можливості
+            судового стягнення заборгованості
+            в установленому порядку.
+          </p>
+
+          <p>
+            Ця претензія направляється
+            з метою досудового врегулювання питання
+            та надання можливості
+            добровільно виконати
+            прострочене грошове зобов’язання.
+          </p>
+
+          <div class="ar-claim-attachments">
+
+            <strong>
+              Додатки:
+            </strong>
+
+            <ol>
+              <li>
+                Копія Договору поставки
+                № DG-2026-114.
+              </li>
+
+              <li>
+                Копія рахунку
+                № INV-4821.
+              </li>
+
+              <li>
+                Копії документів,
+                що підтверджують
+                поставку товару.
+              </li>
+
+              <li>
+                Історія попередніх повідомлень
+                щодо заборгованості.
+              </li>
+            </ol>
+
+          </div>
+
+          <div class="ar-claim-signature">
+
+            <div>
+              <span>
+                Директор
+              </span>
+
+              <strong>
+                Андрій Коваленко
+              </strong>
+            </div>
+
+            <div>
+              <span>
+                ТОВ «Демо Компані»
+              </span>
+            </div>
+
+          </div>
+
+        </article>
+
+      </template>
+
+    </div>
+
+    <div
+      class="ar-claim-gate"
+      id="arClaimGate"
+      hidden
+    >
+
+      <div class="ar-claim-gate-alert">
+
+        <span>
+          ПОТРІБНЕ ПІДТВЕРДЖЕННЯ МЕНЕДЖЕРА
+        </span>
+
+        <strong>
+          Процес дійшов до рівня офіційної претензії
+        </strong>
+
+        <p>
+          Система підготувала документ,
+          але не виконує юридично значущу дію
+          без окремого підтвердження відповідальної особи.
+        </p>
+
+      </div>
+
+      <div class="ar-claim-gate-data">
+
+        <div>
+          <span>Поточний борг</span>
+          <strong>
+            350 000,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Прострочення</span>
+          <strong>
+            20+ днів
+          </strong>
+        </div>
+
+        <div>
+          <span>Попередніх нагадувань</span>
+          <strong>
+            3
+          </strong>
+        </div>
+
+        <div>
+          <span>Наступний можливий етап</span>
+          <strong>
+            Юридичний розгляд
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ar-claim-gate-actions">
+
+        <button
+          type="button"
+          data-ar-claim-preview
+        >
+          Переглянути претензію
+        </button>
+
+        <button
+          type="button"
+          class="ar-action-primary"
+          data-ar-claim-approve
+        >
+          Підтвердити відправлення
+        </button>
+
+        <button
+          type="button"
+          data-ar-claim-postpone
+        >
+          Відкласти рішення
+        </button>
+
+        <button
+          type="button"
+          data-ar-claim-stop
+        >
+          Зупинити процес
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-legal-package"
+      id="arLegalPackage"
+      hidden
+    >
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>ПЕРЕДАЧА ЮРИСТАМ</span>
+          <strong>
+            Пакет матеріалів сформовано автоматично
+          </strong>
+        </div>
+
+        <span>
+          ГОТОВО ДО РОЗГЛЯДУ
+        </span>
+
+      </div>
+
+      <div class="ar-legal-files">
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Contract_DG-2026-114.pdf
+          </strong>
+
+          <small>
+            Договір поставки
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Invoice_INV-4821.pdf
+          </strong>
+
+          <small>
+            Рахунок
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Delivery_Documents.pdf
+          </strong>
+
+          <small>
+            Документи, що підтверджують поставку
+          </small>
+        </div>
+
+        <div>
+          <span>EML</span>
+
+          <strong>
+            Reminder_History.eml
+          </strong>
+
+          <small>
+            Попередня комунікація з клієнтом
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            Formal_Claim.pdf
+          </strong>
+
+          <small>
+            Офіційна претензія
+          </small>
+        </div>
+
+        <div>
+          <span>CSV</span>
+
+          <strong>
+            Audit_Trail.csv
+          </strong>
+
+          <small>
+            Історія системних та людських рішень
+          </small>
+        </div>
+
+        <div>
+          <span>PDF</span>
+
+          <strong>
+            AR_Case_Summary.pdf
+          </strong>
+
+          <small>
+            Зведена інформація по кейсу
+          </small>
+        </div>
+
+      </div>
+
+      <div class="ar-legal-note">
+
+        <strong>
+          Система не приймає юридичне рішення замість людини.
+        </strong>
+
+        <p>
+          Вона збирає документи,
+          структурує факти,
+          додає історію попередніх дій
+          і передає юристу
+          підготовлений пакет матеріалів
+          для подальшої професійної оцінки.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div
+      class="ar-success-screen"
+      id="arSuccessScreen"
+      hidden
+    >
+
+      <div class="ar-success-icon">
+        ✓
+      </div>
+
+      <span>
+        КЕЙС ЗАКРИТО
+      </span>
+
+      <h3>
+        Заборгованість погашено
+      </h3>
+
+      <p>
+        SAP або 1C підтвердив надходження коштів.
+        Залишок за рахунком INV-4821
+        дорівнює 0,00 грн.
+      </p>
+
+      <div class="ar-success-data">
+
+        <div>
+          <span>Рахунок</span>
+          <strong>
+            INV-4821
+          </strong>
+        </div>
+
+        <div>
+          <span>Отримано</span>
+          <strong>
+            350 000,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Залишок</span>
+          <strong>
+            0,00 грн
+          </strong>
+        </div>
+
+        <div>
+          <span>Фінальний статус</span>
+          <strong>
+            ЗАКРИТО
+          </strong>
+        </div>
+
+      </div>
+
+      <p class="ar-success-summary">
+        Менеджеру не потрібно
+        вручну перевіряти рахунок,
+        шукати попередню переписку,
+        знімати власні нагадування
+        або закривати кейс.
+        Після появи факту оплати
+        система сама завершила цикл.
+      </p>
+
+      <button
+        type="button"
+        data-ar-restart
+      >
+        Пройти інший сценарій
+      </button>
+
+    </div>
+
+    <div
+      class="ar-manual-review-screen"
+      id="arManualReviewScreen"
+      hidden
+    >
+
+      <span>
+        РУЧНИЙ РОЗГЛЯД
+      </span>
+
+      <h3>
+        Автоматичний процес коректно зупинено
+      </h3>
+
+      <p>
+        Виявлено обставину,
+        за якої продовження стандартної процедури
+        без участі людини
+        могло б бути неправильним.
+      </p>
+
+      <div class="ar-review-reason">
+
+        <span>
+          Причина
+        </span>
+
+        <strong>
+          Спір із клієнтом
+        </strong>
+
+      </div>
+
+      <p>
+        Кейс передано
+        відповідальному менеджеру
+        або іншому підрозділу
+        для ручного розгляду.
+        Усі попередні події,
+        листи, рішення та документи
+        залишаються в історії.
+      </p>
+
+      <button
+        type="button"
+        data-ar-restart
+      >
+        Пройти інший сценарій
+      </button>
+
+    </div>
+
+    <div class="ar-business-value">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>БІЗНЕС-ЦІННІСТЬ</span>
+          <strong>
+            Що насправді забирає на себе система
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ar-business-value-grid">
+
+        <div>
+          <span>01</span>
+
+          <strong>
+            Не пропустити
+          </strong>
+
+          <p>
+            Система сама знаходить рахунки,
+            строк оплати яких уже минув.
+          </p>
+        </div>
+
+        <div>
+          <span>02</span>
+
+          <strong>
+            Не тримати в голові
+          </strong>
+
+          <p>
+            Менеджеру не потрібно пам’ятати,
+            коли знову повернутися
+            до конкретного клієнта.
+          </p>
+        </div>
+
+        <div>
+          <span>03</span>
+
+          <strong>
+            Не копіювати дані
+          </strong>
+
+          <p>
+            Суми, дати, реквізити,
+            номер рахунку та історія
+            підтягуються автоматично.
+          </p>
+        </div>
+
+        <div>
+          <span>04</span>
+
+          <strong>
+            Не писати лист заново
+          </strong>
+
+          <p>
+            Для кожного рівня прострочення
+            використовується погоджений шаблон.
+          </p>
+        </div>
+
+        <div>
+          <span>05</span>
+
+          <strong>
+            Не втрачати контекст
+          </strong>
+
+          <p>
+            Кожне погодження,
+            відмова, відкладення
+            та відповідь клієнта
+            зберігаються в Audit Trail.
+          </p>
+        </div>
+
+        <div>
+          <span>06</span>
+
+          <strong>
+            Не турбувати клієнта даремно
+          </strong>
+
+          <p>
+            Якщо клієнт назвав дату оплати,
+            система робить паузу
+            до цієї дати.
+          </p>
+        </div>
+
+        <div>
+          <span>07</span>
+
+          <strong>
+            Не ігнорувати часткову оплату
+          </strong>
+
+          <p>
+            Залишок перераховується автоматично,
+            а наступна комунікація
+            вже використовує актуальну суму.
+          </p>
+        </div>
+
+        <div>
+          <span>08</span>
+
+          <strong>
+            Не автоматизувати там, де не треба
+          </strong>
+
+          <p>
+            Спір або нестандартна ситуація
+            автоматично переводять кейс
+            до людини.
+          </p>
+        </div>
+
+        <div>
+          <span>09</span>
+
+          <strong>
+            Не закривати вручну
+          </strong>
+
+          <p>
+            Після фактичного надходження коштів
+            система сама завершує процес.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-integration-map">
+
+      <div class="ar-panel-heading">
+
+        <div>
+          <span>СХЕМА ІНТЕГРАЦІЙ</span>
+          <strong>
+            Як може виглядати реальна архітектура
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="ar-integration-flow">
+
+        <div class="ar-integration-node">
+          <span>ОБЛІК</span>
+          <strong>SAP / 1C</strong>
+          <small>
+            Борг, оплата, залишок
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node ar-integration-node--core">
+          <span>ЛОГІКА</span>
+          <strong>
+            Automation Engine
+          </strong>
+          <small>
+            Правила, строки, статуси, сценарії
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node">
+          <span>МЕНЕДЖЕР</span>
+          <strong>
+            Telegram / Email
+          </strong>
+          <small>
+            Погодження та рішення
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node">
+          <span>КЛІЄНТ</span>
+          <strong>
+            Email
+          </strong>
+          <small>
+            Нагадування та відповіді
+          </small>
+        </div>
+
+        <div class="ar-integration-link">
+          ⇄
+        </div>
+
+        <div class="ar-integration-node">
+          <span>ІСТОРІЯ</span>
+          <strong>
+            Audit Trail
+          </strong>
+          <small>
+            Повна трасованість процесу
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="ar-final-message">
+
+      <span>
+        CLOSED-LOOP AUTOMATION
+      </span>
+
+      <h3>
+        Проблему недостатньо просто знайти.
+        Система повинна довести її до результату.
+      </h3>
+
+      <p>
+        Людина приймає рішення там,
+        де потрібні досвід і судження.
+        Система бере на себе все інше:
+        контроль, пам’ять, підготовку документів,
+        повторні перевірки, строки,
+        журнал подій та наступний крок.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="ar-case-cta">
+
+    <div>
+
+      <span>
+        Маєте подібний ручний процес?
+      </span>
+
+      <strong>
+        Логіку можна побудувати
+        під ваші правила,
+        бухгалтерську систему
+        та реальний workflow.
+      </strong>
+
+    </div>
+
+    <a href="contacts.html">
+      Хочу таку автоматизацію
+    </a>
+
+  </div>
+
+</section>

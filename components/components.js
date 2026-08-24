@@ -396,7 +396,7 @@ function setupOnlineCounter(lang) {
   }
 
   labelElement.textContent =
-    languages[lang].online;
+    languages[lang].nav.online;
 
   const storageKey =
     "sp_online_visitor_id";

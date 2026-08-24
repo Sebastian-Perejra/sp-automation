@@ -3378,3 +3378,405 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+#ar-case .ar-telegram-console {
+  position: relative;
+  display: flex;
+  min-height: 500px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #c8d3da;
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow:
+    0 8px 24px rgba(42, 58, 68, 0.1),
+    0 1px 2px rgba(42, 58, 68, 0.08);
+}
+
+#ar-case .ar-telegram-appbar {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 62px;
+  padding: 10px 12px;
+  align-items: center;
+  border-bottom: 1px solid #dfe6eb;
+  background: #ffffff;
+}
+
+#ar-case .ar-telegram-avatar {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      145deg,
+      #63b8e8,
+      #2f97d1
+    );
+  color: #ffffff;
+  font-family: var(--font-tech, "Roboto Mono", monospace);
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+#ar-case .ar-telegram-contact {
+  min-width: 0;
+}
+
+#ar-case .ar-telegram-contact strong,
+#ar-case .ar-telegram-contact span {
+  display: block;
+}
+
+#ar-case .ar-telegram-contact strong {
+  overflow: hidden;
+  color: #222222;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ar-case .ar-telegram-contact span {
+  margin-top: 2px;
+  color: #7c8b95;
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+#ar-case .ar-telegram-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+#ar-case .ar-telegram-header-actions button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #71808a;
+  font-family: Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1;
+  cursor: default;
+}
+
+#ar-case .ar-telegram-service {
+  position: absolute;
+  top: 74px;
+  left: 50%;
+  z-index: 5;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(104, 126, 139, 0.58);
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.3;
+  transform: translateX(-50%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+#ar-case .ar-telegram-chat {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 350px;
+  max-height: 500px;
+  padding: 34px 13px 14px;
+  overflow-y: auto;
+  background:
+    radial-gradient(
+      circle at 12px 12px,
+      rgba(120, 156, 173, 0.08) 1.2px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 34px 30px,
+      rgba(120, 156, 173, 0.06) 1px,
+      transparent 1.3px
+    ),
+    linear-gradient(
+      135deg,
+      #dfe9ee,
+      #e8f0f3
+    );
+  background-size:
+    44px 44px,
+    52px 52px,
+    auto;
+}
+
+#ar-case .ar-telegram-chat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.28;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 18px,
+      rgba(255, 255, 255, 0.16) 19px,
+      transparent 20px
+    );
+}
+
+#ar-case .ar-telegram-chat > * {
+  position: relative;
+  z-index: 1;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-empty {
+  min-height: 280px;
+}
+
+#ar-case .ar-telegram-empty-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  place-items: center;
+  border-radius: 50%;
+  background: #3390ec;
+  color: #ffffff;
+  font-size: 21px;
+  transform: rotate(-12deg);
+  box-shadow:
+    0 8px 20px rgba(51, 144, 236, 0.2);
+}
+
+#ar-case .ar-telegram-chat .ar-chat-empty strong {
+  margin-bottom: 5px;
+  color: #51606a;
+  font-size: 10px;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-empty p {
+  max-width: 260px;
+  color: #71808a;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message {
+  position: relative;
+  width: fit-content;
+  max-width: 86%;
+  margin: 0 auto 8px 0;
+  padding: 8px 10px 6px;
+  border: 0;
+  border-radius: 5px 12px 12px 12px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(52, 72, 84, 0.16);
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  bottom: 0;
+  width: 9px;
+  height: 12px;
+  background: #ffffff;
+  clip-path:
+    polygon(
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message.manager {
+  margin-right: 0;
+  margin-left: auto;
+  border-radius: 12px 5px 12px 12px;
+  background: #e2ffc7;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message.manager::before {
+  right: -6px;
+  left: auto;
+  background: #e2ffc7;
+  clip-path:
+    polygon(
+      0 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+#ar-case .ar-telegram-chat .ar-chat-author {
+  margin-bottom: 3px;
+  color: #3390ec;
+  font-family: var(--font-main, "Manrope", Arial, sans-serif);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message.manager .ar-chat-author {
+  color: #4f8b36;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message p {
+  color: #202b33;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  line-height: 1.48;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message p b {
+  color: #172128;
+  font-weight: 700;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-meta {
+  margin-top: 3px;
+  color: #84939c;
+  font-family: Arial, sans-serif;
+  font-size: 6px;
+  text-align: right;
+}
+
+#ar-case .ar-telegram-chat .ar-chat-message.manager .ar-chat-meta {
+  color: #73a25f;
+}
+
+#ar-case .ar-telegram-inline-keyboard {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding: 6px 8px;
+  border-top: 1px solid #dce5ea;
+  background: #edf3f6;
+}
+
+#ar-case .ar-telegram-inline-keyboard button {
+  min-height: 37px;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #2481cc;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  box-shadow:
+    0 1px 2px rgba(46, 66, 78, 0.08);
+}
+
+#ar-case .ar-telegram-inline-keyboard button:hover {
+  transform: none;
+  border: 0;
+  background: #f7fafb;
+  color: #1672b8;
+  box-shadow:
+    0 1px 3px rgba(46, 66, 78, 0.12);
+}
+
+#ar-case .ar-telegram-inline-keyboard .ar-action-primary {
+  border: 0;
+  background: #ffffff;
+  color: #2481cc;
+}
+
+#ar-case .ar-telegram-composer {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px 34px;
+  gap: 2px;
+  min-height: 52px;
+  padding: 6px 8px;
+  align-items: center;
+  border-top: 1px solid #dce5ea;
+  background: #ffffff;
+}
+
+#ar-case .ar-telegram-composer button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #7e8d96;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  cursor: default;
+}
+
+#ar-case .ar-telegram-input {
+  min-width: 0;
+  padding: 0 8px;
+  color: #9aa6ad;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+#ar-case .ar-telegram-mic {
+  color: #3390ec !important;
+  font-size: 13px !important;
+}
+
+@media (max-width: 760px) {
+  #ar-case .ar-telegram-console {
+    min-height: 480px;
+  }
+
+  #ar-case .ar-telegram-appbar {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    min-height: 57px;
+    padding: 8px 9px;
+  }
+
+  #ar-case .ar-telegram-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  #ar-case .ar-telegram-header-actions button {
+    width: 30px;
+    height: 30px;
+  }
+
+  #ar-case .ar-telegram-service {
+    top: 67px;
+  }
+
+  #ar-case .ar-telegram-chat {
+    min-height: 330px;
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  #ar-case .ar-telegram-chat .ar-chat-message {
+    max-width: 92%;
+  }
+
+  #ar-case .ar-telegram-inline-keyboard {
+    grid-template-columns: 1fr;
+  }
+
+  #ar-case .ar-telegram-composer {
+    grid-template-columns: 30px minmax(0, 1fr) 30px 30px;
+  }
+
+  #ar-case .ar-telegram-composer button {
+    width: 30px;
+    height: 30px;
+  }
+}

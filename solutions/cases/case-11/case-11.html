@@ -881,83 +881,149 @@
 
         </section>
 
-        <section class="ar-manager-console">
+       <section class="ar-manager-console ar-telegram-console">
 
-          <div class="ar-window-header">
+  <div class="ar-telegram-appbar">
 
-            <div>
-              <span>КАНАЛ МЕНЕДЖЕРА</span>
-              <strong>
-                Telegram
-              </strong>
-            </div>
+    <div class="ar-telegram-avatar">
+      AR
+    </div>
 
-            <div class="ar-telegram-live">
-              <i></i>
-              БОТ ПІДКЛЮЧЕНИЙ
-            </div>
+    <div class="ar-telegram-contact">
 
-          </div>
+      <strong>
+        AR Control Bot
+      </strong>
 
-          <div
-            class="ar-chat"
-            id="arManagerChat"
-          >
+      <span>
+        бот
+      </span>
 
-            <div class="ar-chat-empty">
+    </div>
 
-              <strong>
-                Нових повідомлень немає
-              </strong>
+    <div class="ar-telegram-header-actions">
 
-              <p>
-                Коли системі буде потрібне
-                рішення менеджера,
-                запит з’явиться тут.
-              </p>
+      <button
+        type="button"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        ⌕
+      </button>
 
-            </div>
+      <button
+        type="button"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        ⋮
+      </button>
 
-          </div>
+    </div>
 
-          <div
-            class="ar-manager-actions"
-            id="arManagerActions"
-            hidden
-          >
+  </div>
 
-            <button
-              type="button"
-              class="ar-action-primary"
-              data-ar-manager-action="approve"
-            >
-              Так, відправити
-            </button>
+  <div class="ar-telegram-service">
+    Сьогодні
+  </div>
 
-            <button
-              type="button"
-              data-ar-manager-action="preview"
-            >
-              Переглянути лист
-            </button>
+  <div
+    class="ar-chat ar-telegram-chat"
+    id="arManagerChat"
+  >
 
-            <button
-              type="button"
-              data-ar-manager-action="postpone"
-            >
-              Нагадати пізніше
-            </button>
+    <div class="ar-chat-empty">
 
-            <button
-              type="button"
-              data-ar-manager-action="decline"
-            >
-              Ні, поки не відправляти
-            </button>
+      <div class="ar-telegram-empty-icon">
+        ✈
+      </div>
 
-          </div>
+      <strong>
+        AR Control Bot
+      </strong>
 
-        </section>
+      <p>
+        Системні повідомлення та запити
+        на погодження з’являться в цьому чаті.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div
+    class="ar-manager-actions ar-telegram-inline-keyboard"
+    id="arManagerActions"
+    hidden
+  >
+
+    <button
+      type="button"
+      class="ar-action-primary"
+      data-ar-manager-action="approve"
+    >
+      ✓ Так, відправити
+    </button>
+
+    <button
+      type="button"
+      data-ar-manager-action="preview"
+    >
+      Переглянути лист
+    </button>
+
+    <button
+      type="button"
+      data-ar-manager-action="postpone"
+    >
+      Нагадати пізніше
+    </button>
+
+    <button
+      type="button"
+      data-ar-manager-action="decline"
+    >
+      Не відправляти
+    </button>
+
+  </div>
+
+  <div class="ar-telegram-composer">
+
+    <button
+      type="button"
+      tabindex="-1"
+      aria-hidden="true"
+      class="ar-telegram-attach"
+    >
+      ⌕
+    </button>
+
+    <div class="ar-telegram-input">
+      Повідомлення
+    </div>
+
+    <button
+      type="button"
+      tabindex="-1"
+      aria-hidden="true"
+      class="ar-telegram-emoji"
+    >
+      ☺
+    </button>
+
+    <button
+      type="button"
+      tabindex="-1"
+      aria-hidden="true"
+      class="ar-telegram-mic"
+    >
+      ●
+    </button>
+
+  </div>
+
+</section>
 
       </div>
 

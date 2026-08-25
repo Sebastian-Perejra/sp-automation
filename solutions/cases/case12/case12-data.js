@@ -1154,6 +1154,622 @@
     }
   ];
 
+  C12.inboxRequests = [
+
+  {
+    id: "REQ-EMAIL-001",
+    source: "email",
+    sourceLabel: "Email",
+    time: "09:47",
+    unread: true,
+    isMain: true,
+
+    client: "WestWood Ukraine",
+    contact: "Ірина Мельник",
+    contactLine: "logistics@westwood.ua",
+
+    title: "Перевезення Львів → Краків · 26.08",
+    preview: "12 палет · 4 800 кг · тент",
+
+    origin: "Львів",
+    destination: "Краків",
+
+    pickup: "26.08 · 10:00",
+    delivery: "28.08 · до 14:00",
+
+    cargo: "Дерев'яні панелі",
+    pallets: 12,
+    weightKg: 4800,
+    vehicleType: "Тент",
+
+    message:
+      "Доброго дня. Потрібне перевезення вантажу зі Львова до Кракова. Завантаження сьогодні о 10:00. Просимо підтвердити автомобіль та орієнтовний час доставки."
+  },
+
+
+  {
+    id: "REQ-EMAIL-002",
+    source: "email",
+    sourceLabel: "Email",
+    time: "09:48",
+    unread: true,
+    isMain: false,
+
+    client: "NordPack",
+    contact: "Марія Савчук",
+    contactLine: "orders@nordpack.ua",
+
+    title: "Львів → Варшава · 27.08",
+    preview: "18 палет · 7 600 кг · тент",
+
+    origin: "Львів",
+    destination: "Варшава",
+
+    pickup: "27.08 · 08:30",
+    delivery: "28.08 · до 17:00",
+
+    cargo: "Пакувальні матеріали",
+    pallets: 18,
+    weightKg: 7600,
+    vehicleType: "Тент",
+
+    message:
+      "Добрий день. Потрібна машина Львів — Варшава на завтра. 18 палет пакувальних матеріалів. Завантаження бажано до 09:00."
+  },
+
+
+  {
+    id: "REQ-EMAIL-003",
+    source: "email",
+    sourceLabel: "Email",
+    time: "09:55",
+    unread: true,
+    isMain: false,
+
+    client: "Galicia Foods",
+    contact: "Олег Коваль",
+    contactLine: "transport@galiciafoods.ua",
+
+    title: "Львів → Люблін · 26.08",
+    preview: "16 палет · 9 200 кг · рефрижератор",
+
+    origin: "Львів",
+    destination: "Люблін",
+
+    pickup: "26.08 · 16:00",
+    delivery: "27.08 · до 12:00",
+
+    cargo: "Продукти харчування",
+    pallets: 16,
+    weightKg: 9200,
+    vehicleType: "Рефрижератор",
+
+    message:
+      "Просимо підтвердити рефрижератор на сьогодні. Температурний режим +4°C. Доставка до Любліна завтра до обіду."
+  },
+
+
+  {
+    id: "REQ-PHONE-001",
+    source: "phone",
+    sourceLabel: "Телефон",
+    time: "09:49",
+    unread: true,
+    isMain: false,
+
+    client: "FreshLine Distribution",
+    contact: "Андрій Левицький",
+    contactLine: "+380 67 351 42 18",
+
+    title: "Вхідний дзвінок · FreshLine",
+    preview: "Тернопіль → Краків · 8 200 кг",
+
+    origin: "Тернопіль",
+    destination: "Краків",
+
+    pickup: "26.08 · 14:00",
+    delivery: "27.08 · до 09:00",
+
+    cargo: "Продукти харчування",
+    pallets: 14,
+    weightKg: 8200,
+    vehicleType: "Рефрижератор",
+
+    message:
+      "Менеджер зафіксував зі слів клієнта: потрібен рефрижератор із Тернополя до Кракова. Забрати сьогодні після 14:00. Вага приблизно 8,2 т."
+  },
+
+
+  {
+    id: "REQ-PHONE-002",
+    source: "phone",
+    sourceLabel: "Телефон",
+    time: "10:01",
+    unread: true,
+    isMain: false,
+
+    client: "UA Glass",
+    contact: "Тарас Козак",
+    contactLine: "+380 50 618 37 90",
+
+    title: "Вхідний дзвінок · UA Glass",
+    preview: "Київ → Краків · скло · 14 300 кг",
+
+    origin: "Київ",
+    destination: "Краків",
+
+    pickup: "27.08 · 07:00",
+    delivery: "28.08 · до 15:00",
+
+    cargo: "Скляна продукція",
+    pallets: 20,
+    weightKg: 14300,
+    vehicleType: "Тент",
+
+    message:
+      "Клієнту потрібен автомобіль для перевезення скла Київ — Краків. Обов'язкове надійне кріплення вантажу. Завантаження завтра зранку."
+  },
+
+
+  {
+    id: "REQ-MSG-001",
+    source: "messenger",
+    sourceLabel: "Viber",
+    time: "09:53",
+    unread: true,
+    isMain: false,
+
+    client: "BuildWest",
+    contact: "Ігор Павлюк",
+    contactLine: "Viber",
+
+    title: "BuildWest · Viber",
+    preview: "Львів → Катовіце · 11 400 кг",
+
+    origin: "Львів",
+    destination: "Катовіце",
+
+    pickup: "27.08 · 11:00",
+    delivery: "28.08 · до 14:00",
+
+    cargo: "Будівельні матеріали",
+    pallets: 20,
+    weightKg: 11400,
+    vehicleType: "Тент",
+
+    chat: [
+      {
+        side: "client",
+        text: "Добрий день. Є машина на Катовіце?"
+      },
+      {
+        side: "dispatcher",
+        text: "На яку дату потрібне завантаження?"
+      },
+      {
+        side: "client",
+        text: "Завтра об 11:00. Будматеріали, 11,4 т, тент."
+      }
+    ]
+  },
+
+
+  {
+    id: "REQ-MSG-002",
+    source: "messenger",
+    sourceLabel: "Telegram",
+    time: "10:06",
+    unread: true,
+    isMain: false,
+
+    client: "ProMebel",
+    contact: "Сергій Ткачук",
+    contactLine: "Telegram",
+
+    title: "ProMebel · Telegram",
+    preview: "Івано-Франківськ → Кошице · 14 палет",
+
+    origin: "Івано-Франківськ",
+    destination: "Кошице",
+
+    pickup: "27.08 · 09:00",
+    delivery: "27.08 · до 19:00",
+
+    cargo: "Меблі",
+    pallets: 14,
+    weightKg: 6100,
+    vehicleType: "Тент",
+
+    chat: [
+      {
+        side: "client",
+        text: "Потрібне авто на Кошице завтра."
+      },
+      {
+        side: "client",
+        text: "14 палет меблів, близько 6 тонн."
+      },
+      {
+        side: "dispatcher",
+        text: "Прийнято. Перевіряємо доступний транспорт."
+      }
+    ]
+  },
+
+
+  {
+    id: "REQ-MSG-003",
+    source: "messenger",
+    sourceLabel: "WhatsApp",
+    time: "10:11",
+    unread: true,
+    isMain: false,
+
+    client: "AquaTrade",
+    contact: "Юлія Семенюк",
+    contactLine: "WhatsApp",
+
+    title: "AquaTrade · WhatsApp",
+    preview: "Львів → Жешув · 21 палета",
+
+    origin: "Львів",
+    destination: "Жешув",
+
+    pickup: "26.08 · 18:30",
+    delivery: "27.08 · до 08:00",
+
+    cargo: "Напої",
+    pallets: 21,
+    weightKg: 15800,
+    vehicleType: "Тент",
+
+    chat: [
+      {
+        side: "client",
+        text: "Чи можете сьогодні забрати 21 палету на Жешув?"
+      },
+      {
+        side: "dispatcher",
+        text: "Так, перевіряємо машину."
+      },
+      {
+        side: "client",
+        text: "Вага 15,8 т. Завантаження після 18:30."
+      }
+    ]
+  },
+
+
+  {
+    id: "REQ-MSG-004",
+    source: "messenger",
+    sourceLabel: "Viber",
+    time: "10:18",
+    unread: true,
+    isMain: false,
+
+    client: "Carpathian Furniture",
+    contact: "Роман Гнатюк",
+    contactLine: "Viber",
+
+    title: "Carpathian Furniture · Viber",
+    preview: "Львів → Вроцлав · 18 палет",
+
+    origin: "Львів",
+    destination: "Вроцлав",
+
+    pickup: "28.08 · 08:00",
+    delivery: "29.08 · до 18:00",
+
+    cargo: "Меблі",
+    pallets: 18,
+    weightKg: 7900,
+    vehicleType: "Мега",
+
+    chat: [
+      {
+        side: "client",
+        text: "Романе, потрібна мега на Вроцлав."
+      },
+      {
+        side: "dispatcher",
+        text: "Коли завантаження?"
+      },
+      {
+        side: "client",
+        text: "28-го зранку. 18 палет."
+      }
+    ]
+  },
+
+
+  {
+    id: "REQ-EX-001",
+    source: "exchange",
+    sourceLabel: "Lardi-Trans",
+    time: "09:51",
+    unread: true,
+    isMain: false,
+
+    client: "MetalPro Sp. z o.o.",
+    contact: "Krzysztof Nowak",
+    contactLine: "Lardi-Trans",
+
+    title: "Жешув → Львів",
+    preview: "Тент · 20 палет · €940",
+
+    origin: "Жешув",
+    destination: "Львів",
+
+    pickup: "27.08 · 08:00",
+    delivery: "27.08 · до 19:00",
+
+    cargo: "Промислове обладнання",
+    pallets: 20,
+    weightKg: 13600,
+    vehicleType: "Тент",
+
+    rate: "€940",
+
+    message:
+      "Вантаж доступний з 08:00. 20 палет. Повне завантаження. Оплата 14 днів."
+  },
+
+
+  {
+    id: "REQ-EX-002",
+    source: "exchange",
+    sourceLabel: "DELLA",
+    time: "10:04",
+    unread: true,
+    isMain: false,
+
+    client: "Cargo Polska",
+    contact: "Michał Wójcik",
+    contactLine: "DELLA",
+
+    title: "Варшава → Львів",
+    preview: "Збірний вантаж · €620",
+
+    origin: "Варшава",
+    destination: "Львів",
+
+    pickup: "27.08 · 12:00",
+    delivery: "28.08 · до 12:00",
+
+    cargo: "Збірний вантаж",
+    pallets: 6,
+    weightKg: 2900,
+    vehicleType: "Фургон",
+
+    rate: "€620",
+
+    message:
+      "Шість палет збірного вантажу. Можливе дозавантаження. Документи готові."
+  },
+
+
+  {
+    id: "REQ-EX-003",
+    source: "exchange",
+    sourceLabel: "Lardi-Trans",
+    time: "10:12",
+    unread: true,
+    isMain: false,
+
+    client: "EcoPack PL",
+    contact: "Tomasz Lis",
+    contactLine: "Lardi-Trans",
+
+    title: "Краків → Київ",
+    preview: "Тент · 9 800 кг · €1 360",
+
+    origin: "Краків",
+    destination: "Київ",
+
+    pickup: "28.08 · 06:00",
+    delivery: "29.08 · до 18:00",
+
+    cargo: "Пакувальні матеріали",
+    pallets: 22,
+    weightKg: 9800,
+    vehicleType: "Тент",
+
+    rate: "€1 360",
+
+    message:
+      "Завантаження Краків. Митні документи на стороні відправника. Потрібен стандартний тент."
+  },
+
+
+  {
+    id: "REQ-EX-004",
+    source: "exchange",
+    sourceLabel: "DELLA",
+    time: "10:16",
+    unread: true,
+    isMain: false,
+
+    client: "Slovak Industry",
+    contact: "Martin Kováč",
+    contactLine: "DELLA",
+
+    title: "Кошице → Ужгород",
+    preview: "Тент · 12 палет · €480",
+
+    origin: "Кошице",
+    destination: "Ужгород",
+
+    pickup: "27.08 · 15:00",
+    delivery: "27.08 · до 22:00",
+
+    cargo: "Промислове обладнання",
+    pallets: 12,
+    weightKg: 6800,
+    vehicleType: "Тент",
+
+    rate: "€480",
+
+    message:
+      "Короткий міжнародний рейс. Завантаження після 15:00. Без ADR."
+  },
+
+
+  {
+    id: "REQ-EX-005",
+    source: "exchange",
+    sourceLabel: "Lardi-Trans",
+    time: "10:21",
+    unread: true,
+    isMain: false,
+
+    client: "Danube Trade",
+    contact: "Péter Nagy",
+    contactLine: "Lardi-Trans",
+
+    title: "Будапешт → Львів",
+    preview: "Мега · 18 палет · €1 050",
+
+    origin: "Будапешт",
+    destination: "Львів",
+
+    pickup: "28.08 · 07:00",
+    delivery: "29.08 · до 12:00",
+
+    cargo: "Текстиль",
+    pallets: 18,
+    weightKg: 7400,
+    vehicleType: "Мега",
+
+    rate: "€1 050",
+
+    message:
+      "Легкий об'ємний вантаж. Потрібна mega. Готовність 28 серпня з 07:00."
+  },
+
+
+  {
+    id: "REQ-EX-006",
+    source: "exchange",
+    sourceLabel: "DELLA",
+    time: "10:24",
+    unread: true,
+    isMain: false,
+
+    client: "Baltic Home",
+    contact: "Katarzyna Wójcik",
+    contactLine: "DELLA",
+
+    title: "Люблін → Львів",
+    preview: "Тент · 16 палет · €710",
+
+    origin: "Люблін",
+    destination: "Львів",
+
+    pickup: "27.08 · 17:00",
+    delivery: "28.08 · до 09:00",
+
+    cargo: "Меблі",
+    pallets: 16,
+    weightKg: 7200,
+    vehicleType: "Тент",
+
+    rate: "€710",
+
+    message:
+      "Меблі в упаковці. Бокове завантаження бажане. CMR на місці."
+  }
+
+];
+
+
+C12.inboxSourceConfig = {
+
+  email: {
+    label: "Email",
+    icon: "✉",
+    empty: "Нових листів немає"
+  },
+
+  phone: {
+    label: "Телефон",
+    icon: "☎",
+    empty: "Нових телефонних звернень немає"
+  },
+
+  messenger: {
+    label: "Месенджери",
+    icon: "●",
+    empty: "Нових повідомлень немає"
+  },
+
+  exchange: {
+    label: "Транспортні біржі",
+    icon: "⇄",
+    empty: "Нових пропозицій немає"
+  }
+
+};
+
+
+C12.getInboxRequests = function (
+  source
+) {
+  return C12.inboxRequests
+    .filter(
+      item =>
+        item.source === source &&
+        item.unread !== false
+    );
+};
+
+
+C12.getInboxRequest = function (
+  id
+) {
+  return C12.inboxRequests
+    .find(
+      item =>
+        item.id === id
+    ) || null;
+};
+
+
+C12.getInboxCounts = function () {
+
+  const counts = {
+    email: 0,
+    phone: 0,
+    messenger: 0,
+    exchange: 0,
+    total: 0
+  };
+
+  C12.inboxRequests
+    .filter(
+      item =>
+        item.unread !== false
+    )
+    .forEach(
+      item => {
+        if (
+          Object.prototype
+            .hasOwnProperty.call(
+              counts,
+              item.source
+            )
+        ) {
+          counts[
+            item.source
+          ] += 1;
+
+          counts.total += 1;
+        }
+      }
+    );
+
+  return counts;
+};
 
   /* ============================================================
      PLANNING QUEUE

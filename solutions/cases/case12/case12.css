@@ -6962,3 +6962,38 @@ button:first-child {
 .case-detail-stage__body.c12-body .c12-before-after {
   padding-top: 28px !important;
 }
+
+/* =========================================================
+   TIME MACHINE — READABILITY
+========================================================= */
+
+.case-detail-stage__body.c12-body .c12-time-machine__header strong {
+  font-size: 15px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-time-machine .c12-panel__eyebrow {
+  font-size: 10px !important;
+  letter-spacing: 0.12em !important;
+}
+
+.case-detail-stage__body.c12-body .c12-time-machine__hint {
+  font-size: 10px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-time-machine__date {
+  font-size: 10px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-time-range__events span {
+  font-size: 9px !important;
+  font-weight: 800 !important;
+}
+
+.case-detail-stage__body.c12-body .c12-time-machine__stats {
+  font-size: 10px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-time-machine__stats strong {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}

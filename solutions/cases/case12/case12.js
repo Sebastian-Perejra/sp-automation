@@ -1125,37 +1125,24 @@ async function createMainOrder() {
             .driverAction(
               "loaded"
             );
-
+      
         if (
           !result.success
         ) {
           return;
         }
-
+      
         C12.ui.addAutomationBatch(
           C12.automationTemplates
             .cargoLoaded
         );
-
+      
         C12.ui.showToast(
           "Вантаж завантажено",
-          "12 палет · 4 800 кг.",
+          "12 палет · 4 800 кг. Можна вирушати до клієнта.",
           "success"
         );
-
-        await sleep(700);
-
-        C12.simulation
-          .driverAction(
-            "transit"
-          );
-
-        C12.ui.showToast(
-          "Вантаж у дорозі",
-          "ETA: 28 серпня · 14:00.",
-          "info"
-        );
-
+      
         break;
       }
 

@@ -2450,76 +2450,98 @@ else {
      DRIVER BUTTONS
   ============================================================ */
 
-  function updateDriverActions(
-    snapshot
-  ) {
-    const buttons =
-      $$(
-        "[data-driver-action]"
-      );
-
-    buttons.forEach(
-      button => {
-        button.disabled =
-          true;
-      }
+function updateDriverActions(
+  snapshot
+) {
+  const buttons =
+    $$(
+      "[data-driver-action]"
     );
 
-    const position =
-      snapshot.position;
-
-    const enable = action => {
-      const button =
-        $(
-          `[data-driver-action="${action}"]`
-        );
-
-      if (button) {
-        button.disabled =
-          false;
-      }
-    };
-
-    if (
-      position >= 24 &&
-      position < 39
-    ) {
-      enable(
-        "start"
-      );
-
-      enable(
-        "arrived"
-      );
+  buttons.forEach(
+    button => {
+      button.disabled =
+        true;
     }
+  );
 
-    if (
-      position >= 39 &&
-      position < 48
-    ) {
-      enable(
-        "loaded"
+  const enable = action => {
+    const button =
+      $(
+        `[data-driver-action="${action}"]`
       );
-    }
 
-    if (
-      position >= 48 &&
-      position < 65
-    ) {
-      enable(
-        "delay"
-      );
+    if (button) {
+      button.disabled =
+        false;
     }
+  };
 
-    if (
-      position >= 65 &&
-      position < 92
-    ) {
-      enable(
-        "delivered"
-      );
-    }
+
+  if (
+    C12.state.delivered
+  ) {
+    return;
   }
+
+
+  if (
+    !C12.state.tripStarted
+  ) {
+    enable(
+      "start"
+    );
+
+    return;
+  }
+
+
+  if (
+    !C12.state.arrivedLoading
+  ) {
+    enable(
+      "arrived"
+    );
+
+    return;
+  }
+
+
+  if (
+    !C12.state.cargoLoaded
+  ) {
+    enable(
+      "loaded"
+    );
+
+    return;
+  }
+
+
+  if (
+    !C12.state.inTransit
+  ) {
+    enable(
+      "transit"
+    );
+
+    return;
+  }
+
+
+  if (
+    !C12.state.delayReported
+  ) {
+    enable(
+      "delay"
+    );
+  }
+
+
+  enable(
+    "delivered"
+  );
+}
 
 
   /* ============================================================

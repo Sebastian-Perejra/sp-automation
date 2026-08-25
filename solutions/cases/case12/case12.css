@@ -5790,3 +5790,19 @@ button.c12-kpi-card:hover {
   font-size: 9px;
   line-height: 1.45;
 }
+
+.case-detail-stage__body.c12-body {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.case-detail-stage__body.c12-body .c12-shell {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.case-detail-stage__body.c12-body .c12-scene--intro {
+  min-height: 0 !important;
+  height: auto !important;
+  padding-bottom: 18px !important;
+}

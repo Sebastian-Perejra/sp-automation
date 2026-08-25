@@ -2207,7 +2207,7 @@ box-shadow:
 }
 
 .case-result-card__why {
-  margin-top: auto;
+  margin-top: 0;
   padding-top: 24px;
 }
 
@@ -10732,7 +10732,7 @@ box-shadow:
     "icon text";
   column-gap: 12px;
   row-gap: 4px;
-  margin: 16px 0 18px;
+  margin: auto 0 18px;
   padding: 14px 15px;
   overflow: hidden;
   border: 1px solid rgba(190, 255, 74, 0.42);

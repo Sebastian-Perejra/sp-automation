@@ -2048,174 +2048,957 @@ else {
   ============================================================ */
 
   function renderMapRoutes() {
-    const container =
-      $(
-        "[data-map-routes]"
-      );
-
-    if (!container) {
-      return;
-    }
-
-    const svgNS =
-      "http://www.w3.org/2000/svg";
-
-    const svg =
-      document.createElementNS(
-        svgNS,
-        "svg"
-      );
-
-    svg.setAttribute(
-      "viewBox",
-      "0 0 100 100"
+  const container =
+    $(
+      "[data-map-routes]"
     );
 
-    svg.setAttribute(
-      "preserveAspectRatio",
-      "none"
-    );
-
-    svg.classList.add(
-      "c12-map-svg"
-    );
-
-    C12.mapRoutes.forEach(
-      (route, index) => {
-        const from =
-          C12.data.getLocation(
-            route.from
-          );
-
-        const to =
-          C12.data.getLocation(
-            route.to
-          );
-
-        if (
-          !from ||
-          !to
-        ) {
-          return;
-        }
-
-        const path =
-          document.createElementNS(
-            svgNS,
-            "path"
-          );
-
-        const midX =
-          (
-            from.x +
-            to.x
-          ) / 2;
-
-        const midY =
-          Math.min(
-            from.y,
-            to.y
-          ) -
-          5 -
-          (
-            index % 3
-          ) *
-          2;
-
-        path.setAttribute(
-          "d",
-          [
-            `M ${from.x} ${from.y}`,
-            `Q ${midX} ${midY}`,
-            `${to.x} ${to.y}`
-          ].join(" ")
-        );
-
-        path.setAttribute(
-          "class",
-          [
-            "c12-map-route",
-            route.status ===
-            "attention"
-              ? "is-warning"
-              : "",
-            route.orderId ===
-            C12.mainOrder.id
-              ? "is-main"
-              : ""
-          ].join(" ")
-        );
-
-        path.setAttribute(
-          "data-map-order",
-          route.orderId
-        );
-
-        svg.appendChild(
-          path
-        );
-
-        const truck =
-          document.createElementNS(
-            svgNS,
-            "circle"
-          );
-
-        truck.setAttribute(
-          "cx",
-          String(
-            from.x +
-            (
-              to.x -
-              from.x
-            ) *
-            0.52
-          )
-        );
-
-        truck.setAttribute(
-          "cy",
-          String(
-            from.y +
-            (
-              to.y -
-              from.y
-            ) *
-            0.52 -
-            2
-          )
-        );
-
-        truck.setAttribute(
-          "r",
-          route.orderId ===
-          C12.mainOrder.id
-            ? "1.7"
-            : "1.1"
-        );
-
-        truck.setAttribute(
-          "class",
-          route.orderId ===
-          C12.mainOrder.id
-            ? "c12-map-truck is-main"
-            : "c12-map-truck"
-        );
-
-        svg.appendChild(
-          truck
-        );
-      }
-    );
-
-    container.innerHTML =
-      "";
-
-    container.appendChild(
-      svg
-    );
+  if (!container) {
+    return;
   }
 
+  const svgNS =
+    "http://www.w3.org/2000/svg";
+
+  const width =
+    760;
+
+  const height =
+    520;
+
+  const bounds = {
+    minLon: 13.5,
+    maxLon: 32.5,
+    minLat: 43.4,
+    maxLat: 55.3
+  };
+
+  const project = (
+    lon,
+    lat
+  ) => {
+    const x =
+      (
+        (
+          lon -
+          bounds.minLon
+        ) /
+        (
+          bounds.maxLon -
+          bounds.minLon
+        )
+      ) *
+      width;
+
+    const y =
+      (
+        (
+          bounds.maxLat -
+          lat
+        ) /
+        (
+          bounds.maxLat -
+          bounds.minLat
+        )
+      ) *
+      height;
+
+    return {
+      x,
+      y
+    };
+  };
+
+  const cities = {
+    "Львів": {
+      lon: 24.0316,
+      lat: 49.8429,
+      dx: 12,
+      dy: -12
+    },
+
+    "Київ": {
+      lon: 30.5234,
+      lat: 50.4501,
+      dx: -8,
+      dy: -13
+    },
+
+    "Краків": {
+      lon: 19.945,
+      lat: 50.0647,
+      dx: -10,
+      dy: -13
+    },
+
+    "Варшава": {
+      lon: 21.0122,
+      lat: 52.2297,
+      dx: 10,
+      dy: -12
+    },
+
+    "Катовіце": {
+      lon: 19.0238,
+      lat: 50.2649,
+      dx: -12,
+      dy: 17
+    },
+
+    "Будапешт": {
+      lon: 19.0402,
+      lat: 47.4979,
+      dx: -12,
+      dy: 19
+    },
+
+    "Бухарест": {
+      lon: 26.1025,
+      lat: 44.4268,
+      dx: 12,
+      dy: -10
+    },
+
+    "Чернівці": {
+      lon: 25.9358,
+      lat: 48.2915,
+      dx: 11,
+      dy: 17
+    },
+
+    "Ужгород": {
+      lon: 22.2879,
+      lat: 48.6208,
+      dx: -12,
+      dy: 18
+    },
+
+    "Кошице": {
+      lon: 21.2611,
+      lat: 48.7164,
+      dx: -10,
+      dy: -13
+    },
+
+    "Івано-Франківськ": {
+      lon: 24.7111,
+      lat: 48.9226,
+      dx: 10,
+      dy: 18
+    }
+  };
+
+  const countries = [
+    {
+      name:
+        "ПОЛЬЩА",
+
+      points: [
+        [14.15, 54.15],
+        [16.7, 54.55],
+        [18.8, 54.85],
+        [21.4, 54.35],
+        [23.8, 53.75],
+        [24.1, 51.0],
+        [22.7, 49.05],
+        [19.1, 49.0],
+        [16.1, 50.25],
+        [14.15, 51.0]
+      ],
+
+      label:
+        [18.2, 52.1]
+    },
+
+    {
+      name:
+        "УКРАЇНА",
+
+      points: [
+        [22.2, 51.15],
+        [24.1, 52.15],
+        [27.2, 52.25],
+        [30.5, 51.65],
+        [32.1, 50.4],
+        [32.35, 48.8],
+        [30.2, 47.7],
+        [27.3, 47.7],
+        [25.4, 47.65],
+        [23.3, 48.25],
+        [22.15, 49.4]
+      ],
+
+      label:
+        [27.7, 50.2]
+    },
+
+    {
+      name:
+        "СЛОВАЧЧИНА",
+
+      points: [
+        [16.85, 49.5],
+        [19.2, 49.55],
+        [22.5, 49.15],
+        [22.35, 48.35],
+        [20.4, 47.7],
+        [17.05, 48.05]
+      ],
+
+      label:
+        [19.2, 48.65]
+    },
+
+    {
+      name:
+        "УГОРЩИНА",
+
+      points: [
+        [16.15, 48.55],
+        [18.4, 48.25],
+        [21.2, 48.5],
+        [22.85, 48.2],
+        [22.45, 46.95],
+        [20.3, 46.0],
+        [17.0, 46.1]
+      ],
+
+      label:
+        [19.4, 47.15]
+    },
+
+    {
+      name:
+        "РУМУНІЯ",
+
+      points: [
+        [20.35, 47.75],
+        [22.7, 48.15],
+        [25.6, 47.9],
+        [27.5, 47.15],
+        [29.65, 45.05],
+        [28.3, 43.75],
+        [25.1, 43.65],
+        [22.35, 44.15],
+        [20.35, 46.05]
+      ],
+
+      label:
+        [25.0, 45.8]
+    },
+
+    {
+      name:
+        "ЧЕХІЯ",
+
+      points: [
+        [13.6, 50.45],
+        [15.0, 51.0],
+        [16.8, 50.65],
+        [18.8, 49.55],
+        [16.85, 48.55],
+        [14.1, 48.7],
+        [13.55, 49.35]
+      ],
+
+      label:
+        [15.5, 49.7]
+    }
+  ];
+
+  const svg =
+    document.createElementNS(
+      svgNS,
+      "svg"
+    );
+
+  svg.setAttribute(
+    "viewBox",
+    `0 0 ${width} ${height}`
+  );
+
+  svg.setAttribute(
+    "preserveAspectRatio",
+    "xMidYMid meet"
+  );
+
+  svg.setAttribute(
+    "role",
+    "img"
+  );
+
+  svg.setAttribute(
+    "aria-label",
+    "Карта поточних перевезень Центральної та Східної Європи"
+  );
+
+  svg.classList.add(
+    "c12-real-map-svg"
+  );
+
+
+  const background =
+    document.createElementNS(
+      svgNS,
+      "rect"
+    );
+
+  background.setAttribute(
+    "x",
+    "0"
+  );
+
+  background.setAttribute(
+    "y",
+    "0"
+  );
+
+  background.setAttribute(
+    "width",
+    String(width)
+  );
+
+  background.setAttribute(
+    "height",
+    String(height)
+  );
+
+  background.setAttribute(
+    "class",
+    "c12-real-map-background"
+  );
+
+  svg.appendChild(
+    background
+  );
+
+
+  const countryGroup =
+    document.createElementNS(
+      svgNS,
+      "g"
+    );
+
+  countryGroup.setAttribute(
+    "class",
+    "c12-real-map-countries"
+  );
+
+  countries.forEach(
+    country => {
+      const polygon =
+        document.createElementNS(
+          svgNS,
+          "polygon"
+        );
+
+      polygon.setAttribute(
+        "points",
+        country.points
+          .map(
+            point => {
+              const projected =
+                project(
+                  point[0],
+                  point[1]
+                );
+
+              return (
+                `${projected.x},${projected.y}`
+              );
+            }
+          )
+          .join(" ")
+      );
+
+      polygon.setAttribute(
+        "class",
+        "c12-real-map-country"
+      );
+
+      countryGroup.appendChild(
+        polygon
+      );
+
+
+      const labelPoint =
+        project(
+          country.label[0],
+          country.label[1]
+        );
+
+      const label =
+        document.createElementNS(
+          svgNS,
+          "text"
+        );
+
+      label.setAttribute(
+        "x",
+        String(
+          labelPoint.x
+        )
+      );
+
+      label.setAttribute(
+        "y",
+        String(
+          labelPoint.y
+        )
+      );
+
+      label.setAttribute(
+        "class",
+        "c12-real-map-country-label"
+      );
+
+      label.textContent =
+        country.name;
+
+      countryGroup.appendChild(
+        label
+      );
+    }
+  );
+
+  svg.appendChild(
+    countryGroup
+  );
+
+
+  const routeGroup =
+    document.createElementNS(
+      svgNS,
+      "g"
+    );
+
+  routeGroup.setAttribute(
+    "class",
+    "c12-real-map-routes"
+  );
+
+
+  C12.mapRoutes.forEach(
+    (
+      route,
+      index
+    ) => {
+      const from =
+        cities[
+          route.from
+        ];
+
+      const to =
+        cities[
+          route.to
+        ];
+
+      if (
+        !from ||
+        !to
+      ) {
+        return;
+      }
+
+      const start =
+        project(
+          from.lon,
+          from.lat
+        );
+
+      const end =
+        project(
+          to.lon,
+          to.lat
+        );
+
+      const dx =
+        end.x -
+        start.x;
+
+      const dy =
+        end.y -
+        start.y;
+
+      const length =
+        Math.max(
+          1,
+          Math.sqrt(
+            dx * dx +
+            dy * dy
+          )
+        );
+
+      const nx =
+        -dy /
+        length;
+
+      const ny =
+        dx /
+        length;
+
+      const direction =
+        route.from <
+        route.to
+          ? 1
+          : -1;
+
+      const curve =
+        (
+          11 +
+          (
+            index %
+            3
+          ) *
+          4
+        ) *
+        direction;
+
+      const controlX =
+        (
+          start.x +
+          end.x
+        ) /
+        2 +
+        nx *
+        curve;
+
+      const controlY =
+        (
+          start.y +
+          end.y
+        ) /
+        2 +
+        ny *
+        curve;
+
+      const path =
+        document.createElementNS(
+          svgNS,
+          "path"
+        );
+
+      path.setAttribute(
+        "d",
+        [
+          `M ${start.x} ${start.y}`,
+          `Q ${controlX} ${controlY}`,
+          `${end.x} ${end.y}`
+        ].join(" ")
+      );
+
+      path.setAttribute(
+        "class",
+        [
+          "c12-real-map-route",
+
+          route.status ===
+          "attention"
+            ? "is-warning"
+            : "",
+
+          route.orderId ===
+          C12.mainOrder.id
+            ? "is-main"
+            : ""
+        ]
+          .filter(Boolean)
+          .join(" ")
+      );
+
+      path.setAttribute(
+        "data-map-order",
+        route.orderId
+      );
+
+      const title =
+        document.createElementNS(
+          svgNS,
+          "title"
+        );
+
+      title.textContent =
+        `${route.orderId}: ${route.from} → ${route.to}`;
+
+      path.appendChild(
+        title
+      );
+
+      routeGroup.appendChild(
+        path
+      );
+
+
+      const t =
+        0.54;
+
+      const mt =
+        1 -
+        t;
+
+      const truckX =
+        mt *
+        mt *
+        start.x +
+        2 *
+        mt *
+        t *
+        controlX +
+        t *
+        t *
+        end.x;
+
+      const truckY =
+        mt *
+        mt *
+        start.y +
+        2 *
+        mt *
+        t *
+        controlY +
+        t *
+        t *
+        end.y;
+
+      const truck =
+        document.createElementNS(
+          svgNS,
+          "g"
+        );
+
+      truck.setAttribute(
+        "class",
+        [
+          "c12-real-map-truck",
+
+          route.status ===
+          "attention"
+            ? "is-warning"
+            : "",
+
+          route.orderId ===
+          C12.mainOrder.id
+            ? "is-main"
+            : ""
+        ]
+          .filter(Boolean)
+          .join(" ")
+      );
+
+      truck.setAttribute(
+        "transform",
+        `translate(${truckX} ${truckY})`
+      );
+
+
+      const halo =
+        document.createElementNS(
+          svgNS,
+          "circle"
+        );
+
+      halo.setAttribute(
+        "r",
+        route.orderId ===
+        C12.mainOrder.id
+          ? "8"
+          : "6"
+      );
+
+      halo.setAttribute(
+        "class",
+        "c12-real-map-truck-halo"
+      );
+
+      truck.appendChild(
+        halo
+      );
+
+
+      const dot =
+        document.createElementNS(
+          svgNS,
+          "circle"
+        );
+
+      dot.setAttribute(
+        "r",
+        route.orderId ===
+        C12.mainOrder.id
+          ? "4"
+          : "3"
+      );
+
+      dot.setAttribute(
+        "class",
+        "c12-real-map-truck-dot"
+      );
+
+      truck.appendChild(
+        dot
+      );
+
+      routeGroup.appendChild(
+        truck
+      );
+    }
+  );
+
+
+  svg.appendChild(
+    routeGroup
+  );
+
+
+  const usedCities =
+    new Set();
+
+  C12.mapRoutes.forEach(
+    route => {
+      usedCities.add(
+        route.from
+      );
+
+      usedCities.add(
+        route.to
+      );
+    }
+  );
+
+
+  const cityGroup =
+    document.createElementNS(
+      svgNS,
+      "g"
+    );
+
+  cityGroup.setAttribute(
+    "class",
+    "c12-real-map-cities"
+  );
+
+
+  usedCities.forEach(
+    cityName => {
+      const city =
+        cities[
+          cityName
+        ];
+
+      if (!city) {
+        return;
+      }
+
+      const point =
+        project(
+          city.lon,
+          city.lat
+        );
+
+      const marker =
+        document.createElementNS(
+          svgNS,
+          "circle"
+        );
+
+      marker.setAttribute(
+        "cx",
+        String(
+          point.x
+        )
+      );
+
+      marker.setAttribute(
+        "cy",
+        String(
+          point.y
+        )
+      );
+
+      marker.setAttribute(
+        "r",
+        cityName ===
+        "Львів"
+          ? "5"
+          : "3.7"
+      );
+
+      marker.setAttribute(
+        "class",
+        cityName ===
+        "Львів"
+          ? "c12-real-map-city-dot is-hub"
+          : "c12-real-map-city-dot"
+      );
+
+      cityGroup.appendChild(
+        marker
+      );
+
+
+      const label =
+        document.createElementNS(
+          svgNS,
+          "text"
+        );
+
+      label.setAttribute(
+        "x",
+        String(
+          point.x +
+          city.dx
+        )
+      );
+
+      label.setAttribute(
+        "y",
+        String(
+          point.y +
+          city.dy
+        )
+      );
+
+      label.setAttribute(
+        "class",
+        cityName ===
+        "Львів"
+          ? "c12-real-map-city-label is-hub"
+          : "c12-real-map-city-label"
+      );
+
+      label.textContent =
+        cityName;
+
+      cityGroup.appendChild(
+        label
+      );
+    }
+  );
+
+
+  svg.appendChild(
+    cityGroup
+  );
+
+
+  const legend =
+    document.createElementNS(
+      svgNS,
+      "g"
+    );
+
+  legend.setAttribute(
+    "class",
+    "c12-real-map-legend"
+  );
+
+  const legendItems = [
+    {
+      x: 28,
+      label:
+        "У рейсі",
+      className:
+        "is-transit"
+    },
+
+    {
+      x: 118,
+      label:
+        "Потребує уваги",
+      className:
+        "is-warning"
+    },
+
+    {
+      x: 257,
+      label:
+        "Головний рейс",
+      className:
+        "is-main"
+    }
+  ];
+
+  legendItems.forEach(
+    item => {
+      const circle =
+        document.createElementNS(
+          svgNS,
+          "circle"
+        );
+
+      circle.setAttribute(
+        "cx",
+        String(
+          item.x
+        )
+      );
+
+      circle.setAttribute(
+        "cy",
+        "495"
+      );
+
+      circle.setAttribute(
+        "r",
+        "4"
+      );
+
+      circle.setAttribute(
+        "class",
+        `c12-real-map-legend-dot ${item.className}`
+      );
+
+      legend.appendChild(
+        circle
+      );
+
+
+      const text =
+        document.createElementNS(
+          svgNS,
+          "text"
+        );
+
+      text.setAttribute(
+        "x",
+        String(
+          item.x +
+          10
+        )
+      );
+
+      text.setAttribute(
+        "y",
+        "499"
+      );
+
+      text.setAttribute(
+        "class",
+        "c12-real-map-legend-text"
+      );
+
+      text.textContent =
+        item.label;
+
+      legend.appendChild(
+        text
+      );
+    }
+  );
+
+
+  svg.appendChild(
+    legend
+  );
+
+
+  container.innerHTML =
+    "";
+
+  container.appendChild(
+    svg
+  );
+}
 
   /* ============================================================
      CUSTOMER MESSAGES

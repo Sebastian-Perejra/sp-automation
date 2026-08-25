@@ -6954,3 +6954,11 @@ button:first-child {
   background:
     #2f6f9f !important;
 }
+
+.case-detail-stage__body.c12-body .c12-underhood {
+  padding-bottom: 28px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-before-after {
+  padding-top: 28px !important;
+}

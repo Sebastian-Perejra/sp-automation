@@ -1264,4 +1264,50 @@
     init();
   }
 
+document.addEventListener(
+  "click",
+  event => {
+    const startButton =
+      event.target.closest(
+        "[data-start-story]"
+      );
+
+    if (!startButton) {
+      return;
+    }
+
+    window.setTimeout(
+      () => {
+        const feed =
+          document.querySelector(
+            "[data-automation-feed]"
+          );
+
+        if (feed) {
+          feed.classList.add(
+            "is-open"
+          );
+        }
+      },
+      300
+    );
+  }
+);
+
+document.addEventListener(
+  "c12:storyevent",
+  () => {
+    const feed =
+      document.querySelector(
+        "[data-automation-feed]"
+      );
+
+    if (feed) {
+      feed.classList.add(
+        "is-open"
+      );
+    }
+  }
+);
+  
 })();

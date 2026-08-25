@@ -2450,9 +2450,7 @@ else {
      DRIVER BUTTONS
   ============================================================ */
 
-function updateDriverActions(
-  snapshot
-) {
+function updateDriverActions() {
   const buttons =
     $$(
       "[data-driver-action]"
@@ -2477,17 +2475,13 @@ function updateDriverActions(
     }
   };
 
+  const step =
+    Number(
+      C12.state.driverStep ||
+      0
+    );
 
-  if (
-    C12.state.delivered
-  ) {
-    return;
-  }
-
-
-  if (
-    !C12.state.tripStarted
-  ) {
+  if (step === 0) {
     enable(
       "start"
     );
@@ -2495,10 +2489,7 @@ function updateDriverActions(
     return;
   }
 
-
-  if (
-    !C12.state.arrivedLoading
-  ) {
+  if (step === 1) {
     enable(
       "arrived"
     );
@@ -2506,10 +2497,7 @@ function updateDriverActions(
     return;
   }
 
-
-  if (
-    !C12.state.cargoLoaded
-  ) {
+  if (step === 2) {
     enable(
       "loaded"
     );
@@ -2517,10 +2505,7 @@ function updateDriverActions(
     return;
   }
 
-
-  if (
-    !C12.state.inTransit
-  ) {
+  if (step === 3) {
     enable(
       "transit"
     );
@@ -2528,19 +2513,21 @@ function updateDriverActions(
     return;
   }
 
+  if (step === 4) {
+    if (
+      !C12.state.delayReported
+    ) {
+      enable(
+        "delay"
+      );
+    }
 
-  if (
-    !C12.state.delayReported
-  ) {
     enable(
-      "delay"
+      "delivered"
     );
+
+    return;
   }
-
-
-  enable(
-    "delivered"
-  );
 }
 
 

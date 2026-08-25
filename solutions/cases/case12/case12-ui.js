@@ -2047,711 +2047,403 @@ else {
      MAP
   ============================================================ */
 
-  function renderMapRoutes() {
+ /* ============================================================
+   REAL OPERATIONS MAP
+============================================================ */
+
+let c12LeafletLoader = null;
+let c12OperationsMap = null;
+let c12OperationsMapBound = false;
+
+
+const c12MapLocations = {
+  "Львів": [
+    49.8397,
+    24.0297
+  ],
+
+  "Київ": [
+    50.4501,
+    30.5234
+  ],
+
+  "Варшава": [
+    52.2297,
+    21.0122
+  ],
+
+  "Краків": [
+    50.0647,
+    19.9450
+  ],
+
+  "Катовіце": [
+    50.2649,
+    19.0238
+  ],
+
+  "Будапешт": [
+    47.4979,
+    19.0402
+  ],
+
+  "Бухарест": [
+    44.4268,
+    26.1025
+  ],
+
+  "Чернівці": [
+    48.2915,
+    25.9358
+  ],
+
+  "Ужгород": [
+    48.6208,
+    22.2879
+  ],
+
+  "Кошице": [
+    48.7164,
+    21.2611
+  ],
+
+  "Івано-Франківськ": [
+    48.9226,
+    24.7111
+  ]
+};
+
+
+function ensureLeaflet() {
+  if (
+    window.L &&
+    typeof window.L.map ===
+      "function"
+  ) {
+    return Promise.resolve(
+      window.L
+    );
+  }
+
+
+  if (
+    c12LeafletLoader
+  ) {
+    return c12LeafletLoader;
+  }
+
+
+  c12LeafletLoader =
+    new Promise(
+      (
+        resolve,
+        reject
+      ) => {
+
+        if (
+          !document.getElementById(
+            "c12-leaflet-css"
+          )
+        ) {
+          const link =
+            document.createElement(
+              "link"
+            );
+
+          link.id =
+            "c12-leaflet-css";
+
+          link.rel =
+            "stylesheet";
+
+          link.href =
+            "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+
+          document.head.appendChild(
+            link
+          );
+        }
+
+
+        const existingScript =
+          document.getElementById(
+            "c12-leaflet-js"
+          );
+
+
+        if (existingScript) {
+          existingScript.addEventListener(
+            "load",
+            () => {
+              resolve(
+                window.L
+              );
+            },
+            {
+              once: true
+            }
+          );
+
+          existingScript.addEventListener(
+            "error",
+            reject,
+            {
+              once: true
+            }
+          );
+
+          return;
+        }
+
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        script.id =
+          "c12-leaflet-js";
+
+        script.src =
+          "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+
+        script.onload =
+          () => {
+            resolve(
+              window.L
+            );
+          };
+
+        script.onerror =
+          reject;
+
+        document.head.appendChild(
+          script
+        );
+      }
+    );
+
+
+  return c12LeafletLoader;
+}
+
+
+function getMapRouteStyle(
+  route
+) {
+  if (
+    route.orderId ===
+    C12.mainOrder.id
+  ) {
+    return {
+      color:
+        "#2f78ad",
+
+      weight:
+        4,
+
+      opacity:
+        0.95,
+
+      dashArray:
+        null
+    };
+  }
+
+
+  if (
+    route.status ===
+    "attention"
+  ) {
+    return {
+      color:
+        "#d28d28",
+
+      weight:
+        3.5,
+
+      opacity:
+        0.95,
+
+      dashArray:
+        "8 6"
+    };
+  }
+
+
+  return {
+    color:
+      "#4f8a62",
+
+    weight:
+      2.7,
+
+    opacity:
+      0.78,
+
+    dashArray:
+      null
+  };
+}
+
+
+function getPointOnRoute(
+  from,
+  to,
+  ratio
+) {
+  return [
+    from[0] +
+      (
+        to[0] -
+        from[0]
+      ) *
+      ratio,
+
+    from[1] +
+      (
+        to[1] -
+        from[1]
+      ) *
+      ratio
+  ];
+}
+
+
+function buildOperationsMap() {
   const container =
     $(
       "[data-map-routes]"
     );
 
-  if (!container) {
+
+  if (
+    !container ||
+    !window.L
+  ) {
     return;
   }
 
-  const svgNS =
-    "http://www.w3.org/2000/svg";
 
-  const width =
-    760;
+  if (
+    container.clientWidth <
+    80
+  ) {
+    return;
+  }
 
-  const height =
-    520;
 
-  const bounds = {
-    minLon: 13.5,
-    maxLon: 32.5,
-    minLat: 43.4,
-    maxLat: 55.3
-  };
-
-  const project = (
-    lon,
-    lat
-  ) => {
-    const x =
-      (
-        (
-          lon -
-          bounds.minLon
-        ) /
-        (
-          bounds.maxLon -
-          bounds.minLon
-        )
-      ) *
-      width;
-
-    const y =
-      (
-        (
-          bounds.maxLat -
-          lat
-        ) /
-        (
-          bounds.maxLat -
-          bounds.minLat
-        )
-      ) *
-      height;
-
-    return {
-      x,
-      y
-    };
-  };
-
-  const cities = {
-    "Львів": {
-      lon: 24.0316,
-      lat: 49.8429,
-      dx: 12,
-      dy: -12
-    },
-
-    "Київ": {
-      lon: 30.5234,
-      lat: 50.4501,
-      dx: -8,
-      dy: -13
-    },
-
-    "Краків": {
-      lon: 19.945,
-      lat: 50.0647,
-      dx: -10,
-      dy: -13
-    },
-
-    "Варшава": {
-      lon: 21.0122,
-      lat: 52.2297,
-      dx: 10,
-      dy: -12
-    },
-
-    "Катовіце": {
-      lon: 19.0238,
-      lat: 50.2649,
-      dx: -12,
-      dy: 17
-    },
-
-    "Будапешт": {
-      lon: 19.0402,
-      lat: 47.4979,
-      dx: -12,
-      dy: 19
-    },
-
-    "Бухарест": {
-      lon: 26.1025,
-      lat: 44.4268,
-      dx: 12,
-      dy: -10
-    },
-
-    "Чернівці": {
-      lon: 25.9358,
-      lat: 48.2915,
-      dx: 11,
-      dy: 17
-    },
-
-    "Ужгород": {
-      lon: 22.2879,
-      lat: 48.6208,
-      dx: -12,
-      dy: 18
-    },
-
-    "Кошице": {
-      lon: 21.2611,
-      lat: 48.7164,
-      dx: -10,
-      dy: -13
-    },
-
-    "Івано-Франківськ": {
-      lon: 24.7111,
-      lat: 48.9226,
-      dx: 10,
-      dy: 18
-    }
-  };
-
-  const countries = [
-    {
-      name:
-        "ПОЛЬЩА",
-
-      points: [
-        [14.15, 54.15],
-        [16.7, 54.55],
-        [18.8, 54.85],
-        [21.4, 54.35],
-        [23.8, 53.75],
-        [24.1, 51.0],
-        [22.7, 49.05],
-        [19.1, 49.0],
-        [16.1, 50.25],
-        [14.15, 51.0]
-      ],
-
-      label:
-        [18.2, 52.1]
-    },
-
-    {
-      name:
-        "УКРАЇНА",
-
-      points: [
-        [22.2, 51.15],
-        [24.1, 52.15],
-        [27.2, 52.25],
-        [30.5, 51.65],
-        [32.1, 50.4],
-        [32.35, 48.8],
-        [30.2, 47.7],
-        [27.3, 47.7],
-        [25.4, 47.65],
-        [23.3, 48.25],
-        [22.15, 49.4]
-      ],
-
-      label:
-        [27.7, 50.2]
-    },
-
-    {
-      name:
-        "СЛОВАЧЧИНА",
-
-      points: [
-        [16.85, 49.5],
-        [19.2, 49.55],
-        [22.5, 49.15],
-        [22.35, 48.35],
-        [20.4, 47.7],
-        [17.05, 48.05]
-      ],
-
-      label:
-        [19.2, 48.65]
-    },
-
-    {
-      name:
-        "УГОРЩИНА",
-
-      points: [
-        [16.15, 48.55],
-        [18.4, 48.25],
-        [21.2, 48.5],
-        [22.85, 48.2],
-        [22.45, 46.95],
-        [20.3, 46.0],
-        [17.0, 46.1]
-      ],
-
-      label:
-        [19.4, 47.15]
-    },
-
-    {
-      name:
-        "РУМУНІЯ",
-
-      points: [
-        [20.35, 47.75],
-        [22.7, 48.15],
-        [25.6, 47.9],
-        [27.5, 47.15],
-        [29.65, 45.05],
-        [28.3, 43.75],
-        [25.1, 43.65],
-        [22.35, 44.15],
-        [20.35, 46.05]
-      ],
-
-      label:
-        [25.0, 45.8]
-    },
-
-    {
-      name:
-        "ЧЕХІЯ",
-
-      points: [
-        [13.6, 50.45],
-        [15.0, 51.0],
-        [16.8, 50.65],
-        [18.8, 49.55],
-        [16.85, 48.55],
-        [14.1, 48.7],
-        [13.55, 49.35]
-      ],
-
-      label:
-        [15.5, 49.7]
-    }
-  ];
-
-  const svg =
-    document.createElementNS(
-      svgNS,
-      "svg"
+  if (
+    c12OperationsMap
+  ) {
+    window.setTimeout(
+      () => {
+        c12OperationsMap
+          .invalidateSize();
+      },
+      80
     );
 
-  svg.setAttribute(
-    "viewBox",
-    `0 0 ${width} ${height}`
-  );
+    return;
+  }
 
-  svg.setAttribute(
-    "preserveAspectRatio",
-    "xMidYMid meet"
-  );
 
-  svg.setAttribute(
-    "role",
-    "img"
-  );
+  container.innerHTML =
+    "";
 
-  svg.setAttribute(
-    "aria-label",
-    "Карта поточних перевезень Центральної та Східної Європи"
-  );
 
-  svg.classList.add(
-    "c12-real-map-svg"
+  container.classList.add(
+    "c12-leaflet-map"
   );
 
 
-  const background =
-    document.createElementNS(
-      svgNS,
-      "rect"
-    );
+  c12OperationsMap =
+    window.L.map(
+      container,
+      {
+        zoomControl:
+          false,
 
-  background.setAttribute(
-    "x",
-    "0"
-  );
+        attributionControl:
+          true,
 
-  background.setAttribute(
-    "y",
-    "0"
-  );
+        scrollWheelZoom:
+          false,
 
-  background.setAttribute(
-    "width",
-    String(width)
-  );
+        doubleClickZoom:
+          false,
 
-  background.setAttribute(
-    "height",
-    String(height)
-  );
+        boxZoom:
+          false,
 
-  background.setAttribute(
-    "class",
-    "c12-real-map-background"
-  );
+        keyboard:
+          false,
 
-  svg.appendChild(
-    background
-  );
-
-
-  const countryGroup =
-    document.createElementNS(
-      svgNS,
-      "g"
-    );
-
-  countryGroup.setAttribute(
-    "class",
-    "c12-real-map-countries"
-  );
-
-  countries.forEach(
-    country => {
-      const polygon =
-        document.createElementNS(
-          svgNS,
-          "polygon"
-        );
-
-      polygon.setAttribute(
-        "points",
-        country.points
-          .map(
-            point => {
-              const projected =
-                project(
-                  point[0],
-                  point[1]
-                );
-
-              return (
-                `${projected.x},${projected.y}`
-              );
-            }
-          )
-          .join(" ")
-      );
-
-      polygon.setAttribute(
-        "class",
-        "c12-real-map-country"
-      );
-
-      countryGroup.appendChild(
-        polygon
-      );
-
-
-      const labelPoint =
-        project(
-          country.label[0],
-          country.label[1]
-        );
-
-      const label =
-        document.createElementNS(
-          svgNS,
-          "text"
-        );
-
-      label.setAttribute(
-        "x",
-        String(
-          labelPoint.x
-        )
-      );
-
-      label.setAttribute(
-        "y",
-        String(
-          labelPoint.y
-        )
-      );
-
-      label.setAttribute(
-        "class",
-        "c12-real-map-country-label"
-      );
-
-      label.textContent =
-        country.name;
-
-      countryGroup.appendChild(
-        label
-      );
-    }
-  );
-
-  svg.appendChild(
-    countryGroup
-  );
-
-
-  const routeGroup =
-    document.createElementNS(
-      svgNS,
-      "g"
-    );
-
-  routeGroup.setAttribute(
-    "class",
-    "c12-real-map-routes"
-  );
-
-
-  C12.mapRoutes.forEach(
-    (
-      route,
-      index
-    ) => {
-      const from =
-        cities[
-          route.from
-        ];
-
-      const to =
-        cities[
-          route.to
-        ];
-
-      if (
-        !from ||
-        !to
-      ) {
-        return;
+        preferCanvas:
+          true
       }
+    );
 
-      const start =
-        project(
-          from.lon,
-          from.lat
-        );
 
-      const end =
-        project(
-          to.lon,
-          to.lat
-        );
+  window.L
+    .tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        minZoom:
+          4,
 
-      const dx =
-        end.x -
-        start.x;
+        maxZoom:
+          18,
 
-      const dy =
-        end.y -
-        start.y;
+        attribution:
+          "© OpenStreetMap contributors"
+      }
+    )
+    .addTo(
+      c12OperationsMap
+    );
 
-      const length =
-        Math.max(
-          1,
-          Math.sqrt(
-            dx * dx +
-            dy * dy
-          )
-        );
 
-      const nx =
-        -dy /
-        length;
+  window.L.control
+    .zoom({
+      position:
+        "bottomright"
+    })
+    .addTo(
+      c12OperationsMap
+    );
 
-      const ny =
-        dx /
-        length;
 
-      const direction =
-        route.from <
-        route.to
-          ? 1
-          : -1;
-
-      const curve =
-        (
-          11 +
-          (
-            index %
-            3
-          ) *
-          4
-        ) *
-        direction;
-
-      const controlX =
-        (
-          start.x +
-          end.x
-        ) /
-        2 +
-        nx *
-        curve;
-
-      const controlY =
-        (
-          start.y +
-          end.y
-        ) /
-        2 +
-        ny *
-        curve;
-
-      const path =
-        document.createElementNS(
-          svgNS,
-          "path"
-        );
-
-      path.setAttribute(
-        "d",
+  const mapBounds =
+    window.L.latLngBounds(
+      [
         [
-          `M ${start.x} ${start.y}`,
-          `Q ${controlX} ${controlY}`,
-          `${end.x} ${end.y}`
-        ].join(" ")
-      );
+          43.8,
+          13.2
+        ],
 
-      path.setAttribute(
-        "class",
         [
-          "c12-real-map-route",
-
-          route.status ===
-          "attention"
-            ? "is-warning"
-            : "",
-
-          route.orderId ===
-          C12.mainOrder.id
-            ? "is-main"
-            : ""
+          54.9,
+          32.7
         ]
-          .filter(Boolean)
-          .join(" ")
-      );
-
-      path.setAttribute(
-        "data-map-order",
-        route.orderId
-      );
-
-      const title =
-        document.createElementNS(
-          svgNS,
-          "title"
-        );
-
-      title.textContent =
-        `${route.orderId}: ${route.from} → ${route.to}`;
-
-      path.appendChild(
-        title
-      );
-
-      routeGroup.appendChild(
-        path
-      );
+      ]
+    );
 
 
-      const t =
-        0.54;
-
-      const mt =
-        1 -
-        t;
-
-      const truckX =
-        mt *
-        mt *
-        start.x +
-        2 *
-        mt *
-        t *
-        controlX +
-        t *
-        t *
-        end.x;
-
-      const truckY =
-        mt *
-        mt *
-        start.y +
-        2 *
-        mt *
-        t *
-        controlY +
-        t *
-        t *
-        end.y;
-
-      const truck =
-        document.createElementNS(
-          svgNS,
-          "g"
-        );
-
-      truck.setAttribute(
-        "class",
-        [
-          "c12-real-map-truck",
-
-          route.status ===
-          "attention"
-            ? "is-warning"
-            : "",
-
-          route.orderId ===
-          C12.mainOrder.id
-            ? "is-main"
-            : ""
-        ]
-          .filter(Boolean)
-          .join(" ")
-      );
-
-      truck.setAttribute(
-        "transform",
-        `translate(${truckX} ${truckY})`
-      );
-
-
-      const halo =
-        document.createElementNS(
-          svgNS,
-          "circle"
-        );
-
-      halo.setAttribute(
-        "r",
-        route.orderId ===
-        C12.mainOrder.id
-          ? "8"
-          : "6"
-      );
-
-      halo.setAttribute(
-        "class",
-        "c12-real-map-truck-halo"
-      );
-
-      truck.appendChild(
-        halo
-      );
-
-
-      const dot =
-        document.createElementNS(
-          svgNS,
-          "circle"
-        );
-
-      dot.setAttribute(
-        "r",
-        route.orderId ===
-        C12.mainOrder.id
-          ? "4"
-          : "3"
-      );
-
-      dot.setAttribute(
-        "class",
-        "c12-real-map-truck-dot"
-      );
-
-      truck.appendChild(
-        dot
-      );
-
-      routeGroup.appendChild(
-        truck
-      );
+  c12OperationsMap.fitBounds(
+    mapBounds,
+    {
+      padding: [
+        10,
+        10
+      ]
     }
-  );
-
-
-  svg.appendChild(
-    routeGroup
   );
 
 
   const usedCities =
     new Set();
+
 
   C12.mapRoutes.forEach(
     route => {
@@ -2766,238 +2458,339 @@ else {
   );
 
 
-  const cityGroup =
-    document.createElementNS(
-      svgNS,
-      "g"
-    );
-
-  cityGroup.setAttribute(
-    "class",
-    "c12-real-map-cities"
-  );
-
-
   usedCities.forEach(
     cityName => {
-      const city =
-        cities[
+      const location =
+        c12MapLocations[
           cityName
         ];
 
-      if (!city) {
+
+      if (
+        !location
+      ) {
         return;
       }
 
-      const point =
-        project(
-          city.lon,
-          city.lat
-        );
+
+      const mainCity =
+        cityName ===
+          "Львів" ||
+        cityName ===
+          "Краків";
+
 
       const marker =
-        document.createElementNS(
-          svgNS,
-          "circle"
+        window.L.circleMarker(
+          location,
+          {
+            radius:
+              mainCity
+                ? 5
+                : 3.5,
+
+            color:
+              "#ffffff",
+
+            weight:
+              2,
+
+            fillColor:
+              mainCity
+                ? "#2f78ad"
+                : "#4f8a62",
+
+            fillOpacity:
+              1
+          }
+        )
+        .addTo(
+          c12OperationsMap
         );
 
-      marker.setAttribute(
-        "cx",
-        String(
-          point.x
-        )
-      );
 
-      marker.setAttribute(
-        "cy",
-        String(
-          point.y
-        )
-      );
+      marker.bindTooltip(
+        cityName,
+        {
+          direction:
+            "top",
 
-      marker.setAttribute(
-        "r",
-        cityName ===
-        "Львів"
-          ? "5"
-          : "3.7"
-      );
+          offset: [
+            0,
+            -5
+          ],
 
-      marker.setAttribute(
-        "class",
-        cityName ===
-        "Львів"
-          ? "c12-real-map-city-dot is-hub"
-          : "c12-real-map-city-dot"
-      );
-
-      cityGroup.appendChild(
-        marker
-      );
-
-
-      const label =
-        document.createElementNS(
-          svgNS,
-          "text"
-        );
-
-      label.setAttribute(
-        "x",
-        String(
-          point.x +
-          city.dx
-        )
-      );
-
-      label.setAttribute(
-        "y",
-        String(
-          point.y +
-          city.dy
-        )
-      );
-
-      label.setAttribute(
-        "class",
-        cityName ===
-        "Львів"
-          ? "c12-real-map-city-label is-hub"
-          : "c12-real-map-city-label"
-      );
-
-      label.textContent =
-        cityName;
-
-      cityGroup.appendChild(
-        label
+          className:
+            "c12-map-tooltip"
+        }
       );
     }
   );
 
 
-  svg.appendChild(
-    cityGroup
+  C12.mapRoutes.forEach(
+    (
+      route,
+      index
+    ) => {
+      const from =
+        c12MapLocations[
+          route.from
+        ];
+
+      const to =
+        c12MapLocations[
+          route.to
+        ];
+
+
+      if (
+        !from ||
+        !to
+      ) {
+        return;
+      }
+
+
+      const style =
+        getMapRouteStyle(
+          route
+        );
+
+
+      const line =
+        window.L.polyline(
+          [
+            from,
+            to
+          ],
+          {
+            color:
+              style.color,
+
+            weight:
+              style.weight,
+
+            opacity:
+              style.opacity,
+
+            dashArray:
+              style.dashArray,
+
+            lineCap:
+              "round",
+
+            lineJoin:
+              "round",
+
+            interactive:
+              true
+          }
+        )
+        .addTo(
+          c12OperationsMap
+        );
+
+
+      line.bindPopup(
+        `
+          <div class="c12-map-popup">
+            <strong>
+              ${escapeHtml(
+                route.orderId
+              )}
+            </strong>
+
+            <span>
+              ${escapeHtml(
+                route.from
+              )}
+              →
+              ${escapeHtml(
+                route.to
+              )}
+            </span>
+          </div>
+        `
+      );
+
+
+      const currentPoint =
+        getPointOnRoute(
+          from,
+          to,
+          0.42 +
+            (
+              index %
+              4
+            ) *
+            0.11
+        );
+
+
+      const currentMarker =
+        window.L.circleMarker(
+          currentPoint,
+          {
+            radius:
+              route.orderId ===
+              C12.mainOrder.id
+                ? 6
+                : 4,
+
+            color:
+              "#ffffff",
+
+            weight:
+              2,
+
+            fillColor:
+              style.color,
+
+            fillOpacity:
+              1
+          }
+        )
+        .addTo(
+          c12OperationsMap
+        );
+
+
+      currentMarker.bindTooltip(
+        route.orderId,
+        {
+          direction:
+            "top",
+
+          className:
+            "c12-map-tooltip"
+        }
+      );
+    }
   );
 
 
-  const legend =
-    document.createElementNS(
-      svgNS,
-      "g"
+  const Legend =
+    window.L.Control.extend({
+      onAdd() {
+        const legend =
+          window.L.DomUtil.create(
+            "div",
+            "c12-map-legend"
+          );
+
+        legend.innerHTML = `
+          <span>
+            <i class="is-transit"></i>
+            У рейсі
+          </span>
+
+          <span>
+            <i class="is-warning"></i>
+            Потребує уваги
+          </span>
+
+          <span>
+            <i class="is-main"></i>
+            Головний рейс
+          </span>
+        `;
+
+        return legend;
+      }
+    });
+
+
+  new Legend({
+    position:
+      "bottomleft"
+  }).addTo(
+    c12OperationsMap
+  );
+
+
+  window.setTimeout(
+    () => {
+      c12OperationsMap
+        .invalidateSize();
+    },
+    120
+  );
+}
+
+
+function renderMapRoutes() {
+  if (
+    !c12OperationsMapBound
+  ) {
+    c12OperationsMapBound =
+      true;
+
+
+    document.addEventListener(
+      "c12:rolechange",
+      event => {
+        if (
+          event.detail
+            ?.role !==
+          "owner"
+        ) {
+          return;
+        }
+
+
+        ensureLeaflet()
+          .then(
+            () => {
+              window.setTimeout(
+                buildOperationsMap,
+                100
+              );
+            }
+          )
+          .catch(
+            error => {
+              console.error(
+                "[CASE 12] Map library failed:",
+                error
+              );
+            }
+          );
+      }
+    );
+  }
+
+
+  const ownerScene =
+    $(
+      '[data-role-scene="owner"]'
     );
 
-  legend.setAttribute(
-    "class",
-    "c12-real-map-legend"
-  );
 
-  const legendItems = [
-    {
-      x: 28,
-      label:
-        "У рейсі",
-      className:
-        "is-transit"
-    },
-
-    {
-      x: 118,
-      label:
-        "Потребує уваги",
-      className:
-        "is-warning"
-    },
-
-    {
-      x: 257,
-      label:
-        "Головний рейс",
-      className:
-        "is-main"
-    }
-  ];
-
-  legendItems.forEach(
-    item => {
-      const circle =
-        document.createElementNS(
-          svgNS,
-          "circle"
-        );
-
-      circle.setAttribute(
-        "cx",
-        String(
-          item.x
-        )
+  if (
+    ownerScene &&
+    ownerScene.classList.contains(
+      "is-active"
+    )
+  ) {
+    ensureLeaflet()
+      .then(
+        () => {
+          window.setTimeout(
+            buildOperationsMap,
+            80
+          );
+        }
+      )
+      .catch(
+        error => {
+          console.error(
+            "[CASE 12] Map library failed:",
+            error
+          );
+        }
       );
-
-      circle.setAttribute(
-        "cy",
-        "495"
-      );
-
-      circle.setAttribute(
-        "r",
-        "4"
-      );
-
-      circle.setAttribute(
-        "class",
-        `c12-real-map-legend-dot ${item.className}`
-      );
-
-      legend.appendChild(
-        circle
-      );
-
-
-      const text =
-        document.createElementNS(
-          svgNS,
-          "text"
-        );
-
-      text.setAttribute(
-        "x",
-        String(
-          item.x +
-          10
-        )
-      );
-
-      text.setAttribute(
-        "y",
-        "499"
-      );
-
-      text.setAttribute(
-        "class",
-        "c12-real-map-legend-text"
-      );
-
-      text.textContent =
-        item.label;
-
-      legend.appendChild(
-        text
-      );
-    }
-  );
-
-
-  svg.appendChild(
-    legend
-  );
-
-
-  container.innerHTML =
-    "";
-
-  container.appendChild(
-    svg
-  );
+  }
 }
 
   /* ============================================================

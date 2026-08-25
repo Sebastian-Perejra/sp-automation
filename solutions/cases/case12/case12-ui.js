@@ -971,7 +971,868 @@
         .join("");
   }
 
+/* ============================================================
+   LIVE INBOX
+============================================================ */
 
+C12.uiState.inboxSource =
+  "email";
+
+C12.uiState.selectedInboxRequestId =
+  "REQ-EMAIL-001";
+
+C12.uiState.inboxOpen =
+  true;
+
+
+function getInboxSourceCaption(
+  source,
+  count
+) {
+  if (source === "email") {
+    return count === 1
+      ? "1 нова заявка"
+      : `${count} нові заявки`;
+  }
+
+  if (source === "phone") {
+    return count === 1
+      ? "1 звернення"
+      : `${count} звернення`;
+  }
+
+  if (source === "messenger") {
+    return count === 1
+      ? "1 звернення"
+      : `${count} звернення`;
+  }
+
+  if (source === "exchange") {
+    return count === 1
+      ? "1 потенційне"
+      : `${count} потенційних`;
+  }
+
+  return String(count);
+}
+
+
+function getInboxChannelTitle(
+  source,
+  count
+) {
+  if (source === "email") {
+    return `${count} нові заявки`;
+  }
+
+  if (source === "phone") {
+    return `${count} телефонні звернення`;
+  }
+
+  if (source === "messenger") {
+    return `${count} нові діалоги`;
+  }
+
+  if (source === "exchange") {
+    return `${count} пропозицій`;
+  }
+
+  return `${count} звернень`;
+}
+
+
+function getSelectedRequestHeading(
+  request
+) {
+  if (!request) {
+    return "Запит на перевезення";
+  }
+
+  if (request.source === "phone") {
+    return "Телефонне звернення";
+  }
+
+  if (request.source === "messenger") {
+    return "Діалог з клієнтом";
+  }
+
+  if (request.source === "exchange") {
+    return "Заявка з транспортної біржі";
+  }
+
+  return "Запит на перевезення";
+}
+
+
+function renderInboxCounts() {
+  const counts =
+    C12.getInboxCounts();
+
+  setText(
+    "[data-incoming-total]",
+    counts.total
+  );
+
+  [
+    "email",
+    "phone",
+    "messenger",
+    "exchange"
+  ].forEach(
+    source => {
+      setText(
+        `[data-source-count="${source}"]`,
+        counts[source]
+      );
+
+      setText(
+        `[data-source-caption="${source}"]`,
+        getInboxSourceCaption(
+          source,
+          counts[source]
+        )
+      );
+    }
+  );
+}
+
+
+function renderInboxList(
+  source =
+    C12.uiState.inboxSource
+) {
+  const container =
+    $(
+      "[data-inbox-list]"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const config =
+    C12.inboxSourceConfig[
+      source
+    ];
+
+  const requests =
+    C12.getInboxRequests(
+      source
+    );
+
+  setText(
+    "[data-inbox-channel-label]",
+    config?.label
+      ?.toUpperCase() ||
+      source.toUpperCase()
+  );
+
+  setText(
+    "[data-inbox-channel-title]",
+    getInboxChannelTitle(
+      source,
+      requests.length
+    )
+  );
+
+  if (!requests.length) {
+    container.innerHTML = `
+      <div class="c12-inbox-empty">
+        ${escapeHtml(
+          config?.empty ||
+          "Нових звернень немає"
+        )}
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML =
+    requests
+      .map(
+        request => {
+          const selected =
+            request.id ===
+            C12.uiState
+              .selectedInboxRequestId;
+
+          return `
+            <button
+              class="
+                c12-inbox-item
+                ${
+                  selected
+                    ? "is-selected"
+                    : ""
+                }
+              "
+              type="button"
+              data-inbox-request="${escapeHtml(
+                request.id
+              )}"
+            >
+
+              <div class="c12-inbox-item__top">
+
+                <span class="c12-inbox-item__source">
+                  ${escapeHtml(
+                    request.sourceLabel
+                  )}
+                </span>
+
+                <span class="c12-inbox-item__time">
+                  ${escapeHtml(
+                    request.time
+                  )}
+                </span>
+
+              </div>
+
+
+              <strong>
+                ${escapeHtml(
+                  request.client
+                )}
+              </strong>
+
+
+              <span class="c12-inbox-item__route">
+                ${escapeHtml(
+                  request.origin
+                )}
+                →
+                ${escapeHtml(
+                  request.destination
+                )}
+              </span>
+
+
+              <span class="c12-inbox-item__preview">
+                ${escapeHtml(
+                  request.preview
+                )}
+              </span>
+
+
+              ${
+                request.rate
+                  ? `
+                    <span class="c12-inbox-item__rate">
+                      ${escapeHtml(
+                        request.rate
+                      )}
+                    </span>
+                  `
+                  : ""
+              }
+
+            </button>
+          `;
+        }
+      )
+      .join("");
+}
+
+
+function renderSelectedInboxRequest(
+  requestId =
+    C12.uiState
+      .selectedInboxRequestId
+) {
+  const request =
+    C12.getInboxRequest(
+      requestId
+    );
+
+  if (!request) {
+    return;
+  }
+
+  C12.uiState
+    .selectedInboxRequestId =
+    request.id;
+
+  C12.uiState
+    .inboxSource =
+    request.source;
+
+
+  const panel =
+    $(
+      "[data-selected-request-panel]"
+    );
+
+  if (panel) {
+    panel.dataset.requestSource =
+      request.source;
+  }
+
+
+  setText(
+    "[data-selected-request-channel]",
+    `${request.sourceLabel.toUpperCase()} · ${request.time}`
+  );
+
+
+  setText(
+    "[data-selected-request-heading]",
+    getSelectedRequestHeading(
+      request
+    )
+  );
+
+
+  setText(
+    "[data-selected-request-client-label]",
+    request.source === "email"
+      ? "ВІД"
+      : "КЛІЄНТ"
+  );
+
+
+  setText(
+    "[data-selected-request-client]",
+    request.client
+  );
+
+
+  setText(
+    "[data-selected-request-contact-label]",
+    request.source === "exchange"
+      ? "КОНТАКТ / БІРЖА"
+      : "КОНТАКТ"
+  );
+
+
+  setText(
+    "[data-selected-request-contact]",
+    request.contact
+  );
+
+
+  setText(
+    "[data-selected-request-subject]",
+    request.title
+  );
+
+
+  setText(
+    "[data-selected-request-pickup]",
+    request.pickup
+  );
+
+
+  setText(
+    "[data-selected-request-delivery]",
+    request.delivery
+  );
+
+
+  setText(
+    "[data-selected-request-cargo]",
+    [
+      request.cargo,
+      request.pallets
+        ? `${request.pallets} палет`
+        : ""
+    ]
+      .filter(Boolean)
+      .join(" · ")
+  );
+
+
+  setText(
+    "[data-selected-request-weight]",
+    `${formatNumber(
+      request.weightKg
+    )} кг`
+  );
+
+
+  setText(
+    "[data-selected-request-vehicle]",
+    request.vehicleType
+  );
+
+
+  const rateRow =
+    $(
+      "[data-selected-request-rate-row]"
+    );
+
+  if (rateRow) {
+    rateRow.hidden =
+      !request.rate;
+  }
+
+
+  setText(
+    "[data-selected-request-rate]",
+    request.rate || "—"
+  );
+
+
+  const sourceConfig =
+    C12.inboxSourceConfig[
+      request.source
+    ];
+
+
+  setText(
+    "[data-selected-request-source-icon]",
+    sourceConfig?.icon || "•"
+  );
+
+
+  setText(
+    "[data-selected-request-source-name]",
+    request.sourceLabel
+  );
+
+
+  setText(
+    "[data-selected-request-contact-line]",
+    request.contactLine || ""
+  );
+
+
+  const message =
+    $(
+      "[data-selected-request-message]"
+    );
+
+  const chat =
+    $(
+      "[data-selected-request-chat]"
+    );
+
+
+  if (
+    Array.isArray(
+      request.chat
+    ) &&
+    request.chat.length
+  ) {
+    if (message) {
+      message.hidden =
+        true;
+
+      message.innerHTML =
+        "";
+    }
+
+    if (chat) {
+      chat.hidden =
+        false;
+
+      chat.innerHTML =
+        request.chat
+          .map(
+            item => `
+              <div
+                class="
+                  c12-chat-message
+                  ${
+                    item.side ===
+                    "dispatcher"
+                      ? "is-dispatcher"
+                      : "is-client"
+                  }
+                "
+              >
+                ${escapeHtml(
+                  item.text
+                )}
+              </div>
+            `
+          )
+          .join("");
+    }
+  }
+
+  else {
+    if (chat) {
+      chat.hidden =
+        true;
+
+      chat.innerHTML =
+        "";
+    }
+
+    if (message) {
+      message.hidden =
+        false;
+
+      message.innerHTML =
+        request.message
+          ? `
+            <p>
+              ${escapeHtml(
+                request.message
+              )}
+            </p>
+          `
+          : "";
+    }
+  }
+
+
+  const createButton =
+    $(
+      "[data-create-selected-request]"
+    );
+
+  if (createButton) {
+    createButton.dataset
+      .selectedRequestId =
+      request.id;
+
+    createButton.dataset
+      .requestSource =
+      request.source;
+  }
+
+
+  setText(
+    "[data-create-request-label]",
+    request.isMain
+      ? "Створити замовлення"
+      : "Створити замовлення"
+  );
+
+
+  $$(
+    "[data-inbox-request]"
+  ).forEach(
+    button => {
+      button.classList.toggle(
+        "is-selected",
+        button.dataset
+          .inboxRequest ===
+          request.id
+      );
+    }
+  );
+}
+
+
+function openInboxSource(
+  source,
+  options = {}
+) {
+  if (
+    !C12.inboxSourceConfig[
+      source
+    ]
+  ) {
+    return;
+  }
+
+  const drawer =
+    $(
+      "[data-inbox-drawer]"
+    );
+
+  const wasSameSource =
+    C12.uiState
+      .inboxSource ===
+      source;
+
+  const shouldToggle =
+    options.toggle ===
+    true;
+
+
+  if (
+    shouldToggle &&
+    wasSameSource &&
+    C12.uiState.inboxOpen
+  ) {
+    closeInbox();
+    return;
+  }
+
+
+  C12.uiState.inboxSource =
+    source;
+
+  C12.uiState.inboxOpen =
+    true;
+
+
+  if (drawer) {
+    drawer.hidden =
+      false;
+  }
+
+
+  $$(
+    "[data-source]"
+  ).forEach(
+    button => {
+      const active =
+        button.dataset.source ===
+        source;
+
+      button.classList.toggle(
+        "is-active",
+        active
+      );
+
+      button.classList.toggle(
+        "is-hot",
+        active
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        active
+          ? "true"
+          : "false"
+      );
+    }
+  );
+
+
+  const requests =
+    C12.getInboxRequests(
+      source
+    );
+
+
+  const selected =
+    C12.getInboxRequest(
+      C12.uiState
+        .selectedInboxRequestId
+    );
+
+
+  if (
+    !selected ||
+    selected.source !==
+      source ||
+    selected.unread === false
+  ) {
+    C12.uiState
+      .selectedInboxRequestId =
+      requests[0]?.id ||
+      null;
+  }
+
+
+  renderInboxList(
+    source
+  );
+
+
+  if (
+    C12.uiState
+      .selectedInboxRequestId
+  ) {
+    renderSelectedInboxRequest(
+      C12.uiState
+        .selectedInboxRequestId
+    );
+  }
+}
+
+
+function closeInbox() {
+  const drawer =
+    $(
+      "[data-inbox-drawer]"
+    );
+
+  C12.uiState.inboxOpen =
+    false;
+
+  if (drawer) {
+    drawer.hidden =
+      true;
+  }
+
+
+  $$(
+    "[data-source]"
+  ).forEach(
+    button => {
+      button.classList.remove(
+        "is-active"
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+  );
+}
+
+
+function selectInboxRequest(
+  requestId
+) {
+  const request =
+    C12.getInboxRequest(
+      requestId
+    );
+
+  if (!request) {
+    return;
+  }
+
+
+  C12.uiState
+    .selectedInboxRequestId =
+    request.id;
+
+  C12.uiState
+    .inboxSource =
+    request.source;
+
+
+  renderInboxList(
+    request.source
+  );
+
+  renderSelectedInboxRequest(
+    request.id
+  );
+}
+
+
+function refreshLiveInbox() {
+  renderInboxCounts();
+
+  renderInboxList(
+    C12.uiState
+      .inboxSource
+  );
+
+  if (
+    C12.uiState
+      .selectedInboxRequestId
+  ) {
+    renderSelectedInboxRequest(
+      C12.uiState
+        .selectedInboxRequestId
+    );
+  }
+}
+
+
+function bindLiveInbox() {
+
+  document.addEventListener(
+    "click",
+    event => {
+
+      const sourceButton =
+        event.target.closest(
+          "[data-source]"
+        );
+
+      if (sourceButton) {
+        openInboxSource(
+          sourceButton.dataset
+            .source,
+          {
+            toggle: true
+          }
+        );
+
+        return;
+      }
+
+
+      const requestButton =
+        event.target.closest(
+          "[data-inbox-request]"
+        );
+
+      if (requestButton) {
+        selectInboxRequest(
+          requestButton.dataset
+            .inboxRequest
+        );
+
+        return;
+      }
+
+
+      const closeButton =
+        event.target.closest(
+          "[data-close-inbox]"
+        );
+
+      if (closeButton) {
+        closeInbox();
+      }
+    }
+  );
+}
+
+
+function initLiveInbox() {
+  renderInboxCounts();
+
+  openInboxSource(
+    "email"
+  );
+
+  bindLiveInbox();
+}
+
+
+C12.inboxUI = {
+  renderCounts:
+    renderInboxCounts,
+
+  renderList:
+    renderInboxList,
+
+  renderSelected:
+    renderSelectedInboxRequest,
+
+  openSource:
+    openInboxSource,
+
+  close:
+    closeInbox,
+
+  select:
+    selectInboxRequest,
+
+  refresh:
+    refreshLiveInbox,
+
+  getSelected() {
+    return C12.getInboxRequest(
+      C12.uiState
+        .selectedInboxRequestId
+    );
+  }
+};
+
+
+if (
+  document.readyState ===
+  "loading"
+) {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initLiveInbox,
+    {
+      once: true
+    }
+  );
+}
+
+else {
+  initLiveInbox();
+}
+  
   /* ============================================================
      PLANNING QUEUE
   ============================================================ */

@@ -3309,31 +3309,30 @@ function updateDriverActions() {
 
 
   function closeEventRipple() {
-    const ripple =
-      $(
-        "[data-event-ripple]"
-      );
-
-    const workspace =
-      $(
-        "[data-workspace]"
-      );
-
-    if (ripple) {
-      ripple.hidden =
-        true;
-    }
-
-    if (workspace) {
-      workspace.hidden =
-        false;
-    }
-
-    showRole(
-      "customer"
+  const ripple =
+    $(
+      "[data-event-ripple]"
     );
+
+  const workspace =
+    $(
+      "[data-workspace]"
+    );
+
+  if (ripple) {
+    ripple.hidden =
+      true;
   }
 
+  if (workspace) {
+    workspace.hidden =
+      false;
+  }
+
+  showRole(
+    "driver"
+  );
+}
 
   /* ============================================================
      RESET UI

@@ -600,203 +600,399 @@
 
             <!-- INCOMING SOURCES -->
 
-            <aside class="c12-panel c12-incoming-panel">
+<aside class="c12-panel c12-incoming-panel">
 
-              <div class="c12-panel__header">
+  <div class="c12-panel__header">
 
-                <div>
-                  <span class="c12-panel__eyebrow">
-                    ВХІДНІ КАНАЛИ
-                  </span>
+    <div>
+      <span class="c12-panel__eyebrow">
+        ВХІДНІ КАНАЛИ
+      </span>
 
-                  <h3>Нові звернення</h3>
-                </div>
+      <h3>Нові звернення</h3>
+    </div>
 
-                <span class="c12-counter" data-incoming-total>
-                  15
-                </span>
+    <span
+      class="c12-counter"
+      data-incoming-total
+    >
+      15
+    </span>
 
-              </div>
-
-
-              <button
-                class="c12-source-row is-hot"
-                type="button"
-                data-source="email"
-              >
-                <span class="c12-source-row__icon">✉</span>
-
-                <span class="c12-source-row__content">
-                  <strong>Email</strong>
-                  <small>3 нові заявки</small>
-                </span>
-
-                <span class="c12-source-row__count">3</span>
-              </button>
+  </div>
 
 
-              <button
-                class="c12-source-row"
-                type="button"
-                data-source="phone"
-              >
-                <span class="c12-source-row__icon">☎</span>
+  <div class="c12-source-menu">
 
-                <span class="c12-source-row__content">
-                  <strong>Телефон</strong>
-                  <small>2 звернення</small>
-                </span>
+    <button
+      class="c12-source-row is-hot is-active"
+      type="button"
+      data-source="email"
+      aria-expanded="true"
+    >
+      <span class="c12-source-row__icon">✉</span>
 
-                <span class="c12-source-row__count">2</span>
-              </button>
+      <span class="c12-source-row__content">
+        <strong>Email</strong>
 
+        <small
+          data-source-caption="email"
+        >
+          3 нові заявки
+        </small>
+      </span>
 
-              <button
-                class="c12-source-row"
-                type="button"
-                data-source="messenger"
-              >
-                <span class="c12-source-row__icon">●</span>
+      <span
+        class="c12-source-row__count"
+        data-source-count="email"
+      >
+        3
+      </span>
 
-                <span class="c12-source-row__content">
-                  <strong>Месенджери</strong>
-                  <small>4 звернення</small>
-                </span>
-
-                <span class="c12-source-row__count">4</span>
-              </button>
-
-
-              <button
-                class="c12-source-row"
-                type="button"
-                data-source="exchange"
-              >
-                <span class="c12-source-row__icon">⇄</span>
-
-                <span class="c12-source-row__content">
-                  <strong>Транспортні біржі</strong>
-                  <small>6 потенційних</small>
-                </span>
-
-                <span class="c12-source-row__count">6</span>
-              </button>
+      <span class="c12-source-row__arrow">
+        ›
+      </span>
+    </button>
 
 
-              <div class="c12-incoming-stream">
+    <button
+      class="c12-source-row"
+      type="button"
+      data-source="phone"
+      aria-expanded="false"
+    >
+      <span class="c12-source-row__icon">☎</span>
 
-                <div class="c12-stream-title">
-                  <span class="c12-live-dot"></span>
-                  ЖИВИЙ ПОТІК
-                </div>
+      <span class="c12-source-row__content">
+        <strong>Телефон</strong>
 
-                <div
-                  class="c12-stream-list"
-                  data-incoming-stream
-                ></div>
+        <small
+          data-source-caption="phone"
+        >
+          2 звернення
+        </small>
+      </span>
 
-              </div>
+      <span
+        class="c12-source-row__count"
+        data-source-count="phone"
+      >
+        2
+      </span>
 
-            </aside>
-
-
-            <!-- INCOMING REQUEST -->
-
-            <article class="c12-panel c12-request-panel">
-
-              <div class="c12-panel__header">
-
-                <div>
-                  <span class="c12-panel__eyebrow">
-                    EMAIL · 09:47
-                  </span>
-
-                  <h3>Запит на перевезення</h3>
-                </div>
-
-                <span class="c12-new-badge">
-                  NEW
-                </span>
-
-              </div>
+      <span class="c12-source-row__arrow">
+        ›
+      </span>
+    </button>
 
 
-              <div class="c12-email-card">
+    <button
+      class="c12-source-row"
+      type="button"
+      data-source="messenger"
+      aria-expanded="false"
+    >
+      <span class="c12-source-row__icon">●</span>
 
-                <div class="c12-email-card__meta">
+      <span class="c12-source-row__content">
+        <strong>Месенджери</strong>
 
-                  <div>
-                    <small>ВІД</small>
-                    <strong>WestWood Ukraine</strong>
-                  </div>
+        <small
+          data-source-caption="messenger"
+        >
+          4 звернення
+        </small>
+      </span>
 
-                  <div>
-                    <small>КОНТАКТ</small>
-                    <strong>Ірина Мельник</strong>
-                  </div>
+      <span
+        class="c12-source-row__count"
+        data-source-count="messenger"
+      >
+        4
+      </span>
 
-                </div>
-
-
-                <div class="c12-email-card__subject">
-                  Перевезення Львів → Краків · 26.08
-                </div>
-
-
-                <div class="c12-email-card__body">
-
-                  <p>Доброго дня.</p>
-
-                  <p>
-                    Потрібне перевезення вантажу зі Львова
-                    до Кракова.
-                  </p>
-
-                  <dl>
-
-                    <div>
-                      <dt>Завантаження</dt>
-                      <dd>26.08 · 10:00</dd>
-                    </div>
-
-                    <div>
-                      <dt>Доставка</dt>
-                      <dd>28.08 · до 14:00</dd>
-                    </div>
-
-                    <div>
-                      <dt>Вантаж</dt>
-                      <dd>12 палет</dd>
-                    </div>
-
-                    <div>
-                      <dt>Вага</dt>
-                      <dd>4 800 кг</dd>
-                    </div>
-
-                    <div>
-                      <dt>Автомобіль</dt>
-                      <dd>Тент</dd>
-                    </div>
-
-                  </dl>
-
-                </div>
+      <span class="c12-source-row__arrow">
+        ›
+      </span>
+    </button>
 
 
-                <button
-                  class="c12-primary-action c12-primary-action--full"
-                  type="button"
-                  data-create-main-order
-                >
-                  <span>Створити замовлення</span>
-                  <span>→</span>
-                </button>
+    <button
+      class="c12-source-row"
+      type="button"
+      data-source="exchange"
+      aria-expanded="false"
+    >
+      <span class="c12-source-row__icon">⇄</span>
 
-              </div>
+      <span class="c12-source-row__content">
+        <strong>Транспортні біржі</strong>
 
-            </article>
+        <small
+          data-source-caption="exchange"
+        >
+          6 потенційних
+        </small>
+      </span>
 
+      <span
+        class="c12-source-row__count"
+        data-source-count="exchange"
+      >
+        6
+      </span>
+
+      <span class="c12-source-row__arrow">
+        ›
+      </span>
+    </button>
+
+  </div>
+
+
+  <div
+    class="c12-inbox-drawer"
+    data-inbox-drawer
+  >
+
+    <div class="c12-inbox-drawer__head">
+
+      <div>
+        <span
+          class="c12-inbox-drawer__eyebrow"
+          data-inbox-channel-label
+        >
+          EMAIL
+        </span>
+
+        <strong data-inbox-channel-title>
+          Нові заявки
+        </strong>
+      </div>
+
+      <button
+        class="c12-inbox-drawer__close"
+        type="button"
+        aria-label="Закрити список звернень"
+        data-close-inbox
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="c12-inbox-list"
+      data-inbox-list
+    ></div>
+
+  </div>
+
+
+  <div class="c12-incoming-stream">
+
+    <div class="c12-stream-title">
+      <span class="c12-live-dot"></span>
+      ЖИВИЙ ПОТІК
+    </div>
+
+    <div
+      class="c12-stream-list"
+      data-incoming-stream
+    ></div>
+
+  </div>
+
+</aside>
+
+
+<!-- SELECTED INCOMING REQUEST -->
+
+<article
+  class="c12-panel c12-request-panel"
+  data-selected-request-panel
+>
+
+  <div class="c12-panel__header">
+
+    <div>
+
+      <span
+        class="c12-panel__eyebrow"
+        data-selected-request-channel
+      >
+        EMAIL · 09:47
+      </span>
+
+      <h3 data-selected-request-heading>
+        Запит на перевезення
+      </h3>
+
+    </div>
+
+    <span
+      class="c12-new-badge"
+      data-selected-request-badge
+    >
+      NEW
+    </span>
+
+  </div>
+
+
+  <div class="c12-email-card">
+
+    <div class="c12-email-card__meta">
+
+      <div>
+        <small data-selected-request-client-label>
+          ВІД
+        </small>
+
+        <strong data-selected-request-client>
+          WestWood Ukraine
+        </strong>
+      </div>
+
+      <div>
+        <small data-selected-request-contact-label>
+          КОНТАКТ
+        </small>
+
+        <strong data-selected-request-contact>
+          Ірина Мельник
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div
+      class="c12-email-card__subject"
+      data-selected-request-subject
+    >
+      Перевезення Львів → Краків · 26.08
+    </div>
+
+
+    <div class="c12-email-card__body">
+
+      <div
+        class="c12-request-message"
+        data-selected-request-message
+      >
+        <p>
+          Доброго дня. Потрібне перевезення вантажу
+          зі Львова до Кракова.
+        </p>
+      </div>
+
+
+      <div
+        class="c12-request-chat"
+        data-selected-request-chat
+        hidden
+      ></div>
+
+
+      <dl>
+
+        <div>
+          <dt>Завантаження</dt>
+
+          <dd data-selected-request-pickup>
+            26.08 · 10:00
+          </dd>
+        </div>
+
+        <div>
+          <dt>Доставка</dt>
+
+          <dd data-selected-request-delivery>
+            28.08 · до 14:00
+          </dd>
+        </div>
+
+        <div>
+          <dt>Вантаж</dt>
+
+          <dd data-selected-request-cargo>
+            Дерев'яні панелі · 12 палет
+          </dd>
+        </div>
+
+        <div>
+          <dt>Вага</dt>
+
+          <dd data-selected-request-weight>
+            4 800 кг
+          </dd>
+        </div>
+
+        <div>
+          <dt>Автомобіль</dt>
+
+          <dd data-selected-request-vehicle>
+            Тент
+          </dd>
+        </div>
+
+        <div
+          data-selected-request-rate-row
+          hidden
+        >
+          <dt>Ставка</dt>
+
+          <dd data-selected-request-rate>
+            —
+          </dd>
+        </div>
+
+      </dl>
+
+    </div>
+
+
+    <div
+      class="c12-selected-request-source"
+      data-selected-request-source-info
+    >
+      <span data-selected-request-source-icon>
+        ✉
+      </span>
+
+      <div>
+        <small>ДЖЕРЕЛО ЗАЯВКИ</small>
+
+        <strong data-selected-request-source-name>
+          Email
+        </strong>
+
+        <span data-selected-request-contact-line>
+          logistics@westwood.ua
+        </span>
+      </div>
+    </div>
+
+
+    <button
+      class="c12-primary-action c12-primary-action--full"
+      type="button"
+      data-create-main-order
+      data-create-selected-request
+      data-selected-request-id="REQ-EMAIL-001"
+    >
+      <span data-create-request-label>
+        Створити замовлення
+      </span>
+
+      <span>→</span>
+    </button>
+
+  </div>
+
+</article>
 
             <!-- ORDER REGISTER -->
 

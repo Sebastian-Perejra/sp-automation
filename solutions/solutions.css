@@ -10789,3 +10789,13 @@ box-shadow:
   font-size: 9px;
   line-height: 1.5;
 }
+
+.case-result-card__desktop-note {
+  margin-top: auto !important;
+  margin-bottom: 18px !important;
+}
+
+.case-result-card__why {
+  margin-top: 0 !important;
+  padding-top: 24px !important;
+}

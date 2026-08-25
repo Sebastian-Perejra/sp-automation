@@ -5684,3 +5684,26 @@ button.c12-kpi-card:hover {
   }
 
 }
+
+@media (min-width: 1181px) {
+
+  .c12-scene--intro {
+    min-height: unset !important;
+    height: auto !important;
+
+    padding-top: 30px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .c12-intro {
+    min-height: 0 !important;
+    height: auto !important;
+
+    row-gap: 18px !important;
+  }
+
+  .c12-intro__pain-solution {
+    margin-bottom: 0 !important;
+  }
+
+}

@@ -137,13 +137,384 @@
   }
 
 
+/* ============================================================
+   CREATE ORDER FROM INBOX
+============================================================ */
+
+function parseInboxDate(
+  value,
+  fallback
+) {
+  const text =
+    String(value || "");
+
+  const match =
+    text.match(
+      /(\d{1,2})\.(\d{1,2}).*?(\d{1,2}):(\d{2})/
+    );
+
+  if (!match) {
+    return fallback;
+  }
+
+  const day =
+    String(match[1])
+      .padStart(2, "0");
+
+  const month =
+    String(match[2])
+      .padStart(2, "0");
+
+  const hour =
+    String(match[3])
+      .padStart(2, "0");
+
+  const minute =
+    String(match[4])
+      .padStart(2, "0");
+
+  return (
+    `2026-${month}-${day}` +
+    `T${hour}:${minute}:00`
+  );
+}
+
+
+function getNextOrderId() {
+  const maxNumber =
+    C12.orders.reduce(
+      (
+        currentMax,
+        order
+      ) => {
+        const match =
+          String(
+            order.id || ""
+          ).match(
+            /(\d+)$/
+          );
+
+        if (!match) {
+          return currentMax;
+        }
+
+        return Math.max(
+          currentMax,
+          Number(match[1])
+        );
+      },
+      0
+    );
+
+  return (
+    "TR-2026-" +
+    String(
+      maxNumber + 1
+    ).padStart(
+      5,
+      "0"
+    )
+  );
+}
+
+
+function getVehicleTypeCode(
+  label
+) {
+  const map = {
+    "Тент":
+      "curtain",
+
+    "Рефрижератор":
+      "refrigerator",
+
+    "Мега":
+      "mega",
+
+    "Фургон":
+      "van"
+  };
+
+  return (
+    map[label] ||
+    "curtain"
+  );
+}
+
+
+function buildOrderFromInbox(
+  request,
+  orderId
+) {
+  const createdAt =
+    C12.state
+      .simulationTime ||
+    C12.company
+      .simulationStart;
+
+  const pickupAt =
+    parseInboxDate(
+      request.pickup,
+      createdAt
+    );
+
+  const deliveryAt =
+    parseInboxDate(
+      request.delivery,
+      pickupAt
+    );
+
+  const origin =
+    C12.data.getLocation(
+      request.origin
+    );
+
+  const destination =
+    C12.data.getLocation(
+      request.destination
+    );
+
+  return {
+    id:
+      orderId,
+
+    createdAt,
+
+    source:
+      request.source,
+
+    sourceLabel:
+      request.sourceLabel,
+
+    client:
+      request.client,
+
+    contact:
+      request.contact,
+
+    email:
+      request.source ===
+      "email"
+        ? request.contactLine
+        : "",
+
+    contactLine:
+      request.contactLine ||
+      "",
+
+    origin:
+      request.origin,
+
+    originCountry:
+      origin?.country ||
+      "",
+
+    destination:
+      request.destination,
+
+    destinationCountry:
+      destination?.country ||
+      "",
+
+    pickupAt,
+
+    deliveryAt,
+
+    cargo:
+      request.cargo,
+
+    pallets:
+      Number(
+        request.pallets ||
+        0
+      ),
+
+    weightKg:
+      Number(
+        request.weightKg ||
+        0
+      ),
+
+    vehicleType:
+      getVehicleTypeCode(
+        request.vehicleType
+      ),
+
+    vehicleTypeLabel:
+      request.vehicleType,
+
+    execution:
+      null,
+
+    executionLabel:
+      "Не призначено",
+
+    carrier:
+      null,
+
+    vehicle:
+      null,
+
+    driver:
+      null,
+
+    status:
+      "new",
+
+    statusLabel:
+      C12.statuses
+        .new
+        .label,
+
+    attention:
+      false,
+
+    revenue:
+      0,
+
+    cost:
+      0,
+
+    margin:
+      0,
+
+    marginPercent:
+      0,
+
+    eta:
+      deliveryAt,
+
+    deliveredAt:
+      null,
+
+    receivedBy:
+      null,
+
+    cmr:
+      false,
+
+    pod:
+      false,
+
+    history: [
+      {
+        time:
+          createdAt,
+
+        status:
+          "new",
+
+        title:
+          "Замовлення створено",
+
+        actor:
+          "Диспетчер"
+      }
+    ]
+  };
+}
+
+
+function markInboxRequestProcessed(
+  request,
+  orderId
+) {
+  request.unread =
+    false;
+
+  request.createdOrderId =
+    orderId;
+
+  request.processedAt =
+    C12.state
+      .simulationTime;
+
+
+  if (
+    C12.inboxUI
+  ) {
+    C12.inboxUI.openSource(
+      request.source
+    );
+  }
+}
+
+
+function updateCreatedOrderUI() {
+  C12.ui
+    .renderOrdersTable();
+
+  C12.ui
+    .renderAllOrdersTable();
+
+
+  const liveCount =
+    $(
+      "[data-live-order-count]"
+    );
+
+  if (liveCount) {
+    liveCount.textContent =
+      String(
+        C12.orders.length
+      );
+  }
+}
+
+
+async function createMainOrder() {
+  const button =
+    $(
+      "[data-create-selected-request]"
+    );
+
+  const requestId =
+    button?.dataset
+      .selectedRequestId ||
+    C12.uiState
+      ?.selectedInboxRequestId ||
+    "REQ-EMAIL-001";
+
+  const request =
+    C12.getInboxRequest(
+      requestId
+    );
+
+
+  if (!request) {
+    C12.ui.showToast(
+      "Заявку не знайдено",
+      "Оберіть звернення у вхідному каналі.",
+      "warning"
+    );
+
+    return;
+  }
+
+
+  if (
+    request.createdOrderId
+  ) {
+    C12.ui.showToast(
+      "Замовлення вже створено",
+      `${request.createdOrderId} уже знаходиться в реєстрі.`,
+      "info"
+    );
+
+    return;
+  }
+
+
   /* ============================================================
-     CREATE MAIN ORDER
+     MAIN STORY REQUEST
   ============================================================ */
 
-  async function createMainOrder() {
+  if (
+    request.isMain
+  ) {
     if (
-      C12.state.mainOrderCreated
+      C12.state
+        .mainOrderCreated
     ) {
       C12.ui.showToast(
         "Замовлення вже створено",
@@ -154,34 +525,44 @@
       return;
     }
 
-    C12.state.mainOrderCreated =
+
+    C12.state
+      .mainOrderCreated =
       true;
+
 
     C12.mainOrder.status =
       "new";
 
     C12.mainOrder.statusLabel =
-      C12.statuses.new.label;
+      C12.statuses
+        .new
+        .label;
 
-    C12.mainOrder.history.push({
-      time:
-        C12.state
-          .simulationTime,
 
-      status:
-        "new",
+    C12.mainOrder
+      .history
+      .push({
+        time:
+          C12.state
+            .simulationTime,
 
-      title:
-        "Замовлення створено",
+        status:
+          "new",
 
-      actor:
-        "Диспетчер"
-    });
+        title:
+          "Замовлення створено",
 
-    C12.ui.addAutomationBatch(
-      C12.automationTemplates
-        .orderCreated
+        actor:
+          "Диспетчер"
+      });
+
+
+    markInboxRequestProcessed(
+      request,
+      C12.mainOrder.id
     );
+
 
     C12.ui.showToast(
       "TR-2026-00184 створено",
@@ -189,15 +570,24 @@
       "success"
     );
 
-    C12.simulation.setPosition(
-      9,
-      {
-        source:
-          "dispatcher-create"
-      }
+
+    C12.simulation
+      .setPosition(
+        9,
+        {
+          source:
+            "dispatcher-create"
+        }
+      );
+
+
+    updateCreatedOrderUI();
+
+
+    await sleep(
+      700
     );
 
-    await sleep(700);
 
     if (
       C12.state.mode ===
@@ -210,13 +600,94 @@
         3200
       );
 
-      await sleep(900);
+
+      await sleep(
+        900
+      );
+
 
       C12.ui.showRole(
         "manager"
       );
     }
+
+
+    return;
   }
+
+
+  /* ============================================================
+     REGULAR INBOX REQUEST
+  ============================================================ */
+
+  const orderId =
+    getNextOrderId();
+
+
+  const order =
+    buildOrderFromInbox(
+      request,
+      orderId
+    );
+
+
+  C12.orders.push(
+    order
+  );
+
+
+  C12.planningQueue.unshift(
+    order
+  );
+
+
+  C12.featuredOrderIds =
+    [
+      orderId,
+      ...C12.featuredOrderIds
+        .filter(
+          id =>
+            id !==
+            orderId
+        )
+    ]
+      .slice(
+        0,
+        12
+      );
+
+
+  C12.company.orders =
+    C12.orders.length;
+
+
+  markInboxRequestProcessed(
+    request,
+    orderId
+  );
+
+
+  C12.ui
+    .addAutomationBatch(
+      [
+        `Присвоєно номер ${orderId}`,
+        "Зафіксовано час створення",
+        "Заявку перенесено до реєстру перевезень",
+        "Статус встановлено: НОВЕ",
+        "Замовлення додано до черги планування"
+      ]
+    );
+
+
+  C12.ui.showToast(
+    `${orderId} створено`,
+    `${request.client} · ${request.origin} → ${request.destination}`,
+    "success"
+  );
+
+
+  updateCreatedOrderUI();
+}
 
 
   /* ============================================================

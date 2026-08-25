@@ -1060,172 +1060,260 @@ async function createMainOrder() {
   ============================================================ */
 
   async function handleDriverAction(
-    action
-  ) {
-    switch (action) {
+  action
+) {
+  const refreshDriverUI = () => {
+    const snapshot =
+      C12.simulation.preview(
+        C12.state.simulationPosition
+      );
 
-      case "start": {
-        const result =
-          C12.simulation
-            .driverAction(
-              "start"
-            );
+    C12.ui.applySnapshot(
+      snapshot
+    );
+  };
 
-        if (
-          !result.success
-        ) {
-          return;
-        }
 
-        C12.ui.addAutomationBatch(
-          C12.automationTemplates
-            .tripStarted
+  switch (action) {
+
+    case "start": {
+      const result =
+        C12.simulation.driverAction(
+          "start"
         );
 
-        C12.ui.showToast(
-          "Рейс розпочато",
-          "Час старту зафіксовано.",
-          "success"
-        );
-
-        break;
+      if (
+        !result ||
+        !result.success
+      ) {
+        return;
       }
 
+      C12.state.tripStarted =
+        true;
 
-      case "arrived": {
-        const result =
-          C12.simulation
-            .driverAction(
-              "arrived"
-            );
+      refreshDriverUI();
 
-        if (
-          !result.success
-        ) {
-          return;
-        }
+      C12.ui.addAutomationBatch(
+        C12.automationTemplates
+          .tripStarted
+      );
 
-        C12.ui.addAutomationEvent(
-          "Зафіксовано прибуття на завантаження"
+      C12.ui.showToast(
+        "Рейс розпочато",
+        "Час старту зафіксовано.",
+        "success"
+      );
+
+      break;
+    }
+
+
+    case "arrived": {
+      const result =
+        C12.simulation.driverAction(
+          "arrived"
         );
 
-        C12.ui.showToast(
-          "Автомобіль прибув",
-          "Точка завантаження — Львів.",
-          "success"
-        );
-
-        break;
+      if (
+        !result ||
+        !result.success
+      ) {
+        return;
       }
 
+      C12.state.tripStarted =
+        true;
 
-      case "loaded": {
-        const result =
-          C12.simulation
-            .driverAction(
-              "loaded"
-            );
-      
-        if (
-          !result.success
-        ) {
-          return;
-        }
-      
-        C12.ui.addAutomationBatch(
-          C12.automationTemplates
-            .cargoLoaded
+      C12.state.arrivedLoading =
+        true;
+
+      refreshDriverUI();
+
+      C12.ui.addAutomationEvent(
+        "Зафіксовано прибуття на завантаження"
+      );
+
+      C12.ui.showToast(
+        "Автомобіль прибув",
+        "Точка завантаження — Львів.",
+        "success"
+      );
+
+      break;
+    }
+
+
+    case "loaded": {
+      const result =
+        C12.simulation.driverAction(
+          "loaded"
         );
-      
-        C12.ui.showToast(
-          "Вантаж завантажено",
-          "12 палет · 4 800 кг. Можна вирушати до клієнта.",
-          "success"
-        );
-      
-        break;
+
+      if (
+        !result ||
+        !result.success
+      ) {
+        return;
       }
 
+      C12.state.tripStarted =
+        true;
 
-      case "transit": {
-        const result =
-          C12.simulation
-            .driverAction(
-              "transit"
-            );
+      C12.state.arrivedLoading =
+        true;
 
-        if (
-          !result.success
-        ) {
-          return;
-        }
+      C12.state.cargoLoaded =
+        true;
 
-        C12.ui.showToast(
-          "Рух до клієнта",
-          "Перевезення перейшло у статус «У дорозі».",
-          "success"
+      refreshDriverUI();
+
+      C12.ui.addAutomationBatch(
+        C12.automationTemplates
+          .cargoLoaded
+      );
+
+      C12.ui.showToast(
+        "Вантаж завантажено",
+        "12 палет · 4 800 кг. Можна вирушати до клієнта.",
+        "success"
+      );
+
+      break;
+    }
+
+
+    case "transit": {
+      const result =
+        C12.simulation.driverAction(
+          "transit"
         );
 
-        break;
+      if (
+        !result ||
+        !result.success
+      ) {
+        return;
       }
 
+      C12.state.tripStarted =
+        true;
 
-      case "delay": {
-        C12.simulation
-          .reportDelay(2);
+      C12.state.arrivedLoading =
+        true;
 
-        C12.ui.addAutomationBatch(
-          C12.automationTemplates
-            .delayReported
+      C12.state.cargoLoaded =
+        true;
+
+      C12.state.inTransit =
+        true;
+
+      refreshDriverUI();
+
+      C12.ui.showToast(
+        "Вантаж у дорозі",
+        "Рейс прямує до клієнта. ETA: 28 серпня · 14:00.",
+        "success"
+      );
+
+      break;
+    }
+
+
+    case "delay": {
+      C12.simulation.reportDelay(
+        2
+      );
+
+      C12.state.tripStarted =
+        true;
+
+      C12.state.arrivedLoading =
+        true;
+
+      C12.state.cargoLoaded =
+        true;
+
+      C12.state.inTransit =
+        true;
+
+      C12.state.delayReported =
+        true;
+
+      refreshDriverUI();
+
+      C12.ui.addAutomationBatch(
+        C12.automationTemplates
+          .delayReported
+      );
+
+      C12.ui.showToast(
+        "Затримка +2 години",
+        "ETA клієнта автоматично оновлено.",
+        "warning"
+      );
+
+      break;
+    }
+
+
+    case "delivered": {
+      C12.simulation.completeDelivery({
+        receivedBy:
+          "Jan Kowalski",
+
+        pod:
+          true,
+
+        cmr:
+          true
+      });
+
+      C12.state.tripStarted =
+        true;
+
+      C12.state.arrivedLoading =
+        true;
+
+      C12.state.cargoLoaded =
+        true;
+
+      C12.state.inTransit =
+        true;
+
+      C12.state.delivered =
+        true;
+
+      refreshDriverUI();
+
+      C12.ui.addAutomationBatch(
+        C12.automationTemplates
+          .delivered
+      );
+
+      C12.ui.showToast(
+        "Доставку завершено",
+        "Отримав: Jan Kowalski.",
+        "success"
+      );
+
+      await sleep(
+        900
+      );
+
+      if (
+        C12.state.mode ===
+        "guided"
+      ) {
+        C12.ui.showRole(
+          "customer"
         );
-
-        C12.ui.showToast(
-          "Затримка +2 години",
-          "ETA клієнта автоматично оновлено.",
-          "warning"
-        );
-
-        break;
       }
 
-
-      case "delivered": {
-        C12.simulation
-          .completeDelivery({
-            receivedBy:
-              "Jan Kowalski",
-            pod:
-              true,
-            cmr:
-              true
-          });
-
-        C12.ui.addAutomationBatch(
-          C12.automationTemplates
-            .delivered
-        );
-
-        C12.ui.showToast(
-          "Доставку завершено",
-          "Отримав: Jan Kowalski.",
-          "success"
-        );
-
-        await sleep(900);
-
-        if (
-          C12.state.mode ===
-          "guided"
-        ) {
-          C12.ui.showRole(
-            "customer"
-          );
-        }
-
-        break;
-      }
+      break;
     }
   }
+}
 
 
   function bindDriverActions() {

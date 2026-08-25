@@ -1059,28 +1059,31 @@ async function createMainOrder() {
      DRIVER ACTIONS
   ============================================================ */
 
-  async function handleDriverAction(
+ async function handleDriverAction(
   action
 ) {
-  const refreshDriverUI = () => {
-    const snapshot =
-      C12.simulation.preview(
-        C12.state.simulationPosition
-      );
+  const refresh =
+    () => {
+      const snapshot =
+        C12.simulation.preview(
+          C12.state
+            .simulationPosition
+        );
 
-    C12.ui.applySnapshot(
-      snapshot
-    );
-  };
+      C12.ui.applySnapshot(
+        snapshot
+      );
+    };
 
 
   switch (action) {
 
     case "start": {
       const result =
-        C12.simulation.driverAction(
-          "start"
-        );
+        C12.simulation
+          .driverAction(
+            "start"
+          );
 
       if (
         !result ||
@@ -1092,7 +1095,10 @@ async function createMainOrder() {
       C12.state.tripStarted =
         true;
 
-      refreshDriverUI();
+      C12.state.driverStep =
+        1;
+
+      refresh();
 
       C12.ui.addAutomationBatch(
         C12.automationTemplates
@@ -1101,7 +1107,7 @@ async function createMainOrder() {
 
       C12.ui.showToast(
         "Рейс розпочато",
-        "Час старту зафіксовано.",
+        "Наступний крок — прибуття на завантаження.",
         "success"
       );
 
@@ -1111,9 +1117,10 @@ async function createMainOrder() {
 
     case "arrived": {
       const result =
-        C12.simulation.driverAction(
-          "arrived"
-        );
+        C12.simulation
+          .driverAction(
+            "arrived"
+          );
 
       if (
         !result ||
@@ -1128,7 +1135,10 @@ async function createMainOrder() {
       C12.state.arrivedLoading =
         true;
 
-      refreshDriverUI();
+      C12.state.driverStep =
+        2;
+
+      refresh();
 
       C12.ui.addAutomationEvent(
         "Зафіксовано прибуття на завантаження"
@@ -1136,7 +1146,7 @@ async function createMainOrder() {
 
       C12.ui.showToast(
         "Автомобіль прибув",
-        "Точка завантаження — Львів.",
+        "Наступний крок — підтвердити завантаження.",
         "success"
       );
 
@@ -1146,9 +1156,10 @@ async function createMainOrder() {
 
     case "loaded": {
       const result =
-        C12.simulation.driverAction(
-          "loaded"
-        );
+        C12.simulation
+          .driverAction(
+            "loaded"
+          );
 
       if (
         !result ||
@@ -1166,7 +1177,10 @@ async function createMainOrder() {
       C12.state.cargoLoaded =
         true;
 
-      refreshDriverUI();
+      C12.state.driverStep =
+        3;
+
+      refresh();
 
       C12.ui.addAutomationBatch(
         C12.automationTemplates
@@ -1175,7 +1189,7 @@ async function createMainOrder() {
 
       C12.ui.showToast(
         "Вантаж завантажено",
-        "12 палет · 4 800 кг. Можна вирушати до клієнта.",
+        "Тепер можна вирушати до клієнта.",
         "success"
       );
 
@@ -1185,9 +1199,10 @@ async function createMainOrder() {
 
     case "transit": {
       const result =
-        C12.simulation.driverAction(
-          "transit"
-        );
+        C12.simulation
+          .driverAction(
+            "transit"
+          );
 
       if (
         !result ||
@@ -1208,11 +1223,14 @@ async function createMainOrder() {
       C12.state.inTransit =
         true;
 
-      refreshDriverUI();
+      C12.state.driverStep =
+        4;
+
+      refresh();
 
       C12.ui.showToast(
         "Вантаж у дорозі",
-        "Рейс прямує до клієнта. ETA: 28 серпня · 14:00.",
+        "Можна завершити доставку або повідомити про затримку.",
         "success"
       );
 
@@ -1221,26 +1239,18 @@ async function createMainOrder() {
 
 
     case "delay": {
-      C12.simulation.reportDelay(
-        2
-      );
-
-      C12.state.tripStarted =
-        true;
-
-      C12.state.arrivedLoading =
-        true;
-
-      C12.state.cargoLoaded =
-        true;
-
-      C12.state.inTransit =
-        true;
+      C12.simulation
+        .reportDelay(
+          2
+        );
 
       C12.state.delayReported =
         true;
 
-      refreshDriverUI();
+      C12.state.driverStep =
+        4;
+
+      refresh();
 
       C12.ui.addAutomationBatch(
         C12.automationTemplates
@@ -1258,33 +1268,25 @@ async function createMainOrder() {
 
 
     case "delivered": {
-      C12.simulation.completeDelivery({
-        receivedBy:
-          "Jan Kowalski",
+      C12.simulation
+        .completeDelivery({
+          receivedBy:
+            "Jan Kowalski",
 
-        pod:
-          true,
+          pod:
+            true,
 
-        cmr:
-          true
-      });
-
-      C12.state.tripStarted =
-        true;
-
-      C12.state.arrivedLoading =
-        true;
-
-      C12.state.cargoLoaded =
-        true;
-
-      C12.state.inTransit =
-        true;
+          cmr:
+            true
+        });
 
       C12.state.delivered =
         true;
 
-      refreshDriverUI();
+      C12.state.driverStep =
+        5;
+
+      refresh();
 
       C12.ui.addAutomationBatch(
         C12.automationTemplates
@@ -1314,7 +1316,6 @@ async function createMainOrder() {
     }
   }
 }
-
 
   function bindDriverActions() {
     $$(
@@ -1759,6 +1760,16 @@ async function createMainOrder() {
   ============================================================ */
 
   function init() {
+
+   if (
+      !Number.isInteger(
+        C12.state.driverStep
+      )
+    ) {
+      C12.state.driverStep =
+        0;
+    }
+    
     bindModes();
 
     bindSound();

@@ -3415,3 +3415,302 @@
   applySemanticTranslations();
 
 })();
+
+(function () {
+  "use strict";
+
+  const C12 =
+    window.C12 =
+    window.C12 || {};
+
+  if (!C12.i18n) {
+    return;
+  }
+
+  const extraTranslations = {
+
+    uk: {
+      underhood: {
+        kicker: "ПІД КАПОТОМ",
+        title: "Не нова корпоративна система.",
+        emphasis: "Чітка бізнес-логіка.",
+        description: "Процес можна побудувати навколо інструментів, якими команда вже користується.",
+
+        dataLabel: "ДАНІ ТА РОБОЧЕ СЕРЕДОВИЩЕ",
+        dataText: "Замовлення, клієнти, автопарк, водії, перевізники, статуси та історія.",
+
+        logicLabel: "БІЗНЕС-ЛОГІКА",
+        logicText: "Перевірки, статуси, timestamps, автоматичні дії, повідомлення та контроль.",
+
+        documentsLabel: "ДОКУМЕНТИ",
+        documentsText: "CMR, POD, фотографії та документи конкретного перевезення.",
+
+        communicationLabel: "КОМУНІКАЦІЯ",
+        communicationText: "Підтвердження, зміни ETA, доставка та внутрішні повідомлення.",
+
+        interfacesLabel: "ЗОВНІШНІ ІНТЕРФЕЙСИ",
+        interfacesText: "Мобільний інтерфейс водія, Track & Trace та спеціальні робочі екрани."
+      },
+
+      beforeAfter: {
+        before: "ДО",
+        beforeTitle: "Інформація",
+        beforeEmphasis: "розкидана.",
+
+        phone: "ТЕЛЕФОН",
+        exchange: "БІРЖА",
+        notes: "НОТАТКИ",
+        memory: "ПАМ'ЯТЬ",
+
+        after: "ПІСЛЯ",
+        afterTitle: "Один",
+        afterEmphasis: "операційний процес.",
+
+        request: "Заявка",
+        planning: "Планування",
+        trip: "Рейс",
+        delivery: "Доставка",
+        documents: "Документи",
+        analytics: "Аналітика"
+      },
+
+      final: {
+        kicker: "НЕ ЗАВЖДИ ПОТРІБНА НОВА СИСТЕМА",
+
+        title: "Іноді потрібно,",
+        titleSecond: "щоб ваш процес",
+        emphasis: "нарешті працював як система.",
+
+        description: "Робочий процес можна побудувати навколо Google Sheets та інструментів, які команда вже знає — з перевірками, автоматизацією, контролем і аналітикою.",
+
+        contact: "Обговорити свій процес →",
+        restart: "Пройти кейс ще раз",
+
+        your: "ВАШ",
+        process: "ПРОЦЕС",
+        works: "працює як система",
+
+        orders: "Замовлення",
+        ordersText: "вхід та статус",
+
+        team: "Команда",
+        teamText: "ролі та дії",
+
+        fleet: "Автопарк",
+        fleetText: "ресурси та рейси",
+
+        documents: "Документи",
+        documentsText: "CMR · POD · файли",
+
+        customers: "Клієнти",
+        customersText: "ETA та повідомлення",
+
+        analytics: "Аналітика",
+        analyticsText: "KPI та контроль"
+      }
+    },
+
+
+    ru: {
+      underhood: {
+        kicker: "ПОД КАПОТОМ",
+        title: "Не новая корпоративная система.",
+        emphasis: "Чёткая бизнес-логика.",
+        description: "Процесс можно построить вокруг инструментов, которыми команда уже пользуется.",
+
+        dataLabel: "ДАННЫЕ И РАБОЧАЯ СРЕДА",
+        dataText: "Заказы, клиенты, автопарк, водители, перевозчики, статусы и история.",
+
+        logicLabel: "БИЗНЕС-ЛОГИКА",
+        logicText: "Проверки, статусы, timestamps, автоматические действия, уведомления и контроль.",
+
+        documentsLabel: "ДОКУМЕНТЫ",
+        documentsText: "CMR, POD, фотографии и документы конкретной перевозки.",
+
+        communicationLabel: "КОММУНИКАЦИЯ",
+        communicationText: "Подтверждения, изменения ETA, доставка и внутренние уведомления.",
+
+        interfacesLabel: "ВНЕШНИЕ ИНТЕРФЕЙСЫ",
+        interfacesText: "Мобильный интерфейс водителя, Track & Trace и специальные рабочие экраны."
+      },
+
+      beforeAfter: {
+        before: "ДО",
+        beforeTitle: "Информация",
+        beforeEmphasis: "разбросана.",
+
+        phone: "ТЕЛЕФОН",
+        exchange: "БИРЖА",
+        notes: "ЗАМЕТКИ",
+        memory: "ПАМЯТЬ",
+
+        after: "ПОСЛЕ",
+        afterTitle: "Один",
+        afterEmphasis: "операционный процесс.",
+
+        request: "Заявка",
+        planning: "Планирование",
+        trip: "Рейс",
+        delivery: "Доставка",
+        documents: "Документы",
+        analytics: "Аналитика"
+      },
+
+      final: {
+        kicker: "НЕ ВСЕГДА НУЖНА НОВАЯ СИСТЕМА",
+
+        title: "Иногда нужно,",
+        titleSecond: "чтобы ваш процесс",
+        emphasis: "наконец работал как система.",
+
+        description: "Рабочий процесс можно построить вокруг Google Sheets и знакомых команде инструментов — с проверками, автоматизацией, контролем и аналитикой.",
+
+        contact: "Обсудить свой процесс →",
+        restart: "Пройти кейс ещё раз",
+
+        your: "ВАШ",
+        process: "ПРОЦЕСС",
+        works: "работает как система",
+
+        orders: "Заказы",
+        ordersText: "вход и статус",
+
+        team: "Команда",
+        teamText: "роли и действия",
+
+        fleet: "Автопарк",
+        fleetText: "ресурсы и рейсы",
+
+        documents: "Документы",
+        documentsText: "CMR · POD · файлы",
+
+        customers: "Клиенты",
+        customersText: "ETA и уведомления",
+
+        analytics: "Аналитика",
+        analyticsText: "KPI и контроль"
+      }
+    },
+
+
+    en: {
+      underhood: {
+        kicker: "UNDER THE HOOD",
+        title: "Not another enterprise platform.",
+        emphasis: "Just the right business logic.",
+        description: "The workflow can be built around tools your team already uses.",
+
+        dataLabel: "DATA & WORKSPACE",
+        dataText: "Orders, customers, fleet, drivers, carriers, statuses, and history.",
+
+        logicLabel: "BUSINESS LOGIC",
+        logicText: "Validation, status changes, timestamps, automated actions, notifications, and controls.",
+
+        documentsLabel: "DOCUMENTS",
+        documentsText: "CMR, POD, photos, and files tied to each shipment.",
+
+        communicationLabel: "COMMUNICATION",
+        communicationText: "Confirmations, ETA updates, delivery messages, and internal notifications.",
+
+        interfacesLabel: "USER INTERFACES",
+        interfacesText: "Driver mobile view, Track & Trace, and purpose-built operations screens."
+      },
+
+      beforeAfter: {
+        before: "BEFORE",
+        beforeTitle: "Information is",
+        beforeEmphasis: "scattered.",
+
+        phone: "PHONE",
+        exchange: "LOAD BOARD",
+        notes: "NOTES",
+        memory: "MEMORY",
+
+        after: "AFTER",
+        afterTitle: "One",
+        afterEmphasis: "connected operations workflow.",
+
+        request: "Request",
+        planning: "Planning",
+        trip: "Trip",
+        delivery: "Delivery",
+        documents: "Documents",
+        analytics: "Analytics"
+      },
+
+      final: {
+        kicker: "YOU DON'T ALWAYS NEED A NEW SYSTEM",
+
+        title: "Sometimes the real need is simple:",
+        titleSecond: "make your existing process",
+        emphasis: "work like a system.",
+
+        description: "A reliable operations workflow can be built around Google Sheets and tools your team already knows — with validation, automation, visibility, and reporting built in.",
+
+        contact: "Discuss your process →",
+        restart: "Run the case again",
+
+        your: "YOUR",
+        process: "PROCESS",
+        works: "works like a system",
+
+        orders: "Orders",
+        ordersText: "intake & status",
+
+        team: "Team",
+        teamText: "roles & actions",
+
+        fleet: "Fleet",
+        fleetText: "capacity & trips",
+
+        documents: "Documents",
+        documentsText: "CMR · POD · files",
+
+        customers: "Customers",
+        customersText: "ETA & notifications",
+
+        analytics: "Analytics",
+        analyticsText: "KPIs & control"
+      }
+    }
+
+  };
+
+
+  Object.entries(
+    extraTranslations
+  ).forEach(
+    ([language, sections]) => {
+
+      const target =
+        C12.i18n.languages[
+          language
+        ];
+
+      if (!target) {
+        return;
+      }
+
+      Object.entries(
+        sections
+      ).forEach(
+        ([section, values]) => {
+
+          target[section] = {
+            ...(
+              target[section] ||
+              {}
+            ),
+            ...values
+          };
+
+        }
+      );
+
+    }
+  );
+
+
+  C12.i18n.apply?.();
+
+})();

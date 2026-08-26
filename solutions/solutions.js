@@ -2009,22 +2009,118 @@ stateNode.textContent =
 try {
 
   if (caseId === 12) {
-    const basePath =
-      "/solutions/cases/case12";
+  const basePath =
+    "/solutions/cases/case12";
 
-    const htmlResponse =
+  const case12Version =
+    "20260826-01";
+
+
+  const htmlResponse =
+    await fetch(
+      `${basePath}/index.html?v=${case12Version}`,
+      {
+        cache: "no-store"
+      }
+    );
+
+
+  if (!htmlResponse.ok) {
+    throw new Error(
+      "Case 12 HTML failed"
+    );
+  }
+
+
+  const fullHtml =
+    await htmlResponse.text();
+
+
+  if (
+    requestId !==
+    detailRequestId
+  ) {
+    return;
+  }
+
+
+  const parser =
+    new DOMParser();
+
+
+  const parsed =
+    parser.parseFromString(
+      fullHtml,
+      "text/html"
+    );
+
+
+  const caseShell =
+    parsed.querySelector(
+      "#transportCase"
+    );
+
+
+  if (!caseShell) {
+    throw new Error(
+      "Case 12 root #transportCase not found"
+    );
+  }
+
+
+  stageBody.innerHTML =
+    caseShell.outerHTML;
+
+
+  stageBody.classList.add(
+    "c12-body"
+  );
+
+
+  if (window.C12) {
+    delete window.C12;
+  }
+
+
+  const moduleFiles = [
+    "case12-i18n.js",
+    "case12-data.js",
+    "case12-rules.js",
+    "case12-simulation.js",
+    "case12-ui.js",
+    "case12.js"
+  ];
+
+
+  for (
+    const fileName
+    of moduleFiles
+  ) {
+    const modulePath =
+      `${basePath}/${fileName}?v=${case12Version}`;
+
+
+    const moduleResponse =
       await fetch(
-        `${basePath}/index.html?v=1`
+        modulePath,
+        {
+          cache: "no-store"
+        }
       );
 
-    if (!htmlResponse.ok) {
+
+    if (
+      !moduleResponse.ok
+    ) {
       throw new Error(
-        "Case 12 HTML failed"
+        `Case 12 module failed: ${fileName}`
       );
     }
 
-    const fullHtml =
-      await htmlResponse.text();
+
+    const moduleCode =
+      await moduleResponse.text();
+
 
     if (
       requestId !==
@@ -2033,83 +2129,56 @@ try {
       return;
     }
 
-    const parser =
-      new DOMParser();
 
-    const parsed =
-      parser.parseFromString(
-        fullHtml,
-        "text/html"
-      );
-
-    const caseShell =
-      parsed.querySelector(
-        "#transportCase"
-      );
-
-    if (!caseShell) {
-      throw new Error(
-        "Case 12 root #transportCase not found"
-      );
-    }
-
-    stageBody.innerHTML =
-      caseShell.outerHTML;
-
-    stageBody.classList.add(
-      "c12-body"
+    executeCaseScript(
+      moduleCode,
+      modulePath
     );
+  }
 
-    if (window.C12) {
-      delete window.C12;
+
+  if (
+    requestId !==
+    detailRequestId
+  ) {
+    return;
+  }
+
+
+  if (
+    window.C12?.i18n
+      ?.applyStatic
+  ) {
+    window.C12
+      .i18n
+      .applyStatic();
+  }
+
+
+  if (
+    window.C12?.ui
+      ?.localize
+  ) {
+    window.C12
+      .ui
+      .localize();
+  }
+
+
+  console.info(
+    "[SOLUTIONS] Case 12 loaded:",
+    {
+      pageLanguage,
+      caseLanguage:
+        window.C12
+          ?.i18n
+          ?.current,
+      version:
+        case12Version
     }
+  );
 
-    const moduleFiles = [
-      "case12-i18n.js",
-      "case12-data.js",
-      "case12-rules.js",
-      "case12-simulation.js",
-      "case12-ui.js",
-      "case12.js"
-    ];
-
-    for (
-      const fileName
-      of moduleFiles
-    ) {
-      const modulePath =
-        `${basePath}/${fileName}?v=1`;
-
-      const moduleResponse =
-        await fetch(
-          modulePath
-        );
-
-      if (
-        !moduleResponse.ok
-      ) {
-        throw new Error(
-          `Case 12 module failed: ${fileName}`
-        );
-      }
-
-      const moduleCode =
-        await moduleResponse.text();
-
-      if (
-        requestId !==
-        detailRequestId
-      ) {
-        return;
-      }
-
-      executeCaseScript(
-        moduleCode,
-        modulePath
-      );
-    }
-
-  } else {
+} else {
 
     const basePath =
       `/solutions/cases/case-${caseId}`;

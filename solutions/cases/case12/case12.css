@@ -8977,3 +8977,80 @@ button:first-child {
     min-height: 58px;
   }
 }
+
+.case-detail-stage__body.c12-body .c12-before-after {
+  padding-bottom: 34px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final {
+  min-height: auto !important;
+
+  padding-top: 34px !important;
+  padding-bottom: 70px !important;
+
+  gap: 56px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final__system {
+  min-height: 560px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final__system::before {
+  width: 350px !important;
+  height: 350px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final__system::after {
+  width: 500px !important;
+  height: 500px !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final-node--orders {
+  top: 0 !important;
+  left: 10% !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final-node--people {
+  top: 4% !important;
+  right: 1% !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final-node--fleet {
+  top: 43% !important;
+  right: -8% !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final-node--documents {
+  right: 2% !important;
+  bottom: 0 !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final-node--customers {
+  bottom: 1% !important;
+  left: 1% !important;
+}
+
+.case-detail-stage__body.c12-body .c12-final-node--analytics {
+  top: 43% !important;
+  left: -8% !important;
+}
+
+@media (min-width: 1181px) {
+  .case-detail-stage__body.c12-body .c12-final {
+    margin-top: -10px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .case-detail-stage__body.c12-body .c12-before-after {
+    padding-bottom: 24px !important;
+  }
+
+  .case-detail-stage__body.c12-body .c12-final {
+    padding-top: 24px !important;
+  }
+
+  .case-detail-stage__body.c12-body .c12-final__system {
+    min-height: 0 !important;
+  }
+}

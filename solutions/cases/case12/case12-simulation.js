@@ -251,147 +251,347 @@
      MAIN ORDER DRIVER / VEHICLE STATE
   ============================================================ */
 
-  function syncMainResources(position) {
-    const vehicle = C12.data.getVehicle("BC4587KA");
-    const driver = C12.data.getDriver(
+  function getMainAssignment() {
+  const choice =
+    C12.state
+      .assignmentChoice;
+
+  if (
+    choice &&
+    (
+      choice.execution ===
+        "own" ||
+      choice.execution ===
+        "carrier"
+    )
+  ) {
+    return choice;
+  }
+
+  return {
+    execution:
+      "own",
+
+    executionLabel:
+      "Власний транспорт",
+
+    carrier:
+      null,
+
+    vehicle:
+      "BC 4587 KA",
+
+    driver:
+      "Олександр Петренко",
+
+    externalResource:
+      null
+  };
+}
+
+
+function syncMainResources(
+  position
+) {
+  const assignment =
+    getMainAssignment();
+
+  const defaultVehicle =
+    C12.data.getVehicle(
+      "BC4587KA"
+    );
+
+  const defaultDriver =
+    C12.data.getDriver(
       "Олександр Петренко"
     );
 
-    if (!vehicle || !driver) {
-      return;
+  if (
+    assignment.execution ===
+    "carrier"
+  ) {
+    if (
+      defaultVehicle
+    ) {
+      defaultVehicle.status =
+        "free";
+
+      defaultVehicle.location =
+        "Львів";
     }
 
-    if (position < 24) {
-      vehicle.status = "free";
-      vehicle.location = "Львів";
-
-      driver.status = "free";
+    if (
+      defaultDriver
+    ) {
+      defaultDriver.status =
+        "free";
     }
 
-    else if (position < 39) {
-      vehicle.status = "reserved";
-      vehicle.location = "Львів";
+    return;
+  }
 
-      driver.status = "reserved";
+  const vehicle =
+    C12.data.getVehicle(
+      assignment.vehicle
+    );
+
+  const driver =
+    C12.data.getDriver(
+      assignment.driver
+    );
+
+  if (
+    !vehicle ||
+    !driver
+  ) {
+    return;
+  }
+
+  if (
+    position <
+    24
+  ) {
+    vehicle.status =
+      "free";
+
+    vehicle.location =
+      "Львів";
+
+    driver.status =
+      "free";
+  }
+
+  else if (
+    position <
+    39
+  ) {
+    vehicle.status =
+      "reserved";
+
+    vehicle.location =
+      "Львів";
+
+    driver.status =
+      "reserved";
+  }
+
+  else if (
+    position <
+    92
+  ) {
+    vehicle.status =
+      "transit";
+
+    driver.status =
+      "transit";
+
+    if (
+      position <
+      65
+    ) {
+      vehicle.location =
+        "Львів";
     }
 
-    else if (position < 92) {
-      vehicle.status = "transit";
-
-      driver.status = "transit";
-
-      if (position < 65) {
-        vehicle.location = "Львів";
-      }
-
-      else if (position < 78) {
-        vehicle.location = "Польща";
-      }
-
-      else {
-        vehicle.location = "Краків";
-      }
+    else if (
+      position <
+      78
+    ) {
+      vehicle.location =
+        "Польща";
     }
 
     else {
-      vehicle.status = "free";
-      vehicle.location = "Краків";
-
-      driver.status = "free";
+      vehicle.location =
+        "Краків";
     }
   }
 
+  else {
+    vehicle.status =
+      "free";
 
-  /* ============================================================
-     UPDATE MAIN ORDER FROM TIME POSITION
-  ============================================================ */
+    vehicle.location =
+      "Краків";
 
-  function syncMainOrder(position) {
-    const order = C12.mainOrder;
-
-    const status = getMainStatusByPosition(position);
-
-    order.status = status;
-    order.statusLabel =
-      C12.statuses[status]?.label || status;
-
-    order.attention =
-      status === "delayed";
-
-    order.eta =
-      getMainEtaByPosition(position);
-
-    if (position >= 24) {
-      order.execution = "own";
-      order.executionLabel =
-        "Власний транспорт";
-
-      order.vehicle = "BC 4587 KA";
-      order.driver = "Олександр Петренко";
-
-      order.carrier = null;
-    }
-
-    else {
-      order.execution = null;
-      order.executionLabel =
-        "Не призначено";
-
-      order.vehicle = null;
-      order.driver = null;
-    }
-
-    if (position >= 92) {
-      order.deliveredAt =
-        "2026-08-28T15:43:00";
-
-      order.receivedBy =
-        "Jan Kowalski";
-
-      order.pod = true;
-      order.cmr = true;
-    }
-
-    else {
-      order.deliveredAt = null;
-      order.receivedBy = null;
-
-      if (position < 92) {
-        order.pod = false;
-        order.cmr = false;
-      }
-    }
-
-    C12.state.mainOrderCreated =
-      position >= 9;
-
-    C12.state.mainOrderAssigned =
-      position >= 24;
-
-    C12.state.tripStarted =
-      position >= 39;
-
-    C12.state.arrivedLoading =
-      position >= 39;
-
-    C12.state.cargoLoaded =
-      position >= 48;
-
-    C12.state.inTransit =
-      position >= 48;
-
-    C12.state.delayReported =
-      position >= 65 &&
-      position < 92;
-
-    C12.state.delivered =
-      position >= 92;
-
-    C12.state.podUploaded =
-      position >= 92;
-
-    syncMainResources(position);
+    driver.status =
+      "free";
   }
+}
+
+
+function syncMainOrder(
+  position
+) {
+  const order =
+    C12.mainOrder;
+
+  const status =
+    getMainStatusByPosition(
+      position
+    );
+
+  order.status =
+    status;
+
+  order.statusLabel =
+    C12.statuses[
+      status
+    ]?.label ||
+    status;
+
+  order.attention =
+    status ===
+    "delayed";
+
+  order.eta =
+    getMainEtaByPosition(
+      position
+    );
+
+  if (
+    position >=
+    24
+  ) {
+    const assignment =
+      getMainAssignment();
+
+    order.execution =
+      assignment.execution;
+
+    order.executionLabel =
+      assignment.executionLabel;
+
+    order.vehicle =
+      assignment.vehicle;
+
+    order.driver =
+      assignment.driver;
+
+    order.carrier =
+      assignment.carrier ||
+      null;
+
+    order.externalResource =
+      assignment.externalResource ||
+      null;
+
+    order.carrierRate =
+      assignment.externalResource
+        ?.rate ||
+      null;
+  }
+
+  else {
+    order.execution =
+      null;
+
+    order.executionLabel =
+      "Не призначено";
+
+    order.vehicle =
+      null;
+
+    order.driver =
+      null;
+
+    order.carrier =
+      null;
+
+    order.externalResource =
+      null;
+
+    order.carrierRate =
+      null;
+  }
+
+  if (
+    position >=
+    92
+  ) {
+    order.deliveredAt =
+      "2026-08-28T15:43:00";
+
+    order.receivedBy =
+      "Jan Kowalski";
+
+    order.pod =
+      true;
+
+    order.cmr =
+      true;
+  }
+
+  else {
+    order.deliveredAt =
+      null;
+
+    order.receivedBy =
+      null;
+
+    if (
+      position <
+      92
+    ) {
+      order.pod =
+        false;
+
+      order.cmr =
+        false;
+    }
+  }
+
+  C12.state
+    .mainOrderCreated =
+    position >=
+    9;
+
+  C12.state
+    .mainOrderAssigned =
+    position >=
+    24;
+
+  C12.state
+    .tripStarted =
+    position >=
+    39;
+
+  C12.state
+    .arrivedLoading =
+    position >=
+    39;
+
+  C12.state
+    .cargoLoaded =
+    position >=
+    48;
+
+  C12.state
+    .inTransit =
+    position >=
+    48;
+
+  C12.state
+    .delayReported =
+    position >=
+      65 &&
+    position <
+      92;
+
+  C12.state
+    .delivered =
+    position >=
+    92;
+
+  C12.state
+    .podUploaded =
+    position >=
+    92;
+
+  syncMainResources(
+    position
+  );
+}
 
 
   /* ============================================================
@@ -1258,58 +1458,104 @@
   ============================================================ */
 
   function reset() {
-    triggeredThresholds.clear();
+  triggeredThresholds.clear();
 
-    C12.state.simulationPosition = 4;
-    C12.state.simulationTime =
-      "2026-08-26T09:45:00";
+  C12.state
+    .simulationPosition =
+    4;
 
-    C12.state.mainOrderCreated = false;
-    C12.state.mainOrderAssigned = false;
+  C12.state
+    .simulationTime =
+    "2026-08-26T09:45:00";
 
-    C12.state.tripStarted = false;
-    C12.state.arrivedLoading = false;
-    C12.state.cargoLoaded = false;
-    C12.state.inTransit = false;
+  C12.state
+    .mainOrderCreated =
+    false;
 
-    C12.state.delayReported = false;
+  C12.state
+    .mainOrderAssigned =
+    false;
 
-    C12.state.delivered = false;
-    C12.state.podUploaded = false;
+  C12.state
+    .assignmentChoice =
+    null;
 
-    C12.state.customerMessagesVisible = [];
+  C12.state
+    .driverStep =
+    0;
 
-    const snapshot =
-      buildSimulationSnapshot(4);
+  C12.state
+    .tripStarted =
+    false;
 
-    document.dispatchEvent(
-      new CustomEvent(
-        "c12:simulationreset",
-        {
-          detail: {
-            snapshot
-          }
-        }
-      )
+  C12.state
+    .arrivedLoading =
+    false;
+
+  C12.state
+    .cargoLoaded =
+    false;
+
+  C12.state
+    .inTransit =
+    false;
+
+  C12.state
+    .delayReported =
+    false;
+
+  C12.state
+    .delivered =
+    false;
+
+  C12.state
+    .podUploaded =
+    false;
+
+  C12.state
+    .customerMessagesVisible =
+    [];
+
+  C12.carriers.forEach(
+    carrier => {
+      carrier.available =
+        carrier.initialAvailable;
+    }
+  );
+
+  const snapshot =
+    buildSimulationSnapshot(
+      4
     );
 
-    document.dispatchEvent(
-      new CustomEvent(
-        "c12:simulationchange",
-        {
-          detail: {
-            snapshot,
-            crossedEvents: [],
-            previousPosition: 4,
-            position: 4,
-            source: "reset"
-          }
+  document.dispatchEvent(
+    new CustomEvent(
+      "c12:simulationreset",
+      {
+        detail: {
+          snapshot
         }
-      )
-    );
+      }
+    )
+  );
 
-    return snapshot;
-  }
+  document.dispatchEvent(
+    new CustomEvent(
+      "c12:simulationchange",
+      {
+        detail: {
+          snapshot,
+          crossedEvents: [],
+          previousPosition: 4,
+          position: 4,
+          source: "reset"
+        }
+      }
+    )
+  );
+
+  return snapshot;
+}
 
 
   /* ============================================================

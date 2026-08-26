@@ -492,17 +492,18 @@ async function createMainOrder() {
   }
 
 
-  if (
-    request.createdOrderId
-  ) {
-    C12.ui.showToast(
-      "Замовлення вже створено",
-      `${request.createdOrderId} уже знаходиться в реєстрі.`,
-      "info"
-    );
+ if (
+  request.createdOrderId
+) {
+  request.createdOrderId =
+    null;
 
-    return;
-  }
+  request.processedAt =
+    null;
+
+  request.unread =
+    true;
+}
 
 
   /* ============================================================
@@ -615,62 +616,115 @@ async function createMainOrder() {
     return;
   }
 
-
   /* ============================================================
      REGULAR INBOX REQUEST
   ============================================================ */
 
-  const orderId =
-    getNextOrderId();
-
-
   const order =
     buildOrderFromInbox(
       request,
-      orderId
+      C12.mainOrder.id
     );
 
 
-  C12.orders.push(
-    order
+  Object.assign(
+    C12.mainOrder,
+    order,
+    {
+      id:
+        "TR-2026-00184",
+
+      status:
+        "new",
+
+      statusLabel:
+        C12.statuses
+          .new
+          .label,
+
+      execution:
+        null,
+
+      executionLabel:
+        "Не призначено",
+
+      carrier:
+        null,
+
+      vehicle:
+        null,
+
+      driver:
+        null,
+
+      attention:
+        false,
+
+      deliveredAt:
+        null,
+
+      receivedBy:
+        null,
+
+      cmr:
+        false,
+
+      pod:
+        false
+    }
   );
 
 
-  C12.planningQueue.unshift(
-    order
-  );
+  C12.state.mainOrderCreated =
+    true;
+
+  C12.state.mainOrderAssigned =
+    false;
+
+  C12.state.tripStarted =
+    false;
+
+  C12.state.arrivedLoading =
+    false;
+
+  C12.state.cargoLoaded =
+    false;
+
+  C12.state.inTransit =
+    false;
+
+  C12.state.delayReported =
+    false;
+
+  C12.state.delivered =
+    false;
+
+  C12.state.driverStep =
+    0;
 
 
-  C12.featuredOrderIds =
+  C12.planningQueue =
     [
-      orderId,
-      ...C12.featuredOrderIds
+      C12.mainOrder,
+      ...C12.planningQueue
         .filter(
-          id =>
-            id !==
-            orderId
+          item =>
+            item.id !==
+            C12.mainOrder.id
         )
-    ]
-      .slice(
-        0,
-        12
-      );
-
-
-  C12.company.orders =
-    C12.orders.length;
+    ];
 
 
   markInboxRequestProcessed(
     request,
-    orderId
+    C12.mainOrder.id
   );
 
 
   C12.ui
     .addAutomationBatch(
       [
-        `Присвоєно номер ${orderId}`,
+        `Присвоєно номер ${C12.mainOrder.id}`,
         "Зафіксовано час створення",
         "Заявку перенесено до реєстру перевезень",
         "Статус встановлено: НОВЕ",
@@ -680,16 +734,52 @@ async function createMainOrder() {
 
 
   C12.ui.showToast(
-    `${orderId} створено`,
+    `${C12.mainOrder.id} створено`,
     `${request.client} · ${request.origin} → ${request.destination}`,
     "success"
   );
 
 
+  C12.simulation
+    .setPosition(
+      9,
+      {
+        source:
+          "dispatcher-create"
+      }
+    );
+
+
   updateCreatedOrderUI();
+
+
+  await sleep(
+    700
+  );
+
+
+  if (
+    C12.state.mode ===
+    "guided"
+  ) {
+    C12.ui.showToast(
+      "Далі — планування",
+      `${request.origin} → ${request.destination}. Тепер підбираємо ресурс.`,
+      "info",
+      3200
+    );
+
+
+    await sleep(
+      900
+    );
+
+
+    C12.ui.showRole(
+      "manager"
+    );
+  }
 }
-
-
   /* ============================================================
      DRAG & DROP
   ============================================================ */
@@ -1735,29 +1825,53 @@ async function createMainOrder() {
       C12.story.step =
         0;
 
-      C12.state
-        .mainOrderAssigned =
+      C12.state.mainOrderAssigned =
         false;
 
-      C12.state
-        .mainOrderCreated =
+      C12.state.mainOrderCreated =
         false;
 
-      const mainRequest =
-        C12.getInboxRequest(
-          "REQ-EMAIL-001"
+      C12.state.tripStarted =
+        false;
+
+      C12.state.arrivedLoading =
+        false;
+
+      C12.state.cargoLoaded =
+        false;
+
+      C12.state.inTransit =
+        false;
+
+      C12.state.delayReported =
+        false;
+
+      C12.state.delivered =
+        false;
+
+      C12.state.driverStep =
+        0;
+
+
+      if (
+        Array.isArray(
+          C12.inboxRequests
+        )
+      ) {
+        C12.inboxRequests.forEach(
+          request => {
+            request.unread =
+              true;
+
+            request.createdOrderId =
+              null;
+
+            request.processedAt =
+              null;
+          }
         );
-
-      if (mainRequest) {
-        mainRequest.unread =
-          true;
-
-        mainRequest.createdOrderId =
-          null;
-
-        mainRequest.processedAt =
-          null;
       }
+
 
       if (
         C12.uiState
@@ -1769,6 +1883,7 @@ async function createMainOrder() {
           "REQ-EMAIL-001";
       }
 
+
       if (
         C12.inboxUI
       ) {
@@ -1779,7 +1894,6 @@ async function createMainOrder() {
     }
   );
 }
-
 
   /* ============================================================
      SAFETY CHECK

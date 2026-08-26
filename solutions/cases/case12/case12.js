@@ -1728,23 +1728,57 @@ async function createMainOrder() {
      RESET HOOK
   ============================================================ */
 
-  function bindReset() {
-    document.addEventListener(
-      "c12:simulationreset",
-      () => {
-        C12.story.step =
-          0;
+ function bindReset() {
+  document.addEventListener(
+    "c12:simulationreset",
+    () => {
+      C12.story.step =
+        0;
 
-        C12.state
-          .mainOrderAssigned =
-          false;
+      C12.state
+        .mainOrderAssigned =
+        false;
 
-        C12.state
-          .mainOrderCreated =
-          false;
+      C12.state
+        .mainOrderCreated =
+        false;
+
+      const mainRequest =
+        C12.getInboxRequest(
+          "REQ-EMAIL-001"
+        );
+
+      if (mainRequest) {
+        mainRequest.unread =
+          true;
+
+        mainRequest.createdOrderId =
+          null;
+
+        mainRequest.processedAt =
+          null;
       }
-    );
-  }
+
+      if (
+        C12.uiState
+      ) {
+        C12.uiState.inboxSource =
+          "email";
+
+        C12.uiState.selectedInboxRequestId =
+          "REQ-EMAIL-001";
+      }
+
+      if (
+        C12.inboxUI
+      ) {
+        C12.inboxUI.openSource(
+          "email"
+        );
+      }
+    }
+  );
+}
 
 
   /* ============================================================

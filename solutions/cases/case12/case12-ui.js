@@ -4575,33 +4575,116 @@ function updateDriverActions() {
      TIME SLIDER
   ============================================================ */
 
-  function bindTimeMachine() {
-    const slider =
-      $(
-        "[data-time-slider]"
-      );
+  function getRoleByTimePosition(
+  position
+) {
+  const value =
+    Number(position);
 
-    if (!slider) {
-      return;
-    }
-
-    slider.addEventListener(
-      "input",
-      () => {
-        C12.simulation
-          .setPosition(
-            Number(
-              slider.value
-            ),
-            {
-              source:
-                "time-slider"
-            }
-          );
-      }
-    );
+  if (value < 24) {
+    return "dispatcher";
   }
 
+  if (value < 39) {
+    return "manager";
+  }
+
+  if (value < 92) {
+    return "driver";
+  }
+
+  if (value < 100) {
+    return "customer";
+  }
+
+  return "owner";
+}
+
+
+function jumpToTimeScene(
+  position
+) {
+  const ripple =
+    $(
+      "[data-event-ripple]"
+    );
+
+  const workspace =
+    $(
+      "[data-workspace]"
+    );
+
+  const strip =
+    $(
+      "[data-global-order-strip]"
+    );
+
+  if (ripple) {
+    ripple.hidden =
+      true;
+  }
+
+  if (workspace) {
+    workspace.hidden =
+      false;
+  }
+
+  if (strip) {
+    strip.hidden =
+      false;
+  }
+
+  const role =
+    getRoleByTimePosition(
+      position
+    );
+
+  showRole(
+    role,
+    {
+      scroll: true
+    }
+  );
+}
+
+
+function bindTimeMachine() {
+  const slider =
+    $(
+      "[data-time-slider]"
+    );
+
+  if (!slider) {
+    return;
+  }
+
+  slider.addEventListener(
+    "input",
+    () => {
+      C12.simulation
+        .setPosition(
+          Number(
+            slider.value
+          ),
+          {
+            source:
+              "time-slider"
+          }
+        );
+    }
+  );
+
+  slider.addEventListener(
+    "change",
+    () => {
+      jumpToTimeScene(
+        Number(
+          slider.value
+        )
+      );
+    }
+  );
+}
 
   /* ============================================================
      OWNER FILTER BUTTONS
@@ -4745,12 +4828,20 @@ function updateDriverActions() {
     );
 
 
-    document.addEventListener(
-      "c12:storyevent",
-      event => {
-        const name =
-          event.detail
-            .event;
+document.addEventListener(
+  "c12:storyevent",
+  event => {
+    if (
+      event.detail
+        ?.source ===
+      "time-slider"
+    ) {
+      return;
+    }
+
+    const name =
+      event.detail
+        .event;
 
         switch (name) {
           case "created":

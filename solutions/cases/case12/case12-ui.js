@@ -2194,189 +2194,710 @@ else {
         .join("");
   }
 
-
-  /* ============================================================
-     MAP
-  ============================================================ */
-
  /* ============================================================
    REAL OPERATIONS MAP
 ============================================================ */
 
-let c12LeafletLoader = null;
+let c12MapLibrariesLoader = null;
 let c12OperationsMap = null;
 let c12OperationsMapBound = false;
+let c12PoliticalBoundariesPromise = null;
 
 
 const c12MapLocations = {
-  "Львів": [
-    49.8397,
-    24.0297
-  ],
-
-  "Київ": [
-    50.4501,
-    30.5234
-  ],
-
-  "Варшава": [
-    52.2297,
-    21.0122
-  ],
-
-  "Краків": [
-    50.0647,
-    19.9450
-  ],
-
-  "Катовіце": [
-    50.2649,
-    19.0238
-  ],
-
-  "Будапешт": [
-    47.4979,
-    19.0402
-  ],
-
-  "Бухарест": [
-    44.4268,
-    26.1025
-  ],
-
-  "Чернівці": [
-    48.2915,
-    25.9358
-  ],
-
-  "Ужгород": [
-    48.6208,
-    22.2879
-  ],
-
-  "Кошице": [
-    48.7164,
-    21.2611
-  ],
-
-  "Івано-Франківськ": [
-    48.9226,
-    24.7111
-  ]
+  "Львів": [49.8397, 24.0297],
+  "Київ": [50.4501, 30.5234],
+  "Варшава": [52.2297, 21.0122],
+  "Краків": [50.0647, 19.9450],
+  "Катовіце": [50.2649, 19.0238],
+  "Будапешт": [47.4979, 19.0402],
+  "Бухарест": [44.4268, 26.1025],
+  "Чернівці": [48.2915, 25.9358],
+  "Ужгород": [48.6208, 22.2879],
+  "Кошице": [48.7164, 21.2611],
+  "Івано-Франківськ": [48.9226, 24.7111]
 };
 
 
-function ensureLeaflet() {
+const c12PoliticalCountries = [
+  {
+    iso: "UKR",
+    name: "Україна",
+    label: [49.2, 30.4],
+    main: true
+  },
+
+  {
+    iso: "POL",
+    name: "Польща",
+    label: [52.1, 19.0]
+  },
+
+  {
+    iso: "CZE",
+    name: "Чехія",
+    label: [49.8, 15.4]
+  },
+
+  {
+    iso: "SVK",
+    name: "Словаччина",
+    label: [48.7, 19.5]
+  },
+
+  {
+    iso: "HUN",
+    name: "Угорщина",
+    label: [47.1, 19.4]
+  },
+
+  {
+    iso: "ROU",
+    name: "Румунія",
+    label: [45.8, 24.8]
+  },
+
+  {
+    iso: "MDA",
+    name: "Молдова",
+    label: [47.1, 28.6]
+  },
+
+  {
+    iso: "BLR",
+    name: "Білорусь",
+    label: [53.3, 27.8]
+  }
+];
+
+
+function loadStyleOnce(
+  id,
+  href
+) {
   if (
-    window.L &&
-    typeof window.L.map ===
-      "function"
+    document.getElementById(
+      id
+    )
   ) {
-    return Promise.resolve(
-      window.L
+    return;
+  }
+
+  const link =
+    document.createElement(
+      "link"
     );
-  }
+
+  link.id =
+    id;
+
+  link.rel =
+    "stylesheet";
+
+  link.href =
+    href;
+
+  document.head.appendChild(
+    link
+  );
+}
 
 
+function loadScriptOnce(
+  id,
+  src,
+  test
+) {
   if (
-    c12LeafletLoader
+    typeof test ===
+      "function" &&
+    test()
   ) {
-    return c12LeafletLoader;
+    return Promise.resolve();
   }
 
+  const existing =
+    document.getElementById(
+      id
+    );
 
-  c12LeafletLoader =
-    new Promise(
+  if (existing) {
+    return new Promise(
       (
         resolve,
         reject
       ) => {
-
         if (
-          !document.getElementById(
-            "c12-leaflet-css"
-          )
+          typeof test ===
+            "function" &&
+          test()
         ) {
-          const link =
-            document.createElement(
-              "link"
-            );
-
-          link.id =
-            "c12-leaflet-css";
-
-          link.rel =
-            "stylesheet";
-
-          link.href =
-            "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-
-          document.head.appendChild(
-            link
-          );
-        }
-
-
-        const existingScript =
-          document.getElementById(
-            "c12-leaflet-js"
-          );
-
-
-        if (existingScript) {
-          existingScript.addEventListener(
-            "load",
-            () => {
-              resolve(
-                window.L
-              );
-            },
-            {
-              once: true
-            }
-          );
-
-          existingScript.addEventListener(
-            "error",
-            reject,
-            {
-              once: true
-            }
-          );
-
+          resolve();
           return;
         }
 
+        existing.addEventListener(
+          "load",
+          resolve,
+          {
+            once: true
+          }
+        );
 
-        const script =
-          document.createElement(
-            "script"
-          );
-
-        script.id =
-          "c12-leaflet-js";
-
-        script.src =
-          "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-
-        script.onload =
-          () => {
-            resolve(
-              window.L
-            );
-          };
-
-        script.onerror =
-          reject;
-
-        document.head.appendChild(
-          script
+        existing.addEventListener(
+          "error",
+          reject,
+          {
+            once: true
+          }
         );
       }
     );
+  }
+
+  return new Promise(
+    (
+      resolve,
+      reject
+    ) => {
+      const script =
+        document.createElement(
+          "script"
+        );
+
+      script.id =
+        id;
+
+      script.src =
+        src;
+
+      script.onload =
+        resolve;
+
+      script.onerror =
+        reject;
+
+      document.head.appendChild(
+        script
+      );
+    }
+  );
+}
 
 
-  return c12LeafletLoader;
+function ensureMapLibraries() {
+  if (
+    window.L &&
+    window.maplibregl &&
+    typeof window.L.maplibreGL ===
+      "function"
+  ) {
+    return Promise.resolve();
+  }
+
+  if (
+    c12MapLibrariesLoader
+  ) {
+    return c12MapLibrariesLoader;
+  }
+
+  loadStyleOnce(
+    "c12-leaflet-css",
+    "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  );
+
+  loadStyleOnce(
+    "c12-maplibre-css",
+    "https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css"
+  );
+
+  c12MapLibrariesLoader =
+    loadScriptOnce(
+      "c12-leaflet-js",
+      "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+      () =>
+        Boolean(
+          window.L &&
+          typeof window.L.map ===
+            "function"
+        )
+    )
+      .then(
+        () =>
+          loadScriptOnce(
+            "c12-maplibre-js",
+            "https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js",
+            () =>
+              Boolean(
+                window.maplibregl
+              )
+          )
+      )
+      .then(
+        () =>
+          loadScriptOnce(
+            "c12-maplibre-leaflet-js",
+            "https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js",
+            () =>
+              Boolean(
+                window.L &&
+                typeof window.L.maplibreGL ===
+                  "function"
+              )
+          )
+      );
+
+  return c12MapLibrariesLoader;
+}
+
+
+async function getSafeOpenFreeMapStyle() {
+  const response =
+    await fetch(
+      "https://tiles.openfreemap.org/styles/liberty",
+      {
+        cache:
+          "force-cache"
+      }
+    );
+
+  if (
+    !response.ok
+  ) {
+    throw new Error(
+      "OpenFreeMap style unavailable"
+    );
+  }
+
+  const style =
+    await response.json();
+
+  style.layers =
+    style.layers.filter(
+      layer => {
+        const id =
+          String(
+            layer.id ||
+            ""
+          )
+            .toLowerCase();
+
+        const sourceLayer =
+          String(
+            layer[
+              "source-layer"
+            ] ||
+            ""
+          )
+            .toLowerCase();
+
+        if (
+          sourceLayer ===
+          "boundary"
+        ) {
+          return false;
+        }
+
+        if (
+          id.includes(
+            "boundary"
+          )
+        ) {
+          return false;
+        }
+
+        if (
+          id.includes(
+            "country"
+          )
+        ) {
+          return false;
+        }
+
+        if (
+          id.includes(
+            "state"
+          )
+        ) {
+          return false;
+        }
+
+        return true;
+      }
+    );
+
+  return style;
+}
+
+
+async function fetchCountryBoundary(
+  iso
+) {
+  const metadataResponse =
+    await fetch(
+      `https://www.geoboundaries.org/api/current/gbOpen/${iso}/ADM0/`,
+      {
+        cache:
+          "force-cache"
+      }
+    );
+
+  if (
+    !metadataResponse.ok
+  ) {
+    throw new Error(
+      `Boundary metadata failed: ${iso}`
+    );
+  }
+
+  const metadata =
+    await metadataResponse.json();
+
+  const geoJsonUrl =
+    metadata
+      .simplifiedGeometryGeoJSON ||
+    metadata
+      .gjDownloadURL;
+
+  if (
+    !geoJsonUrl
+  ) {
+    throw new Error(
+      `Boundary GeoJSON missing: ${iso}`
+    );
+  }
+
+  const geoJsonResponse =
+    await fetch(
+      geoJsonUrl,
+      {
+        cache:
+          "force-cache"
+      }
+    );
+
+  if (
+    !geoJsonResponse.ok
+  ) {
+    throw new Error(
+      `Boundary GeoJSON failed: ${iso}`
+    );
+  }
+
+  return {
+    iso,
+    geojson:
+      await geoJsonResponse
+        .json()
+  };
+}
+
+
+function pointInsideRing(
+  point,
+  ring
+) {
+  const x =
+    Number(
+      point[0]
+    );
+
+  const y =
+    Number(
+      point[1]
+    );
+
+  let inside =
+    false;
+
+  for (
+    let i = 0,
+      j =
+        ring.length -
+        1;
+
+    i <
+    ring.length;
+
+    j =
+      i++
+  ) {
+    const xi =
+      Number(
+        ring[i][0]
+      );
+
+    const yi =
+      Number(
+        ring[i][1]
+      );
+
+    const xj =
+      Number(
+        ring[j][0]
+      );
+
+    const yj =
+      Number(
+        ring[j][1]
+      );
+
+    const intersects =
+      (
+        (
+          yi >
+          y
+        ) !==
+        (
+          yj >
+          y
+        )
+      ) &&
+      (
+        x <
+        (
+          (
+            xj -
+            xi
+          ) *
+          (
+            y -
+            yi
+          )
+        ) /
+        (
+          (
+            yj -
+            yi
+          ) ||
+          Number.EPSILON
+        ) +
+        xi
+      );
+
+    if (
+      intersects
+    ) {
+      inside =
+        !inside;
+    }
+  }
+
+  return inside;
+}
+
+
+function pointInsidePolygon(
+  point,
+  polygon
+) {
+  if (
+    !polygon ||
+    !polygon.length
+  ) {
+    return false;
+  }
+
+  if (
+    !pointInsideRing(
+      point,
+      polygon[0]
+    )
+  ) {
+    return false;
+  }
+
+  for (
+    let i = 1;
+    i <
+    polygon.length;
+    i += 1
+  ) {
+    if (
+      pointInsideRing(
+        point,
+        polygon[i]
+      )
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+function geometryContainsPoint(
+  geometry,
+  point
+) {
+  if (
+    !geometry
+  ) {
+    return false;
+  }
+
+  if (
+    geometry.type ===
+    "Polygon"
+  ) {
+    return pointInsidePolygon(
+      point,
+      geometry.coordinates
+    );
+  }
+
+  if (
+    geometry.type ===
+    "MultiPolygon"
+  ) {
+    return geometry.coordinates
+      .some(
+        polygon =>
+          pointInsidePolygon(
+            point,
+            polygon
+          )
+      );
+  }
+
+  return false;
+}
+
+
+function geoJsonContainsPoint(
+  geojson,
+  point
+) {
+  if (
+    !geojson
+  ) {
+    return false;
+  }
+
+  if (
+    geojson.type ===
+    "FeatureCollection"
+  ) {
+    return geojson.features
+      .some(
+        feature =>
+          geometryContainsPoint(
+            feature.geometry,
+            point
+          )
+      );
+  }
+
+  if (
+    geojson.type ===
+    "Feature"
+  ) {
+    return geometryContainsPoint(
+      geojson.geometry,
+      point
+    );
+  }
+
+  return geometryContainsPoint(
+    geojson,
+    point
+  );
+}
+
+
+function validateUkraineBoundary(
+  geojson
+) {
+  const simferopol = [
+    34.1003,
+    44.9521
+  ];
+
+  const sevastopol = [
+    33.5254,
+    44.6167
+  ];
+
+  if (
+    !geoJsonContainsPoint(
+      geojson,
+      simferopol
+    ) ||
+    !geoJsonContainsPoint(
+      geojson,
+      sevastopol
+    )
+  ) {
+    throw new Error(
+      "UKR ADM0 validation failed"
+    );
+  }
+
+  return true;
+}
+
+
+async function loadPoliticalBoundaries() {
+  if (
+    c12PoliticalBoundariesPromise
+  ) {
+    return c12PoliticalBoundariesPromise;
+  }
+
+  c12PoliticalBoundariesPromise =
+    (
+      async () => {
+        const ukraine =
+          await fetchCountryBoundary(
+            "UKR"
+          );
+
+        validateUkraineBoundary(
+          ukraine.geojson
+        );
+
+        const otherCountries =
+          c12PoliticalCountries
+            .filter(
+              country =>
+                country.iso !==
+                "UKR"
+            );
+
+        const results =
+          await Promise.allSettled(
+            otherCountries
+              .map(
+                country =>
+                  fetchCountryBoundary(
+                    country.iso
+                  )
+              )
+          );
+
+        const boundaries = [
+          ukraine
+        ];
+
+        results.forEach(
+          result => {
+            if (
+              result.status ===
+              "fulfilled"
+            ) {
+              boundaries.push(
+                result.value
+              );
+            }
+          }
+        );
+
+        return boundaries;
+      }
+    )();
+
+  return c12PoliticalBoundariesPromise;
 }
 
 
@@ -2395,13 +2916,12 @@ function getMapRouteStyle(
         4,
 
       opacity:
-        0.95,
+        0.96,
 
       dashArray:
         null
     };
   }
-
 
   if (
     route.status ===
@@ -2422,7 +2942,6 @@ function getMapRouteStyle(
     };
   }
 
-
   return {
     color:
       "#4f8a62",
@@ -2431,7 +2950,7 @@ function getMapRouteStyle(
       2.7,
 
     opacity:
-      0.78,
+      0.8,
 
     dashArray:
       null
@@ -2462,20 +2981,58 @@ function getPointOnRoute(
 }
 
 
-function buildOperationsMap() {
+function createCountryLabel(
+  country
+) {
+  return window.L.divIcon({
+    className:
+      country.main
+        ? "c12-country-label c12-country-label--ukraine"
+        : "c12-country-label",
+
+    html:
+      `<span>${escapeHtml(
+        country.name
+      )}</span>`,
+
+    iconSize: [
+      0,
+      0
+    ]
+  });
+}
+
+
+function createCrimeaLabel() {
+  return window.L.divIcon({
+    className:
+      "c12-crimea-label",
+
+    html:
+      `
+        <span>Крим</span>
+        <strong>Україна</strong>
+      `,
+
+    iconSize: [
+      0,
+      0
+    ]
+  });
+}
+
+
+async function buildOperationsMap() {
   const container =
     $(
       "[data-map-routes]"
     );
 
-
   if (
-    !container ||
-    !window.L
+    !container
   ) {
     return;
   }
-
 
   if (
     container.clientWidth <
@@ -2483,7 +3040,6 @@ function buildOperationsMap() {
   ) {
     return;
   }
-
 
   if (
     c12OperationsMap
@@ -2499,15 +3055,53 @@ function buildOperationsMap() {
     return;
   }
 
+  container.innerHTML = `
+    <div class="c12-map-loading">
+      Завантаження карти…
+    </div>
+  `;
+
+  let style;
+  let boundaries;
+
+  try {
+    [
+      style,
+      boundaries
+    ] =
+      await Promise.all([
+        getSafeOpenFreeMapStyle(),
+        loadPoliticalBoundaries()
+      ]);
+  }
+
+  catch (error) {
+    console.error(
+      "[CASE 12] Safe map validation failed:",
+      error
+    );
+
+    container.innerHTML = `
+      <div class="c12-map-error">
+        <strong>
+          Карта тимчасово недоступна
+        </strong>
+
+        <span>
+          Географічний шар не пройшов перевірку кордонів України.
+        </span>
+      </div>
+    `;
+
+    return;
+  }
 
   container.innerHTML =
     "";
 
-
   container.classList.add(
     "c12-leaflet-map"
   );
-
 
   c12OperationsMap =
     window.L.map(
@@ -2532,29 +3126,138 @@ function buildOperationsMap() {
           false,
 
         preferCanvas:
-          true
+          true,
+
+        maxBounds: [
+          [
+            42.0,
+            11.5
+          ],
+
+          [
+            57.0,
+            41.5
+          ]
+        ],
+
+        maxBoundsViscosity:
+          1
       }
     );
 
-
   window.L
-    .tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      {
-        minZoom:
-          4,
-
-        maxZoom:
-          18,
-
-        attribution:
-          "© OpenStreetMap contributors"
-      }
-    )
+    .maplibreGL({
+      style,
+      interactive:
+        false
+    })
     .addTo(
       c12OperationsMap
     );
 
+  boundaries.forEach(
+    boundary => {
+      const country =
+        c12PoliticalCountries
+          .find(
+            item =>
+              item.iso ===
+              boundary.iso
+          );
+
+      if (
+        !country
+      ) {
+        return;
+      }
+
+      window.L
+        .geoJSON(
+          boundary.geojson,
+          {
+            interactive:
+              false,
+
+            style:
+              country.main
+                ? {
+                    color:
+                      "#36764d",
+
+                    weight:
+                      2.6,
+
+                    opacity:
+                      1,
+
+                    fillColor:
+                      "#e7f3ea",
+
+                    fillOpacity:
+                      0.12
+                  }
+                : {
+                    color:
+                      "#80958a",
+
+                    weight:
+                      1.1,
+
+                    opacity:
+                      0.88,
+
+                    fillColor:
+                      "#ffffff",
+
+                    fillOpacity:
+                      0
+                  }
+          }
+        )
+        .addTo(
+          c12OperationsMap
+        );
+
+      window.L.marker(
+        country.label,
+        {
+          interactive:
+            false,
+
+          keyboard:
+            false,
+
+          icon:
+            createCountryLabel(
+              country
+            )
+        }
+      )
+      .addTo(
+        c12OperationsMap
+      );
+    }
+  );
+
+  window.L.marker(
+    [
+      44.95,
+      34.10
+    ],
+    {
+      interactive:
+        false,
+
+      keyboard:
+        false,
+
+      icon:
+        createCrimeaLabel()
+    }
+  )
+  .addTo(
+    c12OperationsMap
+  );
 
   window.L.control
     .zoom({
@@ -2565,37 +3268,8 @@ function buildOperationsMap() {
       c12OperationsMap
     );
 
-
-  const mapBounds =
-    window.L.latLngBounds(
-      [
-        [
-          43.8,
-          13.2
-        ],
-
-        [
-          54.9,
-          32.7
-        ]
-      ]
-    );
-
-
-  c12OperationsMap.fitBounds(
-    mapBounds,
-    {
-      padding: [
-        10,
-        10
-      ]
-    }
-  );
-
-
   const usedCities =
     new Set();
-
 
   C12.mapRoutes.forEach(
     route => {
@@ -2609,7 +3283,6 @@ function buildOperationsMap() {
     }
   );
 
-
   usedCities.forEach(
     cityName => {
       const location =
@@ -2617,20 +3290,17 @@ function buildOperationsMap() {
           cityName
         ];
 
-
       if (
         !location
       ) {
         return;
       }
 
-
       const mainCity =
         cityName ===
           "Львів" ||
         cityName ===
           "Краків";
-
 
       const marker =
         window.L.circleMarker(
@@ -2660,7 +3330,6 @@ function buildOperationsMap() {
           c12OperationsMap
         );
 
-
       marker.bindTooltip(
         cityName,
         {
@@ -2679,7 +3348,6 @@ function buildOperationsMap() {
     }
   );
 
-
   C12.mapRoutes.forEach(
     (
       route,
@@ -2695,7 +3363,6 @@ function buildOperationsMap() {
           route.to
         ];
 
-
       if (
         !from ||
         !to
@@ -2703,12 +3370,10 @@ function buildOperationsMap() {
         return;
       }
 
-
       const style =
         getMapRouteStyle(
           route
         );
-
 
       const line =
         window.L.polyline(
@@ -2743,10 +3408,10 @@ function buildOperationsMap() {
           c12OperationsMap
         );
 
-
       line.bindPopup(
         `
           <div class="c12-map-popup">
+
             <strong>
               ${escapeHtml(
                 route.orderId
@@ -2762,10 +3427,10 @@ function buildOperationsMap() {
                 route.to
               )}
             </span>
+
           </div>
         `
       );
-
 
       const currentPoint =
         getPointOnRoute(
@@ -2778,7 +3443,6 @@ function buildOperationsMap() {
             ) *
             0.11
         );
-
 
       const currentMarker =
         window.L.circleMarker(
@@ -2807,7 +3471,6 @@ function buildOperationsMap() {
           c12OperationsMap
         );
 
-
       currentMarker.bindTooltip(
         route.orderId,
         {
@@ -2820,7 +3483,6 @@ function buildOperationsMap() {
       );
     }
   );
-
 
   const Legend =
     window.L.Control.extend({
@@ -2852,32 +3514,67 @@ function buildOperationsMap() {
       }
     });
 
-
   new Legend({
     position:
       "bottomleft"
-  }).addTo(
+  })
+  .addTo(
     c12OperationsMap
   );
 
+  c12OperationsMap.fitBounds(
+    [
+      [
+        43.0,
+        13.0
+      ],
+
+      [
+        55.7,
+        40.5
+      ]
+    ],
+    {
+      padding: [
+        8,
+        8
+      ]
+    }
+  );
 
   window.setTimeout(
     () => {
       c12OperationsMap
         .invalidateSize();
     },
-    120
+    150
   );
 }
 
 
 function renderMapRoutes() {
+  const openMap =
+    () => {
+      ensureMapLibraries()
+        .then(
+          () =>
+            buildOperationsMap()
+        )
+        .catch(
+          error => {
+            console.error(
+              "[CASE 12] Map libraries failed:",
+              error
+            );
+          }
+        );
+    };
+
   if (
     !c12OperationsMapBound
   ) {
     c12OperationsMapBound =
       true;
-
 
     document.addEventListener(
       "c12:rolechange",
@@ -2890,61 +3587,33 @@ function renderMapRoutes() {
           return;
         }
 
-
-        ensureLeaflet()
-          .then(
-            () => {
-              window.setTimeout(
-                buildOperationsMap,
-                100
-              );
-            }
-          )
-          .catch(
-            error => {
-              console.error(
-                "[CASE 12] Map library failed:",
-                error
-              );
-            }
-          );
+        window.setTimeout(
+          openMap,
+          100
+        );
       }
     );
   }
-
 
   const ownerScene =
     $(
       '[data-role-scene="owner"]'
     );
 
-
   if (
     ownerScene &&
-    ownerScene.classList.contains(
-      "is-active"
-    )
-  ) {
-    ensureLeaflet()
-      .then(
-        () => {
-          window.setTimeout(
-            buildOperationsMap,
-            80
-          );
-        }
+    ownerScene
+      .classList
+      .contains(
+        "is-active"
       )
-      .catch(
-        error => {
-          console.error(
-            "[CASE 12] Map library failed:",
-            error
-          );
-        }
-      );
+  ) {
+    window.setTimeout(
+      openMap,
+      80
+    );
   }
 }
-
   /* ============================================================
      CUSTOMER MESSAGES
   ============================================================ */

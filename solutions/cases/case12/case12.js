@@ -968,91 +968,125 @@ async function createMainOrder() {
   ============================================================ */
 
   function bindCarriers() {
-    document.addEventListener(
-      "click",
-      event => {
-        const button =
-          event.target.closest(
-            "[data-carrier]"
-          );
+  document.addEventListener(
+    "click",
+    async event => {
+      const button =
+        event.target.closest(
+          "[data-carrier]"
+        );
 
-        if (!button) {
-          return;
-        }
+      if (!button) {
+        return;
+      }
 
-        if (
-          C12.state.mainOrderAssigned
-        ) {
-          C12.ui.showToast(
-            "Ресурс уже призначено",
-            "Спочатку потрібно скасувати поточне призначення.",
-            "info"
-          );
-
-          return;
-        }
-
-        const carrierName =
-          button.dataset
-            .carrier;
-
-        const validation =
-          C12.rules
-            .validateCarrierForOrder(
-              carrierName,
-              C12.mainOrder
-            );
-
-        if (
-          !validation.valid
-        ) {
-          C12.ui.showRuleModal(
-            validation
-          );
-
-          return;
-        }
-
-        const result =
-          C12.rules
-            .assignCarrierToOrder(
-              carrierName,
-              C12.mainOrder
-            );
-
-        if (
-          !result.success
-        ) {
-          C12.ui.showRuleModal(
-            result.validation
-          );
-
-          return;
-        }
-
-        C12.state.mainOrderAssigned =
-          true;
-
+      if (
+        C12.state
+          .mainOrderAssigned
+      ) {
         C12.ui.showToast(
-          "Перевізника призначено",
-          `${carrierName} виконає перевезення.`,
-          "success"
+          "Ресурс уже призначено",
+          "Поточний ресурс уже закріплено за рейсом.",
+          "info"
         );
 
-        C12.ui.addAutomationEvent(
-          `Перевізника ${carrierName} призначено на TR-2026-00184`
+        return;
+      }
+
+      const carrierName =
+        button.dataset
+          .carrier;
+
+      const validation =
+        C12.rules
+          .validateCarrierForOrder(
+            carrierName,
+            C12.mainOrder
+          );
+
+      if (
+        !validation.valid
+      ) {
+        C12.ui.showRuleModal(
+          validation
         );
 
-        C12.simulation.setPosition(
+        return;
+      }
+
+      const result =
+        C12.rules
+          .assignCarrierToOrder(
+            carrierName,
+            C12.mainOrder
+          );
+
+      if (
+        !result.success
+      ) {
+        C12.ui.showRuleModal(
+          result.validation
+        );
+
+        return;
+      }
+
+      const offer =
+        result.offer;
+
+      C12.ui.showToast(
+        "Залучений транспорт призначено",
+        `${carrierName} · ${offer.brand} ${offer.model} · ${offer.displayPlate}`,
+        "success",
+        4200
+      );
+
+      C12.ui.addAutomationBatch(
+        [
+          `Перевірено доступність ${carrierName}`,
+          `Підтверджено ${offer.brand} ${offer.model} · ${offer.displayPlate}`,
+          `Водія ${offer.driver} призначено на рейс`,
+          `Ставку €${offer.rate.toLocaleString("uk-UA")} зафіксовано`,
+          "Клієнту сформовано підтвердження"
+        ]
+      );
+
+      C12.simulation
+        .setPosition(
           24,
           {
             source:
               "carrier-assignment"
           }
         );
+
+      C12.ui.renderCarriers();
+
+      await sleep(
+        800
+      );
+
+      if (
+        C12.state.mode ===
+        "guided"
+      ) {
+        C12.ui.showToast(
+          "Ресурс призначено",
+          "Тепер рейс переходить до водія залученого перевізника.",
+          "info"
+        );
+
+        await sleep(
+          1000
+        );
+
+        C12.ui.showRole(
+          "driver"
+        );
       }
-    );
-  }
+    }
+  );
+}
 
 
   /* ============================================================

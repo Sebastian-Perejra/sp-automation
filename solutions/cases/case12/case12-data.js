@@ -2520,3 +2520,1329 @@ C12.getInboxCounts = function () {
   );
 
 })();
+
+(function () {
+  "use strict";
+
+  const C12 =
+    window.C12 =
+    window.C12 || {};
+
+  if (
+    !C12.data ||
+    !C12.i18n
+  ) {
+    return;
+  }
+
+
+  const locale = () =>
+    C12.i18n.getLocale
+      ? C12.i18n.getLocale()
+      : "uk-UA";
+
+
+  const language = () =>
+    C12.i18n.current ||
+    "uk";
+
+
+  const pickLocalized = (
+    dictionary,
+    key,
+    fallback = ""
+  ) => {
+    const lang =
+      language();
+
+    return (
+      dictionary?.[key]?.[lang] ??
+      dictionary?.[key]?.uk ??
+      fallback ??
+      key
+    );
+  };
+
+
+  const cities = {
+    "Львів": {
+      uk: "Львів",
+      ru: "Львов",
+      en: "Lviv"
+    },
+
+    "Київ": {
+      uk: "Київ",
+      ru: "Киев",
+      en: "Kyiv"
+    },
+
+    "Тернопіль": {
+      uk: "Тернопіль",
+      ru: "Тернополь",
+      en: "Ternopil"
+    },
+
+    "Івано-Франківськ": {
+      uk: "Івано-Франківськ",
+      ru: "Ивано-Франковск",
+      en: "Ivano-Frankivsk"
+    },
+
+    "Луцьк": {
+      uk: "Луцьк",
+      ru: "Луцк",
+      en: "Lutsk"
+    },
+
+    "Рівне": {
+      uk: "Рівне",
+      ru: "Ровно",
+      en: "Rivne"
+    },
+
+    "Ужгород": {
+      uk: "Ужгород",
+      ru: "Ужгород",
+      en: "Uzhhorod"
+    },
+
+    "Чернівці": {
+      uk: "Чернівці",
+      ru: "Черновцы",
+      en: "Chernivtsi"
+    },
+
+    "Житомир": {
+      uk: "Житомир",
+      ru: "Житомир",
+      en: "Zhytomyr"
+    },
+
+    "Вінниця": {
+      uk: "Вінниця",
+      ru: "Винница",
+      en: "Vinnytsia"
+    },
+
+    "Краків": {
+      uk: "Краків",
+      ru: "Краков",
+      en: "Krakow"
+    },
+
+    "Варшава": {
+      uk: "Варшава",
+      ru: "Варшава",
+      en: "Warsaw"
+    },
+
+    "Люблін": {
+      uk: "Люблін",
+      ru: "Люблин",
+      en: "Lublin"
+    },
+
+    "Жешув": {
+      uk: "Жешув",
+      ru: "Жешув",
+      en: "Rzeszów"
+    },
+
+    "Катовіце": {
+      uk: "Катовіце",
+      ru: "Катовице",
+      en: "Katowice"
+    },
+
+    "Вроцлав": {
+      uk: "Вроцлав",
+      ru: "Вроцлав",
+      en: "Wrocław"
+    },
+
+    "Познань": {
+      uk: "Познань",
+      ru: "Познань",
+      en: "Poznań"
+    },
+
+    "Гданськ": {
+      uk: "Гданськ",
+      ru: "Гданьск",
+      en: "Gdańsk"
+    },
+
+    "Кошице": {
+      uk: "Кошице",
+      ru: "Кошице",
+      en: "Košice"
+    },
+
+    "Пряшів": {
+      uk: "Пряшів",
+      ru: "Прешов",
+      en: "Prešov"
+    },
+
+    "Братислава": {
+      uk: "Братислава",
+      ru: "Братислава",
+      en: "Bratislava"
+    },
+
+    "Будапешт": {
+      uk: "Будапешт",
+      ru: "Будапешт",
+      en: "Budapest"
+    },
+
+    "Дебрецен": {
+      uk: "Дебрецен",
+      ru: "Дебрецен",
+      en: "Debrecen"
+    },
+
+    "Ньїредьгаза": {
+      uk: "Ньїредьгаза",
+      ru: "Ньиредьхаза",
+      en: "Nyíregyháza"
+    },
+
+    "Бухарест": {
+      uk: "Бухарест",
+      ru: "Бухарест",
+      en: "Bucharest"
+    },
+
+    "Клуж-Напока": {
+      uk: "Клуж-Напока",
+      ru: "Клуж-Напока",
+      en: "Cluj-Napoca"
+    },
+
+    "Орадя": {
+      uk: "Орадя",
+      ru: "Орадя",
+      en: "Oradea"
+    }
+  };
+
+
+  const countries = {
+    "Україна": {
+      uk: "Україна",
+      ru: "Украина",
+      en: "Ukraine"
+    },
+
+    "Польща": {
+      uk: "Польща",
+      ru: "Польша",
+      en: "Poland"
+    },
+
+    "Словаччина": {
+      uk: "Словаччина",
+      ru: "Словакия",
+      en: "Slovakia"
+    },
+
+    "Угорщина": {
+      uk: "Угорщина",
+      ru: "Венгрия",
+      en: "Hungary"
+    },
+
+    "Румунія": {
+      uk: "Румунія",
+      ru: "Румыния",
+      en: "Romania"
+    }
+  };
+
+
+  const vehicleTypes = {
+    "Тент": {
+      uk: "Тент",
+      ru: "Тент",
+      en: "Curtainside"
+    },
+
+    "Рефрижератор": {
+      uk: "Рефрижератор",
+      ru: "Рефрижератор",
+      en: "Reefer"
+    },
+
+    "Мега": {
+      uk: "Мега",
+      ru: "Мега",
+      en: "Mega Trailer"
+    },
+
+    "Фургон": {
+      uk: "Фургон",
+      ru: "Фургон",
+      en: "Box Truck"
+    }
+  };
+
+
+  const cargoTypes = {
+    "Меблі": {
+      uk: "Меблі",
+      ru: "Мебель",
+      en: "Furniture"
+    },
+
+    "Продукти харчування": {
+      uk: "Продукти харчування",
+      ru: "Продукты питания",
+      en: "Food Products"
+    },
+
+    "Будівельні матеріали": {
+      uk: "Будівельні матеріали",
+      ru: "Строительные материалы",
+      en: "Building Materials"
+    },
+
+    "Пакувальні матеріали": {
+      uk: "Пакувальні матеріали",
+      ru: "Упаковочные материалы",
+      en: "Packaging Materials"
+    },
+
+    "Скляна продукція": {
+      uk: "Скляна продукція",
+      ru: "Стеклянная продукция",
+      en: "Glass Products"
+    },
+
+    "Напої": {
+      uk: "Напої",
+      ru: "Напитки",
+      en: "Beverages"
+    },
+
+    "Побутова техніка": {
+      uk: "Побутова техніка",
+      ru: "Бытовая техника",
+      en: "Home Appliances"
+    },
+
+    "Текстиль": {
+      uk: "Текстиль",
+      ru: "Текстиль",
+      en: "Textiles"
+    },
+
+    "Промислове обладнання": {
+      uk: "Промислове обладнання",
+      ru: "Промышленное оборудование",
+      en: "Industrial Equipment"
+    },
+
+    "Збірний вантаж": {
+      uk: "Збірний вантаж",
+      ru: "Сборный груз",
+      en: "LTL Freight"
+    },
+
+    "Дерев'яні панелі": {
+      uk: "Дерев'яні панелі",
+      ru: "Деревянные панели",
+      en: "Wood Panels"
+    }
+  };
+
+
+  const sources = {
+    "Email": {
+      uk: "Email",
+      ru: "Email",
+      en: "Email"
+    },
+
+    "Телефон": {
+      uk: "Телефон",
+      ru: "Телефон",
+      en: "Phone"
+    },
+
+    "Транспортна біржа": {
+      uk: "Транспортна біржа",
+      ru: "Транспортная биржа",
+      en: "Freight Exchange"
+    },
+
+    "Біржа": {
+      uk: "Біржа",
+      ru: "Биржа",
+      en: "Freight Exchange"
+    },
+
+    "Постійний клієнт": {
+      uk: "Постійний клієнт",
+      ru: "Постоянный клиент",
+      en: "Repeat Customer"
+    },
+
+    "Месенджер": {
+      uk: "Месенджер",
+      ru: "Мессенджер",
+      en: "Messaging App"
+    },
+
+    "Месенджери": {
+      uk: "Месенджери",
+      ru: "Мессенджеры",
+      en: "Messaging Apps"
+    },
+
+    "Транспортні біржі": {
+      uk: "Транспортні біржі",
+      ru: "Транспортные биржи",
+      en: "Freight Exchanges"
+    }
+  };
+
+
+  const executionLabels = {
+    own: {
+      uk:
+        "Власний транспорт",
+
+      ru:
+        "Собственный транспорт",
+
+      en:
+        "Company Fleet"
+    },
+
+    carrier: {
+      uk:
+        "Залучений перевізник",
+
+      ru:
+        "Привлечённый перевозчик",
+
+      en:
+        "Third-Party Carrier"
+    },
+
+    none: {
+      uk:
+        "Не призначено",
+
+      ru:
+        "Не назначено",
+
+      en:
+        "Not Assigned"
+    }
+  };
+
+
+  const statusLabels = {
+    new: {
+      uk: "НОВЕ",
+      ru: "НОВОЕ",
+      en: "NEW"
+    },
+
+    planning: {
+      uk: "ПЛАНУВАННЯ",
+      ru: "ПЛАНИРОВАНИЕ",
+      en: "PLANNING"
+    },
+
+    assigned: {
+      uk: "ПРИЗНАЧЕНО",
+      ru: "НАЗНАЧЕНО",
+      en: "ASSIGNED"
+    },
+
+    loading: {
+      uk: "ЗАВАНТАЖЕННЯ",
+      ru: "ПОГРУЗКА",
+      en: "LOADING"
+    },
+
+    transit: {
+      uk: "У ДОРОЗІ",
+      ru: "В ПУТИ",
+      en: "IN TRANSIT"
+    },
+
+    delayed: {
+      uk: "ЗАТРИМКА",
+      ru: "ЗАДЕРЖКА",
+      en: "DELAYED"
+    },
+
+    customs: {
+      uk: "МИТНИЦЯ",
+      ru: "ТАМОЖНЯ",
+      en: "CUSTOMS"
+    },
+
+    issue: {
+      uk: "ПОТРЕБУЄ УВАГИ",
+      ru: "ТРЕБУЕТ ВНИМАНИЯ",
+      en: "REQUIRES ATTENTION"
+    },
+
+    delivered: {
+      uk: "ДОСТАВЛЕНО",
+      ru: "ДОСТАВЛЕНО",
+      en: "DELIVERED"
+    }
+  };
+
+
+  const requestText = {
+    "REQ-EMAIL-001": {
+      ru: {
+        title:
+          "Перевозка Львов → Краков · 26.08",
+
+        preview:
+          "12 палет · 4 800 кг · тент",
+
+        message:
+          "Добрый день. Нужна перевозка груза из Львова в Краков. Погрузка сегодня в 10:00. Просим подтвердить автомобиль и ориентировочное время доставки."
+      },
+
+      en: {
+        title:
+          "Lviv → Krakow · Aug 26",
+
+        preview:
+          "12 pallets · 4,800 kg · curtainside",
+
+        message:
+          "Hello. We need a shipment from Lviv to Krakow. Pickup is today at 10:00 AM. Please confirm the truck and estimated delivery time."
+      }
+    },
+
+
+    "REQ-EMAIL-002": {
+      ru: {
+        title:
+          "Львов → Варшава · 27.08",
+
+        preview:
+          "18 палет · 7 600 кг · тент",
+
+        message:
+          "Добрый день. Нужна машина Львов — Варшава на завтра. 18 палет упаковочных материалов. Погрузка желательно до 09:00."
+      },
+
+      en: {
+        title:
+          "Lviv → Warsaw · Aug 27",
+
+        preview:
+          "18 pallets · 7,600 kg · curtainside",
+
+        message:
+          "Hello. We need a truck from Lviv to Warsaw tomorrow. Eighteen pallets of packaging materials. Pickup preferably before 9:00 AM."
+      }
+    },
+
+
+    "REQ-EMAIL-003": {
+      ru: {
+        title:
+          "Львов → Люблин · 26.08",
+
+        preview:
+          "16 палет · 9 200 кг · рефрижератор",
+
+        message:
+          "Просим подтвердить рефрижератор на сегодня. Температурный режим +4°C. Доставка в Люблин завтра до обеда."
+      },
+
+      en: {
+        title:
+          "Lviv → Lublin · Aug 26",
+
+        preview:
+          "16 pallets · 9,200 kg · reefer",
+
+        message:
+          "Please confirm a reefer for today. Required temperature is +4°C. Delivery to Lublin is due tomorrow before noon."
+      }
+    },
+
+
+    "REQ-PHONE-001": {
+      ru: {
+        title:
+          "Входящий звонок · FreshLine",
+
+        preview:
+          "Тернополь → Краков · 8 200 кг",
+
+        message:
+          "Менеджер зафиксировал со слов клиента: нужен рефрижератор из Тернополя в Краков. Забрать сегодня после 14:00. Вес примерно 8,2 т."
+      },
+
+      en: {
+        title:
+          "Incoming call · FreshLine",
+
+        preview:
+          "Ternopil → Krakow · 8,200 kg",
+
+        message:
+          "Dispatcher notes from the customer call: reefer required from Ternopil to Krakow. Pickup today after 2:00 PM. Approximate weight: 8.2 metric tons."
+      }
+    },
+
+
+    "REQ-PHONE-002": {
+      ru: {
+        title:
+          "Входящий звонок · UA Glass",
+
+        preview:
+          "Киев → Краков · стекло · 14 300 кг",
+
+        message:
+          "Клиенту нужен автомобиль для перевозки стекла Киев — Краков. Обязательно надежное крепление груза. Погрузка завтра утром."
+      },
+
+      en: {
+        title:
+          "Incoming call · UA Glass",
+
+        preview:
+          "Kyiv → Krakow · glass · 14,300 kg",
+
+        message:
+          "The customer needs a truck for a glass shipment from Kyiv to Krakow. Secure load restraint is required. Pickup is tomorrow morning."
+      }
+    },
+
+
+    "REQ-EX-001": {
+      ru: {
+        title:
+          "Жешув → Львов",
+
+        preview:
+          "Тент · 20 палет · €940",
+
+        message:
+          "Груз доступен с 08:00. 20 палет. Полная загрузка. Оплата 14 дней."
+      },
+
+      en: {
+        title:
+          "Rzeszów → Lviv",
+
+        preview:
+          "Curtainside · 20 pallets · €940",
+
+        message:
+          "Freight available from 8:00 AM. Twenty pallets. Full truckload. Payment terms: 14 days."
+      }
+    },
+
+
+    "REQ-EX-002": {
+      ru: {
+        title:
+          "Варшава → Львов",
+
+        preview:
+          "Сборный груз · €620",
+
+        message:
+          "Шесть палет сборного груза. Возможна догрузка. Документы готовы."
+      },
+
+      en: {
+        title:
+          "Warsaw → Lviv",
+
+        preview:
+          "LTL freight · €620",
+
+        message:
+          "Six pallets of LTL freight. Additional freight can be added. Documents are ready."
+      }
+    },
+
+
+    "REQ-EX-003": {
+      ru: {
+        title:
+          "Краков → Киев",
+
+        preview:
+          "Тент · 9 800 кг · €1 360",
+
+        message:
+          "Погрузка в Кракове. Таможенные документы со стороны отправителя. Нужен стандартный тент."
+      },
+
+      en: {
+        title:
+          "Krakow → Kyiv",
+
+        preview:
+          "Curtainside · 9,800 kg · €1,360",
+
+        message:
+          "Pickup in Krakow. Customs documents will be provided by the shipper. Standard curtainside trailer required."
+      }
+    },
+
+
+    "REQ-EX-004": {
+      ru: {
+        title:
+          "Кошице → Ужгород",
+
+        preview:
+          "Тент · 12 палет · €480",
+
+        message:
+          "Короткий международный рейс. Погрузка после 15:00. Без ADR."
+      },
+
+      en: {
+        title:
+          "Košice → Uzhhorod",
+
+        preview:
+          "Curtainside · 12 pallets · €480",
+
+        message:
+          "Short cross-border run. Pickup after 3:00 PM. Non-ADR freight."
+      }
+    },
+
+
+    "REQ-EX-005": {
+      ru: {
+        title:
+          "Будапешт → Львов",
+
+        preview:
+          "Мега · 18 палет · €1 050",
+
+        message:
+          "Легкий объемный груз. Нужна mega. Готовность 28 августа с 07:00."
+      },
+
+      en: {
+        title:
+          "Budapest → Lviv",
+
+        preview:
+          "Mega trailer · 18 pallets · €1,050",
+
+        message:
+          "Lightweight, high-volume freight. Mega trailer required. Ready Aug 28 from 7:00 AM."
+      }
+    },
+
+
+    "REQ-EX-006": {
+      ru: {
+        title:
+          "Люблин → Львов",
+
+        preview:
+          "Тент · 16 палет · €710",
+
+        message:
+          "Мебель в упаковке. Желательна боковая погрузка. CMR будет на месте."
+      },
+
+      en: {
+        title:
+          "Lublin → Lviv",
+
+        preview:
+          "Curtainside · 16 pallets · €710",
+
+        message:
+          "Packaged furniture. Side loading preferred. CMR will be available at pickup."
+      }
+    }
+  };
+
+
+  const chatText = {
+    "Добрий день. Є машина на Катовіце?": {
+      ru:
+        "Добрый день. Есть машина на Катовице?",
+
+      en:
+        "Hi. Do you have a truck available for Katowice?"
+    },
+
+
+    "На яку дату потрібне завантаження?": {
+      ru:
+        "На какую дату нужна погрузка?",
+
+      en:
+        "What pickup date do you need?"
+    },
+
+
+    "Завтра об 11:00. Будматеріали, 11,4 т, тент.": {
+      ru:
+        "Завтра в 11:00. Стройматериалы, 11,4 т, тент.",
+
+      en:
+        "Tomorrow at 11:00 AM. Building materials, 11.4 metric tons, curtainside."
+    },
+
+
+    "Потрібне авто на Кошице завтра.": {
+      ru:
+        "Нужна машина на Кошице завтра.",
+
+      en:
+        "Need a truck to Košice tomorrow."
+    },
+
+
+    "14 палет меблів, близько 6 тонн.": {
+      ru:
+        "14 палет мебели, около 6 тонн.",
+
+      en:
+        "Fourteen pallets of furniture, about 6 metric tons."
+    },
+
+
+    "Прийнято. Перевіряємо доступний транспорт.": {
+      ru:
+        "Принято. Проверяем доступный транспорт.",
+
+      en:
+        "Got it. We're checking available capacity."
+    },
+
+
+    "Чи можете сьогодні забрати 21 палету на Жешув?": {
+      ru:
+        "Можете сегодня забрать 21 палету на Жешув?",
+
+      en:
+        "Can you pick up 21 pallets for Rzeszów today?"
+    },
+
+
+    "Так, перевіряємо машину.": {
+      ru:
+        "Да, проверяем машину.",
+
+      en:
+        "Yes, we're checking truck availability."
+    },
+
+
+    "Вага 15,8 т. Завантаження після 18:30.": {
+      ru:
+        "Вес 15,8 т. Погрузка после 18:30.",
+
+      en:
+        "Weight is 15.8 metric tons. Pickup after 6:30 PM."
+    },
+
+
+    "Романе, потрібна мега на Вроцлав.": {
+      ru:
+        "Роман, нужна мега на Вроцлав.",
+
+      en:
+        "Roman, we need a mega trailer for Wrocław."
+    },
+
+
+    "Коли завантаження?": {
+      ru:
+        "Когда погрузка?",
+
+      en:
+        "When is pickup?"
+    },
+
+
+    "28-го зранку. 18 палет.": {
+      ru:
+        "28-го утром. 18 палет.",
+
+      en:
+        "Morning of the 28th. Eighteen pallets."
+    }
+  };
+
+
+  const displayCity = value =>
+    pickLocalized(
+      cities,
+      value,
+      value
+    );
+
+
+  const displayCountry = value =>
+    pickLocalized(
+      countries,
+      value,
+      value
+    );
+
+
+  const displayVehicleType = value =>
+    pickLocalized(
+      vehicleTypes,
+      value,
+      value
+    );
+
+
+  const displayCargo = value =>
+    pickLocalized(
+      cargoTypes,
+      value,
+      value
+    );
+
+
+  const displaySource = value =>
+    pickLocalized(
+      sources,
+      value,
+      value
+    );
+
+
+  const displayExecution = value => {
+    const key =
+      value === "own"
+        ? "own"
+        : value === "carrier"
+          ? "carrier"
+          : "none";
+
+    return (
+      executionLabels[
+        key
+      ]?.[
+        language()
+      ] ||
+      executionLabels[
+        key
+      ].uk
+    );
+  };
+
+
+  const displayStatus = value =>
+    statusLabels[
+      value
+    ]?.[
+      language()
+    ] ||
+    statusLabels[
+      value
+    ]?.uk ||
+    value;
+
+
+  const displayRoute = (
+    origin,
+    destination
+  ) =>
+    `${displayCity(
+      origin
+    )} → ${displayCity(
+      destination
+    )}`;
+
+
+  const formatWeight = value => {
+    const number =
+      Number(
+        value ||
+        0
+      );
+
+    if (
+      language() ===
+      "en"
+    ) {
+      return (
+        number.toLocaleString(
+          "en-US"
+        ) +
+        " kg"
+      );
+    }
+
+    return (
+      number.toLocaleString(
+        locale()
+      ) +
+      " кг"
+    );
+  };
+
+
+  const formatPallets = value => {
+    const count =
+      Number(
+        value ||
+        0
+      );
+
+    if (
+      language() ===
+      "en"
+    ) {
+      return (
+        count === 1
+          ? "1 pallet"
+          : `${count} pallets`
+      );
+    }
+
+    return (
+      `${count} палет`
+    );
+  };
+
+
+  const displayRequest = request => {
+    if (!request) {
+      return null;
+    }
+
+    const localized =
+      requestText[
+        request.id
+      ]?.[
+        language()
+      ] ||
+      {};
+
+
+    return {
+      ...request,
+
+      sourceLabel:
+        displaySource(
+          request.sourceLabel
+        ),
+
+      originDisplay:
+        displayCity(
+          request.origin
+        ),
+
+      destinationDisplay:
+        displayCity(
+          request.destination
+        ),
+
+      routeDisplay:
+        displayRoute(
+          request.origin,
+          request.destination
+        ),
+
+      cargoDisplay:
+        displayCargo(
+          request.cargo
+        ),
+
+      vehicleTypeDisplay:
+        displayVehicleType(
+          request.vehicleType
+        ),
+
+      titleDisplay:
+        localized.title ||
+        request.title,
+
+      previewDisplay:
+        localized.preview ||
+        request.preview,
+
+      messageDisplay:
+        localized.message ||
+        request.message ||
+        "",
+
+      chatDisplay:
+        Array.isArray(
+          request.chat
+        )
+          ? request.chat.map(
+              item => ({
+                ...item,
+
+                text:
+                  chatText[
+                    item.text
+                  ]?.[
+                    language()
+                  ] ||
+                  item.text
+              })
+            )
+          : []
+    };
+  };
+
+
+  const displayOrder = order => {
+    if (!order) {
+      return null;
+    }
+
+    return {
+      ...order,
+
+      sourceLabelDisplay:
+        displaySource(
+          order.sourceLabel
+        ),
+
+      originDisplay:
+        displayCity(
+          order.origin
+        ),
+
+      destinationDisplay:
+        displayCity(
+          order.destination
+        ),
+
+      originCountryDisplay:
+        displayCountry(
+          order.originCountry
+        ),
+
+      destinationCountryDisplay:
+        displayCountry(
+          order.destinationCountry
+        ),
+
+      routeDisplay:
+        displayRoute(
+          order.origin,
+          order.destination
+        ),
+
+      cargoDisplay:
+        displayCargo(
+          order.cargo
+        ),
+
+      vehicleTypeLabelDisplay:
+        displayVehicleType(
+          order.vehicleTypeLabel
+        ),
+
+      executionLabelDisplay:
+        displayExecution(
+          order.execution
+        ),
+
+      statusLabelDisplay:
+        displayStatus(
+          order.status
+        )
+    };
+  };
+
+
+  const originalSearchOrders =
+    C12.data.searchOrders
+      .bind(
+        C12.data
+      );
+
+
+  C12.data.i18n = {
+    cities,
+    countries,
+    vehicleTypes,
+    cargoTypes,
+    sources,
+    executionLabels,
+    statusLabels
+  };
+
+
+  C12.data.displayCity =
+    displayCity;
+
+
+  C12.data.displayCountry =
+    displayCountry;
+
+
+  C12.data.displayVehicleType =
+    displayVehicleType;
+
+
+  C12.data.displayCargo =
+    displayCargo;
+
+
+  C12.data.displaySource =
+    displaySource;
+
+
+  C12.data.displayExecution =
+    displayExecution;
+
+
+  C12.data.displayStatus =
+    displayStatus;
+
+
+  C12.data.displayRoute =
+    displayRoute;
+
+
+  C12.data.formatWeight =
+    formatWeight;
+
+
+  C12.data.formatPallets =
+    formatPallets;
+
+
+  C12.data.displayRequest =
+    displayRequest;
+
+
+  C12.data.displayOrder =
+    displayOrder;
+
+
+  C12.data.searchOrders =
+    function (
+      query
+    ) {
+      const sourceResult =
+        originalSearchOrders(
+          query
+        );
+
+      const needle =
+        String(
+          query ||
+          ""
+        )
+          .trim()
+          .toLocaleLowerCase(
+            locale()
+          );
+
+      if (!needle) {
+        return sourceResult;
+      }
+
+
+      const ids =
+        new Set(
+          sourceResult.map(
+            order =>
+              order.id
+          )
+        );
+
+
+      C12.orders.forEach(
+        order => {
+          const display =
+            displayOrder(
+              order
+            );
+
+          const haystack =
+            [
+              display.id,
+              display.client,
+              display.originDisplay,
+              display.destinationDisplay,
+              display.routeDisplay,
+              display.cargoDisplay,
+              display.vehicleTypeLabelDisplay,
+              display.executionLabelDisplay,
+              display.statusLabelDisplay,
+              display.sourceLabelDisplay,
+              display.vehicle,
+              display.driver,
+              display.carrier
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLocaleLowerCase(
+                locale()
+              );
+
+
+          if (
+            haystack.includes(
+              needle
+            )
+          ) {
+            ids.add(
+              order.id
+            );
+          }
+        }
+      );
+
+
+      return C12.orders
+        .filter(
+          order =>
+            ids.has(
+              order.id
+            )
+        );
+    };
+
+
+  document.addEventListener(
+    "c12:languagechange",
+    () => {
+      document.dispatchEvent(
+        new CustomEvent(
+          "c12:data-languagechange",
+          {
+            detail: {
+              language:
+                language()
+            }
+          }
+        )
+      );
+    }
+  );
+
+
+  console.info(
+    "[CASE 12] Data localization ready:",
+    language()
+  );
+
+})();

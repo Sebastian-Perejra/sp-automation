@@ -2188,116 +2188,153 @@
         ====================================================== -->
 
         <section
-          class="c12-time-machine"
-          data-time-machine
+  class="c12-time-machine"
+  data-time-machine
+>
+
+  <div class="c12-time-machine__header">
+
+    <div>
+
+      <span
+        class="c12-panel__eyebrow"
+        data-i18n="timeMachine.eyebrow"
+      >
+        ЧАС ПЕРЕВЕЗЕННЯ
+      </span>
+
+      <strong data-time-machine-label>
+        26 серпня · 09:45
+      </strong>
+
+    </div>
+
+
+    <div class="c12-time-machine__hint">
+      <span>↔</span>
+
+      <span data-i18n="timeMachine.hint">
+        Перетягуйте час і дивіться, як змінюється вся система
+      </span>
+    </div>
+
+  </div>
+
+
+  <div class="c12-time-machine__control">
+
+    <span
+      class="c12-time-machine__date"
+      data-i18n="timeMachine.startDate"
+    >
+      26 СЕР
+    </span>
+
+    <div class="c12-time-range-wrap">
+
+      <div class="c12-time-range__events">
+
+        <span
+          style="--position: 9%;"
+          data-i18n="timeMachine.request"
         >
+          Заявка
+        </span>
 
-          <div class="c12-time-machine__header">
+        <span
+          style="--position: 24%;"
+          data-i18n="timeMachine.assignment"
+        >
+          Призначення
+        </span>
 
-            <div>
+        <span
+          style="--position: 39%;"
+          data-i18n="timeMachine.pickup"
+        >
+          Завантаження
+        </span>
 
-              <span class="c12-panel__eyebrow">
-                ЧАС ПЕРЕВЕЗЕННЯ
-              </span>
+        <span
+          style="--position: 65%;"
+          data-i18n="timeMachine.delay"
+        >
+          Затримка
+        </span>
 
-              <strong data-time-machine-label>
-                26 серпня · 09:45
-              </strong>
+        <span
+          style="--position: 92%;"
+          data-i18n="timeMachine.delivery"
+        >
+          Доставка
+        </span>
 
-            </div>
-
-
-            <div class="c12-time-machine__hint">
-              <span>↔</span>
-              Перетягуйте час і дивіться,
-              як змінюється вся система
-            </div>
-
-          </div>
-
-
-          <div class="c12-time-machine__control">
-
-            <span class="c12-time-machine__date">
-              26 СЕР
-            </span>
-
-            <div class="c12-time-range-wrap">
-
-              <div class="c12-time-range__events">
-
-                <span style="--position: 9%;">
-                  Заявка
-                </span>
-
-                <span style="--position: 24%;">
-                  Призначення
-                </span>
-
-                <span style="--position: 39%;">
-                  Завантаження
-                </span>
-
-                <span style="--position: 65%;">
-                  Затримка
-                </span>
-
-                <span style="--position: 92%;">
-                  Доставка
-                </span>
-
-              </div>
+      </div>
 
 
-              <input
-                class="c12-time-range"
-                type="range"
-                min="0"
-                max="100"
-                value="4"
-                step="1"
-                aria-label="Час перевезення"
-                data-time-slider
-              >
-
-              <div class="c12-time-range__progress">
-                <span data-time-progress></span>
-              </div>
-
-            </div>
-
-            <span class="c12-time-machine__date">
-              28 СЕР
-            </span>
-
-          </div>
+      <input
+        class="c12-time-range"
+        type="range"
+        min="0"
+        max="100"
+        value="4"
+        step="1"
+        aria-label="Час перевезення"
+        data-i18n-aria-label="timeMachine.sliderAria"
+        data-time-slider
+      >
 
 
-          <div class="c12-time-machine__stats">
+      <div class="c12-time-range__progress">
+        <span data-time-progress></span>
+      </div>
 
-            <span>
-              Активні:
-              <strong data-time-active>47</strong>
-            </span>
+    </div>
 
-            <span>
-              У дорозі:
-              <strong data-time-transit>31</strong>
-            </span>
 
-            <span>
-              Увага:
-              <strong data-time-attention>2</strong>
-            </span>
+    <span
+      class="c12-time-machine__date"
+      data-i18n="timeMachine.endDate"
+    >
+      28 СЕР
+    </span>
 
-            <span>
-              Доставлено:
-              <strong data-time-delivered>118</strong>
-            </span>
+  </div>
 
-          </div>
 
-        </section>
+  <div class="c12-time-machine__stats">
+
+    <span>
+      <span data-i18n="timeMachine.active">
+        Активні
+      </span>:
+      <strong data-time-active>47</strong>
+    </span>
+
+    <span>
+      <span data-i18n="timeMachine.inTransit">
+        У дорозі
+      </span>:
+      <strong data-time-transit>31</strong>
+    </span>
+
+    <span>
+      <span data-i18n="timeMachine.attention">
+        Увага
+      </span>:
+      <strong data-time-attention>2</strong>
+    </span>
+
+    <span>
+      <span data-i18n="timeMachine.delivered">
+        Доставлено
+      </span>:
+      <strong data-time-delivered>118</strong>
+    </span>
+
+  </div>
+
+</section>
 
 
         <!-- =====================================================
@@ -2308,48 +2345,54 @@
           class="c12-automation-feed"
           data-automation-feed
         >
-
+        
           <button
             class="c12-automation-feed__toggle"
             type="button"
             data-automation-toggle
           >
-
+        
             <span class="c12-automation-feed__pulse"></span>
-
+        
             <span>
-              <small>АВТОМАТИЗАЦІЯ</small>
-              <strong>Система зробила сама</strong>
+              <small data-i18n="automationFeed.eyebrow">
+                АВТОМАТИЗАЦІЯ
+              </small>
+        
+              <strong data-i18n="automationFeed.title">
+                Система зробила сама
+              </strong>
             </span>
-
+        
             <span
               class="c12-automation-feed__count"
               data-automation-count
             >
               0
             </span>
-
+        
           </button>
-
-
+        
+        
           <div class="c12-automation-feed__body">
-
+        
             <div
               class="c12-automation-events"
               data-automation-events
             >
-
-              <div class="c12-empty-automation">
-                Виконайте першу дію —
-                тут з'являться автоматичні операції системи.
+        
+              <div
+                class="c12-empty-automation"
+                data-i18n="automationFeed.empty"
+              >
+                Виконайте першу дію — тут з'являться автоматичні операції системи.
               </div>
-
+        
             </div>
-
+        
           </div>
-
+        
         </aside>
-
       </section>
 
 

@@ -2932,9 +2932,7 @@ async function buildOperationsMap() {
       "[data-map-routes]"
     );
 
-  if (
-    !container
-  ) {
+  if (!container) {
     return;
   }
 
@@ -2965,40 +2963,40 @@ async function buildOperationsMap() {
     </div>
   `;
 
-let style;
-let ukraineBoundary;
+  let mapStyle;
+  let ukraineBoundary;
 
-try {
-  [
-    style,
-    ukraineBoundary
-  ] =
-    await Promise.all([
-      getSafeOpenFreeMapStyle(),
-      loadUkraineBoundary()
-    ]);
-}
+  try {
+    [
+      mapStyle,
+      ukraineBoundary
+    ] =
+      await Promise.all([
+        getSafeOpenFreeMapStyle(),
+        loadUkraineBoundary()
+      ]);
+  }
 
-catch (error) {
-  console.error(
-    "[CASE 12] Safe map validation failed:",
-    error
-  );
+  catch (error) {
+    console.error(
+      "[CASE 12] Safe map validation failed:",
+      error
+    );
 
-  container.innerHTML = `
-    <div class="c12-map-error">
-      <strong>
-        Карта тимчасово недоступна
-      </strong>
+    container.innerHTML = `
+      <div class="c12-map-error">
+        <strong>
+          Карта тимчасово недоступна
+        </strong>
 
-      <span>
-        Локальний шар кордонів України не пройшов перевірку.
-      </span>
-    </div>
-  `;
+        <span>
+          Локальний шар кордонів України не пройшов перевірку.
+        </span>
+      </div>
+    `;
 
-  return;
-}
+    return;
+  }
 
   container.innerHTML =
     "";
@@ -3030,14 +3028,13 @@ catch (error) {
           false,
 
         preferCanvas:
-          true,
+          false,
 
         maxBounds: [
           [
             42.0,
             11.5
           ],
-
           [
             57.0,
             41.5
@@ -3049,9 +3046,60 @@ catch (error) {
       }
     );
 
+
+  c12OperationsMap.createPane(
+    "c12PoliticalPane"
+  );
+
+  c12OperationsMap
+    .getPane(
+      "c12PoliticalPane"
+    )
+    .style.zIndex =
+    "450";
+
+
+  c12OperationsMap.createPane(
+    "c12RoutesPane"
+  );
+
+  c12OperationsMap
+    .getPane(
+      "c12RoutesPane"
+    )
+    .style.zIndex =
+    "650";
+
+
+  c12OperationsMap.createPane(
+    "c12VehiclesPane"
+  );
+
+  c12OperationsMap
+    .getPane(
+      "c12VehiclesPane"
+    )
+    .style.zIndex =
+    "680";
+
+
+  c12OperationsMap.createPane(
+    "c12LabelsPane"
+  );
+
+  c12OperationsMap
+    .getPane(
+      "c12LabelsPane"
+    )
+    .style.zIndex =
+    "700";
+
+
   window.L
     .maplibreGL({
-      style,
+      style:
+        mapStyle,
+
       interactive:
         false
     })
@@ -3059,29 +3107,63 @@ catch (error) {
       c12OperationsMap
     );
 
-window.L
-  .geoJSON(
-    ukraineBoundary,
+
+  window.L
+    .geoJSON(
+      ukraineBoundary,
+      {
+        pane:
+          "c12PoliticalPane",
+
+        interactive:
+          false,
+
+        style: {
+          color:
+            "#36764d",
+
+          weight:
+            3,
+
+          opacity:
+            1,
+
+          fillColor:
+            "#e7f3ea",
+
+          fillOpacity:
+            0.14
+        }
+      }
+    )
+    .addTo(
+      c12OperationsMap
+    );
+
+
+  window.L.marker(
+    [
+      49.2,
+      30.4
+    ],
     {
+      pane:
+        "c12LabelsPane",
+
       interactive:
         false,
 
-      style: {
-        color:
-          "#36764d",
+      keyboard:
+        false,
 
-        weight:
-          3,
+      icon:
+        createCountryLabel({
+          name:
+            "Україна",
 
-        opacity:
-          1,
-
-        fillColor:
-          "#e7f3ea",
-
-        fillOpacity:
-          0.14
-      }
+          main:
+            true
+        })
     }
   )
   .addTo(
@@ -3089,38 +3171,15 @@ window.L
   );
 
 
-window.L.marker(
-  [
-    49.2,
-    30.4
-  ],
-  {
-    interactive:
-      false,
-
-    keyboard:
-      false,
-
-    icon:
-      createCountryLabel({
-        name:
-          "Україна",
-
-        main:
-          true
-      })
-  }
-)
-.addTo(
-  c12OperationsMap
-);
-
   window.L.marker(
     [
       44.95,
       34.10
     ],
     {
+      pane:
+        "c12LabelsPane",
+
       interactive:
         false,
 
@@ -3135,6 +3194,7 @@ window.L.marker(
     c12OperationsMap
   );
 
+
   window.L.control
     .zoom({
       position:
@@ -3144,8 +3204,10 @@ window.L.marker(
       c12OperationsMap
     );
 
+
   const usedCities =
     new Set();
+
 
   C12.mapRoutes.forEach(
     route => {
@@ -3159,6 +3221,7 @@ window.L.marker(
     }
   );
 
+
   usedCities.forEach(
     cityName => {
       const location =
@@ -3166,9 +3229,7 @@ window.L.marker(
           cityName
         ];
 
-      if (
-        !location
-      ) {
+      if (!location) {
         return;
       }
 
@@ -3178,10 +3239,14 @@ window.L.marker(
         cityName ===
           "Краків";
 
+
       const marker =
         window.L.circleMarker(
           location,
           {
+            pane:
+              "c12VehiclesPane",
+
             radius:
               mainCity
                 ? 5
@@ -3206,6 +3271,7 @@ window.L.marker(
           c12OperationsMap
         );
 
+
       marker.bindTooltip(
         cityName,
         {
@@ -3223,6 +3289,7 @@ window.L.marker(
       );
     }
   );
+
 
   C12.mapRoutes.forEach(
     (
@@ -3246,10 +3313,12 @@ window.L.marker(
         return;
       }
 
-      const style =
+
+      const routeStyle =
         getMapRouteStyle(
           route
         );
+
 
       const line =
         window.L.polyline(
@@ -3258,17 +3327,20 @@ window.L.marker(
             to
           ],
           {
+            pane:
+              "c12RoutesPane",
+
             color:
-              style.color,
+              routeStyle.color,
 
             weight:
-              style.weight,
+              routeStyle.weight,
 
             opacity:
-              style.opacity,
+              routeStyle.opacity,
 
             dashArray:
-              style.dashArray,
+              routeStyle.dashArray,
 
             lineCap:
               "round",
@@ -3283,6 +3355,7 @@ window.L.marker(
         .addTo(
           c12OperationsMap
         );
+
 
       line.bindPopup(
         `
@@ -3308,6 +3381,7 @@ window.L.marker(
         `
       );
 
+
       const currentPoint =
         getPointOnRoute(
           from,
@@ -3320,10 +3394,14 @@ window.L.marker(
             0.11
         );
 
+
       const currentMarker =
         window.L.circleMarker(
           currentPoint,
           {
+            pane:
+              "c12VehiclesPane",
+
             radius:
               route.orderId ===
               C12.mainOrder.id
@@ -3337,7 +3415,7 @@ window.L.marker(
               2,
 
             fillColor:
-              style.color,
+              routeStyle.color,
 
             fillOpacity:
               1
@@ -3346,6 +3424,7 @@ window.L.marker(
         .addTo(
           c12OperationsMap
         );
+
 
       currentMarker.bindTooltip(
         route.orderId,
@@ -3359,6 +3438,7 @@ window.L.marker(
       );
     }
   );
+
 
   const Legend =
     window.L.Control.extend({
@@ -3390,6 +3470,7 @@ window.L.marker(
       }
     });
 
+
   new Legend({
     position:
       "bottomleft"
@@ -3398,13 +3479,13 @@ window.L.marker(
     c12OperationsMap
   );
 
+
   c12OperationsMap.fitBounds(
     [
       [
         43.0,
         13.0
       ],
-
       [
         55.7,
         40.5
@@ -3418,6 +3499,7 @@ window.L.marker(
     }
   );
 
+
   window.setTimeout(
     () => {
       c12OperationsMap
@@ -3426,7 +3508,6 @@ window.L.marker(
     150
   );
 }
-
 
 function renderMapRoutes() {
   const openMap =

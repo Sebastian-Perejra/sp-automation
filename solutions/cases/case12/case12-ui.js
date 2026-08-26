@@ -3095,6 +3095,27 @@ async function buildOperationsMap() {
     "700";
 
 
+  const politicalRenderer =
+    window.L.svg({
+      pane:
+        "c12PoliticalPane"
+    });
+
+
+  const routesRenderer =
+    window.L.svg({
+      pane:
+        "c12RoutesPane"
+    });
+
+
+  const vehiclesRenderer =
+    window.L.svg({
+      pane:
+        "c12VehiclesPane"
+    });
+
+
   window.L
     .maplibreGL({
       style:
@@ -3112,8 +3133,8 @@ async function buildOperationsMap() {
     .geoJSON(
       ukraineBoundary,
       {
-        pane:
-          "c12PoliticalPane",
+        renderer:
+          politicalRenderer,
 
         interactive:
           false,
@@ -3244,8 +3265,8 @@ async function buildOperationsMap() {
         window.L.circleMarker(
           location,
           {
-            pane:
-              "c12VehiclesPane",
+            renderer:
+              vehiclesRenderer,
 
             radius:
               mainCity
@@ -3327,8 +3348,8 @@ async function buildOperationsMap() {
             to
           ],
           {
-            pane:
-              "c12RoutesPane",
+            renderer:
+              routesRenderer,
 
             color:
               routeStyle.color,
@@ -3399,8 +3420,8 @@ async function buildOperationsMap() {
         window.L.circleMarker(
           currentPoint,
           {
-            pane:
-              "c12VehiclesPane",
+            renderer:
+              vehiclesRenderer,
 
             radius:
               route.orderId ===

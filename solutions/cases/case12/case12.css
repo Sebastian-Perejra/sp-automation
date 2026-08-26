@@ -9369,3 +9369,46 @@ button:first-child {
     brightness(1.05)
     contrast(0.92) !important;
 }
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-maplibre-gl {
+  z-index: 100 !important;
+  pointer-events: none !important;
+}
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-tile-pane {
+  z-index: 100 !important;
+}
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-overlay-pane {
+  z-index: 450 !important;
+}
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-shadow-pane {
+  z-index: 500 !important;
+}
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-marker-pane {
+  z-index: 600 !important;
+}
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-tooltip-pane {
+  z-index: 650 !important;
+}
+
+.case-detail-stage__body.c12-body
+.c12-leaflet-map
+.leaflet-popup-pane {
+  z-index: 700 !important;
+}

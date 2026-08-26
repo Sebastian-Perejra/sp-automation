@@ -1837,78 +1837,78 @@ else {
      PLANNING QUEUE
   ============================================================ */
 
-  function renderPlanningQueue() {
-    const container =
-      $(
-        "[data-planning-orders]"
-      );
-
-    if (!container) {
-      return;
-    }
-
-    const queue =
-      C12.data
-        .getPlanningOrders()
-        .filter(
-          order =>
-            order.id !==
-            C12.mainOrder.id
-        )
-        .slice(
-          0,
-          6
+    function renderPlanningQueue() {
+      const container =
+        $(
+          "[data-planning-orders]"
         );
-
-    container.innerHTML =
-      queue
-        .map(
-          order => `
-            <div class="c12-mini-order">
-              <div>
-                <strong>
-                  ${escapeHtml(
-                    order.id
-                  )}
-                </strong>
-
-                <span>
-                  ${escapeHtml(
-                    order.origin
-                  )}
-                  →
-                  ${escapeHtml(
-                    order.destination
-                  )}
-                </span>
+  
+      if (!container) {
+        return;
+      }
+  
+      const queue =
+        C12.data
+          .getPlanningOrders()
+          .filter(
+            order =>
+              order.id !==
+              C12.mainOrder.id
+          )
+          .slice(
+            0,
+            6
+          );
+  
+      container.innerHTML =
+        queue
+          .map(
+            order => `
+              <div class="c12-mini-order">
+                <div>
+                  <strong>
+                    ${escapeHtml(
+                      order.id
+                    )}
+                  </strong>
+  
+                  <span>
+                    ${escapeHtml(
+                      order.origin
+                    )}
+                    →
+                    ${escapeHtml(
+                      order.destination
+                    )}
+                  </span>
+                </div>
+  
+                <div>
+                  <span>
+                    ${formatNumber(
+                      order.weightKg
+                    )}
+                    кг
+                  </span>
+  
+                  <small>
+                    ${escapeHtml(
+                      order.vehicleTypeLabel
+                    )}
+                  </small>
+                </div>
               </div>
-
-              <div>
-                <span>
-                  ${formatNumber(
-                    order.weightKg
-                  )}
-                  кг
-                </span>
-
-                <small>
-                  ${escapeHtml(
-                    order.vehicleTypeLabel
-                  )}
-                </small>
-              </div>
-            </div>
-          `
-        )
-        .join("");
-
-    setText(
-      "[data-waiting-assignment-count]",
-      C12.data
-        .getPlanningOrders()
-        .length
-    );
-  }
+            `
+          )
+          .join("");
+  
+      setText(
+        "[data-waiting-assignment-count]",
+        C12.data
+          .getPlanningOrders()
+          .length
+      );
+    }
 
 
   /* ============================================================

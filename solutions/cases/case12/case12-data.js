@@ -402,54 +402,147 @@
      CARRIERS
   ============================================================ */
 
-  C12.carriers = [
-    {
-      id: "CAR-001",
-      name: "TransKarpaty",
-      country: "Україна",
-      rating: 4.9,
-      available: 3,
-      types: ["Тент", "Мега"],
-      priceIndex: 1.02
-    },
-    {
-      id: "CAR-002",
-      name: "RoadLink UA",
-      country: "Україна",
-      rating: 4.8,
-      available: 2,
-      types: ["Тент", "Рефрижератор"],
-      priceIndex: 1.05
-    },
-    {
-      id: "CAR-003",
-      name: "PolCargo Partner",
-      country: "Польща",
-      rating: 4.7,
-      available: 4,
-      types: ["Тент", "Мега", "Фургон"],
-      priceIndex: 1.08
-    },
-    {
-      id: "CAR-004",
-      name: "Vistula Transport",
-      country: "Польща",
-      rating: 4.6,
-      available: 2,
-      types: ["Тент", "Рефрижератор"],
-      priceIndex: 1.1
-    },
-    {
-      id: "CAR-005",
-      name: "Danube Freight",
-      country: "Угорщина",
-      rating: 4.8,
-      available: 1,
-      types: ["Тент", "Мега"],
-      priceIndex: 1.12
-    }
-  ];
+ C12.carriers = [
+  {
+    id: "CAR-001",
+    name: "TransKarpaty",
+    country: "Україна",
+    rating: 4.9,
+    available: 3,
+    initialAvailable: 3,
+    types: ["Тент", "Мега"],
+    priceIndex: 1.02,
 
+    offer: {
+      brand: "Volvo",
+      model: "FH 460",
+      plate: "AA7421KT",
+      displayPlate: "AA 7421 KT",
+      type: "curtain",
+      typeLabel: "Тент",
+      capacityKg: 22000,
+      pallets: 33,
+      driver: "Павло Коваль",
+      driverPhone: "+380 67 441 28 06",
+      location: "Львів",
+      readyAt: "2026-08-26T09:52:00",
+      rate: 1340,
+      currency: "EUR"
+    }
+  },
+
+  {
+    id: "CAR-002",
+    name: "RoadLink UA",
+    country: "Україна",
+    rating: 4.8,
+    available: 2,
+    initialAvailable: 2,
+    types: ["Тент", "Рефрижератор"],
+    priceIndex: 1.05,
+
+    offer: {
+      brand: "Scania",
+      model: "R450",
+      plate: "AI5832MP",
+      displayPlate: "AI 5832 MP",
+      type: "curtain",
+      typeLabel: "Тент",
+      capacityKg: 22000,
+      pallets: 33,
+      driver: "Микола Романюк",
+      driverPhone: "+380 93 518 42 71",
+      location: "Львів",
+      readyAt: "2026-08-26T09:56:00",
+      rate: 1380,
+      currency: "EUR"
+    }
+  },
+
+  {
+    id: "CAR-003",
+    name: "PolCargo Partner",
+    country: "Польща",
+    rating: 4.7,
+    available: 4,
+    initialAvailable: 4,
+    types: ["Тент", "Мега", "Фургон"],
+    priceIndex: 1.08,
+
+    offer: {
+      brand: "DAF",
+      model: "XF 480",
+      plate: "KR8H72",
+      displayPlate: "KR 8H72",
+      type: "curtain",
+      typeLabel: "Тент",
+      capacityKg: 22000,
+      pallets: 33,
+      driver: "Marek Zieliński",
+      driverPhone: "+48 602 417 835",
+      location: "Львів",
+      readyAt: "2026-08-26T09:50:00",
+      rate: 1420,
+      currency: "EUR"
+    }
+  },
+
+  {
+    id: "CAR-004",
+    name: "Vistula Transport",
+    country: "Польща",
+    rating: 4.6,
+    available: 2,
+    initialAvailable: 2,
+    types: ["Тент", "Рефрижератор"],
+    priceIndex: 1.1,
+
+    offer: {
+      brand: "Mercedes-Benz",
+      model: "Actros 1845",
+      plate: "RZ6214P",
+      displayPlate: "RZ 6214P",
+      type: "curtain",
+      typeLabel: "Тент",
+      capacityKg: 22000,
+      pallets: 33,
+      driver: "Piotr Nowak",
+      driverPhone: "+48 697 284 116",
+      location: "Львів",
+      readyAt: "2026-08-26T09:55:00",
+      rate: 1460,
+      currency: "EUR"
+    }
+  },
+
+  {
+    id: "CAR-005",
+    name: "Danube Freight",
+    country: "Угорщина",
+    rating: 4.8,
+    available: 1,
+    initialAvailable: 1,
+    types: ["Тент", "Мега"],
+    priceIndex: 1.12,
+
+    offer: {
+      brand: "MAN",
+      model: "TGX 18.510",
+      plate: "RTE418",
+      displayPlate: "RTE-418",
+      type: "curtain",
+      typeLabel: "Тент",
+      capacityKg: 22000,
+      pallets: 33,
+      driver: "Gábor Nagy",
+      driverPhone: "+36 30 418 7251",
+      location: "Львів",
+      readyAt: "2026-08-26T09:57:00",
+      rate: 1520,
+      currency: "EUR"
+    }
+  }
+];
 
   /* ============================================================
      CARGO TYPES

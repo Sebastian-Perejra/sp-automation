@@ -2882,27 +2882,6 @@ window.L.marker(
   c12OperationsMap
 );
 
-      window.L.marker(
-        country.label,
-        {
-          interactive:
-            false,
-
-          keyboard:
-            false,
-
-          icon:
-            createCountryLabel(
-              country
-            )
-        }
-      )
-      .addTo(
-        c12OperationsMap
-      );
-    }
-  );
-
   window.L.marker(
     [
       44.95,

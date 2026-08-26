@@ -8377,3 +8377,280 @@ button:first-child {
     min-height: 350px !important;
   }
 }
+
+.case-detail-stage__body.c12-body .c12-carrier-card {
+  width: 100%;
+
+  display: grid;
+  gap: 7px;
+
+  padding: 11px 12px;
+
+  border: 1px solid #ddd7cf;
+  border-radius: 11px;
+
+  color: #3c5045;
+  text-align: left;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card:hover {
+  transform: translateY(-1px);
+
+  border-color: #bfd3c5;
+
+  background: #f8fbf9;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card.is-selected {
+  border-color: #8fbaa0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eef8f1,
+      #ffffff
+    );
+
+  box-shadow:
+    0 12px 28px
+    rgba(67, 103, 78, 0.12);
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card__top strong {
+  color: #31483d;
+
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card__top span {
+  color: #597267;
+
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card__country {
+  color: #76827b;
+
+  font-size: 10px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+
+  color: #68766e;
+
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer {
+  display: grid;
+  gap: 10px;
+
+  margin-top: 5px;
+  padding-top: 11px;
+
+  border-top: 1px solid #ceddd2;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer__label {
+  color: #4f8a62;
+
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer__vehicle {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  gap: 9px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer__vehicle > div:last-child {
+  min-width: 0;
+
+  display: grid;
+  gap: 2px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer__vehicle strong {
+  color: #31483d;
+
+  font-size: 11px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer__vehicle span {
+  color: #69776f;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-truck {
+  position: relative;
+
+  width: 44px;
+  height: 24px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-truck span {
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+
+  width: 29px;
+  height: 14px;
+
+  border: 1px solid #8fb39b;
+  border-radius: 3px 2px 2px 3px;
+
+  background: #e6f2e9;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-truck i {
+  position: absolute;
+  right: 1px;
+  bottom: 5px;
+
+  width: 14px;
+  height: 12px;
+
+  border: 1px solid #8fb39b;
+  border-radius: 2px 5px 2px 2px;
+
+  background: #edf7ef;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-truck b,
+.case-detail-stage__body.c12-body .c12-carrier-truck::after {
+  content: "";
+
+  position: absolute;
+  bottom: 1px;
+
+  width: 6px;
+  height: 6px;
+
+  border: 2px solid #31483d;
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-truck b {
+  left: 8px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-truck::after {
+  right: 5px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer dl {
+  display: grid;
+  gap: 0;
+
+  margin: 0;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer dl > div {
+  min-height: 27px;
+
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 0;
+
+  border-top: 1px solid #e5e1db;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer dt {
+  color: #78847d;
+
+  font-size: 8.5px;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer dd {
+  margin: 0;
+
+  color: #344a3e;
+
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1.3;
+
+  text-align: right;
+}
+
+.case-detail-stage__body.c12-body .c12-carrier-offer__confirmed {
+  padding: 7px 8px;
+
+  border: 1px solid #bcd8c5;
+  border-radius: 8px;
+
+  color: #3f7652;
+
+  background: #eaf6ed;
+
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.case-detail-stage__body.c12-body .c12-driver-resource {
+  display: grid;
+  gap: 3px;
+
+  margin: 12px 0;
+  padding: 9px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.case-detail-stage__body.c12-body .c12-driver-resource small {
+  color: #79a78a;
+
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+
+.case-detail-stage__body.c12-body .c12-driver-resource strong {
+  color: #f2f6f3;
+
+  font-size: 11px;
+}
+
+.case-detail-stage__body.c12-body .c12-driver-resource span {
+  color: #aebdb5;
+
+  font-size: 9px;
+}

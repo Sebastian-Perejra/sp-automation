@@ -494,13 +494,119 @@ const conceptsNode =
       data_matching: 0.30
     },
 
-    realtime: {
-      reporting: 0.34,
-      powerbi: 0.38,
-      dashboard: 0.34,
-      integration: 0.28
-    }
-  };
+realtime: {
+  reporting: 0.34,
+  powerbi: 0.38,
+  dashboard: 0.34,
+  integration: 0.28,
+  tracking: 0.28,
+  transport: 0.20
+},
+
+transport: {
+  logistics: 0.92,
+  fleet: 0.76,
+  carrier: 0.68,
+  route: 0.66,
+  delivery: 0.64,
+  tracking: 0.62,
+  tms: 0.76,
+  google_sheets: 0.28,
+  automation: 0.36,
+  integration: 0.30
+},
+
+logistics: {
+  transport: 0.92,
+  fleet: 0.70,
+  carrier: 0.66,
+  route: 0.62,
+  delivery: 0.58,
+  tracking: 0.52,
+  tms: 0.68,
+  automation: 0.32
+},
+
+fleet: {
+  transport: 0.78,
+  logistics: 0.72,
+  carrier: 0.48,
+  route: 0.44,
+  delivery: 0.38,
+  tracking: 0.40,
+  tms: 0.54,
+  realtime: 0.28
+},
+
+carrier: {
+  logistics: 0.78,
+  transport: 0.74,
+  fleet: 0.54,
+  route: 0.42,
+  delivery: 0.44,
+  tracking: 0.32,
+  tms: 0.48
+},
+
+route: {
+  transport: 0.72,
+  logistics: 0.66,
+  delivery: 0.68,
+  tracking: 0.48,
+  fleet: 0.38,
+  carrier: 0.34
+},
+
+delivery: {
+  transport: 0.66,
+  logistics: 0.56,
+  route: 0.64,
+  tracking: 0.74,
+  pod: 0.82,
+  cmr: 0.50,
+  notifications: 0.36,
+  realtime: 0.28
+},
+
+tracking: {
+  transport: 0.64,
+  logistics: 0.54,
+  delivery: 0.78,
+  route: 0.52,
+  realtime: 0.48,
+  notifications: 0.38,
+  pod: 0.34
+},
+
+pod: {
+  delivery: 0.92,
+  tracking: 0.52,
+  documents: 0.78,
+  transport: 0.48,
+  cmr: 0.46
+},
+
+cmr: {
+  documents: 0.82,
+  transport: 0.58,
+  logistics: 0.44,
+  delivery: 0.50,
+  pod: 0.46
+},
+
+tms: {
+  transport: 0.94,
+  logistics: 0.86,
+  fleet: 0.64,
+  carrier: 0.58,
+  route: 0.52,
+  delivery: 0.50,
+  tracking: 0.48,
+  automation: 0.36,
+  integration: 0.34
+}
+
+};
 
 const conceptLabels =
   ui.concepts || {};

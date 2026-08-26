@@ -3798,7 +3798,13 @@ function renderMapRoutes() {
      DRIVER BUTTONS
   ============================================================ */
 
-function updateDriverActions() {
+function updateDriverActions(
+  snapshot
+) {
+  if (!snapshot) {
+    return;
+  }
+
   const buttons =
     $$(
       "[data-driver-action]"
@@ -3808,28 +3814,95 @@ function updateDriverActions() {
     button => {
       button.disabled =
         true;
+
+      button.classList.remove(
+        "is-current"
+      );
     }
   );
 
-  const enable = action => {
-    const button =
-      $(
-        `[data-driver-action="${action}"]`
-      );
 
-    if (button) {
+  const enable =
+    action => {
+      const button =
+        $(
+          `[data-driver-action="${action}"]`
+        );
+
+      if (!button) {
+        return;
+      }
+
       button.disabled =
         false;
-    }
-  };
 
-  const step =
+      button.classList.add(
+        "is-current"
+      );
+    };
+
+
+  const position =
     Number(
-      C12.state.driverStep ||
+      snapshot.position ||
       0
     );
 
-  if (step === 0) {
+
+  if (
+    position <
+    24
+  ) {
+    C12.state.driverStep =
+      0;
+
+    C12.state.tripStarted =
+      false;
+
+    C12.state.arrivedLoading =
+      false;
+
+    C12.state.cargoLoaded =
+      false;
+
+    C12.state.inTransit =
+      false;
+
+    C12.state.delayReported =
+      false;
+
+    C12.state.delivered =
+      false;
+
+    return;
+  }
+
+
+  if (
+    position <
+    34
+  ) {
+    C12.state.driverStep =
+      0;
+
+    C12.state.tripStarted =
+      false;
+
+    C12.state.arrivedLoading =
+      false;
+
+    C12.state.cargoLoaded =
+      false;
+
+    C12.state.inTransit =
+      false;
+
+    C12.state.delayReported =
+      false;
+
+    C12.state.delivered =
+      false;
+
     enable(
       "start"
     );
@@ -3837,7 +3910,32 @@ function updateDriverActions() {
     return;
   }
 
-  if (step === 1) {
+
+  if (
+    position <
+    39
+  ) {
+    C12.state.driverStep =
+      1;
+
+    C12.state.tripStarted =
+      true;
+
+    C12.state.arrivedLoading =
+      false;
+
+    C12.state.cargoLoaded =
+      false;
+
+    C12.state.inTransit =
+      false;
+
+    C12.state.delayReported =
+      false;
+
+    C12.state.delivered =
+      false;
+
     enable(
       "arrived"
     );
@@ -3845,7 +3943,32 @@ function updateDriverActions() {
     return;
   }
 
-  if (step === 2) {
+
+  if (
+    position <
+    45
+  ) {
+    C12.state.driverStep =
+      2;
+
+    C12.state.tripStarted =
+      true;
+
+    C12.state.arrivedLoading =
+      true;
+
+    C12.state.cargoLoaded =
+      false;
+
+    C12.state.inTransit =
+      false;
+
+    C12.state.delayReported =
+      false;
+
+    C12.state.delivered =
+      false;
+
     enable(
       "loaded"
     );
@@ -3853,7 +3976,32 @@ function updateDriverActions() {
     return;
   }
 
-  if (step === 3) {
+
+  if (
+    position <
+    48
+  ) {
+    C12.state.driverStep =
+      3;
+
+    C12.state.tripStarted =
+      true;
+
+    C12.state.arrivedLoading =
+      true;
+
+    C12.state.cargoLoaded =
+      true;
+
+    C12.state.inTransit =
+      false;
+
+    C12.state.delayReported =
+      false;
+
+    C12.state.delivered =
+      false;
+
     enable(
       "transit"
     );
@@ -3861,9 +4009,73 @@ function updateDriverActions() {
     return;
   }
 
-  if (step === 4) {
+
+  if (
+    position <
+    65
+  ) {
+    C12.state.driverStep =
+      4;
+
+    C12.state.tripStarted =
+      true;
+
+    C12.state.arrivedLoading =
+      true;
+
+    C12.state.cargoLoaded =
+      true;
+
+    C12.state.inTransit =
+      true;
+
+    C12.state.delayReported =
+      false;
+
+    C12.state.delivered =
+      false;
+
+    enable(
+      "delay"
+    );
+
+    enable(
+      "delivered"
+    );
+
+    return;
+  }
+
+
+  if (
+    position <
+    92
+  ) {
+    C12.state.driverStep =
+      4;
+
+    C12.state.tripStarted =
+      true;
+
+    C12.state.arrivedLoading =
+      true;
+
+    C12.state.cargoLoaded =
+      true;
+
+    C12.state.inTransit =
+      true;
+
+    C12.state.delayReported =
+      position <
+      78;
+
+    C12.state.delivered =
+      false;
+
     if (
-      !C12.state.delayReported
+      position >=
+      78
     ) {
       enable(
         "delay"
@@ -3876,6 +4088,28 @@ function updateDriverActions() {
 
     return;
   }
+
+
+  C12.state.driverStep =
+    5;
+
+  C12.state.tripStarted =
+    true;
+
+  C12.state.arrivedLoading =
+    true;
+
+  C12.state.cargoLoaded =
+    true;
+
+  C12.state.inTransit =
+    true;
+
+  C12.state.delayReported =
+    false;
+
+  C12.state.delivered =
+    true;
 }
 
 

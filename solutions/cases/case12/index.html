@@ -3044,190 +3044,305 @@
          MODAL: ALL ORDERS
     ========================================================== -->
 
-    <div
-      class="c12-modal"
-      data-orders-modal
-      hidden
-    >
+   <div
+  class="c12-modal"
+  data-orders-modal
+  hidden
+>
 
-      <div
-        class="c12-modal__backdrop"
-        data-close-orders-modal
-      ></div>
-
-
-      <div
-        class="c12-modal__window c12-modal__window--wide"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Усі замовлення"
-      >
-
-        <header class="c12-modal__header">
-
-          <div>
-            <span class="c12-panel__eyebrow">
-              ОПЕРАЦІЙНА БАЗА
-            </span>
-
-            <h2>200 перевезень</h2>
-          </div>
+  <div
+    class="c12-modal__backdrop"
+    data-close-orders-modal
+  ></div>
 
 
-          <button
-            class="c12-modal__close"
-            type="button"
-            aria-label="Закрити"
-            data-close-orders-modal
-          >
-            ×
-          </button>
+  <div
+    class="c12-modal__window c12-modal__window--wide"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Усі замовлення"
+    data-i18n-aria-label="ordersModal.aria"
+  >
 
-        </header>
+    <header class="c12-modal__header">
 
+      <div>
 
-          <div class="c12-orders-toolbar">
-          
-            <button
-              class="c12-orders-back"
-              type="button"
-              data-return-dispatcher
-            >
-              ← До диспетчера
-            </button>
-          
-            <label class="c12-search">
+        <span
+          class="c12-panel__eyebrow"
+          data-i18n="ordersModal.eyebrow"
+        >
+          ОПЕРАЦІЙНА БАЗА
+        </span>
 
-            <span>⌕</span>
-
-            <input
-              type="search"
-              placeholder="ID, клієнт, місто, водій, автомобіль..."
-              data-orders-search
-            >
-
-          </label>
-
-
-          <select data-orders-status-filter>
-            <option value="all">Усі статуси</option>
-            <option value="new">Нові</option>
-            <option value="planning">Планування</option>
-            <option value="assigned">Призначено</option>
-            <option value="transit">У дорозі</option>
-            <option value="delivered">Доставлено</option>
-            <option value="attention">Потребують уваги</option>
-          </select>
-
-
-          <select data-orders-execution-filter>
-            <option value="all">Усі перевезення</option>
-            <option value="own">Власний транспорт</option>
-            <option value="carrier">Залучений перевізник</option>
-          </select>
-
-        </div>
-
-
-        <div class="c12-table-wrap c12-table-wrap--modal">
-
-          <table class="c12-table c12-table--large">
-
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Створено</th>
-                <th>Клієнт</th>
-                <th>Маршрут</th>
-                <th>Вантаж</th>
-                <th>Завантаження</th>
-                <th>Доставка</th>
-                <th>Виконання</th>
-                <th>Автомобіль</th>
-                <th>Водій</th>
-                <th>Статус</th>
-                <th>Маржа</th>
-              </tr>
-            </thead>
-
-            <tbody data-all-orders-table></tbody>
-
-          </table>
-
-        </div>
-
-
-        <footer class="c12-modal__footer">
-
-          <span data-modal-orders-summary>
-            200 замовлень
-          </span>
-
-        </footer>
+        <h2 data-i18n="ordersModal.title">
+          200 перевезень
+        </h2>
 
       </div>
 
+
+      <button
+        class="c12-modal__close"
+        type="button"
+        aria-label="Закрити"
+        data-i18n-aria-label="ordersModal.closeAria"
+        data-close-orders-modal
+      >
+        ×
+      </button>
+
+    </header>
+
+
+    <div class="c12-orders-toolbar">
+
+      <button
+        class="c12-orders-back"
+        type="button"
+        data-return-dispatcher
+        data-i18n="ordersModal.back"
+      >
+        ← До диспетчера
+      </button>
+
+
+      <label class="c12-search">
+
+        <span>⌕</span>
+
+        <input
+          type="search"
+          placeholder="ID, клієнт, місто, водій, автомобіль..."
+          data-i18n-placeholder="ordersModal.searchPlaceholder"
+          data-orders-search
+        >
+
+      </label>
+
+
+      <select data-orders-status-filter>
+
+        <option
+          value="all"
+          data-i18n="ordersModal.statusAll"
+        >
+          Усі статуси
+        </option>
+
+        <option
+          value="new"
+          data-i18n="ordersModal.statusNew"
+        >
+          Нові
+        </option>
+
+        <option
+          value="planning"
+          data-i18n="ordersModal.statusPlanning"
+        >
+          Планування
+        </option>
+
+        <option
+          value="assigned"
+          data-i18n="ordersModal.statusAssigned"
+        >
+          Призначено
+        </option>
+
+        <option
+          value="transit"
+          data-i18n="ordersModal.statusTransit"
+        >
+          У дорозі
+        </option>
+
+        <option
+          value="delivered"
+          data-i18n="ordersModal.statusDelivered"
+        >
+          Доставлено
+        </option>
+
+        <option
+          value="attention"
+          data-i18n="ordersModal.statusAttention"
+        >
+          Потребують уваги
+        </option>
+
+      </select>
+
+
+      <select data-orders-execution-filter>
+
+        <option
+          value="all"
+          data-i18n="ordersModal.executionAll"
+        >
+          Усі перевезення
+        </option>
+
+        <option
+          value="own"
+          data-i18n="ordersModal.executionOwn"
+        >
+          Власний транспорт
+        </option>
+
+        <option
+          value="carrier"
+          data-i18n="ordersModal.executionCarrier"
+        >
+          Залучений перевізник
+        </option>
+
+      </select>
+
     </div>
 
+
+    <div class="c12-table-wrap c12-table-wrap--modal">
+
+      <table class="c12-table c12-table--large">
+
+        <thead>
+
+          <tr>
+            <th>ID</th>
+
+            <th data-i18n="ordersModal.created">
+              Створено
+            </th>
+
+            <th data-i18n="ordersModal.customer">
+              Клієнт
+            </th>
+
+            <th data-i18n="ordersModal.route">
+              Маршрут
+            </th>
+
+            <th data-i18n="ordersModal.freight">
+              Вантаж
+            </th>
+
+            <th data-i18n="ordersModal.pickup">
+              Завантаження
+            </th>
+
+            <th data-i18n="ordersModal.delivery">
+              Доставка
+            </th>
+
+            <th data-i18n="ordersModal.execution">
+              Виконання
+            </th>
+
+            <th data-i18n="ordersModal.truck">
+              Автомобіль
+            </th>
+
+            <th data-i18n="ordersModal.driver">
+              Водій
+            </th>
+
+            <th data-i18n="ordersModal.status">
+              Статус
+            </th>
+
+            <th data-i18n="ordersModal.margin">
+              Маржа
+            </th>
+          </tr>
+
+        </thead>
+
+        <tbody data-all-orders-table></tbody>
+
+      </table>
+
+    </div>
+
+
+    <footer class="c12-modal__footer">
+
+      <span
+        data-modal-orders-summary
+        data-i18n="ordersModal.summary"
+      >
+        200 замовлень
+      </span>
+
+    </footer>
+
+  </div>
+
+</div>
 
     <!-- =========================================================
          MODAL: BUSINESS RULE MESSAGE
     ========================================================== -->
 
     <div
-      class="c12-modal"
-      data-rule-modal
-      hidden
+  class="c12-modal"
+  data-rule-modal
+  hidden
+>
+
+  <div
+    class="c12-modal__backdrop"
+    data-close-rule-modal
+  ></div>
+
+
+  <div
+    class="c12-modal__window c12-modal__window--small"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Перевірка бізнес-правила"
+    data-i18n-aria-label="ruleModal.aria"
+  >
+
+    <div
+      class="c12-rule-result"
+      data-rule-result
     >
 
-      <div
-        class="c12-modal__backdrop"
-        data-close-rule-modal
-      ></div>
+      <span class="c12-rule-result__icon">
+        ⚠
+      </span>
 
-
-      <div
-        class="c12-modal__window c12-modal__window--small"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Перевірка бізнес-правила"
+      <span
+        class="c12-panel__eyebrow"
+        data-i18n="ruleModal.eyebrow"
       >
+        БІЗНЕС-ПРАВИЛО
+      </span>
 
-        <div
-          class="c12-rule-result"
-          data-rule-result
-        >
+      <h3 data-rule-title>
+        Неможливо призначити автомобіль
+      </h3>
 
-          <span class="c12-rule-result__icon">
-            ⚠
-          </span>
+      <p data-rule-description>
+        Цей автомобіль не відповідає вимогам замовлення.
+      </p>
 
-          <span class="c12-panel__eyebrow">
-            БІЗНЕС-ПРАВИЛО
-          </span>
-
-          <h3 data-rule-title>
-            Неможливо призначити автомобіль
-          </h3>
-
-          <p data-rule-description>
-            Цей автомобіль не відповідає вимогам замовлення.
-          </p>
-
-          <button
-            class="c12-primary-action"
-            type="button"
-            data-close-rule-modal
-          >
-            Зрозуміло
-          </button>
-
-        </div>
-
-      </div>
+      <button
+        class="c12-primary-action"
+        type="button"
+        data-close-rule-modal
+        data-i18n="ruleModal.ok"
+      >
+        Зрозуміло
+      </button>
 
     </div>
 
+  </div>
+
+</div>
 
     <!-- =========================================================
          TOASTS

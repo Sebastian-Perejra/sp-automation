@@ -3007,3 +3007,411 @@
   );
 
 })();
+
+(function () {
+  "use strict";
+
+  const C12 =
+    window.C12 =
+    window.C12 || {};
+
+  if (!C12.i18n) {
+    return;
+  }
+
+
+  const translations = {
+
+    uk: {
+      timeMachine: {
+        eyebrow:
+          "ЧАС ПЕРЕВЕЗЕННЯ",
+
+        hint:
+          "Перетягуйте час і дивіться, як змінюється вся система",
+
+        startDate:
+          "26 СЕР",
+
+        endDate:
+          "28 СЕР",
+
+        request:
+          "Заявка",
+
+        assignment:
+          "Призначення",
+
+        pickup:
+          "Завантаження",
+
+        delay:
+          "Затримка",
+
+        delivery:
+          "Доставка",
+
+        active:
+          "Активні",
+
+        inTransit:
+          "У дорозі",
+
+        attention:
+          "Увага",
+
+        delivered:
+          "Доставлено",
+
+        sliderAria:
+          "Час перевезення"
+      },
+
+      automationFeed: {
+        eyebrow:
+          "АВТОМАТИЗАЦІЯ",
+
+        title:
+          "Система зробила сама",
+
+        empty:
+          "Виконайте першу дію — тут з'являться автоматичні операції системи."
+      }
+    },
+
+
+    ru: {
+      timeMachine: {
+        eyebrow:
+          "ВРЕМЯ ПЕРЕВОЗКИ",
+
+        hint:
+          "Перемещайте время и смотрите, как меняется вся система",
+
+        startDate:
+          "26 АВГ",
+
+        endDate:
+          "28 АВГ",
+
+        request:
+          "Заявка",
+
+        assignment:
+          "Назначение",
+
+        pickup:
+          "Погрузка",
+
+        delay:
+          "Задержка",
+
+        delivery:
+          "Доставка",
+
+        active:
+          "Активные",
+
+        inTransit:
+          "В пути",
+
+        attention:
+          "Внимание",
+
+        delivered:
+          "Доставлено",
+
+        sliderAria:
+          "Время перевозки"
+      },
+
+      automationFeed: {
+        eyebrow:
+          "АВТОМАТИЗАЦИЯ",
+
+        title:
+          "Система сделала сама",
+
+        empty:
+          "Выполните первое действие — здесь появятся автоматические операции системы."
+      }
+    },
+
+
+    en: {
+      timeMachine: {
+        eyebrow:
+          "SHIPMENT TIMELINE",
+
+        hint:
+          "Drag the timeline to see the entire operation update in real time",
+
+        startDate:
+          "26 AUG",
+
+        endDate:
+          "28 AUG",
+
+        request:
+          "Request",
+
+        assignment:
+          "Assignment",
+
+        pickup:
+          "Pickup",
+
+        delay:
+          "Delay",
+
+        delivery:
+          "Delivery",
+
+        active:
+          "Active",
+
+        inTransit:
+          "In Transit",
+
+        attention:
+          "Attention",
+
+        delivered:
+          "Delivered",
+
+        sliderAria:
+          "Shipment timeline"
+      },
+
+      automationFeed: {
+        eyebrow:
+          "AUTOMATION",
+
+        title:
+          "Handled automatically",
+
+        empty:
+          "Complete the first action to see the operations the system handles automatically."
+      }
+    }
+
+  };
+
+
+  Object.entries(
+    translations
+  ).forEach(
+    ([language, sections]) => {
+
+      const target =
+        C12.i18n.languages[
+          language
+        ];
+
+      if (!target) {
+        return;
+      }
+
+      Object.entries(
+        sections
+      ).forEach(
+        ([section, values]) => {
+
+          target[section] = {
+            ...(
+              target[section] ||
+              {}
+            ),
+            ...values
+          };
+
+        }
+      );
+
+    }
+  );
+
+
+  function applySemanticTranslations() {
+
+    const root =
+      document.getElementById(
+        "transportCase"
+      );
+
+    if (!root) {
+      return false;
+    }
+
+
+    root
+      .querySelectorAll(
+        "[data-i18n]"
+      )
+      .forEach(
+        element => {
+
+          const key =
+            element.getAttribute(
+              "data-i18n"
+            );
+
+          if (!key) {
+            return;
+          }
+
+          const value =
+            C12.i18n.get(
+              key,
+              ""
+            );
+
+          if (value) {
+            element.textContent =
+              value;
+          }
+
+        }
+      );
+
+
+    root
+      .querySelectorAll(
+        "[data-i18n-aria-label]"
+      )
+      .forEach(
+        element => {
+
+          const key =
+            element.getAttribute(
+              "data-i18n-aria-label"
+            );
+
+          if (!key) {
+            return;
+          }
+
+          const value =
+            C12.i18n.get(
+              key,
+              ""
+            );
+
+          if (value) {
+            element.setAttribute(
+              "aria-label",
+              value
+            );
+          }
+
+        }
+      );
+
+
+    root
+      .querySelectorAll(
+        "[data-i18n-title]"
+      )
+      .forEach(
+        element => {
+
+          const key =
+            element.getAttribute(
+              "data-i18n-title"
+            );
+
+          if (!key) {
+            return;
+          }
+
+          const value =
+            C12.i18n.get(
+              key,
+              ""
+            );
+
+          if (value) {
+            element.setAttribute(
+              "title",
+              value
+            );
+          }
+
+        }
+      );
+
+
+    root
+      .querySelectorAll(
+        "[data-i18n-placeholder]"
+      )
+      .forEach(
+        element => {
+
+          const key =
+            element.getAttribute(
+              "data-i18n-placeholder"
+            );
+
+          if (!key) {
+            return;
+          }
+
+          const value =
+            C12.i18n.get(
+              key,
+              ""
+            );
+
+          if (value) {
+            element.setAttribute(
+              "placeholder",
+              value
+            );
+          }
+
+        }
+      );
+
+
+    return true;
+  }
+
+
+  const previousApplyStatic =
+    C12.i18n.applyStatic
+      ?.bind(
+        C12.i18n
+      );
+
+
+  C12.i18n.applyStatic =
+    function () {
+
+      if (
+        previousApplyStatic
+      ) {
+        previousApplyStatic();
+      }
+
+      applySemanticTranslations();
+
+      return true;
+    };
+
+
+  C12.i18n.apply =
+    applySemanticTranslations;
+
+
+  document.addEventListener(
+    "c12:languagechange",
+    () => {
+      applySemanticTranslations();
+    }
+  );
+
+
+  applySemanticTranslations();
+
+})();

@@ -238,13 +238,18 @@
      MAIN ORDER ETA
   ============================================================ */
 
-  function getMainEtaByPosition(position) {
-    if (Number(position) >= 65) {
-      return "2026-08-28T16:00:00";
-    }
-
-    return "2026-08-28T14:00:00";
+function getMainEtaByPosition(
+  position
+) {
+  if (
+    C12.state.delayReported &&
+    Number(position) >= 65
+  ) {
+    return "2026-08-28T16:00:00";
   }
+
+  return "2026-08-28T14:00:00";
+}
 
 
   /* ============================================================
@@ -1697,50 +1702,54 @@ function syncMainOrder(
   ============================================================ */
 
   function completeDelivery(
-    options = {}
-  ) {
-    C12.mainOrder.receivedBy =
-      options.receivedBy ||
-      "Jan Kowalski";
+  options = {}
+) {
+  C12.mainOrder.receivedBy =
+    options.receivedBy ||
+    "Jan Kowalski";
 
-    C12.mainOrder.deliveredAt =
-      options.deliveredAt ||
-      "2026-08-28T15:43:00";
+  C12.mainOrder.deliveredAt =
+    options.deliveredAt ||
+    "2026-08-28T15:43:00";
 
-    C12.mainOrder.pod =
-      options.pod !== false;
+  C12.mainOrder.pod =
+    options.pod !== false;
 
-    C12.mainOrder.cmr =
-      options.cmr !== false;
+  C12.mainOrder.cmr =
+    options.cmr !== false;
 
-    const snapshot =
-      setPosition(
-        92,
-        {
-          source:
-            "manual-delivery"
-        }
-      );
+  triggeredThresholds.add(
+    "delay-reported"
+  );
 
-    C12.rules.releaseVehicleForOrder(
-      C12.mainOrder
+  const snapshot =
+    setPosition(
+      92,
+      {
+        source:
+          "manual-delivery"
+      }
     );
 
-    document.dispatchEvent(
-      new CustomEvent(
-        "c12:deliverycompleted",
-        {
-          detail: {
-            snapshot,
-            order:
-              C12.mainOrder
-          }
-        }
-      )
-    );
+  C12.rules.releaseVehicleForOrder(
+    C12.mainOrder
+  );
 
-    return snapshot;
-  }
+  document.dispatchEvent(
+    new CustomEvent(
+      "c12:deliverycompleted",
+      {
+        detail: {
+          snapshot,
+          order:
+            C12.mainOrder
+        }
+      }
+    )
+  );
+
+  return snapshot;
+}
 
 
   /* ============================================================

@@ -4769,16 +4769,32 @@ function updateDriverActions() {
             break;
 
           case "delayed":
+            if (
+              event.detail
+                ?.source ===
+              "manual-delivery"
+            ) {
+              break;
+            }
+          
             addAutomationBatch(
               C12.automationTemplates
                 .delayReported
             );
-
+          
             window.setTimeout(
-              showEventRipple,
+              () => {
+                if (
+                  C12.state.delivered
+                ) {
+                  return;
+                }
+          
+                showEventRipple();
+              },
               900
             );
-
+          
             break;
 
           case "delivered":

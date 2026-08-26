@@ -9245,3 +9245,127 @@ button:first-child {
   box-shadow:
     inset 0 12px 28px rgba(66, 94, 75, 0.06) !important;
 }
+
+.case-detail-stage__body.c12-body .c12-country-label {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.case-detail-stage__body.c12-body .c12-country-label span {
+  display: inline-block;
+
+  transform: translate(-50%, -50%);
+
+  color: rgba(55, 72, 62, 0.58);
+
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 0 5px rgba(255, 255, 255, 0.9);
+}
+
+.case-detail-stage__body.c12-body
+.c12-country-label--ukraine span {
+  color: #326f49;
+
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.case-detail-stage__body.c12-body .c12-crimea-label {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.case-detail-stage__body.c12-body .c12-crimea-label > div,
+.case-detail-stage__body.c12-body .c12-crimea-label {
+  overflow: visible !important;
+}
+
+.case-detail-stage__body.c12-body .c12-crimea-label span,
+.case-detail-stage__body.c12-body .c12-crimea-label strong {
+  display: block;
+
+  width: max-content;
+
+  transform: translate(-50%, 0);
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 0 #ffffff,
+    0 0 4px #ffffff,
+    0 0 8px #ffffff;
+}
+
+.case-detail-stage__body.c12-body .c12-crimea-label span {
+  color: #315c42;
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.case-detail-stage__body.c12-body .c12-crimea-label strong {
+  margin-top: 1px;
+
+  color: #4f8a62;
+
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.case-detail-stage__body.c12-body .c12-map-loading,
+.case-detail-stage__body.c12-body .c12-map-error {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 25px;
+
+  color: #65756c;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eef4ef,
+      #f8faf8
+    );
+
+  font-size: 10px;
+  text-align: center;
+}
+
+.case-detail-stage__body.c12-body .c12-map-error strong {
+  color: #315c42;
+
+  font-size: 12px;
+}
+
+.case-detail-stage__body.c12-body .c12-map-error span {
+  max-width: 290px;
+
+  line-height: 1.45;
+}
+
+.case-detail-stage__body.c12-body .leaflet-tile-pane {
+  filter:
+    saturate(0.7)
+    brightness(1.05)
+    contrast(0.92) !important;
+}

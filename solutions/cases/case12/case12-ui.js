@@ -2201,7 +2201,7 @@ else {
 let c12MapLibrariesLoader = null;
 let c12OperationsMap = null;
 let c12OperationsMapBound = false;
-let c12PoliticalBoundariesPromise = null;
+let c12UkraineBoundaryPromise = null;
 
 
 const c12MapLocations = {
@@ -2530,374 +2530,45 @@ async function getSafeOpenFreeMapStyle() {
 }
 
 
-async function fetchCountryBoundary(
-  iso
-) {
-  const metadataResponse =
-    await fetch(
-      `https://www.geoboundaries.org/api/current/gbOpen/${iso}/ADM0/`,
-      {
-        cache:
-          "force-cache"
-      }
-    );
-
+async function loadUkraineBoundary() {
   if (
-    !metadataResponse.ok
+    c12UkraineBoundaryPromise
   ) {
-    throw new Error(
-      `Boundary metadata failed: ${iso}`
-    );
+    return c12UkraineBoundaryPromise;
   }
 
-  const metadata =
-    await metadataResponse.json();
-
-  const geoJsonUrl =
-    metadata
-      .simplifiedGeometryGeoJSON ||
-    metadata
-      .gjDownloadURL;
-
-  if (
-    !geoJsonUrl
-  ) {
-    throw new Error(
-      `Boundary GeoJSON missing: ${iso}`
-    );
-  }
-
-  const geoJsonResponse =
-    await fetch(
-      geoJsonUrl,
-      {
-        cache:
-          "force-cache"
-      }
-    );
-
-  if (
-    !geoJsonResponse.ok
-  ) {
-    throw new Error(
-      `Boundary GeoJSON failed: ${iso}`
-    );
-  }
-
-  return {
-    iso,
-    geojson:
-      await geoJsonResponse
-        .json()
-  };
-}
-
-
-function pointInsideRing(
-  point,
-  ring
-) {
-  const x =
-    Number(
-      point[0]
-    );
-
-  const y =
-    Number(
-      point[1]
-    );
-
-  let inside =
-    false;
-
-  for (
-    let i = 0,
-      j =
-        ring.length -
-        1;
-
-    i <
-    ring.length;
-
-    j =
-      i++
-  ) {
-    const xi =
-      Number(
-        ring[i][0]
-      );
-
-    const yi =
-      Number(
-        ring[i][1]
-      );
-
-    const xj =
-      Number(
-        ring[j][0]
-      );
-
-    const yj =
-      Number(
-        ring[j][1]
-      );
-
-    const intersects =
-      (
-        (
-          yi >
-          y
-        ) !==
-        (
-          yj >
-          y
-        )
-      ) &&
-      (
-        x <
-        (
-          (
-            xj -
-            xi
-          ) *
-          (
-            y -
-            yi
-          )
-        ) /
-        (
-          (
-            yj -
-            yi
-          ) ||
-          Number.EPSILON
-        ) +
-        xi
-      );
-
-    if (
-      intersects
-    ) {
-      inside =
-        !inside;
-    }
-  }
-
-  return inside;
-}
-
-
-function pointInsidePolygon(
-  point,
-  polygon
-) {
-  if (
-    !polygon ||
-    !polygon.length
-  ) {
-    return false;
-  }
-
-  if (
-    !pointInsideRing(
-      point,
-      polygon[0]
-    )
-  ) {
-    return false;
-  }
-
-  for (
-    let i = 1;
-    i <
-    polygon.length;
-    i += 1
-  ) {
-    if (
-      pointInsideRing(
-        point,
-        polygon[i]
-      )
-    ) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-
-function geometryContainsPoint(
-  geometry,
-  point
-) {
-  if (
-    !geometry
-  ) {
-    return false;
-  }
-
-  if (
-    geometry.type ===
-    "Polygon"
-  ) {
-    return pointInsidePolygon(
-      point,
-      geometry.coordinates
-    );
-  }
-
-  if (
-    geometry.type ===
-    "MultiPolygon"
-  ) {
-    return geometry.coordinates
-      .some(
-        polygon =>
-          pointInsidePolygon(
-            point,
-            polygon
-          )
-      );
-  }
-
-  return false;
-}
-
-
-function geoJsonContainsPoint(
-  geojson,
-  point
-) {
-  if (
-    !geojson
-  ) {
-    return false;
-  }
-
-  if (
-    geojson.type ===
-    "FeatureCollection"
-  ) {
-    return geojson.features
-      .some(
-        feature =>
-          geometryContainsPoint(
-            feature.geometry,
-            point
-          )
-      );
-  }
-
-  if (
-    geojson.type ===
-    "Feature"
-  ) {
-    return geometryContainsPoint(
-      geojson.geometry,
-      point
-    );
-  }
-
-  return geometryContainsPoint(
-    geojson,
-    point
-  );
-}
-
-
-function validateUkraineBoundary(
-  geojson
-) {
-  const simferopol = [
-    34.1003,
-    44.9521
-  ];
-
-  const sevastopol = [
-    33.5254,
-    44.6167
-  ];
-
-  if (
-    !geoJsonContainsPoint(
-      geojson,
-      simferopol
-    ) ||
-    !geoJsonContainsPoint(
-      geojson,
-      sevastopol
-    )
-  ) {
-    throw new Error(
-      "UKR ADM0 validation failed"
-    );
-  }
-
-  return true;
-}
-
-
-async function loadPoliticalBoundaries() {
-  if (
-    c12PoliticalBoundariesPromise
-  ) {
-    return c12PoliticalBoundariesPromise;
-  }
-
-  c12PoliticalBoundariesPromise =
+  c12UkraineBoundaryPromise =
     (
       async () => {
-        const ukraine =
-          await fetchCountryBoundary(
-            "UKR"
+        const response =
+          await fetch(
+            "/solutions/cases/case12/ukraine-boundary.geojson?v=1",
+            {
+              cache:
+                "no-store"
+            }
           );
+
+        if (
+          !response.ok
+        ) {
+          throw new Error(
+            "Local Ukraine boundary unavailable"
+          );
+        }
+
+        const geojson =
+          await response.json();
 
         validateUkraineBoundary(
-          ukraine.geojson
+          geojson
         );
 
-        const otherCountries =
-          c12PoliticalCountries
-            .filter(
-              country =>
-                country.iso !==
-                "UKR"
-            );
-
-        const results =
-          await Promise.allSettled(
-            otherCountries
-              .map(
-                country =>
-                  fetchCountryBoundary(
-                    country.iso
-                  )
-              )
-          );
-
-        const boundaries = [
-          ukraine
-        ];
-
-        results.forEach(
-          result => {
-            if (
-              result.status ===
-              "fulfilled"
-            ) {
-              boundaries.push(
-                result.value
-              );
-            }
-          }
-        );
-
-        return boundaries;
+        return geojson;
       }
     )();
 
-  return c12PoliticalBoundariesPromise;
+  return c12UkraineBoundaryPromise;
 }
 
 
@@ -3061,40 +2732,40 @@ async function buildOperationsMap() {
     </div>
   `;
 
-  let style;
-  let boundaries;
+let style;
+let ukraineBoundary;
 
-  try {
-    [
-      style,
-      boundaries
-    ] =
-      await Promise.all([
-        getSafeOpenFreeMapStyle(),
-        loadPoliticalBoundaries()
-      ]);
-  }
+try {
+  [
+    style,
+    ukraineBoundary
+  ] =
+    await Promise.all([
+      getSafeOpenFreeMapStyle(),
+      loadUkraineBoundary()
+    ]);
+}
 
-  catch (error) {
-    console.error(
-      "[CASE 12] Safe map validation failed:",
-      error
-    );
+catch (error) {
+  console.error(
+    "[CASE 12] Safe map validation failed:",
+    error
+  );
 
-    container.innerHTML = `
-      <div class="c12-map-error">
-        <strong>
-          Карта тимчасово недоступна
-        </strong>
+  container.innerHTML = `
+    <div class="c12-map-error">
+      <strong>
+        Карта тимчасово недоступна
+      </strong>
 
-        <span>
-          Географічний шар не пройшов перевірку кордонів України.
-        </span>
-      </div>
-    `;
+      <span>
+        Локальний шар кордонів України не пройшов перевірку.
+      </span>
+    </div>
+  `;
 
-    return;
-  }
+  return;
+}
 
   container.innerHTML =
     "";
@@ -3155,68 +2826,61 @@ async function buildOperationsMap() {
       c12OperationsMap
     );
 
-  boundaries.forEach(
-    boundary => {
-      const country =
-        c12PoliticalCountries
-          .find(
-            item =>
-              item.iso ===
-              boundary.iso
-          );
+window.L
+  .geoJSON(
+    ukraineBoundary,
+    {
+      interactive:
+        false,
 
-      if (
-        !country
-      ) {
-        return;
+      style: {
+        color:
+          "#36764d",
+
+        weight:
+          3,
+
+        opacity:
+          1,
+
+        fillColor:
+          "#e7f3ea",
+
+        fillOpacity:
+          0.14
       }
+    }
+  )
+  .addTo(
+    c12OperationsMap
+  );
 
-      window.L
-        .geoJSON(
-          boundary.geojson,
-          {
-            interactive:
-              false,
 
-            style:
-              country.main
-                ? {
-                    color:
-                      "#36764d",
+window.L.marker(
+  [
+    49.2,
+    30.4
+  ],
+  {
+    interactive:
+      false,
 
-                    weight:
-                      2.6,
+    keyboard:
+      false,
 
-                    opacity:
-                      1,
+    icon:
+      createCountryLabel({
+        name:
+          "Україна",
 
-                    fillColor:
-                      "#e7f3ea",
-
-                    fillOpacity:
-                      0.12
-                  }
-                : {
-                    color:
-                      "#80958a",
-
-                    weight:
-                      1.1,
-
-                    opacity:
-                      0.88,
-
-                    fillColor:
-                      "#ffffff",
-
-                    fillOpacity:
-                      0
-                  }
-          }
-        )
-        .addTo(
-          c12OperationsMap
-        );
+        main:
+          true
+      })
+  }
+)
+.addTo(
+  c12OperationsMap
+);
 
       window.L.marker(
         country.label,

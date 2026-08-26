@@ -3857,3 +3857,195 @@
   C12.i18n.apply?.();
 
 })();
+
+(function () {
+  "use strict";
+
+  const C12 =
+    window.C12 =
+    window.C12 || {};
+
+  if (!C12.i18n) {
+    return;
+  }
+
+
+  const modalTranslations = {
+
+    uk: {
+      ordersModal: {
+        aria: "Усі замовлення",
+        eyebrow: "ОПЕРАЦІЙНА БАЗА",
+        title: "200 перевезень",
+        closeAria: "Закрити",
+        back: "← До диспетчера",
+
+        searchPlaceholder:
+          "ID, клієнт, місто, водій, автомобіль...",
+
+        statusAll: "Усі статуси",
+        statusNew: "Нові",
+        statusPlanning: "Планування",
+        statusAssigned: "Призначено",
+        statusTransit: "У дорозі",
+        statusDelivered: "Доставлено",
+        statusAttention: "Потребують уваги",
+
+        executionAll: "Усі перевезення",
+        executionOwn: "Власний транспорт",
+        executionCarrier: "Залучений перевізник",
+
+        created: "Створено",
+        customer: "Клієнт",
+        route: "Маршрут",
+        freight: "Вантаж",
+        pickup: "Завантаження",
+        delivery: "Доставка",
+        execution: "Виконання",
+        truck: "Автомобіль",
+        driver: "Водій",
+        status: "Статус",
+        margin: "Маржа",
+
+        summary: "200 замовлень"
+      },
+
+      ruleModal: {
+        aria: "Перевірка бізнес-правила",
+        eyebrow: "БІЗНЕС-ПРАВИЛО",
+        ok: "Зрозуміло"
+      }
+    },
+
+
+    ru: {
+      ordersModal: {
+        aria: "Все заказы",
+        eyebrow: "ОПЕРАЦИОННАЯ БАЗА",
+        title: "200 перевозок",
+        closeAria: "Закрыть",
+        back: "← К диспетчеру",
+
+        searchPlaceholder:
+          "ID, клиент, город, водитель, автомобиль...",
+
+        statusAll: "Все статусы",
+        statusNew: "Новые",
+        statusPlanning: "Планирование",
+        statusAssigned: "Назначено",
+        statusTransit: "В пути",
+        statusDelivered: "Доставлено",
+        statusAttention: "Требуют внимания",
+
+        executionAll: "Все перевозки",
+        executionOwn: "Собственный транспорт",
+        executionCarrier: "Привлечённый перевозчик",
+
+        created: "Создано",
+        customer: "Клиент",
+        route: "Маршрут",
+        freight: "Груз",
+        pickup: "Погрузка",
+        delivery: "Доставка",
+        execution: "Исполнение",
+        truck: "Автомобиль",
+        driver: "Водитель",
+        status: "Статус",
+        margin: "Маржа",
+
+        summary: "200 заказов"
+      },
+
+      ruleModal: {
+        aria: "Проверка бизнес-правила",
+        eyebrow: "БИЗНЕС-ПРАВИЛО",
+        ok: "Понятно"
+      }
+    },
+
+
+    en: {
+      ordersModal: {
+        aria: "All shipments",
+        eyebrow: "OPERATIONS DATABASE",
+        title: "200 shipments",
+        closeAria: "Close",
+        back: "← Back to Dispatch",
+
+        searchPlaceholder:
+          "ID, customer, city, driver, truck...",
+
+        statusAll: "All Statuses",
+        statusNew: "New",
+        statusPlanning: "Planning",
+        statusAssigned: "Assigned",
+        statusTransit: "In Transit",
+        statusDelivered: "Delivered",
+        statusAttention: "Requires Attention",
+
+        executionAll: "All Shipments",
+        executionOwn: "Company Fleet",
+        executionCarrier: "Third-Party Carrier",
+
+        created: "Created",
+        customer: "Customer",
+        route: "Lane",
+        freight: "Freight",
+        pickup: "Pickup",
+        delivery: "Delivery",
+        execution: "Execution",
+        truck: "Truck",
+        driver: "Driver",
+        status: "Status",
+        margin: "Margin",
+
+        summary: "200 orders"
+      },
+
+      ruleModal: {
+        aria: "Business rule validation",
+        eyebrow: "BUSINESS RULE",
+        ok: "Got it"
+      }
+    }
+
+  };
+
+
+  Object.entries(
+    modalTranslations
+  ).forEach(
+    ([language, sections]) => {
+
+      const target =
+        C12.i18n.languages[
+          language
+        ];
+
+      if (!target) {
+        return;
+      }
+
+      Object.entries(
+        sections
+      ).forEach(
+        ([section, values]) => {
+
+          target[section] = {
+            ...(
+              target[section] ||
+              {}
+            ),
+            ...values
+          };
+
+        }
+      );
+
+    }
+  );
+
+
+  C12.i18n.apply?.();
+
+})();

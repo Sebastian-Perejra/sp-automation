@@ -1881,3 +1881,817 @@ function syncMainOrder(
   );
 
 })();
+
+(function () {
+  "use strict";
+
+  const C12 =
+    window.C12 =
+    window.C12 || {};
+
+  if (
+    !C12.simulation ||
+    !C12.i18n ||
+    !C12.data
+  ) {
+    return;
+  }
+
+
+  const language = () =>
+    C12.i18n.current ||
+    "uk";
+
+
+  const locale = () =>
+    C12.i18n.getLocale
+      ? C12.i18n.getLocale()
+      : "uk-UA";
+
+
+  const t = (
+    uk,
+    ru,
+    en
+  ) => {
+    if (
+      language() ===
+      "ru"
+    ) {
+      return ru;
+    }
+
+    if (
+      language() ===
+      "en"
+    ) {
+      return en;
+    }
+
+    return uk;
+  };
+
+
+  function formatSimulationDateLocalized(
+    value
+  ) {
+    if (!value) {
+      return "—";
+    }
+
+    const date =
+      new Date(
+        value
+      );
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+      return "—";
+    }
+
+
+    if (
+      language() ===
+      "en"
+    ) {
+      return new Intl
+        .DateTimeFormat(
+          "en-US",
+          {
+            month:
+              "short",
+
+            day:
+              "numeric",
+
+            hour:
+              "numeric",
+
+            minute:
+              "2-digit",
+
+            hour12:
+              true
+          }
+        )
+        .format(
+          date
+        );
+    }
+
+
+    const monthNames =
+      language() ===
+      "ru"
+        ? [
+            "января",
+            "февраля",
+            "марта",
+            "апреля",
+            "мая",
+            "июня",
+            "июля",
+            "августа",
+            "сентября",
+            "октября",
+            "ноября",
+            "декабря"
+          ]
+        : [
+            "січня",
+            "лютого",
+            "березня",
+            "квітня",
+            "травня",
+            "червня",
+            "липня",
+            "серпня",
+            "вересня",
+            "жовтня",
+            "листопада",
+            "грудня"
+          ];
+
+
+    const pad =
+      value =>
+        String(
+          value
+        )
+          .padStart(
+            2,
+            "0"
+          );
+
+
+    return (
+      `${date.getDate()} ` +
+      `${monthNames[
+        date.getMonth()
+      ]} · ` +
+      `${pad(
+        date.getHours()
+      )}:` +
+      `${pad(
+        date.getMinutes()
+      )}`
+    );
+  }
+
+
+  function formatClockLocalized(
+    value
+  ) {
+    if (!value) {
+      return "—";
+    }
+
+    const date =
+      new Date(
+        value
+      );
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+      return "—";
+    }
+
+
+    if (
+      language() ===
+      "en"
+    ) {
+      return new Intl
+        .DateTimeFormat(
+          "en-US",
+          {
+            month:
+              "short",
+
+            day:
+              "numeric",
+
+            year:
+              "numeric",
+
+            hour:
+              "numeric",
+
+            minute:
+              "2-digit",
+
+            hour12:
+              true
+          }
+        )
+        .format(
+          date
+        );
+    }
+
+
+    const pad =
+      value =>
+        String(
+          value
+        )
+          .padStart(
+            2,
+            "0"
+          );
+
+
+    return (
+      `${pad(
+        date.getDate()
+      )}.` +
+      `${pad(
+        date.getMonth() +
+        1
+      )}.` +
+      `${date.getFullYear()} · ` +
+      `${pad(
+        date.getHours()
+      )}:` +
+      `${pad(
+        date.getMinutes()
+      )}`
+    );
+  }
+
+
+  function getCustomerStateLocalized(
+    position
+  ) {
+    const value =
+      Number(
+        position ||
+        0
+      );
+
+
+    const eta1400 =
+      t(
+        "28 серпня · 14:00",
+        "28 августа · 14:00",
+        "Aug 28 · 2:00 PM"
+      );
+
+
+    const eta1600 =
+      t(
+        "28 серпня · 16:00",
+        "28 августа · 16:00",
+        "Aug 28 · 4:00 PM"
+      );
+
+
+    const etaDelivered =
+      t(
+        "28 серпня · 15:43",
+        "28 августа · 15:43",
+        "Aug 28 · 3:43 PM"
+      );
+
+
+    if (
+      value <
+      9
+    ) {
+      return {
+        status:
+          t(
+            "ОЧІКУЄ",
+            "ОЖИДАЕТ",
+            "PENDING"
+          ),
+
+        eta:
+          eta1400,
+
+        timelineStep:
+          0,
+
+        delivered:
+          false
+      };
+    }
+
+
+    if (
+      value <
+      24
+    ) {
+      return {
+        status:
+          t(
+            "ОТРИМАНО",
+            "ПОЛУЧЕНО",
+            "RECEIVED"
+          ),
+
+        eta:
+          eta1400,
+
+        timelineStep:
+          1,
+
+        delivered:
+          false
+      };
+    }
+
+
+    if (
+      value <
+      48
+    ) {
+      return {
+        status:
+          t(
+            "ПІДТВЕРДЖЕНО",
+            "ПОДТВЕРЖДЕНО",
+            "CONFIRMED"
+          ),
+
+        eta:
+          eta1400,
+
+        timelineStep:
+          2,
+
+        delivered:
+          false
+      };
+    }
+
+
+    if (
+      value <
+      65
+    ) {
+      return {
+        status:
+          t(
+            "У ДОРОЗІ",
+            "В ПУТИ",
+            "IN TRANSIT"
+          ),
+
+        eta:
+          eta1400,
+
+        timelineStep:
+          4,
+
+        delivered:
+          false
+      };
+    }
+
+
+    if (
+      value <
+      92
+    ) {
+      return {
+        status:
+          t(
+            "У ДОРОЗІ",
+            "В ПУТИ",
+            "IN TRANSIT"
+          ),
+
+        eta:
+          eta1600,
+
+        timelineStep:
+          4,
+
+        delivered:
+          false,
+
+        delay:
+          true
+      };
+    }
+
+
+    return {
+      status:
+        t(
+          "ДОСТАВЛЕНО",
+          "ДОСТАВЛЕНО",
+          "DELIVERED"
+        ),
+
+      eta:
+        etaDelivered,
+
+      timelineStep:
+        5,
+
+      delivered:
+        true
+    };
+  }
+
+
+  function localizeSnapshot(
+    snapshot
+  ) {
+    if (!snapshot) {
+      return snapshot;
+    }
+
+
+    snapshot.timeLabel =
+      formatSimulationDateLocalized(
+        snapshot.time
+      );
+
+
+    snapshot.clockLabel =
+      formatClockLocalized(
+        snapshot.time
+      );
+
+
+    snapshot.statusLabel =
+      C12.data
+        .displayStatus(
+          snapshot.status
+        );
+
+
+    if (
+      snapshot.mainOrder
+    ) {
+      snapshot.mainOrder
+        .statusLabel =
+        C12.data
+          .displayStatus(
+            snapshot.mainOrder
+              .status
+          );
+
+
+      snapshot.mainOrder
+        .executionLabel =
+        C12.data
+          .displayExecution(
+            snapshot.mainOrder
+              .execution
+          );
+
+
+      snapshot.mainOrder
+        .originDisplay =
+        C12.data
+          .displayCity(
+            snapshot.mainOrder
+              .origin
+          );
+
+
+      snapshot.mainOrder
+        .destinationDisplay =
+        C12.data
+          .displayCity(
+            snapshot.mainOrder
+              .destination
+          );
+
+
+      snapshot.mainOrder
+        .routeDisplay =
+        C12.data
+          .displayRoute(
+            snapshot.mainOrder
+              .origin,
+            snapshot.mainOrder
+              .destination
+          );
+
+
+      snapshot.mainOrder
+        .cargoDisplay =
+        C12.data
+          .displayCargo(
+            snapshot.mainOrder
+              .cargo
+          );
+
+
+      snapshot.mainOrder
+        .vehicleTypeLabelDisplay =
+        C12.data
+          .displayVehicleType(
+            snapshot.mainOrder
+              .vehicleTypeLabel
+          );
+    }
+
+
+    snapshot.customer =
+      getCustomerStateLocalized(
+        snapshot.position
+      );
+
+
+    if (
+      Array.isArray(
+        snapshot.stats
+          ?.virtualOrders
+      )
+    ) {
+      snapshot.stats
+        .virtualOrders =
+        snapshot.stats
+          .virtualOrders
+          .map(
+            order => ({
+              ...order,
+
+              virtualStatusLabel:
+                C12.data
+                  .displayStatus(
+                    order.virtualStatus
+                  ),
+
+              originDisplay:
+                C12.data
+                  .displayCity(
+                    order.origin
+                  ),
+
+              destinationDisplay:
+                C12.data
+                  .displayCity(
+                    order.destination
+                  ),
+
+              routeDisplay:
+                C12.data
+                  .displayRoute(
+                    order.origin,
+                    order.destination
+                  ),
+
+              cargoDisplay:
+                C12.data
+                  .displayCargo(
+                    order.cargo
+                  )
+            })
+          );
+    }
+
+
+    return snapshot;
+  }
+
+
+  const originalPreview =
+    C12.simulation
+      .preview
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.preview =
+    function (
+      position
+    ) {
+      return localizeSnapshot(
+        originalPreview(
+          position
+        )
+      );
+    };
+
+
+  const originalSetPosition =
+    C12.simulation
+      .setPosition
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.setPosition =
+    function (
+      position,
+      options = {}
+    ) {
+      const snapshot =
+        originalSetPosition(
+          position,
+          options
+        );
+
+      return localizeSnapshot(
+        snapshot
+      );
+    };
+
+
+  const originalReset =
+    C12.simulation
+      .reset
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.reset =
+    function () {
+      return localizeSnapshot(
+        originalReset()
+      );
+    };
+
+
+  const originalNextMilestone =
+    C12.simulation
+      .nextMilestone
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.nextMilestone =
+    function () {
+      return localizeSnapshot(
+        originalNextMilestone()
+      );
+    };
+
+
+  const originalPreviousMilestone =
+    C12.simulation
+      .previousMilestone
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.previousMilestone =
+    function () {
+      return localizeSnapshot(
+        originalPreviousMilestone()
+      );
+    };
+
+
+  const originalMoveToEvent =
+    C12.simulation
+      .moveToEvent
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.moveToEvent =
+    function (
+      eventName
+    ) {
+      return localizeSnapshot(
+        originalMoveToEvent(
+          eventName
+        )
+      );
+    };
+
+
+  const originalDriverAction =
+    C12.simulation
+      .driverAction
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.driverAction =
+    function (
+      action
+    ) {
+      const result =
+        originalDriverAction(
+          action
+        );
+
+      if (
+        result &&
+        result.snapshot
+      ) {
+        result.snapshot =
+          localizeSnapshot(
+            result.snapshot
+          );
+      }
+
+      return result;
+    };
+
+
+  const originalReportDelay =
+    C12.simulation
+      .reportDelay
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.reportDelay =
+    function (
+      hours = 2
+    ) {
+      return localizeSnapshot(
+        originalReportDelay(
+          hours
+        )
+      );
+    };
+
+
+  const originalCompleteDelivery =
+    C12.simulation
+      .completeDelivery
+      .bind(
+        C12.simulation
+      );
+
+
+  C12.simulation.completeDelivery =
+    function (
+      options = {}
+    ) {
+      return localizeSnapshot(
+        originalCompleteDelivery(
+          options
+        )
+      );
+    };
+
+
+  C12.simulation
+    .getCustomerState =
+      getCustomerStateLocalized;
+
+
+  C12.simulation
+    .formatSimulationDate =
+      formatSimulationDateLocalized;
+
+
+  C12.simulation
+    .formatClock =
+      formatClockLocalized;
+
+
+  C12.simulation
+    .localizeSnapshot =
+      localizeSnapshot;
+
+
+  document.addEventListener(
+    "c12:languagechange",
+    () => {
+      const snapshot =
+        C12.simulation
+          .preview(
+            C12.state
+              .simulationPosition
+          );
+
+
+      document.dispatchEvent(
+        new CustomEvent(
+          "c12:simulationlocalized",
+          {
+            detail: {
+              snapshot,
+              language:
+                language()
+            }
+          }
+        )
+      );
+    }
+  );
+
+
+  console.info(
+    "[CASE 12] Simulation localization ready:",
+    language()
+  );
+
+})();

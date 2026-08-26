@@ -3714,3 +3714,146 @@
   C12.i18n.apply?.();
 
 })();
+
+(function () {
+  "use strict";
+
+  const C12 =
+    window.C12 =
+    window.C12 || {};
+
+  if (!C12.i18n) {
+    return;
+  }
+
+  const rippleTranslations = {
+
+    uk: {
+      ripple: {
+        kicker: "ОДНА ПОДІЯ",
+        title: "Одне оновлення.",
+        emphasis: "П'ять реакцій.",
+        description: "Водій повідомив про затримку. Дані внесено один раз. Далі система сама передає потрібну інформацію кожному учаснику процесу.",
+
+        delayHours: "+2 ГОД",
+        delay: "ЗАТРИМКА",
+
+        driverRole: "ВОДІЙ",
+        driverText: "Затримку зафіксовано",
+
+        managerRole: "ЛОГІСТ",
+        managerText: "Ризик запізнення",
+
+        dispatcherRole: "ДИСПЕТЧЕР",
+        dispatcherText: "Замовлення підсвічено",
+
+        customerRole: "КЛІЄНТ",
+        customerText: "Нове ETA · 16:00",
+
+        ownerRole: "ВЛАСНИК",
+        ownerText: "Увага: 2 → 3",
+
+        continue: "Продовжити перевезення →"
+      }
+    },
+
+
+    ru: {
+      ripple: {
+        kicker: "ОДНО СОБЫТИЕ",
+        title: "Одно обновление.",
+        emphasis: "Пять реакций.",
+        description: "Водитель сообщил о задержке. Данные внесены один раз. Дальше система сама передаёт нужную информацию каждому участнику процесса.",
+
+        delayHours: "+2 Ч",
+        delay: "ЗАДЕРЖКА",
+
+        driverRole: "ВОДИТЕЛЬ",
+        driverText: "Задержка зафиксирована",
+
+        managerRole: "ЛОГИСТ",
+        managerText: "Риск опоздания",
+
+        dispatcherRole: "ДИСПЕТЧЕР",
+        dispatcherText: "Заказ отмечен",
+
+        customerRole: "КЛИЕНТ",
+        customerText: "Новое ETA · 16:00",
+
+        ownerRole: "ВЛАДЕЛЕЦ",
+        ownerText: "Внимание: 2 → 3",
+
+        continue: "Продолжить перевозку →"
+      }
+    },
+
+
+    en: {
+      ripple: {
+        kicker: "ONE EVENT",
+        title: "One update.",
+        emphasis: "Five reactions.",
+        description: "The driver reports a delay once. From there, the system updates each stakeholder with the information they need.",
+
+        delayHours: "+2 HRS",
+        delay: "DELAY",
+
+        driverRole: "DRIVER",
+        driverText: "Delay reported",
+
+        managerRole: "LOGISTICS",
+        managerText: "Late-delivery risk",
+
+        dispatcherRole: "DISPATCH",
+        dispatcherText: "Shipment flagged",
+
+        customerRole: "CUSTOMER",
+        customerText: "Updated ETA · 4:00 PM",
+
+        ownerRole: "OWNER",
+        ownerText: "Attention: 2 → 3",
+
+        continue: "Continue shipment →"
+      }
+    }
+
+  };
+
+
+  Object.entries(
+    rippleTranslations
+  ).forEach(
+    ([language, sections]) => {
+
+      const target =
+        C12.i18n.languages[
+          language
+        ];
+
+      if (!target) {
+        return;
+      }
+
+      Object.entries(
+        sections
+      ).forEach(
+        ([section, values]) => {
+
+          target[section] = {
+            ...(
+              target[section] ||
+              {}
+            ),
+            ...values
+          };
+
+        }
+      );
+
+    }
+  );
+
+
+  C12.i18n.apply?.();
+
+})();

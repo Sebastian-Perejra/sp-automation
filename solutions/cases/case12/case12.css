@@ -9218,3 +9218,30 @@ button:first-child {
     justify-self: start;
   }
 }
+
+.case-detail-stage__body.c12-body .c12-underhood-divider,
+.case-detail-stage__body.c12-body .c12-underhood-divider::before,
+.case-detail-stage__body.c12-body .c12-underhood-divider::after,
+.case-detail-stage__body.c12-body .c12-underhood-divider span {
+  display: none !important;
+  content: none !important;
+}
+
+.case-detail-stage__body.c12-body .c12-underhood {
+  position: relative !important;
+
+  padding-top: 54px !important;
+
+  border-top: 2px solid #9fb6a6 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f1f6f2 0,
+      #f8faf8 70px,
+      #fcfbf9 150px
+    ) !important;
+
+  box-shadow:
+    inset 0 12px 28px rgba(66, 94, 75, 0.06) !important;
+}

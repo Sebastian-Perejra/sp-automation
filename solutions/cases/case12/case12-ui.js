@@ -4456,7 +4456,12 @@ function updateDriverActions() {
       "click",
       () => {
         C12.simulation.reset();
+    
         resetUI();
+    
+        openWorkspace(
+          "dispatcher"
+        );
       }
     );
   }

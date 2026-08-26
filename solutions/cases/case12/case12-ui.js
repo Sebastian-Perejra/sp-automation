@@ -1916,27 +1916,55 @@ else {
   ============================================================ */
 
   function renderCarriers() {
-    const container =
-      $(
-        "[data-carriers-list]"
-      );
+  const container =
+    $(
+      "[data-carriers-list]"
+    );
 
-    if (!container) {
-      return;
-    }
+  if (!container) {
+    return;
+  }
 
-    container.innerHTML =
-      C12.carriers
-        .map(
-          carrier => `
+  const selectedCarrier =
+    C12.mainOrder.execution ===
+      "carrier"
+      ? C12.mainOrder.carrier
+      : null;
+
+  container.innerHTML =
+    C12.carriers
+      .map(
+        carrier => {
+          const offer =
+            carrier.offer;
+
+          const selected =
+            selectedCarrier ===
+            carrier.name;
+
+          return `
             <button
-              class="c12-carrier-card"
+              class="
+                c12-carrier-card
+                ${
+                  selected
+                    ? "is-selected"
+                    : ""
+                }
+              "
               type="button"
               data-carrier="${escapeHtml(
                 carrier.name
               )}"
+              aria-pressed="${
+                selected
+                  ? "true"
+                  : "false"
+              }"
             >
+
               <div class="c12-carrier-card__top">
+
                 <strong>
                   ${escapeHtml(
                     carrier.name
@@ -1944,18 +1972,19 @@ else {
                 </strong>
 
                 <span>
-                  ★
-                  ${carrier.rating}
+                  ★ ${carrier.rating}
                 </span>
+
               </div>
 
-              <small>
+              <div class="c12-carrier-card__country">
                 ${escapeHtml(
                   carrier.country
                 )}
-              </small>
+              </div>
 
               <div class="c12-carrier-card__meta">
+
                 <span>
                   ${carrier.available}
                   авто вільно
@@ -1968,12 +1997,135 @@ else {
                     )
                   )}
                 </span>
+
               </div>
+
+              ${
+                selected &&
+                offer
+                  ? `
+                    <div class="c12-carrier-offer">
+
+                      <span class="c12-carrier-offer__label">
+                        ПІДІБРАНО ПІД ЦЕЙ РЕЙС
+                      </span>
+
+                      <div class="c12-carrier-offer__vehicle">
+
+                        <div class="c12-carrier-truck">
+                          <span></span>
+                          <i></i>
+                          <b></b>
+                        </div>
+
+                        <div>
+                          <strong>
+                            ${escapeHtml(
+                              `${offer.brand} ${offer.model}`
+                            )}
+                          </strong>
+
+                          <span>
+                            ${escapeHtml(
+                              offer.displayPlate
+                            )}
+                          </span>
+                        </div>
+
+                      </div>
+
+                      <dl>
+
+                        <div>
+                          <dt>Кузов</dt>
+                          <dd>
+                            ${escapeHtml(
+                              offer.typeLabel
+                            )}
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Вантажність</dt>
+                          <dd>
+                            ${formatNumber(
+                              offer.capacityKg
+                            )}
+                            кг
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Палетомісця</dt>
+                          <dd>
+                            ${offer.pallets}
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Водій</dt>
+                          <dd>
+                            ${escapeHtml(
+                              offer.driver
+                            )}
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Телефон</dt>
+                          <dd>
+                            ${escapeHtml(
+                              offer.driverPhone
+                            )}
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Локація</dt>
+                          <dd>
+                            ${escapeHtml(
+                              offer.location
+                            )}
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Подача</dt>
+                          <dd>
+                            ${escapeHtml(
+                              formatDateShort(
+                                offer.readyAt
+                              )
+                            )}
+                          </dd>
+                        </div>
+
+                        <div>
+                          <dt>Ставка</dt>
+                          <dd>
+                            €${formatNumber(
+                              offer.rate
+                            )}
+                          </dd>
+                        </div>
+
+                      </dl>
+
+                      <div class="c12-carrier-offer__confirmed">
+                        ✓ ПРИЗНАЧЕНО
+                      </div>
+
+                    </div>
+                  `
+                  : ""
+              }
+
             </button>
-          `
-        )
-        .join("");
-  }
+          `;
+        }
+      )
+      .join("");
+}
 
 
   /* ============================================================
@@ -3419,45 +3571,65 @@ function updateDriverActions() {
   ============================================================ */
 
   function updateMainPlanningCard(
-    snapshot
-  ) {
-    const card =
-      $(
-        '[data-draggable-order="TR-2026-00184"]'
-      );
-
-    if (!card) {
-      return;
-    }
-
-    const assigned =
-      snapshot.position >= 24;
-
-    card.classList.toggle(
-      "is-assigned",
-      assigned
+  snapshot
+) {
+  const card =
+    $(
+      '[data-draggable-order="TR-2026-00184"]'
     );
 
-    card.setAttribute(
-      "draggable",
-      assigned
-        ? "false"
-        : "true"
-    );
-
-    const hint =
-      $(
-        ".c12-drag-hint",
-        card
-      );
-
-    if (hint) {
-      hint.textContent =
-        assigned
-          ? "✓ DAF XF · BC 4587 KA призначено"
-          : "Перетягніть на автомобіль →";
-    }
+  if (!card) {
+    return;
   }
+
+  const assigned =
+    snapshot.position >=
+      24 &&
+    C12.state
+      .mainOrderAssigned;
+
+  card.classList.toggle(
+    "is-assigned",
+    assigned
+  );
+
+  card.setAttribute(
+    "draggable",
+    assigned
+      ? "false"
+      : "true"
+  );
+
+  const hint =
+    $(
+      ".c12-drag-hint",
+      card
+    );
+
+  if (!hint) {
+    return;
+  }
+
+  if (!assigned) {
+    hint.textContent =
+      "Перетягніть на автомобіль →";
+
+    return;
+  }
+
+  if (
+    C12.mainOrder.execution ===
+    "carrier"
+  ) {
+    hint.textContent =
+      `✓ ${C12.mainOrder.carrier} · ${C12.mainOrder.vehicle}`;
+
+    return;
+  }
+
+  hint.textContent =
+    `✓ DAF XF · ${C12.mainOrder.vehicle} призначено`;
+}
 
 
   /* ============================================================
@@ -3465,58 +3637,224 @@ function updateDriverActions() {
   ============================================================ */
 
   function updateVehicleCards(
-    snapshot
-  ) {
-    const valid =
-      $(
-        '[data-vehicle="BC4587KA"]'
-      );
+  snapshot
+) {
+  const card =
+    $(
+      '[data-vehicle="BC4587KA"]'
+    );
 
-    if (valid) {
-      valid.classList.toggle(
-        "is-assigned",
-        snapshot.position >= 24 &&
-        snapshot.position < 92
-      );
-
-      const badge =
-        $(
-          ".c12-vehicle-card__status",
-          valid
-        );
-
-      if (badge) {
-        if (
-          snapshot.position <
-          24
-        ) {
-          badge.textContent =
-            "ВІЛЬНИЙ";
-        }
-
-        else if (
-          snapshot.position <
-          48
-        ) {
-          badge.textContent =
-            "ЗАРЕЗЕРВОВАНО";
-        }
-
-        else if (
-          snapshot.position <
-          92
-        ) {
-          badge.textContent =
-            "У РЕЙСІ";
-        }
-
-        else {
-          badge.textContent =
-            "ВІЛЬНИЙ";
-        }
-      }
-    }
+  if (!card) {
+    return;
   }
+
+  const ownAssignment =
+    C12.mainOrder.execution ===
+      "own" &&
+    String(
+      C12.mainOrder.vehicle ||
+      ""
+    )
+      .replace(
+        /\s+/g,
+        ""
+      ) ===
+      "BC4587KA" &&
+    snapshot.position >=
+      24 &&
+    snapshot.position <
+      92;
+
+  card.classList.toggle(
+    "is-assigned",
+    ownAssignment
+  );
+
+  const badge =
+    $(
+      ".c12-vehicle-card__status",
+      card
+    );
+
+  if (!badge) {
+    return;
+  }
+
+  if (!ownAssignment) {
+    const vehicle =
+      C12.data.getVehicle(
+        "BC4587KA"
+      );
+
+    badge.textContent =
+      vehicle?.status ===
+      "reserved"
+        ? "ЗАРЕЗЕРВОВАНО"
+        : vehicle?.status ===
+          "transit"
+          ? "У РЕЙСІ"
+          : "ВІЛЬНИЙ";
+
+    return;
+  }
+
+  if (
+    snapshot.position <
+    48
+  ) {
+    badge.textContent =
+      "ЗАРЕЗЕРВОВАНО";
+  }
+
+  else {
+    badge.textContent =
+      "У РЕЙСІ";
+  }
+}
+
+  function updateDriverResource() {
+  const order =
+    C12.mainOrder;
+
+  if (
+    !order ||
+    !order.driver
+  ) {
+    return;
+  }
+
+  const headerName =
+    $(
+      ".c12-driver-app__header strong"
+    );
+
+  const avatar =
+    $(
+      ".c12-driver-avatar"
+    );
+
+  const trip =
+    $(
+      ".c12-driver-trip"
+    );
+
+  const firstName =
+    String(
+      order.driver
+    )
+      .trim()
+      .split(/\s+/)[0];
+
+  if (headerName) {
+    headerName.textContent =
+      firstName;
+  }
+
+  if (avatar) {
+    avatar.textContent =
+      String(
+        order.driver
+      )
+        .trim()
+        .split(/\s+/)
+        .slice(
+          0,
+          2
+        )
+        .map(
+          part =>
+            part.charAt(0)
+              .toUpperCase()
+        )
+        .join("");
+  }
+
+  if (!trip) {
+    return;
+  }
+
+  let resource =
+    $(
+      ".c12-driver-resource",
+      trip
+    );
+
+  if (!resource) {
+    resource =
+      document.createElement(
+        "div"
+      );
+
+    resource.className =
+      "c12-driver-resource";
+
+    const route =
+      $(
+        ".c12-driver-route",
+        trip
+      );
+
+    trip.insertBefore(
+      resource,
+      route
+    );
+  }
+
+  if (
+    order.execution ===
+    "carrier" &&
+    order.externalResource
+  ) {
+    const item =
+      order.externalResource;
+
+    resource.innerHTML = `
+      <small>
+        ЗАЛУЧЕНИЙ ПЕРЕВІЗНИК
+      </small>
+
+      <strong>
+        ${escapeHtml(
+          item.carrierName
+        )}
+      </strong>
+
+      <span>
+        ${escapeHtml(
+          `${item.brand} ${item.model} · ${item.displayPlate}`
+        )}
+      </span>
+    `;
+
+    return;
+  }
+
+  const ownVehicle =
+    C12.data.getVehicle(
+      order.vehicle
+    );
+
+  resource.innerHTML = `
+    <small>
+      ВЛАСНИЙ АВТОПАРК
+    </small>
+
+    <strong>
+      ${escapeHtml(
+        ownVehicle
+          ? `${ownVehicle.brand} ${ownVehicle.model}`
+          : "Автомобіль"
+      )}
+    </strong>
+
+    <span>
+      ${escapeHtml(
+        order.vehicle ||
+        ""
+      )}
+    </span>
+  `;
+}
 
 
   /* ============================================================
@@ -3557,11 +3895,15 @@ function updateDriverActions() {
     updateMainPlanningCard(
       snapshot
     );
-
+    
     updateVehicleCards(
       snapshot
     );
-
+    
+    updateDriverResource();
+    
+    renderCarriers();
+    
     renderOrdersTable();
   }
 

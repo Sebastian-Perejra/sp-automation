@@ -3025,7 +3025,7 @@ async function buildOperationsMap() {
           false,
 
         preferCanvas:
-          false,
+          true,
 
         maxBounds: [
           [
@@ -3087,23 +3087,29 @@ async function buildOperationsMap() {
     .style.zIndex =
     "700";
 
-  const politicalRenderer =
-    window.L.svg({
-      pane:
-        "c12PoliticalPane"
-    });
+const politicalRenderer =
+  window.L.canvas({
+    pane:
+      "c12PoliticalPane",
+    padding:
+      0.5
+  });
 
-  const routesRenderer =
-    window.L.svg({
-      pane:
-        "c12RoutesPane"
-    });
+const routesRenderer =
+  window.L.canvas({
+    pane:
+      "c12RoutesPane",
+    padding:
+      0.5
+  });
 
-  const vehiclesRenderer =
-    window.L.svg({
-      pane:
-        "c12VehiclesPane"
-    });
+const vehiclesRenderer =
+  window.L.canvas({
+    pane:
+      "c12VehiclesPane",
+    padding:
+      0.5
+  });
 
   window.L
     .maplibreGL({

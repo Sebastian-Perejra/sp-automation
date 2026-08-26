@@ -4421,6 +4421,19 @@ function updateDriverActions() {
       }
     );
 
+    $(
+  "[data-return-dispatcher]"
+)?.addEventListener(
+  "click",
+  () => {
+    closeOrdersModal();
+
+    openWorkspace(
+      "dispatcher"
+    );
+  }
+);
+
 
     $$(
       "[data-close-rule-modal]"

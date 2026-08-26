@@ -2925,7 +2925,6 @@ function createCrimeaLabel() {
   });
 }
 
-
 async function buildOperationsMap() {
   const container =
     $(
@@ -2975,9 +2974,7 @@ async function buildOperationsMap() {
         getSafeOpenFreeMapStyle(),
         loadUkraineBoundary()
       ]);
-  }
-
-  catch (error) {
+  } catch (error) {
     console.error(
       "[CASE 12] Safe map validation failed:",
       error
@@ -3046,7 +3043,6 @@ async function buildOperationsMap() {
       }
     );
 
-
   c12OperationsMap.createPane(
     "c12PoliticalPane"
   );
@@ -3057,7 +3053,6 @@ async function buildOperationsMap() {
     )
     .style.zIndex =
     "450";
-
 
   c12OperationsMap.createPane(
     "c12RoutesPane"
@@ -3070,7 +3065,6 @@ async function buildOperationsMap() {
     .style.zIndex =
     "650";
 
-
   c12OperationsMap.createPane(
     "c12VehiclesPane"
   );
@@ -3081,7 +3075,6 @@ async function buildOperationsMap() {
     )
     .style.zIndex =
     "680";
-
 
   c12OperationsMap.createPane(
     "c12LabelsPane"
@@ -3094,13 +3087,11 @@ async function buildOperationsMap() {
     .style.zIndex =
     "700";
 
-
   const politicalRenderer =
     window.L.svg({
       pane:
         "c12PoliticalPane"
     });
-
 
   const routesRenderer =
     window.L.svg({
@@ -3108,13 +3099,11 @@ async function buildOperationsMap() {
         "c12RoutesPane"
     });
 
-
   const vehiclesRenderer =
     window.L.svg({
       pane:
         "c12VehiclesPane"
     });
-
 
   window.L
     .maplibreGL({
@@ -3127,7 +3116,6 @@ async function buildOperationsMap() {
     .addTo(
       c12OperationsMap
     );
-
 
   window.L
     .geoJSON(
@@ -3161,7 +3149,6 @@ async function buildOperationsMap() {
       c12OperationsMap
     );
 
-
   window.L.marker(
     [
       49.2,
@@ -3191,7 +3178,6 @@ async function buildOperationsMap() {
     c12OperationsMap
   );
 
-
   window.L.marker(
     [
       44.95,
@@ -3215,7 +3201,6 @@ async function buildOperationsMap() {
     c12OperationsMap
   );
 
-
   window.L.control
     .zoom({
       position:
@@ -3225,10 +3210,8 @@ async function buildOperationsMap() {
       c12OperationsMap
     );
 
-
   const usedCities =
     new Set();
-
 
   C12.mapRoutes.forEach(
     route => {
@@ -3241,7 +3224,6 @@ async function buildOperationsMap() {
       );
     }
   );
-
 
   usedCities.forEach(
     cityName => {
@@ -3259,7 +3241,6 @@ async function buildOperationsMap() {
           "Львів" ||
         cityName ===
           "Краків";
-
 
       const marker =
         window.L.circleMarker(
@@ -3292,7 +3273,6 @@ async function buildOperationsMap() {
           c12OperationsMap
         );
 
-
       marker.bindTooltip(
         cityName,
         {
@@ -3310,7 +3290,6 @@ async function buildOperationsMap() {
       );
     }
   );
-
 
   C12.mapRoutes.forEach(
     (
@@ -3334,12 +3313,10 @@ async function buildOperationsMap() {
         return;
       }
 
-
       const routeStyle =
         getMapRouteStyle(
           route
         );
-
 
       const line =
         window.L.polyline(
@@ -3377,11 +3354,9 @@ async function buildOperationsMap() {
           c12OperationsMap
         );
 
-
       line.bindPopup(
         `
           <div class="c12-map-popup">
-
             <strong>
               ${escapeHtml(
                 route.orderId
@@ -3397,11 +3372,9 @@ async function buildOperationsMap() {
                 route.to
               )}
             </span>
-
           </div>
         `
       );
-
 
       const currentPoint =
         getPointOnRoute(
@@ -3414,7 +3387,6 @@ async function buildOperationsMap() {
             ) *
             0.11
         );
-
 
       const currentMarker =
         window.L.circleMarker(
@@ -3446,7 +3418,6 @@ async function buildOperationsMap() {
           c12OperationsMap
         );
 
-
       currentMarker.bindTooltip(
         route.orderId,
         {
@@ -3459,7 +3430,6 @@ async function buildOperationsMap() {
       );
     }
   );
-
 
   const Legend =
     window.L.Control.extend({
@@ -3491,7 +3461,6 @@ async function buildOperationsMap() {
       }
     });
 
-
   new Legend({
     position:
       "bottomleft"
@@ -3499,7 +3468,6 @@ async function buildOperationsMap() {
   .addTo(
     c12OperationsMap
   );
-
 
   c12OperationsMap.fitBounds(
     [
@@ -3519,7 +3487,6 @@ async function buildOperationsMap() {
       ]
     }
   );
-
 
   window.setTimeout(
     () => {

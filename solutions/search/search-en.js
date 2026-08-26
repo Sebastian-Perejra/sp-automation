@@ -1105,3 +1105,4 @@ window.SOLUTIONS_CASES_EN = [
     "dispatcher logistics coordinator driver customer and owner work in one connected process"
   ]
 }
+];

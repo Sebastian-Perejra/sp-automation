@@ -688,74 +688,55 @@
      CARRIER CHECK
   ============================================================ */
 
-  function validateCarrierForOrder(carrierInput, orderInput) {
-    const carrier =
-      typeof carrierInput === "string"
-        ? C12.data.getCarrier(carrierInput)
-        : carrierInput;
+function validateCarrierForOrder(
+  carrierInput,
+  orderInput
+) {
+  const carrier =
+    typeof carrierInput === "string"
+      ? C12.data.getCarrier(
+          carrierInput
+        )
+      : carrierInput;
 
-    const order =
-      typeof orderInput === "string"
-        ? C12.data.getOrder(orderInput)
-        : orderInput;
+  const order =
+    typeof orderInput === "string"
+      ? C12.data.getOrder(
+          orderInput
+        )
+      : orderInput;
 
-    if (!carrier) {
-      return createResult({
-        valid: false,
-        code: "CARRIER_NOT_FOUND",
-        title: "Перевізника не знайдено",
-        description:
-          "Такого перевізника немає у довіднику.",
-        order
-      });
-    }
-
-    if (!order) {
-      return createResult({
-        valid: false,
-        code: "ORDER_NOT_FOUND",
-        title: "Замовлення не знайдено",
-        description:
-          "Неможливо перевірити залученого перевізника."
-      });
-    }
-
-    if (carrier.available <= 0) {
-      return createResult({
-        valid: false,
-        code: "CARRIER_NO_CAPACITY",
-        title: "Немає вільного транспорту",
-        description:
-          `${carrier.name} зараз не має доступних автомобілів.`,
-        order,
-        details: {
-          carrier
-        }
-      });
-    }
-
-    if (
-      !carrier.types.includes(order.vehicleTypeLabel)
-    ) {
-      return createResult({
-        valid: false,
-        code: "CARRIER_WRONG_TYPE",
-        title: "Немає потрібного типу автомобіля",
-        description:
-          `${carrier.name} не підтвердив наявність автомобіля типу «${order.vehicleTypeLabel}».`,
-        order,
-        details: {
-          carrier
-        }
-      });
-    }
-
+  if (!carrier) {
     return createResult({
-      valid: true,
-      code: "CARRIER_OK",
-      title: "Перевізник підходить",
+      valid: false,
+      code: "CARRIER_NOT_FOUND",
+      title: "Перевізника не знайдено",
       description:
-        `${carrier.name} має доступний транспорт потрібного типу.`,
+        "Такого перевізника немає у довіднику.",
+      order
+    });
+  }
+
+  if (!order) {
+    return createResult({
+      valid: false,
+      code: "ORDER_NOT_FOUND",
+      title: "Замовлення не знайдено",
+      description:
+        "Неможливо перевірити залученого перевізника."
+    });
+  }
+
+  if (
+    carrier.available <=
+    0
+  ) {
+    return createResult({
+      valid: false,
+      code: "CARRIER_NO_CAPACITY",
+      title: "Немає вільного транспорту",
+      description:
+        `${carrier.name} зараз не має доступних автомобілів.`,
       order,
       details: {
         carrier
@@ -763,84 +744,357 @@
     });
   }
 
+  if (
+    !carrier.types.includes(
+      order.vehicleTypeLabel
+    )
+  ) {
+    return createResult({
+      valid: false,
+      code: "CARRIER_WRONG_TYPE",
+      title:
+        "Немає потрібного типу автомобіля",
+      description:
+        `${carrier.name} не підтвердив автомобіль типу «${order.vehicleTypeLabel}».`,
+      order,
+      details: {
+        carrier
+      }
+    });
+  }
 
-  /* ============================================================
-     ASSIGN CARRIER
-  ============================================================ */
+  const offer =
+    carrier.offer;
 
-  function assignCarrierToOrder(carrierInput, orderInput) {
-    const carrier =
-      typeof carrierInput === "string"
-        ? C12.data.getCarrier(carrierInput)
-        : carrierInput;
+  if (!offer) {
+    return createResult({
+      valid: false,
+      code: "CARRIER_OFFER_MISSING",
+      title:
+        "Немає підтвердженої машини",
+      description:
+        `${carrier.name} ще не надав конкретний автомобіль.`,
+      order,
+      details: {
+        carrier
+      }
+    });
+  }
 
-    const order =
-      typeof orderInput === "string"
-        ? C12.data.getOrder(orderInput)
-        : orderInput;
+  if (
+    offer.type !==
+    order.vehicleType
+  ) {
+    return createResult({
+      valid: false,
+      code: "CARRIER_OFFER_WRONG_TYPE",
+      title:
+        "Автомобіль не відповідає вимогам",
+      description:
+        `${offer.brand} ${offer.model} має тип «${offer.typeLabel}», а замовлення потребує «${order.vehicleTypeLabel}».`,
+      order,
+      details: {
+        carrier,
+        offer
+      }
+    });
+  }
 
-    const validation = validateCarrierForOrder(
+  if (
+    Number(
+      offer.capacityKg
+    ) <
+    Number(
+      order.weightKg
+    )
+  ) {
+    return createResult({
+      valid: false,
+      code:
+        "CARRIER_OFFER_CAPACITY",
+      title:
+        "Недостатня вантажність",
+      description:
+        `${offer.brand} ${offer.model} не має достатньої вантажності.`,
+      order,
+      details: {
+        carrier,
+        offer
+      }
+    });
+  }
+
+  if (
+    Number(
+      offer.pallets
+    ) <
+    Number(
+      order.pallets
+    )
+  ) {
+    return createResult({
+      valid: false,
+      code:
+        "CARRIER_OFFER_PALLETS",
+      title:
+        "Недостатньо палетомісць",
+      description:
+        `${offer.brand} ${offer.model} не вміщує потрібну кількість палет.`,
+      order,
+      details: {
+        carrier,
+        offer
+      }
+    });
+  }
+
+  return createResult({
+    valid: true,
+    code: "CARRIER_OK",
+    title:
+      "Перевізник і автомобіль підходять",
+    description:
+      `${carrier.name}: ${offer.brand} ${offer.model} · ${offer.displayPlate} підтверджено для рейсу.`,
+    order,
+    details: {
+      carrier,
+      offer
+    }
+  });
+}
+
+
+function assignCarrierToOrder(
+  carrierInput,
+  orderInput
+) {
+  const carrier =
+    typeof carrierInput === "string"
+      ? C12.data.getCarrier(
+          carrierInput
+        )
+      : carrierInput;
+
+  const order =
+    typeof orderInput === "string"
+      ? C12.data.getOrder(
+          orderInput
+        )
+      : orderInput;
+
+  const validation =
+    validateCarrierForOrder(
       carrier,
       order
     );
 
-    if (!validation.valid) {
-      return {
-        success: false,
-        validation,
-        result: validation
-      };
-    }
+  if (
+    !validation.valid
+  ) {
+    return {
+      success: false,
+      validation,
+      result: validation
+    };
+  }
 
-    order.execution = "carrier";
-    order.executionLabel = "Залучений перевізник";
+  const offer =
+    carrier.offer;
 
-    order.carrier = carrier.name;
+  const externalResource = {
+    carrierId:
+      carrier.id,
 
-    order.vehicle = "Очікує підтвердження";
-    order.driver = "Очікує підтвердження";
+    carrierName:
+      carrier.name,
 
-    order.status = "assigned";
-    order.statusLabel =
-      C12.statuses.assigned.label;
+    carrierCountry:
+      carrier.country,
 
-    carrier.available = Math.max(
+    carrierRating:
+      carrier.rating,
+
+    brand:
+      offer.brand,
+
+    model:
+      offer.model,
+
+    plate:
+      offer.plate,
+
+    displayPlate:
+      offer.displayPlate,
+
+    type:
+      offer.type,
+
+    typeLabel:
+      offer.typeLabel,
+
+    capacityKg:
+      offer.capacityKg,
+
+    pallets:
+      offer.pallets,
+
+    driver:
+      offer.driver,
+
+    driverPhone:
+      offer.driverPhone,
+
+    location:
+      offer.location,
+
+    readyAt:
+      offer.readyAt,
+
+    rate:
+      offer.rate,
+
+    currency:
+      offer.currency
+  };
+
+  order.execution =
+    "carrier";
+
+  order.executionLabel =
+    "Залучений перевізник";
+
+  order.carrier =
+    carrier.name;
+
+  order.vehicle =
+    offer.displayPlate;
+
+  order.driver =
+    offer.driver;
+
+  order.externalResource =
+    externalResource;
+
+  order.carrierRate =
+    offer.rate;
+
+  order.status =
+    "assigned";
+
+  order.statusLabel =
+    C12.statuses
+      .assigned
+      .label;
+
+  order.attention =
+    false;
+
+  carrier.available =
+    Math.max(
       0,
       carrier.available - 1
     );
 
-    if (!Array.isArray(order.history)) {
-      order.history = [];
-    }
+  C12.state.assignmentChoice = {
+    execution:
+      "carrier",
 
-    order.history.push({
-      time: C12.state.simulationTime,
-      status: "assigned",
-      title: "Залученого перевізника призначено",
-      actor: "Логіст",
-      carrier: carrier.name
-    });
+    executionLabel:
+      "Залучений перевізник",
 
-    return {
-      success: true,
-      order,
-      carrier,
-      validation,
-      result: createResult({
-        valid: true,
-        code: "CARRIER_ASSIGNED",
-        title: "Перевізника призначено",
-        description:
-          `${carrier.name} призначено на ${order.id}.`,
-        order,
-        details: {
-          carrier
-        }
-      })
-    };
+    carrier:
+      carrier.name,
+
+    vehicle:
+      offer.displayPlate,
+
+    driver:
+      offer.driver,
+
+    externalResource
+  };
+
+  if (
+    order.id ===
+    C12.mainOrder.id
+  ) {
+    C12.state
+      .mainOrderAssigned =
+      true;
   }
 
+  if (
+    !Array.isArray(
+      order.history
+    )
+  ) {
+    order.history =
+      [];
+  }
 
+  order.history.push({
+    time:
+      C12.state
+        .simulationTime,
+
+    status:
+      "assigned",
+
+    title:
+      "Залученого перевізника призначено",
+
+    actor:
+      "Логіст",
+
+    carrier:
+      carrier.name,
+
+    vehicle:
+      offer.displayPlate,
+
+    driver:
+      offer.driver,
+
+    rate:
+      offer.rate
+  });
+
+  return {
+    success: true,
+
+    order,
+
+    carrier,
+
+    offer,
+
+    externalResource,
+
+    validation,
+
+    result:
+      createResult({
+        valid: true,
+
+        code:
+          "CARRIER_ASSIGNED",
+
+        title:
+          "Перевізника призначено",
+
+        description:
+          `${carrier.name} · ${offer.brand} ${offer.model} · ${offer.displayPlate} · ${offer.driver}`,
+
+        order,
+
+        details: {
+          carrier,
+          offer,
+          externalResource
+        }
+      })
+  };
+}
   /* ============================================================
      TRIP STATUS RULES
   ============================================================ */

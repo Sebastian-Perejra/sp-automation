@@ -49,7 +49,6 @@ window.SOLUTIONS_UI = {
     forecast: "прогноз",
     errors: "помилки",
     realtime: "актуальні дані",
-    realtime: "актуальні дані",
     transport: "перевезення",
     logistics: "логістика",
     fleet: "автопарк",

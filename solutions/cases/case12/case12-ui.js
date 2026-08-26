@@ -3805,6 +3805,12 @@ function updateDriverActions(
     return;
   }
 
+  const position =
+    Number(
+      snapshot.position ||
+      0
+    );
+
   const buttons =
     $$(
       "[data-driver-action]"
@@ -3842,11 +3848,24 @@ function updateDriverActions(
     };
 
 
-  const position =
-    Number(
-      snapshot.position ||
-      0
-    );
+  C12.state.tripStarted =
+    position >= 34;
+
+  C12.state.arrivedLoading =
+    position >= 39;
+
+  C12.state.cargoLoaded =
+    position >= 45;
+
+  C12.state.inTransit =
+    position >= 48;
+
+  C12.state.delayReported =
+    position >= 65 &&
+    position < 92;
+
+  C12.state.delivered =
+    position >= 92;
 
 
   if (
@@ -3855,24 +3874,6 @@ function updateDriverActions(
   ) {
     C12.state.driverStep =
       0;
-
-    C12.state.tripStarted =
-      false;
-
-    C12.state.arrivedLoading =
-      false;
-
-    C12.state.cargoLoaded =
-      false;
-
-    C12.state.inTransit =
-      false;
-
-    C12.state.delayReported =
-      false;
-
-    C12.state.delivered =
-      false;
 
     return;
   }
@@ -3884,24 +3885,6 @@ function updateDriverActions(
   ) {
     C12.state.driverStep =
       0;
-
-    C12.state.tripStarted =
-      false;
-
-    C12.state.arrivedLoading =
-      false;
-
-    C12.state.cargoLoaded =
-      false;
-
-    C12.state.inTransit =
-      false;
-
-    C12.state.delayReported =
-      false;
-
-    C12.state.delivered =
-      false;
 
     enable(
       "start"
@@ -3918,24 +3901,6 @@ function updateDriverActions(
     C12.state.driverStep =
       1;
 
-    C12.state.tripStarted =
-      true;
-
-    C12.state.arrivedLoading =
-      false;
-
-    C12.state.cargoLoaded =
-      false;
-
-    C12.state.inTransit =
-      false;
-
-    C12.state.delayReported =
-      false;
-
-    C12.state.delivered =
-      false;
-
     enable(
       "arrived"
     );
@@ -3950,24 +3915,6 @@ function updateDriverActions(
   ) {
     C12.state.driverStep =
       2;
-
-    C12.state.tripStarted =
-      true;
-
-    C12.state.arrivedLoading =
-      true;
-
-    C12.state.cargoLoaded =
-      false;
-
-    C12.state.inTransit =
-      false;
-
-    C12.state.delayReported =
-      false;
-
-    C12.state.delivered =
-      false;
 
     enable(
       "loaded"
@@ -3984,24 +3931,6 @@ function updateDriverActions(
     C12.state.driverStep =
       3;
 
-    C12.state.tripStarted =
-      true;
-
-    C12.state.arrivedLoading =
-      true;
-
-    C12.state.cargoLoaded =
-      true;
-
-    C12.state.inTransit =
-      false;
-
-    C12.state.delayReported =
-      false;
-
-    C12.state.delivered =
-      false;
-
     enable(
       "transit"
     );
@@ -4016,24 +3945,6 @@ function updateDriverActions(
   ) {
     C12.state.driverStep =
       4;
-
-    C12.state.tripStarted =
-      true;
-
-    C12.state.arrivedLoading =
-      true;
-
-    C12.state.cargoLoaded =
-      true;
-
-    C12.state.inTransit =
-      true;
-
-    C12.state.delayReported =
-      false;
-
-    C12.state.delivered =
-      false;
 
     enable(
       "delay"
@@ -4054,28 +3965,8 @@ function updateDriverActions(
     C12.state.driverStep =
       4;
 
-    C12.state.tripStarted =
-      true;
-
-    C12.state.arrivedLoading =
-      true;
-
-    C12.state.cargoLoaded =
-      true;
-
-    C12.state.inTransit =
-      true;
-
-    C12.state.delayReported =
-      position <
-      78;
-
-    C12.state.delivered =
-      false;
-
     if (
-      position >=
-      78
+      position >= 78
     ) {
       enable(
         "delay"
@@ -4092,24 +3983,196 @@ function updateDriverActions(
 
   C12.state.driverStep =
     5;
+}
 
-  C12.state.tripStarted =
+function updateDriverDocuments(
+  snapshot
+) {
+  if (!snapshot) {
+    return;
+  }
+
+  const position =
+    Number(
+      snapshot.position ||
+      0
+    );
+
+  const upload =
+    $(
+      "[data-upload-cmr]"
+    );
+
+  if (!upload) {
+    return;
+  }
+
+
+  if (
+    position <
+    48
+  ) {
+    upload.disabled =
+      true;
+
+    upload.innerHTML = `
+      <span>＋</span>
+      <strong>
+        CMR / POD ще недоступний
+      </strong>
+      <small>
+        Документ можна додати після початку рейсу
+      </small>
+    `;
+
+    return;
+  }
+
+
+  if (
+    position <
+    92
+  ) {
+    upload.disabled =
+      false;
+
+    upload.innerHTML = `
+      <span>＋</span>
+      <strong>
+        Додати CMR / POD
+      </strong>
+      <small>
+        Фото або PDF
+      </small>
+    `;
+
+    return;
+  }
+
+
+  upload.disabled =
     true;
 
-  C12.state.arrivedLoading =
-    true;
+  upload.innerHTML = `
+    <span>✓</span>
+    <strong>
+      CMR / POD додано
+    </strong>
+    <small>
+      Документ прив'язано до рейсу
+    </small>
+  `;
+}
 
-  C12.state.cargoLoaded =
-    true;
 
-  C12.state.inTransit =
-    true;
+function updateDriverCabin(
+  snapshot
+) {
+  if (!snapshot) {
+    return;
+  }
 
-  C12.state.delayReported =
-    false;
+  const position =
+    Number(
+      snapshot.position ||
+      0
+    );
 
-  C12.state.delivered =
-    true;
+  const trip =
+    $(
+      ".c12-driver-trip"
+    );
+
+  if (!trip) {
+    return;
+  }
+
+
+  trip.classList.remove(
+    "is-assigned",
+    "is-started",
+    "is-loading",
+    "is-transit",
+    "is-delayed",
+    "is-delivered"
+  );
+
+
+  if (
+    position <
+    34
+  ) {
+    trip.classList.add(
+      "is-assigned"
+    );
+
+    return;
+  }
+
+
+  if (
+    position <
+    45
+  ) {
+    trip.classList.add(
+      "is-started"
+    );
+
+    return;
+  }
+
+
+  if (
+    position <
+    48
+  ) {
+    trip.classList.add(
+      "is-loading"
+    );
+
+    return;
+  }
+
+
+  if (
+    position <
+    65
+  ) {
+    trip.classList.add(
+      "is-transit"
+    );
+
+    return;
+  }
+
+
+  if (
+    position <
+    78
+  ) {
+    trip.classList.add(
+      "is-delayed"
+    );
+
+    return;
+  }
+
+
+  if (
+    position <
+    92
+  ) {
+    trip.classList.add(
+      "is-transit"
+    );
+
+    return;
+  }
+
+
+  trip.classList.add(
+    "is-delivered"
+  );
 }
 
 
@@ -4716,51 +4779,58 @@ function updateDriverActions(
   ============================================================ */
 
   function applySnapshot(
-    snapshot
-  ) {
-    if (!snapshot) {
-      return;
-    }
-
-    updateTimeMachine(
-      snapshot
-    );
-
-    updateMainOrderStrip(
-      snapshot
-    );
-
-    updateCustomerView(
-      snapshot
-    );
-
-    updateDriverTimeline(
-      snapshot
-    );
-
-    updateDriverActions(
-      snapshot
-    );
-
-    updateOwnerDashboard(
-      snapshot
-    );
-
-    updateMainPlanningCard(
-      snapshot
-    );
-    
-    updateVehicleCards(
-      snapshot
-    );
-    
-    updateDriverResource();
-    
-    renderCarriers();
-    
-    renderOrdersTable();
+  snapshot
+) {
+  if (!snapshot) {
+    return;
   }
 
+  updateTimeMachine(
+    snapshot
+  );
+
+  updateMainOrderStrip(
+    snapshot
+  );
+
+  updateCustomerView(
+    snapshot
+  );
+
+  updateDriverTimeline(
+    snapshot
+  );
+
+  updateDriverActions(
+    snapshot
+  );
+
+  updateDriverDocuments(
+    snapshot
+  );
+
+  updateDriverCabin(
+    snapshot
+  );
+
+  updateOwnerDashboard(
+    snapshot
+  );
+
+  updateMainPlanningCard(
+    snapshot
+  );
+
+  updateVehicleCards(
+    snapshot
+  );
+
+  updateDriverResource();
+
+  renderCarriers();
+
+  renderOrdersTable();
+}
 
   /* ============================================================
      BUSINESS RULE MODAL

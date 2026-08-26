@@ -48,7 +48,17 @@ window.SOLUTIONS_UI = {
     sales: "sales",
     forecast: "forecast",
     errors: "errors",
-    realtime: "real-time data"
+    realtime: "real-time data",
+    transport: "transport operations",
+    logistics: "logistics",
+    fleet: "fleet",
+    carrier: "carriers",
+    route: "routing",
+    delivery: "delivery",
+    tracking: "shipment tracking",
+    pod: "proof of delivery",
+    cmr: "CMR",
+    tms: "transport management"
   },
 
   finder: {

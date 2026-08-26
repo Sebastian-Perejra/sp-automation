@@ -3,8 +3,19 @@
 
   const C12 = window.C12 = window.C12 || {};
 
+  const pageLanguage =
+    String(
+      document.documentElement.lang ||
+      "uk"
+    ).toLowerCase();
+
+  const initialLanguage =
+    pageLanguage.startsWith("ru")
+      ? "ru"
+      : "uk";
+
   C12.i18n = {
-    current: "uk",
+    current: initialLanguage,
 
     languages: {
       uk: {
@@ -121,6 +132,122 @@
             "Перевезення включено до аналітики"
           ]
         }
+      },
+
+      ru: {
+        code: "ru",
+        locale: "ru-RU",
+        name: "Русский",
+
+        common: {
+          yes: "Да",
+          no: "Нет",
+          close: "Закрыть",
+          cancel: "Отмена",
+          continue: "Продолжить",
+          back: "Назад",
+          loading: "Загрузка",
+          save: "Сохранить"
+        },
+
+        roles: {
+          dispatcher: "Диспетчер",
+          manager: "Логист",
+          driver: "Водитель",
+          customer: "Клиент",
+          owner: "Владелец"
+        },
+
+        statuses: {
+          new: "НОВОЕ",
+          planning: "ПЛАНИРОВАНИЕ",
+          assigned: "НАЗНАЧЕНО",
+          loading: "ПОГРУЗКА",
+          transit: "В ПУТИ",
+          delayed: "ЗАДЕРЖКА",
+          customs: "ТАМОЖНЯ",
+          issue: "ТРЕБУЕТ ВНИМАНИЯ",
+          delivered: "ДОСТАВЛЕНО",
+          future: "ОЖИДАЕТ"
+        },
+
+        execution: {
+          own: "Собственный транспорт",
+          carrier: "Привлечённый перевозчик",
+          none: "Не назначено"
+        },
+
+        vehicleStatuses: {
+          free: "СВОБОДЕН",
+          reserved: "ЗАРЕЗЕРВИРОВАН",
+          transit: "В РЕЙСЕ",
+          service: "СЕРВИС"
+        },
+
+        notifications: {
+          orderCreated: "Заказ создан",
+          vehicleAssigned: "Автомобиль назначен",
+          carrierAssigned: "Перевозчик назначен",
+          tripStarted: "Рейс начат",
+          arrivedLoading: "Прибыл на погрузку",
+          cargoLoaded: "Груз загружен",
+          inTransit: "Груз в пути",
+          delayReported: "Задержка зафиксирована",
+          deliveryCompleted: "Доставка завершена",
+          documentUploaded: "CMR / POD добавлен"
+        },
+
+        businessRules: {
+          vehicleUnavailable: "Автомобиль недоступен",
+          vehicleBusy: "Автомобиль уже выполняет рейс",
+          vehicleService: "Автомобиль на сервисе",
+          wrongVehicleType: "Неподходящий тип автомобиля",
+          insufficientCapacity: "Недостаточная грузоподъёмность",
+          insufficientPallets: "Недостаточно палетомест",
+          driverBusy: "Водитель уже выполняет рейс",
+          driverMissing: "Водитель не назначен",
+          locationWarning: "Необходима подача автомобиля",
+          invalidStatusTransition: "Невозможно изменить статус"
+        },
+
+        automation: {
+          title: "Система сделала сама",
+
+          orderCreated: [
+            "Присвоен номер заказа",
+            "Зафиксировано время создания",
+            "Заказ добавлен в реестр",
+            "Установлен начальный статус"
+          ],
+
+          assignment: [
+            "Проверен тип автомобиля",
+            "Проверена грузоподъёмность",
+            "Проверена доступность водителя",
+            "Автомобиль зарезервирован",
+            "Водитель назначен на рейс",
+            "Для клиента сформировано подтверждение"
+          ],
+
+          delay: [
+            "Задержка записана в историю",
+            "ETA пересчитан",
+            "Заказ отмечен как проблемный",
+            "Для логиста создано предупреждение",
+            "Статус диспетчера обновлён",
+            "Для клиента сформировано уведомление",
+            "KPI владельца обновлены"
+          ],
+
+          delivered: [
+            "Зафиксировано фактическое время доставки",
+            "Статус изменён на ДОСТАВЛЕНО",
+            "Автомобиль освобождён",
+            "Водитель освобождён",
+            "Для клиента сформировано уведомление",
+            "Перевозка включена в аналитику"
+          ]
+        }
       }
     },
 
@@ -137,7 +264,8 @@
           .split(".")
           .filter(Boolean);
 
-      let value = language;
+      let value =
+        language;
 
       for (const part of parts) {
         if (
@@ -147,7 +275,8 @@
             part
           )
         ) {
-          value = value[part];
+          value =
+            value[part];
         } else {
           return fallback;
         }
@@ -173,9 +302,6 @@
       this.current =
         languageCode;
 
-      document.documentElement.lang =
-        languageCode;
-
       document.dispatchEvent(
         new CustomEvent(
           "c12:languagechange",
@@ -197,6 +323,13 @@
           this.current
         ]?.locale ||
         "uk-UA"
+      );
+    },
+
+    is(languageCode) {
+      return (
+        this.current ===
+        languageCode
       );
     }
   };

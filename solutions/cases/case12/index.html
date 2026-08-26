@@ -2401,115 +2401,175 @@
       ======================================================== -->
 
       <section
-        class="c12-event-ripple"
-        data-event-ripple
-        hidden
-      >
+  class="c12-event-ripple"
+  data-event-ripple
+  hidden
+>
 
-        <div class="c12-event-ripple__intro">
+  <div class="c12-event-ripple__intro">
 
-          <span class="c12-kicker">
-            ОДНА ПОДІЯ
-          </span>
+    <span
+      class="c12-kicker"
+      data-i18n="ripple.kicker"
+    >
+      ОДНА ПОДІЯ
+    </span>
 
-          <h2>
-            Одне оновлення.
-            <em>П'ять реакцій.</em>
-          </h2>
+    <h2>
+      <span data-i18n="ripple.title">
+        Одне оновлення.
+      </span>
 
-          <p>
-            Водій повідомив про затримку.
-            Дані внесено один раз.
-            Далі система сама передає потрібну інформацію
-            кожному учаснику процесу.
-          </p>
+      <em data-i18n="ripple.emphasis">
+        П'ять реакцій.
+      </em>
+    </h2>
 
-        </div>
+    <p data-i18n="ripple.description">
+      Водій повідомив про затримку.
+      Дані внесено один раз.
+      Далі система сама передає потрібну інформацію
+      кожному учаснику процесу.
+    </p>
 
-
-        <div class="c12-ripple-system">
-
-          <div class="c12-ripple-core">
-
-            <span>+2 ГОД</span>
-
-            <strong>ЗАТРИМКА</strong>
-
-            <small>TR-2026-00184</small>
-
-          </div>
+  </div>
 
 
-          <div class="c12-ripple-card" data-ripple-role="driver">
+  <div class="c12-ripple-system">
 
-            <small>ВОДІЙ</small>
-            <strong>Затримку зафіксовано</strong>
-            <span>✓</span>
+    <div class="c12-ripple-core">
 
-          </div>
+      <span data-i18n="ripple.delayHours">
+        +2 ГОД
+      </span>
 
+      <strong data-i18n="ripple.delay">
+        ЗАТРИМКА
+      </strong>
 
-          <div class="c12-ripple-card" data-ripple-role="manager">
+      <small>
+        TR-2026-00184
+      </small>
 
-            <small>ЛОГІСТ</small>
-            <strong>Ризик запізнення</strong>
-            <span>⚠</span>
-
-          </div>
-
-
-          <div class="c12-ripple-card" data-ripple-role="dispatcher">
-
-            <small>ДИСПЕТЧЕР</small>
-            <strong>Замовлення підсвічено</strong>
-            <span>⚠</span>
-
-          </div>
+    </div>
 
 
-          <div class="c12-ripple-card" data-ripple-role="customer">
+    <div
+      class="c12-ripple-card"
+      data-ripple-role="driver"
+    >
 
-            <small>КЛІЄНТ</small>
-            <strong>Нове ETA · 16:00</strong>
-            <span>✉</span>
+      <small data-i18n="ripple.driverRole">
+        ВОДІЙ
+      </small>
 
-          </div>
+      <strong data-i18n="ripple.driverText">
+        Затримку зафіксовано
+      </strong>
 
+      <span>✓</span>
 
-          <div class="c12-ripple-card" data-ripple-role="owner">
-
-            <small>ВЛАСНИК</small>
-            <strong>Увага: 2 → 3</strong>
-            <span>↑</span>
-
-          </div>
-
-
-          <svg
-            class="c12-ripple-lines"
-            viewBox="0 0 1000 650"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path d="M500 325 L180 120"></path>
-            <path d="M500 325 L820 120"></path>
-            <path d="M500 325 L130 510"></path>
-            <path d="M500 325 L870 510"></path>
-            <path d="M500 325 L500 610"></path>
-          </svg>
-
-        </div>
+    </div>
 
 
-        <button
-          class="c12-primary-action"
-          type="button"
-          data-close-ripple
-        >
-          Продовжити перевезення →
-        </button>
+    <div
+      class="c12-ripple-card"
+      data-ripple-role="manager"
+    >
 
-      </section>
+      <small data-i18n="ripple.managerRole">
+        ЛОГІСТ
+      </small>
+
+      <strong data-i18n="ripple.managerText">
+        Ризик запізнення
+      </strong>
+
+      <span>⚠</span>
+
+    </div>
+
+
+    <div
+      class="c12-ripple-card"
+      data-ripple-role="dispatcher"
+    >
+
+      <small data-i18n="ripple.dispatcherRole">
+        ДИСПЕТЧЕР
+      </small>
+
+      <strong data-i18n="ripple.dispatcherText">
+        Замовлення підсвічено
+      </strong>
+
+      <span>⚠</span>
+
+    </div>
+
+
+    <div
+      class="c12-ripple-card"
+      data-ripple-role="customer"
+    >
+
+      <small data-i18n="ripple.customerRole">
+        КЛІЄНТ
+      </small>
+
+      <strong data-i18n="ripple.customerText">
+        Нове ETA · 16:00
+      </strong>
+
+      <span>✉</span>
+
+    </div>
+
+
+    <div
+      class="c12-ripple-card"
+      data-ripple-role="owner"
+    >
+
+      <small data-i18n="ripple.ownerRole">
+        ВЛАСНИК
+      </small>
+
+      <strong data-i18n="ripple.ownerText">
+        Увага: 2 → 3
+      </strong>
+
+      <span>↑</span>
+
+    </div>
+
+
+    <svg
+      class="c12-ripple-lines"
+      viewBox="0 0 1000 650"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path d="M500 325 L180 120"></path>
+      <path d="M500 325 L820 120"></path>
+      <path d="M500 325 L130 510"></path>
+      <path d="M500 325 L870 510"></path>
+      <path d="M500 325 L500 610"></path>
+    </svg>
+
+  </div>
+
+
+  <button
+    class="c12-primary-action"
+    type="button"
+    data-close-ripple
+    data-i18n="ripple.continue"
+  >
+    Продовжити перевезення →
+  </button>
+
+</section>
 
 
       <!-- =======================================================

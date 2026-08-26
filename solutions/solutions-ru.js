@@ -48,7 +48,17 @@ window.SOLUTIONS_UI = {
     sales: "продажи",
     forecast: "прогноз",
     errors: "ошибки",
-    realtime: "актуальные данные"
+    realtime: "актуальные данные",
+    transport: "перевозки",
+    logistics: "логистика",
+    fleet: "автопарк",
+    carrier: "перевозчики",
+    route: "маршруты",
+    delivery: "доставка",
+    tracking: "отслеживание",
+    pod: "POD / подтверждение доставки",
+    cmr: "CMR",
+    tms: "TMS / управление перевозками"
   },
 
   finder: {

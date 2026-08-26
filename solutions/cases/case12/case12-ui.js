@@ -2571,6 +2571,239 @@ async function loadUkraineBoundary() {
   return c12UkraineBoundaryPromise;
 }
 
+  function pointInsideRing(
+  point,
+  ring
+) {
+  const x =
+    Number(
+      point[0]
+    );
+
+  const y =
+    Number(
+      point[1]
+    );
+
+  let inside =
+    false;
+
+  for (
+    let i = 0,
+      j = ring.length - 1;
+    i < ring.length;
+    j = i++
+  ) {
+    const xi =
+      Number(
+        ring[i][0]
+      );
+
+    const yi =
+      Number(
+        ring[i][1]
+      );
+
+    const xj =
+      Number(
+        ring[j][0]
+      );
+
+    const yj =
+      Number(
+        ring[j][1]
+      );
+
+    const intersect =
+      (
+        (
+          yi > y
+        ) !==
+        (
+          yj > y
+        )
+      ) &&
+      (
+        x <
+        (
+          (
+            xj - xi
+          ) *
+          (
+            y - yi
+          )
+        ) /
+        (
+          (
+            yj - yi
+          ) ||
+          Number.EPSILON
+        ) +
+        xi
+      );
+
+    if (
+      intersect
+    ) {
+      inside =
+        !inside;
+    }
+  }
+
+  return inside;
+}
+
+
+function pointInsidePolygon(
+  point,
+  polygon
+) {
+  if (
+    !polygon ||
+    !polygon.length
+  ) {
+    return false;
+  }
+
+  if (
+    !pointInsideRing(
+      point,
+      polygon[0]
+    )
+  ) {
+    return false;
+  }
+
+  for (
+    let i = 1;
+    i < polygon.length;
+    i += 1
+  ) {
+    if (
+      pointInsideRing(
+        point,
+        polygon[i]
+      )
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+function geometryContainsPoint(
+  geometry,
+  point
+) {
+  if (!geometry) {
+    return false;
+  }
+
+  if (
+    geometry.type ===
+    "Polygon"
+  ) {
+    return pointInsidePolygon(
+      point,
+      geometry.coordinates
+    );
+  }
+
+  if (
+    geometry.type ===
+    "MultiPolygon"
+  ) {
+    return geometry.coordinates
+      .some(
+        polygon =>
+          pointInsidePolygon(
+            point,
+            polygon
+          )
+      );
+  }
+
+  return false;
+}
+
+
+function geoJsonContainsPoint(
+  geojson,
+  point
+) {
+  if (!geojson) {
+    return false;
+  }
+
+  if (
+    geojson.type ===
+    "Feature"
+  ) {
+    return geometryContainsPoint(
+      geojson.geometry,
+      point
+    );
+  }
+
+  if (
+    geojson.type ===
+    "FeatureCollection"
+  ) {
+    return geojson.features
+      .some(
+        feature =>
+          geometryContainsPoint(
+            feature.geometry,
+            point
+          )
+      );
+  }
+
+  return geometryContainsPoint(
+    geojson,
+    point
+  );
+}
+
+
+function validateUkraineBoundary(
+  geojson
+) {
+  const simferopol = [
+    34.1003,
+    44.9521
+  ];
+
+  const sevastopol = [
+    33.5254,
+    44.6167
+  ];
+
+  const simferopolInside =
+    geoJsonContainsPoint(
+      geojson,
+      simferopol
+    );
+
+  const sevastopolInside =
+    geoJsonContainsPoint(
+      geojson,
+      sevastopol
+    );
+
+  if (
+    !simferopolInside ||
+    !sevastopolInside
+  ) {
+    throw new Error(
+      "Ukraine boundary validation failed"
+    );
+  }
+
+  return true;
+}
 
 function getMapRouteStyle(
   route

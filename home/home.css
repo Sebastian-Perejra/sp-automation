@@ -2179,8 +2179,8 @@ body.home-bg-show-b::after {
 }
 .workspace-peek-btn {
   animation:
-    workspacePeekAppear 0.35s ease 8s backwards,
-    workspacePeekHint 7s ease-in-out 10s infinite;
+    workspacePeekAppear 0.35s ease 2.35s backwards,
+    workspacePeekHint 7s ease-in-out 4.35s infinite;
 }
 
 @keyframes workspacePeekHint {

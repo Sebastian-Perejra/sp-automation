@@ -44,93 +44,93 @@
   }
 
   const translations = {
-    uk: {
-      title: 'Налаштування cookies',
-      tooltip: 'Налаштування cookies',
+  uk: {
+    title: 'Налаштування cookies',
+    tooltip: 'Налаштування cookies',
 
-      intro:
-        'Ми використовуємо необхідні cookies для роботи та безпеки сайту, а аналітичні cookies — лише за вашою згодою.',
+    intro:
+      'Ми використовуємо необхідні технології для роботи та безпеки сайту, а аналітичні cookies — лише за вашою згодою.',
 
-      necessary: 'Необхідні',
+    necessary: 'Необхідні',
 
-      necessaryText:
-        'Потрібні для базової роботи сайту, безпеки, роботи форм та збереження ваших налаштувань.',
+    necessaryText:
+      'Потрібні для базової роботи сайту, безпеки, роботи форм та збереження ваших налаштувань.',
 
-      alwaysActive: 'Завжди активні',
+    alwaysActive: 'Завжди активні',
 
-      analytics: 'Аналітика',
+    analytics: 'Аналітика',
 
-      analyticsText:
-        'Допомагає нам розуміти відвідуваність і використання сайту за допомогою Google Analytics.',
+    analyticsText:
+      'Допомагає нам розуміти відвідуваність і використання сайту за допомогою Google Analytics. Вмикається лише за вашою згодою.',
 
-      thirdPartyInfo: 'Сторонні сервіси',
+    thirdPartyInfo: 'Сторонні сервіси',
 
-      thirdPartyInfoText:
-        'На сайті наразі немає необов’язкових сторонніх сервісів, які потребують окремого вибору користувача. Технічні сторонні сервіси, необхідні для роботи та захисту сайту, належать до категорії «Необхідні».',
+    thirdPartyInfoText:
+      'Деякі функції сайту використовують зовнішні сервіси та ресурси, зокрема для захисту форм, аналітики та інтерактивних карт. Такі сервіси можуть отримувати технічну інформацію про з’єднання, браузер і пристрій та, залежно від сервісу, використовувати cookies або інші технічні ідентифікатори. Google Analytics активується лише за вашою згодою.',
 
-      rejectAll: 'Відхилити аналітику',
-      save: 'Зберегти налаштування',
-      acceptAll: 'Дозволити аналітику'
-    },
+    rejectAll: 'Відхилити аналітику',
+    save: 'Зберегти налаштування',
+    acceptAll: 'Дозволити аналітику'
+  },
 
-    ru: {
-      title: 'Настройки cookies',
-      tooltip: 'Настройки cookies',
+  ru: {
+    title: 'Настройки cookies',
+    tooltip: 'Настройки cookies',
 
-      intro:
-        'Мы используем необходимые cookies для работы и безопасности сайта, а аналитические cookies — только с вашего согласия.',
+    intro:
+      'Мы используем необходимые технологии для работы и безопасности сайта, а аналитические cookies — только с вашего согласия.',
 
-      necessary: 'Необходимые',
+    necessary: 'Необходимые',
 
-      necessaryText:
-        'Нужны для базовой работы сайта, безопасности, работы форм и сохранения ваших настроек.',
+    necessaryText:
+      'Нужны для базовой работы сайта, безопасности, работы форм и сохранения ваших настроек.',
 
-      alwaysActive: 'Всегда активны',
+    alwaysActive: 'Всегда активны',
 
-      analytics: 'Аналитика',
+    analytics: 'Аналитика',
 
-      analyticsText:
-        'Помогает нам понимать посещаемость и использование сайта с помощью Google Analytics.',
+    analyticsText:
+      'Помогает нам понимать посещаемость и использование сайта с помощью Google Analytics. Включается только с вашего согласия.',
 
-      thirdPartyInfo: 'Сторонние сервисы',
+    thirdPartyInfo: 'Сторонние сервисы',
 
-      thirdPartyInfoText:
-        'На сайте сейчас нет необязательных сторонних сервисов, требующих отдельного выбора пользователя. Технические сторонние сервисы, необходимые для работы и защиты сайта, относятся к категории «Необходимые».',
+    thirdPartyInfoText:
+      'Некоторые функции сайта используют внешние сервисы и ресурсы, в том числе для защиты форм, аналитики и интерактивных карт. Такие сервисы могут получать техническую информацию о соединении, браузере и устройстве и, в зависимости от сервиса, использовать cookies или другие технические идентификаторы. Google Analytics активируется только с вашего согласия.',
 
-      rejectAll: 'Отклонить аналитику',
-      save: 'Сохранить настройки',
-      acceptAll: 'Разрешить аналитику'
-    },
+    rejectAll: 'Отклонить аналитику',
+    save: 'Сохранить настройки',
+    acceptAll: 'Разрешить аналитику'
+  },
 
-    en: {
-      title: 'Cookie settings',
-      tooltip: 'Cookie settings',
+  en: {
+    title: 'Cookie settings',
+    tooltip: 'Cookie settings',
 
-      intro:
-        'We use necessary cookies for website functionality and security. Analytics cookies are used only with your consent.',
+    intro:
+      'We use necessary technologies for website functionality and security. Analytics cookies are used only with your consent.',
 
-      necessary: 'Necessary',
+    necessary: 'Necessary',
 
-      necessaryText:
-        'Required for basic website functionality, security, forms and remembering your preferences.',
+    necessaryText:
+      'Required for basic website functionality, security, forms and remembering your preferences.',
 
-      alwaysActive: 'Always active',
+    alwaysActive: 'Always active',
 
-      analytics: 'Analytics',
+    analytics: 'Analytics',
 
-      analyticsText:
-        'Helps us understand website traffic and usage through Google Analytics.',
+    analyticsText:
+      'Helps us understand website traffic and usage through Google Analytics. It is enabled only with your consent.',
 
-      thirdPartyInfo: 'Third-party services',
+    thirdPartyInfo: 'Third-party services',
 
-      thirdPartyInfoText:
-        'The website currently does not use optional third-party services that require a separate user choice. Technical third-party services required for website functionality and security are treated as Necessary.',
+    thirdPartyInfoText:
+      'Some website features use external services and resources, including services for form protection, analytics and interactive maps. These providers may receive technical information about your connection, browser and device and, depending on the service, may use cookies or other technical identifiers. Google Analytics is activated only with your consent.',
 
-      rejectAll: 'Reject analytics',
-      save: 'Save preferences',
-      acceptAll: 'Allow analytics'
-    }
-  };
+    rejectAll: 'Reject analytics',
+    save: 'Save preferences',
+    acceptAll: 'Allow analytics'
+  }
+};
 
   function getLanguage() {
     const lang =

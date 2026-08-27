@@ -423,13 +423,16 @@ function initCarousel() {
     ).matches;
 
   let isDragging = false;
-  let startX = 0;
+let startX = 0;
 
-  let rotation = 0;
-  let lastTime = performance.now();
+let rotation = 0;
+let lastTime = performance.now();
 
-  const rotationSpeed =
-    360 / 80000;
+let carouselVisible = false;
+let animationFrameId = null;
+
+const rotationSpeed =
+  360 / 80000;
 
   carousel.style.animation = 'none';
 
@@ -551,32 +554,72 @@ const descriptions =
     );
   }
 
-  function animate(time) {
-    const delta =
-      time - lastTime;
+function animate(time) {
+  if (!carouselVisible) {
+    animationFrameId = null;
+    return;
+  }
 
-    lastTime = time;
+  const delta =
+    Math.min(
+      time - lastTime,
+      50
+    );
 
-    if (
-      !isDragging &&
-      !reducedMotion
-    ) {
-      rotation +=
-        delta *
-        rotationSpeed;
-    }
+  lastTime = time;
 
-    rotation %= 360;
+  if (
+    !isDragging &&
+    !reducedMotion
+  ) {
+    rotation +=
+      delta *
+      rotationSpeed;
+  }
 
-    carousel.style.transform =
-      `rotateY(${rotation}deg)`;
+  rotation %= 360;
 
-    updateDepth();
+  carousel.style.transform =
+    `rotateY(${rotation}deg)`;
 
+  updateDepth();
+
+  animationFrameId =
     window.requestAnimationFrame(
       animate
     );
-  }
+}
+
+const carouselObserver =
+  new IntersectionObserver(
+    entries => {
+      const entry =
+        entries[0];
+
+      carouselVisible =
+        entry.isIntersecting;
+
+      if (
+        carouselVisible &&
+        !animationFrameId
+      ) {
+        lastTime =
+          performance.now();
+
+        animationFrameId =
+          window.requestAnimationFrame(
+            animate
+          );
+      }
+    },
+    {
+      rootMargin: '150px 0px'
+    }
+  );
+
+carouselObserver.observe(
+  carousel.parentElement
+);
 
   carousel.parentElement.addEventListener(
     'mousedown',
@@ -692,10 +735,6 @@ const descriptions =
   );
 
   updateDepth();
-
-  window.requestAnimationFrame(
-    animate
-  );
 }
 
 function openContactModal() {
@@ -3228,74 +3267,103 @@ function initHomePhysicalCalculator() {
     }
   );
 
-  function animate() {
-    currentX +=
-      (targetX - currentX) *
-      0.08;
+let calculatorVisible = false;
+let calculatorFrameId = null;
 
-    currentY +=
-      (targetY - currentY) *
-      0.08;
+function animate() {
+  if (!calculatorVisible) {
+    calculatorFrameId = null;
+    return;
+  }
 
-    calc.style.setProperty(
-      '--calc-x',
-      `${currentX.toFixed(2)}px`
-    );
+  currentX +=
+    (targetX - currentX) *
+    0.08;
 
-    calc.style.setProperty(
-      '--calc-y',
-      `${currentY.toFixed(2)}px`
-    );
+  currentY +=
+    (targetY - currentY) *
+    0.08;
 
+  calc.style.setProperty(
+    '--calc-x',
+    `${currentX.toFixed(2)}px`
+  );
+
+  calc.style.setProperty(
+    '--calc-y',
+    `${currentY.toFixed(2)}px`
+  );
+
+  calculatorFrameId =
     requestAnimationFrame(
       animate
     );
-  }
+}
 
   if (!reducedMotion) {
-    visual.addEventListener(
-      'pointermove',
-      event => {
-        const rect =
-          visual.getBoundingClientRect();
+  visual.addEventListener(
+    'pointermove',
+    event => {
+      const rect =
+        visual.getBoundingClientRect();
 
-        const x =
-          (
-            event.clientX -
-            rect.left
-          ) /
-          rect.width -
-          0.5;
+      const x =
+        (
+          event.clientX -
+          rect.left
+        ) /
+        rect.width -
+        0.5;
 
-        const y =
-          (
-            event.clientY -
-            rect.top
-          ) /
-          rect.height -
-          0.5;
+      const y =
+        (
+          event.clientY -
+          rect.top
+        ) /
+        rect.height -
+        0.5;
 
-        targetX =
-          x * 14;
+      targetX =
+        x * 14;
 
-        targetY =
-          y * 10;
+      targetY =
+        y * 10;
+    }
+  );
+
+  visual.addEventListener(
+    'pointerleave',
+    () => {
+      targetX = 0;
+      targetY = 0;
+    }
+  );
+
+  const calculatorObserver =
+    new IntersectionObserver(
+      entries => {
+        calculatorVisible =
+          entries[0].isIntersecting;
+
+        if (
+          calculatorVisible &&
+          !calculatorFrameId
+        ) {
+          calculatorFrameId =
+            requestAnimationFrame(
+              animate
+            );
+        }
+      },
+      {
+        rootMargin: '150px 0px'
       }
     );
 
-    visual.addEventListener(
-      'pointerleave',
-      () => {
-        targetX = 0;
-        targetY = 0;
-      }
-    );
-
-    requestAnimationFrame(
-      animate
-    );
-  }
-
+  calculatorObserver.observe(
+    visual
+  );
+}
   if (estimateButton) {
     estimateButton.addEventListener(
       'pointerenter',

@@ -423,14 +423,13 @@ function initCarousel() {
     ).matches;
 
   let isDragging = false;
-let startX = 0;
+  let startX = 0;
 
-let rotation = 0;
-let lastTime = performance.now();
+  let rotation = 0;
+  let lastTime = performance.now();
 
-
-const rotationSpeed =
-  360 / 80000;
+  const rotationSpeed =
+    360 / 80000;
 
   carousel.style.animation = 'none';
 
@@ -552,32 +551,32 @@ const descriptions =
     );
   }
 
-function animate(time) {
-  const delta =
-    time - lastTime;
+  function animate(time) {
+    const delta =
+      time - lastTime;
 
-  lastTime = time;
+    lastTime = time;
 
-  if (
-    !isDragging &&
-    !reducedMotion
-  ) {
-    rotation +=
-      delta *
-      rotationSpeed;
+    if (
+      !isDragging &&
+      !reducedMotion
+    ) {
+      rotation +=
+        delta *
+        rotationSpeed;
+    }
+
+    rotation %= 360;
+
+    carousel.style.transform =
+      `rotateY(${rotation}deg)`;
+
+    updateDepth();
+
+    window.requestAnimationFrame(
+      animate
+    );
   }
-
-  rotation %= 360;
-
-  carousel.style.transform =
-    `rotateY(${rotation}deg)`;
-
-  updateDepth();
-
-  window.requestAnimationFrame(
-    animate
-  );
-}
 
   carousel.parentElement.addEventListener(
     'mousedown',
@@ -3229,30 +3228,29 @@ function initHomePhysicalCalculator() {
     }
   );
 
+  function animate() {
+    currentX +=
+      (targetX - currentX) *
+      0.08;
 
-function animate() {
-  currentX +=
-    (targetX - currentX) *
-    0.08;
+    currentY +=
+      (targetY - currentY) *
+      0.08;
 
-  currentY +=
-    (targetY - currentY) *
-    0.08;
+    calc.style.setProperty(
+      '--calc-x',
+      `${currentX.toFixed(2)}px`
+    );
 
-  calc.style.setProperty(
-    '--calc-x',
-    `${currentX.toFixed(2)}px`
-  );
+    calc.style.setProperty(
+      '--calc-y',
+      `${currentY.toFixed(2)}px`
+    );
 
-  calc.style.setProperty(
-    '--calc-y',
-    `${currentY.toFixed(2)}px`
-  );
-
-  requestAnimationFrame(
-    animate
-  );
-}
+    requestAnimationFrame(
+      animate
+    );
+  }
 
   if (!reducedMotion) {
     visual.addEventListener(
@@ -3297,6 +3295,7 @@ function animate() {
       animate
     );
   }
+
   if (estimateButton) {
     estimateButton.addEventListener(
       'pointerenter',

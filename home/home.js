@@ -428,8 +428,6 @@ let startX = 0;
 let rotation = 0;
 let lastTime = performance.now();
 
-let carouselVisible = false;
-let animationFrameId = null;
 
 const rotationSpeed =
   360 / 80000;
@@ -555,16 +553,8 @@ const descriptions =
   }
 
 function animate(time) {
-  if (!carouselVisible) {
-    animationFrameId = null;
-    return;
-  }
-
   const delta =
-    Math.min(
-      time - lastTime,
-      50
-    );
+    time - lastTime;
 
   lastTime = time;
 
@@ -584,42 +574,10 @@ function animate(time) {
 
   updateDepth();
 
-  animationFrameId =
-    window.requestAnimationFrame(
-      animate
-    );
-}
-
-const carouselObserver =
-  new IntersectionObserver(
-    entries => {
-      const entry =
-        entries[0];
-
-      carouselVisible =
-        entry.isIntersecting;
-
-      if (
-        carouselVisible &&
-        !animationFrameId
-      ) {
-        lastTime =
-          performance.now();
-
-        animationFrameId =
-          window.requestAnimationFrame(
-            animate
-          );
-      }
-    },
-    {
-      rootMargin: '150px 0px'
-    }
+  window.requestAnimationFrame(
+    animate
   );
-
-carouselObserver.observe(
-  carousel.parentElement
-);
+}
 
   carousel.parentElement.addEventListener(
     'mousedown',
@@ -735,6 +693,10 @@ carouselObserver.observe(
   );
 
   updateDepth();
+
+  window.requestAnimationFrame(
+    animate
+  );
 }
 
 function openContactModal() {
@@ -3267,15 +3229,8 @@ function initHomePhysicalCalculator() {
     }
   );
 
-let calculatorVisible = false;
-let calculatorFrameId = null;
 
 function animate() {
-  if (!calculatorVisible) {
-    calculatorFrameId = null;
-    return;
-  }
-
   currentX +=
     (targetX - currentX) *
     0.08;
@@ -3294,76 +3249,54 @@ function animate() {
     `${currentY.toFixed(2)}px`
   );
 
-  calculatorFrameId =
-    requestAnimationFrame(
-      animate
-    );
+  requestAnimationFrame(
+    animate
+  );
 }
 
   if (!reducedMotion) {
-  visual.addEventListener(
-    'pointermove',
-    event => {
-      const rect =
-        visual.getBoundingClientRect();
+    visual.addEventListener(
+      'pointermove',
+      event => {
+        const rect =
+          visual.getBoundingClientRect();
 
-      const x =
-        (
-          event.clientX -
-          rect.left
-        ) /
-        rect.width -
-        0.5;
+        const x =
+          (
+            event.clientX -
+            rect.left
+          ) /
+          rect.width -
+          0.5;
 
-      const y =
-        (
-          event.clientY -
-          rect.top
-        ) /
-        rect.height -
-        0.5;
+        const y =
+          (
+            event.clientY -
+            rect.top
+          ) /
+          rect.height -
+          0.5;
 
-      targetX =
-        x * 14;
+        targetX =
+          x * 14;
 
-      targetY =
-        y * 10;
-    }
-  );
-
-  visual.addEventListener(
-    'pointerleave',
-    () => {
-      targetX = 0;
-      targetY = 0;
-    }
-  );
-
-  const calculatorObserver =
-    new IntersectionObserver(
-      entries => {
-        calculatorVisible =
-          entries[0].isIntersecting;
-
-        if (
-          calculatorVisible &&
-          !calculatorFrameId
-        ) {
-          calculatorFrameId =
-            requestAnimationFrame(
-              animate
-            );
-        }
-      },
-      {
-        rootMargin: '150px 0px'
+        targetY =
+          y * 10;
       }
     );
 
-  calculatorObserver.observe(
-    visual
-  );
-}
+    visual.addEventListener(
+      'pointerleave',
+      () => {
+        targetX = 0;
+        targetY = 0;
+      }
+    );
+
+    requestAnimationFrame(
+      animate
+    );
+  }
   if (estimateButton) {
     estimateButton.addEventListener(
       'pointerenter',

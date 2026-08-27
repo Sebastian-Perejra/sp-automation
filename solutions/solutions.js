@@ -4271,6 +4271,18 @@ if (
 }
 
 renderResults("");
+
+const directCaseId = Number(
+  new URLSearchParams(window.location.search).get("case")
+);
+
+if (
+  Number.isInteger(directCaseId) &&
+  directCaseId > 0
+) {
+  openCase(directCaseId);
+}
+
 })();
 
 (() => {

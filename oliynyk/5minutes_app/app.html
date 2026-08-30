@@ -608,6 +608,17 @@ document
       pendingEmail =
         email;
 
+       const button =
+    document.getElementById(
+      'emailBtn'
+    );
+  
+  pressAuthButton(
+    button,
+    'Надсилаємо...'
+  );
+
+      
       clearStatus();
 
      document.getElementById(
@@ -1012,6 +1023,11 @@ if (
   data.type ===
   'EMAIL_RESULT'
 ) {
+  releaseAuthButton(
+  document.getElementById(
+    'emailBtn'
+  )
+);
   if (!data.success) {
     showError(
       data.message ||
@@ -1036,6 +1052,20 @@ if (
     .classList.remove(
       'hidden'
     );
+
+  document
+  .getElementById(
+    'codeStep'
+  )
+  .classList.add(
+    'stepEnter'
+  );
+
+document
+  .getElementById(
+    'codeInput'
+  )
+  .focus();
 
   const status =
     document.getElementById(

@@ -563,6 +563,11 @@ document
 
       clearStatus();
 
+     document.getElementById(
+      'status'
+    ).textContent =
+      'Надсилаємо код...';
+      
       submitAuthRequest(
         'SEND_LOGIN_CODE',
         '',

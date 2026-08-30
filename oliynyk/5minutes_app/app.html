@@ -176,6 +176,44 @@
   opacity: .55;
   cursor: default;
 }
+    .authBtn {
+  transition:
+    transform .08s ease,
+    box-shadow .08s ease,
+    opacity .15s ease;
+  box-shadow:
+    0 4px 0 rgba(87, 47, 59, .28);
+}
+
+.authBtn:active,
+.authBtn.isPressed {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 rgba(87, 47, 59, .28);
+}
+
+.authStep {
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+}
+
+.authStep.stepEnter {
+  animation:
+    authStepEnter .24s ease;
+}
+
+@keyframes authStepEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
     
   #status {
     width: 100%;
@@ -516,6 +554,15 @@ document
         return;
       }
 
+      const button =
+  document.getElementById(
+    'passwordBtn'
+  );
+
+pressAuthButton(
+  button,
+  'Перевіряємо...'
+);
       clearStatus();
 
       document.getElementById(
@@ -635,6 +682,46 @@ function clearStatus() {
   );
 
   status.textContent = '';
+}
+
+    function pressAuthButton(
+  button,
+  text
+) {
+  button.classList.add(
+    'isPressed'
+  );
+
+  button.disabled = true;
+
+  button.dataset.originalText =
+    button.textContent;
+
+  button.textContent =
+    text;
+
+  setTimeout(
+    function() {
+      button.classList.remove(
+        'isPressed'
+      );
+    },
+    140
+  );
+}
+
+
+function releaseAuthButton(
+  button
+) {
+  button.disabled = false;
+
+  if (
+    button.dataset.originalText
+  ) {
+    button.textContent =
+      button.dataset.originalText;
+  }
 }
     
   window.addEventListener(
@@ -872,6 +959,11 @@ sessionStorage.setItem(
   data.type ===
   'PASSWORD_RESULT'
 ) {
+      releaseAuthButton(
+  document.getElementById(
+    'passwordBtn'
+  )
+);
   if (!data.success) {
     showError(
       data.message ||
@@ -896,6 +988,19 @@ sessionStorage.setItem(
     .classList.remove(
       'hidden'
     );
+      document
+  .getElementById(
+    'emailStep'
+  )
+  .classList.add(
+    'stepEnter'
+  );
+
+document
+  .getElementById(
+    'emailInput'
+  )
+  .focus();
 
   clearStatus();
 

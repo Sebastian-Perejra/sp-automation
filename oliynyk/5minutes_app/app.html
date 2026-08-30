@@ -518,6 +518,11 @@ document
 
       clearStatus();
 
+      document.getElementById(
+        'status'
+      ).textContent =
+        'Перевіряємо пароль...';
+      
       submitAuthRequest(
         'CHECK_PASSWORD',
         password,

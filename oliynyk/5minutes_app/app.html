@@ -31,8 +31,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#A96A7C">
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
   <style>
   * {
     box-sizing: border-box;
@@ -137,6 +135,48 @@
   margin: 0;
 }
 
+ .authStep {
+  width: 100%;
+}
+
+.authStep.hidden {
+  display: none;
+}
+
+.authInput {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  margin-bottom: 12px;
+  border: 1px solid #d8e0e1;
+  border-radius: 14px;
+  font-size: 16px;
+  outline: none;
+  background: #ffffff;
+  color: #263638;
+}
+
+.authInput:focus {
+  border-color: #A96A7C;
+}
+
+.authBtn {
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 14px;
+  background: #A96A7C;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.authBtn:disabled {
+  opacity: .55;
+  cursor: default;
+}
+    
   #status {
     width: 100%;
     min-height: 20px;
@@ -261,31 +301,68 @@
         Мобільна версія
       </div>
 
-      <div
-        id="g_id_onload"
-        data-client_id="1655310339-bmbl5rav6cn57ibr4jmfmpl3d34u09ps.apps.googleusercontent.com"
-        data-callback="handleGoogleLogin"
-        data-auto_prompt="false"
-        data-cancel_on_tap_outside="false"
-      ></div>
+<div id="passwordStep" class="authStep">
+  <input
+    id="passwordInput"
+    class="authInput"
+    type="password"
+    placeholder="Загальний пароль"
+    autocomplete="current-password"
+  >
 
-      <div
-        class="g_id_signin"
-        data-type="standard"
-        data-shape="pill"
-        data-theme="outline"
-        data-text="signin_with"
-        data-size="large"
-        data-logo_alignment="left"
-        data-width="300"
-      ></div>
+  <button
+    id="passwordBtn"
+    class="authBtn"
+    type="button"
+  >
+    Продовжити
+  </button>
+</div>
+
+<div id="emailStep" class="authStep hidden">
+  <input
+    id="emailInput"
+    class="authInput"
+    type="email"
+    placeholder="Ваш email"
+    autocomplete="email"
+  >
+
+  <button
+    id="emailBtn"
+    class="authBtn"
+    type="button"
+  >
+    Надіслати код
+  </button>
+</div>
+
+<div id="codeStep" class="authStep hidden">
+  <input
+    id="codeInput"
+    class="authInput"
+    type="text"
+    inputmode="numeric"
+    maxlength="6"
+    placeholder="Код з листа"
+    autocomplete="one-time-code"
+  >
+
+  <button
+    id="codeBtn"
+    class="authBtn"
+    type="button"
+  >
+    Увійти
+  </button>
+</div>
 
       <div id="status"></div>
 
-      <div class="loginHint">
-        Доступ дозволено лише авторизованим
-        Google-акаунтам клініки.
-      </div>
+<div class="loginHint">
+  Для входу потрібен загальний пароль
+  та підтвердження через дозволений email.
+</div>
 
     </div>
 
@@ -306,12 +383,7 @@
     action="https://script.google.com/macros/s/AKfycbzT5Z8RYIKjH0h_Oj7giOgoyTRJlcPbp5kUnoJzZEwKQIYWQqgX6dX6GNtwCoeoVySe/exec"
     style="display:none;"
   >
-    <input
-      type="hidden"
-      id="credentialInput"
-      name="credential"
-      value=""
-    >
+
     <input
   type="hidden"
   id="sessionTokenInput"
@@ -320,6 +392,49 @@
 >
   </form>
 
+  <iframe
+  id="authFrame"
+  name="authFrame"
+  style="display:none;"
+></iframe>
+
+<form
+  id="authForm"
+  method="POST"
+  target="authFrame"
+  action="https://script.google.com/macros/s/AKfycbzT5Z8RYIKjH0h_Oj7giOgoyTRJlcPbp5kUnoJzZEwKQIYWQqgX6dX6GNtwCoeoVySe/exec"
+  style="display:none;"
+>
+  <input
+    type="hidden"
+    id="authAction"
+    name="action"
+  >
+
+  <input
+    type="hidden"
+    id="authPassword"
+    name="password"
+  >
+
+  <input
+    type="hidden"
+    id="authEmail"
+    name="email"
+  >
+
+  <input
+    type="hidden"
+    id="authCode"
+    name="code"
+  >
+
+  <input
+    type="hidden"
+    id="authSessionToken"
+    name="sessionToken"
+  >
+</form>
 
   <script>
   const SESSION_STORAGE_KEY =
@@ -344,7 +459,174 @@
       .join('');
   }
 
+let pendingEmail = '';
 
+function submitAuthRequest(
+  action,
+  password,
+  email,
+  code,
+  sessionToken
+) {
+  document.getElementById(
+    'authAction'
+  ).value = action || '';
+
+  document.getElementById(
+    'authPassword'
+  ).value = password || '';
+
+  document.getElementById(
+    'authEmail'
+  ).value = email || '';
+
+  document.getElementById(
+    'authCode'
+  ).value = code || '';
+
+  document.getElementById(
+    'authSessionToken'
+  ).value = sessionToken || '';
+
+  document.getElementById(
+    'authForm'
+  ).submit();
+}
+
+
+document
+  .getElementById('passwordBtn')
+  .addEventListener(
+    'click',
+    function() {
+      const password =
+        String(
+          document
+            .getElementById(
+              'passwordInput'
+            )
+            .value || ''
+        ).trim();
+
+      if (!password) {
+        showError(
+          'Введіть пароль.'
+        );
+
+        return;
+      }
+
+      clearStatus();
+
+      submitAuthRequest(
+        'CHECK_PASSWORD',
+        password,
+        '',
+        '',
+        ''
+      );
+    }
+  );
+
+
+document
+  .getElementById('emailBtn')
+  .addEventListener(
+    'click',
+    function() {
+      const email =
+        String(
+          document
+            .getElementById(
+              'emailInput'
+            )
+            .value || ''
+        )
+          .trim()
+          .toLowerCase();
+
+      if (!email) {
+        showError(
+          'Введіть email.'
+        );
+
+        return;
+      }
+
+      pendingEmail =
+        email;
+
+      clearStatus();
+
+      submitAuthRequest(
+        'SEND_LOGIN_CODE',
+        '',
+        email,
+        '',
+        ''
+      );
+    }
+  );
+
+
+document
+  .getElementById('codeBtn')
+  .addEventListener(
+    'click',
+    function() {
+      const code =
+        String(
+          document
+            .getElementById(
+              'codeInput'
+            )
+            .value || ''
+        ).trim();
+
+      if (!code) {
+        showError(
+          'Введіть код з листа.'
+        );
+
+        return;
+      }
+
+      const sessionToken =
+        createSessionToken();
+
+      document
+        .getElementById(
+          'authSessionToken'
+        )
+        .dataset.pendingToken =
+          sessionToken;
+
+      clearStatus();
+
+      submitAuthRequest(
+        'VERIFY_LOGIN_CODE',
+        '',
+        pendingEmail,
+        code,
+        sessionToken
+      );
+    }
+  );
+
+
+function clearStatus() {
+  const status =
+    document.getElementById(
+      'status'
+    );
+
+  status.classList.remove(
+    'error'
+  );
+
+  status.textContent = '';
+}
+    
   window.addEventListener(
     'load',
     function() {
@@ -375,90 +657,13 @@
         'Відновлюємо сесію...';
 
       document.getElementById(
-        'credentialInput'
-      ).value = '';
-
-      document.getElementById(
         'sessionTokenInput'
       ).value = savedSession;
 
       openApp();
     }
   );
-
-
-  function handleGoogleLogin(response) {
-
-    if (loginStarted) {
-      return;
-    }
-
-    const credential =
-      String(
-        response &&
-        response.credential
-          ? response.credential
-          : ''
-      ).trim();
-
-    if (!credential) {
-
-      showError(
-        'Не вдалося отримати дані Google-акаунта.'
-      );
-
-      return;
-    }
-
-
-    const sessionToken =
-      createSessionToken();
-
-    localStorage.setItem(
-      SESSION_STORAGE_KEY,
-      sessionToken
-    );
-
-
-    loginStarted = true;
-
-    const status =
-      document.getElementById(
-        'status'
-      );
-
-    status.classList.remove(
-      'error'
-    );
-
-    status.textContent =
-      'Перевіряємо доступ...';
-
-
-    document.getElementById(
-      'credentialInput'
-    ).value = credential;
-
-    document.getElementById(
-      'sessionTokenInput'
-    ).value = sessionToken;
-    
-requestDriveAccess()
-  .then(function () {
-    openApp();
-  })
-  .catch(function (error) {
-
-    loginStarted = false;
-
-    showError(
-      error && error.message
-        ? error.message
-        : String(error)
-    );
-  });
-  }
-
+ 
     let driveAccessToken =
   String(
     sessionStorage.getItem(
@@ -498,6 +703,7 @@ requestDriveAccess()
     '*'
   );
 }
+
 
 function requestDriveAccess() {
 
@@ -654,6 +860,133 @@ sessionStorage.setItem(
       event.data || {};
     if (
   data.type ===
+  'PASSWORD_RESULT'
+) {
+  if (!data.success) {
+    showError(
+      data.message ||
+      'Невірний пароль.'
+    );
+
+    return;
+  }
+
+  document
+    .getElementById(
+      'passwordStep'
+    )
+    .classList.add(
+      'hidden'
+    );
+
+  document
+    .getElementById(
+      'emailStep'
+    )
+    .classList.remove(
+      'hidden'
+    );
+
+  clearStatus();
+
+  return;
+}
+
+
+if (
+  data.type ===
+  'EMAIL_RESULT'
+) {
+  if (!data.success) {
+    showError(
+      data.message ||
+      'Не вдалося підтвердити доступ.'
+    );
+
+    return;
+  }
+
+  document
+    .getElementById(
+      'emailStep'
+    )
+    .classList.add(
+      'hidden'
+    );
+
+  document
+    .getElementById(
+      'codeStep'
+    )
+    .classList.remove(
+      'hidden'
+    );
+
+  const status =
+    document.getElementById(
+      'status'
+    );
+
+  status.classList.remove(
+    'error'
+  );
+
+  status.textContent =
+    'Код надіслано на email.';
+
+  return;
+}
+
+
+if (
+  data.type ===
+  'CODE_RESULT'
+) {
+  if (!data.success) {
+    showError(
+      data.message ||
+      'Невірний код.'
+    );
+
+    return;
+  }
+
+  const sessionToken =
+    String(
+      document
+        .getElementById(
+          'authSessionToken'
+        )
+        .dataset.pendingToken || ''
+    );
+
+  if (!sessionToken) {
+    showError(
+      'Не вдалося створити сесію.'
+    );
+
+    return;
+  }
+
+  localStorage.setItem(
+    SESSION_STORAGE_KEY,
+    sessionToken
+  );
+
+  document.getElementById(
+    'sessionTokenInput'
+  ).value =
+    sessionToken;
+
+  loginStarted =
+    true;
+
+  openApp();
+
+  return;
+}
+    if (
+  data.type ===
   'FIVE_MINUTE_APP_READY'
 ) {
 
@@ -681,10 +1014,6 @@ sessionStorage.setItem(
 
     frame.style.display =
       'none';
-
-    document.getElementById(
-      'credentialInput'
-    ).value = '';
 
     document.getElementById(
       'sessionTokenInput'

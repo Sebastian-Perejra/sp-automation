@@ -475,8 +475,19 @@
 </form>
 
   <script>
-  const SESSION_STORAGE_KEY =
-    'fiveminuteSessionToken';
+const SESSION_STORAGE_KEY =
+  'fiveminuteSessionToken_v2';
+    localStorage.removeItem(
+  'fiveminuteSessionToken'
+);
+
+sessionStorage.removeItem(
+  'fiveMinuteDriveAccessToken'
+);
+
+sessionStorage.removeItem(
+  'fiveMinuteDriveAccessTokenExpiresAt'
+);
 
   let loginStarted = false;
 

@@ -7107,3 +7107,23 @@ button[data-calc="clear"] {
     background-position: 0% 50%;
   }
 }
+
+.hero-metric-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hero-metric-link:hover {
+  transform: translateY(-3px);
+}
+
+.hero-metric-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}

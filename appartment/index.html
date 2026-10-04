@@ -2071,6 +2071,126 @@ body{
   #payments .apt-col.expense{width:4px !important}
 }
 
+
+/* =========================================================
+   MOBILE WIDTH ROOT FIX
+   Premium desktop .layout was overriding the earlier mobile
+   one-column rule and leaving a hidden 286px grid column.
+   ========================================================= */
+
+@media(max-width:1120px){
+  #app{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .layout{
+    display:block !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+
+  .sidebar{
+    display:none !important;
+  }
+
+  .main{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+  }
+
+  #dashboard,
+  #apartment,
+  .premium-apartment{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+
+  .mobile-tabs{
+    width:100% !important;
+    max-width:100% !important;
+  }
+}
+
+@media(max-width:720px){
+  html,
+  body,
+  #app,
+  .layout,
+  .main{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+
+  .main{
+    padding-left:8px !important;
+    padding-right:8px !important;
+  }
+
+  #dashboard,
+  #apartment,
+  .apartment-grid,
+  .apartment-grid > div,
+  .stack,
+  .tabs,
+  .tabpanel,
+  #payments,
+  #utilitiesTab,
+  #documents,
+  #history,
+  .finance-overview,
+  .fin-summary,
+  .apt-chart-scroll,
+  .apt-history-chart,
+  .hero,
+  .gallery,
+  .compact-card{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+
+  .apartment-grid{
+    display:block !important;
+  }
+
+  /* use almost the whole phone width visually */
+  #apartment .pagehead,
+  #dashboard .pagehead{
+    width:100% !important;
+  }
+
+  .hero{
+    aspect-ratio:16/9 !important;
+  }
+
+  .gallery{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+
+  /* charts still stay full-width after the layout fix */
+  #dashboard .chart-wrap,
+  #payments .apt-chart-scroll{
+    width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+
+  #dashboard .chart,
+  #payments .apt-history-chart{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+}
+
 </style>
 </head>
 <body>

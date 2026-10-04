@@ -532,6 +532,12 @@ const I18N = {
     "Вітальня":"Living room","Кухня":"Kitchen","Спальня":"Bedroom","Ванна":"Bathroom",
     "Демонстраційна версія. Усі дані та об'єкти вигадані.":"Demo version. All data and properties are fictional.",
     "Невірний Gmail або код доступу.":"Incorrect Gmail or access code.",
+    "Платежі за 12 місяців":"12-month payments",
+    "Останні зміни":"Latest updates",
+    "Оновлено":"Updated",
+    "Отримано:":"Received:",
+    "Витрати:":"Expenses:",
+    "Головна":"Overview",
     "Лис 25":"Nov 25","Гру 25":"Dec 25","Січ 26":"Jan 26","Лют 26":"Feb 26","Бер 26":"Mar 26","Кві 26":"Apr 26","Тра 26":"May 26","Чер 26":"Jun 26","Лип 26":"Jul 26","Сер 26":"Aug 26","Вер 26":"Sep 26","Жов 26":"Oct 26"
   }
 };
@@ -541,9 +547,11 @@ let currentLang = localStorage.getItem("ownerPortalLang") || "uk";
 function translateTextValue(text){
   if(currentLang==="uk") return text;
   const trimmed=text.trim();
+  if(!trimmed) return text;
+
   if(I18N.en[trimmed]) return text.replace(trimmed,I18N.en[trimmed]);
 
-  // Dynamic small phrases
+  // Dynamic UI phrases
   let m=trimmed.match(/^(\d+) в оренді$/);
   if(m) return text.replace(trimmed,`${m[1]} rented`);
 
@@ -553,10 +561,28 @@ function translateTextValue(text){
   m=trimmed.match(/^(\d+) об'єктів$/);
   if(m) return text.replace(trimmed,`${m[1]} properties`);
 
+  // Property titles: "ЖК River Park, кв. 24" -> "RC River Park, Apt. 24"
+  if(/^ЖК\s/.test(trimmed)){
+    let s=trimmed.replace(/^ЖК\s+/,"RC ");
+    s=s.replace(/,\s*кв\.\s*/i,", Apt. ");
+    return text.replace(trimmed,s);
+  }
+
+  // Addresses
+  let s=trimmed;
+  s=s.replace(/^вул\.\s*/i,"St. ");
+  s=s.replace(/^просп\.\s*/i,"Ave. ");
+  s=s.replace(/^Дніпровська наб\.\s*/i,"Dniprovska Embankment, ");
+  s=s.replace(/^Кільцева дорога,\s*/i,"Ring Road, ");
+  s=s.replace(/,\s*Львів$/i,", Lviv");
+  s=s.replace(/,\s*Київ$/i,", Kyiv");
+  if(s!==trimmed) return text.replace(trimmed,s);
+
   return text;
 }
 
 function translateDOM(root=document.body){
+  // Ordinary visible text
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   let node;
   while(node=walker.nextNode()){
@@ -565,42 +591,59 @@ function translateDOM(root=document.body){
 
     if(node._uaOriginal===undefined) node._uaOriginal=node.nodeValue;
     const source=node._uaOriginal;
-
-    if(currentLang==="uk"){
-      node.nodeValue=source;
-    }else{
-      node.nodeValue=translateTextValue(source);
-    }
+    node.nodeValue=currentLang==="uk" ? source : translateTextValue(source);
   }
+
+  // Mobile card captions are rendered from data-label via CSS ::before.
+  document.querySelectorAll("[data-label]").forEach(el=>{
+    if(el._uaDataLabel===undefined) el._uaDataLabel=el.getAttribute("data-label");
+    const source=el._uaDataLabel || "";
+    el.setAttribute("data-label", currentLang==="uk" ? source : translateTextValue(source).trim());
+  });
+
+  // Tooltip/title attributes, including chart hints.
+  document.querySelectorAll("[title]").forEach(el=>{
+    if(el._uaTitle===undefined) el._uaTitle=el.getAttribute("title");
+    const source=el._uaTitle || "";
+    el.setAttribute("title", currentLang==="uk" ? source : translateTextValue(source).trim());
+  });
+
+  // Accessible labels if present.
+  document.querySelectorAll("[aria-label]").forEach(el=>{
+    if(el._uaAria===undefined) el._uaAria=el.getAttribute("aria-label");
+    const source=el._uaAria || "";
+    el.setAttribute("aria-label", currentLang==="uk" ? source : translateTextValue(source).trim());
+  });
 
   document.documentElement.lang=currentLang==="uk"?"uk":"en";
   document.querySelectorAll(".lang-btn").forEach(b=>{
     b.classList.toggle("active",b.dataset.lang===currentLang);
   });
 
-  const title=document.querySelector("title");
-  if(title) title.textContent=currentLang==="uk"?"Owner Portal - Demo":"Owner Portal - Demo";
+  document.title="Owner Portal - Demo";
 }
-
 function setLanguage(lang){
+  const apartmentOpen=!document.getElementById("apartment").classList.contains("hidden");
+  const oldSel=document.getElementById("mobileAptSelect");
+  const selectedIndex=oldSel && oldSel.value!=="" ? Number(oldSel.value) : 0;
+
   currentLang=lang;
   localStorage.setItem("ownerPortalLang",lang);
 
-  // Re-render dynamic content first in UA source form
   buildNavigation();
   buildDashboard();
 
-  if(!document.getElementById("apartment").classList.contains("hidden")){
-    const sel=document.getElementById("mobileAptSelect");
-    const idx=sel && sel.value!=="" ? Number(sel.value) : 0;
-    showApartment(idx);
+  if(apartmentOpen){
+    showApartment(selectedIndex);
+  }else{
+    showDashboard(document.getElementById("mobileOverview"));
   }
 
-  translateDOM();
+  translateDOM(document.body);
 }
 
 function refreshTranslation(){
-  requestAnimationFrame(()=>translateDOM());
+  requestAnimationFrame(()=>translateDOM(document.body));
 }
 
 
@@ -642,6 +685,7 @@ function buildNavigation(){
       <option value="">Оберіть квартиру</option>
       ${apartments.map((a,i)=>`<option value="${i}">${a.code} - ${a.title}</option>`).join("")}
     </select>`;
+  refreshTranslation();
 }
 function mobileApartmentChange(sel){
   if(sel.value==="") return;
@@ -697,6 +741,7 @@ function buildDashboard(){
   ];
   document.getElementById("recentOps").innerHTML=latestOps.map(r=>`
     <tr><td data-label="Квартира">${r[0].title}</td><td data-label="Подія">${r[1]}</td><td data-label="Дата">${r[2]}</td><td data-label="Сума"><b>${money(r[3])}</b></td><td data-label="Статус"><span class="badge ${r[4]==="Сплачено"?"good":r[4]==="Очікується"?"warn":"bad"}">${r[4]}</span></td></tr>`).join("");
+  refreshTranslation();
 }
 
 function showApartment(i,btn){
@@ -728,6 +773,7 @@ function showApartment(i,btn){
 
   renderPhotos(a,0,i);
   renderPanels(a);
+  refreshTranslation();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
@@ -735,6 +781,7 @@ function renderPhotos(a,active,idx){
   const labels=["Вітальня","Кухня","Спальня","Ванна"];
   document.getElementById("hero").innerHTML=roomSvg(a.palette[active],labels[active],idx*10+active+20)+`<div class="hero-tag">${labels[active]}</div>`;
   document.getElementById("gallery").innerHTML=labels.map((lab,j)=>`<button class="${j===active?"active":""}" onclick="renderPhotos(apartments[${idx}],${j},${idx})">${roomSvg(a.palette[j],lab,idx*10+j+40)}</button>`).join("");
+  refreshTranslation();
 }
 
 function renderPanels(a){
@@ -834,6 +881,17 @@ function toggleHistoryMonths(){
 }
 
 function switchTab(id,btn){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tabpanel").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");document.getElementById(id).classList.add("active")}
+
+
+const i18nObserver=new MutationObserver((mutations)=>{
+  if(currentLang!=="en") return;
+  let relevant=false;
+  for(const m of mutations){
+    if(m.type==="childList" && m.addedNodes.length){ relevant=true; break; }
+  }
+  if(relevant) requestAnimationFrame(()=>translateDOM(document.body));
+});
+i18nObserver.observe(document.body,{childList:true,subtree:true});
 
 buildNavigation();
 buildDashboard();

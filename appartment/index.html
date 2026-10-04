@@ -151,6 +151,61 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
   .mobile-tabs .navbtn{padding:9px 10px}
   .mobile-select{font-size:12px}
 }.top-actions{gap:7px}.main{padding:11px}.kpis{grid-template-columns:1fr 1fr}.kpi-value{font-size:18px}.hero{height:245px}.gallery button{height:84px}.info-grid{grid-template-columns:1fr}.table{min-width:570px}}
+
+/* Improved apartment financial history */
+.fin-summary{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px
+}
+.fin-kpi{
+  border:1px solid var(--line);border-radius:12px;padding:12px;background:#fafcff
+}
+.fin-kpi small{display:block;color:var(--muted);font-size:9px;font-weight:800}
+.fin-kpi strong{display:block;margin-top:5px;font-size:15px}
+.apt-history-chart{
+  height:190px;display:flex;align-items:flex-end;gap:7px;
+  padding:14px 6px 0;border-bottom:1px solid var(--line);margin-bottom:8px
+}
+.apt-chart-item{
+  flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center;
+  gap:2px;position:relative;padding-bottom:25px
+}
+.apt-col{width:7px;min-height:3px;border-radius:4px 4px 1px 1px}
+.apt-col.received{background:#376cec}
+.apt-col.expense{background:#d7deeb}
+.apt-chart-month{
+  position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  font-size:8px;color:var(--muted);white-space:nowrap
+}
+.mobile-history-cards{display:none}
+.mobile-history-card{
+  border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff
+}
+.mobile-history-card + .mobile-history-card{margin-top:8px}
+.mhc-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.mhc-month{font-size:13px;font-weight:900}
+.mhc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mhc-item{padding:9px;border-radius:10px;background:#f8fafc}
+.mhc-item small{display:block;font-size:8px;color:var(--muted);font-weight:800}
+.mhc-item strong{display:block;margin-top:4px;font-size:11px}
+.history-more{
+  display:none;width:100%;margin-top:10px;border:1px solid var(--line);
+  background:#fff;color:#455268;border-radius:11px;padding:11px;font-weight:800;cursor:pointer
+}
+.desktop-history-table{display:block}
+@media(max-width:720px){
+  .fin-summary{grid-template-columns:1fr 1fr;gap:8px}
+  .fin-kpi{padding:10px}
+  .fin-kpi strong{font-size:13px}
+  .apt-history-chart{height:155px;gap:3px;padding-left:0;padding-right:0}
+  .apt-col{width:5px}
+  .apt-chart-month{font-size:7px;transform:translateX(-50%) rotate(-45deg);transform-origin:center}
+  .desktop-history-table{display:none}
+  .mobile-history-cards{display:block}
+  .history-more{display:block}
+  .mobile-history-card.extra-month{display:none}
+  .mobile-history-cards.expanded .mobile-history-card.extra-month{display:block}
+}
+
 </style>
 </head>
 <body>
@@ -400,10 +455,68 @@ function renderPhotos(a,active,idx){
 }
 
 function renderPanels(a){
+  const yearExpected=a.history.reduce((s,h)=>s+h.expected,0);
+  const yearReceived=a.history.reduce((s,h)=>s+h.received,0);
+  const yearExpenses=a.history.reduce((s,h)=>s+h.expense,0);
+  const yearUtilities=a.history.reduce((s,h)=>s+h.utilities,0);
+  const yearDebt=Math.max(0,yearExpected-yearReceived);
+  const maxHist=Math.max(...a.history.map(h=>Math.max(h.received,h.expense)),1);
+
   document.getElementById("payments").innerHTML=`
-    <div class="sechead"><h3>Платежі за 12 місяців</h3><span>${a.code}</span></div>
-    <div class="table-wrap"><table class="table mobile-stack"><thead><tr><th>Місяць</th><th>Нараховано</th><th>Отримано</th><th>Витрати</th><th>Комунальні</th><th>Статус</th></tr></thead>
-    <tbody>${a.history.map(h=>`<tr><td data-label="Місяць">${h.month}</td><td data-label="Нараховано">${money(h.expected)}</td><td data-label="Отримано"><b>${money(h.received)}</b></td><td data-label="Витрати">${money(h.expense)}</td><td data-label="Комунальні">${money(h.utilities)}</td><td data-label="Статус"><span class="badge ${h.expected===0?"warn":h.received>=h.expected?"good":"bad"}">${h.expected===0?"Без оренди":h.received>=h.expected?"Сплачено":"Є борг"}</span></td></tr>`).join("")}</tbody></table></div>`;
+    <div class="sechead"><h3>Фінансова історія за 12 місяців</h3><span>${a.code}</span></div>
+
+    <div class="fin-summary">
+      <div class="fin-kpi"><small>Нараховано за рік</small><strong>${money(yearExpected)}</strong></div>
+      <div class="fin-kpi"><small>Отримано за рік</small><strong style="color:var(--good)">${money(yearReceived)}</strong></div>
+      <div class="fin-kpi"><small>Витрати за рік</small><strong>${money(yearExpenses)}</strong></div>
+      <div class="fin-kpi"><small>Борг за період</small><strong style="color:${yearDebt?'var(--bad)':'var(--good)'}">${money(yearDebt)}</strong></div>
+    </div>
+
+    <div class="apt-history-chart">
+      ${a.history.map(h=>`
+        <div class="apt-chart-item">
+          <div class="apt-col received" style="height:${Math.max(3,Math.round(h.received/maxHist*90))}%" title="Отримано: ${money(h.received)}"></div>
+          <div class="apt-col expense" style="height:${Math.max(3,Math.round(h.expense/maxHist*90))}%" title="Витрати: ${money(h.expense)}"></div>
+          <div class="apt-chart-month">${h.month}</div>
+        </div>`).join("")}
+    </div>
+
+    <div class="legend">
+      <span><i style="background:#376cec"></i>Отримано</span>
+      <span><i style="background:#d7deeb"></i>Витрати</span>
+      <span style="margin-left:auto">Комунальні за рік: <b>${money(yearUtilities)}</b></span>
+    </div>
+
+    <div class="desktop-history-table" style="margin-top:14px">
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Місяць</th><th>Нараховано</th><th>Отримано</th><th>Витрати</th><th>Комунальні</th><th>Статус</th></tr></thead>
+        <tbody>${a.history.map(h=>`<tr>
+          <td>${h.month}</td>
+          <td>${money(h.expected)}</td>
+          <td><b>${money(h.received)}</b></td>
+          <td>${money(h.expense)}</td>
+          <td>${money(h.utilities)}</td>
+          <td><span class="badge ${h.expected===0?"warn":h.received>=h.expected?"good":"bad"}">${h.expected===0?"Без оренди":h.received>=h.expected?"Сплачено":"Є борг"}</span></td>
+        </tr>`).join("")}</tbody>
+      </table></div>
+    </div>
+
+    <div id="mobileHistoryCards" class="mobile-history-cards" style="margin-top:12px">
+      ${[...a.history].reverse().map((h,idx)=>`
+        <div class="mobile-history-card ${idx>=3?'extra-month':''}">
+          <div class="mhc-head">
+            <div class="mhc-month">${h.month}</div>
+            <span class="badge ${h.expected===0?"warn":h.received>=h.expected?"good":"bad"}">${h.expected===0?"Без оренди":h.received>=h.expected?"Сплачено":"Є борг"}</span>
+          </div>
+          <div class="mhc-grid">
+            <div class="mhc-item"><small>Нараховано</small><strong>${money(h.expected)}</strong></div>
+            <div class="mhc-item"><small>Отримано</small><strong>${money(h.received)}</strong></div>
+            <div class="mhc-item"><small>Витрати</small><strong>${money(h.expense)}</strong></div>
+            <div class="mhc-item"><small>Комунальні</small><strong>${money(h.utilities)}</strong></div>
+          </div>
+        </div>`).join("")}
+    </div>
+    <button id="historyMoreBtn" class="history-more" onclick="toggleHistoryMonths()">Показати всі 12 місяців</button>`;
 
   const latest=a.history[a.history.length-1];
   document.getElementById("utilitiesTab").innerHTML=`
@@ -426,6 +539,14 @@ function renderPanels(a){
     <div class="docrow"><div><span class="event-dot"></span><b>Оновлено фотогалерею</b><small>28.09.2026</small></div></div>
     <div class="docrow"><div><span class="event-dot"></span><b>Додано квитанцію за комунальні</b><small>25.09.2026</small></div></div>`;
   switchTab("payments",document.querySelector(".tab"));
+}
+
+function toggleHistoryMonths(){
+  const box=document.getElementById("mobileHistoryCards");
+  const btn=document.getElementById("historyMoreBtn");
+  if(!box || !btn) return;
+  const expanded=box.classList.toggle("expanded");
+  btn.textContent=expanded?"Показати останні 3 місяці":"Показати всі 12 місяців";
 }
 
 function switchTab(id,btn){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tabpanel").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");document.getElementById(id).classList.add("active")}

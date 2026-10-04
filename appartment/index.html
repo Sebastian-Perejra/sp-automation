@@ -1,1 +1,437 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<title>Owner Portal - Demo</title>
+<style>
+:root{
+  --bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#748097;--line:#e7ebf2;
+  --accent:#3b6ff5;--accent2:#6b94ff;--good:#16865a;--good-bg:#e9f7f0;
+  --bad:#c64b4b;--bad-bg:#fff0f0;--warn:#a56a00;--warn-bg:#fff5d8;
+  --shadow:0 12px 30px rgba(25,39,67,.08)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!important}
+.login-screen{min-height:100dvh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 10% 0%,rgba(72,116,255,.16),transparent 28%),radial-gradient(circle at 90% 100%,rgba(22,134,90,.12),transparent 30%),#f6f8fc}
+.login-card{width:min(430px,100%);background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:30px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850}.brandmark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#7aa4ff);color:#fff;font-weight:900;box-shadow:0 8px 20px rgba(59,111,245,.25)}
+.login-card h1{font-size:30px;line-height:1.1;margin:30px 0 8px}.login-card p{margin:0;color:var(--muted);line-height:1.55}
+.field{margin-top:18px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:8px}.field input{width:100%;border:1px solid #d9dfe8;border-radius:12px;padding:14px 15px;outline:none}.field input:focus{border-color:#91adff;box-shadow:0 0 0 4px #eef3ff}
+.primary{width:100%;margin-top:22px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:14px 16px;font-weight:850;cursor:pointer;box-shadow:0 8px 22px rgba(59,111,245,.22)}
+.demo-box{margin-top:18px;padding:12px 14px;border-radius:12px;background:#f7f9fc;color:#667289;font-size:12px;line-height:1.5;border:1px solid #edf0f5}.err{color:var(--bad);font-size:12px;margin-top:10px}
+.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50}
+.top-actions{display:flex;align-items:center;gap:12px}.sync{font-size:11px;line-height:1.35;color:var(--muted);text-align:right}.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#edf3ff;color:#2e60d8;font-weight:850}
+.ghost{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 11px;cursor:pointer;color:#566174}
+.layout{display:grid;grid-template-columns:255px minmax(0,1fr);min-height:calc(100dvh - 70px)}.sidebar{background:#fff;border-right:1px solid var(--line);padding:18px 13px;position:sticky;top:70px;height:calc(100dvh - 70px);overflow:auto}
+.nav-label{padding:8px 10px 6px;color:#9aa4b6;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.navbtn{width:100%;border:0;background:transparent;text-align:left;padding:10px 11px;border-radius:10px;color:#536076;cursor:pointer;margin:2px 0;font-weight:750}.navbtn small{display:block;color:#98a2b4;font-weight:500;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.navbtn:hover,.navbtn.active{background:#edf3ff;color:#2458c7}
+.main{width:100%;max-width:1480px;margin:0 auto;padding:26px}.mobile-tabs{display:none}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:20px}.pagehead h2{margin:0;font-size:28px;line-height:1.15}.pagehead p{margin:7px 0 0;color:var(--muted)}
+.badge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850;white-space:nowrap}.good{background:var(--good-bg);color:var(--good)}.bad{background:var(--bad-bg);color:var(--bad)}.warn{background:var(--warn-bg);color:var(--warn)}
+.card{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 3px 12px rgba(24,37,67,.035)}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:18px}.kpi{padding:16px}.kpi-label{font-size:10px;color:var(--muted);font-weight:800}.kpi-value{font-size:23px;font-weight:900;margin-top:6px;letter-spacing:-.02em}.kpi-sub{font-size:10px;color:#9aa4b6;margin-top:4px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(340px,.9fr);gap:18px}.section{padding:18px}.sechead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.sechead h3{font-size:15px;margin:0}.sechead span{font-size:11px;color:var(--muted)}
+.chart-wrap{overflow:auto;padding-bottom:4px}.chart{height:280px;display:flex;align-items:flex-end;gap:9px;border-bottom:1px solid var(--line);padding:18px 8px 0;min-width:760px}.baritem{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;position:relative}
+.barset{height:100%;display:flex;align-items:flex-end;gap:4px}.bar{width:18px;min-height:4px;border-radius:6px 6px 2px 2px;position:relative}.bar.received{background:linear-gradient(180deg,#6d98ff,#376cec)}.bar.expense{background:#d7deeb}
+.bar:hover:after{content:attr(data-tip);position:absolute;top:-31px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;font-size:10px;padding:5px 7px;border-radius:6px;white-space:nowrap;z-index:4}.month{font-size:9px;color:var(--muted);padding-bottom:7px}
+.legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin-top:10px}.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}
+.property-scroll{max-height:520px;overflow:auto;padding-right:3px}.property-list{display:grid;gap:9px}.property-row{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:.15s}.property-row:hover{background:#fafcff;transform:translateY(-1px)}
+.mini-photo{width:64px;height:48px;border-radius:9px;overflow:hidden;background:#e8edf4;flex:none}.mini-photo svg{width:100%;height:100%;display:block}.prop-copy{flex:1;min-width:0}.prop-copy b{display:block;font-size:11px}.prop-copy span{display:block;font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.prop-money{text-align:right;min-width:80px}.prop-money strong{display:block;font-size:11px}
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;font-size:10px;white-space:nowrap}.table th{background:#fafbfc;color:#8791a4;font-weight:800}.table tr:last-child td{border-bottom:0}
+.apartment-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(390px,1fr);gap:18px}.hero{height:380px;border-radius:17px;overflow:hidden;background:#e8edf4;position:relative;border:1px solid var(--line)}.hero svg{width:100%;height:100%;display:block}.hero-tag{position:absolute;left:14px;bottom:14px;background:rgba(17,24,39,.76);color:#fff;font-size:11px;padding:7px 9px;border-radius:8px;backdrop-filter:blur(4px)}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}.gallery button{border:2px solid transparent;padding:0;height:90px;border-radius:11px;overflow:hidden;background:#edf1f6;cursor:pointer}.gallery button.active{border-color:#4d7df3}.gallery svg{width:100%;height:100%;display:block}
+.stack{display:grid;gap:18px}.info-card{padding:18px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info{padding:13px;border:1px solid var(--line);border-radius:12px}.info small{display:block;font-size:10px;color:var(--muted);font-weight:750}.info strong{display:block;font-size:15px;margin-top:5px}
+.tabs{display:flex;gap:8px;margin:18px 0 11px;overflow:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap;border:1px solid var(--line);background:#fff;color:#576276;border-radius:999px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer}.tab.active{background:#121b2a;color:#fff;border-color:#121b2a}
+.tabpanel{display:none}.tabpanel.active{display:block}.docrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}.docrow:last-child{border-bottom:0}.docrow small{display:block;color:var(--muted);margin-top:3px}.event-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#28a66b;margin-right:7px}
+.footer{text-align:center;color:#9aa4b4;font-size:10px;padding:24px}
+@media(max-width:1120px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .mobile-tabs{
+    display:flex;align-items:center;gap:8px;
+    background:#fff;border-bottom:1px solid var(--line);
+    padding:9px 12px;position:sticky;top:70px;z-index:40
+  }
+  .mobile-tabs .navbtn{width:auto;white-space:nowrap;margin:0;padding:9px 12px;flex:none}
+  .mobile-select{
+    min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;
+    background:#fff;color:#465269;padding:9px 34px 9px 11px;font-weight:750;
+    outline:none
+  }
+  .main{padding:18px}
+  .grid2,.apartment-grid{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .hero{height:430px}
+}
+@media(max-width:720px){
+  body{overflow-x:hidden}
+  .topbar{height:64px;padding:0 12px}
+  .layout{min-height:calc(100dvh - 64px)}
+  .mobile-tabs{top:64px;padding:8px 10px}
+  .sync{display:none}
+  .ghost{padding:8px 9px;font-size:12px}
+  .avatar{width:35px;height:35px;font-size:12px}
+  .main{padding:12px}
+  .pagehead{align-items:flex-start;flex-direction:column;gap:9px;margin-bottom:14px}
+  .pagehead h2{font-size:22px}
+  .pagehead p{font-size:12px;line-height:1.4}
+  .kpis{grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+  .kpi{padding:13px;min-height:94px}
+  .kpi-label{font-size:9px}
+  .kpi-value{font-size:19px;line-height:1.15}
+  .kpi-sub{font-size:9px}
+  .grid2{gap:12px}
+  .section{padding:14px}
+  .sechead{align-items:flex-start}
+  .sechead h3{font-size:14px}
+  .chart-wrap{overflow:visible}
+  .chart{height:220px;min-width:0;width:100%;gap:3px;padding:12px 0 0}
+  .baritem{gap:5px;min-width:0}
+  .barset{gap:2px}
+  .bar{width:7px;border-radius:4px 4px 1px 1px}
+  .month{font-size:8px;transform:rotate(-45deg);transform-origin:center;white-space:nowrap;height:28px;padding:0}
+  .legend{margin-top:7px}
+  .property-scroll{max-height:none;overflow:visible}
+  .property-row{padding:10px;align-items:center}
+  .mini-photo{width:62px;height:49px}
+  .prop-copy b{font-size:11px}
+  .prop-copy span{font-size:9px}
+  .prop-money{min-width:75px}
+  .prop-money strong{font-size:11px}
+  .hero{height:auto;aspect-ratio:16/10;min-height:0;max-height:none}
+  .gallery{
+    display:flex;overflow-x:auto;gap:8px;margin-top:8px;
+    scroll-snap-type:x mandatory;padding-bottom:3px;scrollbar-width:none
+  }
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery button{width:118px;height:78px;flex:none;scroll-snap-align:start}
+  .info-card{padding:14px}
+  .info-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .info{padding:11px}
+  .info small{font-size:9px}
+  .info strong{font-size:13px}
+  .tabs{margin:14px -2px 10px;padding:0 2px}
+  .tab{padding:9px 11px}
+  .table.mobile-stack{min-width:0}
+  .table.mobile-stack thead{display:none}
+  .table.mobile-stack tbody{display:grid;gap:9px}
+  .table.mobile-stack tr{
+    display:block;border:1px solid var(--line);border-radius:12px;
+    padding:8px 10px;background:#fff
+  }
+  .table.mobile-stack td{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    width:100%;padding:7px 0;border-bottom:1px solid #eef1f5;
+    white-space:normal;text-align:right
+  }
+  .table.mobile-stack td:last-child{border-bottom:0}
+  .table.mobile-stack td::before{
+    content:attr(data-label);color:var(--muted);font-size:9px;
+    font-weight:800;text-align:left;flex:0 0 38%
+  }
+  .table.mobile-stack td > *{margin-left:auto}
+  .login-screen{padding:14px}
+  .login-card{padding:24px 20px;border-radius:20px}
+  .login-card h1{font-size:26px}
+  .field input{font-size:16px}
+  .footer{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+}
+@media(max-width:360px){
+  .brand span{display:none}
+  .main{padding:10px}
+  .kpis{grid-template-columns:1fr}
+  .kpi{min-height:0}
+  .info-grid{grid-template-columns:1fr}
+  .mobile-tabs .navbtn{padding:9px 10px}
+  .mobile-select{font-size:12px}
+}.top-actions{gap:7px}.main{padding:11px}.kpis{grid-template-columns:1fr 1fr}.kpi-value{font-size:18px}.hero{height:245px}.gallery button{height:84px}.info-grid{grid-template-columns:1fr}.table{min-width:570px}}
+</style>
+</head>
+<body>
+<div id="login" class="login-screen">
+  <div class="login-card">
+    <div class="brand"><div class="brandmark">H</div><span>HomeOwner Portal</span></div>
+    <h1>Кабінет власника</h1>
+    <p>Квартири, платежі, витрати, документи, фото та ключові показники в одному місці.</p>
+    <div class="field"><label>Gmail</label><input id="email" value="owner.demo@gmail.com"></div>
+    <div class="field"><label>Код доступу</label><input id="code" value="2468" type="password"></div>
+    <button class="primary" onclick="login()">Увійти</button>
+    <div id="err" class="err"></div>
+    <div class="demo-box">Демо-доступ:<br><b>owner.demo@gmail.com</b><br>Код: <b>2468</b></div>
+  </div>
+</div>
 
+<div id="app" class="hidden">
+<header class="topbar">
+  <div class="brand"><div class="brandmark">H</div><span>HomeOwner Portal</span></div>
+  <div class="top-actions">
+    <div class="sync">Останнє оновлення<br><b>04.10.2026, 14:10</b></div>
+    <div class="avatar">ОМ</div>
+    <button class="ghost" onclick="logout()">Вийти</button>
+  </div>
+</header>
+
+<div class="mobile-tabs" id="mobileTabs"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main">
+    <section id="dashboard">
+      <div class="pagehead">
+        <div><h2>Добрий день, Олександре</h2><p>Зведена інформація по ваших об'єктах</p></div>
+        <span class="badge good">● Дані актуальні</span>
+      </div>
+      <div class="kpis" id="kpis"></div>
+
+      <div class="grid2">
+        <div class="card section">
+          <div class="sechead"><h3>Фінансова історія за 12 місяців</h3><span>листопад 2025 - жовтень 2026</span></div>
+          <div class="chart-wrap"><div id="chart" class="chart"></div></div>
+          <div class="legend"><span><i style="background:#376cec"></i>Отримано</span><span><i style="background:#d7deeb"></i>Витрати</span></div>
+        </div>
+        <div class="card section">
+          <div class="sechead"><h3>Мої квартири</h3><span>10 об'єктів</span></div>
+          <div class="property-scroll"><div id="propertyList" class="property-list"></div></div>
+        </div>
+      </div>
+
+      <div class="card section" style="margin-top:18px">
+        <div class="sechead"><h3>Останні операції</h3><span>жовтень 2026</span></div>
+        <div class="table-wrap"><table class="table mobile-stack">
+          <thead><tr><th>Квартира</th><th>Подія</th><th>Дата</th><th>Сума</th><th>Статус</th></tr></thead>
+          <tbody id="recentOps"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section id="apartment" class="hidden">
+      <div class="pagehead">
+        <div><h2 id="aptTitle"></h2><p id="aptAddress"></p></div>
+        <span id="aptStatus" class="badge good"></span>
+      </div>
+
+      <div class="apartment-grid">
+        <div>
+          <div id="hero" class="hero"></div>
+          <div id="gallery" class="gallery"></div>
+        </div>
+
+        <div class="stack">
+          <div class="card info-card">
+            <div class="sechead"><h3>Основна інформація</h3><span id="aptCode"></span></div>
+            <div class="info-grid">
+              <div class="info"><small>Орендна ставка</small><strong id="rent"></strong></div>
+              <div class="info"><small>Депозит</small><strong id="deposit"></strong></div>
+              <div class="info"><small>Площа</small><strong id="area"></strong></div>
+              <div class="info"><small>Кімнати</small><strong id="rooms"></strong></div>
+              <div class="info"><small>Орендар</small><strong id="tenant"></strong></div>
+              <div class="info"><small>Договір до</small><strong id="leaseEnd"></strong></div>
+            </div>
+          </div>
+
+          <div class="card info-card">
+            <div class="sechead"><h3>Поточний місяць</h3><span>жовтень 2026</span></div>
+            <div class="info-grid">
+              <div class="info"><small>Нараховано</small><strong id="charged"></strong></div>
+              <div class="info"><small>Отримано</small><strong id="received"></strong></div>
+              <div class="info"><small>Комунальні</small><strong id="utilities"></strong></div>
+              <div class="info"><small>Борг</small><strong id="debt"></strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('payments',this)">Платежі за 12 міс.</button>
+        <button class="tab" onclick="switchTab('utilitiesTab',this)">Комунальні</button>
+        <button class="tab" onclick="switchTab('documents',this)">Документи</button>
+        <button class="tab" onclick="switchTab('history',this)">Історія подій</button>
+      </div>
+
+      <div id="payments" class="card section tabpanel active"></div>
+      <div id="utilitiesTab" class="card section tabpanel"></div>
+      <div id="documents" class="card section tabpanel"></div>
+      <div id="history" class="card section tabpanel"></div>
+    </section>
+
+    <div class="footer">Демонстраційна версія. Усі дані та об'єкти вигадані.</div>
+  </main>
+</div>
+</div>
+
+<script>
+const DATA={"apartments": [{"code": "APT-001", "title": "ЖК River Park, кв. 24", "address": "вул. Набережна, 15, Львів", "rent": 28000, "deposit": 28000, "area": 62, "rooms": 2, "tenant": "Ірина М.", "leaseEnd": "31.05.2027", "status": "Здана", "utilities": 2350, "expense": 1250, "debt": 0, "palette": ["#c8d7ea", "#e6d7c5", "#d7dfcf", "#d7c7bd"], "history": [{"month": "Лис 25", "expected": 28000, "received": 28000, "expense": 687, "utilities": 1833}, {"month": "Гру 25", "expected": 28000, "received": 28000, "expense": 900, "utilities": 2138}, {"month": "Січ 26", "expected": 28000, "received": 28000, "expense": 1112, "utilities": 2444}, {"month": "Лют 26", "expected": 28000, "received": 28000, "expense": 762, "utilities": 1950}, {"month": "Бер 26", "expected": 28000, "received": 28000, "expense": 975, "utilities": 2256}, {"month": "Кві 26", "expected": 28000, "received": 28000, "expense": 1187, "utilities": 2561}, {"month": "Тра 26", "expected": 28000, "received": 28000, "expense": 837, "utilities": 2068}, {"month": "Чер 26", "expected": 28000, "received": 28000, "expense": 1050, "utilities": 2373}, {"month": "Лип 26", "expected": 28000, "received": 28000, "expense": 700, "utilities": 1880}, {"month": "Сер 26", "expected": 28000, "received": 28000, "expense": 912, "utilities": 2185}, {"month": "Вер 26", "expected": 28000, "received": 28000, "expense": 1125, "utilities": 2491}, {"month": "Жов 26", "expected": 28000, "received": 28000, "expense": 775, "utilities": 1997}]}, {"code": "APT-002", "title": "ЖК Green Hills, кв. 81", "address": "вул. Паркова, 8, Львів", "rent": 24000, "deposit": 24000, "area": 54, "rooms": 2, "tenant": "Андрій К.", "leaseEnd": "28.02.2027", "status": "Здана", "utilities": 2500, "expense": 900, "debt": 0, "palette": ["#d7cfbf", "#c7d6d0", "#dad1e3", "#ccd5e5"], "history": [{"month": "Лис 25", "expected": 24000, "received": 24000, "expense": 594, "utilities": 2125}, {"month": "Гру 25", "expected": 24000, "received": 24000, "expense": 747, "utilities": 2450}, {"month": "Січ 26", "expected": 24000, "received": 24000, "expense": 495, "utilities": 2775}, {"month": "Лют 26", "expected": 24000, "received": 24000, "expense": 648, "utilities": 2250}, {"month": "Бер 26", "expected": 24000, "received": 24000, "expense": 801, "utilities": 2575}, {"month": "Кві 26", "expected": 24000, "received": 24000, "expense": 549, "utilities": 2050}, {"month": "Тра 26", "expected": 24000, "received": 24000, "expense": 702, "utilities": 2375}, {"month": "Чер 26", "expected": 24000, "received": 24000, "expense": 855, "utilities": 2700}, {"month": "Лип 26", "expected": 24000, "received": 24000, "expense": 603, "utilities": 2175}, {"month": "Сер 26", "expected": 24000, "received": 24000, "expense": 756, "utilities": 2500}, {"month": "Вер 26", "expected": 24000, "received": 24000, "expense": 504, "utilities": 1975}, {"month": "Жов 26", "expected": 24000, "received": 24000, "expense": 657, "utilities": 2300}]}, {"code": "APT-003", "title": "ЖК Avalon, кв. 105", "address": "вул. Замарстинівська, 55, Львів", "rent": 32000, "deposit": 32000, "area": 71, "rooms": 3, "tenant": "Марина С.", "leaseEnd": "30.06.2027", "status": "Здана", "utilities": 3100, "expense": 1750, "debt": 0, "palette": ["#d7d8c7", "#d5c6b8", "#c7d0df", "#e2d7ce"], "history": [{"month": "Лис 25", "expected": 32000, "received": 32000, "expense": 1347, "utilities": 2852}, {"month": "Гру 25", "expected": 32000, "received": 32000, "expense": 1645, "utilities": 3255}, {"month": "Січ 26", "expected": 32000, "received": 32000, "expense": 1155, "utilities": 2604}, {"month": "Лют 26", "expected": 32000, "received": 28000, "expense": 1452, "utilities": 3007}, {"month": "Бер 26", "expected": 32000, "received": 32000, "expense": 962, "utilities": 3410}, {"month": "Кві 26", "expected": 32000, "received": 32000, "expense": 1260, "utilities": 2759}, {"month": "Тра 26", "expected": 32000, "received": 32000, "expense": 1557, "utilities": 3162}, {"month": "Чер 26", "expected": 32000, "received": 32000, "expense": 1067, "utilities": 2511}, {"month": "Лип 26", "expected": 32000, "received": 32000, "expense": 1365, "utilities": 2914}, {"month": "Сер 26", "expected": 32000, "received": 32000, "expense": 1662, "utilities": 3317}, {"month": "Вер 26", "expected": 32000, "received": 32000, "expense": 1172, "utilities": 2666}, {"month": "Жов 26", "expected": 32000, "received": 32000, "expense": 1470, "utilities": 3069}]}, {"code": "APT-004", "title": "ЖК Seven, кв. 33", "address": "вул. Шевченка, 73, Львів", "rent": 26000, "deposit": 26000, "area": 58, "rooms": 2, "tenant": "Олег П.", "leaseEnd": "31.03.2027", "status": "Здана", "utilities": 2250, "expense": 650, "debt": 0, "palette": ["#c9d1df", "#ddd0bf", "#d2d9c8", "#d8c7c1"], "history": [{"month": "Лис 25", "expected": 26000, "received": 26000, "expense": 572, "utilities": 2227}, {"month": "Гру 25", "expected": 26000, "received": 26000, "expense": 390, "utilities": 1755}, {"month": "Січ 26", "expected": 26000, "received": 26000, "expense": 500, "utilities": 2047}, {"month": "Лют 26", "expected": 26000, "received": 26000, "expense": 611, "utilities": 2340}, {"month": "Бер 26", "expected": 26000, "received": 26000, "expense": 429, "utilities": 1867}, {"month": "Кві 26", "expected": 26000, "received": 26000, "expense": 539, "utilities": 2160}, {"month": "Тра 26", "expected": 26000, "received": 26000, "expense": 357, "utilities": 2452}, {"month": "Чер 26", "expected": 26000, "received": 26000, "expense": 468, "utilities": 1980}, {"month": "Лип 26", "expected": 26000, "received": 26000, "expense": 578, "utilities": 2272}, {"month": "Сер 26", "expected": 26000, "received": 26000, "expense": 396, "utilities": 1800}, {"month": "Вер 26", "expected": 26000, "received": 26000, "expense": 507, "utilities": 2092}, {"month": "Жов 26", "expected": 26000, "received": 26000, "expense": 617, "utilities": 2385}]}, {"code": "APT-005", "title": "ЖК Greenville, кв. 14", "address": "вул. Княгині Ольги, 122, Львів", "rent": 35000, "deposit": 35000, "area": 79, "rooms": 3, "tenant": "Катерина Л.", "leaseEnd": "31.08.2027", "status": "Здана", "utilities": 3400, "expense": 2100, "debt": 35000, "palette": ["#d8cbbb", "#c8d7d2", "#dfd3c5", "#c8d0df"], "history": [{"month": "Лис 25", "expected": 35000, "received": 35000, "expense": 2079, "utilities": 3604}, {"month": "Гру 25", "expected": 35000, "received": 35000, "expense": 1491, "utilities": 2890}, {"month": "Січ 26", "expected": 35000, "received": 35000, "expense": 1848, "utilities": 3332}, {"month": "Лют 26", "expected": 35000, "received": 35000, "expense": 1260, "utilities": 3774}, {"month": "Бер 26", "expected": 35000, "received": 35000, "expense": 1617, "utilities": 3060}, {"month": "Кві 26", "expected": 35000, "received": 35000, "expense": 1974, "utilities": 3502}, {"month": "Тра 26", "expected": 35000, "received": 35000, "expense": 1386, "utilities": 2788}, {"month": "Чер 26", "expected": 35000, "received": 35000, "expense": 1743, "utilities": 3230}, {"month": "Лип 26", "expected": 35000, "received": 35000, "expense": 1155, "utilities": 3672}, {"month": "Сер 26", "expected": 35000, "received": 35000, "expense": 1512, "utilities": 2958}, {"month": "Вер 26", "expected": 35000, "received": 35000, "expense": 1869, "utilities": 3400}, {"month": "Жов 26", "expected": 35000, "received": 0, "expense": 1281, "utilities": 2686}]}, {"code": "APT-006", "title": "ЖК Great, кв. 207", "address": "Дніпровська наб., 15, Київ", "rent": 38000, "deposit": 38000, "area": 83, "rooms": 3, "tenant": "Сергій В.", "leaseEnd": "30.04.2027", "status": "Здана", "utilities": 3650, "expense": 1450, "debt": 0, "palette": ["#c7d8e7", "#decdbb", "#d1d8c9", "#d9c7c0"], "history": [{"month": "Лис 25", "expected": 38000, "received": 38000, "expense": 942, "utilities": 2883}, {"month": "Гру 25", "expected": 38000, "received": 38000, "expense": 1189, "utilities": 3358}, {"month": "Січ 26", "expected": 38000, "received": 38000, "expense": 1435, "utilities": 3832}, {"month": "Лют 26", "expected": 38000, "received": 38000, "expense": 1029, "utilities": 3066}, {"month": "Бер 26", "expected": 38000, "received": 38000, "expense": 1276, "utilities": 3540}, {"month": "Кві 26", "expected": 38000, "received": 38000, "expense": 870, "utilities": 4015}, {"month": "Тра 26", "expected": 38000, "received": 38000, "expense": 1116, "utilities": 3248}, {"month": "Чер 26", "expected": 38000, "received": 38000, "expense": 1363, "utilities": 3723}, {"month": "Лип 26", "expected": 38000, "received": 38000, "expense": 957, "utilities": 2956}, {"month": "Сер 26", "expected": 38000, "received": 38000, "expense": 1203, "utilities": 3431}, {"month": "Вер 26", "expected": 38000, "received": 38000, "expense": 797, "utilities": 3905}, {"month": "Жов 26", "expected": 38000, "received": 38000, "expense": 1044, "utilities": 3139}]}, {"code": "APT-007", "title": "ЖК Respublika, кв. 118", "address": "Кільцева дорога, 1, Київ", "rent": 30000, "deposit": 30000, "area": 66, "rooms": 2, "tenant": "Наталія Б.", "leaseEnd": "31.12.2026", "status": "Здана", "utilities": 2950, "expense": 1150, "debt": 0, "palette": ["#d0d5e1", "#d9c9bc", "#cbd7cf", "#e0d4cc"], "history": [{"month": "Лис 25", "expected": 30000, "received": 30000, "expense": 874, "utilities": 2537}, {"month": "Гру 25", "expected": 30000, "received": 30000, "expense": 1069, "utilities": 2920}, {"month": "Січ 26", "expected": 30000, "received": 30000, "expense": 747, "utilities": 2301}, {"month": "Лют 26", "expected": 30000, "received": 30000, "expense": 943, "utilities": 2684}, {"month": "Бер 26", "expected": 30000, "received": 30000, "expense": 1138, "utilities": 3068}, {"month": "Кві 26", "expected": 30000, "received": 30000, "expense": 816, "utilities": 2448}, {"month": "Тра 26", "expected": 30000, "received": 30000, "expense": 1012, "utilities": 2832}, {"month": "Чер 26", "expected": 30000, "received": 30000, "expense": 690, "utilities": 3215}, {"month": "Лип 26", "expected": 30000, "received": 30000, "expense": 885, "utilities": 2596}, {"month": "Сер 26", "expected": 30000, "received": 30000, "expense": 1081, "utilities": 2979}, {"month": "Вер 26", "expected": 30000, "received": 30000, "expense": 759, "utilities": 2360}, {"month": "Жов 26", "expected": 30000, "received": 30000, "expense": 954, "utilities": 2743}]}, {"code": "APT-008", "title": "ЖК Варшавський, кв. 63", "address": "просп. Правди, 45, Київ", "rent": 27000, "deposit": 27000, "area": 60, "rooms": 2, "tenant": "Роман Т.", "leaseEnd": "31.01.2027", "status": "Здана", "utilities": 2480, "expense": 780, "debt": 27000, "palette": ["#c9d4e1", "#e1d3c0", "#ccd8cd", "#d6c6c0"], "history": [{"month": "Лис 25", "expected": 27000, "received": 27000, "expense": 678, "utilities": 2306}, {"month": "Гру 25", "expected": 27000, "received": 27000, "expense": 460, "utilities": 2628}, {"month": "Січ 26", "expected": 27000, "received": 27000, "expense": 592, "utilities": 2108}, {"month": "Лют 26", "expected": 27000, "received": 27000, "expense": 725, "utilities": 2430}, {"month": "Бер 26", "expected": 27000, "received": 27000, "expense": 507, "utilities": 2752}, {"month": "Кві 26", "expected": 27000, "received": 27000, "expense": 639, "utilities": 2232}, {"month": "Тра 26", "expected": 27000, "received": 27000, "expense": 772, "utilities": 2554}, {"month": "Чер 26", "expected": 27000, "received": 27000, "expense": 553, "utilities": 2033}, {"month": "Лип 26", "expected": 27000, "received": 27000, "expense": 686, "utilities": 2356}, {"month": "Сер 26", "expected": 27000, "received": 27000, "expense": 468, "utilities": 2678}, {"month": "Вер 26", "expected": 27000, "received": 27000, "expense": 600, "utilities": 2157}, {"month": "Жов 26", "expected": 27000, "received": 0, "expense": 733, "utilities": 2480}]}, {"code": "APT-009", "title": "ЖК Комфорт Таун, кв. 41", "address": "вул. Регенераторна, 4, Київ", "rent": 22000, "deposit": 22000, "area": 49, "rooms": 1, "tenant": "-", "leaseEnd": "-", "status": "Вільна", "utilities": 980, "expense": 3200, "debt": 0, "palette": ["#d7d2c6", "#cad7d8", "#e2d3c9", "#cdd5df"], "history": [{"month": "Лис 25", "expected": 22000, "received": 22000, "expense": 3136, "utilities": 980}, {"month": "Гру 25", "expected": 22000, "received": 22000, "expense": 2240, "utilities": 774}, {"month": "Січ 26", "expected": 22000, "received": 22000, "expense": 2784, "utilities": 901}, {"month": "Лют 26", "expected": 22000, "received": 22000, "expense": 1888, "utilities": 1029}, {"month": "Бер 26", "expected": 22000, "received": 22000, "expense": 2432, "utilities": 823}, {"month": "Кві 26", "expected": 22000, "received": 22000, "expense": 2976, "utilities": 950}, {"month": "Тра 26", "expected": 22000, "received": 22000, "expense": 2080, "utilities": 1078}, {"month": "Чер 26", "expected": 22000, "received": 22000, "expense": 2624, "utilities": 872}, {"month": "Лип 26", "expected": 0, "received": 0, "expense": 3168, "utilities": 999}, {"month": "Сер 26", "expected": 0, "received": 0, "expense": 2272, "utilities": 793}, {"month": "Вер 26", "expected": 0, "received": 0, "expense": 2816, "utilities": 921}, {"month": "Жов 26", "expected": 0, "received": 0, "expense": 1920, "utilities": 1048}]}, {"code": "APT-010", "title": "ЖК Французький квартал, кв. 92", "address": "вул. Саперне Поле, 12, Київ", "rent": 41000, "deposit": 41000, "area": 88, "rooms": 3, "tenant": "-", "leaseEnd": "-", "status": "Ремонт", "utilities": 1200, "expense": 14800, "debt": 0, "palette": ["#d4d1c7", "#c9d6df", "#ddcfbf", "#cbd5cf"], "history": [{"month": "Лис 25", "expected": 41000, "received": 41000, "expense": 9472, "utilities": 1284}, {"month": "Гру 25", "expected": 41000, "received": 41000, "expense": 11988, "utilities": 1032}, {"month": "Січ 26", "expected": 41000, "received": 41000, "expense": 14504, "utilities": 1188}, {"month": "Лют 26", "expected": 41000, "received": 41000, "expense": 10360, "utilities": 936}, {"month": "Бер 26", "expected": 41000, "received": 41000, "expense": 12876, "utilities": 1092}, {"month": "Кві 26", "expected": 41000, "received": 41000, "expense": 8732, "utilities": 1248}, {"month": "Тра 26", "expected": 41000, "received": 41000, "expense": 11248, "utilities": 996}, {"month": "Чер 26", "expected": 41000, "received": 41000, "expense": 13764, "utilities": 1152}, {"month": "Лип 26", "expected": 41000, "received": 41000, "expense": 9620, "utilities": 1308}, {"month": "Сер 26", "expected": 0, "received": 0, "expense": 12136, "utilities": 1056}, {"month": "Вер 26", "expected": 0, "received": 0, "expense": 14652, "utilities": 1212}, {"month": "Жов 26", "expected": 0, "received": 0, "expense": 10508, "utilities": 960}]}], "months": ["Лис 25", "Гру 25", "Січ 26", "Лют 26", "Бер 26", "Кві 26", "Тра 26", "Чер 26", "Лип 26", "Сер 26", "Вер 26", "Жов 26"], "overall": [{"month": "Лис 25", "expected": 303000, "received": 303000, "expense": 20381}, {"month": "Гру 25", "expected": 303000, "received": 303000, "expense": 22119}, {"month": "Січ 26", "expected": 303000, "received": 303000, "expense": 25172}, {"month": "Лют 26", "expected": 303000, "received": 299000, "expense": 19678}, {"month": "Бер 26", "expected": 303000, "received": 303000, "expense": 23013}, {"month": "Кві 26", "expected": 303000, "received": 303000, "expense": 19542}, {"month": "Тра 26", "expected": 303000, "received": 303000, "expense": 21067}, {"month": "Чер 26", "expected": 303000, "received": 303000, "expense": 24177}, {"month": "Лип 26", "expected": 281000, "received": 281000, "expense": 19717}, {"month": "Сер 26", "expected": 240000, "received": 240000, "expense": 22398}, {"month": "Вер 26", "expected": 240000, "received": 240000, "expense": 24801}, {"month": "Жов 26", "expected": 240000, "received": 178000, "expense": 19959}]};
+const apartments=DATA.apartments;
+const overall=DATA.overall;
+
+function money(n){return Number(n).toLocaleString("uk-UA")+" ₴"}
+function badgeClass(status){return status==="Здана"?"good":status==="Вільна"?"warn":"bad"}
+
+function roomSvg(base,label,v=0){
+  const wall=v%2?"#f2eee8":"#eef3f8", sofa=v%2?"#9f8976":"#8199b6";
+  return `<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="g${v}" x1="0" x2="1"><stop stop-color="${base}"/><stop offset="1" stop-color="${wall}"/></linearGradient><linearGradient id="f${v}" x1="0" x2="1"><stop stop-color="#d8c5a8"/><stop offset="1" stop-color="#bfa786"/></linearGradient></defs>
+  <rect width="800" height="500" fill="${wall}"/><rect width="800" height="335" fill="url(#g${v})" opacity=".72"/><rect y="335" width="800" height="165" fill="url(#f${v})"/>
+  <rect x="72" y="70" width="220" height="165" rx="4" fill="#dcecf7"/><rect x="88" y="86" width="188" height="133" fill="#9ec7e6"/><line x1="182" y1="86" x2="182" y2="219" stroke="#f8fbff" stroke-width="8"/><line x1="88" y1="152" x2="276" y2="152" stroke="#f8fbff" stroke-width="8"/>
+  <rect x="168" y="320" width="420" height="104" rx="24" fill="${sofa}"/><rect x="205" y="285" width="135" height="78" rx="18" fill="#f7f1e8"/><rect x="401" y="284" width="130" height="80" rx="18" fill="#ece5db"/>
+  <rect x="616" y="223" width="15" height="142" fill="#6d6259"/><circle cx="624" cy="195" r="52" fill="#efe2c8"/><rect x="60" y="438" width="680" height="34" rx="9" fill="#f2e6d0" opacity=".72"/><text x="400" y="466" text-anchor="middle" font-family="Arial" font-size="18" fill="#596476">${label}</text>
+  </svg>`;
+}
+
+function login(){
+  const e=document.getElementById("email").value.trim().toLowerCase(), c=document.getElementById("code").value.trim();
+  if(e==="owner.demo@gmail.com" && c==="2468"){document.getElementById("login").classList.add("hidden");document.getElementById("app").classList.remove("hidden");document.getElementById("err").textContent=""}
+  else document.getElementById("err").textContent="Невірний Gmail або код доступу.";
+}
+function logout(){document.getElementById("app").classList.add("hidden");document.getElementById("login").classList.remove("hidden")}
+
+function buildNavigation(){
+  const side=document.getElementById("sidebar"), mobile=document.getElementById("mobileTabs");
+  side.innerHTML=`<div class="nav-label">Кабінет</div><button class="navbtn active" onclick="showDashboard(this)">Огляд</button><div class="nav-label" style="margin-top:14px">Мої квартири</div>`;
+  apartments.forEach((a,i)=>{
+    side.insertAdjacentHTML("beforeend",`<button class="navbtn" onclick="showApartment(${i},this)">${a.code}<small>${a.title}</small></button>`);
+  });
+
+  mobile.innerHTML=`
+    <button id="mobileOverview" class="navbtn active" onclick="showDashboard(this)">Огляд</button>
+    <select id="mobileAptSelect" class="mobile-select" onchange="mobileApartmentChange(this)">
+      <option value="">Оберіть квартиру</option>
+      ${apartments.map((a,i)=>`<option value="${i}">${a.code} - ${a.title}</option>`).join("")}
+    </select>`;
+}
+function mobileApartmentChange(sel){
+  if(sel.value==="") return;
+  showApartment(Number(sel.value));
+}
+function clearNav(){document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"))}
+function showDashboard(btn){
+  document.getElementById("dashboard").classList.remove("hidden");
+  document.getElementById("apartment").classList.add("hidden");
+  clearNav();
+  if(btn)btn.classList.add("active");
+  const sel=document.getElementById("mobileAptSelect"); if(sel) sel.value="";
+  const ov=document.getElementById("mobileOverview"); if(ov) ov.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function buildDashboard(){
+  const current=overall[overall.length-1];
+  const annualReceived=overall.reduce((s,x)=>s+x.received,0);
+  const annualExpenses=overall.reduce((s,x)=>s+x.expense,0);
+  const debt=apartments.reduce((s,a)=>s+a.debt,0);
+  const rented=apartments.filter(a=>a.status==="Здана").length;
+  const occupancy=Math.round(rented/apartments.length*100);
+  document.getElementById("kpis").innerHTML=`
+    <div class="card kpi"><div class="kpi-label">Квартири</div><div class="kpi-value">${apartments.length}</div><div class="kpi-sub">${rented} в оренді</div></div>
+    <div class="card kpi"><div class="kpi-label">Завантаження</div><div class="kpi-value">${occupancy}%</div><div class="kpi-sub">поточний статус</div></div>
+    <div class="card kpi"><div class="kpi-label">Отримано за рік</div><div class="kpi-value">${money(annualReceived)}</div><div class="kpi-sub">12 місяців</div></div>
+    <div class="card kpi"><div class="kpi-label">Витрати за рік</div><div class="kpi-value">${money(annualExpenses)}</div><div class="kpi-sub">по всіх об'єктах</div></div>
+    <div class="card kpi"><div class="kpi-label">Отримано в жовтні</div><div class="kpi-value">${money(current.received)}</div><div class="kpi-sub">поточний місяць</div></div>
+    <div class="card kpi"><div class="kpi-label">Заборгованість</div><div class="kpi-value">${money(debt)}</div><div class="kpi-sub">2 квартири</div></div>`;
+
+  const max=Math.max(...overall.map(x=>Math.max(x.received,x.expense)));
+  document.getElementById("chart").innerHTML=overall.map(x=>`
+    <div class="baritem"><div class="barset">
+      <div class="bar received" style="height:${Math.max(3,Math.round(x.received/max*92))}%" data-tip="${money(x.received)}"></div>
+      <div class="bar expense" style="height:${Math.max(3,Math.round(x.expense/max*92))}%" data-tip="${money(x.expense)}"></div>
+    </div><div class="month">${x.month}</div></div>`).join("");
+
+  document.getElementById("propertyList").innerHTML=apartments.map((a,i)=>`
+    <div class="property-row" onclick="showApartment(${i})">
+      <div class="mini-photo">${roomSvg(a.palette[0],a.code,i+1)}</div>
+      <div class="prop-copy"><b>${a.title}</b><span>${a.address}</span></div>
+      <div class="prop-money"><strong>${money(a.rent)}</strong><span class="badge ${badgeClass(a.status)}" style="margin-top:4px">${a.status}</span></div>
+    </div>`).join("");
+
+  const latestOps = [
+    [apartments[0],"Оренда","02.10.2026",apartments[0].rent,"Сплачено"],
+    [apartments[1],"Оренда","03.10.2026",apartments[1].rent,"Сплачено"],
+    [apartments[4],"Оренда","05.10.2026",apartments[4].rent,"Очікується"],
+    [apartments[7],"Оренда","05.10.2026",apartments[7].rent,"Очікується"],
+    [apartments[9],"Ремонт","01.10.2026",14800,"Витрата"],
+    [apartments[8],"Прибирання","30.09.2026",3200,"Витрата"],
+  ];
+  document.getElementById("recentOps").innerHTML=latestOps.map(r=>`
+    <tr><td data-label="Квартира">${r[0].title}</td><td data-label="Подія">${r[1]}</td><td data-label="Дата">${r[2]}</td><td data-label="Сума"><b>${money(r[3])}</b></td><td data-label="Статус"><span class="badge ${r[4]==="Сплачено"?"good":r[4]==="Очікується"?"warn":"bad"}">${r[4]}</span></td></tr>`).join("");
+}
+
+function showApartment(i,btn){
+  const a=apartments[i];
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("apartment").classList.remove("hidden");
+  clearNav(); if(btn)btn.classList.add("active");
+  const sel=document.getElementById("mobileAptSelect"); if(sel) sel.value=String(i);
+
+  document.getElementById("aptTitle").textContent=a.title;
+  document.getElementById("aptAddress").textContent=a.address;
+  document.getElementById("aptCode").textContent=a.code;
+  const status=document.getElementById("aptStatus");status.textContent=a.status;status.className="badge "+badgeClass(a.status);
+
+  document.getElementById("rent").textContent=money(a.rent);
+  document.getElementById("deposit").textContent=money(a.deposit);
+  document.getElementById("area").textContent=a.area+" м²";
+  document.getElementById("rooms").textContent=a.rooms;
+  document.getElementById("tenant").textContent=a.tenant;
+  document.getElementById("leaseEnd").textContent=a.leaseEnd;
+
+  const cur=a.history[a.history.length-1];
+  document.getElementById("charged").textContent=money(cur.expected);
+  document.getElementById("received").textContent=money(cur.received);
+  document.getElementById("received").style.color=cur.received<cur.expected?"var(--bad)":"var(--good)";
+  document.getElementById("utilities").textContent=money(cur.utilities);
+  document.getElementById("debt").textContent=money(a.debt);
+  document.getElementById("debt").style.color=a.debt?"var(--bad)":"var(--good)";
+
+  renderPhotos(a,0,i);
+  renderPanels(a);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderPhotos(a,active,idx){
+  const labels=["Вітальня","Кухня","Спальня","Ванна"];
+  document.getElementById("hero").innerHTML=roomSvg(a.palette[active],labels[active],idx*10+active+20)+`<div class="hero-tag">${labels[active]}</div>`;
+  document.getElementById("gallery").innerHTML=labels.map((lab,j)=>`<button class="${j===active?"active":""}" onclick="renderPhotos(apartments[${idx}],${j},${idx})">${roomSvg(a.palette[j],lab,idx*10+j+40)}</button>`).join("");
+}
+
+function renderPanels(a){
+  document.getElementById("payments").innerHTML=`
+    <div class="sechead"><h3>Платежі за 12 місяців</h3><span>${a.code}</span></div>
+    <div class="table-wrap"><table class="table mobile-stack"><thead><tr><th>Місяць</th><th>Нараховано</th><th>Отримано</th><th>Витрати</th><th>Комунальні</th><th>Статус</th></tr></thead>
+    <tbody>${a.history.map(h=>`<tr><td data-label="Місяць">${h.month}</td><td data-label="Нараховано">${money(h.expected)}</td><td data-label="Отримано"><b>${money(h.received)}</b></td><td data-label="Витрати">${money(h.expense)}</td><td data-label="Комунальні">${money(h.utilities)}</td><td data-label="Статус"><span class="badge ${h.expected===0?"warn":h.received>=h.expected?"good":"bad"}">${h.expected===0?"Без оренди":h.received>=h.expected?"Сплачено":"Є борг"}</span></td></tr>`).join("")}</tbody></table></div>`;
+
+  const latest=a.history[a.history.length-1];
+  document.getElementById("utilitiesTab").innerHTML=`
+    <div class="sechead"><h3>Комунальні за жовтень</h3><span>${money(latest.utilities)}</span></div>
+    <div class="docrow"><span>Електроенергія</span><b>${money(Math.round(latest.utilities*.46))}</b></div>
+    <div class="docrow"><span>Вода</span><b>${money(Math.round(latest.utilities*.19))}</b></div>
+    <div class="docrow"><span>Утримання будинку / ОСББ</span><b>${money(Math.round(latest.utilities*.35))}</b></div>`;
+
+  document.getElementById("documents").innerHTML=`
+    <div class="sechead"><h3>Документи</h3><span>тільки перегляд</span></div>
+    <div class="docrow"><div><b>Договір оренди</b><small>PDF · актуальна версія</small></div><span class="badge good">Доступно</span></div>
+    <div class="docrow"><div><b>Акт приймання-передачі</b><small>PDF · підписано</small></div><span class="badge good">Доступно</span></div>
+    <div class="docrow"><div><b>Фото лічильників</b><small>4 файли · жовтень 2026</small></div><span class="badge good">Доступно</span></div>
+    <div class="docrow"><div><b>Рахунки / квитанції</b><small>архів за 12 місяців</small></div><span class="badge good">Доступно</span></div>`;
+
+  document.getElementById("history").innerHTML=`
+    <div class="sechead"><h3>Історія подій</h3><span>останні зміни</span></div>
+    <div class="docrow"><div><span class="event-dot"></span><b>Оновлено фінансові дані</b><small>04.10.2026</small></div></div>
+    <div class="docrow"><div><span class="event-dot"></span><b>Додано показники лічильників</b><small>01.10.2026</small></div></div>
+    <div class="docrow"><div><span class="event-dot"></span><b>Оновлено фотогалерею</b><small>28.09.2026</small></div></div>
+    <div class="docrow"><div><span class="event-dot"></span><b>Додано квитанцію за комунальні</b><small>25.09.2026</small></div></div>`;
+  switchTab("payments",document.querySelector(".tab"));
+}
+
+function switchTab(id,btn){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tabpanel").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");document.getElementById(id).classList.add("active")}
+
+buildNavigation();
+buildDashboard();
+</script>
+</body>
+</html>

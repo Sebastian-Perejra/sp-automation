@@ -206,11 +206,32 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
   .mobile-history-cards.expanded .mobile-history-card.extra-month{display:block}
 }
 
+
+.lang-switch{
+  display:inline-flex;align-items:center;gap:3px;padding:3px;
+  border:1px solid var(--line);background:#f7f9fc;border-radius:10px
+}
+.lang-btn{
+  border:0;background:transparent;color:#6a7589;border-radius:7px;
+  padding:6px 8px;font-size:10px;font-weight:900;cursor:pointer
+}
+.lang-btn.active{background:#fff;color:#2458c7;box-shadow:0 1px 4px rgba(25,39,67,.10)}
+.login-lang{position:absolute;top:18px;right:18px}
+.login-card{position:relative}
+@media(max-width:720px){
+  .lang-btn{padding:6px 7px}
+  .top-actions .lang-switch{margin-right:1px}
+}
+
 </style>
 </head>
 <body>
 <div id="login" class="login-screen">
   <div class="login-card">
+    <div class="lang-switch login-lang">
+      <button class="lang-btn" data-lang="uk" onclick="setLanguage('uk')">UA</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+    </div>
     <div class="brand"><div class="brandmark">H</div><span>HomeOwner Portal</span></div>
     <h1>Кабінет власника</h1>
     <p>Квартири, платежі, витрати, документи, фото та ключові показники в одному місці.</p>
@@ -226,6 +247,10 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
 <header class="topbar">
   <div class="brand"><div class="brandmark">H</div><span>HomeOwner Portal</span></div>
   <div class="top-actions">
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="uk" onclick="setLanguage('uk')">UA</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+    </div>
     <div class="sync">Останнє оновлення<br><b>04.10.2026, 14:10</b></div>
     <div class="avatar">ОМ</div>
     <button class="ghost" onclick="logout()">Вийти</button>
@@ -321,6 +346,264 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
 </div>
 
 <script>
+
+const I18N = {
+  uk: {
+    "Кабінет власника":"Кабінет власника",
+    "Квартири, платежі, витрати, документи, фото та ключові показники в одному місці.":"Квартири, платежі, витрати, документи, фото та ключові показники в одному місці.",
+    "Код доступу":"Код доступу",
+    "Увійти":"Увійти",
+    "Демо-доступ:":"Демо-доступ:",
+    "Останнє оновлення":"Останнє оновлення",
+    "Вийти":"Вийти",
+    "Огляд":"Огляд",
+    "Оберіть квартиру":"Оберіть квартиру",
+    "Кабінет":"Кабінет",
+    "Мої квартири":"Мої квартири",
+    "Добрий день, Олександре":"Добрий день, Олександре",
+    "Зведена інформація по ваших об'єктах":"Зведена інформація по ваших об'єктах",
+    "Дані актуальні":"Дані актуальні",
+    "Квартири":"Квартири",
+    "Завантаження":"Завантаження",
+    "Отримано за рік":"Отримано за рік",
+    "Витрати за рік":"Витрати за рік",
+    "Отримано в жовтні":"Отримано в жовтні",
+    "Заборгованість":"Заборгованість",
+    "в оренді":"в оренді",
+    "поточний статус":"поточний статус",
+    "12 місяців":"12 місяців",
+    "по всіх об'єктах":"по всіх об'єктах",
+    "поточний місяць":"поточний місяць",
+    "2 квартири":"2 квартири",
+    "Фінансова історія за 12 місяців":"Фінансова історія за 12 місяців",
+    "листопад 2025 - жовтень 2026":"листопад 2025 - жовтень 2026",
+    "Отримано":"Отримано",
+    "Витрати":"Витрати",
+    "10 об'єктів":"10 об'єктів",
+    "Останні операції":"Останні операції",
+    "жовтень 2026":"жовтень 2026",
+    "Квартира":"Квартира",
+    "Подія":"Подія",
+    "Дата":"Дата",
+    "Сума":"Сума",
+    "Статус":"Статус",
+    "Оренда":"Оренда",
+    "Сплачено":"Сплачено",
+    "Очікується":"Очікується",
+    "Ремонт":"Ремонт",
+    "Витрата":"Витрата",
+    "Прибирання":"Прибирання",
+    "Здана":"Здана",
+    "Вільна":"Вільна",
+    "Основна інформація":"Основна інформація",
+    "Орендна ставка":"Орендна ставка",
+    "Депозит":"Депозит",
+    "Площа":"Площа",
+    "Кімнати":"Кімнати",
+    "Орендар":"Орендар",
+    "Договір до":"Договір до",
+    "Поточний місяць":"Поточний місяць",
+    "Нараховано":"Нараховано",
+    "Комунальні":"Комунальні",
+    "Борг":"Борг",
+    "Платежі за 12 міс.":"Платежі за 12 міс.",
+    "Документи":"Документи",
+    "Історія подій":"Історія подій",
+    "Нараховано за рік":"Нараховано за рік",
+    "Борг за період":"Борг за період",
+    "Комунальні за рік:":"Комунальні за рік:",
+    "Місяць":"Місяць",
+    "Без оренди":"Без оренди",
+    "Є борг":"Є борг",
+    "Показати всі 12 місяців":"Показати всі 12 місяців",
+    "Показати останні 3 місяці":"Показати останні 3 місяці",
+    "Комунальні за жовтень":"Комунальні за жовтень",
+    "Електроенергія":"Електроенергія",
+    "Вода":"Вода",
+    "Утримання будинку / ОСББ":"Утримання будинку / ОСББ",
+    "тільки перегляд":"тільки перегляд",
+    "Договір оренди":"Договір оренди",
+    "актуальна версія":"актуальна версія",
+    "Акт приймання-передачі":"Акт приймання-передачі",
+    "підписано":"підписано",
+    "Фото лічильників":"Фото лічильників",
+    "4 файли · жовтень 2026":"4 файли · жовтень 2026",
+    "Рахунки / квитанції":"Рахунки / квитанції",
+    "архів за 12 місяців":"архів за 12 місяців",
+    "Доступно":"Доступно",
+    "останні зміни":"останні зміни",
+    "Оновлено фінансові дані":"Оновлено фінансові дані",
+    "Додано показники лічильників":"Додано показники лічильників",
+    "Оновлено фотогалерею":"Оновлено фотогалерею",
+    "Додано квитанцію за комунальні":"Додано квитанцію за комунальні",
+    "Вітальня":"Вітальня","Кухня":"Кухня","Спальня":"Спальня","Ванна":"Ванна",
+    "Демонстраційна версія. Усі дані та об'єкти вигадані.":"Демонстраційна версія. Усі дані та об'єкти вигадані.",
+    "Невірний Gmail або код доступу.":"Невірний Gmail або код доступу.",
+    "Лис 25":"Лис 25","Гру 25":"Гру 25","Січ 26":"Січ 26","Лют 26":"Лют 26","Бер 26":"Бер 26","Кві 26":"Кві 26","Тра 26":"Тра 26","Чер 26":"Чер 26","Лип 26":"Лип 26","Сер 26":"Сер 26","Вер 26":"Вер 26","Жов 26":"Жов 26"
+  },
+  en: {
+    "Кабінет власника":"Owner Portal",
+    "Квартири, платежі, витрати, документи, фото та ключові показники в одному місці.":"Properties, payments, expenses, documents, photos and key metrics in one place.",
+    "Код доступу":"Access code",
+    "Увійти":"Sign in",
+    "Демо-доступ:":"Demo access:",
+    "Останнє оновлення":"Last update",
+    "Вийти":"Sign out",
+    "Огляд":"Overview",
+    "Оберіть квартиру":"Select apartment",
+    "Кабінет":"Portal",
+    "Мої квартири":"My apartments",
+    "Добрий день, Олександре":"Good afternoon, Oleksandr",
+    "Зведена інформація по ваших об'єктах":"Summary of your properties",
+    "Дані актуальні":"Data up to date",
+    "Квартири":"Apartments",
+    "Завантаження":"Occupancy",
+    "Отримано за рік":"Received this year",
+    "Витрати за рік":"Expenses this year",
+    "Отримано в жовтні":"Received in October",
+    "Заборгованість":"Outstanding balance",
+    "в оренді":"rented",
+    "поточний статус":"current status",
+    "12 місяців":"12 months",
+    "по всіх об'єктах":"all properties",
+    "поточний місяць":"current month",
+    "2 квартири":"2 apartments",
+    "Фінансова історія за 12 місяців":"12-month financial history",
+    "листопад 2025 - жовтень 2026":"November 2025 - October 2026",
+    "Отримано":"Received",
+    "Витрати":"Expenses",
+    "10 об'єктів":"10 properties",
+    "Останні операції":"Recent transactions",
+    "жовтень 2026":"October 2026",
+    "Квартира":"Apartment",
+    "Подія":"Transaction",
+    "Дата":"Date",
+    "Сума":"Amount",
+    "Статус":"Status",
+    "Оренда":"Rent",
+    "Сплачено":"Paid",
+    "Очікується":"Pending",
+    "Ремонт":"Renovation",
+    "Витрата":"Expense",
+    "Прибирання":"Cleaning",
+    "Здана":"Rented",
+    "Вільна":"Vacant",
+    "Основна інформація":"Property information",
+    "Орендна ставка":"Monthly rent",
+    "Депозит":"Deposit",
+    "Площа":"Area",
+    "Кімнати":"Rooms",
+    "Орендар":"Tenant",
+    "Договір до":"Lease ends",
+    "Поточний місяць":"Current month",
+    "Нараховано":"Charged",
+    "Комунальні":"Utilities",
+    "Борг":"Debt",
+    "Платежі за 12 міс.":"12-month payments",
+    "Документи":"Documents",
+    "Історія подій":"Activity history",
+    "Нараховано за рік":"Charged this year",
+    "Борг за період":"Debt for period",
+    "Комунальні за рік:":"Utilities this year:",
+    "Місяць":"Month",
+    "Без оренди":"Vacant",
+    "Є борг":"Debt",
+    "Показати всі 12 місяців":"Show all 12 months",
+    "Показати останні 3 місяці":"Show last 3 months",
+    "Комунальні за жовтень":"October utilities",
+    "Електроенергія":"Electricity",
+    "Вода":"Water",
+    "Утримання будинку / ОСББ":"Building maintenance",
+    "тільки перегляд":"view only",
+    "Договір оренди":"Rental agreement",
+    "актуальна версія":"current version",
+    "Акт приймання-передачі":"Handover report",
+    "підписано":"signed",
+    "Фото лічильників":"Meter photos",
+    "4 файли · жовтень 2026":"4 files · October 2026",
+    "Рахунки / квитанції":"Bills / receipts",
+    "архів за 12 місяців":"12-month archive",
+    "Доступно":"Available",
+    "останні зміни":"latest updates",
+    "Оновлено фінансові дані":"Financial data updated",
+    "Додано показники лічильників":"Meter readings added",
+    "Оновлено фотогалерею":"Photo gallery updated",
+    "Додано квитанцію за комунальні":"Utility receipt added",
+    "Вітальня":"Living room","Кухня":"Kitchen","Спальня":"Bedroom","Ванна":"Bathroom",
+    "Демонстраційна версія. Усі дані та об'єкти вигадані.":"Demo version. All data and properties are fictional.",
+    "Невірний Gmail або код доступу.":"Incorrect Gmail or access code.",
+    "Лис 25":"Nov 25","Гру 25":"Dec 25","Січ 26":"Jan 26","Лют 26":"Feb 26","Бер 26":"Mar 26","Кві 26":"Apr 26","Тра 26":"May 26","Чер 26":"Jun 26","Лип 26":"Jul 26","Сер 26":"Aug 26","Вер 26":"Sep 26","Жов 26":"Oct 26"
+  }
+};
+
+let currentLang = localStorage.getItem("ownerPortalLang") || "uk";
+
+function translateTextValue(text){
+  if(currentLang==="uk") return text;
+  const trimmed=text.trim();
+  if(I18N.en[trimmed]) return text.replace(trimmed,I18N.en[trimmed]);
+
+  // Dynamic small phrases
+  let m=trimmed.match(/^(\d+) в оренді$/);
+  if(m) return text.replace(trimmed,`${m[1]} rented`);
+
+  m=trimmed.match(/^(\d+) квартири$/);
+  if(m) return text.replace(trimmed,`${m[1]} apartments`);
+
+  m=trimmed.match(/^(\d+) об'єктів$/);
+  if(m) return text.replace(trimmed,`${m[1]} properties`);
+
+  return text;
+}
+
+function translateDOM(root=document.body){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let node;
+  while(node=walker.nextNode()){
+    if(!node.parentElement) continue;
+    if(["SCRIPT","STYLE"].includes(node.parentElement.tagName)) continue;
+
+    if(node._uaOriginal===undefined) node._uaOriginal=node.nodeValue;
+    const source=node._uaOriginal;
+
+    if(currentLang==="uk"){
+      node.nodeValue=source;
+    }else{
+      node.nodeValue=translateTextValue(source);
+    }
+  }
+
+  document.documentElement.lang=currentLang==="uk"?"uk":"en";
+  document.querySelectorAll(".lang-btn").forEach(b=>{
+    b.classList.toggle("active",b.dataset.lang===currentLang);
+  });
+
+  const title=document.querySelector("title");
+  if(title) title.textContent=currentLang==="uk"?"Owner Portal - Demo":"Owner Portal - Demo";
+}
+
+function setLanguage(lang){
+  currentLang=lang;
+  localStorage.setItem("ownerPortalLang",lang);
+
+  // Re-render dynamic content first in UA source form
+  buildNavigation();
+  buildDashboard();
+
+  if(!document.getElementById("apartment").classList.contains("hidden")){
+    const sel=document.getElementById("mobileAptSelect");
+    const idx=sel && sel.value!=="" ? Number(sel.value) : 0;
+    showApartment(idx);
+  }
+
+  translateDOM();
+}
+
+function refreshTranslation(){
+  requestAnimationFrame(()=>translateDOM());
+}
+
+
 const DATA={"apartments": [{"code": "APT-001", "title": "ЖК River Park, кв. 24", "address": "вул. Набережна, 15, Львів", "rent": 28000, "deposit": 28000, "area": 62, "rooms": 2, "tenant": "Ірина М.", "leaseEnd": "31.05.2027", "status": "Здана", "utilities": 2350, "expense": 1250, "debt": 0, "palette": ["#c8d7ea", "#e6d7c5", "#d7dfcf", "#d7c7bd"], "history": [{"month": "Лис 25", "expected": 28000, "received": 28000, "expense": 687, "utilities": 1833}, {"month": "Гру 25", "expected": 28000, "received": 28000, "expense": 900, "utilities": 2138}, {"month": "Січ 26", "expected": 28000, "received": 28000, "expense": 1112, "utilities": 2444}, {"month": "Лют 26", "expected": 28000, "received": 28000, "expense": 762, "utilities": 1950}, {"month": "Бер 26", "expected": 28000, "received": 28000, "expense": 975, "utilities": 2256}, {"month": "Кві 26", "expected": 28000, "received": 28000, "expense": 1187, "utilities": 2561}, {"month": "Тра 26", "expected": 28000, "received": 28000, "expense": 837, "utilities": 2068}, {"month": "Чер 26", "expected": 28000, "received": 28000, "expense": 1050, "utilities": 2373}, {"month": "Лип 26", "expected": 28000, "received": 28000, "expense": 700, "utilities": 1880}, {"month": "Сер 26", "expected": 28000, "received": 28000, "expense": 912, "utilities": 2185}, {"month": "Вер 26", "expected": 28000, "received": 28000, "expense": 1125, "utilities": 2491}, {"month": "Жов 26", "expected": 28000, "received": 28000, "expense": 775, "utilities": 1997}]}, {"code": "APT-002", "title": "ЖК Green Hills, кв. 81", "address": "вул. Паркова, 8, Львів", "rent": 24000, "deposit": 24000, "area": 54, "rooms": 2, "tenant": "Андрій К.", "leaseEnd": "28.02.2027", "status": "Здана", "utilities": 2500, "expense": 900, "debt": 0, "palette": ["#d7cfbf", "#c7d6d0", "#dad1e3", "#ccd5e5"], "history": [{"month": "Лис 25", "expected": 24000, "received": 24000, "expense": 594, "utilities": 2125}, {"month": "Гру 25", "expected": 24000, "received": 24000, "expense": 747, "utilities": 2450}, {"month": "Січ 26", "expected": 24000, "received": 24000, "expense": 495, "utilities": 2775}, {"month": "Лют 26", "expected": 24000, "received": 24000, "expense": 648, "utilities": 2250}, {"month": "Бер 26", "expected": 24000, "received": 24000, "expense": 801, "utilities": 2575}, {"month": "Кві 26", "expected": 24000, "received": 24000, "expense": 549, "utilities": 2050}, {"month": "Тра 26", "expected": 24000, "received": 24000, "expense": 702, "utilities": 2375}, {"month": "Чер 26", "expected": 24000, "received": 24000, "expense": 855, "utilities": 2700}, {"month": "Лип 26", "expected": 24000, "received": 24000, "expense": 603, "utilities": 2175}, {"month": "Сер 26", "expected": 24000, "received": 24000, "expense": 756, "utilities": 2500}, {"month": "Вер 26", "expected": 24000, "received": 24000, "expense": 504, "utilities": 1975}, {"month": "Жов 26", "expected": 24000, "received": 24000, "expense": 657, "utilities": 2300}]}, {"code": "APT-003", "title": "ЖК Avalon, кв. 105", "address": "вул. Замарстинівська, 55, Львів", "rent": 32000, "deposit": 32000, "area": 71, "rooms": 3, "tenant": "Марина С.", "leaseEnd": "30.06.2027", "status": "Здана", "utilities": 3100, "expense": 1750, "debt": 0, "palette": ["#d7d8c7", "#d5c6b8", "#c7d0df", "#e2d7ce"], "history": [{"month": "Лис 25", "expected": 32000, "received": 32000, "expense": 1347, "utilities": 2852}, {"month": "Гру 25", "expected": 32000, "received": 32000, "expense": 1645, "utilities": 3255}, {"month": "Січ 26", "expected": 32000, "received": 32000, "expense": 1155, "utilities": 2604}, {"month": "Лют 26", "expected": 32000, "received": 28000, "expense": 1452, "utilities": 3007}, {"month": "Бер 26", "expected": 32000, "received": 32000, "expense": 962, "utilities": 3410}, {"month": "Кві 26", "expected": 32000, "received": 32000, "expense": 1260, "utilities": 2759}, {"month": "Тра 26", "expected": 32000, "received": 32000, "expense": 1557, "utilities": 3162}, {"month": "Чер 26", "expected": 32000, "received": 32000, "expense": 1067, "utilities": 2511}, {"month": "Лип 26", "expected": 32000, "received": 32000, "expense": 1365, "utilities": 2914}, {"month": "Сер 26", "expected": 32000, "received": 32000, "expense": 1662, "utilities": 3317}, {"month": "Вер 26", "expected": 32000, "received": 32000, "expense": 1172, "utilities": 2666}, {"month": "Жов 26", "expected": 32000, "received": 32000, "expense": 1470, "utilities": 3069}]}, {"code": "APT-004", "title": "ЖК Seven, кв. 33", "address": "вул. Шевченка, 73, Львів", "rent": 26000, "deposit": 26000, "area": 58, "rooms": 2, "tenant": "Олег П.", "leaseEnd": "31.03.2027", "status": "Здана", "utilities": 2250, "expense": 650, "debt": 0, "palette": ["#c9d1df", "#ddd0bf", "#d2d9c8", "#d8c7c1"], "history": [{"month": "Лис 25", "expected": 26000, "received": 26000, "expense": 572, "utilities": 2227}, {"month": "Гру 25", "expected": 26000, "received": 26000, "expense": 390, "utilities": 1755}, {"month": "Січ 26", "expected": 26000, "received": 26000, "expense": 500, "utilities": 2047}, {"month": "Лют 26", "expected": 26000, "received": 26000, "expense": 611, "utilities": 2340}, {"month": "Бер 26", "expected": 26000, "received": 26000, "expense": 429, "utilities": 1867}, {"month": "Кві 26", "expected": 26000, "received": 26000, "expense": 539, "utilities": 2160}, {"month": "Тра 26", "expected": 26000, "received": 26000, "expense": 357, "utilities": 2452}, {"month": "Чер 26", "expected": 26000, "received": 26000, "expense": 468, "utilities": 1980}, {"month": "Лип 26", "expected": 26000, "received": 26000, "expense": 578, "utilities": 2272}, {"month": "Сер 26", "expected": 26000, "received": 26000, "expense": 396, "utilities": 1800}, {"month": "Вер 26", "expected": 26000, "received": 26000, "expense": 507, "utilities": 2092}, {"month": "Жов 26", "expected": 26000, "received": 26000, "expense": 617, "utilities": 2385}]}, {"code": "APT-005", "title": "ЖК Greenville, кв. 14", "address": "вул. Княгині Ольги, 122, Львів", "rent": 35000, "deposit": 35000, "area": 79, "rooms": 3, "tenant": "Катерина Л.", "leaseEnd": "31.08.2027", "status": "Здана", "utilities": 3400, "expense": 2100, "debt": 35000, "palette": ["#d8cbbb", "#c8d7d2", "#dfd3c5", "#c8d0df"], "history": [{"month": "Лис 25", "expected": 35000, "received": 35000, "expense": 2079, "utilities": 3604}, {"month": "Гру 25", "expected": 35000, "received": 35000, "expense": 1491, "utilities": 2890}, {"month": "Січ 26", "expected": 35000, "received": 35000, "expense": 1848, "utilities": 3332}, {"month": "Лют 26", "expected": 35000, "received": 35000, "expense": 1260, "utilities": 3774}, {"month": "Бер 26", "expected": 35000, "received": 35000, "expense": 1617, "utilities": 3060}, {"month": "Кві 26", "expected": 35000, "received": 35000, "expense": 1974, "utilities": 3502}, {"month": "Тра 26", "expected": 35000, "received": 35000, "expense": 1386, "utilities": 2788}, {"month": "Чер 26", "expected": 35000, "received": 35000, "expense": 1743, "utilities": 3230}, {"month": "Лип 26", "expected": 35000, "received": 35000, "expense": 1155, "utilities": 3672}, {"month": "Сер 26", "expected": 35000, "received": 35000, "expense": 1512, "utilities": 2958}, {"month": "Вер 26", "expected": 35000, "received": 35000, "expense": 1869, "utilities": 3400}, {"month": "Жов 26", "expected": 35000, "received": 0, "expense": 1281, "utilities": 2686}]}, {"code": "APT-006", "title": "ЖК Great, кв. 207", "address": "Дніпровська наб., 15, Київ", "rent": 38000, "deposit": 38000, "area": 83, "rooms": 3, "tenant": "Сергій В.", "leaseEnd": "30.04.2027", "status": "Здана", "utilities": 3650, "expense": 1450, "debt": 0, "palette": ["#c7d8e7", "#decdbb", "#d1d8c9", "#d9c7c0"], "history": [{"month": "Лис 25", "expected": 38000, "received": 38000, "expense": 942, "utilities": 2883}, {"month": "Гру 25", "expected": 38000, "received": 38000, "expense": 1189, "utilities": 3358}, {"month": "Січ 26", "expected": 38000, "received": 38000, "expense": 1435, "utilities": 3832}, {"month": "Лют 26", "expected": 38000, "received": 38000, "expense": 1029, "utilities": 3066}, {"month": "Бер 26", "expected": 38000, "received": 38000, "expense": 1276, "utilities": 3540}, {"month": "Кві 26", "expected": 38000, "received": 38000, "expense": 870, "utilities": 4015}, {"month": "Тра 26", "expected": 38000, "received": 38000, "expense": 1116, "utilities": 3248}, {"month": "Чер 26", "expected": 38000, "received": 38000, "expense": 1363, "utilities": 3723}, {"month": "Лип 26", "expected": 38000, "received": 38000, "expense": 957, "utilities": 2956}, {"month": "Сер 26", "expected": 38000, "received": 38000, "expense": 1203, "utilities": 3431}, {"month": "Вер 26", "expected": 38000, "received": 38000, "expense": 797, "utilities": 3905}, {"month": "Жов 26", "expected": 38000, "received": 38000, "expense": 1044, "utilities": 3139}]}, {"code": "APT-007", "title": "ЖК Respublika, кв. 118", "address": "Кільцева дорога, 1, Київ", "rent": 30000, "deposit": 30000, "area": 66, "rooms": 2, "tenant": "Наталія Б.", "leaseEnd": "31.12.2026", "status": "Здана", "utilities": 2950, "expense": 1150, "debt": 0, "palette": ["#d0d5e1", "#d9c9bc", "#cbd7cf", "#e0d4cc"], "history": [{"month": "Лис 25", "expected": 30000, "received": 30000, "expense": 874, "utilities": 2537}, {"month": "Гру 25", "expected": 30000, "received": 30000, "expense": 1069, "utilities": 2920}, {"month": "Січ 26", "expected": 30000, "received": 30000, "expense": 747, "utilities": 2301}, {"month": "Лют 26", "expected": 30000, "received": 30000, "expense": 943, "utilities": 2684}, {"month": "Бер 26", "expected": 30000, "received": 30000, "expense": 1138, "utilities": 3068}, {"month": "Кві 26", "expected": 30000, "received": 30000, "expense": 816, "utilities": 2448}, {"month": "Тра 26", "expected": 30000, "received": 30000, "expense": 1012, "utilities": 2832}, {"month": "Чер 26", "expected": 30000, "received": 30000, "expense": 690, "utilities": 3215}, {"month": "Лип 26", "expected": 30000, "received": 30000, "expense": 885, "utilities": 2596}, {"month": "Сер 26", "expected": 30000, "received": 30000, "expense": 1081, "utilities": 2979}, {"month": "Вер 26", "expected": 30000, "received": 30000, "expense": 759, "utilities": 2360}, {"month": "Жов 26", "expected": 30000, "received": 30000, "expense": 954, "utilities": 2743}]}, {"code": "APT-008", "title": "ЖК Варшавський, кв. 63", "address": "просп. Правди, 45, Київ", "rent": 27000, "deposit": 27000, "area": 60, "rooms": 2, "tenant": "Роман Т.", "leaseEnd": "31.01.2027", "status": "Здана", "utilities": 2480, "expense": 780, "debt": 27000, "palette": ["#c9d4e1", "#e1d3c0", "#ccd8cd", "#d6c6c0"], "history": [{"month": "Лис 25", "expected": 27000, "received": 27000, "expense": 678, "utilities": 2306}, {"month": "Гру 25", "expected": 27000, "received": 27000, "expense": 460, "utilities": 2628}, {"month": "Січ 26", "expected": 27000, "received": 27000, "expense": 592, "utilities": 2108}, {"month": "Лют 26", "expected": 27000, "received": 27000, "expense": 725, "utilities": 2430}, {"month": "Бер 26", "expected": 27000, "received": 27000, "expense": 507, "utilities": 2752}, {"month": "Кві 26", "expected": 27000, "received": 27000, "expense": 639, "utilities": 2232}, {"month": "Тра 26", "expected": 27000, "received": 27000, "expense": 772, "utilities": 2554}, {"month": "Чер 26", "expected": 27000, "received": 27000, "expense": 553, "utilities": 2033}, {"month": "Лип 26", "expected": 27000, "received": 27000, "expense": 686, "utilities": 2356}, {"month": "Сер 26", "expected": 27000, "received": 27000, "expense": 468, "utilities": 2678}, {"month": "Вер 26", "expected": 27000, "received": 27000, "expense": 600, "utilities": 2157}, {"month": "Жов 26", "expected": 27000, "received": 0, "expense": 733, "utilities": 2480}]}, {"code": "APT-009", "title": "ЖК Комфорт Таун, кв. 41", "address": "вул. Регенераторна, 4, Київ", "rent": 22000, "deposit": 22000, "area": 49, "rooms": 1, "tenant": "-", "leaseEnd": "-", "status": "Вільна", "utilities": 980, "expense": 3200, "debt": 0, "palette": ["#d7d2c6", "#cad7d8", "#e2d3c9", "#cdd5df"], "history": [{"month": "Лис 25", "expected": 22000, "received": 22000, "expense": 3136, "utilities": 980}, {"month": "Гру 25", "expected": 22000, "received": 22000, "expense": 2240, "utilities": 774}, {"month": "Січ 26", "expected": 22000, "received": 22000, "expense": 2784, "utilities": 901}, {"month": "Лют 26", "expected": 22000, "received": 22000, "expense": 1888, "utilities": 1029}, {"month": "Бер 26", "expected": 22000, "received": 22000, "expense": 2432, "utilities": 823}, {"month": "Кві 26", "expected": 22000, "received": 22000, "expense": 2976, "utilities": 950}, {"month": "Тра 26", "expected": 22000, "received": 22000, "expense": 2080, "utilities": 1078}, {"month": "Чер 26", "expected": 22000, "received": 22000, "expense": 2624, "utilities": 872}, {"month": "Лип 26", "expected": 0, "received": 0, "expense": 3168, "utilities": 999}, {"month": "Сер 26", "expected": 0, "received": 0, "expense": 2272, "utilities": 793}, {"month": "Вер 26", "expected": 0, "received": 0, "expense": 2816, "utilities": 921}, {"month": "Жов 26", "expected": 0, "received": 0, "expense": 1920, "utilities": 1048}]}, {"code": "APT-010", "title": "ЖК Французький квартал, кв. 92", "address": "вул. Саперне Поле, 12, Київ", "rent": 41000, "deposit": 41000, "area": 88, "rooms": 3, "tenant": "-", "leaseEnd": "-", "status": "Ремонт", "utilities": 1200, "expense": 14800, "debt": 0, "palette": ["#d4d1c7", "#c9d6df", "#ddcfbf", "#cbd5cf"], "history": [{"month": "Лис 25", "expected": 41000, "received": 41000, "expense": 9472, "utilities": 1284}, {"month": "Гру 25", "expected": 41000, "received": 41000, "expense": 11988, "utilities": 1032}, {"month": "Січ 26", "expected": 41000, "received": 41000, "expense": 14504, "utilities": 1188}, {"month": "Лют 26", "expected": 41000, "received": 41000, "expense": 10360, "utilities": 936}, {"month": "Бер 26", "expected": 41000, "received": 41000, "expense": 12876, "utilities": 1092}, {"month": "Кві 26", "expected": 41000, "received": 41000, "expense": 8732, "utilities": 1248}, {"month": "Тра 26", "expected": 41000, "received": 41000, "expense": 11248, "utilities": 996}, {"month": "Чер 26", "expected": 41000, "received": 41000, "expense": 13764, "utilities": 1152}, {"month": "Лип 26", "expected": 41000, "received": 41000, "expense": 9620, "utilities": 1308}, {"month": "Сер 26", "expected": 0, "received": 0, "expense": 12136, "utilities": 1056}, {"month": "Вер 26", "expected": 0, "received": 0, "expense": 14652, "utilities": 1212}, {"month": "Жов 26", "expected": 0, "received": 0, "expense": 10508, "utilities": 960}]}], "months": ["Лис 25", "Гру 25", "Січ 26", "Лют 26", "Бер 26", "Кві 26", "Тра 26", "Чер 26", "Лип 26", "Сер 26", "Вер 26", "Жов 26"], "overall": [{"month": "Лис 25", "expected": 303000, "received": 303000, "expense": 20381}, {"month": "Гру 25", "expected": 303000, "received": 303000, "expense": 22119}, {"month": "Січ 26", "expected": 303000, "received": 303000, "expense": 25172}, {"month": "Лют 26", "expected": 303000, "received": 299000, "expense": 19678}, {"month": "Бер 26", "expected": 303000, "received": 303000, "expense": 23013}, {"month": "Кві 26", "expected": 303000, "received": 303000, "expense": 19542}, {"month": "Тра 26", "expected": 303000, "received": 303000, "expense": 21067}, {"month": "Чер 26", "expected": 303000, "received": 303000, "expense": 24177}, {"month": "Лип 26", "expected": 281000, "received": 281000, "expense": 19717}, {"month": "Сер 26", "expected": 240000, "received": 240000, "expense": 22398}, {"month": "Вер 26", "expected": 240000, "received": 240000, "expense": 24801}, {"month": "Жов 26", "expected": 240000, "received": 178000, "expense": 19959}]};
 const apartments=DATA.apartments;
 const overall=DATA.overall;
@@ -342,7 +625,7 @@ function roomSvg(base,label,v=0){
 function login(){
   const e=document.getElementById("email").value.trim().toLowerCase(), c=document.getElementById("code").value.trim();
   if(e==="owner.demo@gmail.com" && c==="2468"){document.getElementById("login").classList.add("hidden");document.getElementById("app").classList.remove("hidden");document.getElementById("err").textContent=""}
-  else document.getElementById("err").textContent="Невірний Gmail або код доступу.";
+  else { document.getElementById("err").textContent="Невірний Gmail або код доступу."; refreshTranslation(); }
 }
 function logout(){document.getElementById("app").classList.add("hidden");document.getElementById("login").classList.remove("hidden")}
 
@@ -539,6 +822,7 @@ function renderPanels(a){
     <div class="docrow"><div><span class="event-dot"></span><b>Оновлено фотогалерею</b><small>28.09.2026</small></div></div>
     <div class="docrow"><div><span class="event-dot"></span><b>Додано квитанцію за комунальні</b><small>25.09.2026</small></div></div>`;
   switchTab("payments",document.querySelector(".tab"));
+  refreshTranslation();
 }
 
 function toggleHistoryMonths(){
@@ -553,6 +837,7 @@ function switchTab(id,btn){document.querySelectorAll(".tab").forEach(x=>x.classL
 
 buildNavigation();
 buildDashboard();
+translateDOM();
 </script>
 </body>
 </html>

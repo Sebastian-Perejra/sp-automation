@@ -1087,6 +1087,455 @@ body{
   }
 }
 
+
+/* =========================================================
+   MOBILE V2 — dedicated layout, not a squeezed desktop view
+   ========================================================= */
+.mobile-only{display:none}
+
+@media(max-width:720px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  body{background:#f2f5fa}
+
+  /* HEADER */
+  .topbar{
+    height:60px !important;
+    padding:0 9px !important;
+    gap:7px;
+  }
+  .brand{gap:7px}
+  .brandmark{
+    width:34px !important;
+    height:34px !important;
+    border-radius:11px !important;
+    flex:none;
+  }
+  .brand span{
+    display:block;
+    max-width:94px;
+    font-size:12px;
+    line-height:1.05;
+  }
+  .top-actions{gap:5px !important}
+  .top-actions .lang-switch{
+    padding:2px;
+    border-radius:9px;
+  }
+  .lang-btn{
+    padding:5px 6px !important;
+    font-size:8px !important;
+  }
+  .sync{display:none !important}
+  .avatar{
+    width:32px !important;
+    height:32px !important;
+    font-size:10px !important;
+  }
+  .ghost{
+    min-width:49px;
+    padding:7px 8px !important;
+    font-size:9px !important;
+    line-height:1.05;
+  }
+
+  /* NAV ROW */
+  .mobile-tabs{
+    top:60px !important;
+    z-index:45;
+    padding:7px 9px !important;
+    gap:7px !important;
+    background:rgba(255,255,255,.97) !important;
+    backdrop-filter:blur(12px);
+    box-shadow:0 5px 16px rgba(15,23,42,.06) !important;
+  }
+  .mobile-tabs .navbtn{
+    padding:9px 10px !important;
+    border-radius:10px;
+    font-size:11px;
+  }
+  .mobile-select{
+    height:38px;
+    font-size:11px !important;
+    border-radius:10px !important;
+    padding:7px 30px 7px 10px !important;
+    background:#fff;
+  }
+
+  /* PAGE */
+  .main{
+    width:100% !important;
+    max-width:none !important;
+    padding:13px 10px 24px !important;
+  }
+  .pagehead{
+    margin-bottom:12px !important;
+    gap:7px !important;
+  }
+  .pagehead h2{
+    font-size:22px !important;
+    line-height:1.05 !important;
+    letter-spacing:-.03em;
+  }
+  .pagehead p{
+    margin-top:5px !important;
+    font-size:10px !important;
+  }
+  .pagehead .badge{
+    font-size:9px;
+    padding:6px 9px;
+  }
+
+  /* KPI: 2 cols, but values MUST stay readable */
+  .kpis{
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+    margin-bottom:10px !important;
+  }
+  .kpi{
+    min-height:86px !important;
+    padding:11px 11px 10px !important;
+    border-radius:14px !important;
+  }
+  .kpi-label{
+    font-size:8px !important;
+    line-height:1.15;
+    min-height:18px;
+  }
+  .kpi-value{
+    font-size:17px !important;
+    line-height:1.05 !important;
+    white-space:nowrap;
+    margin-top:5px !important;
+  }
+  .kpi-value .desktop-number{display:none}
+  .kpi-value .mobile-number{display:inline}
+  .kpi-sub{
+    font-size:8px !important;
+    margin-top:5px !important;
+  }
+
+  /* DASHBOARD: do not repeat apartment list; dropdown already exists */
+  #dashboard .grid2{
+    display:block !important;
+  }
+  #dashboard .grid2 > .card:nth-child(2){
+    display:none !important;
+  }
+  #dashboard .grid2 > .card:first-child{
+    margin-bottom:10px;
+  }
+  .section{
+    padding:13px !important;
+    border-radius:15px !important;
+  }
+  .sechead{
+    margin-bottom:8px !important;
+  }
+  .sechead h3{
+    font-size:13px !important;
+  }
+  .sechead span{
+    font-size:8px !important;
+    text-align:right;
+  }
+
+  /* DASHBOARD CHART: SWIPE, DO NOT SQUEEZE */
+  .chart-wrap{
+    width:100%;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  .chart-wrap::-webkit-scrollbar{display:none}
+  .chart{
+    width:720px !important;
+    min-width:720px !important;
+    height:255px !important;
+    gap:8px !important;
+    padding:26px 10px 0 !important;
+  }
+  .baritem{min-width:48px !important}
+  .barset{gap:5px !important}
+  .bar{
+    width:18px !important;
+    border-radius:6px 6px 2px 2px !important;
+  }
+  .data-label{
+    font-size:8px !important;
+  }
+  .month{
+    font-size:8px !important;
+    transform:none !important;
+    height:auto !important;
+    white-space:nowrap;
+  }
+  .legend{
+    font-size:9px !important;
+    gap:10px !important;
+  }
+
+  /* RECENT TRANSACTIONS: only 3 cards initially */
+  #recentOps tr:nth-child(n+4){
+    display:none;
+  }
+  #recentOps.expanded tr{
+    display:block;
+  }
+  .mobile-more-transactions{
+    display:block !important;
+    width:100%;
+    margin-top:10px;
+    border:1px solid #e2e8f0;
+    background:#fff;
+    color:#334155;
+    border-radius:11px;
+    padding:10px 12px;
+    font-weight:850;
+    font-size:10px;
+  }
+  .table.mobile-stack tbody{
+    gap:8px !important;
+  }
+  .table.mobile-stack tr{
+    padding:9px 10px !important;
+    border-radius:12px !important;
+    box-shadow:0 3px 10px rgba(15,23,42,.035);
+  }
+  .table.mobile-stack td{
+    padding:6px 0 !important;
+    font-size:10px !important;
+  }
+  .table.mobile-stack td::before{
+    font-size:8px !important;
+  }
+
+  /* APARTMENT */
+  #apartment .pagehead{
+    align-items:flex-start !important;
+  }
+  .apartment-grid{
+    display:block !important;
+  }
+  .hero{
+    width:100%;
+    height:auto !important;
+    aspect-ratio:16/10 !important;
+    border-radius:16px !important;
+  }
+  .hero-tag,.hero-counter{
+    bottom:11px !important;
+    font-size:9px !important;
+    padding:6px 8px !important;
+  }
+  .hero-tag{left:11px !important}
+  .hero-counter{right:11px !important}
+  .gallery{
+    display:flex !important;
+    overflow-x:auto !important;
+    gap:7px !important;
+    margin:8px 0 11px !important;
+    padding:2px 1px 5px;
+    scrollbar-width:none;
+  }
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery button{
+    width:112px !important;
+    height:72px !important;
+    flex:0 0 112px !important;
+    border-radius:11px !important;
+  }
+  .thumb-label{
+    font-size:7px !important;
+    left:6px !important;
+    bottom:5px !important;
+  }
+
+  /* apartment info cards */
+  .stack{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:9px !important;
+    position:static !important;
+  }
+  .compact-card{
+    padding:12px !important;
+    border-radius:14px !important;
+  }
+  .sechead-tight{
+    padding-bottom:7px !important;
+    margin-bottom:6px !important;
+  }
+  .info-list{
+    border-radius:11px !important;
+  }
+  .info-row{
+    min-height:39px !important;
+    padding:7px 10px !important;
+  }
+  .info-row small{
+    font-size:8px !important;
+  }
+  .info-row strong{
+    font-size:12px !important;
+  }
+  .mini-kpi-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:7px !important;
+  }
+  .mini-kpi{
+    min-height:64px !important;
+    padding:9px 10px !important;
+  }
+  .mini-kpi small{font-size:8px !important}
+  .mini-kpi strong{
+    font-size:15px !important;
+    margin-top:5px !important;
+  }
+
+  /* tabs: horizontal, compact */
+  .tabs{
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:auto !important;
+    margin:10px 0 8px !important;
+    padding:4px !important;
+    gap:4px !important;
+    border-radius:12px !important;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:none;
+    padding:8px 10px !important;
+    font-size:9px !important;
+    border-radius:9px !important;
+  }
+
+  /* FINANCIAL HISTORY: KPI first, swipeable chart second */
+  #payments{
+    padding:12px !important;
+  }
+  .finance-overview{
+    display:block !important;
+    margin:0 0 8px !important;
+  }
+  .fin-summary{
+    grid-template-columns:1fr 1fr !important;
+    gap:7px !important;
+    margin-bottom:9px !important;
+  }
+  .fin-kpi{
+    min-height:72px !important;
+    padding:9px 10px !important;
+  }
+  .fin-kpi small{
+    font-size:8px !important;
+  }
+  .fin-kpi strong{
+    font-size:15px !important;
+    margin-top:5px !important;
+    white-space:nowrap;
+  }
+  .apt-chart-scroll{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    border-radius:12px;
+  }
+  .apt-chart-scroll::-webkit-scrollbar{display:none}
+  .apt-history-chart{
+    width:680px !important;
+    min-width:680px !important;
+    height:225px !important;
+    padding:24px 10px 22px !important;
+    gap:5px !important;
+  }
+  .apt-chart-item{
+    min-width:48px !important;
+    gap:4px !important;
+  }
+  .apt-col{
+    width:16px !important;
+  }
+  .apt-value-label{
+    font-size:8px !important;
+  }
+  .apt-chart-month{
+    font-size:8px !important;
+    transform:none !important;
+    white-space:nowrap;
+  }
+  #payments .legend{
+    margin-top:7px !important;
+    display:grid !important;
+    grid-template-columns:auto auto 1fr;
+    align-items:center;
+    gap:7px !important;
+    font-size:8px !important;
+  }
+  #payments .legend span:last-child{
+    margin-left:0 !important;
+    text-align:right;
+  }
+
+  /* last months cards */
+  .mobile-history-cards{
+    margin-top:9px !important;
+  }
+  .mobile-history-card{
+    padding:10px !important;
+    border-radius:12px !important;
+    box-shadow:0 3px 10px rgba(15,23,42,.035);
+  }
+  .mobile-history-card + .mobile-history-card{
+    margin-top:7px !important;
+  }
+  .mhc-head{
+    margin-bottom:8px !important;
+  }
+  .mhc-month{
+    font-size:12px !important;
+  }
+  .mhc-grid{
+    gap:6px !important;
+  }
+  .mhc-item{
+    padding:8px !important;
+    border-radius:9px !important;
+  }
+  .mhc-item small{font-size:7px !important}
+  .mhc-item strong{font-size:10px !important}
+
+  .history-more{
+    padding:10px !important;
+    font-size:10px !important;
+    border-radius:10px !important;
+  }
+
+  /* documents/activity */
+  .docrow{
+    padding:10px 1px !important;
+  }
+  .docrow b{font-size:11px !important}
+  .docrow small{font-size:8px}
+
+  .footer{
+    font-size:8px !important;
+    padding:18px 10px calc(20px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media(max-width:370px){
+  .brand span{display:none !important}
+  .top-actions{margin-left:auto}
+  .kpi-value{font-size:16px !important}
+  .pagehead h2{font-size:20px !important}
+}
+
 </style>
 </head>
 <body>
@@ -1151,6 +1600,7 @@ body{
           <thead><tr><th>Квартира</th><th>Подія</th><th>Дата</th><th>Сума</th><th>Статус</th></tr></thead>
           <tbody id="recentOps"></tbody>
         </table></div>
+        <button id="mobileMoreTransactions" class="mobile-more-transactions mobile-only" onclick="toggleRecentTransactions()">Показати всі операції</button>
       </div>
     </section>
 
@@ -1281,6 +1731,8 @@ const I18N = {
     "Є борг":"Є борг",
     "Показати всі 12 місяців":"Показати всі 12 місяців",
     "Показати останні 3 місяці":"Показати останні 3 місяці",
+    "Показати всі операції":"Показати всі операції",
+    "Показати останні 3 операції":"Показати останні 3 операції",
     "Комунальні за жовтень":"Комунальні за жовтень",
     "Електроенергія":"Електроенергія",
     "Вода":"Вода",
@@ -1374,6 +1826,8 @@ const I18N = {
     "Є борг":"Debt",
     "Показати всі 12 місяців":"Show all 12 months",
     "Показати останні 3 місяці":"Show last 3 months",
+    "Показати всі операції":"Show all transactions",
+    "Показати останні 3 операції":"Show last 3 transactions",
     "Комунальні за жовтень":"October utilities",
     "Електроенергія":"Electricity",
     "Вода":"Water",
@@ -1607,10 +2061,10 @@ function buildDashboard(){
   document.getElementById("kpis").innerHTML=`
     <div class="card kpi"><div class="kpi-label">Квартири</div><div class="kpi-value">${apartments.length}</div><div class="kpi-sub">${rented} в оренді</div></div>
     <div class="card kpi"><div class="kpi-label">Завантаження</div><div class="kpi-value">${occupancy}%</div><div class="kpi-sub">поточний статус</div></div>
-    <div class="card kpi"><div class="kpi-label">Отримано за рік</div><div class="kpi-value">${money(annualReceived)}</div><div class="kpi-sub">12 місяців</div></div>
-    <div class="card kpi"><div class="kpi-label">Витрати за рік</div><div class="kpi-value">${money(annualExpenses)}</div><div class="kpi-sub">по всіх об'єктах</div></div>
-    <div class="card kpi"><div class="kpi-label">Отримано в жовтні</div><div class="kpi-value">${money(current.received)}</div><div class="kpi-sub">поточний місяць</div></div>
-    <div class="card kpi"><div class="kpi-label">Заборгованість</div><div class="kpi-value">${money(debt)}</div><div class="kpi-sub">2 квартири</div></div>`;
+    <div class="card kpi"><div class="kpi-label">Отримано за рік</div><div class="kpi-value"><span class="desktop-number">${money(annualReceived)}</span><span class="mobile-number mobile-only">${compactMoney(annualReceived)} ₴</span></div><div class="kpi-sub">12 місяців</div></div>
+    <div class="card kpi"><div class="kpi-label">Витрати за рік</div><div class="kpi-value"><span class="desktop-number">${money(annualExpenses)}</span><span class="mobile-number mobile-only">${compactMoney(annualExpenses)} ₴</span></div><div class="kpi-sub">по всіх об'єктах</div></div>
+    <div class="card kpi"><div class="kpi-label">Отримано в жовтні</div><div class="kpi-value"><span class="desktop-number">${money(current.received)}</span><span class="mobile-number mobile-only">${compactMoney(current.received)} ₴</span></div><div class="kpi-sub">поточний місяць</div></div>
+    <div class="card kpi"><div class="kpi-label">Заборгованість</div><div class="kpi-value"><span class="desktop-number">${money(debt)}</span><span class="mobile-number mobile-only">${compactMoney(debt)} ₴</span></div><div class="kpi-sub">2 квартири</div></div>`;
 
   const max=Math.max(...overall.map(x=>Math.max(x.received,x.expense)));
   document.getElementById("chart").innerHTML=overall.map(x=>{
@@ -1645,6 +2099,10 @@ function buildDashboard(){
   ];
   document.getElementById("recentOps").innerHTML=latestOps.map(r=>`
     <tr><td data-label="Квартира">${r[0].title}</td><td data-label="Подія">${r[1]}</td><td data-label="Дата">${r[2]}</td><td data-label="Сума"><b>${money(r[3])}</b></td><td data-label="Статус"><span class="badge ${r[4]==="Сплачено"?"good":r[4]==="Очікується"?"warn":"bad"}">${r[4]}</span></td></tr>`).join("");
+  const recentBody=document.getElementById("recentOps");
+  if(recentBody) recentBody.classList.remove("expanded");
+  const recentBtn=document.getElementById("mobileMoreTransactions");
+  if(recentBtn) recentBtn.textContent="Показати всі операції";
   refreshTranslation();
 }
 
@@ -1721,6 +2179,7 @@ function renderPanels(a){
         <div class="fin-kpi"><small>Борг за період</small><strong style="color:${yearDebt?'var(--bad)':'var(--good)'}">${money(yearDebt)}</strong></div>
       </div>
 
+      <div class="apt-chart-scroll">
       <div class="apt-history-chart">
         ${a.history.map(h=>{
           const recH=Math.max(4,Math.round(h.received/maxHist*72));
@@ -1734,6 +2193,7 @@ function renderPanels(a){
             <div class="apt-chart-month">${h.month}</div>
           </div>`;
         }).join("")}
+      </div>
       </div>
     </div>
 
@@ -1795,6 +2255,16 @@ function renderPanels(a){
     <div class="docrow"><div><span class="event-dot"></span><b>Оновлено фотогалерею</b><small>28.09.2026</small></div></div>
     <div class="docrow"><div><span class="event-dot"></span><b>Додано квитанцію за комунальні</b><small>25.09.2026</small></div></div>`;
   switchTab("payments",document.querySelector(".tab"));
+  refreshTranslation();
+}
+
+
+function toggleRecentTransactions(){
+  const body=document.getElementById("recentOps");
+  const btn=document.getElementById("mobileMoreTransactions");
+  if(!body || !btn) return;
+  const expanded=body.classList.toggle("expanded");
+  btn.textContent=expanded ? "Показати останні 3 операції" : "Показати всі операції";
   refreshTranslation();
 }
 

@@ -223,6 +223,30 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
   .top-actions .lang-switch{margin-right:1px}
 }
 
+
+/* Chart data labels */
+.barset{position:relative}
+.data-label{
+  position:absolute;left:50%;transform:translateX(-50%);
+  font-size:8px;font-weight:900;white-space:nowrap;line-height:1;
+  pointer-events:none
+}
+.data-label.received-label{color:#2f5fd0}
+.data-label.expense-label{color:#778397}
+
+.apt-chart-item{overflow:visible}
+.apt-value-label{
+  position:absolute;left:50%;transform:translateX(-50%);
+  font-size:7px;font-weight:900;white-space:nowrap;pointer-events:none;
+}
+.apt-value-label.received-label{color:#2f5fd0}
+.apt-value-label.expense-label{color:#778397}
+
+@media(max-width:720px){
+  .data-label{font-size:6px}
+  .apt-value-label{font-size:6px}
+}
+
 </style>
 </head>
 <body>
@@ -550,6 +574,7 @@ function translateTextValue(text){
   if(!trimmed) return text;
 
   if(I18N.en[trimmed]) return text.replace(trimmed,I18N.en[trimmed]);
+  if(trimmed==="● Дані актуальні") return text.replace(trimmed,"● Data up to date");
 
   // Dynamic UI phrases
   let m=trimmed.match(/^(\d+) в оренді$/);
@@ -652,6 +677,17 @@ const apartments=DATA.apartments;
 const overall=DATA.overall;
 
 function money(n){return Number(n).toLocaleString("uk-UA")+" ₴"}
+function compactMoney(n){
+  n=Number(n)||0;
+  if(n>=1000000){
+    const v=(n/1000000).toFixed(n%1000000===0?0:1);
+    return v.replace(".0","")+"M";
+  }
+  if(n>=1000){
+    return Math.round(n/1000)+"k";
+  }
+  return String(n);
+}
 function badgeClass(status){return status==="Здана"?"good":status==="Вільна"?"warn":"bad"}
 
 function roomSvg(base,label,v=0){
@@ -718,11 +754,20 @@ function buildDashboard(){
     <div class="card kpi"><div class="kpi-label">Заборгованість</div><div class="kpi-value">${money(debt)}</div><div class="kpi-sub">2 квартири</div></div>`;
 
   const max=Math.max(...overall.map(x=>Math.max(x.received,x.expense)));
-  document.getElementById("chart").innerHTML=overall.map(x=>`
-    <div class="baritem"><div class="barset">
-      <div class="bar received" style="height:${Math.max(3,Math.round(x.received/max*92))}%" data-tip="${money(x.received)}"></div>
-      <div class="bar expense" style="height:${Math.max(3,Math.round(x.expense/max*92))}%" data-tip="${money(x.expense)}"></div>
-    </div><div class="month">${x.month}</div></div>`).join("");
+  document.getElementById("chart").innerHTML=overall.map(x=>{
+    const recH=Math.max(3,Math.round(x.received/max*82));
+    const expH=Math.max(3,Math.round(x.expense/max*82));
+    return `
+    <div class="baritem">
+      <div class="barset">
+        <div class="data-label received-label" style="bottom:calc(${recH}% + 9px)">${compactMoney(x.received)}</div>
+        <div class="data-label expense-label" style="bottom:calc(${expH}% + 0px);transform:translateX(35%)">${compactMoney(x.expense)}</div>
+        <div class="bar received" style="height:${recH}%" data-tip="${money(x.received)}"></div>
+        <div class="bar expense" style="height:${expH}%" data-tip="${money(x.expense)}"></div>
+      </div>
+      <div class="month">${x.month}</div>
+    </div>`;
+  }).join("");
 
   document.getElementById("propertyList").innerHTML=apartments.map((a,i)=>`
     <div class="property-row" onclick="showApartment(${i})">
@@ -803,12 +848,18 @@ function renderPanels(a){
     </div>
 
     <div class="apt-history-chart">
-      ${a.history.map(h=>`
+      ${a.history.map(h=>{
+        const recH=Math.max(3,Math.round(h.received/maxHist*78));
+        const expH=Math.max(3,Math.round(h.expense/maxHist*78));
+        return `
         <div class="apt-chart-item">
-          <div class="apt-col received" style="height:${Math.max(3,Math.round(h.received/maxHist*90))}%" title="Отримано: ${money(h.received)}"></div>
-          <div class="apt-col expense" style="height:${Math.max(3,Math.round(h.expense/maxHist*90))}%" title="Витрати: ${money(h.expense)}"></div>
+          <div class="apt-value-label received-label" style="bottom:calc(${recH}% + 30px)">${compactMoney(h.received)}</div>
+          <div class="apt-value-label expense-label" style="bottom:calc(${expH}% + 20px);transform:translateX(30%)">${compactMoney(h.expense)}</div>
+          <div class="apt-col received" style="height:${recH}%" title="Отримано: ${money(h.received)}"></div>
+          <div class="apt-col expense" style="height:${expH}%" title="Витрати: ${money(h.expense)}"></div>
           <div class="apt-chart-month">${h.month}</div>
-        </div>`).join("")}
+        </div>`;
+      }).join("")}
     </div>
 
     <div class="legend">

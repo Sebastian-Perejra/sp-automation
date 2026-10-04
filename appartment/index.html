@@ -1536,6 +1536,275 @@ body{
   .pagehead h2{font-size:20px !important}
 }
 
+
+/* =========================================================
+   MOBILE V3 — final app layout
+   ========================================================= */
+@media(max-width:720px){
+
+  /* overall */
+  body{background:#f4f7fb !important}
+  .main{padding:12px 10px 24px !important}
+  .card{box-shadow:0 6px 18px rgba(15,23,42,.055) !important}
+
+  /* header: one clean row */
+  .topbar{
+    height:58px !important;
+    padding:0 10px !important;
+  }
+  .brandmark{width:32px !important;height:32px !important;border-radius:10px !important}
+  .brand span{font-size:11px !important;max-width:86px !important}
+  .top-actions{gap:4px !important}
+  .top-actions .lang-switch{padding:2px !important}
+  .lang-btn{padding:5px 5px !important;font-size:8px !important}
+  .avatar{width:30px !important;height:30px !important}
+  .ghost{min-width:46px !important;padding:7px 7px !important;font-size:8px !important}
+  .sync{display:none !important}
+
+  .mobile-tabs{
+    top:58px !important;
+    padding:7px 10px !important;
+    gap:7px !important;
+  }
+  .mobile-tabs .navbtn{font-size:10px !important;padding:8px 10px !important}
+  .mobile-select{height:36px !important;font-size:10px !important}
+
+  /* dashboard heading */
+  .pagehead{
+    margin:4px 0 12px !important;
+    gap:6px !important;
+  }
+  .pagehead h2{font-size:21px !important}
+  .pagehead p{font-size:10px !important}
+  .pagehead .badge{font-size:8px !important;padding:5px 8px !important}
+
+  /* KPI cards */
+  .kpis{gap:8px !important;margin-bottom:10px !important}
+  .kpi{
+    min-height:82px !important;
+    padding:10px 11px !important;
+    border-radius:13px !important;
+  }
+  .kpi-label{font-size:8px !important;min-height:16px !important}
+  .kpi-value{font-size:17px !important;margin-top:4px !important}
+  .kpi-sub{font-size:7px !important;margin-top:4px !important}
+
+  /* overview chart: ALL 12 months visible, no horizontal scroll */
+  #dashboard .grid2{display:block !important}
+  #dashboard .grid2 > .card:nth-child(2){display:none !important}
+  #dashboard .grid2 > .card:first-child{margin-bottom:10px !important}
+  #dashboard .chart-wrap{
+    overflow:visible !important;
+    width:100% !important;
+    padding:0 !important;
+  }
+  #dashboard .chart{
+    width:100% !important;
+    min-width:0 !important;
+    height:220px !important;
+    display:grid !important;
+    grid-template-columns:repeat(12,minmax(0,1fr)) !important;
+    align-items:end !important;
+    gap:2px !important;
+    padding:24px 0 0 !important;
+  }
+  #dashboard .baritem{
+    min-width:0 !important;
+    width:100% !important;
+    gap:4px !important;
+  }
+  #dashboard .barset{
+    gap:1px !important;
+    width:100%;
+    justify-content:center;
+  }
+  #dashboard .bar.received{width:9px !important}
+  #dashboard .bar.expense{width:4px !important}
+  #dashboard .data-label.received-label{font-size:6.5px !important}
+  #dashboard .data-label.expense-label{display:none !important}
+  #dashboard .month{
+    font-size:6.5px !important;
+    transform:none !important;
+    height:18px !important;
+    padding:0 !important;
+    white-space:nowrap;
+  }
+  #dashboard .legend{font-size:8px !important;margin-top:6px !important}
+
+  /* recent transactions as compact native-like rows */
+  .recent-desktop-table{display:none !important}
+  .mobile-recent-list{display:grid !important;gap:7px}
+  .mobile-recent-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px;
+    border:1px solid #e7ebf2;
+    border-radius:12px;
+    background:#fff;
+  }
+  .mobile-recent-main{display:flex;align-items:center;gap:9px;min-width:0}
+  .mobile-recent-icon{
+    width:30px;height:30px;border-radius:9px;
+    display:grid;place-items:center;
+    background:#edf3ff;color:#376cec;
+    font-size:13px;font-weight:900;flex:none;
+  }
+  .mobile-recent-copy{min-width:0}
+  .mobile-recent-copy strong{
+    display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .mobile-recent-copy small{display:block;margin-top:3px;font-size:8px;color:#8a96aa}
+  .mobile-recent-value{text-align:right;flex:none}
+  .mobile-recent-value strong{display:block;font-size:10px}
+  .mobile-recent-value .badge{margin-top:4px;padding:4px 7px;font-size:7px}
+  .mobile-more-transactions{display:none !important}
+
+  /* apartment: gallery + info */
+  .hero{aspect-ratio:16/9 !important;border-radius:15px !important}
+  .gallery{
+    display:grid !important;
+    grid-template-columns:repeat(4,1fr) !important;
+    gap:6px !important;
+    overflow:visible !important;
+    margin:7px 0 10px !important;
+    padding:0 !important;
+  }
+  .gallery button{
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:4/3 !important;
+    flex:none !important;
+    border-radius:10px !important;
+  }
+  .thumb-label{font-size:6.5px !important}
+
+  .stack{gap:8px !important}
+  .compact-card{padding:11px !important}
+  .info-row{min-height:36px !important;padding:6px 9px !important}
+  .info-row small{font-size:8px !important}
+  .info-row strong{font-size:11px !important}
+  .mini-kpi{min-height:60px !important;padding:8px 9px !important}
+  .mini-kpi small{font-size:7px !important}
+  .mini-kpi strong{font-size:14px !important}
+
+  /* tabs: 2x2, never clipped */
+  .tabs{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    width:100% !important;
+    overflow:visible !important;
+    gap:5px !important;
+    padding:5px !important;
+    margin:9px 0 8px !important;
+  }
+  .tab{
+    width:100%;
+    text-align:center;
+    white-space:normal !important;
+    padding:8px 6px !important;
+    font-size:8px !important;
+  }
+
+  /* apartment finance: all 12 months fit */
+  #payments{padding:11px !important}
+  .finance-overview{display:block !important}
+  .fin-summary{
+    grid-template-columns:1fr 1fr !important;
+    gap:7px !important;
+    margin-bottom:8px !important;
+  }
+  .fin-kpi{min-height:68px !important;padding:8px 9px !important}
+  .fin-kpi small{font-size:7px !important}
+  .fin-kpi strong{font-size:14px !important;margin-top:5px !important}
+
+  .apt-chart-scroll{
+    overflow:visible !important;
+    width:100% !important;
+  }
+  .apt-history-chart{
+    width:100% !important;
+    min-width:0 !important;
+    height:205px !important;
+    display:grid !important;
+    grid-template-columns:repeat(12,minmax(0,1fr)) !important;
+    align-items:end !important;
+    gap:2px !important;
+    padding:22px 0 20px !important;
+  }
+  .apt-chart-item{
+    min-width:0 !important;
+    width:100% !important;
+    gap:1px !important;
+    padding-bottom:22px !important;
+  }
+  .apt-col.received{width:8px !important}
+  .apt-col.expense{width:4px !important}
+  .apt-value-label.received-label{font-size:6px !important}
+  .apt-value-label.expense-label{display:none !important}
+  .apt-chart-month{
+    font-size:6px !important;
+    transform:none !important;
+    white-space:nowrap;
+  }
+  #payments .legend{
+    display:flex !important;
+    flex-wrap:wrap;
+    gap:6px 10px !important;
+    font-size:7px !important;
+    margin-top:5px !important;
+  }
+  #payments .legend span:last-child{
+    width:100%;
+    text-align:left !important;
+  }
+
+  /* compact history rows instead of tall cards */
+  .mobile-history-cards{
+    display:block !important;
+    border:1px solid #e7ebf2;
+    border-radius:11px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .mobile-history-head,
+  .mobile-history-row{
+    display:grid;
+    grid-template-columns:.8fr 1fr .8fr .85fr;
+    align-items:center;
+    gap:5px;
+  }
+  .mobile-history-head{
+    padding:7px 8px;
+    background:#f7f9fc;
+    color:#8a96aa;
+    font-size:7px;
+    font-weight:800;
+  }
+  .mobile-history-row{
+    padding:8px;
+    border-top:1px solid #eef1f5;
+    font-size:8px;
+  }
+  .mobile-history-row strong{font-size:8px}
+  .mobile-history-row .badge{
+    justify-self:end;
+    padding:4px 6px;
+    font-size:6.5px;
+  }
+  .mobile-history-row.extra-month{display:none}
+  .mobile-history-cards.expanded .mobile-history-row.extra-month{display:grid}
+  .history-more{
+    margin-top:7px !important;
+    padding:9px !important;
+    font-size:9px !important;
+  }
+
+  .desktop-history-table{display:none !important}
+  .footer{font-size:7px !important;padding-top:16px !important}
+}
+
 </style>
 </head>
 <body>
@@ -1596,7 +1865,8 @@ body{
 
       <div class="card section" style="margin-top:18px">
         <div class="sechead"><h3>Останні операції</h3><span>жовтень 2026</span></div>
-        <div class="table-wrap"><table class="table mobile-stack">
+        <div id="mobileRecentOps" class="mobile-recent-list mobile-only"></div>
+        <div class="table-wrap recent-desktop-table"><table class="table mobile-stack">
           <thead><tr><th>Квартира</th><th>Подія</th><th>Дата</th><th>Сума</th><th>Статус</th></tr></thead>
           <tbody id="recentOps"></tbody>
         </table></div>
@@ -2099,6 +2369,23 @@ function buildDashboard(){
   ];
   document.getElementById("recentOps").innerHTML=latestOps.map(r=>`
     <tr><td data-label="Квартира">${r[0].title}</td><td data-label="Подія">${r[1]}</td><td data-label="Дата">${r[2]}</td><td data-label="Сума"><b>${money(r[3])}</b></td><td data-label="Статус"><span class="badge ${r[4]==="Сплачено"?"good":r[4]==="Очікується"?"warn":"bad"}">${r[4]}</span></td></tr>`).join("");
+  const mobileRecent=document.getElementById("mobileRecentOps");
+  if(mobileRecent){
+    mobileRecent.innerHTML=latestOps.slice(0,3).map(r=>`
+      <div class="mobile-recent-row">
+        <div class="mobile-recent-main">
+          <div class="mobile-recent-icon">${r[1]==="Оренда"?"↗":r[1]==="Ремонт"?"⌘":"✓"}</div>
+          <div class="mobile-recent-copy">
+            <strong>${r[0].title}</strong>
+            <small>${r[1]} · ${r[2]}</small>
+          </div>
+        </div>
+        <div class="mobile-recent-value">
+          <strong>${money(r[3])}</strong>
+          <span class="badge ${r[4]==="Сплачено"?"good":r[4]==="Очікується"?"warn":"bad"}">${r[4]}</span>
+        </div>
+      </div>`).join("");
+  }
   const recentBody=document.getElementById("recentOps");
   if(recentBody) recentBody.classList.remove("expanded");
   const recentBtn=document.getElementById("mobileMoreTransactions");
@@ -2217,19 +2504,16 @@ function renderPanels(a){
       </table></div>
     </div>
 
-    <div id="mobileHistoryCards" class="mobile-history-cards" style="margin-top:12px">
+    <div id="mobileHistoryCards" class="mobile-history-cards" style="margin-top:10px">
+      <div class="mobile-history-head">
+        <span>Місяць</span><span>Отримано</span><span>Витрати</span><span>Статус</span>
+      </div>
       ${[...a.history].reverse().map((h,idx)=>`
-        <div class="mobile-history-card ${idx>=3?'extra-month':''}">
-          <div class="mhc-head">
-            <div class="mhc-month">${h.month}</div>
-            <span class="badge ${h.expected===0?"warn":h.received>=h.expected?"good":"bad"}">${h.expected===0?"Без оренди":h.received>=h.expected?"Сплачено":"Є борг"}</span>
-          </div>
-          <div class="mhc-grid">
-            <div class="mhc-item"><small>Нараховано</small><strong>${money(h.expected)}</strong></div>
-            <div class="mhc-item"><small>Отримано</small><strong>${money(h.received)}</strong></div>
-            <div class="mhc-item"><small>Витрати</small><strong>${money(h.expense)}</strong></div>
-            <div class="mhc-item"><small>Комунальні</small><strong>${money(h.utilities)}</strong></div>
-          </div>
+        <div class="mobile-history-row ${idx>=3?'extra-month':''}">
+          <strong>${h.month}</strong>
+          <span>${compactMoney(h.received)} ₴</span>
+          <span>${compactMoney(h.expense)} ₴</span>
+          <span class="badge ${h.expected===0?"warn":h.received>=h.expected?"good":"bad"}">${h.expected===0?"Без оренди":h.received>=h.expected?"Сплачено":"Є борг"}</span>
         </div>`).join("")}
     </div>
     <button id="historyMoreBtn" class="history-more" onclick="toggleHistoryMonths()">Показати всі 12 місяців</button>`;

@@ -247,6 +247,109 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
   .apt-value-label{font-size:6px}
 }
 
+
+/* Compact, cleaner apartment detail sidebar */
+.apartment-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.32fr) minmax(340px,.92fr);
+  gap:18px;
+  align-items:start;
+}
+.stack{
+  display:grid;
+  gap:14px;
+}
+.compact-card{
+  padding:16px;
+}
+.sechead-tight{
+  margin-bottom:10px;
+}
+.sechead-tight h3{
+  font-size:14px;
+}
+.sechead-tight span{
+  font-size:11px;
+}
+.info-list{
+  display:grid;
+  gap:8px;
+}
+.info-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfcfe;
+}
+.info-row small{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  line-height:1.2;
+}
+.info-row strong{
+  font-size:16px;
+  line-height:1.2;
+  text-align:right;
+}
+.mini-kpi-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.mini-kpi{
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfcfe;
+}
+.mini-kpi small{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  font-weight:800;
+  line-height:1.2;
+}
+.mini-kpi strong{
+  display:block;
+  margin-top:6px;
+  font-size:18px;
+  line-height:1.15;
+}
+.mini-kpi.received strong{color:var(--good)}
+.mini-kpi.debt strong{color:var(--bad)}
+.compact-card .sechead{
+  align-items:center;
+}
+.compact-card .sechead h3{
+  margin:0;
+}
+
+@media(min-width:1121px){
+  .stack{
+    position:sticky;
+    top:82px;
+  }
+}
+
+@media(max-width:1120px){
+  .apartment-grid{grid-template-columns:1fr}
+  .stack{position:static}
+}
+
+@media(max-width:720px){
+  .compact-card{padding:14px}
+  .info-row{padding:10px 11px}
+  .info-row strong{font-size:15px}
+  .mini-kpi-grid{grid-template-columns:1fr 1fr; gap:8px}
+  .mini-kpi{padding:11px}
+  .mini-kpi strong{font-size:16px}
+}
+
 </style>
 </head>
 <body>
@@ -327,25 +430,25 @@ button,input{font:inherit}button{touch-action:manipulation}.hidden{display:none!
         </div>
 
         <div class="stack">
-          <div class="card info-card">
-            <div class="sechead"><h3>Основна інформація</h3><span id="aptCode"></span></div>
-            <div class="info-grid">
-              <div class="info"><small>Орендна ставка</small><strong id="rent"></strong></div>
-              <div class="info"><small>Депозит</small><strong id="deposit"></strong></div>
-              <div class="info"><small>Площа</small><strong id="area"></strong></div>
-              <div class="info"><small>Кімнати</small><strong id="rooms"></strong></div>
-              <div class="info"><small>Орендар</small><strong id="tenant"></strong></div>
-              <div class="info"><small>Договір до</small><strong id="leaseEnd"></strong></div>
+          <div class="card compact-card">
+            <div class="sechead sechead-tight"><h3>Основна інформація</h3><span id="aptCode"></span></div>
+            <div class="info-list">
+              <div class="info-row"><small>Орендна ставка</small><strong id="rent"></strong></div>
+              <div class="info-row"><small>Депозит</small><strong id="deposit"></strong></div>
+              <div class="info-row"><small>Площа</small><strong id="area"></strong></div>
+              <div class="info-row"><small>Кімнати</small><strong id="rooms"></strong></div>
+              <div class="info-row"><small>Орендар</small><strong id="tenant"></strong></div>
+              <div class="info-row"><small>Договір до</small><strong id="leaseEnd"></strong></div>
             </div>
           </div>
 
-          <div class="card info-card">
-            <div class="sechead"><h3>Поточний місяць</h3><span>жовтень 2026</span></div>
-            <div class="info-grid">
-              <div class="info"><small>Нараховано</small><strong id="charged"></strong></div>
-              <div class="info"><small>Отримано</small><strong id="received"></strong></div>
-              <div class="info"><small>Комунальні</small><strong id="utilities"></strong></div>
-              <div class="info"><small>Борг</small><strong id="debt"></strong></div>
+          <div class="card compact-card">
+            <div class="sechead sechead-tight"><h3>Поточний місяць</h3><span>жовтень 2026</span></div>
+            <div class="mini-kpi-grid">
+              <div class="mini-kpi"><small>Нараховано</small><strong id="charged"></strong></div>
+              <div class="mini-kpi received"><small>Отримано</small><strong id="received"></strong></div>
+              <div class="mini-kpi"><small>Комунальні</small><strong id="utilities"></strong></div>
+              <div class="mini-kpi debt"><small>Борг</small><strong id="debt"></strong></div>
             </div>
           </div>
         </div>

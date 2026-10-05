@@ -497,8 +497,8 @@ const descriptions =
           ) / 2;
 
         const scale =
-          0.76 +
-          depth * 0.34;
+          0.38 +
+          depth * 0.17;
 
         const opacity =
           0.38 +

@@ -115,7 +115,8 @@ html, body {
   transform:
     translate(-50%, -50%)
     rotateY(calc(var(--i) * 36deg))
-    translateZ(400px);
+    translateZ(400px)
+    scale(var(--depth-scale, 1));
   height: 200px;
   image-rendering: auto;
   cursor: pointer;
@@ -133,9 +134,9 @@ html, body {
     .carousel img:hover {
   transform:
     translate(-50%, -50%)
-    scale(1.16)
     rotateY(calc(var(--i) * 36deg))
-    translateZ(420px);
+    translateZ(400px)
+    scale(var(--depth-scale, 1));
   filter:
     drop-shadow(0 20px 34px rgba(0,0,0,0.24))
     saturate(1.12)
@@ -1463,17 +1464,19 @@ body::-webkit-scrollbar {
 
     .carousel img {
       height: 136px;
-      transform:
-        translate(-50%, -50%)
-        rotateY(calc(var(--i) * 36deg))
-        translateZ(165px);
+    transform:
+      translate(-50%, -50%)
+      rotateY(calc(var(--i) * 36deg))
+      translateZ(165px)
+      scale(var(--depth-scale, 1));
     }
 
     .carousel img:hover {
-      transform:
-        translate(-50%, -50%)
-        rotateY(calc(var(--i) * 36deg))
-        translateZ(165px);
+    transform:
+      translate(-50%, -50%)
+      rotateY(calc(var(--i) * 36deg))
+      translateZ(165px)
+      scale(var(--depth-scale, 1));
     }
 
     .hint {

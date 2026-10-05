@@ -417,18 +417,9 @@ function initCarousel() {
       carousel.querySelectorAll('img')
     );
 
-  if (!images.length) {
-    return;
-  }
-
   const reducedMotion =
     window.matchMedia(
       '(prefers-reduced-motion: reduce)'
-    ).matches;
-
-  const mobile =
-    window.matchMedia(
-      '(max-width: 768px)'
     ).matches;
 
   let isDragging = false;
@@ -440,118 +431,95 @@ function initCarousel() {
   const rotationSpeed =
     360 / 80000;
 
-  const radius =
-    mobile ? 92 : 175;
+  carousel.style.animation = 'none';
 
   const descriptionsByLang = {
-    uk: {
-      Excel: 'Автоматизація Excel',
-      'Power BI': 'Візуалізація через Power BI',
-      'Google Sheets': 'Скрипти в Google Таблицях',
-      JavaScript: 'Автоматизація через JavaScript',
-      VBA: 'Макроси та коди VBA',
-      'Power Query': 'Імпорт та трансформації',
-      'Power Pivot': 'DAX-аналіз у Power Pivot',
-      'Telegram Bot': 'Telegram-боти та сповіщення',
-      'Google Drive': 'Автоматизація Google Drive',
-      'Web App': 'Вебзастосунки та PWA'
-    },
+  uk: {
+    Excel: 'Автоматизація Excel',
+    'Power BI': 'Візуалізація через Power BI',
+    'Google Sheets': 'Скрипти в Google Таблицях',
+    JavaScript: 'Автоматизація через JavaScript',
+    VBA: 'Макроси та коди VBA',
+    'Power Query': 'Імпорт та трансформації',
+    'Power Pivot': 'DAX-аналіз у Power Pivot',
+    'Telegram Bot': 'Telegram-боти та сповіщення',
+    'Google Drive': 'Автоматизація Google Drive',
+    'Web App': 'Вебзастосунки та PWA'
+  },
 
-    en: {
-      Excel: 'Excel automation',
-      'Power BI': 'Visualization with Power BI',
-      'Google Sheets': 'Scripts in Google Sheets',
-      JavaScript: 'Automation with JavaScript',
-      VBA: 'VBA macros and code',
-      'Power Query': 'Import and data transformations',
-      'Power Pivot': 'DAX analysis in Power Pivot',
-      'Telegram Bot': 'Telegram bots and notifications',
-      'Google Drive': 'Google Drive automation',
-      'Web App': 'Web apps and PWA'
-    },
+  en: {
+    Excel: 'Excel automation',
+    'Power BI': 'Visualization with Power BI',
+    'Google Sheets': 'Scripts in Google Sheets',
+    JavaScript: 'Automation with JavaScript',
+    VBA: 'VBA macros and code',
+    'Power Query': 'Import and data transformations',
+    'Power Pivot': 'DAX analysis in Power Pivot',
+    'Telegram Bot': 'Telegram bots and notifications',
+    'Google Drive': 'Google Drive automation',
+    'Web App': 'Web apps and PWA'
+  },
 
-    ru: {
-      Excel: 'Автоматизация Excel',
-      'Power BI': 'Визуализация через Power BI',
-      'Google Sheets': 'Скрипты в Google Таблицах',
-      JavaScript: 'Автоматизация через JavaScript',
-      VBA: 'Макросы и код VBA',
-      'Power Query': 'Импорт и преобразование данных',
-      'Power Pivot': 'DAX-анализ в Power Pivot',
-      'Telegram Bot': 'Telegram-боты и уведомления',
-      'Google Drive': 'Автоматизация Google Drive',
-      'Web App': 'Веб-приложения и PWA'
-    }
-  };
+  ru: {
+    Excel: 'Автоматизация Excel',
+    'Power BI': 'Визуализация через Power BI',
+    'Google Sheets': 'Скрипты в Google Таблицах',
+    JavaScript: 'Автоматизация через JavaScript',
+    VBA: 'Макросы и код VBA',
+    'Power Query': 'Импорт и преобразование данных',
+    'Power Pivot': 'DAX-анализ в Power Pivot',
+    'Telegram Bot': 'Telegram-боты и уведомления',
+    'Google Drive': 'Автоматизация Google Drive',
+    'Web App': 'Веб-приложения и PWA'
+  }
+};
 
-  const descriptions =
-    descriptionsByLang[HOME_LANG] ||
-    descriptionsByLang.uk;
+const descriptions =
+  descriptionsByLang[HOME_LANG] ||
+  descriptionsByLang.uk;
 
-  function updateCarousel() {
-    const step =
-      360 / images.length;
-
+  function updateDepth() {
     images.forEach(
       (img, index) => {
         const angle =
           rotation +
-          index * step -
-          90;
+          index * 36;
 
         const radians =
           angle *
           Math.PI /
           180;
 
-        const x =
-          Math.cos(radians) *
-          radius;
-
-        const y =
-          Math.sin(radians) *
-          radius;
-
-        /*
-         * Нижняя часть круга визуально ближе,
-         * верхняя — дальше.
-         */
         const depth =
           (
-            Math.sin(radians) +
+            Math.cos(radians) +
             1
           ) / 2;
 
         const scale =
-          mobile
-            ? 0.34 + depth * 0.10
-            : 0.38 + depth * 0.17;
+          0.38 +
+          depth * 0.17;
 
         const opacity =
-          0.55 +
-          depth * 0.45;
+          0.38 +
+          depth * 0.62;
 
         const brightness =
-          0.82 +
-          depth * 0.18;
+          0.72 +
+          depth * 0.36;
 
         const saturation =
-          0.88 +
-          depth * 0.12;
+          0.72 +
+          depth * 0.38;
+
+          const blur = 0;
 
         const shadow =
           6 +
-          depth * 12;
+          depth * 18;
 
-        img.style.transform =
-          `
-            translate(-50%, -50%)
-            translate(
-              ${x.toFixed(2)}px,
-              ${y.toFixed(2)}px
-            )
-            scale(${scale.toFixed(3)})
-          `;
+        img.style.scale =
+          scale.toFixed(3);
 
         img.style.opacity =
           opacity.toFixed(3);
@@ -559,7 +527,7 @@ function initCarousel() {
         img.style.zIndex =
           String(
             Math.round(
-              10 + depth * 90
+              depth * 100
             )
           );
 
@@ -567,11 +535,15 @@ function initCarousel() {
           `
             brightness(${brightness.toFixed(3)})
             saturate(${saturation.toFixed(3)})
+            blur(${blur.toFixed(2)}px)
             drop-shadow(
               0
               ${shadow.toFixed(1)}px
-              ${(shadow * 1.4).toFixed(1)}px
-              rgba(0, 0, 0, 0.16)
+              ${(shadow * 1.5).toFixed(1)}px
+              rgba(0, 0, 0, ${(
+                0.08 +
+                depth * 0.14
+              ).toFixed(3)})
             )
           `;
       }
@@ -595,7 +567,10 @@ function initCarousel() {
 
     rotation %= 360;
 
-    updateCarousel();
+    carousel.style.transform =
+      `rotateY(${rotation}deg)`;
+
+    updateDepth();
 
     window.requestAnimationFrame(
       animate
@@ -639,7 +614,9 @@ function initCarousel() {
   carousel.parentElement.addEventListener(
     'touchstart',
     event => {
-      if (!event.touches.length) {
+      if (
+        !event.touches.length
+      ) {
         return;
       }
 
@@ -713,7 +690,7 @@ function initCarousel() {
     }
   );
 
-  updateCarousel();
+  updateDepth();
 
   window.requestAnimationFrame(
     animate

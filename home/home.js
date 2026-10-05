@@ -518,8 +518,10 @@ const descriptions =
           6 +
           depth * 18;
 
-        img.style.scale =
-          scale.toFixed(3);
+        img.style.setProperty(
+          '--depth-scale',
+          scale.toFixed(3)
+        );
 
         img.style.opacity =
           opacity.toFixed(3);

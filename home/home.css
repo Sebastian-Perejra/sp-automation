@@ -116,7 +116,8 @@ html, body {
     translate(-50%, -50%)
     rotateY(calc(var(--i) * 36deg))
     translateZ(400px);
-  height: 100px;
+  height: 200px;
+  image-rendering: auto;
   cursor: pointer;
   backface-visibility: visible;
   filter:
@@ -1461,7 +1462,7 @@ body::-webkit-scrollbar {
     }
 
     .carousel img {
-      height: 68px;
+      height: 136px;
       transform:
         translate(-50%, -50%)
         rotateY(calc(var(--i) * 36deg))

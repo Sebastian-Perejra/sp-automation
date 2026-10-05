@@ -85,72 +85,62 @@ html, body {
   cursor: pointer;
 }
 
-.carousel-container {
-  width: 100%;
-  overflow: hidden;
+    .carousel-container {
+      perspective: 1000px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      margin: 60px 0;
+      position: relative;
+    }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    .carousel {
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: spin 80s linear infinite;
+    }
 
-  height: 460px;
-  margin: 60px 0;
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
 
-  position: relative;
-
-  perspective: none;
-}
-
-.carousel {
+    .carousel img {
   position: absolute;
-
   left: 50%;
   top: 50%;
-
-  width: 0;
-  height: 0;
-
-  transform: none;
-  transform-style: flat;
-
-  animation: none;
-}
-
-.carousel img {
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
+  transform:
+    translate(-50%, -50%)
+    rotateY(calc(var(--i) * 36deg))
+    translateZ(400px);
   height: 200px;
-
-  cursor: pointer;
-
   image-rendering: auto;
-
-  transform-origin: center center;
-
+  cursor: pointer;
   backface-visibility: visible;
-
-  opacity: 1;
-
   filter:
-    drop-shadow(
-      0 12px 22px rgba(0,0,0,0.16)
-    );
-
+    drop-shadow(0 14px 24px rgba(0,0,0,0.18))
+    saturate(1.05);
+  opacity: 0.92;
   transition:
-    filter 0.22s ease,
-    opacity 0.22s ease;
+    transform 0.35s ease,
+    filter 0.35s ease,
+    opacity 0.35s ease;
 }
 
-.carousel img:hover {
+    .carousel img:hover {
+  transform:
+    translate(-50%, -50%)
+    scale(1.16)
+    rotateY(calc(var(--i) * 36deg))
+    translateZ(420px);
   filter:
-    brightness(1.06)
-    saturate(1.08)
-    drop-shadow(
-      0 18px 30px rgba(0,0,0,0.22)
-    ) !important;
+    drop-shadow(0 20px 34px rgba(0,0,0,0.24))
+    saturate(1.12)
+    brightness(1.06);
+  opacity: 1;
 }
 
 .hint {
@@ -1464,25 +1454,27 @@ body::-webkit-scrollbar {
       font-size: 15px;
     }
 
-.carousel-container {
+    .carousel-container {
   width: calc(100% - 24px);
-  height: 260px;
+  height: 220px;
   margin: 22px auto 42px;
   overflow: hidden;
-}
+    }
 
-.carousel img {
-  height: 136px;
-}
+    .carousel img {
+      height: 136px;
+      transform:
+        translate(-50%, -50%)
+        rotateY(calc(var(--i) * 36deg))
+        translateZ(165px);
+    }
 
-.carousel img:hover {
-  filter:
-    brightness(1.05)
-    saturate(1.06)
-    drop-shadow(
-      0 12px 22px rgba(0,0,0,0.18)
-    ) !important;
-}
+    .carousel img:hover {
+      transform:
+        translate(-50%, -50%)
+        rotateY(calc(var(--i) * 36deg))
+        translateZ(165px);
+    }
 
     .hint {
       display: none !important;

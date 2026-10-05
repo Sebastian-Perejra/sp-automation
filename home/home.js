@@ -512,7 +512,6 @@ const descriptions =
           0.72 +
           depth * 0.38;
 
-        const blur =
           const blur = 0;
 
         const shadow =

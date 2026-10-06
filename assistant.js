@@ -362,21 +362,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .join("");
 });
 
-  let activeLanguage = "UA";
-
-  if (path.includes("-en.html")) {
-    activeLanguage = "EN";
-  } else if (path.includes("-ru.html")) {
-    activeLanguage = "RU";
-  }
-
-  buttons.forEach(button => {
-    const isActive =
-      button.textContent.trim().toUpperCase() === activeLanguage;
-
-    button.classList.toggle("active-language", isActive);
-    button.setAttribute("aria-current", isActive ? "page" : "false");
-  });
 
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector(".desktop-nav");

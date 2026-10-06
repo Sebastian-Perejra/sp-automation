@@ -837,11 +837,11 @@ const info =
 
       <div class="site-map-scene__stage">
         <img
-          class="site-map-scene__image"
-          src="/components/site-map/campus_at_night.webp"
-          alt=""
-          draggable="false"
-        >
+        class="site-map-scene__image"
+        data-src="/components/site-map/campus_at_night.webp"
+        alt=""
+        draggable="false"
+      >
 
         <svg
           class="site-map-route-layer"
@@ -1063,6 +1063,13 @@ requestAnimationFrame(
 );
 
   function openMap() {
+    if (
+  mapImage &&
+  !mapImage.getAttribute("src")
+) {
+  mapImage.src =
+    mapImage.dataset.src;
+}
     overlay.classList.add(
       "is-open"
     );

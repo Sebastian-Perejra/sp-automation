@@ -168,18 +168,10 @@ if (!mobile) {
       });
   };
 
-  if (
-    'requestIdleCallback' in window
-  ) {
-    requestIdleCallback(
-      preloadRest
-    );
-  } else {
-    setTimeout(
-      preloadRest,
-      1800
-    );
-  }
+window.setTimeout(
+  preloadRest,
+  16000
+);
 }
 
   const reducedMotion =

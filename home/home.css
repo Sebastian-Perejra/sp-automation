@@ -2269,18 +2269,14 @@ body.home-bg-show-b::after {
   }
 }
 
-.home-hero,
+.home-hero {
+  opacity: 1;
+  transform: none;
+}
+
 .carousel-container {
   opacity: 0;
   transform: translateY(18px);
-}
-
-body.home-ready .home-hero {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity 0.65s ease,
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body.home-ready .carousel-container {

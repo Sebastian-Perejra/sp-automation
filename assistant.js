@@ -121,7 +121,7 @@ function createAssistant() {
     assistant.innerHTML = `
         <img
             id="sp-assistant-avatar"
-            src="/assistant-avatar.png"
+            src="/assistant-avatar.webp"
             alt="Assistant"
         >
 

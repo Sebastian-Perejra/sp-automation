@@ -181,6 +181,8 @@
   visibility: hidden;
   pointer-events: none;
 
+  contain: layout paint;
+
   transition:
     opacity 0.32s ease,
     visibility 0s linear 0.32s;

@@ -442,23 +442,3 @@ document.addEventListener("DOMContentLoaded", () => {
     .join("");
 });
 
-  navLinks.forEach(link => {
-    const href = link.getAttribute("href")?.toLowerCase();
-
-    if (!href) return;
-
-    const linkFile = href.split("/").pop();
-    const currentFile = path.split("/").pop() || "index.html";
-
-    const isActive =
-      linkFile === currentFile ||
-      (currentFile === "" && linkFile === "index.html");
-
-    link.classList.toggle("active-page", isActive);
-
-    if (isActive) {
-      link.setAttribute("aria-current", "page");
-    } else {
-      link.removeAttribute("aria-current");
-    }
-  });

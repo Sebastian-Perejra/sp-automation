@@ -2237,6 +2237,7 @@ const WORKSPACE_PEEK_FRAMES = [
 let workspacePeekFrameIndex = 0;
 let workspacePeekTimer = null;
 let workspacePeekPreloaded = false;
+let workspacePeekNavigationReady = false;
 
 function preloadWorkspacePeekFrames() {
   if (workspacePeekPreloaded) {
@@ -2345,6 +2346,145 @@ function scheduleWorkspacePeekFrame() {
     );
 }
 
+function selectWorkspacePeekFrame(index) {
+  let nextIndex = index;
+
+  if (nextIndex < 0) {
+    nextIndex =
+      WORKSPACE_PEEK_FRAMES.length - 1;
+  }
+
+  if (
+    nextIndex >=
+    WORKSPACE_PEEK_FRAMES.length
+  ) {
+    nextIndex = 0;
+  }
+
+  window.clearTimeout(
+    workspacePeekTimer
+  );
+
+  showWorkspacePeekFrame(
+    nextIndex
+  );
+
+  workspacePeekTimer =
+    window.setTimeout(
+      scheduleWorkspacePeekFrame,
+      750
+    );
+}
+
+
+function initWorkspacePeekNavigation() {
+  if (workspacePeekNavigationReady) {
+    return;
+  }
+
+  const overlay =
+    document.getElementById(
+      'workspace-peek'
+    );
+
+  if (!overlay) {
+    return;
+  }
+
+  const image =
+    overlay.querySelector(
+      '.workspace-peek-image'
+    );
+
+  const progressDots =
+    Array.from(
+      overlay.querySelectorAll(
+        '.workspace-peek-progress span'
+      )
+    );
+
+  if (!image) {
+    return;
+  }
+
+  workspacePeekNavigationReady = true;
+
+  image.draggable = false;
+  image.style.touchAction = 'pan-y';
+
+  let pointerStartX = 0;
+  let pointerActive = false;
+
+  image.addEventListener(
+    'pointerdown',
+    event => {
+      pointerActive = true;
+      pointerStartX =
+        event.clientX;
+
+      image.setPointerCapture?.(
+        event.pointerId
+      );
+    }
+  );
+
+  image.addEventListener(
+    'pointerup',
+    event => {
+      if (!pointerActive) {
+        return;
+      }
+
+      pointerActive = false;
+
+      const deltaX =
+        event.clientX -
+        pointerStartX;
+
+      if (
+        Math.abs(deltaX) < 45
+      ) {
+        return;
+      }
+
+      if (deltaX < 0) {
+        selectWorkspacePeekFrame(
+          workspacePeekFrameIndex + 1
+        );
+      } else {
+        selectWorkspacePeekFrame(
+          workspacePeekFrameIndex - 1
+        );
+      }
+    }
+  );
+
+  image.addEventListener(
+    'pointercancel',
+    () => {
+      pointerActive = false;
+    }
+  );
+
+  progressDots.forEach(
+    (dot, index) => {
+      dot.style.cursor =
+        'pointer';
+
+      dot.addEventListener(
+        'click',
+        event => {
+          event.stopPropagation();
+
+          selectWorkspacePeekFrame(
+            index
+          );
+        }
+      );
+    }
+  );
+}
+
 function openWorkspacePeek() {
   const overlay =
     document.getElementById(
@@ -2356,7 +2496,7 @@ function openWorkspacePeek() {
   }
 
   preloadWorkspacePeekFrames();
-
+  initWorkspacePeekNavigation();
   overlay.classList.add(
     'show'
   );

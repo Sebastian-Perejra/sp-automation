@@ -7127,3 +7127,47 @@ button[data-calc="clear"] {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
+
+.workspace-peek-progress span {
+  position: relative;
+  overflow: hidden;
+}
+
+.workspace-peek-progress span.active {
+  width: 42px;
+  height: 6px;
+  border-radius: 999px;
+
+  background:
+    rgba(239, 244, 241, 0.22);
+}
+
+.workspace-peek-progress span.active::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  background:
+    #6cdb89;
+
+  transform-origin: left center;
+
+  animation:
+    workspacePeekCountdown
+    var(--workspace-peek-duration, 12000ms)
+    linear
+    forwards;
+}
+
+@keyframes workspacePeekCountdown {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}

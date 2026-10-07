@@ -2282,19 +2282,37 @@ function showWorkspacePeekFrame(index) {
 
       workspacePeekFrameIndex =
         index;
-          const progressDots =
+        const progressDots =
           overlay.querySelectorAll(
             '.workspace-peek-progress span'
           );
         
+        const frameDuration =
+          WORKSPACE_PEEK_FRAMES[index].duration;
+        
         progressDots.forEach(
-          (dot, dotIndex) => {
-            dot.classList.toggle(
-              'active',
-              dotIndex === index
+          dot => {
+            dot.classList.remove('active');
+        
+            dot.style.removeProperty(
+              '--workspace-peek-duration'
             );
           }
-      );
+        );
+        
+        const activeDot =
+          progressDots[index];
+        
+        if (activeDot) {
+          activeDot.style.setProperty(
+            '--workspace-peek-duration',
+            `${frameDuration}ms`
+          );
+        
+          void activeDot.offsetWidth;
+        
+          activeDot.classList.add('active');
+        }
     },
     260
   );

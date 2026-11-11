@@ -1027,4 +1027,25 @@ body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .timeline-panel
 body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .mobile-calendar-tool{
   height:29px;padding:0 7px;
 }
-
+/* Mobile row captions: keep the moving label at the TOP, away from event chips. */
+body.mobile-calendar-mode #timeline-view .timeline-row .mobile-operation-watermark {
+  top: 3px !important;
+  bottom: auto !important;
+  transform: translateZ(0) !important;
+  z-index: 2;
+  opacity: .37;
+  line-height: 1.2;
+}
+body.mobile-calendar-mode #timeline-view .timeline-row .day-slot .event-chip {
+  transform: translateY(5px);
+}
+body.mobile-calendar-mode #timeline-view .timeline-row .day-slot.has-operation-age .event-chip {
+  transform: translateY(7px);
+}
+@media (max-width: 760px) and (orientation: portrait) {
+  #timeline-view .timeline-row .mobile-operation-watermark {
+    top: 3px !important;
+    bottom: auto !important;
+    transform: translateZ(0) !important;
+  }
+}

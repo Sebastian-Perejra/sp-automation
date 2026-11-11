@@ -261,7 +261,7 @@
         const showAge=d===TODAY&&ageDays!==null;
         const ageBand=ageDays>=14?'age-critical':ageDays>=7?'age-watch':'age-normal';
         const ageBadge=showAge?`<span class="operation-age ${ageBand}" role="img" aria-label="В работе ${ageDays} дн." title="В работе ${ageDays} дн. · с ${formatDate(es.find(e=>e.type==='actual'&&e.date<=TODAY).date)}">${ageDays}</span>`:'';
-        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${d===TODAY?'today':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · двойной клик или два касания для редактирования">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
+        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · двойной клик или два касания для редактирования">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
       }
       const rowCaption=(op.direction==='EXP'?'ЭКСПОРТ':'ИМПОРТ')+' · '+op.company+(op.goods?' · '+op.goods:'');
       html+=`<span class="mobile-operation-watermark" aria-hidden="true">${esc(rowCaption)}</span>`;

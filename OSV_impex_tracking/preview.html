@@ -94,8 +94,13 @@
   <span class="mobile-calendar-hint" title="Поверните телефон, если браузер не изменил ориентацию автоматически">ⓘ Альбомный режим</span>
 </div><div class="date-navigation"><button class="nav-arrow" id="prev-week" title="Назад на 7 дней">‹</button><button class="btn btn-soft" id="today-btn">Сегодня</button><button class="nav-arrow" id="next-week" title="Вперёд на 7 дней">›</button></div><div id="timeline-actions-mount"></div></div></div>
             <div class="legend"><span><i class="legend-square legend-intake"></i>Задание</span><span><i class="legend-square legend-transport"></i>Транспорт</span><span><i class="legend-square legend-customs"></i>Таможня</span><span><i class="legend-square legend-delivery"></i>Доставка</span><span><i class="legend-outline"></i>Плановое событие</span><span class="legend-hint">Нажмите на день, чтобы добавить статус</span></div>
+            <div id="calendar-pinch-hint" class="calendar-pinch-hint" aria-hidden="true">
+  <div class="pinch-fingers" aria-hidden="true"><span class="pinch-finger pinch-finger-left"></span><span class="pinch-finger pinch-finger-right"></span></div>
+  <strong>Масштаб календаря</strong>
+  <span>Сведите два пальца — увидите больше дат и строк</span>
+</div>
             <div class="timeline-scroller" id="timeline-scroller"><div id="timeline-track" class="timeline-track"></div></div>
-            <div class="timeline-footer"><span><span class="pulse-dot"></span> Данные обновляются после сохранения</span><span>Горизонтальная прокрутка ↔</span></div>
+            <div class="timeline-footer"><span><span class="pulse-dot"></span> Данные обновляются после сохранения</span><span>Горизонтальная прокрутка ↔</span><span id="calendar-zoom-level" class="mobile-calendar-zoom-level">100%</span></div>
           </div>
         </section>
 

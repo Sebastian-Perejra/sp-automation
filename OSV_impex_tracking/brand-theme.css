@@ -945,3 +945,26 @@ body.mobile-calendar-mode #timeline-view .timeline-row-label{
   #timeline-view .calendar-title-group{flex:1 1 auto;min-width:0;gap:7px}
   #timeline-view .filter-reset{font-size:9px;padding:5px 7px}
 }
+/* November 2026: desktop grab-to-pan calendar; refresh button next to LIVE. */
+#workspace .top-refresh{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:29px;padding:5px 10px;border:1px solid #d9e0e7;border-radius:8px;background:#fff;color:#4e5d6a;font:700 11px/1.1 inherit;white-space:nowrap;cursor:pointer}
+#workspace .top-refresh:hover{color:#ae1524;background:#fff4f5;border-color:#e9b7bf}
+#workspace .top-refresh:focus-visible{outline:2px solid #c4172a;outline-offset:2px}
+#workspace .top-refresh:disabled{opacity:.65;cursor:progress}
+#workspace .top-refresh svg{display:block;flex-shrink:0}
+#workspace .top-refresh.is-loading svg{animation:osvRefreshSpin .9s linear infinite}
+@keyframes osvRefreshSpin{to{transform:rotate(360deg)}}
+#timeline-view .touch-scroll-hint{display:none}
+@media (hover:hover) and (pointer:fine){
+  #timeline-view .timeline-scroller,
+  #timeline-view .timeline-scroller .day-slot,
+  #timeline-view .timeline-scroller .timeline-row-label{cursor:grab}
+  #timeline-view .timeline-scroller .timeline-track{user-select:none;-webkit-user-select:none}
+  #timeline-view .timeline-scroller.is-dragging,
+  #timeline-view .timeline-scroller.is-dragging *{cursor:grabbing!important;user-select:none!important;-webkit-user-select:none!important}
+}
+@media(max-width:760px){
+  #workspace .top-refresh{padding:5px 8px;min-height:30px;min-width:32px}
+  #workspace .top-refresh span{display:none}
+  #timeline-view .desktop-drag-hint{display:none}
+  #timeline-view .touch-scroll-hint{display:inline}
+}

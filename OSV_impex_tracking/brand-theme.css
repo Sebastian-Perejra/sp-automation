@@ -211,3 +211,76 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  .login-card .login-signature{margin-top:25px}
 }
 @media(prefers-reduced-motion:reduce){.login-visual:before,.login-visual:after{animation:none!important}}
+
+
+/* OSV industrial photographic login · subtle pointer parallax (±9px).
+   Photo shows OSV equipment via the manufacturer’s DirectIndustry profile:
+   https://trends.directindustry.es/osv/project-196919-1177121.html
+   External image is optional: layered gradients keep login readable if it fails. */
+.login-screen {
+  --osv-parallax-x: 0px;
+  --osv-parallax-y: 0px;
+  isolation:isolate;
+  position:relative;
+  background:#2a2d33;
+}
+.login-screen::before {
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-22px;
+  pointer-events:none;
+  background:
+    linear-gradient(113deg,rgba(24,26,30,.60),rgba(51,28,33,.52)),
+    url("https://img.directindustry.es/images_di/projects/images-om/183604-21357318.jpg") center 46% / cover no-repeat,
+    #2a2d33;
+  transform:translate3d(var(--osv-parallax-x),var(--osv-parallax-y),0) scale(1.055);
+  transition:transform 430ms cubic-bezier(.2,.7,.2,1);
+  will-change:transform;
+}
+.login-screen::after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at 12% 14%,rgba(201,21,36,.11),transparent 41%),linear-gradient(180deg,rgba(21,25,32,.16),rgba(16,19,25,.32));
+}
+.login-layout {
+  position:relative;
+  z-index:1;
+  box-shadow:0 30px 108px rgba(7,10,14,.40),0 5px 16px rgba(7,10,14,.15);
+}
+.login-visual {
+  background:linear-gradient(120deg,rgba(21,22,27,.90),rgba(36,26,30,.82));
+}
+.login-visual::before {
+  content:"";
+  position:absolute;
+  inset:-28px;
+  z-index:0;
+  opacity:1;
+  pointer-events:none;
+  mask-image:none;
+  background:
+    linear-gradient(97deg,rgba(18,21,28,.87) 4%,rgba(18,21,28,.62) 68%,rgba(85,18,30,.45)),
+    url("https://img.directindustry.es/images_di/projects/images-om/183604-21357318.jpg") 52% 48% / cover no-repeat,
+    linear-gradient(145deg,#343740,#191b20);
+  transform:translate3d(calc(var(--osv-parallax-x) * .7),calc(var(--osv-parallax-y) * .7),0) scale(1.06);
+  transition:transform 460ms cubic-bezier(.2,.7,.2,1);
+  will-change:transform;
+}
+.login-visual::after {
+  opacity:.6;
+  border-color:rgba(217,22,42,.14);
+}
+.login-visual .hero-brand,.login-hero-copy,.login-visual-footer,.login-visual-steps {
+  text-shadow:0 2px 16px rgba(0,0,0,.26);
+}
+@media (max-width:780px), (pointer:coarse), (prefers-reduced-motion:reduce) {
+  .login-screen::before,.login-visual::before {
+    transform:none!important;
+    transition:none!important;
+    will-change:auto;
+  }
+}

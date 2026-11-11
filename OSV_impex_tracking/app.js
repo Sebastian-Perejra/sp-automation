@@ -254,3 +254,55 @@
   async function init(){attachEvents();if(IS_GAS){$('workspace').classList.add('hidden');let cached=null;try{cached=sessionStorage.getItem(SESSION_KEY);}catch{}if(cached){state.token=cached;try{await startWorkspace();return;}catch{try{sessionStorage.removeItem(SESSION_KEY);}catch{}state.token=null;}}$('login').classList.remove('hidden');}else await startWorkspace();}
   init().catch(e=>{toast('Ошибка запуска: '+(e.message||e),true);console.error(e);});
 })();
+
+/* Three-up OSV photo gallery; independent randomized, preloaded crossfades. */
+(function initOsbSidebarThreeUp(){
+  const gallery=document.querySelector('.sidebar-gallery[data-gallery="osv"]');
+  if(!gallery)return;
+  const slots=Array.from(gallery.querySelectorAll('.sidebar-gallery-slot'));
+  if(slots.length!==3)return;
+  const photos=[
+    'https://www.osv.com.ua/wp-content/uploads/2020/07/osv-combi-scaled.jpg',
+    'https://img.directindustry.com/images_di/photo-g/196919-17034400.jpg',
+    'https://img.directindustry.com/images_di/projects/images-g/osv-s3-3k-179451-20995047.jpg',
+    'https://img.directindustry.com/images_di/photo-g/196919-19465417.jpg',
+    'https://img.directindustry.com/images_di/photo-g/196919-12434100.jpg',
+    'https://img.directindustry.com/images_di/photo-g/196919-20024065.jpg',
+    'https://img.directindustry.com/images_di/projects/images-om/173499-20574110.jpg'
+  ];
+  const live=slots.map(slot=>slot.querySelector('.is-visible').getAttribute('src'));
+  const randomIndex=(size)=>Math.floor(Math.random()*size);
+  let lastSlot=-1,busy=false;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  const tick=()=>{
+    if(document.hidden||busy){schedule();return;}
+    const candidates=[0,1,2].filter(x=>x!==lastSlot);
+    const index=candidates[randomIndex(candidates.length)];
+    const available=photos.filter(url=>!live.includes(url));
+    if(!available.length){schedule();return;}
+    const url=available[randomIndex(available.length)];
+    const imgs=Array.from(slots[index].querySelectorAll('.sidebar-gallery-img'));
+    const current=imgs.find(img=>img.classList.contains('is-visible'));
+    const next=imgs.find(img=>img!==current);
+    if(!current||!next){schedule();return;}
+    busy=true;
+    // Use a separate Image preload so an unavailable external image never creates a blank slot.
+    const probe=new Image();
+    probe.onload=()=>{
+      next.src=url;
+      requestAnimationFrame(()=>{
+        next.classList.add('is-visible');
+        current.classList.remove('is-visible');
+        live[index]=url;
+        lastSlot=index;
+        busy=false;
+        schedule();
+      });
+    };
+    probe.onerror=()=>{busy=false;lastSlot=index;schedule();};
+    probe.src=url;
+  };
+  function schedule(){window.setTimeout(tick,7500+Math.floor(Math.random()*4500));}
+  schedule();
+})();

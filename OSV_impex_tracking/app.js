@@ -243,7 +243,7 @@
     $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}state.token=null;try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
   }
   async function startWorkspace(){
-    if(IS_GAS){const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));$('environment-badge').classList.add('live');$('environment-badge').innerHTML='<i></i> LIVE';$('connection-label').textContent='Google Sheets · Online';$('logout-btn').hidden=false;}
+    if(IS_GAS){const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));$('environment-badge').classList.add('live');$('environment-badge').innerHTML='<i></i> LIVE';const connectionLabel=$('connection-label');if(connectionLabel)connectionLabel.textContent='Google Sheets · Online';$('logout-btn').hidden=false;}
     else{Object.assign(state,loadDemo());$('environment-badge').innerHTML='<i></i> ДЕМО';}
     const first=state.events.map(e=>e.date).sort()[0];if(first&&first<state.start)state.start=addDays(first,-12);
     const last=state.events.map(e=>e.date).sort().at(-1);if(last&&last>state.end)state.end=addDays(last,50);

@@ -186,7 +186,60 @@
   function renderAudit(){const actions={CREATE_OPERATION:'Создана операция',CREATE_EVENT:'Добавлено событие',UPDATE_EVENT:'Изменено событие',DELETE_EVENT:'Удалено событие',ARCHIVE_OPERATION:'Изменён статус архива'};const entries=[...state.audit].sort((a,b)=>String(b.at||'').localeCompare(String(a.at||''))).slice(0,120);$('audit-list').innerHTML=entries.length?entries.map(a=>{const op=state.operations.find(o=>o.id===a.operationId);const at=a.at?new Date(a.at):null;const when=at&&!isNaN(at.getTime())?at.toLocaleString('ru-RU'):'—';return `<div class="archive-item" ${op?`data-open-op="${esc(op.id)}"`:''}><div><strong>${esc(actions[a.action]||a.action)}</strong><p>${esc(op?op.direction+' · '+op.company:'Операция '+String(a.operationId||'').slice(0,8))}</p></div><span>${esc(when)}</span></div>`;}).join(''):'<div class="empty-state">Изменений пока нет. Первое событие будет зарегистрировано после сохранения.</div>'; }
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
   function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderAnalytics();renderArchive();renderAudit();}
-  function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];}
+/* Mobile-only calendar viewer with native fullscreen/orientation where permitted. */
+  function isMobileCalendarDevice(){
+    const shortSide=Math.min(window.innerWidth,window.innerHeight)<=600;
+    const touch=window.matchMedia&&window.matchMedia('(pointer:coarse)').matches;
+    return shortSide&&(touch||window.innerWidth<=760);
+  }
+  function updateMobileCalendarFullscreen(){
+    const button=$('mobile-calendar-fullscreen');
+    if(!button)return;
+    const active=!!document.fullscreenElement;
+    button.textContent=active?'⤡ Выйти из полного экрана':'⛶ На весь экран';
+    button.setAttribute('aria-pressed',String(active));
+  }
+  function openMobileCalendar(){
+    if(!isMobileCalendarDevice()||state.view!=='timeline')return;
+    document.body.classList.add('mobile-calendar-mode');
+    // A non-gesture orientation request may be rejected. The CSS viewer remains landscape.
+    if(screen.orientation&&typeof screen.orientation.lock==='function'){
+      try{Promise.resolve(screen.orientation.lock('landscape')).catch(()=>{});}catch{}
+    }
+    updateMobileCalendarFullscreen();
+  }
+  function closeMobileCalendar(){
+    document.body.classList.remove('mobile-calendar-mode');
+    if(screen.orientation&&typeof screen.orientation.unlock==='function'){
+      try{screen.orientation.unlock();}catch{}
+    }
+    if(document.fullscreenElement&&document.exitFullscreen){
+      Promise.resolve(document.exitFullscreen()).catch(()=>{});
+    }
+    updateMobileCalendarFullscreen();
+  }
+  async function toggleMobileCalendarFullscreen(){
+    if(document.fullscreenElement){
+      try{await document.exitFullscreen();}catch{toast('Не удалось выйти из полноэкранного режима',true);}
+      updateMobileCalendarFullscreen();
+      return;
+    }
+    if(!document.documentElement.requestFullscreen){
+      toast('Полноэкранный режим не поддерживается. Альбомный просмотр уже открыт.',true);
+      return;
+    }
+    try{
+      await document.documentElement.requestFullscreen();
+      if(screen.orientation&&typeof screen.orientation.lock==='function'){
+        try{await screen.orientation.lock('landscape');}catch{}
+      }
+    }catch{
+      toast('Браузер запретил полный экран. Поверните телефон вручную.',true);
+    }
+    updateMobileCalendarFullscreen();
+  }
+
+  function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view==='timeline'&&isMobileCalendarDevice())openMobileCalendar();else if(view!=='timeline')closeMobileCalendar();}
   function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
@@ -213,6 +266,12 @@
   function closeDrawer(){$('drawer-backdrop').classList.add('hidden');$('detail-drawer').classList.add('hidden');document.body.style.overflow='';}
   function csvExport(){const headers=['Операция ID','Направление','Компания','Товар','Дата задания','Дата события','Статус','Тип','Комментарий'];const lines=[headers];state.operations.forEach(op=>{const ev=operationEvents(op.id);ev.forEach(e=>lines.push([op.id,op.direction,op.company,op.goods,op.createdAt,e.date,statusFor(e.status).label,e.type==='actual'?'Факт':'План',e.note||'']));});const csv='\ufeff'+lines.map(row=>row.map(v=>{const t=String(v??'');const safe=/^[=+\-@\t\r]/.test(t)?'\''+t:t;return '"'+safe.replace(/"/g,'""')+'"';}).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='OSV_IMPEX_'+TODAY+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);toast('CSV-файл подготовлен');}
   function attachEvents(){
+    $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
+    $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
+    document.addEventListener('fullscreenchange',updateMobileCalendarFullscreen);
+    window.addEventListener('resize',()=>{
+      if(document.body.classList.contains('mobile-calendar-mode')&&!isMobileCalendarDevice())closeMobileCalendar();
+    });
     document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.dataset.view)));
     $('new-operation-btn').addEventListener('click',newOperation);
     $('search-input').addEventListener('input',e=>{state.query=e.target.value;renderTimeline(true);});

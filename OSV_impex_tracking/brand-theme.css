@@ -642,17 +642,42 @@ body.mobile-calendar-mode .drawer-backdrop{z-index:170!important}
 body.mobile-calendar-mode .detail-drawer{z-index:171!important}
 body.mobile-calendar-mode .toast-stack{z-index:180!important}
 body.mobile-calendar-mode #timeline-view .timeline-panel:fullscreen{width:100vw!important;height:100vh!important}
-@media(orientation:portrait){
-  body.mobile-calendar-mode #timeline-view .timeline-panel{
-    width:100dvh!important;height:100dvw!important;
-    transform-origin:top left;transform:translateX(100dvw) rotate(90deg);
-  }
+/* Keep the calendar in the device's actual orientation. Never rotate its DOM. */
+body.mobile-calendar-mode #timeline-view .timeline-panel{
+  width:100dvw!important;height:100dvh!important;
+  transform:none!important;
 }
-@media(orientation:landscape){
-  body.mobile-calendar-mode #timeline-view .timeline-panel{
-    width:100dvw!important;height:100dvh!important;transform:none;
+@media(orientation:portrait) and (max-width:760px){
+  body.mobile-calendar-mode #timeline-view .timeline-panel-head>div:first-child{display:none!important}
+  body.mobile-calendar-mode #timeline-view .timeline-panel-head{
+    padding:6px 8px!important;
+    min-height:unset!important;
   }
-  body.mobile-calendar-mode .mobile-calendar-hint{display:none}
+  body.mobile-calendar-mode #timeline-view .calendar-header-actions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    justify-content:stretch;
+    gap:5px 7px!important;
+  }
+  body.mobile-calendar-mode .mobile-calendar-controls{grid-column:1/-1;min-width:0}
+  body.mobile-calendar-mode #timeline-view .date-navigation{grid-column:1;justify-content:flex-start}
+  body.mobile-calendar-mode #timeline-view #timeline-actions-mount{
+    grid-column:2;
+    display:flex;align-items:center;justify-content:flex-end;
+  }
+  body.mobile-calendar-mode #timeline-view .mobile-calendar-tool{height:30px;padding:0 8px}
+  body.mobile-calendar-mode #timeline-view #new-operation-btn{
+    height:31px!important;min-height:31px!important;padding:4px 7px!important;
+  }
+  body.mobile-calendar-mode #timeline-view .legend{
+    flex-wrap:wrap;
+    gap:3px 10px;
+    padding:5px 8px!important;
+  }
+  body.mobile-calendar-mode #timeline-view .mobile-orientation-tip{
+    display:flex;
+  }
 }
 @media(max-height:450px) and (orientation:landscape){
   body.mobile-calendar-mode #timeline-view .timeline-panel-head{min-height:42px!important;padding:4px 8px!important}
@@ -820,4 +845,40 @@ body.mobile-calendar-mode #timeline-view .mobile-operation-watermark{
   #timeline-view .day-slot.phase-done:hover{background-color:#f1f8f5!important}
   #timeline-view .day-slot.is-delivered:hover{background-color:#e5f8ec!important}
   #timeline-view .day-slot:hover .slot-add{display:none!important}
+}
+
+
+/* Mobile orientation is optional; tip is compact, dismissible and never blocks the timeline. */
+.mobile-orientation-tip{display:none}
+body.mobile-calendar-mode .mobile-orientation-tip{
+  flex:0 0 auto;
+  align-items:center;gap:8px;
+  padding:7px 10px;
+  color:#425875;
+  background:#f1f6fd;
+  border-bottom:1px solid #d8e5f4;
+  font-size:10px;
+  line-height:1.35;
+}
+body.mobile-calendar-mode .mobile-orientation-tip.is-dismissed{display:none!important}
+body.mobile-calendar-mode .mobile-orientation-tip .orientation-tip-icon{
+  font-size:19px;color:#c91729;line-height:1;
+}
+body.mobile-calendar-mode .mobile-orientation-tip span:nth-child(2){min-width:0;flex:1}
+body.mobile-calendar-mode .mobile-orientation-tip button{
+  width:26px;height:26px;flex:0 0 26px;
+  border:1px solid #d6e2ef;background:#fff;color:#61738c;border-radius:7px;
+  line-height:1;font-size:17px;cursor:pointer;
+}
+/* Never freeze the first two left-hand fields while the user pans in portrait. */
+body.mobile-calendar-mode #timeline-view .calendar-corner,
+body.mobile-calendar-mode #timeline-view .timeline-row-label{
+  position:relative!important;left:auto!important;right:auto!important;
+  transform:none!important;
+}
+body.mobile-calendar-mode #timeline-view .mobile-operation-watermark{
+  display:block!important;
+}
+@media (orientation:landscape){
+  body.mobile-calendar-mode .mobile-orientation-tip{display:none!important}
 }

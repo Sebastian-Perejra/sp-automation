@@ -946,7 +946,7 @@ body.mobile-calendar-mode #timeline-view .timeline-row-label{
   #timeline-view .filter-reset{font-size:9px;padding:5px 7px}
 }
 /* November 2026: desktop grab-to-pan calendar; refresh button next to LIVE. */
-#workspace .top-refresh{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:29px;padding:5px 10px;border:1px solid #d9e0e7;border-radius:8px;background:#fff;color:#4e5d6a;font:700 11px/1.1 inherit;white-space:nowrap;cursor:pointer}
+#workspace .top-refresh{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:29px;padding:5px 10px;border:1px solid #d9e0e7;border-radius:8px;background:#fff;color:#4e5d6a;font-size:11px;font-weight:700;line-height:1.1;font-family:inherit;white-space:nowrap;cursor:pointer}
 #workspace .top-refresh:hover{color:#ae1524;background:#fff4f5;border-color:#e9b7bf}
 #workspace .top-refresh:focus-visible{outline:2px solid #c4172a;outline-offset:2px}
 #workspace .top-refresh:disabled{opacity:.65;cursor:progress}

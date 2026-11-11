@@ -245,7 +245,7 @@
     for(const op of rows){
       const es=operationEvents(op.id);const byDate={};for(const e of es)(byDate[e.date]??=[]).push(e);
       const ageDays=runningAgeDays(es,TODAY);
-      html+=`<div class="timeline-row"><div class="timeline-row-label" data-open-op="${esc(op.id)}" title="Открыть карточку операции"><span class="direction-tag ${op.direction.toLowerCase()}">${esc(op.direction)}</span><div class="op-main"><strong title="${esc(op.company)}">${esc(op.company)}</strong><small title="${esc(op.goods)}">${esc(op.goods)}</small></div><span class="op-label-right">›</span></div>`;
+      html+=`<div class="timeline-row" data-row-op="${esc(op.id)}"><div class="timeline-row-label" data-open-op="${esc(op.id)}" title="Открыть карточку операции"><span class="direction-tag ${op.direction.toLowerCase()}">${esc(op.direction)}</span><div class="op-main"><strong title="${esc(op.company)}">${esc(op.company)}</strong><small title="${esc(op.goods)}">${esc(op.goods)}</small></div><span class="op-label-right">›</span></div>`;
       // Single sweep for the dominant current actual stage, no per-cell N^2 event traversal.
       const actuals=es.filter(e=>e.type==='actual');const receivedExists=actuals.some(e=>e.status==='received');let aidx=0,lastActual=null;
       for(const d of dates){
@@ -261,7 +261,7 @@
         const showAge=d===TODAY&&ageDays!==null;
         const ageBand=ageDays>=14?'age-critical':ageDays>=7?'age-watch':'age-normal';
         const ageBadge=showAge?`<span class="operation-age ${ageBand}" role="img" aria-label="В работе ${ageDays} дн." title="В работе ${ageDays} дн. · с ${formatDate(es.find(e=>e.type==='actual'&&e.date<=TODAY).date)}">${ageDays}</span>`:'';
-        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · двойной клик или два касания для редактирования">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
+        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · телефон: 2 касания — хронология, 3 касания — события дня · ПК: двойной клик — редактировать">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
       }
       const rowCaption=(op.direction==='EXP'?'ЭКСПОРТ':'ИМПОРТ')+' · '+op.company+(op.goods?' · '+op.goods:'');
       html+=`<span class="mobile-operation-watermark" aria-hidden="true">${esc(rowCaption)}</span>`;
@@ -502,42 +502,70 @@
     anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
     toast('Excel-файл .xlsx подготовлен');
   }
-  /* Reliable mobile double-tap, with movement/pinch rejection.
-     Native dblclick is retained for mouse and trackpad users. */
+  /* Mobile row gestures:
+     2 taps on the same shipment row = open full operation details and chronology.
+     3 taps on the same date cell = open that date's event editor.
+     Delay the double-tap action until the third-tap window closes, so double
+     cannot swallow triple. Cancel on scrolling, pinch, movement and long holds.
+     Desktop double-click editing remains separate. */
   let lastMobileCellOpen=0;
   function installCalendarDoubleTap(){
     const scroller=$('timeline-scroller');
-    let fingerStart=null,lastTap=null;
-    const reset=()=>{fingerStart=null;lastTap=null;};
+    const WINDOW=440, MOVE_TOLERANCE=13, MAX_HOLD=500;
+    let finger=null,sequence=null,pendingAction=0;
+    const clearPending=()=>{if(pendingAction){clearTimeout(pendingAction);pendingAction=0;}};
+    const clearSequence=()=>{clearPending();sequence=null;};
+    const cancel=()=>{finger=null;clearSequence();};
     scroller.addEventListener('touchstart',e=>{
-      if(e.touches.length!==1){reset();return;}
-      const target=e.target.closest('.day-slot');
-      if(!target){fingerStart=null;return;}
+      if(e.touches.length!==1){cancel();return;}
+      const row=e.target.closest('.timeline-row[data-row-op]');
+      if(!row||e.target.closest('button,a,input,textarea,select')){finger=null;return;}
       const t=e.touches[0];
-      fingerStart={target,x:t.clientX,y:t.clientY,time:Date.now()};
+      finger={op:row.dataset.rowOp,cell:e.target.closest('.day-slot'),x:t.clientX,y:t.clientY,time:Date.now()};
     },{passive:true});
     scroller.addEventListener('touchmove',e=>{
-      if(!fingerStart)return;
-      if(e.touches.length!==1){reset();return;}
+      if(!finger)return;
+      if(e.touches.length!==1){cancel();return;}
       const t=e.touches[0];
-      if(Math.hypot(t.clientX-fingerStart.x,t.clientY-fingerStart.y)>12){reset();}
+      if(Math.hypot(t.clientX-finger.x,t.clientY-finger.y)>MOVE_TOLERANCE)cancel();
     },{passive:true});
     scroller.addEventListener('touchend',e=>{
-      const tap=fingerStart;fingerStart=null;
-      if(e.touches.length||!tap||Date.now()-tap.time>500)return;
-      const now=Date.now();
-      if(lastTap&&lastTap.target===tap.target&&now-lastTap.time<=420){
-        lastTap=null;
-        e.preventDefault(); // prevent emulated click/double-click after a confirmed double-tap
+      const tap=finger;finger=null;
+      if(!tap||e.touches.length!==0||e.changedTouches.length!==1||Date.now()-tap.time>MAX_HOLD)return;
+      const now=Date.now(),matches=sequence&&sequence.op===tap.op&&now-sequence.lastTime<=WINDOW;
+      if(!matches){
+        clearSequence();
+        sequence={op:tap.op,firstCell:tap.cell,secondCell:null,count:1,lastTime:now};
+        return;
+      }
+      if(sequence.count===1){
+        // Confirm two taps; give the user a short window for the third tap.
+        sequence.count=2;sequence.secondCell=tap.cell;sequence.lastTime=now;
+        e.preventDefault();
         lastMobileCellOpen=now;
-        openEvent(tap.target.dataset.op,tap.target.dataset.date);
-      }else{
-        lastTap={target:tap.target,time:now};
+        clearPending();
+        pendingAction=setTimeout(()=>{
+          pendingAction=0;
+          if(!sequence||sequence.count!==2)return;
+          const op=sequence.op;
+          sequence=null;
+          openDrawer(op);
+        },WINDOW);
+        return;
+      }
+      if(sequence.count===2){
+        e.preventDefault();
+        lastMobileCellOpen=now;
+        const sameCell=!!(tap.cell&&tap.cell===sequence.firstCell&&tap.cell===sequence.secondCell);
+        const op=sequence.op,date=sameCell?tap.cell.dataset.date:null;
+        clearSequence();
+        if(sameCell&&date)openEvent(op,date);
+        else openDrawer(op);
       }
     },{passive:false});
-    scroller.addEventListener('touchcancel',reset,{passive:true});
+    scroller.addEventListener('touchcancel',cancel,{passive:true});
+    scroller.addEventListener('scroll',()=>{if(finger||sequence)cancel();},{passive:true});
   }
-
   /* Desktop: move the timeline with a held left mouse button, in both axes.
      A short click remains a click; double-click edits only when no dragging occurred.
      Touch/pinch gestures and all buttons keep their existing behavior. */
@@ -651,12 +679,12 @@
     // Opening a status is an intentional double action, never a single scroll/tap.
     document.addEventListener('dblclick',e=>{
       const slot=e.target.closest('.day-slot');
-      if(!slot||Date.now()-lastMobileCellOpen<700)return;
+      if(!slot||isMobileCalendarDevice()||Date.now()-lastMobileCellOpen<900)return;
       e.preventDefault();
       openEvent(slot.dataset.op,slot.dataset.date);
     });
     document.addEventListener('click',e=>{
-      const op=e.target.closest('[data-open-op]');if(op){openDrawer(op.dataset.openOp);return;}
+      const op=e.target.closest('[data-open-op]');if(op){if(isMobileCalendarDevice()&&op.closest('.timeline-row'))return;openDrawer(op.dataset.openOp);return;}
       const edit=e.target.closest('[data-edit-event]');if(edit){openEvent(state.activeOperation,state.activeDate,edit.dataset.editEvent);return;}
       const del=e.target.closest('[data-delete-event]');if(del){const id=del.dataset.deleteEvent,opid=state.activeOperation,date=state.activeDate;if(!confirm('Удалить событие? История изменения сохранится в журнале.'))return;guarded(async()=>{await backendCall('apiDeleteEvent',opid,id);closeModal('event-modal');toast('Событие удалено');});}
     });

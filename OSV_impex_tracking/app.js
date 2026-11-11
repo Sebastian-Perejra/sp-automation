@@ -133,7 +133,7 @@
     const scroller=$('timeline-scroller');const prevX=preserve?scroller.scrollLeft:null,prevY=preserve?scroller.scrollTop:0;
     const dates=dateArray(),todayIdx=dates.indexOf(TODAY),rows=filteredOperations();$('row-count').textContent=rows.length;
     const monthHTML=monthParts(dates).map(m=>`<div class="month-cell" style="width:calc(${m.count} * var(--day-width))">${esc(formatDate(m.date,{month:'long',year:'numeric'}).toLocaleUpperCase('ru-RU'))}</div>`).join('');
-    const dayHTML=dates.map(d=>{const dt=asDate(d),dow=dt.getDay(),weekend=dow===0||dow===6;return `<div class="day-head ${weekend?'weekend':''} ${d===TODAY?'today':''}" title="${esc(formatDate(d))}"><span>${['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'][dow]}</span><strong>${dt.getDate()}</strong></div>`;}).join('');
+    const dayHTML=dates.map(d=>{const dt=asDate(d),dow=dt.getDay(),weekend=dow===0||dow===6;return `<div class="day-head ${weekend?'weekend':''} ${d===TODAY?'today':''}" title="${esc(formatDate(d,{day:'numeric',month:'long',year:'numeric'}))}"><span>${['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'][dow]}</span><strong>${dt.getDate()}</strong><em>${esc(formatDate(d,{month:'short'}).replace('.',''))}</em></div>`;}).join('');
     let html=`<div class="calendar-months"><div class="calendar-corner">${state.start.slice(0,4)}–${state.end.slice(0,4)}<span>КАЛЕНДАРЬ</span></div>${monthHTML}</div><div class="calendar-days"><div class="calendar-corner">ОПЕРАЦИЯ <span>СТАТУС ПО ДНЯМ</span></div>${dayHTML}</div>`;
     for(const op of rows){
       const es=operationEvents(op.id);const byDate={};for(const e of es)(byDate[e.date]??=[]).push(e);
@@ -150,7 +150,17 @@
       }
       html+='</div>';
     }
-    if(!rows.length)html+='<div class="empty-state"><div class="empty-icon">⌕</div><strong>Операции не найдены</strong>Попробуйте изменить фильтры или создайте новую операцию.</div>';
+    // Keep the calendar grid visible even when there are no operations or only a few.
+    // Ghost cells are decorative and must NOT receive the .day-slot click handler.
+    for(let ghost=rows.length;ghost<7;ghost++){
+      html+='<div class="timeline-row timeline-placeholder-row">';
+      html+='<div class="timeline-row-label timeline-placeholder-label" aria-hidden="true">'+(ghost===0&&!rows.length?'<span class="timeline-placeholder-message">Нет операций<br><small>Создайте новую операцию</small></span>':'')+'</div>';
+      for(const d of dates){
+        const weekend=[0,6].includes(asDate(d).getDay());
+        html+='<div class="timeline-ghost-cell'+(weekend?' weekend':'')+(d===TODAY?' today':'')+'" aria-hidden="true"></div>';
+      }
+      html+='</div>';
+    }
     $('timeline-track').innerHTML=html;
     requestAnimationFrame(()=>{if(prevX===null){if(todayIdx>=0)scroller.scrollLeft=Math.max(0,todayIdx*dayWidth()-dayWidth()*5);}else{scroller.scrollLeft=prevX;scroller.scrollTop=prevY;}});
   }
@@ -176,7 +186,7 @@
   function renderAudit(){const actions={CREATE_OPERATION:'Создана операция',CREATE_EVENT:'Добавлено событие',UPDATE_EVENT:'Изменено событие',DELETE_EVENT:'Удалено событие',ARCHIVE_OPERATION:'Изменён статус архива'};const entries=[...state.audit].sort((a,b)=>String(b.at||'').localeCompare(String(a.at||''))).slice(0,120);$('audit-list').innerHTML=entries.length?entries.map(a=>{const op=state.operations.find(o=>o.id===a.operationId);const at=a.at?new Date(a.at):null;const when=at&&!isNaN(at.getTime())?at.toLocaleString('ru-RU'):'—';return `<div class="archive-item" ${op?`data-open-op="${esc(op.id)}"`:''}><div><strong>${esc(actions[a.action]||a.action)}</strong><p>${esc(op?op.direction+' · '+op.company:'Операция '+String(a.operationId||'').slice(0,8))}</p></div><span>${esc(when)}</span></div>`;}).join(''):'<div class="empty-state">Изменений пока нет. Первое событие будет зарегистрировано после сохранения.</div>'; }
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
   function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderAnalytics();renderArchive();renderAudit();}
-  function setView(view){state.view=view;document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];}
+  function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];}
   function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
@@ -239,7 +249,7 @@
     const last=state.events.map(e=>e.date).sort().at(-1);if(last&&last>state.end)state.end=addDays(last,50);
     $('login').classList.add('hidden');$('workspace').classList.remove('hidden');
     $('top-date').textContent=formatDate(TODAY,{day:'numeric',month:'long',year:'numeric'});
-    renderAll();state.initialized=true;
+    renderAll();setView(state.view);state.initialized=true;
   }
   async function init(){attachEvents();if(IS_GAS){$('workspace').classList.add('hidden');let cached=null;try{cached=sessionStorage.getItem(SESSION_KEY);}catch{}if(cached){state.token=cached;try{await startWorkspace();return;}catch{try{sessionStorage.removeItem(SESSION_KEY);}catch{}state.token=null;}}$('login').classList.remove('hidden');}else await startWorkspace();}
   init().catch(e=>{toast('Ошибка запуска: '+(e.message||e),true);console.error(e);});

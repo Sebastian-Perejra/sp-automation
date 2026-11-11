@@ -377,7 +377,7 @@
     updateMobileCalendarFullscreen();
   }
   function toggleMobileCalendarFullscreen(){
-    // CSS-only focus: never call requestFullscreen(). The old Fullscreen API
+    // CSS-only focus: never invoke the browser Fullscreen API. The old API
     // caused Chrome's unavoidable "To exit full screen, press Esc" overlay.
     if(isIOSDevice()&&!isStandaloneWebApp()){
       showIOSStandaloneGuide();

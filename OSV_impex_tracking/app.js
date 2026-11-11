@@ -285,9 +285,10 @@
   function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderAnalytics();renderArchive();renderAudit();}
 /* Mobile-only calendar viewer with native fullscreen/orientation where permitted. */
   function isMobileCalendarDevice(){
+    const viewportWidth=Math.min(window.innerWidth,document.documentElement.clientWidth||window.innerWidth);
     const shortSide=Math.min(window.innerWidth,window.innerHeight)<=600;
     const touch=window.matchMedia&&window.matchMedia('(pointer:coarse)').matches;
-    return shortSide&&(touch||window.innerWidth<=760);
+    return shortSide&&(touch||viewportWidth<=760);
   }
   function updateMobileCalendarFullscreen(){
     const button=$('mobile-calendar-fullscreen');

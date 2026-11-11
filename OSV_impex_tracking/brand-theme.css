@@ -848,37 +848,58 @@ body.mobile-calendar-mode #timeline-view .mobile-operation-watermark{
 }
 
 
-/* Mobile orientation is optional; tip is compact, dismissible and never blocks the timeline. */
-.mobile-orientation-tip{display:none}
-body.mobile-calendar-mode .mobile-orientation-tip{
-  flex:0 0 auto;
-  align-items:center;gap:8px;
-  padding:7px 10px;
-  color:#425875;
-  background:#f1f6fd;
-  border-bottom:1px solid #d8e5f4;
-  font-size:10px;
+/* Portrait-mode calendar: no mandatory device rotation and no frozen columns,
+   even after the user selects "Вернуться" from the focused calendar viewer. */
+#timeline-view .mobile-orientation-tip{
+  display:none;align-items:center;gap:9px;
+  padding:10px 12px;
+  color:#243b55;background:#eff6ff;
+  border-left:3px solid #c91729;
+  border-bottom:1px solid #cfdfed;
   line-height:1.35;
 }
-body.mobile-calendar-mode .mobile-orientation-tip.is-dismissed{display:none!important}
-body.mobile-calendar-mode .mobile-orientation-tip .orientation-tip-icon{
-  font-size:19px;color:#c91729;line-height:1;
+#timeline-view .mobile-orientation-tip.is-dismissed{display:none!important}
+#timeline-view .orientation-tip-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;flex:none;border-radius:9px;
+  color:#ae1628;background:#fff;font-size:23px;
+  border:1px solid #d9e6f4;
 }
-body.mobile-calendar-mode .mobile-orientation-tip span:nth-child(2){min-width:0;flex:1}
-body.mobile-calendar-mode .mobile-orientation-tip button{
-  width:26px;height:26px;flex:0 0 26px;
+#timeline-view .orientation-tip-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:2px}
+#timeline-view .orientation-tip-copy strong{font-size:12px;font-weight:800;color:#172f4a}
+#timeline-view .orientation-tip-copy small{font-size:10px;color:#5c718a}
+#timeline-view #mobile-orientation-dismiss{
+  width:28px;height:28px;flex:0 0 28px;
   border:1px solid #d6e2ef;background:#fff;color:#61738c;border-radius:7px;
-  line-height:1;font-size:17px;cursor:pointer;
+  line-height:1;font-size:18px;cursor:pointer;
 }
-/* Never freeze the first two left-hand fields while the user pans in portrait. */
+body.mobile-calendar-mode #timeline-view .mobile-orientation-tip{
+  flex:0 0 auto;
+}
 body.mobile-calendar-mode #timeline-view .calendar-corner,
 body.mobile-calendar-mode #timeline-view .timeline-row-label{
   position:relative!important;left:auto!important;right:auto!important;
   transform:none!important;
 }
-body.mobile-calendar-mode #timeline-view .mobile-operation-watermark{
-  display:block!important;
+@media (max-width:760px) and (orientation:portrait){
+  /* Explicit fallback for the normal (non-focused) calendar as well. */
+  #timeline-view .mobile-orientation-tip{display:flex}
+  #timeline-view .calendar-corner,
+  #timeline-view .timeline-row-label{
+    position:relative!important;left:auto!important;right:auto!important;
+    z-index:1!important;
+  }
+  #timeline-view .mobile-operation-watermark{
+    display:block!important;position:absolute;
+    left:var(--mobile-label-x, 155px);
+    top:50%;bottom:auto;transform:translateY(-50%);
+    z-index:4;pointer-events:none;user-select:none;
+    color:#1b4f78;opacity:.25;
+    font-size:10px;font-weight:800;line-height:1.2;letter-spacing:.03em;
+    white-space:nowrap;max-width:min(260px,68%);
+    overflow:hidden;text-overflow:ellipsis;
+  }
 }
 @media (orientation:landscape){
-  body.mobile-calendar-mode .mobile-orientation-tip{display:none!important}
+  #timeline-view .mobile-orientation-tip{display:none!important}
 }

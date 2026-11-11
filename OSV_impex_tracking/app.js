@@ -151,8 +151,14 @@
   const clampMobileZoom=n=>Math.min(PINCH_MAX,Math.max(PINCH_MIN,n));
   function applyMobileCalendarZoom(zoom){
     mobileCalendarZoom=clampMobileZoom(zoom);
-    document.body.style.setProperty('--day-width',(BASE_DAY*mobileCalendarZoom).toFixed(2)+'px');
-    document.body.style.setProperty('--mobile-row-height',(BASE_ROW*mobileCalendarZoom).toFixed(2)+'px');
+    if(document.body.classList.contains('mobile-calendar-mode')){
+      document.body.style.setProperty('--day-width',(BASE_DAY*mobileCalendarZoom).toFixed(2)+'px');
+      document.body.style.setProperty('--mobile-row-height',(BASE_ROW*mobileCalendarZoom).toFixed(2)+'px');
+    }else{
+      // Do not leak 66px mobile columns into the desktop timeline.
+      document.body.style.removeProperty('--day-width');
+      document.body.style.removeProperty('--mobile-row-height');
+    }
     const level=$('calendar-zoom-level');
     if(level)level.textContent=Math.round(mobileCalendarZoom*100)+'%';
   }

@@ -302,10 +302,7 @@
     // Rebuild after the 150px/66px mobile grid variables become active.
     // Otherwise arrows retain desktop coordinates from the initial render.
     renderTimeline(false);
-    // A non-gesture orientation request may be rejected. The CSS viewer remains landscape.
-    if(screen.orientation&&typeof screen.orientation.lock==='function'){
-      try{Promise.resolve(screen.orientation.lock('landscape')).catch(()=>{});}catch{}
-    }
+    // Device orientation always belongs to the user. Both portrait and landscape work.
     updateMobileCalendarFullscreen();
     displayPinchHint();
   }
@@ -316,9 +313,6 @@
     pinchGesture=null;
     applyMobileCalendarZoom(1);
     renderTimeline(true);
-    if(screen.orientation&&typeof screen.orientation.unlock==='function'){
-      try{screen.orientation.unlock();}catch{}
-    }
     if(document.fullscreenElement&&document.exitFullscreen){
       Promise.resolve(document.exitFullscreen()).catch(()=>{});
     }
@@ -331,14 +325,11 @@
       return;
     }
     if(!document.documentElement.requestFullscreen){
-      toast('Полноэкранный режим не поддерживается. Альбомный просмотр уже открыт.',true);
+      toast('Полноэкранный режим не поддерживается. Поверните телефон вручную, если нужно больше места.',true);
       return;
     }
     try{
       await document.documentElement.requestFullscreen();
-      if(screen.orientation&&typeof screen.orientation.lock==='function'){
-        try{await screen.orientation.lock('landscape');}catch{}
-      }
     }catch{
       toast('Браузер запретил полный экран. Поверните телефон вручную.',true);
     }
@@ -409,6 +400,7 @@
   function attachEvents(){
     installTimelinePinch();
     installCalendarDoubleTap();
+    $('mobile-orientation-dismiss').addEventListener('click',()=>$('mobile-orientation-tip').classList.add('is-dismissed'));
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
     $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
     document.addEventListener('fullscreenchange',updateMobileCalendarFullscreen);

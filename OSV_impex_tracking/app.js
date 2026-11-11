@@ -505,9 +505,94 @@
     },{passive:false});
     scroller.addEventListener('touchcancel',reset,{passive:true});
   }
+
+  /* Desktop: move the timeline with a held left mouse button, in both axes.
+     A short click remains a click; double-click edits only when no dragging occurred.
+     Touch/pinch gestures and all buttons keep their existing behavior. */
+  function installDesktopCalendarDrag(){
+    const scroller=$('timeline-scroller');
+    let drag=null,ignoreNextClick=false,ignoreNextDoubleClick=false;
+    const finish=()=>{
+      if(!drag)return;
+      const moved=drag.moved;
+      const pointerId=drag.pointerId;
+      drag=null;
+      scroller.classList.remove('is-dragging');
+      if(scroller.hasPointerCapture&&scroller.hasPointerCapture(pointerId)){
+        try{scroller.releasePointerCapture(pointerId);}catch{}
+      }
+      if(moved){
+        ignoreNextClick=true;
+        ignoreNextDoubleClick=true;
+        setTimeout(()=>{ignoreNextClick=false;},0);
+        setTimeout(()=>{ignoreNextDoubleClick=false;},300);
+      }
+    };
+    scroller.addEventListener('pointerdown',e=>{
+      if(e.pointerType!=='mouse'||e.button!==0||e.isPrimary===false||document.body.classList.contains('mobile-calendar-mode'))return;
+      if(e.target.closest('button,a,input,select,textarea,[contenteditable="true"]'))return;
+      drag={pointerId:e.pointerId,x:e.clientX,y:e.clientY,left:scroller.scrollLeft,top:scroller.scrollTop,moved:false};
+    });
+    window.addEventListener('pointermove',e=>{
+      if(!drag||e.pointerId!==drag.pointerId)return;
+      if((e.buttons&1)===0){finish();return;}
+      const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+      if(!drag.moved&&Math.hypot(dx,dy)<5)return;
+      if(!drag.moved){
+        drag.moved=true;
+        scroller.classList.add('is-dragging');
+        if(scroller.setPointerCapture){try{scroller.setPointerCapture(e.pointerId);}catch{}}
+      }
+      e.preventDefault();
+      scroller.scrollLeft=drag.left-dx;
+      scroller.scrollTop=drag.top-dy;
+    },{passive:false});
+    window.addEventListener('pointerup',e=>{if(drag&&e.pointerId===drag.pointerId)finish();});
+    window.addEventListener('pointercancel',e=>{if(drag&&e.pointerId===drag.pointerId)finish();});
+    window.addEventListener('blur',finish);
+    scroller.addEventListener('dragstart',e=>{if(drag)e.preventDefault();});
+    scroller.addEventListener('click',e=>{
+      if(!ignoreNextClick)return;
+      ignoreNextClick=false;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    },true);
+    scroller.addEventListener('dblclick',e=>{
+      if(!ignoreNextDoubleClick)return;
+      ignoreNextDoubleClick=false;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    },true);
+  }
+  async function refreshDataManually(){
+    if(state.isLoading)return;
+    const button=$('refresh-data-btn');
+    state.isLoading=true;
+    button.disabled=true;
+    button.classList.add('is-loading');
+    button.setAttribute('aria-busy','true');
+    try{
+      if(IS_GAS)await reloadFromBackend();
+      else Object.assign(state,loadDemo());
+      renderAll(true);
+      const at=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+      button.title='Обновлено в '+at;
+      toast('Данные обновлены · '+at);
+    }catch(err){
+      toast('Ошибка обновления: '+(err?.message||String(err)),true);
+    }finally{
+      button.classList.remove('is-loading');
+      button.removeAttribute('aria-busy');
+      button.disabled=false;
+      state.isLoading=false;
+    }
+  }
+
   function attachEvents(){
     installTimelinePinch();
     installCalendarDoubleTap();
+    installDesktopCalendarDrag();
+    $('refresh-data-btn').addEventListener('click',refreshDataManually);
     $('mobile-orientation-dismiss').addEventListener('click',()=>$('mobile-orientation-tip').classList.add('is-dismissed'));
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
     $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);

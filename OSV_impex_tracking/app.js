@@ -322,13 +322,17 @@
   function updateMobileCalendarFullscreen(){
     const button=$('mobile-calendar-fullscreen');
     if(!button)return;
-    const active=!!document.fullscreenElement;
-    if(isIOSDevice()&&!document.documentElement.requestFullscreen){
-      button.textContent=isStandaloneWebApp()?'✓ Режим приложения':'ⓘ Без вкладок Safari';
-      button.title=isStandaloneWebApp()?'OSV открыт как отдельное приложение':'Как запустить OSV без панелей Safari';
+    if(isIOSDevice()){
+      const installed=isStandaloneWebApp();
+      button.hidden=installed;
+      button.style.display=installed?'none':'';
+      button.textContent='ⓘ Без вкладок';
+      button.title='Как убрать панели Safari: открыть OSV с экрана «Домой»';
       button.setAttribute('aria-pressed','false');
       return;
     }
+    button.hidden=false;button.style.display='';
+    const active=!!document.fullscreenElement;
     button.textContent=active?'⤡ Выйти из полного экрана':'⛶ На весь экран';
     button.title=active?'Выйти из полноэкранного режима':'На весь экран';
     button.setAttribute('aria-pressed',String(active));
@@ -367,23 +371,19 @@
     updateMobileCalendarFullscreen();
   }
   async function toggleMobileCalendarFullscreen(){
-    if(document.fullscreenElement){
-      try{await document.exitFullscreen();}catch{toast('Не удалось выйти из полноэкранного режима',true);}
-      updateMobileCalendarFullscreen();
+    // iOS Safari cannot hide its tabs with Fullscreen API, especially in an iframe.
+    if(isIOSDevice()){
+      if(!isStandaloneWebApp())showIOSStandaloneGuide();
       return;
+    }
+    if(document.fullscreenElement){
+      try{await document.exitFullscreen();}catch{}
+      updateMobileCalendarFullscreen();return;
     }
     if(!document.documentElement.requestFullscreen){
-      if(isIOSDevice()){
-        if(isStandaloneWebApp())toast('OSV уже запущен без вкладок Safari.');
-        else showIOSStandaloneGuide();
-      }else toast('Этот браузер не поддерживает полноэкранный режим.',true);
-      return;
+      updateMobileCalendarFullscreen();return; // CSS viewer remains available
     }
-    try{
-      await document.documentElement.requestFullscreen();
-    }catch{
-      toast('Браузер запретил полноэкранный режим.',true);
-    }
+    try{await document.documentElement.requestFullscreen();}catch{}
     updateMobileCalendarFullscreen();
   }
 

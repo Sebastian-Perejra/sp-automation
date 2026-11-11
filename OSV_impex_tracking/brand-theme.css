@@ -903,3 +903,45 @@ body.mobile-calendar-mode #timeline-view .timeline-row-label{
 @media (orientation:landscape){
   #timeline-view .mobile-orientation-tip{display:none!important}
 }
+/* Calendar stacking: status chips were painted above sticky operation labels.
+   Desktop labels must be opaque and above all chips/flow connectors;
+   touch/portrait/mobile-calendar modes intentionally remain UNFROZEN. */
+@media (min-width:761px) {
+  #timeline-view .timeline-row-label{position:sticky;left:0;z-index:25;isolation:isolate}
+  #timeline-view .calendar-corner{z-index:26}
+}
+#timeline-view .timeline-row-label .op-main{position:relative;z-index:1}
+#timeline-view .timeline-flow-arrow{z-index:2}
+#timeline-view .day-slot .event-chip{z-index:3}
+
+/* Clickable KPI filters + visible reset affordance. */
+#metrics .metric-filter{width:100%;appearance:none;text-align:left;font:inherit;color:inherit;cursor:pointer;position:relative}
+#metrics .metric-filter:hover{border-color:#d35a65;box-shadow:0 3px 12px rgba(117,30,39,.10)}
+#metrics .metric-filter:focus-visible{outline:2px solid #cb2434;outline-offset:2px}
+#metrics .metric-filter.is-selected{background:#fff0f1;border-color:#c71728;box-shadow:inset 0 0 0 1px #c71728,0 0 0 1px rgba(199,23,40,.10)}
+#metrics .metric-filter.is-selected .metric-top,#metrics .metric-filter.is-selected .metric-value strong{color:#a00e1b}
+#metrics .metric-filter.is-selected .metric-symbol{color:#c71728}
+#metrics .metric-filter.is-selected:after{display:block;content:"";position:absolute;right:8px;bottom:7px;width:6px;height:6px;border-radius:50%;background:#c71728}
+#timeline-view .calendar-title-group{display:flex;align-items:center;gap:12px;flex-shrink:0}
+#timeline-view .filter-reset{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;cursor:pointer;color:#b81425;background:#fff2f3;border:1px solid #e8b9bf;border-radius:7px;padding:6px 9px;font-size:10px;font-weight:800}
+#timeline-view .filter-reset:hover{background:#fce1e4}
+#timeline-view .filter-reset.hidden{display:none!important}
+#timeline-view .legend-inline{display:none}
+#timeline-view .icon-export{width:38px;min-width:38px;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
+#timeline-view .icon-export svg{display:block;flex:none}
+@media (min-width:1200px) {
+  body.timeline-mode #timeline-view .timeline-panel-head{display:flex;align-items:center;gap:15px}
+  body.timeline-mode #timeline-view .legend-under{display:none!important}
+  body.timeline-mode #timeline-view .legend-inline{display:flex!important;flex:1 1 auto;align-items:center;justify-content:flex-start;gap:13px;padding:0!important;min-width:0;flex-wrap:nowrap;white-space:nowrap;font-size:11px;color:#5c6a79}
+  #timeline-view .legend-inline span{gap:7px}
+  #timeline-view .legend-inline .legend-square{width:12px;height:12px;flex:none}
+  #timeline-view .legend-inline .legend-outline{width:12px;height:12px;border-width:2px;flex:none}
+  #timeline-view .calendar-header-actions{flex-shrink:0;margin-left:auto}
+}
+@media (max-width:1199px) {
+  #timeline-view .legend-inline{display:none!important}
+}
+@media (max-width:760px) {
+  #timeline-view .calendar-title-group{flex:1 1 auto;min-width:0;gap:7px}
+  #timeline-view .filter-reset{font-size:9px;padding:5px 7px}
+}

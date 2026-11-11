@@ -64,20 +64,20 @@
         <div class="topbar-actions"><span class="environment-badge" id="environment-badge"><i></i> ДЕМО</span><span class="top-date" id="top-date"></span><button class="icon-button" id="logout-btn" title="Выйти" hidden>⇥</button></div>
       </div>
       <section class="content">
-        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-dash"></span> OPERATION CONTROL CENTER</div><h1 id="page-title">Таймлайн операций<span class="title-dot">.</span></h1><p id="page-subtitle">Импорт и экспорт. От получения задания до финальной доставки.</p></div><button class="btn btn-primary" id="new-operation-btn"><span class="btn-plus">+</span> Новая операция</button></div>
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-dash"></span> OPERATION CONTROL CENTER</div><h1 id="page-title">Таймлайн операций<span class="title-dot">.</span></h1><p id="page-subtitle">Импорт и экспорт. От получения задания до финальной доставки.</p></div><div id="intro-actions-mount"><button class="btn btn-primary" id="new-operation-btn"><span class="btn-plus">+</span> Новая операция</button></div></div>
 
-        <section class="metrics" id="metrics" aria-label="Показатели"></section>
+        <div id="global-metrics-mount"><section class="metrics" id="metrics" aria-label="Показатели"></section></div>
 
         <section id="timeline-view" class="view-pane">
-          <div class="control-panel">
+          <div class="timeline-ribbon"><div id="timeline-metrics-mount"></div><div class="control-panel">
             <div class="control-row"><div class="search-wrap"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Поиск по компании, грузу, коду…" aria-label="Поиск операций"></div>
               <select id="direction-filter" aria-label="Направление"><option value="all">Все направления</option><option value="IMP">Импорт</option><option value="EXP">Экспорт</option></select>
               <select id="state-filter" aria-label="Состояние"><option value="all">Все операции</option><option value="active">В работе</option><option value="completed">Завершены</option><option value="overdue">С просрочкой</option></select>
               <button id="export-btn" class="btn btn-outline" title="Экспорт событий в CSV">↓ Экспорт</button>
             </div>
-          </div>
+          </div></div>
           <div class="timeline-panel">
-            <div class="timeline-panel-head"><div><div class="panel-kicker">OPERATION TIMELINE</div><h2>Календарь операций <span id="row-count" class="tiny-count">0</span></h2></div><div class="date-navigation"><button class="nav-arrow" id="prev-week" title="Назад на 7 дней">‹</button><button class="btn btn-soft" id="today-btn">Сегодня</button><button class="nav-arrow" id="next-week" title="Вперёд на 7 дней">›</button></div></div>
+            <div class="timeline-panel-head"><div><div class="panel-kicker">OPERATION TIMELINE</div><h2>Календарь операций <span id="row-count" class="tiny-count">0</span></h2></div><div class="calendar-header-actions"><div class="date-navigation"><button class="nav-arrow" id="prev-week" title="Назад на 7 дней">‹</button><button class="btn btn-soft" id="today-btn">Сегодня</button><button class="nav-arrow" id="next-week" title="Вперёд на 7 дней">›</button></div><div id="timeline-actions-mount"></div></div></div>
             <div class="legend"><span><i class="legend-square legend-intake"></i>Задание</span><span><i class="legend-square legend-transport"></i>Транспорт</span><span><i class="legend-square legend-customs"></i>Таможня</span><span><i class="legend-square legend-delivery"></i>Доставка</span><span><i class="legend-outline"></i>Плановое событие</span><span class="legend-hint">Нажмите на день, чтобы добавить статус</span></div>
             <div class="timeline-scroller" id="timeline-scroller"><div id="timeline-track" class="timeline-track"></div></div>
             <div class="timeline-footer"><span><span class="pulse-dot"></span> Данные обновляются после сохранения</span><span>Горизонтальная прокрутка ↔</span></div>

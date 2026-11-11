@@ -600,19 +600,17 @@ body.mobile-calendar-mode #timeline-view .timeline-panel-head{
   display:flex;flex:0 0 auto;padding:6px 10px!important;gap:8px!important;
   min-height:48px!important;flex-wrap:nowrap!important;border-bottom:1px solid #dbe1e8;
 }
-body.mobile-calendar-mode #timeline-view .timeline-panel-head h2{
-  margin:0!important;font-size:13px!important;white-space:nowrap;
-}
+body.mobile-calendar-mode #timeline-view .timeline-panel-head h2{display:none!important}
 body.mobile-calendar-mode #timeline-view .calendar-header-actions{
-  flex:1 1 auto;width:auto!important;justify-content:flex-end;flex-wrap:nowrap!important;gap:8px!important;
+  flex:1 1 auto;width:100%!important;justify-content:space-between;flex-wrap:nowrap!important;gap:4px!important;
 }
 body.mobile-calendar-mode .mobile-calendar-tool{
   display:inline-flex;align-items:center;justify-content:center;border:1px solid #cad5e2;
   background:#fff;color:#1c2e42;border-radius:7px;height:34px;padding:0 9px;
-  font-size:11px;font-weight:700;line-height:1.1;font-family:inherit;white-space:nowrap;cursor:pointer;
+  font-size:10px;font-weight:700;line-height:1.1;font-family:inherit;white-space:nowrap;cursor:pointer;
 }
 body.mobile-calendar-mode .mobile-calendar-tool-primary{color:#fff;background:#c91729;border-color:#c91729}
-body.mobile-calendar-mode .mobile-calendar-hint{font-size:10px;color:#778397;white-space:nowrap}
+body.mobile-calendar-mode .mobile-calendar-hint{display:none}
 body.mobile-calendar-mode #timeline-view .date-navigation{gap:3px;flex-shrink:0}
 body.mobile-calendar-mode #timeline-view .date-navigation .btn{height:32px!important;min-height:32px!important;padding:5px 8px!important}
 body.mobile-calendar-mode #timeline-view .nav-arrow{width:30px;height:32px}

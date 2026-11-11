@@ -6,29 +6,43 @@
   <meta name="theme-color" content="#0a1020">
   <meta name="description" content="OSV IMPEX Tracking — управление импортными и экспортными операциями">
   <title>OSV · IMPEX Tracking</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23111e35'/%3E%3Cpath d='M15 38 29 24l8 8 12-14' fill='none' stroke='%2362e5b6' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="https://sp-automation.com/OSV_impex_tracking/favicon.svg?v=2">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="brand-theme.css">
 </head>
 <body>
   <div id="login" class="login-screen hidden" aria-live="polite">
-    <form id="login-form" class="login-card">
-      <div class="brand-mark brand-mark-lg">↗</div>
-      <p class="eyebrow">SECURE WORKSPACE</p>
-      <h1>OSV IMPEX<br><span>Tracking</span></h1>
-      <p class="login-description">Рабочее пространство для контроля импортных и экспортных операций.</p>
-      <label for="login-password">Пароль доступа</label>
-      <input id="login-password" type="password" autocomplete="current-password" placeholder="Введите пароль" required minlength="8">
-      <div id="login-error" class="form-error hidden"></div>
-      <button class="btn btn-primary btn-wide" type="submit">Войти в систему <span>↗</span></button>
-      <p class="login-foot">Доступ только для авторизованных пользователей</p>
-    </form>
+    <div class="login-layout">
+      <aside class="login-visual" aria-hidden="true">
+        <div class="hero-brand"><img class="hero-mark" alt="" src="https://sp-automation.com/OSV_impex_tracking/osv-logo-light.svg"> <span>INTERNAL WORKSPACE</span></div>
+        <div class="login-hero-copy">
+          <span class="hero-overline">IMPORT · EXPORT · CONTROL</span>
+          <h2>Каждая поставка.<br><span>Под контролем.</span></h2>
+          <p>Единое пространство для ведения импортных и экспортных операций: события, сроки, таможенное оформление и доставка.</p>
+          <div class="login-visual-steps"><span>ЗАДАНИЕ</span><span>ТРАНСПОРТ</span><span>ТАМОЖНЯ</span><span>ДОСТАВКА</span></div>
+        </div>
+        <div class="login-visual-footer">OSV · IMPEX TRACKING PLATFORM</div>
+      </aside>
+      <form id="login-form" class="login-card">
+        <img class="login-company-logo" alt="OSV" src="https://sp-automation.com/OSV_impex_tracking/osv-logo.svg">
+        <p class="eyebrow">SECURE ACCESS</p>
+        <h1>Добро пожаловать<br><span>в OSV Tracking.</span></h1>
+        <p class="login-description">Авторизуйтесь для доступа к календарю операций и журналу статусов.</p>
+        <label for="login-password">Пароль доступа</label>
+        <input id="login-password" type="password" autocomplete="current-password" placeholder="Введите пароль" required minlength="8">
+        <div id="login-error" class="form-error hidden"></div>
+        <button class="btn btn-primary btn-wide" type="submit">Войти в систему <span>↗</span></button>
+        <p class="login-foot">Доступ только для авторизованных пользователей</p>
+        <p class="login-signature">DESIGNED &amp; BUILT BY <b>SP AUTOMATION</b></p>
+      </form>
+    </div>
   </div>
 
   <div id="workspace" class="app-shell">
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-mark">↗</div>
-        <div><strong>OSV <span>IMPEX</span></strong><small>TRACKING PLATFORM</small></div>
+        <div class="brand-mark"><img class="osv-brand-icon" src="https://sp-automation.com/OSV_impex_tracking/favicon.svg" alt="OSV"></div>
+        <div><strong>OSV <span>IMPEX</span></strong><small>OPERATIONS TRACKING</small></div>
       </div>
       <div class="sidebar-separator"></div>
       <div class="sidebar-heading">WORKSPACE</div>
@@ -39,8 +53,8 @@
         <button class="nav-item" data-view="audit"><span class="nav-icon">≡</span>Журнал</button>
       </nav>
       <div class="sidebar-bottom">
-        <div class="side-help"><span class="side-help-icon">✳</span><strong>Контроль логистики</strong><p>Все этапы перевозок<br>на одном экране.</p></div>
-        <div class="side-user"><div class="avatar">OS</div><div><strong>OSV Workspace</strong><small id="connection-label">Демо-данные</small></div><span class="live-dot"></span></div>
+        <div class="side-help"><span class="side-help-icon">▤</span><strong>Контроль логистики</strong><p>Все этапы перевозок<br>на одном экране.</p></div>
+        <div class="side-user"><div class="avatar">OSV</div><div><strong>OSV Workspace</strong><small id="connection-label">Демо-данные</small></div><span class="live-dot"></span></div>
       </div>
     </aside>
 

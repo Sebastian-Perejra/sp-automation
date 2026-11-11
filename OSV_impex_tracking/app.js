@@ -224,11 +224,15 @@
       const actuals=es.filter(e=>e.type==='actual');const receivedExists=actuals.some(e=>e.status==='received');let aidx=0,lastActual=null;
       for(const d of dates){
         while(aidx<actuals.length&&actuals[aidx].date<=d){lastActual=actuals[aidx];aidx++;}
-        const isWeekend=[0,6].includes(asDate(d).getDay()),isToday=d===TODAY;
+        const isWeekend=[0,6].includes(asDate(d).getDay());
         let phase='';if(lastActual&&receivedExists&&lastActual.date<=d){phase=lastActual.status==='delivered'?(lastActual.date===d?'done':''):statusFor(lastActual.status).stage;}
-        const ev=byDate[d]||[];const primary=ev.find(e=>e.type==='actual')||ev[0];let chip='';
+        const ev=byDate[d]||[];
+        const actualDelivery=ev.find(e=>e.type==='actual'&&e.status==='delivered');
+        const primary=actualDelivery||ev.find(e=>e.type==='actual')||ev[0];let chip='';
         if(primary){const cfg=statusFor(primary.status);chip=`<span class="event-chip ${primary.type} ${cfg.stage}" title="${esc(ev.map(e=>`${e.type==='planned'?'ПЛАН':'ФАКТ'}: ${statusFor(e.status).label}`).join(' • '))}"><small class="chip-direction">${op.direction}.</small>${esc(cfg.short)}${ev.length>1?`<span class="event-count">+${ev.length-1}</span>`:''}</span>`;}
-        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${isToday?'today':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}">${chip||'<span class="slot-add">+</span>'}</div>`;
+        // Delivery is one green cell, not an entire date column. The flag is decorative.
+        const deliveredFlag=actualDelivery?'<span class="delivery-flag" aria-label="Доставлено" title="Доставлено"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 2v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 3h11l-2.6 4L16 11H5z" fill="currentColor"/></svg></span>':'';
+        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)} · двойной клик или два касания для редактирования">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}</div>`;
       }
       // A separate lightweight overlay connects consecutive unique event dates.
       // No arrow is drawn where a timeline has only one event.
@@ -250,7 +254,7 @@
       html+='<div class="timeline-row-label timeline-placeholder-label" aria-hidden="true">'+(ghost===0&&!rows.length?'<span class="timeline-placeholder-message">Нет операций<br><small>Создайте новую операцию</small></span>':'')+'</div>';
       for(const d of dates){
         const weekend=[0,6].includes(asDate(d).getDay());
-        html+='<div class="timeline-ghost-cell'+(weekend?' weekend':'')+(d===TODAY?' today':'')+'" aria-hidden="true"></div>';
+        html+='<div class="timeline-ghost-cell'+(weekend?' weekend':'')+'" aria-hidden="true"></div>';
       }
       html+='</div>';
     }
@@ -367,8 +371,44 @@
   }
   function closeDrawer(){$('drawer-backdrop').classList.add('hidden');$('detail-drawer').classList.add('hidden');document.body.style.overflow='';}
   function csvExport(){const headers=['Операция ID','Направление','Компания','Товар','Дата задания','Дата события','Статус','Тип','Комментарий'];const lines=[headers];state.operations.forEach(op=>{const ev=operationEvents(op.id);ev.forEach(e=>lines.push([op.id,op.direction,op.company,op.goods,op.createdAt,e.date,statusFor(e.status).label,e.type==='actual'?'Факт':'План',e.note||'']));});const csv='\ufeff'+lines.map(row=>row.map(v=>{const t=String(v??'');const safe=/^[=+\-@\t\r]/.test(t)?'\''+t:t;return '"'+safe.replace(/"/g,'""')+'"';}).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='OSV_IMPEX_'+TODAY+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);toast('CSV-файл подготовлен');}
+  /* Reliable mobile double-tap, with movement/pinch rejection.
+     Native dblclick is retained for mouse and trackpad users. */
+  let lastMobileCellOpen=0;
+  function installCalendarDoubleTap(){
+    const scroller=$('timeline-scroller');
+    let fingerStart=null,lastTap=null;
+    const reset=()=>{fingerStart=null;lastTap=null;};
+    scroller.addEventListener('touchstart',e=>{
+      if(e.touches.length!==1){reset();return;}
+      const target=e.target.closest('.day-slot');
+      if(!target){fingerStart=null;return;}
+      const t=e.touches[0];
+      fingerStart={target,x:t.clientX,y:t.clientY,time:Date.now()};
+    },{passive:true});
+    scroller.addEventListener('touchmove',e=>{
+      if(!fingerStart)return;
+      if(e.touches.length!==1){reset();return;}
+      const t=e.touches[0];
+      if(Math.hypot(t.clientX-fingerStart.x,t.clientY-fingerStart.y)>12){reset();}
+    },{passive:true});
+    scroller.addEventListener('touchend',e=>{
+      const tap=fingerStart;fingerStart=null;
+      if(e.touches.length||!tap||Date.now()-tap.time>500)return;
+      const now=Date.now();
+      if(lastTap&&lastTap.target===tap.target&&now-lastTap.time<=420){
+        lastTap=null;
+        e.preventDefault(); // prevent emulated click/double-click after a confirmed double-tap
+        lastMobileCellOpen=now;
+        openEvent(tap.target.dataset.op,tap.target.dataset.date);
+      }else{
+        lastTap={target:tap.target,time:now};
+      }
+    },{passive:false});
+    scroller.addEventListener('touchcancel',reset,{passive:true});
+  }
   function attachEvents(){
     installTimelinePinch();
+    installCalendarDoubleTap();
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
     $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
     document.addEventListener('fullscreenchange',updateMobileCalendarFullscreen);
@@ -387,8 +427,14 @@
     document.querySelectorAll('.modal-layer').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));
     $('close-drawer').addEventListener('click',closeDrawer);$('drawer-backdrop').addEventListener('click',closeDrawer);
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-layer:not(.hidden)').forEach(el=>closeModal(el.id));closeDrawer();}});
+    // Opening a status is an intentional double action, never a single scroll/tap.
+    document.addEventListener('dblclick',e=>{
+      const slot=e.target.closest('.day-slot');
+      if(!slot||Date.now()-lastMobileCellOpen<700)return;
+      e.preventDefault();
+      openEvent(slot.dataset.op,slot.dataset.date);
+    });
     document.addEventListener('click',e=>{
-      const slot=e.target.closest('.day-slot');if(slot){openEvent(slot.dataset.op,slot.dataset.date);return;}
       const op=e.target.closest('[data-open-op]');if(op){openDrawer(op.dataset.openOp);return;}
       const edit=e.target.closest('[data-edit-event]');if(edit){openEvent(state.activeOperation,state.activeDate,edit.dataset.editEvent);return;}
       const del=e.target.closest('[data-delete-event]');if(del){const id=del.dataset.deleteEvent,opid=state.activeOperation,date=state.activeDate;if(!confirm('Удалить событие? История изменения сохранится в журнале.'))return;guarded(async()=>{await backendCall('apiDeleteEvent',opid,id);closeModal('event-modal');toast('Событие удалено');});}

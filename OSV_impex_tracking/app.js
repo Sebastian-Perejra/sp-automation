@@ -255,54 +255,93 @@
   init().catch(e=>{toast('Ошибка запуска: '+(e.message||e),true);console.error(e);});
 })();
 
-/* Three-up OSV photo gallery; independent randomized, preloaded crossfades. */
+/* Sidebar gallery: three complete photos hosted on our own site; randomized without repeats. */
 (function initOsbSidebarThreeUp(){
   const gallery=document.querySelector('.sidebar-gallery[data-gallery="osv"]');
   if(!gallery)return;
   const slots=Array.from(gallery.querySelectorAll('.sidebar-gallery-slot'));
   if(slots.length!==3)return;
-  const photos=[
-    'https://www.osv.com.ua/wp-content/uploads/2020/07/osv-combi-scaled.jpg',
-    'https://img.directindustry.com/images_di/photo-g/196919-17034400.jpg',
-    'https://img.directindustry.com/images_di/projects/images-g/osv-s3-3k-179451-20995047.jpg',
-    'https://img.directindustry.com/images_di/photo-g/196919-19465417.jpg',
-    'https://img.directindustry.com/images_di/photo-g/196919-12434100.jpg',
-    'https://img.directindustry.com/images_di/photo-g/196919-20024065.jpg',
-    'https://img.directindustry.com/images_di/projects/images-om/173499-20574110.jpg'
-  ];
-  const live=slots.map(slot=>slot.querySelector('.is-visible').getAttribute('src'));
-  const randomIndex=(size)=>Math.floor(Math.random()*size);
-  let lastSlot=-1,busy=false;
-  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce)return;
-  const tick=()=>{
-    if(document.hidden||busy){schedule();return;}
-    const candidates=[0,1,2].filter(x=>x!==lastSlot);
-    const index=candidates[randomIndex(candidates.length)];
-    const available=photos.filter(url=>!live.includes(url));
-    if(!available.length){schedule();return;}
-    const url=available[randomIndex(available.length)];
-    const imgs=Array.from(slots[index].querySelectorAll('.sidebar-gallery-img'));
-    const current=imgs.find(img=>img.classList.contains('is-visible'));
-    const next=imgs.find(img=>img!==current);
-    if(!current||!next){schedule();return;}
-    busy=true;
-    // Use a separate Image preload so an unavailable external image never creates a blank slot.
+
+  // Source of truth: uploaded files in sp-automation/OSV_impex_tracking/Images.
+  // Images are served by OUR domain, not osv.com.ua, DirectIndustry or GitHub raw.
+  const filenames=["01.jpg","01.png","016-1.jpg","02-1.png","03.png","143-scaled-e1603368966340.jpg","170-1-scaled-e1603367407650.jpg","2-1024x1024.jpg","20200601_112324-scaled.jpg","2026-04-29-1024x768.jpeg","3-kopiya-1024x768.jpg","anton.jpg","bez-nazvy-1.jpg","img_4793-1024x753.jpg","katalog-osv-1024x727.png","katya.jpg","ksyusha.jpg","lp01_7_5_kg_start_extended_hr-photoroom-kopiya-1024x678.jpg","natasha.jpg","oleg.jpg","osv-2020-800x800-2-scaled.jpg","osv-m12-10k-mdi-1.jpeg","osv-mini-ab-1024x685.jpg","osv-mini-dynamica.jpg","osv-on-linkedin-—-mini-ab-for-pu-edge-1024x685.png","osv-s1-2k-static-abrasive-—-05-1024x768.jpeg","sasha.jpg","seryozha.jpg","sydene-yz-ppu-—-01.jpeg","whatsapp-image-2020-12-02-at-08.51.12-1024x576.jpeg","whatsapp-image-2026-07-05-at-22.44.50-1-1024x768.jpeg","yana.jpg","yura.jpg","yurchik.jpg","zobrazhennya-whatsapp-data_-2025-11-19-o-14.54.57_ab810c1d-1024x685.jpg","zobrazhennya-whatsapp-data_-2025-12-10-o-16.42.00_5ae8aab6-1024x768.jpg"];
+  const base='https://sp-automation.com/OSV_impex_tracking/Images/';
+  const photos=filenames.map(name=>base+encodeURIComponent(name));
+  const broken=new Set();
+  const visible=[null,null,null];
+  let lastSlot=-1,changing=false;
+  const prefersReducedMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const shuffle=list=>{
+    const result=list.slice();
+    for(let i=result.length-1;i>0;i--){
+      const k=Math.floor(Math.random()*(i+1));
+      [result[i],result[k]]=[result[k],result[i]];
+    }
+    return result;
+  };
+  // Shuffle bag: use each photo before repeating, excluding currently shown photos.
+  let bag=shuffle(photos);
+  const nextPhoto=()=>{
+    for(let pass=0;pass<2;pass++){
+      const pos=bag.findIndex(url=>!broken.has(url)&&!visible.includes(url));
+      if(pos>=0)return bag.splice(pos,1)[0];
+      bag=shuffle(photos.filter(url=>!broken.has(url)&&!visible.includes(url)));
+    }
+    return null;
+  };
+  const load=(url,onLoad,onError)=>{
     const probe=new Image();
-    probe.onload=()=>{
+    probe.onload=onLoad;
+    probe.onerror=onError;
+    probe.src=url;
+  };
+
+  // Random three-image opening, never three copies of the same image.
+  slots.forEach((slot,index)=>{
+    const first=slot.querySelector('.sidebar-gallery-img.is-visible');
+    let attempts=0;
+    const start=()=>{
+      if(attempts++>=photos.length)return;
+      const url=nextPhoto();
+      if(!url)return;
+      visible[index]=url; // reserve while the image loads to avoid duplicates
+      load(url,()=>{first.src=url;},()=>{
+        broken.add(url);
+        visible[index]=null;
+        start();
+      });
+    };
+    start();
+  });
+
+  if(prefersReducedMotion)return;
+  const schedule=()=>window.setTimeout(tick,7000+Math.floor(Math.random()*4500));
+  function tick(){
+    if(document.hidden||changing){schedule();return;}
+    const options=[0,1,2].filter(n=>n!==lastSlot);
+    const index=options[Math.floor(Math.random()*options.length)];
+    const url=nextPhoto();
+    if(!url){schedule();return;}
+    const images=Array.from(slots[index].querySelectorAll('.sidebar-gallery-img'));
+    const current=images.find(img=>img.classList.contains('is-visible'));
+    const next=images.find(img=>img!==current);
+    if(!current||!next){schedule();return;}
+    changing=true;
+    load(url,()=>{
       next.src=url;
       requestAnimationFrame(()=>{
         next.classList.add('is-visible');
         current.classList.remove('is-visible');
-        live[index]=url;
+        visible[index]=url;
         lastSlot=index;
-        busy=false;
+        changing=false;
         schedule();
       });
-    };
-    probe.onerror=()=>{busy=false;lastSlot=index;schedule();};
-    probe.src=url;
-  };
-  function schedule(){window.setTimeout(tick,7500+Math.floor(Math.random()*4500));}
+    },()=>{
+      broken.add(url);
+      changing=false;
+      schedule();
+    });
+  }
   schedule();
 })();

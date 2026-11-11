@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a1020">
+  <meta name="description" content="OSV IMPEX Tracking — управление импортными и экспортными операциями">
+  <title>OSV · IMPEX Tracking</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23111e35'/%3E%3Cpath d='M15 38 29 24l8 8 12-14' fill='none' stroke='%2362e5b6' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="login" class="login-screen hidden" aria-live="polite">
+    <form id="login-form" class="login-card">
+      <div class="brand-mark brand-mark-lg">↗</div>
+      <p class="eyebrow">SECURE WORKSPACE</p>
+      <h1>OSV IMPEX<br><span>Tracking</span></h1>
+      <p class="login-description">Рабочее пространство для контроля импортных и экспортных операций.</p>
+      <label for="login-password">Пароль доступа</label>
+      <input id="login-password" type="password" autocomplete="current-password" placeholder="Введите пароль" required minlength="8">
+      <div id="login-error" class="form-error hidden"></div>
+      <button class="btn btn-primary btn-wide" type="submit">Войти в систему <span>↗</span></button>
+      <p class="login-foot">Доступ только для авторизованных пользователей</p>
+    </form>
+  </div>
+
+  <div id="workspace" class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">↗</div>
+        <div><strong>OSV <span>IMPEX</span></strong><small>TRACKING PLATFORM</small></div>
+      </div>
+      <div class="sidebar-separator"></div>
+      <div class="sidebar-heading">WORKSPACE</div>
+      <nav class="sidebar-nav" aria-label="Навигация">
+        <button class="nav-item selected" data-view="timeline"><span class="nav-icon">▦</span>Таймлайн<span class="nav-count" id="nav-active">0</span></button>
+        <button class="nav-item" data-view="analytics"><span class="nav-icon">◫</span>Аналитика</button>
+        <button class="nav-item" data-view="archive"><span class="nav-icon">▤</span>Архив</button>
+        <button class="nav-item" data-view="audit"><span class="nav-icon">≡</span>Журнал</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-help"><span class="side-help-icon">✳</span><strong>Контроль логистики</strong><p>Все этапы перевозок<br>на одном экране.</p></div>
+        <div class="side-user"><div class="avatar">OS</div><div><strong>OSV Workspace</strong><small id="connection-label">Демо-данные</small></div><span class="live-dot"></span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <div class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong id="breadcrumb-title">Таймлайн операций</strong></div>
+        <div class="topbar-actions"><span class="environment-badge" id="environment-badge"><i></i> ДЕМО</span><span class="top-date" id="top-date"></span><button class="icon-button" id="logout-btn" title="Выйти" hidden>⇥</button></div>
+      </div>
+      <section class="content">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-dash"></span> OPERATION CONTROL CENTER</div><h1 id="page-title">Таймлайн операций<span class="title-dot">.</span></h1><p id="page-subtitle">Импорт и экспорт. От получения задания до финальной доставки.</p></div><button class="btn btn-primary" id="new-operation-btn"><span class="btn-plus">+</span> Новая операция</button></div>
+
+        <section class="metrics" id="metrics" aria-label="Показатели"></section>
+
+        <section id="timeline-view" class="view-pane">
+          <div class="control-panel">
+            <div class="control-row"><div class="search-wrap"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Поиск по компании, грузу, коду…" aria-label="Поиск операций"></div>
+              <select id="direction-filter" aria-label="Направление"><option value="all">Все направления</option><option value="IMP">Импорт</option><option value="EXP">Экспорт</option></select>
+              <select id="state-filter" aria-label="Состояние"><option value="all">Все операции</option><option value="active">В работе</option><option value="completed">Завершены</option><option value="overdue">С просрочкой</option></select>
+              <button id="export-btn" class="btn btn-outline" title="Экспорт событий в CSV">↓ Экспорт</button>
+            </div>
+          </div>
+          <div class="timeline-panel">
+            <div class="timeline-panel-head"><div><div class="panel-kicker">OPERATION TIMELINE</div><h2>Календарь операций <span id="row-count" class="tiny-count">0</span></h2></div><div class="date-navigation"><button class="nav-arrow" id="prev-week" title="Назад на 7 дней">‹</button><button class="btn btn-soft" id="today-btn">Сегодня</button><button class="nav-arrow" id="next-week" title="Вперёд на 7 дней">›</button></div></div>
+            <div class="legend"><span><i class="legend-square legend-intake"></i>Задание</span><span><i class="legend-square legend-transport"></i>Транспорт</span><span><i class="legend-square legend-customs"></i>Таможня</span><span><i class="legend-square legend-delivery"></i>Доставка</span><span><i class="legend-outline"></i>Плановое событие</span><span class="legend-hint">Нажмите на день, чтобы добавить статус</span></div>
+            <div class="timeline-scroller" id="timeline-scroller"><div id="timeline-track" class="timeline-track"></div></div>
+            <div class="timeline-footer"><span><span class="pulse-dot"></span> Данные обновляются после сохранения</span><span>Горизонтальная прокрутка ↔</span></div>
+          </div>
+        </section>
+
+        <section id="analytics-view" class="view-pane hidden"><div class="analysis-layout"><div class="analysis-card"><div class="panel-kicker">PERFORMANCE</div><h2>Время прохождения этапов</h2><p>Средняя продолжительность на основании фактических событий.</p><div id="phase-bars"></div></div><div class="analysis-card"><div class="panel-kicker">DIRECTIONS</div><h2>Структура операций</h2><p>Распределение по направлениям.</p><div id="direction-bars"></div></div></div><div class="analysis-card recent-card"><div class="panel-kicker">OPERATIONS</div><h2>Последние операции</h2><div id="recent-operations"></div></div></section>
+        <section id="archive-view" class="view-pane hidden"><div class="archive-intro"><h2>Архив операций</h2><p>Завершённые и вручную архивированные записи остаются доступными для просмотра и анализа.</p></div><div id="archive-list" class="archive-list"></div></section>
+        <section id="audit-view" class="view-pane hidden"><div class="archive-intro"><h2>Журнал изменений</h2><p>Создание операций, обновления дат и статусов, архивирование. События не исчезают бесследно.</p></div><div id="audit-list" class="archive-list"></div></section>
+        <footer class="app-footer"><span>© 2026 OSV IMPEX Tracking</span><span>POWERED BY <b>SP AUTOMATION</b></span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-layer hidden" id="operation-modal" role="dialog" aria-modal="true" aria-labelledby="operation-modal-title">
+    <div class="modal-card"><div class="modal-head"><div><div class="panel-kicker">NEW SHIPMENT</div><h2 id="operation-modal-title">Новая операция</h2></div><button class="modal-close" data-close="operation-modal" aria-label="Закрыть">×</button></div>
+      <form id="operation-form" class="form-grid"><div class="field"><label>Направление</label><div class="seg-choice"><label><input name="direction" type="radio" value="IMP" checked><span>↙ Импорт</span></label><label><input name="direction" type="radio" value="EXP"><span>↗ Экспорт</span></label></div></div><div class="field"><label for="op-company">Компания <em>*</em></label><input id="op-company" name="company" maxlength="80" required placeholder="Например, Альфа Трейд"></div><div class="field"><label for="op-goods">Группа товаров <em>*</em></label><input id="op-goods" name="goods" maxlength="100" required placeholder="Оборудование, полимеры, запчасти…"></div><div class="field"><label for="op-date">Дата получения задания <em>*</em></label><input id="op-date" name="date" type="date" required></div><div class="field"><label for="op-note">Комментарий</label><textarea id="op-note" name="note" rows="2" maxlength="400" placeholder="Необязательно"></textarea></div><div class="form-error hidden" id="operation-error"></div><div class="modal-actions"><button class="btn btn-outline" type="button" data-close="operation-modal">Отмена</button><button class="btn btn-primary" type="submit">Создать операцию ↗</button></div></form>
+    </div>
+  </div>
+
+  <div class="modal-layer hidden" id="event-modal" role="dialog" aria-modal="true" aria-labelledby="event-modal-title"><div class="modal-card event-modal-card"><div class="modal-head"><div><div class="panel-kicker" id="event-operation-caption">OPERATION EVENT</div><h2 id="event-modal-title">События дня</h2></div><button class="modal-close" data-close="event-modal" aria-label="Закрыть">×</button></div><div id="existing-events" class="existing-events"></div><form id="event-form" class="form-grid"><input type="hidden" id="event-operation-id"><input type="hidden" id="event-edit-id"><div class="field"><label for="event-date">Дата события</label><input id="event-date" type="date" required></div><div class="field"><label for="event-status">Статус / событие</label><select id="event-status" required></select></div><div class="field"><label>Тип</label><div class="seg-choice"><label><input type="radio" name="event-type" value="actual" checked><span>✓ Фактическое</span></label><label><input type="radio" name="event-type" value="planned"><span>◷ Плановое</span></label></div></div><div class="field"><label for="event-note">Комментарий</label><textarea id="event-note" rows="2" maxlength="400" placeholder="Например: водитель подтвердил подачу на 09:00"></textarea></div><div class="form-error hidden" id="event-error"></div><div class="modal-actions"><button class="btn btn-outline" type="button" data-close="event-modal">Отмена</button><button class="btn btn-primary" type="submit" id="event-submit">Сохранить статус ↗</button></div></form></div></div>
+
+  <div class="drawer-backdrop hidden" id="drawer-backdrop"></div><aside class="detail-drawer hidden" id="detail-drawer" aria-label="Детали операции"><div class="drawer-head"><span class="panel-kicker">SHIPMENT DETAILS</span><button class="modal-close" id="close-drawer" aria-label="Закрыть">×</button></div><div id="drawer-content"></div></aside>
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

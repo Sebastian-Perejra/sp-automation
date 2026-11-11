@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#09101c"><title>OSV · IMPEX Tracking</title>
+  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#09101c}iframe{border:0;display:block;width:100%;height:100dvh;min-height:100vh}</style>
+</head>
+<body>
+  <iframe id="osv-frame" title="OSV IMPEX Tracking" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <script src="backend-config.js"></script>
+  <script>
+    (function(){
+      var u=String(window.OSV_GAS_WEBAPP_URL||'');
+      var approved=/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec(?:\?.*)?$/.test(u);
+      document.getElementById('osv-frame').src=approved?u:'preview.html';
+    })();
+  </script>
+</body>
+</html>

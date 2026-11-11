@@ -1003,3 +1003,28 @@ body.mobile-calendar-mode #timeline-view .timeline-row-label{
 #timeline-view .day-slot .operation-age.age-critical{background:#fee4e6;color:#aa1526;border-color:#da6674}
 body.mobile-calendar-mode #timeline-view .day-slot .operation-age{top:2px;right:2px;min-width:20px;height:20px;font-size:9px}
 body.mobile-calendar-mode #timeline-view .day-slot.has-operation-age .event-chip{transform:translateY(9px)}
+
+/* Preserve row boundaries on every colored phase cell.
+   Previous row-only border sat underneath the full-height filled children. */
+#timeline-view .timeline-row .day-slot::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;
+  border-bottom:1px dashed #b9c9d8;
+  z-index:8;pointer-events:none;
+}
+#timeline-view .timeline-row .timeline-ghost-cell{
+  border-bottom:1px dashed #c5d2dd;
+  box-sizing:border-box;
+}
+/* CSS-only mobile focus; no native Fullscreen API, so no browser Esc banner. */
+body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .mobile-orientation-tip,
+body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .legend-under,
+body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .timeline-footer{
+  display:none!important;
+}
+body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .timeline-panel-head{
+  padding:4px 7px!important;min-height:38px!important;
+}
+body.mobile-calendar-mode.calendar-immersive-mode #timeline-view .mobile-calendar-tool{
+  height:29px;padding:0 7px;
+}
+

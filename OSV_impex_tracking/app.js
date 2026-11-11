@@ -106,18 +106,39 @@
   async function guarded(action,button){if(state.isLoading)return;state.isLoading=true;if(button)button.disabled=true;try{await action();if(IS_GAS)await reloadFromBackend();renderAll(true);}catch(e){toast(e.message||'Ошибка сохранения',true);}finally{state.isLoading=false;if(button)button.disabled=false;}}
 
   function renderMetrics(){
-    const active=state.operations.filter(o=>!o.archived&&!delivered(o));
-    const completed=state.operations.filter(o=>delivered(o));
-    const delays=state.operations.filter(o=>!o.archived&&correctOverdue(o));
+    const visible=state.operations.filter(o=>!o.archived);
+    const active=visible.filter(o=>!delivered(o));
+    const completed=visible.filter(delivered);
+    const delays=visible.filter(correctOverdue);
     const cycles=completed.map(cycleDays).filter(n=>n!==null);
     const cards=[
-      ['Активные операции',String(active.length),'В работе прямо сейчас','↗',''],
-      ['Завершено',String(completed.length),'За весь период','✓',''],
-      ['Средний цикл',fmtMetric(avg(cycles)),'От задания до доставки','◷','дн.'],
-      ['С отклонениями',String(delays.length),'Плановая дата не соблюдена','⚑','']
+      ['Активные операции',String(active.length),'В работе прямо сейчас','↗','','active'],
+      ['Завершено',String(completed.length),'За весь период','✓','','completed'],
+      ['Средний цикл',fmtMetric(avg(cycles)),'От задания до доставки','◷','дн.',null],
+      ['С отклонениями',String(delays.length),'Плановая дата не соблюдена','⚑','','overdue']
     ];
-    $('metrics').innerHTML=cards.map((m,i)=>`<article class="metric-card ${i===3&&delays.length?'metric-emphasis':''}"><div class="metric-top"><span>${m[0]}</span><span class="metric-symbol">${m[3]}</span></div><div class="metric-value"><strong>${m[1]}</strong><span class="unit">${m[4]}</span></div><div class="metric-bottom">${m[2]}</div></article>`).join('');
+    $('metrics').innerHTML=cards.map((m,i)=>{
+      const filter=m[5],selected=filter===state.filter;
+      const contents=`<div class="metric-top"><span>${m[0]}</span><span class="metric-symbol">${m[3]}</span></div><div class="metric-value"><strong>${m[1]}</strong><span class="unit">${m[4]}</span></div><div class="metric-bottom">${selected?'Нажмите ещё раз, чтобы снять фильтр':m[2]}</div>`;
+      return filter?`<button type="button" data-metric-filter="${filter}" class="metric-card metric-filter ${selected?'is-selected':''} ${i===3&&delays.length?'metric-emphasis':''}" aria-pressed="${selected}" title="${selected?'Снять фильтр':'Показать только '+m[0].toLowerCase()}">${contents}</button>`:`<article class="metric-card">${contents}</article>`;
+    }).join('');
     $('nav-active').textContent=active.length;
+    const hasFilter=state.filter!=='all'||state.direction!=='all'||Boolean(state.query.trim());
+    $('clear-filter-btn').classList.toggle('hidden',!hasFilter);
+    $('state-filter').value=state.filter;
+  }
+  function setMetricFilter(filter){
+    state.filter=state.filter===filter?'all':filter;
+    renderMetrics();
+    renderTimeline(true);
+  }
+  function clearAllTimelineFilters(){
+    state.filter='all';state.direction='all';state.query='';
+    $('search-input').value='';
+    $('direction-filter').value='all';
+    $('state-filter').value='all';
+    renderMetrics();
+    renderTimeline(true);
   }
   function filteredOperations(){return state.operations.filter(op=>{
     if(op.archived)return false;
@@ -362,7 +383,93 @@
     $('drawer-archive').onclick=()=>{if(!confirm(op.archived?'Вернуть операцию из архива?':'Переместить операцию в архив?'))return;const button=$('drawer-archive');guarded(async()=>{await backendCall('apiArchiveOperation',id,!op.archived);closeDrawer();toast(op.archived?'Операция восстановлена':'Операция архивирована');},button);};
   }
   function closeDrawer(){$('drawer-backdrop').classList.add('hidden');$('detail-drawer').classList.add('hidden');document.body.style.overflow='';}
-  function csvExport(){const headers=['Операция ID','Направление','Компания','Товар','Дата задания','Дата события','Статус','Тип','Комментарий'];const lines=[headers];state.operations.forEach(op=>{const ev=operationEvents(op.id);ev.forEach(e=>lines.push([op.id,op.direction,op.company,op.goods,op.createdAt,e.date,statusFor(e.status).label,e.type==='actual'?'Факт':'План',e.note||'']));});const csv='\ufeff'+lines.map(row=>row.map(v=>{const t=String(v??'');const safe=/^[=+\-@\t\r]/.test(t)?'\''+t:t;return '"'+safe.replace(/"/g,'""')+'"';}).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='OSV_IMPEX_'+TODAY+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);toast('CSV-файл подготовлен');}
+  /* Excel OOXML export with a dependency-free ZIP (stored files + CRC32).
+     No CSV fallback, network library, macros, or intermediate server. */
+  function xlsxExport(){
+    const ops=state.operations.filter(o=>!o.archived);
+    const isOverdue=o=>correctOverdue(o);
+    const summary=[
+      ['Показатель','Значение'],
+      ['Дата формирования',TODAY],
+      ['Операций',ops.length],
+      ['Активные',ops.filter(o=>!delivered(o)).length],
+      ['Завершены',ops.filter(delivered).length],
+      ['С отклонениями',ops.filter(isOverdue).length],
+      ['Средний цикл (дней)',fmtMetric(avg(ops.filter(delivered).map(cycleDays).filter(n=>n!==null)))],
+      ['Источник','OSV IMPEX Tracking']
+    ];
+    const operationRows=[['ID','Направление','Компания','Товар','Дата задания','Состояние','Просрочка','Дней полного цикла','Комментарий']];
+    ops.forEach(op=>operationRows.push([op.id,op.direction,op.company,op.goods,op.createdAt,delivered(op)?'Завершена':'В работе',isOverdue(op)?'Да':'Нет',cycleDays(op)??'',op.note||'']));
+    const eventRows=[['ID события','ID операции','Направление','Компания','Товар','Дата события','Этап','Тип','Комментарий']];
+    ops.forEach(op=>operationEvents(op.id).forEach(ev=>eventRows.push([ev.id,op.id,op.direction,op.company,op.goods,ev.date,statusFor(ev.status).label,ev.type==='actual'?'Факт':'План',ev.note||''])));
+    const sheets=[
+      {name:'Сводка',widths:[31,30],rows:summary},
+      {name:'Операции',widths:[41,16,32,34,18,19,17,23,55],rows:operationRows},
+      {name:'События',widths:[41,41,16,32,34,18,38,16,55],rows:eventRows}
+    ];
+    const xmlEsc=v=>String(v??'').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+    const colName=i=>{let s='';for(i++;i;i=Math.floor((i-1)/26))s=String.fromCharCode(65+(i-1)%26)+s;return s;};
+    const worksheet=sh=>{
+      const columns=sh.widths.map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join('');
+      const rows=sh.rows.map((row,i)=>'<row r="'+(i+1)+'">'+row.map((value,j)=>{
+        const cell=' r="'+colName(j)+(i+1)+'"'+(i===0?' s="1"':'');
+        return typeof value==='number'&&Number.isFinite(value)?'<c'+cell+'><v>'+value+'</v></c>':'<c'+cell+' t="inlineStr"><is><t xml:space="preserve">'+xmlEsc(value)+'</t></is></c>';
+      }).join('')+'</row>').join('');
+      const last=colName(sh.widths.length-1)+sh.rows.length;
+      return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'+
+        '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>'+
+        '<sheetFormatPr defaultRowHeight="16"/><cols>'+columns+'</cols><sheetData>'+rows+'</sheetData>'+
+        '<autoFilter ref="A1:'+last+'"/></worksheet>';
+    };
+    const xml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+    const book=xml+'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+
+      sheets.map((sh,i)=>'<sheet name="'+xmlEsc(sh.name)+'" sheetId="'+(i+1)+'" r:id="rId'+(i+1)+'"/>').join('')+'</sheets></workbook>';
+    const rels=xml+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
+      sheets.map((_,i)=>'<Relationship Id="rId'+(i+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+(i+1)+'.xml"/>').join('')+
+      '<Relationship Id="rId'+(sheets.length+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>';
+    const styles=xml+'<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'+
+      '<fonts count="2"><font><sz val="11"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Aptos"/></font></fonts>'+
+      '<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFAE1828"/><bgColor indexed="64"/></patternFill></fill></fills>'+
+      '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'+
+      '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'+
+      '<cellXfs count="2"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="1" borderId="0" xfId="0" applyFont="1" applyFill="1"/></cellXfs>'+
+      '</styleSheet>';
+    const types=xml+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'+
+      '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>'+
+      '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'+
+      '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'+
+      sheets.map((_,i)=>'<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join('')+'</Types>';
+    const files=[
+      ['[Content_Types].xml',types],
+      ['_rels/.rels',xml+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+      ['xl/workbook.xml',book],['xl/_rels/workbook.xml.rels',rels],['xl/styles.xml',styles],
+      ...sheets.map((sh,i)=>['xl/worksheets/sheet'+(i+1)+'.xml',worksheet(sh)])
+    ];
+    const enc=new TextEncoder(),chunks=[],central=[];let offset=0;
+    const put16=(view,pos,n)=>view.setUint16(pos,n,true),put32=(view,pos,n)=>view.setUint32(pos,n>>>0,true);
+    const crc32=data=>{let crc=0xffffffff;for(const byte of data){crc^=byte;for(let k=0;k<8;k++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return (crc^0xffffffff)>>>0;};
+    files.forEach(([filename,contents])=>{
+      const name=enc.encode(filename),data=enc.encode(contents),crc=crc32(data);
+      const local=new Uint8Array(30+name.length),lv=new DataView(local.buffer);
+      put32(lv,0,0x04034b50);put16(lv,4,20);put16(lv,6,0x0800);put16(lv,8,0);
+      put32(lv,14,crc);put32(lv,18,data.length);put32(lv,22,data.length);put16(lv,26,name.length);
+      local.set(name,30);chunks.push(local,data);
+      const cd=new Uint8Array(46+name.length),cv=new DataView(cd.buffer);
+      put32(cv,0,0x02014b50);put16(cv,4,20);put16(cv,6,20);put16(cv,8,0x0800);put16(cv,10,0);
+      put32(cv,16,crc);put32(cv,20,data.length);put32(cv,24,data.length);put16(cv,28,name.length);
+      put32(cv,42,offset);cd.set(name,46);central.push(cd);offset+=local.length+data.length;
+    });
+    const centralSize=central.reduce((sum,item)=>sum+item.length,0);
+    const end=new Uint8Array(22),endView=new DataView(end.buffer);
+    put32(endView,0,0x06054b50);put16(endView,8,files.length);put16(endView,10,files.length);
+    put32(endView,12,centralSize);put32(endView,16,offset);
+    const blob=new Blob([...chunks,...central,end],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    const url=URL.createObjectURL(blob),anchor=document.createElement('a');
+    anchor.href=url;anchor.download='OSV_IMPEX_'+TODAY+'.xlsx';document.body.appendChild(anchor);
+    anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+    toast('Excel-файл .xlsx подготовлен');
+  }
   /* Reliable mobile double-tap, with movement/pinch rejection.
      Native dblclick is retained for mouse and trackpad users. */
   let lastMobileCellOpen=0;
@@ -410,12 +517,14 @@
     });
     document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.dataset.view)));
     $('new-operation-btn').addEventListener('click',newOperation);
-    $('search-input').addEventListener('input',e=>{state.query=e.target.value;renderTimeline(true);});
-    $('direction-filter').addEventListener('change',e=>{state.direction=e.target.value;renderTimeline(true);});
-    $('state-filter').addEventListener('change',e=>{state.filter=e.target.value;renderTimeline(true);});
+    $('search-input').addEventListener('input',e=>{state.query=e.target.value;renderMetrics();renderTimeline(true);});
+    $('direction-filter').addEventListener('change',e=>{state.direction=e.target.value;renderMetrics();renderTimeline(true);});
+    $('state-filter').addEventListener('change',e=>{state.filter=e.target.value;renderMetrics();renderTimeline(true);});
+    $('metrics').addEventListener('click',e=>{const btn=e.target.closest('[data-metric-filter]');if(btn)setMetricFilter(btn.dataset.metricFilter);});
+    $('clear-filter-btn').addEventListener('click',clearAllTimelineFilters);
     $('today-btn').addEventListener('click',()=>scrollToDate(TODAY));
     $('prev-week').addEventListener('click',()=>shiftWeek(-1));$('next-week').addEventListener('click',()=>shiftWeek(1));
-    $('export-btn').addEventListener('click',csvExport);
+    $('export-btn').addEventListener('click',xlsxExport);
     document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
     document.querySelectorAll('.modal-layer').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));
     $('close-drawer').addEventListener('click',closeDrawer);$('drawer-backdrop').addEventListener('click',closeDrawer);

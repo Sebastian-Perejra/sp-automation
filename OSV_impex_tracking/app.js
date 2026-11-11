@@ -332,20 +332,19 @@
   function updateMobileCalendarFullscreen(){
     const button=$('mobile-calendar-fullscreen');
     if(!button)return;
-    if(isIOSDevice()){
-      const installed=isStandaloneWebApp();
-      button.hidden=installed;
-      button.style.display=installed?'none':'';
+    button.hidden=false;
+    button.style.display='';
+    // iPhone Safari owns the tabs/address bar. Offer standalone setup instead.
+    if(isIOSDevice()&&!isStandaloneWebApp()){
       button.textContent='ⓘ Без вкладок';
-      button.title='Как убрать панели Safari: открыть OSV с экрана «Домой»';
+      button.title='Как открыть OSV без панелей Safari';
       button.setAttribute('aria-pressed','false');
       return;
     }
-    button.hidden=false;button.style.display='';
-    const active=!!document.fullscreenElement;
-    button.textContent=active?'⤡ Выйти из полного экрана':'⛶ На весь экран';
-    button.title=active?'Выйти из полноэкранного режима':'На весь экран';
-    button.setAttribute('aria-pressed',String(active));
+    const focused=document.body.classList.contains('calendar-immersive-mode');
+    button.textContent=focused?'⤡ Обычный вид':'⛶ Больше места';
+    button.title=focused?'Вернуть элементы управления':'Увеличить календарь, скрыв второстепенные панели';
+    button.setAttribute('aria-pressed',String(focused));
   }
   function showIOSStandaloneGuide(){
     if(document.getElementById('ios-standalone-guide'))return;
@@ -369,31 +368,25 @@
     displayPinchHint();
   }
   function closeMobileCalendar(){
-    document.body.classList.remove('mobile-calendar-mode');
+    document.body.classList.remove('mobile-calendar-mode','calendar-immersive-mode');
     clearTimeout(pinchHintTimer);
     $('calendar-pinch-hint').classList.remove('is-visible');
     pinchGesture=null;
     applyMobileCalendarZoom(1);
     renderTimeline(true);
-    if(document.fullscreenElement&&document.exitFullscreen){
-      Promise.resolve(document.exitFullscreen()).catch(()=>{});
-    }
     updateMobileCalendarFullscreen();
   }
-  async function toggleMobileCalendarFullscreen(){
-    // iOS Safari cannot hide its tabs with Fullscreen API, especially in an iframe.
-    if(isIOSDevice()){
-      if(!isStandaloneWebApp())showIOSStandaloneGuide();
+  function toggleMobileCalendarFullscreen(){
+    // CSS-only focus: never call requestFullscreen(). The old Fullscreen API
+    // caused Chrome's unavoidable "To exit full screen, press Esc" overlay.
+    if(isIOSDevice()&&!isStandaloneWebApp()){
+      showIOSStandaloneGuide();
       return;
     }
-    if(document.fullscreenElement){
-      try{await document.exitFullscreen();}catch{}
-      updateMobileCalendarFullscreen();return;
+    const active=document.body.classList.toggle('calendar-immersive-mode');
+    if(!document.body.classList.contains('mobile-calendar-mode')){
+      document.body.classList.remove('calendar-immersive-mode');
     }
-    if(!document.documentElement.requestFullscreen){
-      updateMobileCalendarFullscreen();return; // CSS viewer remains available
-    }
-    try{await document.documentElement.requestFullscreen();}catch{}
     updateMobileCalendarFullscreen();
   }
 
@@ -638,7 +631,6 @@
     $('mobile-orientation-dismiss').addEventListener('click',()=>$('mobile-orientation-tip').classList.add('is-dismissed'));
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
     $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
-    document.addEventListener('fullscreenchange',updateMobileCalendarFullscreen);
     window.addEventListener('resize',()=>{
       if(document.body.classList.contains('mobile-calendar-mode')&&!isMobileCalendarDevice())closeMobileCalendar();
     });

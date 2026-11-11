@@ -3,16 +3,54 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#d31524"><link rel="icon" type="image/svg+xml" href="favicon.svg?v=2"><title>OSV · IMPEX Tracking</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="OSV Tracking">
+  <link rel="manifest" href="manifest.webmanifest">
   <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;background:#f4f5f7}iframe{position:fixed;inset:0;border:0;display:block;width:100%;height:100vh;height:100dvh;max-width:100%}</style>
+
+  <style>
+    #osv-ios-install-tip{position:fixed;z-index:1000;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:min(390px,calc(100vw - 24px));padding:13px 38px 13px 15px;border-radius:12px;border:1px solid #e4b7bf;border-left:4px solid #cd1928;background:#fff;box-shadow:0 9px 34px rgba(20,23,29,.23);color:#293440;font:12px/1.48 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    #osv-ios-install-tip strong{display:block;font-size:13px;margin-bottom:3px}
+    #osv-ios-install-tip button{position:absolute;right:8px;top:7px;display:grid;place-items:center;width:28px;height:28px;border:0;border-radius:7px;background:#f3f5f7;color:#495563;font-size:19px;cursor:pointer}
+    #osv-ios-install-tip[hidden]{display:none}
+    @media(orientation:landscape) and (max-height:540px){#osv-ios-install-tip{width:min(365px,55vw);bottom:8px;right:8px;padding:10px 34px 10px 12px;font-size:11px}}
+  </style>
 </head>
 <body>
   <iframe id="osv-frame" title="OSV IMPEX Tracking" allow="fullscreen *; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <aside id="osv-ios-install-tip" role="note" hidden aria-label="Полноэкранный просмотр на iPhone">
+    <strong>OSV без панелей Safari</strong>
+    Safari → Поделиться → На экран «Домой» → включить «Открыть как веб-приложение». Затем запускайте OSV со значка.
+    <button type="button" id="osv-ios-tip-dismiss" aria-label="Скрыть подсказку">×</button>
+  </aside>
   <script src="backend-config.js"></script>
   <script>
     (function(){
       var u=String(window.OSV_GAS_WEBAPP_URL||'');
       var approved=/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec(?:\?.*)?$/.test(u);
       document.getElementById('osv-frame').src=approved?u:'preview.html';
+    })();
+  </script>
+  <script>
+    (function(){
+      // Safari's own tab/address UI cannot be hidden by web-page fullscreen API.
+      // This tip is offered once on iPhone/iOS Safari only, not inside the installed web app.
+      var ua=navigator.userAgent||'';
+      var ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+      var phone=Math.min(screen.width||9999,screen.height||9999)<=600;
+      var standalone=navigator.standalone===true||(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches);
+      if(!ios||!phone||standalone)return;
+      var dismissed=false;
+      try{dismissed=localStorage.getItem('osv-ios-app-tip-dismissed')==='1';}catch(e){}
+      if(dismissed)return;
+      var tip=document.getElementById('osv-ios-install-tip');
+      if(!tip)return;
+      tip.hidden=false;
+      document.getElementById('osv-ios-tip-dismiss').addEventListener('click',function(){
+        tip.hidden=true;
+        try{localStorage.setItem('osv-ios-app-tip-dismissed','1');}catch(e){}
+      });
     })();
   </script>
 </body>

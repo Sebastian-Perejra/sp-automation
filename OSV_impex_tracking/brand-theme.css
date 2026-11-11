@@ -583,3 +583,80 @@ body.timeline-mode .timeline-footer{padding:7px 13px}
 @media(prefers-reduced-motion:reduce){
   .sidebar-gallery-img{transition:none}
 }
+
+
+/* OSV IMPEX mobile calendar: landscape viewer; no fixed columns. */
+.mobile-calendar-controls{display:none}
+body.mobile-calendar-mode{overflow:hidden!important;--label-width:150px;--day-width:66px}
+body.mobile-calendar-mode .sidebar{visibility:hidden!important}
+body.mobile-calendar-mode #timeline-view .timeline-panel{
+  position:fixed!important;inset:0 auto auto 0!important;z-index:120!important;
+  width:100dvw;height:100dvh;max-width:none!important;max-height:none!important;
+  margin:0!important;padding:0!important;display:flex;flex-direction:column;
+  overflow:hidden;border:0;border-radius:0;box-shadow:none;background:#fff;
+}
+body.mobile-calendar-mode .mobile-calendar-controls{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+body.mobile-calendar-mode #timeline-view .timeline-panel-head{
+  display:flex;flex:0 0 auto;padding:6px 10px!important;gap:8px!important;
+  min-height:48px!important;flex-wrap:nowrap!important;border-bottom:1px solid #dbe1e8;
+}
+body.mobile-calendar-mode #timeline-view .timeline-panel-head h2{
+  margin:0!important;font-size:13px!important;white-space:nowrap;
+}
+body.mobile-calendar-mode #timeline-view .calendar-header-actions{
+  flex:1 1 auto;width:auto!important;justify-content:flex-end;flex-wrap:nowrap!important;gap:8px!important;
+}
+body.mobile-calendar-mode .mobile-calendar-tool{
+  display:inline-flex;align-items:center;justify-content:center;border:1px solid #cad5e2;
+  background:#fff;color:#1c2e42;border-radius:7px;height:34px;padding:0 9px;
+  font-size:11px;font-weight:700;line-height:1.1;font-family:inherit;white-space:nowrap;cursor:pointer;
+}
+body.mobile-calendar-mode .mobile-calendar-tool-primary{color:#fff;background:#c91729;border-color:#c91729}
+body.mobile-calendar-mode .mobile-calendar-hint{font-size:10px;color:#778397;white-space:nowrap}
+body.mobile-calendar-mode #timeline-view .date-navigation{gap:3px;flex-shrink:0}
+body.mobile-calendar-mode #timeline-view .date-navigation .btn{height:32px!important;min-height:32px!important;padding:5px 8px!important}
+body.mobile-calendar-mode #timeline-view .nav-arrow{width:30px;height:32px}
+body.mobile-calendar-mode #timeline-view #new-operation-btn{height:34px;min-height:34px;padding:6px 9px;white-space:nowrap}
+body.mobile-calendar-mode #timeline-view .legend{
+  flex:0 0 auto;display:flex;gap:6px 12px;padding:5px 10px 7px!important;
+  flex-wrap:nowrap;font-size:9px;border-bottom:1px solid #e1e6ec;
+}
+body.mobile-calendar-mode #timeline-view .legend-hint{display:none!important}
+body.mobile-calendar-mode #timeline-view .timeline-scroller{
+  flex:1 1 auto;width:100%;min-height:0!important;max-height:none!important;
+  overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;
+}
+body.mobile-calendar-mode #timeline-view .timeline-footer{flex:0 0 auto;padding:5px 10px!important;font-size:9px}
+body.mobile-calendar-mode #timeline-view .calendar-corner,
+body.mobile-calendar-mode #timeline-view .timeline-row-label{
+  position:relative!important;left:auto!important;z-index:1!important;
+  width:150px!important;min-width:150px!important;flex-shrink:0!important;
+}
+body.mobile-calendar-mode #timeline-view .calendar-days{z-index:6!important}
+body.mobile-calendar-mode #timeline-view .calendar-months{z-index:7!important}
+body.mobile-calendar-mode #timeline-view .day-head,
+body.mobile-calendar-mode #timeline-view .timeline-row .day-slot,
+body.mobile-calendar-mode #timeline-view .timeline-ghost-cell{
+  width:66px!important;min-width:66px!important;flex-shrink:0;
+}
+body.mobile-calendar-mode .modal-layer{z-index:160!important}
+body.mobile-calendar-mode .drawer-backdrop{z-index:170!important}
+body.mobile-calendar-mode .detail-drawer{z-index:171!important}
+body.mobile-calendar-mode .toast-stack{z-index:180!important}
+body.mobile-calendar-mode #timeline-view .timeline-panel:fullscreen{width:100vw!important;height:100vh!important}
+@media(orientation:portrait){
+  body.mobile-calendar-mode #timeline-view .timeline-panel{
+    width:100dvh!important;height:100dvw!important;
+    transform-origin:top left;transform:translateX(100dvw) rotate(90deg);
+  }
+}
+@media(orientation:landscape){
+  body.mobile-calendar-mode #timeline-view .timeline-panel{
+    width:100dvw!important;height:100dvh!important;transform:none;
+  }
+  body.mobile-calendar-mode .mobile-calendar-hint{display:none}
+}
+@media(max-height:450px) and (orientation:landscape){
+  body.mobile-calendar-mode #timeline-view .timeline-panel-head{min-height:42px!important;padding:4px 8px!important}
+  body.mobile-calendar-mode #timeline-view .legend{padding:3px 8px 5px!important}
+}

@@ -687,18 +687,6 @@ body.mobile-calendar-mode #timeline-view .timeline-panel{
 
 /* Flow sequence and mobile gesture UX — mobile iteration, 11 Nov 2026. */
 #timeline-view .timeline-row{position:relative}
-#timeline-view .timeline-flow-arrow{
-  position:absolute;top:50%;height:0;
-  border-top:2px dashed rgba(38,107,148,.55);
-  transform:translateY(-50%);
-  z-index:2;pointer-events:none;opacity:.8;
-}
-#timeline-view .timeline-flow-arrow::after{
-  content:"";position:absolute;right:-1px;top:-5px;
-  width:7px;height:7px;border-top:2px solid rgba(38,107,148,.7);
-  border-right:2px solid rgba(38,107,148,.7);
-  transform:rotate(45deg);
-}
 #timeline-view .day-slot .event-chip{z-index:3}
 #timeline-view .mobile-operation-watermark{display:none}
 .calendar-pinch-hint{display:none}
@@ -749,9 +737,6 @@ body.mobile-calendar-mode #timeline-view .mobile-operation-watermark{
 body.mobile-calendar-mode #timeline-view .mobile-calendar-zoom-level{
   display:inline-flex;align-items:center;font-size:10px;font-weight:800;color:#a01523;
   border-radius:5px;padding:3px 6px;background:#fff0f2;
-}
-body.mobile-calendar-mode #timeline-view .timeline-flow-arrow{
-  border-top-color:rgba(32,91,132,.50);
 }
 body.mobile-calendar-mode #timeline-view .event-chip{
   max-width:calc(var(--day-width) - 5px);
@@ -911,7 +896,6 @@ body.mobile-calendar-mode #timeline-view .timeline-row-label{
   #timeline-view .calendar-corner{z-index:26}
 }
 #timeline-view .timeline-row-label .op-main{position:relative;z-index:1}
-#timeline-view .timeline-flow-arrow{z-index:2}
 #timeline-view .day-slot .event-chip{z-index:3}
 
 /* Clickable KPI filters + visible reset affordance. */
@@ -1001,3 +985,21 @@ body.mobile-calendar-mode #timeline-view .timeline-row-label{
  #workspace .topbar-actions #refresh-data-btn{height:32px;min-height:32px;width:32px;min-width:32px;padding:0}
  #workspace .topbar-actions #logout-btn{height:32px;min-height:32px;width:32px;min-width:32px;flex-basis:32px}
 }
+/* Elapsed age on TODAY only (active, unfinished operations). No connector arrows. */
+#timeline-view .day-slot.has-operation-age{isolation:isolate}
+#timeline-view .day-slot.has-operation-age .event-chip{transform:translateY(9px)}
+#timeline-view .day-slot .operation-age{
+  position:absolute;top:2px;right:3px;z-index:6;
+  display:flex;align-items:center;justify-content:center;
+  min-width:23px;height:23px;padding:0 3px;
+  border:1.5px solid #9bbad6;border-radius:999px;
+  background:#e5f0fa;color:#275a87;
+  font:800 10px/1 Arial,Helvetica,sans-serif;
+  font-variant-numeric:tabular-nums;
+  box-shadow:0 1px 3px rgba(20,37,56,.12);
+  pointer-events:none;user-select:none;
+}
+#timeline-view .day-slot .operation-age.age-watch{background:#fff0d6;color:#9a5b13;border-color:#e6ac55}
+#timeline-view .day-slot .operation-age.age-critical{background:#fee4e6;color:#aa1526;border-color:#da6674}
+body.mobile-calendar-mode #timeline-view .day-slot .operation-age{top:2px;right:2px;min-width:20px;height:20px;font-size:9px}
+body.mobile-calendar-mode #timeline-view .day-slot.has-operation-age .event-chip{transform:translateY(9px)}

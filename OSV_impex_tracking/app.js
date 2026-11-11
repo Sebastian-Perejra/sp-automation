@@ -305,18 +305,44 @@
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
   function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderAnalytics();renderArchive();renderAudit();}
 /* Mobile-only calendar viewer with native fullscreen/orientation where permitted. */
+  function isIOSDevice(){
+    return /iPhone|iPad|iPod/.test(navigator.userAgent||'')||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  }
+  function isStandaloneWebApp(){
+    return navigator.standalone===true||!!(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches);
+  }
   function isMobileCalendarDevice(){
     const viewportWidth=Math.min(window.innerWidth,document.documentElement.clientWidth||window.innerWidth);
     const shortSide=Math.min(window.innerWidth,window.innerHeight)<=600;
-    const touch=window.matchMedia&&window.matchMedia('(pointer:coarse)').matches;
-    return shortSide&&(touch||viewportWidth<=760);
+    const coarse=!!(window.matchMedia&&window.matchMedia('(pointer:coarse)').matches);
+    const touch=coarse||navigator.maxTouchPoints>0||'ontouchstart' in window;
+    // iPhone landscape may request a desktop UA/layout. Height + touch wins.
+    return shortSide&&(touch||viewportWidth<=760||isIOSDevice());
   }
   function updateMobileCalendarFullscreen(){
     const button=$('mobile-calendar-fullscreen');
     if(!button)return;
     const active=!!document.fullscreenElement;
+    if(isIOSDevice()&&!document.documentElement.requestFullscreen){
+      button.textContent=isStandaloneWebApp()?'✓ Режим приложения':'ⓘ Без вкладок Safari';
+      button.title=isStandaloneWebApp()?'OSV открыт как отдельное приложение':'Как запустить OSV без панелей Safari';
+      button.setAttribute('aria-pressed','false');
+      return;
+    }
     button.textContent=active?'⤡ Выйти из полного экрана':'⛶ На весь экран';
+    button.title=active?'Выйти из полноэкранного режима':'На весь экран';
     button.setAttribute('aria-pressed',String(active));
+  }
+  function showIOSStandaloneGuide(){
+    if(document.getElementById('ios-standalone-guide'))return;
+    const layer=document.createElement('div');
+    layer.id='ios-standalone-guide';
+    layer.className='modal-layer ios-standalone-guide';
+    layer.innerHTML='<section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="ios-standalone-guide-title"><div class="modal-head"><h2 id="ios-standalone-guide-title">OSV без вкладок Safari</h2><button type="button" class="modal-close" data-ios-guide-close aria-label="Закрыть">×</button></div><p>Safari не позволяет веб-сайту скрыть адресную строку и вкладки. Откройте OSV как отдельное приложение:</p><ol><li>Откройте адрес <strong>sp-automation.com/OSV_impex_tracking/</strong> в Safari.</li><li>Нажмите <strong>«Поделиться»</strong> (квадрат со стрелкой вверх).</li><li>Выберите <strong>«На экран „Домой“»</strong> и включите <strong>«Открыть как веб-приложение»</strong>.</li><li>Нажмите <strong>«Добавить»</strong> и откройте OSV с нового значка.</li></ol><button type="button" class="btn btn-primary" data-ios-guide-close>Понятно</button></section>';
+    layer.addEventListener('click',e=>{
+      if(e.target===layer||e.target.closest('[data-ios-guide-close]'))layer.remove();
+    });
+    document.body.appendChild(layer);
   }
   function openMobileCalendar(){
     if(!isMobileCalendarDevice()||state.view!=='timeline')return;
@@ -347,13 +373,16 @@
       return;
     }
     if(!document.documentElement.requestFullscreen){
-      toast('Полноэкранный режим не поддерживается. Поверните телефон вручную, если нужно больше места.',true);
+      if(isIOSDevice()){
+        if(isStandaloneWebApp())toast('OSV уже запущен без вкладок Safari.');
+        else showIOSStandaloneGuide();
+      }else toast('Этот браузер не поддерживает полноэкранный режим.',true);
       return;
     }
     try{
       await document.documentElement.requestFullscreen();
     }catch{
-      toast('Браузер запретил полный экран. Поверните телефон вручную.',true);
+      toast('Браузер запретил полноэкранный режим.',true);
     }
     updateMobileCalendarFullscreen();
   }

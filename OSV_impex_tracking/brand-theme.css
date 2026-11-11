@@ -231,7 +231,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   inset:-22px;
   pointer-events:none;
   background:
-    linear-gradient(113deg,rgba(24,26,30,.60),rgba(51,28,33,.52)),
+    linear-gradient(113deg,rgba(24,26,30,.46),rgba(51,28,33,.40)),
     url("https://img.directindustry.es/images_di/projects/images-om/183604-21357318.jpg") center 46% / cover no-repeat,
     #2a2d33;
   transform:translate3d(var(--osv-parallax-x),var(--osv-parallax-y),0) scale(1.055);
@@ -263,7 +263,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   pointer-events:none;
   mask-image:none;
   background:
-    linear-gradient(97deg,rgba(18,21,28,.87) 4%,rgba(18,21,28,.62) 68%,rgba(85,18,30,.45)),
+    linear-gradient(97deg,rgba(18,21,28,.77) 4%,rgba(18,21,28,.49) 68%,rgba(85,18,30,.28)),
     url("https://img.directindustry.es/images_di/projects/images-om/183604-21357318.jpg") 52% 48% / cover no-repeat,
     linear-gradient(145deg,#343740,#191b20);
   transform:translate3d(calc(var(--osv-parallax-x) * .7),calc(var(--osv-parallax-y) * .7),0) scale(1.06);
@@ -271,7 +271,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   will-change:transform;
 }
 .login-visual::after {
-  opacity:.6;
+  opacity:.22;
   border-color:rgba(217,22,42,.14);
 }
 .login-visual .hero-brand,.login-hero-copy,.login-visual-footer,.login-visual-steps {

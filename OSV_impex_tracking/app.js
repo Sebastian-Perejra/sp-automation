@@ -5,7 +5,7 @@
   const STORAGE_KEY = 'osv-impex-demo-v1';
   const SESSION_KEY = 'osv-impex-session';
   const IS_GAS = !!(window.google && google.script && google.script.run);
-  const TODAY = iso(new Date());
+  let TODAY = iso(new Date());
   const STATUS = [
     {id:'received', label:'Задание получено', short:'Получено', stage:'intake', allowed:'actual'},
     {id:'search_transport', label:'Поиск транспорта', short:'Поиск ТС', stage:'transport', allowed:'actual'},
@@ -47,6 +47,11 @@
     });
   }
   function opState(op){return delivered(op)?'completed':correctOverdue(op)?'overdue':'active';}
+  function runningAgeDays(events,asOf=TODAY){
+    if(events.some(e=>e.status==='delivered'&&e.type==='actual'))return null;
+    const first=events.find(e=>e.type==='actual'&&e.date<=asOf);
+    return first?Math.max(0,dayDiff(first.date,asOf)):null;
+  }
   function cycleDays(op){const es=operationEvents(op.id);const first=es.find(e=>e.status==='received'&&e.type==='actual');const last=es.find(e=>e.status==='delivered'&&e.type==='actual');return first&&last?Math.max(0,dayDiff(first.date,last.date)):null;}
   function avg(numbers){return numbers.length?numbers.reduce((s,n)=>s+n,0)/numbers.length:null;}
   function fmtMetric(v){return v===null?'—':Number.isInteger(v)?String(v):v.toFixed(1).replace('.',',');}
@@ -225,7 +230,7 @@
     const finish=()=>{
       if(!pinchGesture)return;
       pinchGesture=null;
-      renderTimeline(true); // redraw connecting arrows using the actual zoomed column width
+      renderTimeline(true); // redraw cells at the current zoom level
     };
     scroller.addEventListener('touchend',e=>{if(e.touches.length<2)finish();},{passive:true});
     scroller.addEventListener('touchcancel',finish,{passive:true});
@@ -237,9 +242,9 @@
     const monthHTML=monthParts(dates).map(m=>`<div class="month-cell" style="width:calc(${m.count} * var(--day-width))">${esc(formatDate(m.date,{month:'long',year:'numeric'}).toLocaleUpperCase('ru-RU'))}</div>`).join('');
     const dayHTML=dates.map(d=>{const dt=asDate(d),dow=dt.getDay(),weekend=dow===0||dow===6;return `<div class="day-head ${weekend?'weekend':''} ${d===TODAY?'today':''}" title="${esc(formatDate(d,{day:'numeric',month:'long',year:'numeric'}))}"><span>${['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'][dow]}</span><strong>${dt.getDate()}</strong><em>${esc(formatDate(d,{month:'short'}).replace('.',''))}</em></div>`;}).join('');
     let html=`<div class="calendar-months"><div class="calendar-corner">${state.start.slice(0,4)}–${state.end.slice(0,4)}<span>КАЛЕНДАРЬ</span></div>${monthHTML}</div><div class="calendar-days"><div class="calendar-corner">ОПЕРАЦИЯ <span>СТАТУС ПО ДНЯМ</span></div>${dayHTML}</div>`;
-    const arrowDayWidth=dayWidth(),arrowLabelWidth=timelineLabelWidth();
     for(const op of rows){
       const es=operationEvents(op.id);const byDate={};for(const e of es)(byDate[e.date]??=[]).push(e);
+      const ageDays=runningAgeDays(es,TODAY);
       html+=`<div class="timeline-row"><div class="timeline-row-label" data-open-op="${esc(op.id)}" title="Открыть карточку операции"><span class="direction-tag ${op.direction.toLowerCase()}">${esc(op.direction)}</span><div class="op-main"><strong title="${esc(op.company)}">${esc(op.company)}</strong><small title="${esc(op.goods)}">${esc(op.goods)}</small></div><span class="op-label-right">›</span></div>`;
       // Single sweep for the dominant current actual stage, no per-cell N^2 event traversal.
       const actuals=es.filter(e=>e.type==='actual');const receivedExists=actuals.some(e=>e.status==='received');let aidx=0,lastActual=null;
@@ -253,16 +258,10 @@
         if(primary){const cfg=statusFor(primary.status);chip=`<span class="event-chip ${primary.type} ${cfg.stage}" title="${esc(ev.map(e=>`${e.type==='planned'?'ПЛАН':'ФАКТ'}: ${statusFor(e.status).label}`).join(' • '))}"><small class="chip-direction">${op.direction}.</small>${esc(cfg.short)}${ev.length>1?`<span class="event-count">+${ev.length-1}</span>`:''}</span>`;}
         // Delivery is one green cell, not an entire date column. The flag is decorative.
         const deliveredFlag=actualDelivery?'<span class="delivery-flag" aria-label="Доставлено" title="Доставлено"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 2v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 3h11l-2.6 4L16 11H5z" fill="currentColor"/></svg></span>':'';
-        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)} · двойной клик или два касания для редактирования">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}</div>`;
-      }
-      // A separate lightweight overlay connects consecutive unique event dates.
-      // No arrow is drawn where a timeline has only one event.
-      const eventDayIndexes=[...new Set(es.map(e=>dates.indexOf(e.date)).filter(idx=>idx>=0))].sort((a,b)=>a-b);
-      for(let k=1;k<eventDayIndexes.length;k++){
-        const start=eventDayIndexes[k-1],end=eventDayIndexes[k],gap=end-start;
-        const left=Math.round(arrowLabelWidth+(start+.80)*arrowDayWidth);
-        const width=Math.max(10,Math.round((gap-.60)*arrowDayWidth));
-        html+=`<span class="timeline-flow-arrow" aria-hidden="true" style="left:${left}px;width:${width}px"></span>`;
+        const showAge=d===TODAY&&ageDays!==null;
+        const ageBand=ageDays>=14?'age-critical':ageDays>=7?'age-watch':'age-normal';
+        const ageBadge=showAge?`<span class="operation-age ${ageBand}" role="img" aria-label="В работе ${ageDays} дн." title="В работе ${ageDays} дн. · с ${formatDate(es.find(e=>e.type==='actual'&&e.date<=TODAY).date)}">${ageDays}</span>`:'';
+        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${d===TODAY?'today':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · двойной клик или два касания для редактирования">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
       }
       const rowCaption=(op.direction==='EXP'?'ЭКСПОРТ':'ИМПОРТ')+' · '+op.company+(op.goods?' · '+op.goods:'');
       html+=`<span class="mobile-operation-watermark" aria-hidden="true">${esc(rowCaption)}</span>`;
@@ -304,6 +303,17 @@
   function renderAudit(){const actions={CREATE_OPERATION:'Создана операция',CREATE_EVENT:'Добавлено событие',UPDATE_EVENT:'Изменено событие',DELETE_EVENT:'Удалено событие',ARCHIVE_OPERATION:'Изменён статус архива'};const entries=[...state.audit].sort((a,b)=>String(b.at||'').localeCompare(String(a.at||''))).slice(0,120);$('audit-list').innerHTML=entries.length?entries.map(a=>{const op=state.operations.find(o=>o.id===a.operationId);const at=a.at?new Date(a.at):null;const when=at&&!isNaN(at.getTime())?at.toLocaleString('ru-RU'):'—';return `<div class="archive-item" ${op?`data-open-op="${esc(op.id)}"`:''}><div><strong>${esc(actions[a.action]||a.action)}</strong><p>${esc(op?op.direction+' · '+op.company:'Операция '+String(a.operationId||'').slice(0,8))}</p></div><span>${esc(when)}</span></div>`;}).join(''):'<div class="empty-state">Изменений пока нет. Первое событие будет зарегистрировано после сохранения.</div>'; }
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
   function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderAnalytics();renderArchive();renderAudit();}
+  /* Midnight rollover: move today's badges into tomorrow's cells without reload. */
+  function rolloverToday(){
+    const next=iso(new Date());
+    if(next===TODAY)return;
+    TODAY=next;
+    if(state.end<TODAY)state.end=addDays(TODAY,60);
+    if(state.initialized){
+      $('top-date').textContent=formatDate(TODAY,{day:'numeric',month:'long',year:'numeric'});
+      renderAll(true);
+    }
+  }
 /* Mobile-only calendar viewer with native fullscreen/orientation where permitted. */
   function isIOSDevice(){
     return /iPhone|iPad|iPod/.test(navigator.userAgent||'')||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
@@ -618,6 +628,9 @@
   }
 
   function attachEvents(){
+    setInterval(rolloverToday,30000);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)rolloverToday();});
+    window.addEventListener('focus',rolloverToday);
     installTimelinePinch();
     installCalendarDoubleTap();
     installDesktopCalendarDrag();

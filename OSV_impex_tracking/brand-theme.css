@@ -407,3 +407,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   .login-description { margin-bottom:9px; }
   .login-card .login-signature { margin-top:7px; }
 }
+
+/* Login panel polish: preserve emergency inner scrolling for tiny windows and enlarged text, without a visible nested scrollbar. */
+.login-screen .login-card{scrollbar-width:none;-ms-overflow-style:none}
+.login-screen .login-card::-webkit-scrollbar{display:none;width:0;height:0}

@@ -129,12 +129,88 @@
   }).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));}
   function dateArray(){const a=[];for(let d=state.start;d<=state.end;d=addDays(d,1)){a.push(d);if(a.length>700)break;}return a;}
   function monthParts(dates){const result=[];dates.forEach(date=>{const key=date.slice(0,7);if(result.length&&result[result.length-1].key===key)result[result.length-1].count++;else result.push({key,count:1,date});});return result;}
+  /* Floating row captions: they follow horizontal scroll, never trap taps. */
+  let watermarkRaf=0;
+  function timelineLabelWidth(){
+    return parseFloat(getComputedStyle($('timeline-scroller')).getPropertyValue('--label-width'))||205;
+  }
+  function positionTimelineWatermarks(){
+    const scroller=$('timeline-scroller');
+    if(!scroller)return;
+    if(watermarkRaf)return;
+    watermarkRaf=requestAnimationFrame(()=>{
+      watermarkRaf=0;
+      const label=timelineLabelWidth();
+      const visibleLeft=Math.max(label+12,scroller.scrollLeft+12);
+      $('timeline-track').style.setProperty('--mobile-label-x',visibleLeft+'px');
+    });
+  }
+  /* Two-finger pinch scales BOTH dates and rows, keeping the viewport centered. */
+  const PINCH_MIN=.63,PINCH_MAX=1.42,BASE_DAY=66,BASE_ROW=76;
+  let mobileCalendarZoom=1,pinchGesture=null,pinchHintWasShown=false,pinchHintTimer=0;
+  const clampMobileZoom=n=>Math.min(PINCH_MAX,Math.max(PINCH_MIN,n));
+  function applyMobileCalendarZoom(zoom){
+    mobileCalendarZoom=clampMobileZoom(zoom);
+    document.body.style.setProperty('--day-width',(BASE_DAY*mobileCalendarZoom).toFixed(2)+'px');
+    document.body.style.setProperty('--mobile-row-height',(BASE_ROW*mobileCalendarZoom).toFixed(2)+'px');
+    const level=$('calendar-zoom-level');
+    if(level)level.textContent=Math.round(mobileCalendarZoom*100)+'%';
+  }
+  function displayPinchHint(){
+    if(pinchHintWasShown||!document.body.classList.contains('mobile-calendar-mode'))return;
+    pinchHintWasShown=true;
+    const hint=$('calendar-pinch-hint');
+    if(!hint)return;
+    hint.classList.add('is-visible');
+    clearTimeout(pinchHintTimer);
+    pinchHintTimer=setTimeout(()=>hint.classList.remove('is-visible'),4700);
+  }
+  const touchDistance=e=>Math.hypot(
+    e.touches[0].clientX-e.touches[1].clientX,
+    e.touches[0].clientY-e.touches[1].clientY
+  );
+  function installTimelinePinch(){
+    const scroller=$('timeline-scroller');
+    scroller.addEventListener('touchstart',e=>{
+      if(!document.body.classList.contains('mobile-calendar-mode')||e.touches.length!==2)return;
+      const distance=touchDistance(e);
+      if(distance<12)return;
+      clearTimeout(pinchHintTimer);
+      $('calendar-pinch-hint').classList.remove('is-visible');
+      const label=timelineLabelWidth(),w=dayWidth();
+      pinchGesture={
+        distance,zoom:mobileCalendarZoom,
+        dateAtCenter:(scroller.scrollLeft+scroller.clientWidth/2-label)/w,
+        oldScrollTop:scroller.scrollTop,
+        oldHeight:BASE_ROW*mobileCalendarZoom
+      };
+    },{passive:true});
+    scroller.addEventListener('touchmove',e=>{
+      if(!pinchGesture||!document.body.classList.contains('mobile-calendar-mode')||e.touches.length!==2)return;
+      e.preventDefault();
+      const g=pinchGesture,next=clampMobileZoom(g.zoom*touchDistance(e)/g.distance);
+      if(Math.abs(next-mobileCalendarZoom)<.005)return;
+      applyMobileCalendarZoom(next);
+      scroller.scrollLeft=Math.max(0,timelineLabelWidth()+g.dateAtCenter*dayWidth()-scroller.clientWidth/2);
+      scroller.scrollTop=Math.max(0,g.oldScrollTop*(BASE_ROW*next)/g.oldHeight);
+      positionTimelineWatermarks();
+    },{passive:false});
+    const finish=()=>{
+      if(!pinchGesture)return;
+      pinchGesture=null;
+      renderTimeline(true); // redraw connecting arrows using the actual zoomed column width
+    };
+    scroller.addEventListener('touchend',e=>{if(e.touches.length<2)finish();},{passive:true});
+    scroller.addEventListener('touchcancel',finish,{passive:true});
+  }
+
   function renderTimeline(preserve=false){
     const scroller=$('timeline-scroller');const prevX=preserve?scroller.scrollLeft:null,prevY=preserve?scroller.scrollTop:0;
     const dates=dateArray(),todayIdx=dates.indexOf(TODAY),rows=filteredOperations();$('row-count').textContent=rows.length;
     const monthHTML=monthParts(dates).map(m=>`<div class="month-cell" style="width:calc(${m.count} * var(--day-width))">${esc(formatDate(m.date,{month:'long',year:'numeric'}).toLocaleUpperCase('ru-RU'))}</div>`).join('');
     const dayHTML=dates.map(d=>{const dt=asDate(d),dow=dt.getDay(),weekend=dow===0||dow===6;return `<div class="day-head ${weekend?'weekend':''} ${d===TODAY?'today':''}" title="${esc(formatDate(d,{day:'numeric',month:'long',year:'numeric'}))}"><span>${['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'][dow]}</span><strong>${dt.getDate()}</strong><em>${esc(formatDate(d,{month:'short'}).replace('.',''))}</em></div>`;}).join('');
     let html=`<div class="calendar-months"><div class="calendar-corner">${state.start.slice(0,4)}–${state.end.slice(0,4)}<span>КАЛЕНДАРЬ</span></div>${monthHTML}</div><div class="calendar-days"><div class="calendar-corner">ОПЕРАЦИЯ <span>СТАТУС ПО ДНЯМ</span></div>${dayHTML}</div>`;
+    const arrowDayWidth=dayWidth(),arrowLabelWidth=timelineLabelWidth();
     for(const op of rows){
       const es=operationEvents(op.id);const byDate={};for(const e of es)(byDate[e.date]??=[]).push(e);
       html+=`<div class="timeline-row"><div class="timeline-row-label" data-open-op="${esc(op.id)}" title="Открыть карточку операции"><span class="direction-tag ${op.direction.toLowerCase()}">${esc(op.direction)}</span><div class="op-main"><strong title="${esc(op.company)}">${esc(op.company)}</strong><small title="${esc(op.goods)}">${esc(op.goods)}</small></div><span class="op-label-right">›</span></div>`;
@@ -148,6 +224,17 @@
         if(primary){const cfg=statusFor(primary.status);chip=`<span class="event-chip ${primary.type} ${cfg.stage}" title="${esc(ev.map(e=>`${e.type==='planned'?'ПЛАН':'ФАКТ'}: ${statusFor(e.status).label}`).join(' • '))}"><small class="chip-direction">${op.direction}.</small>${esc(cfg.short)}${ev.length>1?`<span class="event-count">+${ev.length-1}</span>`:''}</span>`;}
         html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${isToday?'today':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}">${chip||'<span class="slot-add">+</span>'}</div>`;
       }
+      // A separate lightweight overlay connects consecutive unique event dates.
+      // No arrow is drawn where a timeline has only one event.
+      const eventDayIndexes=[...new Set(es.map(e=>dates.indexOf(e.date)).filter(idx=>idx>=0))].sort((a,b)=>a-b);
+      for(let k=1;k<eventDayIndexes.length;k++){
+        const start=eventDayIndexes[k-1],end=eventDayIndexes[k],gap=end-start;
+        const left=Math.round(arrowLabelWidth+(start+.80)*arrowDayWidth);
+        const width=Math.max(10,Math.round((gap-.60)*arrowDayWidth));
+        html+=`<span class="timeline-flow-arrow" aria-hidden="true" style="left:${left}px;width:${width}px"></span>`;
+      }
+      const rowCaption=(op.direction==='EXP'?'ЭКСПОРТ':'ИМПОРТ')+' · '+op.company+(op.goods?' · '+op.goods:'');
+      html+=`<span class="mobile-operation-watermark" aria-hidden="true">${esc(rowCaption)}</span>`;
       html+='</div>';
     }
     // Keep the calendar grid visible even when there are no operations or only a few.
@@ -162,9 +249,9 @@
       html+='</div>';
     }
     $('timeline-track').innerHTML=html;
-    requestAnimationFrame(()=>{if(prevX===null){if(todayIdx>=0)scroller.scrollLeft=Math.max(0,todayIdx*dayWidth()-dayWidth()*5);}else{scroller.scrollLeft=prevX;scroller.scrollTop=prevY;}});
+    requestAnimationFrame(()=>{if(prevX===null){if(todayIdx>=0)scroller.scrollLeft=Math.max(0,todayIdx*dayWidth()-dayWidth()*5);}else{scroller.scrollLeft=prevX;scroller.scrollTop=prevY;}positionTimelineWatermarks();});
   }
-  function dayWidth(){return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--day-width'))||79;}
+  function dayWidth(){return parseFloat(getComputedStyle($('timeline-scroller')).getPropertyValue('--day-width'))||79;}
   function scrollToDate(d){if(state.view!=='timeline')setView('timeline');if(d<state.start){state.start=addDays(d,-30);renderTimeline();}if(d>state.end){state.end=addDays(d,70);renderTimeline();}const idx=dayDiff(state.start,d);$('timeline-scroller').scrollTo({left:Math.max(0,idx*dayWidth()-dayWidth()*5),behavior:'smooth'});}
   function shiftWeek(dir){const el=$('timeline-scroller');el.scrollBy({left:dir*dayWidth()*7,behavior:'smooth'});}
   function renderAnalytics(){
@@ -207,9 +294,15 @@
       try{Promise.resolve(screen.orientation.lock('landscape')).catch(()=>{});}catch{}
     }
     updateMobileCalendarFullscreen();
+    displayPinchHint();
   }
   function closeMobileCalendar(){
     document.body.classList.remove('mobile-calendar-mode');
+    clearTimeout(pinchHintTimer);
+    $('calendar-pinch-hint').classList.remove('is-visible');
+    pinchGesture=null;
+    applyMobileCalendarZoom(1);
+    renderTimeline(true);
     if(screen.orientation&&typeof screen.orientation.unlock==='function'){
       try{screen.orientation.unlock();}catch{}
     }
@@ -266,6 +359,7 @@
   function closeDrawer(){$('drawer-backdrop').classList.add('hidden');$('detail-drawer').classList.add('hidden');document.body.style.overflow='';}
   function csvExport(){const headers=['Операция ID','Направление','Компания','Товар','Дата задания','Дата события','Статус','Тип','Комментарий'];const lines=[headers];state.operations.forEach(op=>{const ev=operationEvents(op.id);ev.forEach(e=>lines.push([op.id,op.direction,op.company,op.goods,op.createdAt,e.date,statusFor(e.status).label,e.type==='actual'?'Факт':'План',e.note||'']));});const csv='\ufeff'+lines.map(row=>row.map(v=>{const t=String(v??'');const safe=/^[=+\-@\t\r]/.test(t)?'\''+t:t;return '"'+safe.replace(/"/g,'""')+'"';}).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='OSV_IMPEX_'+TODAY+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);toast('CSV-файл подготовлен');}
   function attachEvents(){
+    installTimelinePinch();
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
     $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
     document.addEventListener('fullscreenchange',updateMobileCalendarFullscreen);
@@ -294,6 +388,7 @@
     $('operation-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget,btn=form.querySelector('button[type=submit]');const fd=new FormData(form);const p={direction:fd.get('direction'),company:String(fd.get('company')||'').trim(),goods:String(fd.get('goods')||'').trim(),date:String(fd.get('date')||''),note:String(fd.get('note')||'').trim()};if(!p.company||!p.goods||!/\d{4}-\d{2}-\d{2}/.test(p.date)){showError('operation-error','Заполните обязательные поля');return;}guarded(async()=>{await backendCall('apiCreateOperation',p);closeModal('operation-modal');toast('Операция создана');},btn);});
     $('event-form').addEventListener('submit',e=>{e.preventDefault();const btn=$('event-submit');const operationId=$('event-operation-id').value, p={id:$('event-edit-id').value||'',date:$('event-date').value,status:$('event-status').value,type:document.querySelector('input[name="event-type"]:checked').value,note:$('event-note').value.trim()};if(!p.date||!BY_STATUS[p.status]){showError('event-error','Заполните дату и статус');return;}guarded(async()=>{await backendCall('apiSaveEvent',operationId,p);closeModal('event-modal');toast(p.id?'Событие обновлено':'Событие сохранено');},btn);});
     $('timeline-scroller').addEventListener('scroll',()=>{
+      positionTimelineWatermarks();
       const s=$('timeline-scroller');if(s.scrollLeft+s.clientWidth>s.scrollWidth-dayWidth()*14&&state.end<addDays(TODAY,700)){
         const x=s.scrollLeft,y=s.scrollTop;state.end=addDays(state.end,70);renderTimeline(true);requestAnimationFrame(()=>{s.scrollLeft=x;s.scrollTop=y;});
       }

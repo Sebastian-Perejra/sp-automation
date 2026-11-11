@@ -295,6 +295,9 @@
   function openMobileCalendar(){
     if(!isMobileCalendarDevice()||state.view!=='timeline')return;
     document.body.classList.add('mobile-calendar-mode');
+    // Rebuild after the 150px/66px mobile grid variables become active.
+    // Otherwise arrows retain desktop coordinates from the initial render.
+    renderTimeline(false);
     // A non-gesture orientation request may be rejected. The CSS viewer remains landscape.
     if(screen.orientation&&typeof screen.orientation.lock==='function'){
       try{Promise.resolve(screen.orientation.lock('landscape')).catch(()=>{});}catch{}

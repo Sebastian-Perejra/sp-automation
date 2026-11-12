@@ -1393,3 +1393,6 @@ body.viewer-mode #drawer-archive{display:none!important}
 body.viewer-mode .stage-truck{cursor:pointer!important}
 body.viewer-mode .stage-check{cursor:default!important}
 @media(max-width:760px){.access-role-badge{font-size:9px;padding:6px 7px}}
+
+body.viewer-mode .stage-picker-choices button:disabled{opacity:1;cursor:default}
+body.viewer-mode .stage-picker-choices button.stage-choice-pending:disabled{opacity:.8}

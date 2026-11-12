@@ -342,6 +342,77 @@
     $('recent-operations').innerHTML=rec.length?rec.map(op=>`<div class="recent-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><small>${esc(op.goods)}</small></div><span>${esc(formatDate(op.createdAt,{day:'numeric',month:'short'}))} ›</span></div>`).join(''):'<p>Пока нет операций.</p>';
   }
   function renderAudit(){const actions={CREATE_OPERATION:'Создана операция',CREATE_EVENT:'Добавлено событие',UPDATE_EVENT:'Изменено событие',DELETE_EVENT:'Удалено событие',ARCHIVE_OPERATION:'Изменён статус архива'};const entries=[...state.audit].sort((a,b)=>String(b.at||'').localeCompare(String(a.at||''))).slice(0,120);$('audit-list').innerHTML=entries.length?entries.map(a=>{const op=state.operations.find(o=>o.id===a.operationId);const at=a.at?new Date(a.at):null;const when=at&&!isNaN(at.getTime())?at.toLocaleString('ru-RU'):'—';return `<div class="archive-item" ${op?`data-open-op="${esc(op.id)}"`:''}><div><strong>${esc(actions[a.action]||a.action)}</strong><p>${esc(op?op.direction+' · '+op.company:'Операция '+String(a.operationId||'').slice(0,8))}</p></div><span>${esc(when)}</span></div>`;}).join(''):'<div class="empty-state">Изменений пока нет. Первое событие будет зарегистрировано после сохранения.</div>'; }
+
+  /* Email notification matrix: separate administrator unlock for EDITOR sessions. */
+  const MAIL_STATUS_IDS=['received','search_transport','transport_booked','waiting_loading','loaded','en_route_customs','customs_arrived','customs_cleared','en_route_delivery','delivered'];
+  const MAIL_STATUS_NAMES=['Заявка получена','Поиск транспорта','Транспорт найден','Ожидание загрузки','Загружен','В пути на таможню','Таможенное оформление','Оформлено','В пути на выгрузку','Выгружен'];
+  let mailRows=[],mailRevision='',mailAdminToken='',mailAdminUntil=0,mailLoadInProgress=false,mailDirty=false;
+  const mailCanEdit=()=>canEdit()&&!!mailAdminToken&&Date.now()<mailAdminUntil;
+  function mailTemplateRow(){
+    return {name:'',email:'',enabled:false,statuses:MAIL_STATUS_IDS.map(()=>false)};
+  }
+  function renderMailRoom(){
+    const editing=mailCanEdit();
+    const head=['Адресат','Email','Включено',...MAIL_STATUS_NAMES];
+    $('mail-head').innerHTML='<tr>'+head.map((text,i)=>'<th scope="col" '+(i===0?'class="mail-sticky-name"':i===1?'class="mail-sticky-email"':'')+'>'+esc(text)+'</th>').join('')+'</tr>';
+    $('mail-body').innerHTML=mailRows.map((r,i)=>'<tr>'+
+      '<td class="mail-sticky-name">'+(editing?'<input class="mail-text-input" data-mail-row="'+i+'" data-mail-field="name" value="'+esc(r.name)+'" placeholder="Имя / отдел">':'<strong>'+esc(r.name||'—')+'</strong>')+'</td>'+
+      '<td class="mail-sticky-email">'+(editing?'<input class="mail-text-input" type="email" data-mail-row="'+i+'" data-mail-field="email" value="'+esc(r.email)+'" placeholder="name@company.com">':'<span>'+esc(r.email||'—')+'</span>')+'</td>'+
+      '<td class="mail-check-col"><input type="checkbox" aria-label="Включить уведомления для '+esc(r.name||'адресата')+'" data-mail-row="'+i+'" data-mail-enabled="1" '+(r.enabled?'checked':'')+' '+(editing?'':'disabled')+'></td>'+
+      r.statuses.map((flag,k)=>'<td class="mail-check-col"><input type="checkbox" aria-label="'+esc(MAIL_STATUS_NAMES[k])+' для '+esc(r.name||'адресата')+'" data-mail-row="'+i+'" data-mail-status="'+k+'" '+(flag?'checked':'')+' '+(editing?'':'disabled')+'></td>').join('')+
+      '</tr>').join('')||'<tr><td colspan="13" class="mail-no-address">Адресатов пока нет</td></tr>';
+    $('mail-total').textContent=String(mailRows.filter(r=>r.email).length);
+    $('mail-enabled').textContent=String(mailRows.filter(r=>r.email&&r.enabled).length);
+    $('mail-rules').textContent=String(mailRows.reduce((sum,r)=>sum+(r.enabled?r.statuses.filter(Boolean).length:0),0));
+    $('mail-read-status').textContent=editing?'● Редактирование':'◉ Только просмотр';
+    $('mail-read-status').classList.toggle('is-admin',editing);
+    $('mail-unlock').hidden=!canEdit()||editing||!IS_GAS;
+    $('mail-add').hidden=!editing;
+    $('mail-save').hidden=!editing;
+    $('mail-info').textContent=editing?'Изменения сохраняются сразу в матрице Google Sheets после нажатия «Сохранить».':'Данные читаются из Google Sheets · изменения доступны только администратору';
+  }
+  async function loadMailRoom(force=false){
+    if(mailLoadInProgress||!IS_GAS)return;
+    if(mailDirty&&!force)return;
+    mailLoadInProgress=true;
+    try{
+      const raw=await gasCall('apiGetNotificationMatrix',state.token);
+      mailRows=(raw.rows||[]).map(r=>({name:r.name||'',email:r.email||'',enabled:!!r.enabled,statuses:MAIL_STATUS_IDS.map((_,i)=>!!r.statuses?.[i])}));
+      mailRevision=raw.revision||'';
+      mailDirty=false;
+      if(!raw.canRequestAdmin){mailAdminToken='';mailAdminUntil=0;}
+      renderMailRoom();
+    }catch(err){toast('Рассылки: '+err.message,true);}
+    finally{mailLoadInProgress=false;}
+  }
+  async function unlockMailAdmin(){
+    if(!canEdit())return;
+    const password=window.prompt('Пароль администратора рассылок (отдельно от пароля EDITOR):');
+    if(!password)return;
+    try{
+      const result=await gasCall('apiUnlockNotificationAdmin',state.token,password);
+      mailAdminToken=result.adminToken;
+      mailAdminUntil=Date.now()+Number(result.minutes||15)*60000-5000;
+      renderMailRoom();
+      toast('Управление рассылками открыто на 15 минут.');
+    }catch(err){toast(err.message,true);}
+  }
+  async function saveMailRoom(){
+    if(!mailCanEdit()){toast('Нужен доступ администратора рассылки.',true);renderMailRoom();return;}
+    $('mail-save').disabled=true;
+    try{
+      const updated=await gasCall('apiSaveNotificationMatrix',state.token,mailAdminToken,mailRows,mailRevision);
+      mailRows=updated.rows;
+      mailRevision=updated.revision;
+      mailDirty=false;
+      renderMailRoom();
+      toast('Матрица email-уведомлений сохранена.');
+    }catch(err){
+      toast('Не удалось сохранить матрицу: '+err.message,true);
+      if(/истёк|отозвана/.test(err.message)){mailAdminToken='';mailAdminUntil=0;renderMailRoom();}
+    }finally{$('mail-save').disabled=false;}
+  }
+
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
   function renderAll(preserve=false){applyRole();renderMetrics();renderTimeline(preserve);renderStages();renderAnalytics();renderArchive();renderAudit();}
 
@@ -771,7 +842,7 @@
       renderTimeline(true);
     }
   }
-  function setView(view){if(view!=='timeline'){resetStageZoom();resetDesktopCalendarZoom();}state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));applyRole();document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
+  function setView(view){if(view!=='timeline'){resetStageZoom();resetDesktopCalendarZoom();}state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));applyRole();document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.'],mail:['Email-рассылки','Адресаты и события для автоматических уведомлений.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view==='mail')loadMailRoom();if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
   function openModal(id){
     if((id==='operation-modal'||id==='event-modal')&&!canEdit())return;
     $(id).classList.remove('hidden');
@@ -1193,6 +1264,23 @@
     });
     document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.dataset.view)));
     $('new-operation-btn').addEventListener('click',newOperation);
+    $('mail-reload').addEventListener('click',()=>{if(mailDirty&&!confirm('Несохранённые изменения будут потеряны. Продолжить?'))return;mailDirty=false;loadMailRoom(true);});
+    $('mail-unlock').addEventListener('click',unlockMailAdmin);
+    $('mail-add').addEventListener('click',()=>{if(!mailCanEdit())return;if(mailRows.length>=100){toast('Не более 100 адресатов.',true);return;}mailRows.push(mailTemplateRow());mailDirty=true;renderMailRoom();});
+    $('mail-save').addEventListener('click',saveMailRoom);
+    $('mail-body').addEventListener('input',e=>{
+      const el=e.target,i=Number(el.dataset.mailRow);
+      if(!mailCanEdit()||!Number.isInteger(i)||!mailRows[i])return;
+      const field=el.dataset.mailField;
+      if(field==='name'||field==='email'){mailRows[i][field]=el.value;mailDirty=true;}
+    });
+    $('mail-body').addEventListener('change',e=>{
+      const el=e.target,i=Number(el.dataset.mailRow);
+      if(!mailCanEdit()||!Number.isInteger(i)||!mailRows[i])return;
+      if(el.dataset.mailEnabled)mailRows[i].enabled=el.checked;
+      else if(el.dataset.mailStatus!==undefined)mailRows[i].statuses[Number(el.dataset.mailStatus)]=el.checked;
+      mailDirty=true;renderMailRoom();
+    });
     $('search-input').addEventListener('input',e=>{state.query=e.target.value;refreshFilteredTimeline();});
     $('direction-filter').addEventListener('change',e=>{state.direction=e.target.value;refreshFilteredTimeline();});
     $('state-filter').addEventListener('change',e=>{state.filter=e.target.value;refreshFilteredTimeline();});
@@ -1227,7 +1315,7 @@
       }
     },{passive:true});
     $('login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=e.currentTarget.querySelector('button[type=submit]');btn.disabled=true;showError('login-error','');try{const result=await gasCall('apiLogin',$('login-password').value);if(!result?.token)throw Error('Сервер не выдал сессию');state.token=result.token;state.role=result.role||'editor';try{sessionStorage.setItem(SESSION_KEY,result.token);}catch{}await startWorkspace();}catch(err){showError('login-error',err?.message||'Ошибка авторизации');}finally{btn.disabled=false;}});
-    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}$('footer-online').hidden=true;state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
+    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}$('footer-online').hidden=true;mailAdminToken='';mailAdminUntil=0;mailRows=[];mailDirty=false;state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
   }
 
   /* Online indicator counts recent authenticated sessions, not identifiable people. */

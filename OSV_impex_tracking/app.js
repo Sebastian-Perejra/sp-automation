@@ -10,6 +10,10 @@
     {id:'received', label:'Задание получено', short:'Получено', stage:'intake', allowed:'actual'},
     {id:'search_transport', label:'Поиск транспорта', short:'Поиск ТС', stage:'transport', allowed:'actual'},
     {id:'transport_booked', label:'Транспорт согласован', short:'ТС найден', stage:'transport', allowed:'actual'},
+    {id:'waiting_loading', label:'Ожидает постановки под загрузку', short:'Ожид. загрузки', stage:'transport', allowed:'actual'},
+    {id:'loaded', label:'Груз загружен', short:'Загружен', stage:'transport', allowed:'actual'},
+    {id:'en_route_customs', label:'В пути на таможню', short:'В пути к там.', stage:'transport', allowed:'actual'},
+    {id:'en_route_delivery', label:'В пути на выгрузку', short:'В пути к выг.', stage:'delivery', allowed:'actual'},
     {id:'vehicle_eta', label:'Ожидаемая подача транспорта', short:'Подача ТС', stage:'transport', allowed:'planned'},
     {id:'loading_actual', label:'Транспорт подан под загрузку', short:'ТС подан', stage:'transport', allowed:'actual'},
     {id:'pickup_actual', label:'Груз забран / отправлен', short:'Забран', stage:'transport', allowed:'actual'},
@@ -307,7 +311,150 @@
   }
   function renderAudit(){const actions={CREATE_OPERATION:'Создана операция',CREATE_EVENT:'Добавлено событие',UPDATE_EVENT:'Изменено событие',DELETE_EVENT:'Удалено событие',ARCHIVE_OPERATION:'Изменён статус архива'};const entries=[...state.audit].sort((a,b)=>String(b.at||'').localeCompare(String(a.at||''))).slice(0,120);$('audit-list').innerHTML=entries.length?entries.map(a=>{const op=state.operations.find(o=>o.id===a.operationId);const at=a.at?new Date(a.at):null;const when=at&&!isNaN(at.getTime())?at.toLocaleString('ru-RU'):'—';return `<div class="archive-item" ${op?`data-open-op="${esc(op.id)}"`:''}><div><strong>${esc(actions[a.action]||a.action)}</strong><p>${esc(op?op.direction+' · '+op.company:'Операция '+String(a.operationId||'').slice(0,8))}</p></div><span>${esc(when)}</span></div>`;}).join(''):'<div class="empty-state">Изменений пока нет. Первое событие будет зарегистрировано после сохранения.</div>'; }
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
-  function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderAnalytics();renderArchive();renderAudit();}
+  function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderStages();renderAnalytics();renderArchive();renderAudit();}
+
+  /* Shared event-backed stage tracker. Confirmed events only — no synthetic checkmarks. */
+  const STAGES=[
+    {id:'received',label:'Получена заявка'},
+    {id:'search_transport',label:'Поиск транспорта'},
+    {id:'transport_booked',label:'Транспорт найден'},
+    {id:'waiting_loading',label:'Ожидание загрузки'},
+    {id:'loaded',label:'Загружен'},
+    {id:'en_route_customs',label:'В пути на таможню'},
+    {id:'customs_arrived',label:'Таможенное оформление'},
+    {id:'customs_cleared',label:'Оформлено'},
+    {id:'en_route_delivery',label:'В пути на выгрузку'},
+    {id:'delivered',label:'Выгружен'}
+  ];
+  const STAGE_INDEX=Object.fromEntries(STAGES.map((s,i)=>[s.id,i]));
+  // Legacy statuses are mapped for display but are not retroactively fabricated in history.
+  const STAGE_LEGACY={loading_actual:'waiting_loading',pickup_actual:'en_route_customs'};
+  let timelineDisplay='calendar',selectedTruckOperation=null;
+  const truckGraphic="<svg class=\"stage-truck-art\" viewBox=\"0 0 96 52\" aria-hidden=\"true\" focusable=\"false\"><defs><linearGradient id=\"truckBody\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#f8ffff\"/><stop offset=\"1\" stop-color=\"#d3e0ea\"/></linearGradient></defs><ellipse cx=\"48\" cy=\"46\" rx=\"36\" ry=\"3\" fill=\"#153a51\" opacity=\".16\"/><rect x=\"6\" y=\"10\" width=\"54\" height=\"30\" rx=\"4\" fill=\"url(#truckBody)\" stroke=\"#647f93\" stroke-width=\"1.5\"/><path d=\"M59 19h16l13 13v8H59z\" fill=\"#d52131\" stroke=\"#951728\" stroke-width=\"1.6\"/><path d=\"M64 22h10l9 10H64z\" fill=\"#bce4f2\" stroke=\"#951728\" stroke-width=\"1\"/><rect x=\"11\" y=\"16\" width=\"38\" height=\"4\" rx=\"2\" fill=\"#cc2335\" opacity=\".8\"/><rect x=\"11\" y=\"24\" width=\"29\" height=\"2\" rx=\"1\" fill=\"#9dacb9\"/><circle cx=\"25\" cy=\"41\" r=\"8\" fill=\"#263746\"/><circle cx=\"25\" cy=\"41\" r=\"3.5\" fill=\"#c5d8e1\"/><circle cx=\"73\" cy=\"41\" r=\"8\" fill=\"#263746\"/><circle cx=\"73\" cy=\"41\" r=\"3.5\" fill=\"#c5d8e1\"/><rect x=\"86\" y=\"34\" width=\"4\" height=\"5\" fill=\"#f6c662\"/></svg>";
+  function stageIndex(status){
+    const key=STAGE_LEGACY[status]||status;
+    return Object.prototype.hasOwnProperty.call(STAGE_INDEX,key)?STAGE_INDEX[key]:null;
+  }
+  function stageFacts(op){
+    const actual=operationEvents(op.id).filter(e=>e.type==='actual'&&e.date<=TODAY);
+    const statusEvents=actual.filter(e=>stageIndex(e.status)!==null);
+    const latest=statusEvents[statusEvents.length-1];
+    const current=latest?stageIndex(latest.status):null;
+    const first=actual.find(e=>e.status==='received')||statusEvents[0]||null;
+    const stageDays=latest?Math.max(0,dayDiff(latest.date,TODAY)):null;
+    const totalDays=first?Math.max(0,dayDiff(first.date,TODAY)):null;
+    const confirmed=new Set(statusEvents.map(e=>stageIndex(e.status)));
+    const pause=actual.some(e=>e.status==='hold'&&(!latest||e.date>=latest.date));
+    return {current,stageDays,totalDays,confirmed,pause,latest,first};
+  }
+  function currentStageRows(){return filteredOperations();}
+  function renderStages(){
+    const rows=currentStageRows();
+    const counts=STAGES.map(()=>0);
+    const facts=rows.map(op=>{const f=stageFacts(op);if(f.current!==null)counts[f.current]++;return {op,f};});
+    $('stage-grid').style.setProperty('--stage-count',String(STAGES.length));
+    let out='<div class="stage-corner">ГРУЗ / ОПЕРАЦИЯ <small>'+rows.length+' записей</small></div>';
+    out+=STAGES.map((s,i)=>'<div class="stage-heading"><span>'+esc(s.label)+'</span><strong title="Грузов сейчас на этапе">'+counts[i]+'</strong></div>').join('');
+    for(const {op,f} of facts){
+      const current=f.current;
+      const late=correctOverdue(op);
+      out+='<div class="stage-op" data-stage-open="'+esc(op.id)+'" tabindex="0" role="button" title="Открыть хронологию"><div class="stage-op-head"><span class="direction-tag '+op.direction.toLowerCase()+'">'+esc(op.direction)+'</span><strong>'+esc(op.company)+'</strong></div><small>'+esc(op.goods)+'</small><div class="stage-op-meta">'+(f.totalDays===null?'Нет факта старта':f.totalDays+' дн. всего')+(late?' · ⚑ Отклонение':'')+'</div></div>';
+      for(let i=0;i<STAGES.length;i++){
+        const isCurrent=i===current,confirmed=f.confirmed.has(i)&&!isCurrent;
+        let content='';
+        if(isCurrent){
+          const duration=f.stageDays+' / '+f.totalDays;
+          content='<button class="stage-truck '+(late?'is-late ':'')+(f.pause?'is-paused':'')+'" type="button" draggable="true" data-truck="'+esc(op.id)+'" aria-label="'+esc(op.company)+' — '+esc(STAGES[i].label)+', '+duration+' дней" title="'+esc(op.company)+' — '+duration+' дн. (этап / всего)">'+truckGraphic+'<span>'+duration+'</span></button>';
+        }else if(confirmed){
+          content='<span class="stage-check" title="Фактический статус подтверждён">✓</span>';
+        }else if(current!==null&&i<current){
+          content='<span class="stage-skipped" title="Фактический этап не подтверждён">·</span>';
+        }
+        out+='<div class="stage-cell '+(isCurrent?'is-current ':'')+(current!==null&&i<current?'is-past ':'')+(i===9?'is-last ':'')+'" data-stage-target="'+i+'" data-stage-operation="'+esc(op.id)+'">'+content+'</div>';
+      }
+    }
+    if(!rows.length)out+='<div class="stage-empty">Нет операций для выбранных фильтров.</div>';
+    $('stage-grid').innerHTML=out;
+    $('timeline-view-stages').classList.toggle('is-selected',timelineDisplay==='stages');
+    $('timeline-view-calendar').classList.toggle('is-selected',timelineDisplay==='calendar');
+    $('timeline-view-stages').setAttribute('aria-pressed',String(timelineDisplay==='stages'));
+    $('timeline-view-calendar').setAttribute('aria-pressed',String(timelineDisplay==='calendar'));
+  }
+  function setTimelineDisplay(next){
+    if(next!=='calendar'&&next!=='stages')return;
+    if(next==='stages'){
+      resetDesktopCalendarZoom();
+      if(document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();
+    }
+    timelineDisplay=next;
+    $('stages-view').classList.toggle('hidden',next!=='stages');
+    $('timeline-scroller').classList.toggle('hidden',next==='stages');
+    $('timeline-view').querySelector('.legend-under').classList.toggle('hidden',next==='stages');
+    $('timeline-view').querySelector('.timeline-footer').classList.toggle('hidden',next==='stages');
+    $('timeline-view').querySelector('.calendar-header-actions').classList.toggle('stage-active',next==='stages');
+    $('mobile-calendar-open').style.display=next==='stages'?'none':'';
+    renderStages();
+  }
+  function promptStageMove(opId,stageNo){
+    const op=state.operations.find(o=>o.id===opId);
+    if(!op||op.archived)return;
+    const f=stageFacts(op),target=STAGES[stageNo];
+    if(!target||f.current===stageNo)return;
+    if(delivered(op)){toast('Завершённую поставку нельзя перемещать без корректировки истории.',true);return;}
+    const prev=f.current===null?'Без текущего этапа':STAGES[f.current].label;
+    const skips=f.current!==null&&stageNo>f.current+1?'\nПромежуточные стадии НЕ будут отмечены как пройденные.':'';
+    if(!confirm('Изменить статус '+op.company+'?\n'+prev+' → '+target.label+'\nДата: '+formatDate(TODAY)+skips))return;
+    guarded(async()=>{
+      await backendCall('apiSaveEvent',opId,{date:TODAY,status:target.id,type:'actual',note:'Перемещено в режиме «Этапы»'});
+      toast('Этап обновлён: '+target.label);
+    });
+  }
+  function installStageInteractions(){
+    $('timeline-view-calendar').addEventListener('click',()=>setTimelineDisplay('calendar'));
+    $('timeline-view-stages').addEventListener('click',()=>setTimelineDisplay('stages'));
+    const grid=$('stage-grid');
+    grid.addEventListener('click',e=>{
+      const truck=e.target.closest('[data-truck]');
+      if(truck){selectedTruckOperation=truck.dataset.truck;
+        const op=state.operations.find(o=>o.id===selectedTruckOperation);
+        if(!op)return;
+        const f=stageFacts(op);
+        const menu=STAGES.map((s,i)=>(i+1)+'. '+s.label).join('\n');
+        const response=prompt('Текущий статус: '+(f.current===null?'—':STAGES[f.current].label)+'\nВыберите номер нового этапа (1–10).\n\n'+menu,'');
+        if(response!==null&&response.trim()){
+          const i=Number(response)-1;
+          if(Number.isInteger(i)&&i>=0&&i<10)promptStageMove(op.id,i);
+          else toast('Введите номер от 1 до 10.',true);
+        }
+        return;
+      }
+      const op=e.target.closest('[data-stage-open]');
+      if(op)openDrawer(op.dataset.stageOpen);
+    });
+    grid.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-stage-open]')){e.preventDefault();openDrawer(e.target.dataset.stageOpen);}});
+    grid.addEventListener('dragstart',e=>{
+      const truck=e.target.closest('[data-truck]');
+      if(!truck)return;
+      selectedTruckOperation=truck.dataset.truck;
+      e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',selectedTruckOperation);
+    });
+    grid.addEventListener('dragover',e=>{
+      const target=e.target.closest('[data-stage-target]');
+      if(!target||!selectedTruckOperation||target.dataset.stageOperation!==selectedTruckOperation)return;
+      e.preventDefault();e.dataTransfer.dropEffect='move';target.classList.add('drag-over');
+    });
+    grid.addEventListener('dragleave',e=>{const cell=e.target.closest('[data-stage-target]');if(cell)cell.classList.remove('drag-over');});
+    grid.addEventListener('drop',e=>{
+      const cell=e.target.closest('[data-stage-target]');
+      grid.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));
+      if(!cell||!selectedTruckOperation||cell.dataset.stageOperation!==selectedTruckOperation)return;
+      e.preventDefault();
+      const opId=selectedTruckOperation;selectedTruckOperation=null;
+      promptStageMove(opId,Number(cell.dataset.stageTarget));
+    });
+    grid.addEventListener('dragend',()=>{selectedTruckOperation=null;grid.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));});
+  }
+
   /* Midnight rollover: move today's badges into tomorrow's cells without reload. */
   function rolloverToday(){
     const next=iso(new Date());
@@ -702,6 +849,7 @@
     installTimelinePinch();
     installCalendarDoubleTap();
     installDesktopCalendarDrag();
+    installStageInteractions();
     $('desktop-calendar-minus').addEventListener('click',()=>changeDesktopCalendarZoom(-1));
     $('desktop-calendar-plus').addEventListener('click',()=>changeDesktopCalendarZoom(1));
     $('desktop-calendar-close').addEventListener('click',resetDesktopCalendarZoom);

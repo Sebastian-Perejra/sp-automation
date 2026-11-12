@@ -334,23 +334,6 @@
     // iPhone landscape may request a desktop UA/layout. Height + touch wins.
     return shortSide&&(touch||viewportWidth<=760||isIOSDevice());
   }
-  function updateMobileCalendarFullscreen(){
-    const button=$('mobile-calendar-fullscreen');
-    if(!button)return;
-    button.hidden=false;
-    button.style.display='';
-    // iPhone Safari owns the tabs/address bar. Offer standalone setup instead.
-    if(isIOSDevice()&&!isStandaloneWebApp()){
-      button.textContent='ⓘ Без вкладок';
-      button.title='Как открыть OSV без панелей Safari';
-      button.setAttribute('aria-pressed','false');
-      return;
-    }
-    const focused=document.body.classList.contains('calendar-immersive-mode');
-    button.textContent=focused?'⤡ Обычный вид':'⛶ Больше места';
-    button.title=focused?'Вернуть элементы управления':'Увеличить календарь, скрыв второстепенные панели';
-    button.setAttribute('aria-pressed',String(focused));
-  }
   function showIOSStandaloneGuide(){
     if(document.getElementById('ios-standalone-guide'))return;
     const layer=document.createElement('div');
@@ -366,7 +349,7 @@
     if(!isMobileCalendarDevice()||state.view!=='timeline')return;
     document.body.classList.add('mobile-calendar-mode');
     renderTimeline(false);
-    updateMobileCalendarFullscreen();
+
   }
   function closeMobileCalendar(){
     document.body.classList.remove('mobile-calendar-mode','calendar-immersive-mode');
@@ -375,22 +358,8 @@
     pinchGesture=null;
     applyMobileCalendarZoom(1);
     renderTimeline(true);
-    updateMobileCalendarFullscreen();
-  }
-  function toggleMobileCalendarFullscreen(){
-    // CSS-only focus: never invoke the browser Fullscreen API. The old API
-    // caused Chrome's unavoidable "To exit full screen, press Esc" overlay.
-    if(isIOSDevice()&&!isStandaloneWebApp()){
-      showIOSStandaloneGuide();
-      return;
-    }
-    const active=document.body.classList.toggle('calendar-immersive-mode');
-    if(!document.body.classList.contains('mobile-calendar-mode')){
-      document.body.classList.remove('calendar-immersive-mode');
-    }
-    updateMobileCalendarFullscreen();
-  }
 
+  }
   function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
   function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
@@ -659,7 +628,6 @@
     $('refresh-data-btn').addEventListener('click',refreshDataManually);
     $('mobile-calendar-open').addEventListener('click',openMobileCalendar);
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
-    $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
     window.addEventListener('resize',()=>{
       if(document.body.classList.contains('mobile-calendar-mode')&&!isMobileCalendarDevice())closeMobileCalendar();
     });

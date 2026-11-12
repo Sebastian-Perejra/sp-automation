@@ -1156,3 +1156,67 @@ body.mobile-calendar-mode #timeline-view .mobile-calendar-open{display:none!impo
   padding-right:45px!important;
   cursor:pointer;
 }
+
+/* Desktop zoom control: fixed command position, small, deliberate visual weight. */
+#timeline-view .desktop-calendar-zoom{display:none}
+@media(min-width:1000px) and (hover:hover) and (pointer:fine){
+  #timeline-view .desktop-calendar-zoom{
+    display:inline-flex;align-items:center;gap:0;flex:0 0 auto;
+    height:34px;background:#fff;border:1px solid #d4dce5;
+    border-radius:9px;overflow:hidden;white-space:nowrap;
+  }
+  #timeline-view .desktop-calendar-zoom button{
+    appearance:none;border:0;background:transparent;color:#3b4c60;
+    height:32px;width:34px;font-size:19px;font-weight:600;line-height:1;
+    display:grid;place-items:center;cursor:pointer;padding:0;
+  }
+  #timeline-view .desktop-calendar-zoom button:hover:not(:disabled){background:#edf2f7;color:#b91527}
+  #timeline-view .desktop-calendar-zoom button:focus-visible{outline:2px solid #b91527;outline-offset:-3px}
+  #timeline-view .desktop-calendar-zoom button:disabled{cursor:default;color:#bec8d1}
+  #timeline-view #desktop-calendar-scale{
+    display:block;min-width:42px;padding:0 5px;text-align:center;
+    font-size:10px;font-weight:800;color:#607086;font-variant-numeric:tabular-nums;
+  }
+  #timeline-view #desktop-calendar-close{border-left:1px solid #d4dce5;color:#aa2230}
+  /* Reduce row height as well as date width so zooming out shows MORE operations. */
+  #timeline-view .timeline-panel .timeline-row,
+  #timeline-view .timeline-panel .timeline-row-label,
+  #timeline-view .timeline-panel .day-slot,
+  #timeline-view .timeline-panel .timeline-ghost-cell{
+    height:var(--desktop-row-height,76px);
+    min-height:var(--desktop-row-height,76px);
+  }
+  #timeline-view .timeline-panel .timeline-row,
+  #timeline-view .timeline-panel .day-slot,
+  #timeline-view .timeline-panel .timeline-ghost-cell{
+    transition:height .18s ease,min-height .18s ease;
+  }
+}
+#calendar-zoom-backdrop{position:fixed;inset:0;background:rgba(14,24,39,.48);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);z-index:450;opacity:0;pointer-events:none;transition:opacity .24s ease,backdrop-filter .24s ease,-webkit-backdrop-filter .24s ease}
+#calendar-zoom-backdrop[hidden]{display:none!important}
+#calendar-zoom-backdrop.is-active{opacity:1;pointer-events:auto;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+@media(min-width:1000px) and (hover:hover) and (pointer:fine){
+  body.calendar-zoom-overlay{overflow:hidden!important}
+  body.calendar-zoom-overlay #timeline-view .timeline-panel{
+    position:fixed!important;inset:22px!important;width:auto!important;height:auto!important;
+    max-width:none!important;max-height:none!important;z-index:460!important;
+    display:flex!important;flex-direction:column!important;
+    border:1px solid #dce4ed!important;border-radius:15px!important;
+    background:#fff!important;box-shadow:0 25px 100px rgba(0,0,0,.25)!important;
+    animation:osvCalendarExpand .26s cubic-bezier(.2,.8,.2,1) both;
+  }
+  body.calendar-zoom-overlay #timeline-view .timeline-scroller{
+    flex:1 1 auto!important;height:auto!important;min-height:0!important;
+    max-height:none!important;overflow:auto!important;
+  }
+  body.calendar-zoom-overlay #timeline-view .timeline-panel-head{flex:0 0 auto!important}
+  body.calendar-zoom-overlay #timeline-view .timeline-footer{flex:0 0 auto!important}
+}
+@keyframes osvCalendarExpand{
+  from{transform:translateY(14px) scale(.965);opacity:.72}
+  to{transform:translateY(0) scale(1);opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  body.calendar-zoom-overlay #timeline-view .timeline-panel{animation:none!important}
+  #calendar-zoom-backdrop{transition:none!important}
+}

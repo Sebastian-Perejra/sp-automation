@@ -79,6 +79,7 @@
         <button class="nav-item" data-view="analytics"><span class="nav-icon">◫</span>Аналитика</button>
         <button class="nav-item" data-view="archive"><span class="nav-icon">▤</span>Архив</button>
         <button class="nav-item" data-view="audit"><span class="nav-icon">≡</span>Журнал</button>
+        <button class="nav-item" data-view="mail"><span class="nav-icon">✉</span>Рассылки</button>
       </nav>
 
     </aside>
@@ -114,6 +115,19 @@
 
         <section id="analytics-view" class="view-pane hidden"><div class="analysis-layout"><div class="analysis-card"><div class="panel-kicker">PERFORMANCE</div><h2>Время прохождения этапов</h2><p>Средняя продолжительность на основании фактических событий.</p><div id="phase-bars"></div></div><div class="analysis-card"><div class="panel-kicker">DIRECTIONS</div><h2>Структура операций</h2><p>Распределение по направлениям.</p><div id="direction-bars"></div></div></div><div class="analysis-card recent-card"><div class="panel-kicker">OPERATIONS</div><h2>Последние операции</h2><div id="recent-operations"></div></div></section>
         <section id="archive-view" class="view-pane hidden"><div class="archive-intro"><h2>Архив операций</h2><p>Завершённые и вручную архивированные записи остаются доступными для просмотра и анализа.</p></div><div id="archive-list" class="archive-list"></div></section>
+
+        <section id="mail-view" class="view-pane hidden">
+          <div class="mail-room">
+            <div class="mail-room-head"><div><div class="panel-kicker">NOTIFICATION CENTER</div><h2>Матрица email-рассылок</h2><p>Адресаты получают уведомления только о выбранных фактических этапах. Плановые ETA не вызывают рассылку.</p></div>
+              <div class="mail-room-actions"><span id="mail-read-status" class="mail-room-status">Просмотр</span><button class="btn btn-outline" id="mail-reload" type="button">Обновить</button><button class="btn btn-primary" id="mail-unlock" type="button" hidden>Администрирование</button></div>
+            </div>
+            <div class="mail-summary"><span>Адресатов: <b id="mail-total">0</b></span><span>Активных: <b id="mail-enabled">0</b></span><span>Правила: <b id="mail-rules">0</b></span></div>
+            <div class="mail-grid-outer"><div class="mail-grid-scroll" role="region" aria-label="Матрица уведомлений" tabindex="0">
+              <table class="mail-grid"><thead id="mail-head"></thead><tbody id="mail-body"></tbody></table>
+            </div></div>
+            <div class="mail-room-bottom"><span id="mail-info">Настройки хранятся в Google Sheets · Email-уведомления</span><div class="mail-room-actions"><button class="btn btn-outline" id="mail-add" type="button" hidden>+ Адресат</button><button class="btn btn-primary" id="mail-save" type="button" hidden>Сохранить настройки</button></div></div>
+          </div>
+        </section>
         <section id="audit-view" class="view-pane hidden"><div class="archive-intro"><h2>Журнал изменений</h2><p>Создание операций, обновления дат и статусов, архивирование. События не исчезают бесследно.</p></div><div id="audit-list" class="archive-list"></div></section>
         <footer class="app-footer"><span>© 2026 OSV IMPEX Tracking</span><span class="footer-right"><span class="footer-online" id="footer-online" role="status" aria-live="off" title="Активные подключения за последние две минуты" hidden><i aria-hidden="true"></i><span>онлайн</span><strong id="footer-online-count">—</strong></span><span>POWERED BY <b>SP AUTOMATION</b></span></span></footer>
       </section>

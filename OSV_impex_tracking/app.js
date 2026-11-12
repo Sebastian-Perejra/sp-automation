@@ -341,8 +341,10 @@
     const latest=statusEvents[statusEvents.length-1];
     const current=latest?stageIndex(latest.status):null;
     const first=actual.find(e=>e.status==='received')||statusEvents[0]||null;
-    const stageDays=latest?Math.max(0,dayDiff(latest.date,TODAY)):null;
-    const totalDays=first?Math.max(0,dayDiff(first.date,TODAY)):null;
+    const finalEvent=statusEvents.find(e=>e.status==='delivered');
+    const asOf=finalEvent?finalEvent.date:TODAY;
+    const stageDays=latest?Math.max(0,dayDiff(latest.date,asOf)):null;
+    const totalDays=first?Math.max(0,dayDiff(first.date,asOf)):null;
     const confirmed=new Set(statusEvents.map(e=>stageIndex(e.status)));
     const pause=actual.some(e=>e.status==='hold'&&(!latest||e.date>=latest.date));
     return {current,stageDays,totalDays,confirmed,pause,latest,first};
@@ -409,25 +411,38 @@
       toast('Этап обновлён: '+target.label);
     });
   }
+  function closeStagePicker(){
+    const picker=document.getElementById('stage-picker-overlay');
+    if(picker)picker.remove();
+  }
+  function openStagePicker(opId){
+    const op=state.operations.find(o=>o.id===opId);
+    if(!op)return;
+    closeStagePicker();
+    const facts=stageFacts(op);
+    const current=facts.current===null?'Не определён':STAGES[facts.current].label;
+    const disabled=op.archived||delivered(op);
+    const layer=document.createElement('div');
+    layer.id='stage-picker-overlay';
+    layer.className='stage-picker-overlay';
+    layer.innerHTML='<div class="stage-picker-card" role="dialog" aria-modal="true" aria-label="Выбор этапа"><div class="stage-picker-head"><div><strong>'+esc(op.company)+'</strong><small>Текущий этап: '+esc(current)+'</small></div><button type="button" data-picker-close aria-label="Закрыть">×</button></div><div class="stage-picker-choices">'+STAGES.map((s,i)=>'<button type="button" data-stage-choice="'+i+'" '+(disabled||i===facts.current?'disabled':'')+'><span class="stage-picker-index">'+(i+1)+'</span><span>'+esc(s.label)+'</span>'+(i===facts.current?'<span class="stage-picker-current">Текущий</span>':'')+'</button>').join('')+'</div><p>Переход создаёт фактическое событие на сегодняшнюю дату. Пропущенные этапы не подтверждаются автоматически.</p></div>';
+    layer.addEventListener('click',e=>{
+      if(e.target===layer||e.target.closest('[data-picker-close]')){closeStagePicker();return;}
+      const target=e.target.closest('[data-stage-choice]');
+      if(!target)return;
+      const index=Number(target.dataset.stageChoice);
+      closeStagePicker();promptStageMove(opId,index);
+    });
+    document.body.appendChild(layer);
+  }
   function installStageInteractions(){
     $('timeline-view-calendar').addEventListener('click',()=>setTimelineDisplay('calendar'));
     $('timeline-view-stages').addEventListener('click',()=>setTimelineDisplay('stages'));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStagePicker();});
     const grid=$('stage-grid');
     grid.addEventListener('click',e=>{
       const truck=e.target.closest('[data-truck]');
-      if(truck){selectedTruckOperation=truck.dataset.truck;
-        const op=state.operations.find(o=>o.id===selectedTruckOperation);
-        if(!op)return;
-        const f=stageFacts(op);
-        const menu=STAGES.map((s,i)=>(i+1)+'. '+s.label).join('\n');
-        const response=prompt('Текущий статус: '+(f.current===null?'—':STAGES[f.current].label)+'\nВыберите номер нового этапа (1–10).\n\n'+menu,'');
-        if(response!==null&&response.trim()){
-          const i=Number(response)-1;
-          if(Number.isInteger(i)&&i>=0&&i<10)promptStageMove(op.id,i);
-          else toast('Введите номер от 1 до 10.',true);
-        }
-        return;
-      }
+      if(truck){openStagePicker(truck.dataset.truck);return;}
       const op=e.target.closest('[data-stage-open]');
       if(op)openDrawer(op.dataset.stageOpen);
     });

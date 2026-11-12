@@ -1343,3 +1343,21 @@ body.calendar-zoom-overlay .toast-stack{z-index:700!important}
 @media(max-width:850px){#timeline-view .stage-grid{grid-template-columns:calc(158px * var(--stage-zoom,1)) repeat(var(--stage-count,10),calc(94px * var(--stage-zoom,1)))!important}#timeline-view .stage-zoom-control{margin-left:0;order:0}}
 @media(min-width:900px) and (pointer:fine){body.stage-zoom-overlay{overflow:hidden!important}body.stage-zoom-overlay #timeline-view .timeline-panel{position:fixed!important;inset:22px!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;z-index:460!important;display:flex!important;flex-direction:column!important;box-shadow:0 25px 90px rgba(0,0,0,.3)!important;background:#fff!important;border-radius:15px!important;animation:osvCalendarExpand .25s ease-out both}body.stage-zoom-overlay #timeline-view .stages-view{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}body.stage-zoom-overlay #timeline-view .stage-scroll{flex:1 1 auto;min-height:0;max-height:none!important}}
 @media(prefers-reduced-motion:reduce){#timeline-view .stage-truck:hover::before{animation:none}}
+
+/* Both calendar and stage zoom occupy the EXACT same slot in the main header. */
+#timeline-view .calendar-header-actions .stage-zoom-control{display:none}
+#timeline-view .calendar-header-actions.stage-active .stage-zoom-control{
+  display:inline-flex!important;
+  order:0!important;
+  margin-left:0!important;
+  flex:0 0 auto;
+  align-self:center;
+}
+#timeline-view .calendar-header-actions:not(.stage-active) .stage-zoom-control{display:none!important}
+#timeline-view .calendar-header-actions.stage-active .desktop-calendar-zoom{display:none!important}
+@media(max-width:850px){
+  #timeline-view .calendar-header-actions.stage-active .stage-zoom-control{
+    grid-area:2 / 1 / 3 / 2!important;
+    justify-self:start!important;
+  }
+}

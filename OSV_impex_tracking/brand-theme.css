@@ -1220,3 +1220,10 @@ body.mobile-calendar-mode #timeline-view .mobile-calendar-open{display:none!impo
   body.calendar-zoom-overlay #timeline-view .timeline-panel{animation:none!important}
   #calendar-zoom-backdrop{transition:none!important}
 }
+
+
+/* Keep editing/dialogs and shipment details above expanded timeline. */
+body.calendar-zoom-overlay .modal-layer{z-index:650!important}
+body.calendar-zoom-overlay .drawer-backdrop{z-index:640!important}
+body.calendar-zoom-overlay .detail-drawer{z-index:645!important}
+body.calendar-zoom-overlay .toast-stack{z-index:700!important}

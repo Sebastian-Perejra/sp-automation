@@ -1380,3 +1380,16 @@ body.calendar-zoom-overlay .toast-stack{z-index:700!important}
 .stage-picker-choices .stage-picker-current small{font-size:9px;font-weight:650;color:#658d7d}
 .stage-picker-choices .stage-picker-done{display:grid;place-items:center;width:20px;height:20px;flex:none;background:#d6f0e2;color:#148a65;border-radius:50%;font-weight:850}
 @media(max-width:600px){.stage-picker-card{width:min(100%,460px)}.stage-picker-section{flex-direction:column;align-items:flex-start;gap:3px}.stage-picker-section>small{text-align:left}}
+
+/* Viewer can browse/filter/export but cannot modify records. */
+.access-role-badge{border:1px solid #d6dde7;border-radius:9px;padding:7px 9px;background:#edf2f8;color:#36506d;font-size:10px;font-weight:850;letter-spacing:.035em;white-space:nowrap}
+.access-role-badge[hidden]{display:none!important}
+body.viewer-mode .access-role-badge{border-color:#b8d7ee;background:#eaf5ff;color:#17649b}
+body.viewer-mode #new-operation-btn,
+body.viewer-mode [data-edit-event],
+body.viewer-mode [data-delete-event],
+body.viewer-mode #drawer-add-event,
+body.viewer-mode #drawer-archive{display:none!important}
+body.viewer-mode .stage-truck{cursor:pointer!important}
+body.viewer-mode .stage-check{cursor:default!important}
+@media(max-width:760px){.access-role-badge{font-size:9px;padding:6px 7px}}

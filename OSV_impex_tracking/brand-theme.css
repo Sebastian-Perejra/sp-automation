@@ -1406,3 +1406,49 @@ body.viewer-mode [data-delete-event],
 body.viewer-mode #drawer-add-event,
 body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!important;pointer-events:none!important}
 #new-operation-btn[hidden]{display:none!important}
+
+/* Mobile unified viewing controls: same Expand/Shrink position in both views.
+   Desktop retains separate 70–160% scale controls in the header. */
+@media(max-width:760px),(max-height:600px) and (pointer:coarse){
+  #timeline-view .calendar-header-actions.stage-active .stage-zoom-control{
+    display:none!important;
+  }
+  body:not(.mobile-calendar-mode) #timeline-view .calendar-header-actions.stage-active .mobile-calendar-open{
+    display:inline-flex!important;
+    grid-area:1 / 1 / 2 / 3!important;
+    justify-self:start!important;
+  }
+  body.mobile-calendar-mode #timeline-view .calendar-header-actions.stage-active .stage-zoom-control{
+    display:none!important;
+  }
+  body.mobile-stage-mode #timeline-view .date-navigation{display:none!important}
+  body.mobile-stage-mode #timeline-view .timeline-panel{
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  body.mobile-stage-mode #timeline-view .stages-view{
+    flex:1 1 auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body.mobile-stage-mode #timeline-view .stage-scroll{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:auto!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  body.mobile-stage-mode #timeline-view .stages-help{flex:0 0 auto!important}
+  body.mobile-stage-mode #timeline-view .calendar-header-actions .mobile-calendar-controls{
+    grid-area:1 / 1 / 2 / 3!important;
+    justify-self:start!important;
+  }
+  body.mobile-stage-mode #timeline-view .calendar-header-actions #timeline-actions-mount{
+    grid-area:2 / 2 / 3 / 3!important;
+    justify-self:end!important;
+  }
+  body.mobile-stage-mode #timeline-view .timeline-scroller{display:none!important}
+}

@@ -270,7 +270,8 @@
     for(const op of rows){
       const es=operationEvents(op.id);const byDate={};for(const e of es)(byDate[e.date]??=[]).push(e);
       const ageDays=runningAgeDays(es,TODAY);
-      html+=`<div class="timeline-row" data-row-op="${esc(op.id)}"><div class="timeline-row-label" data-open-op="${esc(op.id)}" title="Открыть карточку операции"><span class="direction-tag ${op.direction.toLowerCase()}">${esc(op.direction)}</span><div class="op-main"><strong title="${esc(op.company)}">${esc(op.company)}</strong><small title="${esc(op.goods)}">${esc(op.goods)}</small></div>${delivered(op)?'<span class="op-delivered-stamp" aria-label="Доставлено">ДОСТАВЛЕНО</span>':''}<span class="op-label-right">›</span></div>`;
+      const totalDays=stageFacts(op).totalDays;
+      html+=`<div class="timeline-row" data-row-op="${esc(op.id)}"><div class="timeline-row-label" data-open-op="${esc(op.id)}" title="Открыть карточку операции"><span class="direction-tag ${op.direction.toLowerCase()}">${esc(op.direction)}</span><div class="op-main"><strong title="${esc(op.company)}">${esc(op.company)}</strong><small title="${esc(op.goods)}">${esc(op.goods)}</small>${totalDays!==null?`<span class="op-duration" title="С первого фактического события до доставки или сегодня">${totalDays} дн. всего</span>`:'<span class="op-duration no-start">Нет факта старта</span>'}</div>${delivered(op)?'<span class="op-delivered-stamp" aria-label="Доставлено">ДОСТАВЛЕНО</span>':''}<span class="op-label-right">›</span></div>`;
       // Single sweep for the dominant current actual stage, no per-cell N^2 event traversal.
       const actuals=es.filter(e=>e.type==='actual');const receivedExists=actuals.some(e=>e.status==='received');let aidx=0,lastActual=null;
       for(const d of dates){

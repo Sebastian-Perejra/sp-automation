@@ -1139,3 +1139,7 @@ body.mobile-calendar-mode #timeline-view .mobile-calendar-open{display:none!impo
     margin:0!important;
   }
 }
+
+/* Expand/shrink icons share the same alignment as their labels */
+#timeline-view .mobile-calendar-open,#timeline-view .mobile-calendar-tool{align-items:center;gap:5px}
+#timeline-view .mobile-calendar-open svg,#timeline-view .mobile-calendar-tool svg{display:block;flex:none}

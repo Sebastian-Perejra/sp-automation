@@ -1031,13 +1031,14 @@
   async function autoSync(force=false){
     if(!IS_GAS||!state.token||!state.initialized||document.hidden||state.isLoading||autoSyncBusy||editorOverlayOpen())return;
     const now=Date.now();
-    if(!force&&now-lastAutoSync<AUTO_SYNC_MS)return;
+    if(now-lastAutoSync<(force?60000:AUTO_SYNC_MS))return;
     autoSyncBusy=true;
     lastAutoSync=now;
+    const beforeRequest=dataSignature;
     try{
       const raw=await gasCall('apiBootstrap',state.token);
       // An editor may open a form while the network request is in flight.
-      if(state.isLoading||editorOverlayOpen())return;
+      if(state.isLoading||editorOverlayOpen()||dataSignature!==beforeRequest)return;
       const normalizedData=normalized(raw);
       const newSignature=dataDigest(normalizedData);
       if(newSignature===dataSignature)return;

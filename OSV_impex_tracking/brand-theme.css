@@ -1485,32 +1485,32 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
   min-height:calc(90px * var(--stage-zoom,1));
 }
 
-/* Desktop calendar: mark the beginning and end of each Saturday–Sunday block.
-   Borders are inset, so they never change column width or cover event chips. */
+/* Soft weekend differentiation: hairline boundaries, near-neutral shading.
+   Event chips and stage fills remain untouched. */
 @media (min-width: 761px) and (hover: hover) and (pointer: fine) {
   #timeline-view .day-head.weekend {
-    background-color: #e5ebf2;
+    background-color: #f1f3f5;
   }
   #timeline-view .day-head.weekend span,
   #timeline-view .day-head.weekend em {
-    color: #50677d;
-    font-weight: 800;
+    color: #788493;
+    font-weight: 600;
   }
   #timeline-view .day-head.weekend-start,
   #timeline-view .day-slot.weekend-start,
   #timeline-view .timeline-ghost-cell.weekend-start {
-    border-left: 2px solid #91a6bc;
+    border-left: 1px solid #cbd5df;
   }
   #timeline-view .day-head.weekend-end,
   #timeline-view .day-slot.weekend-end,
   #timeline-view .timeline-ghost-cell.weekend-end {
-    border-right: 2px solid #91a6bc;
+    border-right: 1px solid #cbd5df;
   }
   #timeline-view .day-slot.weekend {
-    background-image: linear-gradient(rgba(74, 95, 117, .035), rgba(74, 95, 117, .035));
+    background-image: linear-gradient(rgba(96, 111, 128, .012), rgba(96, 111, 128, .012));
   }
   #timeline-view .timeline-ghost-cell.weekend {
-    background-color: #f1f5f9;
+    background-color: #f8fafb;
   }
 }
 
@@ -1545,3 +1545,16 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
 @media(max-width:760px){
   #timeline-view .op-delivered-stamp{right:10px;bottom:7px;font-size:7px;padding:2px 4px;transform:rotate(-4deg)}
 }
+
+/* Discreet online-session counter in the application footer. */
+.app-footer .footer-online{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  margin-inline:auto;padding:5px 10px;border:1px solid rgba(33,157,94,.22);
+  background:rgba(47,172,105,.06);border-radius:999px;
+  color:#408b63;font-size:10px;font-weight:750;letter-spacing:.03em;
+  white-space:nowrap;
+}
+.app-footer .footer-online[hidden]{display:none!important}
+.app-footer .footer-online i{width:6px;height:6px;flex:none;border-radius:50%;background:#25aa66}
+.app-footer .footer-online strong{font-size:11px;font-weight:850;color:#268253;font-variant-numeric:tabular-nums}
+@media(max-width:760px){.app-footer .footer-online{margin-inline:3px;font-size:9px;padding:4px 8px}}

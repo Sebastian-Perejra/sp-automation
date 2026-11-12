@@ -368,7 +368,7 @@
           const duration=f.stageDays+' / '+f.totalDays;
           content='<button class="stage-truck '+(late?'is-late ':'')+(f.pause?'is-paused':'')+'" type="button" draggable="true" data-truck="'+esc(op.id)+'" aria-label="'+esc(op.company)+' — '+esc(STAGES[i].label)+', '+duration+' дней" title="'+esc(op.company)+' — '+duration+' дн. (этап / всего)">'+truckGraphic+'<span>'+duration+'</span></button>';
         }else if(confirmed){
-          content='<span class="stage-check" title="Фактический статус подтверждён">✓</span>';
+          content='<button type="button" class="stage-check" data-check-op="'+esc(op.id)+'" data-check-stage="'+i+'" title="Три щелчка — снять подтверждение" aria-label="Снять подтверждение: три щелчка">✓</button>';
         }else if(current!==null&&i<current){
           content='<span class="stage-skipped" title="Фактический этап не подтверждён">·</span>';
         }
@@ -384,6 +384,7 @@
   }
   function setTimelineDisplay(next){
     if(next!=='calendar'&&next!=='stages')return;
+    if(next==='calendar')resetStageZoom();
     if(next==='stages'){
       resetDesktopCalendarZoom();
       if(document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();
@@ -397,6 +398,90 @@
     $('mobile-calendar-open').style.display=next==='stages'?'none':'';
     renderStages();
   }
+
+  /* Existing GAS endpoints provide audited, shared calendar/stage updates. */
+  function stageEventRecords(opId){
+    return operationEvents(opId).filter(e=>e.type==='actual'&&stageIndex(e.status)!==null);
+  }
+  async function performStageMove(opId,target){
+    const op=state.operations.find(o=>o.id===opId),facts=op&&stageFacts(op);
+    if(!op||op.archived||!facts||facts.current===null||delivered(op))throw Error('Невозможно изменить этап');
+    if(target===facts.current)return;
+    if(target<facts.current){
+      const later=stageEventRecords(opId).filter(e=>stageIndex(e.status)>target&&e.status!=='received');
+      for(const e of later)await backendCall('apiDeleteEvent',opId,e.id);
+      if(target!==0)await backendCall('apiSaveEvent',opId,{date:TODAY,status:STAGES[target].id,type:'actual',note:'Откат: последующие этапы сняты'});
+    }else{
+      const existing=new Set(stageEventRecords(opId).map(e=>stageIndex(e.status)));
+      for(let i=1;i<=target;i++){
+        if(existing.has(i))continue;
+        await backendCall('apiSaveEvent',opId,{date:TODAY,status:STAGES[i].id,type:'actual',note:i===target?'Перемещение машинки':'Автоподтверждение промежуточного этапа'});
+      }
+      if(existing.has(target))await backendCall('apiSaveEvent',opId,{date:TODAY,status:STAGES[target].id,type:'actual',note:'Возврат на ранее пройденный этап'});
+    }
+  }
+  async function performCheckRemoval(opId,idx){
+    if(idx===0)throw Error('Первое событие нельзя удалить');
+    const op=state.operations.find(o=>o.id===opId);
+    if(!op||delivered(op)||stageFacts(op).current<=idx)throw Error('Только пройденные этапы можно снять');
+    for(const e of stageEventRecords(opId).filter(e=>stageIndex(e.status)===idx))
+      await backendCall('apiDeleteEvent',opId,e.id);
+  }
+  async function runStageBatch(work,onComplete){
+    if(state.isLoading)return;
+    state.isLoading=true;
+    try{await work();if(onComplete)onComplete();}
+    catch(err){toast('Ошибка: '+(err.message||'неизвестно')+'. Часть изменений могла сохраниться — проверьте журнал.',true);}
+    finally{
+      try{if(IS_GAS)await reloadFromBackend();renderAll(true);}
+      catch(err){toast('Не удалось обновить данные: '+err.message,true);}
+      state.isLoading=false;
+    }
+  }
+  function askRemoveStageCheck(opId,index){
+    const op=state.operations.find(o=>o.id===opId);
+    if(!op||index===0)return;
+    closeStageConfirm();
+    const layer=document.createElement('div');
+    layer.id='stage-confirm-overlay';layer.className='stage-confirm-overlay';
+    layer.innerHTML='<section class="stage-confirm-card" role="dialog" aria-modal="true" aria-label="Снять отметку"><div class="stage-confirm-eyebrow">ПОДТВЕРЖДЕНИЕ ЭТАПА</div><h2>Снять галочку?</h2><p class="stage-confirm-shipment">'+esc(op.company)+'</p><div class="stage-confirm-warning"><span>!</span><span>Фактический этап «'+esc(STAGES[index].label)+'» удалится из календаря, но останется в журнале изменений.</span></div><div class="stage-confirm-actions"><button type="button" class="stage-confirm-cancel" data-stage-cancel>Отмена</button><button type="button" class="stage-confirm-approve" data-stage-approve>Снять</button></div></section>';
+    layer.addEventListener('click',e=>{
+      if(e.target===layer||e.target.closest('[data-stage-cancel]')){closeStageConfirm();return;}
+      if(e.target.closest('[data-stage-approve]')){closeStageConfirm();runStageBatch(()=>performCheckRemoval(opId,index),()=>toast('Галочка снята'));}
+    });
+    document.body.appendChild(layer);
+  }
+  let stageZoomValue=1;
+  function updateStageZoomUI(){
+    $('stage-zoom-value').textContent=Math.round(stageZoomValue*100)+'%';
+    $('stage-zoom-minus').disabled=stageZoomValue<=.7;
+    $('stage-zoom-plus').disabled=stageZoomValue>=1.6;
+    $('stage-zoom-close').hidden=!document.body.classList.contains('stage-zoom-overlay');
+    $('stages-view').style.setProperty('--stage-zoom',String(stageZoomValue));
+  }
+  function stageOverlay(active){
+    const b=$('calendar-zoom-backdrop');
+    if(active){
+      b.hidden=false;document.body.classList.add('stage-zoom-overlay');
+      requestAnimationFrame(()=>b.classList.add('is-active'));
+    }else{
+      document.body.classList.remove('stage-zoom-overlay');
+      b.classList.remove('is-active');
+      setTimeout(()=>{if(!document.body.classList.contains('calendar-zoom-overlay')&&!document.body.classList.contains('stage-zoom-overlay'))b.hidden=true;},260);
+    }
+    updateStageZoomUI();
+  }
+  function setStageZoom(direction){
+    const old=stageZoomValue,next=Math.round(Math.max(.7,Math.min(1.6,old+direction*.15))*100)/100;
+    if(next===old)return;
+    const scroller=$('stage-scroll'),x=(scroller.scrollLeft+scroller.clientWidth/2)/old,y=(scroller.scrollTop+scroller.clientHeight/2)/old;
+    stageZoomValue=next;
+    if(window.matchMedia('(min-width:900px) and (pointer:fine)').matches)stageOverlay(next>1);
+    updateStageZoomUI();
+    requestAnimationFrame(()=>{scroller.scrollLeft=Math.max(0,x*next-scroller.clientWidth/2);scroller.scrollTop=Math.max(0,y*next-scroller.clientHeight/2);});
+  }
+  function resetStageZoom(){stageZoomValue=1;stageOverlay(false);updateStageZoomUI();}
+
   function closeStageConfirm(){
     const layer=document.getElementById('stage-confirm-overlay');
     if(layer)layer.remove();
@@ -409,7 +494,7 @@
     if(delivered(op)){toast('Завершённую поставку нельзя перемещать без корректировки истории.',true);return;}
     closeStageConfirm();
     const previous=facts.current===null?'Не определён':STAGES[facts.current].label;
-    const skipped=facts.current!==null&&stageNo>facts.current+1;
+    const forward=stageNo>facts.current;
     const layer=document.createElement('div');
     layer.id='stage-confirm-overlay';
     layer.className='stage-confirm-overlay';
@@ -428,7 +513,7 @@
           <div class="stage-confirm-destination"><small>Новый этап</small><strong>${esc(target.label)}</strong></div>
         </div>
         <div class="stage-confirm-date"><span aria-hidden="true">◷</span> Дата события: <strong>${esc(formatDate(TODAY))}</strong></div>
-        ${skipped?'<div class="stage-confirm-warning"><span aria-hidden="true">!</span><span>Промежуточные этапы останутся без подтверждения. Галочки для них не появятся.</span></div>':''}
+        <div class="stage-confirm-warning"><span>!</span><span>${forward?'Промежуточные этапы будут отмечены галочками.':'Жёсткий откат: все следующие фактические статусы удалятся из календаря.'} Все действия фиксируются в журнале.</span></div>
         <div class="stage-confirm-actions">
           <button type="button" class="stage-confirm-cancel" data-stage-cancel>Отмена</button>
           <button type="button" class="stage-confirm-approve" data-stage-approve>Подтвердить</button>
@@ -441,11 +526,10 @@
       if(!approve||approve.disabled)return;
       approve.disabled=true;
       approve.textContent='Сохранение…';
-      guarded(async()=>{
-        await backendCall('apiSaveEvent',opId,{date:TODAY,status:target.id,type:'actual',note:'Перемещено в режиме «Этапы»'});
+      runStageBatch(()=>performStageMove(opId,stageNo),()=>{
         closeStageConfirm();
         toast('Этап обновлён: '+target.label);
-      },approve).finally(()=>{
+      }).finally(()=>{
         if(document.getElementById('stage-confirm-overlay')===layer){
           approve.textContent='Подтвердить';
           approve.disabled=false;
@@ -470,7 +554,7 @@
     const layer=document.createElement('div');
     layer.id='stage-picker-overlay';
     layer.className='stage-picker-overlay';
-    layer.innerHTML='<div class="stage-picker-card" role="dialog" aria-modal="true" aria-label="Выбор этапа"><div class="stage-picker-head"><div><strong>'+esc(op.company)+'</strong><small>Текущий этап: '+esc(current)+'</small></div><button type="button" data-picker-close aria-label="Закрыть">×</button></div><div class="stage-picker-choices">'+STAGES.map((s,i)=>'<button type="button" data-stage-choice="'+i+'" '+(disabled||i===facts.current?'disabled':'')+'><span class="stage-picker-index">'+(i+1)+'</span><span>'+esc(s.label)+'</span>'+(i===facts.current?'<span class="stage-picker-current">Текущий</span>':'')+'</button>').join('')+'</div><p>Переход создаёт фактическое событие на сегодняшнюю дату. Пропущенные этапы не подтверждаются автоматически.</p></div>';
+    layer.innerHTML='<div class="stage-picker-card" role="dialog" aria-modal="true" aria-label="Выбор этапа"><div class="stage-picker-head"><div><strong>'+esc(op.company)+'</strong><small>Текущий этап: '+esc(current)+'</small></div><button type="button" data-picker-close aria-label="Закрыть">×</button></div><div class="stage-picker-choices">'+STAGES.map((s,i)=>'<button type="button" data-stage-choice="'+i+'" '+(disabled||i===facts.current?'disabled':'')+'><span class="stage-picker-index">'+(i+1)+'</span><span>'+esc(s.label)+'</span>'+(i===facts.current?'<span class="stage-picker-current">Текущий</span>':'')+'</button>').join('')+'</div><p>Переход создаёт фактическое событие на сегодняшнюю дату. При движении вперёд предыдущие этапы подтверждаются; при движении назад последующие снимаются.</p></div>';
     layer.addEventListener('click',e=>{
       if(e.target===layer||e.target.closest('[data-picker-close]')){closeStagePicker();return;}
       const target=e.target.closest('[data-stage-choice]');
@@ -483,15 +567,24 @@
   function installStageInteractions(){
     $('timeline-view-calendar').addEventListener('click',()=>setTimelineDisplay('calendar'));
     $('timeline-view-stages').addEventListener('click',()=>setTimelineDisplay('stages'));
+    $('stage-zoom-minus').addEventListener('click',()=>setStageZoom(-1));
+    $('stage-zoom-plus').addEventListener('click',()=>setStageZoom(1));
+    $('stage-zoom-close').addEventListener('click',resetStageZoom);
+    updateStageZoomUI();
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeStagePicker();closeStageConfirm();}});
     const grid=$('stage-grid');
     grid.addEventListener('click',e=>{
+      if(e.target.closest('[data-check-op]'))return;
       const truck=e.target.closest('[data-truck]');
       if(truck){openStagePicker(truck.dataset.truck);return;}
       const op=e.target.closest('[data-stage-open]');
       if(op)openDrawer(op.dataset.stageOpen);
     });
     grid.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-stage-open]')){e.preventDefault();openDrawer(e.target.dataset.stageOpen);}});
+    grid.addEventListener('click',e=>{const b=e.target.closest('[data-check-op]');if(b&&e.detail>=3){e.preventDefault();askRemoveStageCheck(b.dataset.checkOp,Number(b.dataset.checkStage));}});
+    let checkHold=0,checkButton=null;
+    grid.addEventListener('touchstart',e=>{const b=e.target.closest('[data-check-op]');if(!b||e.touches.length!==1)return;checkButton=b;checkHold=setTimeout(()=>{if(checkButton===b)askRemoveStageCheck(b.dataset.checkOp,Number(b.dataset.checkStage));checkButton=null;},650);},{passive:true});
+    for(const evt of ['touchmove','touchend','touchcancel'])grid.addEventListener(evt,()=>{clearTimeout(checkHold);checkButton=null;},{passive:true});
     grid.addEventListener('dragstart',e=>{
       const truck=e.target.closest('[data-truck]');
       if(!truck)return;
@@ -567,7 +660,7 @@
     renderTimeline(true);
 
   }
-  function setView(view){if(view!=='timeline')resetDesktopCalendarZoom();state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
+  function setView(view){if(view!=='timeline'){resetStageZoom();resetDesktopCalendarZoom();}state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
   function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
@@ -913,7 +1006,7 @@
     $('desktop-calendar-minus').addEventListener('click',()=>changeDesktopCalendarZoom(-1));
     $('desktop-calendar-plus').addEventListener('click',()=>changeDesktopCalendarZoom(1));
     $('desktop-calendar-close').addEventListener('click',resetDesktopCalendarZoom);
-    $('calendar-zoom-backdrop').addEventListener('click',resetDesktopCalendarZoom);
+    $('calendar-zoom-backdrop').addEventListener('click',()=>{resetStageZoom();resetDesktopCalendarZoom();});
     updateDesktopZoomControls();
     window.addEventListener('resize',()=>{if(!isDesktopCalendar())resetDesktopCalendarZoom();});
     $('refresh-data-btn').addEventListener('click',refreshDataManually);
@@ -935,7 +1028,7 @@
     document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
     document.querySelectorAll('.modal-layer').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));
     $('close-drawer').addEventListener('click',closeDrawer);$('drawer-backdrop').addEventListener('click',closeDrawer);
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'){resetDesktopCalendarZoom();document.querySelectorAll('.modal-layer:not(.hidden)').forEach(el=>closeModal(el.id));closeDrawer();}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){resetStageZoom();resetDesktopCalendarZoom();document.querySelectorAll('.modal-layer:not(.hidden)').forEach(el=>closeModal(el.id));closeDrawer();}});
     // Opening a status is an intentional double action, never a single scroll/tap.
     document.addEventListener('dblclick',e=>{
       const slot=e.target.closest('.day-slot');

@@ -1290,3 +1290,36 @@ body.calendar-zoom-overlay .toast-stack{z-index:700!important}
 .stage-picker-current{margin-left:auto;color:#168660;font-size:9px;font-weight:800}
 .stage-picker-card>p{margin:5px 0 0;color:#748394;font-size:11px;line-height:1.5}
 @media(max-width:600px){.stage-picker-choices{grid-template-columns:1fr}.stage-picker-card{padding:14px}}
+
+/* Native JS confirm replaced by OSV-branded stage transition dialog. */
+.stage-confirm-overlay{position:fixed;inset:0;z-index:800;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,24,38,.56);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:osvStageShade .2s ease-out}
+.stage-confirm-card{width:min(100%,480px);max-height:92dvh;overflow-y:auto;box-sizing:border-box;background:#fff;border:1px solid #e0e5eb;border-radius:17px;box-shadow:0 28px 85px rgba(9,26,46,.26);padding:24px;color:#2a3849;animation:osvStageCard .22s cubic-bezier(.2,.8,.2,1)}
+.stage-confirm-header{display:flex;justify-content:space-between;align-items:start}
+.stage-confirm-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:13px;background:#fbecee;font-size:25px}
+.stage-confirm-x{appearance:none;background:#f6f8fa;color:#718195;border:1px solid #dee5ec;border-radius:8px;width:31px;height:31px;font-size:21px;line-height:1;cursor:pointer}
+.stage-confirm-x:hover{color:#bc1b2c;background:#fff0f1}
+.stage-confirm-eyebrow{font-size:10px;font-weight:800;letter-spacing:.12em;color:#bd2030;margin:17px 0 8px}
+.stage-confirm-card h2{margin:0;color:#243448;font-size:22px;line-height:1.25;letter-spacing:-.025em}
+.stage-confirm-shipment{font-size:13px;font-weight:750;line-height:1.5;margin:8px 0 18px;color:#354b61;overflow-wrap:anywhere}
+.stage-confirm-shipment span{font-weight:400;color:#8795a4}
+.stage-confirm-route{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);gap:10px;align-items:center;border:1px solid #dfe6ed;border-radius:12px;background:#f7f9fc;padding:13px}
+.stage-confirm-route>div{min-width:0;display:flex;flex-direction:column;gap:8px}
+.stage-confirm-route small{color:#7a8a9c;font-size:10px;font-weight:650}
+.stage-confirm-route strong{font-size:12px;line-height:1.4;color:#35485c;overflow-wrap:anywhere}
+.stage-confirm-route .stage-confirm-destination strong{color:#b51d2d}
+.stage-confirm-arrow{font-size:22px;color:#b51d2d;text-align:center}
+.stage-confirm-date{display:flex;align-items:center;gap:6px;margin:15px 2px 0;color:#697c8e;font-size:12px}
+.stage-confirm-date strong{color:#33495b;font-weight:750}
+.stage-confirm-warning{display:flex;align-items:start;gap:9px;margin-top:14px;padding:12px;border:1px solid #f2d7a9;background:#fff8ec;color:#92651d;border-radius:10px;font-size:11px;line-height:1.5}
+.stage-confirm-warning>span:first-child{border-radius:50%;background:#e6a837;color:#fff;font-weight:800;flex:none;width:17px;height:17px;display:grid;place-items:center}
+.stage-confirm-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:22px}
+.stage-confirm-actions button{cursor:pointer;border-radius:9px;min-height:39px;padding:10px 16px;font:750 12px/1.2 inherit}
+.stage-confirm-cancel{border:1px solid #d9e1e8;background:#fff;color:#526376}
+.stage-confirm-approve{border:1px solid #be1c2e;background:#c91d30;color:#fff;box-shadow:0 5px 13px rgba(186,31,50,.16)}
+.stage-confirm-approve:hover:not(:disabled){background:#ae1a29}
+.stage-confirm-approve:disabled{opacity:.65;cursor:wait}
+.stage-confirm-card button:focus-visible{outline:2px solid #c91d30;outline-offset:2px}
+@keyframes osvStageShade{from{opacity:0}to{opacity:1}}
+@keyframes osvStageCard{from{opacity:.5;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:500px){.stage-confirm-card{padding:18px;border-radius:14px}.stage-confirm-card h2{font-size:19px}.stage-confirm-route{gap:6px;padding:10px}.stage-confirm-route strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.stage-confirm-overlay,.stage-confirm-card{animation:none}}

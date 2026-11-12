@@ -1083,6 +1083,12 @@
 
   function attachEvents(){
     setInterval(rolloverToday,30000);
+    setInterval(()=>{if(IS_GAS&&state.token&&!document.hidden)updateOnlinePresence(true);},40000);
+    document.addEventListener('visibilitychange',()=>{
+      if(!IS_GAS||!state.token)return;
+      updateOnlinePresence(!document.hidden);
+    });
+    window.addEventListener('focus',()=>{if(IS_GAS&&state.token&&!document.hidden)updateOnlinePresence(true);});
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)rolloverToday();});
     window.addEventListener('focus',rolloverToday);
     installTimelinePinch();
@@ -1137,8 +1143,27 @@
       }
     },{passive:true});
     $('login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=e.currentTarget.querySelector('button[type=submit]');btn.disabled=true;showError('login-error','');try{const result=await gasCall('apiLogin',$('login-password').value);if(!result?.token)throw Error('Сервер не выдал сессию');state.token=result.token;state.role=result.role||'editor';try{sessionStorage.setItem(SESSION_KEY,result.token);}catch{}await startWorkspace();}catch(err){showError('login-error',err?.message||'Ошибка авторизации');}finally{btn.disabled=false;}});
-    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
+    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}$('footer-online').hidden=true;state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
   }
+
+  /* Online indicator counts recent authenticated sessions, not identifiable people. */
+  let presenceBusy=false;
+  async function updateOnlinePresence(active=true){
+    const badge=$('footer-online');
+    if(!IS_GAS||!state.token){badge.hidden=true;return;}
+    if(presenceBusy)return;
+    presenceBusy=true;
+    try{
+      const result=await gasCall('apiPresence',state.token,active);
+      if(!active){badge.hidden=true;return;}
+      $('footer-online-count').textContent=String(Math.max(0,Number(result.count)||0));
+      badge.hidden=false;
+      badge.title='Активные подключения за последние '+(Number(result.windowSeconds)||120)+' секунд (не уникальные люди)';
+    }catch(err){
+      badge.hidden=true;
+    }finally{presenceBusy=false;}
+  }
+
   async function startWorkspace(){
     if(IS_GAS){const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));state.role=raw.role||'editor';$('environment-badge').classList.add('live');$('environment-badge').innerHTML='<i></i> LIVE';const connectionLabel=$('connection-label');if(connectionLabel)connectionLabel.textContent='Google Sheets · Online';$('logout-btn').hidden=false;}
     else{Object.assign(state,loadDemo());state.role='editor';$('environment-badge').innerHTML='<i></i> ДЕМО';}
@@ -1147,6 +1172,7 @@
     $('login').classList.add('hidden');$('workspace').classList.remove('hidden');
     $('top-date').textContent=formatDate(TODAY,{day:'numeric',month:'long',year:'numeric'});
     applyRole();renderAll();setView(state.view);state.initialized=true;
+    if(IS_GAS&&!document.hidden)updateOnlinePresence(true);
   }
   async function init(){attachEvents();if(IS_GAS){$('workspace').classList.add('hidden');let cached=null;try{cached=sessionStorage.getItem(SESSION_KEY);}catch{}if(cached){state.token=cached;try{await startWorkspace();return;}catch{try{sessionStorage.removeItem(SESSION_KEY);}catch{}state.token=null;}}$('login').classList.remove('hidden');}else await startWorkspace();}
   init().catch(e=>{toast('Ошибка запуска: '+(e.message||e),true);console.error(e);});

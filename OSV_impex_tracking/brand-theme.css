@@ -1576,3 +1576,25 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
   .app-footer .footer-online{font-size:8px;padding:0;margin:0}
   .app-footer .footer-online strong{font-size:8px}
 }
+
+/* Gentle green seal, shared by Calendar and Stages. */
+#timeline-view .op-delivered-stamp{
+  border-color:rgba(62,157,100,.22);
+  background:rgba(67,164,105,.025);
+  color:rgba(37,124,71,.48);
+  opacity:.60;
+  font-weight:750;
+}
+#timeline-view .stage-op .op-delivered-stamp{
+  right:14px;
+  bottom:9px;
+}
+#timeline-view .stage-op:has(.op-delivered-stamp) .stage-op-meta{
+  max-width:calc(100% - 88px);
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+@media(max-width:760px){
+  #timeline-view .stage-op .op-delivered-stamp{right:8px;bottom:8px}
+}

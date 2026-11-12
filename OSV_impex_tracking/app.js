@@ -551,14 +551,45 @@
     const facts=stageFacts(op);
     const current=facts.current===null?'Не определён':STAGES[facts.current].label;
     const disabled=op.archived||delivered(op);
+    // One reliable chronological source for both the calendar and this view.
+    // Multiple events for a stage are retained; show its latest factual date.
+    const history=operationEvents(opId).filter(e=>e.type==='actual'&&e.date<=TODAY&&stageIndex(e.status)!==null);
+    const byStage=new Map();
+    for(const event of history){
+      const index=stageIndex(event.status);
+      const previous=byStage.get(index);
+      if(!previous||event.date>previous.date||(event.date===previous.date&&String(event.createdAt||'')>=String(previous.createdAt||'')))
+        byStage.set(index,event);
+    }
+    const lastDay=facts.latest?.date||TODAY;
     const layer=document.createElement('div');
     layer.id='stage-picker-overlay';
     layer.className='stage-picker-overlay';
-    layer.innerHTML='<div class="stage-picker-card" role="dialog" aria-modal="true" aria-label="Выбор этапа"><div class="stage-picker-head"><div><strong>'+esc(op.company)+'</strong><small>Текущий этап: '+esc(current)+'</small></div><button type="button" data-picker-close aria-label="Закрыть">×</button></div><div class="stage-picker-choices">'+STAGES.map((s,i)=>'<button type="button" data-stage-choice="'+i+'" '+(disabled||i===facts.current?'disabled':'')+'><span class="stage-picker-index">'+(i+1)+'</span><span>'+esc(s.label)+'</span>'+(i===facts.current?'<span class="stage-picker-current">Текущий</span>':'')+'</button>').join('')+'</div><p>Переход создаёт фактическое событие на сегодняшнюю дату. При движении вперёд предыдущие этапы подтверждаются; при движении назад последующие снимаются.</p></div>';
+    const fmt=d=>formatDate(d,{day:'2-digit',month:'short',year:'numeric'});
+    layer.innerHTML='<div class="stage-picker-card" role="dialog" aria-modal="true" aria-label="История этапов и изменение статуса">'
+      +'<div class="stage-picker-head"><div><strong>'+esc(op.company)+'</strong><small>'+esc(op.goods)+'</small></div><button type="button" data-picker-close aria-label="Закрыть">×</button></div>'
+      +'<div class="stage-picker-summary"><span>Текущий этап: <strong>'+esc(current)+'</strong></span><span>Дней на этапе / всего: <strong>'+esc(facts.stageDays===null?'—':facts.stageDays)+' / '+esc(facts.totalDays===null?'—':facts.totalDays)+'</strong></span></div>'
+      +'<div class="stage-picker-section"><strong>История прохождения этапов</strong><small>Дата — из фактического события в календаре</small></div>'
+      +'<div class="stage-picker-choices">'+STAGES.map((s,i)=>{
+        const event=byStage.get(i);
+        const active=i===facts.current;
+        const completed=!!event&&!active;
+        const date=event?fmt(event.date):'Нет события';
+        const automated=!!event&&/Автоподтверждено|Автоподтверждение/.test(event.note||'');
+        const duration=active&&facts.stageDays!==null?facts.stageDays+' дн. на этапе':'';
+        const className=active?'stage-choice-current':completed?'stage-choice-done':'stage-choice-pending';
+        return '<button type="button" class="'+className+'" data-stage-choice="'+i+'" '+(disabled||active?'disabled':'')+'>'
+          +'<span class="stage-picker-index">'+(i+1)+'</span>'
+          +'<span class="stage-picker-name"><strong>'+esc(s.label)+'</strong><small class="stage-picker-date">'+(event?'◷ ':'')+esc(date)+(automated?' · Авто':'')+'</small></span>'
+          +(active?'<span class="stage-picker-current">Текущий'+(duration?'<small>'+esc(duration)+'</small>':'')+'</span>':completed?'<span class="stage-picker-done" aria-label="Этап подтверждён">✓</span>':'')
+          +'</button>';
+      }).join('')+'</div>'
+      +'<p>Выберите этап, чтобы изменить статус. Даты в истории обновляются вместе с календарём. При движении вперёд промежуточные этапы подтверждаются, при откате назад последующие снимаются.</p>'
+      +'</div>';
     layer.addEventListener('click',e=>{
       if(e.target===layer||e.target.closest('[data-picker-close]')){closeStagePicker();return;}
       const target=e.target.closest('[data-stage-choice]');
-      if(!target)return;
+      if(!target||target.disabled)return;
       const index=Number(target.dataset.stageChoice);
       closeStagePicker();promptStageMove(opId,index);
     });

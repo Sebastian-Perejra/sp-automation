@@ -136,7 +136,7 @@
     state.audit.unshift({at:actionTime,action:actionMap[fn]||fn,operationId:fn==='apiCreateOperation'?result:args[0],eventId:fn==='apiCreateOperation'?'':fn==='apiSaveEvent'?result:args[1],beforeJSON:before?JSON.stringify(before):'',afterJSON:''});
     saveDemo();return result;
   }
-  async function reloadFromBackend(){if(!IS_GAS)return;const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));}
+  async function reloadFromBackend(){if(!IS_GAS)return;const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));state.role=raw.role||state.role;dataSignature=dataDigest(state);lastAutoSync=Date.now();}
   async function guarded(action,button){if(!requireEditor()||state.isLoading)return;state.isLoading=true;if(button)button.disabled=true;try{await action();if(IS_GAS)await reloadFromBackend();renderAll(true);}catch(e){toast(e.message||'Ошибка сохранения',true);}finally{state.isLoading=false;if(button)button.disabled=false;}}
 
   function renderMetrics(){
@@ -381,6 +381,25 @@
     const pause=actual.some(e=>e.status==='hold'&&(!latest||e.date>=latest.date));
     return {current,stageDays,totalDays,confirmed,pause,latest,first};
   }
+
+  // Display existing planned events as lightweight, non-confirmed ETA annotations.
+  // Plans never create a checkmark and disappear when a matching actual stage is reached.
+  const PLANNED_STAGE_MAP={vehicle_eta:3,customs_eta:6,delivery_eta:9};
+  function plannedStages(opId){
+    const result=new Map();
+    for(const e of operationEvents(opId)){
+      if(e.type!=='planned')continue;
+      const index=PLANNED_STAGE_MAP[e.status];
+      if(index===undefined)continue;
+      // The latest entered/updated plan overrides earlier estimates for the same destination.
+      const previous=result.get(index);
+      const stamp=e.updatedAt||e.createdAt||'';
+      const prior=previous?(previous.updatedAt||previous.createdAt||''):'';
+      if(!previous||stamp>prior||(stamp===prior&&e.date>=previous.date))result.set(index,e);
+    }
+    return result;
+  }
+
   function currentStageRows(){return filteredOperations();}
   function renderStages(){
     const rows=currentStageRows();
@@ -392,6 +411,7 @@
     for(const {op,f} of facts){
       const current=f.current;
       const late=correctOverdue(op);
+      const plans=plannedStages(op.id);
       out+='<div class="stage-op" data-stage-open="'+esc(op.id)+'" tabindex="0" role="button" title="Открыть хронологию"><div class="stage-op-head"><span class="direction-tag '+op.direction.toLowerCase()+'">'+esc(op.direction)+'</span><strong>'+esc(op.company)+'</strong></div><small>'+esc(op.goods)+'</small><div class="stage-op-meta">'+(f.totalDays===null?'Нет факта старта':f.totalDays+' дн. всего')+(late?' · ⚑ Отклонение':'')+'</div>'+(delivered(op)?'<span class="op-delivered-stamp" aria-label="Доставлено">ДОСТАВЛЕНО</span>':'')+'</div>';
       for(let i=0;i<STAGES.length;i++){
         const isCurrent=i===current,confirmed=f.confirmed.has(i)&&!isCurrent;
@@ -403,6 +423,12 @@
           content='<button type="button" class="stage-check" data-check-op="'+esc(op.id)+'" data-check-stage="'+i+'" title="Три щелчка — снять подтверждение" aria-label="Снять подтверждение: три щелчка">✓</button>';
         }else if(current!==null&&i<current){
           content='<span class="stage-skipped" title="Фактический этап не подтверждён">·</span>';
+        }else if(plans.has(i)&&!delivered(op)&&(current===null||i>current)){
+          const plan=plans.get(i);
+          const date=formatDate(plan.date,{day:'numeric',month:'short'}).replace('.','');
+          const overdue=plan.date<TODAY;
+          const title='План: '+STAGES[i].label+' — '+formatDate(plan.date,{day:'numeric',month:'long',year:'numeric'});
+          content='<span class="stage-planned-eta '+(overdue?'is-overdue':'')+'" title="'+esc(title)+'" aria-label="'+esc(title)+'"><span>ETA</span><strong>'+esc(date)+'</strong></span>';
         }
         out+='<div class="stage-cell '+(isCurrent?'is-current ':'')+(current!==null&&i<current?'is-past ':'')+(i===9?'is-last ':'')+'" data-stage-target="'+i+'" data-stage-operation="'+esc(op.id)+'">'+content+'</div>';
       }
@@ -989,6 +1015,53 @@
       e.stopImmediatePropagation();
     },true);
   }
+
+  /* Lightweight five-minute polling: no page reload, no new back-end endpoint. */
+  const AUTO_SYNC_MS=5*60*1000;
+  let lastAutoSync=0,autoSyncBusy=false,dataSignature='';
+  function dataDigest(data){
+    return JSON.stringify([data.operations,data.events,data.audit]);
+  }
+  function editorOverlayOpen(){
+    if(document.querySelector('.modal-layer:not(.hidden)'))return true;
+    if(document.querySelector('#stage-confirm-overlay,#stage-picker-overlay,#ios-standalone-guide'))return true;
+    const drawer=$('detail-drawer');
+    return !!(drawer&&!drawer.classList.contains('hidden'));
+  }
+  async function autoSync(force=false){
+    if(!IS_GAS||!state.token||!state.initialized||document.hidden||state.isLoading||autoSyncBusy||editorOverlayOpen())return;
+    const now=Date.now();
+    if(!force&&now-lastAutoSync<AUTO_SYNC_MS)return;
+    autoSyncBusy=true;
+    lastAutoSync=now;
+    try{
+      const raw=await gasCall('apiBootstrap',state.token);
+      // An editor may open a form while the network request is in flight.
+      if(state.isLoading||editorOverlayOpen())return;
+      const normalizedData=normalized(raw);
+      const newSignature=dataDigest(normalizedData);
+      if(newSignature===dataSignature)return;
+      const stageScroll=$('stage-scroll');
+      const top=stageScroll?stageScroll.scrollTop:0;
+      const left=stageScroll?stageScroll.scrollLeft:0;
+      Object.assign(state,normalizedData);
+      state.role=raw.role||state.role;
+      dataSignature=newSignature;
+      renderAll(true);
+      if(stageScroll){
+        stageScroll.scrollLeft=left;
+        stageScroll.scrollTop=top;
+      }
+      const button=$('refresh-data-btn');
+      if(button)button.title='Автообновлено в '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+    }catch(error){
+      // Never clear valid data or interrupt work due to a temporary network issue.
+      console.warn('OSV auto-sync:',error?.message||error);
+    }finally{
+      autoSyncBusy=false;
+    }
+  }
+
   async function refreshDataManually(){
     if(state.isLoading)return;
     const button=$('refresh-data-btn');
@@ -999,6 +1072,8 @@
     try{
       if(IS_GAS)await reloadFromBackend();
       else Object.assign(state,loadDemo());
+      dataSignature=dataDigest(state);
+      lastAutoSync=Date.now();
       renderAll(true);
       const at=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
       button.title='Обновлено в '+at;
@@ -1084,6 +1159,9 @@
 
   function attachEvents(){
     setInterval(rolloverToday,30000);
+    setInterval(()=>autoSync(),AUTO_SYNC_MS);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)autoSync(true);});
+    window.addEventListener('focus',()=>autoSync(true));
     setInterval(()=>{if(IS_GAS&&state.token&&!document.hidden)updateOnlinePresence(true);},40000);
     document.addEventListener('visibilitychange',()=>{
       if(!IS_GAS||!state.token)return;
@@ -1172,6 +1250,8 @@
     const last=state.events.map(e=>e.date).sort().at(-1);if(last&&last>state.end)state.end=addDays(last,50);
     $('login').classList.add('hidden');$('workspace').classList.remove('hidden');
     $('top-date').textContent=formatDate(TODAY,{day:'numeric',month:'long',year:'numeric'});
+    dataSignature=dataDigest(state);
+    lastAutoSync=Date.now();
     applyRole();renderAll();setView(state.view);state.initialized=true;
     if(IS_GAS&&!document.hidden)updateOnlinePresence(true);
   }

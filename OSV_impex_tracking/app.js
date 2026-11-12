@@ -28,9 +28,20 @@
   const state = {
     view:'timeline', operations:[], events:[], audit:[], query:'', direction:'all', filter:'all',
     start:'2026-10-01', end: addDays(TODAY,95), token:null, isLoading:false,
-    activeOperation:null, activeDate:null, initialized:false
+    activeOperation:null, activeDate:null, initialized:false, role:'editor'
   };
   const $ = id => document.getElementById(id);
+  function canEdit(){return state.role==='editor';}
+  function requireEditor(){
+    if(canEdit())return true;
+    toast('Только просмотр: изменение данных запрещено.',true);return false;
+  }
+  function applyRole(){
+    const viewOnly=!canEdit(),badge=$('access-role-badge');
+    document.body.classList.toggle('viewer-mode',viewOnly);
+    if(badge){badge.hidden=false;badge.textContent=viewOnly?'◉ VIEW ONLY':'● EDITOR';badge.title=viewOnly?'Только просмотр':'Редактирование разрешено';}
+    $('new-operation-btn').hidden=viewOnly;
+  }
   function iso(date) { const d = date instanceof Date ? date : new Date(date); return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-'); }
   function asDate(s) { return new Date(String(s).slice(0,10)+'T12:00:00'); }
   function addDays(s,n){const d=asDate(s);d.setDate(d.getDate()+n);return iso(d);}
@@ -91,6 +102,7 @@
   function saveDemo(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({operations:state.operations,events:state.events,audit:state.audit}));}catch{console.warn('Browser storage is disabled; this demo session cannot persist after reload.');}}
   function gasCall(fn,...args){return new Promise((resolve,reject)=>{google.script.run.withSuccessHandler(resolve).withFailureHandler(e=>reject(Error(e?.message||String(e))))[fn](...args);});}
   async function backendCall(fn,...args){
+    if(!canEdit()&&['apiCreateOperation','apiSaveEvent','apiDeleteEvent','apiArchiveOperation'].includes(fn))return Promise.reject(Error('Недостаточно прав.'));
     if(IS_GAS) return gasCall(fn,state.token,...args);
     let result; const actionTime=new Date().toISOString();const before=fn==='apiSaveEvent'?state.events.find(e=>e.id===args[1]?.id):null;
     if(fn==='apiCreateOperation'){
@@ -112,7 +124,7 @@
     saveDemo();return result;
   }
   async function reloadFromBackend(){if(!IS_GAS)return;const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));}
-  async function guarded(action,button){if(state.isLoading)return;state.isLoading=true;if(button)button.disabled=true;try{await action();if(IS_GAS)await reloadFromBackend();renderAll(true);}catch(e){toast(e.message||'Ошибка сохранения',true);}finally{state.isLoading=false;if(button)button.disabled=false;}}
+  async function guarded(action,button){if(!requireEditor()||state.isLoading)return;state.isLoading=true;if(button)button.disabled=true;try{await action();if(IS_GAS)await reloadFromBackend();renderAll(true);}catch(e){toast(e.message||'Ошибка сохранения',true);}finally{state.isLoading=false;if(button)button.disabled=false;}}
 
   function renderMetrics(){
     const visible=state.operations.filter(o=>!o.archived);
@@ -311,7 +323,7 @@
   }
   function renderAudit(){const actions={CREATE_OPERATION:'Создана операция',CREATE_EVENT:'Добавлено событие',UPDATE_EVENT:'Изменено событие',DELETE_EVENT:'Удалено событие',ARCHIVE_OPERATION:'Изменён статус архива'};const entries=[...state.audit].sort((a,b)=>String(b.at||'').localeCompare(String(a.at||''))).slice(0,120);$('audit-list').innerHTML=entries.length?entries.map(a=>{const op=state.operations.find(o=>o.id===a.operationId);const at=a.at?new Date(a.at):null;const when=at&&!isNaN(at.getTime())?at.toLocaleString('ru-RU'):'—';return `<div class="archive-item" ${op?`data-open-op="${esc(op.id)}"`:''}><div><strong>${esc(actions[a.action]||a.action)}</strong><p>${esc(op?op.direction+' · '+op.company:'Операция '+String(a.operationId||'').slice(0,8))}</p></div><span>${esc(when)}</span></div>`;}).join(''):'<div class="empty-state">Изменений пока нет. Первое событие будет зарегистрировано после сохранения.</div>'; }
   function renderArchive(){const ops=state.operations.filter(o=>o.archived||delivered(o)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));$('archive-list').innerHTML=ops.length?ops.map(op=>`<div class="archive-item" data-open-op="${esc(op.id)}"><div><strong>${esc(op.direction)} · ${esc(op.company)}</strong><p>${esc(op.goods)} · ${esc(formatDate(op.createdAt))}</p></div><span>${cycleDays(op)!==null?cycleDays(op)+' дн.':'Архивировано'} ↗</span></div>`).join(''):'<div class="empty-state">Завершённые операции пока отсутствуют.</div>';}
-  function renderAll(preserve=false){renderMetrics();renderTimeline(preserve);renderStages();renderAnalytics();renderArchive();renderAudit();}
+  function renderAll(preserve=false){applyRole();renderMetrics();renderTimeline(preserve);renderStages();renderAnalytics();renderArchive();renderAudit();}
 
   /* Shared event-backed stage tracker. Confirmed events only — no synthetic checkmarks. */
   const STAGES=[
@@ -366,7 +378,7 @@
         let content='';
         if(isCurrent){
           const duration=f.stageDays+' / '+f.totalDays;
-          content='<button class="stage-truck '+(late?'is-late ':'')+(f.pause?'is-paused':'')+'" type="button" draggable="true" data-truck="'+esc(op.id)+'" aria-label="'+esc(op.company)+' — '+esc(STAGES[i].label)+', '+duration+' дней" title="'+esc(op.company)+' — '+duration+' дн. (этап / всего)">'+truckGraphic+'<span>'+duration+'</span></button>';
+          content='<button class="stage-truck '+(late?'is-late ':'')+(f.pause?'is-paused':'')+'" type="button" draggable="'+(canEdit()?'true':'false')+'" data-truck="'+esc(op.id)+'" aria-label="'+esc(op.company)+' — '+esc(STAGES[i].label)+', '+duration+' дней" title="'+esc(op.company)+' — '+duration+' дн. (этап / всего)">'+truckGraphic+'<span>'+duration+'</span></button>';
         }else if(confirmed){
           content='<button type="button" class="stage-check" data-check-op="'+esc(op.id)+'" data-check-stage="'+i+'" title="Три щелчка — снять подтверждение" aria-label="Снять подтверждение: три щелчка">✓</button>';
         }else if(current!==null&&i<current){
@@ -428,7 +440,7 @@
       await backendCall('apiDeleteEvent',opId,e.id);
   }
   async function runStageBatch(work,onComplete){
-    if(state.isLoading)return;
+    if(!requireEditor()||state.isLoading)return;
     state.isLoading=true;
     try{await work();if(onComplete)onComplete();}
     catch(err){toast('Ошибка: '+(err.message||'неизвестно')+'. Часть изменений могла сохраниться — проверьте журнал.',true);}
@@ -439,6 +451,7 @@
     }
   }
   function askRemoveStageCheck(opId,index){
+    if(!requireEditor())return;
     const op=state.operations.find(o=>o.id===opId);
     if(!op||index===0)return;
     closeStageConfirm();
@@ -487,6 +500,7 @@
     if(layer)layer.remove();
   }
   function promptStageMove(opId,stageNo){
+    if(!requireEditor())return;
     const op=state.operations.find(o=>o.id===opId);
     if(!op||op.archived)return;
     const facts=stageFacts(op),target=STAGES[stageNo];
@@ -550,7 +564,7 @@
     closeStagePicker();
     const facts=stageFacts(op);
     const current=facts.current===null?'Не определён':STAGES[facts.current].label;
-    const disabled=op.archived||delivered(op);
+    const disabled=!canEdit()||op.archived||delivered(op);
     // One reliable chronological source for both the calendar and this view.
     // Multiple events for a stage are retained; show its latest factual date.
     const history=operationEvents(opId).filter(e=>e.type==='actual'&&e.date<=TODAY&&stageIndex(e.status)!==null);
@@ -612,26 +626,26 @@
       if(op)openDrawer(op.dataset.stageOpen);
     });
     grid.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-stage-open]')){e.preventDefault();openDrawer(e.target.dataset.stageOpen);}});
-    grid.addEventListener('click',e=>{const b=e.target.closest('[data-check-op]');if(b&&e.detail>=3){e.preventDefault();askRemoveStageCheck(b.dataset.checkOp,Number(b.dataset.checkStage));}});
+    grid.addEventListener('click',e=>{const b=e.target.closest('[data-check-op]');if(b&&canEdit()&&e.detail>=3){e.preventDefault();askRemoveStageCheck(b.dataset.checkOp,Number(b.dataset.checkStage));}});
     let checkHold=0,checkButton=null;
-    grid.addEventListener('touchstart',e=>{const b=e.target.closest('[data-check-op]');if(!b||e.touches.length!==1)return;checkButton=b;checkHold=setTimeout(()=>{if(checkButton===b)askRemoveStageCheck(b.dataset.checkOp,Number(b.dataset.checkStage));checkButton=null;},650);},{passive:true});
+    grid.addEventListener('touchstart',e=>{const b=e.target.closest('[data-check-op]');if(!b||!canEdit()||e.touches.length!==1)return;checkButton=b;checkHold=setTimeout(()=>{if(checkButton===b)askRemoveStageCheck(b.dataset.checkOp,Number(b.dataset.checkStage));checkButton=null;},650);},{passive:true});
     for(const evt of ['touchmove','touchend','touchcancel'])grid.addEventListener(evt,()=>{clearTimeout(checkHold);checkButton=null;},{passive:true});
     grid.addEventListener('dragstart',e=>{
       const truck=e.target.closest('[data-truck]');
-      if(!truck)return;
+      if(!truck||!canEdit()){e.preventDefault();return;}
       selectedTruckOperation=truck.dataset.truck;
       e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',selectedTruckOperation);
     });
     grid.addEventListener('dragover',e=>{
       const target=e.target.closest('[data-stage-target]');
-      if(!target||!selectedTruckOperation||target.dataset.stageOperation!==selectedTruckOperation)return;
+      if(!canEdit()||!target||!selectedTruckOperation||target.dataset.stageOperation!==selectedTruckOperation)return;
       e.preventDefault();e.dataTransfer.dropEffect='move';target.classList.add('drag-over');
     });
     grid.addEventListener('dragleave',e=>{const cell=e.target.closest('[data-stage-target]');if(cell)cell.classList.remove('drag-over');});
     grid.addEventListener('drop',e=>{
       const cell=e.target.closest('[data-stage-target]');
       grid.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));
-      if(!cell||!selectedTruckOperation||cell.dataset.stageOperation!==selectedTruckOperation)return;
+      if(!canEdit()||!cell||!selectedTruckOperation||cell.dataset.stageOperation!==selectedTruckOperation)return;
       e.preventDefault();
       const opId=selectedTruckOperation;selectedTruckOperation=null;
       promptStageMove(opId,Number(cell.dataset.stageTarget));
@@ -696,10 +710,11 @@
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
   function showError(id,msg){const el=$(id);el.textContent=msg;el.classList.toggle('hidden',!msg);}
-  function newOperation(){const form=$('operation-form');form.reset();$('op-date').value=TODAY;showError('operation-error','');openModal('operation-modal');setTimeout(()=>$('op-company').focus(),40);}
-  function existingEventsHtml(es){if(!es.length)return '';return '<div class="existing-heading">СОБЫТИЯ НА ВЫБРАННУЮ ДАТУ</div>'+es.map(e=>`<div class="existing-item"><span class="event-type-dot ${e.type}"></span><div class="existing-item-info"><strong>${esc(statusFor(e.status).label)}</strong><small>${e.type==='planned'?'План':'Факт'}${e.note?' · '+esc(e.note):''}</small></div><button class="tiny-button" data-edit-event="${esc(e.id)}">Изм.</button><button class="tiny-button danger" data-delete-event="${esc(e.id)}">×</button></div>`).join('');}
+  function newOperation(){if(!requireEditor())return;const form=$('operation-form');form.reset();$('op-date').value=TODAY;showError('operation-error','');openModal('operation-modal');setTimeout(()=>$('op-company').focus(),40);}
+  function existingEventsHtml(es){if(!es.length)return '';return '<div class="existing-heading">СОБЫТИЯ НА ВЫБРАННУЮ ДАТУ</div>'+es.map(e=>`<div class="existing-item"><span class="event-type-dot ${e.type}"></span><div class="existing-item-info"><strong>${esc(statusFor(e.status).label)}</strong><small>${e.type==='planned'?'План':'Факт'}${e.note?' · '+esc(e.note):''}</small></div>${canEdit()?`<button class="tiny-button" data-edit-event="${esc(e.id)}">Изм.</button><button class="tiny-button danger" data-delete-event="${esc(e.id)}">×</button>`:""}</div>`).join('');}
   function defaultEventType(status){return statusFor(status).allowed==='planned'?'planned':'actual';}
   function openEvent(operationId,date,editId=null){
+    if(!requireEditor())return;
     const op=state.operations.find(o=>o.id===operationId);if(!op)return;
     state.activeOperation=operationId;state.activeDate=date;$('event-operation-caption').textContent=op.direction+' · '+op.company;$('event-modal-title').textContent=formatDate(date,{day:'numeric',month:'long',year:'numeric'});
     $('event-operation-id').value=operationId;$('event-edit-id').value=editId||'';$('event-date').value=date;$('event-note').value='';
@@ -718,8 +733,9 @@
     $('event-submit').textContent=editId?'Обновить событие ↗':'Сохранить статус ↗';showError('event-error','');openModal('event-modal');
   }
   function openDrawer(id){const op=state.operations.find(o=>o.id===id);if(!op)return;state.activeOperation=id;const es=operationEvents(id),cycle=cycleDays(op),status=delivered(op)?'Завершена':correctOverdue(op)?'Есть отклонения':'В работе';
-    $('drawer-content').innerHTML=`<h2 class="drawer-title">${esc(op.company)}</h2><p class="drawer-desc">${esc(op.goods)}</p><div class="drawer-identity"><span class="direction-tag ${op.direction.toLowerCase()}">${op.direction}</span><span class="info-pill">${status}</span></div><div class="drawer-stats"><div class="drawer-stat"><strong>${cycle!==null?cycle:'—'}</strong><small>Дней полного цикла</small></div><div class="drawer-stat"><strong>${es.length}</strong><small>Событий</small></div></div>${op.note?`<p style="font-size:12px;color:#a8b9ca;margin-top:18px">${esc(op.note)}</p>`:''}<div class="drawer-section-title">ХРОНОЛОГИЯ СОБЫТИЙ</div>${es.length?es.map(e=>`<div class="drawer-event"><div class="drawer-event-bullet ${e.type}"></div><div><strong>${esc(statusFor(e.status).label)}</strong><small>${esc(formatDate(e.date))} · ${e.type==='planned'?'План':'Факт'}</small>${e.note?`<p>${esc(e.note)}</p>`:''}</div></div>`).join(''):'<p>Пока нет событий</p>'}<div class="drawer-buttons"><button class="btn btn-primary" id="drawer-add-event">+ Событие</button><button class="btn btn-outline" id="drawer-archive">${op.archived?'Вернуть из архива':'В архив'}</button></div>`;
+    $('drawer-content').innerHTML=`<h2 class="drawer-title">${esc(op.company)}</h2><p class="drawer-desc">${esc(op.goods)}</p><div class="drawer-identity"><span class="direction-tag ${op.direction.toLowerCase()}">${op.direction}</span><span class="info-pill">${status}</span></div><div class="drawer-stats"><div class="drawer-stat"><strong>${cycle!==null?cycle:'—'}</strong><small>Дней полного цикла</small></div><div class="drawer-stat"><strong>${es.length}</strong><small>Событий</small></div></div>${op.note?`<p style="font-size:12px;color:#a8b9ca;margin-top:18px">${esc(op.note)}</p>`:''}<div class="drawer-section-title">ХРОНОЛОГИЯ СОБЫТИЙ</div>${es.length?es.map(e=>`<div class="drawer-event"><div class="drawer-event-bullet ${e.type}"></div><div><strong>${esc(statusFor(e.status).label)}</strong><small>${esc(formatDate(e.date))} · ${e.type==='planned'?'План':'Факт'}</small>${e.note?`<p>${esc(e.note)}</p>`:''}</div></div>`).join(''):'<p>Пока нет событий</p>'}${canEdit()?`<div class="drawer-buttons"><button class="btn btn-primary" id="drawer-add-event">+ Событие</button><button class="btn btn-outline" id="drawer-archive">${op.archived?'Вернуть из архива':'В архив'}</button></div>`:""}`;
     $('drawer-backdrop').classList.remove('hidden');$('detail-drawer').classList.remove('hidden');document.body.style.overflow='hidden';
+    if(!canEdit())return;
     $('drawer-add-event').onclick=()=>{closeDrawer();openEvent(id,TODAY);};
     $('drawer-archive').onclick=()=>{if(!confirm(op.archived?'Вернуть операцию из архива?':'Переместить операцию в архив?'))return;const button=$('drawer-archive');guarded(async()=>{await backendCall('apiArchiveOperation',id,!op.archived);closeDrawer();toast(op.archived?'Операция восстановлена':'Операция архивирована');},button);};
   }
@@ -1069,29 +1085,29 @@
     });
     document.addEventListener('click',e=>{
       const op=e.target.closest('[data-open-op]');if(op){if(isMobileCalendarDevice()&&op.closest('.timeline-row'))return;openDrawer(op.dataset.openOp);return;}
-      const edit=e.target.closest('[data-edit-event]');if(edit){openEvent(state.activeOperation,state.activeDate,edit.dataset.editEvent);return;}
-      const del=e.target.closest('[data-delete-event]');if(del){const id=del.dataset.deleteEvent,opid=state.activeOperation,date=state.activeDate;if(!confirm('Удалить событие? История изменения сохранится в журнале.'))return;guarded(async()=>{await backendCall('apiDeleteEvent',opid,id);closeModal('event-modal');toast('Событие удалено');});}
+      const edit=e.target.closest('[data-edit-event]');if(edit){if(!requireEditor())return;openEvent(state.activeOperation,state.activeDate,edit.dataset.editEvent);return;}
+      const del=e.target.closest('[data-delete-event]');if(del){if(!requireEditor())return;const id=del.dataset.deleteEvent,opid=state.activeOperation,date=state.activeDate;if(!confirm('Удалить событие? История изменения сохранится в журнале.'))return;guarded(async()=>{await backendCall('apiDeleteEvent',opid,id);closeModal('event-modal');toast('Событие удалено');});}
     });
     $('event-status').addEventListener('change',e=>{document.querySelector(`input[name="event-type"][value="${defaultEventType(e.target.value)}"]`).checked=true;});
-    $('operation-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget,btn=form.querySelector('button[type=submit]');const fd=new FormData(form);const p={direction:fd.get('direction'),company:String(fd.get('company')||'').trim(),goods:String(fd.get('goods')||'').trim(),date:String(fd.get('date')||''),note:String(fd.get('note')||'').trim()};if(!p.company||!p.goods||!/\d{4}-\d{2}-\d{2}/.test(p.date)){showError('operation-error','Заполните обязательные поля');return;}guarded(async()=>{await backendCall('apiCreateOperation',p);closeModal('operation-modal');toast('Операция создана');},btn);});
-    $('event-form').addEventListener('submit',e=>{e.preventDefault();const btn=$('event-submit');const operationId=$('event-operation-id').value, p={id:$('event-edit-id').value||'',date:$('event-date').value,status:$('event-status').value,type:document.querySelector('input[name="event-type"]:checked').value,note:$('event-note').value.trim()};if(!p.date||!BY_STATUS[p.status]){showError('event-error','Выберите статус и укажите дату события');$('event-status').focus();return;}guarded(async()=>{await backendCall('apiSaveEvent',operationId,p);closeModal('event-modal');toast(p.id?'Событие обновлено':'Событие сохранено');},btn);});
+    $('operation-form').addEventListener('submit',e=>{e.preventDefault();if(!requireEditor())return;const form=e.currentTarget,btn=form.querySelector('button[type=submit]');const fd=new FormData(form);const p={direction:fd.get('direction'),company:String(fd.get('company')||'').trim(),goods:String(fd.get('goods')||'').trim(),date:String(fd.get('date')||''),note:String(fd.get('note')||'').trim()};if(!p.company||!p.goods||!/\d{4}-\d{2}-\d{2}/.test(p.date)){showError('operation-error','Заполните обязательные поля');return;}guarded(async()=>{await backendCall('apiCreateOperation',p);closeModal('operation-modal');toast('Операция создана');},btn);});
+    $('event-form').addEventListener('submit',e=>{e.preventDefault();if(!requireEditor())return;const btn=$('event-submit');const operationId=$('event-operation-id').value, p={id:$('event-edit-id').value||'',date:$('event-date').value,status:$('event-status').value,type:document.querySelector('input[name="event-type"]:checked').value,note:$('event-note').value.trim()};if(!p.date||!BY_STATUS[p.status]){showError('event-error','Выберите статус и укажите дату события');$('event-status').focus();return;}guarded(async()=>{await backendCall('apiSaveEvent',operationId,p);closeModal('event-modal');toast(p.id?'Событие обновлено':'Событие сохранено');},btn);});
     $('timeline-scroller').addEventListener('scroll',()=>{
       positionTimelineWatermarks();
       const s=$('timeline-scroller');if(s.scrollLeft+s.clientWidth>s.scrollWidth-dayWidth()*14&&state.end<addDays(TODAY,700)){
         const x=s.scrollLeft,y=s.scrollTop;state.end=addDays(state.end,70);renderTimeline(true);requestAnimationFrame(()=>{s.scrollLeft=x;s.scrollTop=y;});
       }
     },{passive:true});
-    $('login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=e.currentTarget.querySelector('button[type=submit]');btn.disabled=true;showError('login-error','');try{const result=await gasCall('apiLogin',$('login-password').value);if(!result?.token)throw Error('Сервер не выдал сессию');state.token=result.token;try{sessionStorage.setItem(SESSION_KEY,result.token);}catch{}await startWorkspace();}catch(err){showError('login-error',err?.message||'Ошибка авторизации');}finally{btn.disabled=false;}});
-    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}state.token=null;try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
+    $('login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=e.currentTarget.querySelector('button[type=submit]');btn.disabled=true;showError('login-error','');try{const result=await gasCall('apiLogin',$('login-password').value);if(!result?.token)throw Error('Сервер не выдал сессию');state.token=result.token;state.role=result.role||'editor';try{sessionStorage.setItem(SESSION_KEY,result.token);}catch{}await startWorkspace();}catch(err){showError('login-error',err?.message||'Ошибка авторизации');}finally{btn.disabled=false;}});
+    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
   }
   async function startWorkspace(){
-    if(IS_GAS){const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));$('environment-badge').classList.add('live');$('environment-badge').innerHTML='<i></i> LIVE';const connectionLabel=$('connection-label');if(connectionLabel)connectionLabel.textContent='Google Sheets · Online';$('logout-btn').hidden=false;}
-    else{Object.assign(state,loadDemo());$('environment-badge').innerHTML='<i></i> ДЕМО';}
+    if(IS_GAS){const raw=await gasCall('apiBootstrap',state.token);Object.assign(state,normalized(raw));state.role=raw.role||'editor';$('environment-badge').classList.add('live');$('environment-badge').innerHTML='<i></i> LIVE';const connectionLabel=$('connection-label');if(connectionLabel)connectionLabel.textContent='Google Sheets · Online';$('logout-btn').hidden=false;}
+    else{Object.assign(state,loadDemo());state.role='editor';$('environment-badge').innerHTML='<i></i> ДЕМО';}
     const first=state.events.map(e=>e.date).sort()[0];if(first&&first<state.start)state.start=addDays(first,-12);
     const last=state.events.map(e=>e.date).sort().at(-1);if(last&&last>state.end)state.end=addDays(last,50);
     $('login').classList.add('hidden');$('workspace').classList.remove('hidden');
     $('top-date').textContent=formatDate(TODAY,{day:'numeric',month:'long',year:'numeric'});
-    renderAll();setView(state.view);state.initialized=true;
+    applyRole();renderAll();setView(state.view);state.initialized=true;
   }
   async function init(){attachEvents();if(IS_GAS){$('workspace').classList.add('hidden');let cached=null;try{cached=sessionStorage.getItem(SESSION_KEY);}catch{}if(cached){state.token=cached;try{await startWorkspace();return;}catch{try{sessionStorage.removeItem(SESSION_KEY);}catch{}state.token=null;}}$('login').classList.remove('hidden');}else await startWorkspace();}
   init().catch(e=>{toast('Ошибка запуска: '+(e.message||e),true);console.error(e);});

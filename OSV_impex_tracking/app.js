@@ -265,7 +265,7 @@
     const scroller=$('timeline-scroller');const prevX=preserve?scroller.scrollLeft:null,prevY=preserve?scroller.scrollTop:0;
     const dates=dateArray(),todayIdx=dates.indexOf(TODAY),rows=filteredOperations();$('row-count').textContent=rows.length;
     const monthHTML=monthParts(dates).map(m=>`<div class="month-cell" style="width:calc(${m.count} * var(--day-width))">${esc(formatDate(m.date,{month:'long',year:'numeric'}).toLocaleUpperCase('ru-RU'))}</div>`).join('');
-    const dayHTML=dates.map(d=>{const dt=asDate(d),dow=dt.getDay(),weekend=dow===0||dow===6;return `<div class="day-head ${weekend?'weekend':''} ${d===TODAY?'today':''}" title="${esc(formatDate(d,{day:'numeric',month:'long',year:'numeric'}))}"><span>${['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'][dow]}</span><strong>${dt.getDate()}</strong><em>${esc(formatDate(d,{month:'short'}).replace('.',''))}</em></div>`;}).join('');
+    const dayHTML=dates.map(d=>{const dt=asDate(d),dow=dt.getDay(),weekend=dow===0||dow===6;return `<div class="day-head ${weekend?'weekend':''} ${dow===6?'weekend-start':dow===0?'weekend-end':''} ${d===TODAY?'today':''}" title="${esc(formatDate(d,{day:'numeric',month:'long',year:'numeric'}))}"><span>${['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'][dow]}</span><strong>${dt.getDate()}</strong><em>${esc(formatDate(d,{month:'short'}).replace('.',''))}</em></div>`;}).join('');
     let html=`<div class="calendar-months"><div class="calendar-corner">${state.start.slice(0,4)}–${state.end.slice(0,4)}<span>КАЛЕНДАРЬ</span></div>${monthHTML}</div><div class="calendar-days"><div class="calendar-corner">ОПЕРАЦИЯ <span>СТАТУС ПО ДНЯМ</span></div>${dayHTML}</div>`;
     for(const op of rows){
       const es=operationEvents(op.id);const byDate={};for(const e of es)(byDate[e.date]??=[]).push(e);
@@ -275,7 +275,8 @@
       const actuals=es.filter(e=>e.type==='actual');const receivedExists=actuals.some(e=>e.status==='received');let aidx=0,lastActual=null;
       for(const d of dates){
         while(aidx<actuals.length&&actuals[aidx].date<=d){lastActual=actuals[aidx];aidx++;}
-        const isWeekend=[0,6].includes(asDate(d).getDay());
+        const dayOfWeek=asDate(d).getDay();
+        const isWeekend=dayOfWeek===0||dayOfWeek===6;
         let phase='';if(lastActual&&receivedExists&&lastActual.date<=d){phase=lastActual.status==='delivered'?(lastActual.date===d?'done':''):statusFor(lastActual.status).stage;}
         const ev=byDate[d]||[];
         const actualDelivery=ev.find(e=>e.type==='actual'&&e.status==='delivered');
@@ -286,7 +287,7 @@
         const showAge=d===TODAY&&ageDays!==null;
         const ageBand=ageDays>=14?'age-critical':ageDays>=7?'age-watch':'age-normal';
         const ageBadge=showAge?`<span class="operation-age ${ageBand}" role="img" aria-label="В работе ${ageDays} дн." title="В работе ${ageDays} дн. · с ${formatDate(es.find(e=>e.type==='actual'&&e.date<=TODAY).date)}">${ageDays}</span>`:'';
-        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · телефон: 2 касания — хронология, 3 касания — события дня · ПК: двойной клик — редактировать">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
+        html+=`<div class="day-slot ${phase?'phase-'+phase:''} ${isWeekend?'weekend':''} ${dayOfWeek===6?'weekend-start':dayOfWeek===0?'weekend-end':''} ${showAge?'has-operation-age':''} ${actualDelivery?'is-delivered':''}" data-op="${esc(op.id)}" data-date="${d}" title="${esc(formatDate(d))} · ${esc(op.company)}${showAge?' · В работе '+ageDays+' дн.':''} · телефон: 2 касания — хронология, 3 касания — события дня · ПК: двойной клик — редактировать">${chip||'<span class="slot-add">+</span>'}${deliveredFlag}${ageBadge}</div>`;
       }
       const rowCaption=(op.direction==='EXP'?'ЭКСПОРТ':'ИМПОРТ')+' · '+op.company+(op.goods?' · '+op.goods:'');
       html+=`<span class="mobile-operation-watermark" aria-hidden="true">${esc(rowCaption)}</span>`;
@@ -298,8 +299,9 @@
       html+='<div class="timeline-row timeline-placeholder-row">';
       html+='<div class="timeline-row-label timeline-placeholder-label" aria-hidden="true">'+(ghost===0&&!rows.length?'<span class="timeline-placeholder-message">Нет операций<br><small>Создайте новую операцию</small></span>':'')+'</div>';
       for(const d of dates){
-        const weekend=[0,6].includes(asDate(d).getDay());
-        html+='<div class="timeline-ghost-cell'+(weekend?' weekend':'')+'" aria-hidden="true"></div>';
+        const dow=asDate(d).getDay();
+        const weekend=dow===0||dow===6;
+        html+='<div class="timeline-ghost-cell'+(weekend?' weekend':'')+(dow===6?' weekend-start':dow===0?' weekend-end':'')+'" aria-hidden="true"></div>';
       }
       html+='</div>';
     }

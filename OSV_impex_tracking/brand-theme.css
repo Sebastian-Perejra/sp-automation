@@ -1598,3 +1598,33 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
 @media(max-width:760px){
   #timeline-view .stage-op .op-delivered-stamp{right:8px;bottom:8px}
 }
+
+/* Same elapsed-day calculation in Calendar and Stages; metadata stays understated. */
+#timeline-view .timeline-row-label .op-main{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:0;
+}
+#timeline-view .timeline-row-label .op-duration{
+  display:block;
+  margin-top:3px;
+  color:#98a7b4;
+  font-size:9px;
+  font-weight:550;
+  line-height:1.1;
+  letter-spacing:0;
+  white-space:nowrap;
+  pointer-events:none;
+}
+#timeline-view .timeline-row-label .op-duration.no-start{
+  color:#adb8c1;
+}
+#timeline-view .timeline-row-label:has(.op-delivered-stamp) .op-duration{
+  max-width:calc(100% - 80px);
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media(max-width:760px){
+  #timeline-view .timeline-row-label .op-duration{font-size:8px}
+}

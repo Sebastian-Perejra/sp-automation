@@ -1273,3 +1273,20 @@ body.calendar-zoom-overlay .toast-stack{z-index:700!important}
   #timeline-view .stage-scroll{max-height:65vh}
   #timeline-view .stages-help{font-size:10px;gap:6px}
 }
+
+/* Mobile and desktop status selection without text prompts. */
+.stage-picker-overlay{position:fixed;inset:0;z-index:780;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(13,26,41,.62);backdrop-filter:blur(4px)}
+.stage-picker-card{width:min(100%,480px);max-height:min(90dvh,800px);overflow:auto;border-radius:15px;border:1px solid #d8e2eb;background:#fff;box-shadow:0 20px 65px rgba(10,23,39,.28);padding:18px;color:#304257}
+.stage-picker-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:13px;border-bottom:1px solid #e2e8ee}
+.stage-picker-head div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.stage-picker-head strong{font-size:17px;color:#25394d}
+.stage-picker-head small{font-size:11px;color:#69798a}
+.stage-picker-head>button{border:1px solid #d7dfe8;background:#f7f9fb;border-radius:7px;width:29px;height:29px;cursor:pointer;font-size:19px;color:#52667a}
+.stage-picker-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}
+.stage-picker-choices button{display:flex;align-items:center;gap:8px;text-align:left;border-radius:9px;padding:10px;background:#f7f9fc;border:1px solid #dbe3ec;min-height:51px;cursor:pointer;font:600 11px/1.35 inherit;color:#344a60}
+.stage-picker-choices button:not(:disabled):hover{border-color:#bf2b3c;background:#fff4f5}
+.stage-picker-choices button:disabled{opacity:.55;cursor:default}
+.stage-picker-index{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:7px;background:#e6edf4;color:#3b556e;font-size:11px;font-weight:800}
+.stage-picker-current{margin-left:auto;color:#168660;font-size:9px;font-weight:800}
+.stage-picker-card>p{margin:5px 0 0;color:#748394;font-size:11px;line-height:1.5}
+@media(max-width:600px){.stage-picker-choices{grid-template-columns:1fr}.stage-picker-card{padding:14px}}

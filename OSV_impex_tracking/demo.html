@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#b81727">
+<title>OSV · Интерактивное обучение</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<div class="demo-ribbon"><span>OSV INTERACTIVE TOUR</span><span class="demo-only">УЧЕБНЫЙ РЕЖИМ · ВЫМЫШЛЕННЫЕ ДАННЫЕ</span><a href="./" class="close-tour">✕ <span>Вернуться в портал</span></a></div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><img src="osv-logo-light.svg" alt="OSV"><div><strong>OSV <em>IMPEX</em></strong><small>OPERATIONS TRACKING</small></div></div>
+    <div class="side-divider"></div><div class="side-title">WORKSPACE</div>
+    <nav id="demo-nav">
+      <button class="nav-item is-current" data-tab="timeline"><span>▦</span> Таймлайн <b>4</b></button>
+      <button class="nav-item" data-tab="analytics"><span>◫</span> Аналитика</button>
+      <button class="nav-item" data-tab="archive"><span>▤</span> Архив</button>
+      <button class="nav-item" data-tab="audit"><span>≡</span> Журнал</button>
+      <button class="nav-item" data-tab="mail"><span>✉</span> Рассылки</button>
+    </nav>
+    <div class="side-decor">OSV<br><span>TRAINING</span></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <b id="breadcrumb">Таймлайн операций</b></div><div class="head-actions"><span class="chip role">● VIEW ONLY</span><span class="chip live">● DEMO</span><button class="tour-launch" id="tour-restart">▶ Обучение</button></div></header>
+    <div class="content">
+      <div class="page-title"><div><div class="eyebrow">— OPERATION CONTROL CENTER</div><h1 id="page-heading">Таймлайн <i>.</i></h1><p id="page-description">Демонстрационные операции и статусы. Настоящих данных здесь нет.</p></div><span class="readonly">ДАННЫЕ ДЛЯ ОБУЧЕНИЯ</span></div>
+      <div class="kpis"><button class="kpi" data-kpi="active"><small>Активные операции</small><strong>4</strong><span>В работе прямо сейчас</span></button><button class="kpi" data-kpi="done"><small>Завершено</small><strong>6</strong><span>За весь период</span></button><button class="kpi" data-kpi="cycle"><small>Средний цикл</small><strong>6,8 <small>дн.</small></strong><span>От задания до доставки</span></button><button class="kpi" data-kpi="late"><small>С отклонениями</small><strong>1</strong><span>Плановая дата не соблюдена</span></button></div>
+      <section class="view" id="view-timeline">
+       <div class="panel"><div class="panel-head"><div><div class="eyebrow">TIMELINE CONTROL</div><h2>Календарь операций</h2></div><div class="actions"><button class="outline" id="today-action">Сегодня</button><button class="outline" id="zoom-action">+ Масштаб</button></div></div>
+       <div class="filters"><label>Поиск<input id="filter-search" placeholder="Компания или груз" autocomplete="off"></label><label>Направление<select id="filter-direction"><option value="all">Все направления</option><option value="Импорт">Импорт</option><option value="Экспорт">Экспорт</option></select></label><label>Состояние<select id="filter-state"><option value="all">Все операции</option><option value="active">Активные</option><option value="done">Завершённые</option></select></label><button class="outline" id="filter-reset">Сбросить</button></div>
+       <div class="table-scroll"><table class="timeline-table"><thead><tr><th>Операция</th><th>Пн 09</th><th>Вт 10</th><th>Ср 11</th><th class="today-col">Чт 12</th><th>Пт 13</th><th>Сб 14</th><th>Вс 15</th></tr></thead><tbody id="operations-body"></tbody></table></div><div class="panel-foot">Показаны учебные события. Никаких изменений на сервере.</div>
+       </div>
+      </section>
+      <section class="view hidden" id="view-analytics"><div class="panel"><div class="panel-head"><div><div class="eyebrow">PERFORMANCE INSIGHTS</div><h2>Аналитика операций</h2></div><label class="compact">Период <select id="analytics-period"><option>Все месяцы</option><option>Ноябрь</option><option>Октябрь</option></select></label></div><div class="analytics-grid"><div class="graph-card"><h3>Операции по этапам</h3><div class="bars"><div><span>Транспорт</span><b style="width:76%"></b><em>8</em></div><div><span>Таможня</span><b style="width:48%"></b><em>5</em></div><div><span>Доставка</span><b style="width:65%"></b><em>7</em></div></div></div><div class="graph-card"><h3>Показатели выполнения</h3><div class="stat-large">86% <small>в срок</small></div><p>По учебному набору операций</p></div></div></div></section>
+      <section class="view hidden" id="view-archive"><div class="panel"><div class="panel-head"><div><div class="eyebrow">OPERATIONS ARCHIVE</div><h2>Архив завершённых операций</h2></div></div><div id="archive-list"></div></div></section>
+      <section class="view hidden" id="view-audit"><div class="panel"><div class="panel-head"><div><div class="eyebrow">AUDIT LOG</div><h2>Журнал изменений</h2></div></div><div class="audit-list"><div><b>12.11.2026 · 10:15</b><span>Изменение статуса · В дорозі на митницю</span></div><div><b>11.11.2026 · 14:20</b><span>Добавлено событие · Транспорт найден</span></div><div><b>10.11.2026 · 09:05</b><span>Новая операция · Демо Импорт</span></div></div></div></section>
+      <section class="view hidden" id="view-mail"><div class="panel"><div class="panel-head"><div><div class="eyebrow">NOTIFICATION CENTER</div><h2>Матрица email-рассылок</h2><p>Кому отправлять уведомления о фактических этапах.</p></div><span class="chip role">ТОЛЬКО ПРОСМОТР</span></div><div class="table-scroll"><table class="mail-table"><thead><tr><th>Адресат</th><th>Email</th><th>Включено</th><th>Заявка</th><th>Транспорт</th><th>Загружен</th><th>Доставлен</th></tr></thead><tbody><tr><td>Сотрудник 1</td><td>example1@example.com</td><td>✓</td><td>✓</td><td></td><td></td><td>✓</td></tr><tr><td>Сотрудник 2</td><td>example2@example.com</td><td>✓</td><td></td><td>✓</td><td></td><td>✓</td></tr></tbody></table></div><div class="panel-foot">Примеры адресов. Рассылки в демо не отправляются.</div></div></section>
+    </div>
+  </main>
+</div>
+<div id="tour-shade" class="tour-shade hidden"></div>
+<div id="tour-highlight" class="tour-highlight hidden"></div>
+<div id="tour-cursor" class="tour-cursor hidden"><svg viewBox="0 0 38 48"><path d="M5 3v36l9-10 7 15 8-4-8-14h14Z" fill="#fff" stroke="#b71829" stroke-width="3" stroke-linejoin="round"/></svg><span class="click-ring"></span></div>
+<div id="tour-card" class="tour-card hidden" role="dialog" aria-label="Пошаговое обучение"><div class="tour-card-kicker">OSV · INTERACTIVE TOUR <span id="tour-progress">1 / 10</span></div><h3 id="tour-title">Обучение</h3><p id="tour-text"></p><div class="tour-controls"><button id="tour-back" class="outline">← Назад</button><button id="tour-play" class="outline">⏸ Пауза</button><button id="tour-next" class="primary">Далее →</button><button id="tour-stop" class="plain">Завершить</button></div></div>
+<div id="tour-welcome" class="welcome"><div class="welcome-box"><span class="welcome-mark">OSV · TRAINING CENTER</span><h2>Добро пожаловать<br><em>в интерактивный тур.</em></h2><p>Покажем основные функции портала на вымышленных операциях. Курсор перемещается по интерфейсу, открывает вкладки и объясняет действия. Никакие реальные данные не используются.</p><div class="welcome-actions"><button class="primary" id="start-auto">▶ Автоматический показ</button><button class="outline" id="start-manual">Пошаговое обучение</button><button class="plain" id="explore-demo">Осмотреть самостоятельно</button></div></div></div>
+<script src="demo.js"></script>
+</body></html>

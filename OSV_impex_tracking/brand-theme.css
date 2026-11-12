@@ -1628,3 +1628,21 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
 @media(max-width:760px){
   #timeline-view .timeline-row-label .op-duration{font-size:8px}
 }
+
+/* A plan in Stages is a faint forecast, not an actual status or a completed step. */
+#timeline-view .stage-planned-eta{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;padding:5px 6px;max-width:94%;border:1px dashed #c9d6e1;
+  background:rgba(234,241,248,.35);border-radius:7px;
+  color:#879bad;line-height:1.15;pointer-events:none;user-select:none;
+}
+#timeline-view .stage-planned-eta span{
+  font-size:8px;font-weight:700;letter-spacing:.07em;
+}
+#timeline-view .stage-planned-eta strong{
+  font-size:10px;font-weight:650;white-space:nowrap;color:#718da4;
+}
+#timeline-view .stage-planned-eta.is-overdue{
+  background:rgba(241,174,75,.065);border-color:#e4c8a7;
+}
+#timeline-view .stage-planned-eta.is-overdue strong{color:#ab8c64}

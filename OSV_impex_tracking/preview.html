@@ -121,6 +121,7 @@
             <div class="mail-room-head"><div><div class="panel-kicker">NOTIFICATION CENTER</div><h2>Матрица email-рассылок</h2><p>Адресаты получают уведомления только о выбранных фактических этапах. Плановые ETA не вызывают рассылку.</p></div>
               <div class="mail-room-actions"><span id="mail-read-status" class="mail-room-status">Просмотр</span><button class="btn btn-outline" id="mail-reload" type="button">Обновить</button><button class="btn btn-primary" id="mail-unlock" type="button" hidden>Администрирование</button></div>
             </div>
+            <form id="mail-admin-form" class="mail-admin-form hidden" autocomplete="off"><div><strong>Доступ администратора</strong><small>Отдельный пароль управления рассылками. Действует 15 минут.</small></div><input id="mail-admin-password" type="password" required autocomplete="new-password" placeholder="Пароль администратора" aria-label="Пароль администратора рассылок"><button class="btn btn-primary" type="submit">Войти</button><button class="btn btn-outline" id="mail-admin-cancel" type="button">Отмена</button></form>
             <div class="mail-summary"><span>Адресатов: <b id="mail-total">0</b></span><span>Активных: <b id="mail-enabled">0</b></span><span>Правила: <b id="mail-rules">0</b></span></div>
             <div class="mail-grid-outer"><div class="mail-grid-scroll" role="region" aria-label="Матрица уведомлений" tabindex="0">
               <table class="mail-grid"><thead id="mail-head"></thead><tbody id="mail-body"></tbody></table>

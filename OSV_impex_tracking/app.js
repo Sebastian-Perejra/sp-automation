@@ -360,7 +360,7 @@
     renderTimeline(true);
 
   }
-  function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
+  function setView(view){if(view!=='timeline')resetDesktopCalendarZoom();state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
   function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
@@ -626,6 +626,75 @@
     }
   }
 
+  /* Desktop zoom scales real calendar cells, not the browser viewport.
+     Positive zoom opens an application-owned focus overlay (never browser fullscreen). */
+  const DESKTOP_ZOOM_MIN=0.70,DESKTOP_ZOOM_MAX=1.60,DESKTOP_ZOOM_STEP=0.15;
+  let desktopCalendarZoom=1;
+  function isDesktopCalendar(){
+    return window.matchMedia('(min-width:1000px) and (hover:hover) and (pointer:fine)').matches
+      && !document.body.classList.contains('mobile-calendar-mode');
+  }
+  function updateDesktopZoomControls(){
+    const percent=Math.round(desktopCalendarZoom*100);
+    $('desktop-calendar-scale').textContent=percent+'%';
+    $('desktop-calendar-minus').disabled=desktopCalendarZoom<=DESKTOP_ZOOM_MIN+0.001;
+    $('desktop-calendar-plus').disabled=desktopCalendarZoom>=DESKTOP_ZOOM_MAX-0.001;
+    $('desktop-calendar-close').hidden=!document.body.classList.contains('calendar-zoom-overlay');
+  }
+  function setDesktopOverlay(active){
+    const backdrop=$('calendar-zoom-backdrop');
+    if(active&&!isDesktopCalendar())return;
+    const already=document.body.classList.contains('calendar-zoom-overlay');
+    if(active===already)return;
+    if(active){
+      backdrop.hidden=false;
+      document.body.classList.add('calendar-zoom-overlay');
+      requestAnimationFrame(()=>backdrop.classList.add('is-active'));
+    }else{
+      backdrop.classList.remove('is-active');
+      document.body.classList.remove('calendar-zoom-overlay');
+      setTimeout(()=>{if(!backdrop.classList.contains('is-active'))backdrop.hidden=true;},260);
+    }
+    updateDesktopZoomControls();
+  }
+  function changeDesktopCalendarZoom(direction){
+    if(!isDesktopCalendar())return;
+    const next=Math.round(Math.max(DESKTOP_ZOOM_MIN,Math.min(DESKTOP_ZOOM_MAX,desktopCalendarZoom+direction*DESKTOP_ZOOM_STEP))*100)/100;
+    if(next===desktopCalendarZoom)return;
+    const scroller=$('timeline-scroller');
+    const label=timelineLabelWidth(),oldW=dayWidth();
+    const oldRow=76*desktopCalendarZoom;
+    const centerDate=(scroller.scrollLeft+scroller.clientWidth/2-label)/oldW;
+    const centerRow=(scroller.scrollTop+scroller.clientHeight/2)/oldRow;
+    desktopCalendarZoom=next;
+    const panel=$('timeline-view').querySelector('.timeline-panel');
+    panel.style.setProperty('--day-width',(79*next).toFixed(2)+'px');
+    panel.style.setProperty('--desktop-row-height',(76*next).toFixed(2)+'px');
+    setDesktopOverlay(next>1.001);
+    requestAnimationFrame(()=>{
+      const newW=dayWidth(),newRow=76*next;
+      scroller.scrollLeft=Math.max(0,label+centerDate*newW-scroller.clientWidth/2);
+      scroller.scrollTop=Math.max(0,centerRow*newRow-scroller.clientHeight/2);
+      positionTimelineWatermarks();
+    });
+    updateDesktopZoomControls();
+  }
+  function resetDesktopCalendarZoom(){
+    if(!document.body.classList.contains('calendar-zoom-overlay')&&desktopCalendarZoom===1)return;
+    const scroller=$('timeline-scroller');
+    const date=(scroller.scrollLeft+scroller.clientWidth/2-timelineLabelWidth())/dayWidth();
+    desktopCalendarZoom=1;
+    const panel=$('timeline-view').querySelector('.timeline-panel');
+    panel.style.removeProperty('--day-width');
+    panel.style.removeProperty('--desktop-row-height');
+    setDesktopOverlay(false);
+    requestAnimationFrame(()=>{
+      scroller.scrollLeft=Math.max(0,timelineLabelWidth()+date*dayWidth()-scroller.clientWidth/2);
+      positionTimelineWatermarks();
+    });
+    updateDesktopZoomControls();
+  }
+
   function attachEvents(){
     setInterval(rolloverToday,30000);
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)rolloverToday();});
@@ -633,6 +702,12 @@
     installTimelinePinch();
     installCalendarDoubleTap();
     installDesktopCalendarDrag();
+    $('desktop-calendar-minus').addEventListener('click',()=>changeDesktopCalendarZoom(-1));
+    $('desktop-calendar-plus').addEventListener('click',()=>changeDesktopCalendarZoom(1));
+    $('desktop-calendar-close').addEventListener('click',resetDesktopCalendarZoom);
+    $('calendar-zoom-backdrop').addEventListener('click',resetDesktopCalendarZoom);
+    updateDesktopZoomControls();
+    window.addEventListener('resize',()=>{if(!isDesktopCalendar())resetDesktopCalendarZoom();});
     $('refresh-data-btn').addEventListener('click',refreshDataManually);
     $('mobile-calendar-open').addEventListener('click',openMobileCalendar);
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
@@ -652,7 +727,7 @@
     document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
     document.querySelectorAll('.modal-layer').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));
     $('close-drawer').addEventListener('click',closeDrawer);$('drawer-backdrop').addEventListener('click',closeDrawer);
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-layer:not(.hidden)').forEach(el=>closeModal(el.id));closeDrawer();}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){resetDesktopCalendarZoom();document.querySelectorAll('.modal-layer:not(.hidden)').forEach(el=>closeModal(el.id));closeDrawer();}});
     // Opening a status is an intentional double action, never a single scroll/tap.
     document.addEventListener('dblclick',e=>{
       const slot=e.target.closest('.day-slot');

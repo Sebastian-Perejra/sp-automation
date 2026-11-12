@@ -1361,3 +1361,22 @@ body.calendar-zoom-overlay .toast-stack{z-index:700!important}
     justify-self:start!important;
   }
 }
+
+/* Shipment stage history: each step shows its real event date, or explicitly no event. */
+.stage-picker-card{width:min(100%,580px)}
+.stage-picker-summary{display:flex;flex-wrap:wrap;justify-content:space-between;gap:7px 14px;padding:12px 0;margin-bottom:6px;border-bottom:1px solid #e4eaf0;color:#677c8d;font-size:11px}
+.stage-picker-summary strong{color:#263f56}
+.stage-picker-section{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:14px 0 10px}
+.stage-picker-section>strong{font-size:12px;color:#293f55}
+.stage-picker-section>small{font-size:10px;color:#8998a8;text-align:right}
+.stage-picker-choices button{min-width:0;align-items:center;gap:9px;padding:10px;min-height:64px}
+.stage-picker-choices .stage-picker-name{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.stage-picker-choices .stage-picker-name>strong{color:#30455c;font-size:11px;line-height:1.25;font-weight:750}
+.stage-picker-choices .stage-picker-date{font-size:10px;line-height:1.2;color:#688096;font-weight:650}
+.stage-picker-choices .stage-choice-pending .stage-picker-date{font-weight:500;color:#9aa7b3}
+.stage-picker-choices button.stage-choice-current{border-color:#bfcfdf;background:#edf6fc;opacity:1;cursor:default}
+.stage-picker-choices button.stage-choice-done{background:#f5fbf7;border-color:#d3e9df}
+.stage-picker-choices .stage-picker-current{display:flex;align-items:flex-end;flex-direction:column;gap:4px;margin-left:auto;color:#147f60;font-size:9px;font-weight:850;white-space:nowrap}
+.stage-picker-choices .stage-picker-current small{font-size:9px;font-weight:650;color:#658d7d}
+.stage-picker-choices .stage-picker-done{display:grid;place-items:center;width:20px;height:20px;flex:none;background:#d6f0e2;color:#148a65;border-radius:50%;font-weight:850}
+@media(max-width:600px){.stage-picker-card{width:min(100%,460px)}.stage-picker-section{flex-direction:column;align-items:flex-start;gap:3px}.stage-picker-section>small{text-align:left}}

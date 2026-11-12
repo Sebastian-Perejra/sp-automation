@@ -188,15 +188,7 @@
     const level=$('calendar-zoom-level');
     if(level)level.textContent=Math.round(mobileCalendarZoom*100)+'%';
   }
-  function displayPinchHint(){
-    if(pinchHintWasShown||!document.body.classList.contains('mobile-calendar-mode'))return;
-    pinchHintWasShown=true;
-    const hint=$('calendar-pinch-hint');
-    if(!hint)return;
-    hint.classList.add('is-visible');
-    clearTimeout(pinchHintTimer);
-    pinchHintTimer=setTimeout(()=>hint.classList.remove('is-visible'),4700);
-  }
+  function displayPinchHint(){ /* onboarding overlay removed */ }
   const touchDistance=e=>Math.hypot(
     e.touches[0].clientX-e.touches[1].clientX,
     e.touches[0].clientY-e.touches[1].clientY
@@ -208,7 +200,7 @@
       const distance=touchDistance(e);
       if(distance<12)return;
       clearTimeout(pinchHintTimer);
-      $('calendar-pinch-hint').classList.remove('is-visible');
+      /* pinch hint removed */
       const label=timelineLabelWidth(),w=dayWidth();
       pinchGesture={
         distance,zoom:mobileCalendarZoom,
@@ -279,10 +271,23 @@
       html+='</div>';
     }
     $('timeline-track').innerHTML=html;
-    requestAnimationFrame(()=>{if(prevX===null){if(todayIdx>=0)scroller.scrollLeft=Math.max(0,todayIdx*dayWidth()-dayWidth()*5);}else{scroller.scrollLeft=prevX;scroller.scrollTop=prevY;}positionTimelineWatermarks();});
+    requestAnimationFrame(()=>{if(prevX===null){if(todayIdx>=0)scroller.scrollLeft=calendarDateLeft(todayIdx,scroller);scroller.scrollTop=0;}else{scroller.scrollLeft=prevX;scroller.scrollTop=prevY;}positionTimelineWatermarks();});
   }
   function dayWidth(){return parseFloat(getComputedStyle($('timeline-scroller')).getPropertyValue('--day-width'))||79;}
-  function scrollToDate(d){if(state.view!=='timeline')setView('timeline');if(d<state.start){state.start=addDays(d,-30);renderTimeline();}if(d>state.end){state.end=addDays(d,70);renderTimeline();}const idx=dayDiff(state.start,d);$('timeline-scroller').scrollTo({left:Math.max(0,idx*dayWidth()-dayWidth()*5),behavior:'smooth'});}
+  function calendarDateLeft(idx,scroller){
+    const width=scroller.clientWidth||window.innerWidth;
+    const label=timelineLabelWidth(),dw=dayWidth();
+    // On mobile the left label scrolls with dates; on desktop it stays fixed.
+    const viewportCenter=isMobileCalendarDevice()?width/2:(width+label)/2;
+    return Math.max(0,label+idx*dw+dw/2-viewportCenter);
+  }
+  function scrollToDate(d){
+    if(state.view!=='timeline')setView('timeline');
+    if(d<state.start){state.start=addDays(d,-30);renderTimeline();}
+    if(d>state.end){state.end=addDays(d,70);renderTimeline();}
+    const scroller=$('timeline-scroller'),idx=dayDiff(state.start,d);
+    requestAnimationFrame(()=>scroller.scrollTo({left:calendarDateLeft(idx,scroller),behavior:'auto'}));
+  }
   function shiftWeek(dir){const el=$('timeline-scroller');el.scrollBy({left:dir*dayWidth()*7,behavior:'smooth'});}
   function renderAnalytics(){
     const intervals=[
@@ -360,17 +365,13 @@
   function openMobileCalendar(){
     if(!isMobileCalendarDevice()||state.view!=='timeline')return;
     document.body.classList.add('mobile-calendar-mode');
-    // Rebuild after the 150px/66px mobile grid variables become active.
-    // Otherwise arrows retain desktop coordinates from the initial render.
     renderTimeline(false);
-    // Device orientation always belongs to the user. Both portrait and landscape work.
     updateMobileCalendarFullscreen();
-    displayPinchHint();
   }
   function closeMobileCalendar(){
     document.body.classList.remove('mobile-calendar-mode','calendar-immersive-mode');
     clearTimeout(pinchHintTimer);
-    $('calendar-pinch-hint').classList.remove('is-visible');
+    /* pinch hint removed */
     pinchGesture=null;
     applyMobileCalendarZoom(1);
     renderTimeline(true);
@@ -390,7 +391,7 @@
     updateMobileCalendarFullscreen();
   }
 
-  function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view==='timeline'&&isMobileCalendarDevice())openMobileCalendar();else if(view!=='timeline')closeMobileCalendar();}
+  function setView(view){state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
   function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
@@ -656,7 +657,7 @@
     installCalendarDoubleTap();
     installDesktopCalendarDrag();
     $('refresh-data-btn').addEventListener('click',refreshDataManually);
-    $('mobile-orientation-dismiss').addEventListener('click',()=>$('mobile-orientation-tip').classList.add('is-dismissed'));
+    $('mobile-calendar-open').addEventListener('click',openMobileCalendar);
     $('mobile-calendar-back').addEventListener('click',closeMobileCalendar);
     $('mobile-calendar-fullscreen').addEventListener('click',toggleMobileCalendarFullscreen);
     window.addEventListener('resize',()=>{

@@ -161,18 +161,22 @@
     $('clear-filter-btn').classList.toggle('hidden',!hasFilter);
     $('state-filter').value=state.filter;
   }
-  function setMetricFilter(filter){
-    state.filter=state.filter===filter?'all':filter;
+  // All filters are shared: repaint both Calendar and Stages from filteredOperations().
+  function refreshFilteredTimeline(){
     renderMetrics();
     renderTimeline(true);
+    renderStages();
+  }
+  function setMetricFilter(filter){
+    state.filter=state.filter===filter?'all':filter;
+    refreshFilteredTimeline();
   }
   function clearAllTimelineFilters(){
     state.filter='all';state.direction='all';state.query='';
     $('search-input').value='';
     $('direction-filter').value='all';
     $('state-filter').value='all';
-    renderMetrics();
-    renderTimeline(true);
+    refreshFilteredTimeline();
   }
   function filteredOperations(){return state.operations.filter(op=>{
     if(op.archived)return false;
@@ -1081,9 +1085,9 @@
     });
     document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.dataset.view)));
     $('new-operation-btn').addEventListener('click',newOperation);
-    $('search-input').addEventListener('input',e=>{state.query=e.target.value;renderMetrics();renderTimeline(true);});
-    $('direction-filter').addEventListener('change',e=>{state.direction=e.target.value;renderMetrics();renderTimeline(true);});
-    $('state-filter').addEventListener('change',e=>{state.filter=e.target.value;renderMetrics();renderTimeline(true);});
+    $('search-input').addEventListener('input',e=>{state.query=e.target.value;refreshFilteredTimeline();});
+    $('direction-filter').addEventListener('change',e=>{state.direction=e.target.value;refreshFilteredTimeline();});
+    $('state-filter').addEventListener('change',e=>{state.filter=e.target.value;refreshFilteredTimeline();});
     $('metrics').addEventListener('click',e=>{const btn=e.target.closest('[data-metric-filter]');if(btn)setMetricFilter(btn.dataset.metricFilter);});
     $('clear-filter-btn').addEventListener('click',clearAllTimelineFilters);
     $('today-btn').addEventListener('click',()=>scrollToDate(TODAY));

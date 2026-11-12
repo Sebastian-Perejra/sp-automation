@@ -397,19 +397,64 @@
     $('mobile-calendar-open').style.display=next==='stages'?'none':'';
     renderStages();
   }
+  function closeStageConfirm(){
+    const layer=document.getElementById('stage-confirm-overlay');
+    if(layer)layer.remove();
+  }
   function promptStageMove(opId,stageNo){
     const op=state.operations.find(o=>o.id===opId);
     if(!op||op.archived)return;
-    const f=stageFacts(op),target=STAGES[stageNo];
-    if(!target||f.current===stageNo)return;
+    const facts=stageFacts(op),target=STAGES[stageNo];
+    if(!target||facts.current===stageNo)return;
     if(delivered(op)){toast('Завершённую поставку нельзя перемещать без корректировки истории.',true);return;}
-    const prev=f.current===null?'Без текущего этапа':STAGES[f.current].label;
-    const skips=f.current!==null&&stageNo>f.current+1?'\nПромежуточные стадии НЕ будут отмечены как пройденные.':'';
-    if(!confirm('Изменить статус '+op.company+'?\n'+prev+' → '+target.label+'\nДата: '+formatDate(TODAY)+skips))return;
-    guarded(async()=>{
-      await backendCall('apiSaveEvent',opId,{date:TODAY,status:target.id,type:'actual',note:'Перемещено в режиме «Этапы»'});
-      toast('Этап обновлён: '+target.label);
+    closeStageConfirm();
+    const previous=facts.current===null?'Не определён':STAGES[facts.current].label;
+    const skipped=facts.current!==null&&stageNo>facts.current+1;
+    const layer=document.createElement('div');
+    layer.id='stage-confirm-overlay';
+    layer.className='stage-confirm-overlay';
+    layer.innerHTML=`
+      <section class="stage-confirm-card" role="dialog" aria-modal="true" aria-labelledby="stage-confirm-title" aria-describedby="stage-confirm-description">
+        <div class="stage-confirm-header">
+          <div class="stage-confirm-icon" aria-hidden="true">🚚</div>
+          <button type="button" class="stage-confirm-x" data-stage-cancel aria-label="Закрыть">×</button>
+        </div>
+        <div class="stage-confirm-eyebrow">ИЗМЕНЕНИЕ ЭТАПА</div>
+        <h2 id="stage-confirm-title">Подтвердить перемещение?</h2>
+        <p id="stage-confirm-description" class="stage-confirm-shipment">${esc(op.company)} <span>· ${esc(op.goods)}</span></p>
+        <div class="stage-confirm-route">
+          <div><small>Текущий этап</small><strong>${esc(previous)}</strong></div>
+          <span class="stage-confirm-arrow" aria-hidden="true">→</span>
+          <div class="stage-confirm-destination"><small>Новый этап</small><strong>${esc(target.label)}</strong></div>
+        </div>
+        <div class="stage-confirm-date"><span aria-hidden="true">◷</span> Дата события: <strong>${esc(formatDate(TODAY))}</strong></div>
+        ${skipped?'<div class="stage-confirm-warning"><span aria-hidden="true">!</span><span>Промежуточные этапы останутся без подтверждения. Галочки для них не появятся.</span></div>':''}
+        <div class="stage-confirm-actions">
+          <button type="button" class="stage-confirm-cancel" data-stage-cancel>Отмена</button>
+          <button type="button" class="stage-confirm-approve" data-stage-approve>Подтвердить</button>
+        </div>
+      </section>`;
+    const dismiss=()=>closeStageConfirm();
+    layer.addEventListener('click',e=>{
+      if(e.target===layer||e.target.closest('[data-stage-cancel]')){dismiss();return;}
+      const approve=e.target.closest('[data-stage-approve]');
+      if(!approve||approve.disabled)return;
+      approve.disabled=true;
+      approve.textContent='Сохранение…';
+      guarded(async()=>{
+        await backendCall('apiSaveEvent',opId,{date:TODAY,status:target.id,type:'actual',note:'Перемещено в режиме «Этапы»'});
+        closeStageConfirm();
+        toast('Этап обновлён: '+target.label);
+      },approve).finally(()=>{
+        if(document.getElementById('stage-confirm-overlay')===layer){
+          approve.textContent='Подтвердить';
+          approve.disabled=false;
+        }
+      });
     });
+    document.body.appendChild(layer);
+    const cancel=layer.querySelector('.stage-confirm-cancel');
+    if(cancel)cancel.focus();
   }
   function closeStagePicker(){
     const picker=document.getElementById('stage-picker-overlay');
@@ -438,7 +483,7 @@
   function installStageInteractions(){
     $('timeline-view-calendar').addEventListener('click',()=>setTimelineDisplay('calendar'));
     $('timeline-view-stages').addEventListener('click',()=>setTimelineDisplay('stages'));
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStagePicker();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeStagePicker();closeStageConfirm();}});
     const grid=$('stage-grid');
     grid.addEventListener('click',e=>{
       const truck=e.target.closest('[data-truck]');

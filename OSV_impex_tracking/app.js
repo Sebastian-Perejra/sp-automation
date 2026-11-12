@@ -622,6 +622,7 @@
     if(!op)return;
     closeStagePicker();
     const facts=stageFacts(op);
+    const plans=plannedStages(opId);
     const current=facts.current===null?'Не определён':STAGES[facts.current].label;
     const disabled=!canEdit()||op.archived||delivered(op);
     // One reliable chronological source for both the calendar and this view.
@@ -642,18 +643,21 @@
     layer.innerHTML='<div class="stage-picker-card" role="dialog" aria-modal="true" aria-label="История этапов и изменение статуса">'
       +'<div class="stage-picker-head"><div><strong>'+esc(op.company)+'</strong><small>'+esc(op.goods)+'</small></div><button type="button" data-picker-close aria-label="Закрыть">×</button></div>'
       +'<div class="stage-picker-summary"><span>Текущий этап: <strong>'+esc(current)+'</strong></span><span>Дней на этапе / всего: <strong>'+esc(facts.stageDays===null?'—':facts.stageDays)+' / '+esc(facts.totalDays===null?'—':facts.totalDays)+'</strong></span></div>'
-      +'<div class="stage-picker-section"><strong>История прохождения этапов</strong><small>Дата — из фактического события в календаре</small></div>'
+      +'<div class="stage-picker-section"><strong>Этапы: факт и план</strong><small>✓ — подтверждено · ETA — ожидаемая дата</small></div>'
       +'<div class="stage-picker-choices">'+STAGES.map((s,i)=>{
         const event=byStage.get(i);
+        const plan=plans.get(i);
         const active=i===facts.current;
         const completed=!!event&&!active;
-        const date=event?fmt(event.date):'Нет события';
+        const date=event?fmt(event.date):'Нет фактического события';
         const automated=!!event&&/Автоподтверждено|Автоподтверждение/.test(event.note||'');
         const duration=active&&facts.stageDays!==null?facts.stageDays+' дн. на этапе':'';
-        const className=active?'stage-choice-current':completed?'stage-choice-done':'stage-choice-pending';
+        const planPending=!!plan&&!event&&(facts.current===null||i>facts.current);
+        const planDate=planPending?fmt(plan.date):'';
+        const className=active?'stage-choice-current':completed?'stage-choice-done':planPending?'stage-choice-planned':'stage-choice-pending';
         return '<button type="button" class="'+className+'" data-stage-choice="'+i+'" '+(disabled||active?'disabled':'')+'>'
           +'<span class="stage-picker-index">'+(i+1)+'</span>'
-          +'<span class="stage-picker-name"><strong>'+esc(s.label)+'</strong><small class="stage-picker-date">'+(event?'◷ ':'')+esc(date)+(automated?' · Авто':'')+'</small></span>'
+          +'<span class="stage-picker-name"><strong>'+esc(s.label)+'</strong><small class="stage-picker-date">'+(event?'Факт · ':'')+esc(event?date:planPending?'Ожидается':'Нет события')+(automated?' · Авто':'')+'</small>'+(planPending?'<small class="stage-picker-plan">ETA · '+esc(planDate)+'</small>':'')+'</span>'
           +(active?'<span class="stage-picker-current">Текущий'+(duration?'<small>'+esc(duration)+'</small>':'')+'</span>':completed?'<span class="stage-picker-done" aria-label="Этап подтверждён">✓</span>':'')
           +'</button>';
       }).join('')+'</div>'

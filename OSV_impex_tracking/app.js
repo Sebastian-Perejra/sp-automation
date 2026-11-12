@@ -372,10 +372,18 @@
     const op=state.operations.find(o=>o.id===operationId);if(!op)return;
     state.activeOperation=operationId;state.activeDate=date;$('event-operation-caption').textContent=op.direction+' · '+op.company;$('event-modal-title').textContent=formatDate(date,{day:'numeric',month:'long',year:'numeric'});
     $('event-operation-id').value=operationId;$('event-edit-id').value=editId||'';$('event-date').value=date;$('event-note').value='';
-    const statusSelect=$('event-status');statusSelect.innerHTML=STATUS.map(s=>`<option value="${s.id}">${esc(s.label)}</option>`).join('');statusSelect.value='received';
+    const statusSelect=$('event-status');
+    statusSelect.innerHTML='<option value="" disabled>Выберите статус</option>'+STATUS.map(s=>`<option value="${s.id}">${esc(s.label)}</option>`).join('');
+    statusSelect.value='';
+    document.querySelector('input[name="event-type"][value="actual"]').checked=true;
     const es=operationEvents(operationId).filter(e=>e.date===date);$('existing-events').innerHTML=existingEventsHtml(es);
-    if(editId){const e=operationEvents(operationId).find(e=>e.id===editId);if(e){$('event-date').value=e.date;statusSelect.value=e.status;$('event-note').value=e.note||'';document.querySelector(`input[name="event-type"][value="${e.type}"]`).checked=true;}}
-    else{const initial=es.length?'search_transport':'received';statusSelect.value=initial;document.querySelector(`input[name="event-type"][value="${defaultEventType(initial)}"]`).checked=true;}
+    if(editId){
+      const e=operationEvents(operationId).find(e=>e.id===editId);
+      if(e){
+        $('event-date').value=e.date;statusSelect.value=e.status;$('event-note').value=e.note||'';
+        document.querySelector(`input[name="event-type"][value="${e.type}"]`).checked=true;
+      }
+    }
     $('event-submit').textContent=editId?'Обновить событие ↗':'Сохранить статус ↗';showError('event-error','');openModal('event-modal');
   }
   function openDrawer(id){const op=state.operations.find(o=>o.id===id);if(!op)return;state.activeOperation=id;const es=operationEvents(id),cycle=cycleDays(op),status=delivered(op)?'Завершена':correctOverdue(op)?'Есть отклонения':'В работе';
@@ -659,7 +667,7 @@
     });
     $('event-status').addEventListener('change',e=>{document.querySelector(`input[name="event-type"][value="${defaultEventType(e.target.value)}"]`).checked=true;});
     $('operation-form').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget,btn=form.querySelector('button[type=submit]');const fd=new FormData(form);const p={direction:fd.get('direction'),company:String(fd.get('company')||'').trim(),goods:String(fd.get('goods')||'').trim(),date:String(fd.get('date')||''),note:String(fd.get('note')||'').trim()};if(!p.company||!p.goods||!/\d{4}-\d{2}-\d{2}/.test(p.date)){showError('operation-error','Заполните обязательные поля');return;}guarded(async()=>{await backendCall('apiCreateOperation',p);closeModal('operation-modal');toast('Операция создана');},btn);});
-    $('event-form').addEventListener('submit',e=>{e.preventDefault();const btn=$('event-submit');const operationId=$('event-operation-id').value, p={id:$('event-edit-id').value||'',date:$('event-date').value,status:$('event-status').value,type:document.querySelector('input[name="event-type"]:checked').value,note:$('event-note').value.trim()};if(!p.date||!BY_STATUS[p.status]){showError('event-error','Заполните дату и статус');return;}guarded(async()=>{await backendCall('apiSaveEvent',operationId,p);closeModal('event-modal');toast(p.id?'Событие обновлено':'Событие сохранено');},btn);});
+    $('event-form').addEventListener('submit',e=>{e.preventDefault();const btn=$('event-submit');const operationId=$('event-operation-id').value, p={id:$('event-edit-id').value||'',date:$('event-date').value,status:$('event-status').value,type:document.querySelector('input[name="event-type"]:checked').value,note:$('event-note').value.trim()};if(!p.date||!BY_STATUS[p.status]){showError('event-error','Выберите статус и укажите дату события');$('event-status').focus();return;}guarded(async()=>{await backendCall('apiSaveEvent',operationId,p);closeModal('event-modal');toast(p.id?'Событие обновлено':'Событие сохранено');},btn);});
     $('timeline-scroller').addEventListener('scroll',()=>{
       positionTimelineWatermarks();
       const s=$('timeline-scroller');if(s.scrollLeft+s.clientWidth>s.scrollWidth-dayWidth()*14&&state.end<addDays(TODAY,700)){

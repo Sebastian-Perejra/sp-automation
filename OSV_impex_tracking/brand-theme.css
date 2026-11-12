@@ -1323,3 +1323,23 @@ body.calendar-zoom-overlay .toast-stack{z-index:700!important}
 @keyframes osvStageCard{from{opacity:.5;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:500px){.stage-confirm-card{padding:18px;border-radius:14px}.stage-confirm-card h2{font-size:19px}.stage-confirm-route{gap:6px;padding:10px}.stage-confirm-route strong{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.stage-confirm-overlay,.stage-confirm-card{animation:none}}
+
+#timeline-view .stage-zoom-control{display:flex;align-items:center;gap:1px;order:20;margin-left:auto;border:1px solid #dce4eb;border-radius:9px;background:#fff;height:34px;overflow:hidden}
+#timeline-view .stage-zoom-control button{appearance:none;border:0;background:#fff;cursor:pointer;width:34px;height:32px;font-size:19px;font-weight:800;color:#334a61}
+#timeline-view .stage-zoom-control button:disabled{opacity:.3;cursor:default}
+#timeline-view .stage-zoom-control button:hover:not(:disabled){background:#eef3f8}
+#timeline-view .stage-zoom-control output{min-width:40px;text-align:center;color:#51667d;font:800 11px/1 Arial,sans-serif}
+#timeline-view #stage-zoom-close{border-left:1px solid #dce4eb;color:#b71f32}
+#timeline-view .stage-grid{grid-template-columns:calc(var(--stage-op-width) * var(--stage-zoom,1)) repeat(var(--stage-count,10),calc(100px * var(--stage-zoom,1)))!important}
+#timeline-view .stage-heading,#timeline-view .stage-corner{min-height:calc(93px * var(--stage-zoom,1))}
+#timeline-view .stage-op,#timeline-view .stage-cell{min-height:calc(90px * var(--stage-zoom,1));}
+#timeline-view .stage-truck{width:calc(88px * var(--stage-zoom,1));min-height:calc(68px * var(--stage-zoom,1))}
+#timeline-view .stage-truck-art{width:calc(69px * var(--stage-zoom,1));height:calc(39px * var(--stage-zoom,1))}
+#timeline-view .stage-truck span{font-size:calc(12px * var(--stage-zoom,1))}
+#timeline-view .stage-check{border:0;cursor:pointer;user-select:none}
+#timeline-view .stage-truck::before{content:"";position:absolute;left:-13px;top:19px;width:18px;height:23px;background:repeating-linear-gradient(to bottom,transparent 0 4px,#e19a9e 4px 6px,transparent 6px 10px);opacity:.8;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);pointer-events:none}
+#timeline-view .stage-truck:hover::before{animation:osvTruckStreak .6s ease-in-out infinite alternate}
+@keyframes osvTruckStreak{from{opacity:.3;transform:translateX(4px)}to{opacity:1;transform:translateX(-3px)}}
+@media(max-width:850px){#timeline-view .stage-grid{grid-template-columns:calc(158px * var(--stage-zoom,1)) repeat(var(--stage-count,10),calc(94px * var(--stage-zoom,1)))!important}#timeline-view .stage-zoom-control{margin-left:0;order:0}}
+@media(min-width:900px) and (pointer:fine){body.stage-zoom-overlay{overflow:hidden!important}body.stage-zoom-overlay #timeline-view .timeline-panel{position:fixed!important;inset:22px!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;z-index:460!important;display:flex!important;flex-direction:column!important;box-shadow:0 25px 90px rgba(0,0,0,.3)!important;background:#fff!important;border-radius:15px!important;animation:osvCalendarExpand .25s ease-out both}body.stage-zoom-overlay #timeline-view .stages-view{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}body.stage-zoom-overlay #timeline-view .stage-scroll{flex:1 1 auto;min-height:0;max-height:none!important}}
+@media(prefers-reduced-motion:reduce){#timeline-view .stage-truck:hover::before{animation:none}}

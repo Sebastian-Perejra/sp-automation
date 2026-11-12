@@ -391,7 +391,7 @@
     for(const {op,f} of facts){
       const current=f.current;
       const late=correctOverdue(op);
-      out+='<div class="stage-op" data-stage-open="'+esc(op.id)+'" tabindex="0" role="button" title="Открыть хронологию"><div class="stage-op-head"><span class="direction-tag '+op.direction.toLowerCase()+'">'+esc(op.direction)+'</span><strong>'+esc(op.company)+'</strong></div><small>'+esc(op.goods)+'</small><div class="stage-op-meta">'+(f.totalDays===null?'Нет факта старта':f.totalDays+' дн. всего')+(late?' · ⚑ Отклонение':'')+'</div></div>';
+      out+='<div class="stage-op" data-stage-open="'+esc(op.id)+'" tabindex="0" role="button" title="Открыть хронологию"><div class="stage-op-head"><span class="direction-tag '+op.direction.toLowerCase()+'">'+esc(op.direction)+'</span><strong>'+esc(op.company)+'</strong></div><small>'+esc(op.goods)+'</small><div class="stage-op-meta">'+(f.totalDays===null?'Нет факта старта':f.totalDays+' дн. всего')+(late?' · ⚑ Отклонение':'')+'</div>'+(delivered(op)?'<span class="op-delivered-stamp" aria-label="Доставлено">ДОСТАВЛЕНО</span>':'')+'</div>';
       for(let i=0;i<STAGES.length;i++){
         const isCurrent=i===current,confirmed=f.confirmed.has(i)&&!isCurrent;
         let content='';

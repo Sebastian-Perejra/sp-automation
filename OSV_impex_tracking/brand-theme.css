@@ -1396,3 +1396,13 @@ body.viewer-mode .stage-check{cursor:default!important}
 
 body.viewer-mode .stage-picker-choices button:disabled{opacity:1;cursor:default}
 body.viewer-mode .stage-picker-choices button.stage-choice-pending:disabled{opacity:.8}
+
+/* Deny access to edit-only forms at presentation level as well as app/server guards. */
+body.viewer-mode #new-operation-btn,
+body.viewer-mode #operation-modal,
+body.viewer-mode #event-modal,
+body.viewer-mode [data-edit-event],
+body.viewer-mode [data-delete-event],
+body.viewer-mode #drawer-add-event,
+body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!important;pointer-events:none!important}
+#new-operation-btn[hidden]{display:none!important}

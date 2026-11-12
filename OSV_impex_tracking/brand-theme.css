@@ -1452,3 +1452,35 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
   }
   body.mobile-stage-mode #timeline-view .timeline-scroller{display:none!important}
 }
+
+/* Empty Stages view retains the same 10-column matrix and future-operation rows. */
+#timeline-view .stage-placeholder-label,
+#timeline-view .stage-placeholder-cell{
+  min-height:90px;
+  background:#fbfcfe;
+  pointer-events:none;
+  user-select:none;
+}
+#timeline-view .stage-placeholder-label{
+  cursor:default;
+  border-bottom:1px dashed #d8e2ec;
+}
+#timeline-view .stage-placeholder-label strong{
+  white-space:normal;
+  font-size:12px;
+  color:#647b91;
+}
+#timeline-view .stage-placeholder-label small{
+  white-space:normal;
+  font-size:10px;
+  color:#9aabba;
+}
+#timeline-view .stage-placeholder-cell{
+  background:#fff;
+  border-left:1px dashed #dce6f0;
+  border-bottom:1px dashed #d8e2ec;
+}
+#timeline-view .stages-view .stage-placeholder-label,
+#timeline-view .stages-view .stage-placeholder-cell{
+  min-height:calc(90px * var(--stage-zoom,1));
+}

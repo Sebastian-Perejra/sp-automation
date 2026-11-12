@@ -1484,3 +1484,32 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
 #timeline-view .stages-view .stage-placeholder-cell{
   min-height:calc(90px * var(--stage-zoom,1));
 }
+
+/* Desktop calendar: mark the beginning and end of each Saturday–Sunday block.
+   Borders are inset, so they never change column width or cover event chips. */
+@media (min-width: 761px) and (hover: hover) and (pointer: fine) {
+  #timeline-view .day-head.weekend {
+    background-color: #e5ebf2;
+  }
+  #timeline-view .day-head.weekend span,
+  #timeline-view .day-head.weekend em {
+    color: #50677d;
+    font-weight: 800;
+  }
+  #timeline-view .day-head.weekend-start,
+  #timeline-view .day-slot.weekend-start,
+  #timeline-view .timeline-ghost-cell.weekend-start {
+    border-left: 2px solid #91a6bc;
+  }
+  #timeline-view .day-head.weekend-end,
+  #timeline-view .day-slot.weekend-end,
+  #timeline-view .timeline-ghost-cell.weekend-end {
+    border-right: 2px solid #91a6bc;
+  }
+  #timeline-view .day-slot.weekend {
+    background-image: linear-gradient(rgba(74, 95, 117, .035), rgba(74, 95, 117, .035));
+  }
+  #timeline-view .timeline-ghost-cell.weekend {
+    background-color: #f1f5f9;
+  }
+}

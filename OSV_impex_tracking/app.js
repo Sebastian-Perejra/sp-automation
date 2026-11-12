@@ -404,7 +404,21 @@
         out+='<div class="stage-cell '+(isCurrent?'is-current ':'')+(current!==null&&i<current?'is-past ':'')+(i===9?'is-last ':'')+'" data-stage-target="'+i+'" data-stage-operation="'+esc(op.id)+'">'+content+'</div>';
       }
     }
-    if(!rows.length)out+='<div class="stage-empty">Нет операций для выбранных фильтров.</div>';
+    if(!rows.length){
+      // Match the empty calendar: retain the status matrix without inventing real operations.
+      // No row is interactive, counted, exported or persisted.
+      const filtered=state.filter!=='all'||state.direction!=='all'||!!state.query.trim();
+      const message=filtered?'Нет операций по выбранным фильтрам':'Пока нет операций';
+      const detail=filtered?'Измените или сбросьте фильтры':'Новые перевозки появятся здесь';
+      for(let placeholder=0;placeholder<7;placeholder++){
+        out+='<div class="stage-op stage-placeholder-label" aria-hidden="true">'
+          +(placeholder===0?'<strong>'+message+'</strong><small>'+detail+'</small>':'')
+          +'</div>';
+        for(let column=0;column<STAGES.length;column++){
+          out+='<div class="stage-cell stage-placeholder-cell" aria-hidden="true"></div>';
+        }
+      }
+    }
     $('stage-grid').innerHTML=out;
     $('timeline-view-stages').classList.toggle('is-selected',timelineDisplay==='stages');
     $('timeline-view-calendar').classList.toggle('is-selected',timelineDisplay==='calendar');

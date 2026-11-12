@@ -40,7 +40,20 @@
     const viewOnly=!canEdit(),badge=$('access-role-badge');
     document.body.classList.toggle('viewer-mode',viewOnly);
     if(badge){badge.hidden=false;badge.textContent=viewOnly?'◉ VIEW ONLY':'● EDITOR';badge.title=viewOnly?'Только просмотр':'Редактирование разрешено';}
-    $('new-operation-btn').hidden=viewOnly;
+    const create=$('new-operation-btn');
+    if(create){
+      create.hidden=viewOnly;
+      create.style.display=viewOnly?'none':'';
+      create.setAttribute('aria-hidden',String(viewOnly));
+      create.tabIndex=viewOnly?-1:0;
+    }
+    if(viewOnly){
+      // Clear any editor-only dialog when a user authenticates as VIEWER.
+      ['operation-modal','event-modal'].forEach(id=>{
+        const el=$(id);
+        if(el)el.classList.add('hidden');
+      });
+    }
   }
   function iso(date) { const d = date instanceof Date ? date : new Date(date); return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-'); }
   function asDate(s) { return new Date(String(s).slice(0,10)+'T12:00:00'); }
@@ -705,8 +718,12 @@
     renderTimeline(true);
 
   }
-  function setView(view){if(view!=='timeline'){resetStageZoom();resetDesktopCalendarZoom();}state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
-  function openModal(id){$(id).classList.remove('hidden');document.body.style.overflow='hidden';}
+  function setView(view){if(view!=='timeline'){resetStageZoom();resetDesktopCalendarZoom();}state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));applyRole();document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
+  function openModal(id){
+    if((id==='operation-modal'||id==='event-modal')&&!canEdit())return;
+    $(id).classList.remove('hidden');
+    document.body.style.overflow='hidden';
+  }
   function closeModal(id){$(id).classList.add('hidden');if([...document.querySelectorAll('.modal-layer')].every(x=>x.classList.contains('hidden')))document.body.style.overflow='';}
   function toast(msg,error=false){const node=document.createElement('div');node.className='toast'+(error?' error':'');node.textContent=msg;$('toast-stack').append(node);setTimeout(()=>node.remove(),4300);}
   function showError(id,msg){const el=$(id);el.textContent=msg;el.classList.toggle('hidden',!msg);}

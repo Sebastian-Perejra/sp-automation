@@ -367,6 +367,7 @@
     $('mail-read-status').textContent=editing?'● Редактирование':'◉ Только просмотр';
     $('mail-read-status').classList.toggle('is-admin',editing);
     $('mail-unlock').hidden=!canEdit()||editing||!IS_GAS;
+    if(editing||!canEdit())$('mail-admin-form').classList.add('hidden');
     $('mail-add').hidden=!editing;
     $('mail-save').hidden=!editing;
     $('mail-info').textContent=editing?'Изменения сохраняются сразу в матрице Google Sheets после нажатия «Сохранить».':'Данные читаются из Google Sheets · изменения доступны только администратору';
@@ -385,17 +386,26 @@
     }catch(err){toast('Рассылки: '+err.message,true);}
     finally{mailLoadInProgress=false;}
   }
-  async function unlockMailAdmin(){
+  function unlockMailAdmin(){
     if(!canEdit())return;
-    const password=window.prompt('Пароль администратора рассылок (отдельно от пароля EDITOR):');
+    $('mail-admin-form').classList.remove('hidden');
+    $('mail-admin-password').focus();
+  }
+  async function submitMailAdmin(){
+    const password=$('mail-admin-password').value;
     if(!password)return;
+    const submit=$('mail-admin-form').querySelector('[type="submit"]');
+    submit.disabled=true;
     try{
       const result=await gasCall('apiUnlockNotificationAdmin',state.token,password);
       mailAdminToken=result.adminToken;
       mailAdminUntil=Date.now()+Number(result.minutes||15)*60000-5000;
+      $('mail-admin-password').value='';
+      $('mail-admin-form').classList.add('hidden');
       renderMailRoom();
       toast('Управление рассылками открыто на 15 минут.');
     }catch(err){toast(err.message,true);}
+    finally{submit.disabled=false;}
   }
   async function saveMailRoom(){
     if(!mailCanEdit()){toast('Нужен доступ администратора рассылки.',true);renderMailRoom();return;}
@@ -1266,6 +1276,8 @@
     $('new-operation-btn').addEventListener('click',newOperation);
     $('mail-reload').addEventListener('click',()=>{if(mailDirty&&!confirm('Несохранённые изменения будут потеряны. Продолжить?'))return;mailDirty=false;loadMailRoom(true);});
     $('mail-unlock').addEventListener('click',unlockMailAdmin);
+    $('mail-admin-form').addEventListener('submit',e=>{e.preventDefault();submitMailAdmin();});
+    $('mail-admin-cancel').addEventListener('click',()=>{$('mail-admin-password').value='';$('mail-admin-form').classList.add('hidden');});
     $('mail-add').addEventListener('click',()=>{if(!mailCanEdit())return;if(mailRows.length>=100){toast('Не более 100 адресатов.',true);return;}mailRows.push(mailTemplateRow());mailDirty=true;renderMailRoom();});
     $('mail-save').addEventListener('click',saveMailRoom);
     $('mail-body').addEventListener('input',e=>{

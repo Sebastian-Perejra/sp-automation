@@ -346,8 +346,8 @@
   /* Email notification matrix: separate administrator unlock for EDITOR sessions. */
   const MAIL_STATUS_IDS=['received','search_transport','transport_booked','waiting_loading','loaded','en_route_customs','customs_arrived','customs_cleared','en_route_delivery','delivered'];
   const MAIL_STATUS_NAMES=['Заявка получена','Поиск транспорта','Транспорт найден','Ожидание загрузки','Загружен','В пути на таможню','Таможенное оформление','Оформлено','В пути на выгрузку','Выгружен'];
-  let mailRows=[],mailRevision='',mailAdminToken='',mailAdminUntil=0,mailLoadInProgress=false,mailDirty=false;
-  const mailCanEdit=()=>canEdit()&&!!mailAdminToken&&Date.now()<mailAdminUntil;
+  let mailRows=[],mailRevision='',mailLoadInProgress=false,mailDirty=false;
+  const mailCanEdit=()=>canEdit();
   function mailTemplateRow(){
     return {name:'',email:'',enabled:false,statuses:MAIL_STATUS_IDS.map(()=>false)};
   }
@@ -366,11 +366,9 @@
     $('mail-rules').textContent=String(mailRows.reduce((sum,r)=>sum+(r.enabled?r.statuses.filter(Boolean).length:0),0));
     $('mail-read-status').textContent=editing?'● Редактирование':'◉ Только просмотр';
     $('mail-read-status').classList.toggle('is-admin',editing);
-    $('mail-unlock').hidden=!canEdit()||editing||!IS_GAS;
-    if(editing||!canEdit())$('mail-admin-form').classList.add('hidden');
     $('mail-add').hidden=!editing;
     $('mail-save').hidden=!editing;
-    $('mail-info').textContent=editing?'Изменения сохраняются сразу в матрице Google Sheets после нажатия «Сохранить».':'Данные читаются из Google Sheets · изменения доступны только администратору';
+    $('mail-info').textContent=editing?'После нажатия «Сохранить» изменения записываются в Google Sheets.':'Только просмотр · изменять адресатов и статусы может пользователь EDITOR';
   }
   async function loadMailRoom(force=false){
     if(mailLoadInProgress||!IS_GAS)return;
@@ -381,37 +379,15 @@
       mailRows=(raw.rows||[]).map(r=>({name:r.name||'',email:r.email||'',enabled:!!r.enabled,statuses:MAIL_STATUS_IDS.map((_,i)=>!!r.statuses?.[i])}));
       mailRevision=raw.revision||'';
       mailDirty=false;
-      if(!raw.canRequestAdmin){mailAdminToken='';mailAdminUntil=0;}
       renderMailRoom();
     }catch(err){toast('Рассылки: '+err.message,true);}
     finally{mailLoadInProgress=false;}
   }
-  function unlockMailAdmin(){
-    if(!canEdit())return;
-    $('mail-admin-form').classList.remove('hidden');
-    $('mail-admin-password').focus();
-  }
-  async function submitMailAdmin(){
-    const password=$('mail-admin-password').value;
-    if(!password)return;
-    const submit=$('mail-admin-form').querySelector('[type="submit"]');
-    submit.disabled=true;
-    try{
-      const result=await gasCall('apiUnlockNotificationAdmin',state.token,password);
-      mailAdminToken=result.adminToken;
-      mailAdminUntil=Date.now()+Number(result.minutes||15)*60000-5000;
-      $('mail-admin-password').value='';
-      $('mail-admin-form').classList.add('hidden');
-      renderMailRoom();
-      toast('Управление рассылками открыто на 15 минут.');
-    }catch(err){toast(err.message,true);}
-    finally{submit.disabled=false;}
-  }
   async function saveMailRoom(){
-    if(!mailCanEdit()){toast('Нужен доступ администратора рассылки.',true);renderMailRoom();return;}
+    if(!mailCanEdit()){toast('Только просмотр: изменение рассылок запрещено.',true);renderMailRoom();return;}
     $('mail-save').disabled=true;
     try{
-      const updated=await gasCall('apiSaveNotificationMatrix',state.token,mailAdminToken,mailRows,mailRevision);
+      const updated=await gasCall('apiSaveNotificationMatrix',state.token,mailRows,mailRevision);
       mailRows=updated.rows;
       mailRevision=updated.revision;
       mailDirty=false;
@@ -419,7 +395,6 @@
       toast('Матрица email-уведомлений сохранена.');
     }catch(err){
       toast('Не удалось сохранить матрицу: '+err.message,true);
-      if(/истёк|отозвана/.test(err.message)){mailAdminToken='';mailAdminUntil=0;renderMailRoom();}
     }finally{$('mail-save').disabled=false;}
   }
 
@@ -1275,9 +1250,6 @@
     document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',()=>setView(el.dataset.view)));
     $('new-operation-btn').addEventListener('click',newOperation);
     $('mail-reload').addEventListener('click',()=>{if(mailDirty&&!confirm('Несохранённые изменения будут потеряны. Продолжить?'))return;mailDirty=false;loadMailRoom(true);});
-    $('mail-unlock').addEventListener('click',unlockMailAdmin);
-    $('mail-admin-form').addEventListener('submit',e=>{e.preventDefault();submitMailAdmin();});
-    $('mail-admin-cancel').addEventListener('click',()=>{$('mail-admin-password').value='';$('mail-admin-form').classList.add('hidden');});
     $('mail-add').addEventListener('click',()=>{if(!mailCanEdit())return;if(mailRows.length>=100){toast('Не более 100 адресатов.',true);return;}mailRows.push(mailTemplateRow());mailDirty=true;renderMailRoom();});
     $('mail-save').addEventListener('click',saveMailRoom);
     $('mail-body').addEventListener('input',e=>{
@@ -1327,7 +1299,7 @@
       }
     },{passive:true});
     $('login-form').addEventListener('submit',async e=>{e.preventDefault();const btn=e.currentTarget.querySelector('button[type=submit]');btn.disabled=true;showError('login-error','');try{const result=await gasCall('apiLogin',$('login-password').value);if(!result?.token)throw Error('Сервер не выдал сессию');state.token=result.token;state.role=result.role||'editor';try{sessionStorage.setItem(SESSION_KEY,result.token);}catch{}await startWorkspace();}catch(err){showError('login-error',err?.message||'Ошибка авторизации');}finally{btn.disabled=false;}});
-    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}$('footer-online').hidden=true;mailAdminToken='';mailAdminUntil=0;mailRows=[];mailDirty=false;state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
+    $('logout-btn').addEventListener('click',async()=>{try{await gasCall('apiLogout',state.token);}catch{}$('footer-online').hidden=true;mailRows=[];mailDirty=false;state.token=null;state.role='editor';try{sessionStorage.removeItem(SESSION_KEY);}catch{}$('workspace').classList.add('hidden');$('login').classList.remove('hidden');});
   }
 
   /* Online indicator counts recent authenticated sessions, not identifiable people. */

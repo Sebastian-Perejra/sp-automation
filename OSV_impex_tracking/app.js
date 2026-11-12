@@ -328,7 +328,7 @@
   ];
   const STAGE_INDEX=Object.fromEntries(STAGES.map((s,i)=>[s.id,i]));
   // Legacy statuses are mapped for display but are not retroactively fabricated in history.
-  const STAGE_LEGACY={loading_actual:'waiting_loading',pickup_actual:'en_route_customs'};
+  const STAGE_LEGACY={loading_actual:'waiting_loading',pickup_actual:'loaded'};
   let timelineDisplay='calendar',selectedTruckOperation=null;
   const truckGraphic="<svg class=\"stage-truck-art\" viewBox=\"0 0 96 52\" aria-hidden=\"true\" focusable=\"false\"><defs><linearGradient id=\"truckBody\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#f8ffff\"/><stop offset=\"1\" stop-color=\"#d3e0ea\"/></linearGradient></defs><ellipse cx=\"48\" cy=\"46\" rx=\"36\" ry=\"3\" fill=\"#153a51\" opacity=\".16\"/><rect x=\"6\" y=\"10\" width=\"54\" height=\"30\" rx=\"4\" fill=\"url(#truckBody)\" stroke=\"#647f93\" stroke-width=\"1.5\"/><path d=\"M59 19h16l13 13v8H59z\" fill=\"#d52131\" stroke=\"#951728\" stroke-width=\"1.6\"/><path d=\"M64 22h10l9 10H64z\" fill=\"#bce4f2\" stroke=\"#951728\" stroke-width=\"1\"/><rect x=\"11\" y=\"16\" width=\"38\" height=\"4\" rx=\"2\" fill=\"#cc2335\" opacity=\".8\"/><rect x=\"11\" y=\"24\" width=\"29\" height=\"2\" rx=\"1\" fill=\"#9dacb9\"/><circle cx=\"25\" cy=\"41\" r=\"8\" fill=\"#263746\"/><circle cx=\"25\" cy=\"41\" r=\"3.5\" fill=\"#c5d8e1\"/><circle cx=\"73\" cy=\"41\" r=\"8\" fill=\"#263746\"/><circle cx=\"73\" cy=\"41\" r=\"3.5\" fill=\"#c5d8e1\"/><rect x=\"86\" y=\"34\" width=\"4\" height=\"5\" fill=\"#f6c662\"/></svg>";
   function stageIndex(status){

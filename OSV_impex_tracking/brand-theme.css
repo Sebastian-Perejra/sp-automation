@@ -1513,3 +1513,35 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
     background-color: #f1f5f9;
   }
 }
+
+/* Faint stamped delivery seal: real completed shipments only, desktop calendar label.
+   Absolute positioning does not change timeline row heights or event geometry. */
+#timeline-view .timeline-row-label:has(.op-delivered-stamp){position:sticky}
+#timeline-view .op-delivered-stamp{
+  position:absolute;
+  right:20px;
+  bottom:9px;
+  display:inline-block;
+  box-sizing:border-box;
+  padding:3px 7px 2px;
+  border:1.5px solid rgba(38,151,85,.36);
+  border-radius:4px;
+  background:rgba(52,173,106,.045);
+  color:rgba(26,129,72,.66);
+  font-size:8px;
+  line-height:1.15;
+  font-weight:850;
+  letter-spacing:.095em;
+  white-space:nowrap;
+  transform:rotate(-5deg);
+  opacity:.78;
+  pointer-events:none;
+  user-select:none;
+  z-index:1;
+}
+#timeline-view .timeline-row-label:has(.op-delivered-stamp) .op-main small{
+  max-width:calc(100% - 83px);
+}
+@media(max-width:760px){
+  #timeline-view .op-delivered-stamp{right:10px;bottom:7px;font-size:7px;padding:2px 4px;transform:rotate(-4deg)}
+}

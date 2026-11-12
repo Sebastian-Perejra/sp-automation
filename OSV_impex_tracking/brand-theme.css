@@ -1558,3 +1558,21 @@ body.viewer-mode #drawer-archive{display:none!important;visibility:hidden!import
 .app-footer .footer-online i{width:6px;height:6px;flex:none;border-radius:50%;background:#25aa66}
 .app-footer .footer-online strong{font-size:11px;font-weight:850;color:#268253;font-variant-numeric:tabular-nums}
 @media(max-width:760px){.app-footer .footer-online{margin-inline:3px;font-size:9px;padding:4px 8px}}
+
+/* Quiet secondary metadata: online count shares the baseline with POWERED BY. */
+.app-footer{align-items:center}
+.app-footer .footer-right{display:inline-flex;align-items:center;justify-content:flex-end;gap:14px;white-space:nowrap;line-height:1.2}
+.app-footer .footer-online{
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  margin:0;padding:0;border:0;border-radius:0;background:transparent;
+  color:#8b9c99;font-size:9px;font-weight:500;letter-spacing:0;
+  white-space:nowrap;line-height:1.2;vertical-align:baseline;
+}
+.app-footer .footer-online i{width:5px;height:5px;background:#8bbfa1;flex:none}
+.app-footer .footer-online strong{font-size:9px;font-weight:650;color:#779d86}
+@media(max-width:760px){
+  .app-footer{gap:7px}
+  .app-footer .footer-right{gap:7px}
+  .app-footer .footer-online{font-size:8px;padding:0;margin:0}
+  .app-footer .footer-online strong{font-size:8px}
+}

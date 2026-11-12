@@ -413,18 +413,17 @@
   }
   function setTimelineDisplay(next){
     if(next!=='calendar'&&next!=='stages')return;
+    if(document.body.classList.contains('mobile-calendar-mode')&&next!==timelineDisplay)closeMobileCalendar();
     if(next==='calendar')resetStageZoom();
-    if(next==='stages'){
-      resetDesktopCalendarZoom();
-      if(document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();
-    }
+    if(next==='stages')resetDesktopCalendarZoom();
     timelineDisplay=next;
     $('stages-view').classList.toggle('hidden',next!=='stages');
     $('timeline-scroller').classList.toggle('hidden',next==='stages');
     $('timeline-view').querySelector('.legend-under').classList.toggle('hidden',next==='stages');
     $('timeline-view').querySelector('.timeline-footer').classList.toggle('hidden',next==='stages');
     $('timeline-view').querySelector('.calendar-header-actions').classList.toggle('stage-active',next==='stages');
-    $('mobile-calendar-open').style.display=next==='stages'?'none':'';
+    $('mobile-calendar-open').title=next==='stages'?'Развернуть этапы':'Развернуть календарь';
+    $('mobile-calendar-back').title=next==='stages'?'Свернуть этапы':'Свернуть календарь';
     renderStages();
   }
 
@@ -709,18 +708,21 @@
   }
   function openMobileCalendar(){
     if(!isMobileCalendarDevice()||state.view!=='timeline')return;
+    const stages=timelineDisplay==='stages';
     document.body.classList.add('mobile-calendar-mode');
-    renderTimeline(false);
-
+    document.body.classList.toggle('mobile-stage-mode',stages);
+    if(!stages)renderTimeline(false);
   }
   function closeMobileCalendar(){
-    document.body.classList.remove('mobile-calendar-mode','calendar-immersive-mode');
+    const calendar=timelineDisplay==='calendar';
+    document.body.classList.remove('mobile-calendar-mode','mobile-stage-mode','calendar-immersive-mode');
     clearTimeout(pinchHintTimer);
     /* pinch hint removed */
     pinchGesture=null;
-    applyMobileCalendarZoom(1);
-    renderTimeline(true);
-
+    if(calendar){
+      applyMobileCalendarZoom(1);
+      renderTimeline(true);
+    }
   }
   function setView(view){if(view!=='timeline'){resetStageZoom();resetDesktopCalendarZoom();}state.view=view;document.body.classList.toggle('timeline-mode',view==='timeline');(view==='timeline'?$('timeline-metrics-mount'):$('global-metrics-mount')).appendChild($('metrics'));(view==='timeline'?$('timeline-actions-mount'):$('intro-actions-mount')).appendChild($('new-operation-btn'));applyRole();document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('selected',b.dataset.view===view));document.querySelectorAll('.view-pane').forEach(p=>p.classList.add('hidden'));$(view+'-view').classList.remove('hidden');const titles={timeline:['Таймлайн операций','Импорт и экспорт. От получения задания до финальной доставки.'],analytics:['Аналитика логистики','Скорость прохождения этапов и эффективность операций.'],archive:['Архив операций','История завершённых поставок и архивированные кейсы.'],audit:['Журнал изменений','История действий и корректировок по операциям.']};$('page-title').innerHTML=titles[view][0]+'<span class="title-dot">.</span>';$('page-subtitle').textContent=titles[view][1];$('breadcrumb-title').textContent=titles[view][0];if(view!=='timeline'&&document.body.classList.contains('mobile-calendar-mode'))closeMobileCalendar();}
   function openModal(id){
